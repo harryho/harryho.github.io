@@ -75,6 +75,99 @@
 </div>
 
 
+	<div class="row doc-main">
+		<p class="doc-entry-meta"><time datetime="2017-02-13">February 13, 2017</time></p>
+		
+
+<h1 id="create-a-blog-site-to-github-pages-in-windows-environment">Create a blog site to GitHub Pages in Windows environment</h1>
+
+<p>After I setup the test blog via hugo on my ubuntu machine, I decided to use this to create a blog to GitHub pages on my windows machine. I pretty sure if you use Unix-* system, you can follow the <a href="https://gohugo.io/overview/quickstart/">Hugo Quick Start</a> and <a href="https://gohugo.io/tutorials/github-pages-blog">Hosting on GitHub Pages</a> to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone what to do the same thing within Windows environment.</p>
+
+<h2 id="assumptions">Assumptions</h2>
+
+<ul>
+<li>You already have <strong>Hugo</strong> on your computer. If not, please download and install <a href="https://github.com/spf13/hugo/releases"><strong>Hugo</strong></a> at first, and do not forget to setup the environment variable <strong>PATH</strong>.</li>
+<li>You will have two repositories <code>blog-hugo</code> and <code>&lt;username&gt;.github.io repository</code> to hold your hugo content and blog site respectively.</li>
+<li>The <code>blog-hugo</code> repository will host actual Hugo’s blog content.</li>
+<li><code>&lt;username&gt;.github.io repository</code> repository will host the static website.</li>
+
+<li><p>Your blog site will finally sit in C driver and map to repositories as follow</p>
+
+<pre><code>C:&gt;
+|--git 
+    |--blog-hugo (https://github.com/&lt;yourname&gt;/blog-hugo.git
+        |--archetypes
+        |--content
+        |--data
+        |--layouts
+        |--public (https://github.com/&lt;yourname&gt;/&lt;yourname&gt;.github.io.git)
+        |--themes
+        |--
+
+</code></pre></li>
+</ul>
+
+<h2 id="create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</h2>
+
+<ul>
+<li>Create on GitHub blog-hugo and <username>.github.io repositories  repository via GitHub website</li>
+
+<li><p>Clone blog-hugo via Windows command prompt</p>
+
+<pre><code>c:\&gt;
+c:\&gt;cd git
+c:\git&gt;git clone &lt;&lt;your-project&gt;-hugo-url&gt; &amp;&amp; cd &lt;your-project&gt;-hugo
+</code></pre></li>
+
+<li><p>Create hugo site and setup the theme you like</p>
+
+<pre><code>C:\git&gt;hugo new site blog-hugo
+C:\git&gt;hugo server -t &lt;yourtheme&gt; -D
+</code></pre></li>
+
+<li><p>Clean up the <code>public</code> folder</p></li>
+
+<li><p>Set submodule inside the blog-hugo and map to folder <code>public</code></p>
+
+<pre><code>C:\&gt;cd git
+C:\git&gt;rm -rf public
+C:\git&gt;git submodule add -b master https://git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
+</code></pre></li>
+
+<li><p>Deploy the blog site to GitHub page with the script <code>deploy.bat</code>.</p></li>
+
+<li><p><code>deploy.bat &quot;Your optional commit message&quot;</code> will commit the changes to <code>&lt;username&gt;.github.io</code>.</p></li>
+
+<li><p>You might want to commit the changes to <code>blog-hugo</code> repository. Please do not forget to add <code>public</code> into <code>.gitignore</code>.</p>
+
+<pre><code>@echo OFF
+
+echo  Deploying updates to GitHub...
+
+REM Build the project. If using a theme, replace by `hugo -t &lt;yourtheme&gt;`
+hugo 
+
+REM Go To Public folder
+cd public
+
+REM Add changes to git.
+git add -A
+
+REM Commit changes.
+set msg=&quot;rebuilding site %date%&quot;
+if  NOT &quot;%1&quot;==&quot;&quot;    set msg=%1
+git commit -m '%msg%'
+
+REM Push source and build repos.
+git push origin master
+
+REM Come Back
+cd ..
+</code></pre></li>
+</ul>
+
+	</div>
+
 
 <div class="row doc-category">
 	<h2>Pages in Categories</h2>
