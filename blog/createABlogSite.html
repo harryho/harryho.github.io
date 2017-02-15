@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="alternate" href="/index.xml" type="application/rss+xml" title="Welcome to Hello World">
 		<link rel="icon" href="https://harryho.github.io/favicon.ico">
-		<title>C - Welcome to Hello World</title>
+		<title>Create a blog site on GitHub Pages within Windows environment - Welcome to Hello World</title>
 		
 		<link rel="stylesheet" href="https://harryho.github.io/css/highlight/agate.css">
 		<link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -65,26 +65,127 @@
 <div class="row">
 	<div class="col-sm-8 doc-main">
 		<main role="main">
-			<div class="doc-list-header">
-				<h3>Pages in C</h3>
-			</div>
-			<div class="doc-list-entry">
-			<ul>
-	
-				<li><a class="doc-entry" href="/index.html">
-					<span class="doc-entry-title">_index</span>
-					<span class="doc-entry-meta in-list">
-						(<time datetime="2017-02-15">February 15, 2017</time>)
-					</span>
-				</a></li>
-	
-			</ul>
-			</div>
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Create a blog site on GitHub Pages within Windows environment</h1>
+				<div class="doc-entry-meta">
+					<span><time datetime="2017-02-15">February 15, 2017</time></span>
+				</div>
+				<section>
+					
+
+<p>After I setup a blog site with <strong>Hugo</strong> on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-* system, I pretty sure you can follow the <a href="https://gohugo.io/overview/quickstart/">Hugo Quick Start</a> and <a href="https://gohugo.io/tutorials/github-pages-blog">Hosting on GitHub Pages</a> to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.</p>
+
+<h2 id="assumptions">Assumptions</h2>
+
+<ul>
+<li>You already have <strong>Hugo</strong> on your computer. If not, please follow the instruction to <a href="https://gohugo.io/tutorials/installing-on-windows">install hugo on Windows</a>.</li>
+<li>You will have two repositories <code>blog-hugo</code> and <code>&lt;username&gt;.github.io</code> repositories to hold your hugo content and blog site respectively.</li>
+<li>The <code>blog-hugo</code> repository will host actual Hugo’s blog content.</li>
+<li><code>&lt;username&gt;.github.io repository</code> repository will host the static website.</li>
+<li>Your hugo blog folder will be &ldquo;C:\git\blog-hugo&rdquo; in this example.</li>
+
+<li><p>Your blog site will finally sit in C driver and map to repositories as follow</p>
+
+<pre><code>C:\&gt;
+|--git 
+    |--blog-hugo (https://github.com/&lt;yourname&gt;/blog-hugo.git
+        |--archetypes
+        |--content
+        |--data
+        |--layouts
+        |--public (https://github.com/&lt;yourname&gt;/&lt;yourname&gt;.github.io.git)
+        |--themes
+        |--
+
+</code></pre></li>
+</ul>
+
+<h2 id="create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</h2>
+
+<ul>
+<li>Create on GitHub blog-hugo and <username>.github.io repositories  repository via GitHub website</li>
+
+<li><p>Clone blog-hugo via Windows command prompt</p>
+
+<pre><code>c:\&gt;
+c:\&gt;cd git
+c:\git&gt;git clone &lt;&lt;your-project&gt;-hugo-url&gt; &amp;&amp; cd &lt;your-project&gt;-hugo
+</code></pre></li>
+
+<li><p>Create hugo site and setup the theme you like</p>
+
+<pre><code>C:\git&gt;hugo new site blog-hugo
+C:\git&gt;hugo server -t &lt;yourtheme&gt; -D
+</code></pre></li>
+
+<li><p>Clean up the <code>public</code> folder</p></li>
+
+<li><p>Set submodule inside the blog-hugo and map to folder <code>public</code></p>
+
+<pre><code>C:\&gt;cd git
+C:\git&gt;rm -rf public
+C:\git&gt;git submodule add -b master https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git public
+</code></pre></li>
+
+<li><p>Deploy the blog site to GitHub page with the script <code>deploy.bat</code>.</p></li>
+
+<li><p><code>deploy.bat &quot;Your optional commit message&quot;</code> will commit the changes to <code>&lt;username&gt;.github.io</code>.</p></li>
+
+<li><p>You might want to commit the changes to <code>blog-hugo</code> repository. Please don&rsquo;t forget to add <code>public</code> into the <code>.gitignore</code>.</p>
+
+<pre><code>@echo OFF
+
+echo  Deploying updates to GitHub...
+
+REM Build the project. 
+hugo -t &lt;yourtheme&gt; -D
+
+REM Go To Public folder
+cd public
+
+REM Add changes to git.
+git add -A
+
+REM Commit changes.
+set msg=&quot;rebuilding site %date%&quot;
+if  NOT &quot;%1&quot;==&quot;&quot;    set msg=%1
+git commit -m '%msg%'
+
+REM Push source and build repos.
+git push origin master
+
+REM Come Back
+cd ..
+</code></pre></li>
+</ul>
+
+				</section>
+			</article>
 		</main>
 	</div> 
 
 	
+
 <div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Create a blog site on GitHub Pages within Windows environment</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#assumptions">Assumptions</a></li>
+<li><a href="#create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</a></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
 	<div class="sidebar-module">
 		<h4 class="sidebar-heading">Pages in Categories</h4>
 		<ul class="sidebar-category-list">
@@ -94,7 +195,9 @@
 					<span class="doc-list-category">Blog</span>
 				</a>
 				<ul>
-					<li><a href="/blog/createABlogSite.html">Create a blog site on GitHub Pages within Windows environment</a></li>
+					<li>
+						<span class="active">Create a blog site on GitHub Pages within Windows environment</span>
+						</li>
 				
 				</ul>
 			</li>
@@ -104,7 +207,8 @@
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
-					<li><a href="/project/_project1.html">_project1</a></li>
+					<li><a href="/project/_project1.html">_project1</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -132,6 +236,7 @@
 			<a class="tag-item" href="https://harryho.github.io/tags/shell">shell</a>
 		
 		</div>
+	</div>
 	</div>
 </div>
 
