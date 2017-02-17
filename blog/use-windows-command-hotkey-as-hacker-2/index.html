@@ -65,33 +65,100 @@
 				<a id="title"></a>
 				<h1 class="doc-entry-title">Use Windows command &amp; hotkey as a hacker - Part 2</h1>
 				<div class="doc-entry-meta">
-					<span><time datetime="2014-03-24">March 24, 2014</time></span>
+					<span>updated at <time datetime="2014-03-24">24 Mar 2014</time></span>
 				</div>
 				<section>
 					
 
-<p>This article will continue the topic of Windows command &amp; hotkeys. Part-1 includes all hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus the most useful commands, how to create a batch script.</p>
+<p>This article will continue the topic of Windows command &amp; hotkeys. Part-1 includes all hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the most useful commands and how to create a batch script with those commands.</p>
 
 <h2 id="most-common-and-useful-commands">Most common and useful commands</h2>
 
-<h3 id="help">help</h3>
+<p>This article won&rsquo;t list all commands and all usages of each command. Here I will just choose the commands and some usages of command which are useful for most people. Some advanced command will be demonstrated in Part-3.</p>
 
-<blockquote>
-<p>There is a common mistake for beginners, or even some developers. They forget to check help command before they Google or try it, when they hit some impediment or roadblock. Actually help command is most common feature in any software or tool. Learn how to use help command is first important than any other commands.</p>
-</blockquote>
+<p>Before you start typing any cmd, I want to share a common mistake for most beginners, including myself. We always forget to use help command before we Google a solution, when we hit some impediment or roadblock. Actually help command is the most common built-in feature within any software or tool. Learn how to use help command or find the help information is first important when we are going to learn anything new.</p>
+
+<h3 id="help">help</h3>
 
 <ul>
 <li>Start command prompt and type <code>help</code>. You will get a list of command which you can use, and short decription of each command.</li>
-<li>Use help command to learn other commands
+<li>Use help command to see and learn other commands
 <code>
 C:\&gt;help
 C:\&gt;help cd 
 </code></li>
 </ul>
 
+<h3 id="start">start</h3>
+
+<ul>
+<li>Start another <code>cmd</code> window prompt.</li>
+</ul>
+
 <h3 id="cd-chdir">cd / chdir</h3>
 
+<ul>
+<li>Displays the name of or changes the current directory
+
+<ul>
+<li>Type <code>cd</code> to display the name of directory</li>
+<li>Type <code>cd c:\windows</code> to change to <code>c:\Windows&gt;</code></li>
+<li>Type <code>cd /d D:</code> to change to d driver if you have d driver</li>
+</ul></li>
+</ul>
+
 <h3 id="dir">dir</h3>
+
+<ul>
+<li><p>Displays a list of files and subdirectories in a directory.</p>
+
+<ul>
+<li>Type <code>dir /a:h/a:d</code> to display hidden subdirectories only</li>
+<li>Type <code>dir /p/w</code> to display many items per screen within wide list format</li>
+<li>Type <code>dir /o:-s</code> to display items sorted by size (biggest first)</li>
+<li>Type <code>dir /o:s</code> to display items sorted by size (smallest first)</li>
+<li>Type <code>dir /o:dn</code> to display items sorted by date/time  (oldest first) and name ( alphabetic)</li>
+</ul></li>
+</ul>
+
+<h3 id="tree">tree</h3>
+
+<ul>
+<li>Type <code>tree /f</code> graphically displays the folder structure of a drive or path.</li>
+</ul>
+
+<h3 id="ren-rename">ren / rename</h3>
+
+<ul>
+<li>Type <code>ren abc cba</code> to ren file name from &ldquo;abc&rdquo; to &ldquo;cba&rdquo; if there is file named abc under current directory.</li>
+<li>Type <code>*.md *.txt</code> to ren all files under current directory with <code>md</code> extension to <code>txt</code> extension</li>
+</ul>
+
+<h3 id="md-mkdir">md / mkdir</h3>
+
+<ul>
+<li><p>Type <code>md a\b\c\d &amp;&amp; tree a</code> to create all directories once and display result as follow</p>
+
+<pre><code>&lt;current-directory&gt;\a
+|___b
+    |___c
+        |___d
+
+</code></pre></li>
+</ul>
+
+<h3 id="rd-rmdir">rd / rmdir</h3>
+
+<ul>
+<li>Type <code>rd a</code> to remove a empty directory <code>a</code></li>
+<li>Type <code>rd /s a</code> to remove a directory <code>a</code> including all files and empty directories within folder <code>a</code>.</li>
+</ul>
+
+<h3 id="del">del</h3>
+
+<ul>
+<li>Type <code>del</code> to delete files or <code>del *.txt</code> to delete all files with <code>txt</code> extension</li>
+</ul>
 
 				</section>
 			</article>
@@ -115,8 +182,14 @@ C:\&gt;help cd
 <li><a href="#most-common-and-useful-commands">Most common and useful commands</a>
 <ul>
 <li><a href="#help">help</a></li>
+<li><a href="#start">start</a></li>
 <li><a href="#cd-chdir">cd / chdir</a></li>
 <li><a href="#dir">dir</a></li>
+<li><a href="#tree">tree</a></li>
+<li><a href="#ren-rename">ren / rename</a></li>
+<li><a href="#md-mkdir">md / mkdir</a></li>
+<li><a href="#rd-rmdir">rd / rmdir</a></li>
+<li><a href="#del">del</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -164,7 +237,7 @@ C:\&gt;help cd
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/command">command</a>
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/es6">es6</a>
 		
