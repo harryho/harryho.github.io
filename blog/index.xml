@@ -74,7 +74,7 @@ C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&am
 
 &lt;li&gt;&lt;p&gt;Deploy the blog site to GitHub page with the script &lt;code&gt;deploy.bat&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;. You can use and tailor the script below as your &lt;code&gt;deploy.bat&lt;/code&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
 
@@ -189,7 +189,7 @@ cd ..
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
-runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot;
+runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;tasklist&#34;&gt;tasklist&lt;/h3&gt;
@@ -215,7 +215,7 @@ tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 &lt;li&gt;Query Service&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;sc query &amp;lt;servicename&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc query &amp;lt;servicename&amp;gt;
 sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -228,7 +228,7 @@ sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot;
 &lt;li&gt;&lt;p&gt;Note: If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;sc query state= inactive type= driver type= kernel
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc query state= inactive type= driver type= kernel
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @echo %s    
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
     for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE     &amp;quot;&#39;) do @echo %s -- %t
@@ -237,7 +237,7 @@ for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &am
 
 &lt;ul&gt;
 &lt;li&gt;Start or stop service
-&lt;code&gt;
+&lt;code&gt;bash
 sc start  &amp;lt;servicename&amp;gt;
 sc stop  &amp;lt;servicename&amp;gt;
 &lt;/code&gt;&lt;/li&gt;
@@ -283,6 +283,13 @@ C:\&amp;gt;User\&amp;lt;yourname&amp;gt;\title Hacker Tool
 C:\&amp;gt;User\&amp;lt;yourname&amp;gt;\cd \
 C:\&amp;gt;tree 
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-other-command-prompt&#34;&gt;Use other command prompt&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://cmder.net/&#34;&gt;cmder&lt;/a&gt; is an awesome product. I suggest you just choose mini version to download and install if you are not the heavy git user. There are so many built-in features you can play around.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourceforge.net/projects/console/&#34;&gt;console2&lt;/a&gt; is a very good as well. I used it for many years. I&amp;rsquo;m planning to migrate to &lt;code&gt;cmder&lt;/code&gt;, but it will take me some time to do it, because I have some customized scripts need to run in &lt;code&gt;console2&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;useful-windows-hotkeys&#34;&gt;Useful Windows hotkeys&lt;/h3&gt;
 
@@ -749,7 +756,7 @@ finally {
 
 &lt;p&gt;Following is sample of file watching service. I removed call back part which is relevant to the business.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;import java.nio.file.FileSystems;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;

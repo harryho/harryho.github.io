@@ -145,7 +145,7 @@
 <h3 id="runas">runas</h3>
 
 <pre><code class="language-bash">runas /user:yourpc\administrator &quot;cmd&quot;
-runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot;
+runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot; 
 </code></pre>
 
 <h3 id="tasklist">tasklist</h3>
@@ -171,7 +171,7 @@ tasklist /fi &quot;pid eq 4444&quot;
 <li>Query Service</li>
 </ul>
 
-<pre><code>sc query &lt;servicename&gt;
+<pre><code class="language-bash">sc query &lt;servicename&gt;
 sc query state= all | find &quot;SERVICE_NAME&quot; 
 </code></pre>
 
@@ -184,7 +184,7 @@ sc query state= all | find &quot;SERVICE_NAME&quot;
 <li><p>Note: If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled</p></li>
 </ul>
 
-<pre><code>sc query state= inactive type= driver type= kernel
+<pre><code class="language-bash">sc query state= inactive type= driver type= kernel
 for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @echo %s    
 for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
     for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE     &quot;') do @echo %s -- %t
@@ -193,7 +193,7 @@ for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_N
 
 <ul>
 <li>Start or stop service
-<code>
+<code>bash
 sc start  &lt;servicename&gt;
 sc stop  &lt;servicename&gt;
 </code></li>
@@ -334,6 +334,9 @@ sc stop  &lt;servicename&gt;
 <script>hljs.initHighlightingOnLoad();</script>
 <script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
 <script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
 
 </body>
 </html>
