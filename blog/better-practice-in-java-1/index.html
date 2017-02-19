@@ -76,7 +76,7 @@
 
 <p>Before Java 1.5 you will following coding in many Java program.</p>
 
-<pre><code>    // Use interface or abstract class as constant variable container
+<pre><code class="language-Java">    // Use interface or abstract class as constant variable container
     public interface Country {
          public static final String AU = &quot;Australian&quot;;
          public static final String UK = &quot;United Kingdom&quot;; 
@@ -108,30 +108,30 @@
 
 <p>After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.</p>
 
-<pre><code>    // Use Enum as constant variable container
-    public enum  Country {
-        Australia, UnitedKingdom, UnitedState
-    }
-    
-    public class Util {
-         
-        public static String getLanguageCode(Country country) {
-    
-            String languageCode = &quot;en&quot;;
-            switch (country) {
-                case Australia:
-                    languageCode = &quot;en-au&quot;;
-                    break;
-                case UnitedKingdom:
-                    languageCode = &quot;en-uk&quot;;
-                    break;
-                case UnitedState:
-                    languageCode = &quot;en-us&quot;;
-                    break;
-            }
-            return languageCode;
+<pre><code class="language-java">// Use Enum as constant variable container
+public enum  Country {
+    Australia, UnitedKingdom, UnitedState
+}
+
+public class Util {
+        
+    public static String getLanguageCode(Country country) {
+
+        String languageCode = &quot;en&quot;;
+        switch (country) {
+            case Australia:
+                languageCode = &quot;en-au&quot;;
+                break;
+            case UnitedKingdom:
+                languageCode = &quot;en-uk&quot;;
+                break;
+            case UnitedState:
+                languageCode = &quot;en-us&quot;;
+                break;
         }
+        return languageCode;
     }
+}
 </code></pre>
 
 <p>Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&rsquo;t refactor your static constants container, it is time to improve it now.</p>
@@ -144,40 +144,39 @@
 
 <p>New Enum class, which can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now the Enum can be override with toString to return different constant name.</p>
 
-<pre><code>    // It can return customized name and simplify coding 
-    public enum Country {
-        AU(&quot;Australia&quot;, &quot;au&quot;,&quot;en-au&quot;), 
-        UK(&quot;United Kingdom&quot;, &quot;en-uk&quot;),
-        US(&quot;United State&quot;, &quot;us&quot;,&quot;en-us&quot;);
+<pre><code class="language-java">// It can return customized name and simplify coding 
+public enum Country {
+    AU(&quot;Australia&quot;, &quot;au&quot;,&quot;en-au&quot;), 
+    UK(&quot;United Kingdom&quot;, &quot;en-uk&quot;),
+    US(&quot;United State&quot;, &quot;us&quot;,&quot;en-us&quot;);
 
-        String countryName;
-        String countryCode;
-        String languageCode;
-        
-        private Country(String name, String code) {
-            countryName = name;
-            countryCode = code;
-        }
+    String countryName;
+    String countryCode;
+    String languageCode;
     
-        public String getCode() {
-            return countryCode;
-        }
-        
-        public String getLanguageCode() {
-            return languageCode;
-        }
-        
-        @Override
-        public String toString() {
-            return countryName;
-        }
+    private Country(String name, String code) {
+        countryName = name;
+        countryCode = code;
     }
+
+    public String getCode() {
+        return countryCode;
+    }
+    
+    public String getLanguageCode() {
+        return languageCode;
+    }
+    
+    @Override
+    public String toString() {
+        return countryName;
+    }
+}
 </code></pre>
 
 <p>The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.</p>
 
-<pre><code>
-public class Util {
+<pre><code class="language-java">public class Util {
         
     public static Country convertCountryNameOrCode(String nameOrCode ) {
         
@@ -274,7 +273,7 @@ public class Util {
 
 <p>Following is simple customizaed file visitor which has been the part of my old util.</p>
 
-<pre><code>import java.io.IOException;
+<pre><code class="language-java">import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -331,7 +330,7 @@ public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
 
 <p><strong>Snippet of old style</strong></p>
 
-<pre><code>FileInputStream exchangeCurrencyReader= null;
+<pre><code class="language-java">FileInputStream exchangeCurrencyReader= null;
       FileOutputStream exchangeCurrencyWriter = null;
       try {
 
@@ -350,7 +349,7 @@ public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
 
 <p><strong>Code in Java 7</strong></p>
 
-<pre><code>try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+<pre><code class="language-java">try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
     FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;)){
       int var;
       while((var= exchangeCurrencyReader.read()) != -1 )

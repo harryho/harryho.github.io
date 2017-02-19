@@ -31,7 +31,7 @@
 
 &lt;li&gt;&lt;p&gt;Your blog site will finally sit in C driver and map to repositories as follow&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;C:\&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;
 |--git 
     |--blog-hugo (https://github.com/&amp;lt;yourname&amp;gt;/blog-hugo.git
         |--archetypes
@@ -52,14 +52,14 @@
 
 &lt;li&gt;&lt;p&gt;Clone blog-hugo via Windows command prompt&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;c:\&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;c:\&amp;gt;
 c:\&amp;gt;cd git
 c:\git&amp;gt;git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt; &amp;amp;&amp;amp; cd &amp;lt;your-project&amp;gt;-hugo
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Create hugo site and setup the theme you like&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;C:\git&amp;gt;hugo new site blog-hugo
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\git&amp;gt;hugo new site blog-hugo
 C:\git&amp;gt;hugo server -t &amp;lt;yourtheme&amp;gt; -D
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
@@ -67,7 +67,7 @@ C:\git&amp;gt;hugo server -t &amp;lt;yourtheme&amp;gt; -D
 
 &lt;li&gt;&lt;p&gt;Set submodule inside the blog-hugo and map to folder &lt;code&gt;public&lt;/code&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;C:\&amp;gt;cd git
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;cd git
 C:\git&amp;gt;rm -rf public
 C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
@@ -78,7 +78,7 @@ C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&am
 
 &lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;@echo OFF
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
 
 echo  Deploying updates to GitHub...
 
@@ -177,7 +177,7 @@ cd ..
 
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;runas /user:mypc\administrator &amp;quot;cmd&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;runas /user:mypc\administrator &amp;quot;cmd&amp;quot;
 runas /user:mydomain\administrator &amp;quot;cmd /C \&amp;quot; del /S /F /Q c:\dummy\* \&amp;quot; &amp;amp;  rmdir /S /Q c:\dummy &amp;amp; md c:\dummy &amp;amp; xcopy c:\source c:\dummy /S /E /Y&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -189,7 +189,7 @@ runas /user:mydomain\administrator &amp;quot;cmd /C \&amp;quot; del /S /F /Q c:\
 &lt;li&gt;Find process by pid&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
 tasklist /v /fo list /fi &amp;quot;imagename eq mongod.exe&amp;quot;
 tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq running&amp;quot; 
 tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq not responding&amp;quot; 
@@ -234,7 +234,7 @@ sc stop  &amp;lt;servicename&amp;gt;
 
 &lt;h3 id=&#34;netstat&#34;&gt;netstat&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;netstat -ano | find &amp;quot;:80&amp;quot; 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;netstat -ano | find &amp;quot;:80&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;ipconfig&#34;&gt;ipconfig&lt;/h3&gt;
@@ -448,7 +448,7 @@ C:\&amp;gt;help cd
 
 &lt;p&gt;Before Java 1.5 you will following coding in many Java program.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    // Use interface or abstract class as constant variable container
+&lt;pre&gt;&lt;code class=&#34;language-Java&#34;&gt;    // Use interface or abstract class as constant variable container
     public interface Country {
          public static final String AU = &amp;quot;Australian&amp;quot;;
          public static final String UK = &amp;quot;United Kingdom&amp;quot;; 
@@ -480,30 +480,30 @@ C:\&amp;gt;help cd
 
 &lt;p&gt;After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    // Use Enum as constant variable container
-    public enum  Country {
-        Australia, UnitedKingdom, UnitedState
-    }
-    
-    public class Util {
-         
-        public static String getLanguageCode(Country country) {
-    
-            String languageCode = &amp;quot;en&amp;quot;;
-            switch (country) {
-                case Australia:
-                    languageCode = &amp;quot;en-au&amp;quot;;
-                    break;
-                case UnitedKingdom:
-                    languageCode = &amp;quot;en-uk&amp;quot;;
-                    break;
-                case UnitedState:
-                    languageCode = &amp;quot;en-us&amp;quot;;
-                    break;
-            }
-            return languageCode;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// Use Enum as constant variable container
+public enum  Country {
+    Australia, UnitedKingdom, UnitedState
+}
+
+public class Util {
+        
+    public static String getLanguageCode(Country country) {
+
+        String languageCode = &amp;quot;en&amp;quot;;
+        switch (country) {
+            case Australia:
+                languageCode = &amp;quot;en-au&amp;quot;;
+                break;
+            case UnitedKingdom:
+                languageCode = &amp;quot;en-uk&amp;quot;;
+                break;
+            case UnitedState:
+                languageCode = &amp;quot;en-us&amp;quot;;
+                break;
         }
+        return languageCode;
     }
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&amp;rsquo;t refactor your static constants container, it is time to improve it now.&lt;/p&gt;
@@ -516,40 +516,39 @@ C:\&amp;gt;help cd
 
 &lt;p&gt;New Enum class, which can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now the Enum can be override with toString to return different constant name.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    // It can return customized name and simplify coding 
-    public enum Country {
-        AU(&amp;quot;Australia&amp;quot;, &amp;quot;au&amp;quot;,&amp;quot;en-au&amp;quot;), 
-        UK(&amp;quot;United Kingdom&amp;quot;, &amp;quot;en-uk&amp;quot;),
-        US(&amp;quot;United State&amp;quot;, &amp;quot;us&amp;quot;,&amp;quot;en-us&amp;quot;);
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// It can return customized name and simplify coding 
+public enum Country {
+    AU(&amp;quot;Australia&amp;quot;, &amp;quot;au&amp;quot;,&amp;quot;en-au&amp;quot;), 
+    UK(&amp;quot;United Kingdom&amp;quot;, &amp;quot;en-uk&amp;quot;),
+    US(&amp;quot;United State&amp;quot;, &amp;quot;us&amp;quot;,&amp;quot;en-us&amp;quot;);
 
-        String countryName;
-        String countryCode;
-        String languageCode;
-        
-        private Country(String name, String code) {
-            countryName = name;
-            countryCode = code;
-        }
+    String countryName;
+    String countryCode;
+    String languageCode;
     
-        public String getCode() {
-            return countryCode;
-        }
-        
-        public String getLanguageCode() {
-            return languageCode;
-        }
-        
-        @Override
-        public String toString() {
-            return countryName;
-        }
+    private Country(String name, String code) {
+        countryName = name;
+        countryCode = code;
     }
+
+    public String getCode() {
+        return countryCode;
+    }
+    
+    public String getLanguageCode() {
+        return languageCode;
+    }
+    
+    @Override
+    public String toString() {
+        return countryName;
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
-public class Util {
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Util {
         
     public static Country convertCountryNameOrCode(String nameOrCode ) {
         
@@ -646,7 +645,7 @@ public class Util {
 
 &lt;p&gt;Following is simple customizaed file visitor which has been the part of my old util.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;import java.io.IOException;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -703,7 +702,7 @@ public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
 
 &lt;p&gt;&lt;strong&gt;Snippet of old style&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;FileInputStream exchangeCurrencyReader= null;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
       FileOutputStream exchangeCurrencyWriter = null;
       try {
 
@@ -722,7 +721,7 @@ public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
 
 &lt;p&gt;&lt;strong&gt;Code in Java 7&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
     FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;)){
       int var;
       while((var= exchangeCurrencyReader.read()) != -1 )
