@@ -17,16 +17,16 @@
       <guid>https://harryho.github.io/blog/create-a-blog-on-github-pages/</guid>
       <description>
 
-&lt;p&gt;After I setup a blog site with &lt;strong&gt;Hugo&lt;/strong&gt; on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-* system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;You already have &lt;strong&gt;Hugo&lt;/strong&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;You already have &lt;em&gt;Hugo&lt;/em&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;You will have two repositories &lt;code&gt;blog-hugo&lt;/code&gt; and &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt; repositories to hold your hugo content and blog site respectively.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;blog-hugo&lt;/code&gt; repository will host actual Hugo’s blog content.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;&amp;lt;username&amp;gt;.github.io repository&lt;/code&gt; repository will host the static website.&lt;/li&gt;
-&lt;li&gt;Your hugo blog folder will be &amp;ldquo;C:\git\blog-hugo&amp;rdquo; in this example.&lt;/li&gt;
+&lt;li&gt;Your &lt;em&gt;Hugo&lt;/em&gt; blog folder will be &amp;ldquo;C:\git\blog-hugo&amp;rdquo; in this example.&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Your blog site will finally sit in C driver and map to repositories as follow&lt;/p&gt;
 
@@ -73,9 +73,7 @@ C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&am
 
 &lt;li&gt;&lt;p&gt;Deploy the blog site to GitHub page with the script &lt;code&gt;deploy.bat&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
 
@@ -101,6 +99,8 @@ git push origin master
 REM Come Back
 cd ..
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -113,7 +113,9 @@ cd ..
       <guid>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-2/</guid>
       <description>
 
-&lt;p&gt;This article will continue the topic of Windows command &amp;amp; hotkeys. Part-1 shows you common hotkeys and short command lines for &lt;code&gt;Run&lt;/code&gt; windnow dialog. The rest of this topic will focus on the common and useful commands and how to create a batch script with those commands.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This article will continue the topic of Windows command &amp;amp; hotkeys. Part-1 shows you common hotkeys and short command lines for &lt;code&gt;Run&lt;/code&gt; windnow dialog. The rest of this topic will focus on the advanced commands and how to create a batch script with all those commands.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Let me clarify something first. Advanced command here does not mean that commands here are very complicated or much more powerful than common ones, which have been shown in the Part-1. Here we call them advanced, because they are used by experienced users to complete their given tasks, and those commands are used seldom by majority people. Comparing with Part-1, advanced commands have some specific features which allow them to do some special jobs, which usually are done by system admin. Advanced command is known as Admin command as well.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;advanced-commands-and-usages&#34;&gt;Advanced commands and usages&lt;/h2&gt;
 
@@ -127,7 +129,7 @@ cd ..
 &lt;h3 id=&#34;env&#34;&gt;env&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Type &lt;code&gt;env&amp;gt;env.txt &amp;amp;&amp;amp; notepad env.txt&lt;/code&gt; Display all environment variable in text file&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;env&amp;gt;env.txt &amp;amp; notepad env.txt&lt;/code&gt; Display all environment variable in text file&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;set&#34;&gt;set&lt;/h3&gt;
@@ -138,6 +140,15 @@ cd ..
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;net&#34;&gt;net&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;get sub-commands&lt;/strong&gt; &amp;ndash; type &lt;code&gt;net /?&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+     HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START | 
+     STATISTICS | STOP | TIME | USE | USER | VIEW ]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;get sub-command&amp;rsquo;s help&lt;/strong&gt; &amp;ndash; type &lt;code&gt;net [sub-command] /?&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;net view&lt;/strong&gt;&lt;/p&gt;
 
@@ -176,8 +187,8 @@ cd ..
 
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;runas /user:mypc\administrator &amp;quot;cmd&amp;quot;
-runas /user:mydomain\administrator &amp;quot;cmd /C \&amp;quot; del /S /F /Q c:\dummy\* \&amp;quot; &amp;amp;  rmdir /S /Q c:\dummy &amp;amp; md c:\dummy &amp;amp; xcopy c:\source c:\dummy /S /E /Y&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
+runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;tasklist&#34;&gt;tasklist&lt;/h3&gt;
@@ -248,7 +259,7 @@ sc stop  &amp;lt;servicename&amp;gt;
       <guid>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-1/</guid>
       <description>
 
-&lt;p&gt;Do you want to make your friends amazed by your computer skill and praise you as genius? Or the hacker as watched in Sci-Fi movies? You don&amp;rsquo;t need Mac, Linux or other operating systems, just Windows, you can show-off and look like hacker and master of Zeroes and Ones, even you have no any idea of it. Here are some tricks by which you can make your friends&amp;rsquo; jaw drop.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Do you want to make your friends amazed by your computer skill and praise you as genius? Or the hacker as watched in Sci-Fi movies? You don&amp;rsquo;t need Mac, Linux or other operating systems, just Windows, you can show-off and look like hacker and master of Zeroes and Ones, even you have no any idea of it. Here are some tricks by which you can make your friends&amp;rsquo; jaw drop.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;start-windows-command-prompt-as-hacker&#34;&gt;Start Windows command prompt as hacker&lt;/h3&gt;
 
@@ -390,7 +401,7 @@ C:\&amp;gt;help cd
 &lt;h3 id=&#34;md-mkdir&#34;&gt;md / mkdir&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Use &lt;code&gt;md a\b\c\d &amp;amp;&amp;amp; tree a&lt;/code&gt; to create all directories once and display result as follow&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;md a\b\c\d &amp;amp; tree a&lt;/code&gt; to create all directories once and display result as follow&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;current-directory&amp;gt;\a
 |___b
@@ -403,7 +414,7 @@ C:\&amp;gt;help cd
 &lt;h3 id=&#34;copy&#34;&gt;copy&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use &lt;code&gt;touch test.txt &amp;amp;&amp;amp; copy test.txt C:\User\&amp;lt;yourname&amp;gt;\&lt;/code&gt; to create a test.txt file and copy the test.txt to C:\User&amp;lt;yourname&amp;gt;\&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;touch test.txt &amp;amp; copy test.txt C:\User\&amp;lt;yourname&amp;gt;\&lt;/code&gt; to create a test.txt file and copy the test.txt to C:\User&amp;lt;yourname&amp;gt;\&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;move&#34;&gt;move&lt;/h3&gt;
@@ -441,7 +452,7 @@ C:\&amp;gt;help cd
       <guid>https://harryho.github.io/blog/better-practice-in-java-1/</guid>
       <description>
 
-&lt;h2 id=&#34;refactor-static-final-constant-with-enum&#34;&gt;Refactor static final constant with Enum&lt;/h2&gt;
+&lt;h3 id=&#34;refactor-constant-variables-with-enum&#34;&gt;Refactor constant variables with Enum&lt;/h3&gt;
 
 &lt;p&gt;Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.&lt;/p&gt;
 
@@ -634,13 +645,13 @@ public enum Country {
 
 &lt;p&gt;If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features.&lt;/p&gt;
 
-&lt;h2 id=&#34;good-stuff-from-dull-java-7&#34;&gt;Good stuff from dull Java 7&lt;/h2&gt;
+&lt;h3 id=&#34;good-stuff-from-not-shiny-java-7&#34;&gt;Good stuff from not shiny Java 7&lt;/h3&gt;
 
 &lt;p&gt;When the Java 7 was released, I was kind of disappointed without lamda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.&lt;/p&gt;
 
 &lt;p&gt;To be hoenst, before Java 1.7, Coding file manipulation in Java is very headache task. I say &amp;ldquo;headache&amp;rdquo; it doesn&amp;rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.&lt;/p&gt;
 
-&lt;h3 id=&#34;better-file-visitor-implementation&#34;&gt;Better file visitor implementation&lt;/h3&gt;
+&lt;h4 id=&#34;better-file-visitor-implementation&#34;&gt;Better file visitor implementation&lt;/h4&gt;
 
 &lt;p&gt;Following is simple customizaed file visitor which has been the part of my old util.&lt;/p&gt;
 
@@ -691,15 +702,13 @@ public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
         Files.walkFileTree(path, fileVisitor);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;arm&#34;&gt;ARM&lt;/h3&gt;
+&lt;h4 id=&#34;arm&#34;&gt;ARM&lt;/h4&gt;
 
-&lt;p&gt;Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management.&lt;/p&gt;
+&lt;p&gt;Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the &lt;code&gt;using&lt;/code&gt; statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men&amp;rsquo;s mistakes; fools by their own.&lt;/p&gt;
 
-&lt;p&gt;Coming with the new IO, ARM is really great improvement, especially for people miss the using statement in C#, including myself. Sometimes I wonder why Java is such reluctant to learn some good features from C#. As we all know, C# comes after Java and copies most concept at the early stage, but it really pushed Java to new level and inspired Java world a lot with its many good feature. I really hope someday I can write Java getter and setter in C# coding style. Wise men learn by other men&amp;rsquo;s mistakes; fools by their own.&lt;/p&gt;
+&lt;p&gt;In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource. Following are comparison of old and new style.&lt;/p&gt;
 
-&lt;p&gt;In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Snippet of old style&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Snippet of old style&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
 FileOutputStream exchangeCurrencyWriter = null;
@@ -718,7 +727,7 @@ finally {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;Code in Java 7&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Code in Java 7&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
     FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;)){
@@ -731,7 +740,7 @@ finally {
 
 &lt;p&gt;In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.&lt;/p&gt;
 
-&lt;h3 id=&#34;new-file-change-monitor-service&#34;&gt;New file change monitor service&lt;/h3&gt;
+&lt;h4 id=&#34;new-file-change-monitor-service&#34;&gt;New file change monitor service&lt;/h4&gt;
 
 &lt;p&gt;After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.&lt;/p&gt;
 

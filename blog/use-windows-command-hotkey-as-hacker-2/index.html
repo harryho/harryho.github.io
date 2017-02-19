@@ -70,7 +70,9 @@
 				<section>
 					
 
-<p>This article will continue the topic of Windows command &amp; hotkeys. Part-1 shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the common and useful commands and how to create a batch script with those commands.</p>
+<p><em>This article will continue the topic of Windows command &amp; hotkeys. Part-1 shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the advanced commands and how to create a batch script with all those commands.</em></p>
+
+<p><em>Let me clarify something first. Advanced command here does not mean that commands here are very complicated or much more powerful than common ones, which have been shown in the Part-1. Here we call them advanced, because they are used by experienced users to complete their given tasks, and those commands are used seldom by majority people. Comparing with Part-1, advanced commands have some specific features which allow them to do some special jobs, which usually are done by system admin. Advanced command is known as Admin command as well.</em></p>
 
 <h2 id="advanced-commands-and-usages">Advanced commands and usages</h2>
 
@@ -84,7 +86,7 @@
 <h3 id="env">env</h3>
 
 <ul>
-<li>Type <code>env&gt;env.txt &amp;&amp; notepad env.txt</code> Display all environment variable in text file</li>
+<li>Type <code>env&gt;env.txt &amp; notepad env.txt</code> Display all environment variable in text file</li>
 </ul>
 
 <h3 id="set">set</h3>
@@ -95,6 +97,15 @@
 </ul>
 
 <h3 id="net">net</h3>
+
+<p><strong>get sub-commands</strong> &ndash; type <code>net /?</code></p>
+
+<pre><code class="language-bash">    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+     HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START | 
+     STATISTICS | STOP | TIME | USE | USER | VIEW ]
+</code></pre>
+
+<p><strong>get sub-command&rsquo;s help</strong> &ndash; type <code>net [sub-command] /?</code></p>
 
 <p><strong>net view</strong></p>
 
@@ -133,8 +144,8 @@
 
 <h3 id="runas">runas</h3>
 
-<pre><code class="language-bash">runas /user:mypc\administrator &quot;cmd&quot;
-runas /user:mydomain\administrator &quot;cmd /C \&quot; del /S /F /Q c:\dummy\* \&quot; &amp;  rmdir /S /Q c:\dummy &amp; md c:\dummy &amp; xcopy c:\source c:\dummy /S /E /Y&quot;
+<pre><code class="language-bash">runas /user:yourpc\administrator &quot;cmd&quot;
+runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot;
 </code></pre>
 
 <h3 id="tasklist">tasklist</h3>
