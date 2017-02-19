@@ -1,0 +1,555 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Welcome to Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Better practice in Java - Part 1 - Welcome to Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/agate.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Welcome to Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/blog/">Blog</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/index/">Index</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Better practice in Java - Part 1</h1>
+				<div class="doc-entry-meta">
+					<span>updated at <time datetime="2011-12-10">10 Dec 2011</time></span>
+				</div>
+				<section>
+					
+
+<h2 id="refactor-static-final-constant-with-enum">Refactor static final constant with Enum</h2>
+
+<p>Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.</p>
+
+<p>Before Java 1.5 you will following coding in many Java program.</p>
+
+<pre><code>    // Use interface or abstract class as constant variable container
+    public interface Country {
+         public static final String AU = &quot;Australian&quot;;
+         public static final String UK = &quot;United Kingdom&quot;; 
+         public static final String US = &quot;United State&quot;; 
+    }
+    
+    public class Util {
+         
+        public static String getLanguageCode(String country) {
+    
+            String languageCode = &quot;en&quot;;
+            switch (country) {
+                case Country.AU:
+                    languageCode = &quot;en-au&quot;;
+                    break;
+                case Country.UK:
+                    languageCode = &quot;en-uk&quot;;
+                    break;
+                case Country.US:
+                    languageCode = &quot;en-us&quot;;
+                    break;
+            }
+            return languageCode;
+        }
+    }
+</code></pre>
+
+<p>Above program looks very good. Please take a close look and check it carefully. You will find the program will never return <strong><em>en-au</em></strong>, since there is a typo in the constant AU. It should be <strong><em>Australia</em></strong> instead of <strong><em>Australian</em></strong>. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.</p>
+
+<p>After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.</p>
+
+<pre><code>    // Use Enum as constant variable container
+    public enum  Country {
+        Australia, UnitedKingdom, UnitedState
+    }
+    
+    public class Util {
+         
+        public static String getLanguageCode(Country country) {
+    
+            String languageCode = &quot;en&quot;;
+            switch (country) {
+                case Australia:
+                    languageCode = &quot;en-au&quot;;
+                    break;
+                case UnitedKingdom:
+                    languageCode = &quot;en-uk&quot;;
+                    break;
+                case UnitedState:
+                    languageCode = &quot;en-us&quot;;
+                    break;
+            }
+            return languageCode;
+        }
+    }
+</code></pre>
+
+<p>Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&rsquo;t refactor your static constants container, it is time to improve it now.</p>
+
+<p>(Above were written in 2006. After Java 1.7, I found it can be improved with new feature of Java 1.7 )</p>
+
+<p>After Java Java 1.7, there are some new features. One of these new features is Switch statement. Now it supports String. It is a great for Java developer.</p>
+
+<p>With this new feature, the old Enum can be enhanced and the Util class can provide more handy methods (Overload method getLanguageCode) for development.</p>
+
+<p>New Enum class, which can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now the Enum can be override with toString to return different constant name.</p>
+
+<pre><code>    // It can return customized name and simplify coding 
+    public enum Country {
+        AU(&quot;Australia&quot;, &quot;au&quot;,&quot;en-au&quot;), 
+        UK(&quot;United Kingdom&quot;, &quot;en-uk&quot;),
+        US(&quot;United State&quot;, &quot;us&quot;,&quot;en-us&quot;);
+
+        String countryName;
+        String countryCode;
+        String languageCode;
+        
+        private Country(String name, String code) {
+            countryName = name;
+            countryCode = code;
+        }
+    
+        public String getCode() {
+            return countryCode;
+        }
+        
+        public String getLanguageCode() {
+            return languageCode;
+        }
+        
+        @Override
+        public String toString() {
+            return countryName;
+        }
+    }
+</code></pre>
+
+<p>The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.</p>
+
+<pre><code>
+public class Util {
+        
+    public static Country convertCountryNameOrCode(String nameOrCode ) {
+        
+        Country country = null;
+        switch (nameOrCode) {
+            case &quot;au&quot;:
+            case &quot;AU&quot;:
+            case &quot;Australia&quot;:
+                country = Country.AU;
+                break;
+            case &quot;uk&quot;:
+            case &quot;UK&quot;:  
+            case &quot;United Kingdom&quot;:
+                country = Country.UK;
+                break;
+            case &quot;us&quot;:
+            case &quot;US&quot;:  
+            case &quot;United State&quot;:
+                country = Country.UK;
+                break;
+        }
+        return country;
+    }
+    
+    public static String getCountryName(  Country country ){
+        String countryName = null;
+        switch (country){
+            case AU:
+                countryName = Country.AU.toString();
+                break;
+            case US:
+                countryName = Country.UK.toString();
+                break;
+            case UK:
+                countryName = Country.US.toString();
+                break;
+            default:
+                System.err.println(&quot;Unknow Country&quot;);
+                assert false;
+                break;
+        }
+        return countryName;
+    }
+
+    
+    public static String getCountryCode(  Country country ){
+        String countryCode = null;
+        switch (country){
+            case AU:
+                countryCode = Country.AU.getCode();
+                break;
+            case US:
+                countryCode = Country.UK.getCode();
+                break;
+            case UK:
+                countryCode = Country.US.getCode();
+                break;
+            default:
+                System.err.println(&quot;Unknow Country&quot;);
+                assert false;
+                break;
+        }
+        return countryCode;
+    }
+        
+    public static String getLanguageCode(Country country) {
+    
+            String languageCode = &quot;en&quot;;
+            switch (country) {
+                case AU:
+                    languageCode = Country.AU.getLanguageCode() ;
+                    break;
+                case UK:
+                    languageCode =  Country.UK.getLanguageCode();
+                    break;
+                case US:
+                    languageCode =  Country.US.getLanguageCode();
+                    break;
+            }
+            return languageCode;
+    }
+}
+</code></pre>
+
+<p>If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features.</p>
+
+<h2 id="good-stuff-from-dull-java-7">Good stuff from dull Java 7</h2>
+
+<p>When the Java 7 was released, I was kind of disappointed without lamda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.</p>
+
+<p>To be hoenst, before Java 1.7, Coding file manipulation in Java is very headache task. I say &ldquo;headache&rdquo; it doesn&rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.</p>
+
+<h3 id="better-file-visitor-implementation">Better file visitor implementation</h3>
+
+<p>Following is simple customizaed file visitor which has been the part of my old util.</p>
+
+<pre><code>import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+
+public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
+
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
+            throws IOException {
+         if ( attr.isSymbolicLink() )
+          { System.out.println( &quot; symbolic link  :  &quot;+  file  );
+          
+          }else if (  attr.isSymbolicLink() ){            
+              System.out.println( &quot; regular file : &quot;+ file );
+          }
+        return FileVisitResult.CONTINUE;
+    }
+     
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc)
+            throws IOException {        
+         System.err.println( exc.getMessage());
+        return FileVisitResult.CONTINUE;
+    }
+}
+</code></pre>
+
+<p>To use this customized  is so easy. Just 3 lines coding you can test it by yourself.</p>
+
+<pre><code>        CustomFileVisitor fileVisitor = new CustomFileVisitor();
+        Path path = Paths.get(&quot;TestDir&quot;);
+        Files.walkFileTree(path, fileVisitor);
+</code></pre>
+
+<h3 id="arm">ARM</h3>
+
+<p>Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management.</p>
+
+<p>Coming with the new IO, ARM is really great improvement, especially for people miss the using statement in C#, including myself. Sometimes I wonder why Java is such reluctant to learn some good features from C#. As we all know, C# comes after Java and copies most concept at the early stage, but it really pushed Java to new level and inspired Java world a lot with its many good feature. I really hope someday I can write Java getter and setter in C# coding style. Wise men learn by other men&rsquo;s mistakes; fools by their own.</p>
+
+<p>In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource.</p>
+
+<p><strong>Snippet of old style</strong></p>
+
+<pre><code>FileInputStream exchangeCurrencyReader= null;
+      FileOutputStream exchangeCurrencyWriter = null;
+      try {
+
+        exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+        exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
+        int var;
+        while (var = exchangeCurrencyReader.read()) != -1)
+          exchangeCurrencyWriter.write(var);
+      } finally {
+        if (exchangeCurrencyReader!= null)
+          exchangeCurrencyReader.close();
+        if (exchangeCurrencyWriter!= null)
+          exchangeCurrencyWriter.close();
+      }
+</code></pre>
+
+<p><strong>Code in Java 7</strong></p>
+
+<pre><code>try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;)){
+      int var;
+      while((var= exchangeCurrencyReader.read()) != -1 )
+            exchangeCurrencyWriter.write();
+}
+
+</code></pre>
+
+<p>In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.</p>
+
+<h3 id="new-file-change-monitor-service">New file change monitor service</h3>
+
+<p>After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.</p>
+
+<p>Usually most Java based system somehow needs such monitor function, there will be separate process or thread to run this service, and there should be a call back handler triggered by this service. Everytime there is any file amended, the service will trigger the call back handler to complete some tasks.</p>
+
+<p>Following is sample of file watching service. I removed call back part which is relevant to the business.</p>
+
+<pre><code>import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.HashMap;
+import java.util.Map;
+
+public class FileWatchService {
+
+    public static void watchFileUpdate() {
+        try (WatchService service = FileSystems.getDefault().newWatchService()) {
+            Map&lt;WatchKey, Path&gt; eventMap = new HashMap&lt;&gt;();
+            Path dir = Paths.get(&quot;TestDir&quot;);
+
+            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
+
+            WatchKey key;
+            do {
+                key = service.take();
+                Path eventPath = eventMap.get(key);
+                for (WatchEvent&lt;?&gt; event : key.pollEvents()) {
+                    WatchEvent.Kind&lt;?&gt; kind = event.kind();
+                    Path path = (Path) event.context();
+                    System.out.println(eventPath + &quot; : &quot; + kind + &quot;  : &quot; + path);
+                }
+            } while (key.reset());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main (String [] args ){
+       watchFileUpdate();
+    }
+}
+</code></pre>
+
+<p>The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.</p>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Better practice in Java - Part 1</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#refactor-static-final-constant-with-enum">Refactor static final constant with Enum</a></li>
+<li><a href="#good-stuff-from-dull-java-7">Good stuff from dull Java 7</a>
+<ul>
+<li><a href="#better-file-visitor-implementation">Better file visitor implementation</a></li>
+<li><a href="#arm">ARM</a></li>
+<li><a href="#new-file-change-monitor-service">New file change monitor service</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/blog">
+					<span class="doc-list-category">Blog</span>
+				</a>
+				<ul>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a>
+					</li>
+				
+					<li><a href="/blog/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/blog/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li>
+						<span class="active">Better practice in Java - Part 1</span>
+						</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryhounique';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+
+</body>
+</html>

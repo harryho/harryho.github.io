@@ -72,111 +72,128 @@
 
 <p>This article will continue the topic of Windows command &amp; hotkeys. Part-1 shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the common and useful commands and how to create a batch script with those commands.</p>
 
-<h2 id="most-common-and-useful-commands">Most common and useful commands</h2>
+<h2 id="advanced-commands-and-usages">Advanced commands and usages</h2>
 
-<p>This article won&rsquo;t list all commands and all usages of each command. Here I will just choose the commands and some usages of command which are useful for most people. Some advanced command will be demonstrated in Part-3.</p>
-
-<p>Before you start typing any cmd, I want to share a common mistake for most beginners, including myself. We always forget to use help command before we Google a solution, when we hit some impediment or roadblock. Actually help command is the most common built-in feature within any software or tool. Learn how to use help command or find the help information is first important when we are going to learn anything new.</p>
-
-<h3 id="help">help</h3>
+<h3 id="attrib">attrib</h3>
 
 <ul>
-<li>Start command prompt and type <code>help</code>. You will get a list of command which you can use, and short decription of each command.</li>
-<li>Use help command to see and learn other commands
+<li>Type <code>attrib +h a.txt</code> to hide file and use <code>attrib -h a.txt</code> to unhide it.</li>
+<li>Type <code>attrib +r a.txt</code> to change file to read-only and reverse the action by <code>-r</code></li>
+</ul>
+
+<h3 id="env">env</h3>
+
+<ul>
+<li>Type <code>env&gt;env.txt &amp;&amp; notepad env.txt</code> Display all environment variable in text file</li>
+</ul>
+
+<h3 id="set">set</h3>
+
+<ul>
+<li>Type <code>set path</code> to display <strong>PATH</strong> environment variable, which is useful to check if your <strong>PATH</strong> has been setup properly.</li>
+<li>Type <code>set /P a=b</code> to set b as value to variable a. It will be used in bat/cmd script.</li>
+</ul>
+
+<h3 id="net">net</h3>
+
+<p><strong>net view</strong></p>
+
+<ul>
+<li>Use <code>net view</code> to show a list of computers and network devices on the network.</li>
+</ul>
+
+<p><strong>net statistics</strong></p>
+
+<ul>
+<li>Use <code>net statistics workstation(/server)</code> to show the network statistics log for the Server or Workstation service</li>
+</ul>
+
+<p><strong>net localgroup</strong></p>
+
+<ul>
+<li>Use <code>net localgroup</code> to show a list of local user group on your computer.</li>
+</ul>
+
+<p><strong>net user</strong></p>
+
+<ul>
+<li>Type <code>net user %username%</code> to retrieve your user information</li>
+<li>Type <code>net user adminstrator</code> to check the status of administrator</li>
+<li>Type <code>net user administrator /active:yes</code> to activate adminstrator and inactivate by replacing <code>yes</code> with<code>no</code></li>
+</ul>
+
+<p><strong>net accounts</strong></p>
+
+<ul>
+<li>Use<code>net accounts &lt;user&gt;</code> to show current user&rsquo;s password and login requirement.</li>
+<li>Use<code>net accounts &lt;user&gt; /minpwlen:6</code> to set password minimum length requirement for user.</li>
+<li>Use<code>net accounts &lt;user&gt; /maxpwage:30</code> to force user to reset password every 30 days, or use <code>unlimited</code> to replace the number <code>30</code>, then user&rsquo;s password will never expire.</li>
+<li>User<code>net accounts /unique:5</code> to prevent user reuse previous passwords, and default value is 5.</li>
+</ul>
+
+<h3 id="runas">runas</h3>
+
+<pre><code>runas /user:mypc\administrator &quot;cmd&quot;
+runas /user:mydomain\administrator &quot;cmd /C \&quot; del /S /F /Q c:\dummy\* \&quot; &amp;  rmdir /S /Q c:\dummy &amp; md c:\dummy &amp; xcopy c:\source c:\dummy /S /E /Y&quot;
+</code></pre>
+
+<h3 id="tasklist">tasklist</h3>
+
+<ul>
+<li>tasklist[.exe] [/s computer] [/u domain\user [/p password]] [/fo {TABLE|LIST|CSV}] [/nh] [/fi FilterName [/fi FilterName2 [ &hellip; ]]] [/m [ModuleName] | /svc | /v</li>
+<li>FilterName: Status, Imagename,</li>
+<li>Find process by pid</li>
+</ul>
+
+<pre><code>tasklist /v /fo list /fi &quot;imagename eq mysqld.exe&quot;
+tasklist /v /fo list /fi &quot;imagename eq mongod.exe&quot;
+tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq running&quot; 
+tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq not responding&quot; 
+tasklist /fi &quot;pid eq 4444&quot;
+</code></pre>
+
+<h3 id="taskkill">taskkill</h3>
+
+<h3 id="sc">sc</h3>
+
+<ul>
+<li>Query Service</li>
+</ul>
+
+<pre><code>sc query &lt;servicename&gt;
+sc query state= all | find &quot;SERVICE_NAME&quot; 
+</code></pre>
+
+<ul>
+<li><p>Retrieve service name and state. type parameter can be used twice in some case.
+**state= {active | inactive | all}
+**type= {driver | service | all}
+**type= {own | share | interact | kernel | filesys | rec | adapt}</p></li>
+
+<li><p>Note: If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled</p></li>
+</ul>
+
+<pre><code>sc query state= inactive type= driver type= kernel
+for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @echo %s    
+for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
+    for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE     &quot;') do @echo %s -- %t
+    )
+</code></pre>
+
+<ul>
+<li>Start or stop service
 <code>
-C:\&gt;help
-C:\&gt;help cd 
+sc start  &lt;servicename&gt;
+sc stop  &lt;servicename&gt;
 </code></li>
 </ul>
 
-<h3 id="start">start</h3>
+<h3 id="netstat">netstat</h3>
 
-<ul>
-<li>Start another <code>cmd</code> window prompt.</li>
-</ul>
+<pre><code>netstat -ano | find &quot;:80&quot; 
+</code></pre>
 
-<h3 id="cd-chdir">cd / chdir</h3>
-
-<ul>
-<li>Displays the name of or changes the current directory
-
-<ul>
-<li>Type <code>cd</code> to display the name of directory</li>
-<li>Type <code>cd c:\windows</code> to change to <code>c:\Windows&gt;</code></li>
-<li>Type <code>cd /d D:</code> to change to d driver if you have d driver</li>
-</ul></li>
-</ul>
-
-<h3 id="dir">dir</h3>
-
-<ul>
-<li><p>Displays a list of files and subdirectories in a directory.</p>
-
-<ul>
-<li>Type <code>dir /a:h/a:d</code> to display hidden subdirectories only</li>
-<li>Type <code>dir /p/w</code> to display many items per screen within wide list format</li>
-<li>Type <code>dir /o:-s</code> to display items sorted by size (biggest first)</li>
-<li>Type <code>dir /o:s</code> to display items sorted by size (smallest first)</li>
-<li>Type <code>dir /o:dn</code> to display items sorted by date/time  (oldest first) and name ( alphabetic)</li>
-</ul></li>
-</ul>
-
-<h3 id="tree">tree</h3>
-
-<ul>
-<li>Type <code>tree /f</code> graphically displays the folder structure of a drive or path.</li>
-</ul>
-
-<h3 id="ren-rename">ren / rename</h3>
-
-<ul>
-<li>Type <code>ren abc cba</code> to ren file name from &ldquo;abc&rdquo; to &ldquo;cba&rdquo; if there is file named abc under current directory.</li>
-<li>Type <code>*.md *.txt</code> to ren all files under current directory with <code>md</code> extension to <code>txt</code> extension</li>
-</ul>
-
-<h3 id="md-mkdir">md / mkdir</h3>
-
-<ul>
-<li><p>Type <code>md a\b\c\d &amp;&amp; tree a</code> to create all directories once and display result as follow</p>
-
-<pre><code>&lt;current-directory&gt;\a
-|___b
-    |___c
-        |___d
-
-</code></pre></li>
-</ul>
-
-<h3 id="copy">copy</h3>
-
-<ul>
-<li>Type <code>touch test.txt &amp;&amp; copy test.txt C:\User\&lt;yourname&gt;\</code> to create a test.txt file and copy the test.txt to C:\User&lt;yourname&gt;\<br /></li>
-</ul>
-
-<h3 id="move">move</h3>
-
-<ul>
-<li>Type <code>move a b</code> to move folder a into folder b.</li>
-</ul>
-
-<h3 id="rd-rmdir">rd / rmdir</h3>
-
-<ul>
-<li>Type <code>rd a</code> to remove a empty directory <code>a</code></li>
-<li>Type <code>rd /s a</code> to remove a directory <code>a</code> including all files and empty directories within folder <code>a</code>.</li>
-</ul>
-
-<h3 id="del">del</h3>
-
-<ul>
-<li>Type <code>del</code> to delete files or <code>del *.txt</code> to delete all files with <code>txt</code> extension</li>
-</ul>
-
-<h3 id="cls">cls</h3>
-
-<ul>
-<li>Type <code>cls</code> to clean the screen</li>
-</ul>
+<h3 id="ipconfig">ipconfig</h3>
 
 				</section>
 			</article>
@@ -197,20 +214,18 @@ C:\&gt;help cd
 <ul>
 <li>
 <ul>
-<li><a href="#most-common-and-useful-commands">Most common and useful commands</a>
+<li><a href="#advanced-commands-and-usages">Advanced commands and usages</a>
 <ul>
-<li><a href="#help">help</a></li>
-<li><a href="#start">start</a></li>
-<li><a href="#cd-chdir">cd / chdir</a></li>
-<li><a href="#dir">dir</a></li>
-<li><a href="#tree">tree</a></li>
-<li><a href="#ren-rename">ren / rename</a></li>
-<li><a href="#md-mkdir">md / mkdir</a></li>
-<li><a href="#copy">copy</a></li>
-<li><a href="#move">move</a></li>
-<li><a href="#rd-rmdir">rd / rmdir</a></li>
-<li><a href="#del">del</a></li>
-<li><a href="#cls">cls</a></li>
+<li><a href="#attrib">attrib</a></li>
+<li><a href="#env">env</a></li>
+<li><a href="#set">set</a></li>
+<li><a href="#net">net</a></li>
+<li><a href="#runas">runas</a></li>
+<li><a href="#tasklist">tasklist</a></li>
+<li><a href="#taskkill">taskkill</a></li>
+<li><a href="#sc">sc</a></li>
+<li><a href="#netstat">netstat</a></li>
+<li><a href="#ipconfig">ipconfig</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -234,6 +249,9 @@ C:\&gt;help cd
 						</li>
 				
 					<li><a href="/blog/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/blog/better-practice-in-java-1/">Better practice in Java - Part 1</a>
 					</li>
 				
 				</ul>
@@ -260,13 +278,13 @@ C:\&gt;help cd
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/es6">es6</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/starter">starter</a>
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
 		
