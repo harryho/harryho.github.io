@@ -9,7 +9,7 @@
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
     <title>Better practice in Java - Part 1 - Welcome to Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/agate.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -331,20 +331,20 @@ public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
 <p><strong>Snippet of old style</strong></p>
 
 <pre><code class="language-java">FileInputStream exchangeCurrencyReader= null;
-      FileOutputStream exchangeCurrencyWriter = null;
-      try {
-
-        exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
-        exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
-        int var;
-        while (var = exchangeCurrencyReader.read()) != -1)
-          exchangeCurrencyWriter.write(var);
-      } finally {
-        if (exchangeCurrencyReader!= null)
-          exchangeCurrencyReader.close();
-        if (exchangeCurrencyWriter!= null)
-          exchangeCurrencyWriter.close();
-      }
+FileOutputStream exchangeCurrencyWriter = null;
+try {
+    exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+    exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
+    int var;
+    while (var = exchangeCurrencyReader.read()) != -1)
+        exchangeCurrencyWriter.write(var);
+} 
+finally {
+    if (exchangeCurrencyReader!= null)
+        exchangeCurrencyReader.close();
+    if (exchangeCurrencyWriter!= null)
+        exchangeCurrencyWriter.close();
+}
 </code></pre>
 
 <p><strong>Code in Java 7</strong></p>

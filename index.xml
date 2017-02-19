@@ -766,20 +766,20 @@ public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
 &lt;p&gt;&lt;strong&gt;Snippet of old style&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
-      FileOutputStream exchangeCurrencyWriter = null;
-      try {
-
-        exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-        exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-        int var;
-        while (var = exchangeCurrencyReader.read()) != -1)
-          exchangeCurrencyWriter.write(var);
-      } finally {
-        if (exchangeCurrencyReader!= null)
-          exchangeCurrencyReader.close();
-        if (exchangeCurrencyWriter!= null)
-          exchangeCurrencyWriter.close();
-      }
+FileOutputStream exchangeCurrencyWriter = null;
+try {
+    exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+    exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+    int var;
+    while (var = exchangeCurrencyReader.read()) != -1)
+        exchangeCurrencyWriter.write(var);
+} 
+finally {
+    if (exchangeCurrencyReader!= null)
+        exchangeCurrencyReader.close();
+    if (exchangeCurrencyWriter!= null)
+        exchangeCurrencyWriter.close();
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Code in Java 7&lt;/strong&gt;&lt;/p&gt;
