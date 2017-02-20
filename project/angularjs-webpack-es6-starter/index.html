@@ -87,32 +87,58 @@
 
 <h2 id="structure-of-starter">Structure of starter</h2>
 
-<pre><code>angularjs-webpack-es6-starter
-|--src
-    |--app 
-        |--common
-            |--directives         &lt;-// contains common directives
-                |--AppUiDirective.js
-                |--...
-            |--services           &lt;-// contains common services
-                |--ApiService.js
-                |--...
-            |--views              &lt;-// contains common views
-                |--header-view.html 
-            |--common.js          &lt;-// common module
-            |--common.spec.js
-        |--main
-        |--app.js                  &lt;-// app module
-        |--app.html                
-        |--app.route.js            &lt;-// app route
-        |--app.runner.js
-        |--app.spec.js
-    |--style                       &lt;-// css files including customized css
-    |--public                      &lt;-// fonts, images
+<pre><code class="language-rust">\path\to\angularjs-webpack-es6-starter
+|   .babelrc                                    &lt;-// default setting es2015.
+|   karma.conf.js                               &lt;-// tests and report setup 
+|   webpack.config.js                           &lt;-// webpack config
+\---src
+    |   tests.webpack.js
+    |   
+    +---app
+    |   |   app.html                            &lt;-// app view
+    |   |   app.js                              &lt;-// app module
+    |   |   app.routes.js                       &lt;-// app route to manage all routes 
+    |   |   app.runner.js                       &lt;-// app runner for state change enhancement  
+    |   |   app.spec.js                         &lt;-// app spec file for testing 
+    |   |   
+    |   +---common                              &lt;-// common module for whole app
+    |   |   |   common.js
+    |   |   |   common.spec.js
+    |   |   +---directives                      &lt;-// common directives for whole app
+    |   |   |       appUiDirectives.js
+    |   |   |       appUiDirectives.spec.js
+    |   |   |       commonDirectives.js
+    |   |   |       commonDirectives.spec.js
+    |   |   +---services                        &lt;-// common views for whole app
+    |   |   |       ApiService.js
+    |   |   |       ApiService.spec.js
+    |   |   |       UtilService.js
+    |   |   |       UtilService.spec.js
+    |   |   \---views                           &lt;-// contains common views
+    |   |           footer-view.html
+    |   |           header-view.html
+    |   |           sidebar-view.html
+    |   |           topbar-view.html
+    |   \---main                                &lt;-// built-in fonts, css, images 
+    |       \---dashboard
+    |           +---controllers
+    |           |       dashboardController.js
+    |           |       dashboardController.spec.js
+    |           \---views
+    |                   dashboard-view.html
+    |                   
+    +---public                                  &lt;-// built-in fonts, css, images 
+    |   |   index.html
+    |   +---fonts
+    |   |   +--- ...
+    |   \---img
+    |       +--- favicon.ico
+    \---style                                  &lt;-// css files including customized css
+           
     
 </code></pre>
 
-<h2 id="browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a></h2>
+<h2 id="browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git-folder-path-listing-for-volume-windows8-os">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a>Folder PATH listing for volume Windows8_OS</h2>
 
 				</section>
 			</article>
@@ -134,7 +160,7 @@
 <li>
 <ul>
 <li><a href="#structure-of-starter">Structure of starter</a></li>
-<li><a href="#browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a></a></li>
+<li><a href="#browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git-folder-path-listing-for-volume-windows8-os">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a>Folder PATH listing for volume Windows8_OS</a></li>
 </ul></li>
 </ul>
 </nav>
