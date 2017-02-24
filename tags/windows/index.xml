@@ -95,7 +95,87 @@
 runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h3 id=&#34;sc&#34;&gt;sc&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sc command usage: &lt;code&gt;sc &amp;lt;server&amp;gt; [command] [service name] &amp;lt;option1&amp;gt; &amp;lt;option2&amp;gt;...&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;sc query&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Basic usage&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc \\yourpcname query
+sc query &amp;lt;servicename&amp;gt;
+sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Retrieve service name and state. type parameter can be used twice in some case.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;state = {active | inactive | all}&lt;/li&gt;
+&lt;li&gt;type = {driver | service | all}&lt;/li&gt;
+&lt;li&gt;type= {own | share | interact | kernel | filesys | rec | adapt}&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;IMPORTANT&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The command options for SC are case sensitive.&lt;/li&gt;
+&lt;li&gt;If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled.&lt;/li&gt;
+&lt;li&gt;Extra space within option is necessary. e.g. &lt;code&gt;state= all&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM query all services which are inactive and type are driver and kernel
+sc query state= inactive type= driver type= kernel
+REM get all services&#39; name 
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @echo %s 
+REM get all services&#39; name and state
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
+    for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE&amp;quot; &#39;) do @echo %s -- %t
+    )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;sc queryex&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;REM get all services&#39; name and pid
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
+    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;PID&amp;quot; &#39;) do @echo %s -- %t
+    )
+REM get all services&#39; name and pid
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
+    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) do @echo %s -- %t
+    ) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;sc qc&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;REM get all services&#39; name and path
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(     for /f &amp;quot;tokens=3 delims==:&amp;quot; %t in (&#39;sc qc %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) do @echo %s -- C:%t     )   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;sc start/stop&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM start and stop service
+sc start  &amp;lt;servicename&amp;gt;
+REM query service state
+sc query &amp;lt;servicename&amp;gt;
+REM stop service
+sc stop  &amp;lt;servicename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ipconfig&#34;&gt;ipconfig&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Type &lt;code&gt;ipconfig /all&lt;/code&gt; to display full configuration information.&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;ipconfig /flushdns&lt;/code&gt;    to purge the DNS Resolver cache.&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&#34;tasklist&#34;&gt;tasklist&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;syntax&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;tasklist[.exe] [/s computer] [/u domain\user [/p password]] [/fo {TABLE|LIST|CSV}] [/nh] [/fi FilterName [/fi FilterName2 [ &amp;hellip; ]]] [/m [ModuleName] | /svc | /v&lt;/li&gt;
@@ -103,55 +183,130 @@ runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&am
 &lt;li&gt;Find process by pid&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get the mysqld process info
+tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
+REM get the mongod process info
 tasklist /v /fo list /fi &amp;quot;imagename eq mongod.exe&amp;quot;
-tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq running&amp;quot; 
+REM get list of running processes under given user  
+tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq running&amp;quot;
+REM get list of non-responding processes under given user   
 tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq not responding&amp;quot; 
+REM get process by PID
 tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;taskkill&#34;&gt;taskkill&lt;/h3&gt;
-
-&lt;h3 id=&#34;sc&#34;&gt;sc&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Query Service&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc query &amp;lt;servicename&amp;gt;
-sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Retrieve service name and state. type parameter can be used twice in some case.
-**state= {active | inactive | all}
-**type= {driver | service | all}
-**type= {own | share | interact | kernel | filesys | rec | adapt}&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Note: If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc query state= inactive type= driver type= kernel
-for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @echo %s    
-for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
-    for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE     &amp;quot;&#39;) do @echo %s -- %t
-    )
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Start or stop service
-&lt;code&gt;bash
-sc start  &amp;lt;servicename&amp;gt;
-sc stop  &amp;lt;servicename&amp;gt;
-&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;h3 id=&#34;netstat&#34;&gt;netstat&lt;/h3&gt;
 
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;netstat&lt;/code&gt; to get all ports and IP addresses, which are connected or listening&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type PID of process which is using some given port, such as 80, 443, 22, etc.&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;netstat -ano | find &amp;quot;:80&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type the application which is using given port.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for /f &amp;quot;tokens=5&amp;quot; %p in ( &#39;netstat -ano ^| find &amp;quot;:80&amp;quot;&#39;) do @(     
+for /f &amp;quot;tokens=1&amp;quot; %s in ( &#39;tasklist /fi &amp;quot;pid eq %p&amp;quot; ^| find &amp;quot;%p&amp;quot;&#39;) 
+do @echo PID:%p -- APP: %s 
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;taskkill&#34;&gt;taskkill&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;syntax&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;taskkill [/S system [/U username [/P [password]]]]
+         { [/FI filter] [/PID processid | /IM imagename] } [/F] [/T]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;ipconfig&#34;&gt;ipconfig&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;samples&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM force to stop notepad application and any children processes
+taskkill /F /IM notepad.exe /
+REM stop process by PID and any children processes
+taskkill /PID 1230 /PID 1241 /PID 1253 /T
+REM force to stop applications which PID is equal or greater than 10000
+REM and windows&#39; title of app is not equal to untitle*
+taskkill /F /FI &amp;quot;PID ge 1000&amp;quot; /FI &amp;quot;WINDOWTITLE ne untitle*&amp;quot;
+
+taskkill /F /FI &amp;quot;USERNAME eq NT AUTHORITY\SYSTEM&amp;quot; /IM notepad.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;schtasks&#34;&gt;schtasks&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Syntax : schtasks /parameter [arguments]
+
+&lt;ul&gt;
+&lt;li&gt;parameters include : Change, Create, Delete, End, Query, Run, ShowSid&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;schtasks&lt;/code&gt; to list all scheduled tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;schtasks /Query&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get help info                                                                                                                                                                           
+SCHTASKS /Query /?    
+REM query tasks which are scheduled on given system                                                                                                                                                                         
+SCHTASKS /Query /S system /U user /P       
+REM get list of tasks in details
+SCHTASKS /Query /FO LIST /V     
+REM get table of running tasks in details and output to csv file                                                                                                                          
+SCHTASKS /Query /FO TABLE /NH /V | find &amp;quot;Running&amp;quot;&amp;gt;running_tasks.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;script&#34;&gt;script&lt;/h2&gt;
+
+&lt;h3 id=&#34;basic-hello-world-please-check-it-out-from-the-home-page&#34;&gt;Basic hello world &amp;ndash; Please check it out from the home page&lt;/h3&gt;
+
+&lt;h3 id=&#34;customized-script-to-query-bin-and-empty-the-bin&#34;&gt;Customized script to query bin and empty the bin&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We assume you have multiple temp folders in different drives and You want to delete log files inside temp folder and its subdirectries from time to time. Before you delete them, you want to list all files first. You can confirm if you want to delete them or not.&lt;/li&gt;
+&lt;li&gt;Create a file named clean-logs.bat&lt;/li&gt;
+&lt;li&gt;Copy the sample code and tailor anything you want.&lt;/li&gt;
+&lt;li&gt;The sample shows you how to create interative command script and how to combine commands together with the condition statement and loop statement.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo off
+
+@echo.&amp;quot;Assumption: You have multiple temp folders in different drives. You want to delete log files inside temp folder and its subdirectries. Before you delete them, you want to list all files first, file list should be sorted by time&amp;quot;
+
+:again 
+   echo &amp;quot;Checking all Recycle bins for each drive ...&amp;quot;
+   echo.-----------------------
+   for /f  %%x in (&#39;wmic logicaldisk get caption  ^| find &amp;quot;:&amp;quot;&#39;) do @(
+        for /f &amp;quot;tokens=*&amp;quot; %%s in (&#39;tree /f /a %%x\temp ^| find  &amp;quot;log&amp;quot; &#39;  ) do @(
+            echo.%%x\temp\%%s
+        )
+   )
+
+   set /p answer=Do you want to clean up log files (Y/N)?
+   if /i &amp;quot;%answer:~,1%&amp;quot; EQU &amp;quot;Y&amp;quot; ( 
+       @echo.Y
+       goto clean
+   )
+   if /i &amp;quot;%answer:~,1%&amp;quot; EQU &amp;quot;N&amp;quot; ( 
+       @echo.N 
+       goto end 
+   )  
+   echo Please type Y for Yes or N for No
+   goto again
+
+:clean
+    echo.&#39;deleting logs&#39;
+    for /f  %%x in (&#39;wmic logicaldisk get caption  ^| find &amp;quot;:&amp;quot;&#39;) do @(
+        for /f &amp;quot;tokens=*&amp;quot; %%s in (&#39;tree /f /a %%x\temp ^| find  &amp;quot;log&amp;quot; &#39;  ) do @(
+            del &amp;quot;%%x\temp\%%s&amp;quot;
+        )
+    )
+
+:end
+    echo.&#39;exiting program&#39;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -338,13 +493,15 @@ C:\&amp;gt;help cd
 
 &lt;ul&gt;
 &lt;li&gt;Type &lt;code&gt;rd a&lt;/code&gt; to remove a empty directory &lt;code&gt;a&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Type &lt;code&gt;rd /s a&lt;/code&gt; to remove a directory &lt;code&gt;a&lt;/code&gt; including all files and empty directories within folder &lt;code&gt;a&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;rd /s a&lt;/code&gt; to remove a directory &lt;code&gt;a&lt;/code&gt; including all files and empty subdirectories within folder &lt;code&gt;a&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;del&#34;&gt;del&lt;/h3&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;IMPORTANT&lt;/em&gt;&lt;/strong&gt; : The item deleted by &lt;code&gt;del&lt;/code&gt; can not be restored from &lt;code&gt;bin&lt;/code&gt;. Please be careful before you use this command.&lt;/li&gt;
 &lt;li&gt;Type &lt;code&gt;del&lt;/code&gt; to delete files or &lt;code&gt;del *.txt&lt;/code&gt; to delete all files with &lt;code&gt;txt&lt;/code&gt; extension&lt;/li&gt;
+&lt;li&gt;Combine &lt;code&gt;rd&lt;/code&gt; can remove folder with not-empty subdirectories `del /s/q &lt;folder&gt; &amp;amp; rd /s/q &lt;folder&gt;&amp;lsquo;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;cls&#34;&gt;cls&lt;/h3&gt;
