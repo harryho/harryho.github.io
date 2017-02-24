@@ -386,19 +386,22 @@ tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Type &lt;code&gt;netstat&lt;/code&gt; to get all ports and IP addresses, which are connected or listening&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Type PID of process which is using some given port, such as 80, 443, 22, etc.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Type PID of process which is using some given port, such as 80, 443, 22, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;netstat -ano | find &amp;quot;:80&amp;quot; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;li&gt;&lt;p&gt;Type the application which is using given port.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for /f &amp;quot;tokens=5&amp;quot; %p in ( &#39;netstat -ano ^| find &amp;quot;:80&amp;quot;&#39;) do @(     
-for /f &amp;quot;tokens=1&amp;quot; %s in ( &#39;tasklist /fi &amp;quot;pid eq %p&amp;quot; ^| find &amp;quot;%p&amp;quot;&#39;) 
-do @echo PID:%p -- APP: %s 
-)
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Type the application which is using given port.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;for /f &amp;quot;tokens=5&amp;quot; %p in ( &#39;netstat -ano ^| find &amp;quot;:80&amp;quot;&#39;) do @(     
+    for /f &amp;quot;tokens=1&amp;quot; %s in ( &#39;tasklist /fi &amp;quot;pid eq %p&amp;quot; ^| find &amp;quot;%p&amp;quot;&#39;) do @(
+        echo PID:%p -- APP: %s
+    ) 
+)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;taskkill&#34;&gt;taskkill&lt;/h3&gt;
 

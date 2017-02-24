@@ -253,19 +253,22 @@ tasklist /fi &quot;pid eq 4444&quot;
 <ul>
 <li><p>Type <code>netstat</code> to get all ports and IP addresses, which are connected or listening</p></li>
 
-<li><p>Type PID of process which is using some given port, such as 80, 443, 22, etc.</p>
+<li><p>Type PID of process which is using some given port, such as 80, 443, 22, etc.</p></li>
+</ul>
 
 <pre><code class="language-bash">netstat -ano | find &quot;:80&quot; 
-</code></pre></li>
+</code></pre>
 
-<li><p>Type the application which is using given port.</p>
-
-<pre><code>for /f &quot;tokens=5&quot; %p in ( 'netstat -ano ^| find &quot;:80&quot;') do @(     
-for /f &quot;tokens=1&quot; %s in ( 'tasklist /fi &quot;pid eq %p&quot; ^| find &quot;%p&quot;') 
-do @echo PID:%p -- APP: %s 
-)
-</code></pre></li>
+<ul>
+<li>Type the application which is using given port.</li>
 </ul>
+
+<pre><code class="language-bash">for /f &quot;tokens=5&quot; %p in ( 'netstat -ano ^| find &quot;:80&quot;') do @(     
+    for /f &quot;tokens=1&quot; %s in ( 'tasklist /fi &quot;pid eq %p&quot; ^| find &quot;%p&quot;') do @(
+        echo PID:%p -- APP: %s
+    ) 
+)
+</code></pre>
 
 <h3 id="taskkill">taskkill</h3>
 
@@ -461,7 +464,7 @@ SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot;&gt;running_tasks.csv
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/oop">oop</a>
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
 		

@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oo on Welcome to Hello World</title>
+    <link>https://harryho.github.io/tags/oo/index.xml</link>
+    <description>Recent content in Oo on Welcome to Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
+    <atom:link href="https://harryho.github.io/tags/oo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JavaScript and Object Oriented Programming</title>
+      <link>https://harryho.github.io/blog/javascript-oop/</link>
+      <pubDate>Thu, 20 Mar 2014 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/blog/javascript-oop/</guid>
+      <description>
+
+&lt;p&gt;##Brief history
+&amp;gt; Brief history of JavaScript can be found on &lt;a href=&#34;harryho.github.io/#Javascript&#34;&gt;Home Page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You should have basic knowledge of Javascript.&lt;/li&gt;
+&lt;li&gt;You should know how to test sample code on Chrome or Firefox. It is simple, just open your browser and enter &lt;code&gt;F12&lt;/code&gt;, copy the code to console and then press &lt;code&gt;Enter&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;data-types&#34;&gt;Data types&lt;/h2&gt;
+
+&lt;p&gt;The JavaScript (ECMAScript) standard defines six data types. Five are primitives, including Boolean, Null, Undefined, Number, String, and Object. In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers. The object-oriented nature of JavaScript is important to understand if you want to go further with your knowledge of the language, therefore we&amp;rsquo;ve provided this module to help you. Here we teach object theory and syntax in detail, then look at how to create your own objects.&lt;/p&gt;
+
+&lt;h2 id=&#34;object-and-prototype&#34;&gt;Object and prototype&lt;/h2&gt;
+
+&lt;h3 id=&#34;how-to-define-a-object&#34;&gt;How to define a object&lt;/h3&gt;
+
+&lt;p&gt;There are a couple ways to create variable as object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var obj1 = {};
+var obj2 = new Object();
+var obj3 = Object.create(null);
+console.log( obj );
+console.log( obj2 );
+console.log( obj3 );
+/*
+-- Copy above code and run it inside console from Chrome browser.
+-- You will see follow result.
+object {}
+object {}
+object {}
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Object type gives developers so much power and flexibility to customize their own data type. All JavaScript objects inherit the properties and methods from their prototype. The Object.prototype is on the top of the prototype chain. All JavaScript objects (Date, Array, RegExp, Function, &amp;hellip;.) inherit from the Object.prototype.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Object has properties and method. Object&amp;rsquo;s method are the actions that can be performed on objects, they are one of most powerful feature for developers. Let&amp;rsquo;s see how we can create object with properties and methods.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create three cars with basic object usage.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var car1 = { color: &#39;red&#39;, make:&#39;Toyota&#39;, model:&#39;Sedan&#39;, getInfo: function (){
+        console.log( this );
+}};
+var car2 = { color: &#39;black&#39;, make:&#39;BMW&#39;, model:&#39;Coupe&#39;, getInfo: function (){
+        console.log( this );
+}};
+var car3 = { color: &#39;white&#39;, make:&#39;Subaru&#39;, model:&#39;SUV&#39;, getInfo:function (){
+        console.log( this );
+}};
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+
+/*
+Output:
+Object {color: &amp;quot;red&amp;quot;, make: &amp;quot;Toyota&amp;quot;, model: &amp;quot;Sedan&amp;quot;} 
+Object {color: &amp;quot;black&amp;quot;, make: &amp;quot;BMW&amp;quot;, model: &amp;quot;Coupe&amp;quot;} 
+Object {color: &amp;quot;white&amp;quot;, make: &amp;quot;Subaru&amp;quot;, model: &amp;quot;SUV&amp;quot;}
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var Car = function(color, make, model, getInfo ) {
+    this.color=&#39;&#39;;
+    this.make=&#39;&#39;;
+    this.model=&#39;&#39;;
+    this.getInfo= function( time ){
+            console.log( this );
+    };
+};
+
+var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
+var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
+var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You will get same result as before. If you compare two blocks of code, you may think the second way has more code than the first one. Let&amp;rsquo;s image if you need to create 20 objects and every object with 20 methods, then you totaly need to write 20 X 20 = 400 methods. Object&amp;rsquo;s prototype is powerful, but we need to be careful when we want to use it, especially the &lt;code&gt;this&lt;/code&gt; prototype. We need discuss this more in detail.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Other sample of prototype&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var Car = function(color, make, model ) {
+    this.color=&#39;&#39;;
+    this.make=&#39;&#39;;
+    this.model=&#39;&#39;;
+};
+Car.prototype = {        
+    getInfo : function( ){
+            console.log( this );
+    }
+};
+var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
+var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
+var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;class-and-inheritance&#34;&gt;Class and inheritance&lt;/h3&gt;
+
+&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
+It also lacks built-in methods for determining whether an object implements the same set of
+methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
+is extremely flexible, making it easy to add these features.&lt;/p&gt;
+
+&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
+It also lacks built-in methods for determining whether an object implements the same set of
+methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
+is extremely flexible, making it easy to add these features.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inheritance issue in Javascript&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet() {
+    this.name =  &amp;quot;&amp;quot;;
+    this.species =  &amp;quot;&amp;quot;;
+    this.offsprings = [];
+    this.setName = function ( name ) { this.name = name ;};
+    this.deliverBaby = function( obj ){
+        this.offsprings.push( obj );
+    }
+    this.getInfo = function (){
+        console.log( &amp;quot; species: &amp;quot;,this.species, &amp;quot; name: &amp;quot; ,this.name );
+        console.log( &amp;quot; has &amp;quot;, this.offsprings.length ,&amp;quot; offsprings &amp;quot;);
+    }
+};
+
+function Dog()  {
+};
+
+Dog.prototype = new Pet();
+Dog.prototype.species = &amp;quot;Dog&amp;quot;;
+
+var dog1 = Object.create(new Dog());
+dog1.setName ( &amp;quot;Polly&amp;quot;);
+
+var dog2 = new Dog();
+dog2.setName ( &amp;quot;Lulu&amp;quot;);
+
+dog1.deliverBaby( new Dog());
+dog2.deliverBaby( new Dog());
+
+dog1.getInfo();
+dog2.getInfo();
+
+/*
+output :
+    species:  Dog  name:  Polly 
+    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
+    species:  Dog  name:  Lulu 
+    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tell there is something wrong with the prototype and constructor at a glance. It really confused many developers with C++/Java OOP backgroud. The sample code looks fine, but it doesn&amp;rsquo;t work as other OOP programming language. It is your and Brendan Eich&amp;rsquo;s problem, because he was told to make JavaScript look like Java, even there is no built-in OO mechanism at the beginning. This just looks like an odd way of doing class-based OOP without real classes, and leaves the programmer wondering why they didn’t implement proper class-based OOP. JavaScript keeps using constructor, which obscured JavaScript’s true prototypal nature. It turns out most developers don&amp;rsquo;t know how to use it properly and efficiently, including myself at the early stage.&lt;/p&gt;
+
+&lt;p&gt;Function is first-class citizen in JavaScript world, but it’s not really a class. We need to understand the constructor creates an empty object, then sets the prototype of empty object to the prototype property of the constructor, then set constructor function with &lt;code&gt;this&lt;/code&gt; pointing to the newly-created object, and finally returns the object. You will get more confused after you see this definition. Let&amp;rsquo;s us create a simple sample and take a close look why the constructor and prototype will cause this problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var MyClass = function(){
+    this.name = &#39;MyClass&#39;;
+    this.getInfo = function ( ){
+        console.log( this );
+    }
+}
+MyClass.prototype.propObject = { id: 0, property: &#39;property&#39; }
+
+var objectA = new MyClass();
+var objectB = new MyClass();
+
+console.log( &#39;object A:&#39;, objectA.name ,  &#39;object B:&#39;, objectB.name  );
+console.log( &#39;MyClass.prototype  === objectA.constructor.prototype ? &#39;, MyClass.prototype === objectA.constructor.prototype );
+console.log( &#39;MyClass.prototype  === objectB.constructor.prototype ? &#39;, MyClass.prototype  === objectB.constructor.prototype );
+
+console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject , &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
+
+objectA.propObject.id = 1; 
+objectA.propObject.property = &#39;AAA&#39;; 
+
+console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject,  &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
+/*
+output :
+
+MyClass object B: MyClass
+MyClass.prototype  === objectA.constructor.prototype ?  true
+MyClass.prototype  === objectB.constructor.prototype ?  true
+objectA.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}  objectB.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}
+objectA.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  objectB.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we draw a diagram of above sample, you will see what is happening behind the scene. Since the prototype property is a reference, changing the prototype object’s properties at runtime will affect all objects using the prototype.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
++------------+             
+|  MyClass   |        +---- objectA.prototype
+| prototype&amp;lt;----------|
+|            |        +---- objectB.prototype
++------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we figure out the root cause. You will say it is easy to fix. We just need to create new prototype for each object, and clone the properties and methods from supper class. Yes, you are right, but it is not I want to recommand to you. First, we need to see if we really inheritance, secondly, if it is better to maintain if use inheritance.&lt;/p&gt;
+
+&lt;p&gt;If we still want to use inheritance, I will suggest not to jsut inherit the properties, instead of methods. In my opinion, there is very rare of scenario, we really need to inherit method. So we just need to find to proper way to solve the problem of properties inheritance.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Object-based Inheritance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet(name, master) {
+    this.name = name || &amp;quot;&amp;quot;;
+    this.species = &amp;quot;&amp;quot;;
+    this.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    this.offsprings = [];
+    this.deliverBaby= function ( obj) {
+        this.offsprings.push(obj);
+    },
+    this.getInfo = function () {
+        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        this.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+}
+
+function Dog(name, master) {
+    Pet.call(this, name, master);
+    this.mother = null;
+    this.species = &amp;quot;Dog&amp;quot;;
+}
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+/*
+output:
+
+Dog  name:  Polly  master :  John   M
+has baby :   Polly-Baby-Dog   Dog
+species:  Dog  name:  Lulu  master :  Ada   F
+has baby :   Lulu-Baby-Dog   Dog
+has baby :   Lulu-Baby-Dog-2   Dog
+*/
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you test, did you say: &amp;ldquo;what? how this works? It looks share the same prototype with &lt;code&gt;this&lt;/code&gt;&amp;rdquo;? Actually the problem is the special object &lt;code&gt;this&lt;/code&gt; in Javascript, which is one of the most misunderstood parts of JavaScript. Today it still confuses many other JS developers. If you have experience with other JavaScript framework. You will find many samples which use &lt;code&gt;that&lt;/code&gt; , &lt;code&gt;self&lt;/code&gt;, &lt;code&gt;vm&lt;/code&gt; to replace the built-in &lt;code&gt;this&lt;/code&gt;. e.g. &lt;code&gt;var that = {}&lt;/code&gt;, &lt;code&gt;var self = {}&lt;/code&gt;,etc. Let&amp;rsquo;s see the new version of above sample code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function Pet(name, master) {
+    var self = {};
+    self.name = name || &amp;quot;&amp;quot;;
+    self.species = &amp;quot;&amp;quot;;
+    self.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    self.offsprings = [];
+    return self;
+}
+
+function Dog(name, master) {
+    var self = {};
+    Pet.call(self, name, master);
+    self.species = &amp;quot;Dog&amp;quot;;
+    self.prototype = this.constructor.prototype;
+    return self;
+}
+
+Dog.prototype = {    
+    deliverBaby: function ( self, obj) {
+        self.offsprings.push(obj);
+    },
+    getInfo: function (self) {
+        console.log(&amp;quot; species: &amp;quot;, self.species, &amp;quot; name: &amp;quot;, self.name, &amp;quot; master : &amp;quot;, self.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        self.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+};
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(dog1, new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I rewrite above sample a few lines of code, then you will figour out why it is working, but maybe you still want to implement inheritance as other OOP lanuage C++, Java. Then let&amp;rsquo;s take a look the classical inheritance, which is much more close to other OOP language. In classical inheritance it&amp;rsquo;s impossible (or at least very difficult) to choose which properties you want to inherit. They use virtual base classes and interfaces to solve the diamond problem. It is much more complicated.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Classical inheritance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function extend(subClass, superClass) {
+    var F = function () {};
+    F.prototype = superClass.prototype;
+    subClass.prototype = new F();
+    subClass.prototype.constructor = subClass;
+    subClass.superclass = superClass.prototype;
+
+    if (superClass.prototype.constructor == Object.prototype.constructor) {
+        superClass.prototype.constructor = superClass;
+    }
+}
+
+function Pet(name, master) {
+    this.name = name || &amp;quot;&amp;quot;;
+    this.species = &amp;quot;&amp;quot;;
+    this.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    this.offsprings = [];
+}
+
+Pet.prototype.deliverBaby = function (obj) {
+    this.offsprings.push(obj);
+};
+
+Pet.prototype.getInfo = function () {
+    console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, (this.master?this.master.name:&#39;&#39;), &amp;quot; &amp;quot;,  (this.master?this.master.gender:&#39;&#39;));
+    this.offsprings.forEach(function (e) {
+        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+    });
+}
+
+
+function Dog(name, master) {
+    Dog.superclass.constructor.call(this, name, master);
+    this.species = &amp;quot;Dog&amp;quot;;
+}
+
+extend(Dog, Pet);
+
+Dog.prototype.getInfo = function () {     
+    console.log(&amp;quot; Override --- &amp;quot; );
+    Dog.superclass.getInfo.call(this) ;
+};
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most programmers who come from a classical background argue that classical inheritance is more powerful than prototypal inheritance. The truth is that prototypal inheritance supports inheriting from multiple prototypes. Prototypal inheritance simply means one object inheriting from another object.&lt;/p&gt;
+
+&lt;p&gt;Whether classical or prototypal, is used to reduce the redundancy in code. Since prototypal inheritance allows for multiple inheritance, code which requires multiple inheritance is less redundant if written using prototypal inheritance rather than in a language which has classical inheritance but no multiple inheritance.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Prototypal inheritance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function clone(obj) {
+    if (obj === null || typeof obj !== &#39;object&#39;) {
+        return obj;
+    }
+
+    var temp = obj.constructor(); // give temp the original obj&#39;s constructor
+    for (var key in obj) {
+        temp[key] = clone(obj[key]);
+    } 
+    return temp;
+}
+
+var Pet = {
+    name: &amp;quot;&amp;quot;,
+    species: &amp;quot;&amp;quot;,
+    master: {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    },
+    offsprings: [],
+    deliverBaby: function (obj) {
+        this.offsprings.push(obj);
+    },
+    getInfo: function () {
+        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        this.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+};
+
+var Dog = clone(Pet);
+Dog.species = &#39;Dog&#39;;
+
+Dog.getInfo = function () {
+    console.log(&amp;quot; Override -- species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+    this.offsprings.forEach(function (e) {
+        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+    });
+};
+
+var dog1 = clone(Dog);
+var dog2 = clone(Dog);
+
+dog1.name = &#39;Polly&#39;;
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+dog2.name = &#39;Lulu&#39;;
+dog2.master = {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+};
+
+var dog11 = clone(Dog);
+dog11.name = &#39;Polly-Baby-Dog&#39;;
+var dog21 = clone(Dog);
+var dog22 = clone(Dog);
+dog21.name = &#39;Lulu-Baby-Dog&#39;;
+dog22.name = &#39;Lulu-Baby-Dog-2&#39;;
+
+dog1.deliverBaby(dog11);
+dog2.deliverBaby(dog21);
+dog2.deliverBaby(dog22);
+
+dog1.getInfo();
+dog2.getInfo();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the most important advantages of prototypal inheritance is that you can add new properties to prototypes after they are created. This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.
+This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.This is not possible in classical inheritance because once a class is created you can&amp;rsquo;t modify it at runtime. This is probably the single biggest advantage of prototypal inheritance over classical inheritance, and it should have been at the top.&lt;/p&gt;
+
+&lt;h3 id=&#34;module-and-namespace&#34;&gt;Module and namespace&lt;/h3&gt;
+
+&lt;p&gt;There are quite a lot of benefits from module and namespace, especially when you are going to build some special common api shared within the whole application, even multiple systems across your whole entire enterprise. First thing first, we should not pollute the context, since it will potentially break existing functions or other third party frameworks which have been introduced in your applicatio, vice versa.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern. The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most simple closure&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var closureObject = (function() {
+    var _privateProperty = &#39;private&#39;;
+    var _privateMethod = function () {
+        console.log( &#39; private method &#39;);
+    };
+    return {
+        publicProperty: &#39;Public Property&#39;,
+        publicMethod: function() {
+            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
+        },
+        setPrivateProperty: function ( newValue ){
+            _privateProperty= newValue;
+        },
+        getPrivateProperty: function( ){
+            return _privateProperty;
+        }
+    }
+}());
+
+console.log(  closureObject.publicProperty );
+console.log(  closureObject._privateProperty ); 
+// console.log(  closureObject._privateMethod() ); // This will cause Uncaught TypeError
+console.log(  closureObject.getPrivateProperty() );
+
+closureObject.setPrivateProperty( &#39;public&#39;);
+console.log(  closureObject.getPrivateProperty() );
+
+/* 
+output:
+
+Public Property
+undefined             // privateProperty can not be accessed directly
+private               
+public                // privateProperty can be updated by public method
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.&lt;/p&gt;
+
+&lt;p&gt;Module is not rock science. Actually it is quite easy to implement.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Simple module sample&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function(undefined) {
+    var _privateProperty = &#39;private&#39;;
+    var _privateMethod = function () {
+        console.log( &#39; private method &#39;);
+    };
+    return {
+        publicProperty: &#39;Public Property&#39;,
+        publicMethod: function() {
+            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
+        },
+        setPrivateProperty: function ( newValue ){
+            _privateProperty= newValue;
+        },
+        getPrivateProperty: function( ){
+            return _privateProperty;
+        }
+    }
+}());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You may say &amp;ldquo;What? closure is module.&amp;rdquo; Yes, you can say that. The little difference is the auguements during auto initialization. By having an function argument undefined (the name actually does not matter) which you don&amp;rsquo;t pass a parameter to, you could make sure you have a variable which really is undefined. This technique ensures that it will work as expected, in case it will be excluded to unintential amendment by other script.&lt;/p&gt;
+
+&lt;p&gt;Once we create our module, we can simply extend the module with the same technique.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Module&amp;rsquo;s extension with override or new api&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function() {
+    ....
+}());
+
+var extendModule = (function( m){
+     m.publicMethod = function ( newArgument ) { // overload publicMethod 
+          //   TODO
+     };
+
+     m.newApi = function () {  // 
+         // TODO
+     };
+
+}(myModule));
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we will go further to namespace, which is based on module technique. Namespace gives you the ability to have public and private properties and methods.
+The code inside doesn’t use the Object Literal notation. Allows you to use $ inside your code without worrying about clashing with other libraries
+Allows your library to grow across files using the “window.rtkns = window.rtkns || {}” technique
+A common pattern that you will see in many libraries, widgets, and plugins&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+(function (rtkns, $, undefined) {
+
+    rtkns.createNS = function (namespace) {
+        var nsparts = namespace.split(&amp;quot;.&amp;quot;);
+        var parent = rtkns;
+
+        if (nsparts[0] === &amp;quot;rtkns&amp;quot;) {
+            nsparts = nsparts.slice(1);
+        }
+
+        for (var i = 0; i &amp;lt; nsparts.length; i++) {
+            var partname = nsparts[i];
+
+            if (typeof parent[partname] === &amp;quot;undefined&amp;quot;) {
+                parent[partname] = {};
+            }
+            parent = parent[partname];
+        }
+        return parent;
+    };
+
+    var clone = function(obj) {
+        if (obj === null || typeof obj !== &#39;object&#39;) {
+            return obj;
+        }
+
+        var temp = obj.constructor(); // give temp the original obj&#39;s constructor
+        for (var key in obj) {
+            temp[key] = clone(obj[key]);
+        } 
+        return temp;
+    };
+
+    rtkns.clone = clone;
+
+    rtkns.createNS(&amp;quot;rtkns&amp;quot;);
+
+
+    rtkns.utils = rtkns.createNS(&amp;quot;rtkns.utils&amp;quot;);
+
+    rtkns.model = rtkns.createNS(&amp;quot;rtkns.model&amp;quot;);
+
+
+    rtkns.model.entity = {
+        id: 0,
+        createdBy:&#39;&#39;,
+        modifiedBy:&#39;&#39;,
+        created: null,
+        modified: null,
+    };
+    var entity = rtkns.model.entity;
+    
+    rtkns.model.order = clone ( entity);
+    var order = rtkns.model.order ;
+    order.amount = 0;
+    order.description = &#39;&#39;;
+
+
+    rtkns.model.client = clone( entity);
+    var client =  rtkns.model.client ;
+    client.name = &#39;&#39;;
+    client.email = &#39;&#39;;
+    client.orders = [];
+    client.purchase = function ( order ){
+        this.orders.push( order );
+    };
+
+    rtkns.utils.toString = function (entity) {
+        return entity?JSON.stringify(entity):entity;
+    };
+
+
+}(window.rtkns = window.rtkns || {}));
+
+var rtkns = window.rtkns;
+
+var client1 = rtkns.clone( rtkns.model.client );
+client1.name = &#39;client 1&#39;;
+client1.email = &#39;client1.email@test.com&#39;;
+var client2 = rtkns.clone( rtkns.model.client );
+client2.name = &#39;client 2&#39;;
+client2.email = &#39;client2.email@test.com&#39;;
+
+var order1 = rtkns.clone( rtkns.model.order );
+order1.amount = 100;
+order1.description = &#39;order 1&#39;;
+
+var order2 = rtkns.clone( rtkns.model.order );
+order2.amount = 600;
+order2.description = &#39;order 2&#39;;
+
+client1.purchase( order1 );
+client2.purchase( order2 );
+
+console.log(rtkns.utils.toString( client1));
+console.log(rtkns.utils.toString( client2));
+
+/*
+
+output:
+{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 1&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client1.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:100,&amp;quot;description&amp;quot;:&amp;quot;order 1&amp;quot;}]}
+VM95:2 {&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 2&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client2.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:600,&amp;quot;description&amp;quot;:&amp;quot;order 2&amp;quot;}]}
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The sample above combine namespace and prototypal inheritance. Namespace allows you to add new module for enhancement, and it allows you to organize your API better.  On the other hand, through the globle namespace you can inject customized service, or you can replace it. The disadvantage of namespace, when the source code blows up, it will be a bit more complicated, especially you break different into different files. Mock test or unit test will needs a bit more work to do as well. There is no pattern that is a Silver Bullet, but rather you should assess where you are at and examine the pros and cons of each pattern to address your situation.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
