@@ -43,7 +43,7 @@
 &lt;li&gt;How to setup your server&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;UFW setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ufw-setup&#34;&gt;&lt;strong&gt;&lt;em&gt;UFW setup&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo ufw enable
 sudo ufw allow 80/tcp
@@ -52,7 +52,7 @@ sudo ufw allow 443/tcp
 sudo ufw allow 8000/tcp
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;SSH server setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ssh-server-setup&#34;&gt;&lt;strong&gt;&lt;em&gt;SSH server setup&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install openssh-server 
 
@@ -66,12 +66,12 @@ sudo nano /etc/ssh/sshd_config
 # uncomment  PasswordAuthentication yes to allow remote password login
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Time Zone setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;time-zone-setup&#34;&gt;&lt;strong&gt;&lt;em&gt;Time Zone setup&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo dpkg-reconfigure tzdata
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;install software-properties-common Package&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-software-properties-common-package&#34;&gt;&lt;strong&gt;&lt;em&gt;install software-properties-common Package&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;software-properties-common python-software-properties
 &lt;/code&gt;&lt;/pre&gt;
@@ -86,7 +86,7 @@ byobu
 # change the keyboard for putty &amp;gt; Termianl &amp;gt; Keyboard &amp;gt; Function keys and keyboard &amp;gt; Xterm R6
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;install docker (Ubuntu 14.04 LTS)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-docker-ubuntu-14-04-lts&#34;&gt;&lt;strong&gt;&lt;em&gt;install docker (Ubuntu 14.04 LTS)&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# add GBG Key
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -106,7 +106,7 @@ apt-cache policy docker-engine
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;build vim&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;build-vim&#34;&gt;&lt;strong&gt;&lt;em&gt;build vim&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;I am not &lt;code&gt;vi&lt;/code&gt; fans, but if you really want to use &lt;code&gt;vi&lt;/code&gt;. I wiil suggest spend some time to dig into &lt;a href=&#34;http://vimawesome.com&#34;&gt;&lt;code&gt;vimawesome&lt;/code&gt;&lt;/a&gt; and play around with those plugins. Some are pretty cool, e.g. &lt;code&gt;NERD Tree&lt;/code&gt;, &amp;lsquo;youcompleteme&lt;code&gt;,&lt;/code&gt;syntastic`, etc.&lt;/li&gt;
@@ -121,29 +121,32 @@ make VIMRUNTIMEDIR=/usr/share/vim/vim74
 sudo make install
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install JDK 8&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-jdk-8&#34;&gt;&lt;strong&gt;&lt;em&gt;Install JDK 8&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.&lt;/li&gt;
-&lt;li&gt;Setup oracle jdk ppa and install oracle jdk from ppa
-&lt;code&gt;bash
-sudo add-apt-repository ppa:webupd8team/java
+&lt;li&gt;Setup oracle jdk ppa and install oracle jdk from ppa.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default     
-&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;*Install OpenJdk&lt;/p&gt;
+&lt;h3 id=&#34;install-openjdk&#34;&gt;&lt;strong&gt;&lt;em&gt;Install OpenJdk&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Setup OpenJdk ppa and install it from ppa
-&lt;code&gt;bash
-sudo add-apt-repository ppa:openjdk-r/ppa
+&lt;li&gt;Setup OpenJdk ppa and install it from ppa&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update 
 sudo apt-get install openjdk-8-jdk
 sudo update-alternatives --config java
-&lt;/code&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
 &lt;li&gt;Type in a number to select a Java version.&lt;/li&gt;
 &lt;li&gt;set default Java Compiler&lt;/li&gt;
 &lt;/ul&gt;
@@ -162,7 +165,7 @@ java -version
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install nodejs&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-nodejs&#34;&gt;&lt;strong&gt;&lt;em&gt;Install nodejs&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs
@@ -188,13 +191,18 @@ which npm
 # /usr/bin/npm
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Open .profile add following to end of file&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open .profile add following to end of file&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export PATH=&amp;quot;$HOME/.node_modules_global/bin:$PATH&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install nvm&lt;/em&gt;&lt;/strong&gt;
-* Using &lt;code&gt;nvm&lt;/code&gt; is no longer popular and best option. I will suggest you just use &lt;code&gt;npm&lt;/code&gt; to manage eveything you need.&lt;/p&gt;
+&lt;h3 id=&#34;install-nvm&#34;&gt;&lt;strong&gt;&lt;em&gt;Install nvm&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Using &lt;code&gt;nvm&lt;/code&gt; is no longer popular and best option. I will suggest you just use &lt;code&gt;npm&lt;/code&gt; to manage eveything you need.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get update
 sudo apt-get install build-essential libssl-dev
@@ -207,13 +215,13 @@ nvm alias default 0.11.13
 nvm use default
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;PHP compser&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-php-compser&#34;&gt;&lt;strong&gt;&lt;em&gt;Install PHP &amp;amp; Compser&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install curl php5-cli git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install Go&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-go&#34;&gt;&lt;strong&gt;&lt;em&gt;Install Go&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
@@ -224,7 +232,7 @@ GOROOT=&amp;quot;/usr/local/go&amp;quot;
 PATH=$GOROOT/bin:$PATH
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install R&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-r&#34;&gt;&lt;strong&gt;&lt;em&gt;Install R&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
 sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
@@ -232,12 +240,12 @@ sudo apt-get update
 sudo apt-get install r-base
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install Rust&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-rust&#34;&gt;&lt;strong&gt;&lt;em&gt;Install Rust&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Uninstall Rust&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Uninstall Rust&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo /usr/local/lib/rustlib/uninstall.sh
 &lt;/code&gt;&lt;/pre&gt;

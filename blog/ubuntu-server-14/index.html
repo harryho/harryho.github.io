@@ -94,7 +94,7 @@
 <li>How to setup your server</li>
 </ul>
 
-<p><strong><em>UFW setup</em></strong></p>
+<h3 id="ufw-setup"><strong><em>UFW setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo ufw enable
 sudo ufw allow 80/tcp
@@ -103,7 +103,7 @@ sudo ufw allow 443/tcp
 sudo ufw allow 8000/tcp
 </code></pre>
 
-<p><strong><em>SSH server setup</em></strong></p>
+<h3 id="ssh-server-setup"><strong><em>SSH server setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-get install openssh-server 
 
@@ -117,12 +117,12 @@ sudo nano /etc/ssh/sshd_config
 # uncomment  PasswordAuthentication yes to allow remote password login
 </code></pre>
 
-<p><strong><em>Time Zone setup</em></strong></p>
+<h3 id="time-zone-setup"><strong><em>Time Zone setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo dpkg-reconfigure tzdata
 </code></pre>
 
-<p><strong><em>install software-properties-common Package</em></strong></p>
+<h3 id="install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></h3>
 
 <pre><code class="language-bash">software-properties-common python-software-properties
 </code></pre>
@@ -137,7 +137,7 @@ byobu
 # change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6
 </code></pre>
 
-<p><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></p>
+<h3 id="install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></h3>
 
 <pre><code class="language-bash"># add GBG Key
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -157,7 +157,7 @@ apt-cache policy docker-engine
 
 </code></pre>
 
-<p><strong><em>build vim</em></strong></p>
+<h3 id="build-vim"><strong><em>build vim</em></strong></h3>
 
 <ul>
 <li>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>,</code>syntastic`, etc.</li>
@@ -172,29 +172,32 @@ make VIMRUNTIMEDIR=/usr/share/vim/vim74
 sudo make install
 </code></pre>
 
-<p><strong><em>Install JDK 8</em></strong></p>
+<h3 id="install-jdk-8"><strong><em>Install JDK 8</em></strong></h3>
 
 <ul>
 <li>If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.</li>
-<li>Setup oracle jdk ppa and install oracle jdk from ppa
-<code>bash
-sudo add-apt-repository ppa:webupd8team/java
+<li>Setup oracle jdk ppa and install oracle jdk from ppa.</li>
+</ul>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default     
-</code></li>
-</ul>
+</code></pre>
 
-<p>*Install OpenJdk</p>
+<h3 id="install-openjdk"><strong><em>Install OpenJdk</em></strong></h3>
 
 <ul>
-<li>Setup OpenJdk ppa and install it from ppa
-<code>bash
-sudo add-apt-repository ppa:openjdk-r/ppa
+<li>Setup OpenJdk ppa and install it from ppa</li>
+</ul>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update 
 sudo apt-get install openjdk-8-jdk
 sudo update-alternatives --config java
-</code></li>
+</code></pre>
+
+<ul>
 <li>Type in a number to select a Java version.</li>
 <li>set default Java Compiler</li>
 </ul>
@@ -213,7 +216,7 @@ java -version
 </ul></li>
 </ul>
 
-<p><strong><em>Install nodejs</em></strong></p>
+<h3 id="install-nodejs"><strong><em>Install nodejs</em></strong></h3>
 
 <pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs
@@ -239,13 +242,18 @@ which npm
 # /usr/bin/npm
 </code></pre>
 
-<p>Open .profile add following to end of file</p>
+<ul>
+<li>Open .profile add following to end of file</li>
+</ul>
 
 <pre><code class="language-bash">export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;
 </code></pre>
 
-<p><strong><em>Install nvm</em></strong>
-* Using <code>nvm</code> is no longer popular and best option. I will suggest you just use <code>npm</code> to manage eveything you need.</p>
+<h3 id="install-nvm"><strong><em>Install nvm</em></strong></h3>
+
+<ul>
+<li>Using <code>nvm</code> is no longer popular and best option. I will suggest you just use <code>npm</code> to manage eveything you need.</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get update
 sudo apt-get install build-essential libssl-dev
@@ -258,13 +266,13 @@ nvm alias default 0.11.13
 nvm use default
 </code></pre>
 
-<p><strong><em>PHP compser</em></strong></p>
+<h3 id="install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-get install curl php5-cli git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 </code></pre>
 
-<p><strong><em>Install Go</em></strong></p>
+<h3 id="install-go"><strong><em>Install Go</em></strong></h3>
 
 <pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
@@ -275,7 +283,7 @@ GOROOT=&quot;/usr/local/go&quot;
 PATH=$GOROOT/bin:$PATH
 </code></pre>
 
-<p><strong><em>Install R</em></strong></p>
+<h3 id="install-r"><strong><em>Install R</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
 sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
@@ -283,12 +291,12 @@ sudo apt-get update
 sudo apt-get install r-base
 </code></pre>
 
-<p><strong><em>Install Rust</em></strong></p>
+<h3 id="install-rust"><strong><em>Install Rust</em></strong></h3>
 
 <pre><code class="language-bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
 </code></pre>
 
-<p><strong><em>Uninstall Rust</em></strong></p>
+<p><em>Uninstall Rust</em></p>
 
 <pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
 </code></pre>
@@ -315,7 +323,23 @@ sudo apt-get install r-base
 <li><a href="#prelude">Prelude</a></li>
 <li><a href="#brief-history">Brief history</a></li>
 <li><a href="#assumption">Assumption</a></li>
-<li><a href="#things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</a></li>
+<li><a href="#things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</a>
+<ul>
+<li><a href="#ufw-setup"><strong><em>UFW setup</em></strong></a></li>
+<li><a href="#ssh-server-setup"><strong><em>SSH server setup</em></strong></a></li>
+<li><a href="#time-zone-setup"><strong><em>Time Zone setup</em></strong></a></li>
+<li><a href="#install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></a></li>
+<li><a href="#install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></a></li>
+<li><a href="#build-vim"><strong><em>build vim</em></strong></a></li>
+<li><a href="#install-jdk-8"><strong><em>Install JDK 8</em></strong></a></li>
+<li><a href="#install-openjdk"><strong><em>Install OpenJdk</em></strong></a></li>
+<li><a href="#install-nodejs"><strong><em>Install nodejs</em></strong></a></li>
+<li><a href="#install-nvm"><strong><em>Install nvm</em></strong></a></li>
+<li><a href="#install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></a></li>
+<li><a href="#install-go"><strong><em>Install Go</em></strong></a></li>
+<li><a href="#install-r"><strong><em>Install R</em></strong></a></li>
+<li><a href="#install-rust"><strong><em>Install Rust</em></strong></a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
