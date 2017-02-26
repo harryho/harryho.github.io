@@ -142,7 +142,11 @@
 
 <h3 id="runas">runas</h3>
 
-<pre><code class="language-bash">runas /user:yourpc\administrator &quot;cmd&quot;
+<pre><code class="language-bash">REM start command prompt as administrator
+runas /user:yourpc\administrator &quot;cmd&quot;
+
+REM ##BE CAREFUL When you try the command below ##  
+REM it shows how to create, delete files as admin under C drive root.  
 runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot; 
 </code></pre>
 
@@ -158,7 +162,9 @@ runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &a
 <li>Basic usage<br /></li>
 </ul>
 
-<pre><code class="language-bash">sc \\yourpcname query
+<pre><code class="language-bash">REM query all service on the PC -- &lt;yourpcname&gt;
+sc \\&lt;yourpcname&gt; query
+REM query status of given service 
 sc query &lt;servicename&gt;
 sc query state= all | find &quot;SERVICE_NAME&quot; 
 </code></pre>
@@ -183,8 +189,10 @@ sc query state= all | find &quot;SERVICE_NAME&quot;
 
 <pre><code class="language-dos">REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
+
 REM get all services' name 
 for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @echo %s 
+
 REM get all services' name and state
 for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
     for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE&quot; ') do @echo %s -- %t
@@ -197,6 +205,7 @@ for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_N
 for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
     for /f &quot;tokens=3&quot; %t in ('sc queryex %s ^| find &quot;PID&quot; ') do @echo %s -- %t
     )
+
 REM get all services' name and pid
 for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
     for /f &quot;tokens=3&quot; %t in ('sc queryex %s ^| find &quot;BINARY_PATH_NAME&quot; ') do @echo %s -- %t
@@ -213,8 +222,10 @@ for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE
 
 <pre><code class="language-bash">REM start and stop service
 sc start  &lt;servicename&gt;
+
 REM query service state
 sc query &lt;servicename&gt;
+
 REM stop service
 sc stop  &lt;servicename&gt;
 </code></pre>
@@ -238,12 +249,16 @@ sc stop  &lt;servicename&gt;
 
 <pre><code class="language-bash">REM get the mysqld process info
 tasklist /v /fo list /fi &quot;imagename eq mysqld.exe&quot;
+
 REM get the mongod process info
 tasklist /v /fo list /fi &quot;imagename eq mongod.exe&quot;
+
 REM get list of running processes under given user  
 tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq running&quot;
+
 REM get list of non-responding processes under given user   
 tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq not responding&quot; 
+
 REM get process by PID
 tasklist /fi &quot;pid eq 4444&quot;
 </code></pre>
@@ -282,12 +297,13 @@ tasklist /fi &quot;pid eq 4444&quot;
 
 <pre><code class="language-bash">REM force to stop notepad application and any children processes
 taskkill /F /IM notepad.exe /
+
 REM stop process by PID and any children processes
 taskkill /PID 1230 /PID 1241 /PID 1253 /T
+
 REM force to stop applications which PID is equal or greater than 10000
 REM and windows' title of app is not equal to untitle*
 taskkill /F /FI &quot;PID ge 1000&quot; /FI &quot;WINDOWTITLE ne untitle*&quot;
-
 taskkill /F /FI &quot;USERNAME eq NT AUTHORITY\SYSTEM&quot; /IM notepad.exe
 </code></pre>
 
@@ -306,10 +322,13 @@ taskkill /F /FI &quot;USERNAME eq NT AUTHORITY\SYSTEM&quot; /IM notepad.exe
 
 <pre><code class="language-bash">REM get help info                                                                                                                                                                           
 SCHTASKS /Query /?    
+
 REM query tasks which are scheduled on given system                                                                                                                                                                         
 SCHTASKS /Query /S system /U user /P       
+
 REM get list of tasks in details
 SCHTASKS /Query /FO LIST /V     
+
 REM get table of running tasks in details and output to csv file                                                                                                                          
 SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot;&gt;running_tasks.csv
 </code></pre>

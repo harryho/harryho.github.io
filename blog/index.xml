@@ -716,7 +716,11 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM start command prompt as administrator
+runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
+
+REM ##BE CAREFUL When you try the command below ##  
+REM it shows how to create, delete files as admin under C drive root.  
 runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -732,7 +736,9 @@ runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&am
 &lt;li&gt;Basic usage&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc \\yourpcname query
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM query all service on the PC -- &amp;lt;yourpcname&amp;gt;
+sc \\&amp;lt;yourpcname&amp;gt; query
+REM query status of given service 
 sc query &amp;lt;servicename&amp;gt;
 sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
@@ -757,8 +763,10 @@ sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot;
 
 &lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
+
 REM get all services&#39; name 
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @echo %s 
+
 REM get all services&#39; name and state
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
     for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE&amp;quot; &#39;) do @echo %s -- %t
@@ -771,6 +779,7 @@ for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &am
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
     for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;PID&amp;quot; &#39;) do @echo %s -- %t
     )
+
 REM get all services&#39; name and pid
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
     for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) do @echo %s -- %t
@@ -787,8 +796,10 @@ for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM start and stop service
 sc start  &amp;lt;servicename&amp;gt;
+
 REM query service state
 sc query &amp;lt;servicename&amp;gt;
+
 REM stop service
 sc stop  &amp;lt;servicename&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -812,12 +823,16 @@ sc stop  &amp;lt;servicename&amp;gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get the mysqld process info
 tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
+
 REM get the mongod process info
 tasklist /v /fo list /fi &amp;quot;imagename eq mongod.exe&amp;quot;
+
 REM get list of running processes under given user  
 tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq running&amp;quot;
+
 REM get list of non-responding processes under given user   
 tasklist /fi &amp;quot;USERNAME ne NT AUTHORITY\SYSTEM&amp;quot; /fi &amp;quot;STATUS eq not responding&amp;quot; 
+
 REM get process by PID
 tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
@@ -856,12 +871,13 @@ tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM force to stop notepad application and any children processes
 taskkill /F /IM notepad.exe /
+
 REM stop process by PID and any children processes
 taskkill /PID 1230 /PID 1241 /PID 1253 /T
+
 REM force to stop applications which PID is equal or greater than 10000
 REM and windows&#39; title of app is not equal to untitle*
 taskkill /F /FI &amp;quot;PID ge 1000&amp;quot; /FI &amp;quot;WINDOWTITLE ne untitle*&amp;quot;
-
 taskkill /F /FI &amp;quot;USERNAME eq NT AUTHORITY\SYSTEM&amp;quot; /IM notepad.exe
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -880,10 +896,13 @@ taskkill /F /FI &amp;quot;USERNAME eq NT AUTHORITY\SYSTEM&amp;quot; /IM notepad.
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get help info                                                                                                                                                                           
 SCHTASKS /Query /?    
+
 REM query tasks which are scheduled on given system                                                                                                                                                                         
 SCHTASKS /Query /S system /U user /P       
+
 REM get list of tasks in details
 SCHTASKS /Query /FO LIST /V     
+
 REM get table of running tasks in details and output to csv file                                                                                                                          
 SCHTASKS /Query /FO TABLE /NH /V | find &amp;quot;Running&amp;quot;&amp;gt;running_tasks.csv
 &lt;/code&gt;&lt;/pre&gt;
