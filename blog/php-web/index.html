@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Angularjs Webpack ES6 Starter - Hello World</title>
+    <title>PHP web framework setup - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -61,82 +61,107 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Angularjs Webpack ES6 Starter</h1>
+				<h1 class="doc-entry-title">PHP web framework setup</h1>
 				<div class="doc-entry-meta">
-					<span>updated at <time datetime="2017-02-15">15 Feb 2017</time></span>
+					<span>updated at <time datetime="2016-08-11">11 Aug 2016</time></span>
 				</div>
 				<section>
 					
 
-<p>This starter was inspired by another similar angular webpack starter repository. It simply includes font-awesome, bootstrap for the people who don&rsquo;t want to use boostrap-webpack, font-awesome-webpack. I find it saves us so much effort to create prototype, since we don&rsquo;t need spectacular UI.</p>
+<blockquote>
+<p><em>Today we are going to explore some PHP web frameworks.</em></p>
+</blockquote>
+
+<h2 id="install-php">Install PHP</h2>
 
 <ul>
-<li>This starter uses angular 1.5 for someone want to build component.</li>
-<li>This repo followes mvc patterns instead of component pattern.</li>
-<li>ES6, and ES7 support with babel.</li>
-<li>Development server with live reload.</li>
-<li>Production builds with cache busting.</li>
-<li>Testing environment using karma to run tests and jasmine as the framework.</li>
-<li>Code coverage when tests are run.</li>
-<li>Include font-awesome without font-awesome-loader.</li>
-<li>Include Bootstrap 3 without bootstrap-loader.</li>
-<li>No gulp and no grunt, just npm scripts.</li>
+<li>Follow the <a href="https://getcomposer.org/download/">instruction</a> to download and install php on your PC.</li>
+<li>If you use Windows, please make sure set PATH environment variable. Tye <code>php -v</code> in command prompt, you should retrieve your php version.</li>
 </ul>
 
-<h2 id="structure-of-starter">Structure of starter</h2>
+<h2 id="composer">Composer</h2>
 
-<pre><code class="language-rust">\path\to\angularjs-webpack-es6-starter
-|   .babelrc                                    &lt;-// default setting es2015.
-|   karma.conf.js                               &lt;-// tests and report setup 
-|   webpack.config.js                           &lt;-// webpack config
-\---src
-    |   tests.webpack.js
-    |   
-    +---app
-    |   |   app.html                            &lt;-// app view
-    |   |   app.js                              &lt;-// app module
-    |   |   app.routes.js                       &lt;-// app route to manage all routes 
-    |   |   app.runner.js                       &lt;-// app runner for state change enhancement  
-    |   |   app.spec.js                         &lt;-// app spec file for testing 
-    |   |   
-    |   +---common                              &lt;-// common module for whole app
-    |   |   |   common.js
-    |   |   |   common.spec.js
-    |   |   +---directives                      &lt;-// common directives for whole app
-    |   |   |       appUiDirectives.js
-    |   |   |       appUiDirectives.spec.js
-    |   |   |       commonDirectives.js
-    |   |   |       commonDirectives.spec.js
-    |   |   +---services                        &lt;-// common views for whole app
-    |   |   |       ApiService.js
-    |   |   |       ApiService.spec.js
-    |   |   |       UtilService.js
-    |   |   |       UtilService.spec.js
-    |   |   \---views                           &lt;-// contains common views
-    |   |           footer-view.html
-    |   |           header-view.html
-    |   |           sidebar-view.html
-    |   |           topbar-view.html
-    |   \---main                                &lt;-// built-in fonts, css, images 
-    |       \---dashboard
-    |           +---controllers
-    |           |       dashboardController.js
-    |           |       dashboardController.spec.js
-    |           \---views
-    |                   dashboard-view.html
-    |                   
-    +---public                                  &lt;-// built-in fonts, css, images 
-    |   |   index.html
-    |   +---fonts
-    |   |   +--- ...
-    |   \---img
-    |       +--- favicon.ico
-    \---style                                  &lt;-// css files including customized css
-           
-    
+<h3 id="use-curl-s-https-getcomposer-org-installer-php-to-install-composer-on-linux">Use <code>curl -s https://getcomposer.org/installer | php --</code> to install composer on Linux</h3>
+
+<h3 id="download-the-composer-https-getcomposer-org-download-and-install-php-on-your-pc">Download the <a href="https://getcomposer.org/download/">composer</a> and install php on your PC</h3>
+
+<h2 id="zendframework-2-x">Zendframework 2.x</h2>
+
+<h3 id="clone-zendframework-skeleton-project-as-new-project">Clone Zendframework skeleton project as new project.</h3>
+
+<h3 id="install-zendframework-with-composer">Install zendframework with composer</h3>
+
+<pre><code class="language-bash">cd  /path/to/newproject
+git clone git://github.com/zendframework/ZendSkeletonApplication.git
+cd ZendSkeletonApplication
+php composer.phar self-update
+php composer.phar install
 </code></pre>
 
-<h2 id="browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git-folder-path-listing-for-volume-windows8-os">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a>Folder PATH listing for volume Windows8_OS</h2>
+<h3 id="start-app-with-php-built-in-server">Start app with php built-in server</h3>
+
+<pre><code class="language-bash">php -S 0.0.0.0:8080 -t public/ public/index.php
+</code></pre>
+
+<h3 id="use-apache-server">Use apache server</h3>
+
+<pre><code class="language-apache"> &lt;VirtualHost *:80&gt;
+     ServerName zf2-tutorial.localhost
+     DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
+     SetEnv APPLICATION_ENV &quot;development&quot;
+     &lt;Directory /path/to/newproject/ZendSkeletonApplication/public&gt;
+         DirectoryIndex index.php
+         AllowOverride All
+         Require all granted
+     &lt;/Directory&gt;
+ &lt;/VirtualHost&gt;
+</code></pre>
+
+<h2 id="laravel-5-x">Laravel 5.x</h2>
+
+<h3 id="install-laravel-global-composer-global-laravel-installer">install laravel global <code>composer global laravel/installer</code></h3>
+
+<h3 id="enable-the-mbs-string-pacakge-inside-php-ini">enable the <code>mbs-string</code> pacakge inside <code>php.ini</code></h3>
+
+<h3 id="create-new-project">create new project</h3>
+
+<h3 id="migrate-database-and-seed-dummy-data">migrate database and seed dummy data</h3>
+
+<pre><code class="language-bash">php artisan migrate -VVV 
+php artisan db:seed
+</code></pre>
+
+<p><strong>Fix the error of Specified key was too long</strong></p>
+
+<pre><code class="language-php">namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+        Schema::defaultStringLength(191);
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</code></pre>
 
 				</section>
 			</article>
@@ -151,14 +176,32 @@
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Angularjs Webpack ES6 Starter</a></strong></li>
+				<li><strong><a href="#title">PHP web framework setup</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#structure-of-starter">Structure of starter</a></li>
-<li><a href="#browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git-folder-path-listing-for-volume-windows8-os">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a>Folder PATH listing for volume Windows8_OS</a></li>
+<li><a href="#install-php">Install PHP</a></li>
+<li><a href="#composer">Composer</a>
+<ul>
+<li><a href="#use-curl-s-https-getcomposer-org-installer-php-to-install-composer-on-linux">Use <code>curl -s https://getcomposer.org/installer | php --</code> to install composer on Linux</a></li>
+<li><a href="#download-the-composer-https-getcomposer-org-download-and-install-php-on-your-pc">Download the <a href="https://getcomposer.org/download/">composer</a> and install php on your PC</a></li>
+</ul></li>
+<li><a href="#zendframework-2-x">Zendframework 2.x</a>
+<ul>
+<li><a href="#clone-zendframework-skeleton-project-as-new-project">Clone Zendframework skeleton project as new project.</a></li>
+<li><a href="#install-zendframework-with-composer">Install zendframework with composer</a></li>
+<li><a href="#start-app-with-php-built-in-server">Start app with php built-in server</a></li>
+<li><a href="#use-apache-server">Use apache server</a></li>
+</ul></li>
+<li><a href="#laravel-5-x">Laravel 5.x</a>
+<ul>
+<li><a href="#install-laravel-global-composer-global-laravel-installer">install laravel global <code>composer global laravel/installer</code></a></li>
+<li><a href="#enable-the-mbs-string-pacakge-inside-php-ini">enable the <code>mbs-string</code> pacakge inside <code>php.ini</code></a></li>
+<li><a href="#create-new-project">create new project</a></li>
+<li><a href="#migrate-database-and-seed-dummy-data">migrate database and seed dummy data</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -176,8 +219,9 @@
 					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a>
 					</li>
 				
-					<li><a href="/blog/php-web/">PHP web framework setup</a>
-					</li>
+					<li>
+						<span class="active">PHP web framework setup</span>
+						</li>
 				
 					<li><a href="/blog/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
 					</li>
@@ -208,9 +252,8 @@
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
-					<li>
-						<span class="active">Angularjs Webpack ES6 Starter</span>
-						</li>
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
 				
 				</ul>
 			</li>

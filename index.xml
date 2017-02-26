@@ -196,6 +196,111 @@ cd ..
     </item>
     
     <item>
+      <title>PHP web framework setup</title>
+      <link>https://harryho.github.io/blog/php-web/</link>
+      <pubDate>Thu, 11 Aug 2016 11:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/blog/php-web/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Today we are going to explore some PHP web frameworks.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;install-php&#34;&gt;Install PHP&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Follow the &lt;a href=&#34;https://getcomposer.org/download/&#34;&gt;instruction&lt;/a&gt; to download and install php on your PC.&lt;/li&gt;
+&lt;li&gt;If you use Windows, please make sure set PATH environment variable. Tye &lt;code&gt;php -v&lt;/code&gt; in command prompt, you should retrieve your php version.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;composer&#34;&gt;Composer&lt;/h2&gt;
+
+&lt;h3 id=&#34;use-curl-s-https-getcomposer-org-installer-php-to-install-composer-on-linux&#34;&gt;Use &lt;code&gt;curl -s https://getcomposer.org/installer | php --&lt;/code&gt; to install composer on Linux&lt;/h3&gt;
+
+&lt;h3 id=&#34;download-the-composer-https-getcomposer-org-download-and-install-php-on-your-pc&#34;&gt;Download the &lt;a href=&#34;https://getcomposer.org/download/&#34;&gt;composer&lt;/a&gt; and install php on your PC&lt;/h3&gt;
+
+&lt;h2 id=&#34;zendframework-2-x&#34;&gt;Zendframework 2.x&lt;/h2&gt;
+
+&lt;h3 id=&#34;clone-zendframework-skeleton-project-as-new-project&#34;&gt;Clone Zendframework skeleton project as new project.&lt;/h3&gt;
+
+&lt;h3 id=&#34;install-zendframework-with-composer&#34;&gt;Install zendframework with composer&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd  /path/to/newproject
+git clone git://github.com/zendframework/ZendSkeletonApplication.git
+cd ZendSkeletonApplication
+php composer.phar self-update
+php composer.phar install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;start-app-with-php-built-in-server&#34;&gt;Start app with php built-in server&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;php -S 0.0.0.0:8080 -t public/ public/index.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-apache-server&#34;&gt;Use apache server&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt; &amp;lt;VirtualHost *:80&amp;gt;
+     ServerName zf2-tutorial.localhost
+     DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
+     SetEnv APPLICATION_ENV &amp;quot;development&amp;quot;
+     &amp;lt;Directory /path/to/newproject/ZendSkeletonApplication/public&amp;gt;
+         DirectoryIndex index.php
+         AllowOverride All
+         Require all granted
+     &amp;lt;/Directory&amp;gt;
+ &amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;laravel-5-x&#34;&gt;Laravel 5.x&lt;/h2&gt;
+
+&lt;h3 id=&#34;install-laravel-global-composer-global-laravel-installer&#34;&gt;install laravel global &lt;code&gt;composer global laravel/installer&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h3 id=&#34;enable-the-mbs-string-pacakge-inside-php-ini&#34;&gt;enable the &lt;code&gt;mbs-string&lt;/code&gt; pacakge inside &lt;code&gt;php.ini&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h3 id=&#34;create-new-project&#34;&gt;create new project&lt;/h3&gt;
+
+&lt;h3 id=&#34;migrate-database-and-seed-dummy-data&#34;&gt;migrate database and seed dummy data&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;php artisan migrate -VVV 
+php artisan db:seed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Fix the error of Specified key was too long&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+        Schema::defaultStringLength(191);
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Ubuntu 14 -- server setup</title>
       <link>https://harryho.github.io/blog/ubuntu-server-14/</link>
       <pubDate>Fri, 04 Mar 2016 14:59:31 +1100</pubDate>
