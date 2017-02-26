@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Welcome to Hello World</title>
+    <title>Blog on Hello World</title>
     <link>https://harryho.github.io/categories/blog/index.xml</link>
-    <description>Recent content in Blog on Welcome to Hello World</description>
+    <description>Recent content in Blog on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
@@ -106,6 +106,421 @@ cd ..
     </item>
     
     <item>
+      <title>Ubuntu 14 -- server setup</title>
+      <link>https://harryho.github.io/blog/ubuntu-server-14/</link>
+      <pubDate>Fri, 04 Mar 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/blog/ubuntu-server-14/</guid>
+      <description>
+
+&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow &lt;a href=&#34;https://harrryho.github.io/blog/ubuntu-desktop-14/&#34;&gt;Ubuntu deskstop setup&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;brief-history&#34;&gt;Brief history&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Please find it from &lt;a href=&#34;http://harryho.github.io/blog/linux-history/&#34;&gt;Brief history of Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You are familiar with Ubuntu, at least you have some experience working on Linux system.&lt;/li&gt;
+&lt;li&gt;You are familiar with bash/shell script&lt;/li&gt;
+&lt;li&gt;You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-ubuntu-server&#34;&gt;Things to do after installing Ubuntu server&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to setup your server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;UFW setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow ssh
+sudo ufw allow 443/tcp
+sudo ufw allow 8000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;SSH server setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install openssh-server 
+
+# backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+# use any editor to update sshd_config 
+sudo nano /etc/ssh/sshd_config
+
+# uncomment  PasswordAuthentication yes to allow remote password login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Time Zone setup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo dpkg-reconfigure tzdata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;install software-properties-common Package&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;software-properties-common python-software-properties
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install byobu screen&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install byobu screen 
+
+# Launch byobu
+byobu
+# F9 for help 
+# change the keyboard for putty &amp;gt; Termianl &amp;gt; Keyboard &amp;gt; Function keys and keyboard &amp;gt; Xterm R6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;install docker (Ubuntu 14.04 LTS)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# add GBG Key
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+# add docker.list
+sudo touch /etc/apt/sources.list.d/docker.list
+#  repo 
+sudo vi /etc/apt/sources.list.d/docker.list
+#  add following repo ath the end of file 
+deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
+# apt update 
+sudo apt-get update
+# verify 
+apt-cache policy docker-engine
+# install docker engine
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;build vim&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I am not &lt;code&gt;vi&lt;/code&gt; fans, but if you really want to use &lt;code&gt;vi&lt;/code&gt;. I wiil suggest spend some time to dig into &lt;a href=&#34;http://vimawesome.com&#34;&gt;&lt;code&gt;vimawesome&lt;/code&gt;&lt;/a&gt; and play around with those plugins. Some are pretty cool, e.g. &lt;code&gt;NERD Tree&lt;/code&gt;, &amp;lsquo;youcompleteme&lt;code&gt;,&lt;/code&gt;syntastic`, etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get build-dep vim
+git clone https://github.com/vim/vim.git ~/forks/vim
+cd ~/forks/vim
+## make distclean &amp;amp;&amp;amp; make clean
+## build script from this repo
+make VIMRUNTIMEDIR=/usr/share/vim/vim74
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install JDK 8&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.&lt;/li&gt;
+&lt;li&gt;Setup oracle jdk ppa and install oracle jdk from ppa
+&lt;code&gt;bash
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java8-set-default     
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*Install OpenJdk&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup OpenJdk ppa and install it from ppa
+&lt;code&gt;bash
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update 
+sudo apt-get install openjdk-8-jdk
+sudo update-alternatives --config java
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Type in a number to select a Java version.&lt;/li&gt;
+&lt;li&gt;set default Java Compiler&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo update-alternatives --config javac
+java -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How to stop mysql auto startup&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Comment out the line below in the config file ( /etc/init/mysql.conf )&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Start on (net-device-up&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install nodejs&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install nodejs
+sudo apt-get install build-essential
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Setup NPM&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You can use default &lt;code&gt;npm&lt;/code&gt; on your server after you install nodejs, but there is a better way to manage your &lt;code&gt;npm&lt;/code&gt;. It allows you easily to control your packages.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd 
+mkdir .node_modules
+npm config list
+npm config get prefix
+# /usr or  /usr/share
+npm config set prefix $HOME/.node_modules
+cat .npmrc
+# /home/hho/.node_modules
+npm install -g npm
+which npm
+# /usr/bin/npm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open .profile add following to end of file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export PATH=&amp;quot;$HOME/.node_modules_global/bin:$PATH&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install nvm&lt;/em&gt;&lt;/strong&gt;
+* Using &lt;code&gt;nvm&lt;/code&gt; is no longer popular and best option. I will suggest you just use &lt;code&gt;npm&lt;/code&gt; to manage eveything you need.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
+source ~/.profile
+nvm ls-remote
+nvm install 0.11.13
+nvm use 0.11.13
+nvm alias default 0.11.13
+nvm use default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;PHP compser&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install curl php5-cli git
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install Go&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
+sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
+
+sudo vi /etc/profile
+GOPATH=&amp;quot;/YOUR/USER/HOME/go&amp;quot;
+GOROOT=&amp;quot;/usr/local/go&amp;quot;
+PATH=$GOROOT/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install R&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
+sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
+sudo apt-get update
+sudo apt-get install r-base
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Install Rust&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Uninstall Rust&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo /usr/local/lib/rustlib/uninstall.sh
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 14 -- desktop setup including Windows dual boot </title>
+      <link>https://harryho.github.io/blog/ubuntu-desktop-14/</link>
+      <pubDate>Sun, 10 Jan 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/blog/ubuntu-desktop-14/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This article is mainly to help beginner install Ubuntu desktop at the first time. If you are looking for setup of Ubuntu server, please check out the blog &amp;ndash; &lt;a href=&#34;https://harrryho.github.io/blog/ubuntu-server-14/&#34;&gt;Ubuntu server setup&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;brief-history&#34;&gt;Brief history&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Please find it from &lt;a href=&#34;http://harryho.github.io/blog/linux-history/&#34;&gt;Brief history of Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;where-to-install-linux&#34;&gt;Where to install Linux?&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How to answer this quetion really depends user&amp;rsquo;s computer knowledge and skills. Basically Linux can be installed on almost any PC, laptop, embedded device or tablet. So there are some suggestions for people with different level skills.*&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Beginner &amp;ndash; If you never install any operating system, or you never use &lt;code&gt;Unix/Linux&lt;/code&gt; system, but still want to try something new. You should consider to install virtual machine on your computer and then install ubuntu on the virtual machine. &lt;a href=&#34;http://www.vmware.com&#34;&gt;VMware&lt;/a&gt; and &lt;a href=&#34;https://www.virtualbox.org&#34;&gt;VirtualBox&lt;/a&gt; are both very good products.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Intermediate &amp;ndash; If you have installed operating system, or you have used &lt;code&gt;Unix/Linux&lt;/code&gt; system, you can install it on your old machine. or for safe side try it on virtual machine at first.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Expert &amp;ndash; You can try dual boot or multiple boot operating systems on your PC. Install 10-20 operating systems on a PC with 400GB harddisk should be alright. The only problem I encountered before some operating system can not find all proper drivers to support the all devices on your PC/laptop, such as the drivers for camera, touchpad, wifi, etc. It would take you so much time to research and try.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;install-virtual-machine&#34;&gt;Install virtual machine&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Let&amp;rsquo;s get our hands dirty&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Install VirtualBox/VMWare on your computer. IMO, use VirtualBox is quite handy and save you much effort, even it is free. Because in the real environment, you will use remote tool to do your admin task instead of really handling a phyiscal machine. And you can try another Liunx OS on VirtualBox.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you lean to commercial product, you can choose VMWare. There is free trial option for you.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;which-version-to-choose&#34;&gt;Which version to choose&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Ubuntu has variant versions for you to download and play. I will suggest you always pick LTS (Long Term Support) version to download. As beginner, desktop version is the best option for you to start.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After downlaod the &lt;a href=&#34;https://www.ubuntu.com/download/desktop&#34;&gt;Ubuntu Desktop&lt;/a&gt; from the internet. You will get a &lt;code&gt;ISO&lt;/code&gt; file like this: ubuntu-xx.xx.x-desktop-amd64.iso, if your OS is 64 bits, or something like ubuntu-xx.xx.x-desktop-x86.iso for 32 bits.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;install-unbuntu&#34;&gt;Install Unbuntu&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Before you install, you had better to backup anything on the device which you are going to install, and chcek your internet is working properly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new virtual machine within VMWare or VirtualBox. The processes on both softwares are almost the same.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Assume your new virtual machine will sit in &lt;code&gt;C:\vbox&lt;/code&gt; for VirtualBox or &lt;code&gt;C:\vm&lt;/code&gt; for VMware&lt;/li&gt;
+&lt;li&gt;Create a new machine from menu. Type in the name of vm. e.g. Unbuntu&lt;/li&gt;
+&lt;li&gt;Select the type of operating system: Linux&lt;/li&gt;
+&lt;li&gt;You can choose Ubuntu(&lt;sup&gt;32&lt;/sup&gt;&amp;frasl;&lt;sub&gt;64&lt;/sub&gt; bit ) or something else. It doesn&amp;rsquo;t matter. We don&amp;rsquo;t use any built-in xxx.iso files from VirtualBox or VMware. Then click &lt;code&gt;Next&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Select the memory size for the Unbuntu. 2G RAM is minimal requirement. I prefer up to 30% of total memory size. And then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select &amp;ldquo;Create a virtual hard drive now&amp;rdquo;, and then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select defaut VDI, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select &amp;ldquo;Dynamically allocated&amp;rdquo;, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Choose the location of Unbuntu. e.g. c:\vbox\ubuntu\ubuntu.vdi or c:\vm\ubuntu\ubuntu.vmdk. Select the size of VDI\VMDK file. At least 8G. I&amp;rsquo;d like to select 16 or more. Then a Unbuntu virtual machine has been created.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Config the Unbuntu hardware setting.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;VirtualBox&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On VirtualBox toolbar, there is a &lt;code&gt;Start&lt;/code&gt; button. Click &lt;code&gt;Start&lt;/code&gt;, then go the Storage item.&lt;/li&gt;
+&lt;li&gt;Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click &lt;code&gt;OK&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Leave all the other setting as default. Click the &lt;code&gt;Start&lt;/code&gt;button on the toolbar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;VMWare&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On VMware, you can find CD/DVD button on the tab page of new virtual machine.&lt;/li&gt;
+&lt;li&gt;Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click &lt;code&gt;OK&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Leave all the other setting as default. Click the &lt;code&gt;Power on this virtual machine&lt;/code&gt; option on the tab page.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ubuntu provides a friendly and beautiful UI to complete installation instead of ugly and terrified terminal, as geek&amp;rsquo;s computer shown on sci-fi movie. If you choose VMWare or VirtulBox as machine, you can open the page of &lt;a href=&#34;https://www.ubuntu.com/download/desktop/install-ubuntu-desktop&#34;&gt;installation steps&lt;/a&gt; on your browser. You just need to follow the instruction step by step, it will take you around 1-2 hours to complete.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-ubuntu-desktop&#34;&gt;Things to do after installing Ubuntu desktop&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu desktop is very nice and friendly, even it is different from your Windows. Basically you don&amp;rsquo;t need any geek&amp;rsquo;s skill to play around on Uubuntu desktop and use it as your Windows. There are tons of free software you can download from Ubuntu Software Center, so you don&amp;rsquo;t worry where to find the softwre you need. Considering you are the beginner, some suggestions and caveats will be highlighted below, but none of these needs command line and terminal.
+
+&lt;ul&gt;
+&lt;li&gt;Disable the system upgrade automatically to new LTS version.&lt;/li&gt;
+&lt;li&gt;Disable the system power manager to suspend your PC.&lt;/li&gt;
+&lt;li&gt;Disable the system problem report service.&lt;/li&gt;
+&lt;li&gt;Enbale the third party packages.&lt;/li&gt;
+&lt;li&gt;Install &lt;code&gt;Utity Tweek&lt;/code&gt; to help you customize your UI.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-don-t-do&#34;&gt;Things don&amp;rsquo;t do&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Something below is suggested not to do, because I assume you are Ubuntu or Linux beginner. I don&amp;rsquo;t wnat you to feel frustrated at the beginning of your Ubuntu desktop journey. It is the same that 99.9999% of Windows user should not delete cache files &lt;code&gt;C:\Windows&lt;/code&gt; or change the system registry, expect they really understand what they are doing.&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t optimzie your memory setting. It is really not a big deal.&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t try to change your &lt;code&gt;Utity&lt;/code&gt; to other Ubuntu desktop, e.g. Ubuntu MATE, Ubuntu Xface, etc.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t follow the tips online to use &lt;code&gt;root&lt;/code&gt; in terminal before you fully understand what the commands do.&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t try to mount other drives on your computer, if it is mounted automatically.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;dual-boot-or-multiple-boot-with-windows&#34;&gt;Dual boot or multiple boot with Windows&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;For dual or multiple boot, you need to make sure your disk is formatted as GPT. It will save you so much effort later to install other operating systems.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I suggest Windows first approach for multiple boot systems, because that is easier than the other way around. After install Windows on your PC, you need to shrink Windows disk space for other operating systems with &lt;code&gt;Disk Management&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now you need to prepare Ubuntu USB installer or DVD. Place the USB stick or DVD in the appropriate drive, reboot the machine and instruct the BIOS/UEFI to boot-up from the DVD/USB by pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you install Ubuntu, you need to select a separate &lt;code&gt;boot&lt;/code&gt; drive for dual boot systems. Usually you just need to pick the drive &lt;code&gt;efi&lt;/code&gt; as &lt;code&gt;boot&lt;/code&gt; drive. Your drives will be supposed to format with GPT as following structure.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;sda
+  +----sda1        nfts               500M         Windows recovery
+  +----sda2        efi       /boot    100M         grub2 , Windows boot manager
+  +----sda3                  /        10M            
+  +----sda4        ntfs      /      40000M         Window 7/8/10
+  +----sda5                  swap   &amp;lt;Double size of your RAM size&amp;gt;   
+  +----sda6        ext4      /      20000M         Ubuntu 14 desktop
+  +----sda7        ext4      /      20000M         Fedora 20 desktop           
+  +----sda8        ext4      /      20000M         OpenSuse desktop
+  +----...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;troubleshooting-windows-always-boots-first&#34;&gt;Troubleshooting: Windows always boots first&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Change BIOS&lt;/strong&gt;
+* Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).
+* Some PC&amp;rsquo;s BIOS has &lt;code&gt;BOOT&lt;/code&gt; tab option, open the &lt;code&gt;BOOT&lt;/code&gt; tab, you will find the &lt;code&gt;OS Boot Manager&lt;/code&gt;. It is the simplest way to fix the issue. If your PC&amp;rsquo;s BIOS has no such setting feature, you need to check the next section.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Change the Windows Boot Manager&lt;/strong&gt;
+* Login windows with common prompt
+* Restart windows, meanwhile press shift key
+* In the options page, choose change to other options
+* Troubleshooting
+* Command Prompt
+* Login in Windows with Common prompt
+* Use BCDEdit to change windows boot manager. Change to boot ubuntu at first&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM backup
+bcdedit /enum &amp;gt; X:\Users\public\documents\bcdedit.txt
+REM change the bootmgr 
+bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;After you reboot system, you will see the Grub 2 menu as follow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;                             GNU GRUB version 2.0
+---------------------------------------------------------------------------------- 
+| Ubuntu 
+| Advanced options for Unbuntu
+| Windows Boot Manager ( on /dev/sda2 )
+| Fedora 20
+| Advanced options for Fedora 20
+| OpenSuse 
+| Advanced options for OpenSuse
+| ....
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use Windows command &amp; hotkey as a hacker - Part 2</title>
       <link>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-2/</link>
       <pubDate>Mon, 24 Mar 2014 10:59:31 +1100</pubDate>
@@ -200,13 +615,15 @@ runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&am
 &lt;p&gt;&lt;strong&gt;sc query&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Basic usage&lt;/p&gt;
+&lt;li&gt;Basic usage&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sc \\yourpcname query
 sc query &amp;lt;servicename&amp;gt;
 sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Retrieve service name and state. type parameter can be used twice in some case.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1403,7 +1820,7 @@ C:\&amp;gt;help cd
     </item>
     
     <item>
-      <title>Better practice and common pitfalls in Java - Part 1</title>
+      <title>Better practice in Java, Part-1</title>
       <link>https://harryho.github.io/blog/better-practice-in-java-1/</link>
       <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
       
