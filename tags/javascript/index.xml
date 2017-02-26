@@ -116,7 +116,7 @@
 
 &lt;h2 id=&#34;object-and-prototype&#34;&gt;Object and prototype&lt;/h2&gt;
 
-&lt;h3 id=&#34;how-to-define-a-object&#34;&gt;How to define a object&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;How to define a object&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;There are a couple ways to create variable as object.&lt;/p&gt;
 
@@ -213,7 +213,7 @@ car3.getInfo();
 &lt;li&gt;The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;class-and-inheritance&#34;&gt;Class and inheritance&lt;/h3&gt;
+&lt;h2 id=&#34;class-and-inheritance&#34;&gt;Class and inheritance&lt;/h2&gt;
 
 &lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
 It also lacks built-in methods for determining whether an object implements the same set of
@@ -318,9 +318,7 @@ objectA.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  objectB
 
 &lt;p&gt;If we still want to use inheritance, I will suggest not to jsut inherit the properties, instead of methods. In my opinion, there is very rare of scenario, we really need to inherit method. So we just need to find to proper way to solve the problem of properties inheritance.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Object-based Inheritance&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&#34;object-based-inheritance&#34;&gt;Object-based Inheritance&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet(name, master) {
     this.name = name || &amp;quot;&amp;quot;;
@@ -433,9 +431,7 @@ dog2.getInfo();
 
 &lt;p&gt;Now I rewrite above sample a few lines of code, then you will figour out why it is working, but maybe you still want to implement inheritance as other OOP lanuage C++, Java. Then let&amp;rsquo;s take a look the classical inheritance, which is much more close to other OOP language. In classical inheritance it&amp;rsquo;s impossible (or at least very difficult) to choose which properties you want to inherit. They use virtual base classes and interfaces to solve the diamond problem. It is much more complicated.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Classical inheritance&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&#34;classical-inheritance&#34;&gt;Classical inheritance&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
 function extend(subClass, superClass) {
@@ -509,9 +505,7 @@ dog2.getInfo();
 
 &lt;p&gt;Whether classical or prototypal, is used to reduce the redundancy in code. Since prototypal inheritance allows for multiple inheritance, code which requires multiple inheritance is less redundant if written using prototypal inheritance rather than in a language which has classical inheritance but no multiple inheritance.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Prototypal inheritance&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&#34;prototypal-inheritance&#34;&gt;Prototypal inheritance&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
 function clone(obj) {
@@ -588,11 +582,15 @@ dog2.getInfo();
 &lt;p&gt;One of the most important advantages of prototypal inheritance is that you can add new properties to prototypes after they are created. This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.
 This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.This is not possible in classical inheritance because once a class is created you can&amp;rsquo;t modify it at runtime. This is probably the single biggest advantage of prototypal inheritance over classical inheritance, and it should have been at the top.&lt;/p&gt;
 
-&lt;h3 id=&#34;module-and-namespace&#34;&gt;Module and namespace&lt;/h3&gt;
+&lt;h2 id=&#34;module-and-namespace&#34;&gt;Module and namespace&lt;/h2&gt;
 
 &lt;p&gt;There are quite a lot of benefits from module and namespace, especially when you are going to build some special common api shared within the whole application, even multiple systems across your whole entire enterprise. First thing first, we should not pollute the context, since it will potentially break existing functions or other third party frameworks which have been introduced in your applicatio, vice versa.&lt;/p&gt;
 
-&lt;p&gt;On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern. The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.&lt;/p&gt;
+&lt;p&gt;On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern.&lt;/p&gt;
+
+&lt;h3 id=&#34;closure&#34;&gt;Closure&lt;/h3&gt;
+
+&lt;p&gt;The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Simple closure&lt;br /&gt;
@@ -637,6 +635,8 @@ public                // privateProperty can be updated by public method
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.&lt;/p&gt;
+
+&lt;h3 id=&#34;module&#34;&gt;Module&lt;/h3&gt;
 
 &lt;p&gt;Module is not rock science. Actually it is quite easy to implement.&lt;/p&gt;
 
@@ -688,6 +688,8 @@ var extendModule = (function( m){
 }(myModule));
 
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;namespace&#34;&gt;Namespace&lt;/h3&gt;
 
 &lt;p&gt;Now we will go further to namespace, which is based on module technique. Namespace gives you the ability to have public and private properties and methods.
 The code inside doesn’t use the Object Literal notation. Allows you to use $ inside your code without worrying about clashing with other libraries

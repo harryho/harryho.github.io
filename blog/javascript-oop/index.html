@@ -1,59 +1,3 @@
-<!DOCTYPE html> 
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
-    <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>JavaScript and Object Oriented Programming - Hello World</title>
-    
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
-    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
-    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
-</head>
-
-<body role="document">
-    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li ><a href="https://harryho.github.io/">Home</a></li>
-                       
-                    <li ><a href="https://harryho.github.io/blog/">Blog</a></li>
-                     
-                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
-                      
-                </ul>
-                
-                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
-                    <div class="input-group doc-search-form">
-                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
-                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
-                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
-							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                        </span>
-                    </div>
-                </form>
-                
-            </div>
-            
-        </div>
-    </nav>
-    <div class="container">
 
 
 <div class="row">
@@ -87,7 +31,7 @@
 
 <h2 id="object-and-prototype">Object and prototype</h2>
 
-<h3 id="how-to-define-a-object">How to define a object</h3>
+<p><strong><em>How to define a object</em></strong></p>
 
 <p>There are a couple ways to create variable as object.</p>
 
@@ -184,7 +128,7 @@ car3.getInfo();
 <li>The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.</li>
 </ul>
 
-<h3 id="class-and-inheritance">Class and inheritance</h3>
+<h2 id="class-and-inheritance">Class and inheritance</h2>
 
 <p>JavaScript has no built-in way of creating or implementing interfaces.
 It also lacks built-in methods for determining whether an object implements the same set of
@@ -289,9 +233,7 @@ objectA.propObject :  Object {id: 1, property: &quot;AAA&quot;}  objectB.propObj
 
 <p>If we still want to use inheritance, I will suggest not to jsut inherit the properties, instead of methods. In my opinion, there is very rare of scenario, we really need to inherit method. So we just need to find to proper way to solve the problem of properties inheritance.</p>
 
-<ul>
-<li>Object-based Inheritance</li>
-</ul>
+<h3 id="object-based-inheritance">Object-based Inheritance</h3>
 
 <pre><code class="language-javascript">function Pet(name, master) {
     this.name = name || &quot;&quot;;
@@ -404,9 +346,7 @@ dog2.getInfo();
 
 <p>Now I rewrite above sample a few lines of code, then you will figour out why it is working, but maybe you still want to implement inheritance as other OOP lanuage C++, Java. Then let&rsquo;s take a look the classical inheritance, which is much more close to other OOP language. In classical inheritance it&rsquo;s impossible (or at least very difficult) to choose which properties you want to inherit. They use virtual base classes and interfaces to solve the diamond problem. It is much more complicated.</p>
 
-<ul>
-<li>Classical inheritance</li>
-</ul>
+<h3 id="classical-inheritance">Classical inheritance</h3>
 
 <pre><code class="language-javascript">
 function extend(subClass, superClass) {
@@ -480,9 +420,7 @@ dog2.getInfo();
 
 <p>Whether classical or prototypal, is used to reduce the redundancy in code. Since prototypal inheritance allows for multiple inheritance, code which requires multiple inheritance is less redundant if written using prototypal inheritance rather than in a language which has classical inheritance but no multiple inheritance.</p>
 
-<ul>
-<li>Prototypal inheritance</li>
-</ul>
+<h3 id="prototypal-inheritance">Prototypal inheritance</h3>
 
 <pre><code class="language-javascript">
 function clone(obj) {
@@ -559,11 +497,15 @@ dog2.getInfo();
 <p>One of the most important advantages of prototypal inheritance is that you can add new properties to prototypes after they are created. This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.
 This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.This is not possible in classical inheritance because once a class is created you can&rsquo;t modify it at runtime. This is probably the single biggest advantage of prototypal inheritance over classical inheritance, and it should have been at the top.</p>
 
-<h3 id="module-and-namespace">Module and namespace</h3>
+<h2 id="module-and-namespace">Module and namespace</h2>
 
 <p>There are quite a lot of benefits from module and namespace, especially when you are going to build some special common api shared within the whole application, even multiple systems across your whole entire enterprise. First thing first, we should not pollute the context, since it will potentially break existing functions or other third party frameworks which have been introduced in your applicatio, vice versa.</p>
 
-<p>On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern. The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.</p>
+<p>On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern.</p>
+
+<h3 id="closure">Closure</h3>
+
+<p>The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.</p>
 
 <ul>
 <li>Simple closure<br />
@@ -608,6 +550,8 @@ public                // privateProperty can be updated by public method
 </code></pre>
 
 <p>From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.</p>
+
+<h3 id="module">Module</h3>
 
 <p>Module is not rock science. Actually it is quite easy to implement.</p>
 
@@ -659,6 +603,8 @@ var extendModule = (function( m){
 }(myModule));
 
 </code></pre>
+
+<h3 id="namespace">Namespace</h3>
 
 <p>Now we will go further to namespace, which is based on module technique. Namespace gives you the ability to have public and private properties and methods.
 The code inside doesn’t use the Object Literal notation. Allows you to use $ inside your code without worrying about clashing with other libraries
@@ -795,11 +741,18 @@ VM95:2 {&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quo
 <li><a href="#brief-history">Brief history</a></li>
 <li><a href="#assumption">Assumption</a></li>
 <li><a href="#data-types">Data types</a></li>
-<li><a href="#object-and-prototype">Object and prototype</a>
+<li><a href="#object-and-prototype">Object and prototype</a></li>
+<li><a href="#class-and-inheritance">Class and inheritance</a>
 <ul>
-<li><a href="#how-to-define-a-object">How to define a object</a></li>
-<li><a href="#class-and-inheritance">Class and inheritance</a></li>
-<li><a href="#module-and-namespace">Module and namespace</a></li>
+<li><a href="#object-based-inheritance">Object-based Inheritance</a></li>
+<li><a href="#classical-inheritance">Classical inheritance</a></li>
+<li><a href="#prototypal-inheritance">Prototypal inheritance</a></li>
+</ul></li>
+<li><a href="#module-and-namespace">Module and namespace</a>
+<ul>
+<li><a href="#closure">Closure</a></li>
+<li><a href="#module">Module</a></li>
+<li><a href="#namespace">Namespace</a></li>
 </ul></li>
 </ul></li>
 </ul>
