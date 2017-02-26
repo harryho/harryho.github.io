@@ -723,6 +723,121 @@ VM95:2 {&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;qu
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The sample above combine namespace and prototypal inheritance. Namespace allows you to add new module for enhancement, and it allows you to organize your API better.  On the other hand, through the globle namespace you can inject customized service, or you can replace it. The disadvantage of namespace, when the source code blows up, it will be a bit more complicated, especially you break different into different files. Mock test or unit test will needs a bit more work to do as well. There is no pattern that is a Silver Bullet, but rather you should assess where you are at and examine the pros and cons of each pattern to address your situation.&lt;/p&gt;
+
+&lt;h2 id=&#34;interfaces&#34;&gt;Interfaces&lt;/h2&gt;
+
+&lt;p&gt;An interface tells programmers what methods a given class implements, which makes it easier to use. Interfaces also stabilize the ways in which different classes can communicate.&lt;/p&gt;
+
+&lt;p&gt;Using any interface implementation in JavaScript will create a small performance hit, due in part to the overhead of having another method invocation.&lt;/p&gt;
+
+&lt;p&gt;The biggest drawback is that there is no way to force other programmers to respect the interfaces you have created. In JavaScript, you must manually ensure that a given class implements an interface. You can mitigate this problem by using coding conventions and helper classes, but it will never entirely go away. Everyone on your project must agree to use them and check for them; otherwise much of their value is lost.&lt;/p&gt;
+
+&lt;p&gt;JavaScript does not come with built-in support for interfaces, and there is no Interface keyword, so any method you use to implement this will be very different from what languages such as C++, Java, and making it a little more difficult. JavaScript uses what&amp;rsquo;s called duck typing. (If it walks like a duck, and quacks like a duck, as far as JS cares, it&amp;rsquo;s a duck.) If your object has quack(), walk(), and fly() methods, code can use it wherever it expects an object that can walk, quack, and fly, without requiring the implementation of some &amp;ldquo;Duckable&amp;rdquo; interface.&lt;/p&gt;
+
+&lt;p&gt;JavaScript will use Interface object to ensure if the new instance implements the same action as Interface object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+
+var Interface = function(interfaceName, interfaceMembers) {
+    if (!(this instanceof Interface)) {
+        return new Interface(interfaceName, interfaceMembers);
+    }
+
+    var interfaceObj = this;
+
+    Object.keys(interfaceMembers).forEach(function(memberName) {
+        interfaceObj[memberName] = function() {
+            Interface.errorDetect(interfaceName, memberName);
+        };
+    });
+
+    interfaceObj.name = interfaceName;
+
+    return interfaceObj;
+};
+
+Interface.errorDetect = function(interfaceName, interfaceMember) {
+    throw Error(&#39;errorDetect: Class does not implement interface member &#39; + interfaceName + &#39;.&#39; + interfaceMember + &#39;()&#39;);
+};
+
+Interface.ensureImplement = function(obj /*, interfaces */ ) {
+    var interfaces = [].slice.call(arguments, 1);
+
+    interfaces.forEach(function(_interface) {
+        Object.keys(_interface).forEach(function(interfaceMember) {
+            var isFunction = typeof _interface[interfaceMember] === &#39;function&#39;;
+
+            if (isFunction &amp;amp;&amp;amp; !obj[interfaceMember]) {
+                Interface.errorDetect(_interface.name, interfaceMember);
+            }
+        });
+    });
+
+    return true;
+};
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;How to use this interface&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Samples below show you how  the Interface can ensure the object implement multiple interfaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Sample 1 with only one interface
+
+var ILog = Interface(&#39;ILog&#39;, {
+    logInfo:function(){},
+    logWarning:function(){},
+    logError:function(){},
+}); 
+
+
+var loggerA = {
+    logInfo:function(){},
+    logWarning:function(){},
+    logError:function(){},
+};
+
+// loggerB does not implement all methods
+var loggerB = {
+    logInfo:function(){},
+    logWarning:function(){},
+};
+
+console.log(Interface.ensureImplement( loggerA, ILog));
+console.log(Interface.ensureImplement( loggerB, ILog));
+
+/*
+output:
+true
+Uncaught Error: errorDetect: Class does not implement interface member ILog.logError()
+...
+*/
+
+// Sample 2 with 2 interfaces
+
+var Submarine = Interface(&#39;Submarine&#39;, {
+    operateUnderwater:function(){}
+}); 
+
+var Car = Interface(&#39;Car&#39;, {
+    operateOnRoad:function(){}
+}); 
+
+var SubmarineCar = {
+    operateUnderwater:function(){},
+    operateOnRoad:function(){},
+};
+
+console.log(Interface.ensureImplement( SubmarineCar, Submarine, Car ));
+
+/**
+output:
+true
+*/
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
