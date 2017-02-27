@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Php - Hello World</title>
+    <title>Zendframework 2 MVC Starter - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -59,33 +59,106 @@
 <div class="row">
 	<div class="col-sm-8 doc-main">
 		<main role="main">
-			<div class="doc-list-header">
-				<h3>Pages in Php</h3>
-			</div>
-			<div class="doc-list-entry">
-			<ul>
-	
-				<li><a class="doc-entry" href="/blog/php-web/">
-					<span class="doc-entry-title">PHP web framework setup</span>
-					<span class="doc-entry-meta in-list">
-						(<time datetime="2016-08-11">August 11, 2016</time>)
-					</span>
-				</a></li>
-	
-				<li><a class="doc-entry" href="/project/zf2-mvc-starter/">
-					<span class="doc-entry-title">Zendframework 2 MVC Starter</span>
-					<span class="doc-entry-meta in-list">
-						(<time datetime="2016-02-09">February 09, 2016</time>)
-					</span>
-				</a></li>
-	
-			</ul>
-			</div>
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Zendframework 2 MVC Starter</h1>
+				<div class="doc-entry-meta">
+					<span>updated at <time datetime="2016-02-09">09 Feb 2016</time></span>
+				</div>
+				<section>
+					
+
+<p>This starter is the starting point of zendframe 2 MVC project. This application is meant to be used as a starting place for those looking to get their feet wet with ZF2.</p>
+
+<ul>
+<li>This starter was built on the zendframework 2.x.</li>
+<li>This starter uses mysql as database setting by default.</li>
+<li>Include digest authentication by default.</li>
+<li>Include font-awesome files.</li>
+<li>Include Bootstrap 3 without bootstrap-loader.</li>
+<li>Include html5shiiv.js to support older IE browser.</li>
+</ul>
+
+<h2 id="structure-of-starter">Structure of starter</h2>
+
+<pre><code class="language-bash">C:.
++---config                            // Database, authorizaion, authentication setting
++---data          
++---module                            // Customized application sources
+|   +---Application                   // Global module used by whole application
+|   |   +---config
+|   |   |   \---module.config.php     // Register all modules 
+|   |   +---language
+|   |   +---src
+|   |   |   \---Application
+|   |   |       +---Controller
+|   |   |       \---Factory
+|   |   |           \---AuthenticationAdapterFactory.php
+|   |   \---view                      // Contains common master, basic layout files 
+|   |       +---application
+|   |       |   \---index
+|   |       +---error
+|   |       +---layout
+|   |       \---partial
+|   +---BookList                      // Customized module for business purpose
+|   |   +---config
+|   |   +---src
+|   |   |   \---BookList
+|   |   |       +---Controller
+|   |   |       +---Form
+|   |   |       \---Model
+|   |   \---view
+|   |       \---book-list
+|   |           \---book
+|   \---Test
+|       \---config
++---public                          // Contains all fonts, css, images, and js files
+|   +---css
+|   +---fonts
+|   +---img
+|   \---js
+\---vendor                          // Contains Zendframework 2 source code
+          
+    
+</code></pre>
+
+<h3 id="screenshot-of-home-page">Screenshot of home page</h3>
+
+<blockquote>
+<p><img src="/img/zf2-mvc-starter.png" alt="zf2-mvc-starter" /></p>
+</blockquote>
+
+<h2 id="browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></h2>
+
+				</section>
+			</article>
 		</main>
 	</div> 
 
 	
+
 <div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Zendframework 2 MVC Starter</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#structure-of-starter">Structure of starter</a>
+<ul>
+<li><a href="#screenshot-of-home-page">Screenshot of home page</a></li>
+</ul></li>
+<li><a href="#browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></a></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
 	<div class="sidebar-module">
 		<h4 class="sidebar-heading">Pages in Categories</h4>
 		<ul class="sidebar-category-list">
@@ -95,23 +168,32 @@
 					<span class="doc-list-category">Blog</span>
 				</a>
 				<ul>
-					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a></li>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a>
+					</li>
 				
-					<li><a href="/blog/php-web/">PHP web framework setup</a></li>
+					<li><a href="/blog/php-web/">PHP web framework setup</a>
+					</li>
 				
-					<li><a href="/blog/ubuntu-server-14/">Ubuntu 14 -- server setup</a></li>
+					<li><a href="/blog/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
 				
-					<li><a href="/blog/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup including Windows dual boot </a></li>
+					<li><a href="/blog/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup including Windows dual boot </a>
+					</li>
 				
-					<li><a href="/blog/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a></li>
+					<li><a href="/blog/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
 				
-					<li><a href="/blog/javascript-oop/">JavaScript and Object Oriented Programming</a></li>
+					<li><a href="/blog/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
 				
-					<li><a href="/blog/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a></li>
+					<li><a href="/blog/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
 				
-					<li><a href="/blog/linux-history/">Brief history of Linux</a></li>
+					<li><a href="/blog/linux-history/">Brief history of Linux</a>
+					</li>
 				
-					<li><a href="/blog/better-practice-in-java-1/">Better practice in Java, Part-1</a></li>
+					<li><a href="/blog/better-practice-in-java-1/">Better practice in Java, Part-1</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -121,9 +203,12 @@
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
-					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a></li>
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
 				
-					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a></li>
+					<li>
+						<span class="active">Zendframework 2 MVC Starter</span>
+						</li>
 				
 				</ul>
 			</li>
@@ -161,6 +246,7 @@
 			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
 		
 		</div>
+	</div>
 	</div>
 </div>
 
