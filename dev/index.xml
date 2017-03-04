@@ -123,11 +123,38 @@
 
 &lt;h3 id=&#34;create-new-project-from-scratch&#34;&gt;Create new project from scratch&lt;/h3&gt;
 
-&lt;h4 id=&#34;create-new-project&#34;&gt;create new project&lt;/h4&gt;
+&lt;h4 id=&#34;create-new-project&#34;&gt;Create new project&lt;/h4&gt;
 
-&lt;h4 id=&#34;migrate-database-and-seed-dummy-data&#34;&gt;migrate database and seed dummy data&lt;/h4&gt;
+&lt;h4 id=&#34;migrate-database-and-seed-dummy-data&#34;&gt;Migrate database and seed dummy data&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;php artisan migrate -VVV 
+&lt;ul&gt;
+&lt;li&gt;Create data model&lt;/li&gt;
+&lt;li&gt;Following is the sample code
+```php
+&amp;lt;?php&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;namespace App;
+use Illuminate\Database\Eloquent\Model;&lt;/p&gt;
+
+&lt;p&gt;class Article extends Model
+{
+    protected $fillable = [&amp;lsquo;title&amp;rsquo;, &amp;lsquo;content&amp;rsquo;];&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public function getTitleAttribute($value) {
+    return strtoupper($value);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;* Use artisan to create the table 
+
+```bash
+
+php artisan migrate -VVV 
+
+# Use following command to seek dump or initial data
 php artisan db:seed
 &lt;/code&gt;&lt;/pre&gt;
 

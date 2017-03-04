@@ -179,11 +179,38 @@
 
 <h3 id="create-new-project-from-scratch">Create new project from scratch</h3>
 
-<h4 id="create-new-project">create new project</h4>
+<h4 id="create-new-project">Create new project</h4>
 
-<h4 id="migrate-database-and-seed-dummy-data">migrate database and seed dummy data</h4>
+<h4 id="migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</h4>
 
-<pre><code class="language-bash">php artisan migrate -VVV 
+<ul>
+<li>Create data model</li>
+<li>Following is the sample code
+```php
+&lt;?php</li>
+</ul>
+
+<p>namespace App;
+use Illuminate\Database\Eloquent\Model;</p>
+
+<p>class Article extends Model
+{
+    protected $fillable = [&lsquo;title&rsquo;, &lsquo;content&rsquo;];</p>
+
+<pre><code>public function getTitleAttribute($value) {
+    return strtoupper($value);
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>* Use artisan to create the table 
+
+```bash
+
+php artisan migrate -VVV 
+
+# Use following command to seek dump or initial data
 php artisan db:seed
 </code></pre>
 
@@ -367,8 +394,8 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
 </ul></li>
 <li><a href="#create-new-project-from-scratch">Create new project from scratch</a>
 <ul>
-<li><a href="#create-new-project">create new project</a></li>
-<li><a href="#migrate-database-and-seed-dummy-data">migrate database and seed dummy data</a></li>
+<li><a href="#create-new-project">Create new project</a></li>
+<li><a href="#migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</a></li>
 </ul></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#use-lavarel-mvc-starter-project">Use Lavarel MVC Starter project</a></li>
