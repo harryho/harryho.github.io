@@ -11,10 +11,10 @@
     
     <item>
       <title>Use Windows command &amp; hotkey as a hacker - Part 2</title>
-      <link>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-2/</link>
+      <link>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-2/</link>
       <pubDate>Mon, 24 Mar 2014 10:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-2/</guid>
+      <guid>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-2/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This article will continue the topic of Windows command &amp;amp; hotkeys. Part-1 shows you common hotkeys and short command lines for &lt;code&gt;Run&lt;/code&gt; windnow dialog. The rest of this topic will focus on the advanced commands and how to create a batch script with all those commands.&lt;/em&gt;&lt;/p&gt;
@@ -83,10 +83,10 @@
 &lt;p&gt;&lt;strong&gt;net accounts&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Use&lt;code&gt;net accounts &amp;lt;user&amp;gt;&lt;/code&gt; to show current user&amp;rsquo;s password and login requirement.&lt;/li&gt;
-&lt;li&gt;Use&lt;code&gt;net accounts &amp;lt;user&amp;gt; /minpwlen:6&lt;/code&gt; to set password minimum length requirement for user.&lt;/li&gt;
-&lt;li&gt;Use&lt;code&gt;net accounts &amp;lt;user&amp;gt; /maxpwage:30&lt;/code&gt; to force user to reset password every 30 days, or use &lt;code&gt;unlimited&lt;/code&gt; to replace the number &lt;code&gt;30&lt;/code&gt;, then user&amp;rsquo;s password will never expire.&lt;/li&gt;
-&lt;li&gt;User&lt;code&gt;net accounts /unique:5&lt;/code&gt; to prevent user reuse previous passwords, and default value is 5.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;net accounts &amp;lt;user&amp;gt;&lt;/code&gt; to show current user&amp;rsquo;s password and login requirement.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;net accounts &amp;lt;user&amp;gt; /minpwlen:6&lt;/code&gt; to set password minimum length requirement for user.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;net accounts &amp;lt;user&amp;gt; /maxpwage:30&lt;/code&gt; to force user to reset password every 30 days, or use &lt;code&gt;unlimited&lt;/code&gt; to replace the number &lt;code&gt;30&lt;/code&gt;, then user&amp;rsquo;s password will never expire.&lt;/li&gt;
+&lt;li&gt;User &lt;code&gt;net accounts /unique:5&lt;/code&gt; to prevent user reuse previous passwords, and default value is 5.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
@@ -97,6 +97,7 @@ runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
 REM ##BE CAREFUL When you try the command below ##  
 REM it shows how to create, delete files as admin under C drive root.  
 runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&amp;gt;c:\z.txt &amp;amp; dir c:\z.txt &amp;amp; pause &amp;amp; del c:\z.txt &amp;quot; 
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;sc&#34;&gt;sc&lt;/h3&gt;
@@ -113,6 +114,7 @@ runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&am
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM query all service on the PC -- &amp;lt;yourpcname&amp;gt;
 sc \\&amp;lt;yourpcname&amp;gt; query
+
 REM query status of given service 
 sc query &amp;lt;servicename&amp;gt;
 sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot; 
@@ -136,35 +138,41 @@ sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM query all services which are inactive and type are driver and kernel
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
 
-REM get all services&#39; name 
+REM get all services name
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @echo %s 
 
-REM get all services&#39; name and state
+REM get all services name and state
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
-    for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE&amp;quot; &#39;) do @echo %s -- %t
-    )
+    for /f &amp;quot;tokens=4&amp;quot; %t in (&#39;sc query %s ^| find &amp;quot;STATE&amp;quot; &#39;) 
+        do @echo %s -- %t
+)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;sc queryex&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;REM get all services&#39; name and pid
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get all services name and pid
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
-    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;PID&amp;quot; &#39;) do @echo %s -- %t
-    )
+    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;PID&amp;quot; &#39;) 
+        do @echo %s -- %t
+)
 
-REM get all services&#39; name and pid
+REM get all services name and pid
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
-    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) do @echo %s -- %t
-    ) 
+    for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) 
+        do @echo %s -- %t
+) 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;sc qc&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;REM get all services&#39; name and path
-for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(     for /f &amp;quot;tokens=3 delims==:&amp;quot; %t in (&#39;sc qc %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) do @echo %s -- C:%t     )   
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get all services name and path
+for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(     
+    for /f &amp;quot;tokens=3 delims==:&amp;quot; %t in (&#39;sc qc %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) 
+    do @echo %s -- C:%t
+)   
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;sc start/stop&lt;/strong&gt;&lt;/p&gt;
@@ -215,9 +223,8 @@ tasklist /fi &amp;quot;pid eq 4444&amp;quot;
 &lt;h3 id=&#34;netstat&#34;&gt;netstat&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Type &lt;code&gt;netstat&lt;/code&gt; to get all ports and IP addresses, which are connected or listening&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Type PID of process which is using some given port, such as 80, 443, 22, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;netstat&lt;/code&gt; to get all ports and IP addresses, which are connected or listening&lt;/li&gt;
+&lt;li&gt;Type PID of process which is using some given port, such as 80, 443, 22, etc.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;netstat -ano | find &amp;quot;:80&amp;quot; 
@@ -251,7 +258,7 @@ REM stop process by PID and any children processes
 taskkill /PID 1230 /PID 1241 /PID 1253 /T
 
 REM force to stop applications which PID is equal or greater than 10000
-REM and windows&#39; title of app is not equal to untitle*
+REM and windows title of app is not starts with untitle
 taskkill /F /FI &amp;quot;PID ge 1000&amp;quot; /FI &amp;quot;WINDOWTITLE ne untitle*&amp;quot;
 taskkill /F /FI &amp;quot;USERNAME eq NT AUTHORITY\SYSTEM&amp;quot; /IM notepad.exe
 &lt;/code&gt;&lt;/pre&gt;
@@ -259,47 +266,89 @@ taskkill /F /FI &amp;quot;USERNAME eq NT AUTHORITY\SYSTEM&amp;quot; /IM notepad.
 &lt;h3 id=&#34;schtasks&#34;&gt;schtasks&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Syntax : schtasks /parameter [arguments]
+&lt;li&gt;&lt;p&gt;Syntax &amp;ndash; &lt;code&gt;schtasks /parameter [arguments]&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;parameters include : Change, Create, Delete, End, Query, Run, ShowSid&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;parameters include &amp;ndash; Change, Create, Delete, End, Query, Run, ShowSid&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Type &lt;code&gt;schtasks&lt;/code&gt; to list all scheduled tasks&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;schtasks&lt;/code&gt; to list all scheduled tasks&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;schtasks /Query&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get help info                                                                                                                                                                           
-SCHTASKS /Query /?    
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get help info                                                                 
+SCHTASKS /Query /?
 
-REM query tasks which are scheduled on given system                                                                                                                                                                         
-SCHTASKS /Query /S system /U user /P       
+REM query tasks which are scheduled on given system
+SCHTASKS /Query /S system /U user /P
 
 REM get list of tasks in details
 SCHTASKS /Query /FO LIST /V     
 
-REM get table of running tasks in details and output to csv file                                                                                                                          
+REM get table of running tasks in details and output to csv file 
 SCHTASKS /Query /FO TABLE /NH /V | find &amp;quot;Running&amp;quot;&amp;gt;running_tasks.csv
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;combination-of-multiple-commands&#34;&gt;Combination of multiple commands&lt;/h2&gt;
+
+&lt;p&gt;As we know, usually each command is designed to complete some specific actions, but sometimes we have to combine different commands together to achieve what we want. There are a few ways to put the commands together.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-to-simply-connect-to-commands&#34;&gt;Use &lt;code&gt;&amp;amp;&lt;/code&gt; to simply connect to commands&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delete a folder with non-empty subdirectries &lt;code&gt;test&lt;/code&gt; we need to combine &lt;code&gt;del&lt;/code&gt; and &lt;code&gt;rd&lt;/code&gt; together. Actually we can two commands one by one, but we can put it together and just execute once.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM show the folder with non-empty subdirectries
+tree test
+
+\path\to\TEST
++---subdir1
+|       file1
+|       file2
+|       
+\---subdir2
+        file1
+        file2
+
+del /s/q test &amp;amp; rd /s/q
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands&#34;&gt;Use pipeline &lt;code&gt;|&lt;/code&gt; to setup a channel between commands pass the data through the commands.&lt;/h3&gt;
+
+&lt;p&gt;Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM write some content to a text file all.txt
+echo aaa&amp;gt;all.txt &amp;amp; echo mark aaa &amp;gt;&amp;gt;all.txt &amp;amp; echo mark bbb&amp;gt;&amp;gt;all.txt
+
+REM retrive lines start with mark and write them to mark.txt
+cat all.txt | find &amp;quot;mark&amp;quot;&amp;gt;mark.txt
+cat mark.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-for-loop-to-combine-commands-please-check-the-samples-above&#34;&gt;Use &lt;code&gt;for&lt;/code&gt; loop to combine commands. Please check the samples above.&lt;/h3&gt;
+
 &lt;h2 id=&#34;script&#34;&gt;script&lt;/h2&gt;
 
-&lt;h3 id=&#34;basic-hello-world&#34;&gt;Basic hello world&lt;/h3&gt;
+&lt;h3 id=&#34;basic-hello-world-script&#34;&gt;Basic hello world script&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;You can find it on the &lt;a href=&#34;https://harryho.github.io&#34;&gt;home page&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Customized script to query temp folders and clean up log files within the folder&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;customized-script&#34;&gt;Customized script&lt;/h3&gt;
 
 &lt;ul&gt;
+&lt;li&gt;This sample script is used to query temp folders and clean up log files within the folder.&lt;/li&gt;
 &lt;li&gt;We assume you have multiple temp folders in different drives and You want to delete log files inside temp folder and its subdirectries from time to time. Before you delete them, you want to list all files first. You can confirm if you want to delete them or not.&lt;/li&gt;
 &lt;li&gt;Create a file named clean-logs.bat&lt;/li&gt;
 &lt;li&gt;Copy the sample code and tailor anything you want.&lt;/li&gt;
 &lt;li&gt;The sample shows you how to create interative command script and how to combine commands together with the condition statement and loop statement.&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo off
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+@echo off
 
 @echo.&amp;quot;Assumption: You have multiple temp folders in different drives. You want to delete log files inside temp folder and its subdirectries. Before you delete them, you want to list all files first, file list should be sorted by time&amp;quot;
 
@@ -340,10 +389,10 @@ SCHTASKS /Query /FO TABLE /NH /V | find &amp;quot;Running&amp;quot;&amp;gt;runni
     
     <item>
       <title>Use Windows command &amp; hotkey as a hacker - Part 1</title>
-      <link>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-1/</link>
+      <link>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-1/</link>
       <pubDate>Sun, 09 Mar 2014 10:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-1/</guid>
+      <guid>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-1/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;Do you want to make your friends amazed by your computer skill and praise you as genius? Or the hacker as watched in Sci-Fi movies? You don&amp;rsquo;t need Mac, Linux or other operating systems, just Windows, you can show-off and look like hacker and master of Zeroes and Ones, even you have no any idea of it. Here are some tricks by which you can make your friends&amp;rsquo; jaw drop.&lt;/em&gt;&lt;/p&gt;
@@ -533,9 +582,8 @@ C:\&amp;gt;help cd
 &lt;h3 id=&#34;del&#34;&gt;del&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;em&gt;IMPORTANT&lt;/em&gt;&lt;/strong&gt; : The item deleted by &lt;code&gt;del&lt;/code&gt; can not be restored from &lt;code&gt;bin&lt;/code&gt;. Please be careful before you use this command.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;IMPORTANT&lt;/em&gt;&lt;/strong&gt; : The item deleted by command &lt;code&gt;del&lt;/code&gt; can not be restored from &lt;strong&gt;Recyle Bin&lt;/strong&gt;. Please be careful before you use this command.&lt;/li&gt;
 &lt;li&gt;Type &lt;code&gt;del&lt;/code&gt; to delete files or &lt;code&gt;del *.txt&lt;/code&gt; to delete all files with &lt;code&gt;txt&lt;/code&gt; extension&lt;/li&gt;
-&lt;li&gt;Combine &lt;code&gt;rd&lt;/code&gt; can remove folder with not-empty subdirectories `del /s/q &lt;folder&gt; &amp;amp; rd /s/q &lt;folder&gt;&amp;lsquo;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;cls&#34;&gt;cls&lt;/h3&gt;

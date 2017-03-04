@@ -1,0 +1,511 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>PHP web framework - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/blog/">Blog</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">PHP web framework</h1>
+				<div class="doc-entry-meta">
+					<span>updated at <time datetime="2016-08-11">11 Aug 2016</time></span>
+				</div>
+				<section>
+					
+
+<blockquote>
+<p><em>Here we are going to explore some PHP web frameworks.</em></p>
+</blockquote>
+
+<h1 id="php-development-environment-setup">PHP development environment setup</h1>
+
+<h2 id="install-php-5-6-x">Install PHP 5.6.x</h2>
+
+<ul>
+<li>Please find the instruction from <a href="/#php">home page</a></li>
+</ul>
+
+<h2 id="composer">Composer</h2>
+
+<h3 id="linux">Linux</h3>
+
+<ul>
+<li>Use <code>curl -s https://getcomposer.org/installer | php --</code> to install composer on Linux</li>
+<li>use &lsquo;composer -v &rsquo; to verify.</li>
+</ul>
+
+<h3 id="windows">Windows</h3>
+
+<ul>
+<li>Download the <a href="https://getcomposer.org/download/">composer</a> and install php on your PC</li>
+<li>Use <code>composer -v</code> to verify the composer is ready.</li>
+</ul>
+
+<h2 id="zendframework">Zendframework</h2>
+
+<blockquote>
+<p>Zend Framework is a collection of 60+ packages for professional PHP development. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.</p>
+</blockquote>
+
+<h3 id="zendframework-2-x">Zendframework 2.x</h3>
+
+<h4 id="create-zendframework-2-project-from-scratch">Create Zendframework 2 project from scratch</h4>
+
+<h4 id="clone-zendframework-skeleton-project-as-new-project">* Clone Zendframework skeleton project as new project.</h4>
+
+<h4 id="install-zendframework-with-composer">* Install zendframework with composer</h4>
+
+<pre><code class="language-bash">    cd  /path/to/newproject
+    git clone git://github.com/zendframework/ZendSkeletonApplication.git
+    cd ZendSkeletonApplication
+    php composer.phar self-update
+    php composer.phar install
+</code></pre>
+
+<h4 id="start-app-with-php-built-in-server">* Start app with php built-in server</h4>
+
+<p><strong>Linux</strong></p>
+
+<pre><code class="language-bash">php -S 0.0.0.0:8080 -t public/ public/index.php
+</code></pre>
+
+<p><strong>Windows</strong></p>
+
+<pre><code class="language-bash">php -S 0.0.0.0:8080 -t public public/index.php
+</code></pre>
+
+<h4 id="use-apache-server">* Use apache server</h4>
+
+<pre><code class="language-apache"> &lt;VirtualHost *:80&gt;
+     ServerName zf2-tutorial.localhost
+     DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
+     SetEnv APPLICATION_ENV &quot;development&quot;
+     &lt;Directory /path/to/newproject/ZendSkeletonApplication/public&gt;
+         DirectoryIndex index.php
+         AllowOverride All
+         Require all granted
+     &lt;/Directory&gt;
+ &lt;/VirtualHost&gt;
+</code></pre>
+
+<h3 id="use-zf2-mvc-starter-project">Use Zf2-MVC-Starter project</h3>
+
+<ul>
+<li>Please find the project introduction <a href="/project/zf2-mvc-starter/">here</a>.</li>
+</ul>
+
+<h2 id="laravel">Laravel</h2>
+
+<blockquote>
+<p>Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance, and its orientation toward syntactic sugar.</p>
+</blockquote>
+
+<h2 id="laravel-5-x">Laravel 5.x</h2>
+
+<h3 id="install-laravel-global-composer-global-laravel-installer">install laravel global <code>composer global laravel/installer</code></h3>
+
+<h3 id="change-php-ini-config">Change <code>php.ini</code> config</h3>
+
+<h4 id="enable-the-mbs-string-extension-inside-php-ini-change-the-extension-php-mbstring-dll-as-follow">* enable the <code>mbs-string</code> extension inside <code>php.ini</code>. Change the <code>;extension=php_mbstring.dll</code> as follow.</h4>
+
+<pre><code class="language-ini">extension=php_mbstring.dll
+</code></pre>
+
+<h3 id="create-new-project-from-scratch">Create new project from scratch</h3>
+
+<h4 id="create-new-project">* create new project</h4>
+
+<h4 id="migrate-database-and-seed-dummy-data">* migrate database and seed dummy data</h4>
+
+<pre><code class="language-bash">php artisan migrate -VVV 
+php artisan db:seed
+</code></pre>
+
+<h3 id="troubleshooting">* Troubleshooting</h3>
+
+<p><strong>Fix the error of Specified key was too long</strong></p>
+
+<pre><code class="language-php">namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+        Schema::defaultStringLength(191);
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</code></pre>
+
+<h3 id="use-laravel-mvc-starter-project">Use laravel-mvc-starter project</h3>
+
+<ul>
+<li>Please find the project introduction <a href="/project/lara-mvc-starter/">here</a>.</li>
+</ul>
+
+<h3 id="use-laravel-rest-starter-project">Use laravel-rest-starter project</h3>
+
+<h2 id="prestashop">PrestaShop</h2>
+
+<blockquote>
+<p>PrestaShop is a free, open source e-commerce solution. The software is published under the Open Software License (OSL). It is written in the PHP programming language with support for the MySQL database management system.</p>
+</blockquote>
+
+<h2 id="prestashop-1-5-4">Prestashop 1.5.4</h2>
+
+<h3 id="download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></h3>
+
+<h3 id="install-prestashop">Install Prestashop</h3>
+
+<p>There is a instruction page inside the zip file. You can follow the instructions to complete the installation. There is no EasyPHP, Wamp, XAMPP, or any similar AMP (Apache+MySQL+PHP) package installed on my PC, but I have PHP, Apache, MySQL installed. Actually EasyPHP, Wamp are just the bundle of PHP development tools, which include PHP, Apache, MySQL. I don&rsquo;t install too many duplicate softwares and packages on my PC, so I prefer to install Prestashop with what I have on my PC. It is up to you which way you choose to install it.</p>
+
+<h3 id="install-prestashop-without-amp-package">Install Prestashop without AMP package</h3>
+
+<ul>
+<li>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</li>
+</ul>
+
+<pre><code class="language-ini">path\to\prestashop_workspace
+\---prestashop
+    +---admin 
+    +---cache 
+    +---classes  
+    +---config 
+    +---controllers 
+    +---css
+    +---docs
+    +---download
+    +---img 
+    +---install    
+    +---js   
+    +---localization
+    +---log
+    +---mails
+    +---modules  
+    +---override
+    +---pdf
+    +---themes
+    +---tools 
+    +---translations
+    +---upload
+    \---webservice
+</code></pre>
+
+<ul>
+<li><p>Start your MySQL or check the status of MySQL</p>
+
+<ul>
+<li>Use your MySQL client tool to connect to your MySQL server.</li>
+</ul></li>
+
+<li><p>Launch installer page with php server</p></li>
+
+<li><p>Start a command prompt</p></li>
+</ul>
+
+<pre><code class="language-bash">cd /path/to/prestashop_workspace
+php -S 0.0.0.0:1234 -t prestashop
+</code></pre>
+
+<ul>
+<li>Open the link <code>http://localhost:1234</code> with browser</li>
+<li>Choose language and click <code>Next</code>, and then select the checkbox &ldquo;I agree bah lah bah lah &hellip;. &rdquo; and click <code>Next</code></li>
+<li>If there is an error <code>GD Library is not installed</code> prompt, you just need to enable the library on <code>php.ini</code>
+
+<ul>
+<li>DO NOT close your browser.</li>
+<li>Stop the php server by <code>Ctrl + C</code> in the command prompt.</li>
+<li>Use notepad to open the file <code>php.ini</code> under the <code>\path\to\php</code></li>
+<li>Uncomment the config <code>;extension=php_gd2.dll</code> =&gt; <code>extension=php_gd2.dll</code></li>
+<li>Start the php server again</li>
+</ul></li>
+<li>Click the <code>Refresh this settings</code>, and click <code>Next</code></li>
+<li>Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click <code>Test your database connection</code>.</li>
+<li>If you got error <code>prestashop database not found</code>, you need to create a database on mysql server.
+
+<ul>
+<li>I simply create a new database immediately with one command line
+<code>bash
+CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
+</code></li>
+<li>Test the connection again. You will get the green light</li>
+</ul></li>
+<li>Click <code>Next</code> and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click <code>Next</code></li>
+<li>Setup your sample store. Click <code>Next</code>. Then the installer will help you finish the initialization.</li>
+<li>After the store setup, you can access the website by clicking <code>Font site</code>, but you can not access back office, as known as admin panel.</li>
+<li>Don&rsquo;t panic. It is easy to fix. Stop the php server by clicking <code>Ctrl+C</code>. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder <code>admin</code> under <code>prestashop</code> has been renamed to <code>adminXXXX</code>. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be <code>http://localhost:1234/adminXXXX</code>.</li>
+<li>Open the new link in browser and type in your admin id and password. You can start playing on site.<br /></li>
+</ul>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">PHP web framework</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li><a href="#php-development-environment-setup">PHP development environment setup</a>
+<ul>
+<li><a href="#install-php-5-6-x">Install PHP 5.6.x</a></li>
+<li><a href="#composer">Composer</a>
+<ul>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#windows">Windows</a></li>
+</ul></li>
+<li><a href="#zendframework">Zendframework</a>
+<ul>
+<li><a href="#zendframework-2-x">Zendframework 2.x</a>
+<ul>
+<li><a href="#create-zendframework-2-project-from-scratch">Create Zendframework 2 project from scratch</a></li>
+<li><a href="#clone-zendframework-skeleton-project-as-new-project">* Clone Zendframework skeleton project as new project.</a></li>
+<li><a href="#install-zendframework-with-composer">* Install zendframework with composer</a></li>
+<li><a href="#start-app-with-php-built-in-server">* Start app with php built-in server</a></li>
+<li><a href="#use-apache-server">* Use apache server</a></li>
+</ul></li>
+<li><a href="#use-zf2-mvc-starter-project">Use Zf2-MVC-Starter project</a></li>
+</ul></li>
+<li><a href="#laravel">Laravel</a></li>
+<li><a href="#laravel-5-x">Laravel 5.x</a>
+<ul>
+<li><a href="#install-laravel-global-composer-global-laravel-installer">install laravel global <code>composer global laravel/installer</code></a></li>
+<li><a href="#change-php-ini-config">Change <code>php.ini</code> config</a>
+<ul>
+<li><a href="#enable-the-mbs-string-extension-inside-php-ini-change-the-extension-php-mbstring-dll-as-follow">* enable the <code>mbs-string</code> extension inside <code>php.ini</code>. Change the <code>;extension=php_mbstring.dll</code> as follow.</a></li>
+</ul></li>
+<li><a href="#create-new-project-from-scratch">Create new project from scratch</a>
+<ul>
+<li><a href="#create-new-project">* create new project</a></li>
+<li><a href="#migrate-database-and-seed-dummy-data">* migrate database and seed dummy data</a></li>
+</ul></li>
+<li><a href="#troubleshooting">* Troubleshooting</a></li>
+<li><a href="#use-laravel-mvc-starter-project">Use laravel-mvc-starter project</a></li>
+<li><a href="#use-laravel-rest-starter-project">Use laravel-rest-starter project</a></li>
+</ul></li>
+<li><a href="#prestashop">PrestaShop</a></li>
+<li><a href="#prestashop-1-5-4">Prestashop 1.5.4</a>
+<ul>
+<li><a href="#download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></a></li>
+<li><a href="#install-prestashop">Install Prestashop</a></li>
+<li><a href="#install-prestashop-without-amp-package">Install Prestashop without AMP package</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/blog">
+					<span class="doc-list-category">Blog</span>
+				</a>
+				<ul>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a>
+					</li>
+				
+					<li><a href="/blog/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/better-practice-in-java-1/">Better practice in Java, Part-1</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li>
+						<span class="active">PHP web framework</span>
+						</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup including Windows dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/laravel">laravel</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+

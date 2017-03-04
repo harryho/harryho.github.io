@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Codes on Hello World</title>
+    <link>https://harryho.github.io/code/index.xml</link>
+    <description>Recent content in Codes on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
+    <lastBuildDate>Thu, 20 Mar 2014 14:59:31 +1100</lastBuildDate>
+    <atom:link href="https://harryho.github.io/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JavaScript and Object Oriented Programming</title>
+      <link>https://harryho.github.io/code/javascript-oop/</link>
+      <pubDate>Thu, 20 Mar 2014 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/javascript-oop/</guid>
+      <description>
+
+&lt;h2 id=&#34;brief-history&#34;&gt;Brief history&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Brief history of JavaScript can be found on &lt;a href=&#34;https://harryho.github.io/&#34;&gt;Home Page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You should have basic knowledge of Javascript.&lt;/li&gt;
+&lt;li&gt;You should know how to test sample code on Chrome or Firefox. It is simple, just open your browser and enter &lt;code&gt;F12&lt;/code&gt;, copy the code to console and then press &lt;code&gt;Enter&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;data-types&#34;&gt;Data types&lt;/h2&gt;
+
+&lt;p&gt;The JavaScript (ECMAScript) standard defines six data types. Five are primitives, including Boolean, Null, Undefined, Number, String, and Object. In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers. The object-oriented nature of JavaScript is important to understand if you want to go further with your knowledge of the language, therefore we&amp;rsquo;ve provided this module to help you. Here we teach object theory and syntax in detail, then look at how to create your own objects.&lt;/p&gt;
+
+&lt;h2 id=&#34;object-and-prototype&#34;&gt;Object and prototype&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;How to define a object&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a couple ways to create variable as object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var obj1 = {};
+var obj2 = new Object();
+var obj3 = Object.create(null);
+console.log( obj );
+console.log( obj2 );
+console.log( obj3 );
+
+/*
+output: 
+object {}
+object {}
+object {}
+*/
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Object type gives developers so much power and flexibility to customize their own data type. All JavaScript objects inherit the properties and methods from their prototype. The Object.prototype is on the top of the prototype chain. All JavaScript objects (Date, Array, RegExp, Function, &amp;hellip;.) inherit from the Object.prototype.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Object has properties and method. Object&amp;rsquo;s method are the actions that can be performed on objects, they are one of most powerful feature for developers. Let&amp;rsquo;s see how we can create object with properties and methods.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create three cars with basic object usage.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var car1 = { color: &#39;red&#39;, make:&#39;Toyota&#39;, model:&#39;Sedan&#39;, getInfo: function (){
+        console.log( this );
+}};
+var car2 = { color: &#39;black&#39;, make:&#39;BMW&#39;, model:&#39;Coupe&#39;, getInfo: function (){
+        console.log( this );
+}};
+var car3 = { color: &#39;white&#39;, make:&#39;Subaru&#39;, model:&#39;SUV&#39;, getInfo:function (){
+        console.log( this );
+}};
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+
+/*
+Output:
+Object {color: &amp;quot;red&amp;quot;, make: &amp;quot;Toyota&amp;quot;, model: &amp;quot;Sedan&amp;quot;} 
+Object {color: &amp;quot;black&amp;quot;, make: &amp;quot;BMW&amp;quot;, model: &amp;quot;Coupe&amp;quot;} 
+Object {color: &amp;quot;white&amp;quot;, make: &amp;quot;Subaru&amp;quot;, model: &amp;quot;SUV&amp;quot;}
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var Car = function(color, make, model, getInfo ) {
+    this.color=&#39;&#39;;
+    this.make=&#39;&#39;;
+    this.model=&#39;&#39;;
+    this.getInfo= function( time ){
+            console.log( this );
+    };
+};
+
+var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
+var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
+var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You will get same result as before. If you compare two blocks of code, you may think the second way has more code than the first one. Let&amp;rsquo;s image if you need to create 20 objects and every object with 20 methods, then you totaly need to write 20 X 20 = 400 methods. Object&amp;rsquo;s prototype is powerful, but we need to be careful when we want to use it, especially the &lt;code&gt;this&lt;/code&gt; prototype. We need discuss this more in detail.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Other sample of prototype&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var Car = function(color, make, model ) {
+    this.color=&#39;&#39;;
+    this.make=&#39;&#39;;
+    this.model=&#39;&#39;;
+};
+Car.prototype = {        
+    getInfo : function( ){
+            console.log( this );
+    }
+};
+var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
+var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
+var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
+car1.getInfo();
+car2.getInfo(); 
+car3.getInfo();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;class-and-inheritance&#34;&gt;Class and inheritance&lt;/h2&gt;
+
+&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
+It also lacks built-in methods for determining whether an object implements the same set of
+methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
+is extremely flexible, making it easy to add these features.&lt;/p&gt;
+
+&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
+It also lacks built-in methods for determining whether an object implements the same set of
+methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
+is extremely flexible, making it easy to add these features.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inheritance issue in Javascript&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet() {
+    this.name =  &amp;quot;&amp;quot;;
+    this.species =  &amp;quot;&amp;quot;;
+    this.offsprings = [];
+    this.setName = function ( name ) { this.name = name ;};
+    this.deliverBaby = function( obj ){
+        this.offsprings.push( obj );
+    }
+    this.getInfo = function (){
+        console.log( &amp;quot; species: &amp;quot;,this.species, &amp;quot; name: &amp;quot; ,this.name );
+        console.log( &amp;quot; has &amp;quot;, this.offsprings.length ,&amp;quot; offsprings &amp;quot;);
+    }
+};
+
+function Dog()  {
+};
+
+Dog.prototype = new Pet();
+Dog.prototype.species = &amp;quot;Dog&amp;quot;;
+
+var dog1 = Object.create(new Dog());
+dog1.setName ( &amp;quot;Polly&amp;quot;);
+
+var dog2 = new Dog();
+dog2.setName ( &amp;quot;Lulu&amp;quot;);
+
+dog1.deliverBaby( new Dog());
+dog2.deliverBaby( new Dog());
+
+dog1.getInfo();
+dog2.getInfo();
+
+/*
+output :
+    species:  Dog  name:  Polly 
+    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
+    species:  Dog  name:  Lulu 
+    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tell there is something wrong with the prototype and constructor at a glance. It really confused many developers with C++/Java OOP backgroud. The sample code looks fine, but it doesn&amp;rsquo;t work as other OOP programming language. It is your and Brendan Eich&amp;rsquo;s problem, because he was told to make JavaScript look like Java, even there is no built-in OO mechanism at the beginning. This just looks like an odd way of doing class-based OOP without real classes, and leaves the programmer wondering why they didn’t implement proper class-based OOP. JavaScript keeps using constructor, which obscured JavaScript’s true prototypal nature. It turns out most developers don&amp;rsquo;t know how to use it properly and efficiently, including myself at the early stage.&lt;/p&gt;
+
+&lt;p&gt;Function is first-class citizen in JavaScript world, but it’s not really a class. We need to understand the constructor creates an empty object, then sets the prototype of empty object to the prototype property of the constructor, then set constructor function with &lt;code&gt;this&lt;/code&gt; pointing to the newly-created object, and finally returns the object. You will get more confused after you see this definition. Let&amp;rsquo;s us create a simple sample and take a close look why the constructor and prototype will cause this problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var MyClass = function(){
+    this.name = &#39;MyClass&#39;;
+    this.getInfo = function ( ){
+        console.log( this );
+    }
+}
+MyClass.prototype.propObject = { id: 0, property: &#39;property&#39; }
+
+var objectA = new MyClass();
+var objectB = new MyClass();
+
+console.log( &#39;object A:&#39;, objectA.name ,  &#39;object B:&#39;, objectB.name  );
+console.log( &#39;MyClass.prototype  === objectA.constructor.prototype ? &#39;, MyClass.prototype === objectA.constructor.prototype );
+console.log( &#39;MyClass.prototype  === objectB.constructor.prototype ? &#39;, MyClass.prototype  === objectB.constructor.prototype );
+
+console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject , &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
+
+objectA.propObject.id = 1; 
+objectA.propObject.property = &#39;AAA&#39;; 
+
+console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject,  &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
+/*
+output :
+
+MyClass object B: MyClass
+MyClass.prototype  === objectA.constructor.prototype ?  true
+MyClass.prototype  === objectB.constructor.prototype ?  true
+objectA.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}  objectB.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}
+objectA.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  objectB.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we draw a diagram of above sample, you will see what is happening behind the scene. Since the prototype property is a reference, changing the prototype object’s properties at runtime will affect all objects using the prototype.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
++------------+             
+|  MyClass   |        +---- objectA.prototype
+| prototype&amp;lt;----------|
+|            |        +---- objectB.prototype
++------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we figure out the root cause. You will say it is easy to fix. We just need to create new prototype for each object, and clone the properties and methods from supper class. Yes, you are right, but it is not I want to recommand to you. First, we need to see if we really inheritance, secondly, if it is better to maintain if use inheritance.&lt;/p&gt;
+
+&lt;p&gt;If we still want to use inheritance, I will suggest not to just inherit the properties, instead of methods. In my opinion, there is very rare of scenario, we really need to inherit method. So we just need to find to proper way to solve the problem of properties inheritance.&lt;/p&gt;
+
+&lt;h3 id=&#34;object-based-inheritance&#34;&gt;Object-based Inheritance&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function Pet(name, master) {
+    this.name = name || &amp;quot;&amp;quot;;
+    this.species = &amp;quot;&amp;quot;;
+    this.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    this.offsprings = [];
+    this.deliverBaby= function ( obj) {
+        this.offsprings.push(obj);
+    },
+    this.getInfo = function () {
+        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        this.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+}
+
+function Dog(name, master) {
+    Pet.call(this, name, master);
+    this.mother = null;
+    this.species = &amp;quot;Dog&amp;quot;;
+}
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+/*
+output:
+
+Dog  name:  Polly  master :  John   M
+has baby :   Polly-Baby-Dog   Dog
+species:  Dog  name:  Lulu  master :  Ada   F
+has baby :   Lulu-Baby-Dog   Dog
+has baby :   Lulu-Baby-Dog-2   Dog
+*/
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you test, would you ask: &amp;ldquo;what? how this works? It looks share the same prototype with &lt;code&gt;this&lt;/code&gt;&amp;rdquo;? Actually the problem is the special object &lt;code&gt;this&lt;/code&gt; in Javascript, which is one of the most misunderstood parts of JavaScript. Today it still confuses many other JS developers. If you have experience with other JavaScript framework. You will find many samples which use &lt;code&gt;that&lt;/code&gt; , &lt;code&gt;self&lt;/code&gt;, &lt;code&gt;vm&lt;/code&gt; to replace the built-in &lt;code&gt;this&lt;/code&gt;. e.g. &lt;code&gt;var that = {}&lt;/code&gt;, &lt;code&gt;var self = {}&lt;/code&gt;,etc. Let&amp;rsquo;s see the new version of above sample code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function Pet(name, master) {
+    var self = {};
+    self.name = name || &amp;quot;&amp;quot;;
+    self.species = &amp;quot;&amp;quot;;
+    self.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    self.offsprings = [];
+    return self;
+}
+
+function Dog(name, master) {
+    var self = {};
+    Pet.call(self, name, master);
+    self.species = &amp;quot;Dog&amp;quot;;
+    self.prototype = this.constructor.prototype;
+    return self;
+}
+
+Dog.prototype = {    
+    deliverBaby: function ( self, obj) {
+        self.offsprings.push(obj);
+    },
+    getInfo: function (self) {
+        console.log(&amp;quot; species: &amp;quot;, self.species, &amp;quot; name: &amp;quot;, self.name, &amp;quot; master : &amp;quot;, self.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        self.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+};
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(dog1, new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I rewrite above sample a few lines of code, then you will figour out why it is working, but maybe you still want to implement inheritance as other OOP lanuage C++, Java. Then let&amp;rsquo;s take a look the classical inheritance, which is much more close to other OOP language. In classical inheritance it&amp;rsquo;s impossible (or at least very difficult) to choose which properties you want to inherit. They use virtual base classes and interfaces to solve the diamond problem. It is much more complicated.&lt;/p&gt;
+
+&lt;h3 id=&#34;classical-inheritance&#34;&gt;Classical inheritance&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function extend(subClass, superClass) {
+    var F = function () {};
+    F.prototype = superClass.prototype;
+    subClass.prototype = new F();
+    subClass.prototype.constructor = subClass;
+    subClass.superclass = superClass.prototype;
+
+    if (superClass.prototype.constructor == Object.prototype.constructor) {
+        superClass.prototype.constructor = superClass;
+    }
+}
+
+function Pet(name, master) {
+    this.name = name || &amp;quot;&amp;quot;;
+    this.species = &amp;quot;&amp;quot;;
+    this.master = master || {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    };
+    this.offsprings = [];
+}
+
+Pet.prototype.deliverBaby = function (obj) {
+    this.offsprings.push(obj);
+};
+
+Pet.prototype.getInfo = function () {
+    console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, (this.master?this.master.name:&#39;&#39;), &amp;quot; &amp;quot;,  (this.master?this.master.gender:&#39;&#39;));
+    this.offsprings.forEach(function (e) {
+        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+    });
+}
+
+
+function Dog(name, master) {
+    Dog.superclass.constructor.call(this, name, master);
+    this.species = &amp;quot;Dog&amp;quot;;
+}
+
+extend(Dog, Pet);
+
+Dog.prototype.getInfo = function () {     
+    console.log(&amp;quot; Override --- &amp;quot; );
+    Dog.superclass.getInfo.call(this) ;
+};
+
+var dog1 = new Dog(&#39;Polly&#39;);
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+
+var dog2 = new Dog(&#39;Lulu&#39;, {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+});
+
+dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
+dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
+
+dog1.getInfo();
+dog2.getInfo();
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most programmers who come from a classical background argue that classical inheritance is more powerful than prototypal inheritance. The truth is that prototypal inheritance supports inheriting from multiple prototypes. Prototypal inheritance simply means one object inheriting from another object.&lt;/p&gt;
+
+&lt;p&gt;Whether classical or prototypal, is used to reduce the redundancy in code. Since prototypal inheritance allows for multiple inheritance, code which requires multiple inheritance is less redundant if written using prototypal inheritance rather than in a language which has classical inheritance but no multiple inheritance.&lt;/p&gt;
+
+&lt;h3 id=&#34;prototypal-inheritance&#34;&gt;Prototypal inheritance&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function clone(obj) {
+    if (obj === null || typeof obj !== &#39;object&#39;) {
+        return obj;
+    }
+
+    var temp = obj.constructor(); // give temp the original obj&#39;s constructor
+    for (var key in obj) {
+        temp[key] = clone(obj[key]);
+    } 
+    return temp;
+}
+
+var Pet = {
+    name: &amp;quot;&amp;quot;,
+    species: &amp;quot;&amp;quot;,
+    master: {
+        name: &#39;&#39;,
+        gender: &#39;&#39;
+    },
+    offsprings: [],
+    deliverBaby: function (obj) {
+        this.offsprings.push(obj);
+    },
+    getInfo: function () {
+        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+        this.offsprings.forEach(function (e) {
+            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+        });
+    }
+};
+
+var Dog = clone(Pet);
+Dog.species = &#39;Dog&#39;;
+
+Dog.getInfo = function () {
+    console.log(&amp;quot; Override -- species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
+    this.offsprings.forEach(function (e) {
+        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
+    });
+};
+
+var dog1 = clone(Dog);
+var dog2 = clone(Dog);
+
+dog1.name = &#39;Polly&#39;;
+dog1.master = {
+    name: &#39;John&#39;,
+    gender: &#39;M&#39;
+};
+dog2.name = &#39;Lulu&#39;;
+dog2.master = {
+    name: &#39;Ada&#39;,
+    gender: &#39;F&#39;
+};
+
+var dog11 = clone(Dog);
+dog11.name = &#39;Polly-Baby-Dog&#39;;
+var dog21 = clone(Dog);
+var dog22 = clone(Dog);
+dog21.name = &#39;Lulu-Baby-Dog&#39;;
+dog22.name = &#39;Lulu-Baby-Dog-2&#39;;
+
+dog1.deliverBaby(dog11);
+dog2.deliverBaby(dog21);
+dog2.deliverBaby(dog22);
+
+dog1.getInfo();
+dog2.getInfo();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the most important advantages of prototypal inheritance is that you can add new properties to prototypes after they are created. This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.
+This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.This is not possible in classical inheritance because once a class is created you can&amp;rsquo;t modify it at runtime. This is probably the single biggest advantage of prototypal inheritance over classical inheritance, and it should have been at the top.&lt;/p&gt;
+
+&lt;h2 id=&#34;module-and-namespace&#34;&gt;Module and namespace&lt;/h2&gt;
+
+&lt;p&gt;There are quite a lot of benefits from module and namespace, especially when you are going to build some special common api shared within the whole application, even multiple systems across your whole entire enterprise. First thing first, we should not pollute the context, since it will potentially break existing functions or other third party frameworks which have been introduced in your applicatio, vice versa.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern.&lt;/p&gt;
+
+&lt;h3 id=&#34;closure&#34;&gt;Closure&lt;/h3&gt;
+
+&lt;p&gt;The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Simple closure&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var closureObject = (function() {
+    var _privateProperty = &#39;private&#39;;
+    var _privateMethod = function () {
+        console.log( &#39; private method &#39;);
+    };
+    return {
+        publicProperty: &#39;Public Property&#39;,
+        publicMethod: function() {
+            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
+        },
+        setPrivateProperty: function ( newValue ){
+            _privateProperty= newValue;
+        },
+        getPrivateProperty: function( ){
+            return _privateProperty;
+        }
+    }
+}());
+
+console.log(  closureObject.publicProperty );
+console.log(  closureObject._privateProperty ); 
+// console.log(  closureObject._privateMethod() ); // This will cause Uncaught TypeError
+console.log(  closureObject.getPrivateProperty() );
+
+closureObject.setPrivateProperty( &#39;public&#39;);
+console.log(  closureObject.getPrivateProperty() );
+
+/* 
+output:
+
+Public Property
+undefined             // privateProperty can not be accessed directly
+private               
+public                // privateProperty can be updated by public method
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.&lt;/p&gt;
+
+&lt;h3 id=&#34;module&#34;&gt;Module&lt;/h3&gt;
+
+&lt;p&gt;Module is not rock science. Actually it is quite easy to implement.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Simple module sample&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function(undefined) {
+    var _privateProperty = &#39;private&#39;;
+    var _privateMethod = function () {
+        console.log( &#39; private method &#39;);
+    };
+    return {
+        publicProperty: &#39;Public Property&#39;,
+        publicMethod: function() {
+            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
+        },
+        setPrivateProperty: function ( newValue ){
+            _privateProperty= newValue;
+        },
+        getPrivateProperty: function( ){
+            return _privateProperty;
+        }
+    }
+}());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You may say &amp;ldquo;What? closure is module.&amp;rdquo; Yes, you can say that. The little difference is the auguements during auto initialization. By having an function argument undefined (the name actually does not matter) which you don&amp;rsquo;t pass a parameter to, you could make sure you have a variable which really is undefined. This technique ensures that it will work as expected, in case it will be excluded to unintential amendment by other script.&lt;/p&gt;
+
+&lt;p&gt;Once we create our module, we can simply extend the module with the same technique.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Module&amp;rsquo;s extension with override or new api&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function() {
+    ....
+}());
+
+var extendModule = (function( m){
+     m.publicMethod = function ( newArgument ) { // overload publicMethod 
+          //   TODO
+     };
+
+     m.newApi = function () {  // 
+         // TODO
+     };
+
+}(myModule));
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;namespace&#34;&gt;Namespace&lt;/h3&gt;
+
+&lt;p&gt;Now we will go further to namespace, which is based on module technique. Namespace gives you the ability to have public and private properties and methods.
+The code inside doesn’t use the Object Literal notation. Allows you to use $ inside your code without worrying about clashing with other libraries
+Allows your library to grow across files using the “window.rtkns = window.rtkns || {}” technique
+A common pattern that you will see in many libraries, widgets, and plugins&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+(function (rtkns, $, undefined) {
+
+    rtkns.createNS = function (namespace) {
+        var nsparts = namespace.split(&amp;quot;.&amp;quot;);
+        var parent = rtkns;
+
+        if (nsparts[0] === &amp;quot;rtkns&amp;quot;) {
+            nsparts = nsparts.slice(1);
+        }
+
+        for (var i = 0; i &amp;lt; nsparts.length; i++) {
+            var partname = nsparts[i];
+
+            if (typeof parent[partname] === &amp;quot;undefined&amp;quot;) {
+                parent[partname] = {};
+            }
+            parent = parent[partname];
+        }
+        return parent;
+    };
+
+    var clone = function(obj) {
+        if (obj === null || typeof obj !== &#39;object&#39;) {
+            return obj;
+        }
+
+        var temp = obj.constructor(); // give temp the original obj&#39;s constructor
+        for (var key in obj) {
+            temp[key] = clone(obj[key]);
+        } 
+        return temp;
+    };
+
+    rtkns.clone = clone;
+
+    rtkns.createNS(&amp;quot;rtkns&amp;quot;);
+
+
+    rtkns.utils = rtkns.createNS(&amp;quot;rtkns.utils&amp;quot;);
+
+    rtkns.model = rtkns.createNS(&amp;quot;rtkns.model&amp;quot;);
+
+
+    rtkns.model.entity = {
+        id: 0,
+        createdBy:&#39;&#39;,
+        modifiedBy:&#39;&#39;,
+        created: null,
+        modified: null,
+    };
+    var entity = rtkns.model.entity;
+    
+    rtkns.model.order = clone ( entity);
+    var order = rtkns.model.order ;
+    order.amount = 0;
+    order.description = &#39;&#39;;
+
+
+    rtkns.model.client = clone( entity);
+    var client =  rtkns.model.client ;
+    client.name = &#39;&#39;;
+    client.email = &#39;&#39;;
+    client.orders = [];
+    client.purchase = function ( order ){
+        this.orders.push( order );
+    };
+
+    rtkns.utils.toString = function (entity) {
+        return entity?JSON.stringify(entity):entity;
+    };
+
+
+}(window.rtkns = window.rtkns || {}));
+
+var rtkns = window.rtkns;
+
+var client1 = rtkns.clone( rtkns.model.client );
+client1.name = &#39;client 1&#39;;
+client1.email = &#39;client1.email@test.com&#39;;
+var client2 = rtkns.clone( rtkns.model.client );
+client2.name = &#39;client 2&#39;;
+client2.email = &#39;client2.email@test.com&#39;;
+
+var order1 = rtkns.clone( rtkns.model.order );
+order1.amount = 100;
+order1.description = &#39;order 1&#39;;
+
+var order2 = rtkns.clone( rtkns.model.order );
+order2.amount = 600;
+order2.description = &#39;order 2&#39;;
+
+client1.purchase( order1 );
+client2.purchase( order2 );
+
+console.log(rtkns.utils.toString( client1));
+console.log(rtkns.utils.toString( client2));
+
+/*
+
+output:
+{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 1&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client1.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:100,&amp;quot;description&amp;quot;:&amp;quot;order 1&amp;quot;}]}
+VM95:2 {&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 2&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client2.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:600,&amp;quot;description&amp;quot;:&amp;quot;order 2&amp;quot;}]}
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The sample above combine namespace and prototypal inheritance. Namespace allows you to add new module for enhancement, and it allows you to organize your API better.  On the other hand, through the globle namespace you can inject customized service, or you can replace it. The disadvantage of namespace, when the source code blows up, it will be a bit more complicated, especially you break different into different files. Mock test or unit test will needs a bit more work to do as well. There is no pattern that is a Silver Bullet, but rather you should assess where you are at and examine the pros and cons of each pattern to address your situation.&lt;/p&gt;
+
+&lt;h2 id=&#34;interfaces&#34;&gt;Interfaces&lt;/h2&gt;
+
+&lt;p&gt;An interface tells programmers what methods a given class implements, which makes it easier to use. Interfaces also stabilize the ways in which different classes can communicate.&lt;/p&gt;
+
+&lt;p&gt;Using any interface implementation in JavaScript will create a small performance hit, due in part to the overhead of having another method invocation.&lt;/p&gt;
+
+&lt;p&gt;The biggest drawback is that there is no way to force other programmers to respect the interfaces you have created. In JavaScript, you must manually ensure that a given class implements an interface. You can mitigate this problem by using coding conventions and helper classes, but it will never entirely go away. Everyone on your project must agree to use them and check for them; otherwise much of their value is lost.&lt;/p&gt;
+
+&lt;p&gt;JavaScript does not come with built-in support for interfaces, and there is no Interface keyword, so any method you use to implement this will be very different from what languages such as C++, Java, and making it a little more difficult. JavaScript uses what&amp;rsquo;s called duck typing. (If it walks like a duck, and quacks like a duck, as far as JS cares, it&amp;rsquo;s a duck.) If your object has quack(), walk(), and fly() methods, code can use it wherever it expects an object that can walk, quack, and fly, without requiring the implementation of some &amp;ldquo;Duckable&amp;rdquo; interface.&lt;/p&gt;
+
+&lt;p&gt;JavaScript will use Interface object to ensure if the new instance implements the same action as Interface object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+
+var Interface = function(interfaceName, interfaceMembers) {
+    if (!(this instanceof Interface)) {
+        return new Interface(interfaceName, interfaceMembers);
+    }
+
+    var interfaceObj = this;
+
+    Object.keys(interfaceMembers).forEach(function(memberName) {
+        interfaceObj[memberName] = function() {
+            Interface.errorDetect(interfaceName, memberName);
+        };
+    });
+
+    interfaceObj.name = interfaceName;
+
+    return interfaceObj;
+};
+
+Interface.errorDetect = function(interfaceName, interfaceMember) {
+    throw Error(&#39;errorDetect: Class does not implement interface member &#39; + interfaceName + &#39;.&#39; + interfaceMember + &#39;()&#39;);
+};
+
+Interface.ensureImplement = function(obj /*, interfaces */ ) {
+    var interfaces = [].slice.call(arguments, 1);
+
+    interfaces.forEach(function(_interface) {
+        Object.keys(_interface).forEach(function(interfaceMember) {
+            var isFunction = typeof _interface[interfaceMember] === &#39;function&#39;;
+
+            if (isFunction &amp;amp;&amp;amp; !obj[interfaceMember]) {
+                Interface.errorDetect(_interface.name, interfaceMember);
+            }
+        });
+    });
+
+    return true;
+};
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;How to use this interface&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Samples below show you how  the Interface can ensure the object implement multiple interfaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Sample 1 with only one interface
+
+var ILog = Interface(&#39;ILog&#39;, {
+    logInfo:function(){},
+    logWarning:function(){},
+    logError:function(){},
+}); 
+
+
+var loggerA = {
+    logInfo:function(){},
+    logWarning:function(){},
+    logError:function(){},
+};
+
+// loggerB does not implement all methods
+var loggerB = {
+    logInfo:function(){},
+    logWarning:function(){},
+};
+
+console.log(Interface.ensureImplement( loggerA, ILog));
+console.log(Interface.ensureImplement( loggerB, ILog));
+
+/*
+output:
+true
+Uncaught Error: errorDetect: Class does not implement interface member ILog.logError()
+...
+*/
+
+// Sample 2 with 2 interfaces
+
+var Submarine = Interface(&#39;Submarine&#39;, {
+    operateUnderwater:function(){}
+}); 
+
+var Car = Interface(&#39;Car&#39;, {
+    operateOnRoad:function(){}
+}); 
+
+var SubmarineCar = {
+    operateUnderwater:function(){},
+    operateOnRoad:function(){},
+};
+
+console.log(Interface.ensureImplement( SubmarineCar, Submarine, Car ));
+
+/**
+output:
+true
+*/
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Better practice in Java, Part-1</title>
+      <link>https://harryho.github.io/code/better-practice-in-java-1/</link>
+      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/better-practice-in-java-1/</guid>
+      <description>
+
+&lt;h3 id=&#34;prelude&#34;&gt;Prelude&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Java is one of my favorite OOP language. I want to keep the Java good practice and pitfall as a series. Pitfall will cover most misunderstanding of Java and how to avoid them. As we know, there is no medicine as mighty purpose. So some good practice will be obsolete or replaced by some advanced solution, because new problem push the IT world keep looking for better solution to solve such problems. In my opinion, it is most challenged but excited part of IT.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;refactor-constant-variables-with-enum&#34;&gt;Refactor constant variables with Enum&lt;/h3&gt;
+
+&lt;p&gt;Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.&lt;/p&gt;
+
+&lt;p&gt;Before Java 1.5 you will following coding in many Java program.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    // Use interface or abstract class as constant variable container
+    public interface Country {
+         public static final String AU = &amp;quot;Australian&amp;quot;;
+         public static final String UK = &amp;quot;United Kingdom&amp;quot;; 
+         public static final String US = &amp;quot;United State&amp;quot;; 
+    }
+    
+    public class Util {
+         
+        public static String getLanguageCode(String country) {
+    
+            String languageCode = &amp;quot;en&amp;quot;;
+            switch (country) {
+                case Country.AU:
+                    languageCode = &amp;quot;en-au&amp;quot;;
+                    break;
+                case Country.UK:
+                    languageCode = &amp;quot;en-uk&amp;quot;;
+                    break;
+                case Country.US:
+                    languageCode = &amp;quot;en-us&amp;quot;;
+                    break;
+            }
+            return languageCode;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Above program looks very good. Please take a close look and check it carefully. You will find the program will never return &lt;strong&gt;&lt;em&gt;en-au&lt;/em&gt;&lt;/strong&gt;, since there is a typo in the constant AU. It should be &lt;strong&gt;&lt;em&gt;Australia&lt;/em&gt;&lt;/strong&gt; instead of &lt;strong&gt;&lt;em&gt;Australian&lt;/em&gt;&lt;/strong&gt;. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.&lt;/p&gt;
+
+&lt;p&gt;After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// Use Enum as constant variable container
+public enum  Country {
+    Australia, UnitedKingdom, UnitedState
+}
+
+public class Util {
+        
+    public static String getLanguageCode(Country country) {
+
+        String languageCode = &amp;quot;en&amp;quot;;
+        switch (country) {
+            case Australia:
+                languageCode = &amp;quot;en-au&amp;quot;;
+                break;
+            case UnitedKingdom:
+                languageCode = &amp;quot;en-uk&amp;quot;;
+                break;
+            case UnitedState:
+                languageCode = &amp;quot;en-us&amp;quot;;
+                break;
+        }
+        return languageCode;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&amp;rsquo;t refactor your static constants container, it is time to improve it now.&lt;/p&gt;
+
+&lt;p&gt;(Above were written in 2006. After Java 1.7, I found it can be improved with new feature of Java 1.7 )&lt;/p&gt;
+
+&lt;p&gt;After Java Java 1.7, there are some new features. One of these new features is Switch statement. Now it supports String. It is a great for Java developer.&lt;/p&gt;
+
+&lt;p&gt;With this new feature, the old Enum can be enhanced and the Util class can provide more handy methods (Overload method getLanguageCode) for development.&lt;/p&gt;
+
+&lt;p&gt;New Enum class, which can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now the Enum can be override with toString to return different constant name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// It can return customized name and simplify coding 
+public enum Country {
+    AU(&amp;quot;Australia&amp;quot;, &amp;quot;au&amp;quot;,&amp;quot;en-au&amp;quot;), 
+    UK(&amp;quot;United Kingdom&amp;quot;, &amp;quot;en-uk&amp;quot;),
+    US(&amp;quot;United State&amp;quot;, &amp;quot;us&amp;quot;,&amp;quot;en-us&amp;quot;);
+
+    String countryName;
+    String countryCode;
+    String languageCode;
+    
+    private Country(String name, String code) {
+        countryName = name;
+        countryCode = code;
+    }
+
+    public String getCode() {
+        return countryCode;
+    }
+    
+    public String getLanguageCode() {
+        return languageCode;
+    }
+    
+    @Override
+    public String toString() {
+        return countryName;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Util {
+        
+    public static Country convertCountryNameOrCode(String nameOrCode ) {
+        
+        Country country = null;
+        switch (nameOrCode) {
+            case &amp;quot;au&amp;quot;:
+            case &amp;quot;AU&amp;quot;:
+            case &amp;quot;Australia&amp;quot;:
+                country = Country.AU;
+                break;
+            case &amp;quot;uk&amp;quot;:
+            case &amp;quot;UK&amp;quot;:  
+            case &amp;quot;United Kingdom&amp;quot;:
+                country = Country.UK;
+                break;
+            case &amp;quot;us&amp;quot;:
+            case &amp;quot;US&amp;quot;:  
+            case &amp;quot;United State&amp;quot;:
+                country = Country.UK;
+                break;
+        }
+        return country;
+    }
+    
+    public static String getCountryName(  Country country ){
+        String countryName = null;
+        switch (country){
+            case AU:
+                countryName = Country.AU.toString();
+                break;
+            case US:
+                countryName = Country.UK.toString();
+                break;
+            case UK:
+                countryName = Country.US.toString();
+                break;
+            default:
+                System.err.println(&amp;quot;Unknow Country&amp;quot;);
+                assert false;
+                break;
+        }
+        return countryName;
+    }
+
+    
+    public static String getCountryCode(  Country country ){
+        String countryCode = null;
+        switch (country){
+            case AU:
+                countryCode = Country.AU.getCode();
+                break;
+            case US:
+                countryCode = Country.UK.getCode();
+                break;
+            case UK:
+                countryCode = Country.US.getCode();
+                break;
+            default:
+                System.err.println(&amp;quot;Unknow Country&amp;quot;);
+                assert false;
+                break;
+        }
+        return countryCode;
+    }
+        
+    public static String getLanguageCode(Country country) {
+    
+            String languageCode = &amp;quot;en&amp;quot;;
+            switch (country) {
+                case AU:
+                    languageCode = Country.AU.getLanguageCode() ;
+                    break;
+                case UK:
+                    languageCode =  Country.UK.getLanguageCode();
+                    break;
+                case US:
+                    languageCode =  Country.US.getLanguageCode();
+                    break;
+            }
+            return languageCode;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features.&lt;/p&gt;
+
+&lt;h3 id=&#34;good-stuff-from-not-shiny-java-7&#34;&gt;Good stuff from not shiny Java 7&lt;/h3&gt;
+
+&lt;p&gt;When the Java 7 was released, I was kind of disappointed without lamda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.&lt;/p&gt;
+
+&lt;p&gt;To be hoenst, before Java 1.7, Coding file manipulation in Java is very headache task. I say &amp;ldquo;headache&amp;rdquo; it doesn&amp;rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.&lt;/p&gt;
+
+&lt;h4 id=&#34;better-file-visitor-implementation&#34;&gt;Better file visitor implementation&lt;/h4&gt;
+
+&lt;p&gt;Following is simple customizaed file visitor which has been the part of my old util.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+
+public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
+
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
+            throws IOException {
+         if ( attr.isSymbolicLink() )
+          { System.out.println( &amp;quot; symbolic link  :  &amp;quot;+  file  );
+          
+          }else if (  attr.isSymbolicLink() ){            
+              System.out.println( &amp;quot; regular file : &amp;quot;+ file );
+          }
+        return FileVisitResult.CONTINUE;
+    }
+     
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc)
+            throws IOException {        
+         System.err.println( exc.getMessage());
+        return FileVisitResult.CONTINUE;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use this customized  is so easy. Just 3 lines coding you can test it by yourself.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        CustomFileVisitor fileVisitor = new CustomFileVisitor();
+        Path path = Paths.get(&amp;quot;TestDir&amp;quot;);
+        Files.walkFileTree(path, fileVisitor);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;arm&#34;&gt;ARM&lt;/h4&gt;
+
+&lt;p&gt;Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the &lt;code&gt;using&lt;/code&gt; statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men&amp;rsquo;s mistakes; fools by their own.&lt;/p&gt;
+
+&lt;p&gt;In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource. Following are comparison of old and new style.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Snippet of old style&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
+FileOutputStream exchangeCurrencyWriter = null;
+try {
+    exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+    exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+    int var;
+    while (var = exchangeCurrencyReader.read()) != -1)
+        exchangeCurrencyWriter.write(var);
+} 
+finally {
+    if (exchangeCurrencyReader!= null)
+        exchangeCurrencyReader.close();
+    if (exchangeCurrencyWriter!= null)
+        exchangeCurrencyWriter.close();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Code in Java 7&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
+    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;)){
+      int var;
+      while((var= exchangeCurrencyReader.read()) != -1 )
+            exchangeCurrencyWriter.write();
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.&lt;/p&gt;
+
+&lt;h4 id=&#34;new-file-change-monitor-service&#34;&gt;New file change monitor service&lt;/h4&gt;
+
+&lt;p&gt;After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.&lt;/p&gt;
+
+&lt;p&gt;Usually most Java based system somehow needs such monitor function, there will be separate process or thread to run this service, and there should be a call back handler triggered by this service. Everytime there is any file amended, the service will trigger the call back handler to complete some tasks.&lt;/p&gt;
+
+&lt;p&gt;Following is sample of file watching service. I removed call back part which is relevant to the business.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.HashMap;
+import java.util.Map;
+
+public class FileWatchService {
+
+    public static void watchFileUpdate() {
+        try (WatchService service = FileSystems.getDefault().newWatchService()) {
+            Map&amp;lt;WatchKey, Path&amp;gt; eventMap = new HashMap&amp;lt;&amp;gt;();
+            Path dir = Paths.get(&amp;quot;TestDir&amp;quot;);
+
+            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
+
+            WatchKey key;
+            do {
+                key = service.take();
+                Path eventPath = eventMap.get(key);
+                for (WatchEvent&amp;lt;?&amp;gt; event : key.pollEvents()) {
+                    WatchEvent.Kind&amp;lt;?&amp;gt; kind = event.kind();
+                    Path path = (Path) event.context();
+                    System.out.println(eventPath + &amp;quot; : &amp;quot; + kind + &amp;quot;  : &amp;quot; + path);
+                }
+            } while (key.reset());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main (String [] args ){
+       watchFileUpdate();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -92,10 +92,10 @@
     
     <item>
       <title>JavaScript and Object Oriented Programming</title>
-      <link>https://harryho.github.io/blog/javascript-oop/</link>
+      <link>https://harryho.github.io/code/javascript-oop/</link>
       <pubDate>Thu, 20 Mar 2014 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/blog/javascript-oop/</guid>
+      <guid>https://harryho.github.io/code/javascript-oop/</guid>
       <description>
 
 &lt;h2 id=&#34;brief-history&#34;&gt;Brief history&lt;/h2&gt;
@@ -121,19 +121,21 @@
 
 &lt;p&gt;There are a couple ways to create variable as object.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var obj1 = {};
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var obj1 = {};
 var obj2 = new Object();
 var obj3 = Object.create(null);
 console.log( obj );
 console.log( obj2 );
 console.log( obj3 );
+
 /*
--- Copy above code and run it inside console from Chrome browser.
--- You will see follow result.
+output: 
 object {}
 object {}
 object {}
 */
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Object type gives developers so much power and flexibility to customize their own data type. All JavaScript objects inherit the properties and methods from their prototype. The Object.prototype is on the top of the prototype chain. All JavaScript objects (Date, Array, RegExp, Function, &amp;hellip;.) inherit from the Object.prototype.&lt;/p&gt;
@@ -144,7 +146,8 @@ object {}
 &lt;li&gt;&lt;p&gt;Create three cars with basic object usage.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var car1 = { color: &#39;red&#39;, make:&#39;Toyota&#39;, model:&#39;Sedan&#39;, getInfo: function (){
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var car1 = { color: &#39;red&#39;, make:&#39;Toyota&#39;, model:&#39;Sedan&#39;, getInfo: function (){
         console.log( this );
 }};
 var car2 = { color: &#39;black&#39;, make:&#39;BMW&#39;, model:&#39;Coupe&#39;, getInfo: function (){
@@ -169,7 +172,8 @@ Object {color: &amp;quot;white&amp;quot;, make: &amp;quot;Subaru&amp;quot;, mode
 &lt;li&gt;You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var Car = function(color, make, model, getInfo ) {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var Car = function(color, make, model, getInfo ) {
     this.color=&#39;&#39;;
     this.make=&#39;&#39;;
     this.model=&#39;&#39;;
@@ -273,7 +277,8 @@ output :
 
 &lt;p&gt;Function is first-class citizen in JavaScript world, but it’s not really a class. We need to understand the constructor creates an empty object, then sets the prototype of empty object to the prototype property of the constructor, then set constructor function with &lt;code&gt;this&lt;/code&gt; pointing to the newly-created object, and finally returns the object. You will get more confused after you see this definition. Let&amp;rsquo;s us create a simple sample and take a close look why the constructor and prototype will cause this problem.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var MyClass = function(){
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var MyClass = function(){
     this.name = &#39;MyClass&#39;;
     this.getInfo = function ( ){
         console.log( this );
@@ -321,7 +326,8 @@ objectA.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  objectB
 
 &lt;h3 id=&#34;object-based-inheritance&#34;&gt;Object-based Inheritance&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet(name, master) {
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function Pet(name, master) {
     this.name = name || &amp;quot;&amp;quot;;
     this.species = &amp;quot;&amp;quot;;
     this.master = master || {
@@ -376,7 +382,7 @@ has baby :   Lulu-Baby-Dog-2   Dog
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;After you test, did you say: &amp;ldquo;what? how this works? It looks share the same prototype with &lt;code&gt;this&lt;/code&gt;&amp;rdquo;? Actually the problem is the special object &lt;code&gt;this&lt;/code&gt; in Javascript, which is one of the most misunderstood parts of JavaScript. Today it still confuses many other JS developers. If you have experience with other JavaScript framework. You will find many samples which use &lt;code&gt;that&lt;/code&gt; , &lt;code&gt;self&lt;/code&gt;, &lt;code&gt;vm&lt;/code&gt; to replace the built-in &lt;code&gt;this&lt;/code&gt;. e.g. &lt;code&gt;var that = {}&lt;/code&gt;, &lt;code&gt;var self = {}&lt;/code&gt;,etc. Let&amp;rsquo;s see the new version of above sample code.&lt;/p&gt;
+&lt;p&gt;After you test, would you ask: &amp;ldquo;what? how this works? It looks share the same prototype with &lt;code&gt;this&lt;/code&gt;&amp;rdquo;? Actually the problem is the special object &lt;code&gt;this&lt;/code&gt; in Javascript, which is one of the most misunderstood parts of JavaScript. Today it still confuses many other JS developers. If you have experience with other JavaScript framework. You will find many samples which use &lt;code&gt;that&lt;/code&gt; , &lt;code&gt;self&lt;/code&gt;, &lt;code&gt;vm&lt;/code&gt; to replace the built-in &lt;code&gt;this&lt;/code&gt;. e.g. &lt;code&gt;var that = {}&lt;/code&gt;, &lt;code&gt;var self = {}&lt;/code&gt;,etc. Let&amp;rsquo;s see the new version of above sample code.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
 function Pet(name, master) {
