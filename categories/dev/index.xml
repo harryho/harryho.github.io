@@ -287,7 +287,138 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE &#39;utf8_unicode_ci&#39;;
 &lt;li&gt;Setup your sample store. Click &lt;code&gt;Next&lt;/code&gt;. Then the installer will help you finish the initialization.&lt;/li&gt;
 &lt;li&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/li&gt;
 &lt;li&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Open the new link in browser and type in your admin id and password. You can start playing on site.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Build mobile app with web dev skill</title>
+      <link>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</link>
+      <pubDate>Sun, 10 Jul 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-mobile-app&#34;&gt;What is mobile app&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Native apps&lt;/strong&gt; are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;HTML5 apps&lt;/strong&gt; use standard web technologies—typically HTML5, JavaScript and CSS. This write-once-run-anywhere approach to mobile development creates cross-platform mobile applications that work on multiple devices.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Hybrid apps&lt;/strong&gt; make it possible to embed HTML5 apps inside a thin native container, combining the good parts of &lt;strong&gt;Native app&lt;/strong&gt; and &lt;strong&gt;HTML5 app&lt;/strong&gt; elements.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;mobile-app-development&#34;&gt;Mobile app development&lt;/h2&gt;
+
+&lt;p&gt;According above breif history we can image the mobile developer community has become asfragmented as the market. Mobile software developers work with different programming environments, different tools, and different programming languages.&lt;/p&gt;
+
+&lt;p&gt;After a few years of improvement, we can see some &lt;strong&gt;Hybrid app&lt;/strong&gt; based framework becomes more and more popular and shining. &lt;code&gt;ionic&lt;/code&gt;, &lt;code&gt;nativescript&lt;/code&gt; and &lt;code&gt;react native&lt;/code&gt; are most promising frameworks which we should really look into.&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction-of-ionic-developement&#34;&gt;Introduction of ionic developement&lt;/h2&gt;
+
+&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Here we just introduce ionic 1.x. When I started investigating the &lt;code&gt;ionic&lt;/code&gt;, the &lt;code&gt;ionic 2&lt;/code&gt; just came out for a while. &lt;code&gt;ionic 2&lt;/code&gt; study is on my todo list.&lt;/li&gt;
+&lt;li&gt;You are familiar with web technologies, such as, HTML5, CSS, JavaScript, and you should have experience of nodejs and relevant skills.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;getting-started&#34;&gt;Getting started&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install ionic 1.x&lt;/li&gt;
+&lt;li&gt;setup ionic and create new project &lt;code&gt;demoApp&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;ionic start demoApp slidemenu
+cd demoApp
+ionic platform add android 
+ionic build android 
+ionic emulate android 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-packages&#34;&gt;Install packages&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use &lt;code&gt;npm install&lt;/code&gt; to install packages&lt;/li&gt;
+&lt;li&gt;Folllowing is the &lt;code&gt;package.json&lt;/code&gt;. You can tailor it on your own.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;ionic-project&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;An Ionic project&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;gulp&amp;quot;: &amp;quot;^3.5.6&amp;quot;,
+    &amp;quot;gulp-sass&amp;quot;: &amp;quot;^2.0.4&amp;quot;,
+    &amp;quot;gulp-concat&amp;quot;: &amp;quot;^2.2.0&amp;quot;,
+    &amp;quot;gulp-minify-css&amp;quot;: &amp;quot;^0.3.0&amp;quot;,
+    &amp;quot;gulp-rename&amp;quot;: &amp;quot;^1.2.0&amp;quot;
+  },
+  &amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;bower&amp;quot;: &amp;quot;^1.3.3&amp;quot;,
+    &amp;quot;gulp-util&amp;quot;: &amp;quot;^2.2.14&amp;quot;,
+    &amp;quot;shelljs&amp;quot;: &amp;quot;^0.3.0&amp;quot;
+  },
+  &amp;quot;cordovaPlugins&amp;quot;: [
+    &amp;quot;cordova-plugin-device&amp;quot;,
+    &amp;quot;cordova-plugin-console&amp;quot;,
+    &amp;quot;cordova-plugin-whitelist&amp;quot;,
+    &amp;quot;cordova-plugin-splashscreen&amp;quot;,
+    &amp;quot;cordova-plugin-statusbar&amp;quot;,
+    &amp;quot;ionic-plugin-keyboard&amp;quot;
+  ],
+  &amp;quot;cordovaPlatforms&amp;quot;: []
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;debug&#34;&gt;Debug&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Browser is the best option for ionic mobile development debug tools&lt;/li&gt;
+&lt;li&gt;Use Telerik AppBuilder to debug&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;test-on-emulator-or-device&#34;&gt;Test on emulator or device&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Android&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Download and install &lt;a href=&#34;https://developer.android.com/studio/index.html#downloads&#34;&gt;Android SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Download install at least one sdk platform.&lt;/li&gt;
+&lt;li&gt;ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.&lt;/li&gt;
+&lt;li&gt;install x86 or x86_64 image for windows environment&lt;/li&gt;
+&lt;li&gt;install Extra plugins: Google USB driver, X86 Emulator Accelerator&lt;/li&gt;
+&lt;li&gt;Create AVD for your mobile app testing&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;iPhone&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install AppBuilder on Visual Studio&lt;/li&gt;
+&lt;li&gt;Install Genymotion&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android emulator accelerator error due to version is too low to support the system image&lt;/li&gt;
+&lt;li&gt;uninstall old version intel HAXM&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;install new version manually from &lt;code&gt;&amp;lt;Android_SDK_Location&amp;gt;\extras\intel\Hardware_Accelerated_Execution_Manager&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If app is not working on emulator, check cordova plugins or manually install cordova plugins&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ionic plugins list&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ionic plugins add XXXXX&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

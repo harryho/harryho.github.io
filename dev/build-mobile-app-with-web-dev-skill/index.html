@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Create a blog site on GitHub Pages within Windows environment - Hello World</title>
+    <title>Build mobile app with web dev skill - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -67,97 +67,132 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Create a blog site on GitHub Pages within Windows environment</h1>
+				<h1 class="doc-entry-title">Build mobile app with web dev skill</h1>
 				<div class="doc-entry-meta">
-					<span>updated at <time datetime="2017-02-15">15 Feb 2017</time></span>
+					<span>updated at <time datetime="2016-07-10">10 Jul 2016</time></span>
 				</div>
 				<section>
 					
 
-<p><em>After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the <a href="https://gohugo.io/overview/quickstart/">Hugo Quick Start</a> and <a href="https://gohugo.io/tutorials/github-pages-blog">Hosting on GitHub Pages</a> to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.</em></p>
+<h2 id="what-is-mobile-app">What is mobile app</h2>
 
-<h2 id="assumptions">Assumptions</h2>
+<blockquote>
+<p><em>A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps</em></p>
+
+<p><em><strong>Native apps</strong> are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.</em></p>
+
+<p><em><strong>HTML5 apps</strong> use standard web technologies—typically HTML5, JavaScript and CSS. This write-once-run-anywhere approach to mobile development creates cross-platform mobile applications that work on multiple devices.</em></p>
+
+<p><em><strong>Hybrid apps</strong> make it possible to embed HTML5 apps inside a thin native container, combining the good parts of <strong>Native app</strong> and <strong>HTML5 app</strong> elements.</em></p>
+</blockquote>
+
+<h2 id="mobile-app-development">Mobile app development</h2>
+
+<p>According above breif history we can image the mobile developer community has become asfragmented as the market. Mobile software developers work with different programming environments, different tools, and different programming languages.</p>
+
+<p>After a few years of improvement, we can see some <strong>Hybrid app</strong> based framework becomes more and more popular and shining. <code>ionic</code>, <code>nativescript</code> and <code>react native</code> are most promising frameworks which we should really look into.</p>
+
+<h2 id="introduction-of-ionic-developement">Introduction of ionic developement</h2>
+
+<h3 id="assumption">Assumption</h3>
 
 <ul>
-<li>You already have <em>Hugo</em> on your computer. If not, please follow the instruction to <a href="https://gohugo.io/tutorials/installing-on-windows">install hugo on Windows</a>.</li>
-<li>You will have two repositories <code>blog-hugo</code> and <code>&lt;username&gt;.github.io</code> repositories to hold your hugo content and blog site respectively.</li>
-<li>The <code>blog-hugo</code> repository will host actual Hugo’s blog content.</li>
-<li><code>&lt;username&gt;.github.io repository</code> repository will host the static website.</li>
-<li>Your <em>Hugo</em> blog folder will be &ldquo;C:\git\blog-hugo&rdquo; in this example.</li>
-
-<li><p>Your blog site will finally sit in C driver and map to repositories as follow</p>
-
-<pre><code class="language-bash">C:\&gt;
-|--git 
-    |--blog-hugo (https://github.com/&lt;yourname&gt;/blog-hugo.git
-        |--archetypes
-        |--content
-        |--data
-        |--layouts
-        |--public (https://github.com/&lt;yourname&gt;/&lt;yourname&gt;.github.io.git)
-        |--themes
-        |--
-
-</code></pre></li>
+<li>Here we just introduce ionic 1.x. When I started investigating the <code>ionic</code>, the <code>ionic 2</code> just came out for a while. <code>ionic 2</code> study is on my todo list.</li>
+<li>You are familiar with web technologies, such as, HTML5, CSS, JavaScript, and you should have experience of nodejs and relevant skills.</li>
 </ul>
 
-<h2 id="create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</h2>
+<h3 id="getting-started">Getting started</h3>
 
 <ul>
-<li>Create on GitHub blog-hugo and <username>.github.io repositories  repository via GitHub website</li>
+<li>install ionic 1.x</li>
+<li>setup ionic and create new project <code>demoApp</code></li>
+</ul>
 
-<li><p>Clone blog-hugo via Windows command prompt</p>
+<pre><code>ionic start demoApp slidemenu
+cd demoApp
+ionic platform add android 
+ionic build android 
+ionic emulate android 
+</code></pre>
 
-<pre><code class="language-bash">c:\&gt;
-c:\&gt;cd git
-c:\git&gt;git clone &lt;&lt;your-project&gt;-hugo-url&gt; &amp;&amp; cd &lt;your-project&gt;-hugo
-</code></pre></li>
+<h3 id="install-packages">Install packages</h3>
 
-<li><p>Create hugo site and setup the theme you like</p>
+<ul>
+<li>Use <code>npm install</code> to install packages</li>
+<li>Folllowing is the <code>package.json</code>. You can tailor it on your own.</li>
+</ul>
 
-<pre><code class="language-bash">C:\git&gt;hugo new site blog-hugo
-C:\git&gt;hugo server -t &lt;yourtheme&gt; -D
-</code></pre></li>
+<pre><code>{
+  &quot;name&quot;: &quot;ionic-project&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;An Ionic project&quot;,
+  &quot;dependencies&quot;: {
+    &quot;gulp&quot;: &quot;^3.5.6&quot;,
+    &quot;gulp-sass&quot;: &quot;^2.0.4&quot;,
+    &quot;gulp-concat&quot;: &quot;^2.2.0&quot;,
+    &quot;gulp-minify-css&quot;: &quot;^0.3.0&quot;,
+    &quot;gulp-rename&quot;: &quot;^1.2.0&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;bower&quot;: &quot;^1.3.3&quot;,
+    &quot;gulp-util&quot;: &quot;^2.2.14&quot;,
+    &quot;shelljs&quot;: &quot;^0.3.0&quot;
+  },
+  &quot;cordovaPlugins&quot;: [
+    &quot;cordova-plugin-device&quot;,
+    &quot;cordova-plugin-console&quot;,
+    &quot;cordova-plugin-whitelist&quot;,
+    &quot;cordova-plugin-splashscreen&quot;,
+    &quot;cordova-plugin-statusbar&quot;,
+    &quot;ionic-plugin-keyboard&quot;
+  ],
+  &quot;cordovaPlatforms&quot;: []
+}
 
-<li><p>Clean up the <code>public</code> folder</p></li>
+</code></pre>
 
-<li><p>Set submodule inside the blog-hugo and map to folder <code>public</code></p>
+<h3 id="debug">Debug</h3>
 
-<pre><code class="language-bash">C:\&gt;cd git
-C:\git&gt;rm -rf public
-C:\git&gt;git submodule add -b master https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git public
-</code></pre></li>
+<ul>
+<li>Browser is the best option for ionic mobile development debug tools</li>
+<li>Use Telerik AppBuilder to debug</li>
+</ul>
 
-<li><p>Deploy the blog site to GitHub page with the script <code>deploy.bat</code>.</p></li>
+<h2 id="test-on-emulator-or-device">Test on emulator or device</h2>
 
-<li><p><code>deploy.bat &quot;Your optional commit message&quot;</code> will commit the changes to <code>&lt;username&gt;.github.io</code>. You can use and tailor the script below as your <code>deploy.bat</code></p>
+<ul>
+<li><p>Android</p>
 
-<pre><code class="language-bash">@echo OFF
+<ul>
+<li>Download and install <a href="https://developer.android.com/studio/index.html#downloads">Android SDK</a></li>
+<li>Download install at least one sdk platform.</li>
+<li>ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.</li>
+<li>install x86 or x86_64 image for windows environment</li>
+<li>install Extra plugins: Google USB driver, X86 Emulator Accelerator</li>
+<li>Create AVD for your mobile app testing</li>
+</ul></li>
 
-echo  Deploying updates to GitHub...
+<li><p>iPhone</p>
 
-REM Build the project. 
-hugo -t &lt;yourtheme&gt; -D
+<ul>
+<li>Install AppBuilder on Visual Studio</li>
+<li>Install Genymotion</li>
+</ul></li>
+</ul>
 
-REM Go To Public folder
-cd public
+<h2 id="troubleshooting">Troubleshooting</h2>
 
-REM Add changes to git.
-git add -A
+<ul>
+<li>Android emulator accelerator error due to version is too low to support the system image</li>
+<li>uninstall old version intel HAXM</li>
 
-REM Commit changes.
-set msg=&quot;rebuilding site %date%&quot;
-if  NOT &quot;%1&quot;==&quot;&quot;    set msg=%1
-git commit -m '%msg%'
+<li><p>install new version manually from <code>&lt;Android_SDK_Location&gt;\extras\intel\Hardware_Accelerated_Execution_Manager</code></p></li>
 
-REM Push source and build repos.
-git push origin master
+<li><p>If app is not working on emulator, check cordova plugins or manually install cordova plugins</p></li>
 
-REM Come Back
-cd ..
-</code></pre></li>
+<li><p><code>ionic plugins list</code></p></li>
 
-<li><p>You might want to commit the changes to <code>blog-hugo</code> repository. Please don&rsquo;t forget to add <code>public</code> into the <code>.gitignore</code>.</p></li>
+<li><p><code>ionic plugins add XXXXX</code></p></li>
 </ul>
 
 				</section>
@@ -173,14 +208,23 @@ cd ..
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Create a blog site on GitHub Pages within Windows environment</a></strong></li>
+				<li><strong><a href="#title">Build mobile app with web dev skill</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#assumptions">Assumptions</a></li>
-<li><a href="#create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</a></li>
+<li><a href="#what-is-mobile-app">What is mobile app</a></li>
+<li><a href="#mobile-app-development">Mobile app development</a></li>
+<li><a href="#introduction-of-ionic-developement">Introduction of ionic developement</a>
+<ul>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#install-packages">Install packages</a></li>
+<li><a href="#debug">Debug</a></li>
+</ul></li>
+<li><a href="#test-on-emulator-or-device">Test on emulator or device</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -195,9 +239,8 @@ cd ..
 					<span class="doc-list-category">Blog</span>
 				</a>
 				<ul>
-					<li>
-						<span class="active">Create a blog site on GitHub Pages within Windows environment</span>
-						</li>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages within Windows environment</a>
+					</li>
 				
 					<li><a href="/blog/linux-history/">Brief history of Linux</a>
 					</li>
@@ -227,8 +270,9 @@ cd ..
 					<li><a href="/dev/php-web/">PHP web framework</a>
 					</li>
 				
-					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skill</a>
-					</li>
+					<li>
+						<span class="active">Build mobile app with web dev skill</span>
+						</li>
 				
 				</ul>
 			</li>
