@@ -1160,6 +1160,290 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
     </item>
     
     <item>
+      <title>C# good practice -- Part 1</title>
+      <link>https://harryho.github.io/code/csharp-good-practice-1/</link>
+      <pubDate>Thu, 10 Apr 2014 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/csharp-good-practice-1/</guid>
+      <description>
+
+&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;As the title says, this is first article of the series, which cover C# good practice and common mistakes made by many developers. As we known, .net framework and its most important player changes every year. So some good practice will be obsolete or replaced by some advanced solution, because real world keeps change. The most ridiculous thing is some good practice becomes common mistake in some special context. That is why we keep looking for new ways of good practice to support emerging chanlleges.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;generic-predicat-and-expression&#34;&gt;Generic Predicat and Expression&lt;/h2&gt;
+
+&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You have experience of developing .net application, which includes entity framework or ADO.Net&lt;/p&gt;
+
+&lt;p&gt;You have experience of using SQL to query database&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Database query is one of most common and important function in almost any .net application. ADO.Net was the most critical component which execute the database queries, but after .net 3.5, it has been replaced by entity framework, which provides ORM feature. Now entity framework is core component in all applications, which need to communicate with database.&lt;/p&gt;
+
+&lt;p&gt;Business service get a lot of benefits form entity framework&amp;rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us reduce many reduntant queries.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;h4 id=&#34;analysis&#34;&gt;Analysis&lt;/h4&gt;
+
+&lt;p&gt;Basically, the idea is close to dynamic statement in ADO.Net. Here generic programming is the key, when we utilize predicate and expression to dynamically rebuild the query filter.&lt;/p&gt;
+
+&lt;p&gt;If we look into the queries, we will find 80% of queries can be abstracted as following syntax. Now it is easy to see how generic predicate and expression can support this syntax.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * FROM TABLE_A 
+    WHERE 
+        &amp;lt;FIELD_1&amp;gt; [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE] &amp;lt;VALUE_1&amp;gt;   ----- Expression 
+        [ AND | OR ]                            ------------ Predicate 
+        &amp;lt;FIELD_2&amp;gt; [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE] &amp;lt;VALUE_2&amp;gt;   ----- Expression
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next step we can look into the Expression, actually the &lt;FIELD_1&gt; is the property of entity object, and &lt;VALUE_1&gt; is the filter value entered by client. How to use the filter to narrow down the query result is part of business logic, which is handled by developer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;&amp;lt;FIELD_1&amp;gt;           ==&amp;gt; Entity property
+[=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE]  ==&amp;gt; Operator
+&amp;lt;VALUE_1&amp;gt;           ==&amp;gt; Filter value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;design&#34;&gt;Design&lt;/h4&gt;
+
+&lt;p&gt;Accordingt to abve analysis, we can design the classes to support this feature.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
++--------------+
+|  Filter      |
++--------------+
+|  Property    | --- Map to the column (table) or property (entity)
+|  Op          | --- Operator , e.g. Equals, Contains, GreaterThan, tec.
+|  Val         | --- Value entered by client
++--------------+
+
++----------------------+
+| ExpressionBuilder    |  
++----------------------+
+|GetExpression( filer) | --------- Create expression by input filter 
++ ---------------------+
+
++------------------+
+| PredicateBuilder |
++------------------+      
+| And(exp1, exp2)  | --- Use AND to combine two expressions
+| Or(exp1, exp2)   | --- Use OR to combine two expressions                        
++------------------+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;implementatoin&#34;&gt;Implementatoin&lt;/h4&gt;
+
+&lt;p&gt;Following is the implementation of generic expression and predicate. Please keep it in mind. We are using LINQ to simulate the dynamic statement, so there is some tricks to work around as SQL queries.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Filter&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The Op property should be&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;public class Filter
+{
+    public string Property { get; set; }
+    public string Op { get; set; }
+    public object Val { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Op&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This class can be replaced by Enum if you want.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;
+public static class Op
+{
+    public const string Equals = &amp;quot;Equals&amp;quot;;
+    public const string GreaterThan = &amp;quot;GreaterThan&amp;quot;;
+    public const string LessThan = &amp;quot;LessThan&amp;quot;;
+    public const string GreaterThanOrEqual = &amp;quot;GreaterThanOrEqual&amp;quot;;
+    public const string LessThanOrEqual = &amp;quot;LessThanOrEqual&amp;quot;;
+
+    public const string Contains = &amp;quot;Contains&amp;quot;;
+    public const string StartsWith = &amp;quot;StartsWith&amp;quot;;
+    public const string EndsWith = &amp;quot;EndsWith&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+
+public static class PredicateBuilder
+{
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; True&amp;lt;T&amp;gt;() { return f =&amp;gt; true; }
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; False&amp;lt;T&amp;gt;() { return f =&amp;gt; false; }
+
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; Or&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
+    {
+        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
+                (Expression.OrElse(expr1.Body, secondBody), expr1.Parameters);
+    }
+
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; And&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
+    {
+        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
+                (Expression.AndAlso(expr1.Body, secondBody), expr1.Parameters);
+    }
+
+    public static Expression Replace(this Expression expression, Expression searchEx, Expression replaceEx)
+    {
+        return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
+    }
+
+    internal class ReplaceVisitor : ExpressionVisitor
+    {
+        private readonly Expression from, to;
+        public ReplaceVisitor(Expression from, Expression to)
+        {
+            this.from = from;
+            this.to = to;
+        }
+
+        public override Expression Visit(Expression node)
+        {
+            return node == from ? to : base.Visit(node);
+        }
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+
+public class ExpressionBuilder
+{
+    private static MethodInfo containsMethod = typeof(string).GetMethod(&amp;quot;Contains&amp;quot;);
+    private static MethodInfo startsWithMethod =
+    typeof(string).GetMethod(&amp;quot;StartsWith&amp;quot;, new Type[] { typeof(string) });
+    private static MethodInfo endsWithMethod =
+    typeof(string).GetMethod(&amp;quot;EndsWith&amp;quot;, new Type[] { typeof(string) });
+
+
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; GetExpression&amp;lt;T&amp;gt;(IList&amp;lt;Filter&amp;gt; filters)
+    {
+        if (filters.Count == 0)
+            return null;
+
+        ParameterExpression param = Expression.Parameter(typeof(T), &amp;quot;t&amp;quot;);
+        Expression exp = null;
+
+        if (filters.Count == 1)
+            exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0]);
+        else if (filters.Count == 2)
+            exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]);
+        else
+        {
+            while (filters.Count &amp;gt; 0)
+            {
+                var f1 = filters[0];
+                var f2 = filters[1];
+
+                if (exp == null)
+                    exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]);
+                else
+                    exp = Expression.AndAlso(exp, GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]));
+
+                filters.Remove(f1);
+                filters.Remove(f2);
+
+                if (filters.Count == 1)
+                {
+                    exp = Expression.AndAlso(exp, GetExpression&amp;lt;T&amp;gt;(param, filters[0]));
+                    filters.RemoveAt(0);
+                }
+            }
+        }
+
+        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;(exp, param);
+    }
+
+    private static ConstantExpression ConvetValueType(MemberExpression member, object value)
+    {
+        if (member.Type == typeof(int))
+        {
+            value = int.Parse(value.ToString());
+        }
+        else if (member.Type == typeof(decimal))
+        {
+            value = decimal.Parse(value.ToString());
+        }
+        else if (member.Type == typeof(float))
+        {
+            value = float.Parse(value.ToString());
+        }
+        else if (member.Type == typeof(double))
+        {
+            value = double.Parse(value.ToString());
+        }
+
+        return Expression.Constant(value);
+    }
+
+    private static Expression GetExpression&amp;lt;T&amp;gt;(ParameterExpression param, Filter filter)
+    {
+
+        MemberExpression member = Expression.Property(param, filter.Property);
+
+        switch (filter.Op)
+        {
+            case Op.Equals:
+                return Expression.Equal(member, Expression.Constant(filter.Val, member.Type));
+
+            case Op.GreaterThan:
+                return Expression.GreaterThan(member, ConvetValueType(member, filter.Val));
+
+            case Op.GreaterThanOrEqual:
+                return Expression.GreaterThanOrEqual(member, ConvetValueType(member, filter.Val));
+
+            case Op.LessThan:
+                return Expression.LessThan(member, ConvetValueType(member, filter.Val));
+
+            case Op.LessThanOrEqual:
+                return Expression.LessThanOrEqual(member, ConvetValueType(member, filter.Val));
+
+            case Op.Contains:
+                return Expression.Call(member, containsMethod, Expression.Constant(filter.Val, member.Type));
+
+            case Op.StartsWith:
+                return Expression.Call(member, startsWithMethod, Expression.Constant(filter.Val, member.Type));
+
+            case Op.EndsWith:
+                return Expression.Call(member, endsWithMethod, Expression.Constant(filter.Val, member.Type));
+        }
+
+        return null;
+    }
+
+    private static BinaryExpression GetExpression&amp;lt;T&amp;gt;(ParameterExpression param, Filter filter1, Filter filter2)
+    {
+        Expression bin1 = GetExpression&amp;lt;T&amp;gt;(param, filter1);
+        Expression bin2 = GetExpression&amp;lt;T&amp;gt;(param, filter2);
+
+        return Expression.AndAlso(bin1, bin2);
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use Windows command &amp; hotkey as a hacker - Part 2</title>
       <link>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-2/</link>
       <pubDate>Mon, 24 Mar 2014 10:59:31 +1100</pubDate>
@@ -2863,360 +3147,6 @@ initrd /boot/intrd-plymouth.img
 
 &lt;p&gt;&lt;em&gt;Novell bought the SUSE brands and trademarks in 2003. Novell, one of the founding members of the Open Invention Network, decided to make the community an important part of their development process by opening widely the distribution development to outside contributors in 2005, creating the openSUSE distribution and the openSUSE Project. Novell employed more than 500 developers working on SUSE in 2004. On 27 April 2011, Novell (and SUSE) were acquired by The Attachmate Group, which made SUSE an independent business unit. Later, in October 2014, the entire Attachmate Group, including SUSE, was acquired by the British firm Micro Focus International. SUSE continues to operate as an independent business unit.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Better practice in Java, Part-1</title>
-      <link>https://harryho.github.io/code/better-practice-in-java-1/</link>
-      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/better-practice-in-java-1/</guid>
-      <description>
-
-&lt;h3 id=&#34;prelude&#34;&gt;Prelude&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Java is one of my favorite OOP language. I want to keep the Java good practice and pitfall as a series. Pitfall will cover most misunderstanding of Java and how to avoid them. As we know, there is no medicine as mighty purpose. So some good practice will be obsolete or replaced by some advanced solution, because new problem push the IT world keep looking for better solution to solve such problems. In my opinion, it is most challenged but excited part of IT.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;refactor-constant-variables-with-enum&#34;&gt;Refactor constant variables with Enum&lt;/h3&gt;
-
-&lt;p&gt;Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.&lt;/p&gt;
-
-&lt;p&gt;Before Java 1.5 you will following coding in many Java program.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    // Use interface or abstract class as constant variable container
-    public interface Country {
-         public static final String AU = &amp;quot;Australian&amp;quot;;
-         public static final String UK = &amp;quot;United Kingdom&amp;quot;; 
-         public static final String US = &amp;quot;United State&amp;quot;; 
-    }
-    
-    public class Util {
-         
-        public static String getLanguageCode(String country) {
-    
-            String languageCode = &amp;quot;en&amp;quot;;
-            switch (country) {
-                case Country.AU:
-                    languageCode = &amp;quot;en-au&amp;quot;;
-                    break;
-                case Country.UK:
-                    languageCode = &amp;quot;en-uk&amp;quot;;
-                    break;
-                case Country.US:
-                    languageCode = &amp;quot;en-us&amp;quot;;
-                    break;
-            }
-            return languageCode;
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Above program looks very good. Please take a close look and check it carefully. You will find the program will never return &lt;strong&gt;&lt;em&gt;en-au&lt;/em&gt;&lt;/strong&gt;, since there is a typo in the constant AU. It should be &lt;strong&gt;&lt;em&gt;Australia&lt;/em&gt;&lt;/strong&gt; instead of &lt;strong&gt;&lt;em&gt;Australian&lt;/em&gt;&lt;/strong&gt;. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.&lt;/p&gt;
-
-&lt;p&gt;After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// Use Enum as constant variable container
-public enum  Country {
-    Australia, UnitedKingdom, UnitedState
-}
-
-public class Util {
-        
-    public static String getLanguageCode(Country country) {
-
-        String languageCode = &amp;quot;en&amp;quot;;
-        switch (country) {
-            case Australia:
-                languageCode = &amp;quot;en-au&amp;quot;;
-                break;
-            case UnitedKingdom:
-                languageCode = &amp;quot;en-uk&amp;quot;;
-                break;
-            case UnitedState:
-                languageCode = &amp;quot;en-us&amp;quot;;
-                break;
-        }
-        return languageCode;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&amp;rsquo;t refactor your static constants container, it is time to improve it now.&lt;/p&gt;
-
-&lt;p&gt;(Above were written in 2006. After Java 1.7, I found it can be improved with new feature of Java 1.7 )&lt;/p&gt;
-
-&lt;p&gt;After Java Java 1.7, there are some new features. One of these new features is Switch statement. Now it supports String. It is a great for Java developer.&lt;/p&gt;
-
-&lt;p&gt;With this new feature, the old Enum can be enhanced and the Util class can provide more handy methods (Overload method getLanguageCode) for development.&lt;/p&gt;
-
-&lt;p&gt;New Enum class, which can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now the Enum can be override with toString to return different constant name.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// It can return customized name and simplify coding 
-public enum Country {
-    AU(&amp;quot;Australia&amp;quot;, &amp;quot;au&amp;quot;,&amp;quot;en-au&amp;quot;), 
-    UK(&amp;quot;United Kingdom&amp;quot;, &amp;quot;en-uk&amp;quot;),
-    US(&amp;quot;United State&amp;quot;, &amp;quot;us&amp;quot;,&amp;quot;en-us&amp;quot;);
-
-    String countryName;
-    String countryCode;
-    String languageCode;
-    
-    private Country(String name, String code) {
-        countryName = name;
-        countryCode = code;
-    }
-
-    public String getCode() {
-        return countryCode;
-    }
-    
-    public String getLanguageCode() {
-        return languageCode;
-    }
-    
-    @Override
-    public String toString() {
-        return countryName;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Util {
-        
-    public static Country convertCountryNameOrCode(String nameOrCode ) {
-        
-        Country country = null;
-        switch (nameOrCode) {
-            case &amp;quot;au&amp;quot;:
-            case &amp;quot;AU&amp;quot;:
-            case &amp;quot;Australia&amp;quot;:
-                country = Country.AU;
-                break;
-            case &amp;quot;uk&amp;quot;:
-            case &amp;quot;UK&amp;quot;:  
-            case &amp;quot;United Kingdom&amp;quot;:
-                country = Country.UK;
-                break;
-            case &amp;quot;us&amp;quot;:
-            case &amp;quot;US&amp;quot;:  
-            case &amp;quot;United State&amp;quot;:
-                country = Country.UK;
-                break;
-        }
-        return country;
-    }
-    
-    public static String getCountryName(  Country country ){
-        String countryName = null;
-        switch (country){
-            case AU:
-                countryName = Country.AU.toString();
-                break;
-            case US:
-                countryName = Country.UK.toString();
-                break;
-            case UK:
-                countryName = Country.US.toString();
-                break;
-            default:
-                System.err.println(&amp;quot;Unknow Country&amp;quot;);
-                assert false;
-                break;
-        }
-        return countryName;
-    }
-
-    
-    public static String getCountryCode(  Country country ){
-        String countryCode = null;
-        switch (country){
-            case AU:
-                countryCode = Country.AU.getCode();
-                break;
-            case US:
-                countryCode = Country.UK.getCode();
-                break;
-            case UK:
-                countryCode = Country.US.getCode();
-                break;
-            default:
-                System.err.println(&amp;quot;Unknow Country&amp;quot;);
-                assert false;
-                break;
-        }
-        return countryCode;
-    }
-        
-    public static String getLanguageCode(Country country) {
-    
-            String languageCode = &amp;quot;en&amp;quot;;
-            switch (country) {
-                case AU:
-                    languageCode = Country.AU.getLanguageCode() ;
-                    break;
-                case UK:
-                    languageCode =  Country.UK.getLanguageCode();
-                    break;
-                case US:
-                    languageCode =  Country.US.getLanguageCode();
-                    break;
-            }
-            return languageCode;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features.&lt;/p&gt;
-
-&lt;h3 id=&#34;good-stuff-from-not-shiny-java-7&#34;&gt;Good stuff from not shiny Java 7&lt;/h3&gt;
-
-&lt;p&gt;When the Java 7 was released, I was kind of disappointed without lamda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.&lt;/p&gt;
-
-&lt;p&gt;To be hoenst, before Java 1.7, Coding file manipulation in Java is very headache task. I say &amp;ldquo;headache&amp;rdquo; it doesn&amp;rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.&lt;/p&gt;
-
-&lt;h4 id=&#34;better-file-visitor-implementation&#34;&gt;Better file visitor implementation&lt;/h4&gt;
-
-&lt;p&gt;Following is simple customizaed file visitor which has been the part of my old util.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-
-public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
-    @Override
-    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
-        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
-        return FileVisitResult.CONTINUE;
-        }
-
-        @Override
-    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
-        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
-        return FileVisitResult.CONTINUE;
-        }
-
-    @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
-            throws IOException {
-         if ( attr.isSymbolicLink() )
-          { System.out.println( &amp;quot; symbolic link  :  &amp;quot;+  file  );
-          
-          }else if (  attr.isSymbolicLink() ){            
-              System.out.println( &amp;quot; regular file : &amp;quot;+ file );
-          }
-        return FileVisitResult.CONTINUE;
-    }
-     
-    @Override
-    public FileVisitResult visitFileFailed(Path file, IOException exc)
-            throws IOException {        
-         System.err.println( exc.getMessage());
-        return FileVisitResult.CONTINUE;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To use this customized  is so easy. Just 3 lines coding you can test it by yourself.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;        CustomFileVisitor fileVisitor = new CustomFileVisitor();
-        Path path = Paths.get(&amp;quot;TestDir&amp;quot;);
-        Files.walkFileTree(path, fileVisitor);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;arm&#34;&gt;ARM&lt;/h4&gt;
-
-&lt;p&gt;Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the &lt;code&gt;using&lt;/code&gt; statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men&amp;rsquo;s mistakes; fools by their own.&lt;/p&gt;
-
-&lt;p&gt;In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource. Following are comparison of old and new style.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Snippet of old style&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
-FileOutputStream exchangeCurrencyWriter = null;
-try {
-    exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    int var;
-    while (var = exchangeCurrencyReader.read()) != -1)
-        exchangeCurrencyWriter.write(var);
-} 
-finally {
-    if (exchangeCurrencyReader!= null)
-        exchangeCurrencyReader.close();
-    if (exchangeCurrencyWriter!= null)
-        exchangeCurrencyWriter.close();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Code in Java 7&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;)){
-      int var;
-      while((var= exchangeCurrencyReader.read()) != -1 )
-            exchangeCurrencyWriter.write();
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.&lt;/p&gt;
-
-&lt;h4 id=&#34;new-file-change-monitor-service&#34;&gt;New file change monitor service&lt;/h4&gt;
-
-&lt;p&gt;After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.&lt;/p&gt;
-
-&lt;p&gt;Usually most Java based system somehow needs such monitor function, there will be separate process or thread to run this service, and there should be a call back handler triggered by this service. Everytime there is any file amended, the service will trigger the call back handler to complete some tasks.&lt;/p&gt;
-
-&lt;p&gt;Following is sample of file watching service. I removed call back part which is relevant to the business.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
-import java.util.HashMap;
-import java.util.Map;
-
-public class FileWatchService {
-
-    public static void watchFileUpdate() {
-        try (WatchService service = FileSystems.getDefault().newWatchService()) {
-            Map&amp;lt;WatchKey, Path&amp;gt; eventMap = new HashMap&amp;lt;&amp;gt;();
-            Path dir = Paths.get(&amp;quot;TestDir&amp;quot;);
-
-            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
-
-            WatchKey key;
-            do {
-                key = service.take();
-                Path eventPath = eventMap.get(key);
-                for (WatchEvent&amp;lt;?&amp;gt; event : key.pollEvents()) {
-                    WatchEvent.Kind&amp;lt;?&amp;gt; kind = event.kind();
-                    Path path = (Path) event.context();
-                    System.out.println(eventPath + &amp;quot; : &amp;quot; + kind + &amp;quot;  : &amp;quot; + path);
-                }
-            } while (key.reset());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public static void main (String [] args ){
-       watchFileUpdate();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.&lt;/p&gt;
 </description>
     </item>
     
