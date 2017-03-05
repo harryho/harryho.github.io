@@ -444,7 +444,7 @@ class AppServiceProvider extends ServiceProvider
 &lt;h3 id=&#34;install-prestashop-with-amp-package&#34;&gt;Install Prestashop with AMP package&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Follow the installation page within the zip file&lt;/li&gt;
+&lt;li&gt;Follow the instruction page within zip file.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;install-prestashop-without-amp-package&#34;&gt;Install Prestashop without AMP package&lt;/h3&gt;
@@ -1210,7 +1210,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
         &amp;lt;FIELD_2&amp;gt; [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE] &amp;lt;VALUE_2&amp;gt;   ----- Expression
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The next step we can look into the Expression, actually the &lt;FIELD_1&gt; is the property of entity object, and &lt;VALUE_1&gt; is the filter value entered by client. How to use the filter to narrow down the query result is part of business logic, which is handled by developer.&lt;/p&gt;
+&lt;p&gt;The next step we can look into the Expression, actually the FIELD_1 is the property of entity object, and VALUE_1 is the filter value entered by client. How to use the filter to narrow down the query result is part of business logic, which is handled by developer.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;&amp;lt;FIELD_1&amp;gt;           ==&amp;gt; Entity property
 [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE]  ==&amp;gt; Operator
@@ -1280,52 +1280,9 @@ public static class Op
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
+&lt;p&gt;&lt;strong&gt;ExpressionBuilder&lt;/strong&gt;&lt;/p&gt;
 
-public static class PredicateBuilder
-{
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; True&amp;lt;T&amp;gt;() { return f =&amp;gt; true; }
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; False&amp;lt;T&amp;gt;() { return f =&amp;gt; false; }
-
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; Or&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
-    {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
-                (Expression.OrElse(expr1.Body, secondBody), expr1.Parameters);
-    }
-
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; And&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
-    {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
-                (Expression.AndAlso(expr1.Body, secondBody), expr1.Parameters);
-    }
-
-    public static Expression Replace(this Expression expression, Expression searchEx, Expression replaceEx)
-    {
-        return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
-    }
-
-    internal class ReplaceVisitor : ExpressionVisitor
-    {
-        private readonly Expression from, to;
-        public ReplaceVisitor(Expression from, Expression to)
-        {
-            this.from = from;
-            this.to = to;
-        }
-
-        public override Expression Visit(Expression node)
-        {
-            return node == from ? to : base.Visit(node);
-        }
-    }
-
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This class takes care of Expression with Filter object.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
 using System.Linq;
@@ -1445,6 +1402,56 @@ public class ExpressionBuilder
     }
 }
 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;PredicateBuilder&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This class manages all expressions to support dynamic statement query.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+
+public static class PredicateBuilder
+{
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; True&amp;lt;T&amp;gt;() { return f =&amp;gt; true; }
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; False&amp;lt;T&amp;gt;() { return f =&amp;gt; false; }
+
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; Or&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
+    {
+        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
+                (Expression.OrElse(expr1.Body, secondBody), expr1.Parameters);
+    }
+
+    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; And&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
+    {
+        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
+                (Expression.AndAlso(expr1.Body, secondBody), expr1.Parameters);
+    }
+
+    public static Expression Replace(this Expression expression, Expression searchEx, Expression replaceEx)
+    {
+        return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
+    }
+
+    internal class ReplaceVisitor : ExpressionVisitor
+    {
+        private readonly Expression from, to;
+        public ReplaceVisitor(Expression from, Expression to)
+        {
+            this.from = from;
+            this.to = to;
+        }
+
+        public override Expression Visit(Expression node)
+        {
+            return node == from ? to : base.Visit(node);
+        }
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
