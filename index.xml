@@ -1168,7 +1168,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
     </item>
     
     <item>
-      <title>C# good practice -- Part 1</title>
+      <title>C# Note -- Part 1</title>
       <link>https://harryho.github.io/code/csharp-good-practice-1/</link>
       <pubDate>Fri, 10 Apr 2015 14:59:31 +1100</pubDate>
       
@@ -1181,7 +1181,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 &lt;p&gt;&lt;em&gt;As the title says, this is first article of the series, which cover C# good practice and common mistakes made by many developers. As we known, .net framework and its most important player changes every year. So some good practice will be obsolete or replaced by some advanced solution, because real world keeps change. The most ridiculous thing is some good practice becomes common mistake in some special context. That is why we keep looking for new ways of good practice to support emerging chanlleges.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;generic-predicat-and-expression&#34;&gt;Generic Predicat and Expression&lt;/h2&gt;
+&lt;h2 id=&#34;generic-predicate-and-expression&#34;&gt;Generic predicate and Expression&lt;/h2&gt;
 
 &lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
 
@@ -1193,7 +1193,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 
 &lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
 
-&lt;p&gt;Database query is one of most common and important function in almost any .net application. ADO.Net was the most critical component which execute the database queries, but after .net 3.5, it has been replaced by entity framework, which provides ORM feature. Now entity framework is core component in all applications, which need to communicate with database.&lt;/p&gt;
+&lt;p&gt;Database query is one of most common and important function in almost any .net application. Once ADO.Net was the most critical component which execute all database oprations, but after .net 3.5, its top one position has been taken by entity framework, which provides convenient ORM feature. Now entity framework is core component in all applications, which need to communicate with database.&lt;/p&gt;
 
 &lt;p&gt;Business service get a lot of benefits form entity framework&amp;rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us reduce many reduntant queries.&lt;/p&gt;
 
@@ -2930,15 +2930,16 @@ Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the U
 &lt;li&gt;Select the memory size for the CentOS. It is up  to you. I prefer 4GB, but 2GB is necessary. And then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Select &amp;ldquo;Create a virtual hard drive now&amp;rdquo;, and then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Select defaut VDI, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Select &amp;ldquo;Dynamically allocated&amp;rdquo;, then click &lt;code&gt;Next&lt;/code&gt;.
+
+&lt;li&gt;&lt;p&gt;Select &amp;ldquo;Dynamically allocated&amp;rdquo;, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I&amp;rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.&lt;/li&gt;
 &lt;li&gt;Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I&amp;rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Config the CentOS hardware setting on VirtulBox or VMWare.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Config the CentOS hardware setting on VirtulBox or VMWare.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;VirtualBox&lt;/strong&gt;&lt;/p&gt;
 
