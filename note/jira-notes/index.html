@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Ubuntu 14 -- server setup - Hello World</title>
+    <title>JIRA Notes - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -67,258 +67,103 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Ubuntu 14 -- server setup</h1>
+				<h1 class="doc-entry-title">JIRA Notes</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h2 id="prelude">Prelude</h2>
+<h2 id="jira">JIRA</h2>
 
 <blockquote>
-<p><em>This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow <a href="/blog/ubuntu-desktop-14/">Ubuntu deskstop setup</a></em></p>
+<p>Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&rsquo;s main competitor, Bugzilla. It has been developed since 2002.</p>
 </blockquote>
 
-<h2 id="brief-history">Brief history</h2>
+<h2 id="how-to-work-with-client-within-jira">How to work with client within JIRA</h2>
+
+<blockquote>
+<p>The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.</p>
+</blockquote>
+
+<h3 id="assumption">Assumption</h3>
 
 <ul>
-<li>Please find it from <a href="/blog/linux-history/">Brief history of Linux</a></li>
+<li><p>Your client&rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.</p></li>
+
+<li><p>You have created a project for client, named <strong>ABC IT Project</strong></p></li>
+
+<li><p>You want to allow the client to access this project on JIRA, but you want to avoid client&rsquo;s unintented update to mess up the project management.</p></li>
 </ul>
 
-<h2 id="assumption">Assumption</h2>
+<h3 id="requirement-of-permission-control">Requirement of permission control</h3>
 
 <ul>
-<li>You are familiar with Ubuntu, at least you have some experience working on Linux system.</li>
-<li>You are familiar with bash/shell script</li>
-<li>You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.<br /></li>
+<li>In Agile practice, product owner should attend the</li>
 </ul>
 
-<h2 id="things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</h2>
+<h3 id="change-default-permission-scheme">Change default permission scheme</h3>
 
 <ul>
-<li>How to setup your server</li>
+<li><p>Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.</p></li>
+
+<li><p>Choose <code>Isssues</code> &gt; <code>Permission schemes</code></p></li>
+
+<li><p>Change all permissions from <code>Project Access - Any logged in user</code> to <code>Project role - Administrator</code> except the following items.</p>
+
+<ul>
+<li>View Development Tools</li>
+<li>View Read-Only Workflow</li>
+<li>Assignable User</li>
+<li>Delete Own Comments</li>
+<li>Edit Own Comments</li>
+<li>Delete Own Attachments</li>
+<li>Delete Own Worklogs</li>
+<li>Edit Own Worklogs</li>
+<li>Work On Issues</li>
+</ul></li>
+
+<li><p>Copy the default permission scheme and rename it to <code>&lt;client_business_name&gt; Permission Scheme</code>. In this case it would be <code>ABC Permission Scheme</code>.</p></li>
+
+<li><p>Create a new group named <strong>ABC Group</strong>,</p></li>
+
+<li><p>Update <code>ABC Permission Scheme</code> by granting <code>ABC Group</code> to some items.</p>
+
+<ul>
+<li>Browse Projects</li>
+<li>Create Issues</li>
+</ul></li>
+
+<li><p>Update the permission scheme of the project <code>ABC IT Project</code> from to <code>ABC Permission Scheme</code>.</p></li>
 </ul>
 
-<h3 id="ufw-setup"><strong><em>UFW setup</em></strong></h3>
-
-<pre><code class="language-bash">sudo ufw enable
-sudo ufw allow 80/tcp
-sudo ufw allow ssh
-sudo ufw allow 443/tcp
-sudo ufw allow 8000/tcp
-</code></pre>
-
-<h3 id="ssh-server-setup"><strong><em>SSH server setup</em></strong></h3>
-
-<pre><code class="language-bash">sudo apt-get install openssh-server 
-
-# backup default config 
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
-sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
-
-# use any editor to update sshd_config 
-sudo nano /etc/ssh/sshd_config
-
-# uncomment  PasswordAuthentication yes to allow remote password login
-</code></pre>
-
-<h3 id="time-zone-setup"><strong><em>Time Zone setup</em></strong></h3>
-
-<pre><code class="language-bash">sudo dpkg-reconfigure tzdata
-</code></pre>
-
-<h3 id="install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></h3>
-
-<pre><code class="language-bash">software-properties-common python-software-properties
-</code></pre>
-
-<p><strong><em>Install byobu screen</em></strong></p>
-
-<pre><code class="language-bash">sudo apt-get install byobu screen 
-
-# Launch byobu
-byobu
-# F9 for help 
-# change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6
-</code></pre>
-
-<h3 id="install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></h3>
-
-<pre><code class="language-bash"># add GBG Key
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-# add docker.list
-sudo touch /etc/apt/sources.list.d/docker.list
-#  repo 
-sudo vi /etc/apt/sources.list.d/docker.list
-#  add following repo ath the end of file 
-deb https://apt.dockerproject.org/repo ubuntu-trusty main
-
-# apt update 
-sudo apt-get update
-# verify 
-apt-cache policy docker-engine
-# install docker engine
-
-</code></pre>
-
-<h3 id="build-vim"><strong><em>build vim</em></strong></h3>
+<h3 id="change-user-s-group">Change user&rsquo;s group</h3>
 
 <ul>
-<li>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>,</code>syntastic`, etc.</li>
+<li>Choose <code>User management</code> &gt; <code>User</code></li>
+<li>Add the ABC&rsquo;s user to group <code>ABC Group</code></li>
+<li>Remove the user from default <code>jira-software-user</code> and make sure the checkbox <code>Access JIRA Software</code> is selected.</li>
 </ul>
 
-<pre><code class="language-bash">sudo apt-get build-dep vim
-git clone https://github.com/vim/vim.git ~/forks/vim
-cd ~/forks/vim
-## make distclean &amp;&amp; make clean
-## build script from this repo
-make VIMRUNTIMEDIR=/usr/share/vim/vim74
-sudo make install
-</code></pre>
+<h2 id="time-tracking-and-estimation">Time Tracking and Estimation</h2>
 
-<h3 id="install-jdk-8"><strong><em>Install JDK 8</em></strong></h3>
+<h3 id="enable-time-tracking">Enable Time Tracking</h3>
 
 <ul>
-<li>If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.</li>
-<li>Setup oracle jdk ppa and install oracle jdk from ppa.</li>
-</ul>
-
-<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-sudo apt-get install oracle-java8-set-default     
-</code></pre>
-
-<h3 id="install-openjdk"><strong><em>Install OpenJdk</em></strong></h3>
+<li><p>Choose <code>Issues</code> &gt; <code>Time Tracking</code></p>
 
 <ul>
-<li>Setup OpenJdk ppa and install it from ppa</li>
-</ul>
+<li>Enable the <code>Time Tracking</code> if it is inactive.</li>
+</ul></li>
 
-<pre><code class="language-bash">sudo add-apt-repository ppa:openjdk-r/ppa
-sudo apt-get update 
-sudo apt-get install openjdk-8-jdk
-sudo update-alternatives --config java
-</code></pre>
+<li><p>Choose <code>Boards</code> &gt; <code>View All Boards</code></p>
 
 <ul>
-<li>Type in a number to select a Java version.</li>
-<li>set default Java Compiler</li>
-</ul>
-
-<pre><code class="language-bash">sudo update-alternatives --config javac
-java -version
-</code></pre>
-
-<ul>
-<li><p>How to stop mysql auto startup</p></li>
-
-<li><p>Comment out the line below in the config file ( /etc/init/mysql.conf )</p>
-
-<ul>
-<li>Start on (net-device-up</li>
+<li>Choose <code>Board Settings</code> of the board</li>
+<li>Choose <code>Estimation</code></li>
+<li>Choose <code>Remaining Estimate and Time Spent</code> as Time Tracking</li>
 </ul></li>
 </ul>
-
-<h3 id="install-nodejs"><strong><em>Install nodejs</em></strong></h3>
-
-<pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install nodejs
-sudo apt-get install build-essential
-</code></pre>
-
-<p><strong><em>Setup NPM</em></strong></p>
-
-<ul>
-<li>You can use default <code>npm</code> on your server after you install nodejs, but there is a better way to manage your <code>npm</code>. It allows you easily to control your packages.<br /></li>
-</ul>
-
-<pre><code class="language-bash">cd 
-mkdir .node_modules
-npm config list
-npm config get prefix
-# /usr or  /usr/share
-npm config set prefix $HOME/.node_modules
-cat .npmrc
-# /home/hho/.node_modules
-npm install -g npm
-which npm
-# /usr/bin/npm
-</code></pre>
-
-<ul>
-<li>Open .profile add following to end of file</li>
-</ul>
-
-<pre><code class="language-bash">export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;
-</code></pre>
-
-<h3 id="install-nvm"><strong><em>Install nvm</em></strong></h3>
-
-<ul>
-<li>Using <code>nvm</code> is no longer popular and best option. I will recommand you just use <code>npm</code> to manage eveything you need.</li>
-</ul>
-
-<pre><code class="language-bash">sudo apt-get update
-sudo apt-get install build-essential libssl-dev
-curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
-source ~/.profile
-nvm ls-remote
-nvm install 0.11.13
-nvm use 0.11.13
-nvm alias default 0.11.13
-nvm use default
-</code></pre>
-
-<h3 id="install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></h3>
-
-<pre><code class="language-bash">sudo apt-get install curl php5-cli git
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-</code></pre>
-
-<h3 id="install-python2-python3"><strong><em>Install Python2, Python3</em></strong></h3>
-
-<ul>
-<li>Ubuntu has python instaleld by default</li>
-</ul>
-
-<pre><code class="language-bash">sudo apt-get python pip 
-sudo apt-get install python3 pip3
-### Install virtualenv 
-sudo pip install virtualenv
-sudo pip3 install virtualenv
-</code></pre>
-
-<h3 id="install-go"><strong><em>Install Go</em></strong></h3>
-
-<pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
-sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
-
-sudo vi /etc/profile
-GOPATH=&quot;/YOUR/USER/HOME/go&quot;
-GOROOT=&quot;/usr/local/go&quot;
-PATH=$GOROOT/bin:$PATH
-</code></pre>
-
-<h3 id="install-r"><strong><em>Install R</em></strong></h3>
-
-<pre><code class="language-bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
-sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
-sudo apt-get update
-sudo apt-get install r-base
-</code></pre>
-
-<h3 id="install-rust"><strong><em>Install Rust</em></strong></h3>
-
-<pre><code class="language-bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
-</code></pre>
-
-<p><em>Uninstall Rust</em></p>
-
-<pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
-</code></pre>
 
 				</section>
 			</article>
@@ -333,32 +178,23 @@ sudo apt-get install r-base
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Ubuntu 14 -- server setup</a></strong></li>
+				<li><strong><a href="#title">JIRA Notes</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#prelude">Prelude</a></li>
-<li><a href="#brief-history">Brief history</a></li>
-<li><a href="#assumption">Assumption</a></li>
-<li><a href="#things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</a>
+<li><a href="#jira">JIRA</a></li>
+<li><a href="#how-to-work-with-client-within-jira">How to work with client within JIRA</a>
 <ul>
-<li><a href="#ufw-setup"><strong><em>UFW setup</em></strong></a></li>
-<li><a href="#ssh-server-setup"><strong><em>SSH server setup</em></strong></a></li>
-<li><a href="#time-zone-setup"><strong><em>Time Zone setup</em></strong></a></li>
-<li><a href="#install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></a></li>
-<li><a href="#install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></a></li>
-<li><a href="#build-vim"><strong><em>build vim</em></strong></a></li>
-<li><a href="#install-jdk-8"><strong><em>Install JDK 8</em></strong></a></li>
-<li><a href="#install-openjdk"><strong><em>Install OpenJdk</em></strong></a></li>
-<li><a href="#install-nodejs"><strong><em>Install nodejs</em></strong></a></li>
-<li><a href="#install-nvm"><strong><em>Install nvm</em></strong></a></li>
-<li><a href="#install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></a></li>
-<li><a href="#install-python2-python3"><strong><em>Install Python2, Python3</em></strong></a></li>
-<li><a href="#install-go"><strong><em>Install Go</em></strong></a></li>
-<li><a href="#install-r"><strong><em>Install R</em></strong></a></li>
-<li><a href="#install-rust"><strong><em>Install Rust</em></strong></a></li>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#requirement-of-permission-control">Requirement of permission control</a></li>
+<li><a href="#change-default-permission-scheme">Change default permission scheme</a></li>
+<li><a href="#change-user-s-group">Change user&rsquo;s group</a></li>
+</ul></li>
+<li><a href="#time-tracking-and-estimation">Time Tracking and Estimation</a>
+<ul>
+<li><a href="#enable-time-tracking">Enable Time Tracking</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -414,8 +250,9 @@ sudo apt-get install r-base
 					<li><a href="/note/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
-					<li><a href="/note/jira-notes/">JIRA Notes</a>
-					</li>
+					<li>
+						<span class="active">JIRA Notes</span>
+						</li>
 				
 					<li><a href="/note/linux-history/">Brief history of Linux</a>
 					</li>
@@ -428,9 +265,8 @@ sudo apt-get install r-base
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
-					<li>
-						<span class="active">Ubuntu 14 -- server setup</span>
-						</li>
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
 				
 					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
 					</li>

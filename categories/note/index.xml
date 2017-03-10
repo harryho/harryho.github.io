@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Hello World</title>
-    <link>https://harryho.github.io/categories/blog/index.xml</link>
-    <description>Recent content in Blog on Hello World</description>
+    <title>Note on Hello World</title>
+    <link>https://harryho.github.io/categories/note/index.xml</link>
+    <description>Recent content in Note on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
-    <atom:link href="https://harryho.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://harryho.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Create a blog site on GitHub Pages</title>
-      <link>https://harryho.github.io/blog/create-a-blog-on-github-pages/</link>
+      <link>https://harryho.github.io/note/create-a-blog-on-github-pages/</link>
       <pubDate>Wed, 15 Feb 2017 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/blog/create-a-blog-on-github-pages/</guid>
+      <guid>https://harryho.github.io/note/create-a-blog-on-github-pages/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
@@ -106,11 +106,112 @@ cd ..
     </item>
     
     <item>
+      <title>JIRA Notes</title>
+      <link>https://harryho.github.io/note/jira-notes/</link>
+      <pubDate>Wed, 11 Jan 2017 11:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/note/jira-notes/</guid>
+      <description>
+
+&lt;h2 id=&#34;jira&#34;&gt;JIRA&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&amp;rsquo;s main competitor, Bugzilla. It has been developed since 2002.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;how-to-work-with-client-within-jira&#34;&gt;How to work with client within JIRA&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Your client&amp;rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You have created a project for client, named &lt;strong&gt;ABC IT Project&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You want to allow the client to access this project on JIRA, but you want to avoid client&amp;rsquo;s unintented update to mess up the project management.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;requirement-of-permission-control&#34;&gt;Requirement of permission control&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In Agile practice, product owner should attend the&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;change-default-permission-scheme&#34;&gt;Change default permission scheme&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Isssues&lt;/code&gt; &amp;gt; &lt;code&gt;Permission schemes&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change all permissions from &lt;code&gt;Project Access - Any logged in user&lt;/code&gt; to &lt;code&gt;Project role - Administrator&lt;/code&gt; except the following items.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;View Development Tools&lt;/li&gt;
+&lt;li&gt;View Read-Only Workflow&lt;/li&gt;
+&lt;li&gt;Assignable User&lt;/li&gt;
+&lt;li&gt;Delete Own Comments&lt;/li&gt;
+&lt;li&gt;Edit Own Comments&lt;/li&gt;
+&lt;li&gt;Delete Own Attachments&lt;/li&gt;
+&lt;li&gt;Delete Own Worklogs&lt;/li&gt;
+&lt;li&gt;Edit Own Worklogs&lt;/li&gt;
+&lt;li&gt;Work On Issues&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the default permission scheme and rename it to &lt;code&gt;&amp;lt;client_business_name&amp;gt; Permission Scheme&lt;/code&gt;. In this case it would be &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new group named &lt;strong&gt;ABC Group&lt;/strong&gt;,&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update &lt;code&gt;ABC Permission Scheme&lt;/code&gt; by granting &lt;code&gt;ABC Group&lt;/code&gt; to some items.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Browse Projects&lt;/li&gt;
+&lt;li&gt;Create Issues&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the permission scheme of the project &lt;code&gt;ABC IT Project&lt;/code&gt; from to &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;change-user-s-group&#34;&gt;Change user&amp;rsquo;s group&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose &lt;code&gt;User management&lt;/code&gt; &amp;gt; &lt;code&gt;User&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add the ABC&amp;rsquo;s user to group &lt;code&gt;ABC Group&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Remove the user from default &lt;code&gt;jira-software-user&lt;/code&gt; and make sure the checkbox &lt;code&gt;Access JIRA Software&lt;/code&gt; is selected.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;time-tracking-and-estimation&#34;&gt;Time Tracking and Estimation&lt;/h2&gt;
+
+&lt;h3 id=&#34;enable-time-tracking&#34;&gt;Enable Time Tracking&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Issues&lt;/code&gt; &amp;gt; &lt;code&gt;Time Tracking&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable the &lt;code&gt;Time Tracking&lt;/code&gt; if it is inactive.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Boards&lt;/code&gt; &amp;gt; &lt;code&gt;View All Boards&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose &lt;code&gt;Board Settings&lt;/code&gt; of the board&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Estimation&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Remaining Estimate and Time Spent&lt;/code&gt; as Time Tracking&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Brief history of Linux</title>
-      <link>https://harryho.github.io/blog/linux-history/</link>
+      <link>https://harryho.github.io/note/linux-history/</link>
       <pubDate>Thu, 10 Jan 2013 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/blog/linux-history/</guid>
+      <guid>https://harryho.github.io/note/linux-history/</guid>
       <description>
 
 &lt;h1 id=&#34;linux&#34;&gt;Linux&lt;/h1&gt;
