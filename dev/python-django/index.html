@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Code - Hello World</title>
+    <title>Python Web framework - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -65,29 +65,139 @@
 <div class="row">
 	<div class="col-sm-8 doc-main">
 		<main role="main">
-			<div class="doc-list-header">
-				<h3>Pages in Code</h3>
-			</div>
-			<div class="doc-list-entry">
-			<ul>
-	
-				<li><a class="doc-entry" href="/code/javascript-oop/">
-					<span class="doc-entry-title">JavaScript and Object Oriented Programming</span>
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Python Web framework</h1>
+				<div class="doc-entry-meta">
 					
-				</a></li>
-	
-				<li><a class="doc-entry" href="/code/java-notes-1/">
-					<span class="doc-entry-title">Java Notes, Part-1</span>
+				</div>
+				<section>
 					
-				</a></li>
-	
-			</ul>
-			</div>
+
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="install-python-pip">Install Python &amp; pip</h3>
+
+<h3 id="install-virtualenv">Install virtualenv</h3>
+
+<h3 id="setup-virtualenv">Setup virtualenv</h3>
+
+<h3 id="install-django">Install Django</h3>
+
+<p><strong>Windows</strong></p>
+
+<ul>
+<li>Install django
+
+<ul>
+<li>create a folder virtualenvs within the location of python 3</li>
+<li>create a new virtualenv named django18</li>
+<li>Activate the new virtual env</li>
+<li>Install Django 1.x.x (LTS version )</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-bash">cd  /path/to/python3
+cd  virtualenvs
+virtualenv django18
+cd django18
+Scripts\activate
+which python
+pip install django==1.x.x
+</code></pre>
+
+<h3 id="create-django-project">Create django project</h3>
+
+<ul>
+<li>SET PATH in current command promp</li>
+<li>Navigate to workspace folder</li>
+<li>Create new django project</li>
+
+<li><p>Start the app</p>
+
+<pre><code class="language-bash">SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+which django-admin
+cd c:\ws\python\django\
+django-admin startproject demo
+cd demo
+python manage.py runserver
+</code></pre></li>
+
+<li><p>Create a new app module</p></li>
+</ul>
+
+<p><code>python manage.py startapp main</code></p>
+
+<ul>
+<li>Create a new db</li>
+</ul>
+
+<p>**  following commands are just tested in django 1.8</p>
+
+<pre><code class="language-python">python manage.py syncdb 
+python manage.py makemigrations new_app 
+# migrate 
+pyrhon manage.py sqlmigrate new_app 0001 
+# migrate 
+python manage.py migrate new_app 0001
+</code></pre>
+
+<ul>
+<li>use python shell Model API</li>
+</ul>
+
+<pre><code class="language-python">python manage.py shell
+&gt;&gt;&gt; from XXX.models import ModelClass
+&gt;&gt;&gt; ModelClass.objects.all()
+&gt;&gt;&gt; ModelClass.objects.get(pk =1 )
+&gt;&gt;&gt; ModelClass.objects.filter( fieldName1=&quot;abc&quot;)
+&gt;&gt;&gt; mc = new ModelClass.( fieldName1 = &quot;abc&quot;, fieldName2=&quot;def&quot;, fieldName3 = 3 )
+&gt;&gt;&gt; mc.save()
+&gt;&gt;&gt; mc = ModelClass.objects.get(pd=1)
+&gt;&gt;&gt; mc.delete()    
+</code></pre>
+
+<p><strong>Linux</strong></p>
+
+<ul>
+<li>activate virtual environment need to use source instead of executing sh file
+<code>bash
+source path\to\virtualenv\bin\activate
+</code></li>
+</ul>
+
+				</section>
+			</article>
 		</main>
 	</div> 
 
 	
+
 <div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Python Web framework</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#getting-started">Getting started</a>
+<ul>
+<li><a href="#install-python-pip">Install Python &amp; pip</a></li>
+<li><a href="#install-virtualenv">Install virtualenv</a></li>
+<li><a href="#setup-virtualenv">Setup virtualenv</a></li>
+<li><a href="#install-django">Install Django</a></li>
+<li><a href="#create-django-project">Create django project</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
 	<div class="sidebar-module">
 		<h4 class="sidebar-heading">Pages in Categories</h4>
 		<ul class="sidebar-category-list">
@@ -97,11 +207,14 @@
 					<span class="doc-list-category">Blog</span>
 				</a>
 				<ul>
-					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a></li>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
 				
-					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a></li>
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
 				
-					<li><a href="/blog/linux-history/">Brief history of Linux</a></li>
+					<li><a href="/blog/linux-history/">Brief history of Linux</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -111,9 +224,11 @@
 					<span class="doc-list-category">Code</span>
 				</a>
 				<ul>
-					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a></li>
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
 				
-					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a></li>
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -123,11 +238,15 @@
 					<span class="doc-list-category">Dev</span>
 				</a>
 				<ul>
-					<li><a href="/dev/php-web/">PHP web framework</a></li>
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
 				
-					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a></li>
+					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
+					</li>
 				
-					<li><a href="/dev/python-django/">Python Web framework</a></li>
+					<li>
+						<span class="active">Python Web framework</span>
+						</li>
 				
 				</ul>
 			</li>
@@ -137,15 +256,20 @@
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
-					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a></li>
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
 				
-					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a></li>
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
 				
-					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a></li>
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
 				
-					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a></li>
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
 				
-					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a></li>
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -155,13 +279,17 @@
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
-					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a></li>
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
 				
-					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a></li>
+					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
 				
-					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a></li>
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
 				
-					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a></li>
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -210,10 +338,27 @@
 		
 		</div>
 	</div>
+	</div>
 </div>
 
 </div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 <hr />
 

@@ -457,5 +457,107 @@ ionic emulate android
 </description>
     </item>
     
+    <item>
+      <title>Python Web framework</title>
+      <link>https://harryho.github.io/dev/python-django/</link>
+      <pubDate>Mon, 28 Sep 2015 09:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/dev/python-django/</guid>
+      <description>
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;h3 id=&#34;install-python-pip&#34;&gt;Install Python &amp;amp; pip&lt;/h3&gt;
+
+&lt;h3 id=&#34;install-virtualenv&#34;&gt;Install virtualenv&lt;/h3&gt;
+
+&lt;h3 id=&#34;setup-virtualenv&#34;&gt;Setup virtualenv&lt;/h3&gt;
+
+&lt;h3 id=&#34;install-django&#34;&gt;Install Django&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install django
+
+&lt;ul&gt;
+&lt;li&gt;create a folder virtualenvs within the location of python 3&lt;/li&gt;
+&lt;li&gt;create a new virtualenv named django18&lt;/li&gt;
+&lt;li&gt;Activate the new virtual env&lt;/li&gt;
+&lt;li&gt;Install Django 1.x.x (LTS version )&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd  /path/to/python3
+cd  virtualenvs
+virtualenv django18
+cd django18
+Scripts\activate
+which python
+pip install django==1.x.x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;create-django-project&#34;&gt;Create django project&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SET PATH in current command promp&lt;/li&gt;
+&lt;li&gt;Navigate to workspace folder&lt;/li&gt;
+&lt;li&gt;Create new django project&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the app&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+which django-admin
+cd c:\ws\python\django\
+django-admin startproject demo
+cd demo
+python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new app module&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;python manage.py startapp main&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new db&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;**  following commands are just tested in django 1.8&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py syncdb 
+python manage.py makemigrations new_app 
+# migrate 
+pyrhon manage.py sqlmigrate new_app 0001 
+# migrate 
+python manage.py migrate new_app 0001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;use python shell Model API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py shell
+&amp;gt;&amp;gt;&amp;gt; from XXX.models import ModelClass
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.all()
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.get(pk =1 )
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.filter( fieldName1=&amp;quot;abc&amp;quot;)
+&amp;gt;&amp;gt;&amp;gt; mc = new ModelClass.( fieldName1 = &amp;quot;abc&amp;quot;, fieldName2=&amp;quot;def&amp;quot;, fieldName3 = 3 )
+&amp;gt;&amp;gt;&amp;gt; mc.save()
+&amp;gt;&amp;gt;&amp;gt; mc = ModelClass.objects.get(pd=1)
+&amp;gt;&amp;gt;&amp;gt; mc.delete()    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;activate virtual environment need to use source instead of executing sh file
+&lt;code&gt;bash
+source path\to\virtualenv\bin\activate
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

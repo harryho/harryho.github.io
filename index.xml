@@ -1268,6 +1268,108 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
     </item>
     
     <item>
+      <title>Python Web framework</title>
+      <link>https://harryho.github.io/dev/python-django/</link>
+      <pubDate>Mon, 28 Sep 2015 09:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/dev/python-django/</guid>
+      <description>
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;h3 id=&#34;install-python-pip&#34;&gt;Install Python &amp;amp; pip&lt;/h3&gt;
+
+&lt;h3 id=&#34;install-virtualenv&#34;&gt;Install virtualenv&lt;/h3&gt;
+
+&lt;h3 id=&#34;setup-virtualenv&#34;&gt;Setup virtualenv&lt;/h3&gt;
+
+&lt;h3 id=&#34;install-django&#34;&gt;Install Django&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install django
+
+&lt;ul&gt;
+&lt;li&gt;create a folder virtualenvs within the location of python 3&lt;/li&gt;
+&lt;li&gt;create a new virtualenv named django18&lt;/li&gt;
+&lt;li&gt;Activate the new virtual env&lt;/li&gt;
+&lt;li&gt;Install Django 1.x.x (LTS version )&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd  /path/to/python3
+cd  virtualenvs
+virtualenv django18
+cd django18
+Scripts\activate
+which python
+pip install django==1.x.x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;create-django-project&#34;&gt;Create django project&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SET PATH in current command promp&lt;/li&gt;
+&lt;li&gt;Navigate to workspace folder&lt;/li&gt;
+&lt;li&gt;Create new django project&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the app&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+which django-admin
+cd c:\ws\python\django\
+django-admin startproject demo
+cd demo
+python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new app module&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;python manage.py startapp main&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new db&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;**  following commands are just tested in django 1.8&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py syncdb 
+python manage.py makemigrations new_app 
+# migrate 
+pyrhon manage.py sqlmigrate new_app 0001 
+# migrate 
+python manage.py migrate new_app 0001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;use python shell Model API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py shell
+&amp;gt;&amp;gt;&amp;gt; from XXX.models import ModelClass
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.all()
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.get(pk =1 )
+&amp;gt;&amp;gt;&amp;gt; ModelClass.objects.filter( fieldName1=&amp;quot;abc&amp;quot;)
+&amp;gt;&amp;gt;&amp;gt; mc = new ModelClass.( fieldName1 = &amp;quot;abc&amp;quot;, fieldName2=&amp;quot;def&amp;quot;, fieldName3 = 3 )
+&amp;gt;&amp;gt;&amp;gt; mc.save()
+&amp;gt;&amp;gt;&amp;gt; mc = ModelClass.objects.get(pd=1)
+&amp;gt;&amp;gt;&amp;gt; mc.delete()    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;activate virtual environment need to use source instead of executing sh file
+&lt;code&gt;bash
+source path\to\virtualenv\bin\activate
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>C# Notes -- Part 1</title>
       <link>https://harryho.github.io/code/csharp-notes-1/</link>
       <pubDate>Fri, 10 Apr 2015 14:59:31 +1100</pubDate>
@@ -2986,211 +3088,6 @@ C:\&amp;gt;help cd
 &lt;ul&gt;
 &lt;li&gt;Type &lt;code&gt;cls&lt;/code&gt; to clean the screen&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>CentOS 6/7 -- desktop Setup</title>
-      <link>https://harryho.github.io/os/centos-fedora-desktop/</link>
-      <pubDate>Fri, 10 Jan 2014 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/os/centos-fedora-desktop/</guid>
-      <description>
-
-&lt;h2 id=&#34;breif-history&#34;&gt;Breif History&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please find it from &lt;a href=&#34;https://harryho.github.io/blog/linux-history/#centos&#34;&gt;Brief history of Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;bootable-usb-preparation&#34;&gt;Bootable usb preparation&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Download dvd iso from url or torrent
-Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the USB as origin )&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;install-centos-on-virtual-machine&#34;&gt;Install CentOS on virtual machine&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;CentOS provide a friendly and nice installation process. If you choose VMWare or VirtulBox as machine, you can open &lt;a href=&#34;http://www.tecmint.com/centos-7-installation&#34;&gt;installation steps&lt;/a&gt; on your browser or use ipad /tablet to access this page. You just need to follow the instruction step by step, it will be done within an hour or more(it varies in computing power of PC).&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;prepare-vm-for-centos&#34;&gt;Prepare VM for CentOS&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Create a new virtual machine.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Type in the name of vm. e.g. CentOS&lt;/li&gt;
-&lt;li&gt;Select the type of Linux&lt;/li&gt;
-&lt;li&gt;You can choose RedHat(&lt;sup&gt;32&lt;/sup&gt;&amp;frasl;&lt;sub&gt;64&lt;/sub&gt; bit ) or something else. It doesn&amp;rsquo;t matter. We don&amp;rsquo;t use any built-in xxx.iso files from VirtualBox. Then click &lt;code&gt;Next&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Select the memory size for the CentOS. It is up  to you. I prefer 4GB, but 2GB is necessary. And then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Select &amp;ldquo;Create a virtual hard drive now&amp;rdquo;, and then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Select defaut VDI, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Select &amp;ldquo;Dynamically allocated&amp;rdquo;, then click &lt;code&gt;Next&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I&amp;rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.&lt;/li&gt;
-&lt;li&gt;Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I&amp;rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Config the CentOS hardware setting on VirtulBox or VMWare.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;VirtualBox&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;On VirtualBox toolbar, there is a &lt;code&gt;Start&lt;/code&gt; button. Click &lt;code&gt;Start&lt;/code&gt;, then go the Storage item.&lt;/li&gt;
-&lt;li&gt;Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click &lt;code&gt;OK&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Leave all the other setting as default. Click the &lt;code&gt;Start&lt;/code&gt;button on the toolbar.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;VMWare&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;On VMware, you can find CD/DVD button on the tab page of new virtual machine.&lt;/li&gt;
-&lt;li&gt;Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click &lt;code&gt;OK&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Leave all the other setting as default. Click the &lt;code&gt;Power on this virtual machine&lt;/code&gt; option on the tab page.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;config-centos-default-setting&#34;&gt;Config CentOS default setting&lt;/h3&gt;
-
-&lt;p&gt;After the CentOS starts, we can config the default setting of CentOS. Don&amp;rsquo;t be panic, the configuration envrionment is very nice. You don&amp;rsquo;t need to type any command line so far.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Prepare the installation.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Choose the language of CentOS. Then click Continue.&lt;/li&gt;
-&lt;li&gt;On the Installation Summary screen, there is warning icon attached to the hard drive icon, which is under SYSTEM section with a lable &amp;ldquo;INSTALLATION DESTINATION&amp;rdquo;. Click that label.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;You will see the partition is already done automatically. I&amp;rsquo;d like you to leave it as until you are familar with the CentOS. Then click Done button on the header.&lt;/li&gt;
-&lt;li&gt;Leave the SOFTWARE SELECTION as Minimal Install; NETWORK &amp;amp; HOSTNAME as Not connected. Then click Begin Installation button.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Setup account&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Setup password of root account. Please remember the password. If you forget it you need to reset the root&amp;rsquo;s password. To do that you need to do a few things which depends on the CentOS version. As a beginner, please don&amp;rsquo;t make it too complicated.&lt;/li&gt;
-&lt;li&gt;Create your account. e.g. harryporter Mark your account as administrator to save some effort. Please remember your password and don&amp;rsquo;t make it too complicated.&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;The progress of installation is complete. Click Finish configuration button.
-w$w4 d. After a few seconds, you will the Reboot button. Then click it.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;manage-centos-packages-and-software&#34;&gt;Manage CentOS packages and software&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;there are two management tools rpm and yum. To make it easy, we just talk about yum. It is a very handy tool. Comparing with the windows built-in program management tool, it is much powerful than that. It provides necessary functions for admin. If you need to maintain the Linux server, then you will use it in your daily task.&lt;/li&gt;
-&lt;li&gt;Use &lt;code&gt;man yum&lt;/code&gt; to take a look the description of yum. You do not need to understand all usage of yum. Just have an overview is enough.&lt;/li&gt;
-&lt;li&gt;There are a few useful and common yum commands.&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum list installed | less
-yum search &amp;lt;pacakge_name&amp;gt;
-yum grouplist
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;install-centos-on-pc-or-laptop&#34;&gt;Install CentOS on PC or laptop&lt;/h2&gt;
-
-&lt;h3 id=&#34;setup-network-via-cable&#34;&gt;Setup network ( via cable )&lt;/h3&gt;
-
-&lt;p&gt;If you install a minimal version without network configuration, you will find you can not ping public domain. Here I am going to show you how to setup the connection.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You can use &lt;code&gt;ip a&lt;/code&gt; command to check the status of all network interface.&lt;/li&gt;
-&lt;li&gt;You will see all the state of interfaces would be DOWN OR UNKNOWN.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-# lo ****  qdisc pfifo_fast noqueue UNKNOWN
-# eth0 **** qdisc pfifo_fast state DOWN
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use &lt;code&gt;# ifup eth0&lt;/code&gt; to start the ech0 then you can access internet. It is a bit tedious to start the network service every time we reboot the system. Next step we will setup network service to start automatically after the system is up.&lt;/li&gt;
-&lt;li&gt;There is a configuration file which can help you setup internet connection after the startup. Ususally the configuration is under this path &lt;code&gt;/etc/sysconfig/network-scripts&lt;/code&gt;, and file name would &lt;code&gt;ifcfg-eth&amp;lt;*&amp;gt;&lt;/code&gt;. So we check the real file name at first.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ls /etc/sysconfig/network-scripts/ifcfg-*
-
-# Following are sample of files which will sit in your system. 
-/etc/sysconfig/network-scripts/ifcfg-eth0
-/etc/sysconfig/network-scripts/ifcfg-lo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we need to update this file via nano or vi. If you have no any experience of vi, I recommended an interactive online tutorial for you. Just 20 mins, you can master basic vi usage.
-&lt;a href=&#34;http://www.openvim.com/tutorial.html&#34;&gt;http://www.openvim.com/tutorial.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;We use vi to open the config file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# vi /etc/sysconfig/network-scripts/ifcfg-eth0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will a setting below.
-ONBOOT=no&lt;/p&gt;
-
-&lt;p&gt;You just need to update it to ONBOOT=yes, then save it and reboot CentOS to test the result.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# reboot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After you reboot and login CentOS, you can use ping to test if your system can access internet, then configuration is updated successful.&lt;/p&gt;
-
-&lt;h4 id=&#34;setup-wifi&#34;&gt;Setup Wifi&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Setup Wifi during the installation. After the installation, you will find the Wifi is not available on Cent OS&lt;/li&gt;
-&lt;li&gt;Mount the DVD or iso file&lt;/li&gt;
-&lt;li&gt;use yum to install the NetworkManager-wifi package&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum --disablerepo=\* install /path/to/dvd/Packages/NetworkManager-wifi* 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;multiple-boot-system-fedora-centos-redhat&#34;&gt;Multiple boot system ( Fedora, CentOS, Redhat )&lt;/h2&gt;
-
-&lt;h3 id=&#34;partition-setup-for-multiple-os-installation&#34;&gt;Partition setup for multiple OS installation&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Fedora, CentOS and Redhat share the almost the same installation process.
-Click on the &lt;code&gt;Installation Destination&lt;/code&gt; icon to change this to custom partitioning
-Under the Other Storage Options, choose I will configure partitioning then click Done
-Following is sample of partition setup of multiple boot system.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;sda
-  +----sda1        nfts               500M         Windows recovery
-  +----sda2        efi       /boot    100M         grub2 , Windows boot manager
-  +----sda3                  /        10M            
-  +----sda4        ntfs      /      40000M         Window 7/8/10
-  +----sda5                  swap   &amp;lt;Double size of your RAM size&amp;gt;   
-  +----sda6        ext4      /      20000M         Ubuntu 14 desktop
-  +----sda7        ext4      /      20000M         Fedora 20 desktop           
-  +----sda8        ext4      /      20000M         CentOS 6 desktop
-  +----sda9        ext4      /      20000M         OpenSuse desktop
-  + ...
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h3&gt;
-
-&lt;h3 id=&#34;fedora-boot-error&#34;&gt;Fedora boot error&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please check the grub.cfg if you get booting error&lt;/li&gt;
-&lt;li&gt;You can try following command to boot Fedora from Grub menu&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;linux /boot/vmluz-x.x.x-x.x.x
-initrd /boot/intrd-plymouth.img
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
