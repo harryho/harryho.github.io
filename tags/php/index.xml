@@ -479,5 +479,164 @@ WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
 </description>
     </item>
     
+    <item>
+      <title>Debug PHP with Eclipse PDT and Netbeans</title>
+      <link>https://harryho.github.io/dev/php-debug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://harryho.github.io/dev/php-debug/</guid>
+      <description>
+
+&lt;h2 id=&#34;pdt-and-netbeans&#34;&gt;PDT and Netbeans&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;PDT and Netbeans are two most popluar free PHP IDEs. We choose such IDE for productivity, so code intelligence and debug are two key factors, which let us love IDE. Because both are not created for PHP development at the start, there is no built-in server to support the PHP web debug. When we want to use it to debug, we would come across some wierd problems. Here is how to prepare the IDE for PHP debug.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;amp-package-or-without-amp&#34;&gt;AMP package or without AMP&lt;/h2&gt;
+
+&lt;h3 id=&#34;use-amp-package-as-smart-choice&#34;&gt;Use AMP package as smart choice&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t installed install any MySQL, Apache, PHP on your computer, I will recommend you to choose AMP ( Apache, MySQL, PHP ) package first, especially when project is small, the time is so tight, your client just want you to do some minor change. In that scenario, AMP package is a much better choice. Popular AMP packages include : EasyPHP, MAMP, WAMP, XAMPP. You can pick any of them on your favor.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Here is not going to discuss any specific AMP package. You can find more detailed instruction from their official website. If you still have problem, you can take a look how to do without the AMP package, but I won&amp;rsquo;t guarantee you the solution below will work for your AMP.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;manage-your-shits-without-amp-package&#34;&gt;Manage your shits without AMP package&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Here we just focus on how to work with shits ( Apache, PHP ) which you download and install them piece by piece. 10 years ago, it was easier to choose which one to download and install, because there was no much option, but now there are many options which make us confused.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The more worst and nastiest problem today is compatible issue between x86 and x64 applications in Windows. Even sometimes they are claimed compiled as x86, until you test it you will never they are really compatible. The reason is Windows has different versions of C++ redistributed compiler, if you use different compilers from Windows to compile your source code, you cannot ensure they are compatible to work together.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To avoid this problem, it is better to make sure the package or software are compatible at the beginning. That is why the AMP package is much better and easy to do that. They help you solve such nasty problem by bundling all you need together.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the compatible packages, especially Apache and PHP. When you download PHP, you need to know the PHP is compiled by VC9, VC11, or VC14, and x86 or x64. After that, you need to download proper Apache from &lt;a href=&#34;https://www.apachelounge.com/download&#34;&gt;here&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;h3 id=&#34;apache-path-c-apache-version-2-4-x-vc11-x86&#34;&gt;Apache path &lt;code&gt;c:\apache&lt;/code&gt;. Version 2.4.x, VC11, x86&lt;/h3&gt;
+
+&lt;h3 id=&#34;php-path-c-php-version-5-6-x-vc11-x86&#34;&gt;PHP path &lt;code&gt;c:\php&lt;/code&gt;, Version 5.6.x, VC11, x86&lt;/h3&gt;
+
+&lt;h3 id=&#34;use-localhost-1234-as-test-website-url&#34;&gt;Use &lt;code&gt;localhost:1234&lt;/code&gt; as test website URL&lt;/h3&gt;
+
+&lt;h3 id=&#34;project-workspace-path-c-php-workspace&#34;&gt;Project workspace path &lt;code&gt;c:\php_workspace&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h3 id=&#34;website-root-path-c-php-workspace-phpsite-the-index-php-is-under-this-root-path&#34;&gt;Website root path &lt;code&gt;c:\php_workspace\phpsite&lt;/code&gt;, the &lt;code&gt;index.php&lt;/code&gt; is under this root path&lt;/h3&gt;
+
+&lt;h2 id=&#34;prepare-php-for-debugging&#34;&gt;Prepare PHP for debugging&lt;/h2&gt;
+
+&lt;h3 id=&#34;download-xdebug-and-install-it&#34;&gt;Download XDebug and install it&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Go to xdebug &lt;a href=&#34;xdebug.org&#34;&gt;site&lt;/a&gt;. Use the &lt;a href=&#34;https://xdebug.org/wizard.php&#34;&gt;wizard tool&lt;/a&gt; to find the xdebug tool.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;c:\php\php.exe -i | clip&lt;/code&gt; to copy the php info to memory. And then paste the content to the input area, and click &lt;code&gt;Analyse my phpinfo() output&lt;/code&gt;. It will show the correct file to download.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the dll file and put it into php folder &lt;code&gt;c:\php\ext&lt;/code&gt;. Update the &lt;code&gt;php.ini&lt;/code&gt; file by adding the following lines at the bottom of file.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[XDebug]
+zend_extension=&amp;quot;c:/php/ext/php_xdebug-x.x.x-x.x-vcxx.dll&amp;quot;
+xdebug.remote_enable=1
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_autostart=1
+xdebug.remote_connect_back=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;setup-apache-to-load-php&#34;&gt;Setup Apache to load PHP&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add php module loading inside your apache configuration file.&lt;/li&gt;
+&lt;li&gt;On the file &lt;code&gt;c:\apache\conf\httpd.conf&lt;/code&gt; with nodepad and update as following setting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt;
+# Update apache root
+# ServerRoot &amp;quot;c:/Apache24&amp;quot;
+ServerRoot &amp;quot;c:/apache&amp;quot;
+
+# Change origin 80 to 1234
+# Listen 80
+Listen 1234
+
+# Add ServerName
+ServerName localhost:1234
+
+# Add PHP directory
+PHPIniDir &amp;quot;C:/php&amp;quot;
+
+# Add PHP module and handler
+LoadModule php5_module &amp;quot;c:/php/php5apache2_4.dll&amp;quot;
+AddHandler application/x-httpd-php .php
+
+&amp;lt;FilesMatch \.php$&amp;gt;
+      SetHandler application/x-httpd-php
+&amp;lt;/FilesMatch&amp;gt;
+
+# Change origin doc root htdocs 
+# DocumentRoot &amp;quot;c:/Apache24/htdocs&amp;quot;
+DocumentRoot &amp;quot;c:/php_workspace/phpsite&amp;quot;
+
+&amp;lt;Directory &amp;quot;c:/php_workspace/phpsite&amp;quot;&amp;gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&amp;lt;/Directory&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;debug-php-with-pdt&#34;&gt;Debug PHP with PDT&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;open-phpsite-as-php-the-project-with-eclipse-pdt&#34;&gt;Open phpsite as PHP the project with Eclipse PDT&lt;/h3&gt;
+
+&lt;h3 id=&#34;setup-php-web-application-for-debugging&#34;&gt;Setup PHP Web Application for debugging&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose menu &lt;code&gt;Run&lt;/code&gt; &amp;gt; &lt;code&gt;Debug Configurations&lt;/code&gt; &amp;gt; &lt;code&gt;PHP Web Application&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add new configuration by clicking &lt;img src=&#34;https://harryho.github.io/img/php_pdt_new_debug.png&#34; alt=&#34;New&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;configure-php-web-server&#34;&gt;Configure PHP Web Server&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose &lt;code&gt;Default PHP Web Server&lt;/code&gt; from the dropdown list&lt;/li&gt;
+&lt;li&gt;Click the button  &lt;code&gt;configuration&lt;/code&gt;, it prop up a Window dialog.&lt;/li&gt;
+&lt;li&gt;On the tab &lt;code&gt;Server&lt;/code&gt;, Set the &lt;code&gt;localhost:1234&lt;/code&gt; as &lt;code&gt;Base URL&lt;/code&gt;. It should be the same as ServerName in your &lt;code&gt;httd.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;On the tab &lt;code&gt;Debugger&lt;/code&gt;, choose &lt;code&gt;XDebug&lt;/code&gt; from the dropdown list, then other setting as default.&lt;/li&gt;
+&lt;li&gt;On the tab &lt;code&gt;Path Mapping&lt;/code&gt;, add new mapping. Enter &lt;code&gt;/&lt;/code&gt; as &lt;code&gt;Path on Server&lt;/code&gt;, Put &lt;code&gt;c:\php_workspace\phpsite&lt;/code&gt; as &lt;code&gt;Path in File system&lt;/code&gt;, then leave other setting as default.&lt;/li&gt;
+&lt;li&gt;Close the Window dialog.&lt;/li&gt;
+&lt;li&gt;Choose the File &lt;code&gt;c:\php_workspace\phpsite\index.php&lt;/code&gt; as startup page.&lt;/li&gt;
+&lt;li&gt;If the &lt;code&gt;Auto Generated URL&lt;/code&gt; is not &lt;code&gt;localhost:1234/index.php&lt;/code&gt;, then manually update it.&lt;/li&gt;
+&lt;li&gt;After all these done, you can debug your website now.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;debug-php-with-netbeans&#34;&gt;Debug PHP with Netbeans&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;open-phpsite-as-php-the-project-with-netbeans&#34;&gt;Open phpsite as PHP the project with Netbeans.&lt;/h3&gt;
+
+&lt;h3 id=&#34;configure-php-web-server-1&#34;&gt;Configure PHP Web Server&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On the &lt;code&gt;Projects&lt;/code&gt; panel, choose the project &lt;code&gt;phpsite&lt;/code&gt; , right click and choose &lt;code&gt;Properties&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Sources&lt;/code&gt; within the categories. Check the PHP version is the same as your PHP version.&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Run Configurations&lt;/code&gt; within the categories, and update the default configuration.&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Local Web Site&lt;/code&gt; from &lt;code&gt;Run As&lt;/code&gt; dropdown list.&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;localhost:1234&lt;/code&gt; as Project URL&lt;/li&gt;
+&lt;li&gt;Click the button &lt;code&gt;Advanced ...&lt;/code&gt; to update web server&lt;/li&gt;
+&lt;li&gt;Add a new path mapping. Enter &lt;code&gt;/&lt;/code&gt; as &lt;code&gt;Path on Server&lt;/code&gt;, Put &lt;code&gt;c:\php_workspace\phpsite&lt;/code&gt; as &lt;code&gt;Path in File system&lt;/code&gt;, then leave other setting as default.&lt;/li&gt;
+&lt;li&gt;Leave other default setting and click button &lt;code&gt;OK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Now you can debug php site with Netbeans&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

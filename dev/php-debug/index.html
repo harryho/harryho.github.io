@@ -1,0 +1,477 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Debug PHP with Eclipse PDT and Netbeans - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/blog/">Blog</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Debug PHP with Eclipse PDT and Netbeans</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<h2 id="pdt-and-netbeans">PDT and Netbeans</h2>
+
+<blockquote>
+<p>PDT and Netbeans are two most popluar free PHP IDEs. We choose such IDE for productivity, so code intelligence and debug are two key factors, which let us love IDE. Because both are not created for PHP development at the start, there is no built-in server to support the PHP web debug. When we want to use it to debug, we would come across some wierd problems. Here is how to prepare the IDE for PHP debug.</p>
+</blockquote>
+
+<h2 id="amp-package-or-without-amp">AMP package or without AMP</h2>
+
+<h3 id="use-amp-package-as-smart-choice">Use AMP package as smart choice</h3>
+
+<ul>
+<li><p>If you haven&rsquo;t installed install any MySQL, Apache, PHP on your computer, I will recommend you to choose AMP ( Apache, MySQL, PHP ) package first, especially when project is small, the time is so tight, your client just want you to do some minor change. In that scenario, AMP package is a much better choice. Popular AMP packages include : EasyPHP, MAMP, WAMP, XAMPP. You can pick any of them on your favor.</p></li>
+
+<li><p>Here is not going to discuss any specific AMP package. You can find more detailed instruction from their official website. If you still have problem, you can take a look how to do without the AMP package, but I won&rsquo;t guarantee you the solution below will work for your AMP.</p></li>
+</ul>
+
+<h3 id="manage-your-shits-without-amp-package">Manage your shits without AMP package</h3>
+
+<ul>
+<li><p>Here we just focus on how to work with shits ( Apache, PHP ) which you download and install them piece by piece. 10 years ago, it was easier to choose which one to download and install, because there was no much option, but now there are many options which make us confused.</p></li>
+
+<li><p>The more worst and nastiest problem today is compatible issue between x86 and x64 applications in Windows. Even sometimes they are claimed compiled as x86, until you test it you will never they are really compatible. The reason is Windows has different versions of C++ redistributed compiler, if you use different compilers from Windows to compile your source code, you cannot ensure they are compatible to work together.</p></li>
+
+<li><p>To avoid this problem, it is better to make sure the package or software are compatible at the beginning. That is why the AMP package is much better and easy to do that. They help you solve such nasty problem by bundling all you need together.</p></li>
+
+<li><p>Download the compatible packages, especially Apache and PHP. When you download PHP, you need to know the PHP is compiled by VC9, VC11, or VC14, and x86 or x64. After that, you need to download proper Apache from <a href="https://www.apachelounge.com/download">here</a></p></li>
+</ul>
+
+<h2 id="assumption">Assumption</h2>
+
+<h3 id="apache-path-c-apache-version-2-4-x-vc11-x86">Apache path <code>c:\apache</code>. Version 2.4.x, VC11, x86</h3>
+
+<h3 id="php-path-c-php-version-5-6-x-vc11-x86">PHP path <code>c:\php</code>, Version 5.6.x, VC11, x86</h3>
+
+<h3 id="use-localhost-1234-as-test-website-url">Use <code>localhost:1234</code> as test website URL</h3>
+
+<h3 id="project-workspace-path-c-php-workspace">Project workspace path <code>c:\php_workspace</code></h3>
+
+<h3 id="website-root-path-c-php-workspace-phpsite-the-index-php-is-under-this-root-path">Website root path <code>c:\php_workspace\phpsite</code>, the <code>index.php</code> is under this root path</h3>
+
+<h2 id="prepare-php-for-debugging">Prepare PHP for debugging</h2>
+
+<h3 id="download-xdebug-and-install-it">Download XDebug and install it</h3>
+
+<ul>
+<li><p>Go to xdebug <a href="xdebug.org">site</a>. Use the <a href="https://xdebug.org/wizard.php">wizard tool</a> to find the xdebug tool.</p></li>
+
+<li><p>Type <code>c:\php\php.exe -i | clip</code> to copy the php info to memory. And then paste the content to the input area, and click <code>Analyse my phpinfo() output</code>. It will show the correct file to download.</p></li>
+
+<li><p>Download the dll file and put it into php folder <code>c:\php\ext</code>. Update the <code>php.ini</code> file by adding the following lines at the bottom of file.</p></li>
+</ul>
+
+<pre><code class="language-ini">[XDebug]
+zend_extension=&quot;c:/php/ext/php_xdebug-x.x.x-x.x-vcxx.dll&quot;
+xdebug.remote_enable=1
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_autostart=1
+xdebug.remote_connect_back=1
+</code></pre>
+
+<h3 id="setup-apache-to-load-php">Setup Apache to load PHP</h3>
+
+<ul>
+<li>Add php module loading inside your apache configuration file.</li>
+<li>On the file <code>c:\apache\conf\httpd.conf</code> with nodepad and update as following setting</li>
+</ul>
+
+<pre><code class="language-apache">
+# Update apache root
+# ServerRoot &quot;c:/Apache24&quot;
+ServerRoot &quot;c:/apache&quot;
+
+# Change origin 80 to 1234
+# Listen 80
+Listen 1234
+
+# Add ServerName
+ServerName localhost:1234
+
+# Add PHP directory
+PHPIniDir &quot;C:/php&quot;
+
+# Add PHP module and handler
+LoadModule php5_module &quot;c:/php/php5apache2_4.dll&quot;
+AddHandler application/x-httpd-php .php
+
+&lt;FilesMatch \.php$&gt;
+      SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+
+# Change origin doc root htdocs 
+# DocumentRoot &quot;c:/Apache24/htdocs&quot;
+DocumentRoot &quot;c:/php_workspace/phpsite&quot;
+
+&lt;Directory &quot;c:/php_workspace/phpsite&quot;&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;
+</code></pre>
+
+<h2 id="debug-php-with-pdt">Debug PHP with PDT</h2>
+
+<p><strong>If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.</strong></p>
+
+<h3 id="open-phpsite-as-php-the-project-with-eclipse-pdt">Open phpsite as PHP the project with Eclipse PDT</h3>
+
+<h3 id="setup-php-web-application-for-debugging">Setup PHP Web Application for debugging</h3>
+
+<ul>
+<li>Choose menu <code>Run</code> &gt; <code>Debug Configurations</code> &gt; <code>PHP Web Application</code></li>
+<li>Add new configuration by clicking <img src="/img/php_pdt_new_debug.png" alt="New" /></li>
+</ul>
+
+<h3 id="configure-php-web-server">Configure PHP Web Server</h3>
+
+<ul>
+<li>Choose <code>Default PHP Web Server</code> from the dropdown list</li>
+<li>Click the button  <code>configuration</code>, it prop up a Window dialog.</li>
+<li>On the tab <code>Server</code>, Set the <code>localhost:1234</code> as <code>Base URL</code>. It should be the same as ServerName in your <code>httd.conf</code></li>
+<li>On the tab <code>Debugger</code>, choose <code>XDebug</code> from the dropdown list, then other setting as default.</li>
+<li>On the tab <code>Path Mapping</code>, add new mapping. Enter <code>/</code> as <code>Path on Server</code>, Put <code>c:\php_workspace\phpsite</code> as <code>Path in File system</code>, then leave other setting as default.</li>
+<li>Close the Window dialog.</li>
+<li>Choose the File <code>c:\php_workspace\phpsite\index.php</code> as startup page.</li>
+<li>If the <code>Auto Generated URL</code> is not <code>localhost:1234/index.php</code>, then manually update it.</li>
+<li>After all these done, you can debug your website now.</li>
+</ul>
+
+<h2 id="debug-php-with-netbeans">Debug PHP with Netbeans</h2>
+
+<p><strong>If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.</strong></p>
+
+<h3 id="open-phpsite-as-php-the-project-with-netbeans">Open phpsite as PHP the project with Netbeans.</h3>
+
+<h3 id="configure-php-web-server-1">Configure PHP Web Server</h3>
+
+<ul>
+<li>On the <code>Projects</code> panel, choose the project <code>phpsite</code> , right click and choose <code>Properties</code></li>
+<li>Choose <code>Sources</code> within the categories. Check the PHP version is the same as your PHP version.</li>
+<li>Choose <code>Run Configurations</code> within the categories, and update the default configuration.</li>
+<li>Choose <code>Local Web Site</code> from <code>Run As</code> dropdown list.</li>
+<li>Set <code>localhost:1234</code> as Project URL</li>
+<li>Click the button <code>Advanced ...</code> to update web server</li>
+<li>Add a new path mapping. Enter <code>/</code> as <code>Path on Server</code>, Put <code>c:\php_workspace\phpsite</code> as <code>Path in File system</code>, then leave other setting as default.</li>
+<li>Leave other default setting and click button <code>OK</code></li>
+<li>Now you can debug php site with Netbeans</li>
+</ul>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Debug PHP with Eclipse PDT and Netbeans</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#pdt-and-netbeans">PDT and Netbeans</a></li>
+<li><a href="#amp-package-or-without-amp">AMP package or without AMP</a>
+<ul>
+<li><a href="#use-amp-package-as-smart-choice">Use AMP package as smart choice</a></li>
+<li><a href="#manage-your-shits-without-amp-package">Manage your shits without AMP package</a></li>
+</ul></li>
+<li><a href="#assumption">Assumption</a>
+<ul>
+<li><a href="#apache-path-c-apache-version-2-4-x-vc11-x86">Apache path <code>c:\apache</code>. Version 2.4.x, VC11, x86</a></li>
+<li><a href="#php-path-c-php-version-5-6-x-vc11-x86">PHP path <code>c:\php</code>, Version 5.6.x, VC11, x86</a></li>
+<li><a href="#use-localhost-1234-as-test-website-url">Use <code>localhost:1234</code> as test website URL</a></li>
+<li><a href="#project-workspace-path-c-php-workspace">Project workspace path <code>c:\php_workspace</code></a></li>
+<li><a href="#website-root-path-c-php-workspace-phpsite-the-index-php-is-under-this-root-path">Website root path <code>c:\php_workspace\phpsite</code>, the <code>index.php</code> is under this root path</a></li>
+</ul></li>
+<li><a href="#prepare-php-for-debugging">Prepare PHP for debugging</a>
+<ul>
+<li><a href="#download-xdebug-and-install-it">Download XDebug and install it</a></li>
+<li><a href="#setup-apache-to-load-php">Setup Apache to load PHP</a></li>
+</ul></li>
+<li><a href="#debug-php-with-pdt">Debug PHP with PDT</a>
+<ul>
+<li><a href="#open-phpsite-as-php-the-project-with-eclipse-pdt">Open phpsite as PHP the project with Eclipse PDT</a></li>
+<li><a href="#setup-php-web-application-for-debugging">Setup PHP Web Application for debugging</a></li>
+<li><a href="#configure-php-web-server">Configure PHP Web Server</a></li>
+</ul></li>
+<li><a href="#debug-php-with-netbeans">Debug PHP with Netbeans</a>
+<ul>
+<li><a href="#open-phpsite-as-php-the-project-with-netbeans">Open phpsite as PHP the project with Netbeans.</a></li>
+<li><a href="#configure-php-web-server-1">Configure PHP Web Server</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/blog">
+					<span class="doc-list-category">Blog</span>
+				</a>
+				<ul>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/blog/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li>
+						<span class="active">Debug PHP with Eclipse PDT and Netbeans</span>
+						</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/django">django</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/laravel">laravel</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>
