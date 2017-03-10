@@ -353,6 +353,16 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
 <li>Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.<br /></li>
 </ul>
 
+<h3 id="forgot-admin-s-password">Forgot admin&rsquo;s password</h3>
+
+<ul>
+<li>Forgot admin&rsquo;s password or somehow you have to reset password and you cannot get admin&rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&rsquo;s password from database.</li>
+<li>Tailor the SQL below. Then you should be able to use new password to login.</li>
+</ul>
+
+<pre><code class="language-sql">UPDATE ps_employee SET passwd = MD5('&lt;_COOKIE_KEY_&gt;password') WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
+</code></pre>
+
 				</section>
 			</article>
 		</main>
@@ -414,6 +424,7 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
 <li><a href="#install-prestashop">Install Prestashop</a></li>
 <li><a href="#install-prestashop-with-amp-package">Install Prestashop with AMP package</a></li>
 <li><a href="#install-prestashop-without-amp-package">Install Prestashop without AMP package</a></li>
+<li><a href="#forgot-admin-s-password">Forgot admin&rsquo;s password</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -429,7 +440,7 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
 					<span class="doc-list-category">Blog</span>
 				</a>
 				<ul>
-					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages on Windows</a>
+					<li><a href="/blog/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
 					<li><a href="/code/csharp-good-practice-1/">C# Note -- Part 1</a>
@@ -499,6 +510,9 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
 				</a>
 				<ul>
 					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
 					</li>
 				
 					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>

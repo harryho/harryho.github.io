@@ -295,6 +295,16 @@ CREATE DATABASE prestashop CHAR SET utf8 COLLATE &#39;utf8_unicode_ci&#39;;
 &lt;li&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h3 id=&#34;forgot-admin-s-password&#34;&gt;Forgot admin&amp;rsquo;s password&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Forgot admin&amp;rsquo;s password or somehow you have to reset password and you cannot get admin&amp;rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&amp;rsquo;s password from database.&lt;/li&gt;
+&lt;li&gt;Tailor the SQL below. Then you should be able to use new password to login.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;UPDATE ps_employee SET passwd = MD5(&#39;&amp;lt;_COOKIE_KEY_&amp;gt;password&#39;) WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
