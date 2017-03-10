@@ -268,40 +268,56 @@ php -S 0.0.0.0:1234 -t prestashop
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Open the link &lt;code&gt;http://localhost:1234&lt;/code&gt; with browser&lt;/li&gt;
-&lt;li&gt;Choose language and click &lt;code&gt;Next&lt;/code&gt;, and then select the checkbox &amp;ldquo;I agree bah lah bah lah &amp;hellip;. &amp;rdquo; and click &lt;code&gt;Next&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;If there is an error &lt;code&gt;GD Library is not installed&lt;/code&gt; prompt, you just need to enable the library on &lt;code&gt;php.ini&lt;/code&gt;
+&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234&lt;/code&gt; with browser&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose language and click &lt;code&gt;Next&lt;/code&gt;, and then select the checkbox &amp;ldquo;I agree bah lah bah lah &amp;hellip;. &amp;rdquo; and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If there is an error &lt;code&gt;GD Library is not installed&lt;/code&gt; prompt, you just need to enable the library on &lt;code&gt;php.ini&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;DO NOT close your browser.&lt;/li&gt;
 &lt;li&gt;Stop the php server by &lt;code&gt;Ctrl + C&lt;/code&gt; in the command prompt.&lt;/li&gt;
 &lt;li&gt;Use notepad to open the file &lt;code&gt;php.ini&lt;/code&gt; under the &lt;code&gt;\path\to\php&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Uncomment the config &lt;code&gt;;extension=php_gd2.dll&lt;/code&gt; =&amp;gt; &lt;code&gt;extension=php_gd2.dll&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Start the php server again&lt;/li&gt;
+&lt;li&gt;Start the php server again
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Click the &lt;code&gt;Refresh this settings&lt;/code&gt;, and click &lt;code&gt;Next&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click &lt;code&gt;Test your database connection&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;If you got error &lt;code&gt;prestashop database not found&lt;/code&gt;, you need to create a database on mysql server.
+
+&lt;li&gt;&lt;p&gt;Click the &lt;code&gt;Refresh this settings&lt;/code&gt;, and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click &lt;code&gt;Test your database connection&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you got error &lt;code&gt;prestashop database not found&lt;/code&gt;, you need to create a database on mysql server.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;I simply create a new database immediately with one command line
-&lt;code&gt;bash
-CREATE DATABASE prestashop CHAR SET utf8 COLLATE &#39;utf8_unicode_ci&#39;;
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Test the connection again. You will get the green light&lt;/li&gt;
+&lt;li&gt;I simply create a new database immediately with one command line&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE DATABASE prestashop CHAR SET utf8 COLLATE &#39;utf8_unicode_ci&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test the connection again. You will get the green light
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Click &lt;code&gt;Next&lt;/code&gt; and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click &lt;code&gt;Next&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Setup your sample store. Click &lt;code&gt;Next&lt;/code&gt;. Then the installer will help you finish the initialization.&lt;/li&gt;
-&lt;li&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/li&gt;
-&lt;li&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;br /&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;code&gt;Next&lt;/code&gt; and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Setup your sample store. Click &lt;code&gt;Next&lt;/code&gt;. Then the installer will help you finish the initialization.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;forgot-admin-s-password&#34;&gt;Forgot admin&amp;rsquo;s password&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Forgot admin&amp;rsquo;s password or somehow you have to reset password and you cannot get admin&amp;rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&amp;rsquo;s password from database.&lt;/li&gt;
-&lt;li&gt;Tailor the SQL below. Then you should be able to use new password to login.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Forgot admin&amp;rsquo;s password or somehow you have to reset password and you cannot get admin&amp;rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&amp;rsquo;s password from database.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Tailor the SQL below. Then you should be able to use new password to login.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;UPDATE ps_employee SET passwd = MD5(&#39;&amp;lt;_COOKIE_KEY_&amp;gt;password&#39;) 
