@@ -80,21 +80,81 @@
 <p><em>C# notes is the place, which I keep the good practice and solution from my projects and research.</em></p>
 </blockquote>
 
-<h2 id="generic-predicate-and-expression">Generic predicate and Expression</h2>
+<h2 id="create-simple-net-project-without-visual-studio">Create simple .net project without Visual Studio</h2>
 
 <h3 id="assumption">Assumption</h3>
 
-<blockquote>
-<p>You have experience of developing .net application, which includes entity framework or ADO.Net</p>
+<ul>
+<li>DotNet Frameowork path <code>c:\Windows\Microsfot.Net\Frameowork\v4.0.30319</code></li>
+</ul>
 
-<p>You have experience of using SQL to query database</p>
+<h3 id="simple-c-project">Simple C# project</h3>
+
+<h4 id="create-a-proejct-named-c-project">Create a proejct named <code>c#project</code></h4>
+
+<pre><code class="language-bash">md c#project
+cd c#project 
+md bin src
+echo.&gt;c#project.proj
+echo.&gt;src\helloworld.cs
+</code></pre>
+
+<h4 id="open-project-configuration-c-project-proj-with-notepad">Open Project configuration <code>c#project.proj</code> with notepad</h4>
+
+<pre><code class="language-xml">&lt;Project DefaultTargets = &quot;Compile&quot;
+    xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot; &gt;
+
+    &lt;!-- Set the application name as a property --&gt;
+    &lt;PropertyGroup&gt;
+        &lt;appname&gt;c#app&lt;/appname&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;!-- Specify the inputs by type and file name --&gt;
+    &lt;ItemGroup&gt;
+        &lt;CSFile Include = &quot;src\helloworld.cs&quot;/&gt;
+    &lt;/ItemGroup&gt;
+
+    &lt;Target Name = &quot;Compile&quot;&gt;
+        &lt;!-- Run the Visual C# compilation using input files of type CSFile --&gt;
+        &lt;CSC
+            Sources = &quot;@(CSFile)&quot;
+            OutputAssembly = &quot;bin\$(appname).exe&quot;&gt;
+            &lt;!-- Set the OutputAssembly attribute of the CSC task
+            to the name of the executable file that is created --&gt;
+            &lt;Output
+                TaskParameter = &quot;OutputAssembly&quot;
+                ItemName = &quot;EXEFile&quot; /&gt;
+        &lt;/CSC&gt;
+        &lt;!-- Log the file name of the output file --&gt;
+        &lt;Message Text=&quot;The output file is @(EXEFile)&quot;/&gt;
+    &lt;/Target&gt;
+&lt;/Project&gt;
+
+</code></pre>
+
+<h3 id="copy-the-helloworld-cs-from-home-page-c">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></h3>
+
+<h3 id="compile-with-msbuild-run">Compile with MSBuild &amp; Run</h3>
+
+<pre><code class="language-bash">c:\Windows\Microsfot.Net\Frameowork\v4.0.30319\MSBuild
+bin\c#app.exe
+</code></pre>
+
+<h2 id="generic-predicate-and-expression-for-query">Generic Predicate and Expression for query</h2>
+
+<h3 id="assumption-1">Assumption</h3>
+
+<blockquote>
+<p><em>You have experience of developing .net application, which includes entity framework.</em></p>
+
+<p><em>You have experience of using SQL to query database</em></p>
 </blockquote>
 
 <h3 id="problem">Problem</h3>
 
-<p>Database query is one of most common and important function in almost any .net application. Once ADO.Net was the most critical component which execute all database oprations, but after .net 3.5, its top one position has been taken by entity framework, which provides convenient ORM feature. Now entity framework is core component in all applications, which need to communicate with database.</p>
+<p>Now entity framework is core component in all .net applications, which need to communicate with database.</p>
 
-<p>Business service get a lot of benefits form entity framework&rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us reduce many reduntant queries.</p>
+<p>Business service get a lot of benefits form entity framework&rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us create generic query and reduce many reduntant code.</p>
 
 <h3 id="solution">Solution</h3>
 
@@ -375,9 +435,20 @@ public static class PredicateBuilder
 <li>
 <ul>
 <li><a href="#prelude">Prelude</a></li>
-<li><a href="#generic-predicate-and-expression">Generic predicate and Expression</a>
+<li><a href="#create-simple-net-project-without-visual-studio">Create simple .net project without Visual Studio</a>
 <ul>
 <li><a href="#assumption">Assumption</a></li>
+<li><a href="#simple-c-project">Simple C# project</a>
+<ul>
+<li><a href="#create-a-proejct-named-c-project">Create a proejct named <code>c#project</code></a></li>
+<li><a href="#open-project-configuration-c-project-proj-with-notepad">Open Project configuration <code>c#project.proj</code> with notepad</a></li>
+</ul></li>
+<li><a href="#copy-the-helloworld-cs-from-home-page-c">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></a></li>
+<li><a href="#compile-with-msbuild-run">Compile with MSBuild &amp; Run</a></li>
+</ul></li>
+<li><a href="#generic-predicate-and-expression-for-query">Generic Predicate and Expression for query</a>
+<ul>
+<li><a href="#assumption-1">Assumption</a></li>
 <li><a href="#problem">Problem</a></li>
 <li><a href="#solution">Solution</a>
 <ul>
@@ -404,10 +475,16 @@ public static class PredicateBuilder
 						<span class="active">C# Notes -- Part 1</span>
 						</li>
 				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
 					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
 					</li>
 				
 					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
 					</li>
 				
 				</ul>

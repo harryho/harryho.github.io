@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Build mobile app with web dev skills - Hello World</title>
+    <title>Golang Notes, Part 1 - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -67,133 +67,26 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Build mobile app with web dev skills</h1>
+				<h1 class="doc-entry-title">Golang Notes, Part 1</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
-					
+					<p>Hello World
+In the Go tutorial, you get started with Go in the typical manner: printing &ldquo;Hello World&rdquo; (Ken
+Thompson and Dennis Ritchie started this when they presented the C language in the
+1970s). That&rsquo;s a great way to start, so here it is, &ldquo;Hello World&rdquo; in Go.</p>
 
-<h2 id="what-is-mobile-app">What is mobile app</h2>
-
-<blockquote>
-<p><em>A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps</em></p>
-
-<p><em><strong>Native apps</strong> are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.</em></p>
-
-<p><em><strong>HTML5 apps</strong> use standard web technologies—typically HTML5, JavaScript and CSS. This write-once-run-anywhere approach to mobile development creates cross-platform mobile applications that work on multiple devices.</em></p>
-
-<p><em><strong>Hybrid apps</strong> make it possible to embed HTML5 apps inside a thin native container, combining the good parts of <strong>Native app</strong> and <strong>HTML5 app</strong> elements.</em></p>
-</blockquote>
-
-<h2 id="mobile-app-development">Mobile app development</h2>
-
-<p>According above breif history we can image the mobile developer community has become asfragmented as the market. Mobile software developers work with different programming environments, different tools, and different programming languages.</p>
-
-<p>After a few years of improvement, we can see some <strong>Hybrid app</strong> based framework becomes more and more popular and shining. <code>ionic</code>, <code>nativescript</code> and <code>react native</code> are most promising frameworks which we should really look into.</p>
-
-<h2 id="introduction-of-ionic-developement">Introduction of ionic developement</h2>
-
-<h3 id="assumption">Assumption</h3>
-
-<ul>
-<li>Here we just introduce ionic 1.x. When I started investigating the <code>ionic</code>, the <code>ionic 2</code> just came out for a while. <code>ionic 2</code> study is on my todo list.</li>
-<li>You are familiar with web technologies, such as, HTML5, CSS, JavaScript, and you should have experience of nodejs and relevant skills.</li>
-</ul>
-
-<h3 id="getting-started">Getting started</h3>
-
-<ul>
-<li>install ionic 1.x</li>
-<li>setup ionic and create new project <code>demoApp</code></li>
-</ul>
-
-<pre><code>ionic start demoApp slidemenu
-cd demoApp
-ionic platform add android 
-ionic build android 
-ionic emulate android 
-</code></pre>
-
-<h3 id="install-packages">Install packages</h3>
-
-<ul>
-<li>Use <code>npm install</code> to install packages</li>
-<li>Folllowing is the <code>package.json</code>. You can tailor it on your own.</li>
-</ul>
-
-<pre><code>{
-  &quot;name&quot;: &quot;ionic-project&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;An Ionic project&quot;,
-  &quot;dependencies&quot;: {
-    &quot;gulp&quot;: &quot;^3.5.6&quot;,
-    &quot;gulp-sass&quot;: &quot;^2.0.4&quot;,
-    &quot;gulp-concat&quot;: &quot;^2.2.0&quot;,
-    &quot;gulp-minify-css&quot;: &quot;^0.3.0&quot;,
-    &quot;gulp-rename&quot;: &quot;^1.2.0&quot;
-  },
-  &quot;devDependencies&quot;: {
-    &quot;bower&quot;: &quot;^1.3.3&quot;,
-    &quot;gulp-util&quot;: &quot;^2.2.14&quot;,
-    &quot;shelljs&quot;: &quot;^0.3.0&quot;
-  },
-  &quot;cordovaPlugins&quot;: [
-    &quot;cordova-plugin-device&quot;,
-    &quot;cordova-plugin-console&quot;,
-    &quot;cordova-plugin-whitelist&quot;,
-    &quot;cordova-plugin-splashscreen&quot;,
-    &quot;cordova-plugin-statusbar&quot;,
-    &quot;ionic-plugin-keyboard&quot;
-  ],
-  &quot;cordovaPlatforms&quot;: []
+<pre><code class="language-go">package main 1
+import &quot;fmt&quot; 2 Implements formatted I/O.
+/* Print something */ 3
+func main() { 4
+fmt.Printf(&quot;Hello, world.&quot;) 5
 }
-
 </code></pre>
 
-<h3 id="debug">Debug</h3>
-
-<ul>
-<li>Browser is the best option for ionic mobile development debug tools</li>
-<li>Use Telerik AppBuilder to debug</li>
-</ul>
-
-<h2 id="test-on-emulator-or-device">Test on emulator or device</h2>
-
-<ul>
-<li><p>Android</p>
-
-<ul>
-<li>Download and install <a href="https://developer.android.com/studio/index.html#downloads">Android SDK</a></li>
-<li>Download install at least one sdk platform.</li>
-<li>ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.</li>
-<li>install x86 or x86_64 image for windows environment</li>
-<li>install Extra plugins: Google USB driver, X86 Emulator Accelerator</li>
-<li>Create AVD for your mobile app testing</li>
-</ul></li>
-
-<li><p>iPhone</p>
-
-<ul>
-<li>Install AppBuilder on Visual Studio</li>
-<li>Install Genymotion</li>
-</ul></li>
-</ul>
-
-<h2 id="troubleshooting">Troubleshooting</h2>
-
-<ul>
-<li>Android emulator accelerator error due to version is too low to support the system image</li>
-<li>uninstall old version intel HAXM</li>
-
-<li><p>install new version manually from <code>&lt;Android_SDK_Location&gt;\extras\intel\Hardware_Accelerated_Execution_Manager</code></p></li>
-
-<li><p>If app is not working on emulator, check cordova plugins or manually install cordova plugins</p></li>
-
-<li><p><code>ionic plugins list</code></p></li>
-
-<li><p><code>ionic plugins add XXXXX</code></p></li>
-</ul>
+<p>Lets look at the program line by line. This 􀃗rst line is just required 1 . All Go 􀃗les start with
+package <something>, and package main is required for a standalone executable.</p>
 
 				</section>
 			</article>
@@ -208,26 +101,9 @@ ionic emulate android
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Build mobile app with web dev skills</a></strong></li>
+				<li><strong><a href="#title">Golang Notes, Part 1</a></strong></li>
 			</ul>
-			<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#what-is-mobile-app">What is mobile app</a></li>
-<li><a href="#mobile-app-development">Mobile app development</a></li>
-<li><a href="#introduction-of-ionic-developement">Introduction of ionic developement</a>
-<ul>
-<li><a href="#assumption">Assumption</a></li>
-<li><a href="#getting-started">Getting started</a></li>
-<li><a href="#install-packages">Install packages</a></li>
-<li><a href="#debug">Debug</a></li>
-</ul></li>
-<li><a href="#test-on-emulator-or-device">Test on emulator or device</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-</ul></li>
-</ul>
-</nav>
+			
 		</div>
 	</div>
 	<div class="sidebar-module">
@@ -242,16 +118,10 @@ ionic emulate android
 					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
 					</li>
 				
-					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
-					</li>
-				
 					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
 					</li>
 				
 					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
-					</li>
-				
-					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
 					</li>
 				
 				</ul>
@@ -265,9 +135,8 @@ ionic emulate android
 					<li><a href="/dev/php-web/">PHP web framework</a>
 					</li>
 				
-					<li>
-						<span class="active">Build mobile app with web dev skills</span>
-						</li>
+					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
+					</li>
 				
 					<li><a href="/dev/python-django/">Python Web framework</a>
 					</li>
