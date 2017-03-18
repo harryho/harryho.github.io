@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Brief history of Linux - Hello World</title>
+    <title>JIRA Notes - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li ><a href="https://harryho.github.io/">Home</a></li>
                        
-                    <li ><a href="https://harryho.github.io/note/">Note</a></li>
+                    <li ><a href="https://harryho.github.io/info/">Info</a></li>
                      
                     <li ><a href="https://harryho.github.io/code/">Code</a></li>
                      
@@ -67,74 +67,103 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Brief history of Linux</h1>
+				<h1 class="doc-entry-title">JIRA Notes</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h1 id="linux">Linux</h1>
-
-<h3 id="breif-history">Breif History</h3>
+<h2 id="what-is-jira">What is JIRA</h2>
 
 <blockquote>
-<p><em>When we are talking about Linux, we cannot miss its ancesor&ndash;Unix. Unix is one of the most popular operating systems worldwide because of its large support base and distribution. It was originally developed at AT&amp;T as a multitasking system for minicomputers and mainframes in the 1970&rsquo;s, but has since grown to become one of the most widely-used operating systems anywhere, despite its sometimes confusing interface and lack of central standardization.</em></p>
-
-<p><em>Many hackers feel that Unix is the Right Thing&ndash;the One True Operating System. Hence, the development of Linux by an expanding group of Unix hackers who want to get their hands dirty with their own system.</em></p>
-
-<p><em>Linux was originally developed as a hobby project by Linus Torvalds. It was inspired by Minix, a small Unix system developed by Andy Tanenbaum. The first discussions about Linux were on the Usenet newsgroup, comp.os.minix. These discussions were concerned mostly with the development of a small, academic Unix system for Minix users who wanted more.</em></p>
-
-<p><em>Linux is a complete multitasking, multiuser operating system, as are all other versions of Unix. This means that many users can log into and run programs on the same machine simultaneously.</em></p>
+<p>Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&rsquo;s main competitor, Bugzilla. It has been developed since 2002.</p>
 </blockquote>
 
-<h3 id="linux-distro">Linux distro</h3>
-
-<p>A Linux distribution (often abbreviated as distro) is an operating system made from a software collection, which is based upon the Linux kernel and, often, a package management system. Linux users usually obtain their operating system by downloading one of the Linux distributions, which are available for a wide variety of systems ranging from embedded devices (for example, OpenWrt) and personal computers (for example, Debian, Fedora) to powerful supercomputers (for example, Rocks Cluster Distribution).</p>
-
-<p>You can check out the more of each Linux distro from <a href="https://distrowatch.com/">DistroWatch</a>. The top 20 ranking Linux distro changes dramatically in last few years. Almost every year, some amazing Linux distro emerged into top 10, even top 5 list, but there are some distroes which are quite stable, and stay into top 10 to 20 over last decade.</p>
-
-<p>Here we just give the brief history of some stable and most popular distroes. It means the article will only cover the big players in the linux world. Some special and awesome distroes are assumed as minority, such as, Pentoo, Arch Linux, etc. so we won&rsquo;t cover those distroes.</p>
-
-<h1 id="debian-ubuntu">Debian/Ubuntu</h1>
+<h2 id="how-to-work-with-client-within-jira">How to work with client within JIRA</h2>
 
 <blockquote>
-<p><em>Ubuntu is one of a number of Linux distributions. The source code that makes up the Ubuntu distribution originates from another, much older Linux distribution known as Debian (so called because it was started by two people named Debra and Ian). Debian is still a widely respected operating system but came under criticism for infrequent updates and less than user friendly installation and maintenance (though these areas have shown improvement recently).</em></p>
-
-<p><em>A South African internet mogul (who made his fortune selling his company to VeriSign for around $500 million) decided it was time for a more user friendly Linux. He took the Debian distribution and worked to make it a more human friendly distribution which he called Ubuntu. He subsequently formed a company called Canonical Ltd to promote and provide support for Ubuntu.</em></p>
-
-<p><em>The word &ldquo;Ubuntu&rdquo; is an ancient Zulu and Xhosa word that means &ldquo;humanity to others&rdquo;. Ubuntu also means &ldquo;I am what I am because of who we all are&rdquo;.The Ubuntu operating system brings the spirit of Ubuntu to the world of computers.</em></p>
+<p>The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.</p>
 </blockquote>
 
-<h1 id="fedora-centos-redhat">Fedora/CentOS/Redhat</h1>
+<h3 id="assumption">Assumption</h3>
 
-<p><em>Fedora</em></p>
+<ul>
+<li><p>Your client&rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.</p></li>
 
-<blockquote>
-<p><em>Fedora has received many updates and individual releases over the years. It is a playground for new functionality. Often new technology is found here. It can be compared with other distributions like Arch Linux, except that it is slightly less aggressive in deploying the latest software components for everything. The difference between Fedora and other distributions is the corporate support by Red Hat. That means that professional developers can work on projects that are first tested in Fedora. A lot of these components may then also be picked up by other distributions.</em></p>
-</blockquote>
+<li><p>You have created a project for client, named <strong>ABC IT Project</strong></p></li>
 
-<p><em>Red Hat Enterprise Linux (RHEL)</em></p>
+<li><p>You want to allow the client to access this project on JIRA, but you want to avoid client&rsquo;s unintented update to mess up the project management.</p></li>
+</ul>
 
-<blockquote>
-<p><em>The Enterprise product of Red Hat is named RHEL for short. The main difference with Fedora is that is focused on companies which prefer stability. The most business-critical services are deployed on this platform. Battle-tested components might finally end up in this distribution.</em></p>
-</blockquote>
+<h3 id="requirement-of-permission-control">Requirement of permission control</h3>
 
-<p><em>CentOS</em></p>
+<ul>
+<li>In Agile practice, product owner should attend the</li>
+</ul>
 
-<blockquote>
-<p><em>CentOS as known as the free enterprise version of RedHat Linux, is one of most popular VPS or dedicated linux. Maybe you are using ubuntu or mint for your development, but many companies or institutes still choose CentOS as their production server, even full stack. Grasp the basic setup CentOS for website or web app or web service is still quite important.</em></p>
+<h3 id="change-default-permission-scheme">Change default permission scheme</h3>
 
-<p><em>Now CentOS is much more easy to setup for different purpose. Comparing with 10 years ago or more, even you use graphic UI to setup, you still will come across some weird glitch. CentOS has different group for you to install. Every group includes bunch of packages, and it focus on some specific purpose. I believe they meet most IT infra&rsquo;s requirement. So you don&rsquo;t need do much research, and work around to figure out how to build those packages together. Just use following command you can get all group list.</em></p>
-</blockquote>
+<ul>
+<li><p>Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.</p></li>
 
-<h1 id="suse-opensuse">Suse / OpenSuse</h1>
+<li><p>Choose <code>Isssues</code> &gt; <code>Permission schemes</code></p></li>
 
-<blockquote>
-<p><em>SUSE Linux is a computer operating system. It is built on top of the open source Linux kernel and is distributed with system and application software from other open source projects. SUSE Linux is of German origin, basically an acronym of &ldquo;Software und System-Entwicklung&rdquo; (software and systems development), and was mainly developed in Europe. The first version appeared in early 1994, making SUSE one of the oldest existing commercial distributions. It is known for its YaST configuration tool.</em></p>
+<li><p>Change all permissions from <code>Project Access - Any logged in user</code> to <code>Project role - Administrator</code> except the following items.</p>
 
-<p><em>Novell bought the SUSE brands and trademarks in 2003. Novell, one of the founding members of the Open Invention Network, decided to make the community an important part of their development process by opening widely the distribution development to outside contributors in 2005, creating the openSUSE distribution and the openSUSE Project. Novell employed more than 500 developers working on SUSE in 2004. On 27 April 2011, Novell (and SUSE) were acquired by The Attachmate Group, which made SUSE an independent business unit. Later, in October 2014, the entire Attachmate Group, including SUSE, was acquired by the British firm Micro Focus International. SUSE continues to operate as an independent business unit.</em></p>
-</blockquote>
+<ul>
+<li>View Development Tools</li>
+<li>View Read-Only Workflow</li>
+<li>Assignable User</li>
+<li>Delete Own Comments</li>
+<li>Edit Own Comments</li>
+<li>Delete Own Attachments</li>
+<li>Delete Own Worklogs</li>
+<li>Edit Own Worklogs</li>
+<li>Work On Issues</li>
+</ul></li>
+
+<li><p>Copy the default permission scheme and rename it to <code>&lt;client_business_name&gt; Permission Scheme</code>. In this case it would be <code>ABC Permission Scheme</code>.</p></li>
+
+<li><p>Create a new group named <strong>ABC Group</strong>,</p></li>
+
+<li><p>Update <code>ABC Permission Scheme</code> by granting <code>ABC Group</code> to some items.</p>
+
+<ul>
+<li>Browse Projects</li>
+<li>Create Issues</li>
+</ul></li>
+
+<li><p>Update the permission scheme of the project <code>ABC IT Project</code> from to <code>ABC Permission Scheme</code>.</p></li>
+</ul>
+
+<h3 id="change-user-s-group">Change user&rsquo;s group</h3>
+
+<ul>
+<li>Choose <code>User management</code> &gt; <code>User</code></li>
+<li>Add the ABC&rsquo;s user to group <code>ABC Group</code></li>
+<li>Remove the user from default <code>jira-software-user</code> and make sure the checkbox <code>Access JIRA Software</code> is selected.</li>
+</ul>
+
+<h2 id="time-tracking-and-estimation">Time Tracking and Estimation</h2>
+
+<h3 id="enable-time-tracking">Enable Time Tracking</h3>
+
+<ul>
+<li><p>Choose <code>Issues</code> &gt; <code>Time Tracking</code></p>
+
+<ul>
+<li>Enable the <code>Time Tracking</code> if it is inactive.</li>
+</ul></li>
+
+<li><p>Choose <code>Boards</code> &gt; <code>View All Boards</code></p>
+
+<ul>
+<li>Choose <code>Board Settings</code> of the board</li>
+<li>Choose <code>Estimation</code></li>
+<li>Choose <code>Remaining Estimate and Time Spent</code> as Time Tracking</li>
+</ul></li>
+</ul>
 
 				</section>
 			</article>
@@ -149,21 +178,25 @@
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Brief history of Linux</a></strong></li>
+				<li><strong><a href="#title">JIRA Notes</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
-<li><a href="#linux">Linux</a>
-<ul>
 <li>
 <ul>
-<li><a href="#breif-history">Breif History</a></li>
-<li><a href="#linux-distro">Linux distro</a></li>
+<li><a href="#what-is-jira">What is JIRA</a></li>
+<li><a href="#how-to-work-with-client-within-jira">How to work with client within JIRA</a>
+<ul>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#requirement-of-permission-control">Requirement of permission control</a></li>
+<li><a href="#change-default-permission-scheme">Change default permission scheme</a></li>
+<li><a href="#change-user-s-group">Change user&rsquo;s group</a></li>
+</ul></li>
+<li><a href="#time-tracking-and-estimation">Time Tracking and Estimation</a>
+<ul>
+<li><a href="#enable-time-tracking">Enable Time Tracking</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#debian-ubuntu">Debian/Ubuntu</a></li>
-<li><a href="#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
-<li><a href="#suse-opensuse">Suse / OpenSuse</a></li>
 </ul>
 </nav>
 		</div>
@@ -203,7 +236,7 @@
 					<li><a href="/dev/php-web/">PHP web framework</a>
 					</li>
 				
-					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
 					</li>
 				
 					<li><a href="/dev/python-django/">Python Web framework</a>
@@ -216,19 +249,19 @@
 			</li>
 		
 			<li>
-				<a href="https://harryho.github.io/categories/note">
-					<span class="doc-list-category">Note</span>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
 				</a>
 				<ul>
-					<li><a href="/note/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
-					</li>
-				
-					<li><a href="/note/jira-notes/">JIRA Notes</a>
+					<li><a href="/info/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
 					<li>
-						<span class="active">Brief history of Linux</span>
+						<span class="active">JIRA Notes</span>
 						</li>
+				
+					<li><a href="/info/linux-history/">Brief history of Linux</a>
+					</li>
 				
 				</ul>
 			</li>
@@ -238,6 +271,9 @@
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
 					</li>
 				
@@ -298,8 +334,6 @@
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/laravel">laravel</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -315,8 +349,6 @@
 			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
-		
-			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
 		
 		</div>
 	</div>

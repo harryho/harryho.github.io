@@ -268,7 +268,7 @@ php -S 0.0.0.0:1234 -t prestashop
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234&lt;/code&gt; with browser&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234/install/index.php&lt;/code&gt; with browser, then you can start installation process.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Choose language and click &lt;code&gt;Next&lt;/code&gt;, and then select the checkbox &amp;ldquo;I agree bah lah bah lah &amp;hellip;. &amp;rdquo; and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 
@@ -307,7 +307,7 @@ php -S 0.0.0.0:1234 -t prestashop
 
 &lt;li&gt;&lt;p&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;, and delete the folder &lt;code&gt;install&lt;/code&gt; under the root, and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -323,15 +323,57 @@ php -S 0.0.0.0:1234 -t prestashop
 &lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;UPDATE ps_employee SET passwd = MD5(&#39;&amp;lt;_COOKIE_KEY_&amp;gt;password&#39;) 
 WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;troubleshooting-1&#34;&gt;Troubleshooting&lt;/h3&gt;
+
+&lt;h4 id=&#34;innodb-error&#34;&gt;InnoDB error&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Error : InnoDB is not supported by your MySQL server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You got error because Prestashop 1.5 is not working properly with MySQL 5.4 and later.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Update files &lt;code&gt;DbPDO.php&lt;/code&gt; , &lt;code&gt;MySQL.php&lt;/code&gt; and &lt;code&gt;DbMySQLi.php&lt;/code&gt; as follow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;    // $sql = &#39;SHOW VARIABLES WHERE Variable_name = \&#39;have_innodb\&#39;&#39;;
+    $sql = &amp;quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE &#39;INNO%&#39;&amp;quot;;
+
+    ...
+    
+    // if (!$row || strtolower($row[&#39;Value&#39;]) != &#39;yes&#39;)
+    if (!$row || strtolower($row[&#39;Value&#39;]) === &#39;no&#39;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Restart the server and the proble will be fixed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;cors&#34;&gt;CORS&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Enable module header in &lt;code&gt;httpd.conf&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add header settings&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt;Header always set Access-Control-Max-Age &amp;quot;1000&amp;quot;
+Header always set Access-Control-Allow-Headers &amp;quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&amp;quot;
+Header always set Access-Control-Allow-Methods &amp;quot;POST, GET, OPTIONS, DELETE, PUT&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
       <title>Build mobile app with web dev skills</title>
-      <link>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</link>
+      <link>https://harryho.github.io/dev/build-mobile-app/</link>
       <pubDate>Sun, 10 Jul 2016 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</guid>
+      <guid>https://harryho.github.io/dev/build-mobile-app/</guid>
       <description>
 
 &lt;h2 id=&#34;what-is-mobile-app&#34;&gt;What is mobile app&lt;/h2&gt;
@@ -719,6 +761,73 @@ DocumentRoot &amp;quot;c:/php_workspace/phpsite&amp;quot;
 &lt;li&gt;Leave other default setting and click button &lt;code&gt;OK&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Now you can debug php site with Netbeans&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&#34;use-nginx-to-repalce-apache&#34;&gt;Use Nginx to repalce Apache&lt;/h2&gt;
+
+&lt;h3 id=&#34;download-runhiddenconsole&#34;&gt;Download &lt;code&gt;RunHiddenConsole&lt;/code&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Download &lt;a href=&#34;http://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip&#34;&gt;RunHiddenConsole&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Extract the file &lt;code&gt;RunHiddenConsole.exe&lt;/code&gt; to folder &lt;code&gt;c:\bin\&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;install-nginx-32-bit-version&#34;&gt;Install Nginx 32 bit version.&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We assume the ngnix&amp;rsquo;s path is &lt;code&gt;c:\nginx\&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;confirm-php-cgi-exe-is-within-the-php-folder-c-php&#34;&gt;Confirm &lt;code&gt;php-cgi.exe&lt;/code&gt; is within the PHP folder &lt;code&gt;c:\php&lt;/code&gt;.&lt;/h3&gt;
+
+&lt;h3 id=&#34;setup-nginx-fastcgi-with-php&#34;&gt;Setup Nginx FastCGI with PHP&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Back the original &lt;code&gt;nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Create a script to launch &lt;code&gt;nginx&lt;/code&gt; and &lt;code&gt;php&lt;/code&gt; in sequence.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;@ECHO OFF
+ECHO Start PHP FastCGI...
+SET PATH=c:\php;%PATH%
+c:\bin\RunHiddenConsole.exe c:\php\php-cgi.exe -b 127.0.0.1:9000
+ECHO Start Nginx ...
+c:\bin\RunHiddenConsole.exe c:\nginx\nginx.exe 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Open the &lt;code&gt;nginx.conf&lt;/code&gt; via notepad&lt;/li&gt;
+&lt;li&gt;Replace the &lt;code&gt;server&lt;/code&gt; block with following setting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;server {
+        listen       1234;
+        server_name  localhost;
+        root          c:/php_workspace/phpsite;
+        #charset koi8-r;
+
+        # Static
+        location / {
+            index  index.php;
+        #    try_files $uri $uri/ @missing;
+        }
+        location ~ /\.ht {
+            deny  all;
+        }
+        location ~ /\.rewrite {
+            deny  all;
+        }
+        
+        # PHP FastCGI
+        location ~ \.php$ {
+            root           c:/php_workspace/phpsite;
+            # root  html; 
+            fastcgi_pass   127.0.0.1:41234;
+           fastcgi_index  index.php;
+           fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
+           include        fastcgi_params;
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

@@ -21,10 +21,10 @@
     
     <item>
       <title>Create a blog site on GitHub Pages</title>
-      <link>https://harryho.github.io/note/create-a-blog-on-github-pages/</link>
+      <link>https://harryho.github.io/info/create-a-blog-on-github-pages/</link>
       <pubDate>Wed, 15 Feb 2017 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/note/create-a-blog-on-github-pages/</guid>
+      <guid>https://harryho.github.io/info/create-a-blog-on-github-pages/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
@@ -117,10 +117,10 @@ cd ..
     
     <item>
       <title>JIRA Notes</title>
-      <link>https://harryho.github.io/note/jira-notes/</link>
+      <link>https://harryho.github.io/info/jira-notes/</link>
       <pubDate>Wed, 11 Jan 2017 11:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/note/jira-notes/</guid>
+      <guid>https://harryho.github.io/info/jira-notes/</guid>
       <description>
 
 &lt;h2 id=&#34;what-is-jira&#34;&gt;What is JIRA&lt;/h2&gt;
@@ -703,7 +703,7 @@ php -S 0.0.0.0:1234 -t prestashop
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234&lt;/code&gt; with browser&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234/install/index.php&lt;/code&gt; with browser, then you can start installation process.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Choose language and click &lt;code&gt;Next&lt;/code&gt;, and then select the checkbox &amp;ldquo;I agree bah lah bah lah &amp;hellip;. &amp;rdquo; and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 
@@ -742,7 +742,7 @@ php -S 0.0.0.0:1234 -t prestashop
 
 &lt;li&gt;&lt;p&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;. and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;, and delete the folder &lt;code&gt;install&lt;/code&gt; under the root, and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -758,15 +758,57 @@ php -S 0.0.0.0:1234 -t prestashop
 &lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;UPDATE ps_employee SET passwd = MD5(&#39;&amp;lt;_COOKIE_KEY_&amp;gt;password&#39;) 
 WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;troubleshooting-1&#34;&gt;Troubleshooting&lt;/h3&gt;
+
+&lt;h4 id=&#34;innodb-error&#34;&gt;InnoDB error&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Error : InnoDB is not supported by your MySQL server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You got error because Prestashop 1.5 is not working properly with MySQL 5.4 and later.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Update files &lt;code&gt;DbPDO.php&lt;/code&gt; , &lt;code&gt;MySQL.php&lt;/code&gt; and &lt;code&gt;DbMySQLi.php&lt;/code&gt; as follow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;    // $sql = &#39;SHOW VARIABLES WHERE Variable_name = \&#39;have_innodb\&#39;&#39;;
+    $sql = &amp;quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE &#39;INNO%&#39;&amp;quot;;
+
+    ...
+    
+    // if (!$row || strtolower($row[&#39;Value&#39;]) != &#39;yes&#39;)
+    if (!$row || strtolower($row[&#39;Value&#39;]) === &#39;no&#39;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Restart the server and the proble will be fixed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;cors&#34;&gt;CORS&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Enable module header in &lt;code&gt;httpd.conf&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add header settings&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt;Header always set Access-Control-Max-Age &amp;quot;1000&amp;quot;
+Header always set Access-Control-Allow-Headers &amp;quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&amp;quot;
+Header always set Access-Control-Allow-Methods &amp;quot;POST, GET, OPTIONS, DELETE, PUT&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
       <title>Build mobile app with web dev skills</title>
-      <link>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</link>
+      <link>https://harryho.github.io/dev/build-mobile-app/</link>
       <pubDate>Sun, 10 Jul 2016 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/dev/build-mobile-app-with-web-dev-skill/</guid>
+      <guid>https://harryho.github.io/dev/build-mobile-app/</guid>
       <description>
 
 &lt;h2 id=&#34;what-is-mobile-app&#34;&gt;What is mobile app&lt;/h2&gt;
@@ -913,6 +955,35 @@ fmt.Printf(&amp;quot;Hello, world.&amp;quot;) 5
 
 &lt;p&gt;Lets look at the program line by line. This 􀃗rst line is just required 1 . All Go 􀃗les start with
 package &lt;something&gt;, and package main is required for a standalone executable.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linux notes</title>
+      <link>https://harryho.github.io/os/linux-notes/</link>
+      <pubDate>Fri, 04 Mar 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/linux-notes/</guid>
+      <description>
+
+&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# list folders
+ls -d */
+# list items with proper size format 
+ls -lha # 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ps&#34;&gt;ps&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ps auxww | grep mysql
+ps auxww | egrep httpd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;vmware&#34;&gt;VMware&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;dmidecode | grep -i vmware
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -1881,338 +1952,6 @@ public static class PredicateBuilder
         }
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>C# Notes -- Part 2</title>
-      <link>https://harryho.github.io/code/csharp-notes-2/</link>
-      <pubDate>Fri, 10 Apr 2015 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/csharp-notes-2/</guid>
-      <description>
-
-&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Set up the some scheduled tasks running in the backgroud to take care of data update or sync for every 15 mins, or everyday or every week&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;solution&#34;&gt;Solution&lt;/h1&gt;
-
-&lt;h2 id=&#34;options-as-scheduled-backgroud-service&#34;&gt;Options as scheduled backgroud service&lt;/h2&gt;
-
-&lt;h3 id=&#34;windows-task-scheduler&#34;&gt;Windows Task Scheduler&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Click the Start button.&lt;/li&gt;
-&lt;li&gt;Click Control Panel.&lt;/li&gt;
-&lt;li&gt;Click System and Maintenance.&lt;/li&gt;
-&lt;li&gt;Click Administrative Tools.&lt;/li&gt;
-&lt;li&gt;Double-click Task Scheduler.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;use-window-service-as-task-scheduler&#34;&gt;Use Window Service as task scheduler&lt;/h3&gt;
-
-&lt;h4 id=&#34;overview-of-design&#34;&gt;Overview of design&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;The design here is a simplified version, which I built for previous projects. In the real world, I need to tailor it for different project with different purpose, but fundamental design of architect is the same. IMO, the design below can support most cases, which needs scheduled backgroud task service.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
-        +----------------------------------+          Register as
-        |     System.ServiceProces  ------ |--------O Window Service
-        +----------------------------------+
-        |  +----------------------------+  |
-        |  |   Thread (Infinite)        |  | 
-        |  +----------------------------+  |
-        |  |  +----------------------+  |  |
-        |  |  | MySchedulerService   |  |  | 
-        |  |  +----------------------+  |  |
-        |  |  | while ( true )       |  |  |
-        |  |  | {                    |  |  |
-        |  |  |    Task.Process()    |  |  |
-        |  |  | }                    |  |  | 
-        |  |  +----------------------+  |  | 
-        |  +----------------------------+  |
-        +----------------------------------+ 
-
-            +------------+
-            | ITask      |
-            +------------+
-            | Process()  |
-            +------------+
-                 /|\
-                  |
-        +------------------+
-        |      BaseTask    |  -----------O Customized Task inherit BaseTask   
-        +------------------+
-        | lastProcessTime  | ------------O Last process time 
-        | intervalTime     | ------------O Customize for next process time 
-        | IsReadyProcess() | ------------O Check taks is ready to process 
-        +------------------+
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;create-customized-window-service&#34;&gt;Create customized Window Service&lt;/h4&gt;
-
-&lt;h4 id=&#34;use-serviceprocess-to-create-window-service&#34;&gt;Use ServiceProcess to create Window Service&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The System.ServiceProcess allow you to implement, install, and control Windows service applications. Services are long-running executables that run without a user interface.&lt;/li&gt;
-&lt;li&gt;The project must have main method the entry point&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    using System.ServiceProcess;
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            #if DEBUG
-                MySchedulerService debugService = new MySchedulerService();
-                debugService.onDebug();
-                System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-            #else
-                ServiceBase.Run(new ServiceBase[] { new MySchedulerService() });
-            #endif
-        }
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;create-customized-servicebase&#34;&gt;Create customized ServiceBase&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Implementing a service involves inheriting from the ServiceBase class and defining specific behavior to process when start, stop, pause, and continue commands are passed in, as well as custom behavior and actions to take when the system shuts down.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;
-namespace MyScheduler
-{
-    using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Threading;
-
-    public partial class MySchedulerService : System.ServiceProcess.ServiceBase
-    {
-        public const string START_SERVICE = &amp;quot;start.service&amp;quot;;
-        public const string STOP_SERVICE = &amp;quot;stop.service&amp;quot;;
-
-        public void onDebug()
-        {
-            OnStart(null);
-        }
-
-        protected override void OnStart(string[] args)
-        {
-            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + TART_SERVICE);
-            ThreadStart tsTask = new ThreadStart(TaskLoop);
-            Thread rtkTask = new Thread(tsTask);
-            rtkTask.Start();
-        }
-
-        static void TaskLoop()
-        {
-            while (true)
-            {
-                // Exceute scheduled task
-                ScheduledTask();
-                // Then, wait for certain time interval
-                System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(500));
-            }
-        }
-
-        static void ScheduledTask()
-        {
-            // Task code which is executed periodically
-            try
-            {
-                // Call customized tasks
-                var types = Assembly.GetExecutingAssembly().GetExportedTypes().Where(p =&amp;gt; typeof(ITask).IsAssignableFrom(p.BaseType));
-
-                foreach (var t in types)
-                {
-                    var task = (ITask)Activator.CreateInstance(t);
-                    if (taskSettings.Keys.Contains(t.Name))
-                    {
-                        task.TaskSetting = taskSettings[t.Name];
-                    }
-                    tasks.Add(task);
-                }
-            }
-            catch (Exception e)
-            {
-                // TO Something here               
-            }
-        }
-
-        protected override void OnStop()
-        {
-            // Insert code here to close all the open IO or conection.
-            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + STOP_SERVICE);
-        }
-
-        private void InitializeComponent()
-        {
-            this.ServiceName = &amp;quot;MySchedulerService&amp;quot;;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            OnStop();
-            base.Dispose(disposing);
-        }
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;task-interface-and-class&#34;&gt;Task interface and class&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;interface ITask has only one method&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    public interface ITask
-    {
-        void Process();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;BaseTask&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    using System;
-
-    public class BaseTask : ITask
-    {
-        protected DateTime? lastProcessTime = null;
-
-        // interval time uses second as unit
-        // e.g. 1 min of intervaling time is 60 
-        protected int intervalTime = 0 ;  
-
-        protected bool IsReadyToProcess()
-        {
-            bool isReadyToProcess = true;
-
-            if (lastProcessTime.HasValue)
-            {
-                if (lastProcessTime.Value.AddSeconds(intervalTime) &amp;gt; DateTime.Now)
-                {
-                    isReadyToProcess = false;
-                }
-            } 
-            return isReadyToProcess;
-        }
-
-        public virtual void Process()
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample Task1 and Task2&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Task1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    using System;
-    using System.Linq;
-    using System.Data.Entity;
-
-    public class Task1 : BaseTask
-    {
-        public override void Process()
-        {
-            if (base.IsReadyToProcess())
-            {                
-                System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + &amp;quot;Task-1-&amp;quot; + DateTime.Now.ToString(&amp;quot;dd-MM-yyyy&amp;quot;));
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Task2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    using System;
-    using System.Linq;
-    using System.Data.Entity;
-
-    public class Task2 : BaseTask
-    {
-        public override void Process()
-        {
-            if (base.IsReadyToProcess())
-            {                
-                System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + &amp;quot;Task-2-&amp;quot; + DateTime.Now.ToString(&amp;quot;dd-MM-yyyy&amp;quot;));
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;create-window-service-installer&#34;&gt;Create Window Service installer&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;In Solution Explorer, double-click MyScheduledService.cs.&lt;/li&gt;
-&lt;li&gt;In the Code Editor window, right-click &lt;code&gt;Design View&lt;/code&gt;, and then click &lt;code&gt;Properties&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;In the &lt;code&gt;Properties&lt;/code&gt; pane, click the &lt;code&gt;Add Installer&lt;/code&gt; link.&lt;/li&gt;
-&lt;li&gt;In the Properties pane for MyScheduledServiceInstaller, change the &lt;code&gt;ServiceNameproperty&lt;/code&gt; to &lt;code&gt;MyScheduledService&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;In the Code Editor window in &lt;code&gt;Design view&lt;/code&gt;, click &lt;code&gt;MyScheduledServiceProcessInstaller&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;In the Properties pane, change the &lt;code&gt;Account&lt;/code&gt; property to &lt;code&gt;LocalSystem&lt;/code&gt; (The &lt;code&gt;LocalService&lt;/code&gt; and &lt;code&gt;NetworkService&lt;/code&gt; values are available only in Microsoft Windows XP).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;PreInstaller&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It inherits from System.Configuration.Install.Installer. This is the base class for all custom installers in the .NET Framework. Installers are components that help install applications on a computer.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;namespace MyScheduler
-{
-    [RunInstaller(true)]
-    public partial class ProjectInstaller : System.Configuration.Install.Installer
-    {
-        public ProjectInstaller()
-        {
-            InitializeComponent();
-        }
-
-        private void MySchedulerServiceInstaller_AfterInstall(object sender, InstallEventArgs e)
-        {
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;install-window-service&#34;&gt;Install Window Service&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /i &amp;lt;app_path&amp;gt;\MyScheduler.exe 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;uninstall-window-service&#34;&gt;Uninstall Window Service&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &amp;lt;app_path&amp;gt;\MyScheduler.exe 
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>

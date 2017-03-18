@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>JIRA Notes - Hello World</title>
+    <title>Build mobile app with web dev skills - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li ><a href="https://harryho.github.io/">Home</a></li>
                        
-                    <li ><a href="https://harryho.github.io/note/">Note</a></li>
+                    <li ><a href="https://harryho.github.io/info/">Info</a></li>
                      
                     <li ><a href="https://harryho.github.io/code/">Code</a></li>
                      
@@ -67,102 +67,132 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">JIRA Notes</h1>
+				<h1 class="doc-entry-title">Build mobile app with web dev skills</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h2 id="what-is-jira">What is JIRA</h2>
+<h2 id="what-is-mobile-app">What is mobile app</h2>
 
 <blockquote>
-<p>Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&rsquo;s main competitor, Bugzilla. It has been developed since 2002.</p>
+<p><em>A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps</em></p>
+
+<p><em><strong>Native apps</strong> are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.</em></p>
+
+<p><em><strong>HTML5 apps</strong> use standard web technologies—typically HTML5, JavaScript and CSS. This write-once-run-anywhere approach to mobile development creates cross-platform mobile applications that work on multiple devices.</em></p>
+
+<p><em><strong>Hybrid apps</strong> make it possible to embed HTML5 apps inside a thin native container, combining the good parts of <strong>Native app</strong> and <strong>HTML5 app</strong> elements.</em></p>
 </blockquote>
 
-<h2 id="how-to-work-with-client-within-jira">How to work with client within JIRA</h2>
+<h2 id="mobile-app-development">Mobile app development</h2>
 
-<blockquote>
-<p>The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.</p>
-</blockquote>
+<p>According above breif history we can image the mobile developer community has become asfragmented as the market. Mobile software developers work with different programming environments, different tools, and different programming languages.</p>
+
+<p>After a few years of improvement, we can see some <strong>Hybrid app</strong> based framework becomes more and more popular and shining. <code>ionic</code>, <code>nativescript</code> and <code>react native</code> are most promising frameworks which we should really look into.</p>
+
+<h2 id="introduction-of-ionic-developement">Introduction of ionic developement</h2>
 
 <h3 id="assumption">Assumption</h3>
 
 <ul>
-<li><p>Your client&rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.</p></li>
-
-<li><p>You have created a project for client, named <strong>ABC IT Project</strong></p></li>
-
-<li><p>You want to allow the client to access this project on JIRA, but you want to avoid client&rsquo;s unintented update to mess up the project management.</p></li>
+<li>Here we just introduce ionic 1.x. When I started investigating the <code>ionic</code>, the <code>ionic 2</code> just came out for a while. <code>ionic 2</code> study is on my todo list.</li>
+<li>You are familiar with web technologies, such as, HTML5, CSS, JavaScript, and you should have experience of nodejs and relevant skills.</li>
 </ul>
 
-<h3 id="requirement-of-permission-control">Requirement of permission control</h3>
+<h3 id="getting-started">Getting started</h3>
 
 <ul>
-<li>In Agile practice, product owner should attend the</li>
+<li>install ionic 1.x</li>
+<li>setup ionic and create new project <code>demoApp</code></li>
 </ul>
 
-<h3 id="change-default-permission-scheme">Change default permission scheme</h3>
+<pre><code>ionic start demoApp slidemenu
+cd demoApp
+ionic platform add android 
+ionic build android 
+ionic emulate android 
+</code></pre>
+
+<h3 id="install-packages">Install packages</h3>
 
 <ul>
-<li><p>Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.</p></li>
-
-<li><p>Choose <code>Isssues</code> &gt; <code>Permission schemes</code></p></li>
-
-<li><p>Change all permissions from <code>Project Access - Any logged in user</code> to <code>Project role - Administrator</code> except the following items.</p>
-
-<ul>
-<li>View Development Tools</li>
-<li>View Read-Only Workflow</li>
-<li>Assignable User</li>
-<li>Delete Own Comments</li>
-<li>Edit Own Comments</li>
-<li>Delete Own Attachments</li>
-<li>Delete Own Worklogs</li>
-<li>Edit Own Worklogs</li>
-<li>Work On Issues</li>
-</ul></li>
-
-<li><p>Copy the default permission scheme and rename it to <code>&lt;client_business_name&gt; Permission Scheme</code>. In this case it would be <code>ABC Permission Scheme</code>.</p></li>
-
-<li><p>Create a new group named <strong>ABC Group</strong>,</p></li>
-
-<li><p>Update <code>ABC Permission Scheme</code> by granting <code>ABC Group</code> to some items.</p>
-
-<ul>
-<li>Browse Projects</li>
-<li>Create Issues</li>
-</ul></li>
-
-<li><p>Update the permission scheme of the project <code>ABC IT Project</code> from to <code>ABC Permission Scheme</code>.</p></li>
+<li>Use <code>npm install</code> to install packages</li>
+<li>Folllowing is the <code>package.json</code>. You can tailor it on your own.</li>
 </ul>
 
-<h3 id="change-user-s-group">Change user&rsquo;s group</h3>
+<pre><code>{
+  &quot;name&quot;: &quot;ionic-project&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;An Ionic project&quot;,
+  &quot;dependencies&quot;: {
+    &quot;gulp&quot;: &quot;^3.5.6&quot;,
+    &quot;gulp-sass&quot;: &quot;^2.0.4&quot;,
+    &quot;gulp-concat&quot;: &quot;^2.2.0&quot;,
+    &quot;gulp-minify-css&quot;: &quot;^0.3.0&quot;,
+    &quot;gulp-rename&quot;: &quot;^1.2.0&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;bower&quot;: &quot;^1.3.3&quot;,
+    &quot;gulp-util&quot;: &quot;^2.2.14&quot;,
+    &quot;shelljs&quot;: &quot;^0.3.0&quot;
+  },
+  &quot;cordovaPlugins&quot;: [
+    &quot;cordova-plugin-device&quot;,
+    &quot;cordova-plugin-console&quot;,
+    &quot;cordova-plugin-whitelist&quot;,
+    &quot;cordova-plugin-splashscreen&quot;,
+    &quot;cordova-plugin-statusbar&quot;,
+    &quot;ionic-plugin-keyboard&quot;
+  ],
+  &quot;cordovaPlatforms&quot;: []
+}
+
+</code></pre>
+
+<h3 id="debug">Debug</h3>
 
 <ul>
-<li>Choose <code>User management</code> &gt; <code>User</code></li>
-<li>Add the ABC&rsquo;s user to group <code>ABC Group</code></li>
-<li>Remove the user from default <code>jira-software-user</code> and make sure the checkbox <code>Access JIRA Software</code> is selected.</li>
+<li>Browser is the best option for ionic mobile development debug tools</li>
+<li>Use Telerik AppBuilder to debug</li>
 </ul>
 
-<h2 id="time-tracking-and-estimation">Time Tracking and Estimation</h2>
-
-<h3 id="enable-time-tracking">Enable Time Tracking</h3>
+<h2 id="test-on-emulator-or-device">Test on emulator or device</h2>
 
 <ul>
-<li><p>Choose <code>Issues</code> &gt; <code>Time Tracking</code></p>
+<li><p>Android</p>
 
 <ul>
-<li>Enable the <code>Time Tracking</code> if it is inactive.</li>
+<li>Download and install <a href="https://developer.android.com/studio/index.html#downloads">Android SDK</a></li>
+<li>Download install at least one sdk platform.</li>
+<li>ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.</li>
+<li>install x86 or x86_64 image for windows environment</li>
+<li>install Extra plugins: Google USB driver, X86 Emulator Accelerator</li>
+<li>Create AVD for your mobile app testing</li>
 </ul></li>
 
-<li><p>Choose <code>Boards</code> &gt; <code>View All Boards</code></p>
+<li><p>iPhone</p>
 
 <ul>
-<li>Choose <code>Board Settings</code> of the board</li>
-<li>Choose <code>Estimation</code></li>
-<li>Choose <code>Remaining Estimate and Time Spent</code> as Time Tracking</li>
+<li>Install AppBuilder on Visual Studio</li>
+<li>Install Genymotion</li>
 </ul></li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<ul>
+<li>Android emulator accelerator error due to version is too low to support the system image</li>
+<li>uninstall old version intel HAXM</li>
+
+<li><p>install new version manually from <code>&lt;Android_SDK_Location&gt;\extras\intel\Hardware_Accelerated_Execution_Manager</code></p></li>
+
+<li><p>If app is not working on emulator, check cordova plugins or manually install cordova plugins</p></li>
+
+<li><p><code>ionic plugins list</code></p></li>
+
+<li><p><code>ionic plugins add XXXXX</code></p></li>
 </ul>
 
 				</section>
@@ -178,24 +208,23 @@
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">JIRA Notes</a></strong></li>
+				<li><strong><a href="#title">Build mobile app with web dev skills</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#what-is-jira">What is JIRA</a></li>
-<li><a href="#how-to-work-with-client-within-jira">How to work with client within JIRA</a>
+<li><a href="#what-is-mobile-app">What is mobile app</a></li>
+<li><a href="#mobile-app-development">Mobile app development</a></li>
+<li><a href="#introduction-of-ionic-developement">Introduction of ionic developement</a>
 <ul>
 <li><a href="#assumption">Assumption</a></li>
-<li><a href="#requirement-of-permission-control">Requirement of permission control</a></li>
-<li><a href="#change-default-permission-scheme">Change default permission scheme</a></li>
-<li><a href="#change-user-s-group">Change user&rsquo;s group</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#install-packages">Install packages</a></li>
+<li><a href="#debug">Debug</a></li>
 </ul></li>
-<li><a href="#time-tracking-and-estimation">Time Tracking and Estimation</a>
-<ul>
-<li><a href="#enable-time-tracking">Enable Time Tracking</a></li>
-</ul></li>
+<li><a href="#test-on-emulator-or-device">Test on emulator or device</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -236,8 +265,9 @@
 					<li><a href="/dev/php-web/">PHP web framework</a>
 					</li>
 				
-					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
-					</li>
+					<li>
+						<span class="active">Build mobile app with web dev skills</span>
+						</li>
 				
 					<li><a href="/dev/python-django/">Python Web framework</a>
 					</li>
@@ -249,18 +279,17 @@
 			</li>
 		
 			<li>
-				<a href="https://harryho.github.io/categories/note">
-					<span class="doc-list-category">Note</span>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
 				</a>
 				<ul>
-					<li><a href="/note/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					<li><a href="/info/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
-					<li>
-						<span class="active">JIRA Notes</span>
-						</li>
+					<li><a href="/info/jira-notes/">JIRA Notes</a>
+					</li>
 				
-					<li><a href="/note/linux-history/">Brief history of Linux</a>
+					<li><a href="/info/linux-history/">Brief history of Linux</a>
 					</li>
 				
 				</ul>
@@ -271,6 +300,9 @@
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
 					</li>
 				
@@ -331,8 +363,6 @@
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/laravel">laravel</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -348,8 +378,6 @@
 			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
-		
-			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
 		
 		</div>
 	</div>

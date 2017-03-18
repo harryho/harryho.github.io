@@ -9,7 +9,7 @@
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
     <title>Debug PHP with Eclipse PDT and Netbeans - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li ><a href="https://harryho.github.io/">Home</a></li>
                        
-                    <li ><a href="https://harryho.github.io/note/">Note</a></li>
+                    <li ><a href="https://harryho.github.io/info/">Info</a></li>
                      
                     <li ><a href="https://harryho.github.io/code/">Code</a></li>
                      
@@ -223,6 +223,73 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 <li>Now you can debug php site with Netbeans</li>
 </ul>
 
+<h2 id="use-nginx-to-repalce-apache">Use Nginx to repalce Apache</h2>
+
+<h3 id="download-runhiddenconsole">Download <code>RunHiddenConsole</code></h3>
+
+<ul>
+<li>Download <a href="http://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip">RunHiddenConsole</a></li>
+<li>Extract the file <code>RunHiddenConsole.exe</code> to folder <code>c:\bin\</code></li>
+</ul>
+
+<h3 id="install-nginx-32-bit-version">Install Nginx 32 bit version.</h3>
+
+<ul>
+<li>We assume the ngnix&rsquo;s path is <code>c:\nginx\</code></li>
+</ul>
+
+<h3 id="confirm-php-cgi-exe-is-within-the-php-folder-c-php">Confirm <code>php-cgi.exe</code> is within the PHP folder <code>c:\php</code>.</h3>
+
+<h3 id="setup-nginx-fastcgi-with-php">Setup Nginx FastCGI with PHP</h3>
+
+<ul>
+<li>Back the original <code>nginx.conf</code></li>
+<li>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</li>
+</ul>
+
+<pre><code class="language-dos">@ECHO OFF
+ECHO Start PHP FastCGI...
+SET PATH=c:\php;%PATH%
+c:\bin\RunHiddenConsole.exe c:\php\php-cgi.exe -b 127.0.0.1:9000
+ECHO Start Nginx ...
+c:\bin\RunHiddenConsole.exe c:\nginx\nginx.exe 
+</code></pre>
+
+<ul>
+<li>Open the <code>nginx.conf</code> via notepad</li>
+<li>Replace the <code>server</code> block with following setting</li>
+</ul>
+
+<pre><code class="language-nginx">server {
+        listen       1234;
+        server_name  localhost;
+        root          c:/php_workspace/phpsite;
+        #charset koi8-r;
+
+        # Static
+        location / {
+            index  index.php;
+        #    try_files $uri $uri/ @missing;
+        }
+        location ~ /\.ht {
+            deny  all;
+        }
+        location ~ /\.rewrite {
+            deny  all;
+        }
+        
+        # PHP FastCGI
+        location ~ \.php$ {
+            root           c:/php_workspace/phpsite;
+            # root  html; 
+            fastcgi_pass   127.0.0.1:41234;
+           fastcgi_index  index.php;
+           fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
+           include        fastcgi_params;
+        }
+}
+</code></pre>
+
 				</section>
 			</article>
 		</main>
@@ -272,6 +339,13 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 <li><a href="#open-phpsite-as-php-the-project-with-netbeans">Open phpsite as PHP the project with Netbeans.</a></li>
 <li><a href="#configure-php-web-server-1">Configure PHP Web Server</a></li>
 </ul></li>
+<li><a href="#use-nginx-to-repalce-apache">Use Nginx to repalce Apache</a>
+<ul>
+<li><a href="#download-runhiddenconsole">Download <code>RunHiddenConsole</code></a></li>
+<li><a href="#install-nginx-32-bit-version">Install Nginx 32 bit version.</a></li>
+<li><a href="#confirm-php-cgi-exe-is-within-the-php-folder-c-php">Confirm <code>php-cgi.exe</code> is within the PHP folder <code>c:\php</code>.</a></li>
+<li><a href="#setup-nginx-fastcgi-with-php">Setup Nginx FastCGI with PHP</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -312,7 +386,7 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 					<li><a href="/dev/php-web/">PHP web framework</a>
 					</li>
 				
-					<li><a href="/dev/build-mobile-app-with-web-dev-skill/">Build mobile app with web dev skills</a>
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
 					</li>
 				
 					<li><a href="/dev/python-django/">Python Web framework</a>
@@ -326,17 +400,17 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 			</li>
 		
 			<li>
-				<a href="https://harryho.github.io/categories/note">
-					<span class="doc-list-category">Note</span>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
 				</a>
 				<ul>
-					<li><a href="/note/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					<li><a href="/info/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
-					<li><a href="/note/jira-notes/">JIRA Notes</a>
+					<li><a href="/info/jira-notes/">JIRA Notes</a>
 					</li>
 				
-					<li><a href="/note/linux-history/">Brief history of Linux</a>
+					<li><a href="/info/linux-history/">Brief history of Linux</a>
 					</li>
 				
 				</ul>
@@ -347,6 +421,9 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
 					</li>
 				
@@ -407,8 +484,6 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/laravel">laravel</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -424,8 +499,6 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
-		
-			<a class="tag-item" href="https://harryho.github.io/tags/zendframework">zendframework</a>
 		
 		</div>
 	</div>
