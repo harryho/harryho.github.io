@@ -104,7 +104,7 @@
 
 <p><strong>get sub-commands</strong> &ndash; type <code>net /?</code></p>
 
-<pre><code class="language-bash">    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+<pre><code class="language-dos">    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
      HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START | 
      STATISTICS | STOP | TIME | USE | USER | VIEW ]
 </code></pre>
@@ -148,7 +148,7 @@
 
 <h3 id="runas">runas</h3>
 
-<pre><code class="language-bash">REM start command prompt as administrator
+<pre><code class="language-dos">start command prompt as administrator
 runas /user:yourpc\administrator &quot;cmd&quot;
 
 REM ##BE CAREFUL When you try the command below ##  
@@ -169,7 +169,7 @@ runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &a
 <li>Basic usage<br /></li>
 </ul>
 
-<pre><code class="language-bash">REM query all service on the PC -- &lt;yourpcname&gt;
+<pre><code class="language-dos">REM query all service on the PC -- &lt;yourpcname&gt;
 sc \\&lt;yourpcname&gt; query
 
 REM query status of given service 
@@ -195,7 +195,7 @@ sc query state= all | find &quot;SERVICE_NAME&quot;
 </ul></li>
 </ul>
 
-<pre><code class="language-bash">REM query all services which are inactive and type are driver and kernel
+<pre><code class="language-dos">REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
 
 REM get all services name
@@ -210,7 +210,7 @@ for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_N
 
 <p><strong>sc queryex</strong></p>
 
-<pre><code class="language-bash">REM get all services name and pid
+<pre><code class="language-dos">REM get all services name and pid
 for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
     for /f &quot;tokens=3&quot; %t in ('sc queryex %s ^| find &quot;PID&quot; ') 
         do @echo %s -- %t
@@ -225,7 +225,7 @@ for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE
 
 <p><strong>sc qc</strong></p>
 
-<pre><code class="language-bash">REM get all services name and path
+<pre><code class="language-dos">REM get all services name and path
 for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(     
     for /f &quot;tokens=3 delims==:&quot; %t in ('sc qc %s ^| find &quot;BINARY_PATH_NAME&quot; ') 
     do @echo %s -- C:%t
@@ -261,7 +261,7 @@ sc stop  &lt;servicename&gt;
 <li>Find process by pid</li>
 </ul>
 
-<pre><code class="language-bash">REM get the mysqld process info
+<pre><code class="language-dos">REM get the mysqld process info
 tasklist /v /fo list /fi &quot;imagename eq mysqld.exe&quot;
 
 REM get the mongod process info
@@ -494,6 +494,17 @@ cat mark.txt
 	<div class="sidebar-module">
 		<h4 class="sidebar-heading">Pages in Categories</h4>
 		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/cache">
+					<span class="doc-list-category">Cache</span>
+				</a>
+				<ul>
+					<li><a href="/cache/algorithm/">Algorithm</a>
+					</li>
+				
+				</ul>
+			</li>
 		
 			<li>
 				<a href="https://harryho.github.io/categories/code">

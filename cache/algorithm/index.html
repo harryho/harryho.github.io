@@ -1,0 +1,745 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Algorithm - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/info/">Info</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Algorithm</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<h2 id="this-is-a-demo-task">This is a demo task.</h2>
+
+<p>A zero-indexed array A consisting of N integers is given. An equilibrium index of this array is any integer P such that 0 = P &lt; N and the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
+A[0] + A[1] + &hellip; + A[P-1] = A[P+1] + &hellip; + A[N-2] + A[N-1].
+Sum of zero elements is assumed to be equal to 0. This can happen if P = 0 or if P = N-1.</p>
+
+<p>For example, consider the following array A consisting of N = 8 elements:</p>
+
+<p>A[0] = -1
+  A[1] =  3
+  A[2] = -4
+  A[3] =  5
+  A[4] =  1
+  A[5] = -6
+  A[6] =  2
+  A[7] =  1</p>
+
+<p>P = 1 is an equilibrium index of this array, because:</p>
+
+<p>A[0] = -1 = A[2] + A[3] + A[4] + A[5] + A[6] + A[7]
+P = 3 is an equilibrium index of this array, because:</p>
+
+<p>A[0] + A[1] + A[2] = -2 = A[4] + A[5] + A[6] + A[7]
+P = 7 is also an equilibrium index, because:</p>
+
+<p>A[0] + A[1] + A[2] + A[3] + A[4] + A[5] + A[6] = 0
+and there are no elements with indices greater than 7.</p>
+
+<p>P = 8 is not an equilibrium index, because it does not fulfill the condition 0 = P &lt; N.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int solution(int[] A); }</p>
+
+<p>that, given a zero-indexed array A consisting of N integers, returns any of its equilibrium indices. The function should return -1 if no equilibrium index exists.</p>
+
+<p>For example, given array A shown above, the function may return 1, 3 or 7, as explained above.</p>
+
+<p>Assume that:</p>
+
+<p>N is an integer within the range [0..100,000];
+each element of array A is an integer within the range [-2,147,483,648..2,147,483,647].
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(N), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.</p>
+
+<pre><code class="language-C#">using System;
+
+class Solution {
+    public int solution(int[] A) {
+       int p =0 ;
+       
+       long sumP = 0;
+       long sumN = 0;
+       foreach( var a in A ) sumN += a;
+       
+       for ( int i =0; i &lt; A.Length; i ++ ) {
+            long sum = sumN - A[i] - sumP ;
+            
+            if ( sum == sumP ) 
+            return i;
+            
+            sumP+=A[i];
+       }
+       
+       return -1;
+    }
+}
+
+</code></pre>
+
+<h2 id="binary-gap">binary gap</h2>
+
+<p>A binary gap within a positive integer N is any maximal sequence of consecutive zeros that is surrounded by ones at both ends in the binary representation of N.</p>
+
+<p>For example, number 9 has binary representation 1001 and contains a binary gap of length 2. The number 529 has binary representation 1000010001 and contains two binary gaps: one of length 4 and one of length 3. The number 20 has binary representation 10100 and contains one binary gap of length 1. The number 15 has binary representation 1111 and has no binary gaps.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int solution(int N); }</p>
+
+<p>that, given a positive integer N, returns the length of its longest binary gap. The function should return 0 if N doesn&rsquo;t contain a binary gap.</p>
+
+<p>For example, given N = 1041 the function should return 5, because N has binary representation 10000010001 and so its longest binary gap is of length 5.</p>
+
+<p>Assume that:</p>
+
+<p>N is an integer within the range [1..2,147,483,647].
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(log(N));
+expected worst-case space complexity is O(1).</p>
+
+<pre><code class="language-cs">class Solution {
+    public int solution(int N) {
+        
+        int next =0;
+        int gap = 0;
+        
+        string bin =Convert.ToString(N, 2);
+        
+        while ( bin.IndexOf(&quot;1&quot;) &gt;=0 ){
+            
+            bin = bin.Substring( bin.IndexOf(&quot;1&quot;) + 1 );
+           
+            next = bin.IndexOf(&quot;1&quot;);
+         //   Console.WriteLine(&quot; bin , {0}, {1} &quot; , bin, next  );
+            
+            if( next  &gt; gap ) gap = next;
+            
+        }
+        
+        return gap;
+    }
+}
+</code></pre>
+
+<p>Test cases:
+328
+1162
+66561
+1376796946</p>
+
+<h2 id="cyclicrotation">CyclicRotation</h2>
+
+<p>A zero-indexed array A consisting of N integers is given. Rotation of the array means that each element is shifted right by one index, and the last element of the array is also moved to the first place.</p>
+
+<p>For example, the rotation of array A = [3, 8, 9, 7, 6] is [6, 3, 8, 9, 7]. The goal is to rotate array A K times; that is, each element of A will be shifted to the right by K indexes.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int[] solution(int[] A, int K); }
+that, given a zero-indexed array A consisting of N integers and an integer K, returns the array A rotated K times.</p>
+
+<p>For example, given array A = [3, 8, 9, 7, 6] and K = 3, the function should return [9, 7, 6, 3, 8].</p>
+
+<p>Assume that:</p>
+
+<p>N and K are integers within the range [0..100];
+each element of array A is an integer within the range [-1,000..1,000].</p>
+
+<pre><code class="language-cs">class Solution {
+    public int[] solution(int[] A, int K) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        
+        int [] r =  A;
+        if(A!=null &amp;&amp; A.Length &gt; 0 ) {
+            int len = A.Length;
+            
+            int k = K;
+            
+            
+            if( K &gt;= len ) {
+                k = K % len ;
+            }
+            
+            r = k&gt;0? new int[len]:A;
+
+            if(k &gt; 0 ){
+                int i = 0 ;
+                for (  i = 0 ; i &lt; len ;i++ ) {
+                    
+                  if ( i &lt; k )
+                         r[i]=A[len - k +i];
+                  else
+                         r[i] = A[ i -k ];
+                } 
+            }
+        }
+        
+        return r;
+    }
+}
+
+</code></pre>
+
+<h2 id="oddoccurrencesinarray">OddOccurrencesInArray</h2>
+
+<p>A non-empty zero-indexed array A consisting of N integers is given. The array contains an odd number of elements, and each element of the array can be paired with another element that has the same value, except for one element that is left unpaired.</p>
+
+<p>For example, in array A such that:</p>
+
+<blockquote>
+<p>A[0] = 9    A[1] = 3   A[2] = 9  A[3] = 3</p>
+
+<p>A[4] = 9    A[5] = 7   A[6] = 9</p>
+</blockquote>
+
+<p>the elements at indexes 0 and 2 have value 9,
+the elements at indexes 1 and 3 have value 3,
+the elements at indexes 4 and 6 have value 9,
+the element at index 5 has value 7 and is unpaired.
+Write a function:</p>
+
+<p>class Solution { public int solution(int[] A); }
+that, given an array A consisting of N integers fulfilling the above conditions, returns the value of the unpaired element.</p>
+
+<p>For example, given array A such that:</p>
+
+<blockquote>
+<p>A[0] = 9  A[1] = 3  A[2] = 9  A[3] = 3</p>
+
+<p>A[4] = 9  A[5] = 7  A[6] = 9</p>
+</blockquote>
+
+<p>the function should return 7, as explained in the example above.</p>
+
+<p>Assume that:</p>
+
+<p>N is an odd integer within the range [1..1,000,000];
+each element of array A is an integer within the range [1..1,000,000,000];
+all but one of the values in A occur an even number of times.
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(1), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.</p>
+
+<pre><code class="language-cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+  
+
+// you can also use other imports, for example:
+// using System.Collections.Generic;
+
+// you can write to stdout for debugging purposes, e.g.
+// Console.WriteLine(&quot;this is a debug message&quot;);
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        int r = -1;
+        
+
+          Array.Sort(A);
+        // foreach (int i in A) Console.WriteLine( i+ &quot; &quot;); 
+        //  Console.WriteLine(&quot;this is a debug message {0} &quot; , A);
+         
+         for( int i =0; i &lt; A.Length; ){
+            if ( i == A.Length -1  ){
+                return A[i];
+            }            
+            if ( A[i] != A[i+1] ){
+                return  A[i];
+            }        
+            i +=2;             
+         }
+         
+         return r;
+         
+    }
+}
+</code></pre>
+
+<p>A small frog wants to get to the other side of the road. The frog is currently located at position X and wants to get to a position greater than or equal to Y. The small frog always jumps a fixed distance, D.</p>
+
+<p>Count the minimal number of jumps that the small frog must perform to reach its target.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int solution(int X, int Y, int D); }</p>
+
+<p>that, given three integers X, Y and D, returns the minimal number of jumps from position X to a position equal to or greater than Y.</p>
+
+<p>For example, given:</p>
+
+<p>X = 10
+  Y = 85
+  D = 30
+the function should return 3, because the frog will be positioned as follows:</p>
+
+<p>after the first jump, at position 10 + 30 = 40
+after the second jump, at position 10 + 30 + 30 = 70
+after the third jump, at position 10 + 30 + 30 + 30 = 100
+Assume that:</p>
+
+<p>X, Y and D are integers within the range [1..1,000,000,000];
+X ≤ Y.
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(1);
+expected worst-case space complexity is O(1).</p>
+
+<pre><code class="language-cs">using System;
+class Solution {
+    public int solution(int X, int Y, int D) {
+        
+        int d = 0;
+        int count = 0;
+        
+        if ( d &lt; Y-X ) {
+            int jd  = Y - X;
+            int j = jd % D;
+            
+            if( j == 0 ) {
+                count = jd / D;
+            }
+            else{
+                 count = jd / D + 1;
+            }
+                        
+        }
+        
+        return count;
+        
+        
+    }
+}
+</code></pre>
+
+<p>A zero-indexed array A consisting of N different integers is given. The array contains integers in the range [1..(N + 1)], which means that exactly one element is missing.</p>
+
+<p>Your goal is to find that missing element.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int solution(int[] A); }</p>
+
+<p>that, given a zero-indexed array A, returns the value of the missing element.</p>
+
+<p>For example, given array A such that:</p>
+
+<blockquote>
+<p>A[0] = 2   A[1] = 3</p>
+
+<p>A[2] = 1  A[3] = 5</p>
+</blockquote>
+
+<p>the function should return 4, as it is the missing element.</p>
+
+<p>Assume that:</p>
+
+<p>N is an integer within the range [0..100,000];
+the elements of A are all distinct;
+each element of array A is an integer within the range [1..(N + 1)].
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(1), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.</p>
+
+<pre><code class="language-cs">using System;
+class Solution {
+    public int solution(int[] A)
+    {     
+        int n = A.Length, i;  
+        long r = n + 1;  
+        for (i = 0; i &lt; n; ++i) {  
+            r += (i + 1) - A[i];  
+        }  
+        
+        return (int)r;  
+    }
+}
+
+</code></pre>
+
+<h2 id="frogriverone">FrogRiverOne</h2>
+
+<p>A small frog wants to get to the other side of a river. The frog is initially located on one bank of the river (position 0) and wants to get to the opposite bank (position X+1). Leaves fall from a tree onto the surface of the river.</p>
+
+<p>You are given a zero-indexed array A consisting of N integers representing the falling leaves. A[K] represents the position where one leaf falls at time K, measured in seconds.</p>
+
+<p>The goal is to find the earliest time when the frog can jump to the other side of the river. The frog can cross only when leaves appear at every position across the river from 1 to X (that is, we want to find the earliest moment when all the positions from 1 to X are covered by leaves). You may assume that the speed of the current in the river is negligibly small, i.e. the leaves do not change their positions once they fall in the river.</p>
+
+<p>For example, you are given integer X = 5 and array A such that:</p>
+
+<blockquote>
+<p>A[0] = 1  A[1] = 3  A[2] = 1</p>
+
+<p>A[3] = 4  A[4] = 2  A[5] = 3</p>
+
+<p>A[6] = 5  A[7] = 4</p>
+</blockquote>
+
+<p>In second 6, a leaf falls into position 5. This is the earliest time when leaves appear in every position across the river.</p>
+
+<p>Write a function:</p>
+
+<p>class Solution { public int solution(int X, int[] A); }
+that, given a non-empty zero-indexed array A consisting of N integers and integer X, returns the earliest time when the frog can jump to the other side of the river.</p>
+
+<p>If the frog is never able to jump to the other side of the river, the function should return −1.</p>
+
+<p>For example, given X = 5 and array A such that:</p>
+
+<blockquote>
+<p>A[0] = 1  A[1] = 3  A[2] = 1</p>
+
+<p>A[3] = 4  A[4] = 2  A[5] = 3</p>
+
+<p>A[6] = 5  A[7] = 4</p>
+</blockquote>
+
+<p>the function should return 6, as explained above.</p>
+
+<p>Assume that:</p>
+
+<p>N and X are integers within the range [1..100,000];
+each element of array A is an integer within the range [1..X].
+Complexity:</p>
+
+<p>expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(X), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.</p>
+
+<pre><code class="language-cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Solution {
+    public int solution(int X, int[] A) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        int[] B = A.Distinct().ToArray();
+       return (B.Length != X) ? -1 : Array.IndexOf&lt;int&gt;(A, B[B.Length - 1]);
+    }
+}
+</code></pre>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Algorithm</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#this-is-a-demo-task">This is a demo task.</a></li>
+<li><a href="#binary-gap">binary gap</a></li>
+<li><a href="#cyclicrotation">CyclicRotation</a></li>
+<li><a href="#oddoccurrencesinarray">OddOccurrencesInArray</a></li>
+<li><a href="#frogriverone">FrogRiverOne</a></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/cache">
+					<span class="doc-list-category">Cache</span>
+				</a>
+				<ul>
+					<li>
+						<span class="active">Algorithm</span>
+						</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/info/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/info/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/info/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

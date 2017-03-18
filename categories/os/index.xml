@@ -515,7 +515,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 
 &lt;p&gt;&lt;strong&gt;get sub-commands&lt;/strong&gt; &amp;ndash; type &lt;code&gt;net /?&lt;/code&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
      HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START | 
      STATISTICS | STOP | TIME | USE | USER | VIEW ]
 &lt;/code&gt;&lt;/pre&gt;
@@ -559,7 +559,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 
 &lt;h3 id=&#34;runas&#34;&gt;runas&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM start command prompt as administrator
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;start command prompt as administrator
 runas /user:yourpc\administrator &amp;quot;cmd&amp;quot;
 
 REM ##BE CAREFUL When you try the command below ##  
@@ -580,7 +580,7 @@ runas /user:yourpc\administrator &amp;quot;cmd /C type \&amp;quot;\&amp;quot;&am
 &lt;li&gt;Basic usage&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM query all service on the PC -- &amp;lt;yourpcname&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM query all service on the PC -- &amp;lt;yourpcname&amp;gt;
 sc \\&amp;lt;yourpcname&amp;gt; query
 
 REM query status of given service 
@@ -606,7 +606,7 @@ sc query state= all | find &amp;quot;SERVICE_NAME&amp;quot;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM query all services which are inactive and type are driver and kernel
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
 
 REM get all services name
@@ -621,7 +621,7 @@ for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc query state^= all ^| find &am
 
 &lt;p&gt;&lt;strong&gt;sc queryex&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get all services name and pid
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM get all services name and pid
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(
     for /f &amp;quot;tokens=3&amp;quot; %t in (&#39;sc queryex %s ^| find &amp;quot;PID&amp;quot; &#39;) 
         do @echo %s -- %t
@@ -636,7 +636,7 @@ for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &
 
 &lt;p&gt;&lt;strong&gt;sc qc&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get all services name and path
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM get all services name and path
 for /f &amp;quot;tokens=2&amp;quot; %s in (&#39;sc queryex state^= all ^| find &amp;quot;SERVICE_NAME&amp;quot;&#39;) do @(     
     for /f &amp;quot;tokens=3 delims==:&amp;quot; %t in (&#39;sc qc %s ^| find &amp;quot;BINARY_PATH_NAME&amp;quot; &#39;) 
     do @echo %s -- C:%t
@@ -672,7 +672,7 @@ sc stop  &amp;lt;servicename&amp;gt;
 &lt;li&gt;Find process by pid&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;REM get the mysqld process info
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM get the mysqld process info
 tasklist /v /fo list /fi &amp;quot;imagename eq mysqld.exe&amp;quot;
 
 REM get the mongod process info

@@ -935,6 +935,439 @@ ionic emulate android
     </item>
     
     <item>
+      <title>Algorithm</title>
+      <link>https://harryho.github.io/cache/algorithm/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/cache/algorithm/</guid>
+      <description>
+
+&lt;h2 id=&#34;this-is-a-demo-task&#34;&gt;This is a demo task.&lt;/h2&gt;
+
+&lt;p&gt;A zero-indexed array A consisting of N integers is given. An equilibrium index of this array is any integer P such that 0 = P &amp;lt; N and the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
+A[0] + A[1] + &amp;hellip; + A[P-1] = A[P+1] + &amp;hellip; + A[N-2] + A[N-1].
+Sum of zero elements is assumed to be equal to 0. This can happen if P = 0 or if P = N-1.&lt;/p&gt;
+
+&lt;p&gt;For example, consider the following array A consisting of N = 8 elements:&lt;/p&gt;
+
+&lt;p&gt;A[0] = -1
+  A[1] =  3
+  A[2] = -4
+  A[3] =  5
+  A[4] =  1
+  A[5] = -6
+  A[6] =  2
+  A[7] =  1&lt;/p&gt;
+
+&lt;p&gt;P = 1 is an equilibrium index of this array, because:&lt;/p&gt;
+
+&lt;p&gt;A[0] = -1 = A[2] + A[3] + A[4] + A[5] + A[6] + A[7]
+P = 3 is an equilibrium index of this array, because:&lt;/p&gt;
+
+&lt;p&gt;A[0] + A[1] + A[2] = -2 = A[4] + A[5] + A[6] + A[7]
+P = 7 is also an equilibrium index, because:&lt;/p&gt;
+
+&lt;p&gt;A[0] + A[1] + A[2] + A[3] + A[4] + A[5] + A[6] = 0
+and there are no elements with indices greater than 7.&lt;/p&gt;
+
+&lt;p&gt;P = 8 is not an equilibrium index, because it does not fulfill the condition 0 = P &amp;lt; N.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int[] A); }&lt;/p&gt;
+
+&lt;p&gt;that, given a zero-indexed array A consisting of N integers, returns any of its equilibrium indices. The function should return -1 if no equilibrium index exists.&lt;/p&gt;
+
+&lt;p&gt;For example, given array A shown above, the function may return 1, 3 or 7, as explained above.&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N is an integer within the range [0..100,000];
+each element of array A is an integer within the range [-2,147,483,648..2,147,483,647].
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(N), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C#&#34;&gt;using System;
+
+class Solution {
+    public int solution(int[] A) {
+       int p =0 ;
+       
+       long sumP = 0;
+       long sumN = 0;
+       foreach( var a in A ) sumN += a;
+       
+       for ( int i =0; i &amp;lt; A.Length; i ++ ) {
+            long sum = sumN - A[i] - sumP ;
+            
+            if ( sum == sumP ) 
+            return i;
+            
+            sumP+=A[i];
+       }
+       
+       return -1;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;binary-gap&#34;&gt;binary gap&lt;/h2&gt;
+
+&lt;p&gt;A binary gap within a positive integer N is any maximal sequence of consecutive zeros that is surrounded by ones at both ends in the binary representation of N.&lt;/p&gt;
+
+&lt;p&gt;For example, number 9 has binary representation 1001 and contains a binary gap of length 2. The number 529 has binary representation 1000010001 and contains two binary gaps: one of length 4 and one of length 3. The number 20 has binary representation 10100 and contains one binary gap of length 1. The number 15 has binary representation 1111 and has no binary gaps.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int N); }&lt;/p&gt;
+
+&lt;p&gt;that, given a positive integer N, returns the length of its longest binary gap. The function should return 0 if N doesn&amp;rsquo;t contain a binary gap.&lt;/p&gt;
+
+&lt;p&gt;For example, given N = 1041 the function should return 5, because N has binary representation 10000010001 and so its longest binary gap is of length 5.&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N is an integer within the range [1..2,147,483,647].
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(log(N));
+expected worst-case space complexity is O(1).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;class Solution {
+    public int solution(int N) {
+        
+        int next =0;
+        int gap = 0;
+        
+        string bin =Convert.ToString(N, 2);
+        
+        while ( bin.IndexOf(&amp;quot;1&amp;quot;) &amp;gt;=0 ){
+            
+            bin = bin.Substring( bin.IndexOf(&amp;quot;1&amp;quot;) + 1 );
+           
+            next = bin.IndexOf(&amp;quot;1&amp;quot;);
+         //   Console.WriteLine(&amp;quot; bin , {0}, {1} &amp;quot; , bin, next  );
+            
+            if( next  &amp;gt; gap ) gap = next;
+            
+        }
+        
+        return gap;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Test cases:
+328
+1162
+66561
+1376796946&lt;/p&gt;
+
+&lt;h2 id=&#34;cyclicrotation&#34;&gt;CyclicRotation&lt;/h2&gt;
+
+&lt;p&gt;A zero-indexed array A consisting of N integers is given. Rotation of the array means that each element is shifted right by one index, and the last element of the array is also moved to the first place.&lt;/p&gt;
+
+&lt;p&gt;For example, the rotation of array A = [3, 8, 9, 7, 6] is [6, 3, 8, 9, 7]. The goal is to rotate array A K times; that is, each element of A will be shifted to the right by K indexes.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int[] solution(int[] A, int K); }
+that, given a zero-indexed array A consisting of N integers and an integer K, returns the array A rotated K times.&lt;/p&gt;
+
+&lt;p&gt;For example, given array A = [3, 8, 9, 7, 6] and K = 3, the function should return [9, 7, 6, 3, 8].&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N and K are integers within the range [0..100];
+each element of array A is an integer within the range [-1,000..1,000].&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;class Solution {
+    public int[] solution(int[] A, int K) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        
+        int [] r =  A;
+        if(A!=null &amp;amp;&amp;amp; A.Length &amp;gt; 0 ) {
+            int len = A.Length;
+            
+            int k = K;
+            
+            
+            if( K &amp;gt;= len ) {
+                k = K % len ;
+            }
+            
+            r = k&amp;gt;0? new int[len]:A;
+
+            if(k &amp;gt; 0 ){
+                int i = 0 ;
+                for (  i = 0 ; i &amp;lt; len ;i++ ) {
+                    
+                  if ( i &amp;lt; k )
+                         r[i]=A[len - k +i];
+                  else
+                         r[i] = A[ i -k ];
+                } 
+            }
+        }
+        
+        return r;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;oddoccurrencesinarray&#34;&gt;OddOccurrencesInArray&lt;/h2&gt;
+
+&lt;p&gt;A non-empty zero-indexed array A consisting of N integers is given. The array contains an odd number of elements, and each element of the array can be paired with another element that has the same value, except for one element that is left unpaired.&lt;/p&gt;
+
+&lt;p&gt;For example, in array A such that:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A[0] = 9    A[1] = 3   A[2] = 9  A[3] = 3&lt;/p&gt;
+
+&lt;p&gt;A[4] = 9    A[5] = 7   A[6] = 9&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the elements at indexes 0 and 2 have value 9,
+the elements at indexes 1 and 3 have value 3,
+the elements at indexes 4 and 6 have value 9,
+the element at index 5 has value 7 and is unpaired.
+Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int[] A); }
+that, given an array A consisting of N integers fulfilling the above conditions, returns the value of the unpaired element.&lt;/p&gt;
+
+&lt;p&gt;For example, given array A such that:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A[0] = 9  A[1] = 3  A[2] = 9  A[3] = 3&lt;/p&gt;
+
+&lt;p&gt;A[4] = 9  A[5] = 7  A[6] = 9&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the function should return 7, as explained in the example above.&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N is an odd integer within the range [1..1,000,000];
+each element of array A is an integer within the range [1..1,000,000,000];
+all but one of the values in A occur an even number of times.
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(1), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+  
+
+// you can also use other imports, for example:
+// using System.Collections.Generic;
+
+// you can write to stdout for debugging purposes, e.g.
+// Console.WriteLine(&amp;quot;this is a debug message&amp;quot;);
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        int r = -1;
+        
+
+          Array.Sort(A);
+        // foreach (int i in A) Console.WriteLine( i+ &amp;quot; &amp;quot;); 
+        //  Console.WriteLine(&amp;quot;this is a debug message {0} &amp;quot; , A);
+         
+         for( int i =0; i &amp;lt; A.Length; ){
+            if ( i == A.Length -1  ){
+                return A[i];
+            }            
+            if ( A[i] != A[i+1] ){
+                return  A[i];
+            }        
+            i +=2;             
+         }
+         
+         return r;
+         
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A small frog wants to get to the other side of the road. The frog is currently located at position X and wants to get to a position greater than or equal to Y. The small frog always jumps a fixed distance, D.&lt;/p&gt;
+
+&lt;p&gt;Count the minimal number of jumps that the small frog must perform to reach its target.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int X, int Y, int D); }&lt;/p&gt;
+
+&lt;p&gt;that, given three integers X, Y and D, returns the minimal number of jumps from position X to a position equal to or greater than Y.&lt;/p&gt;
+
+&lt;p&gt;For example, given:&lt;/p&gt;
+
+&lt;p&gt;X = 10
+  Y = 85
+  D = 30
+the function should return 3, because the frog will be positioned as follows:&lt;/p&gt;
+
+&lt;p&gt;after the first jump, at position 10 + 30 = 40
+after the second jump, at position 10 + 30 + 30 = 70
+after the third jump, at position 10 + 30 + 30 + 30 = 100
+Assume that:&lt;/p&gt;
+
+&lt;p&gt;X, Y and D are integers within the range [1..1,000,000,000];
+X ≤ Y.
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(1);
+expected worst-case space complexity is O(1).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+class Solution {
+    public int solution(int X, int Y, int D) {
+        
+        int d = 0;
+        int count = 0;
+        
+        if ( d &amp;lt; Y-X ) {
+            int jd  = Y - X;
+            int j = jd % D;
+            
+            if( j == 0 ) {
+                count = jd / D;
+            }
+            else{
+                 count = jd / D + 1;
+            }
+                        
+        }
+        
+        return count;
+        
+        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A zero-indexed array A consisting of N different integers is given. The array contains integers in the range [1..(N + 1)], which means that exactly one element is missing.&lt;/p&gt;
+
+&lt;p&gt;Your goal is to find that missing element.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int[] A); }&lt;/p&gt;
+
+&lt;p&gt;that, given a zero-indexed array A, returns the value of the missing element.&lt;/p&gt;
+
+&lt;p&gt;For example, given array A such that:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A[0] = 2   A[1] = 3&lt;/p&gt;
+
+&lt;p&gt;A[2] = 1  A[3] = 5&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the function should return 4, as it is the missing element.&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N is an integer within the range [0..100,000];
+the elements of A are all distinct;
+each element of array A is an integer within the range [1..(N + 1)].
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(1), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+class Solution {
+    public int solution(int[] A)
+    {     
+        int n = A.Length, i;  
+        long r = n + 1;  
+        for (i = 0; i &amp;lt; n; ++i) {  
+            r += (i + 1) - A[i];  
+        }  
+        
+        return (int)r;  
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;frogriverone&#34;&gt;FrogRiverOne&lt;/h2&gt;
+
+&lt;p&gt;A small frog wants to get to the other side of a river. The frog is initially located on one bank of the river (position 0) and wants to get to the opposite bank (position X+1). Leaves fall from a tree onto the surface of the river.&lt;/p&gt;
+
+&lt;p&gt;You are given a zero-indexed array A consisting of N integers representing the falling leaves. A[K] represents the position where one leaf falls at time K, measured in seconds.&lt;/p&gt;
+
+&lt;p&gt;The goal is to find the earliest time when the frog can jump to the other side of the river. The frog can cross only when leaves appear at every position across the river from 1 to X (that is, we want to find the earliest moment when all the positions from 1 to X are covered by leaves). You may assume that the speed of the current in the river is negligibly small, i.e. the leaves do not change their positions once they fall in the river.&lt;/p&gt;
+
+&lt;p&gt;For example, you are given integer X = 5 and array A such that:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A[0] = 1  A[1] = 3  A[2] = 1&lt;/p&gt;
+
+&lt;p&gt;A[3] = 4  A[4] = 2  A[5] = 3&lt;/p&gt;
+
+&lt;p&gt;A[6] = 5  A[7] = 4&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In second 6, a leaf falls into position 5. This is the earliest time when leaves appear in every position across the river.&lt;/p&gt;
+
+&lt;p&gt;Write a function:&lt;/p&gt;
+
+&lt;p&gt;class Solution { public int solution(int X, int[] A); }
+that, given a non-empty zero-indexed array A consisting of N integers and integer X, returns the earliest time when the frog can jump to the other side of the river.&lt;/p&gt;
+
+&lt;p&gt;If the frog is never able to jump to the other side of the river, the function should return −1.&lt;/p&gt;
+
+&lt;p&gt;For example, given X = 5 and array A such that:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A[0] = 1  A[1] = 3  A[2] = 1&lt;/p&gt;
+
+&lt;p&gt;A[3] = 4  A[4] = 2  A[5] = 3&lt;/p&gt;
+
+&lt;p&gt;A[6] = 5  A[7] = 4&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the function should return 6, as explained above.&lt;/p&gt;
+
+&lt;p&gt;Assume that:&lt;/p&gt;
+
+&lt;p&gt;N and X are integers within the range [1..100,000];
+each element of array A is an integer within the range [1..X].
+Complexity:&lt;/p&gt;
+
+&lt;p&gt;expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(X), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Solution {
+    public int solution(int X, int[] A) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        int[] B = A.Distinct().ToArray();
+       return (B.Length != X) ? -1 : Array.IndexOf&amp;lt;int&amp;gt;(A, B[B.Length - 1]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Golang Notes, Part 1</title>
       <link>https://harryho.github.io/cache/golang/golang-notes-1/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
@@ -1602,357 +2035,6 @@ python manage.py migrate new_app 0001
 source path\to\virtualenv\bin\activate
 &lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>C# Notes -- Part 1</title>
-      <link>https://harryho.github.io/code/csharp-notes-1/</link>
-      <pubDate>Fri, 10 Apr 2015 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/csharp-notes-1/</guid>
-      <description>
-
-&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;C# notes is the place, which I keep the good practice and solution from my projects and research.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;create-simple-net-project-without-visual-studio&#34;&gt;Create simple .net project without Visual Studio&lt;/h2&gt;
-
-&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;DotNet Frameowork path &lt;code&gt;c:\Windows\Microsfot.Net\Frameowork\v4.0.30319&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;simple-c-project&#34;&gt;Simple C# project&lt;/h3&gt;
-
-&lt;h4 id=&#34;create-a-proejct-named-c-project&#34;&gt;Create a proejct named &lt;code&gt;c#project&lt;/code&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;md c#project
-cd c#project 
-md bin src
-echo.&amp;gt;c#project.proj
-echo.&amp;gt;src\helloworld.cs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;open-project-configuration-c-project-proj-with-notepad&#34;&gt;Open Project configuration &lt;code&gt;c#project.proj&lt;/code&gt; with notepad&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;Project DefaultTargets = &amp;quot;Compile&amp;quot;
-    xmlns=&amp;quot;http://schemas.microsoft.com/developer/msbuild/2003&amp;quot; &amp;gt;
-
-    &amp;lt;!-- Set the application name as a property --&amp;gt;
-    &amp;lt;PropertyGroup&amp;gt;
-        &amp;lt;appname&amp;gt;c#app&amp;lt;/appname&amp;gt;
-    &amp;lt;/PropertyGroup&amp;gt;
-
-    &amp;lt;!-- Specify the inputs by type and file name --&amp;gt;
-    &amp;lt;ItemGroup&amp;gt;
-        &amp;lt;CSFile Include = &amp;quot;src\helloworld.cs&amp;quot;/&amp;gt;
-    &amp;lt;/ItemGroup&amp;gt;
-
-    &amp;lt;Target Name = &amp;quot;Compile&amp;quot;&amp;gt;
-        &amp;lt;!-- Run the Visual C# compilation using input files of type CSFile --&amp;gt;
-        &amp;lt;CSC
-            Sources = &amp;quot;@(CSFile)&amp;quot;
-            OutputAssembly = &amp;quot;bin\$(appname).exe&amp;quot;&amp;gt;
-            &amp;lt;!-- Set the OutputAssembly attribute of the CSC task
-            to the name of the executable file that is created --&amp;gt;
-            &amp;lt;Output
-                TaskParameter = &amp;quot;OutputAssembly&amp;quot;
-                ItemName = &amp;quot;EXEFile&amp;quot; /&amp;gt;
-        &amp;lt;/CSC&amp;gt;
-        &amp;lt;!-- Log the file name of the output file --&amp;gt;
-        &amp;lt;Message Text=&amp;quot;The output file is @(EXEFile)&amp;quot;/&amp;gt;
-    &amp;lt;/Target&amp;gt;
-&amp;lt;/Project&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;copy-the-helloworld-cs-from-home-page-c&#34;&gt;Copy the &lt;code&gt;HelloWorld.cs&lt;/code&gt; from &lt;a href=&#34;https://harryho.github.io/#c&#34;&gt;Home Page&lt;/a&gt;&lt;/h3&gt;
-
-&lt;h3 id=&#34;compile-with-msbuild-run&#34;&gt;Compile with MSBuild &amp;amp; Run&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;c:\Windows\Microsfot.Net\Frameowork\v4.0.30319\MSBuild
-bin\c#app.exe
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;generic-predicate-and-expression-for-query&#34;&gt;Generic Predicate and Expression for query&lt;/h2&gt;
-
-&lt;h3 id=&#34;assumption-1&#34;&gt;Assumption&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;You have experience of developing .net application, which includes entity framework.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;You have experience of using SQL to query database&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Now entity framework is core component in all .net applications, which need to communicate with database.&lt;/p&gt;
-
-&lt;p&gt;Business service get a lot of benefits form entity framework&amp;rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us create generic query and reduce many reduntant code.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;h4 id=&#34;analysis&#34;&gt;Analysis&lt;/h4&gt;
-
-&lt;p&gt;Basically, the idea is close to dynamic statement in ADO.Net. Here generic programming is the key, when we utilize predicate and expression to dynamically rebuild the query filter.&lt;/p&gt;
-
-&lt;p&gt;If we look into the queries, we will find 80% of queries can be abstracted as following syntax. Now it is easy to see how generic predicate and expression can support this syntax.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * FROM TABLE_A 
-    WHERE 
-        &amp;lt;FIELD_1&amp;gt; [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE] &amp;lt;VALUE_1&amp;gt;   ----- Expression 
-        [ AND | OR ]                            ------------ Predicate 
-        &amp;lt;FIELD_2&amp;gt; [=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE] &amp;lt;VALUE_2&amp;gt;   ----- Expression
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The next step we can look into the Expression, actually the FIELD_1 is the property of entity object, and VALUE_1 is the filter value entered by client. How to use the filter to narrow down the query result is part of business logic, which is handled by developer.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;&amp;lt;FIELD_1&amp;gt;           ==&amp;gt; Entity property
-[=|&amp;lt;|&amp;gt;|&amp;gt;=|&amp;lt;=|LIKE]  ==&amp;gt; Operator
-&amp;lt;VALUE_1&amp;gt;           ==&amp;gt; Filter value
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;design&#34;&gt;Design&lt;/h4&gt;
-
-&lt;p&gt;Accordingt to abve analysis, we can design the classes to support this feature.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
-+--------------+
-|  Filter      |
-+--------------+
-|  Property    | --- Map to the column (table) or property (entity)
-|  Op          | --- Operator , e.g. Equals, Contains, GreaterThan, tec.
-|  Val         | --- Value entered by client
-+--------------+
-
-+----------------------+
-| ExpressionBuilder    |  
-+----------------------+
-|GetExpression( filer) | --------- Create expression by input filter 
-+ ---------------------+
-
-+------------------+
-| PredicateBuilder |
-+------------------+      
-| And(exp1, exp2)  | --- Use AND to combine two expressions
-| Or(exp1, exp2)   | --- Use OR to combine two expressions                        
-+------------------+
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;implementatoin&#34;&gt;Implementatoin&lt;/h4&gt;
-
-&lt;p&gt;Following is the implementation of generic expression and predicate. Please keep it in mind. We are using LINQ to simulate the dynamic statement, so there is some tricks to work around as SQL queries.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Filter&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;The Op property should be&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;public class Filter
-{
-    public string Property { get; set; }
-    public string Op { get; set; }
-    public object Val { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Op&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This class can be replaced by Enum if you want.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;
-public static class Op
-{
-    public const string Equals = &amp;quot;Equals&amp;quot;;
-    public const string GreaterThan = &amp;quot;GreaterThan&amp;quot;;
-    public const string LessThan = &amp;quot;LessThan&amp;quot;;
-    public const string GreaterThanOrEqual = &amp;quot;GreaterThanOrEqual&amp;quot;;
-    public const string LessThanOrEqual = &amp;quot;LessThanOrEqual&amp;quot;;
-
-    public const string Contains = &amp;quot;Contains&amp;quot;;
-    public const string StartsWith = &amp;quot;StartsWith&amp;quot;;
-    public const string EndsWith = &amp;quot;EndsWith&amp;quot;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;ExpressionBuilder&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This class takes care of Expression with Filter object.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
-
-public class ExpressionBuilder
-{
-    private static MethodInfo containsMethod = typeof(string).GetMethod(&amp;quot;Contains&amp;quot;);
-    private static MethodInfo startsWithMethod =
-    typeof(string).GetMethod(&amp;quot;StartsWith&amp;quot;, new Type[] { typeof(string) });
-    private static MethodInfo endsWithMethod =
-    typeof(string).GetMethod(&amp;quot;EndsWith&amp;quot;, new Type[] { typeof(string) });
-
-
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; GetExpression&amp;lt;T&amp;gt;(IList&amp;lt;Filter&amp;gt; filters)
-    {
-        if (filters.Count == 0)
-            return null;
-
-        ParameterExpression param = Expression.Parameter(typeof(T), &amp;quot;t&amp;quot;);
-        Expression exp = null;
-
-        if (filters.Count == 1)
-            exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0]);
-        else if (filters.Count == 2)
-            exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]);
-        else
-        {
-            while (filters.Count &amp;gt; 0)
-            {
-                var f1 = filters[0];
-                var f2 = filters[1];
-
-                if (exp == null)
-                    exp = GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]);
-                else
-                    exp = Expression.AndAlso(exp, GetExpression&amp;lt;T&amp;gt;(param, filters[0], filters[1]));
-
-                filters.Remove(f1);
-                filters.Remove(f2);
-
-                if (filters.Count == 1)
-                {
-                    exp = Expression.AndAlso(exp, GetExpression&amp;lt;T&amp;gt;(param, filters[0]));
-                    filters.RemoveAt(0);
-                }
-            }
-        }
-
-        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;(exp, param);
-    }
-
-    private static ConstantExpression ConvetValueType(MemberExpression member, object value)
-    {
-        if (member.Type == typeof(int))
-        {
-            value = int.Parse(value.ToString());
-        }
-        else if (member.Type == typeof(decimal))
-        {
-            value = decimal.Parse(value.ToString());
-        }
-        else if (member.Type == typeof(float))
-        {
-            value = float.Parse(value.ToString());
-        }
-        else if (member.Type == typeof(double))
-        {
-            value = double.Parse(value.ToString());
-        }
-
-        return Expression.Constant(value);
-    }
-
-    private static Expression GetExpression&amp;lt;T&amp;gt;(ParameterExpression param, Filter filter)
-    {
-
-        MemberExpression member = Expression.Property(param, filter.Property);
-
-        switch (filter.Op)
-        {
-            case Op.Equals:
-                return Expression.Equal(member, Expression.Constant(filter.Val, member.Type));
-
-            case Op.GreaterThan:
-                return Expression.GreaterThan(member, ConvetValueType(member, filter.Val));
-
-            case Op.GreaterThanOrEqual:
-                return Expression.GreaterThanOrEqual(member, ConvetValueType(member, filter.Val));
-
-            case Op.LessThan:
-                return Expression.LessThan(member, ConvetValueType(member, filter.Val));
-
-            case Op.LessThanOrEqual:
-                return Expression.LessThanOrEqual(member, ConvetValueType(member, filter.Val));
-
-            case Op.Contains:
-                return Expression.Call(member, containsMethod, Expression.Constant(filter.Val, member.Type));
-
-            case Op.StartsWith:
-                return Expression.Call(member, startsWithMethod, Expression.Constant(filter.Val, member.Type));
-
-            case Op.EndsWith:
-                return Expression.Call(member, endsWithMethod, Expression.Constant(filter.Val, member.Type));
-        }
-
-        return null;
-    }
-
-    private static BinaryExpression GetExpression&amp;lt;T&amp;gt;(ParameterExpression param, Filter filter1, Filter filter2)
-    {
-        Expression bin1 = GetExpression&amp;lt;T&amp;gt;(param, filter1);
-        Expression bin2 = GetExpression&amp;lt;T&amp;gt;(param, filter2);
-
-        return Expression.AndAlso(bin1, bin2);
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;PredicateBuilder&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This class manages all expressions to support dynamic statement query.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
-
-public static class PredicateBuilder
-{
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; True&amp;lt;T&amp;gt;() { return f =&amp;gt; true; }
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; False&amp;lt;T&amp;gt;() { return f =&amp;gt; false; }
-
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; Or&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
-    {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
-                (Expression.OrElse(expr1.Body, secondBody), expr1.Parameters);
-    }
-
-    public static Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; And&amp;lt;T&amp;gt;(this Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr1, Expression&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt; expr2)
-    {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&amp;lt;Func&amp;lt;T, bool&amp;gt;&amp;gt;
-                (Expression.AndAlso(expr1.Body, secondBody), expr1.Parameters);
-    }
-
-    public static Expression Replace(this Expression expression, Expression searchEx, Expression replaceEx)
-    {
-        return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
-    }
-
-    internal class ReplaceVisitor : ExpressionVisitor
-    {
-        private readonly Expression from, to;
-        public ReplaceVisitor(Expression from, Expression to)
-        {
-            this.from = from;
-            this.to = to;
-        }
-
-        public override Expression Visit(Expression node)
-        {
-            return node == from ? to : base.Visit(node);
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
