@@ -2333,7 +2333,7 @@ Producer and Consumer by separating Identification of work with Execution of Wor
 &lt;li&gt;&lt;p&gt;It is everywhere in real life and depict coordination and collaboration. Like one person is preparing food (Producer) while other one is serving food (Consumer), both will use shared table for putting food plates and taking food plates. Producer which is the person preparing food will wait if table is full and Consumer (Person who is serving food) will wait if table is empty. table is a shared object here. On Java library Executor framework itself implement Producer Consumer design pattern be separating responsibility of addition and execution of task.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;mport java.util.concurrent.BlockingQueue;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -2434,7 +2434,9 @@ class Consumer implements Runnable{
 &lt;li&gt;&lt;p&gt;Demo of thread pool&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadPoolDemo {
 
     public static void main(String args[]) {
@@ -2461,11 +2463,14 @@ final class Task implements Runnable{
 
 // Output:
 // Task ID : 0 performed by pool-1-thread-1
-// Task ID : 3 performed by pool-1-thread-4
-// Task ID : 2 performed by pool-1-thread-3
-// Task ID : 1 performed by pool-1-thread-2
-// Task ID : 5 performed by pool-1-thread-6
+// Task ID : 7 performed by pool-1-thread-8
+// Task ID : 8 performed by pool-1-thread-9
+// Task ID : 6 performed by pool-1-thread-7
 // Task ID : 4 performed by pool-1-thread-5
+// Task ID : 5 performed by pool-1-thread-6
+// Task ID : 3 performed by pool-1-thread-4
+// Task ID : 1 performed by pool-1-thread-2
+// ...
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;submit-runnable&#34;&gt;Submit(Runnable)&lt;/h3&gt;
@@ -2494,10 +2499,17 @@ final class Task implements Runnable{
 
 &lt;h3 id=&#34;demo-of-submit-invokeany&#34;&gt;Demo of submit, InvokeAny&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
+import java.util.HashSet;
+import java.util.Set;
+
 public class SubmitInvokeDemo {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException, ExecutionException {
 
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -2552,7 +2564,13 @@ public class SubmitInvokeDemo {
 &lt;code&gt;ExecutorService&lt;/code&gt; where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
+import java.util.Random;
+
 public class FindMinTask implements Callable&amp;lt;Integer&amp;gt; {
     private int[] numbers;
     private int startIndex;
@@ -2605,7 +2623,14 @@ public class FindMinTask implements Callable&amp;lt;Integer&amp;gt; {
 &lt;li&gt;&lt;p&gt;Demo of JoinForkPool&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class GrayscaleImageAction extends RecursiveAction {
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.util.concurrent.ForkJoinPool;
+import javax.imageio.*;
+import java.util.concurrent.RecursiveAction;
+
+public class GrayscaleImageAction extends RecursiveAction {
     private static final long serialVersionUID = 1L;
     private int row;
     private BufferedImage bufferedImage;
@@ -2638,6 +2663,467 @@ public class FindMinTask implements Callable&amp;lt;Integer&amp;gt; {
         pool.shutdown();
         ImageIO.write(bufferedImage, &amp;quot;jpg&amp;quot;, new File(args[1]));
     }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Java Notes, Part-3</title>
+      <link>https://harryho.github.io/code/java-notes-3/</link>
+      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/java-notes-3/</guid>
+      <description>
+
+&lt;h1 id=&#34;date-time-api&#34;&gt;Date-Time API&lt;/h1&gt;
+
+&lt;p&gt;Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instant
+
+&lt;ul&gt;
+&lt;li&gt;represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;LocalDate,  LocalTime, LocalDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;represents human readable date, time, and datetime without a time zone.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;OffsetTime, OffsetDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It represent a time and datetime with a zone offset from UTC.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ZonedDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;iso-8601-standards-for-datetime&#34;&gt;ISO-8601 Standards for Datetime&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[date]T[time][zone offset]&lt;/li&gt;
+&lt;li&gt;A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Epoch is Midnight January 1, 1970 UTC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;useful-datetime-related-enums&#34;&gt;Useful Datetime-Related Enums&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Month&lt;/li&gt;
+&lt;li&gt;DayOfWeek&lt;/li&gt;
+&lt;li&gt;ChronoField&lt;/li&gt;
+&lt;li&gt;ChronoUnit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;period&#34;&gt;Period&lt;/h3&gt;
+
+&lt;p&gt;A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an
+amount of time measured in terms of seconds and nanoseconds. Negative periods are supported.
+What is the difference between a period and a duration? A duration represents an exact number of nanoseconds,
+whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.&lt;/p&gt;
+
+&lt;h3 id=&#34;partial&#34;&gt;Partial&lt;/h3&gt;
+
+&lt;p&gt;Partials
+A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to
+humans. With some more information, a partial may match multiple instants on the timeline.&lt;/p&gt;
+
+&lt;h3 id=&#34;adjusting-dates&#34;&gt;Adjusting Dates&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.time.Duration;
+import java.time.DayOfWeek;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime; 
+import java.time.LocalDateTime; 
+
+import java.time.Month;
+import java.time.MonthDay;
+
+import java.time.OffsetDateTime;
+import java.time.Period;
+
+
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+
+
+import java.time.Year;
+import java.time.YearMonth;
+
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+
+import java.util.Locale;
+import java.util.Set;
+
+
+import static java.time.Month.JANUARY;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
+public class DateTimeApiDemo {
+
+    
+    public static String format(Temporal co, String pattern) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        return fmt.format(co);
+    }
+
+    public static void parseStr(DateTimeFormatter formatter, String text) {
+        try {
+            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
+            if (ta instanceof OffsetDateTime) {
+                OffsetDateTime odt = OffsetDateTime.from(ta);
+                System.out.println(&amp;quot;OffsetDateTime: &amp;quot; + odt);
+            } else if (ta instanceof LocalDateTime) {
+                LocalDateTime ldt = LocalDateTime.from(ta);
+                System.out.println(&amp;quot;LocalDateTime: &amp;quot; + ldt);
+            } else if (ta instanceof LocalDate) {
+                LocalDate ld = LocalDate.from(ta);
+                System.out.println(&amp;quot;LocalDate: &amp;quot; + ld);
+            } else {
+                System.out.println(&amp;quot;Parsing returned: &amp;quot; + ta);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Get current date, time, and datetime 
+        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
+        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
+        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
+        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
+
+        //  ofXXX() method
+        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
+        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
+        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
+        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
+
+        // The plusXXX( ) and minusXXX( ) Methods
+        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
+        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
+        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
+        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
+        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
+        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
+
+        // Instant 
+        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
+        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
+
+        Duration d1 = Duration.ofSeconds(55);
+        Duration d2 = Duration.ofSeconds(-17);
+
+        // Compare instants
+        System.out.println(&amp;quot;i1.isBefore(i2):&amp;quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
+        System.out.println(&amp;quot;i1.isAfter(i2):&amp;quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
+
+        // Add and subtract durations to instants
+        Instant i3 = i1.plus(d1);
+        Instant i4 = i2.minus(d2);
+        System.out.println(&amp;quot;i1.plus(d1):&amp;quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
+
+        System.out.println(&amp;quot;i2.minus(d2):&amp;quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
+
+        // Add two durations
+        System.out.println(&amp;quot;d1.plus(d2):&amp;quot; + d1.plus(d2)); // d1.plus(d2):PT38S
+
+
+        // Print All Zone Id
+        Set&amp;lt;String&amp;gt; zoneIds = ZoneId.getAvailableZoneIds();
+        for (String zoneId: zoneIds) {
+          System.out.println(zoneId);
+        }
+
+        // DayOfWeek
+        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
+
+        // Chrono 
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(&amp;quot;Year: &amp;quot; + now.get(ChronoField.YEAR));
+        System.out.println(&amp;quot;Month: &amp;quot; + now.get(ChronoField.MONTH_OF_YEAR));
+        System.out.println(&amp;quot;Day: &amp;quot; + now.get(ChronoField.DAY_OF_MONTH));
+        System.out.println(&amp;quot;Hour-of-day: &amp;quot; + now.get(ChronoField.HOUR_OF_DAY));
+        System.out.println(&amp;quot;Hour-of-AMPM: &amp;quot; + now.get(ChronoField.HOUR_OF_AMPM));
+        System.out.println(&amp;quot;AMPM-of-day: &amp;quot; + now.get(ChronoField.AMPM_OF_DAY));
+
+        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
+        Period p2 = Period.ofDays(25); // 25 days
+        Period p3 = Period.ofMonths(-3); // -3 months
+        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
+
+        // Date Adjuster
+        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        System.out.println(ld3);
+        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+        System.out.println(ld3);
+
+        // Date Time Format         
+        System.out.println(format(ld, &amp;quot;M/d/yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MM/dd/yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MMMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;EEEE, MMMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;&#39;Month&#39; q &#39;in&#39; QQQ&amp;quot;));
+        System.out.println(format(ld, &amp;quot;[MM-dd-yyyy][&#39; at&#39; HH:mm:ss]&amp;quot;));
+
+        // Parse date time
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&amp;quot;yyyy-MM-dd[&#39;T&#39;HH:mm:ss[Z]]&amp;quot;);
+        parseStr(parser, &amp;quot;2012-05-31&amp;quot;); //  LocalDate: 2012-05-31
+        parseStr(parser, &amp;quot;2012-05-31T16:30:12&amp;quot;); // LocalDateTime: 2012-05-31T16:30:12
+        parseStr(parser, &amp;quot;2012-05-31T16:30:12-0500&amp;quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
+        parseStr(parser, &amp;quot;2012-05-31Hello&amp;quot;); // Text &#39;2012-05-31Hello&#39; could not be parsed, unparsed text found at index 10
+
+
+
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;lamda&#34;&gt;Lamda&lt;/h1&gt;
+
+&lt;h2 id=&#34;lambda-best-practices&#34;&gt;Lambda Best Practices&lt;/h2&gt;
+
+&lt;h3 id=&#34;use-interfaces&#34;&gt;Use Interfaces&lt;/h3&gt;
+
+&lt;p&gt;The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
+in type signatures. In general, you should avoid using the functional interface types directly and instead
+provide single-method interfaces as arguments to your methods. These interfaces become a way to create
+self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
+for your user to provide an actual Java type.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-method-reference&#34;&gt;Use Method Reference&lt;/h3&gt;
+
+&lt;p&gt;As much as possible, use a method reference instead of a lambda. Method references are not only shorter
+and easier to read, but using method references will get you thinking directly about the methods as values.&lt;/p&gt;
+
+&lt;h3 id=&#34;define-lambdas-inline&#34;&gt;Define Lambdas Inline&lt;/h3&gt;
+
+&lt;p&gt;When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
+lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
+inline is that it will allow your code to be more flexible when types change: you are letting type inference do
+more heavy lifting for you, and adapting your code to changing contexts.&lt;/p&gt;
+
+&lt;h3 id=&#34;lambdas-should-always-be-threadsafe&#34;&gt;Lambdas Should Always Be Threadsafe&lt;/h3&gt;
+
+&lt;p&gt;As we go through the rest of this book, we will see many places where lambdas make concurrent programming
+much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
+much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
+instance method handles, since thread-dangerous state can often be hiding within those instances.&lt;/p&gt;
+
+&lt;h3 id=&#34;don-t-use-null&#34;&gt;Don’t Use Null&lt;/h3&gt;
+
+&lt;p&gt;The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
+no need for it. Whenever you have a method, you should be explicit about whether or not you accept
+null, and you generally shouldn’t accept it. This will save you from NullPointerException cropping up
+in obnoxious places, far from the site of the actual error. This is an especially painful problem when you
+start working with streams and lambdas, because the stack trace may not be very useful for you when
+you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
+soon as it occurs.&lt;/p&gt;
+
+&lt;h3 id=&#34;don-t-release-zalgo&#34;&gt;Don’t Release Zalgo&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;build-complexity-from-simple-parts&#34;&gt;Build Complexity from Simple Parts&lt;/h3&gt;
+
+&lt;h3 id=&#34;use-types-and-the-compiler-to-your-advantage&#34;&gt;Use Types and the Compiler to Your Advantage&lt;/h3&gt;
+
+&lt;h2 id=&#34;common-functional-interfaces&#34;&gt;Common functional Interfaces&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Functional Interface&lt;/th&gt;
+&lt;th&gt;Parameter Types&lt;/th&gt;
+&lt;th&gt;Return&lt;/th&gt;
+&lt;th&gt;Abstract Description Method&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Other Methods&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Runnable&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;run&lt;/td&gt;
+&lt;td&gt;Runs an action&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Supplier&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;get&lt;/td&gt;
+&lt;td&gt;Supplies a value of type T&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Consumer&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;accept&lt;/td&gt;
+&lt;td&gt;Consumes a  value of type T&lt;/td&gt;
+&lt;td&gt;chain&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiConsumer&lt;T,U&gt;&lt;/td&gt;
+&lt;td&gt;T,U&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;accept&lt;/td&gt;
+&lt;td&gt;Consumes a  value of type T and U&lt;/td&gt;
+&lt;td&gt;chain&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Function&lt;T, R&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A function with argument oftype T&lt;/td&gt;
+&lt;td&gt;compose,andThen,identity&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiFunction&lt;T, U, R&gt;&lt;/td&gt;
+&lt;td&gt;T,U&lt;/td&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A function with argument oftype T and U&lt;/td&gt;
+&lt;td&gt;andThen&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;UnaryOperator&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A unary operator on type T&lt;/td&gt;
+&lt;td&gt;compose,andThen,identity&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiUnaryOperator&lt;T,T&gt;&lt;/td&gt;
+&lt;td&gt;T,T&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A binary operator on type T&lt;/td&gt;
+&lt;td&gt;andThen&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Predicate&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;test&lt;/td&gt;
+&lt;td&gt;A Boolean-valued function&lt;/td&gt;
+&lt;td&gt;and, or, negate, isEqual&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiPredicate&lt;T,T&gt;&lt;/td&gt;
+&lt;td&gt;T,T&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;test&lt;/td&gt;
+&lt;td&gt;A Boolean-valued function with tow arguments&lt;/td&gt;
+&lt;td&gt;and, or, negate&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;lambda-demo&#34;&gt;Lambda Demo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Locale;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+public class LambdaDemo {
+
+    public static void main(String[] args) {
+
+        // FunctionalInterface 
+        System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y));// w w  w .j  av a 2s.  c om
+        System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y));
+        System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y));
+        System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y));
+
+        String[] strArray = new String[] { &amp;quot;abc&amp;quot;, &amp;quot;klm&amp;quot;, &amp;quot;xyz&amp;quot;, &amp;quot;pqr&amp;quot; };
+        List list = Arrays.asList(strArray);
+
+        // Default Methods
+        list.forEach(System.out::println);
+
+        Arrays.sort(strArray, (first, second) -&amp;gt; first.compareToIgnoreCase(second));
+        list = Arrays.asList(strArray);
+
+        System.out.println(&amp;quot;After sorting ... &amp;quot;);
+        list.forEach(System.out::println);
+
+
+        // Common Functional Interfaces
+        // Runnable
+        repeat(5, () -&amp;gt; System.out.println(&amp;quot;Hello&amp;quot;)) ;
+
+        // UnaryOperator
+        UnaryOperator&amp;lt;String&amp;gt; upperCase = str -&amp;gt; str.toUpperCase();
+        // BiUnaryOperator
+        BinaryOperator&amp;lt;String&amp;gt; concat = (left,right) -&amp;gt; left + right;
+
+        System.out.println( &amp;quot; UnaryOperator upperCase &amp;quot;+upperCase.apply( &amp;quot;hello&amp;quot;) );
+        System.out.println( &amp;quot;  BinaryOperator&amp;lt;String&amp;gt; concat &amp;quot;+ concat.apply(&amp;quot;hello&amp;quot;,&amp;quot;world&amp;quot;));
+        
+
+    }
+
+    private static int engine(Calculator calculator) {
+        int x = 2, y = 4;
+        return calculator.calculate(x, y);
+    }
+
+    public static void repeat(int n, Runnable action) {
+        for (int i = 0; i &amp;lt; n; i++)
+            action.run();
+    }
+}
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int x, int y);
 }
 
 &lt;/code&gt;&lt;/pre&gt;
