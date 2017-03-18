@@ -1199,18 +1199,23 @@ public class GrayscaleImageAction extends RecursiveAction {
 
 &lt;h3 id=&#34;period&#34;&gt;Period&lt;/h3&gt;
 
-&lt;p&gt;A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an
-amount of time measured in terms of seconds and nanoseconds. Negative periods are supported.
-What is the difference between a period and a duration? A duration represents an exact number of nanoseconds,
-whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.&lt;/p&gt;
+&lt;p&gt;A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.&lt;/p&gt;
 
 &lt;h3 id=&#34;partial&#34;&gt;Partial&lt;/h3&gt;
 
 &lt;p&gt;Partials
-A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to
-humans. With some more information, a partial may match multiple instants on the timeline.&lt;/p&gt;
+A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.&lt;/p&gt;
 
 &lt;h3 id=&#34;adjusting-dates&#34;&gt;Adjusting Dates&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the &lt;code&gt;TemporalAdjuster&lt;/code&gt; interface. The interface has one method, adjustInto(), that takes a Temporal and returns a &lt;code&gt;Temporal&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;formatting&#34;&gt;Formatting&lt;/h3&gt;
+
+&lt;p&gt;The most important point to keep in mind is that formatting and parsing are
+always performed by an object of the DateTimeFormatter class.&lt;/p&gt;
+
+&lt;h2 id=&#34;datetimeapidemo&#34;&gt;DateTimeApiDemo&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.time.Duration;
 import java.time.DayOfWeek;
@@ -1494,7 +1499,7 @@ soon as it occurs.&lt;/p&gt;
 &lt;td&gt;T,U&lt;/td&gt;
 &lt;td&gt;R&lt;/td&gt;
 &lt;td&gt;apply&lt;/td&gt;
-&lt;td&gt;A function with argument oftype T and U&lt;/td&gt;
+&lt;td&gt;A function with argument of type T and U&lt;/td&gt;
 &lt;td&gt;andThen&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -1536,12 +1541,68 @@ soon as it occurs.&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;h2 id=&#34;method-reference&#34;&gt;Method Reference&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Syntax&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;TypeName::staticMethod&lt;/td&gt;
+&lt;td&gt;A method reference to a static method of a class, an interface, or an enum&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;objectRef::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of the specified object&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ClassName::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of an arbitrary object of the specified class&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;TypeName.super::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of the supertype of a particular object&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ClassName::new&lt;/td&gt;
+&lt;td&gt;A constructor reference to the constructor of the specified class&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ArrayTypeName::new&lt;/td&gt;
+&lt;td&gt;An array constructor reference to the constructor of the specified&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;array type&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;h2 id=&#34;lambda-demo&#34;&gt;Lambda Demo&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Locale;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
 
 public class LambdaDemo {
 
@@ -1565,19 +1626,81 @@ public class LambdaDemo {
         System.out.println(&amp;quot;After sorting ... &amp;quot;);
         list.forEach(System.out::println);
 
-
         // Common Functional Interfaces
         // Runnable
-        repeat(5, () -&amp;gt; System.out.println(&amp;quot;Hello&amp;quot;)) ;
+        repeat(5, () -&amp;gt; System.out.println(&amp;quot;Hello&amp;quot;));
 
-        // UnaryOperator
         UnaryOperator&amp;lt;String&amp;gt; upperCase = str -&amp;gt; str.toUpperCase();
-        // BiUnaryOperator
-        BinaryOperator&amp;lt;String&amp;gt; concat = (left,right) -&amp;gt; left + right;
+        BinaryOperator&amp;lt;String&amp;gt; concat = (left, right) -&amp;gt; left + right;
 
-        System.out.println( &amp;quot; UnaryOperator upperCase &amp;quot;+upperCase.apply( &amp;quot;hello&amp;quot;) );
-        System.out.println( &amp;quot;  BinaryOperator&amp;lt;String&amp;gt; concat &amp;quot;+ concat.apply(&amp;quot;hello&amp;quot;,&amp;quot;world&amp;quot;));
-        
+        System.out.println(&amp;quot; UnaryOperator upperCase &amp;quot; + upperCase.apply(&amp;quot;hello&amp;quot;));
+        System.out.println(&amp;quot;  BinaryOperator&amp;lt;String&amp;gt; concat &amp;quot; + concat.apply(&amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;));
+
+        // Function 
+        Function&amp;lt;Long, Long&amp;gt; square = x -&amp;gt; x * x;
+        Function&amp;lt;Long, Long&amp;gt; plusOne = x -&amp;gt; x + 1;
+        // Function with andThen, 
+        Function&amp;lt;Long, Long&amp;gt; squarePlusOne = square.andThen(plusOne);
+        Function&amp;lt;Long, Long&amp;gt; plusOneSquare = square.compose(plusOne);
+        System.out.println(&amp;quot; 5 squarePlusOne is &amp;quot; + squarePlusOne.apply(5L)); // 26 
+        System.out.println(&amp;quot; 5 plusOneSquare is  &amp;quot; + plusOneSquare.apply(5L)); // 36
+
+        // Predicate
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThree = x -&amp;gt; x % 3 == 0;
+        Predicate&amp;lt;Integer&amp;gt; divisibleByFive = x -&amp;gt; x % 5 == 0;
+        Predicate&amp;lt;Integer&amp;gt; isNegative = x -&amp;gt; x &amp;lt; 0;
+        // Predicate with AND , OR , NOT
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
+        Predicate&amp;lt;Integer&amp;gt; isPositive = isNegative.negate();
+
+        System.out.println(&amp;quot; 15 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeAndFive.test(15));
+        System.out.println(&amp;quot; 7 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeOrFive.test(7));
+        System.out.println(&amp;quot; -1 is isPositive &amp;quot; + isPositive.test(7));
+
+        // static method reference 
+        Function&amp;lt;Integer, String&amp;gt; toBinary = x -&amp;gt; Integer.toBinaryString(x);
+        System.out.println(toBinary.apply(19));
+
+        // Using a method reference
+        Function&amp;lt;Integer, String&amp;gt; toBinary2 = Integer::toBinaryString;
+        System.out.println(toBinary2.apply(19));
+
+        // static method lambda expression
+        BiFunction&amp;lt;Integer, Integer, Integer&amp;gt; sum = (a, b) -&amp;gt; Integer.sum(a, b);
+        System.out.println(sum.apply(3, 4));
+
+        // Instance method
+        Supplier&amp;lt;Person&amp;gt; personSup = () -&amp;gt; new Person();
+        Function&amp;lt;String, Person&amp;gt; personFunc = (x) -&amp;gt; new Person(x);
+
+        BiFunction&amp;lt;String, String, Person&amp;gt; personBiFunc = (x, y) -&amp;gt; new Person(x, y);
+        // Consumer&amp;lt;String&amp;gt; personCon = (Person p) -&amp;gt; p.setTitle;
+
+        System.out.println(&amp;quot; personSup &amp;quot; + personSup.get());
+        System.out.println(&amp;quot; personFunc &amp;quot; + personFunc.apply(&amp;quot;John Doe&amp;quot;));
+        System.out.println(&amp;quot; personBiFunc &amp;quot; + personBiFunc.apply(&amp;quot;John&amp;quot;, &amp;quot;Doe&amp;quot;));
+
+        // Recursive Lambda Expressions
+
+        IntFunction&amp;lt;Long&amp;gt; factorialCalc = new IntFunction&amp;lt;Long&amp;gt;() {
+            @Override
+            public Long apply(int n) {
+                if (n &amp;lt; 0) {
+                    String msg = &amp;quot;Number must not be negative.&amp;quot;;
+                    throw new IllegalArgumentException(msg);
+                }
+                if (n == 0) {
+                    return 1L;
+                } else {
+                    return n * this.apply(n - 1);
+                }
+            }
+        };
+
+        int n = 5;
+        long fact = factorialCalc.apply(n);
+        System.out.println(&amp;quot;Factorial of &amp;quot; + n + &amp;quot; is &amp;quot; + fact);
 
     }
 
@@ -1596,6 +1719,48 @@ public class LambdaDemo {
 interface Calculator {
     int calculate(int x, int y);
 }
+
+final class Person {
+    String firstName;
+    String lastName;
+    String fullName;
+    String title;
+
+    public Person() {
+        System.out.println(&amp;quot; Person() constructor called &amp;quot;);
+    }
+
+    public Person(String fullName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&amp;quot; Person( fullName ) constructor called &amp;quot;);
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&amp;quot; Person(firstName, lastName ) constructor called &amp;quot;);
+    }
+
+    public void setTitle(String t) {
+        this.title = t;
+        System.out.println(&amp;quot; Person setTitle ( t ) called &amp;quot;);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFullName() {
+        return fullName == null ? firstName != null ? firstName : &amp;quot;Unknown&amp;quot; : fullName;
+    }
+
+    @Override
+    public String toString() {
+        return &amp;quot;name = &amp;quot; + getFullName() + &amp;quot;, title = &amp;quot; + title != null ? title : &amp;quot;Unknown&amp;quot;;
+    }
+}
+
 
 &lt;/code&gt;&lt;/pre&gt;
 </description>

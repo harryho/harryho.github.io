@@ -125,18 +125,23 @@
 
 <h3 id="period">Period</h3>
 
-<p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an
-amount of time measured in terms of seconds and nanoseconds. Negative periods are supported.
-What is the difference between a period and a duration? A duration represents an exact number of nanoseconds,
-whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
+<p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
 
 <h3 id="partial">Partial</h3>
 
 <p>Partials
-A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to
-humans. With some more information, a partial may match multiple instants on the timeline.</p>
+A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.</p>
 
 <h3 id="adjusting-dates">Adjusting Dates</h3>
+
+<p>Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the <code>TemporalAdjuster</code> interface. The interface has one method, adjustInto(), that takes a Temporal and returns a <code>Temporal</code>.</p>
+
+<h3 id="formatting">Formatting</h3>
+
+<p>The most important point to keep in mind is that formatting and parsing are
+always performed by an object of the DateTimeFormatter class.</p>
+
+<h2 id="datetimeapidemo">DateTimeApiDemo</h2>
 
 <pre><code class="language-java">import java.time.Duration;
 import java.time.DayOfWeek;
@@ -420,7 +425,7 @@ soon as it occurs.</p>
 <td>T,U</td>
 <td>R</td>
 <td>apply</td>
-<td>A function with argument oftype T and U</td>
+<td>A function with argument of type T and U</td>
 <td>andThen</td>
 </tr>
 
@@ -462,12 +467,68 @@ soon as it occurs.</p>
 </tbody>
 </table>
 
+<h2 id="method-reference">Method Reference</h2>
+
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TypeName::staticMethod</td>
+<td>A method reference to a static method of a class, an interface, or an enum</td>
+</tr>
+
+<tr>
+<td>objectRef::instanceMethod</td>
+<td>A method reference to an instance method of the specified object</td>
+</tr>
+
+<tr>
+<td>ClassName::instanceMethod</td>
+<td>A method reference to an instance method of an arbitrary object of the specified class</td>
+</tr>
+
+<tr>
+<td>TypeName.super::instanceMethod</td>
+<td>A method reference to an instance method of the supertype of a particular object</td>
+</tr>
+
+<tr>
+<td>ClassName::new</td>
+<td>A constructor reference to the constructor of the specified class</td>
+</tr>
+
+<tr>
+<td>ArrayTypeName::new</td>
+<td>An array constructor reference to the constructor of the specified</td>
+</tr>
+
+<tr>
+<td>array type</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 <h2 id="lambda-demo">Lambda Demo</h2>
 
 <pre><code class="language-java">import java.util.Locale;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
 
 public class LambdaDemo {
 
@@ -491,19 +552,81 @@ public class LambdaDemo {
         System.out.println(&quot;After sorting ... &quot;);
         list.forEach(System.out::println);
 
-
         // Common Functional Interfaces
         // Runnable
-        repeat(5, () -&gt; System.out.println(&quot;Hello&quot;)) ;
+        repeat(5, () -&gt; System.out.println(&quot;Hello&quot;));
 
-        // UnaryOperator
         UnaryOperator&lt;String&gt; upperCase = str -&gt; str.toUpperCase();
-        // BiUnaryOperator
-        BinaryOperator&lt;String&gt; concat = (left,right) -&gt; left + right;
+        BinaryOperator&lt;String&gt; concat = (left, right) -&gt; left + right;
 
-        System.out.println( &quot; UnaryOperator upperCase &quot;+upperCase.apply( &quot;hello&quot;) );
-        System.out.println( &quot;  BinaryOperator&lt;String&gt; concat &quot;+ concat.apply(&quot;hello&quot;,&quot;world&quot;));
-        
+        System.out.println(&quot; UnaryOperator upperCase &quot; + upperCase.apply(&quot;hello&quot;));
+        System.out.println(&quot;  BinaryOperator&lt;String&gt; concat &quot; + concat.apply(&quot;hello&quot;, &quot;world&quot;));
+
+        // Function 
+        Function&lt;Long, Long&gt; square = x -&gt; x * x;
+        Function&lt;Long, Long&gt; plusOne = x -&gt; x + 1;
+        // Function with andThen, 
+        Function&lt;Long, Long&gt; squarePlusOne = square.andThen(plusOne);
+        Function&lt;Long, Long&gt; plusOneSquare = square.compose(plusOne);
+        System.out.println(&quot; 5 squarePlusOne is &quot; + squarePlusOne.apply(5L)); // 26 
+        System.out.println(&quot; 5 plusOneSquare is  &quot; + plusOneSquare.apply(5L)); // 36
+
+        // Predicate
+        Predicate&lt;Integer&gt; divisibleByThree = x -&gt; x % 3 == 0;
+        Predicate&lt;Integer&gt; divisibleByFive = x -&gt; x % 5 == 0;
+        Predicate&lt;Integer&gt; isNegative = x -&gt; x &lt; 0;
+        // Predicate with AND , OR , NOT
+        Predicate&lt;Integer&gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
+        Predicate&lt;Integer&gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
+        Predicate&lt;Integer&gt; isPositive = isNegative.negate();
+
+        System.out.println(&quot; 15 is divisibleByThreeAndFive &quot; + divisibleByThreeAndFive.test(15));
+        System.out.println(&quot; 7 is divisibleByThreeAndFive &quot; + divisibleByThreeOrFive.test(7));
+        System.out.println(&quot; -1 is isPositive &quot; + isPositive.test(7));
+
+        // static method reference 
+        Function&lt;Integer, String&gt; toBinary = x -&gt; Integer.toBinaryString(x);
+        System.out.println(toBinary.apply(19));
+
+        // Using a method reference
+        Function&lt;Integer, String&gt; toBinary2 = Integer::toBinaryString;
+        System.out.println(toBinary2.apply(19));
+
+        // static method lambda expression
+        BiFunction&lt;Integer, Integer, Integer&gt; sum = (a, b) -&gt; Integer.sum(a, b);
+        System.out.println(sum.apply(3, 4));
+
+        // Instance method
+        Supplier&lt;Person&gt; personSup = () -&gt; new Person();
+        Function&lt;String, Person&gt; personFunc = (x) -&gt; new Person(x);
+
+        BiFunction&lt;String, String, Person&gt; personBiFunc = (x, y) -&gt; new Person(x, y);
+        // Consumer&lt;String&gt; personCon = (Person p) -&gt; p.setTitle;
+
+        System.out.println(&quot; personSup &quot; + personSup.get());
+        System.out.println(&quot; personFunc &quot; + personFunc.apply(&quot;John Doe&quot;));
+        System.out.println(&quot; personBiFunc &quot; + personBiFunc.apply(&quot;John&quot;, &quot;Doe&quot;));
+
+        // Recursive Lambda Expressions
+
+        IntFunction&lt;Long&gt; factorialCalc = new IntFunction&lt;Long&gt;() {
+            @Override
+            public Long apply(int n) {
+                if (n &lt; 0) {
+                    String msg = &quot;Number must not be negative.&quot;;
+                    throw new IllegalArgumentException(msg);
+                }
+                if (n == 0) {
+                    return 1L;
+                } else {
+                    return n * this.apply(n - 1);
+                }
+            }
+        };
+
+        int n = 5;
+        long fact = factorialCalc.apply(n);
+        System.out.println(&quot;Factorial of &quot; + n + &quot; is &quot; + fact);
 
     }
 
@@ -522,6 +645,48 @@ public class LambdaDemo {
 interface Calculator {
     int calculate(int x, int y);
 }
+
+final class Person {
+    String firstName;
+    String lastName;
+    String fullName;
+    String title;
+
+    public Person() {
+        System.out.println(&quot; Person() constructor called &quot;);
+    }
+
+    public Person(String fullName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&quot; Person( fullName ) constructor called &quot;);
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&quot; Person(firstName, lastName ) constructor called &quot;);
+    }
+
+    public void setTitle(String t) {
+        this.title = t;
+        System.out.println(&quot; Person setTitle ( t ) called &quot;);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFullName() {
+        return fullName == null ? firstName != null ? firstName : &quot;Unknown&quot; : fullName;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;name = &quot; + getFullName() + &quot;, title = &quot; + title != null ? title : &quot;Unknown&quot;;
+    }
+}
+
 
 </code></pre>
 
@@ -550,7 +715,9 @@ interface Calculator {
 <li><a href="#period">Period</a></li>
 <li><a href="#partial">Partial</a></li>
 <li><a href="#adjusting-dates">Adjusting Dates</a></li>
+<li><a href="#formatting">Formatting</a></li>
 </ul></li>
+<li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
 </ul></li>
 <li><a href="#lamda">Lamda</a>
 <ul>
@@ -566,6 +733,7 @@ interface Calculator {
 <li><a href="#use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</a></li>
 </ul></li>
 <li><a href="#common-functional-interfaces">Common functional Interfaces</a></li>
+<li><a href="#method-reference">Method Reference</a></li>
 <li><a href="#lambda-demo">Lambda Demo</a></li>
 </ul></li>
 </ul>
