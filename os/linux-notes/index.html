@@ -74,12 +74,47 @@
 				<section>
 					
 
+<h3 id="bash">bash</h3>
+
+<h4 id="run-in-background">Run in background</h4>
+
+<pre><code class="language-bash">command &amp;&gt;/dev/null &amp;
+``
+
+## User / group
+
+### Debian / Ubuntu
+```bash
+# Add new group 
+groupadd &lt;groupname&gt;
+
+# add user to group
+
+usermod -a -G &lt;groupname&gt; username
+
+# add user and assign to one group
+useradd -g &lt;groupname&gt; username
+
+</code></pre>
+
 <h3 id="ls">ls</h3>
 
 <pre><code class="language-bash"># list folders
 ls -d */
 # list items with proper size format 
 ls -lha # 
+
+
+# list directories as tree
+
+ls -dR | grep &quot;:$&quot; | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+
+</code></pre>
+
+<h3 id="user-and-group">user and group</h3>
+
+<pre><code class="language-bash">sudo gpasswd -a demo sudo
+
 </code></pre>
 
 <h3 id="ps">ps</h3>
@@ -92,6 +127,66 @@ ps auxww | egrep httpd
 
 <pre><code class="language-bash">dmidecode | grep -i vmware
 </code></pre>
+
+<h3 id="ssh">ssh</h3>
+
+<pre><code class="language-bash">ssh -p 22 &lt;username&gt;@&lt;yourservername_or_ip&gt;
+</code></pre>
+
+<h3 id="ssh-key">ssh key</h3>
+
+<pre><code class="language-bash">
+ssh-copy-id demo@SERVER_IP_ADDRESS
+cat ~/.ssh/id_rsa.pub
+
+</code></pre>
+
+<h3 id="nginx">nginx</h3>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install nginx
+
+## disable auto start
+
+sudo update-rc.d -f nginx disable
+
+
+## Start/Stop/Restart Nginx
+# OR
+
+sudo service nginx start
+sudo service nginx stop
+sudo service nginx restart
+
+# OR 
+sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx stop
+sudo /etc/init.d/nginx restart
+
+## Ubuntu Linux has switched to upstart as above :
+
+sudo systemctl start nginx 
+sudo systemctl stop nginx 
+sudo systemctl restart nginx
+
+
+
+</code></pre>
+
+<h2 id="ftp">ftp</h2>
+
+<pre><code class="language-bash">
+ftp &lt;servername_or_ip&gt;
+
+## type in username and password
+name :
+password:
+
+</code></pre>
+
+<h3 id="mirenesse-dev-phpadmin">Mirenesse dev PhpAdmin</h3>
+
+<p><a href="http://devsite.mirenesse.com/phpmyadmin">http://devsite.mirenesse.com/phpmyadmin</a></p>
 
 				</section>
 			</article>
@@ -114,9 +209,21 @@ ps auxww | egrep httpd
 <ul>
 <li>
 <ul>
+<li><a href="#bash">bash</a>
+<ul>
+<li><a href="#run-in-background">Run in background</a></li>
+</ul></li>
 <li><a href="#ls">ls</a></li>
+<li><a href="#user-and-group">user and group</a></li>
 <li><a href="#ps">ps</a></li>
 <li><a href="#vmware">VMware</a></li>
+<li><a href="#ssh">ssh</a></li>
+<li><a href="#ssh-key">ssh key</a></li>
+<li><a href="#nginx">nginx</a></li>
+</ul></li>
+<li><a href="#ftp">ftp</a>
+<ul>
+<li><a href="#mirenesse-dev-phpadmin">Mirenesse dev PhpAdmin</a></li>
 </ul></li>
 </ul></li>
 </ul>

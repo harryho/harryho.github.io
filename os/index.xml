@@ -18,12 +18,47 @@
       <guid>https://harryho.github.io/os/linux-notes/</guid>
       <description>
 
+&lt;h3 id=&#34;bash&#34;&gt;bash&lt;/h3&gt;
+
+&lt;h4 id=&#34;run-in-background&#34;&gt;Run in background&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;command &amp;amp;&amp;gt;/dev/null &amp;amp;
+``
+
+## User / group
+
+### Debian / Ubuntu
+```bash
+# Add new group 
+groupadd &amp;lt;groupname&amp;gt;
+
+# add user to group
+
+usermod -a -G &amp;lt;groupname&amp;gt; username
+
+# add user and assign to one group
+useradd -g &amp;lt;groupname&amp;gt; username
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# list folders
 ls -d */
 # list items with proper size format 
 ls -lha # 
+
+
+# list directories as tree
+
+ls -dR | grep &amp;quot;:$&amp;quot; | sed -e &#39;s/:$//&#39; -e &#39;s/[^-][^\/]*\//--/g&#39; -e &#39;s/^/   /&#39; -e &#39;s/-/|/&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;user-and-group&#34;&gt;user and group&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo gpasswd -a demo sudo
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;ps&#34;&gt;ps&lt;/h3&gt;
@@ -36,6 +71,66 @@ ps auxww | egrep httpd
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;dmidecode | grep -i vmware
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh&#34;&gt;ssh&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh -p 22 &amp;lt;username&amp;gt;@&amp;lt;yourservername_or_ip&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh-key&#34;&gt;ssh key&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+ssh-copy-id demo@SERVER_IP_ADDRESS
+cat ~/.ssh/id_rsa.pub
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;nginx&#34;&gt;nginx&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get update
+sudo apt-get install nginx
+
+## disable auto start
+
+sudo update-rc.d -f nginx disable
+
+
+## Start/Stop/Restart Nginx
+# OR
+
+sudo service nginx start
+sudo service nginx stop
+sudo service nginx restart
+
+# OR 
+sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx stop
+sudo /etc/init.d/nginx restart
+
+## Ubuntu Linux has switched to upstart as above :
+
+sudo systemctl start nginx 
+sudo systemctl stop nginx 
+sudo systemctl restart nginx
+
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ftp&#34;&gt;ftp&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+ftp &amp;lt;servername_or_ip&amp;gt;
+
+## type in username and password
+name :
+password:
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mirenesse-dev-phpadmin&#34;&gt;Mirenesse dev PhpAdmin&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://devsite.mirenesse.com/phpmyadmin&#34;&gt;http://devsite.mirenesse.com/phpmyadmin&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
