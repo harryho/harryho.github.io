@@ -17,11 +17,29 @@
       <guid>https://harryho.github.io/os/linux-notes/</guid>
       <description>
 
-&lt;h3 id=&#34;bash&#34;&gt;bash&lt;/h3&gt;
-
-&lt;h4 id=&#34;run-in-background&#34;&gt;Run in background&lt;/h4&gt;
+&lt;h2 id=&#34;run-in-background&#34;&gt;Run in background&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;command &amp;amp;&amp;gt;/dev/null &amp;amp;
+``
+
+## Linux info
+
+```bash
+
+# Linux kernel and distribution
+
+uname -a 
+
+# Show distribution detail 
+
+cat /etc/*-release
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;dpkg&#34;&gt;dpkg&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo lsof /var/lib/dpkg/lock
+
 ``
 
 ## User / group
@@ -64,11 +82,18 @@ ls -dR | grep &amp;quot;:$&amp;quot; | sed -e &#39;s/:$//&#39; -e &#39;s/[^-][^\
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ps auxww | grep mysql
 ps auxww | egrep httpd
+ps -eo pri,pid,user,nice,pcpu,time,comm | grep dpkg
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;vmware&#34;&gt;VMware&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;dmidecode | grep -i vmware
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;kill&#34;&gt;kill&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;ssh&#34;&gt;ssh&lt;/h3&gt;

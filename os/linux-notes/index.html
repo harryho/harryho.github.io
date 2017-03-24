@@ -74,11 +74,29 @@
 				<section>
 					
 
-<h3 id="bash">bash</h3>
-
-<h4 id="run-in-background">Run in background</h4>
+<h2 id="run-in-background">Run in background</h2>
 
 <pre><code class="language-bash">command &amp;&gt;/dev/null &amp;
+``
+
+## Linux info
+
+```bash
+
+# Linux kernel and distribution
+
+uname -a 
+
+# Show distribution detail 
+
+cat /etc/*-release
+
+</code></pre>
+
+<h2 id="dpkg">dpkg</h2>
+
+<pre><code class="language-bash">sudo lsof /var/lib/dpkg/lock
+
 ``
 
 ## User / group
@@ -121,11 +139,18 @@ ls -dR | grep &quot;:$&quot; | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/
 
 <pre><code class="language-bash">ps auxww | grep mysql
 ps auxww | egrep httpd
+ps -eo pri,pid,user,nice,pcpu,time,comm | grep dpkg
+
 </code></pre>
 
 <h3 id="vmware">VMware</h3>
 
 <pre><code class="language-bash">dmidecode | grep -i vmware
+</code></pre>
+
+<h3 id="kill">kill</h3>
+
+<pre><code class="language-bash">
 </code></pre>
 
 <h3 id="ssh">ssh</h3>
@@ -207,16 +232,14 @@ password:
 <ul>
 <li>
 <ul>
-<li>
-<ul>
-<li><a href="#bash">bash</a>
-<ul>
 <li><a href="#run-in-background">Run in background</a></li>
-</ul></li>
+<li><a href="#dpkg">dpkg</a>
+<ul>
 <li><a href="#ls">ls</a></li>
 <li><a href="#user-and-group">user and group</a></li>
 <li><a href="#ps">ps</a></li>
 <li><a href="#vmware">VMware</a></li>
+<li><a href="#kill">kill</a></li>
 <li><a href="#ssh">ssh</a></li>
 <li><a href="#ssh-key">ssh key</a></li>
 <li><a href="#nginx">nginx</a></li>
@@ -239,6 +262,9 @@ password:
 					<span class="doc-list-category">Code</span>
 				</a>
 				<ul>
+					<li><a href="/code/lcthw-lectures/">LCTHW Lectures</a>
+					</li>
+				
 					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
 					</li>
 				
@@ -353,6 +379,8 @@ password:
 			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
 		
