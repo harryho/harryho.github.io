@@ -10,16 +10,16 @@
     <atom:link href="https://harryho.github.io/tags/c/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>LCTHW Lectures</title>
-      <link>https://harryho.github.io/code/lcthw-lectures/</link>
+      <title>LCTHW Lectures 1</title>
+      <link>https://harryho.github.io/code/lcthw-lectures.1/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/code/lcthw-lectures/</guid>
+      <guid>https://harryho.github.io/code/lcthw-lectures.1/</guid>
       <description>
 
 &lt;p&gt;Author: Zed A. Shaw&lt;/p&gt;
 
-&lt;p&gt;All content comes from Zed&amp;rsquo;s &lt;a href=&#34;https://github.com/zedshaw/learn-c-the-hard-way-lectures.git&#34;&gt;Repository&lt;/a&gt;. All credit goes to Zed.&lt;/p&gt;
+&lt;p&gt;All content comes from Zed&amp;rsquo;s &lt;a href=&#34;https://github.com/zedshaw/learn-c-the-hard-way-lectures.git&#34;&gt;Lecture Repository&lt;/a&gt; and &lt;a href=&#34;https://github.com/zedshaw/liblcthw&#34;&gt;Libraries Repository&lt;/a&gt;.  All credit goes to Zed.&lt;/p&gt;
 
 &lt;h2 id=&#34;exercise-0-installing-software&#34;&gt;Exercise 0 Installing Software&lt;/h2&gt;
 
@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The Analysis&lt;/p&gt;
@@ -127,10 +128,14 @@ int main(int argc, char *argv[])
 &lt;p&gt;Extra Credit&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Open the &lt;code&gt;ex1&lt;/code&gt; file in your text editor and change or delete random parts. Try running it and see what happens.&lt;/li&gt;
+&lt;li&gt;Open the &lt;code&gt;ex1&lt;/code&gt; file in your text editor and change or delete random parts.
+Try running it and see what happens.&lt;/li&gt;
 &lt;li&gt;Print out five more lines of text or something more complex than &amp;ldquo;hello world.&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;man 3 printf&lt;/code&gt; and read about this function and many others.&lt;/li&gt;
-&lt;li&gt;For each line, write out the symbols you don&amp;rsquo;t understand and see if you can guess what they mean.  Write a little chart on paper with your guess so you can check it later to see if you got it right.&lt;/li&gt;
+&lt;li&gt;For each line, write out the symbols you don&amp;rsquo;t understand and
+see if you can guess what they mean.  Write a little chart on
+paper with your guess so you can check it later to see
+if you got it right.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;exercise-2-using-makefiles-to-build&#34;&gt;Exercise 2 Using Makefiles to Build&lt;/h2&gt;
@@ -511,7 +516,6 @@ fail:
 &lt;p&gt;Typedef&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;typedef DEFINITION IDENTIFIER;
-
 
 typedef unsigned char byte;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1836,8 +1840,6 @@ void dump(compare_cb cmp)
     printf(&amp;quot;\n&amp;quot;);
 }
 
-
-
 int main(int argc, char *argv[])
 {
     if (argc &amp;lt; 2) die(&amp;quot;USAGE: ex18 4 3 1 5 6&amp;quot;);
@@ -1866,7 +1868,6 @@ int main(int argc, char *argv[])
 
     printf(&amp;quot;SORTED:&amp;quot;);
     dump(sorted_order);
-
 
     return 0;
 }
@@ -2206,7 +2207,6 @@ struct State {
     int the_size;
     int the_age;
 };
-
 
 // gets and sets an internal static variable in ex22.c
 int get_age(struct State *state);
@@ -2888,7 +2888,6 @@ what you know so far to something &amp;ldquo;real world&amp;rdquo;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;dbg.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc &amp;gt; 2, &amp;quot;USAGE: logfind word word word&amp;quot;);
@@ -2908,7 +2907,6 @@ error:
 all: logfind
     ./logfind || true
     ./logfind test test test
-
 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -2954,7 +2952,6 @@ error:
     return -1;
 }
 
-
 int main(int argc, char *argv[])
 {
     check(argc &amp;gt; 1, &amp;quot;USAGE: logfind word word word&amp;quot;);
@@ -2993,7 +2990,6 @@ clean:
 #include &amp;lt;glob.h&amp;gt;
 
 const size_t MAX_LINE = 1024;
-
 
 int list_files(glob_t *pglob) 
 {
@@ -3054,7 +3050,6 @@ error:
     return -1;
 }
 
-
 int main(int argc, char *argv[])
 {
     int i = 0;
@@ -3101,7 +3096,6 @@ clean:
 #include &amp;lt;glob.h&amp;gt;
 
 const size_t MAX_LINE = 1024;
-
 
 int list_files(glob_t *pglob) 
 {
@@ -3168,7 +3162,6 @@ error:
     return -1;
 }
 
-
 int main(int argc, char *argv[])
 {
     int i = 0;
@@ -3215,7 +3208,6 @@ clean:
 #include &amp;lt;glob.h&amp;gt;
 
 const size_t MAX_LINE = 1024;
-
 
 int list_files(glob_t *pglob) 
 {
@@ -3292,7 +3284,6 @@ int scan_file(const char *filename, int use_or, int search_len, char *search_for
         }
     }
 
-
     free(line);
     fclose(file);
     return 0;
@@ -3322,7 +3313,6 @@ int parse_args(int *use_or, int *argc, char **argv[])
 error:
     return -1;
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -3434,7 +3424,6 @@ own functions.&lt;/p&gt;
 
 const size_t MAX_LINE = 1024;
 
-
 int list_files(glob_t *pglob) 
 {
     char *line = calloc(MAX_LINE, 1);
@@ -3513,7 +3502,6 @@ int scan_file(const char *filename, int use_or, int search_len, char *search_for
         }
     }
 
-
     free(line);
     fclose(file);
     return 0;
@@ -3543,7 +3531,6 @@ int parse_args(int *use_or, int *argc, char **argv[])
 error:
     return -1;
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -3599,7 +3586,6 @@ clean:
 
 const size_t MAX_LINE = 1024;
 
-
 int list_files(glob_t *pglob) 
 {
     char *line = calloc(MAX_LINE, 1);
@@ -3678,7 +3664,6 @@ int scan_file(const char *filename, int use_or, int search_len, char *search_for
         }
     }
 
-
     free(line);
     fclose(file);
     return 0;
@@ -3708,7 +3693,6 @@ int parse_args(int *use_or, int *argc, char **argv[])
 error:
     return -1;
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -3846,14 +3830,12 @@ clean:
 #include &amp;lt;ctype.h&amp;gt;
 #include &amp;quot;dbg.h&amp;quot;
 
-
 int print_a_message(const char *msg)
 {
     printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
 
     return 0;
 }
-
 
 int uppercase(const char *msg)
 {
@@ -4025,14 +4007,12 @@ Watch me do this.&lt;/p&gt;
 #include &amp;lt;ctype.h&amp;gt;
 #include &amp;quot;dbg.h&amp;quot;
 
-
 int print_a_message(const char *msg)
 {
     printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
 
     return 0;
 }
-
 
 int uppercase(const char *msg)
 {
@@ -4213,14 +4193,12 @@ error:
 #include &amp;lt;ctype.h&amp;gt;
 #include &amp;quot;dbg.h&amp;quot;
 
-
 int print_a_message(const char *msg)
 {
     printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
 
     return 0;
 }
-
 
 int uppercase(const char *msg)
 {
@@ -4416,6 +4394,20 @@ int main(int argc, char *argv[])
 &lt;p&gt;Extra Credit&lt;/p&gt;
 
 &lt;p&gt;Spend a day reading through as much of the UB as you can and find examples of each.  Expect lots of frustration and failure when you do this.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LCTHW Lectures 2</title>
+      <link>https://harryho.github.io/code/lcthw-lectures.2/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/lcthw-lectures.2/</guid>
+      <description>
+
+&lt;p&gt;Author: Zed A. Shaw&lt;/p&gt;
+
+&lt;p&gt;All content comes from Zed&amp;rsquo;s &lt;a href=&#34;https://github.com/zedshaw/learn-c-the-hard-way-lectures.git&#34;&gt;Repository&lt;/a&gt;. All credit goes to Zed.&lt;/p&gt;
 
 &lt;h2 id=&#34;exercise-32-double-linked-lists&#34;&gt;Exercise 32 Double Linked Lists&lt;/h2&gt;
 
@@ -4446,6 +4438,293 @@ about data structures and algorithms.&lt;/p&gt;
 the test.&lt;/p&gt;
 
 &lt;p&gt;Code Reviews&lt;/p&gt;
+
+&lt;p&gt;.\ex32\list.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef lcthw_List_h
+#define lcthw_List_h
+
+#include &amp;lt;stdlib.h&amp;gt;
+
+struct ListNode;
+
+typedef struct ListNode {
+    struct ListNode *next;
+    struct ListNode *prev;
+    void *value;
+} ListNode;
+
+typedef struct List {
+    int count;
+    ListNode *first;
+    ListNode *last;
+} List;
+
+List *List_create();
+void List_destroy(List * list);
+void List_clear(List * list);
+void List_clear_destroy(List * list);
+
+#define List_count(A) ((A)-&amp;gt;count)
+#define List_first(A) ((A)-&amp;gt;first != NULL ? (A)-&amp;gt;first-&amp;gt;value : NULL)
+#define List_last(A) ((A)-&amp;gt;last != NULL ? (A)-&amp;gt;last-&amp;gt;value : NULL)
+
+void List_push(List * list, void *value);
+void *List_pop(List * list);
+
+void List_unshift(List * list, void *value);
+void *List_shift(List * list);
+
+void *List_remove(List * list, ListNode * node);
+
+#define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL;\
+                                                   ListNode *V = NULL;\
+for(V = _node = L-&amp;gt;S; _node != NULL; V = _node = _node-&amp;gt;M)
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex32\list.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/list.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+List *List_create()
+{
+    return calloc(1, sizeof(List));
+}
+
+void List_destroy(List * list)
+{
+    LIST_FOREACH(list, first, next, cur) {
+        if (cur-&amp;gt;prev) {
+            free(cur-&amp;gt;prev);
+        }
+    }
+
+    free(list-&amp;gt;last);
+    free(list);
+}
+
+void List_clear(List * list)
+{
+    LIST_FOREACH(list, first, next, cur) {
+        free(cur-&amp;gt;value);
+    }
+}
+
+void List_clear_destroy(List * list)
+{
+    List_clear(list);
+    List_destroy(list);
+}
+
+void List_push(List * list, void *value)
+{
+    ListNode *node = calloc(1, sizeof(ListNode));
+    check_mem(node);
+
+    node-&amp;gt;value = value;
+
+    if (list-&amp;gt;last == NULL) {
+        list-&amp;gt;first = node;
+        list-&amp;gt;last = node;
+    } else {
+        list-&amp;gt;last-&amp;gt;next = node;
+        node-&amp;gt;prev = list-&amp;gt;last;
+        list-&amp;gt;last = node;
+    }
+
+    list-&amp;gt;count++;
+
+error:
+    return;
+}
+
+void *List_pop(List * list)
+{
+    ListNode *node = list-&amp;gt;last;
+    return node != NULL ? List_remove(list, node) : NULL;
+}
+
+void List_unshift(List * list, void *value)
+{
+    ListNode *node = calloc(1, sizeof(ListNode));
+    check_mem(node);
+
+    node-&amp;gt;value = value;
+
+    if (list-&amp;gt;first == NULL) {
+        list-&amp;gt;first = node;
+        list-&amp;gt;last = node;
+    } else {
+        node-&amp;gt;next = list-&amp;gt;first;
+        list-&amp;gt;first-&amp;gt;prev = node;
+        list-&amp;gt;first = node;
+    }
+
+    list-&amp;gt;count++;
+
+error:
+    return;
+}
+
+void *List_shift(List * list)
+{
+    ListNode *node = list-&amp;gt;first;
+    return node != NULL ? List_remove(list, node) : NULL;
+}
+
+void *List_remove(List * list, ListNode * node)
+{
+    void *result = NULL;
+
+    check(list-&amp;gt;first &amp;amp;&amp;amp; list-&amp;gt;last, &amp;quot;List is empty.&amp;quot;);
+    check(node, &amp;quot;node can&#39;t be NULL&amp;quot;);
+
+    if (node == list-&amp;gt;first &amp;amp;&amp;amp; node == list-&amp;gt;last) {
+        list-&amp;gt;first = NULL;
+        list-&amp;gt;last = NULL;
+    } else if (node == list-&amp;gt;first) {
+        list-&amp;gt;first = node-&amp;gt;next;
+        check(list-&amp;gt;first != NULL,
+                &amp;quot;Invalid list, somehow got a first that is NULL.&amp;quot;);
+        list-&amp;gt;first-&amp;gt;prev = NULL;
+    } else if (node == list-&amp;gt;last) {
+        list-&amp;gt;last = node-&amp;gt;prev;
+        check(list-&amp;gt;last != NULL,
+                &amp;quot;Invalid list, somehow got a next that is NULL.&amp;quot;);
+        list-&amp;gt;last-&amp;gt;next = NULL;
+    } else {
+        ListNode *after = node-&amp;gt;next;
+        ListNode *before = node-&amp;gt;prev;
+        after-&amp;gt;prev = before;
+        before-&amp;gt;next = after;
+    }
+
+    list-&amp;gt;count--;
+    result = node-&amp;gt;value;
+    free(node);
+
+error:
+    return result;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex32\list_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/list.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+
+static List *list = NULL;
+char *test1 = &amp;quot;test1 data&amp;quot;;
+char *test2 = &amp;quot;test2 data&amp;quot;;
+char *test3 = &amp;quot;test3 data&amp;quot;;
+
+char *test_create()
+{
+    list = List_create();
+    mu_assert(list != NULL, &amp;quot;Failed to create list.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    List_clear_destroy(list);
+
+    return NULL;
+
+}
+
+char *test_push_pop()
+{
+    List_push(list, test1);
+    mu_assert(List_last(list) == test1, &amp;quot;Wrong last value.&amp;quot;);
+
+    List_push(list, test2);
+    mu_assert(List_last(list) == test2, &amp;quot;Wrong last value&amp;quot;);
+
+    List_push(list, test3);
+    mu_assert(List_last(list) == test3, &amp;quot;Wrong last value.&amp;quot;);
+    mu_assert(List_count(list) == 3, &amp;quot;Wrong count on push.&amp;quot;);
+
+    char *val = List_pop(list);
+    mu_assert(val == test3, &amp;quot;Wrong value on pop.&amp;quot;);
+
+    val = List_pop(list);
+    mu_assert(val == test2, &amp;quot;Wrong value on pop.&amp;quot;);
+
+    val = List_pop(list);
+    mu_assert(val == test1, &amp;quot;Wrong value on pop.&amp;quot;);
+    mu_assert(List_count(list) == 0, &amp;quot;Wrong count after pop.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_unshift()
+{
+    List_unshift(list, test1);
+    mu_assert(List_first(list) == test1, &amp;quot;Wrong first value.&amp;quot;);
+
+    List_unshift(list, test2);
+    mu_assert(List_first(list) == test2, &amp;quot;Wrong first value&amp;quot;);
+
+    List_unshift(list, test3);
+    mu_assert(List_first(list) == test3, &amp;quot;Wrong last value.&amp;quot;);
+    mu_assert(List_count(list) == 3, &amp;quot;Wrong count on unshift.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_remove()
+{
+    // we only need to test the middle remove case since push/shift 
+    // already tests the other cases
+
+    char *val = List_remove(list, list-&amp;gt;first-&amp;gt;next);
+    mu_assert(val == test2, &amp;quot;Wrong removed element.&amp;quot;);
+    mu_assert(List_count(list) == 2, &amp;quot;Wrong count after remove.&amp;quot;);
+    mu_assert(List_first(list) == test3, &amp;quot;Wrong first after remove.&amp;quot;);
+    mu_assert(List_last(list) == test1, &amp;quot;Wrong last after remove.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_shift()
+{
+    mu_assert(List_count(list) != 0, &amp;quot;Wrong count before shift.&amp;quot;);
+
+    char *val = List_shift(list);
+    mu_assert(val == test3, &amp;quot;Wrong value on shift.&amp;quot;);
+
+    val = List_shift(list);
+    mu_assert(val == test1, &amp;quot;Wrong value on shift.&amp;quot;);
+    mu_assert(List_count(list) == 0, &amp;quot;Wrong count after shift.&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_push_pop);
+    mu_run_test(test_unshift);
+    mu_run_test(test_remove);
+    mu_run_test(test_shift);
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Later videos will demonstrate how to code review to make code solid.&lt;/p&gt;
 
@@ -4490,6 +4769,221 @@ unit tests for them.&lt;/li&gt;
 &lt;p&gt;Watch how to conduct a simple code review.&lt;/p&gt;
 
 &lt;p&gt;The Code&lt;/p&gt;
+
+&lt;p&gt;.\ex33\list_algos.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef lcthw_List_algos_h
+#define lcthw_List_algos_h
+
+#include &amp;lt;lcthw/list.h&amp;gt;
+
+typedef int (*List_compare) (const void *a, const void *b);
+
+int List_bubble_sort(List * list, List_compare cmp);
+
+List *List_merge_sort(List * list, List_compare cmp);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex33\list_algos.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/list_algos.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+inline void ListNode_swap(ListNode * a, ListNode * b)
+{
+    void *temp = a-&amp;gt;value;
+    a-&amp;gt;value = b-&amp;gt;value;
+    b-&amp;gt;value = temp;
+}
+
+int List_bubble_sort(List * list, List_compare cmp)
+{
+    int sorted = 1;
+
+    if (List_count(list) &amp;lt;= 1) {
+        return 0;       // already sorted
+    }
+
+    do {
+        sorted = 1;
+        LIST_FOREACH(list, first, next, cur) {
+            if (cur-&amp;gt;next) {
+                if (cmp(cur-&amp;gt;value, cur-&amp;gt;next-&amp;gt;value) &amp;gt; 0) {
+                    ListNode_swap(cur, cur-&amp;gt;next);
+                    sorted = 0;
+                }
+            }
+        }
+    } while (!sorted);
+
+    return 0;
+}
+
+inline List *List_merge(List * left, List * right, List_compare cmp)
+{
+    List *result = List_create();
+    void *val = NULL;
+
+    while (List_count(left) &amp;gt; 0 || List_count(right) &amp;gt; 0) {
+        if (List_count(left) &amp;gt; 0 &amp;amp;&amp;amp; List_count(right) &amp;gt; 0) {
+            if (cmp(List_first(left), List_first(right)) &amp;lt;= 0) {
+                val = List_shift(left);
+            } else {
+                val = List_shift(right);
+            }
+
+            List_push(result, val);
+        } else if (List_count(left) &amp;gt; 0) {
+            val = List_shift(left);
+            List_push(result, val);
+        } else if (List_count(right) &amp;gt; 0) {
+            val = List_shift(right);
+            List_push(result, val);
+        }
+    }
+
+    return result;
+}
+
+List *List_merge_sort(List * list, List_compare cmp)
+{
+    List *result = NULL;
+
+    if (List_count(list) &amp;lt;= 1) {
+        return list;
+    }
+
+    List *left = List_create();
+    List *right = List_create();
+    int middle = List_count(list) / 2;
+
+    LIST_FOREACH(list, first, next, cur) {
+        if (middle &amp;gt; 0) {
+            List_push(left, cur-&amp;gt;value);
+        } else {
+            List_push(right, cur-&amp;gt;value);
+        }
+
+        middle--;
+    }
+
+    List *sort_left = List_merge_sort(left, cmp);
+    List *sort_right = List_merge_sort(right, cmp);
+
+    if (sort_left != left)
+        List_destroy(left);
+    if (sort_right != right)
+        List_destroy(right);
+
+    result = List_merge(sort_left, sort_right, cmp);
+
+    List_destroy(sort_left);
+    List_destroy(sort_right);
+
+    return result;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex33\list_algos_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/list_algos.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+char *values[] = { &amp;quot;XXXX&amp;quot;, &amp;quot;1234&amp;quot;, &amp;quot;abcd&amp;quot;, &amp;quot;xjvef&amp;quot;, &amp;quot;NDSS&amp;quot; };
+
+#define NUM_VALUES 5
+
+List *create_words()
+{
+    int i = 0;
+    List *words = List_create();
+
+    for (i = 0; i &amp;lt; NUM_VALUES; i++) {
+        List_push(words, values[i]);
+    }
+
+    return words;
+}
+
+int is_sorted(List * words)
+{
+    LIST_FOREACH(words, first, next, cur) {
+        if (cur-&amp;gt;next &amp;amp;&amp;amp; strcmp(cur-&amp;gt;value, cur-&amp;gt;next-&amp;gt;value) &amp;gt; 0) {
+            debug(&amp;quot;%s %s&amp;quot;, (char *)cur-&amp;gt;value,
+                    (char *)cur-&amp;gt;next-&amp;gt;value);
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+char *test_bubble_sort()
+{
+    List *words = create_words();
+
+    // should work on a list that needs sorting
+    int rc = List_bubble_sort(words, (List_compare) strcmp);
+    mu_assert(rc == 0, &amp;quot;Bubble sort failed.&amp;quot;);
+    mu_assert(is_sorted(words),
+            &amp;quot;Words are not sorted after bubble sort.&amp;quot;);
+
+    // should work on an already sorted list
+    rc = List_bubble_sort(words, (List_compare) strcmp);
+    mu_assert(rc == 0, &amp;quot;Bubble sort of already sorted failed.&amp;quot;);
+    mu_assert(is_sorted(words),
+            &amp;quot;Words should be sort if already bubble sorted.&amp;quot;);
+
+    List_destroy(words);
+
+    // should work on an empty list
+    words = List_create(words);
+    rc = List_bubble_sort(words, (List_compare) strcmp);
+    mu_assert(rc == 0, &amp;quot;Bubble sort failed on empty list.&amp;quot;);
+    mu_assert(is_sorted(words), &amp;quot;Words should be sorted if empty.&amp;quot;);
+
+    List_destroy(words);
+
+    return NULL;
+}
+
+char *test_merge_sort()
+{
+    List *words = create_words();
+
+    // should work on a list that needs sorting
+    List *res = List_merge_sort(words, (List_compare) strcmp);
+    mu_assert(is_sorted(res), &amp;quot;Words are not sorted after merge sort.&amp;quot;);
+
+    List *res2 = List_merge_sort(res, (List_compare) strcmp);
+    mu_assert(is_sorted(res),
+            &amp;quot;Should still be sorted after merge sort.&amp;quot;);
+    List_destroy(res2);
+    List_destroy(res);
+
+    List_destroy(words);
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_bubble_sort);
+    mu_run_test(test_merge_sort);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should be able to create this and figure out how it works.&lt;/p&gt;
 
@@ -4551,6 +5045,347 @@ recreate, but try to understand how it&amp;rsquo;s working compared to the slowe
 &lt;p&gt;Learn about dynamic arrays, a very useful datastructure.&lt;/p&gt;
 
 &lt;p&gt;Code Review&lt;/p&gt;
+
+&lt;p&gt;.\ex34\darray.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _DArray_h
+#define _DArray_h
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+typedef struct DArray {
+    int end;
+    int max;
+    size_t element_size;
+    size_t expand_rate;
+    void **contents;
+} DArray;
+
+DArray *DArray_create(size_t element_size, size_t initial_max);
+
+void DArray_destroy(DArray * array);
+
+void DArray_clear(DArray * array);
+
+int DArray_expand(DArray * array);
+
+int DArray_contract(DArray * array);
+
+int DArray_push(DArray * array, void *el);
+
+void *DArray_pop(DArray * array);
+
+void DArray_clear_destroy(DArray * array);
+
+#define DArray_last(A) ((A)-&amp;gt;contents[(A)-&amp;gt;end - 1])
+#define DArray_first(A) ((A)-&amp;gt;contents[0])
+#define DArray_end(A) ((A)-&amp;gt;end)
+#define DArray_count(A) DArray_end(A)
+#define DArray_max(A) ((A)-&amp;gt;max)
+
+#define DEFAULT_EXPAND_RATE 300
+
+static inline void DArray_set(DArray * array, int i, void *el)
+{
+    check(i &amp;lt; array-&amp;gt;max, &amp;quot;darray attempt to set past max&amp;quot;);
+    if (i &amp;gt; array-&amp;gt;end)
+        array-&amp;gt;end = i;
+    array-&amp;gt;contents[i] = el;
+error:
+    return;
+}
+
+static inline void *DArray_get(DArray * array, int i)
+{
+    check(i &amp;lt; array-&amp;gt;max, &amp;quot;darray attempt to get past max&amp;quot;);
+    return array-&amp;gt;contents[i];
+error:
+    return NULL;
+}
+
+static inline void *DArray_remove(DArray * array, int i)
+{
+    void *el = array-&amp;gt;contents[i];
+
+    array-&amp;gt;contents[i] = NULL;
+
+    return el;
+}
+
+static inline void *DArray_new(DArray * array)
+{
+    check(array-&amp;gt;element_size &amp;gt; 0,
+            &amp;quot;Can&#39;t use DArray_new on 0 size darrays.&amp;quot;);
+
+    return calloc(1, array-&amp;gt;element_size);
+
+error:
+    return NULL;
+}
+
+#define DArray_free(E) free((E))
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex34\darray.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/darray.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+
+DArray *DArray_create(size_t element_size, size_t initial_max)
+{
+    DArray *array = malloc(sizeof(DArray));
+    check_mem(array);
+    array-&amp;gt;max = initial_max;
+    check(array-&amp;gt;max &amp;gt; 0, &amp;quot;You must set an initial_max &amp;gt; 0.&amp;quot;);
+
+    array-&amp;gt;contents = calloc(initial_max, sizeof(void *));
+    check_mem(array-&amp;gt;contents);
+
+    array-&amp;gt;end = 0;
+    array-&amp;gt;element_size = element_size;
+    array-&amp;gt;expand_rate = DEFAULT_EXPAND_RATE;
+
+    return array;
+
+error:
+    if (array)
+        free(array);
+    return NULL;
+}
+
+void DArray_clear(DArray * array)
+{
+    int i = 0;
+    if (array-&amp;gt;element_size &amp;gt; 0) {
+        for (i = 0; i &amp;lt; array-&amp;gt;max; i++) {
+            if (array-&amp;gt;contents[i] != NULL) {
+                free(array-&amp;gt;contents[i]);
+            }
+        }
+    }
+}
+
+static inline int DArray_resize(DArray * array, size_t newsize)
+{
+    array-&amp;gt;max = newsize;
+    check(array-&amp;gt;max &amp;gt; 0, &amp;quot;The newsize must be &amp;gt; 0.&amp;quot;);
+
+    void *contents = realloc(
+            array-&amp;gt;contents, array-&amp;gt;max * sizeof(void *));
+    // check contents and assume realloc doesn&#39;t harm the original on error
+
+    check_mem(contents);
+
+    array-&amp;gt;contents = contents;
+
+    return 0;
+error:
+    return -1;
+}
+
+int DArray_expand(DArray * array)
+{
+    size_t old_max = array-&amp;gt;max;
+    check(DArray_resize(array, array-&amp;gt;max + array-&amp;gt;expand_rate) == 0,
+            &amp;quot;Failed to expand array to new size: %d&amp;quot;,
+            array-&amp;gt;max + (int)array-&amp;gt;expand_rate);
+
+    memset(array-&amp;gt;contents + old_max, 0, array-&amp;gt;expand_rate + 1);
+    return 0;
+
+error:
+    return -1;
+}
+
+int DArray_contract(DArray * array)
+{
+    int new_size = array-&amp;gt;end &amp;lt; (int)array-&amp;gt;expand_rate ? 
+            (int)array-&amp;gt;expand_rate : array-&amp;gt;end;
+
+    return DArray_resize(array, new_size + 1);
+}
+
+void DArray_destroy(DArray * array)
+{
+    if (array) {
+        if (array-&amp;gt;contents)
+            free(array-&amp;gt;contents);
+        free(array);
+    }
+}
+
+void DArray_clear_destroy(DArray * array)
+{
+    DArray_clear(array);
+    DArray_destroy(array);
+}
+
+int DArray_push(DArray * array, void *el)
+{
+    array-&amp;gt;contents[array-&amp;gt;end] = el;
+    array-&amp;gt;end++;
+
+    if (DArray_end(array) &amp;gt;= DArray_max(array)) {
+        return DArray_expand(array);
+    } else {
+        return 0;
+    }
+}
+
+void *DArray_pop(DArray * array)
+{
+    check(array-&amp;gt;end - 1 &amp;gt;= 0, &amp;quot;Attempt to pop from empty array.&amp;quot;);
+
+    void *el = DArray_remove(array, array-&amp;gt;end - 1);
+    array-&amp;gt;end--;
+
+    if (DArray_end(array) &amp;gt; (int)array-&amp;gt;expand_rate
+            &amp;amp;&amp;amp; DArray_end(array) % array-&amp;gt;expand_rate) {
+        DArray_contract(array);
+    }
+
+    return el;
+error:
+    return NULL;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex34\darray_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/darray.h&amp;gt;
+
+static DArray *array = NULL;
+static int *val1 = NULL;
+static int *val2 = NULL;
+
+char *test_create()
+{
+    array = DArray_create(sizeof(int), 100);
+    mu_assert(array != NULL, &amp;quot;DArray_create failed.&amp;quot;);
+    mu_assert(array-&amp;gt;contents != NULL, &amp;quot;contents are wrong in darray&amp;quot;);
+    mu_assert(array-&amp;gt;end == 0, &amp;quot;end isn&#39;t at the right spot&amp;quot;);
+    mu_assert(array-&amp;gt;element_size == sizeof(int),
+            &amp;quot;element size is wrong.&amp;quot;);
+    mu_assert(array-&amp;gt;max == 100, &amp;quot;wrong max length on initial size&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    DArray_destroy(array);
+
+    return NULL;
+}
+
+char *test_new()
+{
+    val1 = DArray_new(array);
+    mu_assert(val1 != NULL, &amp;quot;failed to make a new element&amp;quot;);
+
+    val2 = DArray_new(array);
+    mu_assert(val2 != NULL, &amp;quot;failed to make a new element&amp;quot;);
+
+    return NULL;
+}
+
+char *test_set()
+{
+    DArray_set(array, 0, val1);
+    DArray_set(array, 1, val2);
+
+    return NULL;
+}
+
+char *test_get()
+{
+    mu_assert(DArray_get(array, 0) == val1, &amp;quot;Wrong first value.&amp;quot;);
+    mu_assert(DArray_get(array, 1) == val2, &amp;quot;Wrong second value.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_remove()
+{
+    int *val_check = DArray_remove(array, 0);
+    mu_assert(val_check != NULL, &amp;quot;Should not get NULL.&amp;quot;);
+    mu_assert(*val_check == *val1, &amp;quot;Should get the first value.&amp;quot;);
+    mu_assert(DArray_get(array, 0) == NULL, &amp;quot;Should be gone.&amp;quot;);
+    DArray_free(val_check);
+
+    val_check = DArray_remove(array, 1);
+    mu_assert(val_check != NULL, &amp;quot;Should not get NULL.&amp;quot;);
+    mu_assert(*val_check == *val2, &amp;quot;Should get the first value.&amp;quot;);
+    mu_assert(DArray_get(array, 1) == NULL, &amp;quot;Should be gone.&amp;quot;);
+    DArray_free(val_check);
+
+    return NULL;
+}
+
+char *test_expand_contract()
+{
+    int old_max = array-&amp;gt;max;
+    DArray_expand(array);
+    mu_assert((unsigned int)array-&amp;gt;max == old_max + array-&amp;gt;expand_rate,
+            &amp;quot;Wrong size after expand.&amp;quot;);
+
+    DArray_contract(array);
+    mu_assert((unsigned int)array-&amp;gt;max == array-&amp;gt;expand_rate + 1,
+            &amp;quot;Should stay at the expand_rate at least.&amp;quot;);
+
+    DArray_contract(array);
+    mu_assert((unsigned int)array-&amp;gt;max == array-&amp;gt;expand_rate + 1,
+            &amp;quot;Should stay at the expand_rate at least.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_push_pop()
+{
+    int i = 0;
+    for (i = 0; i &amp;lt; 1000; i++) {
+        int *val = DArray_new(array);
+        *val = i * 333;
+        DArray_push(array, val);
+    }
+
+    mu_assert(array-&amp;gt;max == 1201, &amp;quot;Wrong max size.&amp;quot;);
+
+    for (i = 999; i &amp;gt;= 0; i--) {
+        int *val = DArray_pop(array);
+        mu_assert(val != NULL, &amp;quot;Shouldn&#39;t get a NULL.&amp;quot;);
+        mu_assert(*val == i * 333, &amp;quot;Wrong value.&amp;quot;);
+        DArray_free(val);
+    }
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_new);
+    mu_run_test(test_set);
+    mu_run_test(test_get);
+    mu_run_test(test_remove);
+    mu_run_test(test_expand_contract);
+    mu_run_test(test_push_pop);
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Starting with the header file to implement, then the test, then the implementation.&lt;/p&gt;
 
@@ -4653,9 +5488,432 @@ and see when you&amp;rsquo;d want a multiplicative increase instead of a constan
 
 &lt;p&gt;The DArray Code&lt;/p&gt;
 
+&lt;p&gt;.\ex35\darray_algos.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef darray_algos_h
+#define darray_algos_h
+
+#include &amp;lt;lcthw/darray.h&amp;gt;
+
+typedef int (*DArray_compare) (const void *a, const void *b);
+
+int DArray_qsort(DArray * array, DArray_compare cmp);
+
+int DArray_heapsort(DArray * array, DArray_compare cmp);
+
+int DArray_mergesort(DArray * array, DArray_compare cmp);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex35\darray_algos.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/darray_algos.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int DArray_qsort(DArray * array, DArray_compare cmp)
+{
+    qsort(array-&amp;gt;contents, DArray_count(array), sizeof(void *), cmp);
+    return 0;
+}
+
+int DArray_heapsort(DArray * array, DArray_compare cmp)
+{
+    return heapsort(array-&amp;gt;contents, DArray_count(array),
+            sizeof(void *), cmp);
+}
+
+int DArray_mergesort(DArray * array, DArray_compare cmp)
+{
+    return mergesort(array-&amp;gt;contents, DArray_count(array),
+            sizeof(void *), cmp);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex35\darray_algos_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/darray_algos.h&amp;gt;
+
+int testcmp(char **a, char **b)
+{
+    return strcmp(*a, *b);
+}
+
+DArray *create_words()
+{
+    DArray *result = DArray_create(0, 5);
+    char *words[] = { &amp;quot;asdfasfd&amp;quot;,
+        &amp;quot;werwar&amp;quot;, &amp;quot;13234&amp;quot;, &amp;quot;asdfasfd&amp;quot;, &amp;quot;oioj&amp;quot; };
+    int i = 0;
+
+    for (i = 0; i &amp;lt; 5; i++) {
+        DArray_push(result, words[i]);
+    }
+
+    return result;
+}
+
+int is_sorted(DArray * array)
+{
+    int i = 0;
+
+    for (i = 0; i &amp;lt; DArray_count(array) - 1; i++) {
+        if (strcmp(DArray_get(array, i), DArray_get(array, i + 1)) &amp;gt; 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+char *run_sort_test(int (*func) (DArray *, DArray_compare),
+        const char *name)
+{
+    DArray *words = create_words();
+    mu_assert(!is_sorted(words), &amp;quot;Words should start not sorted.&amp;quot;);
+
+    debug(&amp;quot;--- Testing %s sorting algorithm&amp;quot;, name);
+    int rc = func(words, (DArray_compare) testcmp);
+    mu_assert(rc == 0, &amp;quot;sort failed&amp;quot;);
+    mu_assert(is_sorted(words), &amp;quot;didn&#39;t sort it&amp;quot;);
+
+    DArray_destroy(words);
+
+    return NULL;
+}
+
+char *test_qsort()
+{
+    return run_sort_test(DArray_qsort, &amp;quot;qsort&amp;quot;);
+}
+
+char *test_heapsort()
+{
+    return run_sort_test(DArray_heapsort, &amp;quot;heapsort&amp;quot;);
+}
+
+char *test_mergesort()
+{
+    return run_sort_test(DArray_mergesort, &amp;quot;mergesort&amp;quot;);
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_qsort);
+    mu_run_test(test_heapsort);
+    mu_run_test(test_mergesort);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Continuing the code review method with a part of DArray.&lt;/p&gt;
 
 &lt;p&gt;The RadixMap Code&lt;/p&gt;
+
+&lt;p&gt;.\ex35\radixmap.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _radixmap_h
+#include &amp;lt;stdint.h&amp;gt;
+
+typedef union RMElement {
+    uint64_t raw;
+    struct {
+        uint32_t key;
+        uint32_t value;
+    } data;
+} RMElement;
+
+typedef struct RadixMap {
+    size_t max;
+    size_t end;
+    uint32_t counter;
+    RMElement *contents;
+    RMElement *temp;
+} RadixMap;
+
+RadixMap *RadixMap_create(size_t max);
+
+void RadixMap_destroy(RadixMap * map);
+
+void RadixMap_sort(RadixMap * map);
+
+RMElement *RadixMap_find(RadixMap * map, uint32_t key);
+
+int RadixMap_add(RadixMap * map, uint32_t key, uint32_t value);
+
+int RadixMap_delete(RadixMap * map, RMElement * el);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex35\radixmap.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+ * Based on code by Andre Reinald then heavily modified by Zed A. Shaw.
+ */
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/radixmap.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+RadixMap *RadixMap_create(size_t max)
+{
+    RadixMap *map = calloc(sizeof(RadixMap), 1);
+    check_mem(map);
+
+    map-&amp;gt;contents = calloc(sizeof(RMElement), max + 1);
+    check_mem(map-&amp;gt;contents);
+
+    map-&amp;gt;temp = calloc(sizeof(RMElement), max + 1);
+    check_mem(map-&amp;gt;temp);
+
+    map-&amp;gt;max = max;
+    map-&amp;gt;end = 0;
+
+    return map;
+error:
+    return NULL;
+}
+
+void RadixMap_destroy(RadixMap * map)
+{
+    if (map) {
+        free(map-&amp;gt;contents);
+        free(map-&amp;gt;temp);
+        free(map);
+    }
+}
+
+#define ByteOf(x,y) (((uint8_t *)x)[(y)])
+
+static inline void radix_sort(short offset, uint64_t max,
+        uint64_t * source, uint64_t * dest)
+{
+    uint64_t count[256] = { 0 };
+    uint64_t *cp = NULL;
+    uint64_t *sp = NULL;
+    uint64_t *end = NULL;
+    uint64_t s = 0;
+    uint64_t c = 0;
+
+    // count occurences of every byte value
+    for (sp = source, end = source + max; sp &amp;lt; end; sp++) {
+        count[ByteOf(sp, offset)]++;
+    }
+
+    // transform count into index by summing
+    // elements and storing into same array
+    for (s = 0, cp = count, end = count + 256; cp &amp;lt; end; cp++) {
+        c = *cp;
+        *cp = s;
+        s += c;
+    }
+
+    // fill dest with the right values in the right place
+    for (sp = source, end = source + max; sp &amp;lt; end; sp++) {
+        cp = count + ByteOf(sp, offset);
+        dest[*cp] = *sp;
+        ++(*cp);
+    }
+}
+
+void RadixMap_sort(RadixMap * map)
+{
+    uint64_t *source = &amp;amp;map-&amp;gt;contents[0].raw;
+    uint64_t *temp = &amp;amp;map-&amp;gt;temp[0].raw;
+
+    radix_sort(0, map-&amp;gt;end, source, temp);
+    radix_sort(1, map-&amp;gt;end, temp, source);
+    radix_sort(2, map-&amp;gt;end, source, temp);
+    radix_sort(3, map-&amp;gt;end, temp, source);
+}
+
+RMElement *RadixMap_find(RadixMap * map, uint32_t to_find)
+{
+    int low = 0;
+    int high = map-&amp;gt;end - 1;
+    RMElement *data = map-&amp;gt;contents;
+
+    while (low &amp;lt;= high) {
+        int middle = low + (high - low) / 2;
+        uint32_t key = data[middle].data.key;
+
+        if (to_find &amp;lt; key) {
+            high = middle - 1;
+        } else if (to_find &amp;gt; key) {
+            low = middle + 1;
+        } else {
+            return &amp;amp;data[middle];
+        }
+    }
+
+    return NULL;
+}
+
+int RadixMap_add(RadixMap * map, uint32_t key, uint32_t value)
+{
+    check(key &amp;lt; UINT32_MAX, &amp;quot;Key can&#39;t be equal to UINT32_MAX.&amp;quot;);
+
+    RMElement element = {.data = {.key = key,.value = value} };
+    check(map-&amp;gt;end + 1 &amp;lt; map-&amp;gt;max, &amp;quot;RadixMap is full.&amp;quot;);
+
+    map-&amp;gt;contents[map-&amp;gt;end++] = element;
+
+    RadixMap_sort(map);
+
+    return 0;
+
+error:
+    return -1;
+}
+
+int RadixMap_delete(RadixMap * map, RMElement * el)
+{
+    check(map-&amp;gt;end &amp;gt; 0, &amp;quot;There is nothing to delete.&amp;quot;);
+    check(el != NULL, &amp;quot;Can&#39;t delete a NULL element.&amp;quot;);
+
+    el-&amp;gt;data.key = UINT32_MAX;
+
+    if (map-&amp;gt;end &amp;gt; 1) {
+        // don&#39;t bother resorting a map of 1 length
+        RadixMap_sort(map);
+    }
+
+    map-&amp;gt;end--;
+
+    return 0;
+error:
+    return -1;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex35\radixmap_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/radixmap.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+static int make_random(RadixMap * map)
+{
+    size_t i = 0;
+
+    for (i = 0; i &amp;lt; map-&amp;gt;max - 1; i++) {
+        uint32_t key = (uint32_t) (rand() | (rand() &amp;lt;&amp;lt; 16));
+        check(RadixMap_add(map, key, i) == 0, &amp;quot;Failed to add key %u.&amp;quot;,
+                key);
+    }
+
+    return i;
+
+error:
+    return 0;
+}
+
+static int check_order(RadixMap * map)
+{
+    RMElement d1, d2;
+    unsigned int i = 0;
+
+    // only signal errors if any (should not be)
+    for (i = 0; map-&amp;gt;end &amp;gt; 0 &amp;amp;&amp;amp; i &amp;lt; map-&amp;gt;end - 1; i++) {
+        d1 = map-&amp;gt;contents[i];
+        d2 = map-&amp;gt;contents[i + 1];
+
+        if (d1.data.key &amp;gt; d2.data.key) {
+            debug(&amp;quot;FAIL:i=%u, key: %u, value: %u, equals max? %d\n&amp;quot;, i,
+                    d1.data.key, d1.data.value,
+                    d2.data.key == UINT32_MAX);
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+static int test_search(RadixMap * map)
+{
+    unsigned i = 0;
+    RMElement *d = NULL;
+    RMElement *found = NULL;
+
+    for (i = map-&amp;gt;end / 2; i &amp;lt; map-&amp;gt;end; i++) {
+        d = &amp;amp;map-&amp;gt;contents[i];
+        found = RadixMap_find(map, d-&amp;gt;data.key);
+        check(found != NULL, &amp;quot;Didn&#39;t find %u at %u.&amp;quot;, d-&amp;gt;data.key, i);
+        check(found-&amp;gt;data.key == d-&amp;gt;data.key,
+                &amp;quot;Got the wrong result: %p:%u looking for %u at %u&amp;quot;, found,
+                found-&amp;gt;data.key, d-&amp;gt;data.key, i);
+    }
+
+    return 1;
+error:
+    return 0;
+}
+
+// test for big number of elements
+static char *test_operations()
+{
+    size_t N = 200;
+
+    RadixMap *map = RadixMap_create(N);
+    mu_assert(map != NULL, &amp;quot;Failed to make the map.&amp;quot;);
+    mu_assert(make_random(map), &amp;quot;Didn&#39;t make a random fake radix map.&amp;quot;);
+
+    RadixMap_sort(map);
+    mu_assert(check_order(map),
+            &amp;quot;Failed to properly sort the RadixMap.&amp;quot;);
+
+    mu_assert(test_search(map), &amp;quot;Failed the search test.&amp;quot;);
+    mu_assert(check_order(map),
+            &amp;quot;RadixMap didn&#39;t stay sorted after search.&amp;quot;);
+
+    while (map-&amp;gt;end &amp;gt; 0) {
+        RMElement *el = RadixMap_find(map,
+                map-&amp;gt;contents[map-&amp;gt;end / 2].data.key);
+        mu_assert(el != NULL, &amp;quot;Should get a result.&amp;quot;);
+
+        size_t old_end = map-&amp;gt;end;
+
+        mu_assert(RadixMap_delete(map, el) == 0, &amp;quot;Didn&#39;t delete it.&amp;quot;);
+        mu_assert(old_end - 1 == map-&amp;gt;end, &amp;quot;Wrong size after delete.&amp;quot;);
+
+        // test that the end is now the old value,
+        // but uint32 max so it trails off
+        mu_assert(check_order(map),
+                &amp;quot;RadixMap didn&#39;t stay sorted after delete.&amp;quot;);
+    }
+
+    RadixMap_destroy(map);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+    srand(time(NULL));
+
+    mu_run_test(test_operations);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Code review this code next.&lt;/p&gt;
 
@@ -4699,6 +5957,70 @@ in a sorted &lt;em&gt;DArray&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;exercise-36-safer-strings&#34;&gt;Exercise 36 Safer Strings&lt;/h2&gt;
+
+&lt;p&gt;.\ex36\ex36.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;void copy(char to[], char from[])
+{
+    int i = 0;
+
+    // while loop will not end if from isn&#39;t &#39;\0&#39; terminated
+    while ((to[i] = from[i]) != &#39;\0&#39;) {
+        ++i;
+    }
+}
+
+int safercopy(int from_len, char *from, int to_len, char *to)
+{
+    int i = 0;
+    int max = from_len &amp;gt; to_len - 1 ? to_len - 1 : from_len;
+
+    // to_len must have at least 1 byte
+    if (from_len &amp;lt; 0 || to_len &amp;lt;= 0)
+        return -1;
+
+    for (i = 0; i &amp;lt; max; i++) {
+        to[i] = from[i];
+    }
+
+    to[to_len - 1] = &#39;\0&#39;;
+
+    return i;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex36\ex36.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;void copy(char to[], char from[])
+{
+    int i = 0;
+
+    // while loop will not end if from isn&#39;t &#39;\0&#39; terminated
+    while ((to[i] = from[i]) != &#39;\0&#39;) {
+        ++i;
+    }
+}
+
+int safercopy(int from_len, char *from, int to_len, char *to)
+{
+    int i = 0;
+    int max = from_len &amp;gt; to_len - 1 ? to_len - 1 : from_len;
+
+    // to_len must have at least 1 byte
+    if (from_len &amp;lt; 0 || to_len &amp;lt;= 0)
+        return -1;
+
+    for (i = 0; i &amp;lt; max; i++) {
+        to[i] = from[i];
+    }
+
+    to[to_len - 1] = &#39;\0&#39;;
+
+    return i;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The Plan&lt;/p&gt;
 
@@ -4757,6 +6079,271 @@ It&amp;rsquo;s all about the hashing function used.&lt;/p&gt;
 
 &lt;p&gt;Code Review&lt;/p&gt;
 
+&lt;p&gt;.\ex37\hashmap.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _lcthw_Hashmap_h
+#define _lcthw_Hashmap_h
+
+#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;lcthw/darray.h&amp;gt;
+
+#define DEFAULT_NUMBER_OF_BUCKETS 100
+
+typedef int (*Hashmap_compare) (void *a, void *b);
+typedef uint32_t(*Hashmap_hash) (void *key);
+
+typedef struct Hashmap {
+    DArray *buckets;
+    Hashmap_compare compare;
+    Hashmap_hash hash;
+} Hashmap;
+
+typedef struct HashmapNode {
+    void *key;
+    void *data;
+    uint32_t hash;
+} HashmapNode;
+
+typedef int (*Hashmap_traverse_cb) (HashmapNode * node);
+
+Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash);
+void Hashmap_destroy(Hashmap * map);
+
+int Hashmap_set(Hashmap * map, void *key, void *data);
+void *Hashmap_get(Hashmap * map, void *key);
+
+int Hashmap_traverse(Hashmap * map, Hashmap_traverse_cb traverse_cb);
+
+void *Hashmap_delete(Hashmap * map, void *key);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex37\hashmap.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#undef NDEBUG
+#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;lcthw/hashmap.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+
+static int default_compare(void *a, void *b)
+{
+    return bstrcmp((bstring) a, (bstring) b);
+}
+
+/** 
+ * Simple Bob Jenkins&#39;s hash algorithm taken from the
+ * wikipedia description.
+ */
+static uint32_t default_hash(void *a)
+{
+    size_t len = blength((bstring) a);
+    char *key = bdata((bstring) a);
+    uint32_t hash = 0;
+    uint32_t i = 0;
+
+    for (hash = i = 0; i &amp;lt; len; ++i) {
+        hash += key[i];
+        hash += (hash &amp;lt;&amp;lt; 10);
+        hash ^= (hash &amp;gt;&amp;gt; 6);
+    }
+
+    hash += (hash &amp;lt;&amp;lt; 3);
+    hash ^= (hash &amp;gt;&amp;gt; 11);
+    hash += (hash &amp;lt;&amp;lt; 15);
+
+    return hash;
+}
+
+Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash)
+{
+    Hashmap *map = calloc(1, sizeof(Hashmap));
+    check_mem(map);
+
+    map-&amp;gt;compare = compare == NULL ? default_compare : compare;
+    map-&amp;gt;hash = hash == NULL ? default_hash : hash;
+    map-&amp;gt;buckets = DArray_create(
+            sizeof(DArray *), DEFAULT_NUMBER_OF_BUCKETS);
+    map-&amp;gt;buckets-&amp;gt;end = map-&amp;gt;buckets-&amp;gt;max;  // fake out expanding it
+    check_mem(map-&amp;gt;buckets);
+
+    return map;
+
+error:
+    if (map) {
+        Hashmap_destroy(map);
+    }
+
+    return NULL;
+}
+
+void Hashmap_destroy(Hashmap * map)
+{
+    int i = 0;
+    int j = 0;
+
+    if (map) {
+        if (map-&amp;gt;buckets) {
+            for (i = 0; i &amp;lt; DArray_count(map-&amp;gt;buckets); i++) {
+                DArray *bucket = DArray_get(map-&amp;gt;buckets, i);
+                if (bucket) {
+                    for (j = 0; j &amp;lt; DArray_count(bucket); j++) {
+                        free(DArray_get(bucket, j));
+                    }
+                    DArray_destroy(bucket);
+                }
+            }
+            DArray_destroy(map-&amp;gt;buckets);
+        }
+
+        free(map);
+    }
+}
+
+static inline HashmapNode *Hashmap_node_create(int hash, void *key,
+        void *data)
+{
+    HashmapNode *node = calloc(1, sizeof(HashmapNode));
+    check_mem(node);
+
+    node-&amp;gt;key = key;
+    node-&amp;gt;data = data;
+    node-&amp;gt;hash = hash;
+
+    return node;
+
+error:
+    return NULL;
+}
+
+static inline DArray *Hashmap_find_bucket(Hashmap * map, void *key,
+        int create,
+        uint32_t * hash_out)
+{
+    uint32_t hash = map-&amp;gt;hash(key);
+    int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;
+    check(bucket_n &amp;gt;= 0, &amp;quot;Invalid bucket found: %d&amp;quot;, bucket_n);
+    // store it for the return so the caller can use it
+    *hash_out = hash;
+
+    DArray *bucket = DArray_get(map-&amp;gt;buckets, bucket_n);
+
+    if (!bucket &amp;amp;&amp;amp; create) {
+        // new bucket, set it up
+        bucket = DArray_create(
+                sizeof(void *), DEFAULT_NUMBER_OF_BUCKETS);
+        check_mem(bucket);
+        DArray_set(map-&amp;gt;buckets, bucket_n, bucket);
+    }
+
+    return bucket;
+
+error:
+    return NULL;
+}
+
+int Hashmap_set(Hashmap * map, void *key, void *data)
+{
+    uint32_t hash = 0;
+    DArray *bucket = Hashmap_find_bucket(map, key, 1, &amp;amp;hash);
+    check(bucket, &amp;quot;Error can&#39;t create bucket.&amp;quot;);
+
+    HashmapNode *node = Hashmap_node_create(hash, key, data);
+    check_mem(node);
+
+    DArray_push(bucket, node);
+
+    return 0;
+
+error:
+    return -1;
+}
+
+static inline int Hashmap_get_node(Hashmap * map, uint32_t hash,
+        DArray * bucket, void *key)
+{
+    int i = 0;
+
+    for (i = 0; i &amp;lt; DArray_end(bucket); i++) {
+        debug(&amp;quot;TRY: %d&amp;quot;, i);
+        HashmapNode *node = DArray_get(bucket, i);
+        if (node-&amp;gt;hash == hash &amp;amp;&amp;amp; map-&amp;gt;compare(node-&amp;gt;key, key) == 0) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void *Hashmap_get(Hashmap * map, void *key)
+{
+    uint32_t hash = 0;
+    DArray *bucket = Hashmap_find_bucket(map, key, 0, &amp;amp;hash);
+    if (!bucket) return NULL;
+
+    int i = Hashmap_get_node(map, hash, bucket, key);
+    if (i == -1) return NULL;
+
+    HashmapNode *node = DArray_get(bucket, i);
+    check(node != NULL,
+            &amp;quot;Failed to get node from bucket when it should exist.&amp;quot;);
+
+    return node-&amp;gt;data;
+
+error:          // fallthrough
+    return NULL;
+}
+
+int Hashmap_traverse(Hashmap * map, Hashmap_traverse_cb traverse_cb)
+{
+    int i = 0;
+    int j = 0;
+    int rc = 0;
+
+    for (i = 0; i &amp;lt; DArray_count(map-&amp;gt;buckets); i++) {
+        DArray *bucket = DArray_get(map-&amp;gt;buckets, i);
+        if (bucket) {
+            for (j = 0; j &amp;lt; DArray_count(bucket); j++) {
+                HashmapNode *node = DArray_get(bucket, j);
+                rc = traverse_cb(node);
+                if (rc != 0)
+                    return rc;
+            }
+        }
+    }
+
+    return 0;
+}
+
+void *Hashmap_delete(Hashmap * map, void *key)
+{
+    uint32_t hash = 0;
+    DArray *bucket = Hashmap_find_bucket(map, key, 0, &amp;amp;hash);
+    if (!bucket)
+        return NULL;
+
+    int i = Hashmap_get_node(map, hash, bucket, key);
+    if (i == -1)
+        return NULL;
+
+    HashmapNode *node = DArray_get(bucket, i);
+    void *data = node-&amp;gt;data;
+    free(node);
+
+    HashmapNode *ending = DArray_pop(bucket);
+
+    if (ending != node) {
+        // alright looks like it&#39;s not the last one, swap it
+        DArray_set(bucket, i, ending);
+    }
+
+    return data;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Conducting a review of Hashmap by following the test.&lt;/p&gt;
 
 &lt;p&gt;Improving It&lt;/p&gt;
@@ -4813,6 +6400,78 @@ to the Hashmap.&lt;/p&gt;
 
 &lt;p&gt;Code Review&lt;/p&gt;
 
+&lt;p&gt;.\ex38\hashmap_algos.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef hashmap_algos_h
+#define hashmap_algos_h
+
+#include &amp;lt;stdint.h&amp;gt;
+
+uint32_t Hashmap_fnv1a_hash(void *data);
+
+uint32_t Hashmap_adler32_hash(void *data);
+
+uint32_t Hashmap_djb_hash(void *data);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex38\hashmap_algos.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/hashmap_algos.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+
+// settings taken from
+// http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-param
+const uint32_t FNV_PRIME = 16777619;
+const uint32_t FNV_OFFSET_BASIS = 2166136261;
+
+uint32_t Hashmap_fnv1a_hash(void *data)
+{
+    bstring s = (bstring) data;
+    uint32_t hash = FNV_OFFSET_BASIS;
+    int i = 0;
+
+    for (i = 0; i &amp;lt; blength(s); i++) {
+        hash ^= bchare(s, i, 0);
+        hash *= FNV_PRIME;
+    }
+
+    return hash;
+}
+
+const int MOD_ADLER = 65521;
+
+uint32_t Hashmap_adler32_hash(void *data)
+{
+    bstring s = (bstring) data;
+    uint32_t a = 1, b = 0;
+    int i = 0;
+
+    for (i = 0; i &amp;lt; blength(s); i++) {
+        a = (a + bchare(s, i, 0)) % MOD_ADLER;
+        b = (b + a) % MOD_ADLER;
+    }
+
+    return (b &amp;lt;&amp;lt; 16) | a;
+}
+
+uint32_t Hashmap_djb_hash(void *data)
+{
+    bstring s = (bstring) data;
+    uint32_t hash = 5381;
+    int i = 0;
+
+    for (i = 0; i &amp;lt; blength(s); i++) {
+        hash = ((hash &amp;lt;&amp;lt; 5) + hash) + bchare(s, i, 0);  /* hash * 33 + c */
+    }
+
+    return hash;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;The default is the Jenkin&amp;rsquo;s hash.&lt;/p&gt;
 
 &lt;p&gt;You added the FNV1a, Adler32, and DJB hashing algorithms.&lt;/p&gt;
@@ -4845,6 +6504,316 @@ many hash functions!&lt;/li&gt;
 &lt;p&gt;Develop a formal code review procedure.&lt;/p&gt;
 
 &lt;p&gt;The Code&lt;/p&gt;
+
+&lt;p&gt;.\ex39\string_algos.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef string_algos_h
+#define string_algos_h
+
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+#include &amp;lt;lcthw/darray.h&amp;gt;
+
+typedef struct StringScanner {
+    bstring in;
+    const unsigned char *haystack;
+    ssize_t hlen;
+    const unsigned char *needle;
+    ssize_t nlen;
+    size_t skip_chars[UCHAR_MAX + 1];
+} StringScanner;
+
+int String_find(bstring in, bstring what);
+
+StringScanner *StringScanner_create(bstring in);
+
+int StringScanner_scan(StringScanner * scan, bstring tofind);
+
+void StringScanner_destroy(StringScanner * scan);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex39\string_algos.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/string_algos.h&amp;gt;
+#include &amp;lt;limits.h&amp;gt;
+
+static inline void String_setup_skip_chars(size_t * skip_chars,
+        const unsigned char *needle,
+        ssize_t nlen)
+{
+    size_t i = 0;
+    size_t last = nlen - 1;
+
+    for (i = 0; i &amp;lt; UCHAR_MAX + 1; i++) {
+        skip_chars[i] = nlen;
+    }
+
+    for (i = 0; i &amp;lt; last; i++) {
+        skip_chars[needle[i]] = last - i;
+    }
+}
+
+static inline const unsigned char *String_base_search(const unsigned
+        char *haystack,
+        ssize_t hlen,
+        const unsigned
+        char *needle,
+        ssize_t nlen,
+        size_t *
+        skip_chars)
+{
+    size_t i = 0;
+    size_t last = nlen - 1;
+
+    assert(haystack != NULL &amp;amp;&amp;amp; &amp;quot;Given bad haystack to search.&amp;quot;);
+    assert(needle != NULL &amp;amp;&amp;amp; &amp;quot;Given bad needle to search for.&amp;quot;);
+
+    check(nlen &amp;gt; 0, &amp;quot;nlen can&#39;t be &amp;lt;= 0&amp;quot;);
+    check(hlen &amp;gt; 0, &amp;quot;hlen can&#39;t be &amp;lt;= 0&amp;quot;);
+
+    while (hlen &amp;gt;= nlen) {
+        for (i = last; haystack[i] == needle[i]; i--) {
+            if (i == 0) {
+                return haystack;
+            }
+        }
+
+        hlen -= skip_chars[haystack[last]];
+        haystack += skip_chars[haystack[last]];
+    }
+
+error:          // fallthrough
+    return NULL;
+}
+
+int String_find(bstring in, bstring what)
+{
+    const unsigned char *found = NULL;
+
+    const unsigned char *haystack = (const unsigned char *)bdata(in);
+    ssize_t hlen = blength(in);
+    const unsigned char *needle = (const unsigned char *)bdata(what);
+    ssize_t nlen = blength(what);
+    size_t skip_chars[UCHAR_MAX + 1] = { 0 };
+
+    String_setup_skip_chars(skip_chars, needle, nlen);
+
+    found = String_base_search(haystack, hlen,
+                 needle, nlen, skip_chars);
+
+    return found != NULL ? found - haystack : -1;
+}
+
+StringScanner *StringScanner_create(bstring in)
+{
+    StringScanner *scan = calloc(1, sizeof(StringScanner));
+    check_mem(scan);
+
+    scan-&amp;gt;in = in;
+    scan-&amp;gt;haystack = (const unsigned char *)bdata(in);
+    scan-&amp;gt;hlen = blength(in);
+
+    assert(scan != NULL &amp;amp;&amp;amp; &amp;quot;fuck&amp;quot;);
+    return scan;
+
+error:
+    free(scan);
+    return NULL;
+}
+
+static inline void StringScanner_set_needle(StringScanner * scan,
+        bstring tofind)
+{
+    scan-&amp;gt;needle = (const unsigned char *)bdata(tofind);
+    scan-&amp;gt;nlen = blength(tofind);
+
+    String_setup_skip_chars(scan-&amp;gt;skip_chars, scan-&amp;gt;needle, scan-&amp;gt;nlen);
+}
+
+static inline void StringScanner_reset(StringScanner * scan)
+{
+    scan-&amp;gt;haystack = (const unsigned char *)bdata(scan-&amp;gt;in);
+    scan-&amp;gt;hlen = blength(scan-&amp;gt;in);
+}
+
+int StringScanner_scan(StringScanner * scan, bstring tofind)
+{
+    const unsigned char *found = NULL;
+    ssize_t found_at = 0;
+
+    if (scan-&amp;gt;hlen &amp;lt;= 0) {
+        StringScanner_reset(scan);
+        return -1;
+    }
+
+    if ((const unsigned char *)bdata(tofind) != scan-&amp;gt;needle) {
+        StringScanner_set_needle(scan, tofind);
+    }
+
+    found = String_base_search(scan-&amp;gt;haystack, scan-&amp;gt;hlen,
+            scan-&amp;gt;needle, scan-&amp;gt;nlen,
+            scan-&amp;gt;skip_chars);
+
+    if (found) {
+        found_at = found - (const unsigned char *)bdata(scan-&amp;gt;in);
+        scan-&amp;gt;haystack = found + scan-&amp;gt;nlen;
+        scan-&amp;gt;hlen -= found_at - scan-&amp;gt;nlen;
+    } else {
+        // done, reset the setup
+        StringScanner_reset(scan);
+        found_at = -1;
+    }
+
+    return found_at;
+}
+
+void StringScanner_destroy(StringScanner * scan)
+{
+    if (scan) {
+        free(scan);
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex39\string_algos_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/string_algos.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+struct tagbstring IN_STR = bsStatic(
+        &amp;quot;I have ALPHA beta ALPHA and oranges ALPHA&amp;quot;);
+struct tagbstring ALPHA = bsStatic(&amp;quot;ALPHA&amp;quot;);
+const int TEST_TIME = 1;
+
+char *test_find_and_scan()
+{
+    StringScanner *scan = StringScanner_create(&amp;amp;IN_STR);
+    mu_assert(scan != NULL, &amp;quot;Failed to make the scanner.&amp;quot;);
+
+    int find_i = String_find(&amp;amp;IN_STR, &amp;amp;ALPHA);
+    mu_assert(find_i &amp;gt; 0, &amp;quot;Failed to find &#39;ALPHA&#39; in test string.&amp;quot;);
+
+    int scan_i = StringScanner_scan(scan, &amp;amp;ALPHA);
+    mu_assert(scan_i &amp;gt; 0, &amp;quot;Failed to find &#39;ALPHA&#39; with scan.&amp;quot;);
+    mu_assert(scan_i == find_i, &amp;quot;find and scan don&#39;t match&amp;quot;);
+
+    scan_i = StringScanner_scan(scan, &amp;amp;ALPHA);
+    mu_assert(scan_i &amp;gt; find_i,
+            &amp;quot;should find another ALPHA after the first&amp;quot;);
+
+    scan_i = StringScanner_scan(scan, &amp;amp;ALPHA);
+    mu_assert(scan_i &amp;gt; find_i,
+            &amp;quot;should find another ALPHA after the first&amp;quot;);
+
+    mu_assert(StringScanner_scan(scan, &amp;amp;ALPHA) == -1,
+            &amp;quot;shouldn&#39;t find it&amp;quot;);
+
+    StringScanner_destroy(scan);
+
+    return NULL;
+}
+
+char *test_binstr_performance()
+{
+    int i = 0;
+    int found_at = 0;
+    unsigned long find_count = 0;
+    time_t elapsed = 0;
+    time_t start = time(NULL);
+
+    do {
+        for (i = 0; i &amp;lt; 1000; i++) {
+            found_at = binstr(&amp;amp;IN_STR, 0, &amp;amp;ALPHA);
+            mu_assert(found_at != BSTR_ERR, &amp;quot;Failed to find!&amp;quot;);
+            find_count++;
+        }
+
+        elapsed = time(NULL) - start;
+    } while (elapsed &amp;lt;= TEST_TIME);
+
+    debug(&amp;quot;BINSTR COUNT: %lu, END TIME: %d, OPS: %f&amp;quot;,
+            find_count, (int)elapsed, (double)find_count / elapsed);
+    return NULL;
+}
+
+char *test_find_performance()
+{
+    int i = 0;
+    int found_at = 0;
+    unsigned long find_count = 0;
+    time_t elapsed = 0;
+    time_t start = time(NULL);
+
+    do {
+        for (i = 0; i &amp;lt; 1000; i++) {
+            found_at = String_find(&amp;amp;IN_STR, &amp;amp;ALPHA);
+            find_count++;
+        }
+
+        elapsed = time(NULL) - start;
+    } while (elapsed &amp;lt;= TEST_TIME);
+
+    debug(&amp;quot;FIND COUNT: %lu, END TIME: %d, OPS: %f&amp;quot;,
+            find_count, (int)elapsed, (double)find_count / elapsed);
+
+    return NULL;
+}
+
+char *test_scan_performance()
+{
+    int i = 0;
+    int found_at = 0;
+    unsigned long find_count = 0;
+    time_t elapsed = 0;
+    StringScanner *scan = StringScanner_create(&amp;amp;IN_STR);
+
+    time_t start = time(NULL);
+
+    do {
+        for (i = 0; i &amp;lt; 1000; i++) {
+            found_at = 0;
+
+            do {
+                found_at = StringScanner_scan(scan, &amp;amp;ALPHA);
+                find_count++;
+            } while (found_at != -1);
+        }
+
+        elapsed = time(NULL) - start;
+    } while (elapsed &amp;lt;= TEST_TIME);
+
+    debug(&amp;quot;SCAN COUNT: %lu, END TIME: %d, OPS: %f&amp;quot;,
+            find_count, (int)elapsed, (double)find_count / elapsed);
+
+    StringScanner_destroy(scan);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_find_and_scan);
+
+    // this is an idiom for commenting out sections of code
+#if 0
+    mu_run_test(test_scan_performance);
+    mu_run_test(test_find_performance);
+    mu_run_test(test_binstr_performance);
+#endif
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The code is easy to implement so should be no problem for you
 at this point.  Focus on getting the unit test right.&lt;/p&gt;
@@ -4916,9 +6885,943 @@ results.&lt;/li&gt;
 
 &lt;p&gt;The Code&lt;/p&gt;
 
+&lt;p&gt;.\ex40\bstree.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _lcthw_BSTree_h
+#define _lcthw_BSTree_h
+
+typedef int (*BSTree_compare) (void *a, void *b);
+
+typedef struct BSTreeNode {
+    void *key;
+    void *data;
+
+    struct BSTreeNode *left;
+    struct BSTreeNode *right;
+    struct BSTreeNode *parent;
+} BSTreeNode;
+
+typedef struct BSTree {
+    int count;
+    BSTree_compare compare;
+    BSTreeNode *root;
+} BSTree;
+
+typedef int (*BSTree_traverse_cb) (BSTreeNode * node);
+
+BSTree *BSTree_create(BSTree_compare compare);
+void BSTree_destroy(BSTree * map);
+
+int BSTree_set(BSTree * map, void *key, void *data);
+void *BSTree_get(BSTree * map, void *key);
+
+int BSTree_traverse(BSTree * map, BSTree_traverse_cb traverse_cb);
+
+void *BSTree_delete(BSTree * map, void *key);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex40\bstree.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;lcthw/bstree.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+
+static int default_compare(void *a, void *b)
+{
+    return bstrcmp((bstring) a, (bstring) b);
+}
+
+BSTree *BSTree_create(BSTree_compare compare)
+{
+    BSTree *map = calloc(1, sizeof(BSTree));
+    check_mem(map);
+
+    map-&amp;gt;compare = compare == NULL ? default_compare : compare;
+
+    return map;
+
+error:
+    if (map) {
+        BSTree_destroy(map);
+    }
+    return NULL;
+}
+
+static int BSTree_destroy_cb(BSTreeNode * node)
+{
+    free(node);
+    return 0;
+}
+
+void BSTree_destroy(BSTree * map)
+{
+    if (map) {
+        BSTree_traverse(map, BSTree_destroy_cb);
+        free(map);
+    }
+}
+
+static inline BSTreeNode *BSTreeNode_create(BSTreeNode * parent,
+        void *key, void *data)
+{
+    BSTreeNode *node = calloc(1, sizeof(BSTreeNode));
+    check_mem(node);
+
+    node-&amp;gt;key = key;
+    node-&amp;gt;data = data;
+    node-&amp;gt;parent = parent;
+    return node;
+
+error:
+    return NULL;
+}
+
+static inline void BSTree_setnode(BSTree * map, BSTreeNode * node,
+        void *key, void *data)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp &amp;lt;= 0) {
+        if (node-&amp;gt;left) {
+            BSTree_setnode(map, node-&amp;gt;left, key, data);
+        } else {
+            node-&amp;gt;left = BSTreeNode_create(node, key, data);
+        }
+    } else {
+        if (node-&amp;gt;right) {
+            BSTree_setnode(map, node-&amp;gt;right, key, data);
+        } else {
+            node-&amp;gt;right = BSTreeNode_create(node, key, data);
+        }
+    }
+}
+
+int BSTree_set(BSTree * map, void *key, void *data)
+{
+    if (map-&amp;gt;root == NULL) {
+        // first so just make it and get out
+        map-&amp;gt;root = BSTreeNode_create(NULL, key, data);
+        check_mem(map-&amp;gt;root);
+    } else {
+        BSTree_setnode(map, map-&amp;gt;root, key, data);
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+static inline BSTreeNode *BSTree_getnode(BSTree * map,
+        BSTreeNode * node, void *key)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp == 0) {
+        return node;
+    } else if (cmp &amp;lt; 0) {
+        if (node-&amp;gt;left) {
+            return BSTree_getnode(map, node-&amp;gt;left, key);
+        } else {
+            return NULL;
+        }
+    } else {
+        if (node-&amp;gt;right) {
+            return BSTree_getnode(map, node-&amp;gt;right, key);
+        } else {
+            return NULL;
+        }
+    }
+}
+
+void *BSTree_get(BSTree * map, void *key)
+{
+    if (map-&amp;gt;root == NULL) {
+        return NULL;
+    } else {
+        BSTreeNode *node = BSTree_getnode(map, map-&amp;gt;root, key);
+        return node == NULL ? NULL : node-&amp;gt;data;
+    }
+}
+
+static inline int BSTree_traverse_nodes(BSTreeNode * node,
+        BSTree_traverse_cb traverse_cb)
+{
+    int rc = 0;
+
+    if (node-&amp;gt;left) {
+        rc = BSTree_traverse_nodes(node-&amp;gt;left, traverse_cb);
+        if (rc != 0)
+            return rc;
+    }
+
+    if (node-&amp;gt;right) {
+        rc = BSTree_traverse_nodes(node-&amp;gt;right, traverse_cb);
+        if (rc != 0)
+            return rc;
+    }
+
+    return traverse_cb(node);
+}
+
+int BSTree_traverse(BSTree * map, BSTree_traverse_cb traverse_cb)
+{
+    if (map-&amp;gt;root) {
+        return BSTree_traverse_nodes(map-&amp;gt;root, traverse_cb);
+    }
+
+    return 0;
+}
+
+static inline BSTreeNode *BSTree_find_min(BSTreeNode * node)
+{
+    while (node-&amp;gt;left) {
+        node = node-&amp;gt;left;
+    }
+
+    return node;
+}
+
+static inline void BSTree_replace_node_in_parent(BSTree * map,
+        BSTreeNode * node,
+        BSTreeNode * new_value)
+{
+    if (node-&amp;gt;parent) {
+        if (node == node-&amp;gt;parent-&amp;gt;left) {
+            node-&amp;gt;parent-&amp;gt;left = new_value;
+        } else {
+            node-&amp;gt;parent-&amp;gt;right = new_value;
+        }
+    } else {
+        // this is the root so gotta change it
+        map-&amp;gt;root = new_value;
+    }
+
+    if (new_value) {
+        new_value-&amp;gt;parent = node-&amp;gt;parent;
+    }
+}
+
+static inline void BSTree_swap(BSTreeNode * a, BSTreeNode * b)
+{
+    void *temp = NULL;
+    temp = b-&amp;gt;key;
+    b-&amp;gt;key = a-&amp;gt;key;
+    a-&amp;gt;key = temp;
+    temp = b-&amp;gt;data;
+    b-&amp;gt;data = a-&amp;gt;data;
+    a-&amp;gt;data = temp;
+}
+
+static inline BSTreeNode *BSTree_node_delete(BSTree * map,
+        BSTreeNode * node,
+        void *key)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp &amp;lt; 0) {
+        if (node-&amp;gt;left) {
+            return BSTree_node_delete(map, node-&amp;gt;left, key);
+        } else {
+            // not found
+            return NULL;
+        }
+    } else if (cmp &amp;gt; 0) {
+        if (node-&amp;gt;right) {
+            return BSTree_node_delete(map, node-&amp;gt;right, key);
+        } else {
+            // not found
+            return NULL;
+        }
+    } else {
+        if (node-&amp;gt;left &amp;amp;&amp;amp; node-&amp;gt;right) {
+            // swap this node for the smallest node that is bigger than us
+            BSTreeNode *successor = BSTree_find_min(node-&amp;gt;right);
+            BSTree_swap(successor, node);
+
+            // this leaves the old successor with possibly a right child
+            // so replace it with that right child
+            BSTree_replace_node_in_parent(map, successor,
+                    successor-&amp;gt;right);
+
+            // finally it&#39;s swapped, so return successor instead of node
+            return successor;
+        } else if (node-&amp;gt;left) {
+            BSTree_replace_node_in_parent(map, node, node-&amp;gt;left);
+        } else if (node-&amp;gt;right) {
+            BSTree_replace_node_in_parent(map, node, node-&amp;gt;right);
+        } else {
+            BSTree_replace_node_in_parent(map, node, NULL);
+        }
+
+        return node;
+    }
+}
+
+void *BSTree_delete(BSTree * map, void *key)
+{
+    void *data = NULL;
+
+    if (map-&amp;gt;root) {
+        BSTreeNode *node = BSTree_node_delete(map, map-&amp;gt;root, key);
+
+        if (node) {
+            data = node-&amp;gt;data;
+            free(node);
+        }
+    }
+
+    return data;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex40\bstree_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/bstree.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+BSTree *map = NULL;
+static int traverse_called = 0;
+struct tagbstring test1 = bsStatic(&amp;quot;test data 1&amp;quot;);
+struct tagbstring test2 = bsStatic(&amp;quot;test data 2&amp;quot;);
+struct tagbstring test3 = bsStatic(&amp;quot;xest data 3&amp;quot;);
+struct tagbstring expect1 = bsStatic(&amp;quot;THE VALUE 1&amp;quot;);
+struct tagbstring expect2 = bsStatic(&amp;quot;THE VALUE 2&amp;quot;);
+struct tagbstring expect3 = bsStatic(&amp;quot;THE VALUE 3&amp;quot;);
+
+static int traverse_good_cb(BSTreeNode * node)
+{
+    debug(&amp;quot;KEY: %s&amp;quot;, bdata((bstring) node-&amp;gt;key));
+    traverse_called++;
+    return 0;
+}
+
+static int traverse_fail_cb(BSTreeNode * node)
+{
+    debug(&amp;quot;KEY: %s&amp;quot;, bdata((bstring) node-&amp;gt;key));
+    traverse_called++;
+
+    if (traverse_called == 2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+char *test_create()
+{
+    map = BSTree_create(NULL);
+    mu_assert(map != NULL, &amp;quot;Failed to create map.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    BSTree_destroy(map);
+
+    return NULL;
+}
+
+char *test_get_set()
+{
+    int rc = BSTree_set(map, &amp;amp;test1, &amp;amp;expect1);
+    mu_assert(rc == 0, &amp;quot;Failed to set &amp;amp;test1&amp;quot;);
+    bstring result = BSTree_get(map, &amp;amp;test1);
+    mu_assert(result == &amp;amp;expect1, &amp;quot;Wrong value for test1.&amp;quot;);
+
+    rc = BSTree_set(map, &amp;amp;test2, &amp;amp;expect2);
+    mu_assert(rc == 0, &amp;quot;Failed to set test2&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test2);
+    mu_assert(result == &amp;amp;expect2, &amp;quot;Wrong value for test2.&amp;quot;);
+
+    rc = BSTree_set(map, &amp;amp;test3, &amp;amp;expect3);
+    mu_assert(rc == 0, &amp;quot;Failed to set test3&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test3);
+    mu_assert(result == &amp;amp;expect3, &amp;quot;Wrong value for test3.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_traverse()
+{
+    int rc = BSTree_traverse(map, traverse_good_cb);
+    mu_assert(rc == 0, &amp;quot;Failed to traverse.&amp;quot;);
+    mu_assert(traverse_called == 3, &amp;quot;Wrong count traverse.&amp;quot;);
+
+    traverse_called = 0;
+    rc = BSTree_traverse(map, traverse_fail_cb);
+    mu_assert(rc == 1, &amp;quot;Failed to traverse.&amp;quot;);
+    mu_assert(traverse_called == 2, &amp;quot;Wrong count traverse for fail.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_delete()
+{
+    bstring deleted = (bstring) BSTree_delete(map, &amp;amp;test1);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect1, &amp;quot;Should get test1&amp;quot;);
+    bstring result = BSTree_get(map, &amp;amp;test1);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test1);
+    mu_assert(deleted == NULL, &amp;quot;Should get NULL on delete&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test2);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect2, &amp;quot;Should get test2&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test2);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test3);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect3, &amp;quot;Should get test3&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test3);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    // test deleting non-existent stuff
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test3);
+    mu_assert(deleted == NULL, &amp;quot;Should get NULL&amp;quot;);
+
+    return NULL;
+}
+
+char *test_fuzzing()
+{
+    BSTree *store = BSTree_create(NULL);
+    int i = 0;
+    int j = 0;
+    bstring numbers[100] = { NULL };
+    bstring data[100] = { NULL };
+    srand((unsigned int)time(NULL));
+
+    for (i = 0; i &amp;lt; 100; i++) {
+        int num = rand();
+        numbers[i] = bformat(&amp;quot;%d&amp;quot;, num);
+        data[i] = bformat(&amp;quot;data %d&amp;quot;, num);
+        BSTree_set(store, numbers[i], data[i]);
+    }
+
+    for (i = 0; i &amp;lt; 100; i++) {
+        bstring value = BSTree_delete(store, numbers[i]);
+        mu_assert(value == data[i],
+                &amp;quot;Failed to delete the right number.&amp;quot;);
+
+        mu_assert(BSTree_delete(store, numbers[i]) == NULL,
+                &amp;quot;Should get nothing.&amp;quot;);
+
+        for (j = i + 1; j &amp;lt; 99 - i; j++) {
+            bstring value = BSTree_get(store, numbers[j]);
+            mu_assert(value == data[j],
+                    &amp;quot;Failed to get the right number.&amp;quot;);
+        }
+
+        bdestroy(value);
+        bdestroy(numbers[i]);
+    }
+
+    BSTree_destroy(store);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_get_set);
+    mu_run_test(test_traverse);
+    mu_run_test(test_delete);
+    mu_run_test(test_destroy);
+    mu_run_test(test_fuzzing);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;There&amp;rsquo;s nothing new in the code, but make sure you read the book carefully.&lt;/p&gt;
 
 &lt;p&gt;Code Review&lt;/p&gt;
+
+&lt;p&gt;.\ex40\bstree.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _lcthw_BSTree_h
+#define _lcthw_BSTree_h
+
+typedef int (*BSTree_compare) (void *a, void *b);
+
+typedef struct BSTreeNode {
+    void *key;
+    void *data;
+
+    struct BSTreeNode *left;
+    struct BSTreeNode *right;
+    struct BSTreeNode *parent;
+} BSTreeNode;
+
+typedef struct BSTree {
+    int count;
+    BSTree_compare compare;
+    BSTreeNode *root;
+} BSTree;
+
+typedef int (*BSTree_traverse_cb) (BSTreeNode * node);
+
+BSTree *BSTree_create(BSTree_compare compare);
+void BSTree_destroy(BSTree * map);
+
+int BSTree_set(BSTree * map, void *key, void *data);
+void *BSTree_get(BSTree * map, void *key);
+
+int BSTree_traverse(BSTree * map, BSTree_traverse_cb traverse_cb);
+
+void *BSTree_delete(BSTree * map, void *key);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex40\bstree.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;lcthw/bstree.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+
+static int default_compare(void *a, void *b)
+{
+    return bstrcmp((bstring) a, (bstring) b);
+}
+
+BSTree *BSTree_create(BSTree_compare compare)
+{
+    BSTree *map = calloc(1, sizeof(BSTree));
+    check_mem(map);
+
+    map-&amp;gt;compare = compare == NULL ? default_compare : compare;
+
+    return map;
+
+error:
+    if (map) {
+        BSTree_destroy(map);
+    }
+    return NULL;
+}
+
+static int BSTree_destroy_cb(BSTreeNode * node)
+{
+    free(node);
+    return 0;
+}
+
+void BSTree_destroy(BSTree * map)
+{
+    if (map) {
+        BSTree_traverse(map, BSTree_destroy_cb);
+        free(map);
+    }
+}
+
+static inline BSTreeNode *BSTreeNode_create(BSTreeNode * parent,
+        void *key, void *data)
+{
+    BSTreeNode *node = calloc(1, sizeof(BSTreeNode));
+    check_mem(node);
+
+    node-&amp;gt;key = key;
+    node-&amp;gt;data = data;
+    node-&amp;gt;parent = parent;
+    return node;
+
+error:
+    return NULL;
+}
+
+static inline void BSTree_setnode(BSTree * map, BSTreeNode * node,
+        void *key, void *data)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp &amp;lt;= 0) {
+        if (node-&amp;gt;left) {
+            BSTree_setnode(map, node-&amp;gt;left, key, data);
+        } else {
+            node-&amp;gt;left = BSTreeNode_create(node, key, data);
+        }
+    } else {
+        if (node-&amp;gt;right) {
+            BSTree_setnode(map, node-&amp;gt;right, key, data);
+        } else {
+            node-&amp;gt;right = BSTreeNode_create(node, key, data);
+        }
+    }
+}
+
+int BSTree_set(BSTree * map, void *key, void *data)
+{
+    if (map-&amp;gt;root == NULL) {
+        // first so just make it and get out
+        map-&amp;gt;root = BSTreeNode_create(NULL, key, data);
+        check_mem(map-&amp;gt;root);
+    } else {
+        BSTree_setnode(map, map-&amp;gt;root, key, data);
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+static inline BSTreeNode *BSTree_getnode(BSTree * map,
+        BSTreeNode * node, void *key)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp == 0) {
+        return node;
+    } else if (cmp &amp;lt; 0) {
+        if (node-&amp;gt;left) {
+            return BSTree_getnode(map, node-&amp;gt;left, key);
+        } else {
+            return NULL;
+        }
+    } else {
+        if (node-&amp;gt;right) {
+            return BSTree_getnode(map, node-&amp;gt;right, key);
+        } else {
+            return NULL;
+        }
+    }
+}
+
+void *BSTree_get(BSTree * map, void *key)
+{
+    if (map-&amp;gt;root == NULL) {
+        return NULL;
+    } else {
+        BSTreeNode *node = BSTree_getnode(map, map-&amp;gt;root, key);
+        return node == NULL ? NULL : node-&amp;gt;data;
+    }
+}
+
+static inline int BSTree_traverse_nodes(BSTreeNode * node,
+        BSTree_traverse_cb traverse_cb)
+{
+    int rc = 0;
+
+    if (node-&amp;gt;left) {
+        rc = BSTree_traverse_nodes(node-&amp;gt;left, traverse_cb);
+        if (rc != 0)
+            return rc;
+    }
+
+    if (node-&amp;gt;right) {
+        rc = BSTree_traverse_nodes(node-&amp;gt;right, traverse_cb);
+        if (rc != 0)
+            return rc;
+    }
+
+    return traverse_cb(node);
+}
+
+int BSTree_traverse(BSTree * map, BSTree_traverse_cb traverse_cb)
+{
+    if (map-&amp;gt;root) {
+        return BSTree_traverse_nodes(map-&amp;gt;root, traverse_cb);
+    }
+
+    return 0;
+}
+
+static inline BSTreeNode *BSTree_find_min(BSTreeNode * node)
+{
+    while (node-&amp;gt;left) {
+        node = node-&amp;gt;left;
+    }
+
+    return node;
+}
+
+static inline void BSTree_replace_node_in_parent(BSTree * map,
+        BSTreeNode * node,
+        BSTreeNode * new_value)
+{
+    if (node-&amp;gt;parent) {
+        if (node == node-&amp;gt;parent-&amp;gt;left) {
+            node-&amp;gt;parent-&amp;gt;left = new_value;
+        } else {
+            node-&amp;gt;parent-&amp;gt;right = new_value;
+        }
+    } else {
+        // this is the root so gotta change it
+        map-&amp;gt;root = new_value;
+    }
+
+    if (new_value) {
+        new_value-&amp;gt;parent = node-&amp;gt;parent;
+    }
+}
+
+static inline void BSTree_swap(BSTreeNode * a, BSTreeNode * b)
+{
+    void *temp = NULL;
+    temp = b-&amp;gt;key;
+    b-&amp;gt;key = a-&amp;gt;key;
+    a-&amp;gt;key = temp;
+    temp = b-&amp;gt;data;
+    b-&amp;gt;data = a-&amp;gt;data;
+    a-&amp;gt;data = temp;
+}
+
+static inline BSTreeNode *BSTree_node_delete(BSTree * map,
+        BSTreeNode * node,
+        void *key)
+{
+    int cmp = map-&amp;gt;compare(node-&amp;gt;key, key);
+
+    if (cmp &amp;lt; 0) {
+        if (node-&amp;gt;left) {
+            return BSTree_node_delete(map, node-&amp;gt;left, key);
+        } else {
+            // not found
+            return NULL;
+        }
+    } else if (cmp &amp;gt; 0) {
+        if (node-&amp;gt;right) {
+            return BSTree_node_delete(map, node-&amp;gt;right, key);
+        } else {
+            // not found
+            return NULL;
+        }
+    } else {
+        if (node-&amp;gt;left &amp;amp;&amp;amp; node-&amp;gt;right) {
+            // swap this node for the smallest node that is bigger than us
+            BSTreeNode *successor = BSTree_find_min(node-&amp;gt;right);
+            BSTree_swap(successor, node);
+
+            // this leaves the old successor with possibly a right child
+            // so replace it with that right child
+            BSTree_replace_node_in_parent(map, successor,
+                    successor-&amp;gt;right);
+
+            // finally it&#39;s swapped, so return successor instead of node
+            return successor;
+        } else if (node-&amp;gt;left) {
+            BSTree_replace_node_in_parent(map, node, node-&amp;gt;left);
+        } else if (node-&amp;gt;right) {
+            BSTree_replace_node_in_parent(map, node, node-&amp;gt;right);
+        } else {
+            BSTree_replace_node_in_parent(map, node, NULL);
+        }
+
+        return node;
+    }
+}
+
+void *BSTree_delete(BSTree * map, void *key)
+{
+    void *data = NULL;
+
+    if (map-&amp;gt;root) {
+        BSTreeNode *node = BSTree_node_delete(map, map-&amp;gt;root, key);
+
+        if (node) {
+            data = node-&amp;gt;data;
+            free(node);
+        }
+    }
+
+    return data;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex40\bstree_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/bstree.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+BSTree *map = NULL;
+static int traverse_called = 0;
+struct tagbstring test1 = bsStatic(&amp;quot;test data 1&amp;quot;);
+struct tagbstring test2 = bsStatic(&amp;quot;test data 2&amp;quot;);
+struct tagbstring test3 = bsStatic(&amp;quot;xest data 3&amp;quot;);
+struct tagbstring expect1 = bsStatic(&amp;quot;THE VALUE 1&amp;quot;);
+struct tagbstring expect2 = bsStatic(&amp;quot;THE VALUE 2&amp;quot;);
+struct tagbstring expect3 = bsStatic(&amp;quot;THE VALUE 3&amp;quot;);
+
+static int traverse_good_cb(BSTreeNode * node)
+{
+    debug(&amp;quot;KEY: %s&amp;quot;, bdata((bstring) node-&amp;gt;key));
+    traverse_called++;
+    return 0;
+}
+
+static int traverse_fail_cb(BSTreeNode * node)
+{
+    debug(&amp;quot;KEY: %s&amp;quot;, bdata((bstring) node-&amp;gt;key));
+    traverse_called++;
+
+    if (traverse_called == 2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+char *test_create()
+{
+    map = BSTree_create(NULL);
+    mu_assert(map != NULL, &amp;quot;Failed to create map.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    BSTree_destroy(map);
+
+    return NULL;
+}
+
+char *test_get_set()
+{
+    int rc = BSTree_set(map, &amp;amp;test1, &amp;amp;expect1);
+    mu_assert(rc == 0, &amp;quot;Failed to set &amp;amp;test1&amp;quot;);
+    bstring result = BSTree_get(map, &amp;amp;test1);
+    mu_assert(result == &amp;amp;expect1, &amp;quot;Wrong value for test1.&amp;quot;);
+
+    rc = BSTree_set(map, &amp;amp;test2, &amp;amp;expect2);
+    mu_assert(rc == 0, &amp;quot;Failed to set test2&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test2);
+    mu_assert(result == &amp;amp;expect2, &amp;quot;Wrong value for test2.&amp;quot;);
+
+    rc = BSTree_set(map, &amp;amp;test3, &amp;amp;expect3);
+    mu_assert(rc == 0, &amp;quot;Failed to set test3&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test3);
+    mu_assert(result == &amp;amp;expect3, &amp;quot;Wrong value for test3.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_traverse()
+{
+    int rc = BSTree_traverse(map, traverse_good_cb);
+    mu_assert(rc == 0, &amp;quot;Failed to traverse.&amp;quot;);
+    mu_assert(traverse_called == 3, &amp;quot;Wrong count traverse.&amp;quot;);
+
+    traverse_called = 0;
+    rc = BSTree_traverse(map, traverse_fail_cb);
+    mu_assert(rc == 1, &amp;quot;Failed to traverse.&amp;quot;);
+    mu_assert(traverse_called == 2, &amp;quot;Wrong count traverse for fail.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_delete()
+{
+    bstring deleted = (bstring) BSTree_delete(map, &amp;amp;test1);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect1, &amp;quot;Should get test1&amp;quot;);
+    bstring result = BSTree_get(map, &amp;amp;test1);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test1);
+    mu_assert(deleted == NULL, &amp;quot;Should get NULL on delete&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test2);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect2, &amp;quot;Should get test2&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test2);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test3);
+    mu_assert(deleted != NULL, &amp;quot;Got NULL on delete.&amp;quot;);
+    mu_assert(deleted == &amp;amp;expect3, &amp;quot;Should get test3&amp;quot;);
+    result = BSTree_get(map, &amp;amp;test3);
+    mu_assert(result == NULL, &amp;quot;Should delete.&amp;quot;);
+
+    // test deleting non-existent stuff
+    deleted = (bstring) BSTree_delete(map, &amp;amp;test3);
+    mu_assert(deleted == NULL, &amp;quot;Should get NULL&amp;quot;);
+
+    return NULL;
+}
+
+char *test_fuzzing()
+{
+    BSTree *store = BSTree_create(NULL);
+    int i = 0;
+    int j = 0;
+    bstring numbers[100] = { NULL };
+    bstring data[100] = { NULL };
+    srand((unsigned int)time(NULL));
+
+    for (i = 0; i &amp;lt; 100; i++) {
+        int num = rand();
+        numbers[i] = bformat(&amp;quot;%d&amp;quot;, num);
+        data[i] = bformat(&amp;quot;data %d&amp;quot;, num);
+        BSTree_set(store, numbers[i], data[i]);
+    }
+
+    for (i = 0; i &amp;lt; 100; i++) {
+        bstring value = BSTree_delete(store, numbers[i]);
+        mu_assert(value == data[i],
+                &amp;quot;Failed to delete the right number.&amp;quot;);
+
+        mu_assert(BSTree_delete(store, numbers[i]) == NULL,
+                &amp;quot;Should get nothing.&amp;quot;);
+
+        for (j = i + 1; j &amp;lt; 99 - i; j++) {
+            bstring value = BSTree_get(store, numbers[j]);
+            mu_assert(value == data[j],
+                    &amp;quot;Failed to get the right number.&amp;quot;);
+        }
+
+        bdestroy(value);
+        bdestroy(numbers[i]);
+    }
+
+    BSTree_destroy(store);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_get_set);
+    mu_run_test(test_traverse);
+    mu_run_test(test_delete);
+    mu_run_test(test_destroy);
+    mu_run_test(test_fuzzing);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I&amp;rsquo;ll walk through the implementation and compare it to Hashmaps for features.&lt;/p&gt;
 
@@ -4954,6 +7857,20 @@ be better or worse?&lt;/li&gt;
 &lt;li&gt;Read up on all of the different but similar trees you can find. There are AVL trees (named after Georgy Adelson-Velsky and E.M. Landis), red-black trees,
 and some non-tree structures like skip lists.&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LCTHW Lectures 3</title>
+      <link>https://harryho.github.io/code/lcthw-lectures.3/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/lcthw-lectures.3/</guid>
+      <description>
+
+&lt;p&gt;Author: Zed A. Shaw&lt;/p&gt;
+
+&lt;p&gt;All content comes from Zed&amp;rsquo;s &lt;a href=&#34;https://github.com/zedshaw/learn-c-the-hard-way-lectures.git&#34;&gt;Repository&lt;/a&gt;. All credit goes to Zed.&lt;/p&gt;
 
 &lt;h2 id=&#34;exercise-41-project-devpkg&#34;&gt;Exercise 41 Project devpkg&lt;/h2&gt;
 
@@ -5697,7 +8614,6 @@ sudo make install
 cd /tmp
 rm -rf apr-util-1.5.4* apr-1.5.2*
 
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;.\ex41\ex41.2.sh&lt;/p&gt;
@@ -6448,7 +9364,6 @@ sudo make install
 cd /tmp
 rm -rf apr-util-1.5.4* apr-1.5.2*
 
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;.\ex41\ex41.2.sh&lt;/p&gt;
@@ -6512,6 +9427,138 @@ you&amp;rsquo;ve learned.&lt;/li&gt;
 
 &lt;p&gt;Code Review&lt;/p&gt;
 
+&lt;p&gt;.\ex42\queue_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/queue.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+
+static Queue *queue = NULL;
+char *tests[] = { &amp;quot;test1 data&amp;quot;, &amp;quot;test2 data&amp;quot;, &amp;quot;test3 data&amp;quot; };
+
+#define NUM_TESTS 3
+
+char *test_create()
+{
+    queue = Queue_create();
+    mu_assert(queue != NULL, &amp;quot;Failed to create queue.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    mu_assert(queue != NULL, &amp;quot;Failed to make queue #2&amp;quot;);
+    Queue_destroy(queue);
+
+    return NULL;
+}
+
+char *test_send_recv()
+{
+    int i = 0;
+    for (i = 0; i &amp;lt; NUM_TESTS; i++) {
+        Queue_send(queue, tests[i]);
+        mu_assert(Queue_peek(queue) == tests[0], &amp;quot;Wrong next value.&amp;quot;);
+    }
+
+    mu_assert(Queue_count(queue) == NUM_TESTS, &amp;quot;Wrong count on send.&amp;quot;);
+
+    QUEUE_FOREACH(queue, cur) {
+        debug(&amp;quot;VAL: %s&amp;quot;, (char *)cur-&amp;gt;value);
+    }
+
+    for (i = 0; i &amp;lt; NUM_TESTS; i++) {
+        char *val = Queue_recv(queue);
+        mu_assert(val == tests[i], &amp;quot;Wrong value on recv.&amp;quot;);
+    }
+
+    mu_assert(Queue_count(queue) == 0, &amp;quot;Wrong count after recv.&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_send_recv);
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex42\stack_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/stack.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+
+static Stack *stack = NULL;
+char *tests[] = { &amp;quot;test1 data&amp;quot;, &amp;quot;test2 data&amp;quot;, &amp;quot;test3 data&amp;quot; };
+
+#define NUM_TESTS 3
+
+char *test_create()
+{
+    stack = Stack_create();
+    mu_assert(stack != NULL, &amp;quot;Failed to create stack.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    mu_assert(stack != NULL, &amp;quot;Failed to make stack #2&amp;quot;);
+    Stack_destroy(stack);
+
+    return NULL;
+}
+
+char *test_push_pop()
+{
+    int i = 0;
+    for (i = 0; i &amp;lt; NUM_TESTS; i++) {
+        Stack_push(stack, tests[i]);
+        mu_assert(Stack_peek(stack) == tests[i], &amp;quot;Wrong next value.&amp;quot;);
+    }
+
+    mu_assert(Stack_count(stack) == NUM_TESTS, &amp;quot;Wrong count on push.&amp;quot;);
+
+    STACK_FOREACH(stack, cur) {
+        debug(&amp;quot;VAL: %s&amp;quot;, (char *)cur-&amp;gt;value);
+    }
+
+    for (i = NUM_TESTS - 1; i &amp;gt;= 0; i--) {
+        char *val = Stack_pop(stack);
+        mu_assert(val == tests[i], &amp;quot;Wrong value on pop.&amp;quot;);
+    }
+
+    mu_assert(Stack_count(stack) == 0, &amp;quot;Wrong count after pop.&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_create);
+    mu_run_test(test_push_pop);
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Extra Credit&lt;/p&gt;
 
 &lt;ul&gt;
@@ -6519,6 +9566,366 @@ you&amp;rsquo;ve learned.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;exercise-43-a-simple-statistics-engine&#34;&gt;Exercise 43 A Simple Statistics Engine&lt;/h2&gt;
+
+&lt;p&gt;.\ex43\stats.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef lcthw_stats_h
+#define lcthw_stats_h
+
+typedef struct Stats {
+    double sum;
+    double sumsq;
+    unsigned long n;
+    double min;
+    double max;
+} Stats;
+
+Stats *Stats_recreate(double sum, double sumsq, unsigned long n,
+        double min, double max);
+
+Stats *Stats_create();
+
+double Stats_mean(Stats * st);
+
+double Stats_stddev(Stats * st);
+
+void Stats_sample(Stats * st, double s);
+
+void Stats_dump(Stats * st);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex43\stats.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;math.h&amp;gt;
+#include &amp;lt;lcthw/stats.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+Stats *Stats_recreate(double sum, double sumsq, unsigned long n,
+        double min, double max)
+{
+    Stats *st = malloc(sizeof(Stats));
+    check_mem(st);
+
+    st-&amp;gt;sum = sum;
+    st-&amp;gt;sumsq = sumsq;
+    st-&amp;gt;n = n;
+    st-&amp;gt;min = min;
+    st-&amp;gt;max = max;
+
+    return st;
+
+error:
+    return NULL;
+}
+
+Stats *Stats_create()
+{
+    return Stats_recreate(0.0, 0.0, 0L, 0.0, 0.0);
+}
+
+double Stats_mean(Stats * st)
+{
+    return st-&amp;gt;sum / st-&amp;gt;n;
+}
+
+double Stats_stddev(Stats * st)
+{
+    return sqrt((st-&amp;gt;sumsq - (st-&amp;gt;sum * st-&amp;gt;sum / st-&amp;gt;n)) /
+            (st-&amp;gt;n - 1));
+}
+
+void Stats_sample(Stats * st, double s)
+{
+    st-&amp;gt;sum += s;
+    st-&amp;gt;sumsq += s * s;
+
+    if (st-&amp;gt;n == 0) {
+        st-&amp;gt;min = s;
+        st-&amp;gt;max = s;
+    } else {
+        if (st-&amp;gt;min &amp;gt; s)
+            st-&amp;gt;min = s;
+        if (st-&amp;gt;max &amp;lt; s)
+            st-&amp;gt;max = s;
+    }
+
+    st-&amp;gt;n += 1;
+}
+
+void Stats_dump(Stats * st)
+{
+    fprintf(stderr,
+            &amp;quot;sum: %f, sumsq: %f, n: %ld, &amp;quot;
+            &amp;quot;min: %f, max: %f, mean: %f, stddev: %f&amp;quot;,
+            st-&amp;gt;sum, st-&amp;gt;sumsq, st-&amp;gt;n, st-&amp;gt;min, st-&amp;gt;max, Stats_mean(st),
+            Stats_stddev(st));
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex43\stats_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/stats.h&amp;gt;
+#include &amp;lt;math.h&amp;gt;
+
+const int NUM_SAMPLES = 10;
+double samples[] = {
+    6.1061334, 9.6783204, 1.2747090, 8.2395131, 0.3333483,
+    6.9755066, 1.0626275, 7.6587523, 4.9382973, 9.5788115
+};
+
+Stats expect = {
+    .sumsq = 425.1641,
+    .sum = 55.84602,
+    .min = 0.333,
+    .max = 9.678,
+    .n = 10,
+};
+
+double expect_mean = 5.584602;
+double expect_stddev = 3.547868;
+
+#define EQ(X,Y,N) (round((X) * pow(10, N)) == round((Y) * pow(10, N)))
+
+char *test_operations()
+{
+    int i = 0;
+    Stats *st = Stats_create();
+    mu_assert(st != NULL, &amp;quot;Failed to create stats.&amp;quot;);
+
+    for (i = 0; i &amp;lt; NUM_SAMPLES; i++) {
+        Stats_sample(st, samples[i]);
+    }
+
+    Stats_dump(st);
+
+    mu_assert(EQ(st-&amp;gt;sumsq, expect.sumsq, 3), &amp;quot;sumsq not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;sum, expect.sum, 3), &amp;quot;sum not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;min, expect.min, 3), &amp;quot;min not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;max, expect.max, 3), &amp;quot;max not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;n, expect.n, 3), &amp;quot;max not valid&amp;quot;);
+    mu_assert(EQ(expect_mean, Stats_mean(st), 3), &amp;quot;mean not valid&amp;quot;);
+    mu_assert(EQ(expect_stddev, Stats_stddev(st), 3),
+            &amp;quot;stddev not valid&amp;quot;);
+
+    return NULL;
+}
+
+char *test_recreate()
+{
+    Stats *st = Stats_recreate(
+            expect.sum, expect.sumsq, expect.n, expect.min, expect.max);
+
+    mu_assert(st-&amp;gt;sum == expect.sum, &amp;quot;sum not equal&amp;quot;);
+    mu_assert(st-&amp;gt;sumsq == expect.sumsq, &amp;quot;sumsq not equal&amp;quot;);
+    mu_assert(st-&amp;gt;n == expect.n, &amp;quot;n not equal&amp;quot;);
+    mu_assert(st-&amp;gt;min == expect.min, &amp;quot;min not equal&amp;quot;);
+    mu_assert(st-&amp;gt;max == expect.max, &amp;quot;max not equal&amp;quot;);
+    mu_assert(EQ(expect_mean, Stats_mean(st), 3), &amp;quot;mean not valid&amp;quot;);
+    mu_assert(EQ(expect_stddev, Stats_stddev(st), 3),
+            &amp;quot;stddev not valid&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_operations);
+    mu_run_test(test_recreate);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex43\stats.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef lcthw_stats_h
+#define lcthw_stats_h
+
+typedef struct Stats {
+    double sum;
+    double sumsq;
+    unsigned long n;
+    double min;
+    double max;
+} Stats;
+
+Stats *Stats_recreate(double sum, double sumsq, unsigned long n,
+        double min, double max);
+
+Stats *Stats_create();
+
+double Stats_mean(Stats * st);
+
+double Stats_stddev(Stats * st);
+
+void Stats_sample(Stats * st, double s);
+
+void Stats_dump(Stats * st);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex43\stats.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;math.h&amp;gt;
+#include &amp;lt;lcthw/stats.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+
+Stats *Stats_recreate(double sum, double sumsq, unsigned long n,
+        double min, double max)
+{
+    Stats *st = malloc(sizeof(Stats));
+    check_mem(st);
+
+    st-&amp;gt;sum = sum;
+    st-&amp;gt;sumsq = sumsq;
+    st-&amp;gt;n = n;
+    st-&amp;gt;min = min;
+    st-&amp;gt;max = max;
+
+    return st;
+
+error:
+    return NULL;
+}
+
+Stats *Stats_create()
+{
+    return Stats_recreate(0.0, 0.0, 0L, 0.0, 0.0);
+}
+
+double Stats_mean(Stats * st)
+{
+    return st-&amp;gt;sum / st-&amp;gt;n;
+}
+
+double Stats_stddev(Stats * st)
+{
+    return sqrt((st-&amp;gt;sumsq - (st-&amp;gt;sum * st-&amp;gt;sum / st-&amp;gt;n)) /
+            (st-&amp;gt;n - 1));
+}
+
+void Stats_sample(Stats * st, double s)
+{
+    st-&amp;gt;sum += s;
+    st-&amp;gt;sumsq += s * s;
+
+    if (st-&amp;gt;n == 0) {
+        st-&amp;gt;min = s;
+        st-&amp;gt;max = s;
+    } else {
+        if (st-&amp;gt;min &amp;gt; s)
+            st-&amp;gt;min = s;
+        if (st-&amp;gt;max &amp;lt; s)
+            st-&amp;gt;max = s;
+    }
+
+    st-&amp;gt;n += 1;
+}
+
+void Stats_dump(Stats * st)
+{
+    fprintf(stderr,
+            &amp;quot;sum: %f, sumsq: %f, n: %ld, &amp;quot;
+            &amp;quot;min: %f, max: %f, mean: %f, stddev: %f&amp;quot;,
+            st-&amp;gt;sum, st-&amp;gt;sumsq, st-&amp;gt;n, st-&amp;gt;min, st-&amp;gt;max, Stats_mean(st),
+            Stats_stddev(st));
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex43\stats_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/stats.h&amp;gt;
+#include &amp;lt;math.h&amp;gt;
+
+const int NUM_SAMPLES = 10;
+double samples[] = {
+    6.1061334, 9.6783204, 1.2747090, 8.2395131, 0.3333483,
+    6.9755066, 1.0626275, 7.6587523, 4.9382973, 9.5788115
+};
+
+Stats expect = {
+    .sumsq = 425.1641,
+    .sum = 55.84602,
+    .min = 0.333,
+    .max = 9.678,
+    .n = 10,
+};
+
+double expect_mean = 5.584602;
+double expect_stddev = 3.547868;
+
+#define EQ(X,Y,N) (round((X) * pow(10, N)) == round((Y) * pow(10, N)))
+
+char *test_operations()
+{
+    int i = 0;
+    Stats *st = Stats_create();
+    mu_assert(st != NULL, &amp;quot;Failed to create stats.&amp;quot;);
+
+    for (i = 0; i &amp;lt; NUM_SAMPLES; i++) {
+        Stats_sample(st, samples[i]);
+    }
+
+    Stats_dump(st);
+
+    mu_assert(EQ(st-&amp;gt;sumsq, expect.sumsq, 3), &amp;quot;sumsq not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;sum, expect.sum, 3), &amp;quot;sum not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;min, expect.min, 3), &amp;quot;min not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;max, expect.max, 3), &amp;quot;max not valid&amp;quot;);
+    mu_assert(EQ(st-&amp;gt;n, expect.n, 3), &amp;quot;max not valid&amp;quot;);
+    mu_assert(EQ(expect_mean, Stats_mean(st), 3), &amp;quot;mean not valid&amp;quot;);
+    mu_assert(EQ(expect_stddev, Stats_stddev(st), 3),
+            &amp;quot;stddev not valid&amp;quot;);
+
+    return NULL;
+}
+
+char *test_recreate()
+{
+    Stats *st = Stats_recreate(
+            expect.sum, expect.sumsq, expect.n, expect.min, expect.max);
+
+    mu_assert(st-&amp;gt;sum == expect.sum, &amp;quot;sum not equal&amp;quot;);
+    mu_assert(st-&amp;gt;sumsq == expect.sumsq, &amp;quot;sumsq not equal&amp;quot;);
+    mu_assert(st-&amp;gt;n == expect.n, &amp;quot;n not equal&amp;quot;);
+    mu_assert(st-&amp;gt;min == expect.min, &amp;quot;min not equal&amp;quot;);
+    mu_assert(st-&amp;gt;max == expect.max, &amp;quot;max not equal&amp;quot;);
+    mu_assert(EQ(expect_mean, Stats_mean(st), 3), &amp;quot;mean not valid&amp;quot;);
+    mu_assert(EQ(expect_stddev, Stats_stddev(st), 3),
+            &amp;quot;stddev not valid&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_operations);
+    mu_run_test(test_recreate);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The Plan&lt;/p&gt;
 
@@ -6970,6 +10377,300 @@ Sometimes you don&amp;rsquo;t want the translation, so give the user the option.
 
 &lt;p&gt;The Code&lt;/p&gt;
 
+&lt;p&gt;.\ex46\tstree.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _lcthw_TSTree_h
+#define _lcthw_TSTree_h
+
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;lcthw/darray.h&amp;gt;
+
+typedef struct TSTree {
+    char splitchar;
+    struct TSTree *low;
+    struct TSTree *equal;
+    struct TSTree *high;
+    void *value;
+} TSTree;
+
+void *TSTree_search(TSTree * root, const char *key, size_t len);
+
+void *TSTree_search_prefix(TSTree * root, const char *key, size_t len);
+
+typedef void (*TSTree_traverse_cb) (void *value, void *data);
+
+TSTree *TSTree_insert(TSTree * node, const char *key, size_t len,
+        void *value);
+
+void TSTree_traverse(TSTree * node, TSTree_traverse_cb cb, void *data);
+
+void TSTree_destroy(TSTree * root);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex46\tstree.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;lcthw/tstree.h&amp;gt;
+
+static inline TSTree *TSTree_insert_base(TSTree * root, TSTree * node,
+        const char *key, size_t len,
+        void *value)
+{
+    if (node == NULL) {
+        node = (TSTree *) calloc(1, sizeof(TSTree));
+
+        if (root == NULL) {
+            root = node;
+        }
+
+        node-&amp;gt;splitchar = *key;
+    }
+
+    if (*key &amp;lt; node-&amp;gt;splitchar) {
+        node-&amp;gt;low = TSTree_insert_base(
+                root, node-&amp;gt;low, key, len, value);
+    } else if (*key == node-&amp;gt;splitchar) {
+        if (len &amp;gt; 1) {
+            node-&amp;gt;equal = TSTree_insert_base(
+                    root, node-&amp;gt;equal, key + 1, len - 1, value);
+        } else {
+            assert(node-&amp;gt;value == NULL &amp;amp;&amp;amp; &amp;quot;Duplicate insert into tst.&amp;quot;);
+            node-&amp;gt;value = value;
+        }
+    } else {
+        node-&amp;gt;high = TSTree_insert_base(
+                root, node-&amp;gt;high, key, len, value);
+    }
+
+    return node;
+}
+
+TSTree *TSTree_insert(TSTree * node, const char *key, size_t len,
+        void *value)
+{
+    return TSTree_insert_base(node, node, key, len, value);
+}
+
+void *TSTree_search(TSTree * root, const char *key, size_t len)
+{
+    TSTree *node = root;
+    size_t i = 0;
+
+    while (i &amp;lt; len &amp;amp;&amp;amp; node) {
+        if (key[i] &amp;lt; node-&amp;gt;splitchar) {
+            node = node-&amp;gt;low;
+        } else if (key[i] == node-&amp;gt;splitchar) {
+            i++;
+            if (i &amp;lt; len)
+                node = node-&amp;gt;equal;
+        } else {
+            node = node-&amp;gt;high;
+        }
+    }
+
+    if (node) {
+        return node-&amp;gt;value;
+    } else {
+        return NULL;
+    }
+}
+
+void *TSTree_search_prefix(TSTree * root, const char *key, size_t len)
+{
+    if (len == 0)
+        return NULL;
+
+    TSTree *node = root;
+    TSTree *last = NULL;
+    size_t i = 0;
+
+    while (i &amp;lt; len &amp;amp;&amp;amp; node) {
+        if (key[i] &amp;lt; node-&amp;gt;splitchar) {
+            node = node-&amp;gt;low;
+        } else if (key[i] == node-&amp;gt;splitchar) {
+            i++;
+            if (i &amp;lt; len) {
+                if (node-&amp;gt;value)
+                    last = node;
+                node = node-&amp;gt;equal;
+            }
+        } else {
+            node = node-&amp;gt;high;
+        }
+    }
+
+    node = node ? node : last;
+
+    // traverse until we find the first value in the equal chain
+    // this is then the first node with this prefix
+    while (node &amp;amp;&amp;amp; !node-&amp;gt;value) {
+        node = node-&amp;gt;equal;
+    }
+
+    return node ? node-&amp;gt;value : NULL;
+}
+
+void TSTree_traverse(TSTree * node, TSTree_traverse_cb cb, void *data)
+{
+    if (!node)
+        return;
+
+    if (node-&amp;gt;low)
+        TSTree_traverse(node-&amp;gt;low, cb, data);
+
+    if (node-&amp;gt;equal) {
+        TSTree_traverse(node-&amp;gt;equal, cb, data);
+    }
+
+    if (node-&amp;gt;high)
+        TSTree_traverse(node-&amp;gt;high, cb, data);
+
+    if (node-&amp;gt;value)
+        cb(node-&amp;gt;value, data);
+}
+
+void TSTree_destroy(TSTree * node)
+{
+    if (node == NULL)
+        return;
+
+    if (node-&amp;gt;low)
+        TSTree_destroy(node-&amp;gt;low);
+
+    if (node-&amp;gt;equal) {
+        TSTree_destroy(node-&amp;gt;equal);
+    }
+
+    if (node-&amp;gt;high)
+        TSTree_destroy(node-&amp;gt;high);
+
+    free(node);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex46\tstree_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;lcthw/tstree.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;assert.h&amp;gt;
+#include &amp;lt;lcthw/bstrlib.h&amp;gt;
+
+TSTree *node = NULL;
+char *valueA = &amp;quot;VALUEA&amp;quot;;
+char *valueB = &amp;quot;VALUEB&amp;quot;;
+char *value2 = &amp;quot;VALUE2&amp;quot;;
+char *value4 = &amp;quot;VALUE4&amp;quot;;
+char *reverse = &amp;quot;VALUER&amp;quot;;
+int traverse_count = 0;
+
+struct tagbstring test1 = bsStatic(&amp;quot;TEST&amp;quot;);
+struct tagbstring test2 = bsStatic(&amp;quot;TEST2&amp;quot;);
+struct tagbstring test3 = bsStatic(&amp;quot;TSET&amp;quot;);
+struct tagbstring test4 = bsStatic(&amp;quot;T&amp;quot;);
+
+char *test_insert()
+{
+    node = TSTree_insert(node, bdata(&amp;amp;test1), blength(&amp;amp;test1), valueA);
+    mu_assert(node != NULL, &amp;quot;Failed to insert into tst.&amp;quot;);
+
+    node = TSTree_insert(node, bdata(&amp;amp;test2), blength(&amp;amp;test2), value2);
+    mu_assert(node != NULL,
+            &amp;quot;Failed to insert into tst with second name.&amp;quot;);
+
+    node = TSTree_insert(node, bdata(&amp;amp;test3), blength(&amp;amp;test3), reverse);
+    mu_assert(node != NULL,
+            &amp;quot;Failed to insert into tst with reverse name.&amp;quot;);
+
+    node = TSTree_insert(node, bdata(&amp;amp;test4), blength(&amp;amp;test4), value4);
+    mu_assert(node != NULL,
+            &amp;quot;Failed to insert into tst with second name.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_search_exact()
+{
+    // tst returns the last one inserted
+    void *res = TSTree_search(node, bdata(&amp;amp;test1), blength(&amp;amp;test1));
+    mu_assert(res == valueA,
+            &amp;quot;Got the wrong value back, should get A not B.&amp;quot;);
+
+    // tst does not find if not exact
+    res = TSTree_search(node, &amp;quot;TESTNO&amp;quot;, strlen(&amp;quot;TESTNO&amp;quot;));
+    mu_assert(res == NULL, &amp;quot;Should not find anything.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_search_prefix()
+{
+    void *res = TSTree_search_prefix(
+            node, bdata(&amp;amp;test1), blength(&amp;amp;test1));
+    debug(&amp;quot;result: %p, expected: %p&amp;quot;, res, valueA);
+    mu_assert(res == valueA, &amp;quot;Got wrong valueA by prefix.&amp;quot;);
+
+    res = TSTree_search_prefix(node, bdata(&amp;amp;test1), 1);
+    debug(&amp;quot;result: %p, expected: %p&amp;quot;, res, valueA);
+    mu_assert(res == value4, &amp;quot;Got wrong value4 for prefix of 1.&amp;quot;);
+
+    res = TSTree_search_prefix(node, &amp;quot;TE&amp;quot;, strlen(&amp;quot;TE&amp;quot;));
+    mu_assert(res != NULL, &amp;quot;Should find for short prefix.&amp;quot;);
+
+    res = TSTree_search_prefix(node, &amp;quot;TE--&amp;quot;, strlen(&amp;quot;TE--&amp;quot;));
+    mu_assert(res != NULL, &amp;quot;Should find for partial prefix.&amp;quot;);
+
+    return NULL;
+}
+
+void TSTree_traverse_test_cb(void *value, void *data)
+{
+    assert(value != NULL &amp;amp;&amp;amp; &amp;quot;Should not get NULL value.&amp;quot;);
+    assert(data == valueA &amp;amp;&amp;amp; &amp;quot;Expecting valueA as the data.&amp;quot;);
+    traverse_count++;
+}
+
+char *test_traverse()
+{
+    traverse_count = 0;
+    TSTree_traverse(node, TSTree_traverse_test_cb, valueA);
+    debug(&amp;quot;traverse count is: %d&amp;quot;, traverse_count);
+    mu_assert(traverse_count == 4, &amp;quot;Didn&#39;t find 4 keys.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    TSTree_destroy(node);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_insert);
+    mu_run_test(test_search_exact);
+    mu_run_test(test_search_prefix);
+    mu_run_test(test_traverse);
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Similar to a Binary Search Tree, but it has 3 branches per node based on
 the characters in strings.&lt;/p&gt;
 
@@ -7298,14 +10999,12 @@ to run from the command line and keep running.&lt;/li&gt;
 #include &amp;lt;ctype.h&amp;gt;
 #include &amp;quot;dbg.h&amp;quot;
 
-
 int print_a_message(const char *msg)
 {
     printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
 
     return 0;
 }
-
 
 int uppercase(const char *msg)
 {
@@ -7429,7 +11128,6 @@ RUN_TESTS(all_tests);
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
@@ -7442,7 +11140,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -7630,7 +11328,6 @@ int attempt_listen(struct addrinfo *info)
 error:
     return -1;
 }
-
 
 int server_listen(const char *host, const char *port)
 {
@@ -7870,14 +11567,12 @@ RUN_TESTS(all_tests);
 #include &amp;lt;ctype.h&amp;gt;
 #include &amp;quot;dbg.h&amp;quot;
 
-
 int print_a_message(const char *msg)
 {
     printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
 
     return 0;
 }
-
 
 int uppercase(const char *msg)
 {
@@ -8001,7 +11696,6 @@ RUN_TESTS(all_tests);
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
@@ -8014,7 +11708,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -8203,6 +11897,1240 @@ error:
     return -1;
 }
 
+int server_listen(const char *host, const char *port)
+{
+    int rc = 0;
+    int sockfd = -1; // default fail value
+    struct addrinfo *info = NULL;
+    struct addrinfo *next_p = NULL;
+    struct addrinfo addr = {
+        .ai_family = AF_UNSPEC,
+        .ai_socktype = SOCK_STREAM,
+        .ai_flags = AI_PASSIVE
+    };
+
+    check(host != NULL, &amp;quot;Invalid host.&amp;quot;);
+    check(port != NULL, &amp;quot;Invalid port.&amp;quot;);
+
+    // get the address info for host and port
+    rc = getaddrinfo(NULL, port, &amp;amp;addr, &amp;amp;info);
+    check(rc == 0, &amp;quot;Failed to get address info for connect.&amp;quot;);
+
+    // cycle through the available list to find one
+    for(next_p = info; next_p != NULL; next_p = next_p-&amp;gt;ai_next)
+    {
+        // attempt to listen to each one
+        sockfd = attempt_listen(next_p);
+        if(sockfd != -1) break;
+    }
+
+    // either we found one and were able to listen or nothing.
+    check(sockfd != -1, &amp;quot;All possible addresses failed.&amp;quot;);
+
+error: //fallthrough
+    if(info) freeaddrinfo(info);
+    // this gets set by the above to either -1 or valid
+    return sockfd;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\net.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _net_h
+#define _net_h
+
+#include &amp;lt;lcthw/ringbuffer.h&amp;gt;
+
+#define BACKLOG 10
+
+int nonblock(int fd);
+int client_connect(char *host, char *port);
+int read_some(RingBuffer * buffer, int fd, int is_socket);
+int write_some(RingBuffer * buffer, int fd, int is_socket);
+int server_listen(const char *host, const char *port);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\statserve.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;signal.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+#include &amp;quot;net.h&amp;quot;
+#include &amp;lt;netdb.h&amp;gt;
+
+const int RB_SIZE = 1024 * 10;
+
+void handle_sigchild(int sig) {
+    sig = 0; // ignore it
+    while(waitpid(-1, NULL, WNOHANG) &amp;gt; 0) {
+    }
+}
+
+void client_handler(int client_fd)
+{
+    int rc = 0;
+    // need a ringbuffer for the input
+    RingBuffer *sock_rb = RingBuffer_create(RB_SIZE);
+
+    // read_some in a loop
+    while(read_some(sock_rb, client_fd, 1) != -1) {
+        // write_it back off the ringbuffer
+        if(write_some(sock_rb, client_fd, 1) == -1) {
+            debug(&amp;quot;Client closed.&amp;quot;);
+            break;
+        }
+    }
+
+    // close the socket
+    rc = close(client_fd);
+    check(rc != -1, &amp;quot;Failed to close the socket.&amp;quot;);
+
+error: // fallthrough
+    if(sock_rb) RingBuffer_destroy(sock_rb);
+    exit(0); // just exit the child process
+}
+
+int echo_server(const char *host, const char *port)
+{
+    int rc = 0;
+    struct sockaddr_in client_addr;
+    socklen_t sin_size = sizeof(client_addr);
+    int server_socket = 0;
+    int client_fd = 0;
+
+    struct sigaction sa = {
+        .sa_handler = handle_sigchild,
+        .sa_flags = SA_RESTART | SA_NOCLDSTOP
+    };
+
+    check(host != NULL, &amp;quot;Invalid host.&amp;quot;);
+    check(port != NULL, &amp;quot;Invalid port.&amp;quot;);
+
+    // create a sigaction that handles SIGCHLD
+    sigemptyset(&amp;amp;sa.sa_mask);
+    rc = sigaction(SIGCHLD, &amp;amp;sa, 0);
+    check(rc != -1, &amp;quot;Failed to setup signal handler for child processes.&amp;quot;);
+
+    // listen on the given port and host
+    server_socket = server_listen(host, port);
+    check(server_socket &amp;gt;= 0, &amp;quot;bind to %s:%s failed.&amp;quot;, host, port);
+
+    while(1) {
+        // accept the connection
+        client_fd = accept(server_socket, (struct sockaddr *)&amp;amp;client_addr, &amp;amp;sin_size); 
+        check(client_fd &amp;gt;= 0, &amp;quot;Failed to accept connection.&amp;quot;);
+
+        debug(&amp;quot;Client connected.&amp;quot;);
+
+        rc = fork();
+        if(rc == 0) {
+            // child process
+            close(server_socket); // don&#39;t need this
+            // handle the client
+            client_handler(client_fd);
+        } else {
+            // server process
+            close(client_fd); // don&#39;t need this
+        }
+    }
+
+error:  // fallthrough
+    return -1;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\statserve.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _statserve_h
+#define _statserve_h
+
+int echo_server(const char *host, const char *port);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\tests\statserve_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;dlfcn.h&amp;gt;
+#include &amp;quot;statserve.h&amp;quot;
+
+char *test_dummy()
+{
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dummy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Solution&lt;/p&gt;
+
+&lt;p&gt;The Plan&lt;/p&gt;
+
+&lt;p&gt;Show you how I solved the &lt;em&gt;statserve&lt;/em&gt; project.&lt;/p&gt;
+
+&lt;p&gt;The Purpose&lt;/p&gt;
+
+&lt;p&gt;Watch me solve the first project quickly, then review the code.&lt;/p&gt;
+
+&lt;p&gt;The Setup&lt;/p&gt;
+
+&lt;p&gt;First I need to install liblcthw since I&amp;rsquo;ll be using that.&lt;/p&gt;
+
+&lt;p&gt;Then I make the project skeleton and get something, anything going.&lt;/p&gt;
+
+&lt;p&gt;The Server&lt;/p&gt;
+
+&lt;p&gt;Then I just get it accepting a connection.&lt;/p&gt;
+
+&lt;p&gt;The Echo&lt;/p&gt;
+
+&lt;p&gt;Then I decided to just make it echo back what I type.&lt;/p&gt;
+
+&lt;p&gt;The Final Code&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LCTHW Lectures 4</title>
+      <link>https://harryho.github.io/code/lcthw-lectures.4/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/lcthw-lectures.4/</guid>
+      <description>
+
+&lt;p&gt;Author: Zed A. Shaw&lt;/p&gt;
+
+&lt;p&gt;All content comes from Zed&amp;rsquo;s &lt;a href=&#34;https://github.com/zedshaw/learn-c-the-hard-way-lectures.git&#34;&gt;Lecture Repository&lt;/a&gt; and &lt;a href=&#34;https://github.com/zedshaw/liblcthw&#34;&gt;Libraries Repository&lt;/a&gt;.  All credit goes to Zed.&lt;/p&gt;
+
+&lt;h2 id=&#34;exercise-48a-a-simple-network-server&#34;&gt;Exercise 48a A Simple Network Server:&lt;/h2&gt;
+
+&lt;p&gt;Project Description&lt;/p&gt;
+
+&lt;p&gt;The Plan&lt;/p&gt;
+
+&lt;p&gt;Start your first long running project:&lt;/p&gt;
+
+&lt;p&gt;statserve&lt;/p&gt;
+
+&lt;p&gt;The Purpose&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll get the project started and get a minimum first hack going.&lt;/p&gt;
+
+&lt;p&gt;The Requirements&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a simple network server that accepts a connection on port 7899 from
+&lt;em&gt;netclient&lt;/em&gt; or the &lt;em&gt;nc&lt;/em&gt; command, and echoes back anything you type.&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;ll need to learn how to bind a port, listen on the socket, and answer it.
+Use your research skills to study how this is done and attempt to implement it
+yourself.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The Requirements&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The more important part of this project is laying out the project directory
+from the &lt;em&gt;c-skeleton&lt;/em&gt;, and making sure you can build everything and get it
+working.&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t worry about things like daemons or anything else.  Your server just has
+to run from the command line and keep running.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The Clues&lt;/p&gt;
+
+&lt;p&gt;I will now give you some clues:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;USE liblcthw!&lt;/li&gt;
+&lt;li&gt;Remember you did a client already, you just need to make a server.&lt;/li&gt;
+&lt;li&gt;Do NOT use select! Use fork() for the server.&lt;/li&gt;
+&lt;li&gt;Keep it &lt;em&gt;simple&lt;/em&gt;.  Don&amp;rsquo;t worry about anything other than accepting a connection and closing.&lt;/li&gt;
+&lt;li&gt;Stay small, build slowly.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Important References&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Research online for &amp;ldquo;echo server in C&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Read man (2) pages for &lt;em&gt;accept&lt;/em&gt;, &lt;em&gt;bind&lt;/em&gt;, &lt;em&gt;listen&lt;/em&gt;, &lt;em&gt;connect&lt;/em&gt;, &lt;em&gt;select&lt;/em&gt;, &lt;em&gt;socket&lt;/em&gt;, and &lt;em&gt;shutdown&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Encouragement&lt;/p&gt;
+
+&lt;p&gt;This will be &lt;em&gt;HARD&lt;/em&gt;!  Try it your best, and take it piece by piece.  You can do it, but remember if you give up the next video (48b) will show you the code to my solution and how to solve it.  You can peek there then come back when you&amp;rsquo;re stuck.&lt;/p&gt;
+
+&lt;h2 id=&#34;exercise-48b-a-simple-network-server&#34;&gt;Exercise 48b A Simple Network Server:&lt;/h2&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton&lt;/p&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\src\dbg.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &amp;quot;DEBUG %s:%d: &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &amp;quot;None&amp;quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &amp;quot;[ERROR] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &amp;quot;[WARN] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &amp;quot;[INFO] (%s:%d) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &amp;quot;Out of memory.&amp;quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\src\libex29.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+#include &amp;quot;dbg.h&amp;quot;
+
+int print_a_message(const char *msg)
+{
+    printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
+
+    return 0;
+}
+
+int uppercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != &#39;\0&#39;; i++) {
+        printf(&amp;quot;%c&amp;quot;, toupper(msg[i]));
+    }
+
+    printf(&amp;quot;\n&amp;quot;);
+
+    return 0;
+}
+
+int lowercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != &#39;\0&#39;; i++) {
+        printf(&amp;quot;%c&amp;quot;, tolower(msg[i]));
+    }
+
+    printf(&amp;quot;\n&amp;quot;);
+
+    return 0;
+}
+
+int fail_on_purpose(const char *msg)
+{
+    return 1;
+} 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\tests\libex29_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;dlfcn.h&amp;gt;
+
+typedef int (*lib_function) (const char *data);
+char *lib_file = &amp;quot;build/libYOUR_LIBRARY.so&amp;quot;;
+void *lib = NULL;
+
+int check_function(const char *func_to_run, const char *data,
+        int expected)
+{
+    lib_function func = dlsym(lib, func_to_run);
+    check(func != NULL,
+            &amp;quot;Did not find %s function in the library %s: %s&amp;quot;, func_to_run,
+            lib_file, dlerror());
+
+    int rc = func(data);
+    check(rc == expected, &amp;quot;Function %s return %d for data: %s&amp;quot;,
+            func_to_run, rc, data);
+
+    return 1;
+error:
+    return 0;
+}
+
+char *test_dlopen()
+{
+    lib = dlopen(lib_file, RTLD_NOW);
+    mu_assert(lib != NULL, &amp;quot;Failed to open the library to test.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_functions()
+{
+    mu_assert(check_function(&amp;quot;print_a_message&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;print_a_message failed.&amp;quot;);
+    mu_assert(check_function(&amp;quot;uppercase&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;uppercase failed.&amp;quot;);
+    mu_assert(check_function(&amp;quot;lowercase&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;lowercase failed.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_failures()
+{
+    mu_assert(check_function(&amp;quot;fail_on_purpose&amp;quot;, &amp;quot;Hello&amp;quot;, 1),
+            &amp;quot;fail_on_purpose should fail.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_dlclose()
+{
+    int rc = dlclose(lib);
+    mu_assert(rc == 0, &amp;quot;Failed to close lib.&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dlopen);
+    mu_run_test(test_functions);
+    mu_run_test(test_failures);
+    mu_run_test(test_dlclose);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve&lt;/p&gt;
+
+&lt;p&gt;.\ex48b\statserve\bin\statserve.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;quot;statserve.h&amp;quot;
+#include &amp;quot;net.h&amp;quot;
+
+int main(int argc, char *argv[])
+{
+    check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
+
+    const char *host = argv[1];
+    const char *port = argv[2];
+
+    check(echo_server(host, port), &amp;quot;Failed to run the echo server.&amp;quot;);
+
+    return 0;
+
+error:
+
+    return 1;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\dbg.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &amp;quot;DEBUG %s:%d: &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &amp;quot;None&amp;quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &amp;quot;[ERROR] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &amp;quot;[WARN] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &amp;quot;[INFO] (%s:%d) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &amp;quot;Out of memory.&amp;quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\net.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/select.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;lcthw/ringbuffer.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/uio.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;netdb.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;quot;net.h&amp;quot;
+
+struct tagbstring NL = bsStatic(&amp;quot;\n&amp;quot;);
+struct tagbstring CRLF = bsStatic(&amp;quot;\r\n&amp;quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &amp;gt;= 0, &amp;quot;Invalid flags on nonblock.&amp;quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &amp;quot;Can&#39;t set nonblocking.&amp;quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;amp;addr);
+    check(rc == 0, &amp;quot;Failed to lookup %s:%s&amp;quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &amp;gt;= 0, &amp;quot;Cannot create a socket.&amp;quot;);
+
+    rc = connect(sock, addr-&amp;gt;ai_addr, addr-&amp;gt;ai_addrlen);
+    check(rc == 0, &amp;quot;Connect failed.&amp;quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &amp;quot;Can&#39;t set nonblocking.&amp;quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&amp;gt;start = buffer-&amp;gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &amp;gt;= 0, &amp;quot;Failed to read from fd: %d&amp;quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &amp;quot;Failed to get from the buffer.&amp;quot;);
+    check(bfindreplace(data, &amp;amp;NL, &amp;amp;CRLF, 0) == BSTR_OK,
+            &amp;quot;Failed to replace NL.&amp;quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &amp;quot;Failed to write everything to fd: %d.&amp;quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int attempt_listen(struct addrinfo *info)
+{
+    int sockfd = -1; // default fail
+    int rc = -1;
+    int yes = 1;
+
+    check(info != NULL, &amp;quot;Invalid addrinfo.&amp;quot;);
+
+    // create a socket with the addrinfo
+    sockfd = socket(info-&amp;gt;ai_family, info-&amp;gt;ai_socktype,
+            info-&amp;gt;ai_protocol);
+    check_debug(sockfd != -1, &amp;quot;Failed to bind to address. Trying more.&amp;quot;);
+
+    // set the SO_REUSEADDR option on the socket
+    rc = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;amp;yes, sizeof(int));
+    check_debug(rc == 0, &amp;quot;Failed to set SO_REUSADDR.&amp;quot;);
+
+    // attempt to bind to it
+    rc = bind(sockfd, info-&amp;gt;ai_addr, info-&amp;gt;ai_addrlen);
+    check_debug(rc == 0, &amp;quot;Failed to find socket.&amp;quot;);
+
+    // finally listen with a backlog
+    rc = listen(sockfd, BACKLOG);
+    check_debug(rc == 0, &amp;quot;Failed to listen to socket.&amp;quot;);
+
+    return sockfd;
+
+error:
+    return -1;
+}
+
+int server_listen(const char *host, const char *port)
+{
+    int rc = 0;
+    int sockfd = -1; // default fail value
+    struct addrinfo *info = NULL;
+    struct addrinfo *next_p = NULL;
+    struct addrinfo addr = {
+        .ai_family = AF_UNSPEC,
+        .ai_socktype = SOCK_STREAM,
+        .ai_flags = AI_PASSIVE
+    };
+
+    check(host != NULL, &amp;quot;Invalid host.&amp;quot;);
+    check(port != NULL, &amp;quot;Invalid port.&amp;quot;);
+
+    // get the address info for host and port
+    rc = getaddrinfo(NULL, port, &amp;amp;addr, &amp;amp;info);
+    check(rc == 0, &amp;quot;Failed to get address info for connect.&amp;quot;);
+
+    // cycle through the available list to find one
+    for(next_p = info; next_p != NULL; next_p = next_p-&amp;gt;ai_next)
+    {
+        // attempt to listen to each one
+        sockfd = attempt_listen(next_p);
+        if(sockfd != -1) break;
+    }
+
+    // either we found one and were able to listen or nothing.
+    check(sockfd != -1, &amp;quot;All possible addresses failed.&amp;quot;);
+
+error: //fallthrough
+    if(info) freeaddrinfo(info);
+    // this gets set by the above to either -1 or valid
+    return sockfd;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\net.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _net_h
+#define _net_h
+
+#include &amp;lt;lcthw/ringbuffer.h&amp;gt;
+
+#define BACKLOG 10
+
+int nonblock(int fd);
+int client_connect(char *host, char *port);
+int read_some(RingBuffer * buffer, int fd, int is_socket);
+int write_some(RingBuffer * buffer, int fd, int is_socket);
+int server_listen(const char *host, const char *port);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\statserve.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;signal.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+#include &amp;quot;net.h&amp;quot;
+#include &amp;lt;netdb.h&amp;gt;
+
+const int RB_SIZE = 1024 * 10;
+
+void handle_sigchild(int sig) {
+    sig = 0; // ignore it
+    while(waitpid(-1, NULL, WNOHANG) &amp;gt; 0) {
+    }
+}
+
+void client_handler(int client_fd)
+{
+    int rc = 0;
+    // need a ringbuffer for the input
+    RingBuffer *sock_rb = RingBuffer_create(RB_SIZE);
+
+    // read_some in a loop
+    while(read_some(sock_rb, client_fd, 1) != -1) {
+        // write_it back off the ringbuffer
+        if(write_some(sock_rb, client_fd, 1) == -1) {
+            debug(&amp;quot;Client closed.&amp;quot;);
+            break;
+        }
+    }
+
+    // close the socket
+    rc = close(client_fd);
+    check(rc != -1, &amp;quot;Failed to close the socket.&amp;quot;);
+
+error: // fallthrough
+    if(sock_rb) RingBuffer_destroy(sock_rb);
+    exit(0); // just exit the child process
+}
+
+int echo_server(const char *host, const char *port)
+{
+    int rc = 0;
+    struct sockaddr_in client_addr;
+    socklen_t sin_size = sizeof(client_addr);
+    int server_socket = 0;
+    int client_fd = 0;
+
+    struct sigaction sa = {
+        .sa_handler = handle_sigchild,
+        .sa_flags = SA_RESTART | SA_NOCLDSTOP
+    };
+
+    check(host != NULL, &amp;quot;Invalid host.&amp;quot;);
+    check(port != NULL, &amp;quot;Invalid port.&amp;quot;);
+
+    // create a sigaction that handles SIGCHLD
+    sigemptyset(&amp;amp;sa.sa_mask);
+    rc = sigaction(SIGCHLD, &amp;amp;sa, 0);
+    check(rc != -1, &amp;quot;Failed to setup signal handler for child processes.&amp;quot;);
+
+    // listen on the given port and host
+    server_socket = server_listen(host, port);
+    check(server_socket &amp;gt;= 0, &amp;quot;bind to %s:%s failed.&amp;quot;, host, port);
+
+    while(1) {
+        // accept the connection
+        client_fd = accept(server_socket, (struct sockaddr *)&amp;amp;client_addr, &amp;amp;sin_size); 
+        check(client_fd &amp;gt;= 0, &amp;quot;Failed to accept connection.&amp;quot;);
+
+        debug(&amp;quot;Client connected.&amp;quot;);
+
+        rc = fork();
+        if(rc == 0) {
+            // child process
+            close(server_socket); // don&#39;t need this
+            // handle the client
+            client_handler(client_fd);
+        } else {
+            // server process
+            close(client_fd); // don&#39;t need this
+        }
+    }
+
+error:  // fallthrough
+    return -1;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\statserve.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef _statserve_h
+#define _statserve_h
+
+int echo_server(const char *host, const char *port);
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\tests\statserve_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;dlfcn.h&amp;gt;
+#include &amp;quot;statserve.h&amp;quot;
+
+char *test_dummy()
+{
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dummy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton&lt;/p&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\src\dbg.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &amp;quot;DEBUG %s:%d: &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &amp;quot;None&amp;quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &amp;quot;[ERROR] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &amp;quot;[WARN] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &amp;quot;[INFO] (%s:%d) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &amp;quot;Out of memory.&amp;quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\src\libex29.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+#include &amp;quot;dbg.h&amp;quot;
+
+int print_a_message(const char *msg)
+{
+    printf(&amp;quot;A STRING: %s\n&amp;quot;, msg);
+
+    return 0;
+}
+
+int uppercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != &#39;\0&#39;; i++) {
+        printf(&amp;quot;%c&amp;quot;, toupper(msg[i]));
+    }
+
+    printf(&amp;quot;\n&amp;quot;);
+
+    return 0;
+}
+
+int lowercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != &#39;\0&#39;; i++) {
+        printf(&amp;quot;%c&amp;quot;, tolower(msg[i]));
+    }
+
+    printf(&amp;quot;\n&amp;quot;);
+
+    return 0;
+}
+
+int fail_on_purpose(const char *msg)
+{
+    return 1;
+} 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\c-skeleton\tests\libex29_tests.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;quot;minunit.h&amp;quot;
+#include &amp;lt;dlfcn.h&amp;gt;
+
+typedef int (*lib_function) (const char *data);
+char *lib_file = &amp;quot;build/libYOUR_LIBRARY.so&amp;quot;;
+void *lib = NULL;
+
+int check_function(const char *func_to_run, const char *data,
+        int expected)
+{
+    lib_function func = dlsym(lib, func_to_run);
+    check(func != NULL,
+            &amp;quot;Did not find %s function in the library %s: %s&amp;quot;, func_to_run,
+            lib_file, dlerror());
+
+    int rc = func(data);
+    check(rc == expected, &amp;quot;Function %s return %d for data: %s&amp;quot;,
+            func_to_run, rc, data);
+
+    return 1;
+error:
+    return 0;
+}
+
+char *test_dlopen()
+{
+    lib = dlopen(lib_file, RTLD_NOW);
+    mu_assert(lib != NULL, &amp;quot;Failed to open the library to test.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_functions()
+{
+    mu_assert(check_function(&amp;quot;print_a_message&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;print_a_message failed.&amp;quot;);
+    mu_assert(check_function(&amp;quot;uppercase&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;uppercase failed.&amp;quot;);
+    mu_assert(check_function(&amp;quot;lowercase&amp;quot;, &amp;quot;Hello&amp;quot;, 0),
+            &amp;quot;lowercase failed.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_failures()
+{
+    mu_assert(check_function(&amp;quot;fail_on_purpose&amp;quot;, &amp;quot;Hello&amp;quot;, 1),
+            &amp;quot;fail_on_purpose should fail.&amp;quot;);
+
+    return NULL;
+}
+
+char *test_dlclose()
+{
+    int rc = dlclose(lib);
+    mu_assert(rc == 0, &amp;quot;Failed to close lib.&amp;quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dlopen);
+    mu_run_test(test_functions);
+    mu_run_test(test_failures);
+    mu_run_test(test_dlclose);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve&lt;/p&gt;
+
+&lt;p&gt;.\ex48b\statserve\bin\statserve.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;quot;statserve.h&amp;quot;
+#include &amp;quot;net.h&amp;quot;
+
+int main(int argc, char *argv[])
+{
+    check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
+
+    const char *host = argv[1];
+    const char *port = argv[2];
+
+    check(echo_server(host, port), &amp;quot;Failed to run the echo server.&amp;quot;);
+
+    return 0;
+
+error:
+
+    return 1;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\dbg.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &amp;quot;DEBUG %s:%d: &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &amp;quot;None&amp;quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &amp;quot;[ERROR] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &amp;quot;[WARN] (%s:%d: errno: %s) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &amp;quot;[INFO] (%s:%d) &amp;quot; M &amp;quot;\n&amp;quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &amp;quot;Out of memory.&amp;quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;.\ex48b\statserve\src\net.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/select.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;lcthw/ringbuffer.h&amp;gt;
+#include &amp;lt;lcthw/dbg.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/uio.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;netdb.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;quot;net.h&amp;quot;
+
+struct tagbstring NL = bsStatic(&amp;quot;\n&amp;quot;);
+struct tagbstring CRLF = bsStatic(&amp;quot;\r\n&amp;quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &amp;gt;= 0, &amp;quot;Invalid flags on nonblock.&amp;quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &amp;quot;Can&#39;t set nonblocking.&amp;quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;amp;addr);
+    check(rc == 0, &amp;quot;Failed to lookup %s:%s&amp;quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &amp;gt;= 0, &amp;quot;Cannot create a socket.&amp;quot;);
+
+    rc = connect(sock, addr-&amp;gt;ai_addr, addr-&amp;gt;ai_addrlen);
+    check(rc == 0, &amp;quot;Connect failed.&amp;quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &amp;quot;Can&#39;t set nonblocking.&amp;quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&amp;gt;start = buffer-&amp;gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &amp;gt;= 0, &amp;quot;Failed to read from fd: %d&amp;quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &amp;quot;Failed to get from the buffer.&amp;quot;);
+    check(bfindreplace(data, &amp;amp;NL, &amp;amp;CRLF, 0) == BSTR_OK,
+            &amp;quot;Failed to replace NL.&amp;quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &amp;quot;Failed to write everything to fd: %d.&amp;quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int attempt_listen(struct addrinfo *info)
+{
+    int sockfd = -1; // default fail
+    int rc = -1;
+    int yes = 1;
+
+    check(info != NULL, &amp;quot;Invalid addrinfo.&amp;quot;);
+
+    // create a socket with the addrinfo
+    sockfd = socket(info-&amp;gt;ai_family, info-&amp;gt;ai_socktype,
+            info-&amp;gt;ai_protocol);
+    check_debug(sockfd != -1, &amp;quot;Failed to bind to address. Trying more.&amp;quot;);
+
+    // set the SO_REUSEADDR option on the socket
+    rc = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;amp;yes, sizeof(int));
+    check_debug(rc == 0, &amp;quot;Failed to set SO_REUSADDR.&amp;quot;);
+
+    // attempt to bind to it
+    rc = bind(sockfd, info-&amp;gt;ai_addr, info-&amp;gt;ai_addrlen);
+    check_debug(rc == 0, &amp;quot;Failed to find socket.&amp;quot;);
+
+    // finally listen with a backlog
+    rc = listen(sockfd, BACKLOG);
+    check_debug(rc == 0, &amp;quot;Failed to listen to socket.&amp;quot;);
+
+    return sockfd;
+
+error:
+    return -1;
+}
 
 int server_listen(const char *host, const char *port)
 {
@@ -8416,7 +13344,7 @@ RUN_TESTS(all_tests);
 
 &lt;p&gt;The Final Code&lt;/p&gt;
 
-&lt;h2 id=&#34;exercise-49b-a-statistics-server&#34;&gt;Exercise 49b A Statistics Server&lt;/h2&gt;
+&lt;h2 id=&#34;exercise-49a-a-statistics-server&#34;&gt;Exercise 49a A Statistics Server&lt;/h2&gt;
 
 &lt;p&gt;Project Description&lt;/p&gt;
 
@@ -8481,7 +13409,7 @@ dump   Get all of the elements of a statistic (sum, sumsq, n, min, and max).
 &lt;li&gt;Automate your tests!&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;exercise-49a-a-statistics-server&#34;&gt;Exercise 49a A Statistics Server:&lt;/h2&gt;
+&lt;h2 id=&#34;exercise-49b-a-statistics-server&#34;&gt;Exercise 49b A Statistics Server:&lt;/h2&gt;
 
 &lt;p&gt;.\ex49b\statserve&lt;/p&gt;
 
@@ -8491,7 +13419,6 @@ dump   Get all of the elements of a statistic (sum, sumsq, n, min, and max).
 #include &amp;lt;lcthw/dbg.h&amp;gt;
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
-
 
 int main(int argc, char *argv[])
 {
@@ -8505,7 +13432,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -8694,7 +13621,6 @@ error:
     return -1;
 }
 
-
 int server_listen(const char *host, const char *port)
 {
     int rc = 0;
@@ -8824,7 +13750,6 @@ typedef struct Command {
     handler_cb handler;
 } Command;
 
-
 typedef struct Record {
     bstring name;
     Stats *stat;
@@ -8879,7 +13804,6 @@ error:
     return -1;
 }
 
-
 int handle_sample(Command *cmd, RingBuffer *send_rb)
 {
     // get the info from the hashmap
@@ -8895,7 +13819,6 @@ int handle_sample(Command *cmd, RingBuffer *send_rb)
         send_reply(send_rb, reply);
         bdestroy(reply);
     }
-
 
     return 0;
 }
@@ -9193,13 +14116,12 @@ int attempt_line(LineTest test)
     RingBuffer_destroy(send_rb);
     return 1; // using 1 for tests
 error:
-  
+
     log_err(&amp;quot;Failed to process test %s: got %s&amp;quot;, test.line, bdata(result));
     if(line) bdestroy(line);
     if(send_rb) RingBuffer_destroy(send_rb);
     return 0;
 }
-
 
 int run_test_lines(LineTest *tests, int count)
 {
@@ -9266,7 +14188,6 @@ RUN_TESTS(all_tests);
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
@@ -9279,7 +14200,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -9468,7 +14389,6 @@ error:
     return -1;
 }
 
-
 int server_listen(const char *host, const char *port)
 {
     int rc = 0;
@@ -9598,7 +14518,6 @@ typedef struct Command {
     handler_cb handler;
 } Command;
 
-
 typedef struct Record {
     bstring name;
     Stats *stat;
@@ -9653,7 +14572,6 @@ error:
     return -1;
 }
 
-
 int handle_sample(Command *cmd, RingBuffer *send_rb)
 {
     // get the info from the hashmap
@@ -9669,7 +14587,6 @@ int handle_sample(Command *cmd, RingBuffer *send_rb)
         send_reply(send_rb, reply);
         bdestroy(reply);
     }
-
 
     return 0;
 }
@@ -9967,13 +14884,12 @@ int attempt_line(LineTest test)
     RingBuffer_destroy(send_rb);
     return 1; // using 1 for tests
 error:
-  
+
     log_err(&amp;quot;Failed to process test %s: got %s&amp;quot;, test.line, bdata(result));
     if(line) bdestroy(line);
     if(send_rb) RingBuffer_destroy(send_rb);
     return 0;
 }
-
 
 int run_test_lines(LineTest *tests, int count)
 {
@@ -10196,7 +15112,6 @@ works.&lt;/p&gt;
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc == 3, &amp;quot;USAGE: statserve host port&amp;quot;);
@@ -10209,7 +15124,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -10398,7 +15313,6 @@ error:
     return -1;
 }
 
-
 int server_listen(const char *host, const char *port)
 {
     int rc = 0;
@@ -10464,7 +15378,6 @@ error:
     return NULL;
 }
 
-
 void send_reply(RingBuffer *send_rb, bstring reply)
 {
     RingBuffer_puts(send_rb, reply);
@@ -10488,7 +15401,6 @@ int write_some(RingBuffer * buffer, int fd, int is_socket);
 int server_listen(const char *host, const char *port);
 bstring read_line(RingBuffer *input, const char line_ending);
 void send_reply(RingBuffer *send_rb, bstring reply);
-
 
 #endif
 
@@ -10531,7 +15443,6 @@ void handle_sigchild(int sig) {
     while(waitpid(-1, NULL, WNOHANG) &amp;gt; 0) {
     }
 }
-
 
 int handle_create(Command *cmd, RingBuffer *send_rb, bstring path)
 {
@@ -10579,7 +15490,6 @@ int handle_create(Command *cmd, RingBuffer *send_rb, bstring path)
 error:
     return -1;
 }
-
 
 int handle_sample(Command *cmd, RingBuffer *send_rb, bstring path)
 {
@@ -10934,7 +15844,6 @@ typedef struct Command {
     handler_cb handler;
 } Command;
 
-
 typedef struct Record {
     bstring name;
     Stats *stat;
@@ -10991,13 +15900,12 @@ int attempt_line(LineTest test)
     RingBuffer_destroy(send_rb);
     return 1; // using 1 for tests
 error:
-  
+
     log_err(&amp;quot;Failed to process test %s: got %s&amp;quot;, test.line, bdata(result));
     if(line) bdestroy(line);
     if(send_rb) RingBuffer_destroy(send_rb);
     return 0;
 }
-
 
 int run_test_lines(LineTest *tests, int count)
 {
@@ -11209,7 +16117,6 @@ from a hard drive:&lt;/p&gt;
 #include &amp;quot;statserve.h&amp;quot;
 #include &amp;quot;net.h&amp;quot;
 
-
 int main(int argc, char *argv[])
 {
     check(argc == 4, &amp;quot;USAGE: statserve host port store_path&amp;quot;);
@@ -11223,7 +16130,7 @@ int main(int argc, char *argv[])
     return 0;
 
 error:
-    
+
     return 1;
 }
 
@@ -11412,7 +16319,6 @@ error:
     return -1;
 }
 
-
 int server_listen(const char *host, const char *port)
 {
     int rc = 0;
@@ -11478,12 +16384,10 @@ error:
     return NULL;
 }
 
-
 void send_reply(RingBuffer *send_rb, bstring reply)
 {
     RingBuffer_puts(send_rb, reply);
 }
-
 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -11503,7 +16407,6 @@ int write_some(RingBuffer * buffer, int fd, int is_socket);
 int server_listen(const char *host, const char *port);
 bstring read_line(RingBuffer *input, const char line_ending);
 void send_reply(RingBuffer *send_rb, bstring reply);
-
 
 #endif
 
@@ -11601,12 +16504,11 @@ bstring encrypt_armor_name(bstring name)
     return encname;
 }
 
-
 bstring sanitize_location(bstring base, bstring path)
 {
     bstring attempt = NULL;
     bstring encpath = NULL;
-    
+
     // encrypt armore the name
     // BUG: ditch encryption, it was dumb
     encpath = encrypt_armor_name(path);
@@ -11670,7 +16572,6 @@ int handle_create(Command *cmd, RingBuffer *send_rb, bstring path)
 error:
     return -1;
 }
-
 
 int handle_sample(Command *cmd, RingBuffer *send_rb, bstring path)
 {
@@ -11800,7 +16701,6 @@ int handle_dump(Command *cmd, RingBuffer *send_rb, bstring path)
 
     return 0;
 }
-
 
 int handle_store(Command *cmd, RingBuffer *send_rb, bstring path)
 {
@@ -12068,7 +16968,7 @@ int setup_data_store(const char *store_path)
 
     char *path = realpath(store_path, NULL);
     check(path != NULL, &amp;quot;Failed to get the real path for storage: %s&amp;quot;, store_path);
-    
+
     STORE_PATH = bfromcstr(path);
     free(path);
 
@@ -12152,7 +17052,6 @@ typedef struct Command {
     handler_cb handler;
 } Command;
 
-
 typedef struct Record {
     bstring name;
     Stats *stat;
@@ -12212,13 +17111,12 @@ int attempt_line(LineTest test)
     RingBuffer_destroy(send_rb);
     return 1; // using 1 for tests
 error:
-  
+
     log_err(&amp;quot;Failed to process test %s: got %s&amp;quot;, test.line, bdata(result));
     if(line) bdestroy(line);
     if(send_rb) RingBuffer_destroy(send_rb);
     return 0;
 }
-
 
 int run_test_lines(LineTest *tests, int count)
 {
@@ -12319,7 +17217,7 @@ char *test_encrypt_armor_name()
     struct tagbstring expect1 = bsStatic(&amp;quot;vtmTmzNI&amp;quot;);
     struct tagbstring test2 = bsStatic(&amp;quot;../../../../../../../../etc/passwd&amp;quot;);
     struct tagbstring expect2 = bsStatic(&amp;quot;pVOBpFjHEIhB7cuT3BGUvyZGn3lvyj226mgggggg&amp;quot;);
-   
+
     bstring result = encrypt_armor_name(&amp;amp;test1);
     debug(&amp;quot;Got encrypted name %s&amp;quot;, bdata(result));
     mu_assert(biseq(result, &amp;amp;expect1), &amp;quot;Failed to encrypt test2.&amp;quot;);
@@ -12341,7 +17239,6 @@ char *test_path_sanitize_armor()
     bstring expect = bformat(&amp;quot;%s/%s&amp;quot;, bdata(&amp;amp;base), bdata(encname));
     struct tagbstring test2 = bsStatic(&amp;quot;../../../../../../../../etc/passwd&amp;quot;);
 
-
     bstring result = sanitize_location(&amp;amp;base, &amp;amp;test1);
     mu_assert(result != NULL, &amp;quot;Failed to sanitize path.&amp;quot;);
     mu_assert(biseq(result, expect), &amp;quot;failed to sanitize test1&amp;quot;);
@@ -12353,7 +17250,6 @@ char *test_path_sanitize_armor()
     result = sanitize_location(&amp;amp;base, &amp;amp;test2);
     mu_assert(result != NULL, &amp;quot;Failed to sanitize path.&amp;quot;);
     mu_assert(biseq(result, expect), &amp;quot;failed to sanitize test1&amp;quot;);
-    
 
     return NULL;
 }
