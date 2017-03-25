@@ -596,11 +596,26 @@ python manage.py migrate new_app 0001
 
 &lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;pip install virtualenv
+pip3 install virtualenv
+cd ~
+mkdir .envs
+
+# create python2 env
+virtualenv -p /usr/bin/python2.7 py2env
+virtualenv -p /usr/bin/python3.4 py3env
+
+cd py2env 
+source bin/activate
+# Check python path 
+which python
+# Exit
+deactivate
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;ul&gt;
-&lt;li&gt;activate virtual environment need to use source instead of executing sh file
-&lt;code&gt;bash
-source path\to\virtualenv\bin\activate
-&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Activate virtual environment need to use source instead of executing sh file&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

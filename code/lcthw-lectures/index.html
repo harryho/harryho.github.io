@@ -78,9 +78,7 @@
 
 <p>All content comes from Zed&rsquo;s <a href="https://github.com/zedshaw/learn-c-the-hard-way-lectures.git">Repository</a>. All credit goes to Zed.</p>
 
-<h2 id="exercise-0">Exercise 0</h2>
-
-<p>Installing Software</p>
+<h2 id="exercise-0-installing-software">Exercise 0 Installing Software</h2>
 
 <p>The Plan</p>
 
@@ -121,8 +119,7 @@
 
 <p>Windows Install</p>
 
-<p>Install <a href="http://www.mingw.org/">MinGW</a> or  <a href="https://www.cygwin.com/">Cygwin</a> or
-Use <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> to run Linux.</p>
+<p>Install <a href="http://www.mingw.org/">MinGW</a> or <a href="https://www.cygwin.com/">Cygwin</a> or Use <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> to run Linux.</p>
 
 <p>Text Editors</p>
 
@@ -131,9 +128,7 @@ Just don&rsquo;t use an IDE. They aren&rsquo;t very helpful.</p>
 
 <p>End of Lecture 0</p>
 
-<h2 id="exercise-1">Exercise 1</h2>
-
-<p>Dust Off That Compiler</p>
+<h2 id="exercise-1-dust-off-that-compiler">Exercise 1 Dust Off That Compiler</h2>
 
 <p>The Plan</p>
 
@@ -159,6 +154,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
 </code></pre>
 
 <p>.\ex01\ex1_zed.c</p>
@@ -188,19 +184,13 @@ int main(int argc, char *argv[])
 <p>Extra Credit</p>
 
 <ul>
-<li>Open the <code>ex1</code> file in your text editor and change or delete random parts.
-Try running it and see what happens.</li>
+<li>Open the <code>ex1</code> file in your text editor and change or delete random parts. Try running it and see what happens.</li>
 <li>Print out five more lines of text or something more complex than &ldquo;hello world.&rdquo;</li>
 <li>Run <code>man 3 printf</code> and read about this function and many others.</li>
-<li>For each line, write out the symbols you don&rsquo;t understand and
-see if you can guess what they mean.  Write a little chart on
-paper with your guess so you can check it later to see
-if you got it right.</li>
+<li>For each line, write out the symbols you don&rsquo;t understand and see if you can guess what they mean.  Write a little chart on paper with your guess so you can check it later to see if you got it right.</li>
 </ul>
 
-<h2 id="exercise-2">Exercise 2</h2>
-
-<p>Using Makefiles to Build</p>
+<h2 id="exercise-2-using-makefiles-to-build">Exercise 2 Using Makefiles to Build</h2>
 
 <p>The Plan</p>
 
@@ -256,9 +246,7 @@ just the command <em>make</em>.</li>
 what it&rsquo;s doing.</li>
 </ul>
 
-<h2 id="exercise-3">Exercise 3</h2>
-
-<p>Formatted Printing</p>
+<h2 id="exercise-3-formatted-printing">Exercise 3 Formatted Printing</h2>
 
 <p>The Plan</p>
 
@@ -282,6 +270,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
 </code></pre>
 
 <p>The Analysis</p>
@@ -307,9 +296,7 @@ to <em>make clean all</em> and build all of your exercises thus far.</li>
 Use <em>make clean</em> to remove it when you need to.</li>
 </ul>
 
-<h2 id="exercise-4">Exercise 4</h2>
-
-<p>Using a Debugger</p>
+<h2 id="exercise-4-using-a-debugger">Exercise 4 Using a Debugger</h2>
 
 <p>The Plan</p>
 
@@ -322,45 +309,7 @@ Use <em>make clean</em> to remove it when you need to.</li>
 
 <p>Using GDB</p>
 
-<ul>
-<li><code>run</code> [args] &ndash; Start your programwith[args].</li>
-<li><code>break</code>[file:]function Set abreakpoint at [file:]function. You can also use b.</li>
-<li><code>backtrace</code> &ndash; Dump a backtrace of the current calling stack. Shorthand is bt.</li>
-<li><code>print expr</code> Print the value of expr. Shorthand is p.</li>
-<li><code>continue</code> Continue running theprogram. Shorthand is c.</li>
-<li><code>next</code> Next line, but step over function calls. Shorthand is n.</li>
-<li><code>step</code> Nextline, butstep into function calls. Shorthand is s.</li>
-<li><code>quit</code> Exit <code>GDB</code>.</li>
-<li><code>help</code> List the types of commands. You can thenget help on the classof commandas wellas thecommand.</li>
-<li><code>cd, pwd, make</code> This is just like running these commands in your shell.</li>
-<li><code>shell</code> Quicklystart a shell so you can do other things.</li>
-<li><code>clear</code> Clear a breakpoint.</li>
-<li><code>infobreak</code>,info watch Show information about breakpointsand watchpoints.</li>
-<li><code>attach pid</code> Attachto a running process so you can debug it.</li>
-<li><code>detach</code> Detach fromthe process.</li>
-<li><code>list</code> List out the next ten source lines. Add a -to list the previous ten lines.</li>
-</ul>
-
 <p>Using LLDB</p>
-
-<ul>
-<li><code>run</code> [args] Start your programwith[args].</li>
-<li><code>breakpoint set</code> &ndash;name[file:]function Seta break point at [file:]function. You can also use b, which is way easier.</li>
-<li><code>thread backtrace</code> Dump a backtrace of the current calling stack. Shorthand is bt.</li>
-<li><code>print expr</code> Print the value ofexpr. Shorthand is p.</li>
-<li><code>continue</code> Continue running theprogram. Shorthand is c.</li>
-<li><code>next</code> Next line, but step over function calls. Shorthand is n.</li>
-<li><code>step</code> Nextline, but step into function calls. Shorthand is s.</li>
-<li><code>quit</code> Exit LLDB.</li>
-<li><code>help</code> List the types of commands. You can thenget help on the classof commandas wellas thecommand itself.</li>
-<li><code>cd, pwd, make</code> just like running these commands in your shell.</li>
-<li><code>shell</code> Quicklystart a shell so you can do other things.</li>
-<li><code>clear</code> Clear a breakpoint.</li>
-<li><code>infobreak,info</code> watch Show information about break points and watchpoints.</li>
-<li><code>attach -p pid</code> Attach toa running process so you can debug it.</li>
-<li><code>detach</code> Detach fromthe process.</li>
-<li><code>list</code> List out the next ten source lines. Add a -to list the previous ten sources.</li>
-</ul>
 
 <p>Using Valgrind</p>
 
@@ -375,9 +324,7 @@ Use <em>make clean</em> to remove it when you need to.</li>
 <p>When I say &ldquo;the debugger&rdquo; in the book I mean to use GDB, but use
 every tool you can find that helps.</p>
 
-<h2 id="exercise-5">Exercise 5</h2>
-
-<p>Memorizing C Operators</p>
+<h2 id="exercise-5-memorizing-c-operators">Exercise 5 Memorizing C Operators</h2>
 
 <p>The Plan</p>
 
@@ -479,9 +426,7 @@ every tool you can find that helps.</p>
 */        Multi-line comment end
 </code></pre>
 
-<h2 id="exercise-6">Exercise 6</h2>
-
-<p>Memorizing C Syntax</p>
+<h2 id="exercise-6-memorizing-c-syntax">Exercise 6 Memorizing C Syntax</h2>
 
 <p>The Plan</p>
 
@@ -649,9 +594,7 @@ typedef unsigned char byte;
 } [VARIABLE_NAME];
 </code></pre>
 
-<h2 id="exercise-7">Exercise 7</h2>
-
-<p>Variables and Types</p>
+<h2 id="exercise-7-variables-and-types">Exercise 7 Variables and Types</h2>
 
 <p>The Plan</p>
 
@@ -736,9 +679,7 @@ the number that makes it too big.</li>
 why you can multiply a <em>char</em> and an <em>int</em>.</li>
 </ul>
 
-<h2 id="exercise-8">Exercise 8</h2>
-
-<p>If, Else-If, Else</p>
+<h2 id="exercise-8-if-else-if-else">Exercise 8 If, Else-If, Else</h2>
 
 <p>The Plan</p>
 
@@ -798,9 +739,7 @@ so go research online the different <em>Boolean operators</em>.</li>
 up with.</li>
 </ul>
 
-<h2 id="exercise-9">Exercise 9</h2>
-
-<p>While-Loop and Boolean Expressions</p>
+<h2 id="exercise-9-while-loop-and-boolean-expressions">Exercise 9 While-Loop and Boolean Expressions</h2>
 
 <p>The Plan</p>
 
@@ -848,9 +787,7 @@ at 25 and go to 0.</li>
 so far.</li>
 </ul>
 
-<h2 id="exercise-10">Exercise 10</h2>
-
-<p>Switch Statements</p>
+<h2 id="exercise-10-switch-statements">Exercise 10 Switch Statements</h2>
 
 <p>The Plan</p>
 
@@ -955,9 +892,7 @@ Which do you like better?</li>
 and what happens if you move it inside of the <em>if-statement</em>. Prove to yourself that you&rsquo;re right.</li>
 </ul>
 
-<h2 id="exercise-11">Exercise 11</h2>
-
-<p>Arrays and Strings</p>
+<h2 id="exercise-11-arrays-and-strings">Exercise 11 Arrays and Strings</h2>
 
 <p>The Plan</p>
 
@@ -1060,9 +995,7 @@ if you get them right.</li>
 if the code keeps working.</li>
 </ul>
 
-<h2 id="exercise-12">Exercise 12</h2>
-
-<p>Sizes and Arrays</p>
+<h2 id="exercise-12-sizes-and-arrays">Exercise 12 Sizes and Arrays</h2>
 
 <p>The Plan</p>
 
@@ -1138,9 +1071,7 @@ print <em>areas[10]</em>.  See what the debugger thinks of that.</li>
 CPUs.</li>
 </ul>
 
-<h2 id="exercise-13">Exercise 13</h2>
-
-<p>For-Loops and Arrays of Strings</p>
+<h2 id="exercise-13-for-loops-and-arrays-of-strings">Exercise 13 For-Loops and Arrays of Strings</h2>
 
 <p>The Plan</p>
 
@@ -1210,9 +1141,7 @@ statements in the parts of the <em>for-loop</em>, but between the semicolon char
 <em>argv</em> array before printing both.  Try the inverse.</li>
 </ul>
 
-<h2 id="exercise-14">Exercise 14</h2>
-
-<p>Writing and Using Functions</p>
+<h2 id="exercise-14-writing-and-using-functions">Exercise 14 Writing and Using Functions</h2>
 
 <p>The Plan</p>
 
@@ -1303,9 +1232,7 @@ confusing) but understand what it&rsquo;s doing in case you run
 into someone who likes it.</li>
 </ul>
 
-<h2 id="exercise-15">Exercise 15</h2>
-
-<p>Pointers, Dreaded Pointers</p>
+<h2 id="exercise-15-pointers-dreaded-pointers">Exercise 15 Pointers, Dreaded Pointers</h2>
 
 <p>The Plan</p>
 
@@ -1421,9 +1348,7 @@ a pointer, but just use it like an array.</li>
 works better for which kind of pointer usage.</li>
 </ul>
 
-<h2 id="exercise-16">Exercise 16</h2>
-
-<p>Structs And Pointers To Them</p>
+<h2 id="exercise-16-structs-and-pointers-to-them">Exercise 16 Structs And Pointers To Them</h2>
 
 <p>The Plan</p>
 
@@ -1549,9 +1474,7 @@ instead of the <em>x-&gt;y</em> syntax.</li>
 a pointer.</li>
 </ul>
 
-<h2 id="exercise-17">Exercise 17</h2>
-
-<p>Heap and Stack Memory Allocation</p>
+<h2 id="exercise-17-heap-and-stack-memory-allocation">Exercise 17 Heap and Stack Memory Allocation</h2>
 
 <p>The Plan</p>
 
@@ -1842,9 +1765,7 @@ How does this new version of the program compare to the other one?</li>
 then try to do it in C.</li>
 </ul>
 
-<h2 id="exercise-18">Exercise 18</h2>
-
-<p>Pointers to Functions</p>
+<h2 id="exercise-18-pointers-to-functions">Exercise 18 Pointers to Functions</h2>
 
 <p>The Plan</p>
 
@@ -2044,9 +1965,7 @@ that it takes <em>both</em> an arbitrary sort function and the sort function&rsq
 callback comparison.  Use it to test both of your algorithms.</li>
 </ul>
 
-<h2 id="exercise-19">Exercise 19</h2>
-
-<p>Zed&rsquo;s Awesome Debug Macros</p>
+<h2 id="exercise-19-zed-s-awesome-debug-macros">Exercise 19 Zed&rsquo;s Awesome Debug Macros</h2>
 
 <p>The Plan</p>
 
@@ -2202,9 +2121,7 @@ top of the <code>Makefile</code>, and then recompile to see the same thing.</li>
 as the <code>file:line</code>.</li>
 </ul>
 
-<h2 id="exercise-20">Exercise 20</h2>
-
-<p>Advanced Debugging Techniques</p>
+<h2 id="exercise-20-advanced-debugging-techniques">Exercise 20 Advanced Debugging Techniques</h2>
 
 <p>The Plan</p>
 
@@ -2225,9 +2142,7 @@ and what caused it.  Change <code>ex31.c</code> so that it crashes
 after a few iterations, then try to get a core dump and analyze it.</li>
 </ul>
 
-<h2 id="exercise-21">Exercise 21</h2>
-
-<p>Advanced Data Types and Flow Control</p>
+<h2 id="exercise-21-advanced-data-types-and-flow-control">Exercise 21 Advanced Data Types and Flow Control</h2>
 
 <p>The Plan</p>
 
@@ -2326,9 +2241,7 @@ minutes a day practicing it.</li>
 research is right.</li>
 </ul>
 
-<h2 id="exercise-22">Exercise 22</h2>
-
-<p>The Stack, Scope, and Globals</p>
+<h2 id="exercise-22-the-stack-scope-and-globals">Exercise 22 The Stack, Scope, and Globals</h2>
 
 <p>The Plan</p>
 
@@ -2341,36 +2254,27 @@ research is right.</li>
 
 <p>The Code</p>
 
-<p>.\ex22\ex22.c</p>
+<p>.\ex22\ex22.h</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &quot;ex22.h&quot;
-#include &quot;dbg.h&quot;
+<pre><code class="language-c">#ifndef _ex22_h
+#define _ex22_h
 
-int get_age(struct State *state)
-{
-    return state-&gt;the_age;
-}
+struct State {
+    int the_size;
+    int the_age;
+};
 
-void set_age(struct State *state, int age)
-{
-   state-&gt;the_age = age; 
-}
 
-double update_ratio(double new_ratio)
-{
-    static double ratio = 1.0;
+// gets and sets an internal static variable in ex22.c
+int get_age(struct State *state);
+void set_age(struct State *state, int age);
 
-    double old_ratio = ratio;
-    ratio = new_ratio;
+// updates a static variable that's inside update_ratio
+double update_ratio(double ratio);
 
-    return old_ratio;
-}
+void print_size();
 
-void print_size()
-{
-    log_info(&quot;I think size is: %d&quot;, THE_SIZE);
-}
+#endif
 
 </code></pre>
 
@@ -2512,9 +2416,7 @@ bottom of <code>scope_demo</code> itself so that it loops.</li>
 <li>Rewrite the <code>Makefile</code> so that it can build this.</li>
 </ul>
 
-<h2 id="exercise-23">Exercise 23</h2>
-
-<p>Meet Duff&rsquo;s Device</p>
+<h2 id="exercise-23-meet-duff-s-device">Exercise 23 Meet Duff&rsquo;s Device</h2>
 
 <p>The Plan</p>
 
@@ -2721,9 +2623,7 @@ their speed.</li>
 <li>Never use this again!</li>
 </ul>
 
-<h2 id="exercise-24">Exercise 24</h2>
-
-<p>Input, Output, Files</p>
+<h2 id="exercise-24-input-output-files">Exercise 24 Input, Output, Files</h2>
 
 <p>The Plan</p>
 
@@ -2839,9 +2739,7 @@ generic so it can take a size for the string, but just make sure you end
 the string with <code>'\0'</code> no matter what.</li>
 </ul>
 
-<h2 id="exercise-25">Exercise 25</h2>
-
-<p>Variable Argument Functions</p>
+<h2 id="exercise-25-variable-argument-functions">Exercise 25 Variable Argument Functions</h2>
 
 <p>The Plan</p>
 
@@ -3018,9 +2916,7 @@ functions, and some will have these do nothing.  It all depends on the
 compiler and the platform you use.</li>
 </ul>
 
-<h2 id="exercise-26">Exercise 26</h2>
-
-<p>Project logfind</p>
+<h2 id="exercise-26-project-logfind">Exercise 26 Project logfind</h2>
 
 <p>The Plan</p>
 
@@ -3579,9 +3475,172 @@ own functions.</p>
 
 <p>Breaking It</p>
 
-<h2 id="exercise-27">Exercise 27</h2>
+<h2 id="exercise-27-creative-and-defensive-programming">Exercise 27 Creative and Defensive Programming</h2>
 
-<p>Creative and Defensive Programming</p>
+<p>logfind.5</p>
+
+<p>.\ex27\logfind.5\logfind.c</p>
+
+<pre><code class="language-c">#define NDEBUG
+#include &quot;dbg.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;glob.h&gt;
+#include &lt;assert.h&gt;
+
+const size_t MAX_LINE = 1024;
+
+
+int list_files(glob_t *pglob) 
+{
+    char *line = calloc(MAX_LINE, 1);
+    FILE *file = fopen(&quot;.logfind&quot;, &quot;r&quot;);
+    int glob_flags = GLOB_TILDE;
+    int i = 0;
+    int rc = -1;
+
+    check(pglob != NULL, &quot;Invalid glob_t given.&quot;);
+    check_mem(line);
+    check(file, &quot;Failed to open .logfind. Make that first.&quot;);
+
+    while(fgets(line, MAX_LINE-1, file) != NULL) {
+        size_t line_length = strnlen(line, MAX_LINE - 1);
+        assert(line_length &lt; MAX_LINE &amp;&amp; &quot;Got a line length too long.&quot;);
+
+        line[line_length] = '\0'; // drop the \n ending
+        debug(&quot;Globbing %s&quot;, line);
+
+        rc = glob(line, glob_flags, NULL, pglob);
+        check(rc == 0 || rc == GLOB_NOMATCH, &quot;Failed to glob.&quot;);
+
+        // dumb work around to a stupid design in glob
+        if(glob_flags == GLOB_TILDE) glob_flags |= GLOB_APPEND;
+    }
+
+    for(i = 0; i &lt; pglob-&gt;gl_pathc; i++) {
+        debug(&quot;Matched file: %s&quot;, pglob-&gt;gl_pathv[i]);
+    }
+
+    rc = 0; // all good
+
+error: // fallthrough
+    if(line) free(line);
+    return rc;
+}
+
+int found_it(int use_or, int found_count, int search_len)
+{
+    debug(&quot;use_or: %d, found_count: %d, search_len: %d&quot;, use_or, found_count, search_len);
+
+    if(use_or &amp;&amp; found_count &gt; 0) {
+        return 1;
+    } else if(!use_or &amp;&amp; found_count == search_len) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int scan_file(const char *filename, int use_or, int search_len, char *search_for[])
+{
+    char *line = calloc(MAX_LINE, 1);
+    FILE *file = fopen(filename, &quot;r&quot;);
+    int found_count = 0;
+    int i = 0;
+
+    check_mem(line);
+    check(file, &quot;Failed to open file: %s&quot;, filename);
+
+    // read each line of the file and search that line for the contents
+    while(fgets(line, MAX_LINE-1, file) != NULL)
+    {
+        for(i = 0; i &lt; search_len; i++) {
+            if(strcasestr(line, search_for[i]) != NULL) {
+                debug(&quot;file: %s, line: %s, search: %s&quot;, filename, line, search_for[i]);
+                found_count++;
+            }
+        }
+
+        if(found_it(use_or, found_count, search_len)) {
+            printf(&quot;%s\n&quot;, filename);
+            break;
+        } else {
+            found_count = 0;
+        }
+    }
+
+
+    free(line);
+    fclose(file);
+    return 0;
+
+error:
+    if(line) free(line);
+    if(file) fclose(file);
+
+    return -1;
+}
+
+int parse_args(int *use_or, int *argc, char **argv[]) 
+{
+    (*argc)--;
+    (*argv)++;
+
+    if(strcmp((*argv)[0], &quot;-o&quot;) == 0) {
+        *use_or = 1;
+        (*argc)--; // skip the -o
+        (*argv)++;
+        check(*argc &gt; 1, &quot;You need words after -o.&quot;);
+    } else {
+        *use_or = 0;
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+
+int main(int argc, char *argv[])
+{
+    int i = 0;
+    int use_or = 1;
+    glob_t files_found;
+
+    check(argc &gt; 1, &quot;USAGE: logfind [-o] words&quot;);
+
+    check(parse_args(&amp;use_or, &amp;argc, &amp;argv) == 0, &quot;USAGE: logfind [-o] words&quot;);
+
+    check(list_files(&amp;files_found) == 0, &quot;Failed to list files.&quot;);
+
+    for(i = 0; i &lt; files_found.gl_pathc; i++) {
+        scan_file(files_found.gl_pathv[i], use_or, argc, argv);
+    }
+
+    globfree(&amp;files_found);
+    return 0;
+
+error:
+    return 1;
+}
+
+</code></pre>
+
+<p>.\ex27\logfind.5\Makefile</p>
+
+<pre><code class="language-makefile">CFLAGS=-Wall -g
+
+all: logfind
+    ./logfind || true
+    ./logfind MAX_LINE
+    ./logfind error MAX LINE
+    ./logfind -o error MAX LINE
+
+clean:
+    rm -f logfind
+
+</code></pre>
 
 <p>logfind.5</p>
 
@@ -3781,9 +3840,7 @@ clean:
 
 <p>Bonus: Assume Nothing</p>
 
-<h2 id="exercise-28">Exercise 28</h2>
-
-<p>Intermediate Makefiles</p>
+<h2 id="exercise-28-intermediate-makefiles">Exercise 28 Intermediate Makefiles</h2>
 
 <p>The Plan</p>
 
@@ -4155,9 +4212,7 @@ RUN_TESTS(all_tests);
 
 <p>Extra Credit</p>
 
-<h2 id="exercise-29">Exercise 29</h2>
-
-<p>Libraries and Linking</p>
+<h2 id="exercise-29-libraries-and-linking">Exercise 29 Libraries and Linking</h2>
 
 <p>The Plan</p>
 
@@ -4284,9 +4339,7 @@ related functions.  Try some of the other options to <code>dlopen</code>
 beside <code>RTLD_NOW</code>.</li>
 </ul>
 
-<h2 id="exercise-30">Exercise 30</h2>
-
-<p>Automated Testing</p>
+<h2 id="exercise-30-automated-testing">Exercise 30 Automated Testing</h2>
 
 <p>The Plan</p>
 
@@ -4364,9 +4417,7 @@ so you know what it does.  Do you think you could write a C version of this
 script?</li>
 </ul>
 
-<h2 id="exercise-31">Exercise 31</h2>
-
-<p>Common Undefined Behavior</p>
+<h2 id="exercise-31-common-undefined-behavior">Exercise 31 Common Undefined Behavior</h2>
 
 <p>The Plan</p>
 
@@ -4423,9 +4474,7 @@ int main(int argc, char *argv[])
 
 <p>Spend a day reading through as much of the UB as you can and find examples of each.  Expect lots of frustration and failure when you do this.</p>
 
-<h2 id="exercise-32">Exercise 32</h2>
-
-<p>Double Linked Lists</p>
+<h2 id="exercise-32-double-linked-lists">Exercise 32 Double Linked Lists</h2>
 
 <p>The Plan</p>
 
@@ -4489,9 +4538,7 @@ are copying, joining, and splitting.  Implement these operations and write the
 unit tests for them.</li>
 </ul>
 
-<h2 id="exercise-33">Exercise 33</h2>
-
-<p>Linked List Algorithms</p>
+<h2 id="exercise-33-linked-list-algorithms">Exercise 33 Linked List Algorithms</h2>
 
 <p>The Plan</p>
 
@@ -4554,9 +4601,7 @@ right position so that the list is always sorted.  How does using this method co
 recreate, but try to understand how it&rsquo;s working compared to the slower one I have here.</li>
 </ul>
 
-<h2 id="exercise-34">Exercise 34</h2>
-
-<p>Dynamic Array</p>
+<h2 id="exercise-34-dynamic-array">Exercise 34 Dynamic Array</h2>
 
 <p>The Plan</p>
 
@@ -4653,9 +4698,7 @@ found this to cost needless memory for no real performance gain.  Test my assert
 and see when you&rsquo;d want a multiplicative increase instead of a constant increase.</li>
 </ul>
 
-<h2 id="exercise-35">Exercise 35</h2>
-
-<p>Sorting and Searching</p>
+<h2 id="exercise-35-sorting-and-searching">Exercise 35 Sorting and Searching</h2>
 
 <p>The Plan</p>
 
@@ -4712,9 +4755,7 @@ adds elements to the <em>DArray</em> but sorts the array after.</li>
 in a sorted <em>DArray</em>.</li>
 </ul>
 
-<h2 id="exercise-36">Exercise 36</h2>
-
-<p>Safer Strings</p>
+<h2 id="exercise-36-safer-strings">Exercise 36 Safer Strings</h2>
 
 <p>The Plan</p>
 
@@ -4759,9 +4800,7 @@ bchar        Get a char from a bstring.
 <p>There is only one extra credit and that&rsquo;s to write a <em>tests/bstr_tests.c</em> file that
 tests all of these functions.  The bstrlib comes with a test that you can reference it if needed.</p>
 
-<h2 id="exercise-37">Exercise 37</h2>
-
-<p>Hashmaps</p>
+<h2 id="exercise-37-hashmaps">Exercise 37 Hashmaps</h2>
 
 <p>The Plan</p>
 
@@ -4822,9 +4861,7 @@ in the same bucket, then test how this impacts performance.  A good way to do th
 the number of buckets to something stupid, like five.</li>
 </ul>
 
-<h2 id="exercise-38">Exercise 38</h2>
-
-<p>Hashmap Algorithms</p>
+<h2 id="exercise-38-hashmap-algorithms">Exercise 38 Hashmap Algorithms</h2>
 
 <p>The Plan</p>
 
@@ -4858,9 +4895,7 @@ test and compare its statistics to the other hash functions.</li>
 many hash functions!</li>
 </ul>
 
-<h2 id="exercise-39">Exercise 39</h2>
-
-<p>String Algorithms</p>
+<h2 id="exercise-39-string-algorithms">Exercise 39 String Algorithms</h2>
 
 <p>The Plan</p>
 
@@ -4928,9 +4963,7 @@ operations for string processing.</li>
 results.</li>
 </ul>
 
-<h2 id="exercise-40">Exercise 40</h2>
-
-<p>Binary Search Trees</p>
+<h2 id="exercise-40-binary-search-trees">Exercise 40 Binary Search Trees</h2>
 
 <p>The Plan</p>
 
@@ -4979,9 +5012,758 @@ be better or worse?</li>
 and some non-tree structures like skip lists.</li>
 </ul>
 
-<h2 id="exercise-41">Exercise 41</h2>
+<h2 id="exercise-41-project-devpkg">Exercise 41 Project devpkg</h2>
 
-<p>Project devpkg</p>
+<p>.\ex41\devpkg</p>
+
+<p>.\ex41\devpkg\commands.c</p>
+
+<pre><code class="language-c">#include &lt;apr_uri.h&gt;
+#include &lt;apr_fnmatch.h&gt;
+#include &lt;unistd.h&gt;
+
+#include &quot;commands.h&quot;
+#include &quot;dbg.h&quot;
+#include &quot;bstrlib.h&quot;
+#include &quot;db.h&quot;
+#include &quot;shell.h&quot;
+
+int Command_depends(apr_pool_t * p, const char *path)
+{
+    FILE *in = NULL;
+    bstring line = NULL;
+
+    in = fopen(path, &quot;r&quot;);
+    check(in != NULL, &quot;Failed to open downloaded depends: %s&quot;, path);
+
+    for (line = bgets((bNgetc) fgetc, in, '\n');
+            line != NULL; 
+            line = bgets((bNgetc) fgetc, in, '\n')) 
+    {
+        btrimws(line);
+        log_info(&quot;Processing depends: %s&quot;, bdata(line));
+        int rc = Command_install(p, bdata(line), NULL, NULL, NULL);
+        check(rc == 0, &quot;Failed to install: %s&quot;, bdata(line));
+        bdestroy(line);
+    }
+
+    fclose(in);
+    return 0;
+
+error:
+    if (line) bdestroy(line);
+    if (in) fclose(in);
+    return -1;
+}
+
+int Command_fetch(apr_pool_t * p, const char *url, int fetch_only)
+{
+    apr_uri_t info = {.port = 0 };
+    int rc = 0;
+    const char *depends_file = NULL;
+    apr_status_t rv = apr_uri_parse(p, url, &amp;info);
+
+    check(rv == APR_SUCCESS, &quot;Failed to parse URL: %s&quot;, url);
+
+    if (apr_fnmatch(GIT_PAT, info.path, 0) == APR_SUCCESS) {
+        rc = Shell_exec(GIT_SH, &quot;URL&quot;, url, NULL);
+        check(rc == 0, &quot;git failed.&quot;);
+    } else if (apr_fnmatch(DEPEND_PAT, info.path, 0) == APR_SUCCESS) {
+        check(!fetch_only, &quot;No point in fetching a DEPENDS file.&quot;);
+
+        if (info.scheme) {
+            depends_file = DEPENDS_PATH;
+            rc = Shell_exec(CURL_SH, &quot;URL&quot;, url, &quot;TARGET&quot;, depends_file,
+                    NULL);
+            check(rc == 0, &quot;Curl failed.&quot;);
+        } else {
+            depends_file = info.path;
+        }
+
+        // recursively process the devpkg list
+        log_info(&quot;Building according to DEPENDS: %s&quot;, url);
+        rv = Command_depends(p, depends_file);
+        check(rv == 0, &quot;Failed to process the DEPENDS: %s&quot;, url);
+
+        // this indicates that nothing needs to be done
+        return 0;
+
+    } else if (apr_fnmatch(TAR_GZ_PAT, info.path, 0) == APR_SUCCESS) {
+        if (info.scheme) {
+            rc = Shell_exec(CURL_SH,
+                    &quot;URL&quot;, url, &quot;TARGET&quot;, TAR_GZ_SRC, NULL);
+            check(rc == 0, &quot;Failed to curl source: %s&quot;, url);
+        }
+
+        rv = apr_dir_make_recursive(BUILD_DIR,
+                APR_UREAD | APR_UWRITE |
+                APR_UEXECUTE, p);
+        check(rv == APR_SUCCESS, &quot;Failed to make directory %s&quot;,
+                BUILD_DIR);
+
+        rc = Shell_exec(TAR_SH, &quot;FILE&quot;, TAR_GZ_SRC, NULL);
+        check(rc == 0, &quot;Failed to untar %s&quot;, TAR_GZ_SRC);
+    } else if (apr_fnmatch(TAR_BZ2_PAT, info.path, 0) == APR_SUCCESS) {
+        if (info.scheme) {
+            rc = Shell_exec(CURL_SH, &quot;URL&quot;, url, &quot;TARGET&quot;, TAR_BZ2_SRC,
+                    NULL);
+            check(rc == 0, &quot;Curl failed.&quot;);
+        }
+
+        apr_status_t rc = apr_dir_make_recursive(BUILD_DIR,
+                APR_UREAD | APR_UWRITE
+                | APR_UEXECUTE, p);
+
+        check(rc == 0, &quot;Failed to make directory %s&quot;, BUILD_DIR);
+        rc = Shell_exec(TAR_SH, &quot;FILE&quot;, TAR_BZ2_SRC, NULL);
+        check(rc == 0, &quot;Failed to untar %s&quot;, TAR_BZ2_SRC);
+    } else {
+        sentinel(&quot;Don't now how to handle %s&quot;, url);
+    }
+
+    // indicates that an install needs to actually run
+    return 1;
+error:
+    return -1;
+}
+
+int Command_build(apr_pool_t * p, const char *url,
+        const char *configure_opts, const char *make_opts,
+        const char *install_opts)
+{
+    int rc = 0;
+
+    check(access(BUILD_DIR, X_OK | R_OK | W_OK) == 0,
+            &quot;Build directory doesn't exist: %s&quot;, BUILD_DIR);
+
+    // actually do an install
+    if (access(CONFIG_SCRIPT, X_OK) == 0) {
+        log_info(&quot;Has a configure script, running it.&quot;);
+        rc = Shell_exec(CONFIGURE_SH, &quot;OPTS&quot;, configure_opts, NULL);
+        check(rc == 0, &quot;Failed to configure.&quot;);
+    }
+
+    rc = Shell_exec(MAKE_SH, &quot;OPTS&quot;, make_opts, NULL);
+    check(rc == 0, &quot;Failed to build.&quot;);
+
+    rc = Shell_exec(INSTALL_SH,
+            &quot;TARGET&quot;, install_opts ? install_opts : &quot;install&quot;,
+            NULL);
+    check(rc == 0, &quot;Failed to install.&quot;);
+
+    rc = Shell_exec(CLEANUP_SH, NULL);
+    check(rc == 0, &quot;Failed to cleanup after build.&quot;);
+
+    rc = DB_update(url);
+    check(rc == 0, &quot;Failed to add this package to the database.&quot;);
+
+    return 0;
+
+error:
+    return -1;
+}
+
+int Command_install(apr_pool_t * p, const char *url,
+        const char *configure_opts, const char *make_opts,
+        const char *install_opts)
+{
+    int rc = 0;
+    check(Shell_exec(CLEANUP_SH, NULL) == 0,
+            &quot;Failed to cleanup before building.&quot;);
+
+    rc = DB_find(url);
+    check(rc != -1, &quot;Error checking the install database.&quot;);
+
+    if (rc == 1) {
+        log_info(&quot;Package %s already installed.&quot;, url);
+        return 0;
+    }
+
+    rc = Command_fetch(p, url, 0);
+
+    if (rc == 1) {
+        rc = Command_build(p, url, configure_opts, make_opts,
+                install_opts);
+        check(rc == 0, &quot;Failed to build: %s&quot;, url);
+    } else if (rc == 0) {
+        // no install needed
+        log_info(&quot;Depends successfully installed: %s&quot;, url);
+    } else {
+        // had an error
+        sentinel(&quot;Install failed: %s&quot;, url);
+    }
+
+    Shell_exec(CLEANUP_SH, NULL);
+    return 0;
+
+error:
+    Shell_exec(CLEANUP_SH, NULL);
+    return -1;
+}
+
+</code></pre>
+
+<p>.\ex41\devpkg\commands.h</p>
+
+<pre><code class="language-c">#ifndef _commands_h
+#define _commands_h
+
+#include &lt;apr_pools.h&gt;
+
+#define DEPENDS_PATH &quot;/tmp/DEPENDS&quot;
+#define TAR_GZ_SRC &quot;/tmp/pkg-src.tar.gz&quot;
+#define TAR_BZ2_SRC &quot;/tmp/pkg-src.tar.bz2&quot;
+#define BUILD_DIR &quot;/tmp/pkg-build&quot;
+#define GIT_PAT &quot;*.git&quot;
+#define DEPEND_PAT &quot;*DEPENDS&quot;
+#define TAR_GZ_PAT &quot;*.tar.gz&quot;
+#define TAR_BZ2_PAT &quot;*.tar.bz2&quot;
+#define CONFIG_SCRIPT &quot;/tmp/pkg-build/configure&quot;
+
+enum CommandType {
+    COMMAND_NONE, COMMAND_INSTALL, COMMAND_LIST, COMMAND_FETCH,
+    COMMAND_INIT, COMMAND_BUILD
+};
+
+int Command_fetch(apr_pool_t * p, const char *url, int fetch_only);
+
+int Command_install(apr_pool_t * p, const char *url,
+        const char *configure_opts, const char *make_opts,
+        const char *install_opts);
+
+int Command_depends(apr_pool_t * p, const char *path);
+
+int Command_build(apr_pool_t * p, const char *url,
+        const char *configure_opts, const char *make_opts,
+        const char *install_opts);
+
+#endif
+
+</code></pre>
+
+<p>.\ex41\devpkg\db.c</p>
+
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;apr_errno.h&gt;
+#include &lt;apr_file_io.h&gt;
+
+#include &quot;db.h&quot;
+#include &quot;bstrlib.h&quot;
+#include &quot;dbg.h&quot;
+
+static FILE *DB_open(const char *path, const char *mode)
+{
+    return fopen(path, mode);
+}
+
+static void DB_close(FILE * db)
+{
+    fclose(db);
+}
+
+static bstring DB_load()
+{
+    FILE *db = NULL;
+    bstring data = NULL;
+
+    db = DB_open(DB_FILE, &quot;r&quot;);
+    check(db, &quot;Failed to open database: %s&quot;, DB_FILE);
+
+    data = bread((bNread) fread, db);
+    check(data, &quot;Failed to read from db file: %s&quot;, DB_FILE);
+
+    DB_close(db);
+    return data;
+
+error:
+    if (db)
+        DB_close(db);
+    if (data)
+        bdestroy(data);
+    return NULL;
+}
+
+int DB_update(const char *url)
+{
+    if (DB_find(url)) {
+        log_info(&quot;Already recorded as installed: %s&quot;, url);
+    }
+
+    FILE *db = DB_open(DB_FILE, &quot;a+&quot;);
+    check(db, &quot;Failed to open DB file: %s&quot;, DB_FILE);
+
+    bstring line = bfromcstr(url);
+    bconchar(line, '\n');
+    int rc = fwrite(line-&gt;data, blength(line), 1, db);
+    check(rc == 1, &quot;Failed to append to the db.&quot;);
+
+    return 0;
+error:
+    if (db)
+        DB_close(db);
+    return -1;
+}
+
+int DB_find(const char *url)
+{
+    bstring data = NULL;
+    bstring line = bfromcstr(url);
+    int res = -1;
+
+    data = DB_load();
+    check(data, &quot;Failed to load: %s&quot;, DB_FILE);
+
+    if (binstr(data, 0, line) == BSTR_ERR) {
+        res = 0;
+    } else {
+        res = 1;
+    }
+
+error:          // fallthrough
+    if (data)
+        bdestroy(data);
+    if (line)
+        bdestroy(line);
+
+    return res;
+}
+
+int DB_init()
+{
+    apr_pool_t *p = NULL;
+    apr_pool_initialize();
+    apr_pool_create(&amp;p, NULL);
+
+    if (access(DB_DIR, W_OK | X_OK) == -1) {
+        apr_status_t rc = apr_dir_make_recursive(DB_DIR,
+                APR_UREAD | APR_UWRITE
+                | APR_UEXECUTE |
+                APR_GREAD | APR_GWRITE
+                | APR_GEXECUTE, p);
+        check(rc == APR_SUCCESS, &quot;Failed to make database dir: %s&quot;,
+                DB_DIR);
+    }
+
+    if (access(DB_FILE, W_OK) == -1) {
+        FILE *db = DB_open(DB_FILE, &quot;w&quot;);
+        check(db, &quot;Cannot open database: %s&quot;, DB_FILE);
+        DB_close(db);
+    }
+
+    apr_pool_destroy(p);
+    return 0;
+
+error:
+    apr_pool_destroy(p);
+    return -1;
+}
+
+int DB_list()
+{
+    bstring data = DB_load();
+    check(data, &quot;Failed to read load: %s&quot;, DB_FILE);
+
+    printf(&quot;%s&quot;, bdata(data));
+    bdestroy(data);
+    return 0;
+
+error:
+    return -1;
+}
+
+</code></pre>
+
+<p>.\ex41\devpkg\db.h</p>
+
+<pre><code class="language-c">#ifndef _db_h
+#define _db_h
+
+#define DB_FILE &quot;/usr/local/.devpkg/db&quot;
+#define DB_DIR &quot;/usr/local/.devpkg&quot;
+
+int DB_init();
+int DB_list();
+int DB_update(const char *url);
+int DB_find(const char *url);
+
+#endif
+
+</code></pre>
+
+<p>.\ex41\devpkg\dbg.h</p>
+
+<pre><code class="language-c">#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &quot;DEBUG %s:%d: &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &quot;None&quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &quot;[ERROR] (%s:%d: errno: %s) &quot; M &quot;\n&quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &quot;[WARN] (%s:%d: errno: %s) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &quot;[INFO] (%s:%d) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &quot;Out of memory.&quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+</code></pre>
+
+<p>.\ex41\devpkg\devpkg.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;apr_general.h&gt;
+#include &lt;apr_getopt.h&gt;
+#include &lt;apr_strings.h&gt;
+#include &lt;apr_lib.h&gt;
+
+#include &quot;dbg.h&quot;
+#include &quot;db.h&quot;
+#include &quot;commands.h&quot;
+
+int main(int argc, const char *argv[])
+{
+    apr_pool_t *p = NULL;
+    apr_pool_initialize();
+    apr_pool_create(&amp;p, NULL);
+
+    apr_getopt_t *opt;
+    apr_status_t rv;
+
+    char ch = '\0';
+    const char *optarg = NULL;
+    const char *config_opts = NULL;
+    const char *install_opts = NULL;
+    const char *make_opts = NULL;
+    const char *url = NULL;
+    enum CommandType request = COMMAND_NONE;
+
+    rv = apr_getopt_init(&amp;opt, p, argc, argv);
+
+    while (apr_getopt(opt, &quot;I:Lc:m:i:d:SF:B:&quot;, &amp;ch, &amp;optarg) ==
+            APR_SUCCESS) {
+        switch (ch) {
+            case 'I':
+                request = COMMAND_INSTALL;
+                url = optarg;
+                break;
+
+            case 'L':
+                request = COMMAND_LIST;
+                break;
+
+            case 'c':
+                config_opts = optarg;
+                break;
+
+            case 'm':
+                make_opts = optarg;
+                break;
+
+            case 'i':
+                install_opts = optarg;
+                break;
+
+            case 'S':
+                request = COMMAND_INIT;
+                break;
+
+            case 'F':
+                request = COMMAND_FETCH;
+                url = optarg;
+                break;
+
+            case 'B':
+                request = COMMAND_BUILD;
+                url = optarg;
+                break;
+        }
+    }
+
+    switch (request) {
+        case COMMAND_INSTALL:
+            check(url, &quot;You must at least give a URL.&quot;);
+            Command_install(p, url, config_opts, make_opts, install_opts);
+            break;
+
+        case COMMAND_LIST:
+            DB_list();
+            break;
+
+        case COMMAND_FETCH:
+            check(url != NULL, &quot;You must give a URL.&quot;);
+            Command_fetch(p, url, 1);
+            log_info(&quot;Downloaded to %s and in /tmp/&quot;, BUILD_DIR);
+            break;
+
+        case COMMAND_BUILD:
+            check(url, &quot;You must at least give a URL.&quot;);
+            Command_build(p, url, config_opts, make_opts, install_opts);
+            break;
+
+        case COMMAND_INIT:
+            rv = DB_init();
+            check(rv == 0, &quot;Failed to make the database.&quot;);
+            break;
+
+        default:
+            sentinel(&quot;Invalid command given.&quot;);
+    }
+
+    return 0;
+
+error:
+    return 1;
+}
+
+</code></pre>
+
+<p>.\ex41\devpkg\shell.c</p>
+
+<pre><code class="language-c">#include &quot;shell.h&quot;
+#include &quot;dbg.h&quot;
+#include &lt;stdarg.h&gt;
+
+int Shell_exec(Shell template, ...)
+{
+    apr_pool_t *p = NULL;
+    int rc = -1;
+    apr_status_t rv = APR_SUCCESS;
+    va_list argp;
+    const char *key = NULL;
+    const char *arg = NULL;
+    int i = 0;
+
+    rv = apr_pool_create(&amp;p, NULL);
+    check(rv == APR_SUCCESS, &quot;Failed to create pool.&quot;);
+
+    va_start(argp, template);
+
+    for (key = va_arg(argp, const char *);
+            key != NULL; key = va_arg(argp, const char *)) {
+        arg = va_arg(argp, const char *);
+
+        for (i = 0; template.args[i] != NULL; i++) {
+            if (strcmp(template.args[i], key) == 0) {
+                template.args[i] = arg;
+                break;      // found it
+            }
+        }
+    }
+
+    rc = Shell_run(p, &amp;template);
+    apr_pool_destroy(p);
+    va_end(argp);
+    return rc;
+
+error:
+    if (p) {
+        apr_pool_destroy(p);
+    }
+    return rc;
+}
+
+int Shell_run(apr_pool_t * p, Shell * cmd)
+{
+    apr_procattr_t *attr;
+    apr_status_t rv;
+    apr_proc_t newproc;
+
+    rv = apr_procattr_create(&amp;attr, p);
+    check(rv == APR_SUCCESS, &quot;Failed to create proc attr.&quot;);
+
+    rv = apr_procattr_io_set(attr, APR_NO_PIPE, APR_NO_PIPE,
+            APR_NO_PIPE);
+    check(rv == APR_SUCCESS, &quot;Failed to set IO of command.&quot;);
+
+    rv = apr_procattr_dir_set(attr, cmd-&gt;dir);
+    check(rv == APR_SUCCESS, &quot;Failed to set root to %s&quot;, cmd-&gt;dir);
+
+    rv = apr_procattr_cmdtype_set(attr, APR_PROGRAM_PATH);
+    check(rv == APR_SUCCESS, &quot;Failed to set cmd type.&quot;);
+
+    rv = apr_proc_create(&amp;newproc, cmd-&gt;exe, cmd-&gt;args, NULL, attr, p);
+    check(rv == APR_SUCCESS, &quot;Failed to run command.&quot;);
+
+    rv = apr_proc_wait(&amp;newproc, &amp;cmd-&gt;exit_code, &amp;cmd-&gt;exit_why,
+            APR_WAIT);
+    check(rv == APR_CHILD_DONE, &quot;Failed to wait.&quot;);
+
+    check(cmd-&gt;exit_code == 0, &quot;%s exited badly.&quot;, cmd-&gt;exe);
+    check(cmd-&gt;exit_why == APR_PROC_EXIT, &quot;%s was killed or crashed&quot;,
+            cmd-&gt;exe);
+
+    return 0;
+
+error:
+    return -1;
+}
+
+Shell CLEANUP_SH = {
+    .exe = &quot;rm&quot;,
+    .dir = &quot;/tmp&quot;,
+    .args = {&quot;rm&quot;, &quot;-rf&quot;, &quot;/tmp/pkg-build&quot;, &quot;/tmp/pkg-src.tar.gz&quot;,
+        &quot;/tmp/pkg-src.tar.bz2&quot;, &quot;/tmp/DEPENDS&quot;, NULL}
+};
+
+Shell GIT_SH = {
+    .dir = &quot;/tmp&quot;,
+    .exe = &quot;git&quot;,
+    .args = {&quot;git&quot;, &quot;clone&quot;, &quot;URL&quot;, &quot;pkg-build&quot;, NULL}
+};
+
+Shell TAR_SH = {
+    .dir = &quot;/tmp/pkg-build&quot;,
+    .exe = &quot;tar&quot;,
+    .args = {&quot;tar&quot;, &quot;-xzf&quot;, &quot;FILE&quot;, &quot;--strip-components&quot;, &quot;1&quot;, NULL}
+};
+
+Shell CURL_SH = {
+    .dir = &quot;/tmp&quot;,
+    .exe = &quot;curl&quot;,
+    .args = {&quot;curl&quot;, &quot;-L&quot;, &quot;-o&quot;, &quot;TARGET&quot;, &quot;URL&quot;, NULL}
+};
+
+Shell CONFIGURE_SH = {
+    .exe = &quot;./configure&quot;,
+    .dir = &quot;/tmp/pkg-build&quot;,
+    .args = {&quot;configure&quot;, &quot;OPTS&quot;, NULL}
+    ,
+};
+
+Shell MAKE_SH = {
+    .exe = &quot;make&quot;,
+    .dir = &quot;/tmp/pkg-build&quot;,
+    .args = {&quot;make&quot;, &quot;OPTS&quot;, NULL}
+};
+
+Shell INSTALL_SH = {
+    .exe = &quot;sudo&quot;,
+    .dir = &quot;/tmp/pkg-build&quot;,
+    .args = {&quot;sudo&quot;, &quot;make&quot;, &quot;TARGET&quot;, NULL}
+};
+
+</code></pre>
+
+<p>.\ex41\devpkg\shell.h</p>
+
+<pre><code class="language-c">#ifndef _shell_h
+#define _shell_h
+
+#define MAX_COMMAND_ARGS 100
+
+#include &lt;apr_thread_proc.h&gt;
+
+typedef struct Shell {
+    const char *dir;
+    const char *exe;
+
+    apr_procattr_t *attr;
+    apr_proc_t proc;
+    apr_exit_why_e exit_why;
+    int exit_code;
+
+    const char *args[MAX_COMMAND_ARGS];
+} Shell;
+
+int Shell_run(apr_pool_t * p, Shell * cmd);
+int Shell_exec(Shell cmd, ...);
+
+extern Shell CLEANUP_SH;
+extern Shell GIT_SH;
+extern Shell TAR_SH;
+extern Shell CURL_SH;
+extern Shell CONFIGURE_SH;
+extern Shell MAKE_SH;
+extern Shell INSTALL_SH;
+
+#endif
+
+</code></pre>
+
+<p>.\ex41\ex41.1.sh</p>
+
+<pre><code class="language-bash">set -e
+
+# go somewhere safe
+cd /tmp
+
+# get the source to base APR 1.5.2
+curl -L -O http://archive.apache.org/dist/apr/apr-1.5.2.tar.gz
+
+# extract it and go into the source
+tar -xzvf apr-1.5.2.tar.gz
+cd apr-1.5.2
+
+# you need this on OSX Yosemite
+touch libtoolT
+
+# configure, make, make install
+./configure
+make
+sudo make install
+
+# reset and cleanup
+cd /tmp
+rm -rf apr-1.5.2 apr-1.5.2.tar.gz
+
+# do the same with apr-util
+curl -L -O http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gz
+
+# extract
+tar -xzvf apr-util-1.5.4.tar.gz
+cd apr-util-1.5.4
+
+# you need this on OSX Yosemite
+touch libtoolT
+
+# configure, make, make install
+./configure --with-apr=/usr/local/apr
+# you need that extra parameter to configure because
+# apr-util can't really find it because...who knows.
+
+make
+sudo make install
+
+#cleanup
+cd /tmp
+rm -rf apr-util-1.5.4* apr-1.5.2*
+
+
+</code></pre>
+
+<p>.\ex41\ex41.2.sh</p>
+
+<pre><code class="language-bash">mkdir devpkg
+cd devpkg
+touch README Makefile
+
+</code></pre>
 
 <p>.\ex41\devpkg</p>
 
@@ -5773,9 +6555,7 @@ the two, then improve your <em>C</em> version of <code>devpkg</code> based on wh
 you&rsquo;ve learned.</li>
 </ul>
 
-<h2 id="exercise-42">Exercise 42</h2>
-
-<p>Stacks and Queues</p>
+<h2 id="exercise-42-stacks-and-queues">Exercise 42 Stacks and Queues</h2>
 
 <p>The Plan</p>
 
@@ -5795,9 +6575,7 @@ you&rsquo;ve learned.</li>
 <li>Implement <code>Stack</code> using <code>DArray</code> instead of <code>List</code>, but without changing the unit test.  That means you&rsquo;ll have to create your own <code>STACK_FOREACH</code>.</li>
 </ul>
 
-<h2 id="exercise-43">Exercise 43</h2>
-
-<p>A Simple Statistics Engine</p>
+<h2 id="exercise-43-a-simple-statistics-engine">Exercise 43 A Simple Statistics Engine</h2>
 
 <p>The Plan</p>
 
@@ -5836,9 +6614,7 @@ of the other numbers on lines after it are separated by any number of spaces.  Y
 should then print out these statistics for each column by the header name.</li>
 </ul>
 
-<h2 id="exercise-44">Exercise 44</h2>
-
-<p>Ring Buffer</p>
+<h2 id="exercise-44-ring-buffer">Exercise 44 Ring Buffer</h2>
 
 <p>The Plan</p>
 
@@ -5848,10 +6624,332 @@ should then print out these statistics for each column by the header name.</li>
 
 <p>The Code</p>
 
+<p>.\ex44\netclient.c</p>
+
+<pre><code class="language-c">#undef NDEBUG
+#include &lt;stdlib.h&gt;
+#include &lt;sys/select.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/uio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+
+struct tagbstring NL = bsStatic(&quot;\n&quot;);
+struct tagbstring CRLF = bsStatic(&quot;\r\n&quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &gt;= 0, &quot;Invalid flags on nonblock.&quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;addr);
+    check(rc == 0, &quot;Failed to lookup %s:%s&quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &gt;= 0, &quot;Cannot create a socket.&quot;);
+
+    rc = connect(sock, addr-&gt;ai_addr, addr-&gt;ai_addrlen);
+    check(rc == 0, &quot;Connect failed.&quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&gt;start = buffer-&gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &gt;= 0, &quot;Failed to read from fd: %d&quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &quot;Failed to get from the buffer.&quot;);
+    check(bfindreplace(data, &amp;NL, &amp;CRLF, 0) == BSTR_OK,
+            &quot;Failed to replace NL.&quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &quot;Failed to write everything to fd: %d.&quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int main(int argc, char *argv[])
+{
+    fd_set allreads;
+    fd_set readmask;
+
+    int socket = 0;
+    int rc = 0;
+    RingBuffer *in_rb = RingBuffer_create(1024 * 10);
+    RingBuffer *sock_rb = RingBuffer_create(1024 * 10);
+
+    check(argc == 3, &quot;USAGE: netclient host port&quot;);
+
+    socket = client_connect(argv[1], argv[2]);
+    check(socket &gt;= 0, &quot;connect to %s:%s failed.&quot;, argv[1], argv[2]);
+
+    FD_ZERO(&amp;allreads);
+    FD_SET(socket, &amp;allreads);
+    FD_SET(0, &amp;allreads);
+
+    while (1) {
+        readmask = allreads;
+        rc = select(socket + 1, &amp;readmask, NULL, NULL, NULL);
+        check(rc &gt;= 0, &quot;select failed.&quot;);
+
+        if (FD_ISSET(0, &amp;readmask)) {
+            rc = read_some(in_rb, 0, 0);
+            check_debug(rc != -1, &quot;Failed to read from stdin.&quot;);
+        }
+
+        if (FD_ISSET(socket, &amp;readmask)) {
+            rc = read_some(sock_rb, socket, 0);
+            check_debug(rc != -1, &quot;Failed to read from socket.&quot;);
+        }
+
+        while (!RingBuffer_empty(sock_rb)) {
+            rc = write_some(sock_rb, 1, 0);
+            check_debug(rc != -1, &quot;Failed to write to stdout.&quot;);
+        }
+
+        while (!RingBuffer_empty(in_rb)) {
+            rc = write_some(in_rb, socket, 1);
+            check_debug(rc != -1, &quot;Failed to write to socket.&quot;);
+        }
+    }
+
+    return 0;
+
+error:
+    return -1;
+}
+
+</code></pre>
+
 <p>It&rsquo;s basically a DArray with dynamic start and end settings.
 You can <em>also</em> use a Queue of bstrings to do almost the same thing.</p>
 
 <p>Code Review</p>
+
+<p>.\ex44\netclient.c</p>
+
+<pre><code class="language-c">#undef NDEBUG
+#include &lt;stdlib.h&gt;
+#include &lt;sys/select.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/uio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+
+struct tagbstring NL = bsStatic(&quot;\n&quot;);
+struct tagbstring CRLF = bsStatic(&quot;\r\n&quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &gt;= 0, &quot;Invalid flags on nonblock.&quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;addr);
+    check(rc == 0, &quot;Failed to lookup %s:%s&quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &gt;= 0, &quot;Cannot create a socket.&quot;);
+
+    rc = connect(sock, addr-&gt;ai_addr, addr-&gt;ai_addrlen);
+    check(rc == 0, &quot;Connect failed.&quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&gt;start = buffer-&gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &gt;= 0, &quot;Failed to read from fd: %d&quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &quot;Failed to get from the buffer.&quot;);
+    check(bfindreplace(data, &amp;NL, &amp;CRLF, 0) == BSTR_OK,
+            &quot;Failed to replace NL.&quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &quot;Failed to write everything to fd: %d.&quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int main(int argc, char *argv[])
+{
+    fd_set allreads;
+    fd_set readmask;
+
+    int socket = 0;
+    int rc = 0;
+    RingBuffer *in_rb = RingBuffer_create(1024 * 10);
+    RingBuffer *sock_rb = RingBuffer_create(1024 * 10);
+
+    check(argc == 3, &quot;USAGE: netclient host port&quot;);
+
+    socket = client_connect(argv[1], argv[2]);
+    check(socket &gt;= 0, &quot;connect to %s:%s failed.&quot;, argv[1], argv[2]);
+
+    FD_ZERO(&amp;allreads);
+    FD_SET(socket, &amp;allreads);
+    FD_SET(0, &amp;allreads);
+
+    while (1) {
+        readmask = allreads;
+        rc = select(socket + 1, &amp;readmask, NULL, NULL, NULL);
+        check(rc &gt;= 0, &quot;select failed.&quot;);
+
+        if (FD_ISSET(0, &amp;readmask)) {
+            rc = read_some(in_rb, 0, 0);
+            check_debug(rc != -1, &quot;Failed to read from stdin.&quot;);
+        }
+
+        if (FD_ISSET(socket, &amp;readmask)) {
+            rc = read_some(sock_rb, socket, 0);
+            check_debug(rc != -1, &quot;Failed to read from socket.&quot;);
+        }
+
+        while (!RingBuffer_empty(sock_rb)) {
+            rc = write_some(sock_rb, 1, 0);
+            check_debug(rc != -1, &quot;Failed to write to stdout.&quot;);
+        }
+
+        while (!RingBuffer_empty(in_rb)) {
+            rc = write_some(in_rb, socket, 1);
+            check_debug(rc != -1, &quot;Failed to write to socket.&quot;);
+        }
+    }
+
+    return 0;
+
+error:
+    return -1;
+}
+
+</code></pre>
 
 <p>The Analysis</p>
 
@@ -5889,9 +6987,7 @@ Make sure that you set up this fuzzing so that the same operations are done
 to each version, and you can compare them between runs.</li>
 </ul>
 
-<h2 id="exercise-45">Exercise 45</h2>
-
-<p>A Simple TCP/IP Client</p>
+<h2 id="exercise-45-a-simple-tcp-ip-client">Exercise 45 A Simple TCP/IP Client</h2>
 
 <p>The Plan</p>
 
@@ -5921,9 +7017,7 @@ is only needed on protocols that require it for line endings, like HTTP.
 Sometimes you don&rsquo;t want the translation, so give the user the option.</li>
 </ul>
 
-<h2 id="exercise-46">Exercise 46</h2>
-
-<p>Ternary Search Tree</p>
+<h2 id="exercise-46-ternary-search-tree">Exercise 46 Ternary Search Tree</h2>
 
 <p>The Plan</p>
 
@@ -5978,9 +7072,7 @@ so you can do suffix searches and inserts.</li>
 compared to the <em>BSTree</em> and <em>Hashmap</em>.</li>
 </ul>
 
-<h2 id="exercise-47">Exercise 47</h2>
-
-<p>A Fast URL Router</p>
+<h2 id="exercise-47-a-fast-url-router">Exercise 47 A Fast URL Router</h2>
 
 <p>The Plan</p>
 
@@ -5999,6 +7091,131 @@ compared to the <em>BSTree</em> and <em>Hashmap</em>.</li>
 </code></pre>
 
 <p>Code Review</p>
+
+<p>.\ex47\urlor.c</p>
+
+<pre><code class="language-c">#include &lt;lcthw/tstree.h&gt;
+#include &lt;lcthw/bstrlib.h&gt;
+
+TSTree *add_route_data(TSTree * routes, bstring line)
+{
+    struct bstrList *data = bsplit(line, ' ');
+    check(data-&gt;qty == 2, &quot;Line '%s' does not have 2 columns&quot;,
+            bdata(line));
+
+    routes = TSTree_insert(routes,
+            bdata(data-&gt;entry[0]),
+            blength(data-&gt;entry[0]),
+            bstrcpy(data-&gt;entry[1]));
+
+    bstrListDestroy(data);
+
+    return routes;
+
+error:
+    return NULL;
+}
+
+TSTree *load_routes(const char *file)
+{
+    TSTree *routes = NULL;
+    bstring line = NULL;
+    FILE *routes_map = NULL;
+
+    routes_map = fopen(file, &quot;r&quot;);
+    check(routes_map != NULL, &quot;Failed to open routes: %s&quot;, file);
+
+    while ((line = bgets((bNgetc) fgetc, routes_map, '\n')) != NULL) {
+        check(btrimws(line) == BSTR_OK, &quot;Failed to trim line.&quot;);
+        routes = add_route_data(routes, line);
+        check(routes != NULL, &quot;Failed to add route.&quot;);
+        bdestroy(line);
+    }
+
+    fclose(routes_map);
+    return routes;
+
+error:
+    if (routes_map) fclose(routes_map);
+    if (line) bdestroy(line);
+
+    return NULL;
+}
+
+bstring match_url(TSTree * routes, bstring url)
+{
+    bstring route = TSTree_search(routes, bdata(url), blength(url));
+
+    if (route == NULL) {
+        printf(&quot;No exact match found, trying prefix.\n&quot;);
+        route = TSTree_search_prefix(routes, bdata(url), blength(url));
+    }
+
+    return route;
+}
+
+bstring read_line(const char *prompt)
+{
+    printf(&quot;%s&quot;, prompt);
+
+    bstring result = bgets((bNgetc) fgetc, stdin, '\n');
+    check_debug(result != NULL, &quot;stdin closed.&quot;);
+
+    check(btrimws(result) == BSTR_OK, &quot;Failed to trim.&quot;);
+
+    return result;
+
+error:
+    return NULL;
+}
+
+void bdestroy_cb(void *value, void *ignored)
+{
+    (void)ignored;
+    bdestroy((bstring) value);
+}
+
+void destroy_routes(TSTree * routes)
+{
+    TSTree_traverse(routes, bdestroy_cb, NULL);
+    TSTree_destroy(routes);
+}
+
+int main(int argc, char *argv[])
+{
+    bstring url = NULL;
+    bstring route = NULL;
+    TSTree *routes = NULL;
+
+    check(argc == 2, &quot;USAGE: urlor &lt;urlfile&gt;&quot;);
+
+    routes = load_routes(argv[1]);
+    check(routes != NULL, &quot;Your route file has an error.&quot;);
+
+    while (1) {
+        url = read_line(&quot;URL&gt; &quot;);
+        check_debug(url != NULL, &quot;goodbye.&quot;);
+
+        route = match_url(routes, url);
+
+        if (route) {
+            printf(&quot;MATCH: %s == %s\n&quot;, bdata(url), bdata(route));
+        } else {
+            printf(&quot;FAIL: %s\n&quot;, bdata(url));
+        }
+
+        bdestroy(url);
+    }
+
+    destroy_routes(routes);
+    return 0;
+
+error:
+    destroy_routes(routes);
+    return 1;
+}
+
+</code></pre>
 
 <p>The Analysis</p>
 
@@ -6027,9 +7244,7 @@ in your <em>Handler</em> struct, and then you have yourself a fully dynamic call
 handler system in C.</li>
 </ul>
 
-<h2 id="exercise-48a">Exercise 48a</h2>
-
-<p>A Simple Network Server:</p>
+<h2 id="exercise-48-a-simple-network-server">Exercise 48 A Simple Network Server:</h2>
 
 <p>Project Description</p>
 
@@ -6086,9 +7301,579 @@ to run from the command line and keep running.</li>
 
 <p>This will be <em>HARD</em>!  Try it your best, and take it piece by piece.  You can do it, but remember if you give up the next video (48b) will show you the code to my solution and how to solve it.  You can peek there then come back when you&rsquo;re stuck.</p>
 
-<h2 id="exercise-48b">Exercise 48b</h2>
+<h2 id="exercise-48-a-simple-network-server-1">Exercise 48 A Simple Network Server:</h2>
 
-<p>A Simple Network Server:</p>
+<p>.\ex48b\c-skeleton</p>
+
+<p>.\ex48b\c-skeleton\src\dbg.h</p>
+
+<pre><code class="language-c">#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &quot;DEBUG %s:%d: &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &quot;None&quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &quot;[ERROR] (%s:%d: errno: %s) &quot; M &quot;\n&quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &quot;[WARN] (%s:%d: errno: %s) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &quot;[INFO] (%s:%d) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &quot;Out of memory.&quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+</code></pre>
+
+<p>.\ex48b\c-skeleton\src\libex29.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &quot;dbg.h&quot;
+
+
+int print_a_message(const char *msg)
+{
+    printf(&quot;A STRING: %s\n&quot;, msg);
+
+    return 0;
+}
+
+
+int uppercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != '\0'; i++) {
+        printf(&quot;%c&quot;, toupper(msg[i]));
+    }
+
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+
+int lowercase(const char *msg)
+{
+    int i = 0;
+
+    // BUG: \0 termination problems
+    for(i = 0; msg[i] != '\0'; i++) {
+        printf(&quot;%c&quot;, tolower(msg[i]));
+    }
+
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+
+int fail_on_purpose(const char *msg)
+{
+    return 1;
+} 
+
+</code></pre>
+
+<p>.\ex48b\c-skeleton\tests\libex29_tests.c</p>
+
+<pre><code class="language-c">#include &quot;minunit.h&quot;
+#include &lt;dlfcn.h&gt;
+
+typedef int (*lib_function) (const char *data);
+char *lib_file = &quot;build/libYOUR_LIBRARY.so&quot;;
+void *lib = NULL;
+
+int check_function(const char *func_to_run, const char *data,
+        int expected)
+{
+    lib_function func = dlsym(lib, func_to_run);
+    check(func != NULL,
+            &quot;Did not find %s function in the library %s: %s&quot;, func_to_run,
+            lib_file, dlerror());
+
+    int rc = func(data);
+    check(rc == expected, &quot;Function %s return %d for data: %s&quot;,
+            func_to_run, rc, data);
+
+    return 1;
+error:
+    return 0;
+}
+
+char *test_dlopen()
+{
+    lib = dlopen(lib_file, RTLD_NOW);
+    mu_assert(lib != NULL, &quot;Failed to open the library to test.&quot;);
+
+    return NULL;
+}
+
+char *test_functions()
+{
+    mu_assert(check_function(&quot;print_a_message&quot;, &quot;Hello&quot;, 0),
+            &quot;print_a_message failed.&quot;);
+    mu_assert(check_function(&quot;uppercase&quot;, &quot;Hello&quot;, 0),
+            &quot;uppercase failed.&quot;);
+    mu_assert(check_function(&quot;lowercase&quot;, &quot;Hello&quot;, 0),
+            &quot;lowercase failed.&quot;);
+
+    return NULL;
+}
+
+char *test_failures()
+{
+    mu_assert(check_function(&quot;fail_on_purpose&quot;, &quot;Hello&quot;, 1),
+            &quot;fail_on_purpose should fail.&quot;);
+
+    return NULL;
+}
+
+char *test_dlclose()
+{
+    int rc = dlclose(lib);
+    mu_assert(rc == 0, &quot;Failed to close lib.&quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dlopen);
+    mu_run_test(test_functions);
+    mu_run_test(test_failures);
+    mu_run_test(test_dlclose);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+</code></pre>
+
+<p>.\ex48b\statserve</p>
+
+<p>.\ex48b\statserve\bin\statserve.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &quot;statserve.h&quot;
+#include &quot;net.h&quot;
+
+
+int main(int argc, char *argv[])
+{
+    check(argc == 3, &quot;USAGE: statserve host port&quot;);
+
+    const char *host = argv[1];
+    const char *port = argv[2];
+
+    check(echo_server(host, port), &quot;Failed to run the echo server.&quot;);
+
+    return 0;
+
+error:
+    
+    return 1;
+}
+
+</code></pre>
+
+<p>.\ex48b\statserve\src\dbg.h</p>
+
+<pre><code class="language-c">#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &quot;DEBUG %s:%d: &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &quot;None&quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &quot;[ERROR] (%s:%d: errno: %s) &quot; M &quot;\n&quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &quot;[WARN] (%s:%d: errno: %s) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &quot;[INFO] (%s:%d) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &quot;Out of memory.&quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+</code></pre>
+
+<p>.\ex48b\statserve\src\net.c</p>
+
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;sys/select.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/uio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &quot;net.h&quot;
+
+struct tagbstring NL = bsStatic(&quot;\n&quot;);
+struct tagbstring CRLF = bsStatic(&quot;\r\n&quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &gt;= 0, &quot;Invalid flags on nonblock.&quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;addr);
+    check(rc == 0, &quot;Failed to lookup %s:%s&quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &gt;= 0, &quot;Cannot create a socket.&quot;);
+
+    rc = connect(sock, addr-&gt;ai_addr, addr-&gt;ai_addrlen);
+    check(rc == 0, &quot;Connect failed.&quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&gt;start = buffer-&gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &gt;= 0, &quot;Failed to read from fd: %d&quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &quot;Failed to get from the buffer.&quot;);
+    check(bfindreplace(data, &amp;NL, &amp;CRLF, 0) == BSTR_OK,
+            &quot;Failed to replace NL.&quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &quot;Failed to write everything to fd: %d.&quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int attempt_listen(struct addrinfo *info)
+{
+    int sockfd = -1; // default fail
+    int rc = -1;
+    int yes = 1;
+
+    check(info != NULL, &quot;Invalid addrinfo.&quot;);
+
+    // create a socket with the addrinfo
+    sockfd = socket(info-&gt;ai_family, info-&gt;ai_socktype,
+            info-&gt;ai_protocol);
+    check_debug(sockfd != -1, &quot;Failed to bind to address. Trying more.&quot;);
+
+    // set the SO_REUSEADDR option on the socket
+    rc = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int));
+    check_debug(rc == 0, &quot;Failed to set SO_REUSADDR.&quot;);
+
+    // attempt to bind to it
+    rc = bind(sockfd, info-&gt;ai_addr, info-&gt;ai_addrlen);
+    check_debug(rc == 0, &quot;Failed to find socket.&quot;);
+
+    // finally listen with a backlog
+    rc = listen(sockfd, BACKLOG);
+    check_debug(rc == 0, &quot;Failed to listen to socket.&quot;);
+
+    return sockfd;
+
+error:
+    return -1;
+}
+
+
+int server_listen(const char *host, const char *port)
+{
+    int rc = 0;
+    int sockfd = -1; // default fail value
+    struct addrinfo *info = NULL;
+    struct addrinfo *next_p = NULL;
+    struct addrinfo addr = {
+        .ai_family = AF_UNSPEC,
+        .ai_socktype = SOCK_STREAM,
+        .ai_flags = AI_PASSIVE
+    };
+
+    check(host != NULL, &quot;Invalid host.&quot;);
+    check(port != NULL, &quot;Invalid port.&quot;);
+
+    // get the address info for host and port
+    rc = getaddrinfo(NULL, port, &amp;addr, &amp;info);
+    check(rc == 0, &quot;Failed to get address info for connect.&quot;);
+
+    // cycle through the available list to find one
+    for(next_p = info; next_p != NULL; next_p = next_p-&gt;ai_next)
+    {
+        // attempt to listen to each one
+        sockfd = attempt_listen(next_p);
+        if(sockfd != -1) break;
+    }
+
+    // either we found one and were able to listen or nothing.
+    check(sockfd != -1, &quot;All possible addresses failed.&quot;);
+
+error: //fallthrough
+    if(info) freeaddrinfo(info);
+    // this gets set by the above to either -1 or valid
+    return sockfd;
+}
+
+</code></pre>
+
+<p>.\ex48b\statserve\src\net.h</p>
+
+<pre><code class="language-c">#ifndef _net_h
+#define _net_h
+
+#include &lt;lcthw/ringbuffer.h&gt;
+
+#define BACKLOG 10
+
+int nonblock(int fd);
+int client_connect(char *host, char *port);
+int read_some(RingBuffer * buffer, int fd, int is_socket);
+int write_some(RingBuffer * buffer, int fd, int is_socket);
+int server_listen(const char *host, const char *port);
+
+#endif
+
+</code></pre>
+
+<p>.\ex48b\statserve\src\statserve.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &quot;net.h&quot;
+#include &lt;netdb.h&gt;
+
+const int RB_SIZE = 1024 * 10;
+
+void handle_sigchild(int sig) {
+    sig = 0; // ignore it
+    while(waitpid(-1, NULL, WNOHANG) &gt; 0) {
+    }
+}
+
+void client_handler(int client_fd)
+{
+    int rc = 0;
+    // need a ringbuffer for the input
+    RingBuffer *sock_rb = RingBuffer_create(RB_SIZE);
+
+    // read_some in a loop
+    while(read_some(sock_rb, client_fd, 1) != -1) {
+        // write_it back off the ringbuffer
+        if(write_some(sock_rb, client_fd, 1) == -1) {
+            debug(&quot;Client closed.&quot;);
+            break;
+        }
+    }
+
+    // close the socket
+    rc = close(client_fd);
+    check(rc != -1, &quot;Failed to close the socket.&quot;);
+
+error: // fallthrough
+    if(sock_rb) RingBuffer_destroy(sock_rb);
+    exit(0); // just exit the child process
+}
+
+int echo_server(const char *host, const char *port)
+{
+    int rc = 0;
+    struct sockaddr_in client_addr;
+    socklen_t sin_size = sizeof(client_addr);
+    int server_socket = 0;
+    int client_fd = 0;
+
+    struct sigaction sa = {
+        .sa_handler = handle_sigchild,
+        .sa_flags = SA_RESTART | SA_NOCLDSTOP
+    };
+
+    check(host != NULL, &quot;Invalid host.&quot;);
+    check(port != NULL, &quot;Invalid port.&quot;);
+
+    // create a sigaction that handles SIGCHLD
+    sigemptyset(&amp;sa.sa_mask);
+    rc = sigaction(SIGCHLD, &amp;sa, 0);
+    check(rc != -1, &quot;Failed to setup signal handler for child processes.&quot;);
+
+    // listen on the given port and host
+    server_socket = server_listen(host, port);
+    check(server_socket &gt;= 0, &quot;bind to %s:%s failed.&quot;, host, port);
+
+    while(1) {
+        // accept the connection
+        client_fd = accept(server_socket, (struct sockaddr *)&amp;client_addr, &amp;sin_size); 
+        check(client_fd &gt;= 0, &quot;Failed to accept connection.&quot;);
+
+        debug(&quot;Client connected.&quot;);
+
+        rc = fork();
+        if(rc == 0) {
+            // child process
+            close(server_socket); // don't need this
+            // handle the client
+            client_handler(client_fd);
+        } else {
+            // server process
+            close(client_fd); // don't need this
+        }
+    }
+
+error:  // fallthrough
+    return -1;
+}
+
+</code></pre>
+
+<p>.\ex48b\statserve\src\statserve.h</p>
+
+<pre><code class="language-c">#ifndef _statserve_h
+#define _statserve_h
+
+int echo_server(const char *host, const char *port);
+
+#endif
+
+</code></pre>
+
+<p>.\ex48b\statserve\tests\statserve_tests.c</p>
+
+<pre><code class="language-c">#include &quot;minunit.h&quot;
+#include &lt;dlfcn.h&gt;
+#include &quot;statserve.h&quot;
+
+char *test_dummy()
+{
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_dummy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+</code></pre>
 
 <p>.\ex48b\c-skeleton</p>
 
@@ -6688,9 +8473,7 @@ RUN_TESTS(all_tests);
 
 <p>The Final Code</p>
 
-<h2 id="exercise-49a">Exercise 49a</h2>
-
-<p>A Statistics Server</p>
+<h2 id="exercise-49-a-statistics-server">Exercise 49 A Statistics Server</h2>
 
 <p>Project Description</p>
 
@@ -6755,9 +8538,781 @@ dump   Get all of the elements of a statistic (sum, sumsq, n, min, and max).
 <li>Automate your tests!</li>
 </ul>
 
-<h2 id="exercise-49b">Exercise 49b</h2>
+<h2 id="exercise-49-a-statistics-server-1">Exercise 49 A Statistics Server:</h2>
 
-<p>A Statistics Server:</p>
+<p>.\ex49b\statserve</p>
+
+<p>.\ex49b\statserve\bin\statserve.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &quot;statserve.h&quot;
+#include &quot;net.h&quot;
+
+
+int main(int argc, char *argv[])
+{
+    check(argc == 3, &quot;USAGE: statserve host port&quot;);
+
+    const char *host = argv[1];
+    const char *port = argv[2];
+
+    check(echo_server(host, port), &quot;Failed to run the echo server.&quot;);
+
+    return 0;
+
+error:
+    
+    return 1;
+}
+
+</code></pre>
+
+<p>.\ex49b\statserve\src\dbg.h</p>
+
+<pre><code class="language-c">#ifndef __dbg_h__
+#define __dbg_h__
+
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef NDEBUG
+#define debug(M, ...)
+#else
+#define debug(M, ...) fprintf(stderr, &quot;DEBUG %s:%d: &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+#endif
+
+#define clean_errno() (errno == 0 ? &quot;None&quot; : strerror(errno))
+
+#define log_err(M, ...) fprintf(stderr,\
+        &quot;[ERROR] (%s:%d: errno: %s) &quot; M &quot;\n&quot;, __FILE__, __LINE__,\
+        clean_errno(), ##__VA_ARGS__)
+
+#define log_warn(M, ...) fprintf(stderr,\
+        &quot;[WARN] (%s:%d: errno: %s) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+
+#define log_info(M, ...) fprintf(stderr, &quot;[INFO] (%s:%d) &quot; M &quot;\n&quot;,\
+        __FILE__, __LINE__, ##__VA_ARGS__)
+
+#define check(A, M, ...) if(!(A)) {\
+    log_err(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#define check_mem(A) check((A), &quot;Out of memory.&quot;)
+
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__);\
+    errno=0; goto error; }
+
+#endif
+
+</code></pre>
+
+<p>.\ex49b\statserve\src\net.c</p>
+
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;sys/select.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/uio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &quot;net.h&quot;
+
+struct tagbstring NL = bsStatic(&quot;\n&quot;);
+struct tagbstring CRLF = bsStatic(&quot;\r\n&quot;);
+
+int nonblock(int fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    check(flags &gt;= 0, &quot;Invalid flags on nonblock.&quot;);
+
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    return 0;
+error:
+    return -1;
+}
+
+int client_connect(char *host, char *port)
+{
+    int rc = 0;
+    struct addrinfo *addr = NULL;
+
+    rc = getaddrinfo(host, port, NULL, &amp;addr);
+    check(rc == 0, &quot;Failed to lookup %s:%s&quot;, host, port);
+
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    check(sock &gt;= 0, &quot;Cannot create a socket.&quot;);
+
+    rc = connect(sock, addr-&gt;ai_addr, addr-&gt;ai_addrlen);
+    check(rc == 0, &quot;Connect failed.&quot;);
+
+    rc = nonblock(sock);
+    check(rc == 0, &quot;Can't set nonblocking.&quot;);
+
+    freeaddrinfo(addr);
+    return sock;
+
+error:
+    freeaddrinfo(addr);
+    return -1;
+}
+
+int read_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+
+    if (RingBuffer_available_data(buffer) == 0) {
+        buffer-&gt;start = buffer-&gt;end = 0;
+    }
+
+    if (is_socket) {
+        rc = recv(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer), 0);
+    } else {
+        rc = read(fd, RingBuffer_starts_at(buffer),
+                RingBuffer_available_space(buffer));
+    }
+
+    check(rc &gt;= 0, &quot;Failed to read from fd: %d&quot;, fd);
+
+    RingBuffer_commit_write(buffer, rc);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int write_some(RingBuffer * buffer, int fd, int is_socket)
+{
+    int rc = 0;
+    bstring data = RingBuffer_get_all(buffer);
+
+    check(data != NULL, &quot;Failed to get from the buffer.&quot;);
+    check(bfindreplace(data, &amp;NL, &amp;CRLF, 0) == BSTR_OK,
+            &quot;Failed to replace NL.&quot;);
+
+    if (is_socket) {
+        rc = send(fd, bdata(data), blength(data), 0);
+    } else {
+        rc = write(fd, bdata(data), blength(data));
+    }
+
+    check(rc == blength(data), &quot;Failed to write everything to fd: %d.&quot;,
+            fd);
+    bdestroy(data);
+
+    return rc;
+
+error:
+    return -1;
+}
+
+int attempt_listen(struct addrinfo *info)
+{
+    int sockfd = -1; // default fail
+    int rc = -1;
+    int yes = 1;
+
+    check(info != NULL, &quot;Invalid addrinfo.&quot;);
+
+    // create a socket with the addrinfo
+    sockfd = socket(info-&gt;ai_family, info-&gt;ai_socktype,
+            info-&gt;ai_protocol);
+    check_debug(sockfd != -1, &quot;Failed to bind to address. Trying more.&quot;);
+
+    // set the SO_REUSEADDR option on the socket
+    rc = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int));
+    check_debug(rc == 0, &quot;Failed to set SO_REUSADDR.&quot;);
+
+    // attempt to bind to it
+    rc = bind(sockfd, info-&gt;ai_addr, info-&gt;ai_addrlen);
+    check_debug(rc == 0, &quot;Failed to find socket.&quot;);
+
+    // finally listen with a backlog
+    rc = listen(sockfd, BACKLOG);
+    check_debug(rc == 0, &quot;Failed to listen to socket.&quot;);
+
+    return sockfd;
+
+error:
+    return -1;
+}
+
+
+int server_listen(const char *host, const char *port)
+{
+    int rc = 0;
+    int sockfd = -1; // default fail value
+    struct addrinfo *info = NULL;
+    struct addrinfo *next_p = NULL;
+    struct addrinfo addr = {
+        .ai_family = AF_UNSPEC,
+        .ai_socktype = SOCK_STREAM,
+        .ai_flags = AI_PASSIVE
+    };
+
+    check(host != NULL, &quot;Invalid host.&quot;);
+    check(port != NULL, &quot;Invalid port.&quot;);
+
+    // get the address info for host and port
+    rc = getaddrinfo(NULL, port, &amp;addr, &amp;info);
+    check(rc == 0, &quot;Failed to get address info for connect.&quot;);
+
+    // cycle through the available list to find one
+    for(next_p = info; next_p != NULL; next_p = next_p-&gt;ai_next)
+    {
+        // attempt to listen to each one
+        sockfd = attempt_listen(next_p);
+        if(sockfd != -1) break;
+    }
+
+    // either we found one and were able to listen or nothing.
+    check(sockfd != -1, &quot;All possible addresses failed.&quot;);
+
+error: //fallthrough
+    if(info) freeaddrinfo(info);
+    // this gets set by the above to either -1 or valid
+    return sockfd;
+}
+
+bstring read_line(RingBuffer *input, const char line_ending)
+{
+    int i = 0;
+    bstring result = NULL;
+
+    // not super efficient
+    // read a character at a time from the ring buffer
+    for(i = 0; i &lt; RingBuffer_available_data(input); i++) {
+        // if the buffer has line ending
+        if(input-&gt;buffer[i] == line_ending) {
+            // get that much fromt he ring buffer
+            result = RingBuffer_gets(input, i);
+            check(result, &quot;Failed to get line from RingBuffer&quot;);
+            // make sure that we got the right amount
+            check(RingBuffer_available_data(input) &gt;= 1, 
+                    &quot;Not enough data in the RingBuffer after reading line.&quot;);
+            // and commit it
+            RingBuffer_commit_read(input, 1);
+            break;
+        }
+    }
+
+    // notice this will fail in the cases where we get a set of data
+    // on the wire that does not have a line ending yet
+    return result;
+error:
+    return NULL;
+}
+
+</code></pre>
+
+<p>.\ex49b\statserve\src\net.h</p>
+
+<pre><code class="language-c">#ifndef _net_h
+#define _net_h
+
+#include &lt;lcthw/ringbuffer.h&gt;
+
+#define BACKLOG 10
+
+int nonblock(int fd);
+int client_connect(char *host, char *port);
+int read_some(RingBuffer * buffer, int fd, int is_socket);
+int write_some(RingBuffer * buffer, int fd, int is_socket);
+int server_listen(const char *host, const char *port);
+bstring read_line(RingBuffer *input, const char line_ending);
+
+#endif
+
+</code></pre>
+
+<p>.\ex49b\statserve\src\statserve.c</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;lcthw/dbg.h&gt;
+#include &lt;lcthw/hashmap.h&gt;
+#include &lt;lcthw/stats.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &quot;net.h&quot;
+#include &lt;netdb.h&gt;
+
+struct tagbstring LINE_SPLIT = bsStatic(&quot; &quot;);
+struct tagbstring CREATE = bsStatic(&quot;create&quot;);
+struct tagbstring STDDEV = bsStatic(&quot;stddev&quot;);
+struct tagbstring MEAN = bsStatic(&quot;mean&quot;);
+struct tagbstring SAMPLE = bsStatic(&quot;sample&quot;);
+struct tagbstring DUMP = bsStatic(&quot;dump&quot;);
+struct tagbstring DELETE = bsStatic(&quot;delete&quot;);
+struct tagbstring OK = bsStatic(&quot;OK\n&quot;);
+struct tagbstring ERR = bsStatic(&quot;ERR\n&quot;);
+struct tagbstring DNE = bsStatic(&quot;DNE\n&quot;);
+struct tagbstring EXISTS = bsStatic(&quot;EXISTS\n&quot;);
+const char LINE_ENDING = '\n';
+
+const int RB_SIZE = 1024 * 10;
+
+Hashmap *DATA = NULL;
+
+struct Command;
+
+typedef int (*handler_cb)(struct Command *cmd, RingBuffer *send_rb);
+
+typedef struct Command {
+    bstring command;
+    bstring name;
+    bstring number;
+    handler_cb handler;
+} Command;
+
+
+typedef struct Record {
+    bstring name;
+    Stats *stat;
+} Record;
+
+void handle_sigchild(int sig) {
+    sig = 0; // ignore it
+    while(waitpid(-1, NULL, WNOHANG) &gt; 0) {
+    }
+}
+
+void send_reply(RingBuffer *send_rb, bstring reply)
+{
+    RingBuffer_puts(send_rb, reply);
+}
+
+int handle_create(Command *cmd, RingBuffer *send_rb)
+{
+    int rc = 0;
+
+    // if the name is in the DATA map then return exists
+    if(Hashmap_get(DATA, cmd-&gt;name)) {
+        send_reply(send_rb, &amp;EXISTS);
+    } else {
+        // allocate a recrod
+        debug(&quot;create: %s %s&quot;, bdata(cmd-&gt;name), bdata(cmd-&gt;number));
+
+        Record *info = calloc(sizeof(Record), 1);
+        check_mem(info);
+
+        // set its stat element
+        info-&gt;stat = Stats_create();
+        check_mem(info-&gt;stat);
+
+        // set its name element
+        info-&gt;name = bstrcpy(cmd-&gt;name);
+        check_mem(info-&gt;name);
+
+        // do a first sample
+        Stats_sample(info-&gt;stat, atof(bdata(cmd-&gt;number)));
+
+        // add it to the hashmap
+        rc = Hashmap_set(DATA, info-&gt;name, info);
+        check(rc == 0, &quot;Failed to add data to map.&quot;);
+
+        // send an OK
+        send_reply(send_rb, &amp;OK);
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+
+int handle_sample(Command *cmd, RingBuffer *send_rb)
+{
+    // get the info from the hashmap
+    Record *info = Hashmap_get(DATA, cmd-&gt;name);
+
+    if(info == NULL) {
+        // if it doesn't exist then DNE
+        send_reply(send_rb, &amp;DNE);
+    } else {
+        // else run sample on it, return the mean
+        Stats_sample(info-&gt;stat, atof(bdata(cmd-&gt;number)));
+        bstring reply = bformat(&quot;%f\n&quot;, Stats_mean(info-&gt;stat));
+        send_reply(send_rb, reply);
+        bdestroy(reply);
+    }
+
+
+    return 0;
+}
+
+int handle_delete(Command *cmd, RingBuffer *send_rb)
+{
+    log_info(&quot;delete: %s&quot;, bdata(cmd-&gt;name));
+    Record *info = Hashmap_get(DATA, cmd-&gt;name);
+
+    if(info == NULL) {
+        send_reply(send_rb, &amp;DNE);
+    } else {
+        Hashmap_delete(DATA, cmd-&gt;name);
+
+        free(info-&gt;stat);
+        bdestroy(info-&gt;name);
+        free(info);
+
+        send_reply(send_rb, &amp;OK);
+    }
+
+    return 0;
+}
+
+int handle_mean(Command *cmd, RingBuffer *send_rb)
+{
+    log_info(&quot;mean: %s&quot;, bdata(cmd-&gt;name));
+    Record *info = Hashmap_get(DATA, cmd-&gt;name);
+
+    if(info == NULL) {
+        send_reply(send_rb, &amp;DNE);
+    } else {
+        bstring reply = bformat(&quot;%f\n&quot;, Stats_mean(info-&gt;stat));
+        send_reply(send_rb, reply);
+        bdestroy(reply);
+    }
+
+    return 0;
+}
+
+int handle_stddev(Command *cmd, RingBuffer *send_rb)
+{
+    log_info(&quot;stddev: %s&quot;, bdata(cmd-&gt;name));
+    Record *info = Hashmap_get(DATA, cmd-&gt;name);
+
+    if(info == NULL) {
+        send_reply(send_rb, &amp;DNE);
+    } else {
+        bstring reply = bformat(&quot;%f\n&quot;, Stats_stddev(info-&gt;stat));
+        send_reply(send_rb, reply);
+        bdestroy(reply);
+    }
+
+    return 0;
+}
+
+int handle_dump(Command *cmd, RingBuffer *send_rb)
+{
+    log_info(&quot;dump: %s&quot;, bdata(cmd-&gt;name));
+    Record *info = Hashmap_get(DATA, cmd-&gt;name);
+
+    if(info == NULL) {
+        send_reply(send_rb, &amp;DNE);
+    } else {
+        bstring reply = bformat(&quot;%f %f %f %f %ld %f %f\n&quot;,
+                Stats_mean(info-&gt;stat),
+                Stats_stddev(info-&gt;stat),
+                info-&gt;stat-&gt;sum,
+                info-&gt;stat-&gt;sumsq,
+                info-&gt;stat-&gt;n,
+                info-&gt;stat-&gt;min,
+                info-&gt;stat-&gt;max);
+
+        send_reply(send_rb, reply);
+        bdestroy(reply);
+    }
+
+    return 0;
+}
+
+int parse_command(struct bstrList *splits, Command *cmd)
+{
+    // get the command
+    cmd-&gt;command = splits-&gt;entry[0];
+
+    if(biseq(cmd-&gt;command, &amp;CREATE)) {
+        check(splits-&gt;qty == 3, &quot;Failed to parse create: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;number = splits-&gt;entry[2];
+        cmd-&gt;handler = handle_create;
+    } else if(biseq(cmd-&gt;command, &amp;MEAN)) {
+        check(splits-&gt;qty == 2, &quot;Failed to parse mean: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;handler = handle_mean;
+    } else if(biseq(cmd-&gt;command, &amp;SAMPLE)) {
+        check(splits-&gt;qty == 3, &quot;Failed to parse sample: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;number = splits-&gt;entry[2];
+        cmd-&gt;handler = handle_sample;
+    } else if(biseq(cmd-&gt;command, &amp;DUMP)) {
+        check(splits-&gt;qty == 2, &quot;Failed to parse dump: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;handler = handle_dump;
+    } else if(biseq(cmd-&gt;command, &amp;DELETE)) {
+        check(splits-&gt;qty == 2, &quot;Failed to parse delete: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;handler = handle_delete;
+    } else if(biseq(cmd-&gt;command, &amp;STDDEV)) {
+        check(splits-&gt;qty == 2, &quot;Failed to parse stddev: %d&quot;, splits-&gt;qty);
+        cmd-&gt;name = splits-&gt;entry[1];
+        cmd-&gt;handler = handle_stddev;
+    } else {
+        sentinel(&quot;Failed to parse the command.&quot;);
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+int parse_line(bstring data, RingBuffer *send_rb)
+{
+    int rc = -1;
+    Command cmd = {.command = NULL};
+
+    // split data on line boundaries
+    struct bstrList *splits = bsplits(data, &amp;LINE_SPLIT);
+    check(splits != NULL, &quot;Bad data.&quot;);
+
+    // parse it into a command
+    rc = parse_command(splits, &amp;cmd);
+    check(rc == 0, &quot;Failed to parse command.&quot;);
+
+    // call the command handler for that command
+    rc = cmd.handler(&amp;cmd, send_rb);
+
+error: // fallthrough
+    if(splits) bstrListDestroy(splits);
+    return rc;
+
+}
+
+void client_handler(int client_fd)
+{
+    int rc = 0;
+    RingBuffer *recv_rb = RingBuffer_create(RB_SIZE);
+    RingBuffer *send_rb = RingBuffer_create(RB_SIZE);
+
+    check_mem(recv_rb);
+    check_mem(send_rb);
+
+    // keep reading into the recv buffer and sending on send
+    while(read_some(recv_rb, client_fd, 1) != -1) {
+        // read a line from the recv_rb
+        bstring data = read_line(recv_rb, LINE_ENDING);
+        check(data != NULL, &quot;Client closed.&quot;);
+
+        // parse it, close on any protocol errors
+        rc = parse_line(data, send_rb);
+        bdestroy(data); // cleanup here
+        check(rc == 0, &quot;Failed to parse user. Closing.&quot;);
+
+        // and as long as there's something to send, send it
+        if(RingBuffer_available_data(send_rb)) {
+            write_some(send_rb, client_fd, 1);
+        }
+    }
+
+    // close the socket
+    rc = close(client_fd);
+    check(rc != -1, &quot;Failed to close the socket.&quot;);
+
+error: // fallthrough
+    if(recv_rb) RingBuffer_destroy(recv_rb);
+    if(send_rb) RingBuffer_destroy(send_rb);
+    exit(0); // just exit the child process
+}
+
+int setup_data_store()
+{
+    // a more advanced design simply wouldn't use this
+    DATA = Hashmap_create(NULL, NULL);
+    check_mem(DATA);
+
+    return 0;
+error:
+    return -1;
+}
+
+int echo_server(const char *host, const char *port)
+{
+    int rc = 0;
+    struct sockaddr_in client_addr;
+    socklen_t sin_size = sizeof(client_addr);
+    int server_socket = 0;
+    int client_fd = 0;
+
+    rc = setup_data_store();
+    check(rc == 0, &quot;Failed to setup the data store.&quot;);
+
+    struct sigaction sa = {
+        .sa_handler = handle_sigchild,
+        .sa_flags = SA_RESTART | SA_NOCLDSTOP
+    };
+
+    check(host != NULL, &quot;Invalid host.&quot;);
+    check(port != NULL, &quot;Invalid port.&quot;);
+
+    // create a sigaction that handles SIGCHLD
+    sigemptyset(&amp;sa.sa_mask);
+    rc = sigaction(SIGCHLD, &amp;sa, 0);
+    check(rc != -1, &quot;Failed to setup signal handler for child processes.&quot;);
+
+    // listen on the given port and host
+    server_socket = server_listen(host, port);
+    check(server_socket &gt;= 0, &quot;bind to %s:%s failed.&quot;, host, port);
+
+    while(1) {
+        // accept the connection
+        client_fd = accept(server_socket, (struct sockaddr *)&amp;client_addr, &amp;sin_size); 
+        check(client_fd &gt;= 0, &quot;Failed to accept connection.&quot;);
+
+        debug(&quot;Client connected.&quot;);
+
+        rc = fork();
+        if(rc == 0) {
+            // child process
+            close(server_socket); // don't need this
+            // handle the client
+            client_handler(client_fd);
+        } else {
+            // server process
+            close(client_fd); // don't need this
+        }
+    }
+
+error:  // fallthrough
+    return -1;
+}
+
+</code></pre>
+
+<p>.\ex49b\statserve\src\statserve.h</p>
+
+<pre><code class="language-c">#ifndef _statserve_h
+#define _statserve_h
+
+#include &lt;lcthw/bstrlib.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+
+struct tagbstring OK;
+
+int setup_data_store();
+
+int parse_line(bstring data, RingBuffer *send_rb);
+
+int echo_server(const char *host, const char *port);
+
+#endif
+
+</code></pre>
+
+<p>.\ex49b\statserve\tests\statserve_tests.c</p>
+
+<pre><code class="language-c">#include &quot;minunit.h&quot;
+#include &lt;dlfcn.h&gt;
+#include &quot;statserve.h&quot;
+#include &lt;lcthw/bstrlib.h&gt;
+#include &lt;lcthw/ringbuffer.h&gt;
+#include &lt;assert.h&gt;
+
+typedef struct LineTest {
+    char *line;
+    bstring result;
+    char *description;
+} LineTest;
+
+int attempt_line(LineTest test)
+{
+    int rc = -1;
+    bstring result = NULL;
+
+    bstring line = bfromcstr(test.line);
+    RingBuffer *send_rb = RingBuffer_create(1024);
+
+    rc = parse_line(line, send_rb);
+    check(rc == 0, &quot;Failed to parse line.&quot;);
+
+    result = RingBuffer_get_all(send_rb);
+    check(result != NULL, &quot;Ring buffer empty.&quot;);
+    check(biseq(result, test.result), &quot;Got the wrong output: %s expected %s&quot;,
+            bdata(result), bdata(test.result));
+
+    bdestroy(line);
+    RingBuffer_destroy(send_rb);
+    return 1; // using 1 for tests
+error:
+  
+    log_err(&quot;Failed to process test %s: got %s&quot;, test.line, bdata(result));
+    if(line) bdestroy(line);
+    if(send_rb) RingBuffer_destroy(send_rb);
+    return 0;
+}
+
+
+int run_test_lines(LineTest *tests, int count)
+{
+    int i = 0;
+
+    for(i = 0; i &lt; count; i++) {
+        check(attempt_line(tests[i]), &quot;Failed to run %s&quot;, tests[i].description);
+    }
+
+    return 1;
+error:
+    return 0;
+}
+
+char *test_create()
+{
+    LineTest tests[] = {
+        {.line = &quot;create /zed 100&quot;, .result = &amp;OK, .description = &quot;create zed failed&quot;},
+        {.line = &quot;create /joe 100&quot;, .result = &amp;OK, .description = &quot;create joe failed&quot;},
+
+    };
+
+    mu_assert(run_test_lines(tests, 2), &quot;Failed to run create tests.&quot;);
+
+    return NULL;
+}
+
+char *test_sample()
+{
+    struct tagbstring sample1 = bsStatic(&quot;100.000000\n&quot;);
+
+    LineTest tests[] = {
+        {.line = &quot;sample /zed 100&quot;, .result = &amp;sample1, .description = &quot;sample zed failed.&quot;}
+    };
+
+    mu_assert(run_test_lines(tests, 1), &quot;Failed to run sample tests.&quot;);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    int rc = setup_data_store();
+    mu_assert(rc == 0, &quot;Failed to setup the data store.&quot;);
+
+    mu_run_test(test_create);
+    mu_run_test(test_sample);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
+
+</code></pre>
 
 <p>.\ex49b\statserve</p>
 
@@ -7585,9 +10140,7 @@ dump   Get all of the elements of a statistic (sum, sumsq, n, min, and max).Fina
 
 <p>The last thing I would do is add better tests and round out the protocol with CRUD operations.</p>
 
-<h2 id="exercise-50a">Exercise 50a</h2>
-
-<p>Routing The Statistics</p>
+<h2 id="exercise-50-routing-the-statistics">Exercise 50 Routing The Statistics</h2>
 
 <p>Project Description</p>
 
@@ -7632,9 +10185,7 @@ You get to define what that means, but think &ldquo;web application&rdquo;.</p>
 
 <p>This is hard, as I&rsquo;ve said all along, however it is all doable. It&rsquo;s simply a matter of breaking the problems down and tackling each little piece.</p>
 
-<h2 id="exercise-50b">Exercise 50b</h2>
-
-<p>Routing the Statistics</p>
+<h2 id="exercise-50-routing-the-statistics-1">Exercise 50 Routing the Statistics</h2>
 
 <p>Solution</p>
 
@@ -8603,9 +11154,7 @@ RUN_TESTS(all_tests);
 
 <p>Final Review</p>
 
-<h2 id="exercise-51a">Exercise 51a</h2>
-
-<p>Storing the Statistics</p>
+<h2 id="exercise-51-storing-the-statistics">Exercise 51 Storing the Statistics</h2>
 
 <p>Project Description</p>
 
@@ -8650,9 +11199,7 @@ from a hard drive:</p>
 
 <p>There are no clues.  You can do this.</p>
 
-<h2 id="exercise-51b">Exercise 51b</h2>
-
-<p>Storing the Statistics</p>
+<h2 id="exercise-51-storing-the-statistics-1">Exercise 51 Storing the Statistics</h2>
 
 <p>Solution</p>
 
@@ -9910,62 +12457,62 @@ RUN_TESTS(all_tests);
 <ul>
 <li>
 <ul>
-<li><a href="#exercise-0">Exercise 0</a></li>
-<li><a href="#exercise-1">Exercise 1</a></li>
-<li><a href="#exercise-2">Exercise 2</a></li>
-<li><a href="#exercise-3">Exercise 3</a></li>
-<li><a href="#exercise-4">Exercise 4</a></li>
-<li><a href="#exercise-5">Exercise 5</a></li>
-<li><a href="#exercise-6">Exercise 6</a></li>
-<li><a href="#exercise-7">Exercise 7</a></li>
-<li><a href="#exercise-8">Exercise 8</a></li>
-<li><a href="#exercise-9">Exercise 9</a></li>
-<li><a href="#exercise-10">Exercise 10</a></li>
-<li><a href="#exercise-11">Exercise 11</a></li>
-<li><a href="#exercise-12">Exercise 12</a></li>
-<li><a href="#exercise-13">Exercise 13</a></li>
-<li><a href="#exercise-14">Exercise 14</a></li>
-<li><a href="#exercise-15">Exercise 15</a></li>
-<li><a href="#exercise-16">Exercise 16</a></li>
-<li><a href="#exercise-17">Exercise 17</a></li>
-<li><a href="#exercise-18">Exercise 18</a></li>
-<li><a href="#exercise-19">Exercise 19</a></li>
-<li><a href="#exercise-20">Exercise 20</a></li>
-<li><a href="#exercise-21">Exercise 21</a></li>
-<li><a href="#exercise-22">Exercise 22</a></li>
-<li><a href="#exercise-23">Exercise 23</a></li>
-<li><a href="#exercise-24">Exercise 24</a></li>
-<li><a href="#exercise-25">Exercise 25</a></li>
-<li><a href="#exercise-26">Exercise 26</a></li>
-<li><a href="#exercise-27">Exercise 27</a></li>
-<li><a href="#exercise-28">Exercise 28</a></li>
-<li><a href="#exercise-29">Exercise 29</a></li>
-<li><a href="#exercise-30">Exercise 30</a></li>
-<li><a href="#exercise-31">Exercise 31</a></li>
-<li><a href="#exercise-32">Exercise 32</a></li>
-<li><a href="#exercise-33">Exercise 33</a></li>
-<li><a href="#exercise-34">Exercise 34</a></li>
-<li><a href="#exercise-35">Exercise 35</a></li>
-<li><a href="#exercise-36">Exercise 36</a></li>
-<li><a href="#exercise-37">Exercise 37</a></li>
-<li><a href="#exercise-38">Exercise 38</a></li>
-<li><a href="#exercise-39">Exercise 39</a></li>
-<li><a href="#exercise-40">Exercise 40</a></li>
-<li><a href="#exercise-41">Exercise 41</a></li>
-<li><a href="#exercise-42">Exercise 42</a></li>
-<li><a href="#exercise-43">Exercise 43</a></li>
-<li><a href="#exercise-44">Exercise 44</a></li>
-<li><a href="#exercise-45">Exercise 45</a></li>
-<li><a href="#exercise-46">Exercise 46</a></li>
-<li><a href="#exercise-47">Exercise 47</a></li>
-<li><a href="#exercise-48a">Exercise 48a</a></li>
-<li><a href="#exercise-48b">Exercise 48b</a></li>
-<li><a href="#exercise-49a">Exercise 49a</a></li>
-<li><a href="#exercise-49b">Exercise 49b</a></li>
-<li><a href="#exercise-50a">Exercise 50a</a></li>
-<li><a href="#exercise-50b">Exercise 50b</a></li>
-<li><a href="#exercise-51a">Exercise 51a</a></li>
-<li><a href="#exercise-51b">Exercise 51b</a></li>
+<li><a href="#exercise-0-installing-software">Exercise 0 Installing Software</a></li>
+<li><a href="#exercise-1-dust-off-that-compiler">Exercise 1 Dust Off That Compiler</a></li>
+<li><a href="#exercise-2-using-makefiles-to-build">Exercise 2 Using Makefiles to Build</a></li>
+<li><a href="#exercise-3-formatted-printing">Exercise 3 Formatted Printing</a></li>
+<li><a href="#exercise-4-using-a-debugger">Exercise 4 Using a Debugger</a></li>
+<li><a href="#exercise-5-memorizing-c-operators">Exercise 5 Memorizing C Operators</a></li>
+<li><a href="#exercise-6-memorizing-c-syntax">Exercise 6 Memorizing C Syntax</a></li>
+<li><a href="#exercise-7-variables-and-types">Exercise 7 Variables and Types</a></li>
+<li><a href="#exercise-8-if-else-if-else">Exercise 8 If, Else-If, Else</a></li>
+<li><a href="#exercise-9-while-loop-and-boolean-expressions">Exercise 9 While-Loop and Boolean Expressions</a></li>
+<li><a href="#exercise-10-switch-statements">Exercise 10 Switch Statements</a></li>
+<li><a href="#exercise-11-arrays-and-strings">Exercise 11 Arrays and Strings</a></li>
+<li><a href="#exercise-12-sizes-and-arrays">Exercise 12 Sizes and Arrays</a></li>
+<li><a href="#exercise-13-for-loops-and-arrays-of-strings">Exercise 13 For-Loops and Arrays of Strings</a></li>
+<li><a href="#exercise-14-writing-and-using-functions">Exercise 14 Writing and Using Functions</a></li>
+<li><a href="#exercise-15-pointers-dreaded-pointers">Exercise 15 Pointers, Dreaded Pointers</a></li>
+<li><a href="#exercise-16-structs-and-pointers-to-them">Exercise 16 Structs And Pointers To Them</a></li>
+<li><a href="#exercise-17-heap-and-stack-memory-allocation">Exercise 17 Heap and Stack Memory Allocation</a></li>
+<li><a href="#exercise-18-pointers-to-functions">Exercise 18 Pointers to Functions</a></li>
+<li><a href="#exercise-19-zed-s-awesome-debug-macros">Exercise 19 Zed&rsquo;s Awesome Debug Macros</a></li>
+<li><a href="#exercise-20-advanced-debugging-techniques">Exercise 20 Advanced Debugging Techniques</a></li>
+<li><a href="#exercise-21-advanced-data-types-and-flow-control">Exercise 21 Advanced Data Types and Flow Control</a></li>
+<li><a href="#exercise-22-the-stack-scope-and-globals">Exercise 22 The Stack, Scope, and Globals</a></li>
+<li><a href="#exercise-23-meet-duff-s-device">Exercise 23 Meet Duff&rsquo;s Device</a></li>
+<li><a href="#exercise-24-input-output-files">Exercise 24 Input, Output, Files</a></li>
+<li><a href="#exercise-25-variable-argument-functions">Exercise 25 Variable Argument Functions</a></li>
+<li><a href="#exercise-26-project-logfind">Exercise 26 Project logfind</a></li>
+<li><a href="#exercise-27-creative-and-defensive-programming">Exercise 27 Creative and Defensive Programming</a></li>
+<li><a href="#exercise-28-intermediate-makefiles">Exercise 28 Intermediate Makefiles</a></li>
+<li><a href="#exercise-29-libraries-and-linking">Exercise 29 Libraries and Linking</a></li>
+<li><a href="#exercise-30-automated-testing">Exercise 30 Automated Testing</a></li>
+<li><a href="#exercise-31-common-undefined-behavior">Exercise 31 Common Undefined Behavior</a></li>
+<li><a href="#exercise-32-double-linked-lists">Exercise 32 Double Linked Lists</a></li>
+<li><a href="#exercise-33-linked-list-algorithms">Exercise 33 Linked List Algorithms</a></li>
+<li><a href="#exercise-34-dynamic-array">Exercise 34 Dynamic Array</a></li>
+<li><a href="#exercise-35-sorting-and-searching">Exercise 35 Sorting and Searching</a></li>
+<li><a href="#exercise-36-safer-strings">Exercise 36 Safer Strings</a></li>
+<li><a href="#exercise-37-hashmaps">Exercise 37 Hashmaps</a></li>
+<li><a href="#exercise-38-hashmap-algorithms">Exercise 38 Hashmap Algorithms</a></li>
+<li><a href="#exercise-39-string-algorithms">Exercise 39 String Algorithms</a></li>
+<li><a href="#exercise-40-binary-search-trees">Exercise 40 Binary Search Trees</a></li>
+<li><a href="#exercise-41-project-devpkg">Exercise 41 Project devpkg</a></li>
+<li><a href="#exercise-42-stacks-and-queues">Exercise 42 Stacks and Queues</a></li>
+<li><a href="#exercise-43-a-simple-statistics-engine">Exercise 43 A Simple Statistics Engine</a></li>
+<li><a href="#exercise-44-ring-buffer">Exercise 44 Ring Buffer</a></li>
+<li><a href="#exercise-45-a-simple-tcp-ip-client">Exercise 45 A Simple TCP/IP Client</a></li>
+<li><a href="#exercise-46-ternary-search-tree">Exercise 46 Ternary Search Tree</a></li>
+<li><a href="#exercise-47-a-fast-url-router">Exercise 47 A Fast URL Router</a></li>
+<li><a href="#exercise-48-a-simple-network-server">Exercise 48 A Simple Network Server:</a></li>
+<li><a href="#exercise-48-a-simple-network-server-1">Exercise 48 A Simple Network Server:</a></li>
+<li><a href="#exercise-49-a-statistics-server">Exercise 49 A Statistics Server</a></li>
+<li><a href="#exercise-49-a-statistics-server-1">Exercise 49 A Statistics Server:</a></li>
+<li><a href="#exercise-50-routing-the-statistics">Exercise 50 Routing The Statistics</a></li>
+<li><a href="#exercise-50-routing-the-statistics-1">Exercise 50 Routing the Statistics</a></li>
+<li><a href="#exercise-51-storing-the-statistics">Exercise 51 Storing the Statistics</a></li>
+<li><a href="#exercise-51-storing-the-statistics-1">Exercise 51 Storing the Statistics</a></li>
 </ul></li>
 </ul>
 </nav>
