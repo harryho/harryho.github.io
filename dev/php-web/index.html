@@ -422,6 +422,22 @@ Header always set Access-Control-Allow-Headers &quot;X-Requested-With, Content-T
 Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE, PUT&quot;
 </code></pre>
 
+<h4 id="too-big-header-file">Too big header file</h4>
+
+<ul>
+<li><p>Add this to your <code>http {}</code> of the nginx.conf file normally located at <code>/etc/nginx/nginx.conf</code>:</p>
+
+<p>proxy_buffer_size   128k;
+proxy_buffers   4 256k;
+proxy_busy_buffers_size   256k;</p></li>
+
+<li><p>Then add this to your php location block, this will be located in your vhost file look for the block that begins with <code>location ~ .php$ {</code></p>
+
+<p>fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;</p></li>
+</ul>
+
 				</section>
 			</article>
 		</main>
@@ -488,6 +504,7 @@ Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE,
 <ul>
 <li><a href="#innodb-error">InnoDB error</a></li>
 <li><a href="#cors">CORS</a></li>
+<li><a href="#too-big-header-file">Too big header file</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -534,6 +551,9 @@ Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE,
 					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
 					</li>
 				
+					<li><a href="/code/c-program-array/">C Program Array</a>
+					</li>
+				
 				</ul>
 			</li>
 		
@@ -542,6 +562,9 @@ Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE,
 					<span class="doc-list-category">Dev</span>
 				</a>
 				<ul>
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
 					<li>
 						<span class="active">PHP web framework</span>
 						</li>
@@ -640,6 +663,8 @@ Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE,
 			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
 		

@@ -445,6 +445,22 @@ WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
 Header always set Access-Control-Allow-Headers &amp;quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&amp;quot;
 Header always set Access-Control-Allow-Methods &amp;quot;POST, GET, OPTIONS, DELETE, PUT&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;too-big-header-file&#34;&gt;Too big header file&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Add this to your &lt;code&gt;http {}&lt;/code&gt; of the nginx.conf file normally located at &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;proxy_buffer_size   128k;
+proxy_buffers   4 256k;
+proxy_busy_buffers_size   256k;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Then add this to your php location block, this will be located in your vhost file look for the block that begins with &lt;code&gt;location ~ .php$ {&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

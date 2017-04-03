@@ -17279,5 +17279,2377 @@ RUN_TESTS(all_tests);
 </description>
     </item>
     
+    <item>
+      <title>C Program Array</title>
+      <link>https://harryho.github.io/code/c-program-array/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://harryho.github.io/code/c-program-array/</guid>
+      <description>
+
+&lt;h3 id=&#34;find-the-biggest-number-in-an-array-of-numbers-using-recursion&#34;&gt;Find the Biggest Number in an Array of Numbers using Recursion&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to find the Biggest Number in an Array of Numbers using 
+* Recursion
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+int large(int[], int, int);
+
+int main()
+{
+    int size;
+    int largest;
+    int list[20];
+    int i;
+
+    printf(&amp;quot;Enter size of the list:&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;size);
+    printf(&amp;quot;Printing the list:\n&amp;quot;);
+    for (i = 0; i &amp;lt; size ; i++) 
+    {
+        list[i] = rand() % size;
+        printf(&amp;quot;%d\t&amp;quot;, list[i]);
+    }
+    if (size == 0)
+    {
+        printf(&amp;quot;Empty list\n&amp;quot;);
+    }
+    else
+    {
+        largest = list[0];
+        largest = large(list, size - 1, largest);
+        printf(&amp;quot;\nThe largest number in the list is: %d\n&amp;quot;, largest);
+    }
+}
+
+int large(int list[], int size, int largest)
+{
+    if (size == 1)
+        return largest;
+
+    if (size &amp;gt; -1)
+    {
+        if (list[size] &amp;gt; largest)
+        {
+            largest = list[size];
+        }
+        return(largest = large(list, size - 1, largest));
+    }
+    else
+    {
+        return largest;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ gcc c-program-biggest-number-array-using-recursion.c 
+$ a
+Enter size of the list:10
+Printing the list:
+3       3       2       9       0       8       2       6       6       9
+The largest number in the list is: 9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-ceiling-floor-of-x-given-a-sorted-array-a-value-x&#34;&gt;Find Ceiling &amp;amp; Floor of  X given a Sorted Array &amp;amp; a value X&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find Ceiling &amp;amp; Floor of  X given a Sorted Array &amp;amp; a value X
+*/
+ #include &amp;lt;stdio.h&amp;gt;
+
+/* Function to get index of ceiling of x in arr[low..high] */
+int ceilSearch(int arr[], int low, int high, int x)
+{
+     int i;
+
+    /* If x is smaller than or equal to first element,then return the first element */
+    if (x &amp;lt;= arr[low])
+    return low;
+
+   /* Otherwise, linearly search for ceil value */
+   for (i = low; i &amp;lt; high; i++)
+   {
+       if (arr[i] == x)
+          return i;
+
+       /* if x lies between arr[i] and arr[i+1] including arr[i+1], then return arr[i+1] */
+       if (arr[i] &amp;lt; x &amp;amp;&amp;amp; arr[i + 1] &amp;gt;= x)
+           return i + 1;
+   }
+
+   /* If we reach here then x is greater than the last element of the array,  return -1 in this case */
+   return -1;
+}
+
+int main()
+{
+    int arr[] = {1, 2, 8, 10, 10, 12, 19};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int x = 3;
+    int index = ceilSearch(arr, 0, n-1, x);
+    if (index == -1)
+        printf(&amp;quot;Ceiling of %d doesn&#39;t exist in array &amp;quot;, x);
+    else
+        printf(&amp;quot;ceiling of %d is %d&amp;quot;, x, arr[index]);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+ceiling of 3 is 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;compute-the-sum-of-two-one-dimensional-arrays-using-malloc&#34;&gt;Compute the Sum of two One-Dimensional Arrays using Malloc&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to find the sum of two one-dimensional arrays using
+* Dynamic Memory Allocation
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;malloc.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+void main()
+{
+    int i, n;
+    int *a, *b, *c;
+
+    printf(&amp;quot;How many Elements in each array...\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    a = (int *)malloc(n * sizeof(int));
+    b = (int *)malloc(n * sizeof(int));
+    c = (int *)malloc(n * sizeof(int));
+
+    printf(&amp;quot;Enter Elements of First List\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, a + i);
+    }
+    printf(&amp;quot;Enter Elements of Second List\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, b + i);
+    }
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        *(c + i) = *(a + i) + *(b + i);
+    }
+    printf(&amp;quot;Resultant List is\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, *(c + i));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ gcc c-program-compute-sum-two-one-dimensional-arrays-using-malloc.c
+$ a
+How many Elements in each array...        
+5                                         
+Enter Elements of First List              
+22                                        
+45                                        
+12                                        
+6                                         
+39                                        
+Enter Elements of Second List             
+22                                        
+67                                        
+29                                        
+41                                        
+6                                         
+Resultant List is                         
+44                                        
+112                                       
+41                                        
+47                                        
+45                                        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;count-the-occurrences-of-each-c-keyword-using-array-structure&#34;&gt;Count the Occurrences of each C Keyword using Array Structure&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Count the Occurrences of each C Keyword
+* using Array Structure
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+#define KEYMAX 32
+
+struct keyword
+{
+    char word[10];
+    int occur;
+};
+
+int binarysearch(char [], struct keyword[]);
+
+int main()
+{
+    int i = 0, j = 0, pos;
+    char string[100], unit[20], c;
+    struct keyword key[32] = {&amp;quot;auto&amp;quot;, 0, &amp;quot;break&amp;quot;, 0, &amp;quot;case&amp;quot;, 0,
+                          &amp;quot;char&amp;quot;, 0, &amp;quot;const&amp;quot;, 0, &amp;quot;continue&amp;quot;, 0,
+                          &amp;quot;default&amp;quot;, 0, &amp;quot;do&amp;quot;, 0, &amp;quot;double&amp;quot;, 0,
+                          &amp;quot;else&amp;quot;, 0, &amp;quot;enum&amp;quot;, 0, &amp;quot;extern&amp;quot;, 0,
+                          &amp;quot;float&amp;quot;, 0, &amp;quot;for&amp;quot;, 0, &amp;quot;goto&amp;quot;, 0,
+                          &amp;quot;if&amp;quot;, 0, &amp;quot;int&amp;quot;, 0, &amp;quot;long&amp;quot;, 0,
+                          &amp;quot;register&amp;quot;, 0, &amp;quot;return&amp;quot;, 0, &amp;quot;short&amp;quot;, 0,
+                          &amp;quot;signed&amp;quot;, 0, &amp;quot;sizeof&amp;quot;, 0, &amp;quot;static&amp;quot;, 0,
+                          &amp;quot;struct&amp;quot;, 0, &amp;quot;switch&amp;quot;, 0, &amp;quot;typedef&amp;quot;, 0,
+                          &amp;quot;union&amp;quot;, 0, &amp;quot;unsigned&amp;quot;, 0, &amp;quot;void&amp;quot;, 0,
+                          &amp;quot;volatile&amp;quot;, 0, &amp;quot;while&amp;quot;, 0,};
+
+    printf(&amp;quot;Enter string: &amp;quot;);
+    do
+    {
+        fflush(stdin);
+        c = getchar();
+        string[i++] = c;
+
+    } while (c != &#39;\n&#39;);
+    string[i - 1] = &#39;\0&#39;;
+    printf(&amp;quot;The string entered is: %s\n&amp;quot;, string);
+    for (i = 0; i &amp;lt; strlen(string); i++)
+    {
+        while (i &amp;lt; strlen(string) &amp;amp;&amp;amp; string[i] != &#39; &#39; &amp;amp;&amp;amp; isalpha(string[i]))
+        {
+            unit[j++] = tolower(string[i++]);
+        }
+        if (j != 0)
+        {
+            unit[j] = &#39;\0&#39;;
+            pos = binarysearch(unit, key);
+            j = 0;
+            if (pos != -1)
+            {
+               key[pos].occur++;
+            }
+        }
+    }
+    printf(&amp;quot;***********************\n   Keyword\tCount\n***********************\n&amp;quot;);
+    for (i = 0; i &amp;lt; KEYMAX; i++)
+    {
+        if (key[i].occur)
+        {
+            printf(&amp;quot;    %s\t  %d\n&amp;quot;, key[i].word, key[i].occur);
+        }
+    }
+
+    return 0;
+}
+
+int binarysearch(char *word, struct keyword key[])
+{
+    int low, high, mid;
+
+    low = 0;
+    high = KEYMAX - 1;
+    while (low &amp;lt;= high)
+    {
+        mid = (low + high) / 2;
+        if (strcmp(word, key[mid].word) &amp;lt; 0)
+        {
+            high = mid - 1;
+        }
+        else if (strcmp(word, key[mid].word) &amp;gt; 0)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            return mid;
+        }
+    }
+
+    return -1;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ gcc  c-program-count-the-occurrences-c-keyword-using-array-structure.c
+$ ./a
+Enter string: come on. buddy. Tell me some c keyword: while, break, continue,etc. do you have any more? e.g. struct and ...
+The string entered is: come on. buddy. Tell me some c keyword: while, break, continue,etc. do you have any more? e.g. struct and ...
+***********************
+   Keyword      Count
+***********************
+    break         1
+    continue      1
+    do    1
+    struct        1
+    while         1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cyclically-permute-the-elements-of-an-array&#34;&gt;Cyclically Permute the Elements of an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to cyclically permute the elements of an array A.
+* i.e. the content of A1 become that of A2. And A2 contains
+* that of A3 &amp;amp; so on as An contains A1
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main ()
+{
+    int i, n, number[30];
+    printf(&amp;quot;Enter the value of the n = &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;Enter the numbers\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;number[i]);
+    }
+
+    number[n] = number[0];
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        number[i] = number[i + 1];
+    } 
+    printf(&amp;quot;Cyclically permuted numbers are given below \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+        printf(&amp;quot;%d\n&amp;quot;, number[i]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-cyclically-permute-elements-array.c 
+$ a
+Enter the value of the n = 5                
+Enter the numbers                           
+5                                           
+23                                          
+12                                          
+7894                                        
+30                                          
+Cyclically permuted numbers are given below 
+23                                          
+12                                          
+7894                                        
+30                                          
+5                                           
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;delete-the-first-match-specified-integer-from-an-array&#34;&gt;Delete the First Match Specified Integer from an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to accept an array of integers and delete the
+* specified integer from the list
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int vectorx[10];
+    int i, n, pos, element, found = 0;
+
+    printf(&amp;quot;Enter how many elements\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;Enter the elements\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;vectorx[i]);
+    }
+    printf(&amp;quot;Input array elements are\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, vectorx[i]);
+    }
+    printf(&amp;quot;Enter the element to be deleted\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;element);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        if (vectorx[i] == element)
+        {
+            found = 1;
+            pos = i;
+            break;
+        }
+    }
+    if (found == 1)
+    {
+        for (i = pos; i &amp;lt;  n - 1; i++)
+        {
+            vectorx[i] = vectorx[i + 1];
+        }
+        printf(&amp;quot;The resultant vector is \n&amp;quot;);
+        for (i = 0; i &amp;lt; n - 1; i++)
+        {
+            printf(&amp;quot;%d\n&amp;quot;, vectorx[i]);
+        }
+    }
+    else
+        printf(&amp;quot;Element %d is not found in the vector\n&amp;quot;, element);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-delete-specified-integer-array.c 
+$ a
+Enter how many elements           
+4                                 
+Enter the elements                
+2                                 
+3                                 
+7                                 
+2                                 
+Input array elements are          
+2                                 
+3                                 
+7                                 
+2                                 
+Enter the element to be deleted   
+2                                 
+The resultant vector is           
+2                                 
+3                                 
+7                                 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-2-elements-in-the-sorted-array-such-that-difference-between-them-is-largest&#34;&gt;Find 2 Elements in the sorted Array such that Difference between them is Largest&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find 2 Elements in the Array such that Difference between them is Largest
+*/
+ #include &amp;lt;stdio.h&amp;gt;
+
+int maximum_difference(int array[], int arr_size)
+{
+    int max_diff = array[1] - array[0];
+    int i, j;
+    for (i = 0; i &amp;lt; arr_size; i++)
+    {
+        for (j = i + 1; j &amp;lt; arr_size; j++)
+        {
+            if (array[j] - array[i] &amp;gt; max_diff)
+                max_diff = array[j] - array[i]; 
+        }
+    }
+    return max_diff;
+}
+
+int main()
+{
+    int array[] = {10, 15, 90, 110, 200};
+    for (int i = 0; i &amp;lt; 5; i++)
+    {         
+        printf(&amp;quot;%d &amp;quot;, array[i]);     
+    }
+    printf(&amp;quot;\n Maximum difference is %d&amp;quot;,  maximum_difference(array, 5));
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-elements-array-difference-largest.c
+$ a
+20 35 90 110 210 Maximum difference is 190
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;put-even-odd-elements-of-an-array-in-2-separate-arrays&#34;&gt;Put Even &amp;amp; Odd Elements of an Array in 2 Separate Arrays&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to accept N integer number and store them in an array AR.
+* The odd elements in the AR are copied into OAR and other elements
+* are copied into EAR. Display the contents of OAR and EAR.
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    long int ARR[10], OAR[10], EAR[10];
+    int i, j = 0, k = 0, n;
+
+    printf(&amp;quot;Enter the size of array AR \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;Enter the elements of the array \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%ld&amp;quot;, &amp;amp;ARR[i]);
+        fflush(stdin);
+    }
+    /*  Copy odd and even elements into their respective arrays */
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        if (ARR[i] % 2 == 0)
+        {
+            EAR[j] = ARR[i];
+            j++;
+        }
+        else
+        {
+            OAR[k] = ARR[i];
+            k++;
+        }
+    }
+    printf(&amp;quot;The elements of OAR are \n&amp;quot;);
+    for (i = 0; i &amp;lt; j; i++)
+    {
+        printf(&amp;quot;%ld\n&amp;quot;, OAR[i]);
+    }
+    printf(&amp;quot;The elements of EAR are \n&amp;quot;);
+    for (i = 0; i &amp;lt; k; i++)
+    {
+        printf(&amp;quot;%ld\n&amp;quot;, EAR[i]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-odd-even-number-array.c
+$ a
+Enter the size of an array
+5
+Enter the elements of the array
+2
+5
+8
+2
+6
+Even numbers in the array are - 2       8       2       6
+ Odd numbers in the array are -5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-largest-number-in-an-array&#34;&gt;Find the Largest Number in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find the Largest Number in an Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+int main()
+{
+    int array[50], size, i, largest;
+    printf(&amp;quot;\n Enter the size of the array: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;size);
+    printf(&amp;quot;\n Enter %d elements of  the array: &amp;quot;, size);
+    for (i = 0; i &amp;lt; size; i++)
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    largest = array[0];
+    for (i = 1; i &amp;lt; size; i++)
+    {
+        if (largest &amp;lt; array[i])
+            largest = array[i];
+    }
+    printf(&amp;quot;\n largest element present in the given array is : %d&amp;quot;, largest);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  c-program-find-largest-number-array.c
+$ a.out
+Enter the size of the array: 4
+
+Enter 4 elements of  the array: 
+44
+33
+44
+66
+
+ largest element present in the given array is : 66
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;increment-every-element-of-the-array-by-one-print-incremented-array&#34;&gt;Increment every Element of the Array by one &amp;amp; Print Incremented Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Increment every Element of the Array by one &amp;amp; Print Incremented Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void incrementArray(int[]);
+
+void main()
+{
+    int i;
+    int array[4] = {10, 20, 30, 40};
+    printf(&amp;quot;original array \n&amp;quot;);
+    for (i = 0; i &amp;lt; 4; i++)
+       printf(&amp;quot;%d\t&amp;quot;, array[i]);   
+
+    incrementArray(array);
+    printf(&amp;quot;\n Increment array \n&amp;quot;);
+    for (i = 0; i &amp;lt; 4; i++)
+       printf(&amp;quot;%d\t&amp;quot;, array[i]);   // Prints 2, 3, 4, 5
+}
+
+void incrementArray(int arr[])
+{
+    int i;
+
+    for (i = 0; i &amp;lt; 4; i++)
+        arr[i]++;     // this alters values in array in main()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  c-program-increment-element-array.c
+$ a
+original array
+10      20      30      40
+ Increment array
+11      21      31      41
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;insert-an-element-in-a-specified-position-in-a-given-array&#34;&gt;Insert an Element in a Specified Position in a given Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to insert a particular element in a specified position
+* in a given array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int array[10];
+    int i, j, n, m, temp, key, pos;
+
+    printf(&amp;quot;Enter how many elements \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    printf(&amp;quot;Enter the elements \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    }
+
+    printf(&amp;quot;Input array elements are \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, array[i]);
+    }
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        for (j = i + 1; j &amp;lt; n; j++)
+        {
+            if (array[i] &amp;gt; array[j])
+            {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+         }
+    }
+
+    printf(&amp;quot;Sorted list is \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, array[i]);
+    }
+    printf(&amp;quot;Enter the element to be inserted \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;key);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        if (key &amp;lt; array[i])
+        {
+            pos = i;
+            break;
+        }
+        if (key &amp;gt; array[n-1])
+        { 
+            pos = n;
+            break;
+        }
+    }
+    if (pos != n)
+    {
+        m = n - pos + 1 ;
+        for (i = 0; i &amp;lt;= m; i++)
+        {
+            array[n - i + 2] = array[n - i + 1] ;
+        }
+    }
+    array[pos] = key;
+    printf(&amp;quot;Final list is \n&amp;quot;);
+    for (i = 0; i &amp;lt; n + 1; i++)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, array[i]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  c-program-insert-element-specified-position-array.c
+$ a.out
+Enter how many elements             
+4                                   
+Enter the elements                  
+2                                   
+4                                   
+7                                   
+4                                   
+Input array elements are            
+2                                   
+4                                   
+7                                   
+4                                   
+Sorted list is                      
+2                                   
+4                                   
+4                                   
+7                                   
+Enter the element to be inserted    
+4                                   
+Final list is                       
+2                                   
+4                                   
+4                                   
+4                                   
+7                                   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-if-a-given-integer-x-appears-more-than-n-2-times-in-a-sorted-array-of-n-integers&#34;&gt;Find if a given Integer X appears more than N/2 times in a Sorted Array of N Integers&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find if a given Integer X appears more than N/2 times in a Sorted Array of N Integers
+*/
+# include &amp;lt;stdio.h&amp;gt;
+# define bool int
+
+bool Morenooftimes(int array[], int n, int x)
+{
+    int i;
+    int final_index = n % 2 ? n / 2 : (n / 2 + 1);
+
+    for (i = 0; i &amp;lt; final_index; i++)
+    {
+        /* check if x is presents more than n/2 times */
+        if (array[i] == x &amp;amp;&amp;amp; array[i + n / 2] == x)
+            return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    int array[] = {10, 15, 15, 12, 17 ,15};
+    int n = sizeof(array) / sizeof(array[0]);
+    int x = 15;
+    printf(&amp;quot;Array:\n&amp;quot;)
+    for (i = 0; i &amp;lt; n + 1; i++)
+    {
+        printf(&amp;quot;%d\t&amp;quot;, array[i]);
+    }
+    if (Morenooftimes(array, n, x))
+        printf(&amp;quot;\nThe given no %d appears more than %d times in array[]&amp;quot;, x, n/2);
+    else
+        printf(&amp;quot;\nThe given no %d does not appear more than %d times in array[]&amp;quot;, x, n/2);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Array:
+10      15      15      12      17      15
+The given no 15 appears more than 3 times in  array [ ] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-largest-two-numbers-in-a-given-array&#34;&gt;Find the Largest Two Numbers in a given Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to read in four integer numbers into an array and find the
+* average of largest two of the given numbers without sorting the array.
+* The program should output the given four numbers and the average.
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#define MAX 4
+
+void main()
+{
+    int array[MAX], i, largest1, largest2, temp;
+
+    printf(&amp;quot;Enter %d integer numbers \n&amp;quot;, MAX);
+    for (i = 0; i &amp;lt; MAX; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    }
+
+    printf(&amp;quot;Input interger are \n&amp;quot;);
+    for (i = 0; i &amp;lt; MAX; i++)
+    {
+      printf(&amp;quot;%5d&amp;quot;, array[i]);
+    }
+    printf(&amp;quot;\n&amp;quot;);
+    /*  assume first element of array is the first larges t*/
+    largest1 = array[0];
+    /*  assume first element of array is the second largest */
+    largest2 = array[1];
+    if (largest1 &amp;lt; largest2)
+    {
+        temp = largest1;
+        largest1 = largest2;
+        largest2 = temp;
+    }
+    for (i = 2; i &amp;lt; 4;  i++)
+    {
+        if (array[i] &amp;gt;= largest1)
+        {
+            largest2 = largest1;
+            largest1 = array[i];
+        }
+        else if (array[i] &amp;gt; largest2)
+        {
+            largest2 = array[i];
+        }
+    }
+    printf(&amp;quot;n%d is the first largest \n&amp;quot;, largest1);
+    printf(&amp;quot;%d is the second largest \n&amp;quot;, largest2);
+    printf(&amp;quot;nAverage of %d and %d = %d \n&amp;quot;, largest1, largest2, (largest1 + largest2) / 2);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-largest-two-numbers-given-array.c
+$ a.out
+Enter 4 integer numbers
+34
+25
+75
+287
+Input interger are
+   34   25   75  287
+n287 is the first largest
+75 is the second largest
+nAverage of 287 and 75 = 181
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-median-of-the-elements-after-merging-these-2-sorted-arrays-with-same-size&#34;&gt;Find the Median of the Elements after Merging these 2 Sorted Arrays with Same Size&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find the Median of the Elements after Merging these 2 Sorted Arrays with Same Size
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+int getMedian(int array1[], int array2[], int n)
+{
+    int i = 0;  /* Current index of i/p array array1[] */
+    int j = 0; /* Current index of i/p array array2[] */
+    int count;
+    int m1 = -1, m2 = -1;
+
+    for (count = 0; count &amp;lt;= n; count++)
+    {
+        if (i == n)
+        {
+            m1 = m2;
+            m2 = array2[0];
+            break;
+        }
+        else if (j == n)
+        {
+            m1 = m2;
+            m2 = array1[0];
+            break;
+        }
+        if (array1[i] &amp;lt; array2[j])
+        {
+            m1 = m2;  /* Store the prev median */
+            m2 = array1[i];
+            i++;
+        }
+        else
+        {
+            m1 = m2;  /* Store the prev median */
+            m2 = array2[j];
+            j++;
+        }
+    }
+    return (m1 + m2)/2;
+}
+
+int main()
+{
+    int array1[] = {20, 25, 35, 30, 38};
+    int array2[] = {22, 53, 65, 72, 45};
+
+    int n1 = sizeof(array1) / sizeof(array1[0]);
+    int n2 = sizeof(array2) / sizeof(array2[0]);
+
+
+    if (n1 == n2)
+        printf(&amp;quot;Median is %d&amp;quot;, getMedian(array1, array2, n1));
+    else
+        printf(&amp;quot;not possible to findout&amp;quot;);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Median is 
+34
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;merge-the-elements-of-2-sorted-array&#34;&gt;Merge the Elements of 2 Sorted Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Merge the Elements of 2 Sorted Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int array1[50], array2[50], array3[100], m, n, i, j, k = 0;
+
+    printf(&amp;quot;\n Enter size of array Array 1: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;m);
+    printf(&amp;quot;\n Enter sorted elements of array 1: \n&amp;quot;);
+    for (i = 0; i &amp;lt; m; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array1[i]);
+    }
+    printf(&amp;quot;\n Enter size of array 2: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;\n Enter sorted elements of array 2: \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array2[i]);
+    }
+    i = 0;
+    j = 0;
+    while (i &amp;lt; m &amp;amp;&amp;amp; j &amp;lt; n)
+    {
+        if (array1[i] &amp;lt; array2[j])
+        {
+            array3[k] = array1[i];
+            i++;
+        }
+        else
+        {
+            array3[k] = array2[j];
+            j++;
+        }
+        k++;
+    }
+    if (i &amp;gt;= m)
+    {
+        while (j &amp;lt; n)
+        {
+            array3[k] = array2[j];
+            j++;
+            k++;
+        }
+    }
+    if (j &amp;gt;= n)
+    {
+        while (i &amp;lt; m)
+        {
+            array3[k] = array1[i];
+            i++;
+            k++;
+        }
+    }
+    printf(&amp;quot;\n After merging: \n&amp;quot;);
+    for (i = 0; i &amp;lt; m + n; i++)
+    {
+        printf(&amp;quot;\n%d&amp;quot;, array3[i]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+
+Enter size of array Array  1:  
+4
+Enter sorted elements of array  1: 12
+18
+40
+60
+Enter size of array  2:  
+4
+Enter sorted elements of array  2: 47
+56
+89
+90
+After merging:
+12
+18
+40
+47
+56
+60
+89
+90
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;to-identify-the-missing-number-in-an-integer-array-of-size-n-1-with-numbers-1-n&#34;&gt;To Identify the Missing Number in an Integer Array of Size N-1 with Numbers[1,N]&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program To Identify the Missing Number in an Integer 
+* Array of Size N-1 with Numbers[1,N]
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#define MAX 15
+int missing_number_array(int [],int);
+
+int main()
+{
+    int a[MAX], num, i, n;
+
+    printf(&amp;quot;enter the range of array\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    for (i = 0;i &amp;lt; n;i++)
+    {
+        printf(&amp;quot;enter a[%d]element into the array:&amp;quot;, i);
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;a[i]);
+    }
+    num = missing_number_array(a, n);
+    printf(&amp;quot;The missing number -&amp;gt; %d\n&amp;quot;, num);
+}
+
+/* To find the missing number in array */
+int missing_number_array(int a[],  int n)
+{
+    int i;
+    int s1 = 0; 
+    int s2 = 0; 
+
+    for (i = 0;i &amp;lt; n;i++)
+        s1 = s1 ^ a[i];
+    for (i = 1;i &amp;lt;= n + 1;i++)
+        s2 = s2 ^ i; 
+    return (s1 ^ s2);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  bit29.c
+$ a
+enter the range of array
+4
+enter a[0]element into the array:2
+enter a[1]element into the array:3
+enter a[2]element into the array:5
+enter a[3]element into the array:4
+The missing number -&amp;gt; 1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;identify-missing-numbers-in-a-given-array&#34;&gt;identify missing Numbers in a given Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/* 
+* C Program to identify missing numbers in a given array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int n, i, j, c, t, b;
+
+    printf(&amp;quot;Enter size of array : &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    int array[n - 1];     /* array size-1 */
+    printf(&amp;quot;Enter elements into array : \n&amp;quot;);
+    for (i = 0; i &amp;lt; n - 1; i++)    
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+
+    b = array[0];
+    for (i = 1; i &amp;lt; n - 1; i++)
+        b = b ^ array[i];
+    for (i = 2, c = 1; i &amp;lt;= n; i++)
+        c = c ^ i; 
+    c = c ^ b;  
+    printf(&amp;quot;Missing element is : %d \n&amp;quot;, c);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  bit30.c
+$ a.out
+Enter size of array : 
+6
+
+Enter elements into array : 
+
+1
+2
+3
+5
+6
+
+Missing element is : 
+4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-number-of-non-repeated-elements-in-an-array&#34;&gt;Find the Number of Non Repeated Elements in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find the Number of Non Repeated Elements in an Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+int main()
+{
+    int array[50];
+    int *ptr;
+    int i, j, k, size, n;
+
+    printf(&amp;quot;\n Enter size of the array: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;\n Enter %d elements of an array: &amp;quot;, n);
+    for (i = 0; i &amp;lt; n; i++)
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    size = n;
+    ptr = array;
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        for (j = 0; j &amp;lt; size; j++)
+        {
+            if (i == j)
+            {
+                continue;
+            }
+            else if (*(ptr + i) == *(ptr + j))
+            {
+                k = j;
+                size--;
+                while (k &amp;lt; size)
+                {
+                    *(ptr + k) = *(ptr + k + 1);
+                    k++;
+                }
+                j = 0;
+            }
+        }
+    }
+    printf(&amp;quot;\n The array after removing duplicates is: &amp;quot;);
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        printf(&amp;quot; %d&amp;quot;, array[i]);
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc c-program-non-repeated-elements-array.c
+$ a
+
+Enter size of the array: 
+6
+Enter 6 elements of an array: 
+12
+10
+4
+10
+12
+56
+The array after removing duplicates is:  
+12 
+10 
+4 
+56
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-odd-element-given-an-array-with-only-two-different-element&#34;&gt;Find the Odd Element given an Array with only two Different Element&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find the Odd Element given an Array with only two Different Element
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void printodd(int array[], int size)
+{
+    int xor2 = array[0]; /* Will hold XOR of two odd occurring elements */
+    int set;
+    int i;
+    int n = size - 2;
+    int x = 0, y = 0;
+
+    /* The xor will basically be xor of two odd occurring elements */
+    for (i = 1; i &amp;lt; size; i++)
+        xor2 = xor2 ^ array[i]; 
+    /* Get one set rightmost bit in the xor2. */
+    set = xor2 &amp;amp; ~(xor2 - 1);
+    /* Now divide elements in two sets: */
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        /* XOR of first set is finally going to hold one odd occurring number x */
+        if (array[i] &amp;amp; set)
+        x = x ^ array[i];
+        /* XOR of second set is finally going to hold the other odd occurring number y */
+        else
+        y = y ^ array[i];
+    }
+    printf(&amp;quot;\n The ODD elements are %d &amp;amp; %d &amp;quot;, x, y);
+}
+
+int main()
+{
+    int array[] = {10, 3, 2, 10, 2, 8, 8, 7};
+    int arr_size = sizeof(array) / sizeof(array[0]);
+    printodd(array, arr_size);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+
+ The ODD elements are 7 &amp;amp; 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;print-the-number-of-odd-even-numbers-in-an-array&#34;&gt;Print the Number of Odd &amp;amp; Even Numbers in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Print the Number of Odd &amp;amp; Even Numbers in an Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int array[100], i, num;
+
+    printf(&amp;quot;Enter the size of an array \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;num);
+    printf(&amp;quot;Enter the elements of the array \n&amp;quot;);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    }
+    printf(&amp;quot;Even numbers in the array are - &amp;quot;);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        if (array[i] % 2 == 0)
+        {
+            printf(&amp;quot;%d \t&amp;quot;, array[i]);
+        }
+    }
+    printf(&amp;quot;\n Odd numbers in the array are -&amp;quot;);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        if (array[i] % 2 != 0)
+        {
+            printf(&amp;quot;%d \t&amp;quot;, array[i]);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Enter the size of an array 
+6
+
+Enter the elements of the array 
+12
+19
+45
+69
+98
+23
+
+Even numbers  in the array are - 12 98
+Odd numbers  in the array are - 19 45 69 23
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;print-the-alternate-elements-in-an-array&#34;&gt;Print the Alternate Elements in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Print the Alternate Elements in an Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int array[10];
+    int i, j, temp;
+    printf(&amp;quot;enter the element of an array \n&amp;quot;);
+    for (i = 0; i &amp;lt; 10; i++)
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    printf(&amp;quot;Alternate elements of a given array \n&amp;quot;);
+    for (i = 0; i &amp;lt; 10; i += 2)
+        printf( &amp;quot;%d\n&amp;quot;, array[i]) ;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+enter the element of an array
+
+12
+23
+45
+57
+68
+73
+84
+97
+120
+125
+
+Alternate elements of a given array
+
+12
+45
+68
+84
+120
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;print-all-the-repeated-numbers-with-frequency-in-an-array&#34;&gt;Print all the Repeated Numbers with Frequency in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Print all the Repeated Numbers with Frequency in an Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;malloc.h&amp;gt;
+
+void duplicate(int array[], int num)
+{
+    int *count = (int *)calloc(sizeof(int), (num - 2));
+    int i;
+
+    printf(&amp;quot;duplicate elements present in the given array are &amp;quot;);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        if (count[array[i]] == 1)
+            printf(&amp;quot; %d &amp;quot;, array[i]);
+        else
+            count[array[i]]++;
+    }
+}
+
+int main()
+{
+    int array[] = {5, 10, 10, 2, 1, 4, 2};
+    int array_freq = sizeof(array) / sizeof(array[0]);
+    duplicate(array, array_freq);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+ duplicate elements present  in the given array are  
+10  
+2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;using-recursion-to-search-an-element-in-array&#34;&gt;Using Recursion to Search an Element in Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to search for an element in a list using
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int search(int [], int, int);
+int main()
+{
+    int size, index, key;
+    int list[20];
+    int count = 0;
+    int i;
+
+    printf(&amp;quot;Enter the size of the list: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;size);
+    index = size;
+    printf(&amp;quot;Printing the list:\n&amp;quot;);
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        list[i] = rand() % size;
+        printf(&amp;quot;%d\t&amp;quot;, list[i]);
+    }
+    printf(&amp;quot;\nEnter the key to search: &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;key);
+    while (index &amp;gt; 0)
+    {
+        index = search(list, index - 1, key);
+        /* In an array first position is indexed by 0 */
+        printf(&amp;quot;Key found at position: %d\n&amp;quot;, index + 1);
+        count++;
+    }
+    if (!count)
+        printf(&amp;quot;Key not found.\n&amp;quot;);
+    return 0;
+}
+
+int search(int array[], int size, int key)
+{
+    int location;
+    if (array[size] == key)
+    {
+        return size;
+    }
+    else if (size == -1)
+    {
+        return -1;
+    }
+    else
+    {
+        return (location = search(array, size - 1, key));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc  c-program-search-array-using-recursion.c
+$ a
+
+Enter the size of the list: 5
+Printing the list:
+3       3       2       4       0
+Enter the key to search: 3
+Key found at position: 2
+Key found at position: 1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;read-an-array-and-search-for-an-element&#34;&gt;Read an Array and Search for an Element&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program accept an array of N elements and a key to search.
+* If the search is successful, it displays &amp;quot;SUCCESSFUL SEARCH&amp;quot;.
+* Otherwise, a message &amp;quot;UNSUCCESSFUL SEARCH&amp;quot; is displayed.
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int array[20];
+    int i, low, mid, high, key, size;
+
+    printf(&amp;quot;Enter the size of an array\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;size);
+    printf(&amp;quot;Enter the array elements\n&amp;quot;);
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    }
+    printf(&amp;quot;Enter the key\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;key);
+    /*  search begins */
+    low = 0;
+    high = (size - 1);
+    while (low &amp;lt;= high)
+    {
+        mid = (low + high) / 2;
+        if (key == array[mid])
+        {
+            printf(&amp;quot;SUCCESSFUL SEARCH\n&amp;quot;);
+            return;
+        }
+        if (key &amp;lt; array[mid])
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+    printf(&amp;quot;UNSUCCESSFUL SEARCH\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+Enter the size of an array 
+4
+
+Enter the array elements 
+90
+560
+300
+390
+
+Enter the key 90
+
+SUCCESSFUL SEARCH
+
+$ a
+Enter the size of an array 
+4
+
+Enter the array elements 
+100
+500
+580
+470
+
+Enter the key 300
+
+UNSUCCESSFUL SEARCH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-second-largest-smallest-elements-in-an-array&#34;&gt;Find the Second Largest &amp;amp; Smallest Elements in an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to accept a list of data items and find the second largest
+* and smallest elements in it. Compute the average of both and search
+* for the average value if it is present in the array.
+* Display appropriate message on successful search.
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main ()
+{
+    int number[30];
+    int i, j, a, n, counter, average;
+
+    printf(&amp;quot;Enter the value of N\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+
+    printf(&amp;quot;Enter the numbers \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;number[i]);
+    
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        for (j = i + 1; j &amp;lt; n; ++j)
+        {
+            if (number[i] &amp;lt; number[j])
+            {
+                a = number[i];
+                number[i] = number[j];
+                number[j] = a;
+            }
+        }
+    }
+
+    printf(&amp;quot;The numbers arranged in descending order are given below \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, number[i]);
+    }
+
+    printf(&amp;quot;The 2nd largest number is  = %d\n&amp;quot;, number[1]);
+    printf(&amp;quot;The 2nd smallest number is = %d\n&amp;quot;, number[n - 2]);
+    average = (number[1] + number[n - 2]) / 2;
+    counter = 0;
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        if (average == number[i])
+        {
+            ++counter;
+        }
+    }
+    if (counter == 0 )
+        printf(&amp;quot;The average of %d  and %d is = %d is not in the array \n&amp;quot;,
+        number[1], number[n - 2], average);
+    else
+        printf(&amp;quot;The average of %d  and %d in array is %d in numbers \n&amp;quot;,
+        number[1], number[n - 2], counter);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+Enter the value of N 
+4
+
+Enter the numbers 
+450
+340
+120
+670
+
+The numbers arranged  in  descending order are given below 
+670
+450
+340
+120
+
+The 2nd largest number is = 450 
+The 2nd smallest number is = 340
+
+The average of 450 and 340 is = 395 is not  in the array
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;segregate-0s-on-left-side-1s-on-right-side-of-the-array&#34;&gt;Segregate 0s on Left Side &amp;amp; 1s on right side of the Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Segregate 0s on Left Side &amp;amp; 1s on right side of the Array (Traverse Array only once)
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+/*Function to segregate all 0s on left and all 1s on right*/
+void segregate0and1(int array[], int size)
+{
+    int left = 0, right = size-1;
+
+    while (left &amp;lt; right)
+    {
+        /* Increment left index while we see 0 at left */
+        while (array[left] == 0 &amp;amp;&amp;amp; left &amp;lt; right)
+            left++;
+        /* Decrement right index while we see 1 at right */
+        while (array[right] == 1 &amp;amp;&amp;amp; left &amp;lt; right)
+            right--;
+        /* If left is smaller than right then there is a 1 at left and a 0 at right.  Exchange it */
+        if (left &amp;lt; right)
+        {
+            array[left] = 0;
+            array[right] = 1;
+            left++;
+            right--;
+        }
+    }
+}
+
+int main()
+{
+    int arr[] = {0, 1, 0, 1, 1, 0};
+    int array_size = 6, i = 0;
+
+    segregate0and1(arr, array_size);
+    printf(&amp;quot;segregated array is &amp;quot;);
+    for (i = 0; i &amp;lt; 6; i++)
+        printf(&amp;quot;%d &amp;quot;, arr[i]);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+segregated array is 0 0 0 1 1 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sort-the-array-in-an-ascending-order&#34;&gt;Sort the Array in an Ascending Order&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to accept N numbers and arrange them in an ascending order
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    int i, j, a, n, number[30];
+
+    printf(&amp;quot;Enter the value of N \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;Enter the numbers \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;number[i]);
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        for (j = i + 1; j &amp;lt; n; ++j)
+        {
+            if (number[i] &amp;gt; number[j])
+            {
+                a =  number[i];
+                number[i] = number[j];
+                number[j] = a;
+            }
+        }
+    }
+    printf(&amp;quot;The numbers arranged in ascending order are given below \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+        printf(&amp;quot;%d\n&amp;quot;, number[i]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Enter the value of N 
+6
+
+Enter the numbers
+3
+78
+90
+456
+780
+200
+
+The numbers arranged  in  ascending order are given below 
+3
+78
+90
+200
+456
+780
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sort-the-array-in-descending-order&#34;&gt;Sort the Array in Descending Order&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to accept a set of numbers and arrange them
+* in a descending order
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main ()
+{
+    int number[30];
+    int i, j, a, n;
+
+    printf(&amp;quot;Enter the value of N\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;Enter the numbers \n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;number[i]);
+    /*  sorting begins ... */
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        for (j = i + 1; j &amp;lt; n; ++j)
+        {
+            if (number[i] &amp;lt; number[j])
+            {
+                a = number[i];
+                number[i] = number[j];
+                number[j] = a;
+            }
+        }
+    }
+    printf(&amp;quot;The numbers arranged in descending order are given below\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, number[i]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Enter the value of N 
+5
+
+Enter the numbers 
+234
+780
+130
+56
+90
+
+The numbers arranged  in  descending order are given below 
+780
+234
+130
+90
+56
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;split-an-array-from-specified-position-add-first-part-to-the-end&#34;&gt;Split an Array from Specified Position &amp;amp; Add First Part to the End&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to read an array, accept a key &amp;amp; split the array.
+* Add the first half to the end of second half.
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main ()
+{
+    int number[30];
+    int i, n, a, j;
+
+    printf(&amp;quot;Enter the value of n\n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot;enter the numbers\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;number[i]);
+    printf(&amp;quot;Enter the position of the element to split the array \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;a);
+    for (i = 0; i &amp;lt; a; ++i)
+    {
+        number[n] = number[0];
+        for (j = 0; j &amp;lt; n; ++j)
+        {
+            number[j] = number[j + 1];
+        }
+    }
+    printf(&amp;quot;The resultant array is\n&amp;quot;);
+    for (i = 0; i &amp;lt; n; ++i)
+    {
+        printf(&amp;quot;%d\n&amp;quot;, number[i]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+Enter the value of n 
+4
+
+enter the numbers
+
+3
+678
+345
+876
+
+Enter the position of the element to split the array 
+3
+
+The resultant array is 
+876
+3
+678
+345
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;input-a-string-store-their-ascii-values-in-an-integer-array-print-the-array&#34;&gt;Input a String &amp;amp; Store their Ascii Values in an Integer Array &amp;amp; Print the Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Input a String &amp;amp; Store their Ascii Values in an Integer Array &amp;amp; Print the Array
+*/
+#include &amp;lt;stdio.h&amp;gt;
+
+void main()
+{
+    char string[20];
+    int n, count = 0;
+    printf(&amp;quot;Enter the no of characters present in an array \n &amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;n);
+    printf(&amp;quot; Enter the string of %d characters \n&amp;quot; , n);
+    scanf(&amp;quot;%s&amp;quot;, string);
+    while (count &amp;lt; n)
+    {
+        printf(&amp;quot; %c = %d\n&amp;quot;, string[count], string[count] );
+        ++ count ;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+Enter the no of characters present in an array
+ 5
+ Enter the string of 5 characters
+harryho
+ h = 104
+ a = 97
+ r = 114
+ r = 114
+ y = 121
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;input-an-array-store-the-squares-of-these-elements-in-an-array-print-it&#34;&gt;Input an Array, Store the Squares of these Elements in an Array &amp;amp; Print it&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Input an Array, Store the Squares of these Elements in an Array &amp;amp; Print it
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#define MAX_ROWS 3
+#define MAX_COLS 4
+
+void print_square(int [] );
+
+void main (void)
+{
+    int i;
+    int num [MAX_ROWS][MAX_COLS] = { {10, 20, 30, 40}, {50, 60, 70, 80}, {90, 100, 110, 120} };
+
+    for (i = 0; i &amp;lt; MAX_ROWS; i++)
+        print_square(num[i]);
+}
+void print_square(int x[ ])
+{
+    int j;
+    for (j = 0; j &amp;lt; MAX_COLS; j++)
+        printf (&amp;quot;%d\t&amp;quot;, x[j] * x[j]);
+    printf(&amp;quot;\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cc sample_code.c 
+$ a
+100     400     900     1600
+2500    3600    4900    6400
+8100    10000   12100   14400
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;calculate-sum-average-of-an-array&#34;&gt;Calculate Sum &amp;amp; Average of an Array&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C program to read N integers into an array A and
+* a) Find the sum of negative numbers
+* b) Find the sum of positive numbers
+* c) Find the average of all numbers
+* Display the results with suitable headings
+*/
+#include  &amp;lt;stdio.h&amp;gt;
+#define MAXSIZE 10
+
+void main()
+{
+    int array[MAXSIZE];
+    int i, num, negative_sum = 0, positive_sum = 0;
+    float total = 0.0, average;
+
+    printf (&amp;quot;Enter the value of N \n&amp;quot;);
+    scanf(&amp;quot;%d&amp;quot;, &amp;amp;num);
+    printf(&amp;quot;Enter %d numbers (-ve, +ve and zero) \n&amp;quot;, num);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;array[i]);
+    }
+    printf(&amp;quot;Input array elements \n&amp;quot;);
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        printf(&amp;quot;%+3d\n&amp;quot;, array[i]);
+    }
+    /*  Summation starts */
+    for (i = 0; i &amp;lt; num; i++)
+    {
+        if (array[i] &amp;lt; 0)
+        {
+            negative_sum = negative_sum + array[i];
+        }
+        else if (array[i] &amp;gt; 0)
+        {
+            positive_sum = positive_sum + array[i];
+        }
+        else if (array[i] == 0)
+        {
+            ;
+        }
+        total = total + array[i] ;
+    }
+    average = total / num;
+    printf(&amp;quot;\n Sum of all negative numbers =  %d\n&amp;quot;, negative_sum);
+    printf(&amp;quot;Sum of all positive numbers =  %d\n&amp;quot;, positive_sum);
+    printf(&amp;quot;\n Average of all input numbers =  %.2f\n&amp;quot;, average);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a
+Enter the value of N
+4
+Enter 4 numbers (-ve, +ve and zero)
+23
+-23
+882
+100
+Input array elements
++23
+-23
++882
++100
+
+ Sum of all negative numbers =  -23
+Sum of all positive numbers =  1005
+
+ Average of all input numbers =  245.50
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-the-sum-of-contiguous-subarray-within-a-1-d-array-of-numbers-which-has-the-largest-sum&#34;&gt;Find the Sum of Contiguous Subarray within a 1 – D Array of Numbers which has the Largest Sum&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find the Sum of Contiguous Subarray within a 1 - D Array of Numbers which has the Largest Sum
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int maxSubArraySum(int a[], int size, int *begin, int *end)
+{
+    int max_so_far = 0, max_end = 0;
+    int i, current_index = 0;
+
+    for (i = 0; i &amp;lt; size; i++)
+    {
+        max_end = max_end + a[i];
+        if (max_end &amp;lt;= 0)
+        {
+            max_end = 0;
+            current_index = i + 1;
+        }
+        else if (max_so_far &amp;lt; max_end)
+        {
+            max_so_far = max_end;
+            *begin = current_index;
+            *end = i;
+        }
+   }
+   return max_so_far;
+}
+
+int main()
+{
+    int arr[] = {10, -2, -15, 9, -8, 12, 20, -5};
+    int start = 0, end = 0;
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    printf(&amp;quot; The max sum is %d&amp;quot;, maxSubArraySum(arr, size, &amp;amp;start, &amp;amp;end));
+    printf(&amp;quot; The begin and End are %d &amp;amp; %d&amp;quot;, start, end);
+    getchar();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ gcc c-program-sum-contiguous-subarray.c
+$ a
+ The max sum is 33 The begin and End are 3 &amp;amp; 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;find-union-intersection-of-2-arrays&#34;&gt;Find Union &amp;amp; Intersection of 2 Arrays&lt;/h3&gt;
+
+&lt;p&gt;Code Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;/*
+* C Program to Find Union &amp;amp; Intersection of 2 Arrays
+*/
+#include &amp;lt;stdio.h&amp;gt;
+#define SIZE 5
+
+void get_value(int arr[]);
+void print_value(int arr[], int n);
+void function_sort(int arr[]);
+int find_intersection(int array1[], int array2[], int intersection_array[]);
+int find_union(int array1[], int array2[], int union_array[]);
+
+void main()
+{
+    int array1[SIZE], array2[SIZE], intersection_array[SIZE], union_array[SIZE*2];
+    int num_elements;
+
+    //input elements of Array1
+    printf(&amp;quot;\n Enter the elements of Array 1: n&amp;quot;);
+    get_value(array1);
+    printf(&amp;quot;\n\n Elements of Array 1: &amp;quot;);
+    print_value(array1, SIZE);
+
+    //Sort array 1
+    function_sort(array1);
+    printf(&amp;quot;nnSorted elements of Array 1: &amp;quot;);
+    print_value(array1, SIZE);
+
+    //input elements of Array2
+    printf(&amp;quot;nnEnter the elements of Array 2: n&amp;quot;);
+    get_value(array2);
+    printf(&amp;quot;\n\n Elements of Array 2: &amp;quot;);
+    print_value(array2, SIZE);
+
+    //Sort array 2
+    function_sort(array2);
+    printf(&amp;quot;\n\nSorted elements of Array 2: &amp;quot;);
+    print_value(array2, SIZE);
+
+    //Find Intersection
+    num_elements = find_intersection(array1, array2, intersection_array);
+    printf(&amp;quot;\n\n Intersection is: &amp;quot;);
+    print_value(intersection_array, num_elements);
+
+    //Find Union
+    num_elements = find_union(array1, array2, union_array);
+    printf(&amp;quot;\n\n Union is: &amp;quot;);
+    print_value(union_array, num_elements);
+}
+
+void get_value(int arr[])
+{
+    int i, j;
+    for (i = 0; i &amp;lt; SIZE; i++)
+    {
+        j = i + 1;
+        printf(&amp;quot;\n Enter element %d: &amp;quot;, j);
+        scanf(&amp;quot;%d&amp;quot;, &amp;amp;arr[i]);
+    }
+}
+
+void print_value(int arr[], int n)
+{
+    int i;
+    printf(&amp;quot;{ &amp;quot;);
+    for (i = 0; i &amp;lt; n; i++)
+    {
+        printf(&amp;quot;%d &amp;quot;, arr[i]);
+    }
+    printf(&amp;quot;}&amp;quot;);
+}
+
+void function_sort(int arr[])
+{
+    int i, j, temp, swapping;
+
+    for (i = 1; i &amp;lt; size; i++)
+    {
+        swapping = 0;
+        for (j = 0; j &amp;lt; size-i; j++)
+        {
+            if (arr[j] &amp;gt; arr[j+1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapping = 1;
+            }
+        }
+        if (swapping == 0)
+        {
+            break;
+        }
+    }
+}
+
+int find_intersection(int array1[], int array2[], int intersection_array[])
+{
+    int i = 0, j = 0, k = 0;
+    while ((i &amp;lt; size) &amp;amp;&amp;amp; (j &amp;lt; size))
+    {
+        if (array1[i] &amp;lt; array2[j])
+        {
+            i++;
+        }
+        else if (array1[i] &amp;gt; array2[j])
+        {
+            j++;
+        }
+        else
+        {
+            intersection_array[k] = array1[i];
+            i++;
+            j++;
+            k++;
+        }
+    }
+    return(k);
+}
+
+int find_union(int array1[], int array2[], int union_array[])
+{
+    int i = 0, j = 0, k = 0;
+    while ((i &amp;lt; SIZE) &amp;amp;&amp;amp; (j &amp;lt; SIZE))
+    {
+        if (array1[i] &amp;lt; array2[j])
+        {
+            union_array[k] = array1[i];
+            i++;
+            k++;
+        }
+        else if (array1[i] &amp;gt; array2[j])
+        {
+            union_array[k] = array2[j];
+            j++;
+            k++;
+        }
+        else
+        {
+            union_array[k] = array1[i];
+            i++;
+            j++;
+            k++;
+        }
+    }
+    if (i == SIZE)
+    {
+        while (j &amp;lt; SIZE)
+        {
+            union_array[k] = array2[j];
+            j++;
+            k++;
+        }
+    }
+    else
+    {
+        while (i &amp;lt; SIZE)
+        {
+            union_array[k] = array1[i];
+            i++;
+            k++;
+        }
+    }
+    return(k);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+$ cc sample_code.c 
+$ a.out
+
+Enter the elements of Array 1:
+
+ Enter element 1: 3
+
+ Enter element 2: 7
+
+ Enter element 3: 24
+
+ Enter element 4: -87
+
+ Enter element 5: -23
+
+
+ Elements of Array 1: { 3 7 24 -87 -23 }
+
+Sorted elements of Array 1: { -87 -23 3 7 24 }
+
+Enter the elements of Array 2:
+
+ Enter element 1: 34
+
+ Enter element 2: -23
+
+ Enter element 3: 7
+
+ Enter element 4: 87
+
+ Enter element 5: 98
+
+
+ Elements of Array 2: { 34 -23 7 87 98 }
+
+Sorted elements of Array 2: { -23 7 34 87 98 }
+
+ Intersection is: { -23 7 }
+
+ Union is: { -87 -23 3 7 24 34 87 98 }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
