@@ -76,7 +76,7 @@
 
 <p><em>After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the <a href="https://gohugo.io/overview/quickstart/">Hugo Quick Start</a> and <a href="https://gohugo.io/tutorials/github-pages-blog">Hosting on GitHub Pages</a> to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.</em></p>
 
-<h2 id="assumptions">Assumptions</h2>
+<h2 id="assumptions:677eca8a58bb006b7a1c0100cb6acd91">Assumptions</h2>
 
 <ul>
 <li>You already have <em>Hugo</em> on your computer. If not, please follow the instruction to <a href="https://gohugo.io/tutorials/installing-on-windows">install hugo on Windows</a>.</li>
@@ -98,10 +98,11 @@
         |--themes
         |--
 
+
 </code></pre></li>
 </ul>
 
-<h2 id="create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</h2>
+<h2 id="create-a-blog-site-on-github-pages:677eca8a58bb006b7a1c0100cb6acd91">Create a blog site on GitHub pages</h2>
 
 <ul>
 <li>Create on GitHub blog-hugo and <username>.github.io repositories  repository via GitHub website</li>
@@ -134,24 +135,31 @@ C:\git&gt;git submodule add -b master https://github.com/&lt;username&gt;/&lt;us
 
 <pre><code class="language-bash">@echo OFF
 
+
 echo  Deploying updates to GitHub...
+
 
 REM Build the project. 
 hugo -t &lt;yourtheme&gt; -D
 
+
 REM Go To Public folder
 cd public
 
+
 REM Add changes to git.
 git add -A
+
 
 REM Commit changes.
 set msg=&quot;rebuilding site %date%&quot;
 if  NOT &quot;%1&quot;==&quot;&quot;    set msg=%1
 git commit -m '%msg%'
 
+
 REM Push source and build repos.
 git push origin master
+
 
 REM Come Back
 cd ..
@@ -179,8 +187,8 @@ cd ..
 <ul>
 <li>
 <ul>
-<li><a href="#assumptions">Assumptions</a></li>
-<li><a href="#create-a-blog-site-on-github-pages">Create a blog site on GitHub pages</a></li>
+<li><a href="#assumptions:677eca8a58bb006b7a1c0100cb6acd91">Assumptions</a></li>
+<li><a href="#create-a-blog-site-on-github-pages:677eca8a58bb006b7a1c0100cb6acd91">Create a blog site on GitHub pages</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -226,6 +234,9 @@ cd ..
 					</li>
 				
 					<li><a href="/code/c-program-array/">C Program Array</a>
+					</li>
+				
+					<li><a href="/code/cpp-program-algo/">C&#43;&#43; Program Algo</a>
 					</li>
 				
 				</ul>

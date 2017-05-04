@@ -74,19 +74,19 @@
 				<section>
 					
 
-<h2 id="prelude">Prelude</h2>
+<h2 id="prelude:0b8eccf0566cb998af01deefdb02159f">Prelude</h2>
 
 <blockquote>
 <p><em>This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow <a href="/blog/ubuntu-desktop-14/">Ubuntu deskstop setup</a></em></p>
 </blockquote>
 
-<h2 id="brief-history">Brief history</h2>
+<h2 id="brief-history:0b8eccf0566cb998af01deefdb02159f">Brief history</h2>
 
 <ul>
 <li>Please find it from <a href="/blog/linux-history/">Brief history of Linux</a></li>
 </ul>
 
-<h2 id="assumption">Assumption</h2>
+<h2 id="assumption:0b8eccf0566cb998af01deefdb02159f">Assumption</h2>
 
 <ul>
 <li>You are familiar with Ubuntu, at least you have some experience working on Linux system.</li>
@@ -94,13 +94,13 @@
 <li>You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.<br /></li>
 </ul>
 
-<h2 id="things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</h2>
+<h2 id="things-to-do-after-installing-ubuntu-server:0b8eccf0566cb998af01deefdb02159f">Things to do after installing Ubuntu server</h2>
 
 <ul>
 <li>How to setup your server</li>
 </ul>
 
-<h3 id="ufw-setup"><strong><em>UFW setup</em></strong></h3>
+<h3 id="ufw-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>UFW setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo ufw enable
 sudo ufw allow 80/tcp
@@ -109,7 +109,7 @@ sudo ufw allow 443/tcp
 sudo ufw allow 8000/tcp
 </code></pre>
 
-<h3 id="ssh-server-setup"><strong><em>SSH server setup</em></strong></h3>
+<h3 id="ssh-server-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>SSH server setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-get install openssh-server 
 
@@ -123,12 +123,12 @@ sudo nano /etc/ssh/sshd_config
 # uncomment  PasswordAuthentication yes to allow remote password login
 </code></pre>
 
-<h3 id="time-zone-setup"><strong><em>Time Zone setup</em></strong></h3>
+<h3 id="time-zone-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>Time Zone setup</em></strong></h3>
 
 <pre><code class="language-bash">sudo dpkg-reconfigure tzdata
 </code></pre>
 
-<h3 id="install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></h3>
+<h3 id="install-software-properties-common-package:0b8eccf0566cb998af01deefdb02159f"><strong><em>install software-properties-common Package</em></strong></h3>
 
 <pre><code class="language-bash">software-properties-common python-software-properties
 </code></pre>
@@ -143,7 +143,7 @@ byobu
 # change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6
 </code></pre>
 
-<h3 id="install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></h3>
+<h3 id="install-docker-ubuntu-14-04-lts:0b8eccf0566cb998af01deefdb02159f"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></h3>
 
 <pre><code class="language-bash"># add GBG Key
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -163,7 +163,7 @@ apt-cache policy docker-engine
 
 </code></pre>
 
-<h3 id="build-vim"><strong><em>build vim</em></strong></h3>
+<h3 id="build-vim:0b8eccf0566cb998af01deefdb02159f"><strong><em>build vim</em></strong></h3>
 
 <ul>
 <li>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>,</code>syntastic`, etc.</li>
@@ -178,7 +178,7 @@ make VIMRUNTIMEDIR=/usr/share/vim/vim74
 sudo make install
 </code></pre>
 
-<h3 id="install-jdk-8"><strong><em>Install JDK 8</em></strong></h3>
+<h3 id="install-jdk-8:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install JDK 8</em></strong></h3>
 
 <ul>
 <li>If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.</li>
@@ -191,7 +191,7 @@ sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default     
 </code></pre>
 
-<h3 id="install-openjdk"><strong><em>Install OpenJdk</em></strong></h3>
+<h3 id="install-openjdk:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install OpenJdk</em></strong></h3>
 
 <ul>
 <li>Setup OpenJdk ppa and install it from ppa</li>
@@ -222,7 +222,7 @@ java -version
 </ul></li>
 </ul>
 
-<h3 id="install-nodejs"><strong><em>Install nodejs</em></strong></h3>
+<h3 id="install-nodejs:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install nodejs</em></strong></h3>
 
 <pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs
@@ -255,7 +255,7 @@ which npm
 <pre><code class="language-bash">export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;
 </code></pre>
 
-<h3 id="install-nvm"><strong><em>Install nvm</em></strong></h3>
+<h3 id="install-nvm:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install nvm</em></strong></h3>
 
 <ul>
 <li>Using <code>nvm</code> is no longer popular and best option. I will recommand you just use <code>npm</code> to manage eveything you need.</li>
@@ -272,13 +272,13 @@ nvm alias default 0.11.13
 nvm use default
 </code></pre>
 
-<h3 id="install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></h3>
+<h3 id="install-php-compser:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install PHP &amp; Compser</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-get install curl php5-cli git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 </code></pre>
 
-<h3 id="install-python2-python3"><strong><em>Install Python2, Python3</em></strong></h3>
+<h3 id="install-python2-python3:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Python2, Python3</em></strong></h3>
 
 <ul>
 <li>Ubuntu has python instaleld by default</li>
@@ -291,7 +291,7 @@ sudo pip install virtualenv
 sudo pip3 install virtualenv
 </code></pre>
 
-<h3 id="install-go"><strong><em>Install Go</em></strong></h3>
+<h3 id="install-go:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Go</em></strong></h3>
 
 <pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
@@ -302,7 +302,7 @@ GOROOT=&quot;/usr/local/go&quot;
 PATH=$GOROOT/bin:$PATH
 </code></pre>
 
-<h3 id="install-r"><strong><em>Install R</em></strong></h3>
+<h3 id="install-r:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install R</em></strong></h3>
 
 <pre><code class="language-bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
 sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
@@ -310,7 +310,7 @@ sudo apt-get update
 sudo apt-get install r-base
 </code></pre>
 
-<h3 id="install-rust"><strong><em>Install Rust</em></strong></h3>
+<h3 id="install-rust:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Rust</em></strong></h3>
 
 <pre><code class="language-bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
 </code></pre>
@@ -339,26 +339,26 @@ sudo apt-get install r-base
 <ul>
 <li>
 <ul>
-<li><a href="#prelude">Prelude</a></li>
-<li><a href="#brief-history">Brief history</a></li>
-<li><a href="#assumption">Assumption</a></li>
-<li><a href="#things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</a>
+<li><a href="#prelude:0b8eccf0566cb998af01deefdb02159f">Prelude</a></li>
+<li><a href="#brief-history:0b8eccf0566cb998af01deefdb02159f">Brief history</a></li>
+<li><a href="#assumption:0b8eccf0566cb998af01deefdb02159f">Assumption</a></li>
+<li><a href="#things-to-do-after-installing-ubuntu-server:0b8eccf0566cb998af01deefdb02159f">Things to do after installing Ubuntu server</a>
 <ul>
-<li><a href="#ufw-setup"><strong><em>UFW setup</em></strong></a></li>
-<li><a href="#ssh-server-setup"><strong><em>SSH server setup</em></strong></a></li>
-<li><a href="#time-zone-setup"><strong><em>Time Zone setup</em></strong></a></li>
-<li><a href="#install-software-properties-common-package"><strong><em>install software-properties-common Package</em></strong></a></li>
-<li><a href="#install-docker-ubuntu-14-04-lts"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></a></li>
-<li><a href="#build-vim"><strong><em>build vim</em></strong></a></li>
-<li><a href="#install-jdk-8"><strong><em>Install JDK 8</em></strong></a></li>
-<li><a href="#install-openjdk"><strong><em>Install OpenJdk</em></strong></a></li>
-<li><a href="#install-nodejs"><strong><em>Install nodejs</em></strong></a></li>
-<li><a href="#install-nvm"><strong><em>Install nvm</em></strong></a></li>
-<li><a href="#install-php-compser"><strong><em>Install PHP &amp; Compser</em></strong></a></li>
-<li><a href="#install-python2-python3"><strong><em>Install Python2, Python3</em></strong></a></li>
-<li><a href="#install-go"><strong><em>Install Go</em></strong></a></li>
-<li><a href="#install-r"><strong><em>Install R</em></strong></a></li>
-<li><a href="#install-rust"><strong><em>Install Rust</em></strong></a></li>
+<li><a href="#ufw-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>UFW setup</em></strong></a></li>
+<li><a href="#ssh-server-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>SSH server setup</em></strong></a></li>
+<li><a href="#time-zone-setup:0b8eccf0566cb998af01deefdb02159f"><strong><em>Time Zone setup</em></strong></a></li>
+<li><a href="#install-software-properties-common-package:0b8eccf0566cb998af01deefdb02159f"><strong><em>install software-properties-common Package</em></strong></a></li>
+<li><a href="#install-docker-ubuntu-14-04-lts:0b8eccf0566cb998af01deefdb02159f"><strong><em>install docker (Ubuntu 14.04 LTS)</em></strong></a></li>
+<li><a href="#build-vim:0b8eccf0566cb998af01deefdb02159f"><strong><em>build vim</em></strong></a></li>
+<li><a href="#install-jdk-8:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install JDK 8</em></strong></a></li>
+<li><a href="#install-openjdk:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install OpenJdk</em></strong></a></li>
+<li><a href="#install-nodejs:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install nodejs</em></strong></a></li>
+<li><a href="#install-nvm:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install nvm</em></strong></a></li>
+<li><a href="#install-php-compser:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install PHP &amp; Compser</em></strong></a></li>
+<li><a href="#install-python2-python3:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Python2, Python3</em></strong></a></li>
+<li><a href="#install-go:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Go</em></strong></a></li>
+<li><a href="#install-r:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install R</em></strong></a></li>
+<li><a href="#install-rust:0b8eccf0566cb998af01deefdb02159f"><strong><em>Install Rust</em></strong></a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -405,6 +405,9 @@ sudo apt-get install r-base
 					</li>
 				
 					<li><a href="/code/c-program-array/">C Program Array</a>
+					</li>
+				
+					<li><a href="/code/cpp-program-algo/">C&#43;&#43; Program Algo</a>
 					</li>
 				
 				</ul>

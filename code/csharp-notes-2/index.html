@@ -74,17 +74,17 @@
 				<section>
 					
 
-<h1 id="problem">Problem</h1>
+<h1 id="problem:124320b7bd93576d89fecfbc1bede2af">Problem</h1>
 
 <blockquote>
 <p><em>Set up the some scheduled tasks running in the backgroud to take care of data update or sync for every 15 mins, or everyday or every week</em></p>
 </blockquote>
 
-<h1 id="solution">Solution</h1>
+<h1 id="solution:124320b7bd93576d89fecfbc1bede2af">Solution</h1>
 
-<h2 id="options-as-scheduled-backgroud-service">Options as scheduled backgroud service</h2>
+<h2 id="options-as-scheduled-backgroud-service:124320b7bd93576d89fecfbc1bede2af">Options as scheduled backgroud service</h2>
 
-<h3 id="windows-task-scheduler">Windows Task Scheduler</h3>
+<h3 id="windows-task-scheduler:124320b7bd93576d89fecfbc1bede2af">Windows Task Scheduler</h3>
 
 <ul>
 <li>Click the Start button.</li>
@@ -94,9 +94,9 @@
 <li>Double-click Task Scheduler.</li>
 </ul>
 
-<h3 id="use-window-service-as-task-scheduler">Use Window Service as task scheduler</h3>
+<h3 id="use-window-service-as-task-scheduler:124320b7bd93576d89fecfbc1bede2af">Use Window Service as task scheduler</h3>
 
-<h4 id="overview-of-design">Overview of design</h4>
+<h4 id="overview-of-design:124320b7bd93576d89fecfbc1bede2af">Overview of design</h4>
 
 <p><strong>The design here is a simplified version, which I built for previous projects. In the real world, I need to tailor it for different project with different purpose, but fundamental design of architect is the same. IMO, the design below can support most cases, which needs scheduled backgroud task service.</strong></p>
 
@@ -135,9 +135,9 @@
 
 </code></pre>
 
-<h4 id="create-customized-window-service">Create customized Window Service</h4>
+<h4 id="create-customized-window-service:124320b7bd93576d89fecfbc1bede2af">Create customized Window Service</h4>
 
-<h4 id="use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</h4>
+<h4 id="use-serviceprocess-to-create-window-service:124320b7bd93576d89fecfbc1bede2af">Use ServiceProcess to create Window Service</h4>
 
 <ul>
 <li>The System.ServiceProcess allow you to implement, install, and control Windows service applications. Services are long-running executables that run without a user interface.</li>
@@ -165,7 +165,7 @@
 
 </code></pre>
 
-<h4 id="create-customized-servicebase">Create customized ServiceBase</h4>
+<h4 id="create-customized-servicebase:124320b7bd93576d89fecfbc1bede2af">Create customized ServiceBase</h4>
 
 <ul>
 <li>Implementing a service involves inheriting from the ServiceBase class and defining specific behavior to process when start, stop, pause, and continue commands are passed in, as well as custom behavior and actions to take when the system shuts down.</li>
@@ -253,7 +253,7 @@ namespace MyScheduler
 
 </code></pre>
 
-<h4 id="task-interface-and-class">Task interface and class</h4>
+<h4 id="task-interface-and-class:124320b7bd93576d89fecfbc1bede2af">Task interface and class</h4>
 
 <ul>
 <li>interface ITask has only one method</li>
@@ -352,7 +352,7 @@ namespace MyScheduler
 }
 </code></pre>
 
-<h3 id="create-window-service-installer">Create Window Service installer</h3>
+<h3 id="create-window-service-installer:124320b7bd93576d89fecfbc1bede2af">Create Window Service installer</h3>
 
 <ul>
 <li>In Solution Explorer, double-click MyScheduledService.cs.</li>
@@ -386,12 +386,12 @@ namespace MyScheduler
 }
 </code></pre>
 
-<h3 id="install-window-service">Install Window Service</h3>
+<h3 id="install-window-service:124320b7bd93576d89fecfbc1bede2af">Install Window Service</h3>
 
 <pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /i &lt;app_path&gt;\MyScheduler.exe 
 </code></pre>
 
-<h3 id="uninstall-window-service">Uninstall Window Service</h3>
+<h3 id="uninstall-window-service:124320b7bd93576d89fecfbc1bede2af">Uninstall Window Service</h3>
 
 <pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &lt;app_path&gt;\MyScheduler.exe 
 </code></pre>
@@ -413,23 +413,23 @@ namespace MyScheduler
 			</ul>
 			<nav id="TableOfContents">
 <ul>
-<li><a href="#problem">Problem</a></li>
-<li><a href="#solution">Solution</a>
+<li><a href="#problem:124320b7bd93576d89fecfbc1bede2af">Problem</a></li>
+<li><a href="#solution:124320b7bd93576d89fecfbc1bede2af">Solution</a>
 <ul>
-<li><a href="#options-as-scheduled-backgroud-service">Options as scheduled backgroud service</a>
+<li><a href="#options-as-scheduled-backgroud-service:124320b7bd93576d89fecfbc1bede2af">Options as scheduled backgroud service</a>
 <ul>
-<li><a href="#windows-task-scheduler">Windows Task Scheduler</a></li>
-<li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
+<li><a href="#windows-task-scheduler:124320b7bd93576d89fecfbc1bede2af">Windows Task Scheduler</a></li>
+<li><a href="#use-window-service-as-task-scheduler:124320b7bd93576d89fecfbc1bede2af">Use Window Service as task scheduler</a>
 <ul>
-<li><a href="#overview-of-design">Overview of design</a></li>
-<li><a href="#create-customized-window-service">Create customized Window Service</a></li>
-<li><a href="#use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</a></li>
-<li><a href="#create-customized-servicebase">Create customized ServiceBase</a></li>
-<li><a href="#task-interface-and-class">Task interface and class</a></li>
+<li><a href="#overview-of-design:124320b7bd93576d89fecfbc1bede2af">Overview of design</a></li>
+<li><a href="#create-customized-window-service:124320b7bd93576d89fecfbc1bede2af">Create customized Window Service</a></li>
+<li><a href="#use-serviceprocess-to-create-window-service:124320b7bd93576d89fecfbc1bede2af">Use ServiceProcess to create Window Service</a></li>
+<li><a href="#create-customized-servicebase:124320b7bd93576d89fecfbc1bede2af">Create customized ServiceBase</a></li>
+<li><a href="#task-interface-and-class:124320b7bd93576d89fecfbc1bede2af">Task interface and class</a></li>
 </ul></li>
-<li><a href="#create-window-service-installer">Create Window Service installer</a></li>
-<li><a href="#install-window-service">Install Window Service</a></li>
-<li><a href="#uninstall-window-service">Uninstall Window Service</a></li>
+<li><a href="#create-window-service-installer:124320b7bd93576d89fecfbc1bede2af">Create Window Service installer</a></li>
+<li><a href="#install-window-service:124320b7bd93576d89fecfbc1bede2af">Install Window Service</a></li>
+<li><a href="#uninstall-window-service:124320b7bd93576d89fecfbc1bede2af">Uninstall Window Service</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -477,6 +477,9 @@ namespace MyScheduler
 					</li>
 				
 					<li><a href="/code/c-program-array/">C Program Array</a>
+					</li>
+				
+					<li><a href="/code/cpp-program-algo/">C&#43;&#43; Program Algo</a>
 					</li>
 				
 				</ul>

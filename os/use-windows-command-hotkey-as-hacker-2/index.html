@@ -78,29 +78,29 @@
 
 <p><em>Let me clarify something first. Advanced command here does not mean that commands here are very complicated or much more powerful than common ones, which have been shown in the Part-1. Here we call them advanced, because they are used by experienced users to complete their given tasks, and those commands are used seldom by majority people. Comparing with Part-1, advanced commands have some specific features which allow them to do some special jobs, which usually are done by system admin. Advanced command is known as Admin command as well.</em></p>
 
-<h2 id="advanced-commands-and-usages">Advanced commands and usages</h2>
+<h2 id="advanced-commands-and-usages:5677ee0e02086f84eba2d1a25dcb477b">Advanced commands and usages</h2>
 
-<h3 id="attrib">attrib</h3>
+<h3 id="attrib:5677ee0e02086f84eba2d1a25dcb477b">attrib</h3>
 
 <ul>
 <li>Type <code>attrib +h a.txt</code> to hide file and use <code>attrib -h a.txt</code> to unhide it.</li>
 <li>Type <code>attrib +r a.txt</code> to change file to read-only and reverse the action by <code>-r</code></li>
 </ul>
 
-<h3 id="env">env</h3>
+<h3 id="env:5677ee0e02086f84eba2d1a25dcb477b">env</h3>
 
 <ul>
 <li>Type <code>env&gt;env.txt &amp; notepad env.txt</code> Display all environment variable in text file</li>
 </ul>
 
-<h3 id="set">set</h3>
+<h3 id="set:5677ee0e02086f84eba2d1a25dcb477b">set</h3>
 
 <ul>
 <li>Type <code>set path</code> to display <strong>PATH</strong> environment variable, which is useful to check if your <strong>PATH</strong> has been setup properly.</li>
 <li>Type <code>set /P a=b</code> to set b as value to variable a. It will be used in bat/cmd script.</li>
 </ul>
 
-<h3 id="net">net</h3>
+<h3 id="net:5677ee0e02086f84eba2d1a25dcb477b">net</h3>
 
 <p><strong>get sub-commands</strong> &ndash; type <code>net /?</code></p>
 
@@ -146,7 +146,7 @@
 <li>User <code>net accounts /unique:5</code> to prevent user reuse previous passwords, and default value is 5.</li>
 </ul>
 
-<h3 id="runas">runas</h3>
+<h3 id="runas:5677ee0e02086f84eba2d1a25dcb477b">runas</h3>
 
 <pre><code class="language-dos">start command prompt as administrator
 runas /user:yourpc\administrator &quot;cmd&quot;
@@ -157,7 +157,7 @@ runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &a
 
 </code></pre>
 
-<h3 id="sc">sc</h3>
+<h3 id="sc:5677ee0e02086f84eba2d1a25dcb477b">sc</h3>
 
 <ul>
 <li>sc command usage: <code>sc &lt;server&gt; [command] [service name] &lt;option1&gt; &lt;option2&gt;...</code></li>
@@ -244,14 +244,14 @@ REM stop service
 sc stop  &lt;servicename&gt;
 </code></pre>
 
-<h3 id="ipconfig">ipconfig</h3>
+<h3 id="ipconfig:5677ee0e02086f84eba2d1a25dcb477b">ipconfig</h3>
 
 <ul>
 <li>Type <code>ipconfig /all</code> to display full configuration information.</li>
 <li>Type <code>ipconfig /flushdns</code>    to purge the DNS Resolver cache.</li>
 </ul>
 
-<h3 id="tasklist">tasklist</h3>
+<h3 id="tasklist:5677ee0e02086f84eba2d1a25dcb477b">tasklist</h3>
 
 <p><strong>syntax</strong></p>
 
@@ -277,7 +277,7 @@ REM get process by PID
 tasklist /fi &quot;pid eq 4444&quot;
 </code></pre>
 
-<h3 id="netstat">netstat</h3>
+<h3 id="netstat:5677ee0e02086f84eba2d1a25dcb477b">netstat</h3>
 
 <ul>
 <li>Type <code>netstat</code> to get all ports and IP addresses, which are connected or listening</li>
@@ -298,7 +298,7 @@ tasklist /fi &quot;pid eq 4444&quot;
 )
 </code></pre>
 
-<h3 id="taskkill">taskkill</h3>
+<h3 id="taskkill:5677ee0e02086f84eba2d1a25dcb477b">taskkill</h3>
 
 <p><strong>syntax</strong></p>
 
@@ -320,7 +320,7 @@ taskkill /F /FI &quot;PID ge 1000&quot; /FI &quot;WINDOWTITLE ne untitle*&quot;
 taskkill /F /FI &quot;USERNAME eq NT AUTHORITY\SYSTEM&quot; /IM notepad.exe
 </code></pre>
 
-<h3 id="schtasks">schtasks</h3>
+<h3 id="schtasks:5677ee0e02086f84eba2d1a25dcb477b">schtasks</h3>
 
 <ul>
 <li><p>Syntax &ndash; <code>schtasks /parameter [arguments]</code></p>
@@ -347,11 +347,11 @@ REM get table of running tasks in details and output to csv file
 SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot;&gt;running_tasks.csv
 </code></pre>
 
-<h2 id="combination-of-multiple-commands">Combination of multiple commands</h2>
+<h2 id="combination-of-multiple-commands:5677ee0e02086f84eba2d1a25dcb477b">Combination of multiple commands</h2>
 
 <p>As we know, usually each command is designed to complete some specific actions, but sometimes we have to combine different commands together to achieve what we want. There are a few ways to put the commands together.</p>
 
-<h3 id="use-to-simply-connect-to-commands">Use <code>&amp;</code> to simply connect to commands</h3>
+<h3 id="use-to-simply-connect-to-commands:5677ee0e02086f84eba2d1a25dcb477b">Use <code>&amp;</code> to simply connect to commands</h3>
 
 <ul>
 <li>Delete a folder with non-empty subdirectries <code>test</code> we need to combine <code>del</code> and <code>rd</code> together. Actually we can two commands one by one, but we can put it together and just execute once.<br /></li>
@@ -372,7 +372,7 @@ tree test
 del /s/q test &amp; rd /s/q
 </code></pre>
 
-<h3 id="use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</h3>
+<h3 id="use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands:5677ee0e02086f84eba2d1a25dcb477b">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</h3>
 
 <p>Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.</p>
 
@@ -384,17 +384,17 @@ cat all.txt | find &quot;mark&quot;&gt;mark.txt
 cat mark.txt
 </code></pre>
 
-<h3 id="use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</h3>
+<h3 id="use-for-loop-to-combine-commands-please-check-the-samples-above:5677ee0e02086f84eba2d1a25dcb477b">Use <code>for</code> loop to combine commands. Please check the samples above.</h3>
 
-<h2 id="script">script</h2>
+<h2 id="script:5677ee0e02086f84eba2d1a25dcb477b">script</h2>
 
-<h3 id="basic-hello-world-script">Basic hello world script</h3>
+<h3 id="basic-hello-world-script:5677ee0e02086f84eba2d1a25dcb477b">Basic hello world script</h3>
 
 <ul>
 <li>You can find it on the <a href="https://harryho.github.io">home page</a></li>
 </ul>
 
-<h3 id="customized-script">Customized script</h3>
+<h3 id="customized-script:5677ee0e02086f84eba2d1a25dcb477b">Customized script</h3>
 
 <ul>
 <li>This sample script is used to query temp folders and clean up log files within the folder.</li>
@@ -461,30 +461,30 @@ cat mark.txt
 <ul>
 <li>
 <ul>
-<li><a href="#advanced-commands-and-usages">Advanced commands and usages</a>
+<li><a href="#advanced-commands-and-usages:5677ee0e02086f84eba2d1a25dcb477b">Advanced commands and usages</a>
 <ul>
-<li><a href="#attrib">attrib</a></li>
-<li><a href="#env">env</a></li>
-<li><a href="#set">set</a></li>
-<li><a href="#net">net</a></li>
-<li><a href="#runas">runas</a></li>
-<li><a href="#sc">sc</a></li>
-<li><a href="#ipconfig">ipconfig</a></li>
-<li><a href="#tasklist">tasklist</a></li>
-<li><a href="#netstat">netstat</a></li>
-<li><a href="#taskkill">taskkill</a></li>
-<li><a href="#schtasks">schtasks</a></li>
+<li><a href="#attrib:5677ee0e02086f84eba2d1a25dcb477b">attrib</a></li>
+<li><a href="#env:5677ee0e02086f84eba2d1a25dcb477b">env</a></li>
+<li><a href="#set:5677ee0e02086f84eba2d1a25dcb477b">set</a></li>
+<li><a href="#net:5677ee0e02086f84eba2d1a25dcb477b">net</a></li>
+<li><a href="#runas:5677ee0e02086f84eba2d1a25dcb477b">runas</a></li>
+<li><a href="#sc:5677ee0e02086f84eba2d1a25dcb477b">sc</a></li>
+<li><a href="#ipconfig:5677ee0e02086f84eba2d1a25dcb477b">ipconfig</a></li>
+<li><a href="#tasklist:5677ee0e02086f84eba2d1a25dcb477b">tasklist</a></li>
+<li><a href="#netstat:5677ee0e02086f84eba2d1a25dcb477b">netstat</a></li>
+<li><a href="#taskkill:5677ee0e02086f84eba2d1a25dcb477b">taskkill</a></li>
+<li><a href="#schtasks:5677ee0e02086f84eba2d1a25dcb477b">schtasks</a></li>
 </ul></li>
-<li><a href="#combination-of-multiple-commands">Combination of multiple commands</a>
+<li><a href="#combination-of-multiple-commands:5677ee0e02086f84eba2d1a25dcb477b">Combination of multiple commands</a>
 <ul>
-<li><a href="#use-to-simply-connect-to-commands">Use <code>&amp;</code> to simply connect to commands</a></li>
-<li><a href="#use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</a></li>
-<li><a href="#use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</a></li>
+<li><a href="#use-to-simply-connect-to-commands:5677ee0e02086f84eba2d1a25dcb477b">Use <code>&amp;</code> to simply connect to commands</a></li>
+<li><a href="#use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands:5677ee0e02086f84eba2d1a25dcb477b">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</a></li>
+<li><a href="#use-for-loop-to-combine-commands-please-check-the-samples-above:5677ee0e02086f84eba2d1a25dcb477b">Use <code>for</code> loop to combine commands. Please check the samples above.</a></li>
 </ul></li>
-<li><a href="#script">script</a>
+<li><a href="#script:5677ee0e02086f84eba2d1a25dcb477b">script</a>
 <ul>
-<li><a href="#basic-hello-world-script">Basic hello world script</a></li>
-<li><a href="#customized-script">Customized script</a></li>
+<li><a href="#basic-hello-world-script:5677ee0e02086f84eba2d1a25dcb477b">Basic hello world script</a></li>
+<li><a href="#customized-script:5677ee0e02086f84eba2d1a25dcb477b">Customized script</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -531,6 +531,9 @@ cat mark.txt
 					</li>
 				
 					<li><a href="/code/c-program-array/">C Program Array</a>
+					</li>
+				
+					<li><a href="/code/cpp-program-algo/">C&#43;&#43; Program Algo</a>
 					</li>
 				
 				</ul>

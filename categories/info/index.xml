@@ -2,11 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Info on Hello World</title>
-    <link>https://harryho.github.io/categories/info/index.xml</link>
+    <link>https://harryho.github.io/categories/info/</link>
     <description>Recent content in Info on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
+    <lastBuildDate>Wed, 15 Feb 2017 14:59:31 +1100</lastBuildDate>
     <atom:link href="https://harryho.github.io/categories/info/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -19,7 +20,7 @@
 
 &lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
+&lt;h2 id=&#34;assumptions:677eca8a58bb006b7a1c0100cb6acd91&#34;&gt;Assumptions&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;You already have &lt;em&gt;Hugo&lt;/em&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
@@ -41,10 +42,11 @@
         |--themes
         |--
 
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;create-a-blog-site-on-github-pages&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
+&lt;h2 id=&#34;create-a-blog-site-on-github-pages:677eca8a58bb006b7a1c0100cb6acd91&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Create on GitHub blog-hugo and &lt;username&gt;.github.io repositories  repository via GitHub website&lt;/li&gt;
@@ -77,24 +79,31 @@ C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&am
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
 
+
 echo  Deploying updates to GitHub...
+
 
 REM Build the project. 
 hugo -t &amp;lt;yourtheme&amp;gt; -D
 
+
 REM Go To Public folder
 cd public
 
+
 REM Add changes to git.
 git add -A
+
 
 REM Commit changes.
 set msg=&amp;quot;rebuilding site %date%&amp;quot;
 if  NOT &amp;quot;%1&amp;quot;==&amp;quot;&amp;quot;    set msg=%1
 git commit -m &#39;%msg%&#39;
 
+
 REM Push source and build repos.
 git push origin master
+
 
 REM Come Back
 cd ..
@@ -113,19 +122,19 @@ cd ..
       <guid>https://harryho.github.io/info/jira-notes/</guid>
       <description>
 
-&lt;h2 id=&#34;what-is-jira&#34;&gt;What is JIRA&lt;/h2&gt;
+&lt;h2 id=&#34;what-is-jira:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;What is JIRA&lt;/h2&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&amp;rsquo;s main competitor, Bugzilla. It has been developed since 2002.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;how-to-work-with-client-within-jira&#34;&gt;How to work with client within JIRA&lt;/h2&gt;
+&lt;h2 id=&#34;how-to-work-with-client-within-jira:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;How to work with client within JIRA&lt;/h2&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+&lt;h3 id=&#34;assumption:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Assumption&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Your client&amp;rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.&lt;/p&gt;&lt;/li&gt;
@@ -135,13 +144,13 @@ cd ..
 &lt;li&gt;&lt;p&gt;You want to allow the client to access this project on JIRA, but you want to avoid client&amp;rsquo;s unintented update to mess up the project management.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;requirement-of-permission-control&#34;&gt;Requirement of permission control&lt;/h3&gt;
+&lt;h3 id=&#34;requirement-of-permission-control:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Requirement of permission control&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;In Agile practice, product owner should attend the&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;change-default-permission-scheme&#34;&gt;Change default permission scheme&lt;/h3&gt;
+&lt;h3 id=&#34;change-default-permission-scheme:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Change default permission scheme&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.&lt;/p&gt;&lt;/li&gt;
@@ -176,7 +185,7 @@ cd ..
 &lt;li&gt;&lt;p&gt;Update the permission scheme of the project &lt;code&gt;ABC IT Project&lt;/code&gt; from to &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;change-user-s-group&#34;&gt;Change user&amp;rsquo;s group&lt;/h3&gt;
+&lt;h3 id=&#34;change-user-s-group:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Change user&amp;rsquo;s group&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Choose &lt;code&gt;User management&lt;/code&gt; &amp;gt; &lt;code&gt;User&lt;/code&gt;&lt;/li&gt;
@@ -184,9 +193,9 @@ cd ..
 &lt;li&gt;Remove the user from default &lt;code&gt;jira-software-user&lt;/code&gt; and make sure the checkbox &lt;code&gt;Access JIRA Software&lt;/code&gt; is selected.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;time-tracking-and-estimation&#34;&gt;Time Tracking and Estimation&lt;/h2&gt;
+&lt;h2 id=&#34;time-tracking-and-estimation:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Time Tracking and Estimation&lt;/h2&gt;
 
-&lt;h3 id=&#34;enable-time-tracking&#34;&gt;Enable Time Tracking&lt;/h3&gt;
+&lt;h3 id=&#34;enable-time-tracking:2a6d8c948f7a3ac4f8e6148a080bba99&#34;&gt;Enable Time Tracking&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Issues&lt;/code&gt; &amp;gt; &lt;code&gt;Time Tracking&lt;/code&gt;&lt;/p&gt;
@@ -214,9 +223,9 @@ cd ..
       <guid>https://harryho.github.io/info/linux-history/</guid>
       <description>
 
-&lt;h1 id=&#34;linux&#34;&gt;Linux&lt;/h1&gt;
+&lt;h1 id=&#34;linux:c854fba44748d405b3cbceef27c6b221&#34;&gt;Linux&lt;/h1&gt;
 
-&lt;h3 id=&#34;breif-history&#34;&gt;Breif History&lt;/h3&gt;
+&lt;h3 id=&#34;breif-history:c854fba44748d405b3cbceef27c6b221&#34;&gt;Breif History&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;When we are talking about Linux, we cannot miss its ancesor&amp;ndash;Unix. Unix is one of the most popular operating systems worldwide because of its large support base and distribution. It was originally developed at AT&amp;amp;T as a multitasking system for minicomputers and mainframes in the 1970&amp;rsquo;s, but has since grown to become one of the most widely-used operating systems anywhere, despite its sometimes confusing interface and lack of central standardization.&lt;/em&gt;&lt;/p&gt;
@@ -228,7 +237,7 @@ cd ..
 &lt;p&gt;&lt;em&gt;Linux is a complete multitasking, multiuser operating system, as are all other versions of Unix. This means that many users can log into and run programs on the same machine simultaneously.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;linux-distro&#34;&gt;Linux distro&lt;/h3&gt;
+&lt;h3 id=&#34;linux-distro:c854fba44748d405b3cbceef27c6b221&#34;&gt;Linux distro&lt;/h3&gt;
 
 &lt;p&gt;A Linux distribution (often abbreviated as distro) is an operating system made from a software collection, which is based upon the Linux kernel and, often, a package management system. Linux users usually obtain their operating system by downloading one of the Linux distributions, which are available for a wide variety of systems ranging from embedded devices (for example, OpenWrt) and personal computers (for example, Debian, Fedora) to powerful supercomputers (for example, Rocks Cluster Distribution).&lt;/p&gt;
 
@@ -236,7 +245,7 @@ cd ..
 
 &lt;p&gt;Here we just give the brief history of some stable and most popular distroes. It means the article will only cover the big players in the linux world. Some special and awesome distroes are assumed as minority, such as, Pentoo, Arch Linux, etc. so we won&amp;rsquo;t cover those distroes.&lt;/p&gt;
 
-&lt;h1 id=&#34;debian-ubuntu&#34;&gt;Debian/Ubuntu&lt;/h1&gt;
+&lt;h1 id=&#34;debian-ubuntu:c854fba44748d405b3cbceef27c6b221&#34;&gt;Debian/Ubuntu&lt;/h1&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;Ubuntu is one of a number of Linux distributions. The source code that makes up the Ubuntu distribution originates from another, much older Linux distribution known as Debian (so called because it was started by two people named Debra and Ian). Debian is still a widely respected operating system but came under criticism for infrequent updates and less than user friendly installation and maintenance (though these areas have shown improvement recently).&lt;/em&gt;&lt;/p&gt;
@@ -246,7 +255,7 @@ cd ..
 &lt;p&gt;&lt;em&gt;The word &amp;ldquo;Ubuntu&amp;rdquo; is an ancient Zulu and Xhosa word that means &amp;ldquo;humanity to others&amp;rdquo;. Ubuntu also means &amp;ldquo;I am what I am because of who we all are&amp;rdquo;.The Ubuntu operating system brings the spirit of Ubuntu to the world of computers.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id=&#34;fedora-centos-redhat&#34;&gt;Fedora/CentOS/Redhat&lt;/h1&gt;
+&lt;h1 id=&#34;fedora-centos-redhat:c854fba44748d405b3cbceef27c6b221&#34;&gt;Fedora/CentOS/Redhat&lt;/h1&gt;
 
 &lt;p&gt;&lt;em&gt;Fedora&lt;/em&gt;&lt;/p&gt;
 
@@ -268,7 +277,7 @@ cd ..
 &lt;p&gt;&lt;em&gt;Now CentOS is much more easy to setup for different purpose. Comparing with 10 years ago or more, even you use graphic UI to setup, you still will come across some weird glitch. CentOS has different group for you to install. Every group includes bunch of packages, and it focus on some specific purpose. I believe they meet most IT infra&amp;rsquo;s requirement. So you don&amp;rsquo;t need do much research, and work around to figure out how to build those packages together. Just use following command you can get all group list.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id=&#34;suse-opensuse&#34;&gt;Suse / OpenSuse&lt;/h1&gt;
+&lt;h1 id=&#34;suse-opensuse:c854fba44748d405b3cbceef27c6b221&#34;&gt;Suse / OpenSuse&lt;/h1&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;SUSE Linux is a computer operating system. It is built on top of the open source Linux kernel and is distributed with system and application software from other open source projects. SUSE Linux is of German origin, basically an acronym of &amp;ldquo;Software und System-Entwicklung&amp;rdquo; (software and systems development), and was mainly developed in Europe. The first version appeared in early 1994, making SUSE one of the oldest existing commercial distributions. It is known for its YaST configuration tool.&lt;/em&gt;&lt;/p&gt;

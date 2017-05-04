@@ -2,11 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Hello World</title>
-    <link>https://harryho.github.io/tags/git/index.xml</link>
+    <link>https://harryho.github.io/tags/git/</link>
     <description>Recent content in Git on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
+    <lastBuildDate>Wed, 15 Feb 2017 14:59:31 +1100</lastBuildDate>
     <atom:link href="https://harryho.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -19,7 +20,7 @@
 
 &lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
+&lt;h2 id=&#34;assumptions:677eca8a58bb006b7a1c0100cb6acd91&#34;&gt;Assumptions&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;You already have &lt;em&gt;Hugo&lt;/em&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
@@ -41,10 +42,11 @@
         |--themes
         |--
 
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;create-a-blog-site-on-github-pages&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
+&lt;h2 id=&#34;create-a-blog-site-on-github-pages:677eca8a58bb006b7a1c0100cb6acd91&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Create on GitHub blog-hugo and &lt;username&gt;.github.io repositories  repository via GitHub website&lt;/li&gt;
@@ -77,24 +79,31 @@ C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&am
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
 
+
 echo  Deploying updates to GitHub...
+
 
 REM Build the project. 
 hugo -t &amp;lt;yourtheme&amp;gt; -D
 
+
 REM Go To Public folder
 cd public
 
+
 REM Add changes to git.
 git add -A
+
 
 REM Commit changes.
 set msg=&amp;quot;rebuilding site %date%&amp;quot;
 if  NOT &amp;quot;%1&amp;quot;==&amp;quot;&amp;quot;    set msg=%1
 git commit -m &#39;%msg%&#39;
 
+
 REM Push source and build repos.
 git push origin master
+
 
 REM Come Back
 cd ..
