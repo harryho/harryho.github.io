@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Program in Go - Hello World</title>
+    <title>JIRA Notes - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -33,8 +33,6 @@
                 <ul class="nav navbar-nav">
                     <li ><a href="https://harryho.github.io/">Home</a></li>
                        
-                    <li ><a href="https://harryho.github.io/info/">Info</a></li>
-                     
                     <li ><a href="https://harryho.github.io/code/">Code</a></li>
                      
                     <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
@@ -67,20 +65,103 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Program in Go</h1>
+				<h1 class="doc-entry-title">JIRA Notes</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h2 id="hello-world">Hello World</h2>
+<h2 id="what-is-jira:2a6d8c948f7a3ac4f8e6148a080bba99">What is JIRA</h2>
+
+<blockquote>
+<p>Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&rsquo;s main competitor, Bugzilla. It has been developed since 2002.</p>
+</blockquote>
+
+<h2 id="how-to-work-with-client-within-jira:2a6d8c948f7a3ac4f8e6148a080bba99">How to work with client within JIRA</h2>
+
+<blockquote>
+<p>The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.</p>
+</blockquote>
+
+<h3 id="assumption:2a6d8c948f7a3ac4f8e6148a080bba99">Assumption</h3>
 
 <ul>
-<li>Please find it from <a href="/#Go">Home Page</a></li>
+<li><p>Your client&rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.</p></li>
+
+<li><p>You have created a project for client, named <strong>ABC IT Project</strong></p></li>
+
+<li><p>You want to allow the client to access this project on JIRA, but you want to avoid client&rsquo;s unintented update to mess up the project management.</p></li>
 </ul>
 
-<h1 id="data-type">Data Type</h1>
+<h3 id="requirement-of-permission-control:2a6d8c948f7a3ac4f8e6148a080bba99">Requirement of permission control</h3>
+
+<ul>
+<li>In Agile practice, product owner should attend the</li>
+</ul>
+
+<h3 id="change-default-permission-scheme:2a6d8c948f7a3ac4f8e6148a080bba99">Change default permission scheme</h3>
+
+<ul>
+<li><p>Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.</p></li>
+
+<li><p>Choose <code>Isssues</code> &gt; <code>Permission schemes</code></p></li>
+
+<li><p>Change all permissions from <code>Project Access - Any logged in user</code> to <code>Project role - Administrator</code> except the following items.</p>
+
+<ul>
+<li>View Development Tools</li>
+<li>View Read-Only Workflow</li>
+<li>Assignable User</li>
+<li>Delete Own Comments</li>
+<li>Edit Own Comments</li>
+<li>Delete Own Attachments</li>
+<li>Delete Own Worklogs</li>
+<li>Edit Own Worklogs</li>
+<li>Work On Issues</li>
+</ul></li>
+
+<li><p>Copy the default permission scheme and rename it to <code>&lt;client_business_name&gt; Permission Scheme</code>. In this case it would be <code>ABC Permission Scheme</code>.</p></li>
+
+<li><p>Create a new group named <strong>ABC Group</strong>,</p></li>
+
+<li><p>Update <code>ABC Permission Scheme</code> by granting <code>ABC Group</code> to some items.</p>
+
+<ul>
+<li>Browse Projects</li>
+<li>Create Issues</li>
+</ul></li>
+
+<li><p>Update the permission scheme of the project <code>ABC IT Project</code> from to <code>ABC Permission Scheme</code>.</p></li>
+</ul>
+
+<h3 id="change-user-s-group:2a6d8c948f7a3ac4f8e6148a080bba99">Change user&rsquo;s group</h3>
+
+<ul>
+<li>Choose <code>User management</code> &gt; <code>User</code></li>
+<li>Add the ABC&rsquo;s user to group <code>ABC Group</code></li>
+<li>Remove the user from default <code>jira-software-user</code> and make sure the checkbox <code>Access JIRA Software</code> is selected.</li>
+</ul>
+
+<h2 id="time-tracking-and-estimation:2a6d8c948f7a3ac4f8e6148a080bba99">Time Tracking and Estimation</h2>
+
+<h3 id="enable-time-tracking:2a6d8c948f7a3ac4f8e6148a080bba99">Enable Time Tracking</h3>
+
+<ul>
+<li><p>Choose <code>Issues</code> &gt; <code>Time Tracking</code></p>
+
+<ul>
+<li>Enable the <code>Time Tracking</code> if it is inactive.</li>
+</ul></li>
+
+<li><p>Choose <code>Boards</code> &gt; <code>View All Boards</code></p>
+
+<ul>
+<li>Choose <code>Board Settings</code> of the board</li>
+<li>Choose <code>Estimation</code></li>
+<li>Choose <code>Remaining Estimate and Time Spent</code> as Time Tracking</li>
+</ul></li>
+</ul>
 
 				</section>
 			</article>
@@ -95,15 +176,25 @@
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Program in Go</a></strong></li>
+				<li><strong><a href="#title">JIRA Notes</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#hello-world">Hello World</a></li>
+<li><a href="#what-is-jira:2a6d8c948f7a3ac4f8e6148a080bba99">What is JIRA</a></li>
+<li><a href="#how-to-work-with-client-within-jira:2a6d8c948f7a3ac4f8e6148a080bba99">How to work with client within JIRA</a>
+<ul>
+<li><a href="#assumption:2a6d8c948f7a3ac4f8e6148a080bba99">Assumption</a></li>
+<li><a href="#requirement-of-permission-control:2a6d8c948f7a3ac4f8e6148a080bba99">Requirement of permission control</a></li>
+<li><a href="#change-default-permission-scheme:2a6d8c948f7a3ac4f8e6148a080bba99">Change default permission scheme</a></li>
+<li><a href="#change-user-s-group:2a6d8c948f7a3ac4f8e6148a080bba99">Change user&rsquo;s group</a></li>
 </ul></li>
-<li><a href="#data-type">Data Type</a></li>
+<li><a href="#time-tracking-and-estimation:2a6d8c948f7a3ac4f8e6148a080bba99">Time Tracking and Estimation</a>
+<ul>
+<li><a href="#enable-time-tracking:2a6d8c948f7a3ac4f8e6148a080bba99">Enable Time Tracking</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
 		</div>
@@ -150,6 +241,9 @@
 					<li><a href="/code/c-program-array/">C Program Array</a>
 					</li>
 				
+					<li><a href="/code/cpp-program-algo/">C&#43;&#43; Program Algo</a>
+					</li>
+				
 				</ul>
 			</li>
 		
@@ -158,6 +252,10 @@
 					<span class="doc-list-category">Dev</span>
 				</a>
 				<ul>
+					<li>
+						<span class="active">JIRA Notes</span>
+						</li>
+				
 					<li><a href="/dev/git-notes/">Git Notes</a>
 					</li>
 				
@@ -181,13 +279,10 @@
 					<span class="doc-list-category">Info</span>
 				</a>
 				<ul>
-					<li><a href="/info/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					<li><a href="/dev/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
 					</li>
 				
-					<li><a href="/info/jira-notes/">JIRA Notes</a>
-					</li>
-				
-					<li><a href="/info/linux-history/">Brief history of Linux</a>
+					<li><a href="/dev/linux-history/">Brief history of Linux</a>
 					</li>
 				
 				</ul>
