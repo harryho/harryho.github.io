@@ -43,7 +43,7 @@
                       
                 </ul>
                 
-                <form class="navbar-form navbar-left" role="search" action="https://www.google.com/search" method="get">
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
                     <div class="input-group doc-search-form">
                         <input type="hidden" name="as_sitesearch" value="harryho.github.io">
                         <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
@@ -72,9 +72,9 @@
 				<section>
 					
 
-<h1 id="thread:d97bd60d0b4d2dca999ec647ee9b5e56">Thread</h1>
+<h1 id="thread">Thread</h1>
 
-<h2 id="join:d97bd60d0b4d2dca999ec647ee9b5e56">Join</h2>
+<h2 id="join">Join</h2>
 
 <ul>
 <li><p>The join method allows one thread to wait for the completion of another. join responds to an interrupt by exiting with an InterruptedException.</p></li>
@@ -107,7 +107,7 @@
 }
 </code></pre>
 
-<h2 id="common-problem-of-multithred-program:d97bd60d0b4d2dca999ec647ee9b5e56">Common problem of multithred program</h2>
+<h2 id="common-problem-of-multithred-program">Common problem of multithred program</h2>
 
 <ul>
 <li><p>When there are many threads running, the exact sequence in which all running threads are executed depends next to the thread
@@ -202,7 +202,7 @@ public class SyncCounter implements Runnable {
 
 </code></pre>
 
-<h3 id="deadlock:d97bd60d0b4d2dca999ec647ee9b5e56">Deadlock</h3>
+<h3 id="deadlock">Deadlock</h3>
 
 <p>In general the following requirements for a deadlock can be identified:
 * Mutual exclusion: There is a resource which can be accessed only by one thread at any point in time.
@@ -270,21 +270,21 @@ public class SyncWaitNotfiyDemo {
 }
 </code></pre>
 
-<h3 id="useful-concurrent-collections:d97bd60d0b4d2dca999ec647ee9b5e56">Useful concurrent collections</h3>
+<h3 id="useful-concurrent-collections">Useful concurrent collections</h3>
 
-<h4 id="concurrenthashmap:d97bd60d0b4d2dca999ec647ee9b5e56">ConcurrentHashMap</h4>
+<h4 id="concurrenthashmap">ConcurrentHashMap</h4>
 
 <blockquote>
 <p><code>ConcurrentHashMap</code> is undoubtedly most popular collection class introduced in Java 5 and most of us are already using it. It provides a concurrent alternative of Hashtable or Synchronized Map classes with aim to support higher level of concurrency by implementing fined grained locking. Multiple reader can access the Map concurrently  while a portion of Map gets locked for write operation depends upon concurrency level of Map. Also it provides better scalability than there synchronized counter part. Iterator of <code>ConcurrentHashMap</code> are fail-safe iterators which doesn&rsquo;t throw ConcurrencModificationException thus eliminates another requirement of locking during iteration which result in further scalability and performance.</p>
 </blockquote>
 
-<h4 id="copyonwritearraylist-and-copyonwritearrayset:d97bd60d0b4d2dca999ec647ee9b5e56">CopyOnWriteArrayList and CopyOnWriteArraySet</h4>
+<h4 id="copyonwritearraylist-and-copyonwritearrayset">CopyOnWriteArrayList and CopyOnWriteArraySet</h4>
 
 <blockquote>
 <p><code>CopyOnWriteArrayList</code> is a concurrent alternative of synchronized List. It provides better concurrency than synchronized List by allowing multiple concurrent reader and replacing the whole list on write operation. Yes, write operation is costly on <code>CopyOnWriteArrayList</code> but it performs better when there are multiple reader and requirement of iteration is more than writing. Since <code>CopyOnWriteArrayList</code> Iterator also don&rsquo;t throw ConcurrencModificationException it eliminates need to lock the collection during iteration. Remember both <code>ConcurrentHashMap</code> and <code>CopyOnWriteArrayList</code> doesn&rsquo;t provides same level of locking as Synchronized Collection and achieves thread-safety by there locking and mutability strategy. So they perform better if requirements suits there nature. Similarly, <code>CopyOnWriteArraySet</code> is a concurrent replacement to Synchronized Set.</p>
 </blockquote>
 
-<h4 id="blockingqueue-and-deque:d97bd60d0b4d2dca999ec647ee9b5e56">BlockingQueue and <code>Deque</code></h4>
+<h4 id="blockingqueue-and-deque">BlockingQueue and <code>Deque</code></h4>
 
 <blockquote>
 <p><code>BlockingQueue</code> makes it easy to implement producer-consumer design pattern by providing inbuilt blocking support for put() and take() method. put() method will block if Queue is full while take() method will block if Queue is empty. Java 5 API provides two concrete implementation of <code>BlockingQueue</code> in form of <code>ArrayBlockingQueue</code> and <code>LinkedBlockingQueue</code>, both of them implement FIFO ordering of element. ArrayBlockingQueue is backed by Array and its bounded in nature while <code>LinkedBlockingQueue</code> is optionally bounded. Consider using <code>BlockingQueue</code> to solve producer Consumer problem in Java instead of writing your won wait-notify code. Java 5 also provides <code>PriorityBlockingQueue</code>, another implementation of <code>BlockingQueue</code> which is ordered on priority and useful if you want to process elements on order other than FIFO.</p>
@@ -292,15 +292,15 @@ public class SyncWaitNotfiyDemo {
 <p><code>Deque</code> interface is added in Java 6 and it extends Queue interface to support insertion and removal from both end of Queue referred as head and tail. Java6 also provides concurrent implementation of <code>Deque</code> like ArrayDeque and LinkedBlockingDeque. <code>Deque</code> Can be used efficiently to increase parallelism in program by allowing set of worker thread to help each other by taking some of work load from other thread by utilizing <code>Deque</code> double end consumption property. So if all Thread has there own set of task Queue and they are consuming from head; helper thread can also share some work load via consumption from tail.</p>
 </blockquote>
 
-<h4 id="concurrentskiplistmap-and-concurrentskiplistset:d97bd60d0b4d2dca999ec647ee9b5e56">ConcurrentSkipListMap and ConcurrentSkipListSet</h4>
+<h4 id="concurrentskiplistmap-and-concurrentskiplistset">ConcurrentSkipListMap and ConcurrentSkipListSet</h4>
 
 <blockquote>
 <p>Just like <code>ConcurrentHashMap</code> provides a concurrent alternative of synchronized HashMap. ConcurrentSkipListMap and ConcurrentSkipListSet provide concurrent alternative for synchronized version of SortedMap and SortedSet. For example instead of using TreeMap or TreeSet wrapped inside synchronized Collection, You can consider using ConcurrentSkipListMap or ConcurrentSkipListSet from java.util.concurrent package. They also implement NavigableMap and NavigableSet to add additional navigation method.</p>
 </blockquote>
 
-<h2 id="synchronizer:d97bd60d0b4d2dca999ec647ee9b5e56">Synchronizer</h2>
+<h2 id="synchronizer">Synchronizer</h2>
 
-<h3 id="counter-semaphore:d97bd60d0b4d2dca999ec647ee9b5e56">Counter Semaphore</h3>
+<h3 id="counter-semaphore">Counter Semaphore</h3>
 
 <ul>
 <li>Counting Semaphore in Java maintains specified number of pass or permits, In order to access a shared resource, Current Thread must acquire a permit. If permit is already exhausted by other thread than it can wait until a permit is available due to release of permit from different thread. This concurrency utility can be very useful to implement producer consumer design pattern or implement bounded pool or resources like Thread Pool, DB Connection pool etc.</li>
@@ -357,7 +357,7 @@ public class SemaphoreDemo {
 
 </code></pre>
 
-<h3 id="countdownlatch:d97bd60d0b4d2dca999ec647ee9b5e56">CountDownLatch</h3>
+<h3 id="countdownlatch">CountDownLatch</h3>
 
 <ul>
 <li><p><code>CountDownLatch</code> in Java is a kind of synchronizer which allows one Thread  to wait for one or more Threads before starts processing. You can also implement same functionality using  wait and notify mechanism in Java but it requires lot of code and getting it write in first attempt is tricky,  With <code>CountDownLatch</code> it can  be done in just few lines. <code>CountDownLatch</code> also allows flexibility on number of thread for which main thread should wait, It can wait for one thread or n number of thread, there is not much change on code.</p></li>
@@ -428,7 +428,7 @@ class Service implements Runnable{
 
 </code></pre>
 
-<h3 id="cylicbarrier:d97bd60d0b4d2dca999ec647ee9b5e56">CylicBarrier</h3>
+<h3 id="cylicbarrier">CylicBarrier</h3>
 
 <ul>
 <li><p><code>CyclicBarrier</code> is similar to <code>CountDownLatch</code> which we have seen in the last article  What is <code>CountDownLatch</code> in Java and allows multiple threads to wait for each other (barrier) before proceeding. The difference between <code>CountDownLatch</code> and <code>CyclicBarrier</code> is an also very popular multi-threading interview question in Java. <code>CyclicBarrier</code> is a natural requirement for a concurrent program because it can be used to perform final part of the task once individual tasks  are completed.</p></li>
@@ -500,7 +500,7 @@ public class CyclicBarrierDemo {
 
 </code></pre>
 
-<h3 id="producer-consumer-pattern:d97bd60d0b4d2dca999ec647ee9b5e56">Producer / Consumer pattern</h3>
+<h3 id="producer-consumer-pattern">Producer / Consumer pattern</h3>
 
 <ul>
 <li><p>Producer Consumer Design pattern is a classic concurrency or threading pattern which reduces coupling between
@@ -602,7 +602,7 @@ class Consumer implements Runnable{
 
 </code></pre>
 
-<h3 id="executor-thread-pool:d97bd60d0b4d2dca999ec647ee9b5e56">Executor &ndash; Thread Pool</h3>
+<h3 id="executor-thread-pool">Executor &ndash; Thread Pool</h3>
 
 <ul>
 <li><p>Java 1.5 introduced Thread pool in Java in the form of Executor framework, which allows Java programmer to decouple submission of a task to execution of the task. It also introduced a full feature built-in Thread Pool framework commonly known as Executor framework. Executor framework also provides different kind of Thread Pool e.g. <code>SingleThreadExecutor</code> which creates just one worker thread or <code>CachedThreadPool</code> which creates worker threads as and when necessary.</p></li>
@@ -649,31 +649,31 @@ final class Task implements Runnable{
 // ...
 </code></pre>
 
-<h3 id="submit-runnable:d97bd60d0b4d2dca999ec647ee9b5e56">Submit(Runnable)</h3>
+<h3 id="submit-runnable">Submit(Runnable)</h3>
 
 <blockquote>
 <p>The submit(Runnable) method also takes a Runnable implementation, but returns a Future object. This Future object can be used to check if the Runnable as finished executing.</p>
 </blockquote>
 
-<h3 id="submit-callable:d97bd60d0b4d2dca999ec647ee9b5e56">Submit(Callable)</h3>
+<h3 id="submit-callable">Submit(Callable)</h3>
 
 <blockquote>
 <p>The submit(Callable) method is similar to the submit(Runnable) method except for the type of parameter it takes. The Callable instance is very similar to a Runnable except that its call() method can return a result.</p>
 </blockquote>
 
-<h3 id="invokeany:d97bd60d0b4d2dca999ec647ee9b5e56">InvokeAny()</h3>
+<h3 id="invokeany">InvokeAny()</h3>
 
 <blockquote>
 <p>The invokeAny() method takes a collection of Callable objects, or subinterfaces of Callable. If one of the tasks complete (or throws an exception), the rest of the Callable&rsquo;s are cancelled.</p>
 </blockquote>
 
-<h3 id="invokeall:d97bd60d0b4d2dca999ec647ee9b5e56">InvokeAll()</h3>
+<h3 id="invokeall">InvokeAll()</h3>
 
 <blockquote>
 <p>The invokeAll() method invokes all of the Callable objects and returns a list of Future objects. Keep in mind that a task might finish due to an exception, so it may not have &ldquo;succeeded&rdquo;. There is no way on a Future to tell the difference.</p>
 </blockquote>
 
-<h3 id="demo-of-submit-invokeany:d97bd60d0b4d2dca999ec647ee9b5e56">Demo of submit, InvokeAny</h3>
+<h3 id="demo-of-submit-invokeany">Demo of submit, InvokeAny</h3>
 
 <pre><code class="language-java">import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -727,13 +727,13 @@ public class SubmitInvokeDemo {
 
 </code></pre>
 
-<h2 id="join-and-fork:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork</h2>
+<h2 id="join-and-fork">Join and Fork</h2>
 
 <ul>
 <li>Here is an introduction into the Fork/Join Framework that is part of the JDK since version 1.7.</li>
 </ul>
 
-<h3 id="join-and-fork-with-executor-service:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork with Executor Service</h3>
+<h3 id="join-and-fork-with-executor-service">Join and Fork with Executor Service</h3>
 
 <ul>
 <li>The demo code submit() our tasks to the ExecutorService and then use the returned instance of <code>Future</code> to wait() for the result. The normal
@@ -791,7 +791,7 @@ public class FindMinTask implements Callable&lt;Integer&gt; {
 }
 </code></pre>
 
-<h3 id="join-and-fork-with-joinforkpool:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork with JoinForkPool</h3>
+<h3 id="join-and-fork-with-joinforkpool">Join and Fork with JoinForkPool</h3>
 
 <ul>
 <li><p>The <code>ForkJoinPool</code> implements the already mentioned work-stealing strategy, i.e. every time a running thread has to wait for some result; the thread removes the current task from the work queue and executes some other task ready to run. This way the current thread is not blocked and can be used to execute other tasks. Once the result for the originally suspended task has been computed the task gets executed again and the join() method returns the result. This is an important difference between <code>JoinForkPool</code> and <code>ExecutorService</code>.</p></li>
@@ -860,37 +860,37 @@ public class GrayscaleImageAction extends RecursiveAction {
 			</ul>
 			<nav id="TableOfContents">
 <ul>
-<li><a href="#thread:d97bd60d0b4d2dca999ec647ee9b5e56">Thread</a>
+<li><a href="#thread">Thread</a>
 <ul>
-<li><a href="#join:d97bd60d0b4d2dca999ec647ee9b5e56">Join</a></li>
-<li><a href="#common-problem-of-multithred-program:d97bd60d0b4d2dca999ec647ee9b5e56">Common problem of multithred program</a>
+<li><a href="#join">Join</a></li>
+<li><a href="#common-problem-of-multithred-program">Common problem of multithred program</a>
 <ul>
-<li><a href="#deadlock:d97bd60d0b4d2dca999ec647ee9b5e56">Deadlock</a></li>
-<li><a href="#useful-concurrent-collections:d97bd60d0b4d2dca999ec647ee9b5e56">Useful concurrent collections</a>
+<li><a href="#deadlock">Deadlock</a></li>
+<li><a href="#useful-concurrent-collections">Useful concurrent collections</a>
 <ul>
-<li><a href="#concurrenthashmap:d97bd60d0b4d2dca999ec647ee9b5e56">ConcurrentHashMap</a></li>
-<li><a href="#copyonwritearraylist-and-copyonwritearrayset:d97bd60d0b4d2dca999ec647ee9b5e56">CopyOnWriteArrayList and CopyOnWriteArraySet</a></li>
-<li><a href="#blockingqueue-and-deque:d97bd60d0b4d2dca999ec647ee9b5e56">BlockingQueue and <code>Deque</code></a></li>
-<li><a href="#concurrentskiplistmap-and-concurrentskiplistset:d97bd60d0b4d2dca999ec647ee9b5e56">ConcurrentSkipListMap and ConcurrentSkipListSet</a></li>
+<li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
+<li><a href="#copyonwritearraylist-and-copyonwritearrayset">CopyOnWriteArrayList and CopyOnWriteArraySet</a></li>
+<li><a href="#blockingqueue-and-deque">BlockingQueue and <code>Deque</code></a></li>
+<li><a href="#concurrentskiplistmap-and-concurrentskiplistset">ConcurrentSkipListMap and ConcurrentSkipListSet</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#synchronizer:d97bd60d0b4d2dca999ec647ee9b5e56">Synchronizer</a>
+<li><a href="#synchronizer">Synchronizer</a>
 <ul>
-<li><a href="#counter-semaphore:d97bd60d0b4d2dca999ec647ee9b5e56">Counter Semaphore</a></li>
-<li><a href="#countdownlatch:d97bd60d0b4d2dca999ec647ee9b5e56">CountDownLatch</a></li>
-<li><a href="#cylicbarrier:d97bd60d0b4d2dca999ec647ee9b5e56">CylicBarrier</a></li>
-<li><a href="#producer-consumer-pattern:d97bd60d0b4d2dca999ec647ee9b5e56">Producer / Consumer pattern</a></li>
-<li><a href="#executor-thread-pool:d97bd60d0b4d2dca999ec647ee9b5e56">Executor &ndash; Thread Pool</a></li>
-<li><a href="#submit-runnable:d97bd60d0b4d2dca999ec647ee9b5e56">Submit(Runnable)</a></li>
-<li><a href="#submit-callable:d97bd60d0b4d2dca999ec647ee9b5e56">Submit(Callable)</a></li>
-<li><a href="#invokeany:d97bd60d0b4d2dca999ec647ee9b5e56">InvokeAny()</a></li>
-<li><a href="#invokeall:d97bd60d0b4d2dca999ec647ee9b5e56">InvokeAll()</a></li>
-<li><a href="#demo-of-submit-invokeany:d97bd60d0b4d2dca999ec647ee9b5e56">Demo of submit, InvokeAny</a></li>
+<li><a href="#counter-semaphore">Counter Semaphore</a></li>
+<li><a href="#countdownlatch">CountDownLatch</a></li>
+<li><a href="#cylicbarrier">CylicBarrier</a></li>
+<li><a href="#producer-consumer-pattern">Producer / Consumer pattern</a></li>
+<li><a href="#executor-thread-pool">Executor &ndash; Thread Pool</a></li>
+<li><a href="#submit-runnable">Submit(Runnable)</a></li>
+<li><a href="#submit-callable">Submit(Callable)</a></li>
+<li><a href="#invokeany">InvokeAny()</a></li>
+<li><a href="#invokeall">InvokeAll()</a></li>
+<li><a href="#demo-of-submit-invokeany">Demo of submit, InvokeAny</a></li>
 </ul></li>
-<li><a href="#join-and-fork:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork</a>
+<li><a href="#join-and-fork">Join and Fork</a>
 <ul>
-<li><a href="#join-and-fork-with-executor-service:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork with Executor Service</a></li>
-<li><a href="#join-and-fork-with-joinforkpool:d97bd60d0b4d2dca999ec647ee9b5e56">Join and Fork with JoinForkPool</a></li>
+<li><a href="#join-and-fork-with-executor-service">Join and Fork with Executor Service</a></li>
+<li><a href="#join-and-fork-with-joinforkpool">Join and Fork with JoinForkPool</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -948,7 +948,13 @@ public class GrayscaleImageAction extends RecursiveAction {
 					<li><a href="/dev/jira-notes/">JIRA Notes</a>
 					</li>
 				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
 					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
 					</li>
 				
 					<li><a href="/dev/git-notes/">Git Notes</a>
@@ -1018,6 +1024,9 @@ public class GrayscaleImageAction extends RecursiveAction {
 					</li>
 				
 					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Reetek Vue 2 Crm Project</a>
 					</li>
 				
 					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>

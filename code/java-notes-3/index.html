@@ -43,7 +43,7 @@
                       
                 </ul>
                 
-                <form class="navbar-form navbar-left" role="search" action="https://www.google.com/search" method="get">
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
                     <div class="input-group doc-search-form">
                         <input type="hidden" name="as_sitesearch" value="harryho.github.io">
                         <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
@@ -72,7 +72,7 @@
 				<section>
 					
 
-<h1 id="date-time-api:8c5bb6dbfb903456454f804034e99f0a">Date-Time API</h1>
+<h1 id="date-time-api">Date-Time API</h1>
 
 <p>Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are</p>
 
@@ -92,25 +92,27 @@
 <li><p>OffsetTime, OffsetDateTime</p>
 
 <ul>
-<li>It represent a time and datetime with a zone offset from UTC.</li>
+<li>It represent a time and datetime with a zone offset from UTC.
+<br /></li>
 </ul></li>
 
 <li><p>ZonedDateTime</p>
 
 <ul>
-<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.</li>
+<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
+<br /></li>
 </ul></li>
 </ul>
 
-<h2 id="iso-8601-standards-for-datetime:8c5bb6dbfb903456454f804034e99f0a">ISO-8601 Standards for Datetime</h2>
+<h2 id="iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</h2>
 
 <ul>
 <li>[date]T[time][zone offset]</li>
-<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day\</li>
+<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day<br /></li>
 <li>Epoch is Midnight January 1, 1970 UTC</li>
 </ul>
 
-<h2 id="useful-datetime-related-enums:8c5bb6dbfb903456454f804034e99f0a">Useful Datetime-Related Enums</h2>
+<h2 id="useful-datetime-related-enums">Useful Datetime-Related Enums</h2>
 
 <ul>
 <li>Month</li>
@@ -119,25 +121,25 @@
 <li>ChronoUnit</li>
 </ul>
 
-<h3 id="period:8c5bb6dbfb903456454f804034e99f0a">Period</h3>
+<h3 id="period">Period</h3>
 
 <p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
 
-<h3 id="partial:8c5bb6dbfb903456454f804034e99f0a">Partial</h3>
+<h3 id="partial">Partial</h3>
 
 <p>Partials
 A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.</p>
 
-<h3 id="adjusting-dates:8c5bb6dbfb903456454f804034e99f0a">Adjusting Dates</h3>
+<h3 id="adjusting-dates">Adjusting Dates</h3>
 
 <p>Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the <code>TemporalAdjuster</code> interface. The interface has one method, adjustInto(), that takes a Temporal and returns a <code>Temporal</code>.</p>
 
-<h3 id="formatting:8c5bb6dbfb903456454f804034e99f0a">Formatting</h3>
+<h3 id="formatting">Formatting</h3>
 
 <p>The most important point to keep in mind is that formatting and parsing are
 always performed by an object of the DateTimeFormatter class.</p>
 
-<h2 id="datetimeapidemo:8c5bb6dbfb903456454f804034e99f0a">DateTimeApiDemo</h2>
+<h2 id="datetimeapidemo">DateTimeApiDemo</h2>
 
 <pre><code class="language-java">import java.time.Duration;
 import java.time.DayOfWeek;
@@ -305,11 +307,11 @@ public class DateTimeApiDemo {
 
 </code></pre>
 
-<h1 id="lamda:8c5bb6dbfb903456454f804034e99f0a">Lamda</h1>
+<h1 id="lamda">Lamda</h1>
 
-<h2 id="lambda-best-practices:8c5bb6dbfb903456454f804034e99f0a">Lambda Best Practices</h2>
+<h2 id="lambda-best-practices">Lambda Best Practices</h2>
 
-<h3 id="use-interfaces:8c5bb6dbfb903456454f804034e99f0a">Use Interfaces</h3>
+<h3 id="use-interfaces">Use Interfaces</h3>
 
 <p>The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
 in type signatures. In general, you should avoid using the functional interface types directly and instead
@@ -317,26 +319,26 @@ provide single-method interfaces as arguments to your methods. These interfaces 
 self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
 for your user to provide an actual Java type.</p>
 
-<h3 id="use-method-reference:8c5bb6dbfb903456454f804034e99f0a">Use Method Reference</h3>
+<h3 id="use-method-reference">Use Method Reference</h3>
 
 <p>As much as possible, use a method reference instead of a lambda. Method references are not only shorter
 and easier to read, but using method references will get you thinking directly about the methods as values.</p>
 
-<h3 id="define-lambdas-inline:8c5bb6dbfb903456454f804034e99f0a">Define Lambdas Inline</h3>
+<h3 id="define-lambdas-inline">Define Lambdas Inline</h3>
 
 <p>When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
 lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
 inline is that it will allow your code to be more flexible when types change: you are letting type inference do
 more heavy lifting for you, and adapting your code to changing contexts.</p>
 
-<h3 id="lambdas-should-always-be-threadsafe:8c5bb6dbfb903456454f804034e99f0a">Lambdas Should Always Be Threadsafe</h3>
+<h3 id="lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</h3>
 
 <p>As we go through the rest of this book, we will see many places where lambdas make concurrent programming
 much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
 much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
 instance method handles, since thread-dangerous state can often be hiding within those instances.</p>
 
-<h3 id="don-t-use-null:8c5bb6dbfb903456454f804034e99f0a">Don’t Use Null</h3>
+<h3 id="don-t-use-null">Don’t Use Null</h3>
 
 <p>The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
 no need for it. Whenever you have a method, you should be explicit about whether or not you accept
@@ -346,17 +348,17 @@ start working with streams and lambdas, because the stack trace may not be very 
 you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
 soon as it occurs.</p>
 
-<h3 id="don-t-release-zalgo:8c5bb6dbfb903456454f804034e99f0a">Don’t Release Zalgo</h3>
+<h3 id="don-t-release-zalgo">Don’t Release Zalgo</h3>
 
 <ul>
 <li>Don&rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.</li>
 </ul>
 
-<h3 id="build-complexity-from-simple-parts:8c5bb6dbfb903456454f804034e99f0a">Build Complexity from Simple Parts</h3>
+<h3 id="build-complexity-from-simple-parts">Build Complexity from Simple Parts</h3>
 
-<h3 id="use-types-and-the-compiler-to-your-advantage:8c5bb6dbfb903456454f804034e99f0a">Use Types and the Compiler to Your Advantage</h3>
+<h3 id="use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</h3>
 
-<h2 id="common-functional-interfaces:8c5bb6dbfb903456454f804034e99f0a">Common functional Interfaces</h2>
+<h2 id="common-functional-interfaces">Common functional Interfaces</h2>
 
 <table>
 <thead>
@@ -463,7 +465,7 @@ soon as it occurs.</p>
 </tbody>
 </table>
 
-<h2 id="method-reference:8c5bb6dbfb903456454f804034e99f0a">Method Reference</h2>
+<h2 id="method-reference">Method Reference</h2>
 
 <table>
 <thead>
@@ -511,7 +513,7 @@ soon as it occurs.</p>
 </tbody>
 </table>
 
-<h2 id="lambda-demo:8c5bb6dbfb903456454f804034e99f0a">Lambda Demo</h2>
+<h2 id="lambda-demo">Lambda Demo</h2>
 
 <pre><code class="language-java">import java.util.Locale;
 import java.util.Arrays;
@@ -703,34 +705,34 @@ final class Person {
 			</ul>
 			<nav id="TableOfContents">
 <ul>
-<li><a href="#date-time-api:8c5bb6dbfb903456454f804034e99f0a">Date-Time API</a>
+<li><a href="#date-time-api">Date-Time API</a>
 <ul>
-<li><a href="#iso-8601-standards-for-datetime:8c5bb6dbfb903456454f804034e99f0a">ISO-8601 Standards for Datetime</a></li>
-<li><a href="#useful-datetime-related-enums:8c5bb6dbfb903456454f804034e99f0a">Useful Datetime-Related Enums</a>
+<li><a href="#iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</a></li>
+<li><a href="#useful-datetime-related-enums">Useful Datetime-Related Enums</a>
 <ul>
-<li><a href="#period:8c5bb6dbfb903456454f804034e99f0a">Period</a></li>
-<li><a href="#partial:8c5bb6dbfb903456454f804034e99f0a">Partial</a></li>
-<li><a href="#adjusting-dates:8c5bb6dbfb903456454f804034e99f0a">Adjusting Dates</a></li>
-<li><a href="#formatting:8c5bb6dbfb903456454f804034e99f0a">Formatting</a></li>
+<li><a href="#period">Period</a></li>
+<li><a href="#partial">Partial</a></li>
+<li><a href="#adjusting-dates">Adjusting Dates</a></li>
+<li><a href="#formatting">Formatting</a></li>
 </ul></li>
-<li><a href="#datetimeapidemo:8c5bb6dbfb903456454f804034e99f0a">DateTimeApiDemo</a></li>
+<li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
 </ul></li>
-<li><a href="#lamda:8c5bb6dbfb903456454f804034e99f0a">Lamda</a>
+<li><a href="#lamda">Lamda</a>
 <ul>
-<li><a href="#lambda-best-practices:8c5bb6dbfb903456454f804034e99f0a">Lambda Best Practices</a>
+<li><a href="#lambda-best-practices">Lambda Best Practices</a>
 <ul>
-<li><a href="#use-interfaces:8c5bb6dbfb903456454f804034e99f0a">Use Interfaces</a></li>
-<li><a href="#use-method-reference:8c5bb6dbfb903456454f804034e99f0a">Use Method Reference</a></li>
-<li><a href="#define-lambdas-inline:8c5bb6dbfb903456454f804034e99f0a">Define Lambdas Inline</a></li>
-<li><a href="#lambdas-should-always-be-threadsafe:8c5bb6dbfb903456454f804034e99f0a">Lambdas Should Always Be Threadsafe</a></li>
-<li><a href="#don-t-use-null:8c5bb6dbfb903456454f804034e99f0a">Don’t Use Null</a></li>
-<li><a href="#don-t-release-zalgo:8c5bb6dbfb903456454f804034e99f0a">Don’t Release Zalgo</a></li>
-<li><a href="#build-complexity-from-simple-parts:8c5bb6dbfb903456454f804034e99f0a">Build Complexity from Simple Parts</a></li>
-<li><a href="#use-types-and-the-compiler-to-your-advantage:8c5bb6dbfb903456454f804034e99f0a">Use Types and the Compiler to Your Advantage</a></li>
+<li><a href="#use-interfaces">Use Interfaces</a></li>
+<li><a href="#use-method-reference">Use Method Reference</a></li>
+<li><a href="#define-lambdas-inline">Define Lambdas Inline</a></li>
+<li><a href="#lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</a></li>
+<li><a href="#don-t-use-null">Don’t Use Null</a></li>
+<li><a href="#don-t-release-zalgo">Don’t Release Zalgo</a></li>
+<li><a href="#build-complexity-from-simple-parts">Build Complexity from Simple Parts</a></li>
+<li><a href="#use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</a></li>
 </ul></li>
-<li><a href="#common-functional-interfaces:8c5bb6dbfb903456454f804034e99f0a">Common functional Interfaces</a></li>
-<li><a href="#method-reference:8c5bb6dbfb903456454f804034e99f0a">Method Reference</a></li>
-<li><a href="#lambda-demo:8c5bb6dbfb903456454f804034e99f0a">Lambda Demo</a></li>
+<li><a href="#common-functional-interfaces">Common functional Interfaces</a></li>
+<li><a href="#method-reference">Method Reference</a></li>
+<li><a href="#lambda-demo">Lambda Demo</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -787,7 +789,13 @@ final class Person {
 					<li><a href="/dev/jira-notes/">JIRA Notes</a>
 					</li>
 				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
 					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
 					</li>
 				
 					<li><a href="/dev/git-notes/">Git Notes</a>
@@ -857,6 +865,9 @@ final class Person {
 					</li>
 				
 					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Reetek Vue 2 Crm Project</a>
 					</li>
 				
 					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>

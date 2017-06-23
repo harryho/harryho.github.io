@@ -43,7 +43,7 @@
                       
                 </ul>
                 
-                <form class="navbar-form navbar-left" role="search" action="https://www.google.com/search" method="get">
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
                     <div class="input-group doc-search-form">
                         <input type="hidden" name="as_sitesearch" value="harryho.github.io">
                         <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
@@ -72,23 +72,23 @@
 				<section>
 					
 
-<h2 id="prelude:b5ffa072586cf21a0dfa9342ca759915">Prelude</h2>
+<h2 id="prelude">Prelude</h2>
 
 <blockquote>
 <p><em>C# notes is the place, which I keep the good practice and solution from my projects and research.</em></p>
 </blockquote>
 
-<h2 id="create-simple-net-project-without-visual-studio:b5ffa072586cf21a0dfa9342ca759915">Create simple .net project without Visual Studio</h2>
+<h2 id="create-simple-net-project-without-visual-studio">Create simple .net project without Visual Studio</h2>
 
-<h3 id="assumption:b5ffa072586cf21a0dfa9342ca759915">Assumption</h3>
+<h3 id="assumption">Assumption</h3>
 
 <ul>
 <li>DotNet Frameowork path <code>c:\Windows\Microsfot.Net\Frameowork\v4.0.30319</code></li>
 </ul>
 
-<h3 id="simple-c-project:b5ffa072586cf21a0dfa9342ca759915">Simple C# project</h3>
+<h3 id="simple-c-project">Simple C# project</h3>
 
-<h4 id="create-a-proejct-named-c-project:b5ffa072586cf21a0dfa9342ca759915">Create a proejct named <code>c#project</code></h4>
+<h4 id="create-a-proejct-named-c-project">Create a proejct named <code>c#project</code></h4>
 
 <pre><code class="language-bash">md c#project
 cd c#project 
@@ -97,7 +97,7 @@ echo.&gt;c#project.proj
 echo.&gt;src\helloworld.cs
 </code></pre>
 
-<h4 id="open-project-configuration-c-project-proj-with-notepad:b5ffa072586cf21a0dfa9342ca759915">Open Project configuration <code>c#project.proj</code> with notepad</h4>
+<h4 id="open-project-configuration-c-project-proj-with-notepad">Open Project configuration <code>c#project.proj</code> with notepad</h4>
 
 <pre><code class="language-xml">&lt;Project DefaultTargets = &quot;Compile&quot;
     xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot; &gt;
@@ -130,17 +130,17 @@ echo.&gt;src\helloworld.cs
 
 </code></pre>
 
-<h3 id="copy-the-helloworld-cs-from-home-page-c:b5ffa072586cf21a0dfa9342ca759915">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></h3>
+<h3 id="copy-the-helloworld-cs-from-home-page-c">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></h3>
 
-<h3 id="compile-with-msbuild-run:b5ffa072586cf21a0dfa9342ca759915">Compile with MSBuild &amp; Run</h3>
+<h3 id="compile-with-msbuild-run">Compile with MSBuild &amp; Run</h3>
 
 <pre><code class="language-bash">c:\Windows\Microsfot.Net\Frameowork\v4.0.30319\MSBuild
 bin\c#app.exe
 </code></pre>
 
-<h2 id="generic-predicate-and-expression-for-query:b5ffa072586cf21a0dfa9342ca759915">Generic Predicate and Expression for query</h2>
+<h2 id="generic-predicate-and-expression-for-query">Generic Predicate and Expression for query</h2>
 
-<h3 id="assumption-1:b5ffa072586cf21a0dfa9342ca759915">Assumption</h3>
+<h3 id="assumption-1">Assumption</h3>
 
 <blockquote>
 <p><em>You have experience of developing .net application, which includes entity framework.</em></p>
@@ -148,15 +148,15 @@ bin\c#app.exe
 <p><em>You have experience of using SQL to query database</em></p>
 </blockquote>
 
-<h3 id="problem:b5ffa072586cf21a0dfa9342ca759915">Problem</h3>
+<h3 id="problem">Problem</h3>
 
 <p>Now entity framework is core component in all .net applications, which need to communicate with database.</p>
 
 <p>Business service get a lot of benefits form entity framework&rsquo;s ORM feature, and we can create a repository layer on the top of ORM to reduce some simple but tedious database operation, such as, delete, insert, query all data. However, when we need to do some complicated query to support business service, we still need to take so much effort to achieve the query result, because entity framework use LINQ as query language, comparing with SQL, native database language, it is a bit more complicated and cumbersome. Luckily, entity framework provide another generic feature to help us DRY. Predicate and expression can help us create generic query and reduce many reduntant code.</p>
 
-<h3 id="solution:b5ffa072586cf21a0dfa9342ca759915">Solution</h3>
+<h3 id="solution">Solution</h3>
 
-<h4 id="analysis:b5ffa072586cf21a0dfa9342ca759915">Analysis</h4>
+<h4 id="analysis">Analysis</h4>
 
 <p>Basically, the idea is close to dynamic statement in ADO.Net. Here generic programming is the key, when we utilize predicate and expression to dynamically rebuild the query filter.</p>
 
@@ -176,7 +176,7 @@ bin\c#app.exe
 &lt;VALUE_1&gt;           ==&gt; Filter value
 </code></pre>
 
-<h4 id="design:b5ffa072586cf21a0dfa9342ca759915">Design</h4>
+<h4 id="design">Design</h4>
 
 <p>Accordingt to abve analysis, we can design the classes to support this feature.</p>
 
@@ -204,7 +204,7 @@ bin\c#app.exe
 
 </code></pre>
 
-<h4 id="implementatoin:b5ffa072586cf21a0dfa9342ca759915">Implementatoin</h4>
+<h4 id="implementatoin">Implementatoin</h4>
 
 <p>Following is the implementation of generic expression and predicate. Please keep it in mind. We are using LINQ to simulate the dynamic statement, so there is some tricks to work around as SQL queries.</p>
 
@@ -432,27 +432,27 @@ public static class PredicateBuilder
 <ul>
 <li>
 <ul>
-<li><a href="#prelude:b5ffa072586cf21a0dfa9342ca759915">Prelude</a></li>
-<li><a href="#create-simple-net-project-without-visual-studio:b5ffa072586cf21a0dfa9342ca759915">Create simple .net project without Visual Studio</a>
+<li><a href="#prelude">Prelude</a></li>
+<li><a href="#create-simple-net-project-without-visual-studio">Create simple .net project without Visual Studio</a>
 <ul>
-<li><a href="#assumption:b5ffa072586cf21a0dfa9342ca759915">Assumption</a></li>
-<li><a href="#simple-c-project:b5ffa072586cf21a0dfa9342ca759915">Simple C# project</a>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#simple-c-project">Simple C# project</a>
 <ul>
-<li><a href="#create-a-proejct-named-c-project:b5ffa072586cf21a0dfa9342ca759915">Create a proejct named <code>c#project</code></a></li>
-<li><a href="#open-project-configuration-c-project-proj-with-notepad:b5ffa072586cf21a0dfa9342ca759915">Open Project configuration <code>c#project.proj</code> with notepad</a></li>
+<li><a href="#create-a-proejct-named-c-project">Create a proejct named <code>c#project</code></a></li>
+<li><a href="#open-project-configuration-c-project-proj-with-notepad">Open Project configuration <code>c#project.proj</code> with notepad</a></li>
 </ul></li>
-<li><a href="#copy-the-helloworld-cs-from-home-page-c:b5ffa072586cf21a0dfa9342ca759915">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></a></li>
-<li><a href="#compile-with-msbuild-run:b5ffa072586cf21a0dfa9342ca759915">Compile with MSBuild &amp; Run</a></li>
+<li><a href="#copy-the-helloworld-cs-from-home-page-c">Copy the <code>HelloWorld.cs</code> from <a href="/#c">Home Page</a></a></li>
+<li><a href="#compile-with-msbuild-run">Compile with MSBuild &amp; Run</a></li>
 </ul></li>
-<li><a href="#generic-predicate-and-expression-for-query:b5ffa072586cf21a0dfa9342ca759915">Generic Predicate and Expression for query</a>
+<li><a href="#generic-predicate-and-expression-for-query">Generic Predicate and Expression for query</a>
 <ul>
-<li><a href="#assumption-1:b5ffa072586cf21a0dfa9342ca759915">Assumption</a></li>
-<li><a href="#problem:b5ffa072586cf21a0dfa9342ca759915">Problem</a></li>
-<li><a href="#solution:b5ffa072586cf21a0dfa9342ca759915">Solution</a>
+<li><a href="#assumption-1">Assumption</a></li>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution">Solution</a>
 <ul>
-<li><a href="#analysis:b5ffa072586cf21a0dfa9342ca759915">Analysis</a></li>
-<li><a href="#design:b5ffa072586cf21a0dfa9342ca759915">Design</a></li>
-<li><a href="#implementatoin:b5ffa072586cf21a0dfa9342ca759915">Implementatoin</a></li>
+<li><a href="#analysis">Analysis</a></li>
+<li><a href="#design">Design</a></li>
+<li><a href="#implementatoin">Implementatoin</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -511,7 +511,13 @@ public static class PredicateBuilder
 					<li><a href="/dev/jira-notes/">JIRA Notes</a>
 					</li>
 				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
 					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
 					</li>
 				
 					<li><a href="/dev/git-notes/">Git Notes</a>
@@ -581,6 +587,9 @@ public static class PredicateBuilder
 					</li>
 				
 					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Reetek Vue 2 Crm Project</a>
 					</li>
 				
 					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>

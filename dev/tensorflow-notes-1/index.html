@@ -43,7 +43,7 @@
                       
                 </ul>
                 
-                <form class="navbar-form navbar-left" role="search" action="https://www.google.com/search" method="get">
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
                     <div class="input-group doc-search-form">
                         <input type="hidden" name="as_sitesearch" value="harryho.github.io">
                         <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
@@ -72,7 +72,7 @@
 				<section>
 					
 
-<h3 id="assumption:dcc7d6c7e6d56cb7c25ea39a679187b7">Assumption</h3>
+<h3 id="assumption">Assumption</h3>
 
 <ul>
 <li>You are using Ubuntu 16</li>
@@ -80,25 +80,25 @@
 <li>If you are using Ubuntu 14, the installation of CUDA and cuDNN will be a bit different. Please check Google&rsquo;s instructions.</li>
 </ul>
 
-<h3 id="install-python3-and-pip3:dcc7d6c7e6d56cb7c25ea39a679187b7">Install python3 and pip3</h3>
+<h3 id="install-python3-and-pip3">Install python3 and pip3</h3>
 
 <ul>
 <li><a href="https://harryho.github.io/os/ubuntu-server-14">Please find instructions here</a></li>
 </ul>
 
-<h3 id="install-virtualenv-via-pip3:dcc7d6c7e6d56cb7c25ea39a679187b7">Install virtualenv via pip3</h3>
+<h3 id="install-virtualenv-via-pip3">Install virtualenv via pip3</h3>
 
 <pre><code>pip3 install virtualenv
 </code></pre>
 
-<h3 id="create-two-tensorflow-virtualenvs:dcc7d6c7e6d56cb7c25ea39a679187b7">Create two tensorflow virtualenvs.</h3>
+<h3 id="create-two-tensorflow-virtualenvs">Create two tensorflow virtualenvs.</h3>
 
 <pre><code>mkdir ~/.envs
 virtualenv --system-site-packages ~/.envs/tf  # CPU only
 virtualenv --system-site-packages ~/.envs/tfgpu   # GPU enabled
 </code></pre>
 
-<h3 id="install-tensorflow-for-different-virtualenvs:dcc7d6c7e6d56cb7c25ea39a679187b7">Install tensorflow for different virtualenvs</h3>
+<h3 id="install-tensorflow-for-different-virtualenvs">Install tensorflow for different virtualenvs</h3>
 
 <pre><code>source ~/.envs/tf/bin/activate
 source ~/.envs/tfgpu/bin/activate
@@ -107,9 +107,9 @@ pip3 install tensorflow # CPU only
 pip3 install tensorflow-gpu # GPU enabled
 </code></pre>
 
-<h3 id="install-cuda-and-cudnn-for-tensorflow-gpu:dcc7d6c7e6d56cb7c25ea39a679187b7">Install CUDA and cuDNN for tensorflow-gpu</h3>
+<h3 id="install-cuda-and-cudnn-for-tensorflow-gpu">Install CUDA and cuDNN for tensorflow-gpu</h3>
 
-<h4 id="use-following-command-to-check-you-gpu-information:dcc7d6c7e6d56cb7c25ea39a679187b7">Use following command to check you GPU information</h4>
+<h4 id="use-following-command-to-check-you-gpu-information">Use following command to check you GPU information</h4>
 
 <pre><code>lspic -nn | grep '\[03' ]
 lshw -numeric -C display
@@ -118,27 +118,27 @@ lshw -numeric -C display
 # NVIDIA Corporation GM107M [GeForce GTX 850M]
 </code></pre>
 
-<h4 id="download-and-install-nvidia-driver-based-on-above-gpu-info-http-www-geforce-com-drivers:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install Nvidia driver based on above GPU info <a href="http://www.geforce.com/drivers">http://www.geforce.com/drivers</a></h4>
+<h4 id="download-and-install-nvidia-driver-based-on-above-gpu-info-http-www-geforce-com-drivers">Download and install Nvidia driver based on above GPU info <a href="http://www.geforce.com/drivers">http://www.geforce.com/drivers</a></h4>
 
 <pre><code>chmod +x NVIDIA-Linux-xxxx.run
 sudo ./NVIDIA-Linux-xxxx.run   
 </code></pre>
 
-<h4 id="download-and-install-cuda-from-nvidia-https-developer-nvidia-com-cuda-downloads:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install  CUDA from NVIDIA <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></h4>
+<h4 id="download-and-install-cuda-from-nvidia-https-developer-nvidia-com-cuda-downloads">Download and install  CUDA from NVIDIA <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></h4>
 
 <pre><code>sudo dpkg -i cuda-repo-xxxxx.deb
 sudo apt-get udpate
 sudo apt-get install cuda
 </code></pre>
 
-<h4 id="setup-cuda-home:dcc7d6c7e6d56cb7c25ea39a679187b7">Setup CUDA_HOME</h4>
+<h4 id="setup-cuda-home">Setup CUDA_HOME</h4>
 
 <pre><code># CUDA
 export CUDA_HOME=/usr/local/cuda-8.0 
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
 </code></pre>
 
-<h4 id="download-and-install-cudnn-for-cuda-https-developer-nvidia-com-cudnn:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install cuDNN for CUDA <a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></h4>
+<h4 id="download-and-install-cudnn-for-cuda-https-developer-nvidia-com-cudnn">Download and install cuDNN for CUDA <a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></h4>
 
 <pre><code># extra the cuDNN tar ball
 tar -xvf cudnn-8.0
@@ -147,9 +147,9 @@ sudo cp lib64/* /usr/local/cuda-8.0/lib64
 sudo cp include/* /usr/local/cuda-8.0/include
 </code></pre>
 
-<h3 id="use-sample-code-to-test-tensorflow:dcc7d6c7e6d56cb7c25ea39a679187b7">Use sample code to test Tensorflow</h3>
+<h3 id="use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</h3>
 
-<h4 id="save-code-below-to-file-test-py:dcc7d6c7e6d56cb7c25ea39a679187b7">Save code below to file test.py</h4>
+<h4 id="save-code-below-to-file-test-py">Save code below to file test.py</h4>
 
 <pre><code class="language-python">import numpy as np
 import tensorflow as tf
@@ -181,7 +181,7 @@ curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
 print(&quot;W: %s b: %s loss: %s&quot;%(curr_W, curr_b, curr_loss))
 </code></pre>
 
-<h4 id="test-with-tensorflow-gpu-gpu-enabled:dcc7d6c7e6d56cb7c25ea39a679187b7">Test with tensorflow-gpu (GPU enabled)</h4>
+<h4 id="test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</h4>
 
 <pre><code>source ~/.envs/tfgpu/bin/activate
 python3 test.py
@@ -220,23 +220,23 @@ python3 test.py
 <ul>
 <li>
 <ul>
-<li><a href="#assumption:dcc7d6c7e6d56cb7c25ea39a679187b7">Assumption</a></li>
-<li><a href="#install-python3-and-pip3:dcc7d6c7e6d56cb7c25ea39a679187b7">Install python3 and pip3</a></li>
-<li><a href="#install-virtualenv-via-pip3:dcc7d6c7e6d56cb7c25ea39a679187b7">Install virtualenv via pip3</a></li>
-<li><a href="#create-two-tensorflow-virtualenvs:dcc7d6c7e6d56cb7c25ea39a679187b7">Create two tensorflow virtualenvs.</a></li>
-<li><a href="#install-tensorflow-for-different-virtualenvs:dcc7d6c7e6d56cb7c25ea39a679187b7">Install tensorflow for different virtualenvs</a></li>
-<li><a href="#install-cuda-and-cudnn-for-tensorflow-gpu:dcc7d6c7e6d56cb7c25ea39a679187b7">Install CUDA and cuDNN for tensorflow-gpu</a>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#install-python3-and-pip3">Install python3 and pip3</a></li>
+<li><a href="#install-virtualenv-via-pip3">Install virtualenv via pip3</a></li>
+<li><a href="#create-two-tensorflow-virtualenvs">Create two tensorflow virtualenvs.</a></li>
+<li><a href="#install-tensorflow-for-different-virtualenvs">Install tensorflow for different virtualenvs</a></li>
+<li><a href="#install-cuda-and-cudnn-for-tensorflow-gpu">Install CUDA and cuDNN for tensorflow-gpu</a>
 <ul>
-<li><a href="#use-following-command-to-check-you-gpu-information:dcc7d6c7e6d56cb7c25ea39a679187b7">Use following command to check you GPU information</a></li>
-<li><a href="#download-and-install-nvidia-driver-based-on-above-gpu-info-http-www-geforce-com-drivers:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install Nvidia driver based on above GPU info <a href="http://www.geforce.com/drivers">http://www.geforce.com/drivers</a></a></li>
-<li><a href="#download-and-install-cuda-from-nvidia-https-developer-nvidia-com-cuda-downloads:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install  CUDA from NVIDIA <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></a></li>
-<li><a href="#setup-cuda-home:dcc7d6c7e6d56cb7c25ea39a679187b7">Setup CUDA_HOME</a></li>
-<li><a href="#download-and-install-cudnn-for-cuda-https-developer-nvidia-com-cudnn:dcc7d6c7e6d56cb7c25ea39a679187b7">Download and install cuDNN for CUDA <a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></a></li>
+<li><a href="#use-following-command-to-check-you-gpu-information">Use following command to check you GPU information</a></li>
+<li><a href="#download-and-install-nvidia-driver-based-on-above-gpu-info-http-www-geforce-com-drivers">Download and install Nvidia driver based on above GPU info <a href="http://www.geforce.com/drivers">http://www.geforce.com/drivers</a></a></li>
+<li><a href="#download-and-install-cuda-from-nvidia-https-developer-nvidia-com-cuda-downloads">Download and install  CUDA from NVIDIA <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></a></li>
+<li><a href="#setup-cuda-home">Setup CUDA_HOME</a></li>
+<li><a href="#download-and-install-cudnn-for-cuda-https-developer-nvidia-com-cudnn">Download and install cuDNN for CUDA <a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></a></li>
 </ul></li>
-<li><a href="#use-sample-code-to-test-tensorflow:dcc7d6c7e6d56cb7c25ea39a679187b7">Use sample code to test Tensorflow</a>
+<li><a href="#use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</a>
 <ul>
-<li><a href="#save-code-below-to-file-test-py:dcc7d6c7e6d56cb7c25ea39a679187b7">Save code below to file test.py</a></li>
-<li><a href="#test-with-tensorflow-gpu-gpu-enabled:dcc7d6c7e6d56cb7c25ea39a679187b7">Test with tensorflow-gpu (GPU enabled)</a></li>
+<li><a href="#save-code-below-to-file-test-py">Save code below to file test.py</a></li>
+<li><a href="#test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -294,9 +294,15 @@ python3 test.py
 					<li><a href="/dev/jira-notes/">JIRA Notes</a>
 					</li>
 				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
 					<li>
 						<span class="active">Tensorflow Notes, Part 1</span>
 						</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
 				
 					<li><a href="/dev/git-notes/">Git Notes</a>
 					</li>
@@ -365,6 +371,9 @@ python3 test.py
 					</li>
 				
 					<li><a href="/project/reetek-vue2-admin/">Reetek Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Reetek Vue 2 Crm Project</a>
 					</li>
 				
 					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
