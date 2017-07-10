@@ -1,0 +1,426 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Angular 4 Crm Project - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Angular 4 Crm Project</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<p><strong>Ng4Crm</strong> is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp; Bootstrap 3.</p>
+
+<p>This project starts from a popular starter project <a href="https://github.com/AngularClass/angular-starter">AngularClass/AngularStarter</a>. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.</p>
+
+<p><strong>Features</strong></p>
+
+<ul>
+<li>This project is built on the top of AngularClass/Angular-Starter.</li>
+<li>The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.</li>
+<li>This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.</li>
+<li>It uses Json-Server as fake Restful API. (You can simple replace it with your own API)</li>
+</ul>
+
+<h2 id="structure-of-ng4crm">Structure of Ng4Crm</h2>
+
+<pre><code class="language-ini">path\to\ng4crm
++---config             &lt;-// configuration of dev or prod environment
++---db                 &lt;-// json files for json-server
+|   +---db.json        &lt;-// dummy db
+|   \---routes.json    &lt;-// configure fake restful api
++---screenshots
++---src                &lt;-// vue components 
+|   +---app
+|   |   +---_gurad             &lt;-// auth guard for authentication
+|   |   +---_models             &lt;-// common models for whole app
+|   |   +---_services            &lt;-// common services for whole app
+|   |   +---about                &lt;-// about component   
+|   |   +---customer              &lt;-// customer component
+|   |   +---dashboard            &lt;-// dashboard component  
+|   |   +---notfoundpage         &lt;-// notfoundpage component  
+|   |   +---login                &lt;-// login component  
+|   |   +---order                &lt;-// customer component 
+|   |   +---root                &lt;-// root component 
+|   |   +---shared                &lt;-// common component for whole app
+|   |   +---app.component.ts
+|   |   +---app.module.ts
+|   |   +---app.routes.ts
+|   |   +---app.services.ts
+|   |   +---environment.ts
+|   |   \---...
+|   +---assets         &lt;-//   images  and css from third parties
+|   +---styles         &lt;-//   customized css files
+|   +---main.browser.aot.ts     
+|   +---main.browser.ts  
+|   +---polyfills.browser.ts  
+|   \---...
+\...
+
+</code></pre>
+
+<h3 id="screenshots">Screenshots</h3>
+
+<blockquote>
+<p><img src="/img/ng4crm-screenshot-1.jpg" alt="Screenshot1" /></p>
+
+<p><img src="/img/ng4crm-screenshot-2.jpg" alt="Screenshot2" /></p>
+
+<p><img src="/img/ng4crm-screenshot-3.jpg" alt="Screenshot3" /></p>
+
+<p><img src="/img/ng4crm-screenshot-4.jpg" alt="Screenshot4" /></p>
+</blockquote>
+
+<h4 id="browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></h4>
+
+<p><strong>Alternatives</strong></p>
+
+<p>There are two similar projects respectively built on the Vue.js and React. If you have interests in those technical stacks. You can find and clone those projects below.</p>
+
+<ul>
+<li><a href="/project/reetek-vue2-crm">Vue2 Crm</a>.</li>
+<li><a href="/project/reetek-react-crm">React Redux Crm</a>.</li>
+</ul>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Angular 4 Crm Project</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#structure-of-ng4crm">Structure of Ng4Crm</a>
+<ul>
+<li><a href="#screenshots">Screenshots</a>
+<ul>
+<li><a href="#browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/dev/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/dev/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li>
+						<span class="active">Angular 4 Crm Project</span>
+						</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>
