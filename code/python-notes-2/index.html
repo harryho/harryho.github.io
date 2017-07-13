@@ -1,0 +1,589 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Python Notes -- 2 - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Python Notes -- 2</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<h2 id="closure-decorator">Closure &amp; Decorator</h2>
+
+<h3 id="legb-rules">LEGB rules</h3>
+
+<ul>
+<li>Local, Enclosing, Gloable, Built-in</li>
+</ul>
+
+<h3 id="local-function">Local function</h3>
+
+<ul>
+<li>Useful for specialized, one-off functions</li>
+<li>Aid in code organization and readability</li>
+<li>Similar to lambdas, but more general</li>
+<li>May contain multiple expressions</li>
+<li>May contain statements</li>
+</ul>
+
+<h3 id="closure">Closure</h3>
+
+<ul>
+<li>Closure maintain references to objects from earlier scopes</li>
+<li>LEGB does not apply when making new bindings</li>
+
+<li><p>Usage of nonlocal</p>
+
+<ul>
+<li>Example</li>
+</ul>
+
+<pre><code>def make_timer():
+    last_called = None
+
+    def elapsed():
+        nonlocal last_called
+        now = time.time()
+        if last_called is None:
+            last_called = now
+            return None
+        result = now - last_called
+        last_called = now
+        return result
+    return elapsed
+
+
+if __name__ == &quot;__main__&quot;:
+    mt = make_timer()
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+</code></pre></li>
+
+<li><p>Use as function factory</p>
+
+<ul>
+<li>Example
+<br /></li>
+</ul>
+
+<pre><code class="language-python">
+def raise_to(exp):
+    def raise_to_exp(x):
+        return pow(x, exp)
+    return raise_to_exp
+
+if __name__ == &quot;__main__&quot;:
+    square=raise_to(2)
+    cube= raise_to(3)
+    print(square(2))
+    print(cube(2))
+
+# Result:
+# 4
+# 8
+
+</code></pre></li>
+</ul>
+
+<h3 id="decorator">Decorator</h3>
+
+<ul>
+<li>Replace, enhance, or modify existing functions</li>
+<li>Does not change the original function definition</li>
+<li>Calling code does not need to change</li>
+<li>Decorator mechanism uses the modified function’s original name</li>
+
+<li><p>Example</p>
+
+<ul>
+<li>use function as decorator</li>
+</ul>
+
+<pre><code class="language-python">def escape_unicode(f):
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
+
+if __name__ == &quot;__main__&quot;:
+    print(hello_greek())
+
+# result:
+# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+</code></pre>
+
+<ul>
+<li>Example: multiple decorators including function and instance</li>
+</ul>
+
+<pre><code class="language-python">class Trace:
+    def __init__(self):
+        self.enabled = True
+
+    def __call__(self, f):
+        @functools.wraps(f)
+        def wrap(*args, **kwargs):
+            if self.enabled:
+                print('Calling {}'.format(f.__name__))
+            return f(*args, **kwargs)
+        return wrap
+
+def escape_unicode(f):
+    @functools.wraps(f)
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+@tracer
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
+
+# Result
+# Calling hello_greek
+# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+
+</code></pre>
+
+<ul>
+<li>Use as validator</li>
+</ul>
+
+<pre><code class="language-python">def check_non_negative(index):
+    def validator(f):
+        def wrap(*args):
+            if args[index] &lt; 0:
+                raise ValueError(
+                    'Arg {} must be non-negative'.format(index)
+                )
+            return f(*args)
+        return wrap
+    return validator
+
+@check_non_negative(1)
+def create_seq(value, size):
+    return [value]*size  
+
+if __name__ == &quot;__main__&quot;:
+    create_seq('0', -3)
+
+# result
+....
+'Arg {} must be non-negative'.format(index)
+ValueError: Arg 1 must be non-negative
+</code></pre></li>
+</ul>
+
+<h2 id="properties-class">Properties &amp; Class</h2>
+
+<h3 id="staticmethod">@staticmethod</h3>
+
+<ul>
+<li>No access needed to either class or instance objects.</li>
+<li>Most likely an implementation detail of the class.</li>
+<li>May be able to be moved to become a module-scope function</li>
+</ul>
+
+<h3 id="classmethod">@classmethod</h3>
+
+<ul>
+<li>Requires access to the class object to call other class methods or the constructor</li>
+<li>Always use self for the first argument to instance methods.</li>
+<li>Always use cls for the first argument to class methods.</li>
+<li>Use case: use as named constructors</li>
+</ul>
+
+<pre><code class="language-python">class FileStream(object):
+
+    @classmethod
+    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
+        with open(filepath, 'r') as fileobj:
+            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
+                yield obj
+
+    @classmethod
+    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
+        raise NotImplemented # Placeholder until implemented
+
+    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
+        ...
+</code></pre>
+
+<h3 id="property">@property</h3>
+
+<ul>
+<li>Encapsulation</li>
+
+<li><p>Example</p>
+
+<pre><code class="language-python">class A
+@property
+def  prop(self):
+    return self._prop
+
+@prop.setter
+def prop(self, value):
+    self._prop = value
+</code></pre></li>
+</ul>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Python Notes -- 2</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<ul>
+<li><a href="#legb-rules">LEGB rules</a></li>
+<li><a href="#local-function">Local function</a></li>
+<li><a href="#closure">Closure</a></li>
+<li><a href="#decorator">Decorator</a></li>
+</ul></li>
+<li><a href="#properties-class">Properties &amp; Class</a>
+<ul>
+<li><a href="#staticmethod">@staticmethod</a></li>
+<li><a href="#classmethod">@classmethod</a></li>
+<li><a href="#property">@property</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/dev/vue-ng-react/">Angular vs React vs Vue</a>
+					</li>
+				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/dev/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/dev/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

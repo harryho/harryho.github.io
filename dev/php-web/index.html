@@ -183,29 +183,29 @@
 
 <ul>
 <li>Create data model</li>
-<li>Following is the sample code
-```php
-&lt;?php</li>
+<li>Following is the sample code</li>
 </ul>
 
-<p>namespace App;
-use Illuminate\Database\Eloquent\Model;</p>
+<pre><code class="language-php">&lt;?php
 
-<p>class Article extends Model
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Article extends Model
 {
-    protected $fillable = [&lsquo;title&rsquo;, &lsquo;content&rsquo;];</p>
+    protected $fillable = ['title', 'content'];
 
-<pre><code>public function getTitleAttribute($value) {
-    return strtoupper($value);
+    public function getTitleAttribute($value) {
+        return strtoupper($value);
+    }
 }
 </code></pre>
 
-<p>}</p>
+<ul>
+<li>Use artisan to create the table</li>
+</ul>
 
-<pre><code>* Use artisan to create the table 
-
-```bash
-
+<pre><code class="language-bash">
 php artisan migrate -VVV 
 
 # Use following command to seek dump or initial data

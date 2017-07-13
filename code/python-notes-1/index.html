@@ -1,0 +1,940 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Python Notes -- 1 - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Python Notes -- 1</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<h2 id="package-module">Package &amp; Module</h2>
+
+<ul>
+<li>Packages are modules that contain other modules.</li>
+<li>Packages are generally implemented as directories containing a special <code>__init__.py</code> file.</li>
+<li>The <code>__init__.py</code> file is executed when the package is imported.</li>
+<li>Packages can contain sub packages which themselves are implemented with <code>__init__.py</code> files in directories.</li>
+<li>The module objects for packages have a <code>__path__</code> attribute.</li>
+</ul>
+
+<h3 id="sys-path">sys.path</h3>
+
+<ul>
+<li>List of directories which Python searches for modules.</li>
+</ul>
+
+<pre><code class="language-python">
+## list directories
+&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.path
+</code></pre>
+
+<ul>
+<li><p>Use <code>append</code> to attach the package directory to sys.path</p>
+
+<ul>
+<li>Append the package to sys.path</li>
+<li>If you append the relative path of the package to sys.path, you need to make sure the it is correct.</li>
+</ul></li>
+
+<li><p>Example</p>
+
+<ul>
+<li>path: path_root\package0\module0.py</li>
+<li>The code of module0.py</li>
+</ul>
+
+<pre><code class="language-python">def test():
+    print('module0 -- test !')
+</code></pre>
+
+<ul>
+<li>Test module importing</li>
+</ul>
+
+<pre><code class="language-python">cd root
+python
+&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.append('package0')
+&gt;&gt;&gt;import module0
+&gt;&gt;&gt;module0.test
+module0 -- test !
+&gt;&gt;&gt;exit()
+
+## It will fail if you launch python at the parent directory of root 
+cd ..
+python
+&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.append('package0')
+&gt;&gt;&gt;import module0
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+ImportError: No module named 'module0'
+
+## It will success if you adjust relative path as below
+&gt;&gt;&gt;sys.append('path_root/package0')
+&gt;&gt;&gt;import module0
+&gt;&gt;&gt;module0.test
+module0 -- test !
+</code></pre></li>
+</ul>
+
+<h3 id="pythonpath">PYTHONPATH</h3>
+
+<ul>
+<li>Environment variable adds paths to sys.path</li>
+<li>Use previous <code>module0.py</code> to test</li>
+<li>Linux</li>
+</ul>
+
+<pre><code>export PYTHONPATH=package0
+python
+&gt;&gt;&gt;import module0
+module0 -- test !
+</code></pre>
+
+<ul>
+<li>Windows</li>
+</ul>
+
+<pre><code>set PYTHONPATH=package0
+python
+&gt;&gt;&gt;import module0
+module0 -- test !
+</code></pre>
+
+<h3 id="package-structure">Package structure</h3>
+
+<ul>
+<li>Convert a package into a module</li>
+<li>Basic structure of package0</li>
+</ul>
+
+<pre><code>path_root  &lt;--// it must be attached sys.path
++---package0    &lt;--// package root 
+    +---__init__.py  &lt;--// package init file
+    \---module0.py
+</code></pre>
+
+<p><code>
+* Sample code -</code><strong>init</strong>.py` ( The sample code is for demo purpose)</p>
+
+<pre><code class="language-python">print('package0 --init...')
+</code></pre>
+
+<ul>
+<li><p>Test</p>
+
+<pre><code>python
+&gt;&gt;&gt;import package0
+package0 --init...
+&gt;&gt;&gt;import package0.module0
+&gt;&gt;&gt;package0.module0.test()
+module0 -- test !
+</code></pre></li>
+
+<li><p>Add a <code>FileReader</code> class into <code>module0.py</code></p></li>
+
+<li><p>Sample code of <code>module0.py</code></p></li>
+</ul>
+
+<pre><code class="language-python">class FileReader:
+    def __init__(self, filename):
+        self.filename = filename
+        self.f = open(self.filename, 'rt')
+
+    def close(self):
+        self.f.close()
+    
+    def read(self):
+        return self.f.read()
+
+</code></pre>
+
+<ul>
+<li>Test</li>
+</ul>
+
+<pre><code class="language-python">fr=package0.module0.FileReader('package0/module0.py')
+&gt;&gt;&gt;fr.read()
+&gt;&gt;&gt;fr.close()
+
+</code></pre>
+
+<ul>
+<li>Update <code>__init__.py</code></li>
+</ul>
+
+<pre><code>from package0.module0 import FileReader
+</code></pre>
+
+<ul>
+<li>Test again</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt;import package0
+&gt;&gt;&gt;r=package0.FileReader('package0/module0.py')
+&gt;&gt;&gt;r.read()
+&gt;&gt;&gt;r.close()
+</code></pre>
+
+<h3 id="subpackage">Subpackage</h3>
+
+<ul>
+<li>Demo below shows how to add subpackages</li>
+<li>Add sub-package under the <code>package0</code></li>
+<li>Structure</li>
+</ul>
+
+<pre><code>path_root  &lt;--// it must be attached sys.path
++---package0    &lt;--// package root 
+    +---compress
+    |   +---__init__.py
+    |   +---bz.py
+    |   +---gz.py
+    +---__init__.py  &lt;--// package init file
+    \---module0.py
+</code></pre>
+
+<ul>
+<li>Sample code - <code>gz.py</code></li>
+</ul>
+
+<pre><code class="language-python">import gzip
+import sys
+
+opener=gzip.open
+
+if __name__ == '__main__':
+    f = gzip.open(sys.argv[1], mode='wt')
+    f.write(' '.join(sys.argv[2:]))
+    f.close()
+</code></pre>
+
+<ul>
+<li>Sample code - <code>bz.py</code></li>
+</ul>
+
+<pre><code class="language-python">import bz2
+import sys
+
+opener = bz2.open
+
+if __name__ == '__main__':
+    f = bz2.open(sys.argv[1], mode='wt')
+    f.write(' '.join(sys.argv[2:]))
+    f.close()
+</code></pre>
+
+<ul>
+<li>Test by creating two compressed files</li>
+</ul>
+
+<pre><code>python3 -m package0.compress.gz test.gz data compressed with gz
+python3 -m package0.compress.bz test.bz2 data compressed with bz2
+</code></pre>
+
+<ul>
+<li>Change <code>FileReader.py</code> to read above files</li>
+</ul>
+
+<pre><code class="language-python">from package0.compress import gz, bz
+import os
+
+extension_map = {
+    '.gz':gz.opener,
+    '.bz2':bz.opener
+}
+
+class FileReader:
+    def __init__(self, filename):
+        self.filename = filename
+        extension = os.path.splitext(filename)[1]
+        opener = extension_map.get(extension, open)
+        self.f = opener(self.filename, 'rt')
+
+    def close(self):
+        self.f.close()
+    
+    def read(self):
+        return self.f.read()
+
+</code></pre>
+
+<ul>
+<li>Test</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt; import package0
+&gt;&gt;&gt; r=package0.FileReader('test.gz')
+&gt;&gt;&gt; r.read()
+'data compressed with gz'
+&gt;&gt;&gt; r=package0.FileReader('test.bz2')
+&gt;&gt;&gt; r.read()
+'data compressed with bz2'
+
+</code></pre>
+
+<h3 id="import-with-relative-path">Import with relative path</h3>
+
+<ul>
+<li>Example below show how to use relative path to import packages</li>
+</ul>
+
+<pre><code>path_root 
++---package0     
+    +---compress
+    |   +---__init__.py
+    |   +---bz.py      &lt;--// from ..module0 import FileReader
+    |   +---gz.py      &lt;--// from .bz import bz.opener
+    +---__init__.py  
+    \---module0.py
+
+</code></pre>
+
+<h3 id="namespace-package">Namespace package</h3>
+
+<ul>
+<li>Namespace packages have no <code>__init__.py</code></li>
+<li>Python scans all entries in <code>sys.path</code>.</li>
+<li>If a matching directory with <code>__init__.py</code> is found, a normal package is loaded</li>
+<li>Otherwise, all matching directories in <code>sys.path</code> are considered part of the namespace package</li>
+
+<li><p>Example 1</p>
+
+<ul>
+<li>Structure of package</li>
+</ul>
+
+<pre><code>path_root0 
++---package0
+    +---module0.py
+path_root1 
++---package0
+    +---module0.py    
+</code></pre>
+
+<ul>
+<li>Test</li>
+</ul>
+
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path.append('gh')
+&gt;&gt;&gt; sys.path.append('path_root0')
+&gt;&gt;&gt; sys.path.append('path_root1')
+&gt;&gt;&gt; import package0
+&gt;&gt;&gt; package0.__path__
+_NamespacePath(['gh\\package0', 'path_root0\\package0', 'path_root0\\package0'])
+</code></pre></li>
+
+<li><p>Example 2</p>
+
+<ul>
+<li>Structure of package</li>
+</ul>
+
+<pre><code>path_root0 
++---package0
+    +---module0.py
+path_root1 
++---package0
+    +---module0.py    
+path_root2 
++---package0
+    +---__init__.py  &lt;--// Namespace should not include __init__.py
+    +---module0.py            
+</code></pre>
+
+<ul>
+<li>Test</li>
+</ul>
+
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path.append('path_root0')
+&gt;&gt;&gt; sys.path.append('path_root1')
+&gt;&gt;&gt; sys.path.append('path_root2')
+&gt;&gt;&gt; import package0
+&gt;&gt;&gt; package0.__path__
+_NamespacePath(['path_root2\\package0'])    
+</code></pre></li>
+</ul>
+
+<h3 id="recommended-executable-directories">Recommended Executable directories</h3>
+
+<pre><code>project_root &lt;--// Project root directory contains everything
++---__main__.py
++---project_name
+|   +---__init__.py
+|   +---resource.py
+|   +---package0
+|   |   +---__init__.py
+|   |   +---module0.py
+|   +---test
+|      +---__init__.py
+|      +---test.py
+\---setup.py      
+
+</code></pre>
+
+<h3 id="visual-studio-code-setup">Visual Studio Code setup</h3>
+
+<ul>
+<li>Install python plugin <code>Python - donjayamanne</code></li>
+<li>Setup <code>launch.json</code></li>
+</ul>
+
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;Python&quot;,
+            &quot;type&quot;: &quot;python&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;stopOnEntry&quot;: true,
+            &quot;pythonPath&quot;: &quot;${config:python.pythonPath}&quot;,
+            &quot;program&quot;: &quot;${workspaceRoot}/__main__.py&quot;,
+            &quot;cwd&quot;: &quot;${workspaceRoot}&quot;,
+            &quot;env&quot;:{},
+            &quot;envFile&quot;: &quot;${workspaceRoot}/.env&quot;,
+            &quot;debugOptions&quot;: [
+                &quot;WaitOnAbnormalExit&quot;,
+                &quot;WaitOnNormalExit&quot;,
+                &quot;RedirectOutput&quot;
+            ]
+        }
+    ]
+    ...
+}
+</code></pre>
+
+<ul>
+<li>Sample code - <code>__main__.py</code></li>
+</ul>
+
+<pre><code class="language-python">from package1 import FileReader
+
+if __name__ == &quot;__main__&quot;:
+    app = FileReader('C:/ws/python/plural/pbb/gh/test.gz')
+    print(app.read())
+    app.close()
+
+    app = FileReader('C:/ws/python/plural/pbb/gh/test.bz2')
+    print(app.read())
+    app.close()
+</code></pre>
+
+<h2 id="function-lambda">Function &amp; Lambda</h2>
+
+<h3 id="function">Function</h3>
+
+<ul>
+<li>statement which defines a function and binds it to a name</li>
+<li>Must have a name</li>
+<li>Arguments delimited by parentheses, separated by commas</li>
+<li>Zero or more arguments supported -zero arguments ⇒ empty parentheses</li>
+<li>Body is an indented block of statements</li>
+<li>A return statement is required to return anything other than None</li>
+<li>Regular functions can have docstrings‣ Easy to access for testing</li>
+</ul>
+
+<h3 id="lambda">Lambda</h3>
+
+<ul>
+<li>Expression which evaluates to a function</li>
+<li>Anonymous</li>
+<li>Argument list terminated by colon, separated by commas</li>
+<li>Zero or more arguments supported - zero arguments ⇒ lambda:</li>
+<li>Body is a single expression</li>
+<li>The return value is given by the body expression. No return statement is permitted.</li>
+<li>Lambdas cannot have docstrings</li>
+<li>Awkward or impossible to test</li>
+<li>Example</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt;names=list(['Harry Ho', 'Harry Porter', 'Harry Charles'])
+&gt;&gt;&gt;sorted(names, key=lambda name:name.split()[-1]))
+['Harry Charles', 'Harry Ho', 'Harry Porter']
+</code></pre>
+
+<h3 id="callable">Callable</h3>
+
+<ul>
+<li><p>Callable instance</p>
+
+<ul>
+<li>Example</li>
+<li>Sample code - <code>Resolver.py</code></li>
+</ul>
+
+<pre><code class="language-python">class Resolver:
+
+    def __init__(self):
+        self.cache={}
+
+    def __call__(self, host):
+        if host not in self.cache:
+            self.cache[host]= socket.gethostbyname(host)
+        return self.cache[host]
+</code></pre>
+
+<ul>
+<li>Sample code - <code>__main__.py</code></li>
+</ul>
+
+<pre><code>from package1 import Resolver
+
+if __name__ == &quot;__main__&quot;:
+    app = Resolver()
+    print(app('harryho.github.io'))
+    print(app.__call__('harryho.github.io'))
+</code></pre></li>
+
+<li><p>Callable class</p></li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt;seq_class_1 = list
+&gt;&gt;&gt;sequence= seq_class_1('abc')
+&gt;&gt;&gt;type(sequence)
+&lt;class 'list'&gt;
+&gt;&gt;&gt;seq_class_1 = tuple
+&gt;&gt;&gt;sequence= seq_class_1('abc')
+&gt;&gt;&gt;type(sequence)
+&lt;class 'tuple'&gt;
+</code></pre>
+
+<h3 id="extended-arguments-and-call">Extended arguments and call</h3>
+
+<ul>
+<li><p>Extended arguments - syntax:  <code>def extend( *args, **kargs)</code></p></li>
+
+<li><p>Example</p></li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt; def tag(name, **attrs):
+...     t='&lt;'
+...     for k,v in attrs.items():
+...             t+= '{key}=&quot;{val}&quot;'.format(key=k, val=str(v))
+...     t+='&gt;'
+...     return t
+...
+&gt;&gt;&gt; tag('a', href=&quot;harryho.github.io&quot;, target=&quot;_blank&quot;, id=&quot;link&quot;)
+'&lt;href=&quot;harryho.github.io&quot;id=&quot;link&quot;target=&quot;_blank&quot;&gt;'
+</code></pre>
+
+<ul>
+<li>Extended call - sample</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt; def f1 ( a1, a2, *a3):
+...     print(a1)
+...     print(a2)
+...     print(a3)
+...
+&gt;&gt;&gt; aa=(2,3)
+&gt;&gt;&gt; f1(aa)
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: f1() missing 1 required positional argument: 'a2'
+&gt;&gt;&gt; f1(*aa)
+2
+3
+()
+
+&gt;&gt;&gt; def f2(a1, a2):
+...     print(a1)
+...     print(a2)
+...
+
+&gt;&gt;&gt; f2(*aa)
+2
+3
+&gt;&gt;&gt; aa=(1,2,3,4)
+&gt;&gt;&gt; f2(*aa)
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: f2() takes 2 positional arguments but 4 were given
+</code></pre>
+
+<ul>
+<li>Transpose example</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt; mon=[12,13,15,12,14,18,13]
+&gt;&gt;&gt; tue=[11,14,16,12,11,17,14]
+&gt;&gt;&gt; for d in zip(mon, tue):
+...     print(d)
+...
+(12, 11)
+(13, 14)
+(15, 16)
+(12, 12)
+(14, 11)
+(18, 17)
+(13, 14)
+&gt;&gt;&gt; daily = [mon, tue]
+&gt;&gt;&gt; from pprint import pprint as pp
+&gt;&gt;&gt; pp(daily)
+[[12, 13, 15, 12, 14, 18, 13], [11, 14, 16, 12, 11, 17, 14]]
+&gt;&gt;&gt; transposed = list(zip(*daily))
+&gt;&gt;&gt; pp(transposed)
+[(12, 11), (13, 14), (15, 16), (12, 12), (14, 11), (18, 17), (13, 14)]
+
+</code></pre>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Python Notes -- 1</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#package-module">Package &amp; Module</a>
+<ul>
+<li><a href="#sys-path">sys.path</a></li>
+<li><a href="#pythonpath">PYTHONPATH</a></li>
+<li><a href="#package-structure">Package structure</a></li>
+<li><a href="#subpackage">Subpackage</a></li>
+<li><a href="#import-with-relative-path">Import with relative path</a></li>
+<li><a href="#namespace-package">Namespace package</a></li>
+<li><a href="#recommended-executable-directories">Recommended Executable directories</a></li>
+<li><a href="#visual-studio-code-setup">Visual Studio Code setup</a></li>
+</ul></li>
+<li><a href="#function-lambda">Function &amp; Lambda</a>
+<ul>
+<li><a href="#function">Function</a></li>
+<li><a href="#lambda">Lambda</a></li>
+<li><a href="#callable">Callable</a></li>
+<li><a href="#extended-arguments-and-call">Extended arguments and call</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/dev/vue-ng-react/">Angular vs React vs Vue</a>
+					</li>
+				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/dev/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/dev/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

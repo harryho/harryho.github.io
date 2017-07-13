@@ -909,29 +909,29 @@ git branch -d new-feature
 
 &lt;ul&gt;
 &lt;li&gt;Create data model&lt;/li&gt;
-&lt;li&gt;Following is the sample code
-```php
-&amp;lt;?php&lt;/li&gt;
+&lt;li&gt;Following is the sample code&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;namespace App;
-use Illuminate\Database\Eloquent\Model;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
 
-&lt;p&gt;class Article extends Model
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Article extends Model
 {
-    protected $fillable = [&amp;lsquo;title&amp;rsquo;, &amp;lsquo;content&amp;rsquo;];&lt;/p&gt;
+    protected $fillable = [&#39;title&#39;, &#39;content&#39;];
 
-&lt;pre&gt;&lt;code&gt;public function getTitleAttribute($value) {
-    return strtoupper($value);
+    public function getTitleAttribute($value) {
+        return strtoupper($value);
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use artisan to create the table&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;* Use artisan to create the table 
-
-```bash
-
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 php artisan migrate -VVV 
 
 # Use following command to seek dump or initial data
