@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Python Notes - 2 - Hello World</title>
+    <title>Python Notes - 4 - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -65,238 +65,242 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Python Notes - 2</h1>
+				<h1 class="doc-entry-title">Python Notes - 4</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
+<h2 id="iterables-iteration">Iterables &amp; Iteration</h2>
 
-<h3 id="legb-rules">LEGB rules</h3>
-
-<ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
-</ul>
-
-<h3 id="local-function">Local function</h3>
+<h3 id="comprehensions">Comprehensions</h3>
 
 <ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
-</ul>
+<li>Comprehensions can process more than one input sequence</li>
+<li>Multiple input sequences in comprehensions work like nested for-loops</li>
+<li>Comprehensions can also have multiple if-clauses interspersed with the for-clauses</li>
+<li>Later clauses in a comprehension can reference variables bound in earlier clauses</li>
+<li>Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences</li>
+<li>Python provides a number of functional-style tools for working with iterators</li>
+<li><code>map()</code> calls a function for each element in its input sequences</li>
+<li><code>map()</code> returns an iterable object, not a fully-evaluated collection</li>
+<li><code>map()</code> results are lazily evaluated, meaning that you must access them to
+force their calculation</li>
+<li><code>map()</code> results are typically evaluated through the use of iteration constructs such as for-loops</li>
+<li>You must provide as many input sequences to <code>map()</code> as the callable argument has parameters</li>
+<li><code>map()</code> takes one element from each input sequence for each output element
+it produces</li>
+<li><code>map()</code> stops producing output when its shortest input sequence is exhausted</li>
+<li><code>map()</code> can be used to implement the same behavior as comprehensions in some cases</li>
+<li><code>filter()</code> selects values from an input sequence which match a specified criteria</li>
+<li><code>filter()</code> passes each element in its input sequence to the function argument</li>
+<li><code>filter()</code> returns an iterable over the input elements for which the function argument is truthy</li>
+<li>Like <code>map()</code>, <code>filter()</code> produces its output lazily</li>
+<li>If you pass None as the first argument to <code>filter()</code>, it yields the input values which evaluate to True in a boolean context <code>reduce()</code> cumulatively applies a function to the elements of an input sequence</li>
+<li><code>reduce()</code> calls the input function with two arguments: the accumulated result so far, and the next element in the sequence</li>
+<li><code>reduce()</code> is a generalization of summation</li>
+<li><code>reduce()</code> returns the accumulated result after all of the input has been processed</li>
+<li>If you pass an empty sequence to <code>reduce()</code> it will raise a TypeError</li>
+<li><code>reduce()</code> accepts an optional initial value argument</li>
+<li>This initial value is conceptually added to the front of the input sequence</li>
+<li>The initial value is returned if the input sequence is empty</li>
+<li>The <code>map()</code> and <code>reduce()</code> functions in Python are related to the ideas in the map-reduce algorithm</li>
 
-<h3 id="closure">Closure</h3>
+<li><p>Example</p>
 
-<ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
+<pre><code class="language-python">
+# Comprehensions    
+&gt;&gt;&gt; points
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&gt;&gt;&gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
+&gt;&gt;&gt; points_c
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&gt;&gt;&gt; points_d=[(x,y)
+...     for x in range(3)
+...     if x &gt; 0
+...     for y in range(4)
+...     if y &gt; x ]
+&gt;&gt;&gt; points_d
+[(1, 2), (1, 3), (2, 3)]
+&gt;&gt;&gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
+&gt;&gt;&gt; points_e
+[[], [-1], [-1, 0]]
 
-<li><p>Usage of nonlocal</p>
+# map
+&gt;&gt;&gt; sizes =['small','medium', 'large']
+&gt;&gt;&gt; colors = ['lavender', 'teal', 'burnt orange']
+&gt;&gt;&gt; animals = ['koala', 'platypus', 'salamander']
+&gt;&gt;&gt; def combine( size, color, animal):
+...     return '{} {} {}'.format(size, color, animal)
+...
+&gt;&gt;&gt; list(map(combine, sizes, colors, animals ))
+['small lavender koala', 'medium teal platypus', 'large burnt orange salamander']
+&gt;&gt;&gt; import itertools
+&gt;&gt;&gt; def combine2(quantity, size, color, animal):
+...     return '{} - {} {} {}'.format(quantity, size, color, animal)
+...
+&gt;&gt;&gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
+['0 - small lavender koala', '1 - medium teal platypus', '2 - large burnt orange salamander']
 
-<ul>
-<li>Example</li>
-</ul>
+# filter
+&gt;&gt;&gt; negs = filter(lambda x: x&lt;0 , [3, -1, 2,-4,0,9,-33])
+&gt;&gt;&gt; list(negs)
+[-1, -4, -33]
+&gt;&gt;&gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], '', 'yes'])
+&gt;&gt;&gt; list(map(type, list(notnones)))
+[&lt;class 'int'&gt;, &lt;class 'bool'&gt;, &lt;class 'tuple'&gt;, &lt;class 'list'&gt;, &lt;class 'str'&gt;]
 
-<pre><code>def make_timer():
-    last_called = None
+# reduce
+&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; import operator
+&gt;&gt;&gt; reduce(operator.add, [1,2,3,4,5])
+15
 
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
+## x is interim result , y is the next sequence value
+&gt;&gt;&gt; def mul(x, y):
+...     print(' mul {} {} '.format(x,y))
+...     return x * y
+...
+&gt;&gt;&gt; reduce( mul, range(1, 5))
+mul 1 2
+mul 2 3
+mul 6 4
+24
 
 
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
+
 </code></pre></li>
 
-<li><p>Use as function factory</p>
+<li><p>Python&rsquo;s next() function calls <code>__next__()</code> on its argument</p></li>
+
+<li><p>Iterators in Python must support the <code>__next__()</code> method</p></li>
+
+<li><p><code>__next__()</code> should return the next item in the sequence, or raise <code>StopIteration</code> if it is exhausted</p></li>
+
+<li><p>Python&rsquo;s <code>iter()</code> function calls <code>__iter__()</code> on its argument</p></li>
+
+<li><p>Iterable objects in Python must support the <code>__iter__()</code> method</p></li>
+
+<li><p><code>__iter__()</code> should return an iterator for the iterable object</p></li>
+
+<li><p>Objects with a <code>__getitem__()</code> method that accepts consecutive integer indices starting at zero are also iterables</p></li>
+
+<li><p>Iterables implemented via <code>__getitem__()</code> must raise <code>IndexError</code> when they are exhausted</p></li>
+
+<li><p>Example</p>
 
 <ul>
-<li>Example
+<li>Iterator</li>
+</ul>
+
+<pre><code class="language-python">class ExampleIterator:
+def __init__(self, data):
+    self.index = 0
+    self.data = data
+
+def __iter__(self):
+    return self
+
+def __next__(self):
+    if self.index &gt;= len(self.data):
+        raise StopIteration()
+
+    rslt = self.data[self.index]
+    self.index += 1
+    return rslt
+</code></pre>
+
+<ul>
+<li>Iterable
 <br /></li>
 </ul>
 
-<pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-# Result:
-# 4
-# 8
-
-</code></pre></li>
-</ul>
-
-<h3 id="decorator">Decorator</h3>
-
-<ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
-
-<li><p>Example</p>
-
-<ul>
-<li>use function as decorator</li>
-</ul>
-
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-# result:
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-</code></pre>
-
-<ul>
-<li>Example: multiple decorators including function and instance</li>
-</ul>
-
-<pre><code class="language-python">class Trace:
+<pre><code class="language-python">class ExampleIterable:
     def __init__(self):
-        self.enabled = True
+        self.data = [1, 2, 3]
 
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-# Result
-# Calling hello_greek
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
+    def __iter__(self):
+        return ExampleIterator(self.data)
 </code></pre>
 
 <ul>
-<li>Use as validator</li>
+<li>AnotherIterable</li>
 </ul>
 
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
+<pre><code class="language-python">class AnotherIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
 
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
-
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
-
-# result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
+    def __getitem__(self, idx):
+        return self.data[idx]
 </code></pre></li>
-</ul>
 
-<h2 id="properties-class">Properties &amp; Class</h2>
+<li><p>The extended form of <code>iter()</code> accepts a zero-argument callable and a sentinel value</p></li>
 
-<h3 id="staticmethod">@staticmethod</h3>
+<li><p>Extended <code>iter()</code> repeatedly calls the callable argument until it returns the sentinel value</p></li>
 
-<ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
-</ul>
-
-<h3 id="classmethod">@classmethod</h3>
-
-<ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
-<li>Use case: use as named constructors</li>
-</ul>
-
-<pre><code class="language-python">class FileStream(object):
-
-    @classmethod
-    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-        with open(filepath, 'r') as fileobj:
-            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-                yield obj
-
-    @classmethod
-    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-        raise NotImplemented # Placeholder until implemented
-
-    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-        ...
-</code></pre>
-
-<h3 id="property">@property</h3>
-
-<ul>
-<li>Encapsulation</li>
+<li><p>The values produced by extended <code>iter()</code> are those returned from the callable</p></li>
 
 <li><p>Example</p>
 
-<pre><code class="language-python">class A
-@property
-def  prop(self):
-    return self._prop
+<pre><code class="language-python">
+&gt;&gt;&gt; ts = iter(datetime.datetime.now, None)
+&gt;&gt;&gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
+&gt;&gt;&gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 13, 373613)
+&gt;&gt;&gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 14, 754588)
 
-@prop.setter
-def prop(self, value):
-    self._prop = value
+# Read file 
+# Content of the file file.txt
+# You are reading 
+# the file
+# you won't read 
+# the 
+# END
+# but not see the END above
+
+&gt;&gt;&gt; with open('file.txt', 'rt') as f:
+...     for line in iter(lambda: f.readline().strip(), 'END'):
+...             print(line)
+...
+You are reading
+the file
+you won't read
+the
+</code></pre></li>
+
+<li><p>One use case for extended <code>iter()</code> is to iterate using simple functions</p></li>
+
+<li><p>Protocol conforming iterators must also be iterable</p></li>
+
+<li><p>Example</p>
+
+<ul>
+<li>Sensor</li>
+</ul>
+
+<pre><code class="language-python">import datetime
+import itertools
+import random
+import time
+
+class Sensor:
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return random.random()
+
+sensor = Sensor()
+timestamps = iter(datetime.datetime.now, None)
+
+for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
+    print(stamp, value)
+    time.sleep(1)
+
 </code></pre></li>
 </ul>
 
@@ -313,24 +317,15 @@ def prop(self, value):
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Python Notes - 2</a></strong></li>
+				<li><strong><a href="#title">Python Notes - 4</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<li><a href="#iterables-iteration">Iterables &amp; Iteration</a>
 <ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
-</ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
-<ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
+<li><a href="#comprehensions">Comprehensions</a></li>
 </ul></li>
 </ul></li>
 </ul>

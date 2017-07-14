@@ -17301,7 +17301,7 @@ RUN_TESTS(all_tests);
     </item>
     
     <item>
-      <title>Python Notes -- 1</title>
+      <title>Python Notes - 1</title>
       <link>https://harryho.github.io/code/python-notes-1/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
       
@@ -17885,7 +17885,7 @@ TypeError: f2() takes 2 positional arguments but 4 were given
     </item>
     
     <item>
-      <title>Python Notes -- 2</title>
+      <title>Python Notes - 2</title>
       <link>https://harryho.github.io/code/python-notes-2/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
       
@@ -18118,6 +18118,854 @@ def  prop(self):
 def prop(self, value):
     self._prop = value
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 3</title>
+      <link>https://harryho.github.io/code/python-notes-3/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-3/</guid>
+      <description>
+
+&lt;h2 id=&#34;string-representation&#34;&gt;String &amp;amp; Representation&lt;/h2&gt;
+
+&lt;h3 id=&#34;str&#34;&gt;str()&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;print()&lt;/code&gt; -&amp;gt; &lt;code&gt;str()&lt;/code&gt; -&amp;gt;  &lt;code&gt;__str(self)__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fallback to &lt;code&gt;repr()&lt;/code&gt;. By default, &lt;code&gt;str()&lt;/code&gt; simply calls &lt;code&gt;repr()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Produces a readable, human-friendly representation of an object&lt;/li&gt;
+&lt;li&gt;It is also the string constructor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;repr&#34;&gt;repr()&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Exactness is more important than human-friendliness&lt;/li&gt;
+&lt;li&gt;Suited for debugging. Unambiguous, precise, include type&lt;/li&gt;
+&lt;li&gt;Includes identifying information.&lt;/li&gt;
+&lt;li&gt;Generally best for logging and developers&lt;/li&gt;
+&lt;li&gt;The default repr() is not very helpful&lt;/li&gt;
+&lt;li&gt;As a rule, you should always write a repr() for your classes&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;standard library &lt;code&gt;reprlib.repr()&lt;/code&gt; is a replacement for &lt;code&gt;repr()&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; l = [&#39;a&#39;] * 1000
+&amp;gt;&amp;gt;&amp;gt; import reprlib
+&amp;gt;&amp;gt;&amp;gt; reprlib.repr(l)
+&amp;quot;[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, ...]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;format&#34;&gt;format&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;{:f}&amp;quot;.format(obj)&lt;/code&gt; -&amp;gt; &lt;code&gt;__format__(self, f)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fallback to &lt;code&gt;str()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;built-in-functions&#34;&gt;built-in functions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ascii()&lt;/code&gt; replaces non-ASCII characters with escape sequences&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;chr()&lt;/code&gt; converts an integer Unicode codepoint to a single character string&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ord()&lt;/code&gt; converts a single character to its integer Unicode codepoint&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;numeric-scalar-types&#34;&gt;Numeric &amp;amp; scalar types&lt;/h2&gt;
+
+&lt;h3 id=&#34;int&#34;&gt;int&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;unlimited precision signed integer&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;bool in an int&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; False - True
+-1
+&amp;gt;&amp;gt;&amp;gt; False - False
+0
+&amp;gt;&amp;gt;&amp;gt; True - False
+1
+&amp;gt;&amp;gt;&amp;gt; True - True
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;float&#34;&gt;float&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IEEE-754 double precision (64-bit)&lt;/li&gt;
+&lt;li&gt;53 bits of binary precision&lt;/li&gt;
+&lt;li&gt;15 to 17 bits of decimal precision&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;0.001 has value 0/2 + 0/4 + &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt;. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example of float data&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt; f=0.9-0.8
+&amp;gt;&amp;gt;&amp;gt; f
+0.09999999999999998
+&amp;gt;&amp;gt;&amp;gt; f=0.2-0.1
+&amp;gt;&amp;gt;&amp;gt; f
+0.1
+&amp;gt;&amp;gt;&amp;gt; f=0.8-0.7
+&amp;gt;&amp;gt;&amp;gt; f
+0.10000000000000009
+&amp;gt;&amp;gt;&amp;gt; float(2**53)
+9007199254740992.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+1)
+9007199254740992.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+2)
+9007199254740994.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+3)
+9007199254740996.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+4)
+9007199254740996.0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;decimal&#34;&gt;decimal&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;standard library module decimal containing the class Decimal&lt;/li&gt;
+&lt;li&gt;decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision&lt;/li&gt;
+&lt;li&gt;identity is preserved. &lt;code&gt;x == (x // y) * y + x % y&lt;/code&gt;, so integer division and modulus are consistent&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; from decimal import Decimal
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.6)-Decimal(0.5)
+Decimal(&#39;0.09999999999999997779553950750&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.6&#39;)-Decimal(&#39;0.5&#39;)
+Decimal(&#39;0.1&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.2)-Decimal(0.1)
+Decimal(&#39;0.1000000000000000055511151231&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.8)-Decimal(0.7)
+Decimal(&#39;0.1000000000000000888178419700&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.8&#39;)-Decimal(&#39;0.7&#39;)
+Decimal(&#39;0.1&#39;)
+
+# Change the precise 
+&amp;gt;&amp;gt;&amp;gt; import decimal
+&amp;gt;&amp;gt;&amp;gt; decimal.getcontext().prec=4
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) / Decimal(3)
+Decimal(&#39;-2.333&#39;)
+
+# Python handle different type in different way with % 
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) % Decimal(3)
+Decimal(&#39;-1&#39;)  # 
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) // Decimal(3)
+Decimal(&#39;-2&#39;)  # The next multiple of 3 towards zero is -6
+&amp;gt;&amp;gt;&amp;gt; (-7) // (3) 
+-3  # The largest multiple of 3 less than -7 is -9
+&amp;gt;&amp;gt;&amp;gt; (-7) % (3)
+2  # The 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;fraction&#34;&gt;fraction&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;standard library module fractions containing the class Fraction for rational numbers&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt;from fractions import Fraction
+&amp;gt;&amp;gt;&amp;gt;f = Fraction(&amp;quot;2/3&amp;quot;)
+&amp;gt;&amp;gt;&amp;gt;f
+Faction(2,3)
+&amp;gt;&amp;gt;&amp;gt; Fraction(0.2)
+Fraction(3602879701896397, 18014398509481984)
+&amp;gt;&amp;gt;&amp;gt; Fraction(0.5)
+Fraction(1, 2)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;))
+Fraction(3, 10)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) // Fraction(6, 7)
+0
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) % Fraction(6, 7)
+Fraction(3, 10)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) - Fraction(6, 7)
+Fraction(-39, 70)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) + Fraction(6, 7)
+Fraction(81, 70)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) * Fraction(6, 7)
+Fraction(9, 35)
+
+&amp;gt;&amp;gt;&amp;gt; from math import floor, ceil
+&amp;gt;&amp;gt;&amp;gt; ceil(Fraction(&#39;8/7&#39;))
+2
+&amp;gt;&amp;gt;&amp;gt; floor(Fraction(&#39;8/7&#39;))
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;number-base-conversions&#34;&gt;number base conversions&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;bin()&lt;/th&gt;
+&lt;th&gt;oct()&lt;/th&gt;
+&lt;th&gt;hex()&lt;/th&gt;
+&lt;th&gt;int(x, base)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;base 2&lt;/td&gt;
+&lt;td&gt;base 8&lt;/td&gt;
+&lt;td&gt;base 16&lt;/td&gt;
+&lt;td&gt;bases 2 to 36&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 0b0101
+5
+&amp;gt;&amp;gt;&amp;gt; 0o63527
+26455
+&amp;gt;&amp;gt;&amp;gt; 0o63
+51
+&amp;gt;&amp;gt;&amp;gt; 0xad2
+2770
+&amp;gt;&amp;gt;&amp;gt; hex(22)
+&#39;0x16&#39;
+&amp;gt;&amp;gt;&amp;gt; oct(22)
+&#39;0o26&#39;
+&amp;gt;&amp;gt;&amp;gt; bin(22)
+&#39;0b10110&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;complex&#34;&gt;complex&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;complex construction string argument may have parentheses but must not contain spaces&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cmath&lt;/code&gt; standard Library module contains complex equivalents of math&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 1+1j
+(1+1j)
+&amp;gt;&amp;gt;&amp;gt; type(1+1j)
+&amp;lt;class &#39;complex&#39;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; (1+1j) + (1-1j)
+(2+0j)
+&amp;gt;&amp;gt;&amp;gt; (1+1j) + (2-2j)
+(3-1j)
+&amp;gt;&amp;gt;&amp;gt; (1+1j) - (2-2j)
+(-1+3j)
+&amp;gt;&amp;gt;&amp;gt; complex(&#39;-2+1j&#39;)
+(-2+1j)
+&amp;gt;&amp;gt;&amp;gt; complex(&#39;(-2+1j)&#39;)
+(-2+1j)
+&amp;gt;&amp;gt;&amp;gt; complex(-2, 1)
+(-2+1j)
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;date-time&#34;&gt;date &amp;amp; time&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Gregorian calendar&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;weekday()&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 Monday
+1 Tuesday
+2 Wednesday
+3 Thursday
+4 Friday
+5 Saturday
+6 Sunday
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;isoweekday()&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 Monday
+2 Tuesday
+3 Wednesday
+4 Thursday
+5 Friday
+6 Saturday
+7 Sunday   
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;timedelta&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Constructor accepts and sums
+• days
+• seconds
+• microseconds
+• milliseconds
+• minutes
+• hours
+• weeks&lt;/li&gt;
+&lt;li&gt;Instances store only
+• days
+• seconds
+• microseconds&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from datetime import (date, time)
+from datetime import datetime as Datetime
+from datetime import timedelta
+from datetime import (tzinfo, timezone)
+
+## date
+
+&amp;gt;&amp;gt;&amp;gt; datetime.date(2000,month=2, day=10)
+datetime.date(2000, 2, 10)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today()
+datetime.date(2014, 3, 14)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.fromtimestamp(99999999)
+datetime.date(1973, 3, 3)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.fromordinal(9999)
+datetime.date(28, 5, 17)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.max
+datetime.date(9999, 12, 31)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.min
+datetime.date(1, 1, 1)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today().weekday()
+4
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today().isoweekday()
+5
+&amp;gt;&amp;gt;&amp;gt; d = datetime.date.fromtimestamp(99999999)
+&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b&#39;)
+&#39;Saturday 03 March Mar&#39;
+&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b %Y&#39;)
+&#39;Saturday 03 March Mar 1973&#39;
+&amp;gt;&amp;gt;&amp;gt; &amp;quot;The date is {:%A %d %B %b %y}&amp;quot;.format(d)
+&#39;The date is Saturday 03 March Mar 73&#39;
+&amp;gt;&amp;gt;&amp;gt; &amp;quot;{date:%A} {date.day} {date:%B} {date:%Y}&amp;quot;.format(date=d)
+&#39;Saturday 3 March 1973&#39;
+
+## time
+
+&amp;gt;&amp;gt;&amp;gt; t=datetime.time(23,59,1,7451)   
+&amp;gt;&amp;gt;&amp;gt; t.isoformat()
+&#39;23:59:01.007451&#39;
+&amp;gt;&amp;gt;&amp;gt; t.strftime(&#39;%Hh%Mm%Ss&#39;)
+&#39;23h59m01s&#39;
+&amp;gt;&amp;gt;&amp;gt; datetime.time.max
+datetime.time(23, 59, 59, 999999)
+&amp;gt;&amp;gt;&amp;gt; datetime.time.min
+datetime.time(0, 0)
+
+## datetime
+
+&amp;gt;&amp;gt;&amp;gt; datetime.datetime(2001,6,7,8,15,25,895)
+datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
+&amp;gt;&amp;gt;&amp;gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
+&amp;gt;&amp;gt;&amp;gt; dt.isoformat()
+&#39;2001-06-07T08:15:25.000895&#39;
+
+## timedelta
+&amp;gt;&amp;gt;&amp;gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
+&amp;gt;&amp;gt;&amp;gt; td
+datetime.timedelta(15, 3660, 1002)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 4</title>
+      <link>https://harryho.github.io/code/python-notes-4/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-4/</guid>
+      <description>
+
+&lt;h2 id=&#34;iterables-iteration&#34;&gt;Iterables &amp;amp; Iteration&lt;/h2&gt;
+
+&lt;h3 id=&#34;comprehensions&#34;&gt;Comprehensions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Comprehensions can process more than one input sequence&lt;/li&gt;
+&lt;li&gt;Multiple input sequences in comprehensions work like nested for-loops&lt;/li&gt;
+&lt;li&gt;Comprehensions can also have multiple if-clauses interspersed with the for-clauses&lt;/li&gt;
+&lt;li&gt;Later clauses in a comprehension can reference variables bound in earlier clauses&lt;/li&gt;
+&lt;li&gt;Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences&lt;/li&gt;
+&lt;li&gt;Python provides a number of functional-style tools for working with iterators&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; calls a function for each element in its input sequences&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; returns an iterable object, not a fully-evaluated collection&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are lazily evaluated, meaning that you must access them to
+force their calculation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are typically evaluated through the use of iteration constructs such as for-loops&lt;/li&gt;
+&lt;li&gt;You must provide as many input sequences to &lt;code&gt;map()&lt;/code&gt; as the callable argument has parameters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; takes one element from each input sequence for each output element
+it produces&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; stops producing output when its shortest input sequence is exhausted&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; can be used to implement the same behavior as comprehensions in some cases&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; selects values from an input sequence which match a specified criteria&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; passes each element in its input sequence to the function argument&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; returns an iterable over the input elements for which the function argument is truthy&lt;/li&gt;
+&lt;li&gt;Like &lt;code&gt;map()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt; produces its output lazily&lt;/li&gt;
+&lt;li&gt;If you pass None as the first argument to &lt;code&gt;filter()&lt;/code&gt;, it yields the input values which evaluate to True in a boolean context &lt;code&gt;reduce()&lt;/code&gt; cumulatively applies a function to the elements of an input sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; calls the input function with two arguments: the accumulated result so far, and the next element in the sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; is a generalization of summation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; returns the accumulated result after all of the input has been processed&lt;/li&gt;
+&lt;li&gt;If you pass an empty sequence to &lt;code&gt;reduce()&lt;/code&gt; it will raise a TypeError&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; accepts an optional initial value argument&lt;/li&gt;
+&lt;li&gt;This initial value is conceptually added to the front of the input sequence&lt;/li&gt;
+&lt;li&gt;The initial value is returned if the input sequence is empty&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;map()&lt;/code&gt; and &lt;code&gt;reduce()&lt;/code&gt; functions in Python are related to the ideas in the map-reduce algorithm&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+# Comprehensions    
+&amp;gt;&amp;gt;&amp;gt; points
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
+&amp;gt;&amp;gt;&amp;gt; points_c
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_d=[(x,y)
+...     for x in range(3)
+...     if x &amp;gt; 0
+...     for y in range(4)
+...     if y &amp;gt; x ]
+&amp;gt;&amp;gt;&amp;gt; points_d
+[(1, 2), (1, 3), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
+&amp;gt;&amp;gt;&amp;gt; points_e
+[[], [-1], [-1, 0]]
+
+# map
+&amp;gt;&amp;gt;&amp;gt; sizes =[&#39;small&#39;,&#39;medium&#39;, &#39;large&#39;]
+&amp;gt;&amp;gt;&amp;gt; colors = [&#39;lavender&#39;, &#39;teal&#39;, &#39;burnt orange&#39;]
+&amp;gt;&amp;gt;&amp;gt; animals = [&#39;koala&#39;, &#39;platypus&#39;, &#39;salamander&#39;]
+&amp;gt;&amp;gt;&amp;gt; def combine( size, color, animal):
+...     return &#39;{} {} {}&#39;.format(size, color, animal)
+...
+&amp;gt;&amp;gt;&amp;gt; list(map(combine, sizes, colors, animals ))
+[&#39;small lavender koala&#39;, &#39;medium teal platypus&#39;, &#39;large burnt orange salamander&#39;]
+&amp;gt;&amp;gt;&amp;gt; import itertools
+&amp;gt;&amp;gt;&amp;gt; def combine2(quantity, size, color, animal):
+...     return &#39;{} - {} {} {}&#39;.format(quantity, size, color, animal)
+...
+&amp;gt;&amp;gt;&amp;gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
+[&#39;0 - small lavender koala&#39;, &#39;1 - medium teal platypus&#39;, &#39;2 - large burnt orange salamander&#39;]
+
+# filter
+&amp;gt;&amp;gt;&amp;gt; negs = filter(lambda x: x&amp;lt;0 , [3, -1, 2,-4,0,9,-33])
+&amp;gt;&amp;gt;&amp;gt; list(negs)
+[-1, -4, -33]
+&amp;gt;&amp;gt;&amp;gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], &#39;&#39;, &#39;yes&#39;])
+&amp;gt;&amp;gt;&amp;gt; list(map(type, list(notnones)))
+[&amp;lt;class &#39;int&#39;&amp;gt;, &amp;lt;class &#39;bool&#39;&amp;gt;, &amp;lt;class &#39;tuple&#39;&amp;gt;, &amp;lt;class &#39;list&#39;&amp;gt;, &amp;lt;class &#39;str&#39;&amp;gt;]
+
+# reduce
+&amp;gt;&amp;gt;&amp;gt; from functools import reduce
+&amp;gt;&amp;gt;&amp;gt; import operator
+&amp;gt;&amp;gt;&amp;gt; reduce(operator.add, [1,2,3,4,5])
+15
+
+## x is interim result , y is the next sequence value
+&amp;gt;&amp;gt;&amp;gt; def mul(x, y):
+...     print(&#39; mul {} {} &#39;.format(x,y))
+...     return x * y
+...
+&amp;gt;&amp;gt;&amp;gt; reduce( mul, range(1, 5))
+mul 1 2
+mul 2 3
+mul 6 4
+24
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s next() function calls &lt;code&gt;__next__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterators in Python must support the &lt;code&gt;__next__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__next__()&lt;/code&gt; should return the next item in the sequence, or raise &lt;code&gt;StopIteration&lt;/code&gt; if it is exhausted&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s &lt;code&gt;iter()&lt;/code&gt; function calls &lt;code&gt;__iter__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterable objects in Python must support the &lt;code&gt;__iter__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__iter__()&lt;/code&gt; should return an iterator for the iterable object&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Objects with a &lt;code&gt;__getitem__()&lt;/code&gt; method that accepts consecutive integer indices starting at zero are also iterables&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterables implemented via &lt;code&gt;__getitem__()&lt;/code&gt; must raise &lt;code&gt;IndexError&lt;/code&gt; when they are exhausted&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Iterator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterator:
+def __init__(self, data):
+    self.index = 0
+    self.data = data
+
+def __iter__(self):
+    return self
+
+def __next__(self):
+    if self.index &amp;gt;= len(self.data):
+        raise StopIteration()
+
+    rslt = self.data[self.index]
+    self.index += 1
+    return rslt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Iterable
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
+
+    def __iter__(self):
+        return ExampleIterator(self.data)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AnotherIterable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AnotherIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
+
+    def __getitem__(self, idx):
+        return self.data[idx]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The extended form of &lt;code&gt;iter()&lt;/code&gt; accepts a zero-argument callable and a sentinel value&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Extended &lt;code&gt;iter()&lt;/code&gt; repeatedly calls the callable argument until it returns the sentinel value&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The values produced by extended &lt;code&gt;iter()&lt;/code&gt; are those returned from the callable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt; ts = iter(datetime.datetime.now, None)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 13, 373613)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 14, 754588)
+
+# Read file 
+# Content of the file file.txt
+# You are reading 
+# the file
+# you won&#39;t read 
+# the 
+# END
+# but not see the END above
+
+&amp;gt;&amp;gt;&amp;gt; with open(&#39;file.txt&#39;, &#39;rt&#39;) as f:
+...     for line in iter(lambda: f.readline().strip(), &#39;END&#39;):
+...             print(line)
+...
+You are reading
+the file
+you won&#39;t read
+the
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;One use case for extended &lt;code&gt;iter()&lt;/code&gt; is to iterate using simple functions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Protocol conforming iterators must also be iterable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sensor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import datetime
+import itertools
+import random
+import time
+
+class Sensor:
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return random.random()
+
+sensor = Sensor()
+timestamps = iter(datetime.datetime.now, None)
+
+for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
+    print(stamp, value)
+    time.sleep(1)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 5</title>
+      <link>https://harryho.github.io/code/python-notes-5/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-5/</guid>
+      <description>
+
+&lt;h2 id=&#34;inheritance-polymorphism&#34;&gt;Inheritance &amp;amp; Polymorphism&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name&lt;/li&gt;
+&lt;li&gt;Subclasses have all of the methods of their base class&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer&lt;/li&gt;
+&lt;li&gt;If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction&lt;/li&gt;
+&lt;li&gt;Python treats &lt;code&gt;__init__()&lt;/code&gt; like any other method&lt;/li&gt;
+&lt;li&gt;Base class &lt;code&gt;__init__()&lt;/code&gt; is not called if overridden&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;super()&lt;/code&gt; to call base class &lt;code&gt;__init__()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; takes an object as its first argument and a type as its second&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is an instance of the second argument, or any subclass of the second argument&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types&lt;/li&gt;
+&lt;li&gt;Checking for specific types is rare in Python and is sometimes regarded as bad design&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument&lt;/li&gt;
+&lt;li&gt;Multiple inheritance means having more than one direct base class&lt;/li&gt;
+&lt;li&gt;You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition&lt;/li&gt;
+&lt;li&gt;A class can have as many base classes as you want&lt;/li&gt;
+&lt;li&gt;Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime&lt;/li&gt;
+&lt;li&gt;If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is a tuple of types on a class object which defines the base classes for the class&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is in the same order as in the class definition&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is populated for both single and multiple inheritance&lt;/li&gt;
+&lt;li&gt;Method resolution order defines the order in which Python will search an inheritance graph for methods&lt;/li&gt;
+&lt;li&gt;MRO is short for Method Resolution Order&lt;/li&gt;
+&lt;li&gt;MRO is stored as a tuple of types in the &lt;code&gt;__mro__&lt;/code&gt; attribute of a class&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;mro()&lt;/code&gt; method on type objects returns the contents of &lt;code&gt;__mro__&lt;/code&gt; as a list&lt;/li&gt;
+&lt;li&gt;To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method&lt;/li&gt;
+&lt;li&gt;MRO is dependent on base class declaration order&lt;/li&gt;
+&lt;li&gt;MRO is calculated by Python using the C3 algorithm&lt;/li&gt;
+&lt;li&gt;MRO honors base-class ordering from class definitions&lt;/li&gt;
+&lt;li&gt;MRO puts subclasses before base classes&lt;/li&gt;
+&lt;li&gt;The relative order of classes in an MRO is consistent across all classes&lt;/li&gt;
+&lt;li&gt;It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; operates by using the elements in an MRO that come after some specified type&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; returns a proxy object which forwards calls to the correct objects&lt;/li&gt;
+&lt;li&gt;There are two distinct types of &lt;code&gt;super()&lt;/code&gt; proxies, bound and unbound&lt;/li&gt;
+&lt;li&gt;Unbound &lt;code&gt;super()&lt;/code&gt; proxies are primarily used for implementing other Python features&lt;/li&gt;
+&lt;li&gt;Bound proxies can be bound to either class objects or instances&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a base-class and derived-class argument returns a proxy bound to a class&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a class and an instance of that class returns a proxy bound to an instance&lt;/li&gt;
+&lt;li&gt;A &lt;code&gt;super()&lt;/code&gt; proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution&lt;/li&gt;
+&lt;li&gt;Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you&lt;/li&gt;
+&lt;li&gt;However, classmethods resolved by class-bound proxies can be called directly&lt;/li&gt;
+&lt;li&gt;Python will raise a TypeError if the second argument is not a subclass or instance of the first argument&lt;/li&gt;
+&lt;li&gt;Inappropriate use of &lt;code&gt;super()&lt;/code&gt; can violate some design constraints * Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside an instance method produces an instance-bound proxy&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside a classmethod produces a class-bound proxy&lt;/li&gt;
+&lt;li&gt;In both cases, the no-argument form of &lt;code&gt;super()&lt;/code&gt; is the same as calling &lt;code&gt;super()&lt;/code&gt; with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second&lt;/li&gt;
+&lt;li&gt;Since &lt;code&gt;super()&lt;/code&gt; works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another&lt;/li&gt;
+&lt;li&gt;The class object is at the core of Python&amp;rsquo;s object model&lt;/li&gt;
+&lt;li&gt;object is the ultimate base class for all other classes in Python&lt;/li&gt;
+&lt;li&gt;If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base&lt;/li&gt;
+&lt;li&gt;Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.&lt;/li&gt;
+&lt;li&gt;object provides hooks for Python&amp;rsquo;s comparison operators&lt;/li&gt;
+&lt;li&gt;object provides default &lt;code&gt;__repr__()&lt;/code&gt; and &lt;code&gt;__str__()&lt;/code&gt; implementations&lt;/li&gt;
+&lt;li&gt;object implements the core attribute lookup and management functionality in Python&lt;/li&gt;
+&lt;li&gt;Inheritance in Python is best used as a way to share implementation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;explanation-with-example&#34;&gt;Explanation with example&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Example to demo the weird &lt;code&gt;super()&lt;/code&gt; in Python&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from pprint import pprint as pp
+
+class Parent(object):
+    name = &#39;Parent&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from Parent.  {} do_otherthing&#39;.format(self.name))
+        # print(&#39;This is from Parent. do_otherthing {}&#39;.format(self.name))
+
+    def do_something(self):
+        print(&#39;This is from Parent. The name is {}&#39;.format(self.name))
+    
+class Child(Parent):
+    name = &#39;Child&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from Child. {} do_otherthing&#39;.format(self.name))
+        # print(&#39;This is from Child. do_otherthing {}&#39;.format(self.name))
+
+    def do_something(self):
+        print(&amp;quot;This is from Child. The name is {} &amp;quot;.format(self.name))
+    
+class OtherChild(Parent):
+    name = &#39;OtherChild&#39;
+    
+    def do_something(self):
+        print(&amp;quot;This is from OtherChild. The name is {} &amp;quot;.format(self.name)) # I am reading the last book of The Malloreon at the moment. Arends are pretty entertaining
+    
+class OtherOtherChild(Parent):
+    name = &#39;OtherOtherChild&#39;
+    
+    def do_something(self):
+        print(&amp;quot;This is from OtherOtherChild. The name is {} &amp;quot;.format(self.name))
+    
+class GrandChild(Child, OtherChild, OtherOtherChild):
+    name = &#39;GrandChild&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from GrandChild. {} do_otherthing&#39;.format(self.name))
+
+    def do_something(self):
+        print(&amp;quot;This is from GrandChild. The name is {}&amp;quot;.format(self.name))
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    pp(Child.__mro__)
+    pp(GrandChild.__mro__)
+
+    c = Child()
+    c.do_something()
+    gc = GrandChild()
+    gc.do_something()
+
+    print(&#39;Class bound super()&#39;)
+    super(Child, Child).do_otherthing()
+    super(Child, GrandChild).do_otherthing()
+    super(GrandChild, GrandChild).do_otherthing()
+
+    print(&#39;Instance bound super()&#39;)
+    super(Child, gc).do_something()
+    super(OtherChild, gc).do_something()
+    super(GrandChild , gc).do_something()
+
+## result 
+
+#(&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
+#&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
+#&amp;lt;class &#39;object&#39;&amp;gt;)
+#(&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+# &amp;lt;class &#39;object&#39;&amp;gt;)
+# This is from Child. The name is Child 
+# This is from GrandChild. The name is GrandChild
+# Class bound super()
+# This is from Parent.  Child do_otherthing
+# This is from Parent.  GrandChild do_otherthing
+# This is from Child. GrandChild do_otherthing
+# Instance bound super()
+# This is from OtherChild. The name is GrandChild 
+# This is from OtherOtherChild. The name is GrandChild 
+# This is from Child. The name is GrandChild 
+
+
+# Multi-inheritance in Python is very different from other OO language like C++, C#, Java
+# Above result make me surprised a the first time, but after I check the MRO then I can understand why many veterans suggest to avoid multi-inheritance. Its `super` &amp;quot;Magic&amp;quot; really confuses many people.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Let&amp;rsquo;s break down the how the super works with sample code&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 1:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(Child, Child).do_otherthing()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;Child&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;Child&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Parent&lt;/code&gt; which is after &lt;code&gt;Child&lt;/code&gt;, and bind the &lt;code&gt;Child&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 2:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(GrandChild, GrandChild).do_otherthing()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;GrandChild&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;GrandChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Child&lt;/code&gt; which is after &lt;code&gt;GrandChild&lt;/code&gt;, and bind the &lt;code&gt;GrandChild&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 3:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(OtherChild, gc).do_something()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of the type &lt;code&gt;GrandChild&lt;/code&gt; of its second argument &lt;code&gt;gc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;OtherChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;OtherOtherChild&lt;/code&gt; which is after &lt;code&gt;OtherChild&lt;/code&gt;, and bind the &lt;code&gt;gc&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

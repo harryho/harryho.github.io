@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Python Notes - 2 - Hello World</title>
+    <title>Python Notes - 3 - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -65,238 +65,378 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Python Notes - 2</h1>
+				<h1 class="doc-entry-title">Python Notes - 3</h1>
 				<div class="doc-entry-meta">
 					
 				</div>
 				<section>
 					
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
+<h2 id="string-representation">String &amp; Representation</h2>
 
-<h3 id="legb-rules">LEGB rules</h3>
+<h3 id="str">str()</h3>
 
 <ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
+<li><code>print()</code> -&gt; <code>str()</code> -&gt;  <code>__str(self)__</code></li>
+<li>Fallback to <code>repr()</code>. By default, <code>str()</code> simply calls <code>repr()</code></li>
+<li>Produces a readable, human-friendly representation of an object</li>
+<li>It is also the string constructor</li>
 </ul>
 
-<h3 id="local-function">Local function</h3>
+<h3 id="repr">repr()</h3>
 
 <ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
-</ul>
+<li>Exactness is more important than human-friendliness</li>
+<li>Suited for debugging. Unambiguous, precise, include type</li>
+<li>Includes identifying information.</li>
+<li>Generally best for logging and developers</li>
+<li>The default repr() is not very helpful</li>
+<li>As a rule, you should always write a repr() for your classes</li>
 
-<h3 id="closure">Closure</h3>
-
-<ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
-
-<li><p>Usage of nonlocal</p>
+<li><p>standard library <code>reprlib.repr()</code> is a replacement for <code>repr()</code></p>
 
 <ul>
 <li>Example</li>
 </ul>
 
-<pre><code>def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
+<pre><code class="language-python">&gt;&gt;&gt; l = ['a'] * 1000
+&gt;&gt;&gt; import reprlib
+&gt;&gt;&gt; reprlib.repr(l)
+&quot;['a', 'a', 'a', 'a', 'a', 'a', ...]&quot;
 </code></pre></li>
+</ul>
 
-<li><p>Use as function factory</p>
+<h3 id="format">format</h3>
 
 <ul>
-<li>Example
-<br /></li>
+<li><code>&quot;{:f}&quot;.format(obj)</code> -&gt; <code>__format__(self, f)</code></li>
+<li>Fallback to <code>str()</code></li>
 </ul>
+
+<h3 id="built-in-functions">built-in functions</h3>
+
+<ul>
+<li><code>ascii()</code> replaces non-ASCII characters with escape sequences</li>
+<li><code>chr()</code> converts an integer Unicode codepoint to a single character string</li>
+<li><code>ord()</code> converts a single character to its integer Unicode codepoint</li>
+</ul>
+
+<h2 id="numeric-scalar-types">Numeric &amp; scalar types</h2>
+
+<h3 id="int">int</h3>
+
+<ul>
+<li>unlimited precision signed integer</li>
+
+<li><p>bool in an int</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; False - True
+-1
+&gt;&gt;&gt; False - False
+0
+&gt;&gt;&gt; True - False
+1
+&gt;&gt;&gt; True - True
+0
+</code></pre></li>
+</ul>
+
+<h3 id="float">float</h3>
+
+<ul>
+<li>IEEE-754 double precision (64-bit)</li>
+<li>53 bits of binary precision</li>
+<li>15 to 17 bits of decimal precision</li>
+
+<li><p>Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.</p>
+
+<ul>
+<li><p>0.001 has value 0/2 + 0/4 + <sup>1</sup>&frasl;<sub>8</sub>. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2</p></li>
+
+<li><p>Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.</p></li>
+</ul></li>
+
+<li><p>Example of float data</p>
 
 <pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-# Result:
-# 4
-# 8
+&gt;&gt;&gt; f=0.9-0.8
+&gt;&gt;&gt; f
+0.09999999999999998
+&gt;&gt;&gt; f=0.2-0.1
+&gt;&gt;&gt; f
+0.1
+&gt;&gt;&gt; f=0.8-0.7
+&gt;&gt;&gt; f
+0.10000000000000009
+&gt;&gt;&gt; float(2**53)
+9007199254740992.0
+&gt;&gt;&gt; float(2**53+1)
+9007199254740992.0
+&gt;&gt;&gt; float(2**53+2)
+9007199254740994.0
+&gt;&gt;&gt; float(2**53+3)
+9007199254740996.0
+&gt;&gt;&gt; float(2**53+4)
+9007199254740996.0
 
 </code></pre></li>
 </ul>
 
-<h3 id="decorator">Decorator</h3>
+<h3 id="decimal">decimal</h3>
 
 <ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
+<li>standard library module decimal containing the class Decimal</li>
+<li>decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision</li>
+<li>identity is preserved. <code>x == (x // y) * y + x % y</code>, so integer division and modulus are consistent</li>
 
 <li><p>Example</p>
 
-<ul>
-<li>use function as decorator</li>
-</ul>
+<pre><code class="language-python">&gt;&gt;&gt; from decimal import Decimal
+&gt;&gt;&gt; Decimal(0.6)-Decimal(0.5)
+Decimal('0.09999999999999997779553950750')
+&gt;&gt;&gt; Decimal('0.6')-Decimal('0.5')
+Decimal('0.1')
+&gt;&gt;&gt; Decimal(0.2)-Decimal(0.1)
+Decimal('0.1000000000000000055511151231')
+&gt;&gt;&gt; Decimal(0.8)-Decimal(0.7)
+Decimal('0.1000000000000000888178419700')
+&gt;&gt;&gt; Decimal('0.8')-Decimal('0.7')
+Decimal('0.1')
 
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
+# Change the precise 
+&gt;&gt;&gt; import decimal
+&gt;&gt;&gt; decimal.getcontext().prec=4
+&gt;&gt;&gt; Decimal(-7) / Decimal(3)
+Decimal('-2.333')
 
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-# result:
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-</code></pre>
-
-<ul>
-<li>Example: multiple decorators including function and instance</li>
-</ul>
-
-<pre><code class="language-python">class Trace:
-    def __init__(self):
-        self.enabled = True
-
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-# Result
-# Calling hello_greek
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
-</code></pre>
-
-<ul>
-<li>Use as validator</li>
-</ul>
-
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
-
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
-
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
-
-# result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
+# Python handle different type in different way with % 
+&gt;&gt;&gt; Decimal(-7) % Decimal(3)
+Decimal('-1')  # 
+&gt;&gt;&gt; Decimal(-7) // Decimal(3)
+Decimal('-2')  # The next multiple of 3 towards zero is -6
+&gt;&gt;&gt; (-7) // (3) 
+-3  # The largest multiple of 3 less than -7 is -9
+&gt;&gt;&gt; (-7) % (3)
+2  # The 
 </code></pre></li>
 </ul>
 
-<h2 id="properties-class">Properties &amp; Class</h2>
-
-<h3 id="staticmethod">@staticmethod</h3>
+<h3 id="fraction">fraction</h3>
 
 <ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
-</ul>
-
-<h3 id="classmethod">@classmethod</h3>
+<li><p>standard library module fractions containing the class Fraction for rational numbers</p>
 
 <ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
-<li>Use case: use as named constructors</li>
-</ul>
-
-<pre><code class="language-python">class FileStream(object):
-
-    @classmethod
-    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-        with open(filepath, 'r') as fileobj:
-            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-                yield obj
-
-    @classmethod
-    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-        raise NotImplemented # Placeholder until implemented
-
-    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-        ...
-</code></pre>
-
-<h3 id="property">@property</h3>
-
-<ul>
-<li>Encapsulation</li>
+<li>Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.</li>
+</ul></li>
 
 <li><p>Example</p>
 
-<pre><code class="language-python">class A
-@property
-def  prop(self):
-    return self._prop
+<pre><code class="language-python">
+&gt;&gt;&gt;from fractions import Fraction
+&gt;&gt;&gt;f = Fraction(&quot;2/3&quot;)
+&gt;&gt;&gt;f
+Faction(2,3)
+&gt;&gt;&gt; Fraction(0.2)
+Fraction(3602879701896397, 18014398509481984)
+&gt;&gt;&gt; Fraction(0.5)
+Fraction(1, 2)
+&gt;&gt;&gt; Fraction(Decimal('0.3'))
+Fraction(3, 10)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) // Fraction(6, 7)
+0
+&gt;&gt;&gt; Fraction(Decimal('0.3')) % Fraction(6, 7)
+Fraction(3, 10)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) - Fraction(6, 7)
+Fraction(-39, 70)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) + Fraction(6, 7)
+Fraction(81, 70)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) * Fraction(6, 7)
+Fraction(9, 35)
 
-@prop.setter
-def prop(self, value):
-    self._prop = value
+&gt;&gt;&gt; from math import floor, ceil
+&gt;&gt;&gt; ceil(Fraction('8/7'))
+2
+&gt;&gt;&gt; floor(Fraction('8/7'))
+1
+</code></pre></li>
+</ul>
+
+<h3 id="number-base-conversions">number base conversions</h3>
+
+<table>
+<thead>
+<tr>
+<th>bin()</th>
+<th>oct()</th>
+<th>hex()</th>
+<th>int(x, base)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>base 2</td>
+<td>base 8</td>
+<td>base 16</td>
+<td>bases 2 to 36</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>Example</li>
+</ul>
+
+<pre><code class="language-python">&gt;&gt;&gt; 0b0101
+5
+&gt;&gt;&gt; 0o63527
+26455
+&gt;&gt;&gt; 0o63
+51
+&gt;&gt;&gt; 0xad2
+2770
+&gt;&gt;&gt; hex(22)
+'0x16'
+&gt;&gt;&gt; oct(22)
+'0o26'
+&gt;&gt;&gt; bin(22)
+'0b10110'
+</code></pre>
+
+<h3 id="complex">complex</h3>
+
+<ul>
+<li>complex construction string argument may have parentheses but must not contain spaces</li>
+<li><code>cmath</code> standard Library module contains complex equivalents of math</li>
+
+<li><p>Example</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; 1+1j
+(1+1j)
+&gt;&gt;&gt; type(1+1j)
+&lt;class 'complex'&gt;
+&gt;&gt;&gt; (1+1j) + (1-1j)
+(2+0j)
+&gt;&gt;&gt; (1+1j) + (2-2j)
+(3-1j)
+&gt;&gt;&gt; (1+1j) - (2-2j)
+(-1+3j)
+&gt;&gt;&gt; complex('-2+1j')
+(-2+1j)
+&gt;&gt;&gt; complex('(-2+1j)')
+(-2+1j)
+&gt;&gt;&gt; complex(-2, 1)
+(-2+1j)
+
+
+</code></pre></li>
+</ul>
+
+<h3 id="date-time">date &amp; time</h3>
+
+<ul>
+<li>Gregorian calendar</li>
+
+<li><p><code>weekday()</code></p>
+
+<pre><code>0 Monday
+1 Tuesday
+2 Wednesday
+3 Thursday
+4 Friday
+5 Saturday
+6 Sunday
+</code></pre></li>
+
+<li><p><code>isoweekday()</code></p>
+
+<pre><code>1 Monday
+2 Tuesday
+3 Wednesday
+4 Thursday
+5 Friday
+6 Saturday
+7 Sunday   
+</code></pre></li>
+
+<li><p>timedelta</p>
+
+<ul>
+<li>Constructor accepts and sums
+• days
+• seconds
+• microseconds
+• milliseconds
+• minutes
+• hours
+• weeks</li>
+<li>Instances store only
+• days
+• seconds
+• microseconds</li>
+</ul></li>
+
+<li><p>Example</p>
+
+<pre><code class="language-python">from datetime import (date, time)
+from datetime import datetime as Datetime
+from datetime import timedelta
+from datetime import (tzinfo, timezone)
+
+## date
+
+&gt;&gt;&gt; datetime.date(2000,month=2, day=10)
+datetime.date(2000, 2, 10)
+&gt;&gt;&gt; datetime.date.today()
+datetime.date(2014, 3, 14)
+&gt;&gt;&gt; datetime.date.fromtimestamp(99999999)
+datetime.date(1973, 3, 3)
+&gt;&gt;&gt; datetime.date.fromordinal(9999)
+datetime.date(28, 5, 17)
+&gt;&gt;&gt; datetime.date.max
+datetime.date(9999, 12, 31)
+&gt;&gt;&gt; datetime.date.min
+datetime.date(1, 1, 1)
+&gt;&gt;&gt; datetime.date.today().weekday()
+4
+&gt;&gt;&gt; datetime.date.today().isoweekday()
+5
+&gt;&gt;&gt; d = datetime.date.fromtimestamp(99999999)
+&gt;&gt;&gt; d.strftime('%A %d %B %b')
+'Saturday 03 March Mar'
+&gt;&gt;&gt; d.strftime('%A %d %B %b %Y')
+'Saturday 03 March Mar 1973'
+&gt;&gt;&gt; &quot;The date is {:%A %d %B %b %y}&quot;.format(d)
+'The date is Saturday 03 March Mar 73'
+&gt;&gt;&gt; &quot;{date:%A} {date.day} {date:%B} {date:%Y}&quot;.format(date=d)
+'Saturday 3 March 1973'
+
+## time
+
+&gt;&gt;&gt; t=datetime.time(23,59,1,7451)   
+&gt;&gt;&gt; t.isoformat()
+'23:59:01.007451'
+&gt;&gt;&gt; t.strftime('%Hh%Mm%Ss')
+'23h59m01s'
+&gt;&gt;&gt; datetime.time.max
+datetime.time(23, 59, 59, 999999)
+&gt;&gt;&gt; datetime.time.min
+datetime.time(0, 0)
+
+## datetime
+
+&gt;&gt;&gt; datetime.datetime(2001,6,7,8,15,25,895)
+datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
+&gt;&gt;&gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
+&gt;&gt;&gt; dt.isoformat()
+'2001-06-07T08:15:25.000895'
+
+## timedelta
+&gt;&gt;&gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
+&gt;&gt;&gt; td
+datetime.timedelta(15, 3660, 1002)
+
 </code></pre></li>
 </ul>
 
@@ -313,24 +453,28 @@ def prop(self, value):
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Python Notes - 2</a></strong></li>
+				<li><strong><a href="#title">Python Notes - 3</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<li><a href="#string-representation">String &amp; Representation</a>
 <ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
+<li><a href="#str">str()</a></li>
+<li><a href="#repr">repr()</a></li>
+<li><a href="#format">format</a></li>
+<li><a href="#built-in-functions">built-in functions</a></li>
 </ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
+<li><a href="#numeric-scalar-types">Numeric &amp; scalar types</a>
 <ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
+<li><a href="#int">int</a></li>
+<li><a href="#float">float</a></li>
+<li><a href="#decimal">decimal</a></li>
+<li><a href="#fraction">fraction</a></li>
+<li><a href="#number-base-conversions">number base conversions</a></li>
+<li><a href="#complex">complex</a></li>
+<li><a href="#date-time">date &amp; time</a></li>
 </ul></li>
 </ul></li>
 </ul>

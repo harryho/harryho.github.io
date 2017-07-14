@@ -1,0 +1,570 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Python Notes - 5 - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/github.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="https://harryho.github.io/">Home</a></li>
+                       
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Python Notes - 5</h1>
+				<div class="doc-entry-meta">
+					
+				</div>
+				<section>
+					
+
+<h2 id="inheritance-polymorphism">Inheritance &amp; Polymorphism</h2>
+
+<ul>
+<li>Specify single inheritance by putting a base class in parentheses after defining a class&rsquo;s name</li>
+<li>Subclasses have all of the methods of their base class</li>
+<li>It&rsquo;s often best to explicitly call a base class initializer from a subclass&rsquo;s initializer</li>
+<li>If a class with a single base class doesn&rsquo;t define an initializer, the base class&rsquo;s initializer will be called automatically on construction</li>
+<li>Python treats <code>__init__()</code> like any other method</li>
+<li>Base class <code>__init__()</code> is not called if overridden</li>
+<li>Use <code>super()</code> to call base class <code>__init__()</code></li>
+<li><code>isinstance()</code> takes an object as its first argument and a type as its second</li>
+<li><code>isinstance()</code> determines if its first argument is an instance of the second argument, or any subclass of the second argument</li>
+<li><code>isinstance()</code> can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types</li>
+<li>Checking for specific types is rare in Python and is sometimes regarded as bad design</li>
+<li><code>isinstance()</code> determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument</li>
+<li>Multiple inheritance means having more than one direct base class</li>
+<li>You declare multiple base classes with a comma-separated list of class names in parentheses after a class&rsquo;s name in a class definition</li>
+<li>A class can have as many base classes as you want</li>
+<li>Python uses a well-defined &ldquo;method resolution order&rdquo; to resolve methods at runtime</li>
+<li>If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction</li>
+<li><code>__bases__</code> is a tuple of types on a class object which defines the base classes for the class</li>
+<li><code>__bases__</code> is in the same order as in the class definition</li>
+<li><code>__bases__</code> is populated for both single and multiple inheritance</li>
+<li>Method resolution order defines the order in which Python will search an inheritance graph for methods</li>
+<li>MRO is short for Method Resolution Order</li>
+<li>MRO is stored as a tuple of types in the <code>__mro__</code> attribute of a class</li>
+<li>The <code>mro()</code> method on type objects returns the contents of <code>__mro__</code> as a list</li>
+<li>To resolve a method, Python uses the first entry in a class&rsquo;s MRO which has the requested method</li>
+<li>MRO is dependent on base class declaration order</li>
+<li>MRO is calculated by Python using the C3 algorithm</li>
+<li>MRO honors base-class ordering from class definitions</li>
+<li>MRO puts subclasses before base classes</li>
+<li>The relative order of classes in an MRO is consistent across all classes</li>
+<li>It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached</li>
+<li><code>super()</code> operates by using the elements in an MRO that come after some specified type</li>
+<li><code>super()</code> returns a proxy object which forwards calls to the correct objects</li>
+<li>There are two distinct types of <code>super()</code> proxies, bound and unbound</li>
+<li>Unbound <code>super()</code> proxies are primarily used for implementing other Python features</li>
+<li>Bound proxies can be bound to either class objects or instances</li>
+<li>Calling <code>super()</code> with a base-class and derived-class argument returns a proxy bound to a class</li>
+<li>Calling <code>super()</code> with a class and an instance of that class returns a proxy bound to an instance</li>
+<li>A <code>super()</code> proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution</li>
+<li>Since class-bound proxies aren&rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you</li>
+<li>However, classmethods resolved by class-bound proxies can be called directly</li>
+<li>Python will raise a TypeError if the second argument is not a subclass or instance of the first argument</li>
+<li>Inappropriate use of <code>super()</code> can violate some design constraints * Calling <code>super()</code> with no arguments inside an instance method produces an instance-bound proxy</li>
+<li>Calling <code>super()</code> with no arguments inside a classmethod produces a class-bound proxy</li>
+<li>In both cases, the no-argument form of <code>super()</code> is the same as calling <code>super()</code> with the method&rsquo;s class as the first argument and the method&rsquo;s first argument as the second</li>
+<li>Since <code>super()</code> works on MROs and not just a class&rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another</li>
+<li>The class object is at the core of Python&rsquo;s object model</li>
+<li>object is the ultimate base class for all other classes in Python</li>
+<li>If you don&rsquo;t specify a base class for a class, Python automatically uses object as the base</li>
+<li>Because object is in every class&rsquo;s inheritance graph, it shows up in every MRO.</li>
+<li>object provides hooks for Python&rsquo;s comparison operators</li>
+<li>object provides default <code>__repr__()</code> and <code>__str__()</code> implementations</li>
+<li>object implements the core attribute lookup and management functionality in Python</li>
+<li>Inheritance in Python is best used as a way to share implementation</li>
+</ul>
+
+<h3 id="explanation-with-example">Explanation with example</h3>
+
+<ul>
+<li><p>Example to demo the weird <code>super()</code> in Python</p>
+
+<pre><code class="language-python">from pprint import pprint as pp
+
+class Parent(object):
+    name = 'Parent'
+
+    @classmethod
+    def do_otherthing(self):
+        print('This is from Parent.  {} do_otherthing'.format(self.name))
+        # print('This is from Parent. do_otherthing {}'.format(self.name))
+
+    def do_something(self):
+        print('This is from Parent. The name is {}'.format(self.name))
+    
+class Child(Parent):
+    name = 'Child'
+
+    @classmethod
+    def do_otherthing(self):
+        print('This is from Child. {} do_otherthing'.format(self.name))
+        # print('This is from Child. do_otherthing {}'.format(self.name))
+
+    def do_something(self):
+        print(&quot;This is from Child. The name is {} &quot;.format(self.name))
+    
+class OtherChild(Parent):
+    name = 'OtherChild'
+    
+    def do_something(self):
+        print(&quot;This is from OtherChild. The name is {} &quot;.format(self.name)) # I am reading the last book of The Malloreon at the moment. Arends are pretty entertaining
+    
+class OtherOtherChild(Parent):
+    name = 'OtherOtherChild'
+    
+    def do_something(self):
+        print(&quot;This is from OtherOtherChild. The name is {} &quot;.format(self.name))
+    
+class GrandChild(Child, OtherChild, OtherOtherChild):
+    name = 'GrandChild'
+
+    @classmethod
+    def do_otherthing(self):
+        print('This is from GrandChild. {} do_otherthing'.format(self.name))
+
+    def do_something(self):
+        print(&quot;This is from GrandChild. The name is {}&quot;.format(self.name))
+
+
+if __name__ == &quot;__main__&quot;:
+    pp(Child.__mro__)
+    pp(GrandChild.__mro__)
+
+    c = Child()
+    c.do_something()
+    gc = GrandChild()
+    gc.do_something()
+
+    print('Class bound super()')
+    super(Child, Child).do_otherthing()
+    super(Child, GrandChild).do_otherthing()
+    super(GrandChild, GrandChild).do_otherthing()
+
+    print('Instance bound super()')
+    super(Child, gc).do_something()
+    super(OtherChild, gc).do_something()
+    super(GrandChild , gc).do_something()
+
+## result 
+
+#(&lt;class '__main__.Child'&gt;, 
+#&lt;class '__main__.Parent'&gt;, 
+#&lt;class 'object'&gt;)
+#(&lt;class '__main__.GrandChild'&gt;,
+# &lt;class '__main__.Child'&gt;,
+# &lt;class '__main__.OtherChild'&gt;,
+# &lt;class '__main__.OtherOtherChild'&gt;,
+# &lt;class '__main__.Parent'&gt;,
+# &lt;class 'object'&gt;)
+# This is from Child. The name is Child 
+# This is from GrandChild. The name is GrandChild
+# Class bound super()
+# This is from Parent.  Child do_otherthing
+# This is from Parent.  GrandChild do_otherthing
+# This is from Child. GrandChild do_otherthing
+# Instance bound super()
+# This is from OtherChild. The name is GrandChild 
+# This is from OtherOtherChild. The name is GrandChild 
+# This is from Child. The name is GrandChild 
+
+
+# Multi-inheritance in Python is very different from other OO language like C++, C#, Java
+# Above result make me surprised a the first time, but after I check the MRO then I can understand why many veterans suggest to avoid multi-inheritance. Its `super` &quot;Magic&quot; really confuses many people.
+
+</code></pre></li>
+
+<li><p>Let&rsquo;s break down the how the super works with sample code</p></li>
+
+<li><p>Case 1:</p>
+
+<ul>
+<li>code : <code>super(Child, Child).do_otherthing()</code></li>
+
+<li><p><code>super</code> takes the MRO of its second argument <code>Child</code></p>
+
+<pre><code>&lt;class '__main__.Child'&gt;, 
+&lt;class '__main__.Parent'&gt;, 
+&lt;class 'object'&gt;
+</code></pre></li>
+
+<li><p><code>super</code> finds the first argument <code>Child</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>Parent</code> which is after <code>Child</code>, and bind the <code>Child</code> class object</p></li>
+</ul></li>
+
+<li><p>Case 2:</p>
+
+<ul>
+<li>code : <code>super(GrandChild, GrandChild).do_otherthing()</code></li>
+
+<li><p><code>super</code> takes the MRO of its second argument <code>GrandChild</code></p>
+
+<pre><code>&lt;class '__main__.GrandChild'&gt;,
+&lt;class '__main__.Child'&gt;,
+&lt;class '__main__.OtherChild'&gt;,
+&lt;class '__main__.OtherOtherChild'&gt;,
+&lt;class '__main__.Parent'&gt;,
+&lt;class 'object'&gt;
+</code></pre></li>
+
+<li><p><code>super</code> finds the first argument <code>GrandChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>Child</code> which is after <code>GrandChild</code>, and bind the <code>GrandChild</code> class object</p></li>
+</ul></li>
+
+<li><p>Case 3:</p>
+
+<ul>
+<li>code : <code>super(OtherChild, gc).do_something()</code></li>
+
+<li><p><code>super</code> takes the MRO of the type <code>GrandChild</code> of its second argument <code>gc</code></p>
+
+<pre><code>&lt;class '__main__.GrandChild'&gt;,
+&lt;class '__main__.Child'&gt;,
+&lt;class '__main__.OtherChild'&gt;,
+&lt;class '__main__.OtherOtherChild'&gt;,
+&lt;class '__main__.Parent'&gt;,
+&lt;class 'object'&gt;
+</code></pre></li>
+
+<li><p><code>super</code> finds the first argument <code>OtherChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>OtherOtherChild</code> which is after <code>OtherChild</code>, and bind the <code>gc</code> class object</p></li>
+</ul></li>
+</ul>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Python Notes - 5</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#inheritance-polymorphism">Inheritance &amp; Polymorphism</a>
+<ul>
+<li><a href="#explanation-with-example">Explanation with example</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/dev/vue-ng-react/">Angular vs React vs Vue</a>
+					</li>
+				
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/dev/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/dev/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/linux-notes/">Linux notes</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 -- desktop Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>
