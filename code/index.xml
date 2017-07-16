@@ -7,8 +7,344 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
-    <lastBuildDate>Sun, 10 Apr 2016 14:59:31 +1100</lastBuildDate>
+    <lastBuildDate>Thu, 12 May 2016 14:59:31 +1100</lastBuildDate>
     <atom:link href="https://harryho.github.io/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Python Notes - 6</title>
+      <link>https://harryho.github.io/code/python-notes-6/</link>
+      <pubDate>Thu, 12 May 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-6/</guid>
+      <description>
+
+&lt;h2 id=&#34;collection&#34;&gt;Collection&lt;/h2&gt;
+
+&lt;h3 id=&#34;collection-protocols&#34;&gt;Collection protocols&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To implement a protocol, objects must support certain operations.&lt;/li&gt;
+&lt;li&gt;Most collections implement container, sized and iterable.&lt;/li&gt;
+&lt;li&gt;All except dict and set are sequences&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Container&lt;/strong&gt;: membership testing using &lt;code&gt;in&lt;/code&gt; and &lt;code&gt;not in&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sized&lt;/strong&gt;: Determine number of elements with &lt;code&gt;len(s)&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Iterable&lt;/strong&gt;: Can produce an iterator with &lt;code&gt;iter(s)&lt;/code&gt;, e.g.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    for item in iterable:
+        do_something(item) `len(s)`
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Sequence&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Retrieve elements by index, e.g. &lt;code&gt;item = seq[index]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Find items by value &lt;code&gt;index = seq.index(item)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Count items &lt;code&gt;num = seq.count(item)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Produce a reversed sequence &lt;code&gt;r = reversed(seq)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Set&lt;/strong&gt;: set algebra operations, including method and infix operators . e.g.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;subset&lt;/li&gt;
+&lt;li&gt;proper subset&lt;/li&gt;
+&lt;li&gt;equal&lt;/li&gt;
+&lt;li&gt;not equal&lt;/li&gt;
+&lt;li&gt;proper superset&lt;/li&gt;
+&lt;li&gt;superset&lt;/li&gt;
+&lt;li&gt;intersections&lt;/li&gt;
+&lt;li&gt;union&lt;/li&gt;
+&lt;li&gt;symmetric difference&lt;/li&gt;
+&lt;li&gt;difference&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Built-in collections&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Protocol&lt;/th&gt;
+&lt;th&gt;Implementing Collections&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Container&lt;/td&gt;
+&lt;td&gt;str, list, range, tuple, set, bytes, dict&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Sized&lt;/td&gt;
+&lt;td&gt;str, list, range, tuple, set, bytes, dict&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Iterable&lt;/td&gt;
+&lt;td&gt;str, list, range, tuple, set, bytes, dict&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Sequence&lt;/td&gt;
+&lt;td&gt;str, list, range, tuple, bytes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Set&lt;/td&gt;
+&lt;td&gt;set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Mutable Sequence&lt;/td&gt;
+&lt;td&gt;list&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Mutable Set&lt;/td&gt;
+&lt;td&gt;set&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Mutable Mapping&lt;/td&gt;
+&lt;td&gt;dict&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sortedset&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from bisect import bisect_left
+from collections.abc import Sequence, Set
+from itertools import chain
+
+
+class SortedSet(Sequence, Set):
+
+    def __init__(self, items=None):
+        self._items = sorted(set(items)) if items is not None else []
+
+    def __contains__(self, item):
+        try:
+            self.index(item)
+            return True
+        except ValueError:
+            return False
+
+    def __len__(self):
+        return len(self._items)
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def __getitem__(self, index):
+        result = self._items[index]
+        return SortedSet(result) if isinstance(index, slice) else result
+
+    def __repr__(self):
+        return &amp;quot;SortedSet({})&amp;quot;.format(repr(self._items) if self._items else &#39;&#39;)
+
+    def __eq__(self, rhs):
+        if not isinstance(rhs, SortedSet):
+            return False
+        return self._items == rhs._items
+
+    def _is_unique_and_sorted(self):
+        return all(self[i] &amp;lt; self[i + 1] for i in range(len(self) - 1))
+
+    def index(self, item):
+        assert self._is_unique_and_sorted()
+        index = bisect_left(self._items, item)
+        if (index != len(self._items)) and self._items[index] == item:
+            return index
+        raise ValueError(&amp;quot;{} not found&amp;quot;.format(repr(item)))
+
+    def count(self, item):
+        assert self._is_unique_and_sorted()
+        return int(item in self._items)
+
+    def __add__(self, rhs):
+        return SortedSet(chain(self._items, rhs._items))
+
+    def __mul__(self, rhs):
+        return SortedSet(self) if rhs &amp;gt; 0 else SortedSet()
+
+    def __rmul__(self, lhs):
+        return self * lhs
+
+    def issubset(self, iterable):
+        return self &amp;lt;= SortedSet(iterable)
+
+    def issuperset(self, iterable):
+        return self &amp;gt;= SortedSet(iterable)
+
+    def intersection(self, iterable):
+        return self &amp;amp; SortedSet(iterable)
+
+    def union(self, iterable):
+        return self | SortedSet(iterable)
+
+    def symmetric_difference(self, iterable):
+        return self ^ SortedSet(iterable)
+
+    def difference(self, iterable):
+        return self - SortedSet(iterable)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;test case&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import unittest
+from sorted_set import SortedSet
+
+
+class TestConstruction(unittest.TestCase):
+
+    def test_empty(self):
+        s = SortedSet([])
+
+    def test_from_sequence(self):
+        s = SortedSet([7, 8, 3, 1])
+
+    def test_with_duplicates(self):
+        s = SortedSet([8, 8, 8])
+
+    def test_from_iterable(self):
+        def gen6842():
+            yield 6
+            yield 8
+            yield 4
+            yield 2
+        g = gen6842()
+        s = SortedSet(g)
+
+    def test_default_empty(self):
+        s = SortedSet()
+
+
+class TestContainerProtocol(unittest.TestCase):
+
+    def setUp(self):
+        self.s = SortedSet([6, 7, 3, 9])
+
+    def test_positive_contained(self):
+        self.assertTrue(6 in self.s)
+
+    def test_negative_contained(self):
+        self.assertFalse(2 in self.s)
+
+    def test_positive_not_contained(self):
+        self.assertTrue(5 not in self.s)
+
+    def test_negative_not_contained(self):
+        self.assertFalse(9 not in self.s)
+
+
+class TestSizedProtocol(unittest.TestCase):
+
+    def test_empty(self):
+        s = SortedSet()
+        self.assertEqual(len(s), 0)
+
+    def test_one(self):
+        s = SortedSet([42])
+        self.assertEqual(len(s), 1)
+
+    def test_ten(self):
+        s = SortedSet(range(10))
+        self.assertEqual(len(s), 10)
+
+    def test_with_duplicates(self):
+        s = SortedSet([5, 5, 5])
+        self.assertEqual(len(s), 1)
+
+
+class TestIterableProtocol(unittest.TestCase):
+
+    def setUp(self):
+        self.s = SortedSet([7, 2, 1, 1, 9])
+
+    def test_iter(self):
+        i = iter(self.s)
+        self.assertEqual(next(i), 1)
+        self.assertEqual(next(i), 2)
+        self.assertEqual(next(i), 7)
+        self.assertEqual(next(i), 9)
+        self.assertRaises(StopIteration, lambda: next(i))
+
+    def test_for_loop(self):
+        index = 0
+        expected = [1, 2, 7, 9]
+        for item in self.s:
+            self.assertEqual(item, expected[index])
+            index += 1
+
+
+class TestSequenceProtocol(unittest.TestCase):
+
+    def setUp(self):
+        self.s = SortedSet([1, 4, 9, 13, 15])
+
+    def test_index_zero(self):
+        self.assertEqual(self.s[0], 1)
+
+    def test_index_four(self):
+        self.assertEqual(self.s[4], 15)
+
+    def test_index_one_beyond_the_end(self):
+        with self.assertRaises(IndexError):
+            self.s[5]
+
+    def test_index_minus_one(self):
+        self.assertEqual(self.s[-1], 15)
+
+    def test_index_minus_five(self):
+        self.assertEqual(self.s[-5], 1)
+
+    def test_index_one_before_the_beginning(self):
+        with self.assertRaises(IndexError):
+            self.s[-6]
+
+    def test_slice_from_start(self):
+        self.assertEqual(self.s[:3], SortedSet([1, 4, 9]))
+
+    def test_slice_to_end(self):
+        self.assertEqual(self.s[3:], SortedSet([13, 15]))
+
+    def test_slice_empty(self):
+        self.assertEqual(self.s[10:], SortedSet())
+
+    def test_slice_arbitrary(self):
+        self.assertEqual(self.s[2:4], SortedSet([9, 13]))
+
+    def test_slice_full(self):
+        self.assertEqual(self.s[:], self.s)
+
+
+class TestReprProtocol(unittest.TestCase):
+
+    def test_repr_empty(self):
+        s = SortedSet()
+        self.assertEqual(repr(s), &amp;quot;SortedSet()&amp;quot;)
+
+    def test_repr_some(self):
+        s = SortedSet([42, 40, 19])
+        self.assertEqual(repr(s), &amp;quot;SortedSet([19, 40, 42])&amp;quot;)
+
+
+if __name__ == &#39;__main__&#39;:
+    unittest.main()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>LCTHW C Lectures 1</title>
@@ -17301,9 +17637,1095 @@ RUN_TESTS(all_tests);
     </item>
     
     <item>
+      <title>Python Notes - 4</title>
+      <link>https://harryho.github.io/code/python-notes-4/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-4/</guid>
+      <description>
+
+&lt;h2 id=&#34;iterables-iteration&#34;&gt;Iterables &amp;amp; Iteration&lt;/h2&gt;
+
+&lt;h3 id=&#34;comprehensions&#34;&gt;Comprehensions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Comprehensions can process more than one input sequence&lt;/li&gt;
+&lt;li&gt;Multiple input sequences in comprehensions work like nested for-loops&lt;/li&gt;
+&lt;li&gt;Comprehensions can also have multiple if-clauses interspersed with the for-clauses&lt;/li&gt;
+&lt;li&gt;Later clauses in a comprehension can reference variables bound in earlier clauses&lt;/li&gt;
+&lt;li&gt;Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences&lt;/li&gt;
+&lt;li&gt;Python provides a number of functional-style tools for working with iterators&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; calls a function for each element in its input sequences&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; returns an iterable object, not a fully-evaluated collection&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are lazily evaluated, meaning that you must access them to
+force their calculation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are typically evaluated through the use of iteration constructs such as for-loops&lt;/li&gt;
+&lt;li&gt;You must provide as many input sequences to &lt;code&gt;map()&lt;/code&gt; as the callable argument has parameters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; takes one element from each input sequence for each output element
+it produces&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; stops producing output when its shortest input sequence is exhausted&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; can be used to implement the same behavior as comprehensions in some cases&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; selects values from an input sequence which match a specified criteria&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; passes each element in its input sequence to the function argument&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; returns an iterable over the input elements for which the function argument is truthy&lt;/li&gt;
+&lt;li&gt;Like &lt;code&gt;map()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt; produces its output lazily&lt;/li&gt;
+&lt;li&gt;If you pass None as the first argument to &lt;code&gt;filter()&lt;/code&gt;, it yields the input values which evaluate to True in a boolean context &lt;code&gt;reduce()&lt;/code&gt; cumulatively applies a function to the elements of an input sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; calls the input function with two arguments: the accumulated result so far, and the next element in the sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; is a generalization of summation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; returns the accumulated result after all of the input has been processed&lt;/li&gt;
+&lt;li&gt;If you pass an empty sequence to &lt;code&gt;reduce()&lt;/code&gt; it will raise a TypeError&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; accepts an optional initial value argument&lt;/li&gt;
+&lt;li&gt;This initial value is conceptually added to the front of the input sequence&lt;/li&gt;
+&lt;li&gt;The initial value is returned if the input sequence is empty&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;map()&lt;/code&gt; and &lt;code&gt;reduce()&lt;/code&gt; functions in Python are related to the ideas in the map-reduce algorithm&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+# Comprehensions    
+&amp;gt;&amp;gt;&amp;gt; points
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
+&amp;gt;&amp;gt;&amp;gt; points_c
+[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_d=[(x,y)
+...     for x in range(3)
+...     if x &amp;gt; 0
+...     for y in range(4)
+...     if y &amp;gt; x ]
+&amp;gt;&amp;gt;&amp;gt; points_d
+[(1, 2), (1, 3), (2, 3)]
+&amp;gt;&amp;gt;&amp;gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
+&amp;gt;&amp;gt;&amp;gt; points_e
+[[], [-1], [-1, 0]]
+
+# map
+&amp;gt;&amp;gt;&amp;gt; sizes =[&#39;small&#39;,&#39;medium&#39;, &#39;large&#39;]
+&amp;gt;&amp;gt;&amp;gt; colors = [&#39;lavender&#39;, &#39;teal&#39;, &#39;burnt orange&#39;]
+&amp;gt;&amp;gt;&amp;gt; animals = [&#39;koala&#39;, &#39;platypus&#39;, &#39;salamander&#39;]
+&amp;gt;&amp;gt;&amp;gt; def combine( size, color, animal):
+...     return &#39;{} {} {}&#39;.format(size, color, animal)
+...
+&amp;gt;&amp;gt;&amp;gt; list(map(combine, sizes, colors, animals ))
+[&#39;small lavender koala&#39;, &#39;medium teal platypus&#39;, &#39;large burnt orange salamander&#39;]
+&amp;gt;&amp;gt;&amp;gt; import itertools
+&amp;gt;&amp;gt;&amp;gt; def combine2(quantity, size, color, animal):
+...     return &#39;{} - {} {} {}&#39;.format(quantity, size, color, animal)
+...
+&amp;gt;&amp;gt;&amp;gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
+[&#39;0 - small lavender koala&#39;, &#39;1 - medium teal platypus&#39;, &#39;2 - large burnt orange salamander&#39;]
+
+# filter
+&amp;gt;&amp;gt;&amp;gt; negs = filter(lambda x: x&amp;lt;0 , [3, -1, 2,-4,0,9,-33])
+&amp;gt;&amp;gt;&amp;gt; list(negs)
+[-1, -4, -33]
+&amp;gt;&amp;gt;&amp;gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], &#39;&#39;, &#39;yes&#39;])
+&amp;gt;&amp;gt;&amp;gt; list(map(type, list(notnones)))
+[&amp;lt;class &#39;int&#39;&amp;gt;, &amp;lt;class &#39;bool&#39;&amp;gt;, &amp;lt;class &#39;tuple&#39;&amp;gt;, &amp;lt;class &#39;list&#39;&amp;gt;, &amp;lt;class &#39;str&#39;&amp;gt;]
+
+# reduce
+&amp;gt;&amp;gt;&amp;gt; from functools import reduce
+&amp;gt;&amp;gt;&amp;gt; import operator
+&amp;gt;&amp;gt;&amp;gt; reduce(operator.add, [1,2,3,4,5])
+15
+
+## x is interim result , y is the next sequence value
+&amp;gt;&amp;gt;&amp;gt; def mul(x, y):
+...     print(&#39; mul {} {} &#39;.format(x,y))
+...     return x * y
+...
+&amp;gt;&amp;gt;&amp;gt; reduce( mul, range(1, 5))
+mul 1 2
+mul 2 3
+mul 6 4
+24
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s next() function calls &lt;code&gt;__next__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterators in Python must support the &lt;code&gt;__next__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__next__()&lt;/code&gt; should return the next item in the sequence, or raise &lt;code&gt;StopIteration&lt;/code&gt; if it is exhausted&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s &lt;code&gt;iter()&lt;/code&gt; function calls &lt;code&gt;__iter__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterable objects in Python must support the &lt;code&gt;__iter__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__iter__()&lt;/code&gt; should return an iterator for the iterable object&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Objects with a &lt;code&gt;__getitem__()&lt;/code&gt; method that accepts consecutive integer indices starting at zero are also iterables&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterables implemented via &lt;code&gt;__getitem__()&lt;/code&gt; must raise &lt;code&gt;IndexError&lt;/code&gt; when they are exhausted&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Iterator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterator:
+def __init__(self, data):
+    self.index = 0
+    self.data = data
+
+def __iter__(self):
+    return self
+
+def __next__(self):
+    if self.index &amp;gt;= len(self.data):
+        raise StopIteration()
+
+    rslt = self.data[self.index]
+    self.index += 1
+    return rslt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Iterable
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
+
+    def __iter__(self):
+        return ExampleIterator(self.data)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AnotherIterable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AnotherIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
+
+    def __getitem__(self, idx):
+        return self.data[idx]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The extended form of &lt;code&gt;iter()&lt;/code&gt; accepts a zero-argument callable and a sentinel value&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Extended &lt;code&gt;iter()&lt;/code&gt; repeatedly calls the callable argument until it returns the sentinel value&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The values produced by extended &lt;code&gt;iter()&lt;/code&gt; are those returned from the callable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt; ts = iter(datetime.datetime.now, None)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 13, 373613)
+&amp;gt;&amp;gt;&amp;gt; next(ts)
+datetime.datetime(2017, 7, 14, 14, 38, 14, 754588)
+
+# Read file 
+# Content of the file file.txt
+# You are reading 
+# the file
+# you won&#39;t read 
+# the 
+# END
+# but not see the END above
+
+&amp;gt;&amp;gt;&amp;gt; with open(&#39;file.txt&#39;, &#39;rt&#39;) as f:
+...     for line in iter(lambda: f.readline().strip(), &#39;END&#39;):
+...             print(line)
+...
+You are reading
+the file
+you won&#39;t read
+the
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;One use case for extended &lt;code&gt;iter()&lt;/code&gt; is to iterate using simple functions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Protocol conforming iterators must also be iterable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sensor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import datetime
+import itertools
+import random
+import time
+
+class Sensor:
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return random.random()
+
+sensor = Sensor()
+timestamps = iter(datetime.datetime.now, None)
+
+for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
+    print(stamp, value)
+    time.sleep(1)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 5</title>
+      <link>https://harryho.github.io/code/python-notes-5/</link>
+      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-5/</guid>
+      <description>
+
+&lt;h2 id=&#34;inheritance-polymorphism&#34;&gt;Inheritance &amp;amp; Polymorphism&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name&lt;/li&gt;
+&lt;li&gt;Subclasses have all of the methods of their base class&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer&lt;/li&gt;
+&lt;li&gt;If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction&lt;/li&gt;
+&lt;li&gt;Python treats &lt;code&gt;__init__()&lt;/code&gt; like any other method&lt;/li&gt;
+&lt;li&gt;Base class &lt;code&gt;__init__()&lt;/code&gt; is not called if overridden&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;super()&lt;/code&gt; to call base class &lt;code&gt;__init__()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; takes an object as its first argument and a type as its second&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is an instance of the second argument, or any subclass of the second argument&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types&lt;/li&gt;
+&lt;li&gt;Checking for specific types is rare in Python and is sometimes regarded as bad design&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument&lt;/li&gt;
+&lt;li&gt;Multiple inheritance means having more than one direct base class&lt;/li&gt;
+&lt;li&gt;You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition&lt;/li&gt;
+&lt;li&gt;A class can have as many base classes as you want&lt;/li&gt;
+&lt;li&gt;Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime&lt;/li&gt;
+&lt;li&gt;If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is a tuple of types on a class object which defines the base classes for the class&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is in the same order as in the class definition&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is populated for both single and multiple inheritance&lt;/li&gt;
+&lt;li&gt;Method resolution order defines the order in which Python will search an inheritance graph for methods&lt;/li&gt;
+&lt;li&gt;MRO is short for Method Resolution Order&lt;/li&gt;
+&lt;li&gt;MRO is stored as a tuple of types in the &lt;code&gt;__mro__&lt;/code&gt; attribute of a class&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;mro()&lt;/code&gt; method on type objects returns the contents of &lt;code&gt;__mro__&lt;/code&gt; as a list&lt;/li&gt;
+&lt;li&gt;To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method&lt;/li&gt;
+&lt;li&gt;MRO is dependent on base class declaration order&lt;/li&gt;
+&lt;li&gt;MRO is calculated by Python using the C3 algorithm&lt;/li&gt;
+&lt;li&gt;MRO honors base-class ordering from class definitions&lt;/li&gt;
+&lt;li&gt;MRO puts subclasses before base classes&lt;/li&gt;
+&lt;li&gt;The relative order of classes in an MRO is consistent across all classes&lt;/li&gt;
+&lt;li&gt;It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; operates by using the elements in an MRO that come after some specified type&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; returns a proxy object which forwards calls to the correct objects&lt;/li&gt;
+&lt;li&gt;There are two distinct types of &lt;code&gt;super()&lt;/code&gt; proxies, bound and unbound&lt;/li&gt;
+&lt;li&gt;Unbound &lt;code&gt;super()&lt;/code&gt; proxies are primarily used for implementing other Python features&lt;/li&gt;
+&lt;li&gt;Bound proxies can be bound to either class objects or instances&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a base-class and derived-class argument returns a proxy bound to a class&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a class and an instance of that class returns a proxy bound to an instance&lt;/li&gt;
+&lt;li&gt;A &lt;code&gt;super()&lt;/code&gt; proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution&lt;/li&gt;
+&lt;li&gt;Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you&lt;/li&gt;
+&lt;li&gt;However, classmethods resolved by class-bound proxies can be called directly&lt;/li&gt;
+&lt;li&gt;Python will raise a TypeError if the second argument is not a subclass or instance of the first argument&lt;/li&gt;
+&lt;li&gt;Inappropriate use of &lt;code&gt;super()&lt;/code&gt; can violate some design constraints * Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside an instance method produces an instance-bound proxy&lt;/li&gt;
+&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside a classmethod produces a class-bound proxy&lt;/li&gt;
+&lt;li&gt;In both cases, the no-argument form of &lt;code&gt;super()&lt;/code&gt; is the same as calling &lt;code&gt;super()&lt;/code&gt; with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second&lt;/li&gt;
+&lt;li&gt;Since &lt;code&gt;super()&lt;/code&gt; works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another&lt;/li&gt;
+&lt;li&gt;The class object is at the core of Python&amp;rsquo;s object model&lt;/li&gt;
+&lt;li&gt;object is the ultimate base class for all other classes in Python&lt;/li&gt;
+&lt;li&gt;If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base&lt;/li&gt;
+&lt;li&gt;Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.&lt;/li&gt;
+&lt;li&gt;object provides hooks for Python&amp;rsquo;s comparison operators&lt;/li&gt;
+&lt;li&gt;object provides default &lt;code&gt;__repr__()&lt;/code&gt; and &lt;code&gt;__str__()&lt;/code&gt; implementations&lt;/li&gt;
+&lt;li&gt;object implements the core attribute lookup and management functionality in Python&lt;/li&gt;
+&lt;li&gt;Inheritance in Python is best used as a way to share implementation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;explanation-with-example&#34;&gt;Explanation with example&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Example to demo the weird &lt;code&gt;super()&lt;/code&gt; in Python&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from pprint import pprint as pp
+
+class Parent(object):
+    name = &#39;Parent&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from Parent.  {} do_otherthing&#39;.format(self.name))
+        # print(&#39;This is from Parent. do_otherthing {}&#39;.format(self.name))
+
+    def do_something(self):
+        print(&#39;This is from Parent. The name is {}&#39;.format(self.name))
+    
+class Child(Parent):
+    name = &#39;Child&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from Child. {} do_otherthing&#39;.format(self.name))
+        # print(&#39;This is from Child. do_otherthing {}&#39;.format(self.name))
+
+    def do_something(self):
+        print(&amp;quot;This is from Child. The name is {} &amp;quot;.format(self.name))
+    
+class OtherChild(Parent):
+    name = &#39;OtherChild&#39;
+    
+    def do_something(self):
+        print(&amp;quot;This is from OtherChild. The name is {} &amp;quot;.format(self.name)) # I am reading the last book of The Malloreon at the moment. Arends are pretty entertaining
+    
+class OtherOtherChild(Parent):
+    name = &#39;OtherOtherChild&#39;
+    
+    def do_something(self):
+        print(&amp;quot;This is from OtherOtherChild. The name is {} &amp;quot;.format(self.name))
+    
+class GrandChild(Child, OtherChild, OtherOtherChild):
+    name = &#39;GrandChild&#39;
+
+    @classmethod
+    def do_otherthing(self):
+        print(&#39;This is from GrandChild. {} do_otherthing&#39;.format(self.name))
+
+    def do_something(self):
+        print(&amp;quot;This is from GrandChild. The name is {}&amp;quot;.format(self.name))
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    pp(Child.__mro__)
+    pp(GrandChild.__mro__)
+
+    c = Child()
+    c.do_something()
+    gc = GrandChild()
+    gc.do_something()
+
+    print(&#39;Class bound super()&#39;)
+    super(Child, Child).do_otherthing()
+    super(Child, GrandChild).do_otherthing()
+    super(GrandChild, GrandChild).do_otherthing()
+
+    print(&#39;Instance bound super()&#39;)
+    super(Child, gc).do_something()
+    super(OtherChild, gc).do_something()
+    super(GrandChild , gc).do_something()
+
+## result 
+
+#(&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
+#&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
+#&amp;lt;class &#39;object&#39;&amp;gt;)
+#(&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+# &amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+# &amp;lt;class &#39;object&#39;&amp;gt;)
+# This is from Child. The name is Child 
+# This is from GrandChild. The name is GrandChild
+# Class bound super()
+# This is from Parent.  Child do_otherthing
+# This is from Parent.  GrandChild do_otherthing
+# This is from Child. GrandChild do_otherthing
+# Instance bound super()
+# This is from OtherChild. The name is GrandChild 
+# This is from OtherOtherChild. The name is GrandChild 
+# This is from Child. The name is GrandChild 
+
+
+# Multi-inheritance in Python is very different from other OO language like C++, C#, Java
+# Above result make me surprised a the first time, but after I check the MRO then I can understand why many veterans suggest to avoid multi-inheritance. Its `super` &amp;quot;Magic&amp;quot; really confuses many people.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Let&amp;rsquo;s break down the how the super works with sample code&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 1:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(Child, Child).do_otherthing()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;Child&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;Child&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Parent&lt;/code&gt; which is after &lt;code&gt;Child&lt;/code&gt;, and bind the &lt;code&gt;Child&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 2:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(GrandChild, GrandChild).do_otherthing()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;GrandChild&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;GrandChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Child&lt;/code&gt; which is after &lt;code&gt;GrandChild&lt;/code&gt;, and bind the &lt;code&gt;GrandChild&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case 3:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code : &lt;code&gt;super(OtherChild, gc).do_something()&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of the type &lt;code&gt;GrandChild&lt;/code&gt; of its second argument &lt;code&gt;gc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
+&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
+&amp;lt;class &#39;object&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;OtherChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;OtherOtherChild&lt;/code&gt; which is after &lt;code&gt;OtherChild&lt;/code&gt;, and bind the &lt;code&gt;gc&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 3</title>
+      <link>https://harryho.github.io/code/python-notes-3/</link>
+      <pubDate>Fri, 11 Mar 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-3/</guid>
+      <description>
+
+&lt;h2 id=&#34;string-representation&#34;&gt;String &amp;amp; Representation&lt;/h2&gt;
+
+&lt;h3 id=&#34;str&#34;&gt;str()&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;print()&lt;/code&gt; -&amp;gt; &lt;code&gt;str()&lt;/code&gt; -&amp;gt;  &lt;code&gt;__str(self)__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fallback to &lt;code&gt;repr()&lt;/code&gt;. By default, &lt;code&gt;str()&lt;/code&gt; simply calls &lt;code&gt;repr()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Produces a readable, human-friendly representation of an object&lt;/li&gt;
+&lt;li&gt;It is also the string constructor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;repr&#34;&gt;repr()&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Exactness is more important than human-friendliness&lt;/li&gt;
+&lt;li&gt;Suited for debugging. Unambiguous, precise, include type&lt;/li&gt;
+&lt;li&gt;Includes identifying information.&lt;/li&gt;
+&lt;li&gt;Generally best for logging and developers&lt;/li&gt;
+&lt;li&gt;The default repr() is not very helpful&lt;/li&gt;
+&lt;li&gt;As a rule, you should always write a repr() for your classes&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;standard library &lt;code&gt;reprlib.repr()&lt;/code&gt; is a replacement for &lt;code&gt;repr()&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; l = [&#39;a&#39;] * 1000
+&amp;gt;&amp;gt;&amp;gt; import reprlib
+&amp;gt;&amp;gt;&amp;gt; reprlib.repr(l)
+&amp;quot;[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, ...]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;format&#34;&gt;format&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;{:f}&amp;quot;.format(obj)&lt;/code&gt; -&amp;gt; &lt;code&gt;__format__(self, f)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fallback to &lt;code&gt;str()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;built-in-functions&#34;&gt;built-in functions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ascii()&lt;/code&gt; replaces non-ASCII characters with escape sequences&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;chr()&lt;/code&gt; converts an integer Unicode codepoint to a single character string&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ord()&lt;/code&gt; converts a single character to its integer Unicode codepoint&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;numeric-scalar-types&#34;&gt;Numeric &amp;amp; scalar types&lt;/h2&gt;
+
+&lt;h3 id=&#34;int&#34;&gt;int&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;unlimited precision signed integer&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;bool in an int&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; False - True
+-1
+&amp;gt;&amp;gt;&amp;gt; False - False
+0
+&amp;gt;&amp;gt;&amp;gt; True - False
+1
+&amp;gt;&amp;gt;&amp;gt; True - True
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;float&#34;&gt;float&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IEEE-754 double precision (64-bit)&lt;/li&gt;
+&lt;li&gt;53 bits of binary precision&lt;/li&gt;
+&lt;li&gt;15 to 17 bits of decimal precision&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;0.001 has value 0/2 + 0/4 + &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt;. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example of float data&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt; f=0.9-0.8
+&amp;gt;&amp;gt;&amp;gt; f
+0.09999999999999998
+&amp;gt;&amp;gt;&amp;gt; f=0.2-0.1
+&amp;gt;&amp;gt;&amp;gt; f
+0.1
+&amp;gt;&amp;gt;&amp;gt; f=0.8-0.7
+&amp;gt;&amp;gt;&amp;gt; f
+0.10000000000000009
+&amp;gt;&amp;gt;&amp;gt; float(2**53)
+9007199254740992.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+1)
+9007199254740992.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+2)
+9007199254740994.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+3)
+9007199254740996.0
+&amp;gt;&amp;gt;&amp;gt; float(2**53+4)
+9007199254740996.0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;decimal&#34;&gt;decimal&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;standard library module decimal containing the class Decimal&lt;/li&gt;
+&lt;li&gt;decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision&lt;/li&gt;
+&lt;li&gt;identity is preserved. &lt;code&gt;x == (x // y) * y + x % y&lt;/code&gt;, so integer division and modulus are consistent&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; from decimal import Decimal
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.6)-Decimal(0.5)
+Decimal(&#39;0.09999999999999997779553950750&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.6&#39;)-Decimal(&#39;0.5&#39;)
+Decimal(&#39;0.1&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.2)-Decimal(0.1)
+Decimal(&#39;0.1000000000000000055511151231&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(0.8)-Decimal(0.7)
+Decimal(&#39;0.1000000000000000888178419700&#39;)
+&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.8&#39;)-Decimal(&#39;0.7&#39;)
+Decimal(&#39;0.1&#39;)
+
+# Change the precise 
+&amp;gt;&amp;gt;&amp;gt; import decimal
+&amp;gt;&amp;gt;&amp;gt; decimal.getcontext().prec=4
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) / Decimal(3)
+Decimal(&#39;-2.333&#39;)
+
+# Python handle different type in different way with % 
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) % Decimal(3)
+Decimal(&#39;-1&#39;)  # 
+&amp;gt;&amp;gt;&amp;gt; Decimal(-7) // Decimal(3)
+Decimal(&#39;-2&#39;)  # The next multiple of 3 towards zero is -6
+&amp;gt;&amp;gt;&amp;gt; (-7) // (3) 
+-3  # The largest multiple of 3 less than -7 is -9
+&amp;gt;&amp;gt;&amp;gt; (-7) % (3)
+2  # The 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;fraction&#34;&gt;fraction&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;standard library module fractions containing the class Fraction for rational numbers&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&amp;gt;&amp;gt;&amp;gt;from fractions import Fraction
+&amp;gt;&amp;gt;&amp;gt;f = Fraction(&amp;quot;2/3&amp;quot;)
+&amp;gt;&amp;gt;&amp;gt;f
+Faction(2,3)
+&amp;gt;&amp;gt;&amp;gt; Fraction(0.2)
+Fraction(3602879701896397, 18014398509481984)
+&amp;gt;&amp;gt;&amp;gt; Fraction(0.5)
+Fraction(1, 2)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;))
+Fraction(3, 10)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) // Fraction(6, 7)
+0
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) % Fraction(6, 7)
+Fraction(3, 10)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) - Fraction(6, 7)
+Fraction(-39, 70)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) + Fraction(6, 7)
+Fraction(81, 70)
+&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) * Fraction(6, 7)
+Fraction(9, 35)
+
+&amp;gt;&amp;gt;&amp;gt; from math import floor, ceil
+&amp;gt;&amp;gt;&amp;gt; ceil(Fraction(&#39;8/7&#39;))
+2
+&amp;gt;&amp;gt;&amp;gt; floor(Fraction(&#39;8/7&#39;))
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;number-base-conversions&#34;&gt;number base conversions&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;bin()&lt;/th&gt;
+&lt;th&gt;oct()&lt;/th&gt;
+&lt;th&gt;hex()&lt;/th&gt;
+&lt;th&gt;int(x, base)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;base 2&lt;/td&gt;
+&lt;td&gt;base 8&lt;/td&gt;
+&lt;td&gt;base 16&lt;/td&gt;
+&lt;td&gt;bases 2 to 36&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 0b0101
+5
+&amp;gt;&amp;gt;&amp;gt; 0o63527
+26455
+&amp;gt;&amp;gt;&amp;gt; 0o63
+51
+&amp;gt;&amp;gt;&amp;gt; 0xad2
+2770
+&amp;gt;&amp;gt;&amp;gt; hex(22)
+&#39;0x16&#39;
+&amp;gt;&amp;gt;&amp;gt; oct(22)
+&#39;0o26&#39;
+&amp;gt;&amp;gt;&amp;gt; bin(22)
+&#39;0b10110&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;complex&#34;&gt;complex&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;complex construction string argument may have parentheses but must not contain spaces&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cmath&lt;/code&gt; standard Library module contains complex equivalents of math&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 1+1j
+(1+1j)
+&amp;gt;&amp;gt;&amp;gt; type(1+1j)
+&amp;lt;class &#39;complex&#39;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; (1+1j) + (1-1j)
+(2+0j)
+&amp;gt;&amp;gt;&amp;gt; (1+1j) + (2-2j)
+(3-1j)
+&amp;gt;&amp;gt;&amp;gt; (1+1j) - (2-2j)
+(-1+3j)
+&amp;gt;&amp;gt;&amp;gt; complex(&#39;-2+1j&#39;)
+(-2+1j)
+&amp;gt;&amp;gt;&amp;gt; complex(&#39;(-2+1j)&#39;)
+(-2+1j)
+&amp;gt;&amp;gt;&amp;gt; complex(-2, 1)
+(-2+1j)
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;date-time&#34;&gt;date &amp;amp; time&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Gregorian calendar&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;weekday()&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 Monday
+1 Tuesday
+2 Wednesday
+3 Thursday
+4 Friday
+5 Saturday
+6 Sunday
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;isoweekday()&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 Monday
+2 Tuesday
+3 Wednesday
+4 Thursday
+5 Friday
+6 Saturday
+7 Sunday   
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;timedelta&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Constructor accepts and sums
+• days
+• seconds
+• microseconds
+• milliseconds
+• minutes
+• hours
+• weeks&lt;/li&gt;
+&lt;li&gt;Instances store only
+• days
+• seconds
+• microseconds&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from datetime import (date, time)
+from datetime import datetime as Datetime
+from datetime import timedelta
+from datetime import (tzinfo, timezone)
+
+## date
+
+&amp;gt;&amp;gt;&amp;gt; datetime.date(2000,month=2, day=10)
+datetime.date(2000, 2, 10)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today()
+datetime.date(2014, 3, 14)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.fromtimestamp(99999999)
+datetime.date(1973, 3, 3)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.fromordinal(9999)
+datetime.date(28, 5, 17)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.max
+datetime.date(9999, 12, 31)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.min
+datetime.date(1, 1, 1)
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today().weekday()
+4
+&amp;gt;&amp;gt;&amp;gt; datetime.date.today().isoweekday()
+5
+&amp;gt;&amp;gt;&amp;gt; d = datetime.date.fromtimestamp(99999999)
+&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b&#39;)
+&#39;Saturday 03 March Mar&#39;
+&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b %Y&#39;)
+&#39;Saturday 03 March Mar 1973&#39;
+&amp;gt;&amp;gt;&amp;gt; &amp;quot;The date is {:%A %d %B %b %y}&amp;quot;.format(d)
+&#39;The date is Saturday 03 March Mar 73&#39;
+&amp;gt;&amp;gt;&amp;gt; &amp;quot;{date:%A} {date.day} {date:%B} {date:%Y}&amp;quot;.format(date=d)
+&#39;Saturday 3 March 1973&#39;
+
+## time
+
+&amp;gt;&amp;gt;&amp;gt; t=datetime.time(23,59,1,7451)   
+&amp;gt;&amp;gt;&amp;gt; t.isoformat()
+&#39;23:59:01.007451&#39;
+&amp;gt;&amp;gt;&amp;gt; t.strftime(&#39;%Hh%Mm%Ss&#39;)
+&#39;23h59m01s&#39;
+&amp;gt;&amp;gt;&amp;gt; datetime.time.max
+datetime.time(23, 59, 59, 999999)
+&amp;gt;&amp;gt;&amp;gt; datetime.time.min
+datetime.time(0, 0)
+
+## datetime
+
+&amp;gt;&amp;gt;&amp;gt; datetime.datetime(2001,6,7,8,15,25,895)
+datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
+&amp;gt;&amp;gt;&amp;gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
+&amp;gt;&amp;gt;&amp;gt; dt.isoformat()
+&#39;2001-06-07T08:15:25.000895&#39;
+
+## timedelta
+&amp;gt;&amp;gt;&amp;gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
+&amp;gt;&amp;gt;&amp;gt; td
+datetime.timedelta(15, 3660, 1002)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 2</title>
+      <link>https://harryho.github.io/code/python-notes-2/</link>
+      <pubDate>Sat, 20 Feb 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-2/</guid>
+      <description>
+
+&lt;h2 id=&#34;closure-decorator&#34;&gt;Closure &amp;amp; Decorator&lt;/h2&gt;
+
+&lt;h3 id=&#34;legb-rules&#34;&gt;LEGB rules&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Local, Enclosing, Gloable, Built-in&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;local-function&#34;&gt;Local function&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Useful for specialized, one-off functions&lt;/li&gt;
+&lt;li&gt;Aid in code organization and readability&lt;/li&gt;
+&lt;li&gt;Similar to lambdas, but more general&lt;/li&gt;
+&lt;li&gt;May contain multiple expressions&lt;/li&gt;
+&lt;li&gt;May contain statements&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;closure&#34;&gt;Closure&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Closure maintain references to objects from earlier scopes&lt;/li&gt;
+&lt;li&gt;LEGB does not apply when making new bindings&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Usage of nonlocal&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;def make_timer():
+    last_called = None
+
+    def elapsed():
+        nonlocal last_called
+        now = time.time()
+        if last_called is None:
+            last_called = now
+            return None
+        result = now - last_called
+        last_called = now
+        return result
+    return elapsed
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    mt = make_timer()
+    print(mt ())
+    print(&#39;-----------------------------&#39;)
+    print(mt ())
+    print(&#39;-----------------------------&#39;)
+    print(mt ())
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use as function factory&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+def raise_to(exp):
+    def raise_to_exp(x):
+        return pow(x, exp)
+    return raise_to_exp
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    square=raise_to(2)
+    cube= raise_to(3)
+    print(square(2))
+    print(cube(2))
+
+# Result:
+# 4
+# 8
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;decorator&#34;&gt;Decorator&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Replace, enhance, or modify existing functions&lt;/li&gt;
+&lt;li&gt;Does not change the original function definition&lt;/li&gt;
+&lt;li&gt;Calling code does not need to change&lt;/li&gt;
+&lt;li&gt;Decorator mechanism uses the modified function’s original name&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;use function as decorator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def escape_unicode(f):
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+
+@escape_unicode
+def hello_greek():
+    return &#39;γειά σου κόσμος&#39;    
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    print(hello_greek())
+
+# result:
+# &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example: multiple decorators including function and instance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class Trace:
+    def __init__(self):
+        self.enabled = True
+
+    def __call__(self, f):
+        @functools.wraps(f)
+        def wrap(*args, **kwargs):
+            if self.enabled:
+                print(&#39;Calling {}&#39;.format(f.__name__))
+            return f(*args, **kwargs)
+        return wrap
+
+def escape_unicode(f):
+    @functools.wraps(f)
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+@tracer
+@escape_unicode
+def hello_greek():
+    return &#39;γειά σου κόσμος&#39;    
+
+# Result
+# Calling hello_greek
+# &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use as validator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def check_non_negative(index):
+    def validator(f):
+        def wrap(*args):
+            if args[index] &amp;lt; 0:
+                raise ValueError(
+                    &#39;Arg {} must be non-negative&#39;.format(index)
+                )
+            return f(*args)
+        return wrap
+    return validator
+
+@check_non_negative(1)
+def create_seq(value, size):
+    return [value]*size  
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    create_seq(&#39;0&#39;, -3)
+
+# result
+....
+&#39;Arg {} must be non-negative&#39;.format(index)
+ValueError: Arg 1 must be non-negative
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;properties-class&#34;&gt;Properties &amp;amp; Class&lt;/h2&gt;
+
+&lt;h3 id=&#34;staticmethod&#34;&gt;@staticmethod&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No access needed to either class or instance objects.&lt;/li&gt;
+&lt;li&gt;Most likely an implementation detail of the class.&lt;/li&gt;
+&lt;li&gt;May be able to be moved to become a module-scope function&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Requires access to the class object to call other class methods or the constructor&lt;/li&gt;
+&lt;li&gt;Always use self for the first argument to instance methods.&lt;/li&gt;
+&lt;li&gt;Always use cls for the first argument to class methods.&lt;/li&gt;
+&lt;li&gt;Use case: use as named constructors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class FileStream(object):
+
+    @classmethod
+    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
+        with open(filepath, &#39;r&#39;) as fileobj:
+            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
+                yield obj
+
+    @classmethod
+    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
+        raise NotImplemented # Placeholder until implemented
+
+    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
+        ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;property&#34;&gt;@property&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Encapsulation&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class A
+@property
+def  prop(self):
+    return self._prop
+
+@prop.setter
+def prop(self, value):
+    self._prop = value
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Python Notes - 1</title>
       <link>https://harryho.github.io/code/python-notes-1/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
+      <pubDate>Sun, 07 Feb 2016 14:59:31 +1100</pubDate>
       
       <guid>https://harryho.github.io/code/python-notes-1/</guid>
       <description>
@@ -17881,1092 +19303,6 @@ TypeError: f2() takes 2 positional arguments but 4 were given
 [(12, 11), (13, 14), (15, 16), (12, 12), (14, 11), (18, 17), (13, 14)]
 
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Python Notes - 2</title>
-      <link>https://harryho.github.io/code/python-notes-2/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/python-notes-2/</guid>
-      <description>
-
-&lt;h2 id=&#34;closure-decorator&#34;&gt;Closure &amp;amp; Decorator&lt;/h2&gt;
-
-&lt;h3 id=&#34;legb-rules&#34;&gt;LEGB rules&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Local, Enclosing, Gloable, Built-in&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;local-function&#34;&gt;Local function&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Useful for specialized, one-off functions&lt;/li&gt;
-&lt;li&gt;Aid in code organization and readability&lt;/li&gt;
-&lt;li&gt;Similar to lambdas, but more general&lt;/li&gt;
-&lt;li&gt;May contain multiple expressions&lt;/li&gt;
-&lt;li&gt;May contain statements&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;closure&#34;&gt;Closure&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Closure maintain references to objects from earlier scopes&lt;/li&gt;
-&lt;li&gt;LEGB does not apply when making new bindings&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Usage of nonlocal&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Example&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    mt = make_timer()
-    print(mt ())
-    print(&#39;-----------------------------&#39;)
-    print(mt ())
-    print(&#39;-----------------------------&#39;)
-    print(mt ())
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Use as function factory&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Example
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-# Result:
-# 4
-# 8
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;decorator&#34;&gt;Decorator&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Replace, enhance, or modify existing functions&lt;/li&gt;
-&lt;li&gt;Does not change the original function definition&lt;/li&gt;
-&lt;li&gt;Calling code does not need to change&lt;/li&gt;
-&lt;li&gt;Decorator mechanism uses the modified function’s original name&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;use function as decorator&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return &#39;γειά σου κόσμος&#39;    
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    print(hello_greek())
-
-# result:
-# &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Example: multiple decorators including function and instance&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class Trace:
-    def __init__(self):
-        self.enabled = True
-
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print(&#39;Calling {}&#39;.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return &#39;γειά σου κόσμος&#39;    
-
-# Result
-# Calling hello_greek
-# &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use as validator&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &amp;lt; 0:
-                raise ValueError(
-                    &#39;Arg {} must be non-negative&#39;.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
-
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    create_seq(&#39;0&#39;, -3)
-
-# result
-....
-&#39;Arg {} must be non-negative&#39;.format(index)
-ValueError: Arg 1 must be non-negative
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;properties-class&#34;&gt;Properties &amp;amp; Class&lt;/h2&gt;
-
-&lt;h3 id=&#34;staticmethod&#34;&gt;@staticmethod&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;No access needed to either class or instance objects.&lt;/li&gt;
-&lt;li&gt;Most likely an implementation detail of the class.&lt;/li&gt;
-&lt;li&gt;May be able to be moved to become a module-scope function&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Requires access to the class object to call other class methods or the constructor&lt;/li&gt;
-&lt;li&gt;Always use self for the first argument to instance methods.&lt;/li&gt;
-&lt;li&gt;Always use cls for the first argument to class methods.&lt;/li&gt;
-&lt;li&gt;Use case: use as named constructors&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class FileStream(object):
-
-    @classmethod
-    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-        with open(filepath, &#39;r&#39;) as fileobj:
-            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-                yield obj
-
-    @classmethod
-    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-        raise NotImplemented # Placeholder until implemented
-
-    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-        ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;property&#34;&gt;@property&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Encapsulation&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class A
-@property
-def  prop(self):
-    return self._prop
-
-@prop.setter
-def prop(self, value):
-    self._prop = value
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Python Notes - 3</title>
-      <link>https://harryho.github.io/code/python-notes-3/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/python-notes-3/</guid>
-      <description>
-
-&lt;h2 id=&#34;string-representation&#34;&gt;String &amp;amp; Representation&lt;/h2&gt;
-
-&lt;h3 id=&#34;str&#34;&gt;str()&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;print()&lt;/code&gt; -&amp;gt; &lt;code&gt;str()&lt;/code&gt; -&amp;gt;  &lt;code&gt;__str(self)__&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fallback to &lt;code&gt;repr()&lt;/code&gt;. By default, &lt;code&gt;str()&lt;/code&gt; simply calls &lt;code&gt;repr()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Produces a readable, human-friendly representation of an object&lt;/li&gt;
-&lt;li&gt;It is also the string constructor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;repr&#34;&gt;repr()&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Exactness is more important than human-friendliness&lt;/li&gt;
-&lt;li&gt;Suited for debugging. Unambiguous, precise, include type&lt;/li&gt;
-&lt;li&gt;Includes identifying information.&lt;/li&gt;
-&lt;li&gt;Generally best for logging and developers&lt;/li&gt;
-&lt;li&gt;The default repr() is not very helpful&lt;/li&gt;
-&lt;li&gt;As a rule, you should always write a repr() for your classes&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;standard library &lt;code&gt;reprlib.repr()&lt;/code&gt; is a replacement for &lt;code&gt;repr()&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Example&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; l = [&#39;a&#39;] * 1000
-&amp;gt;&amp;gt;&amp;gt; import reprlib
-&amp;gt;&amp;gt;&amp;gt; reprlib.repr(l)
-&amp;quot;[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, ...]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;format&#34;&gt;format&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;{:f}&amp;quot;.format(obj)&lt;/code&gt; -&amp;gt; &lt;code&gt;__format__(self, f)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fallback to &lt;code&gt;str()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;built-in-functions&#34;&gt;built-in functions&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ascii()&lt;/code&gt; replaces non-ASCII characters with escape sequences&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chr()&lt;/code&gt; converts an integer Unicode codepoint to a single character string&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ord()&lt;/code&gt; converts a single character to its integer Unicode codepoint&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;numeric-scalar-types&#34;&gt;Numeric &amp;amp; scalar types&lt;/h2&gt;
-
-&lt;h3 id=&#34;int&#34;&gt;int&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;unlimited precision signed integer&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;bool in an int&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; False - True
--1
-&amp;gt;&amp;gt;&amp;gt; False - False
-0
-&amp;gt;&amp;gt;&amp;gt; True - False
-1
-&amp;gt;&amp;gt;&amp;gt; True - True
-0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;float&#34;&gt;float&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;IEEE-754 double precision (64-bit)&lt;/li&gt;
-&lt;li&gt;53 bits of binary precision&lt;/li&gt;
-&lt;li&gt;15 to 17 bits of decimal precision&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;0.001 has value 0/2 + 0/4 + &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;8&lt;/sub&gt;. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example of float data&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-&amp;gt;&amp;gt;&amp;gt; f=0.9-0.8
-&amp;gt;&amp;gt;&amp;gt; f
-0.09999999999999998
-&amp;gt;&amp;gt;&amp;gt; f=0.2-0.1
-&amp;gt;&amp;gt;&amp;gt; f
-0.1
-&amp;gt;&amp;gt;&amp;gt; f=0.8-0.7
-&amp;gt;&amp;gt;&amp;gt; f
-0.10000000000000009
-&amp;gt;&amp;gt;&amp;gt; float(2**53)
-9007199254740992.0
-&amp;gt;&amp;gt;&amp;gt; float(2**53+1)
-9007199254740992.0
-&amp;gt;&amp;gt;&amp;gt; float(2**53+2)
-9007199254740994.0
-&amp;gt;&amp;gt;&amp;gt; float(2**53+3)
-9007199254740996.0
-&amp;gt;&amp;gt;&amp;gt; float(2**53+4)
-9007199254740996.0
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;decimal&#34;&gt;decimal&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;standard library module decimal containing the class Decimal&lt;/li&gt;
-&lt;li&gt;decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision&lt;/li&gt;
-&lt;li&gt;identity is preserved. &lt;code&gt;x == (x // y) * y + x % y&lt;/code&gt;, so integer division and modulus are consistent&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; from decimal import Decimal
-&amp;gt;&amp;gt;&amp;gt; Decimal(0.6)-Decimal(0.5)
-Decimal(&#39;0.09999999999999997779553950750&#39;)
-&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.6&#39;)-Decimal(&#39;0.5&#39;)
-Decimal(&#39;0.1&#39;)
-&amp;gt;&amp;gt;&amp;gt; Decimal(0.2)-Decimal(0.1)
-Decimal(&#39;0.1000000000000000055511151231&#39;)
-&amp;gt;&amp;gt;&amp;gt; Decimal(0.8)-Decimal(0.7)
-Decimal(&#39;0.1000000000000000888178419700&#39;)
-&amp;gt;&amp;gt;&amp;gt; Decimal(&#39;0.8&#39;)-Decimal(&#39;0.7&#39;)
-Decimal(&#39;0.1&#39;)
-
-# Change the precise 
-&amp;gt;&amp;gt;&amp;gt; import decimal
-&amp;gt;&amp;gt;&amp;gt; decimal.getcontext().prec=4
-&amp;gt;&amp;gt;&amp;gt; Decimal(-7) / Decimal(3)
-Decimal(&#39;-2.333&#39;)
-
-# Python handle different type in different way with % 
-&amp;gt;&amp;gt;&amp;gt; Decimal(-7) % Decimal(3)
-Decimal(&#39;-1&#39;)  # 
-&amp;gt;&amp;gt;&amp;gt; Decimal(-7) // Decimal(3)
-Decimal(&#39;-2&#39;)  # The next multiple of 3 towards zero is -6
-&amp;gt;&amp;gt;&amp;gt; (-7) // (3) 
--3  # The largest multiple of 3 less than -7 is -9
-&amp;gt;&amp;gt;&amp;gt; (-7) % (3)
-2  # The 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;fraction&#34;&gt;fraction&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;standard library module fractions containing the class Fraction for rational numbers&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-&amp;gt;&amp;gt;&amp;gt;from fractions import Fraction
-&amp;gt;&amp;gt;&amp;gt;f = Fraction(&amp;quot;2/3&amp;quot;)
-&amp;gt;&amp;gt;&amp;gt;f
-Faction(2,3)
-&amp;gt;&amp;gt;&amp;gt; Fraction(0.2)
-Fraction(3602879701896397, 18014398509481984)
-&amp;gt;&amp;gt;&amp;gt; Fraction(0.5)
-Fraction(1, 2)
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;))
-Fraction(3, 10)
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) // Fraction(6, 7)
-0
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) % Fraction(6, 7)
-Fraction(3, 10)
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) - Fraction(6, 7)
-Fraction(-39, 70)
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) + Fraction(6, 7)
-Fraction(81, 70)
-&amp;gt;&amp;gt;&amp;gt; Fraction(Decimal(&#39;0.3&#39;)) * Fraction(6, 7)
-Fraction(9, 35)
-
-&amp;gt;&amp;gt;&amp;gt; from math import floor, ceil
-&amp;gt;&amp;gt;&amp;gt; ceil(Fraction(&#39;8/7&#39;))
-2
-&amp;gt;&amp;gt;&amp;gt; floor(Fraction(&#39;8/7&#39;))
-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;number-base-conversions&#34;&gt;number base conversions&lt;/h3&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;bin()&lt;/th&gt;
-&lt;th&gt;oct()&lt;/th&gt;
-&lt;th&gt;hex()&lt;/th&gt;
-&lt;th&gt;int(x, base)&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;base 2&lt;/td&gt;
-&lt;td&gt;base 8&lt;/td&gt;
-&lt;td&gt;base 16&lt;/td&gt;
-&lt;td&gt;bases 2 to 36&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Example&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 0b0101
-5
-&amp;gt;&amp;gt;&amp;gt; 0o63527
-26455
-&amp;gt;&amp;gt;&amp;gt; 0o63
-51
-&amp;gt;&amp;gt;&amp;gt; 0xad2
-2770
-&amp;gt;&amp;gt;&amp;gt; hex(22)
-&#39;0x16&#39;
-&amp;gt;&amp;gt;&amp;gt; oct(22)
-&#39;0o26&#39;
-&amp;gt;&amp;gt;&amp;gt; bin(22)
-&#39;0b10110&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;complex&#34;&gt;complex&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;complex construction string argument may have parentheses but must not contain spaces&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cmath&lt;/code&gt; standard Library module contains complex equivalents of math&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; 1+1j
-(1+1j)
-&amp;gt;&amp;gt;&amp;gt; type(1+1j)
-&amp;lt;class &#39;complex&#39;&amp;gt;
-&amp;gt;&amp;gt;&amp;gt; (1+1j) + (1-1j)
-(2+0j)
-&amp;gt;&amp;gt;&amp;gt; (1+1j) + (2-2j)
-(3-1j)
-&amp;gt;&amp;gt;&amp;gt; (1+1j) - (2-2j)
-(-1+3j)
-&amp;gt;&amp;gt;&amp;gt; complex(&#39;-2+1j&#39;)
-(-2+1j)
-&amp;gt;&amp;gt;&amp;gt; complex(&#39;(-2+1j)&#39;)
-(-2+1j)
-&amp;gt;&amp;gt;&amp;gt; complex(-2, 1)
-(-2+1j)
-
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;date-time&#34;&gt;date &amp;amp; time&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Gregorian calendar&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;weekday()&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;0 Monday
-1 Tuesday
-2 Wednesday
-3 Thursday
-4 Friday
-5 Saturday
-6 Sunday
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;isoweekday()&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1 Monday
-2 Tuesday
-3 Wednesday
-4 Thursday
-5 Friday
-6 Saturday
-7 Sunday   
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;timedelta&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Constructor accepts and sums
-• days
-• seconds
-• microseconds
-• milliseconds
-• minutes
-• hours
-• weeks&lt;/li&gt;
-&lt;li&gt;Instances store only
-• days
-• seconds
-• microseconds&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from datetime import (date, time)
-from datetime import datetime as Datetime
-from datetime import timedelta
-from datetime import (tzinfo, timezone)
-
-## date
-
-&amp;gt;&amp;gt;&amp;gt; datetime.date(2000,month=2, day=10)
-datetime.date(2000, 2, 10)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.today()
-datetime.date(2014, 3, 14)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.fromtimestamp(99999999)
-datetime.date(1973, 3, 3)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.fromordinal(9999)
-datetime.date(28, 5, 17)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.max
-datetime.date(9999, 12, 31)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.min
-datetime.date(1, 1, 1)
-&amp;gt;&amp;gt;&amp;gt; datetime.date.today().weekday()
-4
-&amp;gt;&amp;gt;&amp;gt; datetime.date.today().isoweekday()
-5
-&amp;gt;&amp;gt;&amp;gt; d = datetime.date.fromtimestamp(99999999)
-&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b&#39;)
-&#39;Saturday 03 March Mar&#39;
-&amp;gt;&amp;gt;&amp;gt; d.strftime(&#39;%A %d %B %b %Y&#39;)
-&#39;Saturday 03 March Mar 1973&#39;
-&amp;gt;&amp;gt;&amp;gt; &amp;quot;The date is {:%A %d %B %b %y}&amp;quot;.format(d)
-&#39;The date is Saturday 03 March Mar 73&#39;
-&amp;gt;&amp;gt;&amp;gt; &amp;quot;{date:%A} {date.day} {date:%B} {date:%Y}&amp;quot;.format(date=d)
-&#39;Saturday 3 March 1973&#39;
-
-## time
-
-&amp;gt;&amp;gt;&amp;gt; t=datetime.time(23,59,1,7451)   
-&amp;gt;&amp;gt;&amp;gt; t.isoformat()
-&#39;23:59:01.007451&#39;
-&amp;gt;&amp;gt;&amp;gt; t.strftime(&#39;%Hh%Mm%Ss&#39;)
-&#39;23h59m01s&#39;
-&amp;gt;&amp;gt;&amp;gt; datetime.time.max
-datetime.time(23, 59, 59, 999999)
-&amp;gt;&amp;gt;&amp;gt; datetime.time.min
-datetime.time(0, 0)
-
-## datetime
-
-&amp;gt;&amp;gt;&amp;gt; datetime.datetime(2001,6,7,8,15,25,895)
-datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
-&amp;gt;&amp;gt;&amp;gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
-&amp;gt;&amp;gt;&amp;gt; dt.isoformat()
-&#39;2001-06-07T08:15:25.000895&#39;
-
-## timedelta
-&amp;gt;&amp;gt;&amp;gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
-&amp;gt;&amp;gt;&amp;gt; td
-datetime.timedelta(15, 3660, 1002)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Python Notes - 4</title>
-      <link>https://harryho.github.io/code/python-notes-4/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/python-notes-4/</guid>
-      <description>
-
-&lt;h2 id=&#34;iterables-iteration&#34;&gt;Iterables &amp;amp; Iteration&lt;/h2&gt;
-
-&lt;h3 id=&#34;comprehensions&#34;&gt;Comprehensions&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Comprehensions can process more than one input sequence&lt;/li&gt;
-&lt;li&gt;Multiple input sequences in comprehensions work like nested for-loops&lt;/li&gt;
-&lt;li&gt;Comprehensions can also have multiple if-clauses interspersed with the for-clauses&lt;/li&gt;
-&lt;li&gt;Later clauses in a comprehension can reference variables bound in earlier clauses&lt;/li&gt;
-&lt;li&gt;Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences&lt;/li&gt;
-&lt;li&gt;Python provides a number of functional-style tools for working with iterators&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; calls a function for each element in its input sequences&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; returns an iterable object, not a fully-evaluated collection&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are lazily evaluated, meaning that you must access them to
-force their calculation&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; results are typically evaluated through the use of iteration constructs such as for-loops&lt;/li&gt;
-&lt;li&gt;You must provide as many input sequences to &lt;code&gt;map()&lt;/code&gt; as the callable argument has parameters&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; takes one element from each input sequence for each output element
-it produces&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; stops producing output when its shortest input sequence is exhausted&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;map()&lt;/code&gt; can be used to implement the same behavior as comprehensions in some cases&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; selects values from an input sequence which match a specified criteria&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; passes each element in its input sequence to the function argument&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;filter()&lt;/code&gt; returns an iterable over the input elements for which the function argument is truthy&lt;/li&gt;
-&lt;li&gt;Like &lt;code&gt;map()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt; produces its output lazily&lt;/li&gt;
-&lt;li&gt;If you pass None as the first argument to &lt;code&gt;filter()&lt;/code&gt;, it yields the input values which evaluate to True in a boolean context &lt;code&gt;reduce()&lt;/code&gt; cumulatively applies a function to the elements of an input sequence&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; calls the input function with two arguments: the accumulated result so far, and the next element in the sequence&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; is a generalization of summation&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; returns the accumulated result after all of the input has been processed&lt;/li&gt;
-&lt;li&gt;If you pass an empty sequence to &lt;code&gt;reduce()&lt;/code&gt; it will raise a TypeError&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; accepts an optional initial value argument&lt;/li&gt;
-&lt;li&gt;This initial value is conceptually added to the front of the input sequence&lt;/li&gt;
-&lt;li&gt;The initial value is returned if the input sequence is empty&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;map()&lt;/code&gt; and &lt;code&gt;reduce()&lt;/code&gt; functions in Python are related to the ideas in the map-reduce algorithm&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-# Comprehensions    
-&amp;gt;&amp;gt;&amp;gt; points
-[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
-&amp;gt;&amp;gt;&amp;gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
-&amp;gt;&amp;gt;&amp;gt; points_c
-[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
-&amp;gt;&amp;gt;&amp;gt; points_d=[(x,y)
-...     for x in range(3)
-...     if x &amp;gt; 0
-...     for y in range(4)
-...     if y &amp;gt; x ]
-&amp;gt;&amp;gt;&amp;gt; points_d
-[(1, 2), (1, 3), (2, 3)]
-&amp;gt;&amp;gt;&amp;gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
-&amp;gt;&amp;gt;&amp;gt; points_e
-[[], [-1], [-1, 0]]
-
-# map
-&amp;gt;&amp;gt;&amp;gt; sizes =[&#39;small&#39;,&#39;medium&#39;, &#39;large&#39;]
-&amp;gt;&amp;gt;&amp;gt; colors = [&#39;lavender&#39;, &#39;teal&#39;, &#39;burnt orange&#39;]
-&amp;gt;&amp;gt;&amp;gt; animals = [&#39;koala&#39;, &#39;platypus&#39;, &#39;salamander&#39;]
-&amp;gt;&amp;gt;&amp;gt; def combine( size, color, animal):
-...     return &#39;{} {} {}&#39;.format(size, color, animal)
-...
-&amp;gt;&amp;gt;&amp;gt; list(map(combine, sizes, colors, animals ))
-[&#39;small lavender koala&#39;, &#39;medium teal platypus&#39;, &#39;large burnt orange salamander&#39;]
-&amp;gt;&amp;gt;&amp;gt; import itertools
-&amp;gt;&amp;gt;&amp;gt; def combine2(quantity, size, color, animal):
-...     return &#39;{} - {} {} {}&#39;.format(quantity, size, color, animal)
-...
-&amp;gt;&amp;gt;&amp;gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
-[&#39;0 - small lavender koala&#39;, &#39;1 - medium teal platypus&#39;, &#39;2 - large burnt orange salamander&#39;]
-
-# filter
-&amp;gt;&amp;gt;&amp;gt; negs = filter(lambda x: x&amp;lt;0 , [3, -1, 2,-4,0,9,-33])
-&amp;gt;&amp;gt;&amp;gt; list(negs)
-[-1, -4, -33]
-&amp;gt;&amp;gt;&amp;gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], &#39;&#39;, &#39;yes&#39;])
-&amp;gt;&amp;gt;&amp;gt; list(map(type, list(notnones)))
-[&amp;lt;class &#39;int&#39;&amp;gt;, &amp;lt;class &#39;bool&#39;&amp;gt;, &amp;lt;class &#39;tuple&#39;&amp;gt;, &amp;lt;class &#39;list&#39;&amp;gt;, &amp;lt;class &#39;str&#39;&amp;gt;]
-
-# reduce
-&amp;gt;&amp;gt;&amp;gt; from functools import reduce
-&amp;gt;&amp;gt;&amp;gt; import operator
-&amp;gt;&amp;gt;&amp;gt; reduce(operator.add, [1,2,3,4,5])
-15
-
-## x is interim result , y is the next sequence value
-&amp;gt;&amp;gt;&amp;gt; def mul(x, y):
-...     print(&#39; mul {} {} &#39;.format(x,y))
-...     return x * y
-...
-&amp;gt;&amp;gt;&amp;gt; reduce( mul, range(1, 5))
-mul 1 2
-mul 2 3
-mul 6 4
-24
-
-
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s next() function calls &lt;code&gt;__next__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Iterators in Python must support the &lt;code&gt;__next__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;__next__()&lt;/code&gt; should return the next item in the sequence, or raise &lt;code&gt;StopIteration&lt;/code&gt; if it is exhausted&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Python&amp;rsquo;s &lt;code&gt;iter()&lt;/code&gt; function calls &lt;code&gt;__iter__()&lt;/code&gt; on its argument&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Iterable objects in Python must support the &lt;code&gt;__iter__()&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;__iter__()&lt;/code&gt; should return an iterator for the iterable object&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Objects with a &lt;code&gt;__getitem__()&lt;/code&gt; method that accepts consecutive integer indices starting at zero are also iterables&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Iterables implemented via &lt;code&gt;__getitem__()&lt;/code&gt; must raise &lt;code&gt;IndexError&lt;/code&gt; when they are exhausted&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Iterator&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterator:
-def __init__(self, data):
-    self.index = 0
-    self.data = data
-
-def __iter__(self):
-    return self
-
-def __next__(self):
-    if self.index &amp;gt;= len(self.data):
-        raise StopIteration()
-
-    rslt = self.data[self.index]
-    self.index += 1
-    return rslt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Iterable
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ExampleIterable:
-    def __init__(self):
-        self.data = [1, 2, 3]
-
-    def __iter__(self):
-        return ExampleIterator(self.data)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AnotherIterable&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AnotherIterable:
-    def __init__(self):
-        self.data = [1, 2, 3]
-
-    def __getitem__(self, idx):
-        return self.data[idx]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The extended form of &lt;code&gt;iter()&lt;/code&gt; accepts a zero-argument callable and a sentinel value&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Extended &lt;code&gt;iter()&lt;/code&gt; repeatedly calls the callable argument until it returns the sentinel value&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The values produced by extended &lt;code&gt;iter()&lt;/code&gt; are those returned from the callable&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-&amp;gt;&amp;gt;&amp;gt; ts = iter(datetime.datetime.now, None)
-&amp;gt;&amp;gt;&amp;gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
-&amp;gt;&amp;gt;&amp;gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 13, 373613)
-&amp;gt;&amp;gt;&amp;gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 14, 754588)
-
-# Read file 
-# Content of the file file.txt
-# You are reading 
-# the file
-# you won&#39;t read 
-# the 
-# END
-# but not see the END above
-
-&amp;gt;&amp;gt;&amp;gt; with open(&#39;file.txt&#39;, &#39;rt&#39;) as f:
-...     for line in iter(lambda: f.readline().strip(), &#39;END&#39;):
-...             print(line)
-...
-You are reading
-the file
-you won&#39;t read
-the
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;One use case for extended &lt;code&gt;iter()&lt;/code&gt; is to iterate using simple functions&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Protocol conforming iterators must also be iterable&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sensor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import datetime
-import itertools
-import random
-import time
-
-class Sensor:
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        return random.random()
-
-sensor = Sensor()
-timestamps = iter(datetime.datetime.now, None)
-
-for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
-    print(stamp, value)
-    time.sleep(1)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Python Notes - 5</title>
-      <link>https://harryho.github.io/code/python-notes-5/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/python-notes-5/</guid>
-      <description>
-
-&lt;h2 id=&#34;inheritance-polymorphism&#34;&gt;Inheritance &amp;amp; Polymorphism&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name&lt;/li&gt;
-&lt;li&gt;Subclasses have all of the methods of their base class&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer&lt;/li&gt;
-&lt;li&gt;If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction&lt;/li&gt;
-&lt;li&gt;Python treats &lt;code&gt;__init__()&lt;/code&gt; like any other method&lt;/li&gt;
-&lt;li&gt;Base class &lt;code&gt;__init__()&lt;/code&gt; is not called if overridden&lt;/li&gt;
-&lt;li&gt;Use &lt;code&gt;super()&lt;/code&gt; to call base class &lt;code&gt;__init__()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; takes an object as its first argument and a type as its second&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is an instance of the second argument, or any subclass of the second argument&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types&lt;/li&gt;
-&lt;li&gt;Checking for specific types is rare in Python and is sometimes regarded as bad design&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;isinstance()&lt;/code&gt; determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument&lt;/li&gt;
-&lt;li&gt;Multiple inheritance means having more than one direct base class&lt;/li&gt;
-&lt;li&gt;You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition&lt;/li&gt;
-&lt;li&gt;A class can have as many base classes as you want&lt;/li&gt;
-&lt;li&gt;Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime&lt;/li&gt;
-&lt;li&gt;If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is a tuple of types on a class object which defines the base classes for the class&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is in the same order as in the class definition&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;__bases__&lt;/code&gt; is populated for both single and multiple inheritance&lt;/li&gt;
-&lt;li&gt;Method resolution order defines the order in which Python will search an inheritance graph for methods&lt;/li&gt;
-&lt;li&gt;MRO is short for Method Resolution Order&lt;/li&gt;
-&lt;li&gt;MRO is stored as a tuple of types in the &lt;code&gt;__mro__&lt;/code&gt; attribute of a class&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;mro()&lt;/code&gt; method on type objects returns the contents of &lt;code&gt;__mro__&lt;/code&gt; as a list&lt;/li&gt;
-&lt;li&gt;To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method&lt;/li&gt;
-&lt;li&gt;MRO is dependent on base class declaration order&lt;/li&gt;
-&lt;li&gt;MRO is calculated by Python using the C3 algorithm&lt;/li&gt;
-&lt;li&gt;MRO honors base-class ordering from class definitions&lt;/li&gt;
-&lt;li&gt;MRO puts subclasses before base classes&lt;/li&gt;
-&lt;li&gt;The relative order of classes in an MRO is consistent across all classes&lt;/li&gt;
-&lt;li&gt;It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; operates by using the elements in an MRO that come after some specified type&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;super()&lt;/code&gt; returns a proxy object which forwards calls to the correct objects&lt;/li&gt;
-&lt;li&gt;There are two distinct types of &lt;code&gt;super()&lt;/code&gt; proxies, bound and unbound&lt;/li&gt;
-&lt;li&gt;Unbound &lt;code&gt;super()&lt;/code&gt; proxies are primarily used for implementing other Python features&lt;/li&gt;
-&lt;li&gt;Bound proxies can be bound to either class objects or instances&lt;/li&gt;
-&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a base-class and derived-class argument returns a proxy bound to a class&lt;/li&gt;
-&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with a class and an instance of that class returns a proxy bound to an instance&lt;/li&gt;
-&lt;li&gt;A &lt;code&gt;super()&lt;/code&gt; proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution&lt;/li&gt;
-&lt;li&gt;Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you&lt;/li&gt;
-&lt;li&gt;However, classmethods resolved by class-bound proxies can be called directly&lt;/li&gt;
-&lt;li&gt;Python will raise a TypeError if the second argument is not a subclass or instance of the first argument&lt;/li&gt;
-&lt;li&gt;Inappropriate use of &lt;code&gt;super()&lt;/code&gt; can violate some design constraints * Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside an instance method produces an instance-bound proxy&lt;/li&gt;
-&lt;li&gt;Calling &lt;code&gt;super()&lt;/code&gt; with no arguments inside a classmethod produces a class-bound proxy&lt;/li&gt;
-&lt;li&gt;In both cases, the no-argument form of &lt;code&gt;super()&lt;/code&gt; is the same as calling &lt;code&gt;super()&lt;/code&gt; with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second&lt;/li&gt;
-&lt;li&gt;Since &lt;code&gt;super()&lt;/code&gt; works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another&lt;/li&gt;
-&lt;li&gt;The class object is at the core of Python&amp;rsquo;s object model&lt;/li&gt;
-&lt;li&gt;object is the ultimate base class for all other classes in Python&lt;/li&gt;
-&lt;li&gt;If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base&lt;/li&gt;
-&lt;li&gt;Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.&lt;/li&gt;
-&lt;li&gt;object provides hooks for Python&amp;rsquo;s comparison operators&lt;/li&gt;
-&lt;li&gt;object provides default &lt;code&gt;__repr__()&lt;/code&gt; and &lt;code&gt;__str__()&lt;/code&gt; implementations&lt;/li&gt;
-&lt;li&gt;object implements the core attribute lookup and management functionality in Python&lt;/li&gt;
-&lt;li&gt;Inheritance in Python is best used as a way to share implementation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;explanation-with-example&#34;&gt;Explanation with example&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Example to demo the weird &lt;code&gt;super()&lt;/code&gt; in Python&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from pprint import pprint as pp
-
-class Parent(object):
-    name = &#39;Parent&#39;
-
-    @classmethod
-    def do_otherthing(self):
-        print(&#39;This is from Parent.  {} do_otherthing&#39;.format(self.name))
-        # print(&#39;This is from Parent. do_otherthing {}&#39;.format(self.name))
-
-    def do_something(self):
-        print(&#39;This is from Parent. The name is {}&#39;.format(self.name))
-    
-class Child(Parent):
-    name = &#39;Child&#39;
-
-    @classmethod
-    def do_otherthing(self):
-        print(&#39;This is from Child. {} do_otherthing&#39;.format(self.name))
-        # print(&#39;This is from Child. do_otherthing {}&#39;.format(self.name))
-
-    def do_something(self):
-        print(&amp;quot;This is from Child. The name is {} &amp;quot;.format(self.name))
-    
-class OtherChild(Parent):
-    name = &#39;OtherChild&#39;
-    
-    def do_something(self):
-        print(&amp;quot;This is from OtherChild. The name is {} &amp;quot;.format(self.name)) # I am reading the last book of The Malloreon at the moment. Arends are pretty entertaining
-    
-class OtherOtherChild(Parent):
-    name = &#39;OtherOtherChild&#39;
-    
-    def do_something(self):
-        print(&amp;quot;This is from OtherOtherChild. The name is {} &amp;quot;.format(self.name))
-    
-class GrandChild(Child, OtherChild, OtherOtherChild):
-    name = &#39;GrandChild&#39;
-
-    @classmethod
-    def do_otherthing(self):
-        print(&#39;This is from GrandChild. {} do_otherthing&#39;.format(self.name))
-
-    def do_something(self):
-        print(&amp;quot;This is from GrandChild. The name is {}&amp;quot;.format(self.name))
-
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    pp(Child.__mro__)
-    pp(GrandChild.__mro__)
-
-    c = Child()
-    c.do_something()
-    gc = GrandChild()
-    gc.do_something()
-
-    print(&#39;Class bound super()&#39;)
-    super(Child, Child).do_otherthing()
-    super(Child, GrandChild).do_otherthing()
-    super(GrandChild, GrandChild).do_otherthing()
-
-    print(&#39;Instance bound super()&#39;)
-    super(Child, gc).do_something()
-    super(OtherChild, gc).do_something()
-    super(GrandChild , gc).do_something()
-
-## result 
-
-#(&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
-#&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
-#&amp;lt;class &#39;object&#39;&amp;gt;)
-#(&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
-# &amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
-# &amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
-# &amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
-# &amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
-# &amp;lt;class &#39;object&#39;&amp;gt;)
-# This is from Child. The name is Child 
-# This is from GrandChild. The name is GrandChild
-# Class bound super()
-# This is from Parent.  Child do_otherthing
-# This is from Parent.  GrandChild do_otherthing
-# This is from Child. GrandChild do_otherthing
-# Instance bound super()
-# This is from OtherChild. The name is GrandChild 
-# This is from OtherOtherChild. The name is GrandChild 
-# This is from Child. The name is GrandChild 
-
-
-# Multi-inheritance in Python is very different from other OO language like C++, C#, Java
-# Above result make me surprised a the first time, but after I check the MRO then I can understand why many veterans suggest to avoid multi-inheritance. Its `super` &amp;quot;Magic&amp;quot; really confuses many people.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Let&amp;rsquo;s break down the how the super works with sample code&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Case 1:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;code : &lt;code&gt;super(Child, Child).do_otherthing()&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;Child&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
-&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
-&amp;lt;class &#39;object&#39;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;Child&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Parent&lt;/code&gt; which is after &lt;code&gt;Child&lt;/code&gt;, and bind the &lt;code&gt;Child&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Case 2:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;code : &lt;code&gt;super(GrandChild, GrandChild).do_otherthing()&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of its second argument &lt;code&gt;GrandChild&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
-&amp;lt;class &#39;object&#39;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;GrandChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;Child&lt;/code&gt; which is after &lt;code&gt;GrandChild&lt;/code&gt;, and bind the &lt;code&gt;GrandChild&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Case 3:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;code : &lt;code&gt;super(OtherChild, gc).do_something()&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; takes the MRO of the type &lt;code&gt;GrandChild&lt;/code&gt; of its second argument &lt;code&gt;gc&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;__main__.GrandChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.Child&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.OtherChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.OtherOtherChild&#39;&amp;gt;,
-&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;,
-&amp;lt;class &#39;object&#39;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; finds the first argument &lt;code&gt;OtherChild&lt;/code&gt; in that MRO, and uses everything after it in the MRO for method resolution&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;super&lt;/code&gt; uses the method from &lt;code&gt;OtherOtherChild&lt;/code&gt; which is after &lt;code&gt;OtherChild&lt;/code&gt;, and bind the &lt;code&gt;gc&lt;/code&gt; class object&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
@@ -19649,6 +19985,632 @@ namespace MyScheduler
 &lt;h3 id=&#34;uninstall-window-service&#34;&gt;Uninstall Window Service&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &amp;lt;app_path&amp;gt;\MyScheduler.exe 
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Java Notes, Part-3</title>
+      <link>https://harryho.github.io/code/java-notes-3/</link>
+      <pubDate>Tue, 10 Feb 2015 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/java-notes-3/</guid>
+      <description>
+
+&lt;h1 id=&#34;date-time-api&#34;&gt;Date-Time API&lt;/h1&gt;
+
+&lt;p&gt;Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instant
+
+&lt;ul&gt;
+&lt;li&gt;represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;LocalDate,  LocalTime, LocalDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;represents human readable date, time, and datetime without a time zone.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;OffsetTime, OffsetDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It represent a time and datetime with a zone offset from UTC.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ZonedDateTime&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;iso-8601-standards-for-datetime&#34;&gt;ISO-8601 Standards for Datetime&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[date]T[time][zone offset]&lt;/li&gt;
+&lt;li&gt;A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Epoch is Midnight January 1, 1970 UTC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;useful-datetime-related-enums&#34;&gt;Useful Datetime-Related Enums&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Month&lt;/li&gt;
+&lt;li&gt;DayOfWeek&lt;/li&gt;
+&lt;li&gt;ChronoField&lt;/li&gt;
+&lt;li&gt;ChronoUnit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;period&#34;&gt;Period&lt;/h3&gt;
+
+&lt;p&gt;A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.&lt;/p&gt;
+
+&lt;h3 id=&#34;partial&#34;&gt;Partial&lt;/h3&gt;
+
+&lt;p&gt;Partials
+A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.&lt;/p&gt;
+
+&lt;h3 id=&#34;adjusting-dates&#34;&gt;Adjusting Dates&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the &lt;code&gt;TemporalAdjuster&lt;/code&gt; interface. The interface has one method, adjustInto(), that takes a Temporal and returns a &lt;code&gt;Temporal&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;formatting&#34;&gt;Formatting&lt;/h3&gt;
+
+&lt;p&gt;The most important point to keep in mind is that formatting and parsing are
+always performed by an object of the DateTimeFormatter class.&lt;/p&gt;
+
+&lt;h2 id=&#34;datetimeapidemo&#34;&gt;DateTimeApiDemo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.time.Duration;
+import java.time.DayOfWeek;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime; 
+import java.time.LocalDateTime; 
+
+import java.time.Month;
+import java.time.MonthDay;
+
+import java.time.OffsetDateTime;
+import java.time.Period;
+
+
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+
+
+import java.time.Year;
+import java.time.YearMonth;
+
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+
+import java.util.Locale;
+import java.util.Set;
+
+
+import static java.time.Month.JANUARY;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
+public class DateTimeApiDemo {
+
+    
+    public static String format(Temporal co, String pattern) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        return fmt.format(co);
+    }
+
+    public static void parseStr(DateTimeFormatter formatter, String text) {
+        try {
+            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
+            if (ta instanceof OffsetDateTime) {
+                OffsetDateTime odt = OffsetDateTime.from(ta);
+                System.out.println(&amp;quot;OffsetDateTime: &amp;quot; + odt);
+            } else if (ta instanceof LocalDateTime) {
+                LocalDateTime ldt = LocalDateTime.from(ta);
+                System.out.println(&amp;quot;LocalDateTime: &amp;quot; + ldt);
+            } else if (ta instanceof LocalDate) {
+                LocalDate ld = LocalDate.from(ta);
+                System.out.println(&amp;quot;LocalDate: &amp;quot; + ld);
+            } else {
+                System.out.println(&amp;quot;Parsing returned: &amp;quot; + ta);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Get current date, time, and datetime 
+        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
+        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
+        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
+        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
+
+        //  ofXXX() method
+        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
+        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
+        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
+        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
+
+        // The plusXXX( ) and minusXXX( ) Methods
+        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
+        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
+        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
+        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
+        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
+        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
+
+        // Instant 
+        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
+        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
+
+        Duration d1 = Duration.ofSeconds(55);
+        Duration d2 = Duration.ofSeconds(-17);
+
+        // Compare instants
+        System.out.println(&amp;quot;i1.isBefore(i2):&amp;quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
+        System.out.println(&amp;quot;i1.isAfter(i2):&amp;quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
+
+        // Add and subtract durations to instants
+        Instant i3 = i1.plus(d1);
+        Instant i4 = i2.minus(d2);
+        System.out.println(&amp;quot;i1.plus(d1):&amp;quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
+
+        System.out.println(&amp;quot;i2.minus(d2):&amp;quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
+
+        // Add two durations
+        System.out.println(&amp;quot;d1.plus(d2):&amp;quot; + d1.plus(d2)); // d1.plus(d2):PT38S
+
+
+        // Print All Zone Id
+        Set&amp;lt;String&amp;gt; zoneIds = ZoneId.getAvailableZoneIds();
+        for (String zoneId: zoneIds) {
+          System.out.println(zoneId);
+        }
+
+        // DayOfWeek
+        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
+
+        // Chrono 
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(&amp;quot;Year: &amp;quot; + now.get(ChronoField.YEAR));
+        System.out.println(&amp;quot;Month: &amp;quot; + now.get(ChronoField.MONTH_OF_YEAR));
+        System.out.println(&amp;quot;Day: &amp;quot; + now.get(ChronoField.DAY_OF_MONTH));
+        System.out.println(&amp;quot;Hour-of-day: &amp;quot; + now.get(ChronoField.HOUR_OF_DAY));
+        System.out.println(&amp;quot;Hour-of-AMPM: &amp;quot; + now.get(ChronoField.HOUR_OF_AMPM));
+        System.out.println(&amp;quot;AMPM-of-day: &amp;quot; + now.get(ChronoField.AMPM_OF_DAY));
+
+        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
+        Period p2 = Period.ofDays(25); // 25 days
+        Period p3 = Period.ofMonths(-3); // -3 months
+        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
+
+        // Date Adjuster
+        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        System.out.println(ld3);
+        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+        System.out.println(ld3);
+
+        // Date Time Format         
+        System.out.println(format(ld, &amp;quot;M/d/yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MM/dd/yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;MMMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;EEEE, MMMM dd, yyyy&amp;quot;));
+        System.out.println(format(ld, &amp;quot;&#39;Month&#39; q &#39;in&#39; QQQ&amp;quot;));
+        System.out.println(format(ld, &amp;quot;[MM-dd-yyyy][&#39; at&#39; HH:mm:ss]&amp;quot;));
+
+        // Parse date time
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&amp;quot;yyyy-MM-dd[&#39;T&#39;HH:mm:ss[Z]]&amp;quot;);
+        parseStr(parser, &amp;quot;2012-05-31&amp;quot;); //  LocalDate: 2012-05-31
+        parseStr(parser, &amp;quot;2012-05-31T16:30:12&amp;quot;); // LocalDateTime: 2012-05-31T16:30:12
+        parseStr(parser, &amp;quot;2012-05-31T16:30:12-0500&amp;quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
+        parseStr(parser, &amp;quot;2012-05-31Hello&amp;quot;); // Text &#39;2012-05-31Hello&#39; could not be parsed, unparsed text found at index 10
+
+
+
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;lamda&#34;&gt;Lamda&lt;/h1&gt;
+
+&lt;h2 id=&#34;lambda-best-practices&#34;&gt;Lambda Best Practices&lt;/h2&gt;
+
+&lt;h3 id=&#34;use-interfaces&#34;&gt;Use Interfaces&lt;/h3&gt;
+
+&lt;p&gt;The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
+in type signatures. In general, you should avoid using the functional interface types directly and instead
+provide single-method interfaces as arguments to your methods. These interfaces become a way to create
+self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
+for your user to provide an actual Java type.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-method-reference&#34;&gt;Use Method Reference&lt;/h3&gt;
+
+&lt;p&gt;As much as possible, use a method reference instead of a lambda. Method references are not only shorter
+and easier to read, but using method references will get you thinking directly about the methods as values.&lt;/p&gt;
+
+&lt;h3 id=&#34;define-lambdas-inline&#34;&gt;Define Lambdas Inline&lt;/h3&gt;
+
+&lt;p&gt;When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
+lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
+inline is that it will allow your code to be more flexible when types change: you are letting type inference do
+more heavy lifting for you, and adapting your code to changing contexts.&lt;/p&gt;
+
+&lt;h3 id=&#34;lambdas-should-always-be-threadsafe&#34;&gt;Lambdas Should Always Be Threadsafe&lt;/h3&gt;
+
+&lt;p&gt;As we go through the rest of this book, we will see many places where lambdas make concurrent programming
+much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
+much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
+instance method handles, since thread-dangerous state can often be hiding within those instances.&lt;/p&gt;
+
+&lt;h3 id=&#34;don-t-use-null&#34;&gt;Don’t Use Null&lt;/h3&gt;
+
+&lt;p&gt;The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
+no need for it. Whenever you have a method, you should be explicit about whether or not you accept
+null, and you generally shouldn’t accept it. This will save you from NullPointerException cropping up
+in obnoxious places, far from the site of the actual error. This is an especially painful problem when you
+start working with streams and lambdas, because the stack trace may not be very useful for you when
+you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
+soon as it occurs.&lt;/p&gt;
+
+&lt;h3 id=&#34;don-t-release-zalgo&#34;&gt;Don’t Release Zalgo&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;build-complexity-from-simple-parts&#34;&gt;Build Complexity from Simple Parts&lt;/h3&gt;
+
+&lt;h3 id=&#34;use-types-and-the-compiler-to-your-advantage&#34;&gt;Use Types and the Compiler to Your Advantage&lt;/h3&gt;
+
+&lt;h2 id=&#34;common-functional-interfaces&#34;&gt;Common functional Interfaces&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Functional Interface&lt;/th&gt;
+&lt;th&gt;Parameter Types&lt;/th&gt;
+&lt;th&gt;Return&lt;/th&gt;
+&lt;th&gt;Abstract Description Method&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Other Methods&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Runnable&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;run&lt;/td&gt;
+&lt;td&gt;Runs an action&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Supplier&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;get&lt;/td&gt;
+&lt;td&gt;Supplies a value of type T&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Consumer&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;accept&lt;/td&gt;
+&lt;td&gt;Consumes a  value of type T&lt;/td&gt;
+&lt;td&gt;chain&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiConsumer&lt;T,U&gt;&lt;/td&gt;
+&lt;td&gt;T,U&lt;/td&gt;
+&lt;td&gt;void&lt;/td&gt;
+&lt;td&gt;accept&lt;/td&gt;
+&lt;td&gt;Consumes a  value of type T and U&lt;/td&gt;
+&lt;td&gt;chain&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Function&lt;T, R&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A function with argument oftype T&lt;/td&gt;
+&lt;td&gt;compose,andThen,identity&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiFunction&lt;T, U, R&gt;&lt;/td&gt;
+&lt;td&gt;T,U&lt;/td&gt;
+&lt;td&gt;R&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A function with argument of type T and U&lt;/td&gt;
+&lt;td&gt;andThen&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;UnaryOperator&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A unary operator on type T&lt;/td&gt;
+&lt;td&gt;compose,andThen,identity&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiUnaryOperator&lt;T,T&gt;&lt;/td&gt;
+&lt;td&gt;T,T&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;apply&lt;/td&gt;
+&lt;td&gt;A binary operator on type T&lt;/td&gt;
+&lt;td&gt;andThen&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Predicate&lt;T&gt;&lt;/td&gt;
+&lt;td&gt;T&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;test&lt;/td&gt;
+&lt;td&gt;A Boolean-valued function&lt;/td&gt;
+&lt;td&gt;and, or, negate, isEqual&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;BiPredicate&lt;T,T&gt;&lt;/td&gt;
+&lt;td&gt;T,T&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;test&lt;/td&gt;
+&lt;td&gt;A Boolean-valued function with tow arguments&lt;/td&gt;
+&lt;td&gt;and, or, negate&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;method-reference&#34;&gt;Method Reference&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Syntax&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;TypeName::staticMethod&lt;/td&gt;
+&lt;td&gt;A method reference to a static method of a class, an interface, or an enum&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;objectRef::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of the specified object&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ClassName::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of an arbitrary object of the specified class&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;TypeName.super::instanceMethod&lt;/td&gt;
+&lt;td&gt;A method reference to an instance method of the supertype of a particular object&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ClassName::new&lt;/td&gt;
+&lt;td&gt;A constructor reference to the constructor of the specified class&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ArrayTypeName::new&lt;/td&gt;
+&lt;td&gt;An array constructor reference to the constructor of the specified&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;array type&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;lambda-demo&#34;&gt;Lambda Demo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Locale;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
+
+public class LambdaDemo {
+
+    public static void main(String[] args) {
+
+        // FunctionalInterface 
+        System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y));// w w  w .j  av a 2s.  c om
+        System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y));
+        System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y));
+        System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y));
+
+        String[] strArray = new String[] { &amp;quot;abc&amp;quot;, &amp;quot;klm&amp;quot;, &amp;quot;xyz&amp;quot;, &amp;quot;pqr&amp;quot; };
+        List list = Arrays.asList(strArray);
+
+        // Default Methods
+        list.forEach(System.out::println);
+
+        Arrays.sort(strArray, (first, second) -&amp;gt; first.compareToIgnoreCase(second));
+        list = Arrays.asList(strArray);
+
+        System.out.println(&amp;quot;After sorting ... &amp;quot;);
+        list.forEach(System.out::println);
+
+        // Common Functional Interfaces
+        // Runnable
+        repeat(5, () -&amp;gt; System.out.println(&amp;quot;Hello&amp;quot;));
+
+        UnaryOperator&amp;lt;String&amp;gt; upperCase = str -&amp;gt; str.toUpperCase();
+        BinaryOperator&amp;lt;String&amp;gt; concat = (left, right) -&amp;gt; left + right;
+
+        System.out.println(&amp;quot; UnaryOperator upperCase &amp;quot; + upperCase.apply(&amp;quot;hello&amp;quot;));
+        System.out.println(&amp;quot;  BinaryOperator&amp;lt;String&amp;gt; concat &amp;quot; + concat.apply(&amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;));
+
+        // Function 
+        Function&amp;lt;Long, Long&amp;gt; square = x -&amp;gt; x * x;
+        Function&amp;lt;Long, Long&amp;gt; plusOne = x -&amp;gt; x + 1;
+        // Function with andThen, 
+        Function&amp;lt;Long, Long&amp;gt; squarePlusOne = square.andThen(plusOne);
+        Function&amp;lt;Long, Long&amp;gt; plusOneSquare = square.compose(plusOne);
+        System.out.println(&amp;quot; 5 squarePlusOne is &amp;quot; + squarePlusOne.apply(5L)); // 26 
+        System.out.println(&amp;quot; 5 plusOneSquare is  &amp;quot; + plusOneSquare.apply(5L)); // 36
+
+        // Predicate
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThree = x -&amp;gt; x % 3 == 0;
+        Predicate&amp;lt;Integer&amp;gt; divisibleByFive = x -&amp;gt; x % 5 == 0;
+        Predicate&amp;lt;Integer&amp;gt; isNegative = x -&amp;gt; x &amp;lt; 0;
+        // Predicate with AND , OR , NOT
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
+        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
+        Predicate&amp;lt;Integer&amp;gt; isPositive = isNegative.negate();
+
+        System.out.println(&amp;quot; 15 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeAndFive.test(15));
+        System.out.println(&amp;quot; 7 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeOrFive.test(7));
+        System.out.println(&amp;quot; -1 is isPositive &amp;quot; + isPositive.test(7));
+
+        // static method reference 
+        Function&amp;lt;Integer, String&amp;gt; toBinary = x -&amp;gt; Integer.toBinaryString(x);
+        System.out.println(toBinary.apply(19));
+
+        // Using a method reference
+        Function&amp;lt;Integer, String&amp;gt; toBinary2 = Integer::toBinaryString;
+        System.out.println(toBinary2.apply(19));
+
+        // static method lambda expression
+        BiFunction&amp;lt;Integer, Integer, Integer&amp;gt; sum = (a, b) -&amp;gt; Integer.sum(a, b);
+        System.out.println(sum.apply(3, 4));
+
+        // Instance method
+        Supplier&amp;lt;Person&amp;gt; personSup = () -&amp;gt; new Person();
+        Function&amp;lt;String, Person&amp;gt; personFunc = (x) -&amp;gt; new Person(x);
+
+        BiFunction&amp;lt;String, String, Person&amp;gt; personBiFunc = (x, y) -&amp;gt; new Person(x, y);
+        // Consumer&amp;lt;String&amp;gt; personCon = (Person p) -&amp;gt; p.setTitle;
+
+        System.out.println(&amp;quot; personSup &amp;quot; + personSup.get());
+        System.out.println(&amp;quot; personFunc &amp;quot; + personFunc.apply(&amp;quot;John Doe&amp;quot;));
+        System.out.println(&amp;quot; personBiFunc &amp;quot; + personBiFunc.apply(&amp;quot;John&amp;quot;, &amp;quot;Doe&amp;quot;));
+
+        // Recursive Lambda Expressions
+
+        IntFunction&amp;lt;Long&amp;gt; factorialCalc = new IntFunction&amp;lt;Long&amp;gt;() {
+            @Override
+            public Long apply(int n) {
+                if (n &amp;lt; 0) {
+                    String msg = &amp;quot;Number must not be negative.&amp;quot;;
+                    throw new IllegalArgumentException(msg);
+                }
+                if (n == 0) {
+                    return 1L;
+                } else {
+                    return n * this.apply(n - 1);
+                }
+            }
+        };
+
+        int n = 5;
+        long fact = factorialCalc.apply(n);
+        System.out.println(&amp;quot;Factorial of &amp;quot; + n + &amp;quot; is &amp;quot; + fact);
+
+    }
+
+    private static int engine(Calculator calculator) {
+        int x = 2, y = 4;
+        return calculator.calculate(x, y);
+    }
+
+    public static void repeat(int n, Runnable action) {
+        for (int i = 0; i &amp;lt; n; i++)
+            action.run();
+    }
+}
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int x, int y);
+}
+
+final class Person {
+    String firstName;
+    String lastName;
+    String fullName;
+    String title;
+
+    public Person() {
+        System.out.println(&amp;quot; Person() constructor called &amp;quot;);
+    }
+
+    public Person(String fullName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&amp;quot; Person( fullName ) constructor called &amp;quot;);
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&amp;quot; Person(firstName, lastName ) constructor called &amp;quot;);
+    }
+
+    public void setTitle(String t) {
+        this.title = t;
+        System.out.println(&amp;quot; Person setTitle ( t ) called &amp;quot;);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFullName() {
+        return fullName == null ? firstName != null ? firstName : &amp;quot;Unknown&amp;quot; : fullName;
+    }
+
+    @Override
+    public String toString() {
+        return &amp;quot;name = &amp;quot; + getFullName() + &amp;quot;, title = &amp;quot; + title != null ? title : &amp;quot;Unknown&amp;quot;;
+    }
+}
+
+
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -20500,359 +21462,9 @@ true
     </item>
     
     <item>
-      <title>Java Notes, Part-1</title>
-      <link>https://harryho.github.io/code/java-notes-1/</link>
-      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/java-notes-1/</guid>
-      <description>
-
-&lt;h3 id=&#34;prelude&#34;&gt;Prelude&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Java notes is the place, which I keep the good practice and solution from my projects and research.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;refactor-constant-variables-with-enum&#34;&gt;Refactor constant variables with Enum&lt;/h3&gt;
-
-&lt;p&gt;Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.&lt;/p&gt;
-
-&lt;p&gt;Before Java 1.5 you will following coding in many Java program.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    // Use interface or abstract class as constant variable container
-    public interface Country {
-         public static final String AU = &amp;quot;Australian&amp;quot;;
-         public static final String UK = &amp;quot;United Kingdom&amp;quot;; 
-         public static final String US = &amp;quot;United State&amp;quot;; 
-    }
-    
-    public class Util {
-         
-        public static String getLanguageCode(String country) {
-    
-            String languageCode = &amp;quot;en&amp;quot;;
-            switch (country) {
-                case Country.AU:
-                    languageCode = &amp;quot;en-au&amp;quot;;
-                    break;
-                case Country.UK:
-                    languageCode = &amp;quot;en-uk&amp;quot;;
-                    break;
-                case Country.US:
-                    languageCode = &amp;quot;en-us&amp;quot;;
-                    break;
-            }
-            return languageCode;
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Above program looks very good. Please take a close look and check it carefully. You will find the program will never return &lt;strong&gt;&lt;em&gt;en-au&lt;/em&gt;&lt;/strong&gt;, since there is a typo in the constant AU. It should be &lt;strong&gt;&lt;em&gt;Australia&lt;/em&gt;&lt;/strong&gt; instead of &lt;strong&gt;&lt;em&gt;Australian&lt;/em&gt;&lt;/strong&gt;. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.&lt;/p&gt;
-
-&lt;p&gt;After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// Use Enum as constant variable container
-public enum  Country {
-    Australia, UnitedKingdom, UnitedState
-}
-
-public class Util {
-        
-    public static String getLanguageCode(Country country) {
-
-        String languageCode = &amp;quot;en&amp;quot;;
-        switch (country) {
-            case Australia:
-                languageCode = &amp;quot;en-au&amp;quot;;
-                break;
-            case UnitedKingdom:
-                languageCode = &amp;quot;en-uk&amp;quot;;
-                break;
-            case UnitedState:
-                languageCode = &amp;quot;en-us&amp;quot;;
-                break;
-        }
-        return languageCode;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&amp;rsquo;t refactor your static constants container, it is time to improve it now.&lt;/p&gt;
-
-&lt;p&gt;After Java Java 1.7, there are some new features. One of these new features is Switch statement. Now it supports String. It is a great for Java developer.With this new feature, the old Enum can be enhanced and the Util class can provide more handy methods (Overload method getLanguageCode) for development.&lt;/p&gt;
-
-&lt;p&gt;New Enum class can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now it can be overrided with toString to return different constant name.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// It can return customized name and simplify coding 
-public enum Country {
-    AU(&amp;quot;Australia&amp;quot;, &amp;quot;au&amp;quot;,&amp;quot;en-au&amp;quot;), 
-    UK(&amp;quot;United Kingdom&amp;quot;, &amp;quot;en-uk&amp;quot;),
-    US(&amp;quot;United State&amp;quot;, &amp;quot;us&amp;quot;,&amp;quot;en-us&amp;quot;);
-
-    String countryName;
-    String countryCode;
-    String languageCode;
-    
-    private Country(String name, String code) {
-        countryName = name;
-        countryCode = code;
-    }
-
-    public String getCode() {
-        return countryCode;
-    }
-    
-    public String getLanguageCode() {
-        return languageCode;
-    }
-    
-    @Override
-    public String toString() {
-        return countryName;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Util {
-        
-    public static Country convertCountryNameOrCode(String nameOrCode ) {
-        
-        Country country = null;
-        switch (nameOrCode) {
-            case &amp;quot;au&amp;quot;:
-            case &amp;quot;AU&amp;quot;:
-            case &amp;quot;Australia&amp;quot;:
-                country = Country.AU;
-                break;
-            case &amp;quot;uk&amp;quot;:
-            case &amp;quot;UK&amp;quot;:  
-            case &amp;quot;United Kingdom&amp;quot;:
-                country = Country.UK;
-                break;
-            case &amp;quot;us&amp;quot;:
-            case &amp;quot;US&amp;quot;:  
-            case &amp;quot;United State&amp;quot;:
-                country = Country.UK;
-                break;
-        }
-        return country;
-    }
-    
-    public static String getCountryName(  Country country ){
-        String countryName = null;
-        switch (country){
-            case AU:
-                countryName = Country.AU.toString();
-                break;
-            case US:
-                countryName = Country.UK.toString();
-                break;
-            case UK:
-                countryName = Country.US.toString();
-                break;
-            default:
-                System.err.println(&amp;quot;Unknow Country&amp;quot;);
-                assert false;
-                break;
-        }
-        return countryName;
-    }
-
-    
-    public static String getCountryCode(  Country country ){
-        String countryCode = null;
-        switch (country){
-            case AU:
-                countryCode = Country.AU.getCode();
-                break;
-            case US:
-                countryCode = Country.UK.getCode();
-                break;
-            case UK:
-                countryCode = Country.US.getCode();
-                break;
-            default:
-                System.err.println(&amp;quot;Unknow Country&amp;quot;);
-                assert false;
-                break;
-        }
-        return countryCode;
-    }
-        
-    public static String getLanguageCode(Country country) {
-    
-            String languageCode = &amp;quot;en&amp;quot;;
-            switch (country) {
-                case AU:
-                    languageCode = Country.AU.getLanguageCode() ;
-                    break;
-                case UK:
-                    languageCode =  Country.UK.getLanguageCode();
-                    break;
-                case US:
-                    languageCode =  Country.US.getLanguageCode();
-                    break;
-            }
-            return languageCode;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features.&lt;/p&gt;
-
-&lt;h3 id=&#34;good-stuff-from-not-shiny-java-7&#34;&gt;Good stuff from not shiny Java 7&lt;/h3&gt;
-
-&lt;p&gt;When the Java 7 was released, I was kind of disappointed without lamda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.&lt;/p&gt;
-
-&lt;p&gt;To be hoenst, before Java 1.7, Coding file manipulation in Java is very headache task. I say &amp;ldquo;headache&amp;rdquo; it doesn&amp;rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.&lt;/p&gt;
-
-&lt;h4 id=&#34;better-file-visitor-implementation&#34;&gt;Better file visitor implementation&lt;/h4&gt;
-
-&lt;p&gt;Following is simple customizaed file visitor which has been the part of my old util.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-
-public class CustomFileVisitor extends SimpleFileVisitor&amp;lt;Path&amp;gt; {
-    @Override
-    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
-        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
-        return FileVisitResult.CONTINUE;
-        }
-
-        @Override
-    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
-        System.out.println( &amp;quot;post visit dir :  &amp;quot;+  dir );
-        return FileVisitResult.CONTINUE;
-        }
-
-    @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
-            throws IOException {
-         if ( attr.isSymbolicLink() )
-          { System.out.println( &amp;quot; symbolic link  :  &amp;quot;+  file  );
-          
-          }else if (  attr.isSymbolicLink() ){            
-              System.out.println( &amp;quot; regular file : &amp;quot;+ file );
-          }
-        return FileVisitResult.CONTINUE;
-    }
-     
-    @Override
-    public FileVisitResult visitFileFailed(Path file, IOException exc)
-            throws IOException {        
-         System.err.println( exc.getMessage());
-        return FileVisitResult.CONTINUE;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To use this customized  is so easy. Just 3 lines coding you can test it by yourself.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;        CustomFileVisitor fileVisitor = new CustomFileVisitor();
-        Path path = Paths.get(&amp;quot;TestDir&amp;quot;);
-        Files.walkFileTree(path, fileVisitor);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;arm&#34;&gt;ARM&lt;/h4&gt;
-
-&lt;p&gt;Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the &lt;code&gt;using&lt;/code&gt; statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men&amp;rsquo;s mistakes; fools by their own.&lt;/p&gt;
-
-&lt;p&gt;In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource. Following are comparison of old and new style.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Snippet of old style&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;FileInputStream exchangeCurrencyReader= null;
-FileOutputStream exchangeCurrencyWriter = null;
-try {
-    exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    int var;
-    while (var = exchangeCurrencyReader.read()) != -1)
-        exchangeCurrencyWriter.write(var);
-} 
-finally {
-    if (exchangeCurrencyReader!= null)
-        exchangeCurrencyReader.close();
-    if (exchangeCurrencyWriter!= null)
-        exchangeCurrencyWriter.close();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Code in Java 7&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&amp;quot;AUDvsUSD.txt&amp;quot;);
-    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&amp;quot;AUDvsUSD.txt&amp;quot;)){
-      int var;
-      while((var= exchangeCurrencyReader.read()) != -1 )
-            exchangeCurrencyWriter.write();
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.&lt;/p&gt;
-
-&lt;h4 id=&#34;new-file-change-monitor-service&#34;&gt;New file change monitor service&lt;/h4&gt;
-
-&lt;p&gt;After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.&lt;/p&gt;
-
-&lt;p&gt;Usually most Java based system somehow needs such monitor function, there will be separate process or thread to run this service, and there should be a call back handler triggered by this service. Everytime there is any file amended, the service will trigger the call back handler to complete some tasks.&lt;/p&gt;
-
-&lt;p&gt;Following is sample of file watching service. I removed call back part which is relevant to the business.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
-import java.util.HashMap;
-import java.util.Map;
-
-public class FileWatchService {
-
-    public static void watchFileUpdate() {
-        try (WatchService service = FileSystems.getDefault().newWatchService()) {
-            Map&amp;lt;WatchKey, Path&amp;gt; eventMap = new HashMap&amp;lt;&amp;gt;();
-            Path dir = Paths.get(&amp;quot;TestDir&amp;quot;);
-
-            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
-
-            WatchKey key;
-            do {
-                key = service.take();
-                Path eventPath = eventMap.get(key);
-                for (WatchEvent&amp;lt;?&amp;gt; event : key.pollEvents()) {
-                    WatchEvent.Kind&amp;lt;?&amp;gt; kind = event.kind();
-                    Path path = (Path) event.context();
-                    System.out.println(eventPath + &amp;quot; : &amp;quot; + kind + &amp;quot;  : &amp;quot; + path);
-                }
-            } while (key.reset());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public static void main (String [] args ){
-       watchFileUpdate();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Java Notes, Part-2</title>
       <link>https://harryho.github.io/code/java-notes-2/</link>
-      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
+      <pubDate>Mon, 08 Jul 2013 14:59:31 +1100</pubDate>
       
       <guid>https://harryho.github.io/code/java-notes-2/</guid>
       <description>
@@ -21625,632 +22237,6 @@ public class GrayscaleImageAction extends RecursiveAction {
         ImageIO.write(bufferedImage, &amp;quot;jpg&amp;quot;, new File(args[1]));
     }
 }
-
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Java Notes, Part-3</title>
-      <link>https://harryho.github.io/code/java-notes-3/</link>
-      <pubDate>Sat, 10 Dec 2011 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/java-notes-3/</guid>
-      <description>
-
-&lt;h1 id=&#34;date-time-api&#34;&gt;Date-Time API&lt;/h1&gt;
-
-&lt;p&gt;Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Instant
-
-&lt;ul&gt;
-&lt;li&gt;represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;LocalDate,  LocalTime, LocalDateTime&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;represents human readable date, time, and datetime without a time zone.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;OffsetTime, OffsetDateTime&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It represent a time and datetime with a zone offset from UTC.
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;ZonedDateTime&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;iso-8601-standards-for-datetime&#34;&gt;ISO-8601 Standards for Datetime&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[date]T[time][zone offset]&lt;/li&gt;
-&lt;li&gt;A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Epoch is Midnight January 1, 1970 UTC&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;useful-datetime-related-enums&#34;&gt;Useful Datetime-Related Enums&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Month&lt;/li&gt;
-&lt;li&gt;DayOfWeek&lt;/li&gt;
-&lt;li&gt;ChronoField&lt;/li&gt;
-&lt;li&gt;ChronoUnit&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;period&#34;&gt;Period&lt;/h3&gt;
-
-&lt;p&gt;A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.&lt;/p&gt;
-
-&lt;h3 id=&#34;partial&#34;&gt;Partial&lt;/h3&gt;
-
-&lt;p&gt;Partials
-A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.&lt;/p&gt;
-
-&lt;h3 id=&#34;adjusting-dates&#34;&gt;Adjusting Dates&lt;/h3&gt;
-
-&lt;p&gt;Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the &lt;code&gt;TemporalAdjuster&lt;/code&gt; interface. The interface has one method, adjustInto(), that takes a Temporal and returns a &lt;code&gt;Temporal&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;formatting&#34;&gt;Formatting&lt;/h3&gt;
-
-&lt;p&gt;The most important point to keep in mind is that formatting and parsing are
-always performed by an object of the DateTimeFormatter class.&lt;/p&gt;
-
-&lt;h2 id=&#34;datetimeapidemo&#34;&gt;DateTimeApiDemo&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.time.Duration;
-import java.time.DayOfWeek;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime; 
-import java.time.LocalDateTime; 
-
-import java.time.Month;
-import java.time.MonthDay;
-
-import java.time.OffsetDateTime;
-import java.time.Period;
-
-
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAdjusters;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
-
-
-import java.time.Year;
-import java.time.YearMonth;
-
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
-
-import java.util.Locale;
-import java.util.Set;
-
-
-import static java.time.Month.JANUARY;
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HOURS;
-import static java.time.temporal.ChronoUnit.MINUTES;
-
-
-public class DateTimeApiDemo {
-
-    
-    public static String format(Temporal co, String pattern) {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
-        return fmt.format(co);
-    }
-
-    public static void parseStr(DateTimeFormatter formatter, String text) {
-        try {
-            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
-            if (ta instanceof OffsetDateTime) {
-                OffsetDateTime odt = OffsetDateTime.from(ta);
-                System.out.println(&amp;quot;OffsetDateTime: &amp;quot; + odt);
-            } else if (ta instanceof LocalDateTime) {
-                LocalDateTime ldt = LocalDateTime.from(ta);
-                System.out.println(&amp;quot;LocalDateTime: &amp;quot; + ldt);
-            } else if (ta instanceof LocalDate) {
-                LocalDate ld = LocalDate.from(ta);
-                System.out.println(&amp;quot;LocalDate: &amp;quot; + ld);
-            } else {
-                System.out.println(&amp;quot;Parsing returned: &amp;quot; + ta);
-            }
-        } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void main(String[] args) {
-
-        // Get current date, time, and datetime 
-        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
-        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
-        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
-        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
-
-        //  ofXXX() method
-        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
-        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
-        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
-        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
-
-        // The plusXXX( ) and minusXXX( ) Methods
-        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
-        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
-        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
-        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
-        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
-        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
-
-        // Instant 
-        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
-        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
-
-        Duration d1 = Duration.ofSeconds(55);
-        Duration d2 = Duration.ofSeconds(-17);
-
-        // Compare instants
-        System.out.println(&amp;quot;i1.isBefore(i2):&amp;quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
-        System.out.println(&amp;quot;i1.isAfter(i2):&amp;quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
-
-        // Add and subtract durations to instants
-        Instant i3 = i1.plus(d1);
-        Instant i4 = i2.minus(d2);
-        System.out.println(&amp;quot;i1.plus(d1):&amp;quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
-
-        System.out.println(&amp;quot;i2.minus(d2):&amp;quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
-
-        // Add two durations
-        System.out.println(&amp;quot;d1.plus(d2):&amp;quot; + d1.plus(d2)); // d1.plus(d2):PT38S
-
-
-        // Print All Zone Id
-        Set&amp;lt;String&amp;gt; zoneIds = ZoneId.getAvailableZoneIds();
-        for (String zoneId: zoneIds) {
-          System.out.println(zoneId);
-        }
-
-        // DayOfWeek
-        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
-
-        // Chrono 
-
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(&amp;quot;Year: &amp;quot; + now.get(ChronoField.YEAR));
-        System.out.println(&amp;quot;Month: &amp;quot; + now.get(ChronoField.MONTH_OF_YEAR));
-        System.out.println(&amp;quot;Day: &amp;quot; + now.get(ChronoField.DAY_OF_MONTH));
-        System.out.println(&amp;quot;Hour-of-day: &amp;quot; + now.get(ChronoField.HOUR_OF_DAY));
-        System.out.println(&amp;quot;Hour-of-AMPM: &amp;quot; + now.get(ChronoField.HOUR_OF_AMPM));
-        System.out.println(&amp;quot;AMPM-of-day: &amp;quot; + now.get(ChronoField.AMPM_OF_DAY));
-
-        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
-        Period p2 = Period.ofDays(25); // 25 days
-        Period p3 = Period.ofMonths(-3); // -3 months
-        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
-
-        // Date Adjuster
-        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
-        System.out.println(ld3);
-        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
-        System.out.println(ld3);
-
-        // Date Time Format         
-        System.out.println(format(ld, &amp;quot;M/d/yyyy&amp;quot;));
-        System.out.println(format(ld, &amp;quot;MM/dd/yyyy&amp;quot;));
-        System.out.println(format(ld, &amp;quot;MMM dd, yyyy&amp;quot;));
-        System.out.println(format(ld, &amp;quot;MMMM dd, yyyy&amp;quot;));
-        System.out.println(format(ld, &amp;quot;EEEE, MMMM dd, yyyy&amp;quot;));
-        System.out.println(format(ld, &amp;quot;&#39;Month&#39; q &#39;in&#39; QQQ&amp;quot;));
-        System.out.println(format(ld, &amp;quot;[MM-dd-yyyy][&#39; at&#39; HH:mm:ss]&amp;quot;));
-
-        // Parse date time
-        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&amp;quot;yyyy-MM-dd[&#39;T&#39;HH:mm:ss[Z]]&amp;quot;);
-        parseStr(parser, &amp;quot;2012-05-31&amp;quot;); //  LocalDate: 2012-05-31
-        parseStr(parser, &amp;quot;2012-05-31T16:30:12&amp;quot;); // LocalDateTime: 2012-05-31T16:30:12
-        parseStr(parser, &amp;quot;2012-05-31T16:30:12-0500&amp;quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
-        parseStr(parser, &amp;quot;2012-05-31Hello&amp;quot;); // Text &#39;2012-05-31Hello&#39; could not be parsed, unparsed text found at index 10
-
-
-
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;lamda&#34;&gt;Lamda&lt;/h1&gt;
-
-&lt;h2 id=&#34;lambda-best-practices&#34;&gt;Lambda Best Practices&lt;/h2&gt;
-
-&lt;h3 id=&#34;use-interfaces&#34;&gt;Use Interfaces&lt;/h3&gt;
-
-&lt;p&gt;The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
-in type signatures. In general, you should avoid using the functional interface types directly and instead
-provide single-method interfaces as arguments to your methods. These interfaces become a way to create
-self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
-for your user to provide an actual Java type.&lt;/p&gt;
-
-&lt;h3 id=&#34;use-method-reference&#34;&gt;Use Method Reference&lt;/h3&gt;
-
-&lt;p&gt;As much as possible, use a method reference instead of a lambda. Method references are not only shorter
-and easier to read, but using method references will get you thinking directly about the methods as values.&lt;/p&gt;
-
-&lt;h3 id=&#34;define-lambdas-inline&#34;&gt;Define Lambdas Inline&lt;/h3&gt;
-
-&lt;p&gt;When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
-lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
-inline is that it will allow your code to be more flexible when types change: you are letting type inference do
-more heavy lifting for you, and adapting your code to changing contexts.&lt;/p&gt;
-
-&lt;h3 id=&#34;lambdas-should-always-be-threadsafe&#34;&gt;Lambdas Should Always Be Threadsafe&lt;/h3&gt;
-
-&lt;p&gt;As we go through the rest of this book, we will see many places where lambdas make concurrent programming
-much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
-much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
-instance method handles, since thread-dangerous state can often be hiding within those instances.&lt;/p&gt;
-
-&lt;h3 id=&#34;don-t-use-null&#34;&gt;Don’t Use Null&lt;/h3&gt;
-
-&lt;p&gt;The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
-no need for it. Whenever you have a method, you should be explicit about whether or not you accept
-null, and you generally shouldn’t accept it. This will save you from NullPointerException cropping up
-in obnoxious places, far from the site of the actual error. This is an especially painful problem when you
-start working with streams and lambdas, because the stack trace may not be very useful for you when
-you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
-soon as it occurs.&lt;/p&gt;
-
-&lt;h3 id=&#34;don-t-release-zalgo&#34;&gt;Don’t Release Zalgo&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Don&amp;rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;build-complexity-from-simple-parts&#34;&gt;Build Complexity from Simple Parts&lt;/h3&gt;
-
-&lt;h3 id=&#34;use-types-and-the-compiler-to-your-advantage&#34;&gt;Use Types and the Compiler to Your Advantage&lt;/h3&gt;
-
-&lt;h2 id=&#34;common-functional-interfaces&#34;&gt;Common functional Interfaces&lt;/h2&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Functional Interface&lt;/th&gt;
-&lt;th&gt;Parameter Types&lt;/th&gt;
-&lt;th&gt;Return&lt;/th&gt;
-&lt;th&gt;Abstract Description Method&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Other Methods&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Runnable&lt;/td&gt;
-&lt;td&gt;none&lt;/td&gt;
-&lt;td&gt;void&lt;/td&gt;
-&lt;td&gt;run&lt;/td&gt;
-&lt;td&gt;Runs an action&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Supplier&lt;T&gt;&lt;/td&gt;
-&lt;td&gt;none&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;get&lt;/td&gt;
-&lt;td&gt;Supplies a value of type T&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Consumer&lt;T&gt;&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;void&lt;/td&gt;
-&lt;td&gt;accept&lt;/td&gt;
-&lt;td&gt;Consumes a  value of type T&lt;/td&gt;
-&lt;td&gt;chain&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;BiConsumer&lt;T,U&gt;&lt;/td&gt;
-&lt;td&gt;T,U&lt;/td&gt;
-&lt;td&gt;void&lt;/td&gt;
-&lt;td&gt;accept&lt;/td&gt;
-&lt;td&gt;Consumes a  value of type T and U&lt;/td&gt;
-&lt;td&gt;chain&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Function&lt;T, R&gt;&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;td&gt;apply&lt;/td&gt;
-&lt;td&gt;A function with argument oftype T&lt;/td&gt;
-&lt;td&gt;compose,andThen,identity&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;BiFunction&lt;T, U, R&gt;&lt;/td&gt;
-&lt;td&gt;T,U&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;td&gt;apply&lt;/td&gt;
-&lt;td&gt;A function with argument of type T and U&lt;/td&gt;
-&lt;td&gt;andThen&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;UnaryOperator&lt;T&gt;&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;apply&lt;/td&gt;
-&lt;td&gt;A unary operator on type T&lt;/td&gt;
-&lt;td&gt;compose,andThen,identity&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;BiUnaryOperator&lt;T,T&gt;&lt;/td&gt;
-&lt;td&gt;T,T&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;apply&lt;/td&gt;
-&lt;td&gt;A binary operator on type T&lt;/td&gt;
-&lt;td&gt;andThen&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Predicate&lt;T&gt;&lt;/td&gt;
-&lt;td&gt;T&lt;/td&gt;
-&lt;td&gt;boolean&lt;/td&gt;
-&lt;td&gt;test&lt;/td&gt;
-&lt;td&gt;A Boolean-valued function&lt;/td&gt;
-&lt;td&gt;and, or, negate, isEqual&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;BiPredicate&lt;T,T&gt;&lt;/td&gt;
-&lt;td&gt;T,T&lt;/td&gt;
-&lt;td&gt;boolean&lt;/td&gt;
-&lt;td&gt;test&lt;/td&gt;
-&lt;td&gt;A Boolean-valued function with tow arguments&lt;/td&gt;
-&lt;td&gt;and, or, negate&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;method-reference&#34;&gt;Method Reference&lt;/h2&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Syntax&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;TypeName::staticMethod&lt;/td&gt;
-&lt;td&gt;A method reference to a static method of a class, an interface, or an enum&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;objectRef::instanceMethod&lt;/td&gt;
-&lt;td&gt;A method reference to an instance method of the specified object&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;ClassName::instanceMethod&lt;/td&gt;
-&lt;td&gt;A method reference to an instance method of an arbitrary object of the specified class&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;TypeName.super::instanceMethod&lt;/td&gt;
-&lt;td&gt;A method reference to an instance method of the supertype of a particular object&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;ClassName::new&lt;/td&gt;
-&lt;td&gt;A constructor reference to the constructor of the specified class&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;ArrayTypeName::new&lt;/td&gt;
-&lt;td&gt;An array constructor reference to the constructor of the specified&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;array type&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;lambda-demo&#34;&gt;Lambda Demo&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Locale;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.function.Supplier;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
-import java.util.function.BinaryOperator;
-import java.util.function.IntFunction;
-
-public class LambdaDemo {
-
-    public static void main(String[] args) {
-
-        // FunctionalInterface 
-        System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y));// w w  w .j  av a 2s.  c om
-        System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y));
-        System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y));
-        System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y));
-
-        String[] strArray = new String[] { &amp;quot;abc&amp;quot;, &amp;quot;klm&amp;quot;, &amp;quot;xyz&amp;quot;, &amp;quot;pqr&amp;quot; };
-        List list = Arrays.asList(strArray);
-
-        // Default Methods
-        list.forEach(System.out::println);
-
-        Arrays.sort(strArray, (first, second) -&amp;gt; first.compareToIgnoreCase(second));
-        list = Arrays.asList(strArray);
-
-        System.out.println(&amp;quot;After sorting ... &amp;quot;);
-        list.forEach(System.out::println);
-
-        // Common Functional Interfaces
-        // Runnable
-        repeat(5, () -&amp;gt; System.out.println(&amp;quot;Hello&amp;quot;));
-
-        UnaryOperator&amp;lt;String&amp;gt; upperCase = str -&amp;gt; str.toUpperCase();
-        BinaryOperator&amp;lt;String&amp;gt; concat = (left, right) -&amp;gt; left + right;
-
-        System.out.println(&amp;quot; UnaryOperator upperCase &amp;quot; + upperCase.apply(&amp;quot;hello&amp;quot;));
-        System.out.println(&amp;quot;  BinaryOperator&amp;lt;String&amp;gt; concat &amp;quot; + concat.apply(&amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;));
-
-        // Function 
-        Function&amp;lt;Long, Long&amp;gt; square = x -&amp;gt; x * x;
-        Function&amp;lt;Long, Long&amp;gt; plusOne = x -&amp;gt; x + 1;
-        // Function with andThen, 
-        Function&amp;lt;Long, Long&amp;gt; squarePlusOne = square.andThen(plusOne);
-        Function&amp;lt;Long, Long&amp;gt; plusOneSquare = square.compose(plusOne);
-        System.out.println(&amp;quot; 5 squarePlusOne is &amp;quot; + squarePlusOne.apply(5L)); // 26 
-        System.out.println(&amp;quot; 5 plusOneSquare is  &amp;quot; + plusOneSquare.apply(5L)); // 36
-
-        // Predicate
-        Predicate&amp;lt;Integer&amp;gt; divisibleByThree = x -&amp;gt; x % 3 == 0;
-        Predicate&amp;lt;Integer&amp;gt; divisibleByFive = x -&amp;gt; x % 5 == 0;
-        Predicate&amp;lt;Integer&amp;gt; isNegative = x -&amp;gt; x &amp;lt; 0;
-        // Predicate with AND , OR , NOT
-        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
-        Predicate&amp;lt;Integer&amp;gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
-        Predicate&amp;lt;Integer&amp;gt; isPositive = isNegative.negate();
-
-        System.out.println(&amp;quot; 15 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeAndFive.test(15));
-        System.out.println(&amp;quot; 7 is divisibleByThreeAndFive &amp;quot; + divisibleByThreeOrFive.test(7));
-        System.out.println(&amp;quot; -1 is isPositive &amp;quot; + isPositive.test(7));
-
-        // static method reference 
-        Function&amp;lt;Integer, String&amp;gt; toBinary = x -&amp;gt; Integer.toBinaryString(x);
-        System.out.println(toBinary.apply(19));
-
-        // Using a method reference
-        Function&amp;lt;Integer, String&amp;gt; toBinary2 = Integer::toBinaryString;
-        System.out.println(toBinary2.apply(19));
-
-        // static method lambda expression
-        BiFunction&amp;lt;Integer, Integer, Integer&amp;gt; sum = (a, b) -&amp;gt; Integer.sum(a, b);
-        System.out.println(sum.apply(3, 4));
-
-        // Instance method
-        Supplier&amp;lt;Person&amp;gt; personSup = () -&amp;gt; new Person();
-        Function&amp;lt;String, Person&amp;gt; personFunc = (x) -&amp;gt; new Person(x);
-
-        BiFunction&amp;lt;String, String, Person&amp;gt; personBiFunc = (x, y) -&amp;gt; new Person(x, y);
-        // Consumer&amp;lt;String&amp;gt; personCon = (Person p) -&amp;gt; p.setTitle;
-
-        System.out.println(&amp;quot; personSup &amp;quot; + personSup.get());
-        System.out.println(&amp;quot; personFunc &amp;quot; + personFunc.apply(&amp;quot;John Doe&amp;quot;));
-        System.out.println(&amp;quot; personBiFunc &amp;quot; + personBiFunc.apply(&amp;quot;John&amp;quot;, &amp;quot;Doe&amp;quot;));
-
-        // Recursive Lambda Expressions
-
-        IntFunction&amp;lt;Long&amp;gt; factorialCalc = new IntFunction&amp;lt;Long&amp;gt;() {
-            @Override
-            public Long apply(int n) {
-                if (n &amp;lt; 0) {
-                    String msg = &amp;quot;Number must not be negative.&amp;quot;;
-                    throw new IllegalArgumentException(msg);
-                }
-                if (n == 0) {
-                    return 1L;
-                } else {
-                    return n * this.apply(n - 1);
-                }
-            }
-        };
-
-        int n = 5;
-        long fact = factorialCalc.apply(n);
-        System.out.println(&amp;quot;Factorial of &amp;quot; + n + &amp;quot; is &amp;quot; + fact);
-
-    }
-
-    private static int engine(Calculator calculator) {
-        int x = 2, y = 4;
-        return calculator.calculate(x, y);
-    }
-
-    public static void repeat(int n, Runnable action) {
-        for (int i = 0; i &amp;lt; n; i++)
-            action.run();
-    }
-}
-
-@FunctionalInterface
-interface Calculator {
-    int calculate(int x, int y);
-}
-
-final class Person {
-    String firstName;
-    String lastName;
-    String fullName;
-    String title;
-
-    public Person() {
-        System.out.println(&amp;quot; Person() constructor called &amp;quot;);
-    }
-
-    public Person(String fullName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        System.out.println(&amp;quot; Person( fullName ) constructor called &amp;quot;);
-    }
-
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        System.out.println(&amp;quot; Person(firstName, lastName ) constructor called &amp;quot;);
-    }
-
-    public void setTitle(String t) {
-        this.title = t;
-        System.out.println(&amp;quot; Person setTitle ( t ) called &amp;quot;);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getFullName() {
-        return fullName == null ? firstName != null ? firstName : &amp;quot;Unknown&amp;quot; : fullName;
-    }
-
-    @Override
-    public String toString() {
-        return &amp;quot;name = &amp;quot; + getFullName() + &amp;quot;, title = &amp;quot; + title != null ? title : &amp;quot;Unknown&amp;quot;;
-    }
-}
-
 
 &lt;/code&gt;&lt;/pre&gt;
 </description>

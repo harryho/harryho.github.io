@@ -7,304 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
-    <lastBuildDate>Sun, 06 Mar 2016 16:43:12 +1100</lastBuildDate>
+    <lastBuildDate>Wed, 07 Jun 2017 16:56:21 +1100</lastBuildDate>
     <atom:link href="https://harryho.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>_dummy</title>
-      <link>https://harryho.github.io/index/_dummy/</link>
-      <pubDate>Thu, 16 Feb 2017 11:47:59 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/index/_dummy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Create a blog site on GitHub Pages</title>
-      <link>https://harryho.github.io/dev/create-a-blog-on-github-pages/</link>
-      <pubDate>Wed, 15 Feb 2017 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/dev/create-a-blog-on-github-pages/</guid>
-      <description>
-
-&lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You already have &lt;em&gt;Hugo&lt;/em&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;You will have two repositories &lt;code&gt;blog-hugo&lt;/code&gt; and &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt; repositories to hold your hugo content and blog site respectively.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;blog-hugo&lt;/code&gt; repository will host actual Hugo’s blog content.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;username&amp;gt;.github.io repository&lt;/code&gt; repository will host the static website.&lt;/li&gt;
-&lt;li&gt;Your &lt;em&gt;Hugo&lt;/em&gt; blog folder will be &amp;ldquo;C:\git\blog-hugo&amp;rdquo; in this example.&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Your blog site will finally sit in C driver and map to repositories as follow&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;
-|--git 
-    |--blog-hugo (https://github.com/&amp;lt;yourname&amp;gt;/blog-hugo.git
-        |--archetypes
-        |--content
-        |--data
-        |--layouts
-        |--public (https://github.com/&amp;lt;yourname&amp;gt;/&amp;lt;yourname&amp;gt;.github.io.git)
-        |--themes
-        |--
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;create-a-blog-site-on-github-pages&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create on GitHub blog-hugo and &lt;username&gt;.github.io repositories  repository via GitHub website&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Clone blog-hugo via Windows command prompt&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;c:\&amp;gt;
-c:\&amp;gt;cd git
-c:\git&amp;gt;git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt; &amp;amp;&amp;amp; cd &amp;lt;your-project&amp;gt;-hugo
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create hugo site and setup the theme you like&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\git&amp;gt;hugo new site blog-hugo
-C:\git&amp;gt;hugo server -t &amp;lt;yourtheme&amp;gt; -D
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Clean up the &lt;code&gt;public&lt;/code&gt; folder&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Set submodule inside the blog-hugo and map to folder &lt;code&gt;public&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;cd git
-C:\git&amp;gt;rm -rf public
-C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Deploy the blog site to GitHub page with the script &lt;code&gt;deploy.bat&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;. You can use and tailor the script below as your &lt;code&gt;deploy.bat&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
-
-echo  Deploying updates to GitHub...
-
-REM Build the project. 
-hugo -t &amp;lt;yourtheme&amp;gt; -D
-
-REM Go To Public folder
-cd public
-
-REM Add changes to git.
-git add -A
-
-REM Commit changes.
-set msg=&amp;quot;rebuilding site %date%&amp;quot;
-if  NOT &amp;quot;%1&amp;quot;==&amp;quot;&amp;quot;    set msg=%1
-git commit -m &#39;%msg%&#39;
-
-REM Push source and build repos.
-git push origin master
-
-REM Come Back
-cd ..
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JIRA Notes</title>
-      <link>https://harryho.github.io/dev/jira-notes/</link>
-      <pubDate>Wed, 11 Jan 2017 11:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/dev/jira-notes/</guid>
-      <description>
-
-&lt;h2 id=&#34;what-is-jira&#34;&gt;What is JIRA&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&amp;rsquo;s main competitor, Bugzilla. It has been developed since 2002.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;how-to-work-with-client-within-jira&#34;&gt;How to work with client within JIRA&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Your client&amp;rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;You have created a project for client, named &lt;strong&gt;ABC IT Project&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;You want to allow the client to access this project on JIRA, but you want to avoid client&amp;rsquo;s unintented update to mess up the project management.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;requirement-of-permission-control&#34;&gt;Requirement of permission control&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;In Agile practice, product owner should attend the&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;change-default-permission-scheme&#34;&gt;Change default permission scheme&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Isssues&lt;/code&gt; &amp;gt; &lt;code&gt;Permission schemes&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Change all permissions from &lt;code&gt;Project Access - Any logged in user&lt;/code&gt; to &lt;code&gt;Project role - Administrator&lt;/code&gt; except the following items.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;View Development Tools&lt;/li&gt;
-&lt;li&gt;View Read-Only Workflow&lt;/li&gt;
-&lt;li&gt;Assignable User&lt;/li&gt;
-&lt;li&gt;Delete Own Comments&lt;/li&gt;
-&lt;li&gt;Edit Own Comments&lt;/li&gt;
-&lt;li&gt;Delete Own Attachments&lt;/li&gt;
-&lt;li&gt;Delete Own Worklogs&lt;/li&gt;
-&lt;li&gt;Edit Own Worklogs&lt;/li&gt;
-&lt;li&gt;Work On Issues&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Copy the default permission scheme and rename it to &lt;code&gt;&amp;lt;client_business_name&amp;gt; Permission Scheme&lt;/code&gt;. In this case it would be &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create a new group named &lt;strong&gt;ABC Group&lt;/strong&gt;,&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Update &lt;code&gt;ABC Permission Scheme&lt;/code&gt; by granting &lt;code&gt;ABC Group&lt;/code&gt; to some items.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Browse Projects&lt;/li&gt;
-&lt;li&gt;Create Issues&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Update the permission scheme of the project &lt;code&gt;ABC IT Project&lt;/code&gt; from to &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;change-user-s-group&#34;&gt;Change user&amp;rsquo;s group&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Choose &lt;code&gt;User management&lt;/code&gt; &amp;gt; &lt;code&gt;User&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Add the ABC&amp;rsquo;s user to group &lt;code&gt;ABC Group&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Remove the user from default &lt;code&gt;jira-software-user&lt;/code&gt; and make sure the checkbox &lt;code&gt;Access JIRA Software&lt;/code&gt; is selected.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;time-tracking-and-estimation&#34;&gt;Time Tracking and Estimation&lt;/h2&gt;
-
-&lt;h3 id=&#34;enable-time-tracking&#34;&gt;Enable Time Tracking&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Issues&lt;/code&gt; &amp;gt; &lt;code&gt;Time Tracking&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Enable the &lt;code&gt;Time Tracking&lt;/code&gt; if it is inactive.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Boards&lt;/code&gt; &amp;gt; &lt;code&gt;View All Boards&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Choose &lt;code&gt;Board Settings&lt;/code&gt; of the board&lt;/li&gt;
-&lt;li&gt;Choose &lt;code&gt;Estimation&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Choose &lt;code&gt;Remaining Estimate and Time Spent&lt;/code&gt; as Time Tracking&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Angular 4 Crm Project</title>
-      <link>https://harryho.github.io/project/reetek-angular4-crm/</link>
-      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/project/reetek-angular4-crm/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;Ng4Crm&lt;/strong&gt; is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp;amp; Bootstrap 3.&lt;/p&gt;
-
-&lt;p&gt;This project starts from a popular starter project &lt;a href=&#34;https://github.com/AngularClass/angular-starter&#34;&gt;AngularClass/AngularStarter&lt;/a&gt;. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This project is built on the top of AngularClass/Angular-Starter.&lt;/li&gt;
-&lt;li&gt;The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.&lt;/li&gt;
-&lt;li&gt;This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.&lt;/li&gt;
-&lt;li&gt;It uses Json-Server as fake Restful API. (You can simple replace it with your own API)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;structure-of-ng4crm&#34;&gt;Structure of Ng4Crm&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\ng4crm
-+---config             &amp;lt;-// configuration of dev or prod environment
-+---db                 &amp;lt;-// json files for json-server
-|   +---db.json        &amp;lt;-// dummy db
-|   \---routes.json    &amp;lt;-// configure fake restful api
-+---screenshots
-+---src                &amp;lt;-// vue components 
-|   +---app
-|   |   +---_gurad             &amp;lt;-// auth guard for authentication
-|   |   +---_models             &amp;lt;-// common models for whole app
-|   |   +---_services            &amp;lt;-// common services for whole app
-|   |   +---about                &amp;lt;-// about component   
-|   |   +---customer              &amp;lt;-// customer component
-|   |   +---dashboard            &amp;lt;-// dashboard component  
-|   |   +---notfoundpage         &amp;lt;-// notfoundpage component  
-|   |   +---login                &amp;lt;-// login component  
-|   |   +---order                &amp;lt;-// customer component 
-|   |   +---root                &amp;lt;-// root component 
-|   |   +---shared                &amp;lt;-// common component for whole app
-|   |   +---app.component.ts
-|   |   +---app.module.ts
-|   |   +---app.routes.ts
-|   |   +---app.services.ts
-|   |   +---environment.ts
-|   |   \---...
-|   +---assets         &amp;lt;-//   images  and css from third parties
-|   +---styles         &amp;lt;-//   customized css files
-|   +---main.browser.aot.ts     
-|   +---main.browser.ts  
-|   +---polyfills.browser.ts  
-|   \---...
-\...
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-1.jpg&#34; alt=&#34;Screenshot1&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-2.jpg&#34; alt=&#34;Screenshot2&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-3.jpg&#34; alt=&#34;Screenshot3&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-4.jpg&#34; alt=&#34;Screenshot4&#34; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;browse-repository-https-github-com-harryho-ng4crm-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/ng4crm.git&#34;&gt;Repository&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;Alternatives&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;There are two similar projects respectively built on the Vue.js and React. If you have interests in those technical stacks. You can find and clone those projects below.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-vue2-crm&#34;&gt;Vue2 Crm&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-react-crm&#34;&gt;React Redux Crm&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Angular vs React vs Vue</title>
-      <link>https://harryho.github.io/dev/vue-ng-react/</link>
-      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
+      <link>https://harryho.github.io/article/vue-ng-react/</link>
+      <pubDate>Wed, 07 Jun 2017 16:56:21 +1100</pubDate>
       
-      <guid>https://harryho.github.io/dev/vue-ng-react/</guid>
+      <guid>https://harryho.github.io/article/vue-ng-react/</guid>
       <description>
 
 &lt;blockquote&gt;
@@ -319,9 +30,9 @@ cd ..
 
 &lt;p&gt;There is a big risk to adopt new programming language(ES 6 or Typescript), new  framework, as well as new development, build and test tool. As a solution architect, he or she needs to think it through for development team, and also consider if the team can really pick it up quickly. That is why we have to compare those frameworks here before we make a decision.&lt;/p&gt;
 
-&lt;h2 id=&#34;performance-is-not-crucial-for-many-applications&#34;&gt;Performance is not crucial for many applications&lt;/h2&gt;
+&lt;h2 id=&#34;performance-is-not-a-priority-or-crucial-criterion-for-choosing-a-framework&#34;&gt;Performance is not a priority or crucial criterion for choosing a framework&lt;/h2&gt;
 
-&lt;p&gt;We can find lots of comparison between those frameworks, and so many of them are related to performance, programming language, design pattern, etc. Actually most web applications in the world are just small to median size web application, we don&amp;rsquo;t need to build the web application as Google, Facebook or Twitter. In my opinion, the performance of framework is the not critical benchmark, at lease it is not first priority which we need to consider if it is right for the team. Except performance, we have more concern on tech stacks, community and ecosystem of the framework, which has more impact on our team productivity.&lt;/p&gt;
+&lt;p&gt;We can find lots of comparison between those frameworks, and so many of them are related to performance, programming language, design pattern, etc. Actually many web applications in the world are just small to median size web application, we don&amp;rsquo;t need to build the web application as Google, Facebook or Twitter. In my opinion, the performance of framework is the not critical benchmark, at lease it is not first priority which we need to consider if it is right for the team. Except performance, we have more concern on tech stacks, community and ecosystem involved with the framework, which have more impact on team&amp;rsquo;s productivity and system&amp;rsquo;s maintainability.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-difference-of-those-framework&#34;&gt;The difference of those framework&lt;/h2&gt;
 
@@ -577,6 +288,295 @@ cd ..
 &lt;li&gt;Team with ES6 /TypeScript background can start should any framework you prefer&lt;/li&gt;
 &lt;li&gt;Angular 4 and its ecosystem is under active development.&lt;/li&gt;
 &lt;li&gt;Vue.js framework is a very nice. Give a go on your next project.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>_dummy</title>
+      <link>https://harryho.github.io/index/_dummy/</link>
+      <pubDate>Thu, 16 Feb 2017 11:47:59 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/index/_dummy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Create a blog site on GitHub Pages</title>
+      <link>https://harryho.github.io/article/create-a-blog-on-github-pages/</link>
+      <pubDate>Wed, 15 Feb 2017 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/article/create-a-blog-on-github-pages/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;After I setup a blog site with Hugo on my ubuntu machine, I decided to use it to create a blog to GitHub pages on my windows machine, since I use Windows machine as workstation. If you use Unix-style system, I pretty sure you can follow the &lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo Quick Start&lt;/a&gt; and &lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog&#34;&gt;Hosting on GitHub Pages&lt;/a&gt; to create a blog to GitHub pages within 5 mins, but when I try to do the same on Windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You already have &lt;em&gt;Hugo&lt;/em&gt; on your computer. If not, please follow the instruction to &lt;a href=&#34;https://gohugo.io/tutorials/installing-on-windows&#34;&gt;install hugo on Windows&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;You will have two repositories &lt;code&gt;blog-hugo&lt;/code&gt; and &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt; repositories to hold your hugo content and blog site respectively.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;blog-hugo&lt;/code&gt; repository will host actual Hugo’s blog content.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;username&amp;gt;.github.io repository&lt;/code&gt; repository will host the static website.&lt;/li&gt;
+&lt;li&gt;Your &lt;em&gt;Hugo&lt;/em&gt; blog folder will be &amp;ldquo;C:\git\blog-hugo&amp;rdquo; in this example.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Your blog site will finally sit in C driver and map to repositories as follow&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;
+|--git 
+    |--blog-hugo (https://github.com/&amp;lt;yourname&amp;gt;/blog-hugo.git
+        |--archetypes
+        |--content
+        |--data
+        |--layouts
+        |--public (https://github.com/&amp;lt;yourname&amp;gt;/&amp;lt;yourname&amp;gt;.github.io.git)
+        |--themes
+        |--
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;create-a-blog-site-on-github-pages&#34;&gt;Create a blog site on GitHub pages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create on GitHub blog-hugo and &lt;username&gt;.github.io repositories  repository via GitHub website&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone blog-hugo via Windows command prompt&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;c:\&amp;gt;
+c:\&amp;gt;cd git
+c:\git&amp;gt;git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt; &amp;amp;&amp;amp; cd &amp;lt;your-project&amp;gt;-hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create hugo site and setup the theme you like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\git&amp;gt;hugo new site blog-hugo
+C:\git&amp;gt;hugo server -t &amp;lt;yourtheme&amp;gt; -D
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clean up the &lt;code&gt;public&lt;/code&gt; folder&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set submodule inside the blog-hugo and map to folder &lt;code&gt;public&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;C:\&amp;gt;cd git
+C:\git&amp;gt;rm -rf public
+C:\git&amp;gt;git submodule add -b master https://github.com/&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Deploy the blog site to GitHub page with the script &lt;code&gt;deploy.bat&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;deploy.bat &amp;quot;Your optional commit message&amp;quot;&lt;/code&gt; will commit the changes to &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;. You can use and tailor the script below as your &lt;code&gt;deploy.bat&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;@echo OFF
+
+echo  Deploying updates to GitHub...
+
+REM Build the project. 
+hugo -t &amp;lt;yourtheme&amp;gt; -D
+
+REM Go To Public folder
+cd public
+
+REM Add changes to git.
+git add -A
+
+REM Commit changes.
+set msg=&amp;quot;rebuilding site %date%&amp;quot;
+if  NOT &amp;quot;%1&amp;quot;==&amp;quot;&amp;quot;    set msg=%1
+git commit -m &#39;%msg%&#39;
+
+REM Push source and build repos.
+git push origin master
+
+REM Come Back
+cd ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JIRA Notes</title>
+      <link>https://harryho.github.io/article/jira-notes/</link>
+      <pubDate>Wed, 11 Jan 2017 11:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/article/jira-notes/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-jira&#34;&gt;What is JIRA&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions. Although normally styled JIRA, the product name is not an acronym, but a truncation of Gojira, the Japanese name for Godzilla,[6] itself a reference to Jira&amp;rsquo;s main competitor, Bugzilla. It has been developed since 2002.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;how-to-work-with-client-within-jira&#34;&gt;How to work with client within JIRA&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The instruction below is only for the client who has independent JIRA instance. Here I am not going to discuss how to cooperate with multiple clients and projects on the same JIRA instance. IMO, the strategy for that would be case by case.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Your client&amp;rsquo;s business name is ABC. You help them to manage their JIRA. You are the administrator of JIRA instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You have created a project for client, named &lt;strong&gt;ABC IT Project&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You want to allow the client to access this project on JIRA, but you want to avoid client&amp;rsquo;s unintented update to mess up the project management.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;requirement-of-permission-control&#34;&gt;Requirement of permission control&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In Agile practice, product owner should attend the&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;change-default-permission-scheme&#34;&gt;Change default permission scheme&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Default permission scheme is the built-in scheme, which you cannot delete it, but you can change it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Isssues&lt;/code&gt; &amp;gt; &lt;code&gt;Permission schemes&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change all permissions from &lt;code&gt;Project Access - Any logged in user&lt;/code&gt; to &lt;code&gt;Project role - Administrator&lt;/code&gt; except the following items.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;View Development Tools&lt;/li&gt;
+&lt;li&gt;View Read-Only Workflow&lt;/li&gt;
+&lt;li&gt;Assignable User&lt;/li&gt;
+&lt;li&gt;Delete Own Comments&lt;/li&gt;
+&lt;li&gt;Edit Own Comments&lt;/li&gt;
+&lt;li&gt;Delete Own Attachments&lt;/li&gt;
+&lt;li&gt;Delete Own Worklogs&lt;/li&gt;
+&lt;li&gt;Edit Own Worklogs&lt;/li&gt;
+&lt;li&gt;Work On Issues&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the default permission scheme and rename it to &lt;code&gt;&amp;lt;client_business_name&amp;gt; Permission Scheme&lt;/code&gt;. In this case it would be &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new group named &lt;strong&gt;ABC Group&lt;/strong&gt;,&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update &lt;code&gt;ABC Permission Scheme&lt;/code&gt; by granting &lt;code&gt;ABC Group&lt;/code&gt; to some items.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Browse Projects&lt;/li&gt;
+&lt;li&gt;Create Issues&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the permission scheme of the project &lt;code&gt;ABC IT Project&lt;/code&gt; from to &lt;code&gt;ABC Permission Scheme&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;change-user-s-group&#34;&gt;Change user&amp;rsquo;s group&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose &lt;code&gt;User management&lt;/code&gt; &amp;gt; &lt;code&gt;User&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add the ABC&amp;rsquo;s user to group &lt;code&gt;ABC Group&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Remove the user from default &lt;code&gt;jira-software-user&lt;/code&gt; and make sure the checkbox &lt;code&gt;Access JIRA Software&lt;/code&gt; is selected.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;time-tracking-and-estimation&#34;&gt;Time Tracking and Estimation&lt;/h2&gt;
+
+&lt;h3 id=&#34;enable-time-tracking&#34;&gt;Enable Time Tracking&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Issues&lt;/code&gt; &amp;gt; &lt;code&gt;Time Tracking&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable the &lt;code&gt;Time Tracking&lt;/code&gt; if it is inactive.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;code&gt;Boards&lt;/code&gt; &amp;gt; &lt;code&gt;View All Boards&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose &lt;code&gt;Board Settings&lt;/code&gt; of the board&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Estimation&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Choose &lt;code&gt;Remaining Estimate and Time Spent&lt;/code&gt; as Time Tracking&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Angular 4 Crm Project</title>
+      <link>https://harryho.github.io/project/reetek-angular4-crm/</link>
+      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/project/reetek-angular4-crm/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Ng4Crm&lt;/strong&gt; is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp;amp; Bootstrap 3.&lt;/p&gt;
+
+&lt;p&gt;This project starts from a popular starter project &lt;a href=&#34;https://github.com/AngularClass/angular-starter&#34;&gt;AngularClass/AngularStarter&lt;/a&gt;. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This project is built on the top of AngularClass/Angular-Starter.&lt;/li&gt;
+&lt;li&gt;The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.&lt;/li&gt;
+&lt;li&gt;This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.&lt;/li&gt;
+&lt;li&gt;It uses Json-Server as fake Restful API. (You can simple replace it with your own API)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;structure-of-ng4crm&#34;&gt;Structure of Ng4Crm&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\ng4crm
++---config             &amp;lt;-// configuration of dev or prod environment
++---db                 &amp;lt;-// json files for json-server
+|   +---db.json        &amp;lt;-// dummy db
+|   \---routes.json    &amp;lt;-// configure fake restful api
++---screenshots
++---src                &amp;lt;-// vue components 
+|   +---app
+|   |   +---_gurad             &amp;lt;-// auth guard for authentication
+|   |   +---_models             &amp;lt;-// common models for whole app
+|   |   +---_services            &amp;lt;-// common services for whole app
+|   |   +---about                &amp;lt;-// about component   
+|   |   +---customer              &amp;lt;-// customer component
+|   |   +---dashboard            &amp;lt;-// dashboard component  
+|   |   +---notfoundpage         &amp;lt;-// notfoundpage component  
+|   |   +---login                &amp;lt;-// login component  
+|   |   +---order                &amp;lt;-// customer component 
+|   |   +---root                &amp;lt;-// root component 
+|   |   +---shared                &amp;lt;-// common component for whole app
+|   |   +---app.component.ts
+|   |   +---app.module.ts
+|   |   +---app.routes.ts
+|   |   +---app.services.ts
+|   |   +---environment.ts
+|   |   \---...
+|   +---assets         &amp;lt;-//   images  and css from third parties
+|   +---styles         &amp;lt;-//   customized css files
+|   +---main.browser.aot.ts     
+|   +---main.browser.ts  
+|   +---polyfills.browser.ts  
+|   \---...
+\...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-1.jpg&#34; alt=&#34;Screenshot1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-2.jpg&#34; alt=&#34;Screenshot2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-3.jpg&#34; alt=&#34;Screenshot3&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/ng4crm-screenshot-4.jpg&#34; alt=&#34;Screenshot4&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;browse-repository-https-github-com-harryho-ng4crm-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/ng4crm.git&#34;&gt;Repository&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Alternatives&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are two similar projects respectively built on the Vue.js and React. If you have interests in those technical stacks. You can find and clone those projects below.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-vue2-crm&#34;&gt;Vue2 Crm&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-react-crm&#34;&gt;React Redux Crm&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
