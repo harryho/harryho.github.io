@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Python Notes - 2 - Hello World</title>
+    <title>Python Notes - 7 - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -67,238 +67,247 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Python Notes - 2</h1>
+				<h1 class="doc-entry-title">Python Notes - 7</h1>
 				<div class="doc-entry-meta">
-					<span>updated at <time datetime="2016-02-20">20 Feb 2016</time></span>
+					<span>updated at <time datetime="2016-04-17">17 Apr 2016</time></span>
 				</div>
 				<section>
 					
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
-
-<h3 id="legb-rules">LEGB rules</h3>
+<h2 id="exception-assertion">Exception &amp; Assertion</h2>
 
 <ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
+<li>Avoid bad practices in Python exception handling.</li>
+<li>Always specify an exception type with except, but don&rsquo;t be too general.<br /></li>
+<li>Don&rsquo;t Use Assertions for checking arguments</li>
+
+<li><p>EXamples</p>
+
+<ul>
+<li>lookup exception</li>
 </ul>
 
-<h3 id="local-function">Local function</h3>
+<pre><code class="language-python">def lookups():
+    s = [1, 4, 6]
+    try:
+        item = s[5]
+    except LookupError:
+        print(&quot;Handled IndexError&quot;)
 
-<ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
-</ul>
+    d = dict(a=65, b=66, c=67)
+    try:
+        value = d['x']
+    except LookupError:
+        print(&quot;Handled KeyError&quot;)
 
-<h3 id="closure">Closure</h3>
-
-<ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
-
-<li><p>Usage of nonlocal</p>
-
-<ul>
-<li>Example</li>
-</ul>
-
-<pre><code>def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-</code></pre></li>
-
-<li><p>Use as function factory</p>
-
-<ul>
-<li>Example
-<br /></li>
-</ul>
-
-<pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-# test result:
-# 4
-# 8
-
-</code></pre></li>
-</ul>
-
-<h3 id="decorator">Decorator</h3>
-
-<ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
-
-<li><p>Example</p>
-
-<ul>
-<li>use function as decorator</li>
-</ul>
-
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-# test result:
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+if __name__ == '__main__':
+    lookups()
+    
+# test result 
+# Handled IndexError
+# Handled KeyError
 </code></pre>
 
 <ul>
-<li>Example: multiple decorators including function and instance</li>
+<li>unicode exception</li>
 </ul>
 
-<pre><code class="language-python">class Trace:
-    def __init__(self):
-        self.enabled = True
+<pre><code class="language-python">def unicode_exception():
+try:
+    b'\x81'.decode('utf-8')
+except UnicodeError as e:
+    print(e)
+    print(&quot;encoding:&quot;, e.encoding)
+    print(&quot;reason:&quot;, e.reason)
+    print(&quot;object:&quot;, e.object)
+    print(&quot;start:&quot;, e.start)
+    print(&quot;end&quot;, e.end)
 
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
+if __name__ == '__main__':
+    unicode_exception()
 
 # test result
-# Calling hello_greek
-# '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
+# 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
+# encoding: utf-8
+# reason: invalid start byte
+# object: b'\x81'
+# start: 0
+# end 1        
 </code></pre>
 
 <ul>
-<li>Use as validator</li>
+<li>customized exception with parameters</li>
 </ul>
 
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
+<pre><code class="language-python">import sys
+import io
 
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
 
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
+class TriangleError(Exception):
+
+    def __init__(self, text, sides):
+        super().__init__(text)
+        self._sides = tuple(sides)
+
+    @property
+    def sides(self):
+        return self._sides
+
+    def __str__(self):
+        return &quot;'{}' for sides {}&quot;.format(self.args[0], self._sides)
+
+    def __repr__(self):
+        return &quot;TriangleError({!r}, {!r}&quot;.format(self.args[0], self._sides)
+
+
+def triangle_area(a, b, c):
+    sides = sorted((a, b, c))
+    if sides[2] &gt; sides[0] + sides[1]:
+        raise TriangleError(&quot;Illegal triangle&quot;, sides)
+    p = (a + b + c) / 2
+    a = math.sqrt(p * (p - a) * (p - b) * (p - c))
+    return a
+
+
+def triangle_exception():
+    try:
+        a = triangle_area(3, 4, 10)
+        print(a)
+    except TriangleError as e:
+        try:
+            print(e, file=sys.stdin)
+        except io.UnsupportedOperation as f:
+            print(e)
+            print(f)
+            print(f.__context__ is e)
+
+if __name__ == '__main__':
+    triangle_exception()
 
 # test result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
-</code></pre></li>
-</ul>
-
-<h2 id="properties-class">Properties &amp; Class</h2>
-
-<h3 id="staticmethod">@staticmethod</h3>
-
-<ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
-</ul>
-
-<h3 id="classmethod">@classmethod</h3>
-
-<ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
-<li>Use case: use as named constructors</li>
-</ul>
-
-<pre><code class="language-python">class FileStream(object):
-
-    @classmethod
-    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-        with open(filepath, 'r') as fileobj:
-            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-                yield obj
-
-    @classmethod
-    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-        raise NotImplemented # Placeholder until implemented
-
-    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-        ...
+# 'Illegal triangle' for sides (3, 4, 10)
+# not writable
+# True        
 </code></pre>
 
-<h3 id="property">@property</h3>
+<ul>
+<li>chaining &amp; trackback</li>
+</ul>
+
+<pre><code class="language-python">import math
+import traceback
+
+class InclinationError(Exception):
+    pass
+
+
+def inclination(dx, dy):
+    try:
+        return math.degrees(math.atan(dy / dx))
+    except ZeroDivisionError as e:
+        raise InclinationError(&quot;Slope cannot be vertical&quot;) from e
+
+
+def traceback_inclination():
+    try:
+        inclination(0, 5)
+    except InclinationError as e:
+        print(e.__traceback__)
+        traceback.print_tb(e.__traceback__)
+        s = traceback.format_tb(e.__traceback__)
+        print(s)
+
+if __name__ == '__main__':
+    traceback_inclination()
+    print(&quot;Done.&quot;)
+
+# test result
+
+#&lt;traceback object at 0x000000BE3B4F5108&gt;
+#  File &quot;/path/to/your_project/__main__.py&quot;, line 190, in traceback_inclination
+#    inclination(0, 5)
+#  File &quot;/path/to/your_project/__main__.py&quot;, line 185, in inclination
+#    raise InclinationError(&quot;Slope cannot be vertical&quot;) from e
+#['  File &quot;/path/to/your_project/__main__.py&quot;, line 190, 
+# in traceback_inclination\n    
+# inclination(0,# 5)\n',
+#  '  File &quot;/path/to/your_project/__main__.py&quot;, line 185, 
+#  in inclination\n    
+#  raise 
+# InclinationError(&quot;Slope cannot be vertical&quot;) from e\n']
+
+</code></pre>
 
 <ul>
-<li>Encapsulation</li>
+<li>assertion &amp; exception</li>
+</ul>
 
-<li><p>Example</p>
+<pre><code class="language-python">from pprint import pprint as pp
 
-<pre><code class="language-python">class A
-@property
-def  prop(self):
-    return self._prop
+def wrap(text, line_length):
+    &quot;&quot;&quot;Wrap a string to a specified line length.
 
-@prop.setter
-def prop(self, value):
-    self._prop = value
+    Args:
+        text: The string to wrap.
+        line_length: The line length in characters.
+
+    Returns:
+        A wrapped string.
+
+    Raises:
+        ValueError: If line_length is not positive.
+    &quot;&quot;&quot;
+    if line_length &lt; 1:
+        raise ValueError(&quot;line_length {} is not positive&quot;.format(line_length))
+
+    words = text.split()
+
+    if max(map(len, words)) &gt; line_length:
+        raise ValueError(&quot;line_length must be at least as long as the longest word&quot;)
+
+    lines_of_words = []
+    current_line_length = line_length
+    for word in words:
+        if current_line_length + len(word) &gt; line_length:
+            lines_of_words.append([])  # new line
+            current_line_length = 0
+        lines_of_words[-1].append(word)
+        current_line_length += len(word) + len(' ')
+    lines = [' '.join(line_of_words) for line_of_words in lines_of_words]
+    result = '\n'.join(lines)
+    assert all(len(line) &lt;= line_length for line in result.splitlines())
+    return result
+
+wealth_of_nations = &quot;The annual labour of every nation is the fund which or&quot; \
+&quot;iginally supplies it with all the necessaries and conveniencies of life wh&quot; \
+&quot;ich it annually consumes, and which consist always either in the immediate&quot; \
+&quot; produce of that labour, or in what is purchased with that produce from ot&quot; \
+&quot;her nations. According, therefore, as this produce, or what is purchased w&quot; \
+&quot;ith it, bears a greater or smaller proportion to the number of those who a&quot; \
+&quot;re to consume it, the nation will be better or worse supplied with all the&quot; \
+&quot; necessaries and conveniencies for which it has occasion.&quot;
+
+if __name__ == &quot;__main__&quot;:
+    pp(wrap( wealth_of_nations, 40))
+
+# test result
+# ('The annual labour of every nation is the\n'
+#  'fund which originally supplies it with\n'
+#  'all the necessaries and conveniencies of\n'
+#  'life which it annually consumes, and\n'
+#  'which consist always either in the\n'
+#  'immediate produce of that labour, or in\n'
+#  'what is purchased with that produce from\n'
+#  'other nations. According, therefore, as\n'
+#  'this produce, or what is purchased with\n'
+#  'it, bears a greater or smaller\n'
+#  'proportion to the number of those who\n'
+#  'are to consume it, the nation will be\n'
+#  'better or worse supplied with all the\n'
+#  'necessaries and conveniencies for which\n'
+#  'it has occasion.')
+
+
 </code></pre></li>
 </ul>
 
@@ -315,25 +324,13 @@ def prop(self, value):
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Python Notes - 2</a></strong></li>
+				<li><strong><a href="#title">Python Notes - 7</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
-<ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
-</ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
-<ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
-</ul></li>
+<li><a href="#exception-assertion">Exception &amp; Assertion</a></li>
 </ul></li>
 </ul>
 </nav>

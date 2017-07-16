@@ -347,6 +347,692 @@ if __name__ == &#39;__main__&#39;:
     </item>
     
     <item>
+      <title>Python Notes - 8</title>
+      <link>https://harryho.github.io/code/python-notes-8/</link>
+      <pubDate>Mon, 25 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-8/</guid>
+      <description>
+
+&lt;h2 id=&#34;context-managers&#34;&gt;Context managers&lt;/h2&gt;
+
+&lt;h3 id=&#34;context-manager&#34;&gt;context manager&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;context manager an object designed to be used in a with-statement&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;with context-manager:
+    body
+
+
+with context-manager:
+    context-manager.begin()
+    body
+    context-manager.end()
+    
+with context-manager:
+    setup()
+    body
+    teardown()
+
+with context-manager:
+    context-manager.begin()
+    body
+    context-manager.end()        
+
+with context-manager:
+    allocation()
+    body
+    deallocation()
+
+with context-manager:
+    enter()
+    body
+    exit()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A context-manager ensures that resources are properly and automatically managed&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;enter() prepares the manager for use&lt;/li&gt;
+&lt;li&gt;exit() cleans it up&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Context-manager Protocol&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;__enter__(self)
+
+__exit__(self,
+        exc_type, # exception type 
+        exc_val,  # exception object
+        exc_tb)    # exception traceback
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__enter__()&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;called before entering with-statement body&lt;/li&gt;
+&lt;li&gt;return value bound to as variable&lt;/li&gt;
+&lt;li&gt;can return value of any type&lt;/li&gt;
+&lt;li&gt;commonly returns context-manager itself&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__exit__()&lt;/code&gt; called when with-statement body exits&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;By default &lt;code&gt;__exit__()&lt;/code&gt; propagates exceptions thrown from the with-statement’s code block&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__exit__()&lt;/code&gt; should never explicitly re-raise exceptions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;__exit__()&lt;/code&gt; should only raise exceptions if it fails itself&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;contextlib&#34;&gt;contextlib&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;contextlib&lt;/code&gt; : standard library module for working with context managers&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;contextmanager&lt;/code&gt; is a decorator you can use to create new context managers&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;@contextlib.contextmanager
+def my_context_manager():
+# &amp;lt;ENTER&amp;gt;
+try:
+yield [value]
+# &amp;lt;NORMAL EXIT&amp;gt;
+except:
+# &amp;lt;EXCEPTIONAL EXIT&amp;gt;
+raise
+with my_context_manager() as x:
+# . . .
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;contextmanager&lt;/code&gt; lets you define context-managers with simple control flow It allows you to leverage the statefulness of generators&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;contextmanager&lt;/code&gt; uses standard exception handling to propagate exceptions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;contextmanager&lt;/code&gt; explicitly re-raises – or doesn’t catch – to propagate exceptions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;contextmanager&lt;/code&gt; swallows exceptions by not re-raising them&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exceptions propagated from &lt;strong&gt;inner&lt;/strong&gt; context managers will be seen by &lt;strong&gt;outer&lt;/strong&gt; context managers&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;multiple context managers with-statements can use as many context-managers as you need&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Example &amp;ndash; The code below is the same
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;with cm1() as a, cm2() as b:
+    BODY
+
+with cm1() as a:
+    with cm2() as b:
+        BODY
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Examples&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;simple sample&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import contextlib
+
+class LoggingContextManager:
+    def __enter__(self):
+        print(&#39;LoggingContextManager.__enter__()&#39;)
+        return &amp;quot;You&#39;re in a with-block!&amp;quot;
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            print(&#39;LoggingContextManager.__exit__: &#39;
+                &#39;normal exit detected&#39;)
+        else:
+            print(&#39;LoggingContextManager.__exit__: &#39;
+                &#39;Exception detected! &#39;
+                &#39;type={}, value={}, traceback={}&#39;.format(
+                    exc_type, exc_val, exc_tb))                     
+
+@contextlib.contextmanager
+def logging_context_manager():
+    print(&#39;logging_context_manager: enter&#39;)
+    try:
+        yield &amp;quot;You&#39;re in a with-block!&amp;quot;
+        print(&#39;logging_context_manager: normal exit&#39;)
+    except Exception:
+        print(&#39;logging_context_manager: exceptional exit&#39;,
+            sys.exc_info())
+        raise
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    with LoggingContextManager() as log:
+        pass
+
+    with logging_context_manager() as clog:
+        pass
+
+# test result
+# LoggingContextManager.__enter__()
+# LoggingContextManager.__exit__: normal exit detected
+# logging_context_manager: enter
+# logging_context_manager: normal exit
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;nested&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;            
+@contextlib.contextmanager
+def nest_test(name):
+    print(&#39;Entering&#39;, name)
+    yield name
+    print(&#39;Exiting&#39;, name)
+
+
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    with nest_test(&#39;outer&#39;) as n1, nest_test(&#39;inner nested in &#39; + n1):
+        pass
+
+# test result
+# Entering outer
+# Entering inner nested in outer
+# Exiting inner nested in outer
+# Exiting outer
+            
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;db &amp;amp; transaction&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import contextlib
+
+class Connection:
+    def __init__(self):
+        self.xid = 0
+
+    def _start_transaction(self, read_only=True):
+        print(&#39;starting transaction&#39;, self.xid)
+        rslt = self.xid
+        self.xid = self.xid + 1
+        return rslt
+
+    def _commit_transaction(self, xid):
+        print(&#39;committing transaction&#39;, xid)
+
+    def _rollback_transaction(self, xid):
+        print(&#39;rolling back transaction&#39;, xid)
+
+class Transaction:
+    def __init__(self, conn, read_only=True):
+        self.conn = conn
+        self.xid = conn._start_transaction(read_only=read_only)
+
+    def commit(self):
+        self.conn._commit_transaction(self.xid)
+
+    def rollback(self):
+        self.conn._rollback_transaction(self.xid)
+
+@contextlib.contextmanager
+def start_transaction(connection):
+    tx = Transaction(connection)
+
+    try:
+        yield tx
+    except Exception:
+        tx.rollback()
+        raise
+
+    tx.commit()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;introspection&#34;&gt;Introspection&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;introspector&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import inspect
+import reprlib
+import itertools
+# from sorted_set import SortedSet
+
+from bisect import bisect_left
+from collections.abc import Sequence, Set
+from itertools import chain
+
+
+class SortedSet(Sequence, Set):
+
+    def __init__(self, items=None):
+        self._items = sorted(set(items)) if items is not None else []
+
+    def __contains__(self, item):
+        try:
+            self.index(item)
+            return True
+        except ValueError:
+            return False
+
+    def __len__(self):
+        return len(self._items)
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def __getitem__(self, index):
+        result = self._items[index]
+        return SortedSet(result) if isinstance(index, slice) else result
+
+    def __repr__(self):
+        return &amp;quot;SortedSet({})&amp;quot;.format(
+            repr(self._items) if self._items else &#39;&#39;
+        )
+
+    def __eq__(self, rhs):
+        if not isinstance(rhs, SortedSet):
+            return NotImplemented
+        return self._items == rhs._items
+
+    def __ne__(self, rhs):
+        if not isinstance(rhs, SortedSet):
+            return NotImplemented
+        return self._items != rhs._items
+
+    def _is_unique_and_sorted(self):
+        return all(self[i] &amp;lt; self[i + 1] for i in range(len(self) - 1))
+
+    def index(self, item):
+        assert self._is_unique_and_sorted()
+        index = bisect_left(self._items, item)
+        if (index != len(self._items)) and (self._items[index] == item):
+            return index
+        raise ValueError(&amp;quot;{} not found&amp;quot;.format(repr(item)))
+
+    def count(self, item):
+        assert self._is_unique_and_sorted()
+        return int(item in self)
+
+    def __add__(self, rhs):
+        return SortedSet(chain(self._items, rhs._items))
+
+    def __mul__(self, rhs):
+        return self if rhs &amp;gt; 0 else SortedSet()
+
+    def __rmul__(self, lhs):
+        return self * lhs
+
+    def issubset(self, iterable):
+        return self &amp;lt;= SortedSet(iterable)
+
+    def issuperset(self, iterable):
+        return self &amp;gt;= SortedSet(iterable)
+
+    def intersection(self, iterable):
+        return self &amp;amp; SortedSet(iterable)
+
+    def union(self, iterable):
+        return self | SortedSet(iterable)
+
+    def symmetric_difference(self, iterable):
+        return self ^ SortedSet(iterable)
+
+    def difference(self, iterable):
+        return self - SortedSet(iterable)
+
+def full_sig(method):
+    try:
+        return method.__name__ + inspect.signature(method)
+    except ValueError:
+        return method.__name__ + &#39;(...)&#39;
+
+
+def brief_doc(obj):
+    doc = obj.__doc__
+    if doc is not None:
+        lines = doc.splitlines()
+        if len(lines) &amp;gt; 0:
+            return lines[0]
+    return &#39;&#39;
+
+
+def print_table(rows_of_columns, *headers):
+    num_columns = len(rows_of_columns[0])
+    num_headers = len(headers)
+    if len(headers) != num_columns:
+        raise TypeError(&amp;quot;Expected {} header arguments, &amp;quot;
+                        &amp;quot;got {}&amp;quot;.format(num_columns, num_headers))
+    rows_of_columns_with_header = itertools.chain([headers], rows_of_columns)
+    columns_of_rows = list(zip(*rows_of_columns_with_header))
+    column_widths = [max(map(len, column)) for column in columns_of_rows]
+    column_specs = (&#39;{{:{w}}}&#39;.format(w=width) for width in column_widths)
+    format_spec = &#39; &#39;.join(column_specs)
+    print(format_spec.format(*headers))
+    rules = (&#39;-&#39; * width for width in column_widths)
+    print(format_spec.format(*rules))
+    for row in rows_of_columns:
+        print(format_spec.format(*row))
+
+
+def dump(obj):
+    print(&amp;quot;Type&amp;quot;)
+    print(&amp;quot;====&amp;quot;)
+    print(type(obj))
+    print()
+
+    print(&amp;quot;Documentation&amp;quot;)
+    print(&amp;quot;=============&amp;quot;)
+    print(inspect.getdoc(obj))
+    print()
+
+    print(&amp;quot;Attributes&amp;quot;)
+    print(&amp;quot;==========&amp;quot;)
+    all_attr_names = SortedSet(dir(obj))
+    method_names = SortedSet(
+        filter(lambda attr_name: callable(getattr(obj, attr_name)),
+            all_attr_names))
+    assert method_names &amp;lt;= all_attr_names
+    attr_names = all_attr_names - method_names
+    attr_names_and_values = [(name, reprlib.repr(getattr(obj, name)))
+                            for name in attr_names]
+    print_table(attr_names_and_values, &amp;quot;Name&amp;quot;, &amp;quot;Value&amp;quot;)
+    print()
+
+    print(&amp;quot;Methods&amp;quot;)
+    print(&amp;quot;=======&amp;quot;)
+    methods = (getattr(obj, method_name) for method_name in method_names)
+    method_names_and_doc = [(full_sig(method), brief_doc(method))
+                            for method in methods]
+    print_table(method_names_and_doc, &amp;quot;Name&amp;quot;, &amp;quot;Description&amp;quot;)
+    print()
+
+
+# test result
+# Attributes
+# ==========
+# Name                        Value                         
+# --------------------------- ------------------------------
+# __abstractmethods__         frozenset()                   
+# __dict__                    {&#39;_items&#39;: []}                
+# __doc__                     None                          
+# __hash__                    None                          
+# __module__                  &#39;__main__&#39;                    
+# __slots__                   ()                            
+# __weakref__                 None                          
+# _abc_cache                  &amp;lt;_weakrefset....000A7D5C57240&amp;gt;
+# _abc_negative_cache         &amp;lt;_weakrefset....000A7D5C572B0&amp;gt;
+# _abc_negative_cache_version 36                            
+# _abc_registry               &amp;lt;_weakrefset....000A7D5C571D0&amp;gt;
+# _items                      []  
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 7</title>
+      <link>https://harryho.github.io/code/python-notes-7/</link>
+      <pubDate>Sun, 17 Apr 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/code/python-notes-7/</guid>
+      <description>
+
+&lt;h2 id=&#34;exception-assertion&#34;&gt;Exception &amp;amp; Assertion&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Avoid bad practices in Python exception handling.&lt;/li&gt;
+&lt;li&gt;Always specify an exception type with except, but don&amp;rsquo;t be too general.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t Use Assertions for checking arguments&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;EXamples&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;lookup exception&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def lookups():
+    s = [1, 4, 6]
+    try:
+        item = s[5]
+    except LookupError:
+        print(&amp;quot;Handled IndexError&amp;quot;)
+
+    d = dict(a=65, b=66, c=67)
+    try:
+        value = d[&#39;x&#39;]
+    except LookupError:
+        print(&amp;quot;Handled KeyError&amp;quot;)
+
+if __name__ == &#39;__main__&#39;:
+    lookups()
+    
+# test result 
+# Handled IndexError
+# Handled KeyError
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;unicode exception&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def unicode_exception():
+try:
+    b&#39;\x81&#39;.decode(&#39;utf-8&#39;)
+except UnicodeError as e:
+    print(e)
+    print(&amp;quot;encoding:&amp;quot;, e.encoding)
+    print(&amp;quot;reason:&amp;quot;, e.reason)
+    print(&amp;quot;object:&amp;quot;, e.object)
+    print(&amp;quot;start:&amp;quot;, e.start)
+    print(&amp;quot;end&amp;quot;, e.end)
+
+if __name__ == &#39;__main__&#39;:
+    unicode_exception()
+
+# test result
+# &#39;utf-8&#39; codec can&#39;t decode byte 0x81 in position 0: invalid start byte
+# encoding: utf-8
+# reason: invalid start byte
+# object: b&#39;\x81&#39;
+# start: 0
+# end 1        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;customized exception with parameters&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sys
+import io
+
+
+class TriangleError(Exception):
+
+    def __init__(self, text, sides):
+        super().__init__(text)
+        self._sides = tuple(sides)
+
+    @property
+    def sides(self):
+        return self._sides
+
+    def __str__(self):
+        return &amp;quot;&#39;{}&#39; for sides {}&amp;quot;.format(self.args[0], self._sides)
+
+    def __repr__(self):
+        return &amp;quot;TriangleError({!r}, {!r}&amp;quot;.format(self.args[0], self._sides)
+
+
+def triangle_area(a, b, c):
+    sides = sorted((a, b, c))
+    if sides[2] &amp;gt; sides[0] + sides[1]:
+        raise TriangleError(&amp;quot;Illegal triangle&amp;quot;, sides)
+    p = (a + b + c) / 2
+    a = math.sqrt(p * (p - a) * (p - b) * (p - c))
+    return a
+
+
+def triangle_exception():
+    try:
+        a = triangle_area(3, 4, 10)
+        print(a)
+    except TriangleError as e:
+        try:
+            print(e, file=sys.stdin)
+        except io.UnsupportedOperation as f:
+            print(e)
+            print(f)
+            print(f.__context__ is e)
+
+if __name__ == &#39;__main__&#39;:
+    triangle_exception()
+
+# test result
+# &#39;Illegal triangle&#39; for sides (3, 4, 10)
+# not writable
+# True        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;chaining &amp;amp; trackback&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import math
+import traceback
+
+class InclinationError(Exception):
+    pass
+
+
+def inclination(dx, dy):
+    try:
+        return math.degrees(math.atan(dy / dx))
+    except ZeroDivisionError as e:
+        raise InclinationError(&amp;quot;Slope cannot be vertical&amp;quot;) from e
+
+
+def traceback_inclination():
+    try:
+        inclination(0, 5)
+    except InclinationError as e:
+        print(e.__traceback__)
+        traceback.print_tb(e.__traceback__)
+        s = traceback.format_tb(e.__traceback__)
+        print(s)
+
+if __name__ == &#39;__main__&#39;:
+    traceback_inclination()
+    print(&amp;quot;Done.&amp;quot;)
+
+# test result
+
+#&amp;lt;traceback object at 0x000000BE3B4F5108&amp;gt;
+#  File &amp;quot;/path/to/your_project/__main__.py&amp;quot;, line 190, in traceback_inclination
+#    inclination(0, 5)
+#  File &amp;quot;/path/to/your_project/__main__.py&amp;quot;, line 185, in inclination
+#    raise InclinationError(&amp;quot;Slope cannot be vertical&amp;quot;) from e
+#[&#39;  File &amp;quot;/path/to/your_project/__main__.py&amp;quot;, line 190, 
+# in traceback_inclination\n    
+# inclination(0,# 5)\n&#39;,
+#  &#39;  File &amp;quot;/path/to/your_project/__main__.py&amp;quot;, line 185, 
+#  in inclination\n    
+#  raise 
+# InclinationError(&amp;quot;Slope cannot be vertical&amp;quot;) from e\n&#39;]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;assertion &amp;amp; exception&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from pprint import pprint as pp
+
+def wrap(text, line_length):
+    &amp;quot;&amp;quot;&amp;quot;Wrap a string to a specified line length.
+
+    Args:
+        text: The string to wrap.
+        line_length: The line length in characters.
+
+    Returns:
+        A wrapped string.
+
+    Raises:
+        ValueError: If line_length is not positive.
+    &amp;quot;&amp;quot;&amp;quot;
+    if line_length &amp;lt; 1:
+        raise ValueError(&amp;quot;line_length {} is not positive&amp;quot;.format(line_length))
+
+    words = text.split()
+
+    if max(map(len, words)) &amp;gt; line_length:
+        raise ValueError(&amp;quot;line_length must be at least as long as the longest word&amp;quot;)
+
+    lines_of_words = []
+    current_line_length = line_length
+    for word in words:
+        if current_line_length + len(word) &amp;gt; line_length:
+            lines_of_words.append([])  # new line
+            current_line_length = 0
+        lines_of_words[-1].append(word)
+        current_line_length += len(word) + len(&#39; &#39;)
+    lines = [&#39; &#39;.join(line_of_words) for line_of_words in lines_of_words]
+    result = &#39;\n&#39;.join(lines)
+    assert all(len(line) &amp;lt;= line_length for line in result.splitlines())
+    return result
+
+wealth_of_nations = &amp;quot;The annual labour of every nation is the fund which or&amp;quot; \
+&amp;quot;iginally supplies it with all the necessaries and conveniencies of life wh&amp;quot; \
+&amp;quot;ich it annually consumes, and which consist always either in the immediate&amp;quot; \
+&amp;quot; produce of that labour, or in what is purchased with that produce from ot&amp;quot; \
+&amp;quot;her nations. According, therefore, as this produce, or what is purchased w&amp;quot; \
+&amp;quot;ith it, bears a greater or smaller proportion to the number of those who a&amp;quot; \
+&amp;quot;re to consume it, the nation will be better or worse supplied with all the&amp;quot; \
+&amp;quot; necessaries and conveniencies for which it has occasion.&amp;quot;
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    pp(wrap( wealth_of_nations, 40))
+
+# test result
+# (&#39;The annual labour of every nation is the\n&#39;
+#  &#39;fund which originally supplies it with\n&#39;
+#  &#39;all the necessaries and conveniencies of\n&#39;
+#  &#39;life which it annually consumes, and\n&#39;
+#  &#39;which consist always either in the\n&#39;
+#  &#39;immediate produce of that labour, or in\n&#39;
+#  &#39;what is purchased with that produce from\n&#39;
+#  &#39;other nations. According, therefore, as\n&#39;
+#  &#39;this produce, or what is purchased with\n&#39;
+#  &#39;it, bears a greater or smaller\n&#39;
+#  &#39;proportion to the number of those who\n&#39;
+#  &#39;are to consume it, the nation will be\n&#39;
+#  &#39;better or worse supplied with all the\n&#39;
+#  &#39;necessaries and conveniencies for which\n&#39;
+#  &#39;it has occasion.&#39;)
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>LCTHW C Lectures 2</title>
       <link>https://harryho.github.io/code/lcthw-lectures.2/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
@@ -9357,7 +10043,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
     super(OtherChild, gc).do_something()
     super(GrandChild , gc).do_something()
 
-## result 
+## test result 
 
 #(&amp;lt;class &#39;__main__.Child&#39;&amp;gt;, 
 #&amp;lt;class &#39;__main__.Parent&#39;&amp;gt;, 
@@ -18565,7 +19251,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
     print(square(2))
     print(cube(2))
 
-# Result:
+# test result:
 # 4
 # 8
 
@@ -18600,7 +19286,7 @@ def hello_greek():
 if __name__ == &amp;quot;__main__&amp;quot;:
     print(hello_greek())
 
-# result:
+# test result:
 # &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -18632,7 +19318,7 @@ def escape_unicode(f):
 def hello_greek():
     return &#39;γειά σου κόσμος&#39;    
 
-# Result
+# test result
 # Calling hello_greek
 # &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;
 
@@ -18660,7 +19346,7 @@ def create_seq(value, size):
 if __name__ == &amp;quot;__main__&amp;quot;:
     create_seq(&#39;0&#39;, -3)
 
-# result
+# test result
 ....
 &#39;Arg {} must be non-negative&#39;.format(index)
 ValueError: Arg 1 must be non-negative
@@ -20610,1633 +21296,6 @@ final class Person {
     }
 }
 
-
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JavaScript and Object Oriented Programming</title>
-      <link>https://harryho.github.io/code/javascript-oop/</link>
-      <pubDate>Thu, 20 Mar 2014 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/javascript-oop/</guid>
-      <description>
-
-&lt;h2 id=&#34;what-is-javascript&#34;&gt;What is JavaScript?&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please find the answer on &lt;a href=&#34;https://harryho.github.io/#JavaScript&#34;&gt;Home Page&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;what-is-object-oriented-programming&#34;&gt;What is Object Oriented Programming?&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Object-oriented programming (OOP) is a programming paradigm based on the concept of &amp;ldquo;objects&amp;rdquo;, which may contain data, in the form of fields, as known as attributes or properties; and actions, in the form of functions, as known as methods.&lt;/p&gt;
-
-&lt;p&gt;For example, Car is an object. The color and model of the car are attributes. Then accelerate to 60km/h, brake to 0km/h, and turn left or right of the car are the actions. From this sample, you can tell OOP makes the code more close to the real world. That is why it is most popular paradigm for developing buisness application.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You should have basic knowledge of Javascript.&lt;/li&gt;
-&lt;li&gt;You should know how to test sample code on Chrome or Firefox. It is simple, just open your browser and click &lt;code&gt;F12&lt;/code&gt;, copy the code to console and then press &lt;code&gt;Enter&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;data-types&#34;&gt;Data types&lt;/h2&gt;
-
-&lt;p&gt;The JavaScript (ECMAScript) standard defines six data types. Five are primitives, including Boolean, Null, Undefined, Number, String, and Object. In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers. The object-oriented nature of JavaScript is important to understand if you want to go further with your knowledge of the language, therefore we&amp;rsquo;ve provided this module to help you. Here we teach object theory and syntax in detail, then look at how to create your own objects.&lt;/p&gt;
-
-&lt;h2 id=&#34;object-and-prototype&#34;&gt;Object and prototype&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;How to define a object&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;There are a couple ways to create variable as object.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-var obj1 = {};
-var obj2 = new Object();
-var obj3 = Object.create(null);
-console.log( obj );
-console.log( obj2 );
-console.log( obj3 );
-
-/*
-output: 
-object {}
-object {}
-object {}
-*/
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Object type gives developers so much power and flexibility to customize their own data type. All JavaScript objects inherit the properties and methods from their prototype. The Object.prototype is on the top of the prototype chain. All JavaScript objects (Date, Array, RegExp, Function, &amp;hellip;.) inherit from the Object.prototype.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Object has properties and method. Object&amp;rsquo;s method are the actions that can be performed on objects, they are one of most powerful feature for developers. Let&amp;rsquo;s see how we can create object with properties and methods.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create three cars with basic object usage.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-var car1 = { color: &#39;red&#39;, make:&#39;Toyota&#39;, model:&#39;Sedan&#39;, getInfo: function (){
-        console.log( this );
-}};
-var car2 = { color: &#39;black&#39;, make:&#39;BMW&#39;, model:&#39;Coupe&#39;, getInfo: function (){
-        console.log( this );
-}};
-var car3 = { color: &#39;white&#39;, make:&#39;Subaru&#39;, model:&#39;SUV&#39;, getInfo:function (){
-        console.log( this );
-}};
-car1.getInfo();
-car2.getInfo(); 
-car3.getInfo();
-
-/*
-Output:
-Object {color: &amp;quot;red&amp;quot;, make: &amp;quot;Toyota&amp;quot;, model: &amp;quot;Sedan&amp;quot;} 
-Object {color: &amp;quot;black&amp;quot;, make: &amp;quot;BMW&amp;quot;, model: &amp;quot;Coupe&amp;quot;} 
-Object {color: &amp;quot;white&amp;quot;, make: &amp;quot;Subaru&amp;quot;, model: &amp;quot;SUV&amp;quot;}
-*/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-var Car = function(color, make, model, getInfo ) {
-    this.color=&#39;&#39;;
-    this.make=&#39;&#39;;
-    this.model=&#39;&#39;;
-    this.getInfo= function( time ){
-            console.log( this );
-    };
-};
-
-var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
-var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
-var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
-car1.getInfo();
-car2.getInfo(); 
-car3.getInfo();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;You will get same result as before. If you compare two blocks of code, you may think the second way has more code than the first one. Let&amp;rsquo;s image if you need to create 20 objects and every object with 20 methods, then you totaly need to write 20 X 20 = 400 methods. Object&amp;rsquo;s prototype is powerful, but we need to be careful when we want to use it, especially the &lt;code&gt;this&lt;/code&gt; prototype. We need discuss this more in detail.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Other sample of prototype&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var Car = function(color, make, model ) {
-    this.color=&#39;&#39;;
-    this.make=&#39;&#39;;
-    this.model=&#39;&#39;;
-};
-Car.prototype = {        
-    getInfo : function( ){
-            console.log( this );
-    }
-};
-var car1 = new Car(&#39;red&#39;,&#39;Toyota&#39;,&#39;Sedan&#39;);
-var car2 = new Car(&#39;black&#39;,&#39;BMW&#39;, &#39;Coupe&#39;);
-var car3 = new Car(&#39;white&#39;,&#39;Subaru&#39;,&#39;SUV&#39;);
-car1.getInfo();
-car2.getInfo(); 
-car3.getInfo();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;class-and-inheritance&#34;&gt;Class and inheritance&lt;/h2&gt;
-
-&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
-It also lacks built-in methods for determining whether an object implements the same set of
-methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
-is extremely flexible, making it easy to add these features.&lt;/p&gt;
-
-&lt;p&gt;JavaScript has no built-in way of creating or implementing interfaces.
-It also lacks built-in methods for determining whether an object implements the same set of
-methods as another object, making it difficult to use objects interchangeably. Luckily, JavaScript
-is extremely flexible, making it easy to add these features.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Inheritance issue in Javascript&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Pet() {
-    this.name =  &amp;quot;&amp;quot;;
-    this.species =  &amp;quot;&amp;quot;;
-    this.offsprings = [];
-    this.setName = function ( name ) { this.name = name ;};
-    this.deliverBaby = function( obj ){
-        this.offsprings.push( obj );
-    }
-    this.getInfo = function (){
-        console.log( &amp;quot; species: &amp;quot;,this.species, &amp;quot; name: &amp;quot; ,this.name );
-        console.log( &amp;quot; has &amp;quot;, this.offsprings.length ,&amp;quot; offsprings &amp;quot;);
-    }
-};
-
-function Dog()  {
-};
-
-Dog.prototype = new Pet();
-Dog.prototype.species = &amp;quot;Dog&amp;quot;;
-
-var dog1 = Object.create(new Dog());
-dog1.setName ( &amp;quot;Polly&amp;quot;);
-
-var dog2 = new Dog();
-dog2.setName ( &amp;quot;Lulu&amp;quot;);
-
-dog1.deliverBaby( new Dog());
-dog2.deliverBaby( new Dog());
-
-dog1.getInfo();
-dog2.getInfo();
-
-/*
-output :
-    species:  Dog  name:  Polly 
-    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
-    species:  Dog  name:  Lulu 
-    has  2  offsprings              &amp;lt;- It is wrong. It should be 1 only.
-*/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can tell there is something wrong with the prototype and constructor at a glance. It really confused many developers with C++/Java OOP backgroud. The sample code looks fine, but it doesn&amp;rsquo;t work as other OOP programming language. It is your and Brendan Eich&amp;rsquo;s problem, because he was told to make JavaScript look like Java, even there is no built-in OO mechanism at the beginning. This just looks like an odd way of doing class-based OOP without real classes, and leaves the programmer wondering why they didn’t implement proper class-based OOP. JavaScript keeps using constructor, which obscured JavaScript’s true prototypal nature. It turns out most developers don&amp;rsquo;t know how to use it properly and efficiently, including myself at the early stage.&lt;/p&gt;
-
-&lt;p&gt;Function is first-class citizen in JavaScript world, but it’s not really a class. We need to understand the constructor creates an empty object, then sets the prototype of empty object to the prototype property of the constructor, then set constructor function with &lt;code&gt;this&lt;/code&gt; pointing to the newly-created object, and finally returns the object. You will get more confused after you see this definition. Let&amp;rsquo;s us create a simple sample and take a close look why the constructor and prototype will cause this problem.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-var MyClass = function(){
-    this.name = &#39;MyClass&#39;;
-    this.getInfo = function ( ){
-        console.log( this );
-    }
-}
-MyClass.prototype.propObject = { id: 0, property: &#39;property&#39; }
-
-var objectA = new MyClass();
-var objectB = new MyClass();
-
-console.log( &#39;object A:&#39;, objectA.name ,  &#39;object B:&#39;, objectB.name  );
-console.log( &#39;MyClass.prototype  === objectA.constructor.prototype ? &#39;, MyClass.prototype === objectA.constructor.prototype );
-console.log( &#39;MyClass.prototype  === objectB.constructor.prototype ? &#39;, MyClass.prototype  === objectB.constructor.prototype );
-
-console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject , &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
-
-objectA.propObject.id = 1; 
-objectA.propObject.property = &#39;AAA&#39;; 
-
-console.log( &amp;quot; objectA.propObject : &amp;quot;, objectA.propObject,  &amp;quot; objectB.propObject : &amp;quot;,  objectB.propObject  );
-/*
-output :
-
-MyClass object B: MyClass
-MyClass.prototype  === objectA.constructor.prototype ?  true
-MyClass.prototype  === objectB.constructor.prototype ?  true
-objectA.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}  objectB.propObject :  Object {id: 0, property: &amp;quot;property&amp;quot;}
-objectA.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  objectB.propObject :  Object {id: 1, property: &amp;quot;AAA&amp;quot;}  
-*/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If we draw a diagram of above sample, you will see what is happening behind the scene. Since the prototype property is a reference, changing the prototype object’s properties at runtime will affect all objects using the prototype.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
-+------------+             
-|  MyClass   |        +---- objectA.prototype
-| prototype&amp;lt;----------|
-|            |        +---- objectB.prototype
-+------------+
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we figure out the root cause. You will say it is easy to fix. We just need to create new prototype for each object, and clone the properties and methods from supper class. Yes, you are right, but it is not I want to recommand to you. First, we need to see if we really inheritance, secondly, if it is better to maintain if use inheritance.&lt;/p&gt;
-
-&lt;p&gt;If we still want to use inheritance, I will suggest not to just inherit the properties, instead of methods. In my opinion, there is very rare of scenario, we really need to inherit method. So we just need to find to proper way to solve the problem of properties inheritance.&lt;/p&gt;
-
-&lt;h3 id=&#34;object-based-inheritance&#34;&gt;Object-based Inheritance&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-function Pet(name, master) {
-    this.name = name || &amp;quot;&amp;quot;;
-    this.species = &amp;quot;&amp;quot;;
-    this.master = master || {
-        name: &#39;&#39;,
-        gender: &#39;&#39;
-    };
-    this.offsprings = [];
-    this.deliverBaby= function ( obj) {
-        this.offsprings.push(obj);
-    },
-    this.getInfo = function () {
-        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
-        this.offsprings.forEach(function (e) {
-            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
-        });
-    }
-}
-
-function Dog(name, master) {
-    Pet.call(this, name, master);
-    this.mother = null;
-    this.species = &amp;quot;Dog&amp;quot;;
-}
-
-var dog1 = new Dog(&#39;Polly&#39;);
-dog1.master = {
-    name: &#39;John&#39;,
-    gender: &#39;M&#39;
-};
-
-var dog2 = new Dog(&#39;Lulu&#39;, {
-    name: &#39;Ada&#39;,
-    gender: &#39;F&#39;
-});
-
-dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
-dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
-dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
-
-dog1.getInfo();
-dog2.getInfo();
-
-/*
-output:
-
-Dog  name:  Polly  master :  John   M
-has baby :   Polly-Baby-Dog   Dog
-species:  Dog  name:  Lulu  master :  Ada   F
-has baby :   Lulu-Baby-Dog   Dog
-has baby :   Lulu-Baby-Dog-2   Dog
-*/
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After you test, would you ask: &amp;ldquo;what? how this works? It looks share the same prototype with &lt;code&gt;this&lt;/code&gt;&amp;rdquo;? Actually the problem is the special object &lt;code&gt;this&lt;/code&gt; in Javascript, which is one of the most misunderstood parts of JavaScript. Today it still confuses many other JS developers. If you have experience with other JavaScript framework. You will find many samples which use &lt;code&gt;that&lt;/code&gt; , &lt;code&gt;self&lt;/code&gt;, &lt;code&gt;vm&lt;/code&gt; to replace the built-in &lt;code&gt;this&lt;/code&gt;. e.g. &lt;code&gt;var that = {}&lt;/code&gt;, &lt;code&gt;var self = {}&lt;/code&gt;,etc. Let&amp;rsquo;s see the new version of above sample code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-function Pet(name, master) {
-    var self = {};
-    self.name = name || &amp;quot;&amp;quot;;
-    self.species = &amp;quot;&amp;quot;;
-    self.master = master || {
-        name: &#39;&#39;,
-        gender: &#39;&#39;
-    };
-    self.offsprings = [];
-    return self;
-}
-
-function Dog(name, master) {
-    var self = {};
-    Pet.call(self, name, master);
-    self.species = &amp;quot;Dog&amp;quot;;
-    self.prototype = this.constructor.prototype;
-    return self;
-}
-
-Dog.prototype = {    
-    deliverBaby: function ( self, obj) {
-        self.offsprings.push(obj);
-    },
-    getInfo: function (self) {
-        console.log(&amp;quot; species: &amp;quot;, self.species, &amp;quot; name: &amp;quot;, self.name, &amp;quot; master : &amp;quot;, self.master.name, &amp;quot; &amp;quot;, this.master.gender);
-        self.offsprings.forEach(function (e) {
-            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
-        });
-    }
-};
-
-var dog1 = new Dog(&#39;Polly&#39;);
-dog1.master = {
-    name: &#39;John&#39;,
-    gender: &#39;M&#39;
-};
-var dog2 = new Dog(&#39;Lulu&#39;, {
-    name: &#39;Ada&#39;,
-    gender: &#39;F&#39;
-});
-
-dog1.deliverBaby(dog1, new Dog(&#39;Polly-Baby-Dog&#39;));
-dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog&#39;));
-dog2.deliverBaby(dog2, new Dog(&#39;Lulu-Baby-Dog-2&#39;));
-
-dog1.getInfo();
-dog2.getInfo();
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now I rewrite above sample a few lines of code, then you will figour out why it is working, but maybe you still want to implement inheritance as other OOP lanuage C++, Java. Then let&amp;rsquo;s take a look the classical inheritance, which is much more close to other OOP language. In classical inheritance it&amp;rsquo;s impossible (or at least very difficult) to choose which properties you want to inherit. They use virtual base classes and interfaces to solve the diamond problem. It is much more complicated.&lt;/p&gt;
-
-&lt;h3 id=&#34;classical-inheritance&#34;&gt;Classical inheritance&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-function extend(subClass, superClass) {
-    var F = function () {};
-    F.prototype = superClass.prototype;
-    subClass.prototype = new F();
-    subClass.prototype.constructor = subClass;
-    subClass.superclass = superClass.prototype;
-
-    if (superClass.prototype.constructor == Object.prototype.constructor) {
-        superClass.prototype.constructor = superClass;
-    }
-}
-
-function Pet(name, master) {
-    this.name = name || &amp;quot;&amp;quot;;
-    this.species = &amp;quot;&amp;quot;;
-    this.master = master || {
-        name: &#39;&#39;,
-        gender: &#39;&#39;
-    };
-    this.offsprings = [];
-}
-
-Pet.prototype.deliverBaby = function (obj) {
-    this.offsprings.push(obj);
-};
-
-Pet.prototype.getInfo = function () {
-    console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, (this.master?this.master.name:&#39;&#39;), &amp;quot; &amp;quot;,  (this.master?this.master.gender:&#39;&#39;));
-    this.offsprings.forEach(function (e) {
-        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
-    });
-}
-
-
-function Dog(name, master) {
-    Dog.superclass.constructor.call(this, name, master);
-    this.species = &amp;quot;Dog&amp;quot;;
-}
-
-extend(Dog, Pet);
-
-Dog.prototype.getInfo = function () {     
-    console.log(&amp;quot; Override --- &amp;quot; );
-    Dog.superclass.getInfo.call(this) ;
-};
-
-var dog1 = new Dog(&#39;Polly&#39;);
-dog1.master = {
-    name: &#39;John&#39;,
-    gender: &#39;M&#39;
-};
-
-var dog2 = new Dog(&#39;Lulu&#39;, {
-    name: &#39;Ada&#39;,
-    gender: &#39;F&#39;
-});
-
-dog1.deliverBaby(new Dog(&#39;Polly-Baby-Dog&#39;));
-dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog&#39;));
-dog2.deliverBaby(new Dog(&#39;Lulu-Baby-Dog-2&#39;));
-
-dog1.getInfo();
-dog2.getInfo();
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Most programmers who come from a classical background argue that classical inheritance is more powerful than prototypal inheritance. The truth is that prototypal inheritance supports inheriting from multiple prototypes. Prototypal inheritance simply means one object inheriting from another object.&lt;/p&gt;
-
-&lt;p&gt;Whether classical or prototypal, is used to reduce the redundancy in code. Since prototypal inheritance allows for multiple inheritance, code which requires multiple inheritance is less redundant if written using prototypal inheritance rather than in a language which has classical inheritance but no multiple inheritance.&lt;/p&gt;
-
-&lt;h3 id=&#34;prototypal-inheritance&#34;&gt;Prototypal inheritance&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-function clone(obj) {
-    if (obj === null || typeof obj !== &#39;object&#39;) {
-        return obj;
-    }
-
-    var temp = obj.constructor(); // give temp the original obj&#39;s constructor
-    for (var key in obj) {
-        temp[key] = clone(obj[key]);
-    } 
-    return temp;
-}
-
-var Pet = {
-    name: &amp;quot;&amp;quot;,
-    species: &amp;quot;&amp;quot;,
-    master: {
-        name: &#39;&#39;,
-        gender: &#39;&#39;
-    },
-    offsprings: [],
-    deliverBaby: function (obj) {
-        this.offsprings.push(obj);
-    },
-    getInfo: function () {
-        console.log(&amp;quot; species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
-        this.offsprings.forEach(function (e) {
-            console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
-        });
-    }
-};
-
-var Dog = clone(Pet);
-Dog.species = &#39;Dog&#39;;
-
-Dog.getInfo = function () {
-    console.log(&amp;quot; Override -- species: &amp;quot;, this.species, &amp;quot; name: &amp;quot;, this.name, &amp;quot; master : &amp;quot;, this.master.name, &amp;quot; &amp;quot;, this.master.gender);
-    this.offsprings.forEach(function (e) {
-        console.log(&amp;quot; has baby :  &amp;quot;, e.name, &amp;quot; &amp;quot;, e.species);
-    });
-};
-
-var dog1 = clone(Dog);
-var dog2 = clone(Dog);
-
-dog1.name = &#39;Polly&#39;;
-dog1.master = {
-    name: &#39;John&#39;,
-    gender: &#39;M&#39;
-};
-dog2.name = &#39;Lulu&#39;;
-dog2.master = {
-    name: &#39;Ada&#39;,
-    gender: &#39;F&#39;
-};
-
-var dog11 = clone(Dog);
-dog11.name = &#39;Polly-Baby-Dog&#39;;
-var dog21 = clone(Dog);
-var dog22 = clone(Dog);
-dog21.name = &#39;Lulu-Baby-Dog&#39;;
-dog22.name = &#39;Lulu-Baby-Dog-2&#39;;
-
-dog1.deliverBaby(dog11);
-dog2.deliverBaby(dog21);
-dog2.deliverBaby(dog22);
-
-dog1.getInfo();
-dog2.getInfo();
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One of the most important advantages of prototypal inheritance is that you can add new properties to prototypes after they are created. This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.
-This allows you to add new methods to a prototype which will be automatically made available to all the objects which delegate to that prototype.This is not possible in classical inheritance because once a class is created you can&amp;rsquo;t modify it at runtime. This is probably the single biggest advantage of prototypal inheritance over classical inheritance, and it should have been at the top.&lt;/p&gt;
-
-&lt;h2 id=&#34;module-and-namespace&#34;&gt;Module and namespace&lt;/h2&gt;
-
-&lt;p&gt;There are quite a lot of benefits from module and namespace, especially when you are going to build some special common api shared within the whole application, even multiple systems across your whole entire enterprise. First thing first, we should not pollute the context, since it will potentially break existing functions or other third party frameworks which have been introduced in your applicatio, vice versa.&lt;/p&gt;
-
-&lt;p&gt;On the other hand, it is a good way to create reusable component, and it is easily for further enhancement, or maybe maintenance. JavaScript is very easy to create a module. One of the most widely used design patterns in JavaScript is the module pattern.&lt;/p&gt;
-
-&lt;h3 id=&#34;closure&#34;&gt;Closure&lt;/h3&gt;
-
-&lt;p&gt;The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Simple closure&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var closureObject = (function() {
-    var _privateProperty = &#39;private&#39;;
-    var _privateMethod = function () {
-        console.log( &#39; private method &#39;);
-    };
-    return {
-        publicProperty: &#39;Public Property&#39;,
-        publicMethod: function() {
-            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
-        },
-        setPrivateProperty: function ( newValue ){
-            _privateProperty= newValue;
-        },
-        getPrivateProperty: function( ){
-            return _privateProperty;
-        }
-    }
-}());
-
-console.log(  closureObject.publicProperty );
-console.log(  closureObject._privateProperty ); 
-// console.log(  closureObject._privateMethod() ); // This will cause Uncaught TypeError
-console.log(  closureObject.getPrivateProperty() );
-
-closureObject.setPrivateProperty( &#39;public&#39;);
-console.log(  closureObject.getPrivateProperty() );
-
-/* 
-output:
-
-Public Property
-undefined             // privateProperty can not be accessed directly
-private               
-public                // privateProperty can be updated by public method
-*/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.&lt;/p&gt;
-
-&lt;h3 id=&#34;module&#34;&gt;Module&lt;/h3&gt;
-
-&lt;p&gt;Module is not rock science. Actually it is quite easy to implement.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Simple module sample&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function(undefined) {
-    var _privateProperty = &#39;private&#39;;
-    var _privateMethod = function () {
-        console.log( &#39; private method &#39;);
-    };
-    return {
-        publicProperty: &#39;Public Property&#39;,
-        publicMethod: function() {
-            console.log( &#39; Call &#39;, _privateMethod() , &#39; from public method &#39;);
-        },
-        setPrivateProperty: function ( newValue ){
-            _privateProperty= newValue;
-        },
-        getPrivateProperty: function( ){
-            return _privateProperty;
-        }
-    }
-}());
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You may say &amp;ldquo;What? closure is module.&amp;rdquo; Yes, you can say that. The little difference is the auguements during auto initialization. By having an function argument undefined (the name actually does not matter) which you don&amp;rsquo;t pass a parameter to, you could make sure you have a variable which really is undefined. This technique ensures that it will work as expected, in case it will be excluded to unintential amendment by other script.&lt;/p&gt;
-
-&lt;p&gt;Once we create our module, we can simply extend the module with the same technique.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Module&amp;rsquo;s extension with override or new api&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myModule = (function() {
-    ....
-}());
-
-var extendModule = (function( m){
-     m.publicMethod = function ( newArgument ) { // overload publicMethod 
-          //   TODO
-     };
-
-     m.newApi = function () {  // 
-         // TODO
-     };
-
-}(myModule));
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;namespace&#34;&gt;Namespace&lt;/h3&gt;
-
-&lt;p&gt;Now we will go further to namespace, which is based on module technique. Namespace gives you the ability to have public and private properties and methods.
-The code inside doesn’t use the Object Literal notation. Allows you to use $ inside your code without worrying about clashing with other libraries
-Allows your library to grow across files using the “window.rtkns = window.rtkns || {}” technique
-A common pattern that you will see in many libraries, widgets, and plugins&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-(function (rtkns, $, undefined) {
-
-    rtkns.createNS = function (namespace) {
-        var nsparts = namespace.split(&amp;quot;.&amp;quot;);
-        var parent = rtkns;
-
-        if (nsparts[0] === &amp;quot;rtkns&amp;quot;) {
-            nsparts = nsparts.slice(1);
-        }
-
-        for (var i = 0; i &amp;lt; nsparts.length; i++) {
-            var partname = nsparts[i];
-
-            if (typeof parent[partname] === &amp;quot;undefined&amp;quot;) {
-                parent[partname] = {};
-            }
-            parent = parent[partname];
-        }
-        return parent;
-    };
-
-    var clone = function(obj) {
-        if (obj === null || typeof obj !== &#39;object&#39;) {
-            return obj;
-        }
-
-        var temp = obj.constructor(); // give temp the original obj&#39;s constructor
-        for (var key in obj) {
-            temp[key] = clone(obj[key]);
-        } 
-        return temp;
-    };
-
-    rtkns.clone = clone;
-
-    rtkns.createNS(&amp;quot;rtkns&amp;quot;);
-
-
-    rtkns.utils = rtkns.createNS(&amp;quot;rtkns.utils&amp;quot;);
-
-    rtkns.model = rtkns.createNS(&amp;quot;rtkns.model&amp;quot;);
-
-
-    rtkns.model.entity = {
-        id: 0,
-        createdBy:&#39;&#39;,
-        modifiedBy:&#39;&#39;,
-        created: null,
-        modified: null,
-    };
-    var entity = rtkns.model.entity;
-    
-    rtkns.model.order = clone ( entity);
-    var order = rtkns.model.order ;
-    order.amount = 0;
-    order.description = &#39;&#39;;
-
-
-    rtkns.model.client = clone( entity);
-    var client =  rtkns.model.client ;
-    client.name = &#39;&#39;;
-    client.email = &#39;&#39;;
-    client.orders = [];
-    client.purchase = function ( order ){
-        this.orders.push( order );
-    };
-
-    rtkns.utils.toString = function (entity) {
-        return entity?JSON.stringify(entity):entity;
-    };
-
-
-}(window.rtkns = window.rtkns || {}));
-
-var rtkns = window.rtkns;
-
-var client1 = rtkns.clone( rtkns.model.client );
-client1.name = &#39;client 1&#39;;
-client1.email = &#39;client1.email@test.com&#39;;
-var client2 = rtkns.clone( rtkns.model.client );
-client2.name = &#39;client 2&#39;;
-client2.email = &#39;client2.email@test.com&#39;;
-
-var order1 = rtkns.clone( rtkns.model.order );
-order1.amount = 100;
-order1.description = &#39;order 1&#39;;
-
-var order2 = rtkns.clone( rtkns.model.order );
-order2.amount = 600;
-order2.description = &#39;order 2&#39;;
-
-client1.purchase( order1 );
-client2.purchase( order2 );
-
-console.log(rtkns.utils.toString( client1));
-console.log(rtkns.utils.toString( client2));
-
-/*
-
-output:
-{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 1&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client1.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:100,&amp;quot;description&amp;quot;:&amp;quot;order 1&amp;quot;}]}
-VM95:2 {&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;name&amp;quot;:&amp;quot;client 2&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;client2.email@test.com&amp;quot;,&amp;quot;orders&amp;quot;:[{&amp;quot;id&amp;quot;:0,&amp;quot;createdBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;modifiedBy&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;created&amp;quot;:null,&amp;quot;modified&amp;quot;:null,&amp;quot;amount&amp;quot;:600,&amp;quot;description&amp;quot;:&amp;quot;order 2&amp;quot;}]}
-*/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The sample above combine namespace and prototypal inheritance. Namespace allows you to add new module for enhancement, and it allows you to organize your API better.  On the other hand, through the globle namespace you can inject customized service, or you can replace it. The disadvantage of namespace, when the source code blows up, it will be a bit more complicated, especially you break different into different files. Mock test or unit test will needs a bit more work to do as well. There is no pattern that is a Silver Bullet, but rather you should assess where you are at and examine the pros and cons of each pattern to address your situation.&lt;/p&gt;
-
-&lt;h2 id=&#34;interfaces&#34;&gt;Interfaces&lt;/h2&gt;
-
-&lt;p&gt;An interface tells programmers what methods a given class implements, which makes it easier to use. Interfaces also stabilize the ways in which different classes can communicate.&lt;/p&gt;
-
-&lt;p&gt;Using any interface implementation in JavaScript will create a small performance hit, due in part to the overhead of having another method invocation.&lt;/p&gt;
-
-&lt;p&gt;The biggest drawback is that there is no way to force other programmers to respect the interfaces you have created. In JavaScript, you must manually ensure that a given class implements an interface. You can mitigate this problem by using coding conventions and helper classes, but it will never entirely go away. Everyone on your project must agree to use them and check for them; otherwise much of their value is lost.&lt;/p&gt;
-
-&lt;p&gt;JavaScript does not come with built-in support for interfaces, and there is no Interface keyword, so any method you use to implement this will be very different from what languages such as C++, Java, and making it a little more difficult. JavaScript uses what&amp;rsquo;s called duck typing. (If it walks like a duck, and quacks like a duck, as far as JS cares, it&amp;rsquo;s a duck.) If your object has quack(), walk(), and fly() methods, code can use it wherever it expects an object that can walk, quack, and fly, without requiring the implementation of some &amp;ldquo;Duckable&amp;rdquo; interface.&lt;/p&gt;
-
-&lt;p&gt;JavaScript will use Interface object to ensure if the new instance implements the same action as Interface object.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
-
-var Interface = function(interfaceName, interfaceMembers) {
-    if (!(this instanceof Interface)) {
-        return new Interface(interfaceName, interfaceMembers);
-    }
-
-    var interfaceObj = this;
-
-    Object.keys(interfaceMembers).forEach(function(memberName) {
-        interfaceObj[memberName] = function() {
-            Interface.errorDetect(interfaceName, memberName);
-        };
-    });
-
-    interfaceObj.name = interfaceName;
-
-    return interfaceObj;
-};
-
-Interface.errorDetect = function(interfaceName, interfaceMember) {
-    throw Error(&#39;errorDetect: Class does not implement interface member &#39; + interfaceName + &#39;.&#39; + interfaceMember + &#39;()&#39;);
-};
-
-Interface.ensureImplement = function(obj /*, interfaces */ ) {
-    var interfaces = [].slice.call(arguments, 1);
-
-    interfaces.forEach(function(_interface) {
-        Object.keys(_interface).forEach(function(interfaceMember) {
-            var isFunction = typeof _interface[interfaceMember] === &#39;function&#39;;
-
-            if (isFunction &amp;amp;&amp;amp; !obj[interfaceMember]) {
-                Interface.errorDetect(_interface.name, interfaceMember);
-            }
-        });
-    });
-
-    return true;
-};
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;How to use this interface&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Samples below show you how  the Interface can ensure the object implement multiple interfaces.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Sample 1 with only one interface
-
-var ILog = Interface(&#39;ILog&#39;, {
-    logInfo:function(){},
-    logWarning:function(){},
-    logError:function(){},
-}); 
-
-
-var loggerA = {
-    logInfo:function(){},
-    logWarning:function(){},
-    logError:function(){},
-};
-
-// loggerB does not implement all methods
-var loggerB = {
-    logInfo:function(){},
-    logWarning:function(){},
-};
-
-console.log(Interface.ensureImplement( loggerA, ILog));
-console.log(Interface.ensureImplement( loggerB, ILog));
-
-/*
-output:
-true
-Uncaught Error: errorDetect: Class does not implement interface member ILog.logError()
-...
-*/
-
-// Sample 2 with 2 interfaces
-
-var Submarine = Interface(&#39;Submarine&#39;, {
-    operateUnderwater:function(){}
-}); 
-
-var Car = Interface(&#39;Car&#39;, {
-    operateOnRoad:function(){}
-}); 
-
-var SubmarineCar = {
-    operateUnderwater:function(){},
-    operateOnRoad:function(){},
-};
-
-console.log(Interface.ensureImplement( SubmarineCar, Submarine, Car ));
-
-/**
-output:
-true
-*/
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Java Notes, Part-2</title>
-      <link>https://harryho.github.io/code/java-notes-2/</link>
-      <pubDate>Mon, 08 Jul 2013 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/code/java-notes-2/</guid>
-      <description>
-
-&lt;h1 id=&#34;thread&#34;&gt;Thread&lt;/h1&gt;
-
-&lt;h2 id=&#34;join&#34;&gt;Join&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The join method allows one thread to wait for the completion of another. join responds to an interrupt by exiting with an InterruptedException.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Demo code of thread join&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class JoinDemo implements Runnable {
-    private Random rand = new Random(System.currentTimeMillis());
-
-    public void run() {
-        //simulate some CPU expensive task
-        for (int i = 0; i &amp;lt; 100000000; i++) {
-            rand.nextInt();
-        }
-        System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] finished  .&amp;quot;);
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i] = new Thread(new JoinDemo(), &amp;quot;joinThread &amp;quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i].join();
-        }
-        System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] All  -threads have finished.&amp;quot;);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;common-problem-of-multithred-program&#34;&gt;Common problem of multithred program&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;When there are many threads running, the exact sequence in which all running threads are executed depends next to the thread
-configuration like priority also on the available CPU resources and the way the scheduler chooses the next thread to execute.
-Although the behavior of the scheduler is completely deterministic, it is hard to predict which threads execute in which moment
-at a given point in time. This makes access to shared resources critical as it is hard to predict which thread will be the first thread
-that tries to access it.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Sample code without sync can show you what the problem is. If you run the following sample code, you may get different output from mine here. It is also common Thread safe issue for multiple threads program.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class NotSyncCounter implements Runnable {
-    private static int counter = 0;
-
-    public void run() {
-        while (counter &amp;lt; 10) {
-            System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;]  -    before: &amp;quot; + counter);
-            counter++;
-            System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;]  -    after: &amp;quot; + counter);
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i] = new Thread(new NotSyncCounter(), &amp;quot;  -    thread-&amp;quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i].join();
-        }
-    }
-}
-
-
-//Possible output:
-// [  -    thread-2]  -    before: 0
-// [  -    thread-1]  -    before: 0
-// [  -    thread-4]  -    before: 0
-// [  -    thread-3]  -    before: 0
-// [  -    thread-0]  -    before: 0
-// [  -    thread-3]  -    after: 4
-// [  -    thread-3]  -    before: 5
-// [  -    thread-4]  -    after: 3
-// [  -    thread-1]  -    after: 2
-// [  -    thread-1]  -    before: 6
-// [  -    thread-1]  -    after: 7
-// [  -    thread-2]  -    after: 1
-// [  -    thread-1]  -    before: 7
-// [  -    thread-4]  -    before: 6
-// [  -    thread-4]  -    after: 9
-// [  -    thread-4]  -    before: 9
-// [  -    thread-3]  -    after: 6
-// [  -    thread-0]  -    after: 5
-// [  -    thread-4]  -    after: 10
-// [  -    thread-1]  -    after: 8
-// [  -    thread-2]  -    before: 7
-// [  -    thread-2]  -    after: 11
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;To solve the problme, there is &lt;code&gt;synchronized&lt;/code&gt; keyword in Java available for us to handle the multiple threads program.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Demo code of &lt;code&gt;synchronized&lt;/code&gt; to solve the problem on above sample.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-public class SyncCounter implements Runnable {
-    private static int counter = 0;
-
-    public void run() {
-        while (counter &amp;lt; 10) {
-            synchronized (SyncCounter.class) {
-                System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] - before: &amp;quot; + counter);
-                counter++;
-                System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] - after: &amp;quot; + counter);
-            }
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i] = new Thread(new SyncCounter(), &amp;quot;  -    thread-&amp;quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &amp;lt; threads.length; i++) {
-            threads[i].join();
-        }
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;deadlock&#34;&gt;Deadlock&lt;/h3&gt;
-
-&lt;p&gt;In general the following requirements for a deadlock can be identified:
-* Mutual exclusion: There is a resource which can be accessed only by one thread at any point in time.
-* Resource holding: While having locked one resource, the thread tries to acquire another lock on some other exclusive resource.
-* No preemption: There is no mechanism, which frees the resource if one threads holds the lock for a specific period of time.
-* Circular wait: During runtime a constellation occurs in which two (or more) threads are each waiting on the other thread to free a resource that it has locked.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Monitor with wait and notify&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-public class SyncWaitNotfiyDemo {
-    private static final Queue &amp;lt;Integer&amp;gt;queue = new ConcurrentLinkedQueue&amp;lt;Integer&amp;gt;();
-
-    public Integer getNextInt() {
-        Integer retVal = null;
-        synchronized (queue) {
-            try {
-                while (queue.isEmpty()) {
-                    queue.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            retVal = queue.poll();
-        }
-        return retVal;
-    }
-
-    public synchronized void putInt(Integer value) {
-        synchronized (queue) {
-            queue.add(value);
-            queue.notify();
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        final SyncWaitNotfiyDemo queue = new SyncWaitNotfiyDemo();
-
-        Thread thread1 = new Thread(new Runnable() {
-            public void run() {
-                for (int i = 0; i &amp;lt; 10; i++) {
-                    queue.putInt(i);
-                }
-            }
-        });
-
-        Thread thread2 = new Thread(new Runnable() {
-            public void run() {
-                for (int i = 0; i &amp;lt; 10; i++) {
-                    Integer nextInt = queue.getNextInt();
-                    System.out.println(&amp;quot;Next int: &amp;quot; + nextInt);
-                }
-            }
-        });
-
-        thread1.start();
-        thread2.start();
-        thread1.join();
-        thread2.join();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;useful-concurrent-collections&#34;&gt;Useful concurrent collections&lt;/h3&gt;
-
-&lt;h4 id=&#34;concurrenthashmap&#34;&gt;ConcurrentHashMap&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;ConcurrentHashMap&lt;/code&gt; is undoubtedly most popular collection class introduced in Java 5 and most of us are already using it. It provides a concurrent alternative of Hashtable or Synchronized Map classes with aim to support higher level of concurrency by implementing fined grained locking. Multiple reader can access the Map concurrently  while a portion of Map gets locked for write operation depends upon concurrency level of Map. Also it provides better scalability than there synchronized counter part. Iterator of &lt;code&gt;ConcurrentHashMap&lt;/code&gt; are fail-safe iterators which doesn&amp;rsquo;t throw ConcurrencModificationException thus eliminates another requirement of locking during iteration which result in further scalability and performance.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;copyonwritearraylist-and-copyonwritearrayset&#34;&gt;CopyOnWriteArrayList and CopyOnWriteArraySet&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;CopyOnWriteArrayList&lt;/code&gt; is a concurrent alternative of synchronized List. It provides better concurrency than synchronized List by allowing multiple concurrent reader and replacing the whole list on write operation. Yes, write operation is costly on &lt;code&gt;CopyOnWriteArrayList&lt;/code&gt; but it performs better when there are multiple reader and requirement of iteration is more than writing. Since &lt;code&gt;CopyOnWriteArrayList&lt;/code&gt; Iterator also don&amp;rsquo;t throw ConcurrencModificationException it eliminates need to lock the collection during iteration. Remember both &lt;code&gt;ConcurrentHashMap&lt;/code&gt; and &lt;code&gt;CopyOnWriteArrayList&lt;/code&gt; doesn&amp;rsquo;t provides same level of locking as Synchronized Collection and achieves thread-safety by there locking and mutability strategy. So they perform better if requirements suits there nature. Similarly, &lt;code&gt;CopyOnWriteArraySet&lt;/code&gt; is a concurrent replacement to Synchronized Set.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;blockingqueue-and-deque&#34;&gt;BlockingQueue and &lt;code&gt;Deque&lt;/code&gt;&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;BlockingQueue&lt;/code&gt; makes it easy to implement producer-consumer design pattern by providing inbuilt blocking support for put() and take() method. put() method will block if Queue is full while take() method will block if Queue is empty. Java 5 API provides two concrete implementation of &lt;code&gt;BlockingQueue&lt;/code&gt; in form of &lt;code&gt;ArrayBlockingQueue&lt;/code&gt; and &lt;code&gt;LinkedBlockingQueue&lt;/code&gt;, both of them implement FIFO ordering of element. ArrayBlockingQueue is backed by Array and its bounded in nature while &lt;code&gt;LinkedBlockingQueue&lt;/code&gt; is optionally bounded. Consider using &lt;code&gt;BlockingQueue&lt;/code&gt; to solve producer Consumer problem in Java instead of writing your won wait-notify code. Java 5 also provides &lt;code&gt;PriorityBlockingQueue&lt;/code&gt;, another implementation of &lt;code&gt;BlockingQueue&lt;/code&gt; which is ordered on priority and useful if you want to process elements on order other than FIFO.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Deque&lt;/code&gt; interface is added in Java 6 and it extends Queue interface to support insertion and removal from both end of Queue referred as head and tail. Java6 also provides concurrent implementation of &lt;code&gt;Deque&lt;/code&gt; like ArrayDeque and LinkedBlockingDeque. &lt;code&gt;Deque&lt;/code&gt; Can be used efficiently to increase parallelism in program by allowing set of worker thread to help each other by taking some of work load from other thread by utilizing &lt;code&gt;Deque&lt;/code&gt; double end consumption property. So if all Thread has there own set of task Queue and they are consuming from head; helper thread can also share some work load via consumption from tail.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;concurrentskiplistmap-and-concurrentskiplistset&#34;&gt;ConcurrentSkipListMap and ConcurrentSkipListSet&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Just like &lt;code&gt;ConcurrentHashMap&lt;/code&gt; provides a concurrent alternative of synchronized HashMap. ConcurrentSkipListMap and ConcurrentSkipListSet provide concurrent alternative for synchronized version of SortedMap and SortedSet. For example instead of using TreeMap or TreeSet wrapped inside synchronized Collection, You can consider using ConcurrentSkipListMap or ConcurrentSkipListSet from java.util.concurrent package. They also implement NavigableMap and NavigableSet to add additional navigation method.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;synchronizer&#34;&gt;Synchronizer&lt;/h2&gt;
-
-&lt;h3 id=&#34;counter-semaphore&#34;&gt;Counter Semaphore&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Counting Semaphore in Java maintains specified number of pass or permits, In order to access a shared resource, Current Thread must acquire a permit. If permit is already exhausted by other thread than it can wait until a permit is available due to release of permit from different thread. This concurrency utility can be very useful to implement producer consumer design pattern or implement bounded pool or resources like Thread Pool, DB Connection pool etc.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-import java.util.concurrent.Semaphore;
-
-public class SemaphoreDemo {
-
-    Semaphore binary = new Semaphore(1);
-  
-    public static void main(String args[]) {
-        final SemaphoreDemo test = new SemaphoreDemo();
-        new Thread(){
-            @Override
-            public void run(){
-              test.mutualExclusion(); 
-            }
-        }.start();
-      
-        new Thread(){
-            @Override
-            public void run(){
-              test.mutualExclusion(); 
-            }
-        }.start();
-      
-    }
-  
-    private void mutualExclusion() {
-        try {
-            binary.acquire();
-
-            //mutual exclusive region
-            System.out.println(Thread.currentThread().getName() + &amp;quot; inside mutual exclusive region&amp;quot;);
-            Thread.sleep(1000);
-
-        } catch (InterruptedException i.e.) {
-            ie.printStackTrace();
-        } finally {
-            binary.release();
-            System.out.println(Thread.currentThread().getName() + &amp;quot; outside of mutual exclusive region&amp;quot;);
-        }
-    } 
-  
-}
-
-// Output:
-// Thread-0 inside mutual exclusive region
-// Thread-0 outside of mutual exclusive region
-// Thread-1 inside mutual exclusive region
-// Thread-1 outside of mutual exclusive region
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;countdownlatch&#34;&gt;CountDownLatch&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;CountDownLatch&lt;/code&gt; in Java is a kind of synchronizer which allows one Thread  to wait for one or more Threads before starts processing. You can also implement same functionality using  wait and notify mechanism in Java but it requires lot of code and getting it write in first attempt is tricky,  With &lt;code&gt;CountDownLatch&lt;/code&gt; it can  be done in just few lines. &lt;code&gt;CountDownLatch&lt;/code&gt; also allows flexibility on number of thread for which main thread should wait, It can wait for one thread or n number of thread, there is not much change on code.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The difficulty to use it properly is where to use &lt;code&gt;CountDownLatch&lt;/code&gt;. First, let us figour out how &lt;code&gt;CountDownLatch&lt;/code&gt; works. usaullly main thread of application,  which calls CountDownLatch.await() will wait until count reaches zero or its interrupted by another Thread. All other thread are required to do count down by calling CountDownLatch.countDown() once they are completed. One disadvantage of &lt;code&gt;CountDownLatch&lt;/code&gt; is not reusable, once its count reaches zero.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Sample program requires 3 services namely CacheService, AlertService  and ValidationService  to be started and ready before application can handle any request.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Date;
-import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class CountDownLatchDemo {
-
-    public static void main(String args[]) {
-       final CountDownLatch latch = new CountDownLatch(3);
-       Thread cacheService = new Thread(new Service(&amp;quot;CacheService&amp;quot;, 1000, latch));
-       Thread alertService = new Thread(new Service(&amp;quot;AlertService&amp;quot;, 1000, latch));
-       Thread validationService = new Thread(new Service(&amp;quot;ValidationService&amp;quot;, 1000, latch));
-      
-       cacheService.start(); //separate thread will initialize CacheService
-       alertService.start(); //another thread for AlertService initialization
-       validationService.start();
-      
-      
-       //count is 3 since we have 3 Threads (Services)
-      
-       try{
-            latch.await();  //main thread is waiting on CountDownLatch to finish
-            System.out.println(&amp;quot;All services are up, Application is starting now&amp;quot;);
-       }catch(InterruptedException ie){
-           ie.printStackTrace();
-       }
-      
-    }
-  
-}
-
-/**
- * Service class which will be executed by Thread using CountDownLatch synchronizer.
- */
-class Service implements Runnable{
-    private final String name;
-    private final int timeToStart;
-    private final CountDownLatch latch;
-  
-    public Service(String name, int timeToStart, CountDownLatch latch){
-        this.name = name;
-        this.timeToStart = timeToStart;
-        this.latch = latch;
-    }
-  
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(timeToStart);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println( name + &amp;quot; is Up&amp;quot;);
-        latch.countDown(); //reduce count of CountDownLatch by 1
-    }  
-}
-
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;cylicbarrier&#34;&gt;CylicBarrier&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;CyclicBarrier&lt;/code&gt; is similar to &lt;code&gt;CountDownLatch&lt;/code&gt; which we have seen in the last article  What is &lt;code&gt;CountDownLatch&lt;/code&gt; in Java and allows multiple threads to wait for each other (barrier) before proceeding. The difference between &lt;code&gt;CountDownLatch&lt;/code&gt; and &lt;code&gt;CyclicBarrier&lt;/code&gt; is an also very popular multi-threading interview question in Java. &lt;code&gt;CyclicBarrier&lt;/code&gt; is a natural requirement for a concurrent program because it can be used to perform final part of the task once individual tasks  are completed.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The demo of &lt;code&gt;CyclicBarrier&lt;/code&gt; on which we initialize &lt;code&gt;CyclicBarrier&lt;/code&gt; with 3 parties, means in order to cross barrier, 3 thread needs to call await() method. each thread calls await method in short duration but they don&amp;rsquo;t proceed until all 3 threads reached the barrier, once all thread reach the barrier, barrier gets broker and each thread started their execution from that point.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.`CyclicBarrier`;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class CyclicBarrierDemo {
-
-    //Runnable task for each thread
-    private static class Task implements Runnable {
-
-        private CyclicBarrier barrier;
-
-        public Task(CyclicBarrier barrier) {
-            this.barrier = barrier;
-        }
-
-        @Override
-        public void run() {
-            try {
-                System.out.println(Thread.currentThread().getName() + &amp;quot; is waiting on barrier&amp;quot;);
-                barrier.await();
-                System.out.println(Thread.currentThread().getName() + &amp;quot; has crossed the barrier&amp;quot;);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BrokenBarrierException ex) {
-                Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    public static void main(String args[]) {
-
-        //creating CyclicBarrier with 3 parties i.e. 3 Threads needs to call await()
-        final CyclicBarrier cb = new CyclicBarrier(3, new Runnable(){
-            @Override
-            public void run(){
-                //This task will be executed once all thread reaches barrier
-                System.out.println(&amp;quot;All parties are arrived at barrier, lets play&amp;quot;);
-            }
-        });
-
-        //starting each of thread
-        Thread t1 = new Thread(new Task(cb), &amp;quot;Thread 1&amp;quot;);
-        Thread t2 = new Thread(new Task(cb), &amp;quot;Thread 2&amp;quot;);
-        Thread t3 = new Thread(new Task(cb), &amp;quot;Thread 3&amp;quot;);
-
-        t1.start();
-        t2.start();
-        t3.start();
-      
-    }
-}
-
-// Output:
-// Thread 1 is waiting on barrier
-// Thread 3 is waiting on barrier
-// Thread 2 is waiting on barrier
-// All parties have arrived at barrier, lets play
-// Thread 3 has crossed the barrier
-// Thread 1 has crossed the barrier
-// Thread 2 has crossed the barrier
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;producer-consumer-pattern&#34;&gt;Producer / Consumer pattern&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Producer Consumer Design pattern is a classic concurrency or threading pattern which reduces coupling between
-Producer and Consumer by separating Identification of work with Execution of Work. In producer consumer design pattern a shared queue is used to control the flow and this separation allows you to code producer and consumer separately.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;It is everywhere in real life and depict coordination and collaboration. Like one person is preparing food (Producer) while other one is serving food (Consumer), both will use shared table for putting food plates and taking food plates. Producer which is the person preparing food will wait if table is full and Consumer (Person who is serving food) will wait if table is empty. table is a shared object here. On Java library Executor framework itself implement Producer Consumer design pattern be separating responsibility of addition and execution of task.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class ProducerConsumerPattern {
-
-    public static void main(String args[]){
-  
-     //Creating shared object
-     BlockingQueue sharedQueue = new LinkedBlockingQueue();
- 
-     //Creating Producer and Consumer Thread
-     Thread prodThread = new Thread(new Producer(sharedQueue));
-     Thread consThread = new Thread(new Consumer(sharedQueue));
-
-     //Starting producer and Consumer thread
-     prodThread.start();
-     consThread.start();
-    }
- 
-}
-
-//Producer Class in java
-class Producer implements Runnable {
-
-    private final BlockingQueue sharedQueue;
-
-    public Producer(BlockingQueue sharedQueue) {
-        this.sharedQueue = sharedQueue;
-    }
-
-    @Override
-    public void run() {
-        for(int i=0; i&amp;lt;10; i++){
-            try {
-                System.out.println(&amp;quot;Produced: &amp;quot; + i);
-                sharedQueue.put(i);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-}
-
-//Consumer Class in Java
-class Consumer implements Runnable{
-
-    private final BlockingQueue sharedQueue;
-
-    public Consumer (BlockingQueue sharedQueue) {
-        this.sharedQueue = sharedQueue;
-    }
-  
-    @Override
-    public void run() {
-        while(true){
-            try {
-                System.out.println(&amp;quot;Consumed: &amp;quot;+ sharedQueue.take());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-  
-  
-}
-
-// Output:
-// Produced: 0
-// Produced: 1
-// Consumed: 0
-// Produced: 2
-// Consumed: 1
-// Produced: 3
-// Consumed: 2
-// Produced: 4
-// Consumed: 3
-// Produced: 5
-// Consumed: 4
-// Produced: 6
-// Consumed: 5
-// Produced: 7
-// Consumed: 6
-// Produced: 8
-// Consumed: 7
-// Produced: 9
-// Consumed: 8
-// Consumed: 9
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;executor-thread-pool&#34;&gt;Executor &amp;ndash; Thread Pool&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Java 1.5 introduced Thread pool in Java in the form of Executor framework, which allows Java programmer to decouple submission of a task to execution of the task. It also introduced a full feature built-in Thread Pool framework commonly known as Executor framework. Executor framework also provides different kind of Thread Pool e.g. &lt;code&gt;SingleThreadExecutor&lt;/code&gt; which creates just one worker thread or &lt;code&gt;CachedThreadPool&lt;/code&gt; which creates worker threads as and when necessary.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Demo of thread pool&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public class ThreadPoolDemo {
-
-    public static void main(String args[]) {
-       ExecutorService service = Executors.newFixedThreadPool(10);
-       for (int i =0; i&amp;lt;100; i++){
-           service.submit(new Task(i));
-       }
-    }
-  
-}
-
-final class Task implements Runnable{
-    private int taskId;
-  
-    public Task(int id){
-        this.taskId = id;
-    }
-  
-    @Override
-    public void run() {
-        System.out.println(&amp;quot;Task ID : &amp;quot; + this.taskId +&amp;quot; performed by &amp;quot; + Thread.currentThread().getName());
-    }  
-}
-
-// Output:
-// Task ID : 0 performed by pool-1-thread-1
-// Task ID : 7 performed by pool-1-thread-8
-// Task ID : 8 performed by pool-1-thread-9
-// Task ID : 6 performed by pool-1-thread-7
-// Task ID : 4 performed by pool-1-thread-5
-// Task ID : 5 performed by pool-1-thread-6
-// Task ID : 3 performed by pool-1-thread-4
-// Task ID : 1 performed by pool-1-thread-2
-// ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;submit-runnable&#34;&gt;Submit(Runnable)&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The submit(Runnable) method also takes a Runnable implementation, but returns a Future object. This Future object can be used to check if the Runnable as finished executing.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;submit-callable&#34;&gt;Submit(Callable)&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The submit(Callable) method is similar to the submit(Runnable) method except for the type of parameter it takes. The Callable instance is very similar to a Runnable except that its call() method can return a result.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;invokeany&#34;&gt;InvokeAny()&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The invokeAny() method takes a collection of Callable objects, or subinterfaces of Callable. If one of the tasks complete (or throws an exception), the rest of the Callable&amp;rsquo;s are cancelled.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;invokeall&#34;&gt;InvokeAll()&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The invokeAll() method invokes all of the Callable objects and returns a list of Future objects. Keep in mind that a task might finish due to an exception, so it may not have &amp;ldquo;succeeded&amp;rdquo;. There is no way on a Future to tell the difference.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;demo-of-submit-invokeany&#34;&gt;Demo of submit, InvokeAny&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.ExecutionException;
-import java.util.HashSet;
-import java.util.Set;
-
-public class SubmitInvokeDemo {
-
-    public static void main(String args[]) throws InterruptedException, ExecutionException {
-
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        Future future = executorService.submit(new Runnable() {
-            public void run() {
-                System.out.println(&amp;quot;Asynchronous task&amp;quot;);
-            }
-        });
-
-        future.get();  //returns null if the task has finished correctly.
-
-        Set&amp;lt;Callable&amp;lt;String&amp;gt;&amp;gt; callables = new HashSet&amp;lt;Callable&amp;lt;String&amp;gt;&amp;gt;();
-
-        callables.add(new Callable&amp;lt;String&amp;gt;() {
-            public String call() throws Exception {
-                return &amp;quot;Task 1&amp;quot;;
-            }
-        });
-        callables.add(new Callable&amp;lt;String&amp;gt;() {
-            public String call() throws Exception {
-                return &amp;quot;Task 2&amp;quot;;
-            }
-        });
-        callables.add(new Callable&amp;lt;String&amp;gt;() {
-            public String call() throws Exception {
-                return &amp;quot;Task 3&amp;quot;;
-            }
-        });
-
-        String result = executorService.invokeAny(callables);
-
-        System.out.println(&amp;quot;result = &amp;quot; + result);
-
-        executorService.shutdown();
-
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;join-and-fork&#34;&gt;Join and Fork&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Here is an introduction into the Fork/Join Framework that is part of the JDK since version 1.7.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;join-and-fork-with-executor-service&#34;&gt;Join and Fork with Executor Service&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The demo code submit() our tasks to the ExecutorService and then use the returned instance of &lt;code&gt;Future&lt;/code&gt; to wait() for the result. The normal
-&lt;code&gt;ExecutorService&lt;/code&gt; where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.ExecutionException;
-import java.util.Random;
-
-public class FindMinTask implements Callable&amp;lt;Integer&amp;gt; {
-    private int[] numbers;
-    private int startIndex;
-    private int endIndex;
-    private ExecutorService executorService;
-
-    public FindMinTask(ExecutorService executorService, int[] numbers, int startIndex, int endIndex) {
-        this.executorService = executorService;
-        this.numbers = numbers;
-        this.startIndex = startIndex;
-        this.endIndex = endIndex;
-    }
-
-    public Integer call() throws Exception {
-
-        int sliceLength = (endIndex - startIndex) + 1;
-        if (sliceLength &amp;gt; 2) {
-            FindMinTask lowerFindMin = new FindMinTask(executorService, numbers, startIndex,
-                    startIndex + (sliceLength / 2) - 1);
-            Future&amp;lt;Integer&amp;gt; futureLowerFindMin = executorService.submit(lowerFindMin);
-            FindMinTask upperFindMin = new FindMinTask(executorService, numbers, startIndex + (sliceLength / 2),
-                    endIndex);
-            Future&amp;lt;Integer&amp;gt; futureUpperFindMin = executorService.submit(upperFindMin);
-            return Math.min(futureLowerFindMin.get(), futureUpperFindMin.get());
-        } else {
-            return Math.min(numbers[startIndex], numbers[endIndex]);
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int[] numbers = new int[100];
-        Random random = new Random(System.currentTimeMillis());
-        for (int i = 0; i &amp;lt; numbers.length; i++) {
-            numbers[i] = random.nextInt(100);
-        }
-        ExecutorService executorService = Executors.newFixedThreadPool(64);
-        Future&amp;lt;Integer&amp;gt; futureResult = executorService
-                .submit(new FindMinTask(executorService, numbers, 0, numbers.length - 1));
-        System.out.println(futureResult.get());
-        executorService.shutdown();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;join-and-fork-with-joinforkpool&#34;&gt;Join and Fork with JoinForkPool&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;ForkJoinPool&lt;/code&gt; implements the already mentioned work-stealing strategy, i.e. every time a running thread has to wait for some result; the thread removes the current task from the work queue and executes some other task ready to run. This way the current thread is not blocked and can be used to execute other tasks. Once the result for the originally suspended task has been computed the task gets executed again and the join() method returns the result. This is an important difference between &lt;code&gt;JoinForkPool&lt;/code&gt; and &lt;code&gt;ExecutorService&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Demo of JoinForkPool&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import java.util.concurrent.ForkJoinPool;
-import javax.imageio.*;
-import java.util.concurrent.RecursiveAction;
-
-public class GrayscaleImageAction extends RecursiveAction {
-    private static final long serialVersionUID = 1L;
-    private int row;
-    private BufferedImage bufferedImage;
-
-    public GrayscaleImageAction(int row, BufferedImage bufferedImage) {
-        this.row = row;
-        this.bufferedImage = bufferedImage;
-    }
-
-    @Override
-    protected void compute() {
-        for (int column = 0; column &amp;lt; bufferedImage.getWidth(); column++) {
-            int rgb = bufferedImage.getRGB(column, row);
-            int r = (rgb &amp;gt;&amp;gt; 16) &amp;amp; 0xFF;
-            int g = (rgb &amp;gt;&amp;gt; 8) &amp;amp; 0xFF;
-            int b = (rgb &amp;amp; 0xFF);
-            int gray = (int) (0.2126 * (float) r + 0.7152 * (float) g + 0.0722 * (float) b);
-            gray = (gray &amp;lt;&amp;lt; 16) + (gray &amp;lt;&amp;lt; 8) + gray;
-            bufferedImage.setRGB(column, row, gray);
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-        BufferedImage bufferedImage = ImageIO.read(new File(args[0]));
-        for (int row = 0; row &amp;lt; bufferedImage.getHeight(); row++) {
-            GrayscaleImageAction action = new GrayscaleImageAction(row, bufferedImage);
-            pool.execute(action);
-        }
-        pool.shutdown();
-        ImageIO.write(bufferedImage, &amp;quot;jpg&amp;quot;, new File(args[1]));
-    }
-}
 
 &lt;/code&gt;&lt;/pre&gt;
 </description>
