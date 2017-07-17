@@ -601,6 +601,8 @@ def start_transaction(connection):
 &lt;h2 id=&#34;introspection&#34;&gt;Introspection&lt;/h2&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;type of object is type&lt;/p&gt;&lt;/li&gt;
+
 &lt;li&gt;&lt;p&gt;Example&lt;/p&gt;
 
 &lt;ul&gt;
@@ -697,7 +699,7 @@ class SortedSet(Sequence, Set):
 
 def full_sig(method):
     try:
-        return method.__name__ + inspect.signature(method)
+        return method.__name__ + str(inspect.signature(method))
     except ValueError:
         return method.__name__ + &#39;(...)&#39;
 
@@ -761,26 +763,112 @@ def dump(obj):
     print_table(method_names_and_doc, &amp;quot;Name&amp;quot;, &amp;quot;Description&amp;quot;)
     print()
 
+if __name__ == &amp;quot;__main__&amp;quot;:
+    dump(&#39;a&#39;)
 
 # test result
+# Type
+# ====
+# &amp;lt;class &#39;str&#39;&amp;gt;
+#
+# Documentation
+# =============
+# str(object=&#39;&#39;) -&amp;gt; str
+# str(bytes_or_buffer[, encoding[, errors]]) -&amp;gt; str
+# Create a new string object from the given object. If encoding or
+# errors is specified, then the object must expose a data buffer
+# that will be decoded using the given encoding and error handler.
+# Otherwise, returns the result of object.__str__() (if defined)
+# or repr(object).
+# encoding defaults to sys.getdefaultencoding().
+# errors defaults to &#39;strict&#39;.
+#
 # Attributes
 # ==========
-# Name                        Value                         
-# --------------------------- ------------------------------
-# __abstractmethods__         frozenset()                   
-# __dict__                    {&#39;_items&#39;: []}                
-# __doc__                     None                          
-# __hash__                    None                          
-# __module__                  &#39;__main__&#39;                    
-# __slots__                   ()                            
-# __weakref__                 None                          
-# _abc_cache                  &amp;lt;_weakrefset....000A7D5C57240&amp;gt;
-# _abc_negative_cache         &amp;lt;_weakrefset....000A7D5C572B0&amp;gt;
-# _abc_negative_cache_version 36                            
-# _abc_registry               &amp;lt;_weakrefset....000A7D5C571D0&amp;gt;
-# _items                      []  
-
-
+# Name    Value                         
+# ------- ------------------------------
+# __doc__ &amp;quot;str(object=&#39;... to &#39;strict&#39;.&amp;quot;
+#
+# Methods
+# =======
+# Name              Description                                                            
+# ----------------- -----------------------------------------------------------------------
+# __add__(value, /)               Return self+value.                                                     
+# str(...)                        str(object=&#39;&#39;) -&amp;gt; str                                                  
+# __contains__(key, /)            Return key in self.                                                    
+# __delattr__(name, /)            Implement delattr(self, name).                                         
+# __dir__(...)                    __dir__() -&amp;gt; list                                                      
+# __eq__(value, /)                Return self==value.                                                    
+# __format__(...)                 S.__format__(format_spec) -&amp;gt; str                                       
+# __ge__(value, /)                Return self&amp;gt;=value.                                                    
+# __getattribute__(name, /)       Return getattr(self, name).                                            
+# __getitem__(key, /)             Return self[key].                                                      
+# __getnewargs__(...)                                                                                    
+# __gt__(value, /)                Return self&amp;gt;value.                                                     
+# __hash__()                      Return hash(self).                                                     
+# __init__(*args, **kwargs)       Initialize self.  See help(type(self)) for accurate signature.         
+# __init_subclass__(...)          This method is called when a class is subclassed.                      
+# __iter__()                      Implement iter(self).                                                  
+# __le__(value, /)                Return self&amp;lt;=value.                                                    
+# __len__()                       Return len(self).                                                      
+# __lt__(value, /)                Return self&amp;lt;value.                                                     
+# __mod__(value, /)               Return self%value.                                                     
+# __mul__(value, /)               Return self*value.n                                                    
+# __ne__(value, /)                Return self!=value.                                                    
+# __new__(*args, **kwargs)        Create and return a new object.  See help(type) for accurate signature.
+# __reduce__(...)                 helper for pickle                                                      
+# __reduce_ex__(...)              helper for pickle                                                      
+# __repr__()                      Return repr(self).                                                     
+# __rmod__(value, /)              Return value%self.                                                     
+# __rmul__(value, /)              Return self*value.                                                     
+# __setattr__(name, value, /)     Implement setattr(self, name, value).                                  
+# __sizeof__(...)                 S.__sizeof__() -&amp;gt; size of S in memory, in bytes                        
+# __str__()                       Return str(self).                                                      
+# __subclasshook__(...)           Abstract classes can override this to customize issubclass().          
+# capitalize(...)                 S.capitalize() -&amp;gt; str                                                  
+# casefold(...)                   S.casefold() -&amp;gt; str                                                    
+# center(...)                     S.center(width[, fillchar]) -&amp;gt; str                                     
+# count(...)                      S.count(sub[, start[, end]]) -&amp;gt; int                                    
+# encode(...)                     S.encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;) -&amp;gt; bytes                   
+# endswith(...)                   S.endswith(suffix[, start[, end]]) -&amp;gt; bool                             
+# expandtabs(...)                 S.expandtabs(tabsize=8) -&amp;gt; str                                         
+# find(...)                       S.find(sub[, start[, end]]) -&amp;gt; int                                     
+# format(...)                     S.format(*args, **kwargs) -&amp;gt; str      
+# format_map(...)                 S.format_map(mapping) -&amp;gt; str                                           
+# index(...)                      S.index(sub[, start[, end]]) -&amp;gt; int                                    
+# isalnum(...)                    S.isalnum() -&amp;gt; bool                                                    
+# isalpha(...)                    S.isalpha() -&amp;gt; bool                                                    
+# isdecimal(...)                  S.isdecimal() -&amp;gt; bool                                                  
+# isdigit(...)                    S.isdigit() -&amp;gt; bool                                                    
+# isidentifier(...)               S.isidentifier() -&amp;gt; bool                                               
+# islower(...)                    S.islower() -&amp;gt; bool                                                    
+# isnumeric(...)                  S.isnumeric() -&amp;gt; bool                                                  
+# isprintable(...)                S.isprintable() -&amp;gt; bool                                                
+# isspace(...)                    S.isspace() -&amp;gt; bool                                                    
+# istitle(...)                    S.istitle() -&amp;gt; bool                                                    
+# isupper(...)                    S.isupper() -&amp;gt; bool                                                    
+# join(...)                       S.join(iterable) -&amp;gt; str                                                
+# ljust(...)                      S.ljust(width[, fillchar]) -&amp;gt; str                                      
+# lower(...)                      S.lower() -&amp;gt; str                                                       
+# lstrip(...)                     S.lstrip([chars]) -&amp;gt; str                                               
+# maketrans(x, y=None, z=None, /) Return a translation table usable for str.translate().                 
+# partition(...)                  S.partition(sep) -&amp;gt; (head, sep, tail)                                  
+# replace(...)                    S.replace(old, new[, count]) -&amp;gt; str                                    
+# rfind(...)                      S.rfind(sub[, start[, end]]) -&amp;gt; int                                    
+# rindex(...)                     S.rindex(sub[, start[, end]]) -&amp;gt; int                                   
+# rjust(...)                      S.rjust(width[, fillchar]) -&amp;gt; str                                      
+# rpartition(...)                 S.rpartition(sep) -&amp;gt; (head, sep, tail)                                 
+# rsplit(...)                     S.rsplit(sep=None, maxsplit=-1) -&amp;gt; list of strings                     
+# rstrip(...)                     S.rstrip([chars]) -&amp;gt; str                                               
+# split(...)                      S.split(sep=None, maxsplit=-1) -&amp;gt; list of strings                      
+# splitlines(...)                 S.splitlines([keepends]) -&amp;gt; list of strings                            
+# startswith(...)                 S.startswith(prefix[, start[, end]]) -&amp;gt; bool                           
+# strip(...)                      S.strip([chars]) -&amp;gt; str                                                
+# swapcase(...)                   S.swapcase() -&amp;gt; str                                                    
+# title(...)                      S.title() -&amp;gt; str                                                       
+# translate(...)                  S.translate(table) -&amp;gt; str                                              
+# upper(...)                      S.upper() -&amp;gt; str                                                       
+# zfill(...)                      S.zfill(width) -&amp;gt; str   
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
