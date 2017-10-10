@@ -535,10 +535,10 @@ public class LambdaDemo {
     public static void main(String[] args) {
 
         // FunctionalInterface 
-        System.out.println(&quot;x + y:&quot; + engine((x, y) -&gt; x + y));// w w  w .j  av a 2s.  c om
-        System.out.println(&quot;x - y:&quot; + engine((x, y) -&gt; x * y));
-        System.out.println(&quot;x * y:&quot; + engine((x, y) -&gt; x / y));
-        System.out.println(&quot;x / y:&quot; + engine((x, y) -&gt; x % y));
+        System.out.println(&quot;x + y:&quot; + engine((x, y) -&gt; x + y)); // 6
+        System.out.println(&quot;x - y:&quot; + engine((x, y) -&gt; x * y)); // 8
+        System.out.println(&quot;x * y:&quot; + engine((x, y) -&gt; x / y)); // 0 
+        System.out.println(&quot;x / y:&quot; + engine((x, y) -&gt; x % y)); // 2
 
         String[] strArray = new String[] { &quot;abc&quot;, &quot;klm&quot;, &quot;xyz&quot;, &quot;pqr&quot; };
         List list = Arrays.asList(strArray);
@@ -546,11 +546,22 @@ public class LambdaDemo {
         // Default Methods
         list.forEach(System.out::println);
 
+        // abc
+        // klm
+        // xyz
+        // pqr
+
         Arrays.sort(strArray, (first, second) -&gt; first.compareToIgnoreCase(second));
         list = Arrays.asList(strArray);
 
         System.out.println(&quot;After sorting ... &quot;);
         list.forEach(System.out::println);
+
+        // After sorting ...
+        // abc
+        // klm
+        // pqr
+        // xyz
 
         // Common Functional Interfaces
         // Runnable
@@ -603,12 +614,19 @@ public class LambdaDemo {
         BiFunction&lt;String, String, Person&gt; personBiFunc = (x, y) -&gt; new Person(x, y);
         // Consumer&lt;String&gt; personCon = (Person p) -&gt; p.setTitle;
 
-        System.out.println(&quot; personSup &quot; + personSup.get());
-        System.out.println(&quot; personFunc &quot; + personFunc.apply(&quot;John Doe&quot;));
-        System.out.println(&quot; personBiFunc &quot; + personBiFunc.apply(&quot;John&quot;, &quot;Doe&quot;));
+        System.out.println(personSup.get());
+        // Person() constructor called
+        // name = Unknown, title = Unknown
+        System.out.println(personFunc.apply(&quot;John Doe&quot;));
+        // Person( fullName ) constructor called
+        // name = John Doe, title = Unknown
+
+        System.out.println(personBiFunc.apply(&quot;John&quot;, &quot;Doe&quot;));
+        // Person(firstName, lastName ) constructor called
+        // name = John, title = Unknown
+
 
         // Recursive Lambda Expressions
-
         IntFunction&lt;Long&gt; factorialCalc = new IntFunction&lt;Long&gt;() {
             @Override
             public Long apply(int n) {
@@ -627,8 +645,14 @@ public class LambdaDemo {
         int n = 5;
         long fact = factorialCalc.apply(n);
         System.out.println(&quot;Factorial of &quot; + n + &quot; is &quot; + fact);
+        // Factorial of 5 is 120
 
+
+        
     }
+
+
+
 
     private static int engine(Calculator calculator) {
         int x = 2, y = 4;
@@ -657,8 +681,7 @@ final class Person {
     }
 
     public Person(String fullName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         System.out.println(&quot; Person( fullName ) constructor called &quot;);
     }
 
@@ -678,12 +701,12 @@ final class Person {
     }
 
     public String getFullName() {
-        return fullName == null ? firstName != null ? firstName : &quot;Unknown&quot; : fullName;
+        return fullName == null ?( firstName != null ? firstName : &quot;Unknown&quot; ): fullName;
     }
 
     @Override
     public String toString() {
-        return &quot;name = &quot; + getFullName() + &quot;, title = &quot; + title != null ? title : &quot;Unknown&quot;;
+        return &quot;name = &quot; + getFullName() + &quot;, title = &quot; + (title != null ? title : &quot;Unknown&quot;);
     }
 }
 
@@ -743,29 +766,6 @@ final class Person {
 	<div class="sidebar-module">
 		<h4 class="sidebar-heading">Pages in Categories</h4>
 		<ul class="sidebar-category-list">
-		
-			<li>
-				<a href="https://harryho.github.io/categories/article">
-					<span class="doc-list-category">Article</span>
-				</a>
-				<ul>
-					<li><a href="/article/vue-ng-react/">Angular vs React vs Vue</a>
-					</li>
-				
-					<li><a href="/article/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
-					</li>
-				
-					<li><a href="/article/jira-notes/">JIRA Notes</a>
-					</li>
-				
-					<li><a href="/article/build-mobile-app/">Build mobile app with web dev skills</a>
-					</li>
-				
-					<li><a href="/article/hello-world/">Do you have potential to be a programmer?</a>
-					</li>
-				
-				</ul>
-			</li>
 		
 			<li>
 				<a href="https://harryho.github.io/categories/code">
@@ -907,8 +907,6 @@ final class Person {
 		<h4 class="sidebar-heading">Tags</h4>
 		<div class="tag-box">
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
@@ -919,10 +917,6 @@ final class Person {
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
-			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
-		
-			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
-		
 			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
@@ -930,8 +924,6 @@ final class Person {
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
-		
-			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
 		

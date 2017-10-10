@@ -18451,10 +18451,10 @@ public class LambdaDemo {
     public static void main(String[] args) {
 
         // FunctionalInterface 
-        System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y));// w w  w .j  av a 2s.  c om
-        System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y));
-        System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y));
-        System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y));
+        System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y)); // 6
+        System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y)); // 8
+        System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y)); // 0 
+        System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y)); // 2
 
         String[] strArray = new String[] { &amp;quot;abc&amp;quot;, &amp;quot;klm&amp;quot;, &amp;quot;xyz&amp;quot;, &amp;quot;pqr&amp;quot; };
         List list = Arrays.asList(strArray);
@@ -18462,11 +18462,22 @@ public class LambdaDemo {
         // Default Methods
         list.forEach(System.out::println);
 
+        // abc
+        // klm
+        // xyz
+        // pqr
+
         Arrays.sort(strArray, (first, second) -&amp;gt; first.compareToIgnoreCase(second));
         list = Arrays.asList(strArray);
 
         System.out.println(&amp;quot;After sorting ... &amp;quot;);
         list.forEach(System.out::println);
+
+        // After sorting ...
+        // abc
+        // klm
+        // pqr
+        // xyz
 
         // Common Functional Interfaces
         // Runnable
@@ -18519,12 +18530,19 @@ public class LambdaDemo {
         BiFunction&amp;lt;String, String, Person&amp;gt; personBiFunc = (x, y) -&amp;gt; new Person(x, y);
         // Consumer&amp;lt;String&amp;gt; personCon = (Person p) -&amp;gt; p.setTitle;
 
-        System.out.println(&amp;quot; personSup &amp;quot; + personSup.get());
-        System.out.println(&amp;quot; personFunc &amp;quot; + personFunc.apply(&amp;quot;John Doe&amp;quot;));
-        System.out.println(&amp;quot; personBiFunc &amp;quot; + personBiFunc.apply(&amp;quot;John&amp;quot;, &amp;quot;Doe&amp;quot;));
+        System.out.println(personSup.get());
+        // Person() constructor called
+        // name = Unknown, title = Unknown
+        System.out.println(personFunc.apply(&amp;quot;John Doe&amp;quot;));
+        // Person( fullName ) constructor called
+        // name = John Doe, title = Unknown
+
+        System.out.println(personBiFunc.apply(&amp;quot;John&amp;quot;, &amp;quot;Doe&amp;quot;));
+        // Person(firstName, lastName ) constructor called
+        // name = John, title = Unknown
+
 
         // Recursive Lambda Expressions
-
         IntFunction&amp;lt;Long&amp;gt; factorialCalc = new IntFunction&amp;lt;Long&amp;gt;() {
             @Override
             public Long apply(int n) {
@@ -18543,8 +18561,14 @@ public class LambdaDemo {
         int n = 5;
         long fact = factorialCalc.apply(n);
         System.out.println(&amp;quot;Factorial of &amp;quot; + n + &amp;quot; is &amp;quot; + fact);
+        // Factorial of 5 is 120
 
+
+        
     }
+
+
+
 
     private static int engine(Calculator calculator) {
         int x = 2, y = 4;
@@ -18573,8 +18597,7 @@ final class Person {
     }
 
     public Person(String fullName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         System.out.println(&amp;quot; Person( fullName ) constructor called &amp;quot;);
     }
 
@@ -18594,12 +18617,12 @@ final class Person {
     }
 
     public String getFullName() {
-        return fullName == null ? firstName != null ? firstName : &amp;quot;Unknown&amp;quot; : fullName;
+        return fullName == null ?( firstName != null ? firstName : &amp;quot;Unknown&amp;quot; ): fullName;
     }
 
     @Override
     public String toString() {
-        return &amp;quot;name = &amp;quot; + getFullName() + &amp;quot;, title = &amp;quot; + title != null ? title : &amp;quot;Unknown&amp;quot;;
+        return &amp;quot;name = &amp;quot; + getFullName() + &amp;quot;, title = &amp;quot; + (title != null ? title : &amp;quot;Unknown&amp;quot;);
     }
 }
 
