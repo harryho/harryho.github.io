@@ -598,7 +598,7 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
     </item>
     
     <item>
-      <title>CentOS 6/7 -- desktop Setup</title>
+      <title>CentOS 6/7 -- Setup</title>
       <link>https://harryho.github.io/os/centos-fedora-desktop/</link>
       <pubDate>Fri, 10 Jan 2014 14:59:31 +1100</pubDate>
       
@@ -789,7 +789,33 @@ Following is sample of partition setup of multiple boot system.&lt;/p&gt;
 
 &lt;h3 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h3&gt;
 
-&lt;h3 id=&#34;fedora-boot-error&#34;&gt;Fedora boot error&lt;/h3&gt;
+&lt;h4 id=&#34;ifconfig-not-found-in-centos-minimal-server&#34;&gt;ifconfig not found in CentOS minimal server&lt;/h4&gt;
+
+&lt;p&gt;Use command &lt;code&gt;ip&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ip addr
+ip -s link
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;enable-network-non-wifi-onboot-after-minimal-installation&#34;&gt;Enable Network (Non-wifi) onboot after minimal installation&lt;/h4&gt;
+
+&lt;p&gt;If you cannot ping any domain, use &lt;code&gt;dhclient -v&lt;/code&gt; to check if the internet is available.&lt;/p&gt;
+
+&lt;p&gt;Setup the network enabled onboot&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# cd /etc/sysconfig/network-scripts/ 
+# sed -i -e &#39;s@^ONBOOT=&amp;quot;no@ONBOOT=&amp;quot;yes@&#39; ifcfg-e.xx.xxx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;boot-centos-in-terminal&#34;&gt;Boot CentOS in terminal&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;# cat /etc/inittab
+# systemctl get-default 
+graphic.target
+# systemctl set-default multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;fedora-boot-error&#34;&gt;Fedora boot error&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Please check the grub.cfg if you get booting error&lt;/li&gt;
