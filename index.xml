@@ -319,6 +319,352 @@
     </item>
     
     <item>
+      <title>Ubuntu 16 server note</title>
+      <link>https://harryho.github.io/os/ubuntu-server-16/</link>
+      <pubDate>Thu, 04 May 2017 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/ubuntu-server-16/</guid>
+      <description>
+
+&lt;p&gt;Prelude&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This article is mainly to help experienced user install and setup Ubuntu 16 LTS Server. If you are looking for the information for Ubuntu 14, please go to the page &lt;a href=&#34;https://harryho.github.io/os/ubuntu-server-14/&#34;&gt;Ubuntu 14 server setup&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You are familiar with Ubuntu, at least you have some experience working on Linux system.&lt;/li&gt;
+&lt;li&gt;You are familiar with basic bash/shell command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-ubuntu-server&#34;&gt;Things to do after installing Ubuntu server&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to setup your server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ufw-setup&#34;&gt;UFW setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow ssh
+sudo ufw allow 443/tcp
+sudo ufw allow 8000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh-server-setup&#34;&gt;SSH server setup&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;!!! For production environment, SSH should be secured by the CA&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install openssh-server 
+
+# backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+# use any editor to update sshd_config 
+sudo nano /etc/ssh/sshd_config 
+
+# uncomment  PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-the-software-properties-common-package&#34;&gt;!!! Install the software-properties-common Package&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install software-properties-common python-software-properties
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;time-zone-setup&#34;&gt;Time Zone setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo dpkg-reconfigure tzdata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-tmux&#34;&gt;Install tmux&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install tmux
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most useful tmux commands&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ctrl+b &amp;ldquo; — split pane horizontally.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b % — split pane vertically.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b arrow key — switch pane.&lt;/p&gt;
+
+&lt;p&gt;Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b c — &amp;copy;reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b , — rename reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b n — move to the (n)ext window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b p — move to the (p)revious window.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install git&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-docker-ce-ubuntu-16-lts&#34;&gt;install docker CE (Ubuntu 16 LTS)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+# Update the apt package index
+sudo apt-get update
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Add Docker’s official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+
+# Verify the last 8 characters of the fingerprint.
+sudo apt-key fingerprint xxxxxxxx
+
+
+#   set up the stable repository
+sudo add-apt-repository \
+   &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&amp;quot;
+
+# apt update 
+sudo apt-get update
+
+# install docker CE
+sudo apt-get install docker-ce
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-jdk-8&#34;&gt;Install JDK 8&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Downlaod the JDK from Oracle website.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+java -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup environment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install oracle-java8-set-default
+
+sudo su
+cat &amp;gt;&amp;gt; /etc/environment &amp;lt;&amp;lt;EOL
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
+EOL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test JDK with a simple HelloWorld program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&amp;quot;user.name&amp;quot;);
+        System.out.println(username+ &amp;quot;: Hello World! &amp;quot;);
+        System.out.println(year + &amp;quot;/&amp;quot; + month + &amp;quot;/&amp;quot; + day + &amp;quot; &amp;quot; + hour + &amp;quot;:&amp;quot; + minute);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Compile and run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;javac HelloWorld.java
+java HelloWorld.java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-nodejs&#34;&gt;Install nodejs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Nodejs 8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install latest npm, yarn and ts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-php&#34;&gt;Install PHP&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add new repo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y python-software-properties
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update -y
+
+apt-cache pkgnames | grep php7.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 1: Install LAMP stack&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y apache2
+sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common \
+    php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 2: Install LEMP stack&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y nginx
+sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring \
+    php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Disable Apache and Nginx if you install both&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl disable apache2.service
+sudo systemctl disable nginx.service 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-python2-python3&#34;&gt;Install Python2, Python3&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu has python2 installed by default&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get python-pip 
+sudo apt-get install python3-pip
+sudo apt-get install python3-dev python-dev
+
+### Install virtualenv 
+sudo pip install virtualenv
+sudo pip3 install virtualenv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-go&#34;&gt;Install Go&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Go&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
+
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup GOROOT by overwriting the file &lt;code&gt;/etc/environment&lt;/code&gt; with following content&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;PATH=&amp;quot;/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&amp;quot;
+JAVA_HOME=&amp;quot;/usr/lib/jvm/java-8-oracle&amp;quot;
+JRE_HOME=&amp;quot;/usr/lib/jvm/java-8-oracle/jre&amp;quot;
+GOROOT=&amp;quot;/usr/local/go&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup GOPATH by adding following lines to the end of &lt;code&gt;.profile&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export GOPATH=&amp;quot;$HOME/ws/go&amp;quot;
+export GOBIN=&amp;quot;$GOPATH/bin&amp;quot;
+export PATH=&amp;quot;$GOPATH/bin:$PATH&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a simple &lt;code&gt;hello.go&lt;/code&gt; file to test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main                                                        
+                                                                    
+import (                                                            
+    &amp;quot;fmt&amp;quot;                                                           
+    &amp;quot;log&amp;quot;                                                           
+    &amp;quot;os/user&amp;quot;                                                       
+)
+
+func main(){                                                        
+    user, err := user.Current()                                 
+    if err != nil {                                             
+        log.Fatal(err)                                      
+    }                                                                 
+    fmt.Printf(user.Name + &amp;quot; said : Hello World! \n&amp;quot; )      
+}                                                                   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go run $GOPATH/src/hello.go
+go install $GOPATH/src/hello.go
+$GOBIN/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-clang-cmake&#34;&gt;Install clang &amp;amp; cmake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install clang
+sudo apt-get install cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-rust&#34;&gt;Install Rust&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -f -L https://static.rust-lang.org/rustup.sh -O
+$ sh rustup.sh
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>_dummy</title>
       <link>https://harryho.github.io/index/_dummy/</link>
       <pubDate>Thu, 16 Feb 2017 11:47:59 +1100</pubDate>
@@ -420,6 +766,368 @@ cd ..
 
 &lt;li&gt;&lt;p&gt;You might want to commit the changes to &lt;code&gt;blog-hugo&lt;/code&gt; repository. Please don&amp;rsquo;t forget to add &lt;code&gt;public&lt;/code&gt; into the &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CentOS 7 Server note</title>
+      <link>https://harryho.github.io/os/centos-server-7/</link>
+      <pubDate>Fri, 03 Feb 2017 10:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/centos-server-7/</guid>
+      <description>
+
+&lt;p&gt;Prelude&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This article is mainly to help experienced user install and setup CentOS 7 Server. If you are looking for the information for CentOS 14, please install CentOS desktop version at first, and you can follow &lt;a href=&#34;https://harryho.github.io/os/ubuntu-server-14/&#34;&gt;Ubuntu 14 server setup&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You are familiar with CentOS, at least you have some experience working on Linux system.&lt;/li&gt;
+&lt;li&gt;You are familiar with basic bash/shell command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-centos-server&#34;&gt;Things to do after installing CentOS server&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to setup your server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;firewall-setup&#34;&gt;Firewall setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo firewall-cmd --permanent --add-port=22/tcp
+sudo firewall-cmd --permanent --add-port=21/tcp
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=8080/tcp
+
+sudo firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh-server-setup&#34;&gt;SSH server setup&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;!!! For production environment, SSH should be secured by the CA&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install SSH if it is not done yet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# yum install openssh openssh-server openssh-clients openssl-libs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configure SSH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
+sudo chmod a-w /etc/ssh/sshd_config.ori
+
+# use any editor to update sshd_config 
+sudo vi /etc/ssh/sshd_config 
+
+# uncomment PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo systemctl restart sshd 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;update-time-zone-if-it-is-incorrect&#34;&gt;Update Time Zone if it is incorrect&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ls -l /etc/localtime # check the time zone
+
+sudo timedatectl list | grep New_York # find the time zone by the city
+sudo timedatectl set-timezone America/New_York
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install Git&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 1: You can use &lt;code&gt;yum&lt;/code&gt; to install git, but it is quite out-of-date. The version of git is 1.8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install git
+git --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 2: Download the latest stable release of Git and compile the software from source. (&lt;strong&gt;Recommended&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;install-build-tools&#34;&gt;Install build tools&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum groupinstall &amp;quot;Development Tools&amp;quot;
+
+sudo yum install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel libcurl-devel expat-devel
+
+sudo yum install yum-utils
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;download-the-latest-release&#34;&gt;Download the latest release&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;wget https://github.com/git/git/archive/v2.x.x.tar.gz -O git.tar.gz
+tar -zxf git.tar.gz
+cd git-*
+make configure
+./configure --prefix=/usr/local
+sudo make install
+git --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;setup-a-better-vim&#34;&gt;Setup a better Vim&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum isntall vim-enhanced
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-tmux&#34;&gt;Install Tmux&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install tmux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most useful tmux commands&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ctrl+b &amp;ldquo; — split pane horizontally.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b % — split pane vertically.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b arrow key — switch pane.&lt;/p&gt;
+
+&lt;p&gt;Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b c — &amp;copy;reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b , — rename reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b n — move to the (n)ext window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b p — move to the (p)revious window.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install-python-3&#34;&gt;Install python 3&lt;/h3&gt;
+
+&lt;p&gt;You will only find Python 2 on CentOS by default. In order to install the latest python3, we need to install &lt;code&gt;IUS&lt;/code&gt; to which stands for Inline with Upstream Stable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+sudo yum -y install python36u
+
+## Install development package
+sudo yum -y insall python-devel python36u-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-nodejs&#34;&gt;Install nodejs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nodejs 6.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum -y install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nodejs 8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Upgrade NPM&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-docker-ce-centos-7&#34;&gt;install docker CE (CentOS 7)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# add repo
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+# check docker.list
+yum list docker-ce --showduplicates | sort -r
+
+# install docker engine
+sudo yum install docker-ce
+
+docker -v 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-jdk-8&#34;&gt;Install JDK 8&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Downlaod the JDK from Oracle website.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; wget --no-cookies --no-check-certificate --header &amp;quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-secureb ackup-cookie&amp;quot; \ &amp;quot;http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm&amp;quot;
+
+rpm -Uvh  jdk-8u151-linux-x64.rpm
+
+java -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test JDK with a simple HelloWorld program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&amp;quot;user.name&amp;quot;);
+        System.out.println(username+ &amp;quot;: Hello World! &amp;quot;);
+        System.out.println(year + &amp;quot;/&amp;quot; + month + &amp;quot;/&amp;quot; + day + &amp;quot; &amp;quot; + hour + &amp;quot;:&amp;quot; + minute);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Compile and run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;javac HelloWorld.java
+java HelloWorld.java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-go&#34;&gt;Install Go&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Go&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /tmp
+curl -LO https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup GOROOT&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /etc/profile.d
+# Create a path.sh script
+sudo vi path.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Copy following code into &lt;code&gt;path.sh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/usr/local/go/bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup local GOBIN, GOPATH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export GOBIN=&amp;quot;$HOME/projects/go/bin&amp;quot;
+export GOPATH=&amp;quot;$HOME/projects/go/src&amp;quot;
+export PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a simple &lt;code&gt;hello.go&lt;/code&gt; file to test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main                                                        
+                                                                    
+import (                                                            
+    &amp;quot;fmt&amp;quot;                                                           
+    &amp;quot;log&amp;quot;                                                           
+    &amp;quot;os/user&amp;quot;                                                       
+)                                                                   
+                                                                    
+func main(){                                                        
+    user, err := user.Current()                                 
+    if err != nil {                                             
+            log.Fatal(err)                                      
+    }                                                            
+    fmt.Printf(user.Name + &amp;quot; said : Hello World! \n&amp;quot; )            
+}                                                                   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go run $GOPATH/hello.go
+go install $GOPATH/hello.go
+$GOBIN/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-cmake&#34;&gt;Install Cmake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install epel-release
+sudo yum install cmake3
+sudo ln -s /usr/bin/cmake3 /usr/bin/cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-rust&#34;&gt;Install Rust&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -f -L https://static.rust-lang.org/rustup.sh -O
+sh rustup.sh
+rustc --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-php-7&#34;&gt;Install PHP 7&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install and enable EPEL and Remi repository&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install &lt;code&gt;yum-utils&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install yum-utils
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable PHP 7 repo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum-config-manager --enable remi-php72  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install PHP&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
+    php-ldap php-zip php-fileinfo 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-clang&#34;&gt;Install clang&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install llvm
+sudo yum install clang
+
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -1268,506 +1976,6 @@ python3 test.py
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/angularjs-webpack-es6-starter.git&#34;&gt;Repository&lt;/a&gt;&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Git Notes</title>
-      <link>https://harryho.github.io/dev/git-notes/</link>
-      <pubDate>Thu, 11 Aug 2016 11:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/dev/git-notes/</guid>
-      <description>&lt;p&gt;Create a new branch with git and manage branches&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Create the branch on your local machine and switch in this branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git checkout -b [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Push the branch on github :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  $ git push origin [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When you want to commit something in your branch, be sure to be in your branch.&lt;/p&gt;
-
-&lt;p&gt;You can see all branches created by using :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Which will show :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;* approval_messages
-  master
-  master_clean
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add a new remote for your branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git remote add [name_of_your_remote]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Push changes from your commit into your branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git push [name_of_your_new_remote] [name_of_your_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Update your branch when the original branch from official repository has been updated :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git fetch [name_of_your_remote]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then you need to apply to merge changes, if your branch is derivated from develop you need to do :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git merge [name_of_your_remote]/develop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Delete a branch on your local filesystem :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch -d [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To force the deletion of local branch on your filesystem :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch -D [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Delete the branch on github :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git push origin :[name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Compare two branch:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git diff [name_of_branch1]..[name_of_branch2]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Branch merge&lt;/p&gt;
-
-&lt;p&gt;Example&lt;/p&gt;
-
-&lt;p&gt;Fast-Forward Merge&lt;/p&gt;
-
-&lt;p&gt;Our first example demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Start a new feature
-git checkout -b new-feature master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Start a feature&amp;quot;
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Finish a feature&amp;quot;
-# Merge in the new-feature branch
-git checkout master
-git merge new-feature
-git branch -d new-feature
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.&lt;/p&gt;
-
-&lt;p&gt;Also note that Git should not complain about the git branch -d, since new-feature is now accessible from the master branch.&lt;/p&gt;
-
-&lt;p&gt;3-Way Merge&lt;/p&gt;
-
-&lt;p&gt;The next example is very similar, but requires a 3-way merge because master progresses while the feature is in-progress. This is a common scenario for large features or when several developers are working on a project simultaneously.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Start a new feature
-git checkout -b new-feature master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Start a feature&amp;quot;
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Finish a feature&amp;quot;
-# Develop the master branch
-git checkout master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Make some super-stable changes to master&amp;quot;
-# Merge in the new-feature branch
-git merge new-feature
-git branch -d new-feature
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PHP web framework</title>
-      <link>https://harryho.github.io/dev/php-web/</link>
-      <pubDate>Thu, 11 Aug 2016 11:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/dev/php-web/</guid>
-      <description>
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Here we are going to explore some PHP web frameworks.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;php-development-environment-setup&#34;&gt;PHP development environment setup&lt;/h1&gt;
-
-&lt;h2 id=&#34;install-php-5-6-x&#34;&gt;Install PHP 5.6.x&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please find the instruction from &lt;a href=&#34;https://harryho.github.io/#php&#34;&gt;home page&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;composer&#34;&gt;Composer&lt;/h2&gt;
-
-&lt;h3 id=&#34;linux&#34;&gt;Linux&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use &lt;code&gt;curl -s https://getcomposer.org/installer | php --&lt;/code&gt; to install composer on Linux&lt;/li&gt;
-&lt;li&gt;use &amp;lsquo;composer -v &amp;rsquo; to verify.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Download the &lt;a href=&#34;https://getcomposer.org/download/&#34;&gt;composer&lt;/a&gt; and install php on your PC&lt;/li&gt;
-&lt;li&gt;Use &lt;code&gt;composer -v&lt;/code&gt; to verify the composer is ready.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;zendframework&#34;&gt;Zendframework&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Zend Framework is a collection of 60+ packages for professional PHP development. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;zendframework-2-x&#34;&gt;Zendframework 2.x&lt;/h2&gt;
-
-&lt;h3 id=&#34;create-zendframework-2-project-from-scratch&#34;&gt;Create Zendframework 2 project from scratch&lt;/h3&gt;
-
-&lt;h4 id=&#34;clone-zendframework-skeleton-project-as-new-project&#34;&gt;* Clone Zendframework skeleton project as new project.&lt;/h4&gt;
-
-&lt;h4 id=&#34;install-zendframework-with-composer&#34;&gt;* Install zendframework with composer&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;    cd  /path/to/newproject
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;start-app-with-php-built-in-server&#34;&gt;* Start app with php built-in server&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;php -S 0.0.0.0:8080 -t public/ public/index.php
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;php -S 0.0.0.0:8080 -t public public/index.php
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;use-apache-server&#34;&gt;* Use apache server&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt; &amp;lt;VirtualHost *:80&amp;gt;
-     ServerName zf2-tutorial.localhost
-     DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
-     SetEnv APPLICATION_ENV &amp;quot;development&amp;quot;
-     &amp;lt;Directory /path/to/newproject/ZendSkeletonApplication/public&amp;gt;
-         DirectoryIndex index.php
-         AllowOverride All
-         Require all granted
-     &amp;lt;/Directory&amp;gt;
- &amp;lt;/VirtualHost&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;use-zf2-mvc-starter-project&#34;&gt;Use Zf2-MVC-Starter project&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please find the project introduction &lt;a href=&#34;https://harryho.github.io/project/zf2-mvc-starter/&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;laravel&#34;&gt;Laravel&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance, and its orientation toward syntactic sugar.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;laravel-5-x&#34;&gt;Laravel 5.x&lt;/h2&gt;
-
-&lt;h3 id=&#34;install-laravel-global&#34;&gt;Install laravel global&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;Use `composer global laravel/installer`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;enable-the-mbs-string-extension&#34;&gt;Enable the &lt;code&gt;mbs-string&lt;/code&gt; extension&lt;/h3&gt;
-
-&lt;h4 id=&#34;update-php-ini-config&#34;&gt;update &lt;code&gt;php.ini&lt;/code&gt; config&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Open &lt;code&gt;php.ini&lt;/code&gt; with notepad&lt;/li&gt;
-&lt;li&gt;Change &lt;code&gt;;extension=php_mbstring.dll&lt;/code&gt; to &lt;code&gt;extension=php_mbstring.dll&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;create-new-project-from-scratch&#34;&gt;Create new project from scratch&lt;/h3&gt;
-
-&lt;h4 id=&#34;create-new-project&#34;&gt;Create new project&lt;/h4&gt;
-
-&lt;h4 id=&#34;migrate-database-and-seed-dummy-data&#34;&gt;Migrate database and seed dummy data&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create data model&lt;/li&gt;
-&lt;li&gt;Following is the sample code&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
-
-namespace App;
-use Illuminate\Database\Eloquent\Model;
-
-class Article extends Model
-{
-    protected $fillable = [&#39;title&#39;, &#39;content&#39;];
-
-    public function getTitleAttribute($value) {
-        return strtoupper($value);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use artisan to create the table&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-php artisan migrate -VVV 
-
-# Use following command to seek dump or initial data
-php artisan db:seed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Fix the error of Specified key was too long&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
-
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-        Schema::defaultStringLength(191);
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;use-lavarel-mvc-starter-project&#34;&gt;Use Lavarel MVC Starter project&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;* Please find the project introduction [here](/project/lara-mvc-starter/). 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;use-laravel-rest-starter-project&#34;&gt;Use Laravel Rest Starter project&lt;/h3&gt;
-
-&lt;h2 id=&#34;prestashop&#34;&gt;PrestaShop&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;PrestaShop is a free, open source e-commerce solution. The software is published under the Open Software License (OSL). It is written in the PHP programming language with support for the MySQL database management system.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;prestashop-1-5-4&#34;&gt;Prestashop 1.5.4&lt;/h2&gt;
-
-&lt;h3 id=&#34;download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions&#34;&gt;Download the zip file from &lt;a href=&#34;https://www.prestashop.com/en/developers-versions&#34;&gt;download page&lt;/a&gt;&lt;/h3&gt;
-
-&lt;h3 id=&#34;install-prestashop&#34;&gt;Install Prestashop&lt;/h3&gt;
-
-&lt;p&gt;There is a instruction page inside the zip file. You can follow the instructions to complete the installation. There is no EasyPHP, Wamp, XAMPP, or any similar AMP (Apache+MySQL+PHP) package installed on my PC, but I have PHP, Apache, MySQL installed. Actually EasyPHP, Wamp are just the bundle of PHP development tools, which include PHP, Apache, MySQL. I don&amp;rsquo;t want to install too many duplicate softwares and packages on my PC, so I prefer to install Prestashop with what I have on my PC. Which strategy is up to you.&lt;/p&gt;
-
-&lt;h3 id=&#34;install-prestashop-with-amp-package&#34;&gt;Install Prestashop with AMP package&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Follow the instruction page within zip file.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;install-prestashop-without-amp-package&#34;&gt;Install Prestashop without AMP package&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Unzip file to &lt;code&gt;path\to\prestashop_workspace&lt;/code&gt;. Your folder structure will look like this.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\prestashop_workspace
-\---prestashop
-    +---admin 
-    +---cache 
-    +---classes  
-    +---config 
-    +---controllers 
-    +---css
-    +---docs
-    +---download
-    +---img 
-    +---install    
-    +---js   
-    +---localization
-    +---log
-    +---mails
-    +---modules  
-    +---override
-    +---pdf
-    +---themes
-    +---tools 
-    +---translations
-    +---upload
-    \---webservice
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Start your MySQL or check the status of MySQL&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use your MySQL client tool to connect to your MySQL server.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Launch installer page with php server&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Start a command prompt&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /path/to/prestashop_workspace
-php -S 0.0.0.0:1234 -t prestashop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Open the link &lt;code&gt;http://localhost:1234/install/index.php&lt;/code&gt; with browser, then you can start installation process.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Choose language and click &lt;code&gt;Next&lt;/code&gt;, and then select the checkbox &amp;ldquo;I agree bah lah bah lah &amp;hellip;. &amp;rdquo; and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;If there is an error &lt;code&gt;GD Library is not installed&lt;/code&gt; prompt, you just need to enable the library on &lt;code&gt;php.ini&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;DO NOT close your browser.&lt;/li&gt;
-&lt;li&gt;Stop the php server by &lt;code&gt;Ctrl + C&lt;/code&gt; in the command prompt.&lt;/li&gt;
-&lt;li&gt;Use notepad to open the file &lt;code&gt;php.ini&lt;/code&gt; under the &lt;code&gt;\path\to\php&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Uncomment the config &lt;code&gt;;extension=php_gd2.dll&lt;/code&gt; =&amp;gt; &lt;code&gt;extension=php_gd2.dll&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Start the php server again
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Click the &lt;code&gt;Refresh this settings&lt;/code&gt;, and click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click &lt;code&gt;Test your database connection&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;If you got error &lt;code&gt;prestashop database not found&lt;/code&gt;, you need to create a database on mysql server.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I simply create a new database immediately with one command line&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE DATABASE prestashop CHAR SET utf8 COLLATE &#39;utf8_unicode_ci&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Test the connection again. You will get the green light
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Click &lt;code&gt;Next&lt;/code&gt; and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click &lt;code&gt;Next&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Setup your sample store. Click &lt;code&gt;Next&lt;/code&gt;. Then the installer will help you finish the initialization.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;After the store setup, you can access the website by clicking &lt;code&gt;Font site&lt;/code&gt;, but you can not access back office, as known as admin panel.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t panic. It is easy to fix. Stop the php server by clicking &lt;code&gt;Ctrl+C&lt;/code&gt;, and delete the folder &lt;code&gt;install&lt;/code&gt; under the root, and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder &lt;code&gt;admin&lt;/code&gt; under &lt;code&gt;prestashop&lt;/code&gt; has been renamed to &lt;code&gt;adminXXXX&lt;/code&gt;. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be &lt;code&gt;http://localhost:1234/adminXXXX&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;forgot-admin-s-password&#34;&gt;Forgot admin&amp;rsquo;s password&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Forgot admin&amp;rsquo;s password or somehow you have to reset password and you cannot get admin&amp;rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&amp;rsquo;s password from database.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Tailor the SQL below. Then you should be able to use new password to login.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;UPDATE ps_employee SET passwd = MD5(&#39;&amp;lt;_COOKIE_KEY_&amp;gt;password&#39;) 
-WHERE ps_employee.id_employee = &amp;lt;ID_EMPLOYEE&amp;gt;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;troubleshooting-1&#34;&gt;Troubleshooting&lt;/h3&gt;
-
-&lt;h4 id=&#34;innodb-error&#34;&gt;InnoDB error&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Error : InnoDB is not supported by your MySQL server&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;You got error because Prestashop 1.5 is not working properly with MySQL 5.4 and later.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Update files &lt;code&gt;DbPDO.php&lt;/code&gt; , &lt;code&gt;MySQL.php&lt;/code&gt; and &lt;code&gt;DbMySQLi.php&lt;/code&gt; as follow.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;    // $sql = &#39;SHOW VARIABLES WHERE Variable_name = \&#39;have_innodb\&#39;&#39;;
-    $sql = &amp;quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE &#39;INNO%&#39;&amp;quot;;
-
-    ...
-    
-    // if (!$row || strtolower($row[&#39;Value&#39;]) != &#39;yes&#39;)
-    if (!$row || strtolower($row[&#39;Value&#39;]) === &#39;no&#39;) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Restart the server and the proble will be fixed.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;cors&#34;&gt;CORS&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Enable module header in &lt;code&gt;httpd.conf&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Add header settings&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt;Header always set Access-Control-Max-Age &amp;quot;1000&amp;quot;
-Header always set Access-Control-Allow-Headers &amp;quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&amp;quot;
-Header always set Access-Control-Allow-Methods &amp;quot;POST, GET, OPTIONS, DELETE, PUT&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;too-big-header-file&#34;&gt;Too big header file&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Add this to your &lt;code&gt;http {}&lt;/code&gt; of the nginx.conf file normally located at &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;:&lt;/p&gt;
-
-&lt;p&gt;proxy_buffer_size   128k;
-proxy_buffers   4 256k;
-proxy_busy_buffers_size   256k;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Then add this to your php location block, this will be located in your vhost file look for the block that begins with &lt;code&gt;location ~ .php$ {&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;fastcgi_buffer_size 128k;
-fastcgi_buffers 4 256k;
-fastcgi_busy_buffers_size 256k;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

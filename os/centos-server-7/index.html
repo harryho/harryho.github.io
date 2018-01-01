@@ -1,0 +1,748 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>CentOS 7 Server note - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+                       
+                    <li ><a href="https://harryho.github.io/article/">Article</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">CentOS 7 Server note</h1>
+				<div class="doc-entry-meta">
+					<span>updated at <time datetime="2017-02-03">03 Feb 2017</time></span>
+				</div>
+				<section>
+					
+
+<p>Prelude</p>
+
+<blockquote>
+<p><em>This article is mainly to help experienced user install and setup CentOS 7 Server. If you are looking for the information for CentOS 14, please install CentOS desktop version at first, and you can follow <a href="/os/ubuntu-server-14/">Ubuntu 14 server setup</a></em></p>
+</blockquote>
+
+<h2 id="assumption">Assumption</h2>
+
+<ul>
+<li>You are familiar with CentOS, at least you have some experience working on Linux system.</li>
+<li>You are familiar with basic bash/shell command</li>
+</ul>
+
+<h2 id="things-to-do-after-installing-centos-server">Things to do after installing CentOS server</h2>
+
+<ul>
+<li>How to setup your server</li>
+</ul>
+
+<h3 id="firewall-setup">Firewall setup</h3>
+
+<pre><code class="language-bash">sudo firewall-cmd --permanent --add-port=22/tcp
+sudo firewall-cmd --permanent --add-port=21/tcp
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=8080/tcp
+
+sudo firewall-cmd --reload
+</code></pre>
+
+<h3 id="ssh-server-setup">SSH server setup</h3>
+
+<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
+
+<ul>
+<li>Install SSH if it is not done yet</li>
+</ul>
+
+<pre><code class="language-bash"># yum install openssh openssh-server openssh-clients openssl-libs
+</code></pre>
+
+<ul>
+<li>Configure SSH</li>
+</ul>
+
+<pre><code class="language-bash"># backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
+sudo chmod a-w /etc/ssh/sshd_config.ori
+
+# use any editor to update sshd_config 
+sudo vi /etc/ssh/sshd_config 
+
+# uncomment PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo systemctl restart sshd 
+</code></pre>
+
+<h3 id="update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</h3>
+
+<pre><code class="language-bash">ls -l /etc/localtime # check the time zone
+
+sudo timedatectl list | grep New_York # find the time zone by the city
+sudo timedatectl set-timezone America/New_York
+</code></pre>
+
+<h3 id="install-git">Install Git</h3>
+
+<ul>
+<li>Option 1: You can use <code>yum</code> to install git, but it is quite out-of-date. The version of git is 1.8.x</li>
+</ul>
+
+<pre><code class="language-bash">sudo yum install git
+git --version
+</code></pre>
+
+<ul>
+<li>Option 2: Download the latest stable release of Git and compile the software from source. (<strong>Recommended</strong>)</li>
+</ul>
+
+<h4 id="install-build-tools">Install build tools</h4>
+
+<pre><code>sudo yum groupinstall &quot;Development Tools&quot;
+
+sudo yum install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel libcurl-devel expat-devel
+
+sudo yum install yum-utils
+</code></pre>
+
+<h4 id="download-the-latest-release">Download the latest release</h4>
+
+<pre><code>wget https://github.com/git/git/archive/v2.x.x.tar.gz -O git.tar.gz
+tar -zxf git.tar.gz
+cd git-*
+make configure
+./configure --prefix=/usr/local
+sudo make install
+git --version
+</code></pre>
+
+<h3 id="setup-a-better-vim">Setup a better Vim</h3>
+
+<pre><code class="language-bash">sudo yum isntall vim-enhanced
+
+</code></pre>
+
+<h3 id="install-tmux">Install Tmux</h3>
+
+<pre><code class="language-bash">sudo yum install tmux
+</code></pre>
+
+<ul>
+<li>Most useful tmux commands</li>
+</ul>
+
+<blockquote>
+<p>Ctrl+b &ldquo; — split pane horizontally.</p>
+
+<p>Ctrl+b % — split pane vertically.</p>
+
+<p>Ctrl+b arrow key — switch pane.</p>
+
+<p>Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.</p>
+
+<p>Ctrl+b c — &copy;reate a new window.</p>
+
+<p>Ctrl+b , — rename reate a new window.</p>
+
+<p>Ctrl+b n — move to the (n)ext window.</p>
+
+<p>Ctrl+b p — move to the (p)revious window.</p>
+</blockquote>
+
+<h3 id="install-python-3">Install python 3</h3>
+
+<p>You will only find Python 2 on CentOS by default. In order to install the latest python3, we need to install <code>IUS</code> to which stands for Inline with Upstream Stable.</p>
+
+<pre><code class="language-bash">sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+sudo yum -y install python36u
+
+## Install development package
+sudo yum -y insall python-devel python36u-devel
+</code></pre>
+
+<h3 id="install-nodejs">Install nodejs</h3>
+
+<ul>
+<li>Nodejs 6.x</li>
+</ul>
+
+<pre><code class="language-bash">sudo yum -y install nodejs
+</code></pre>
+
+<ul>
+<li>Nodejs 8.x</li>
+</ul>
+
+<pre><code class="language-bash">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+</code></pre>
+
+<ul>
+<li>Upgrade NPM</li>
+</ul>
+
+<pre><code>sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+</code></pre>
+
+<h3 id="install-docker-ce-centos-7">install docker CE (CentOS 7)</h3>
+
+<pre><code class="language-bash"># add repo
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+# check docker.list
+yum list docker-ce --showduplicates | sort -r
+
+# install docker engine
+sudo yum install docker-ce
+
+docker -v 
+</code></pre>
+
+<h3 id="install-jdk-8">Install JDK 8</h3>
+
+<ul>
+<li>Downlaod the JDK from Oracle website.</li>
+</ul>
+
+<pre><code class="language-bash"> wget --no-cookies --no-check-certificate --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-secureb ackup-cookie&quot; \ &quot;http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm&quot;
+
+rpm -Uvh  jdk-8u151-linux-x64.rpm
+
+java -version
+</code></pre>
+
+<ul>
+<li>Test JDK with a simple HelloWorld program</li>
+</ul>
+
+<pre><code class="language-java">import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&quot;user.name&quot;);
+        System.out.println(username+ &quot;: Hello World! &quot;);
+        System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
+    }
+}
+</code></pre>
+
+<ul>
+<li>Compile and run the program</li>
+</ul>
+
+<pre><code class="language-bash">javac HelloWorld.java
+java HelloWorld.java
+</code></pre>
+
+<h3 id="install-go">Install Go</h3>
+
+<ul>
+<li>Install Go</li>
+</ul>
+
+<pre><code class="language-bash">cd /tmp
+curl -LO https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
+</code></pre>
+
+<ul>
+<li>Setup GOROOT</li>
+</ul>
+
+<pre><code class="language-bash">cd /etc/profile.d
+# Create a path.sh script
+sudo vi path.sh
+</code></pre>
+
+<ul>
+<li>Copy following code into <code>path.sh</code></li>
+</ul>
+
+<pre><code>export PATH=$PATH:/usr/local/go/bin
+</code></pre>
+
+<ul>
+<li>Setup local GOBIN, GOPATH</li>
+</ul>
+
+<pre><code class="language-bash">export GOBIN=&quot;$HOME/projects/go/bin&quot;
+export GOPATH=&quot;$HOME/projects/go/src&quot;
+export PATH
+</code></pre>
+
+<ul>
+<li>Create a simple <code>hello.go</code> file to test</li>
+</ul>
+
+<pre><code class="language-go">package main                                                        
+                                                                    
+import (                                                            
+    &quot;fmt&quot;                                                           
+    &quot;log&quot;                                                           
+    &quot;os/user&quot;                                                       
+)                                                                   
+                                                                    
+func main(){                                                        
+    user, err := user.Current()                                 
+    if err != nil {                                             
+            log.Fatal(err)                                      
+    }                                                            
+    fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )            
+}                                                                   
+</code></pre>
+
+<ul>
+<li>Run the program</li>
+</ul>
+
+<pre><code class="language-bash">go run $GOPATH/hello.go
+go install $GOPATH/hello.go
+$GOBIN/hello
+</code></pre>
+
+<h3 id="install-cmake">Install Cmake</h3>
+
+<pre><code class="language-bash">sudo yum install epel-release
+sudo yum install cmake3
+sudo ln -s /usr/bin/cmake3 /usr/bin/cmake
+</code></pre>
+
+<h3 id="install-rust">Install Rust</h3>
+
+<pre><code class="language-bash">curl -f -L https://static.rust-lang.org/rustup.sh -O
+sh rustup.sh
+rustc --version
+</code></pre>
+
+<h3 id="install-php-7">Install PHP 7</h3>
+
+<ul>
+<li>install and enable EPEL and Remi repository</li>
+</ul>
+
+<pre><code class="language-bash">sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+</code></pre>
+
+<ul>
+<li>install <code>yum-utils</code></li>
+</ul>
+
+<pre><code>sudo yum install yum-utils
+</code></pre>
+
+<ul>
+<li>Enable PHP 7 repo</li>
+</ul>
+
+<pre><code>sudo yum-config-manager --enable remi-php72  
+</code></pre>
+
+<ul>
+<li>Install PHP</li>
+</ul>
+
+<pre><code>sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
+    php-ldap php-zip php-fileinfo 
+</code></pre>
+
+<h3 id="install-clang">Install clang</h3>
+
+<pre><code class="language-bash">sudo yum install llvm
+sudo yum install clang
+
+</code></pre>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">CentOS 7 Server note</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#things-to-do-after-installing-centos-server">Things to do after installing CentOS server</a>
+<ul>
+<li><a href="#firewall-setup">Firewall setup</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a></li>
+<li><a href="#update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</a></li>
+<li><a href="#install-git">Install Git</a>
+<ul>
+<li><a href="#install-build-tools">Install build tools</a></li>
+<li><a href="#download-the-latest-release">Download the latest release</a></li>
+</ul></li>
+<li><a href="#setup-a-better-vim">Setup a better Vim</a></li>
+<li><a href="#install-tmux">Install Tmux</a></li>
+<li><a href="#install-python-3">Install python 3</a></li>
+<li><a href="#install-nodejs">Install nodejs</a></li>
+<li><a href="#install-docker-ce-centos-7">install docker CE (CentOS 7)</a></li>
+<li><a href="#install-jdk-8">Install JDK 8</a></li>
+<li><a href="#install-go">Install Go</a></li>
+<li><a href="#install-cmake">Install Cmake</a></li>
+<li><a href="#install-rust">Install Rust</a></li>
+<li><a href="#install-php-7">Install PHP 7</a></li>
+<li><a href="#install-clang">Install clang</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/article">
+					<span class="doc-list-category">Article</span>
+				</a>
+				<ul>
+					<li><a href="/article/vue-ng-react/">Angular vs React vs Vue</a>
+					</li>
+				
+					<li><a href="/article/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/article/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/article/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/article/hello-world/">Do you have potential to be a programmer?</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-desktop-14-extra-tools/">Ubuntu 14 -- desktop, extra tools</a>
+					</li>
+				
+					<li><a href="/cache/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
+					</li>
+				
+					<li>
+						<span class="active">CentOS 7 Server note</span>
+						</li>
+				
+					<li><a href="/os/raspberrypi-notes/">Raspberry Pi setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 Multi-Boot Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/raspberry-pi">raspberry-pi</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

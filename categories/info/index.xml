@@ -10,6 +10,127 @@
     <atom:link href="https://harryho.github.io/categories/info/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Ubuntu 14 -- desktop, extra tools</title>
+      <link>https://harryho.github.io/os/ubuntu-desktop-14-extra-tools/</link>
+      <pubDate>Sun, 10 Jan 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/ubuntu-desktop-14-extra-tools/</guid>
+      <description>
+
+&lt;h2 id=&#34;how-to-install-ubunt-14&#34;&gt;How to install Ubunt 14&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Please find it from &lt;a href=&#34;https://harryho.github.io/os/ubuntu-desktop-14/&#34;&gt;Brief history of Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;install-chrome&#34;&gt;Install chrome&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-umake&#34;&gt;Install Umake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo apt-get update
+sudo apt-get install ubuntu-make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-ides-via-umake&#34;&gt;Install IDEs via Umake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;umake ide pycharm
+umake web visual-studio-code
+umake android android-studio
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;general-prerequest&#34;&gt;General prerequest&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sed -i &amp;quot;/^# deb .*partner/ s/^# //&amp;quot; /etc/apt/sources.list &amp;amp;&amp;amp; apt-get update
+sudo apt-get install geany byobu p7zip-full gimp pdfshuffler scribus \
+filezilla lftp ubuntu-restricted-extras vlc pyrenamer \
+imagemagick hugin darktable skype avidemux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;remove-games&#34;&gt;Remove Games&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+sudo apt-get remove aisleriot gnome-mahjongg gnomine gnome-sudoku
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;geany-themes&#34;&gt;Geany themes&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd ~/Downloads
+git clone https://github.com/codebrainz/geany-themes.git
+mkdir ~/.config/geany/colorschemes
+cp ~/Downloads/geany-themes/colorschemes/* ~/.config/geany/colorschemes/
+rm -rf ~/Downloads/geany-themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cloud&#34;&gt;Cloud&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;from: &lt;a href=&#34;http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html&#34;&gt;http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:paolorotolo/copy
+sudo apt-get update
+sudo apt-get install copy
+sudo /opt/copy-client/CopyAgent -installOverlay
+nautilus -q
+copy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;data-processing&#34;&gt;Data processing&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository &#39;deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/&#39;
+sudo apt-get update
+sudo apt-get install spyder python-numpy python-numpy-doc sqlite3 \
+python-scipy python-matplotlib python-matplotlib-doc r-base git-core
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;don-t-forget-to-use-your-own-name-and-email&#34;&gt;Don&amp;rsquo;t forget to use your own name and email!&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git config --global user.name &amp;quot;Your Name&amp;quot;
+git config --global user.email &amp;quot;your@email.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;maps-and-gis-software&#34;&gt;Maps and GIS software&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install python-software-properties
+sudo add-apt-repository &#39;deb http://qgis.org/debian trusty main&#39;
+gpg --keyserver keyserver.ubuntu.com --recv DD45F6C3
+gpg --export --armor DD45F6C3 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install qgis python-qgis qgis-plugin-grass grass-gui grass-doc \
+libgdal1-dev libproj-dev gpsbabel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;latex-type-stuff&#34;&gt;Latex type stuff&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install jabref ibus-qt4 texlive texlive-latex-extra \
+texlive-humanities texlive-fonts-extra latex-beamer
+sudo apt-get -f install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;package-download-and-install-texmaker-and-rstudio&#34;&gt;Package download and install (Texmaker and RStudio)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.4.1_amd64.deb
+wget http://download1.rstudio.org/rstudio-0.98.1102-amd64.deb
+sudo dpkg -i *.deb
+sudo rm *.deb
+ 
+sudo apt-get update &amp;amp;&amp;amp; apt-get upgrade
+sudo apt-get autoremove
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo nano /etc/update-manager/release-upgrades
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Brief history of Linux</title>
       <link>https://harryho.github.io/cache/linux-history/</link>
       <pubDate>Thu, 10 Jan 2013 14:59:31 +1100</pubDate>

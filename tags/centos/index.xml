@@ -10,7 +10,490 @@
     <atom:link href="https://harryho.github.io/tags/centos/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>CentOS 6/7 -- Setup</title>
+      <title>CentOS 7 Server note</title>
+      <link>https://harryho.github.io/os/centos-server-7/</link>
+      <pubDate>Fri, 03 Feb 2017 10:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/centos-server-7/</guid>
+      <description>
+
+&lt;p&gt;Prelude&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This article is mainly to help experienced user install and setup CentOS 7 Server. If you are looking for the information for CentOS 14, please install CentOS desktop version at first, and you can follow &lt;a href=&#34;https://harryho.github.io/os/ubuntu-server-14/&#34;&gt;Ubuntu 14 server setup&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You are familiar with CentOS, at least you have some experience working on Linux system.&lt;/li&gt;
+&lt;li&gt;You are familiar with basic bash/shell command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-centos-server&#34;&gt;Things to do after installing CentOS server&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to setup your server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;firewall-setup&#34;&gt;Firewall setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo firewall-cmd --permanent --add-port=22/tcp
+sudo firewall-cmd --permanent --add-port=21/tcp
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=8080/tcp
+
+sudo firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh-server-setup&#34;&gt;SSH server setup&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;!!! For production environment, SSH should be secured by the CA&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install SSH if it is not done yet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# yum install openssh openssh-server openssh-clients openssl-libs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configure SSH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
+sudo chmod a-w /etc/ssh/sshd_config.ori
+
+# use any editor to update sshd_config 
+sudo vi /etc/ssh/sshd_config 
+
+# uncomment PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo systemctl restart sshd 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;update-time-zone-if-it-is-incorrect&#34;&gt;Update Time Zone if it is incorrect&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ls -l /etc/localtime # check the time zone
+
+sudo timedatectl list | grep New_York # find the time zone by the city
+sudo timedatectl set-timezone America/New_York
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install Git&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 1: You can use &lt;code&gt;yum&lt;/code&gt; to install git, but it is quite out-of-date. The version of git is 1.8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install git
+git --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 2: Download the latest stable release of Git and compile the software from source. (&lt;strong&gt;Recommended&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;install-build-tools&#34;&gt;Install build tools&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum groupinstall &amp;quot;Development Tools&amp;quot;
+
+sudo yum install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel libcurl-devel expat-devel
+
+sudo yum install yum-utils
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;download-the-latest-release&#34;&gt;Download the latest release&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;wget https://github.com/git/git/archive/v2.x.x.tar.gz -O git.tar.gz
+tar -zxf git.tar.gz
+cd git-*
+make configure
+./configure --prefix=/usr/local
+sudo make install
+git --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;setup-a-better-vim&#34;&gt;Setup a better Vim&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum isntall vim-enhanced
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-tmux&#34;&gt;Install Tmux&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install tmux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most useful tmux commands&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ctrl+b &amp;ldquo; — split pane horizontally.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b % — split pane vertically.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b arrow key — switch pane.&lt;/p&gt;
+
+&lt;p&gt;Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b c — &amp;copy;reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b , — rename reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b n — move to the (n)ext window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b p — move to the (p)revious window.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install-python-3&#34;&gt;Install python 3&lt;/h3&gt;
+
+&lt;p&gt;You will only find Python 2 on CentOS by default. In order to install the latest python3, we need to install &lt;code&gt;IUS&lt;/code&gt; to which stands for Inline with Upstream Stable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+sudo yum -y install python36u
+
+## Install development package
+sudo yum -y insall python-devel python36u-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-nodejs&#34;&gt;Install nodejs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nodejs 6.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum -y install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nodejs 8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Upgrade NPM&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-docker-ce-centos-7&#34;&gt;install docker CE (CentOS 7)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# add repo
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+# check docker.list
+yum list docker-ce --showduplicates | sort -r
+
+# install docker engine
+sudo yum install docker-ce
+
+docker -v 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-jdk-8&#34;&gt;Install JDK 8&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Downlaod the JDK from Oracle website.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; wget --no-cookies --no-check-certificate --header &amp;quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-secureb ackup-cookie&amp;quot; \ &amp;quot;http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm&amp;quot;
+
+rpm -Uvh  jdk-8u151-linux-x64.rpm
+
+java -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test JDK with a simple HelloWorld program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&amp;quot;user.name&amp;quot;);
+        System.out.println(username+ &amp;quot;: Hello World! &amp;quot;);
+        System.out.println(year + &amp;quot;/&amp;quot; + month + &amp;quot;/&amp;quot; + day + &amp;quot; &amp;quot; + hour + &amp;quot;:&amp;quot; + minute);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Compile and run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;javac HelloWorld.java
+java HelloWorld.java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-go&#34;&gt;Install Go&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Go&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /tmp
+curl -LO https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup GOROOT&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /etc/profile.d
+# Create a path.sh script
+sudo vi path.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Copy following code into &lt;code&gt;path.sh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/usr/local/go/bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup local GOBIN, GOPATH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export GOBIN=&amp;quot;$HOME/projects/go/bin&amp;quot;
+export GOPATH=&amp;quot;$HOME/projects/go/src&amp;quot;
+export PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a simple &lt;code&gt;hello.go&lt;/code&gt; file to test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main                                                        
+                                                                    
+import (                                                            
+    &amp;quot;fmt&amp;quot;                                                           
+    &amp;quot;log&amp;quot;                                                           
+    &amp;quot;os/user&amp;quot;                                                       
+)                                                                   
+                                                                    
+func main(){                                                        
+    user, err := user.Current()                                 
+    if err != nil {                                             
+            log.Fatal(err)                                      
+    }                                                            
+    fmt.Printf(user.Name + &amp;quot; said : Hello World! \n&amp;quot; )            
+}                                                                   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go run $GOPATH/hello.go
+go install $GOPATH/hello.go
+$GOBIN/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-cmake&#34;&gt;Install Cmake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install epel-release
+sudo yum install cmake3
+sudo ln -s /usr/bin/cmake3 /usr/bin/cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-rust&#34;&gt;Install Rust&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -f -L https://static.rust-lang.org/rustup.sh -O
+sh rustup.sh
+rustc --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-php-7&#34;&gt;Install PHP 7&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install and enable EPEL and Remi repository&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install &lt;code&gt;yum-utils&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install yum-utils
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable PHP 7 repo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum-config-manager --enable remi-php72  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install PHP&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
+    php-ldap php-zip php-fileinfo 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-clang&#34;&gt;Install clang&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo yum install llvm
+sudo yum install clang
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 14 -- desktop, extra tools</title>
+      <link>https://harryho.github.io/os/ubuntu-desktop-14-extra-tools/</link>
+      <pubDate>Sun, 10 Jan 2016 14:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/ubuntu-desktop-14-extra-tools/</guid>
+      <description>
+
+&lt;h2 id=&#34;how-to-install-ubunt-14&#34;&gt;How to install Ubunt 14&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Please find it from &lt;a href=&#34;https://harryho.github.io/os/ubuntu-desktop-14/&#34;&gt;Brief history of Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;install-chrome&#34;&gt;Install chrome&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-umake&#34;&gt;Install Umake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo apt-get update
+sudo apt-get install ubuntu-make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-ides-via-umake&#34;&gt;Install IDEs via Umake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;umake ide pycharm
+umake web visual-studio-code
+umake android android-studio
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;general-prerequest&#34;&gt;General prerequest&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sed -i &amp;quot;/^# deb .*partner/ s/^# //&amp;quot; /etc/apt/sources.list &amp;amp;&amp;amp; apt-get update
+sudo apt-get install geany byobu p7zip-full gimp pdfshuffler scribus \
+filezilla lftp ubuntu-restricted-extras vlc pyrenamer \
+imagemagick hugin darktable skype avidemux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;remove-games&#34;&gt;Remove Games&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+sudo apt-get remove aisleriot gnome-mahjongg gnomine gnome-sudoku
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;geany-themes&#34;&gt;Geany themes&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd ~/Downloads
+git clone https://github.com/codebrainz/geany-themes.git
+mkdir ~/.config/geany/colorschemes
+cp ~/Downloads/geany-themes/colorschemes/* ~/.config/geany/colorschemes/
+rm -rf ~/Downloads/geany-themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cloud&#34;&gt;Cloud&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;from: &lt;a href=&#34;http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html&#34;&gt;http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:paolorotolo/copy
+sudo apt-get update
+sudo apt-get install copy
+sudo /opt/copy-client/CopyAgent -installOverlay
+nautilus -q
+copy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;data-processing&#34;&gt;Data processing&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository &#39;deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/&#39;
+sudo apt-get update
+sudo apt-get install spyder python-numpy python-numpy-doc sqlite3 \
+python-scipy python-matplotlib python-matplotlib-doc r-base git-core
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;don-t-forget-to-use-your-own-name-and-email&#34;&gt;Don&amp;rsquo;t forget to use your own name and email!&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git config --global user.name &amp;quot;Your Name&amp;quot;
+git config --global user.email &amp;quot;your@email.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;maps-and-gis-software&#34;&gt;Maps and GIS software&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install python-software-properties
+sudo add-apt-repository &#39;deb http://qgis.org/debian trusty main&#39;
+gpg --keyserver keyserver.ubuntu.com --recv DD45F6C3
+gpg --export --armor DD45F6C3 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install qgis python-qgis qgis-plugin-grass grass-gui grass-doc \
+libgdal1-dev libproj-dev gpsbabel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;latex-type-stuff&#34;&gt;Latex type stuff&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install jabref ibus-qt4 texlive texlive-latex-extra \
+texlive-humanities texlive-fonts-extra latex-beamer
+sudo apt-get -f install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;package-download-and-install-texmaker-and-rstudio&#34;&gt;Package download and install (Texmaker and RStudio)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.4.1_amd64.deb
+wget http://download1.rstudio.org/rstudio-0.98.1102-amd64.deb
+sudo dpkg -i *.deb
+sudo rm *.deb
+ 
+sudo apt-get update &amp;amp;&amp;amp; apt-get upgrade
+sudo apt-get autoremove
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo nano /etc/update-manager/release-upgrades
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CentOS 6/7 Multi-Boot Setup</title>
       <link>https://harryho.github.io/os/centos-fedora-desktop/</link>
       <pubDate>Fri, 10 Jan 2014 14:59:31 +1100</pubDate>
       

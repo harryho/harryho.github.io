@@ -1,0 +1,841 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="fB00vw3NhrcDODZ6PcjUHM1Pz1j4T-eZ0Ja7ffDx-aU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
+    <link rel="icon" href="https://harryho.github.io/favicon.ico">
+    <title>Raspberry Pi setup - Hello World</title>
+    
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/bootie-docs.css">
+</head>
+
+<body role="document">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://harryho.github.io/">Hello World</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+                       
+                    <li ><a href="https://harryho.github.io/article/">Article</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/code/">Code</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/dev/">Dev</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/os/">OS</a></li>
+                     
+                    <li ><a href="https://harryho.github.io/project/">Project</a></li>
+                      
+                </ul>
+                
+                <form class="navbar-form navbar-left" role="search" action="https://www.google.co.jp/search" method="get">
+                    <div class="input-group doc-search-form">
+                        <input type="hidden" name="as_sitesearch" value="harryho.github.io">
+                        <input type="text" name="as_q" class="search-query doc-search-input-text" placeholder="Search Site">
+                        <span class="input-group-addon input-group-btn doc-search-input-btn " >
+							<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+
+
+<div class="row">
+	<div class="col-sm-8 doc-main">
+		<main role="main">
+			<article>
+				<a id="title"></a>
+				<h1 class="doc-entry-title">Raspberry Pi setup</h1>
+				<div class="doc-entry-meta">
+					<span>updated at <time datetime="2016-03-04">04 Mar 2016</time></span>
+				</div>
+				<section>
+					
+
+<p>Prelude</p>
+
+<blockquote>
+<p>*This note is mainly to record how to setup Raspberry Pi as file server.</p>
+</blockquote>
+
+<h2 id="assumption">Assumption</h2>
+
+<ul>
+<li>You know what Raspberry Pi is. <a href="https://www.raspberrypi.org">Raspbery Pi</a></li>
+<li>You have a Raspberry Pi with &lsquo;NOOBS&rsquo; preinstalled SD Card</li>
+<li>RPi is short for Raspberry Pi<br /></li>
+</ul>
+
+<h2 id="raspberry-pi-model">Raspberry Pi model</h2>
+
+<p>I only have the RPi 1 model B in place. It is a birthday gift. There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. It commes a smal problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don&rsquo;t have a cable long enough to connect the RPi and switch.</p>
+
+<p>The clumsy way to do it is move my kits near to the swtich, but I am too lazy to move things around. I choose to use remote access to control RPi from my laptop.</p>
+
+<p>First thing first, I need to setup ssh server, and change the configuration to allow password login, also make it auto-start after reboot. To do so I just need monitor and keyboard.</p>
+
+<h3 id="connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</h3>
+
+<ul>
+<li>Reset pasword of <code>pi</code></li>
+</ul>
+
+<pre><code class="language-bash">sudo passwd pi
+</code></pre>
+
+<h3 id="ssh-server-setup">SSH server setup</h3>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+# backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
+sudo chmod a-w /etc/ssh/sshd_config.ori
+
+# use any editor to update sshd_config 
+sudo nano /etc/ssh/sshd_config 
+
+# uncomment  PasswordAuthentication yes to allow remote password login
+
+# setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
+
+# reboot
+sudo reboot
+
+# Check the ssh is running after reboot
+sudo service ssh status 
+
+# You should see sth as below
+[ok] sshd is running
+
+# Turn off Pi 
+sudo poweroff
+</code></pre>
+
+<h3 id="connect-rpi-with-the-switch">Connect RPi with the switch</h3>
+
+<p>After all above is done, you can disconnect the monitor and keyboard, and connect the RPi with the switch (or modem). Once the power is on, you should be able to access the RPi from you PC or laptop.</p>
+
+<h3 id="find-the-ip-address">Find the ip address</h3>
+
+<p>Access the admin home page of my switch via browser. e.g. <code>http://192.168.0.1/index.html</code> (The actual URL depends on your switch or modem. You can find it on the label sticked on the back or bottom.)</p>
+
+<p>If you forget your password to login the admin page, you still can reset your swtich. If your modem is 3 in 1 model including switch, you need to make sure you have the <code>ID and Password</code> to access the internet before you reset it.</p>
+
+<p>After you login successfully, you just need to expand main menus find a menu called <code>DHCP</code>. e.g.</p>
+
+<pre><code>Basic Setup
+|__ ...
+Advanced Setup
+|__ ...
+Device
+|__ DHCP
+|__ WAN
+|__ ...
+
+</code></pre>
+
+<p>You will see table as blew.</p>
+
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>MAC Address</th>
+<th>IP Address</th>
+<th>Expires In</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>PC-1</td>
+<td>2f:3f:09:ff:f5:24</td>
+<td>192.168.1.7</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>PC-2</td>
+<td>c0:9f:05:ff:f9:14</td>
+<td>192.168.1.8</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>Laptop-1</td>
+<td>b0:f6:05:e2:f5:99</td>
+<td>192.168.1.9</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>raspberrypi</td>
+<td>a5:06:b2:07:c4:03</td>
+<td>192.168.1.10</td>
+<td>x hours x mins</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="access-rpi-with-your-laptop">Access RPi with your laptop</h3>
+
+<ul>
+<li>From Linux or Mac</li>
+</ul>
+
+<pre><code>ssh username@192.168.1.10
+
+# type yes 
+# type the password 
+
+</code></pre>
+
+<ul>
+<li>For widnows</li>
+</ul>
+
+<p>You need to download a ssh tool. If you installed git before, you would have it on your computer. Otherwise, you need to install a SSH too. I recommend you to install <a href="http://www.putty.org/">Putty</a>. It is free and quite handy.</p>
+
+<p>After you install and launch Putty, you just need to type in the IP address <code>192.168.1.10</code> to the field <code>Host Name (or IP Address)</code>, then click button <code>Open</code>.</p>
+
+<pre><code># type in pi as login user
+login as: pi
+
+# type in password
+pi@192.168.1.10's password: 
+
+</code></pre>
+
+<h3 id="access-rpi-via-vnc">Access RPi via VNC</h3>
+
+<h4 id="setup-vnc-server-on-rpi">Setup VNC server on RPi</h4>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install tightvncserver
+</code></pre>
+
+<ul>
+<li>Launch VNC server and setup pasword</li>
+</ul>
+
+<pre><code class="language-bash">/usr/bin/tightvncserver
+
+# Setup password for remote access. 
+# View only password is not necessary
+
+# setup VNC server to auto start
+sudo update_rc.d tightvncserver defaults
+
+sudo reboot
+</code></pre>
+
+<h4 id="setup-vnc-client-on-your-pc">Setup VNC client on your PC</h4>
+
+<p>Linux: Use <strong>xRDP</strong>
+I believe you can figure it out yourself, if you used Linux as desktop.</p>
+
+<p>Windows: Install <a href="https://www.realvnc.com/en/connect/download/viewer/">RealVNC Viewer</a> as VNC client</p>
+
+<ul>
+<li>Laucn the VNC Viewer and create a new connection</li>
+</ul>
+
+<p><img src="/img/raspberry-pi-vnc-new-client.jpg" alt="Screen-VNC-new-connection" /></p>
+
+<ul>
+<li>Type in the VNC password and you can login RPi with GUI</li>
+</ul>
+
+<p><img src="/img/raspberry-pi-vnc.jpg" alt="Screenshot-VNC" /></p>
+
+<h3 id="setup-samba-to-share-files">Setup Samba to share files</h3>
+
+<ul>
+<li>Attach external storage to your RPi. The capacity of preinstalled SD card has only 8G space, so I attached my portal hard drives to RPi. You can attach the PC hard drive, USD or another SD card via adapter. It is really up to what you have in place.</li>
+</ul>
+
+<blockquote>
+<p>I want to make one as public share folder without authentication, and the other needs password to access.</p>
+</blockquote>
+
+<ul>
+<li>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install ntfs-3g
+</code></pre>
+
+<ul>
+<li>Get drive info after attach two hard drives</li>
+</ul>
+
+<pre><code class="language-bash">sudo lsblk
+
+# You will see the tree structure of drives
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    0   1.8T  0 disk
+└─sda1        8:1    0   1.8T  0 part /media/mydrive1
+└─sda2        8:2    0   870G  0 part /media/mydrive2
+mmcblk0     179:0    0   7.4G  0 disk
+├─mmcblk0p1 179:1    0    56M  0 part /boot
+└─mmcblk0p2 179:2    0   7.4G  0 part /
+</code></pre>
+
+<ul>
+<li>Remount the drives with proper name</li>
+</ul>
+
+<pre><code class="language-bash">sudo su # switch to root
+cd /media
+umount mydrive1 
+umount mydrive2
+
+mkdir public private 
+mount -o rw /sda/sda1 public
+mount -o rw /sda/sda2 private
+</code></pre>
+
+<ul>
+<li>Change <code>fstab</code> to support read and write permission</li>
+</ul>
+
+<pre><code class="language-bash">sudo nano /etc/fstab
+</code></pre>
+
+<ul>
+<li>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></li>
+</ul>
+
+<pre><code>/dev/sda1  /media/public       ntfs   nofail,noatime    0    0
+/dev/sda2  /media/private       ntfs   nofail,noatime    0    0
+</code></pre>
+
+<ul>
+<li>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></li>
+</ul>
+
+<pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    0   1.8T  0 disk
+└─sda1        8:1    0   1.8T  0 part /media/public
+└─sda2        8:2    0   870G  0 part /media/private
+mmcblk0     179:0    0   7.4G  0 disk
+├─mmcblk0p1 179:1    0    56M  0 part /boot
+└─mmcblk0p2 179:2    0   7.4G  0 part /
+</code></pre>
+
+<ul>
+<li>Install Samba</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install samba samba-common-bin
+</code></pre>
+
+<ul>
+<li>Setup Samba configuration</li>
+</ul>
+
+<h4 id="backup-original-config-and-update-the-config">Backup original config and update the config</h4>
+
+<pre><code class="language-bash">sudo su
+cd /etc/samba
+cp smb.conf smb.conf.ori
+
+nano smb.conf
+</code></pre>
+
+<h4 id="change-the-line-wins-support-no-to-wins-support-yes">Change the line <code>#   wins support = no</code> to <code>wins support = yes</code></h4>
+
+<h4 id="add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</h4>
+
+<pre><code>[public]
+comment = Share Folder
+path = /media/public
+create mask = 0665
+directory mask = 0775
+read only = no
+guest ok = yes
+
+[private]
+comment = Private Folder
+path = /media/private
+valid users = root,smbu
+force user = smbu
+create mask = 0777
+directory mask = 0777
+writable = yes
+browsable = yes
+read only = no
+guest ok = yes
+</code></pre>
+
+<h4 id="add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</h4>
+
+<pre><code class="language-bash">sudo useradd smbu
+sudo passwd smbu
+sudo usermod -a -G root smbu
+sudo smbpasswd smbu # setup pasword for remote access
+</code></pre>
+
+<ul>
+<li>Access the network folder</li>
+</ul>
+
+<h4 id="linx">Linx</h4>
+
+<p>I have no any problem to access the both netowrk drives via Linux.</p>
+
+<h4 id="windows">Windows</h4>
+
+<p>It took me some time to make it work for me. There are some bullet points, which may help you for trouble shooting.</p>
+
+<ul>
+<li>Please use <code>WORKGROUP</code> instead of domain.</li>
+<li>Please keep name of workgroup as <code>WORKGROUP</code></li>
+<li>Turn on the network discovery<br />
+<code>Control Panel &gt; All Control Panel Items&gt; Network and Sharing Cente &gt; Advanced sharing settings</code></li>
+<li>Reboot the PC or laptop</li>
+</ul>
+
+<h3 id="get-accurate-version-of-rpi-model">Get accurate version of RPi model</h3>
+
+<ul>
+<li>Get the revision code</li>
+</ul>
+
+<pre><code class="language-bash">cat /etc/cpuinfo
+</code></pre>
+
+<ul>
+<li>Check the table below to find your model</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>MODEL AND PI REVISION</th>
+<th>MEMORY</th>
+<th>HARDWARE REVISION CODE FROM CPUINFO</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Model B Revision 1.0</td>
+<td>256MB</td>
+<td>0002</td>
+</tr>
+
+<tr>
+<td>Model B Revision 1.0 + ECN0001 (no fuses, D14 removed)</td>
+<td>256MB</td>
+<td>0003</td>
+</tr>
+
+<tr>
+<td>Model B Revision 2.0 Mounting holes</td>
+<td>256MB</td>
+<td>0004 0005 0006</td>
+</tr>
+
+<tr>
+<td>Model A Mounting holes</td>
+<td>256MB</td>
+<td>0007,0008,0009</td>
+</tr>
+
+<tr>
+<td>Model B Revision 2.0 Mounting holes</td>
+<td>512MB</td>
+<td>000d 000e 000f</td>
+</tr>
+
+<tr>
+<td>Model B+</td>
+<td>512MB</td>
+<td>0010</td>
+</tr>
+
+<tr>
+<td>Compute Module</td>
+<td>512MB</td>
+<td>0011</td>
+</tr>
+
+<tr>
+<td>Model A+</td>
+<td>256MB</td>
+<td>0012</td>
+</tr>
+
+<tr>
+<td>Pi 2 Model B</td>
+<td>1GB</td>
+<td>a01041 (Sony, UK) a21041 (Embest, China)</td>
+</tr>
+
+<tr>
+<td>PiZero</td>
+<td>512MB</td>
+<td>900092(no camera connector) 900093(camera connector)</td>
+</tr>
+
+<tr>
+<td>Pi 3 Model B</td>
+<td>1GB</td>
+<td>a02082 (Sony, UK) a22082 (Embest, China)</td>
+</tr>
+
+<tr>
+<td>PiZero W</td>
+<td>512MB</td>
+<td>9000c1</td>
+</tr>
+</tbody>
+</table>
+
+				</section>
+			</article>
+		</main>
+	</div> 
+
+	
+
+<div class="col-sm-3 col-sm-offset-1 doc-sidebar">
+	<div id="sidebar">
+	<div class="sidebar-module">
+		<div class="sidebar-toc">
+			<h4 class="sidebar-heading">Table of Contents</h4>
+			<ul>
+				<li><strong><a href="#title">Raspberry Pi setup</a></strong></li>
+			</ul>
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#assumption">Assumption</a></li>
+<li><a href="#raspberry-pi-model">Raspberry Pi model</a>
+<ul>
+<li><a href="#connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a></li>
+<li><a href="#connect-rpi-with-the-switch">Connect RPi with the switch</a></li>
+<li><a href="#find-the-ip-address">Find the ip address</a></li>
+<li><a href="#access-rpi-with-your-laptop">Access RPi with your laptop</a></li>
+<li><a href="#access-rpi-via-vnc">Access RPi via VNC</a>
+<ul>
+<li><a href="#setup-vnc-server-on-rpi">Setup VNC server on RPi</a></li>
+<li><a href="#setup-vnc-client-on-your-pc">Setup VNC client on your PC</a></li>
+</ul></li>
+<li><a href="#setup-samba-to-share-files">Setup Samba to share files</a>
+<ul>
+<li><a href="#backup-original-config-and-update-the-config">Backup original config and update the config</a></li>
+<li><a href="#change-the-line-wins-support-no-to-wins-support-yes">Change the line <code>#   wins support = no</code> to <code>wins support = yes</code></a></li>
+<li><a href="#add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</a></li>
+<li><a href="#add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</a></li>
+<li><a href="#linx">Linx</a></li>
+<li><a href="#windows">Windows</a></li>
+</ul></li>
+<li><a href="#get-accurate-version-of-rpi-model">Get accurate version of RPi model</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Pages in Categories</h4>
+		<ul class="sidebar-category-list">
+		
+			<li>
+				<a href="https://harryho.github.io/categories/article">
+					<span class="doc-list-category">Article</span>
+				</a>
+				<ul>
+					<li><a href="/article/vue-ng-react/">Angular vs React vs Vue</a>
+					</li>
+				
+					<li><a href="/article/create-a-blog-on-github-pages/">Create a blog site on GitHub Pages</a>
+					</li>
+				
+					<li><a href="/article/jira-notes/">JIRA Notes</a>
+					</li>
+				
+					<li><a href="/article/build-mobile-app/">Build mobile app with web dev skills</a>
+					</li>
+				
+					<li><a href="/article/hello-world/">Do you have potential to be a programmer?</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/code">
+					<span class="doc-list-category">Code</span>
+				</a>
+				<ul>
+					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					</li>
+				
+					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					</li>
+				
+					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-3/">Java Notes, Part-3</a>
+					</li>
+				
+					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					</li>
+				
+					<li><a href="/code/java-notes-2/">Java Notes, Part-2</a>
+					</li>
+				
+					<li><a href="/code/java-notes-1/">Java Notes, Part-1</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/dev">
+					<span class="doc-list-category">Dev</span>
+				</a>
+				<ul>
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
+					</li>
+				
+					<li><a href="/dev/tensorflow-notes-2/">Tensorflow Notes, Part 2</a>
+					</li>
+				
+					<li><a href="/dev/git-notes/">Git Notes</a>
+					</li>
+				
+					<li><a href="/dev/php-web/">PHP web framework</a>
+					</li>
+				
+					<li><a href="/dev/python-django/">Python Web framework</a>
+					</li>
+				
+					<li><a href="/dev/php-debug/">Debug PHP with Eclipse PDT and Netbeans</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/info">
+					<span class="doc-list-category">Info</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-desktop-14-extra-tools/">Ubuntu 14 -- desktop, extra tools</a>
+					</li>
+				
+					<li><a href="/cache/linux-history/">Brief history of Linux</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/os">
+					<span class="doc-list-category">Os</span>
+				</a>
+				<ul>
+					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
+					</li>
+				
+					<li><a href="/os/centos-server-7/">CentOS 7 Server note</a>
+					</li>
+				
+					<li>
+						<span class="active">Raspberry Pi setup</span>
+						</li>
+				
+					<li><a href="/os/ubuntu-server-14/">Ubuntu 14 -- server setup</a>
+					</li>
+				
+					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-1/">Use Windows command &amp; hotkey as a hacker - Part 1</a>
+					</li>
+				
+					<li><a href="/os/centos-fedora-desktop/">CentOS 6/7 Multi-Boot Setup</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+			<li>
+				<a href="https://harryho.github.io/categories/project">
+					<span class="doc-list-category">Project</span>
+				</a>
+				<ul>
+					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/laravel-mvc-starter/">Laravel MVC Starter</a>
+					</li>
+				
+					<li><a href="/project/reetek-react-crm/">React Redux Crm Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-admin/">Vue 2 Admin Project</a>
+					</li>
+				
+					<li><a href="/project/reetek-vue2-crm/">Vue 2 Crm Project</a>
+					</li>
+				
+					<li><a href="/project/angularjs-webpack-es6-starter/">Angularjs Webpack ES6 Starter</a>
+					</li>
+				
+					<li><a href="/project/zf2-mvc-starter/">Zendframework 2 MVC Starter</a>
+					</li>
+				
+				</ul>
+			</li>
+		
+		</ul>
+	</div>
+	<div class="sidebar-module">
+		<h4 class="sidebar-heading">Tags</h4>
+		<div class="tag-box">
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/agile">agile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ai">ai</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/angularjs">angularjs</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/c">c</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/centos">centos</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/itext">itext</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/java">java</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/oo">oo</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/raspberry-pi">raspberry-pi</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/ubuntu">ubuntu</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/webpack">webpack</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/windows">windows</a>
+		
+		</div>
+	</div>
+	</div>
+</div>
+
+</div> 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'harryho';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-8">
+		<p class="doc-footer-em"><a href="#" onclick="resetSidebarPos()">Back to TOP</a></p>
+	</div>
+</div>
+
+</div> 
+
+<footer class="doc-footer">
+	<p class="doc-footer-em">Browse <strong><a href="https://github.com/harryho/harryho.github.io.git">Repository</a></strong></p>
+	<p>Copyright (c) 2015, harryho; All rights reserved.</p>
+	<p>Powered by <strong><a href="https://github.com/key-amb/hugo-theme-bootie-docs">Bootie Docs</a></strong> - theme for <a href="http://gohugo.io/">Hugo</a> by <a href="https://github.com/key-amb/">key-amb</a>.</p>
+</footer>
+
+
+
+<script src="https://harryho.github.io/js/jquery.min.js"></script>
+<script src="https://harryho.github.io/js/bootstrap.min.js"></script>
+
+<script src="https://harryho.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://harryho.github.io/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://harryho.github.io/js/bootie-docs.js"></script>
+<script>
+	console.log( hljs.listLanguages());
+</script>
+<script id="dsq-count-scr" src="//harryho.disqus.com/count.js" async></script>
+
+
+</body>
+</html>
