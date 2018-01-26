@@ -11,6 +11,110 @@
     <atom:link href="https://harryho.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>FlatApi -- A handy Restful API for python developer</title>
+      <link>https://harryho.github.io/project/python-flat-api/</link>
+      <pubDate>Thu, 03 Aug 2017 16:56:21 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/project/python-flat-api/</guid>
+      <description>
+
+&lt;p&gt;FlatApi is a &lt;strong&gt;zero coding&lt;/strong&gt; and &lt;strong&gt;zero configuration&lt;/strong&gt; restful API server inspired by Json-Server_ and Eve_. It is designed to be used as fake restful api for development, especially for people want to use Python stack. Setup process is &lt;strong&gt;less than 10 seconds&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;FlatApi is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Zero coding and configuration to setup Restful API&lt;/strong&gt; FlatApi is designed to use without coding and configuration by default. You just need one config to setup all endpoints you need, then you can use it immediately.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flask based web server&lt;/strong&gt; FlatApi is built on the top of _Flask&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Json flat file database&lt;/strong&gt; FlatApi uses FlatApi_ to manage the Json flat file database. FlatApi is a document oriented database.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Caching memory storage availble&lt;/strong&gt; FlatApi supports caching momery storage after version 4.0.0.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Install Package&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ pip uninstall flatapi
+$ pip install --no-cache-dir flatapi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Quick Start&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Launch FlatApi without configuration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Start the FlatApi - Sample 1 
+$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi -S MEMORY -G NO
+# Start the FlatApi - Sample 2
+$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi --storage MEMORY -cfgfile NO
+# Start the FlatApi with prefix - Sample 3
+$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi --storage memory -cfgfile no -X api
+
+
+
+\(^_^)/ Hi
+
+Loading  is done.
+
+There is no config file found. Flat Api uses internal configuration.
+
+Resource :
+/&amp;lt;string:doc&amp;gt; -- The doc is the collection name
+                    you want to post or put the object.
+/&amp;lt;string:doc&amp;gt;/&amp;lt;int:id&amp;gt; --The id is the unique id for query or delete.
+
+Database: Memory
+
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Test api via postman&lt;/p&gt;
+
+&lt;p&gt;It would be a much more handy and easy way to play around with the API immediately.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GET /posts       --&amp;gt; Get all posts
+POST /posts      --&amp;gt; Add new post
+PUT /posts/1     --&amp;gt; Update existing post which id is 1
+DELETE /posts/1  --&amp;gt; Delete a post which id is 1
+DELETE /posts    --&amp;gt; Delete all posts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test api via curl&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Add a new post
+$ curl -d &amp;quot;{\&amp;quot;text\&amp;quot;:\&amp;quot;post 1\&amp;quot;,\&amp;quot;author\&amp;quot;:\&amp;quot;harry\&amp;quot;}&amp;quot; -H &amp;quot;Content-Type: application/json&amp;quot; -X POST http://localhost:5000/posts
+{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}
+
+# Get post by Id
+$ curl -X GET http://localhost:5000/posts/1
+{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}
+
+# Get all posts
+$ curl -X GET http://localhost:5000/posts
+[{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}]
+
+# Update  the post
+$ curl -d &amp;quot;{\&amp;quot;text\&amp;quot;:\&amp;quot;post updated\&amp;quot;,\&amp;quot;author\&amp;quot;:\&amp;quot;harry\&amp;quot;}&amp;quot; -H &amp;quot;Content-Type: application/json&amp;quot; -X PUT http://localhost:5000/posts/1
+[{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post updated&amp;quot;, &amp;quot;id&amp;quot;: 1}]
+
+# Delete 
+$ curl -X DELETE http://localhost:5000/posts 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;browse-repository-https-github-com-harryho-flat-api-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/flat-api.git&#34;&gt;Repository&lt;/a&gt;&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Angular vs React vs Vue</title>
       <link>https://harryho.github.io/article/vue-ng-react/</link>
       <pubDate>Wed, 07 Jun 2017 16:56:21 +1100</pubDate>
@@ -316,6 +420,24 @@
 &lt;li&gt;&lt;p&gt;Vue.js framework is a very nice one. Give a go on your next project.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Docker Swarm notes</title>
+      <link>https://harryho.github.io/os/docker-note/</link>
+      <pubDate>Tue, 09 May 2017 19:29:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/docker-note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes notes</title>
+      <link>https://harryho.github.io/os/kubernetes-note/</link>
+      <pubDate>Tue, 09 May 2017 19:29:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/kubernetes-note/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -1749,234 +1871,6 @@ python3 test.py
 # 2017-04-25 10:25:59.640640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] Creating TensorFlow device (/gpu:0) -&amp;gt; (device: 0, name: GeForce GTX 850M, pci # bus id: 0000:0a:00.0)
 # W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vue 2 Admin Project</title>
-      <link>https://harryho.github.io/project/reetek-vue2-admin/</link>
-      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/project/reetek-vue2-admin/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;Vue2Admin&lt;/strong&gt; is a fully responsive admin template that is inspired by &lt;a href=&#34;https://almsaeedstudio.com&#34;&gt;AdminLTE&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This template is built-in with Vue 2 at the start.&lt;/li&gt;
-&lt;li&gt;It include Vue Resource, Vuex as well.&lt;/li&gt;
-&lt;li&gt;The plugins for this project are loaded with script loader.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;structure-of-reetek-vue2admin&#34;&gt;Structure of Reetek Vue2Admin&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\vue2admin
-+---build              &amp;lt;-// webpack files
-+---config             &amp;lt;-// configuration of dev or prod environment
-+---screenshots
-+---src                &amp;lt;-// vue components 
-|   +---components
-|   |   +---charts
-|   |   +---dashboard
-|   |   +---forms
-|   |   +---mailbox
-|   |   +---misc
-|   |   +---pages
-|   |   +---tables
-|   |   +---ui
-|   |   \---widget
-|   \---filters
-+---static              &amp;lt;-// css, dump data, fonts, image files and plugins
-|   +---css
-|   +---data
-|   +---fonts
-|   +---img
-|   |   +---credit
-|   |   \---stock
-|   \---js
-|       \---plugins         &amp;lt;-// plugins for admin dashboard 
-|           +---AdminLTE
-|           +---bootstrap
-|           +---bootstrap-slider
-|           +---bootstrap-wysihtml5
-|           +---chartjs
-|           +---ckeditor
-|           + ...
-\---test
-    +---e2e
-    \---unit
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/vue2admin_screenshot1_sm.png&#34; alt=&#34;Screenshot1&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/vue2admin_screenshot2_sm.png&#34; alt=&#34;Screenshot2&#34; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;browse-repository-https-github-com-harryho-vue2admin-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/vue2admin.git&#34;&gt;Repository&lt;/a&gt;&lt;/h2&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vue 2 Crm Project</title>
-      <link>https://harryho.github.io/project/reetek-vue2-crm/</link>
-      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/project/reetek-vue2-crm/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;Vue2Crm&lt;/strong&gt; is a reusable Vue.js CRM starter project for real-world business based on Vue 2 PWA template with Vuetify.&lt;/p&gt;
-
-&lt;p&gt;The goal of this project is to create a reusable project for real-world business. To achieve this target, we need a solution which includes authentication process, restful API feature and simple but elegant UI design.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This starter project is built-in with Vue 2 PWA from scratch.&lt;/li&gt;
-&lt;li&gt;The whole UI is built on the Vuetify&lt;/li&gt;
-&lt;li&gt;It includes Vuex, Axios as well.&lt;/li&gt;
-&lt;li&gt;It uses Json-Server as fake Restful API. (You can simple replace it with your own API)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;structure-of-vue2crm&#34;&gt;Structure of Vue2Crm&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\vue2crm
-+---build              &amp;lt;-// webpack files
-+---config             &amp;lt;-// configuration of dev or prod environment
-+---db                 &amp;lt;-// json files for json-server
-|   +---db.json        &amp;lt;-// dummy db
-|   \---routes.json    &amp;lt;-// configure fake restful api
-+---screenshots
-+---src                &amp;lt;-// vue components 
-|   +---components
-|   |   +---404.vue
-|   |   +---About.vue
-|   |   +---Customers.vue
-|   |   +---Customer.vue
-|   |   +---Orders.vue
-|   |   +---Order.vue
-|   |   +---Login.vue
-|   |   \---...
-|   +---router         &amp;lt;-// vue-router
-|   +---utils
-|   |   +---auth.js    &amp;lt;-// auth service
-|   |   +---backend-api.js  &amp;lt;-// Axios instance 
-|   |   +---store.js   &amp;lt;-//  Vuex
-|   \---stylus         &amp;lt;-// Customize stylus
-+---static              &amp;lt;-// css, fonts, image files
-|   +---img
-|   \---manifest.json   &amp;lt;-// PWA manifest file
-\---test
-    +---e2e
-    \---unit
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/v2crm-screenshot-1.jpg&#34; alt=&#34;Screenshot1&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/v2crm-screenshot-2.jpg&#34; alt=&#34;Screenshot2&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/v2crm-screenshot-3.jpg&#34; alt=&#34;Screenshot3&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/v2crm-screenshot-4.jpg&#34; alt=&#34;Screenshot4&#34; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;browse-repository-https-github-com-harryho-vue2crm-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/vue2crm.git&#34;&gt;Repository&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;Alternatives&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;There are two similar projects respectively built on the Angular and React. If you have interests in those technical stacks. You can find those projects below.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-angular4-crm&#34;&gt;Angular4 Crm&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://harryho.github.io/project/reetek-react-crm&#34;&gt;React Redux Crm&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Angularjs Webpack ES6 Starter</title>
-      <link>https://harryho.github.io/project/angularjs-webpack-es6-starter/</link>
-      <pubDate>Tue, 15 Nov 2016 16:56:21 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/project/angularjs-webpack-es6-starter/</guid>
-      <description>
-
-&lt;p&gt;This starter was inspired by another similar angular webpack starter repository. It simply includes font-awesome, bootstrap for the people who don&amp;rsquo;t want to use boostrap-webpack, font-awesome-webpack. I find it saves us so much effort to create prototype, since we don&amp;rsquo;t need spectacular UI.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This starter uses angular 1.5 for someone want to build component.&lt;/li&gt;
-&lt;li&gt;This repo followes mvc patterns instead of component pattern.&lt;/li&gt;
-&lt;li&gt;ES6, and ES7 support with babel.&lt;/li&gt;
-&lt;li&gt;Development server with live reload.&lt;/li&gt;
-&lt;li&gt;Production builds with cache busting.&lt;/li&gt;
-&lt;li&gt;Testing environment using karma to run tests and jasmine as the framework.&lt;/li&gt;
-&lt;li&gt;Code coverage when tests are run.&lt;/li&gt;
-&lt;li&gt;Include font-awesome without font-awesome-loader.&lt;/li&gt;
-&lt;li&gt;Include Bootstrap 3 without bootstrap-loader.&lt;/li&gt;
-&lt;li&gt;No gulp and no grunt, just npm scripts.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;structure-of-starter&#34;&gt;Structure of starter&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-\path\to\angularjs-webpack-es6-starter
-|   .babelrc                                    &amp;lt;-// default setting es2015.
-|   karma.conf.js                               &amp;lt;-// tests and report setup 
-|   webpack.config.js                           &amp;lt;-// webpack config
-\---src
-    |   tests.webpack.js
-    |   
-    +---app
-    |   |   app.html                            &amp;lt;-// app view
-    |   |   app.js                              &amp;lt;-// app module
-    |   |   app.routes.js                       &amp;lt;-// app route to manage all routes 
-    |   |   app.runner.js                       &amp;lt;-// app runner for state change enhancement  
-    |   |   app.spec.js                         &amp;lt;-// app spec file for testing 
-    |   |   
-    |   +---common                              &amp;lt;-// common module for whole app
-    |   |   |   common.js
-    |   |   |   common.spec.js
-    |   |   +---directives                      &amp;lt;-// common directives for whole app
-    |   |   |       appUiDirectives.js
-    |   |   |       appUiDirectives.spec.js
-    |   |   |       commonDirectives.js
-    |   |   |       commonDirectives.spec.js
-    |   |   +---services                        &amp;lt;-// common views for whole app
-    |   |   |       ApiService.js
-    |   |   |       ApiService.spec.js
-    |   |   |       UtilService.js
-    |   |   |       UtilService.spec.js
-    |   |   \---views                           &amp;lt;-// contains common views
-    |   |           footer-view.html
-    |   |           header-view.html
-    |   |           sidebar-view.html
-    |   |           topbar-view.html
-    |   \---main                                &amp;lt;-// built-in fonts, css, images 
-    |       \---dashboard
-    |           +---controllers
-    |           |       dashboardController.js
-    |           |       dashboardController.spec.js
-    |           \---views
-    |                   dashboard-view.html
-    |                   
-    +---public                                  &amp;lt;-// built-in fonts, css, images 
-    |   |   index.html
-    |   +---fonts
-    |   |   +--- ...
-    |   \---img
-    |       +--- favicon.ico
-    \---style                                  &amp;lt;-// css files including customized css
-           
-    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/angularjs-webpack-es6-starter.git&#34;&gt;Repository&lt;/a&gt;&lt;/h3&gt;
 </description>
     </item>
     

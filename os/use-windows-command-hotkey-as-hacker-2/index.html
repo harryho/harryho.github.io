@@ -372,16 +372,20 @@ tree test
 del /s/q test &amp; rd /s/q
 </code></pre>
 
-<h3 id="use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</h3>
+<h3 id="use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>&gt;</code> to setup a channel between commands pass the data through the commands.</h3>
 
 <p>Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.</p>
 
 <pre><code class="language-dos">REM write some content to a text file all.txt
 echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&gt;all.txt
 
-REM retrive lines start with mark and write them to mark.txt
-cat all.txt | find &quot;mark&quot;&gt;mark.txt
-cat mark.txt
+</code></pre>
+
+<h3 id="check-cpu-usage-via-command">Check CPU usage via command</h3>
+
+<pre><code>wmic cpu get loadpercentage
+@for /f &quot;skip=1&quot; %p in ('wmic cpu get loadpercentage') do @echo %p%
+
 </code></pre>
 
 <h3 id="use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</h3>
@@ -478,7 +482,8 @@ cat mark.txt
 <li><a href="#combination-of-multiple-commands">Combination of multiple commands</a>
 <ul>
 <li><a href="#use-to-simply-connect-to-commands">Use <code>&amp;</code> to simply connect to commands</a></li>
-<li><a href="#use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>|</code> to setup a channel between commands pass the data through the commands.</a></li>
+<li><a href="#use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>&gt;</code> to setup a channel between commands pass the data through the commands.</a></li>
+<li><a href="#check-cpu-usage-via-command">Check CPU usage via command</a></li>
 <li><a href="#use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</a></li>
 </ul></li>
 <li><a href="#script">script</a>
@@ -604,6 +609,12 @@ cat mark.txt
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/docker-note/">Docker Swarm notes</a>
+					</li>
+				
+					<li><a href="/os/kubernetes-note/">Kubernetes notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
 					</li>
 				
@@ -617,6 +628,9 @@ cat mark.txt
 					</li>
 				
 					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-3/">Use Windows command &amp; hotkey as a hacker - Part 3</a>
 					</li>
 				
 					<li>
@@ -637,6 +651,9 @@ cat mark.txt
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
+					<li><a href="/project/python-flat-api/">FlatApi -- A handy Restful API for python developer</a>
+					</li>
+				
 					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
 					</li>
 				
@@ -679,6 +696,10 @@ cat mark.txt
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/container">container</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/docker">docker</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
@@ -689,6 +710,8 @@ cat mark.txt
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/kubernetes">kubernetes</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -698,6 +721,8 @@ cat mark.txt
 			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/pythoon">pythoon</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/raspberry-pi">raspberry-pi</a>
 		

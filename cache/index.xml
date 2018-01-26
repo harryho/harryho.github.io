@@ -16919,14 +16919,15 @@ s = []int{} // len(s) == 0, s != nil
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;make([]T, len) 
 make([]T, len, cap) // same as make([]T, cap)[:len] 
-Under the hood, make creates an unnamed array variable and returns a slice of it; the array is accessible only through the returned slice. In the first form, the slice is a view of the entire array. In the second, the slice is a view of only the array’s first len elements, but its capacity includes the entire array. The additional elements are set aside for future growth. 
+&lt;/code&gt;&lt;/pre&gt;
 
-### The append Function 
+&lt;p&gt;Under the hood, make creates an unnamed array variable and returns a slice of it; the array is accessible only through the returned slice. In the first form, the slice is a view of the entire array. In the second, the slice is a view of only the array’s first len elements, but its capacity includes the entire array. The additional elements are set aside for future growth.&lt;/p&gt;
 
-The built-in append function appends items to slices: 
+&lt;h3 id=&#34;the-append-function&#34;&gt;The append Function&lt;/h3&gt;
 
-```go
-var runes []rune 
+&lt;p&gt;The built-in append function appends items to slices:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var runes []rune 
 for _, r := range &amp;quot;Hello, 
 &amp;quot; {
 runes = append(runes, r) }
@@ -16996,10 +16997,12 @@ Let’s take a closer look at the i=3 iteration. The slice x contains the three 
 
 &lt;p&gt;The built-in append function may use a more sophisticated growth strategy than appendInt’s simplistic one. Usually we don’t know whether a given call to append will cause a reallocation, so we can’t assume that the original slice refers to the same array as the resulting slice, nor that it refers to a different one. Similarly, we must not assume that assignments to elements of the old slice will (or will not) be reflected in the new slice. Consequently, it’s usual to assign the result of a call to append to the same slice variable whose value we passed to append:
 runes = append(runes, r)
-Updating the slice variable is required not just when calling append, but for any function that may change the length or capacity of a slice or make it refer to a different underlying array. To use slices correctly, it’s important to bear in mind that although the elements of the underlying array are indirect, the slice’s pointer, length, and capacity are not. To update them requires an assignment like the one above. In this respect, slices are not “pure” reference types but resemble an aggregate type such as this struct:
-type IntSlice struct {
-ptr *int
-len, cap int }&lt;/p&gt;
+Updating the slice variable is required not just when calling append, but for any function that may change the length or capacity of a slice or make it refer to a different underlying array. To use slices correctly, it’s important to bear in mind that although the elements of the underlying array are indirect, the slice’s pointer, length, and capacity are not. To update them requires an assignment like the one above. In this respect, slices are not “pure” reference types but resemble an aggregate type such as this struct:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type IntSlice struct {
+ptr *int 
+len, cap int } 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Our appendInt function adds a single element to a slice, but the built-in append lets us add more than one new element, or even a whole slice of them.&lt;/p&gt;
 
@@ -17050,22 +17053,22 @@ i++
 return strings[:i] 
 
 } 
+&lt;/code&gt;&lt;/pre&gt;
 
-The subtle part is that the input slice and the output slice share the same underlying array. This avoids the need to allocate another array, though of course the contents of data are partly overwritten, as evidenced by the second print statement: 
+&lt;p&gt;The subtle part is that the input slice and the output slice share the same underlying array. This avoids the need to allocate another array, though of course the contents of data are partly overwritten, as evidenced by the second print statement:&lt;/p&gt;
 
-```go
-data := []string{&amp;quot;one&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;three&amp;quot;} 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;data := []string{&amp;quot;one&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;three&amp;quot;} 
 fmt.Printf(&amp;quot;%q\n&amp;quot;, nonempty(data)) // `[&amp;quot;one&amp;quot; 
 &amp;quot;three&amp;quot;]`
 fmt.Printf(&amp;quot;%q\n&amp;quot;, data) // `[&amp;quot;one&amp;quot; &amp;quot;three&amp;quot; 
 &amp;quot;three&amp;quot;]` 
+&lt;/code&gt;&lt;/pre&gt;
 
-Thus we would usually write: data = nonempty(data) . 
+&lt;p&gt;Thus we would usually write: data = nonempty(data) .&lt;/p&gt;
 
-The nonempty function can also be written using append: 
+&lt;p&gt;The nonempty function can also be written using append:&lt;/p&gt;
 
-```go
-func nonempty2(strings []string) []string { 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func nonempty2(strings []string) []string { 
 out := strings[:0] // zero-length slice of 
 original
 for _, s := range strings {
@@ -17077,12 +17080,13 @@ out = append(out, s)
 return out 
 
 } 
-Whichever variant we use, reusing an array in this way requires that at most one output value is produced for each input value, which is true of many algorithms that filter out elements of a sequence or combine adjacent ones. Such intricate slice usage is the exception, not the rule, but it can be clear, efficient, and useful on occasion. 
+&lt;/code&gt;&lt;/pre&gt;
 
-A slice can be used to implement a stack. Given an initially empty slice stack, we can push a new value onto the end of the slice with append: 
+&lt;p&gt;Whichever variant we use, reusing an array in this way requires that at most one output value is produced for each input value, which is true of many algorithms that filter out elements of a sequence or combine adjacent ones. Such intricate slice usage is the exception, not the rule, but it can be clear, efficient, and useful on occasion.&lt;/p&gt;
 
-```go
-stack = append(stack, v) // push v 
+&lt;p&gt;A slice can be used to implement a stack. Given an initially empty slice stack, we can push a new value onto the end of the slice with append:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;stack = append(stack, v) // push v 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The top of the stack is the last element:&lt;/p&gt;
@@ -17103,11 +17107,11 @@ return slice[:len(slice)-1] }
 func main() { 
 s := []int{5, 6, 7, 8, 9} 
 fmt.Println(remove(s, 2)) // &amp;quot;[5 6 8 9]&amp;quot; } 
+&lt;/code&gt;&lt;/pre&gt;
 
-And if we don’t need to preserve the order, we can just move the last element into the gap: 
+&lt;p&gt;And if we don’t need to preserve the order, we can just move the last element into the gap:&lt;/p&gt;
 
-```go
-func remove(slice []int, i int) []int {
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func remove(slice []int, i int) []int {
 slice[i] = slice[len(slice)-1] 
 return slice[:len(slice)-1] 
 
@@ -17117,7 +17121,6 @@ s := []int{5, 6, 7, 8, 9}
 fmt.Println(remove(s, 2)) // &amp;quot;[5 6 9 8] 
 
 } 
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Exercise 4.3: Rewrite reverse to use an array pointer instead of a slice.&lt;/p&gt;
@@ -20807,23 +20810,25 @@ fmt.Sprintf(&amp;quot;$%.2f&amp;quot;, d) }
 
 type database map[string]dollars 
 func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {for item, price := range db {fmt.Fprintf(w, &amp;quot;%s: %s\n&amp;quot;, item, price) }} 
+&lt;/code&gt;&lt;/pre&gt;
 
-If we start the server, 
-$ go build gopl.io/ch7/http1 
+&lt;p&gt;If we start the server,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ go build gopl.io/ch7/http1 
 $ ./http1 &amp;amp; 
+&lt;/code&gt;&lt;/pre&gt;
 
-then connect to it with the fetch program from Section 1.5 (or a web browser if you prefer), we get the following output: 
+&lt;p&gt;then connect to it with the fetch program from Section 1.5 (or a web browser if you prefer), we get the following output:&lt;/p&gt;
 
-```go
-$ go build gopl.io/ch1/fetch 
+&lt;pre&gt;&lt;code&gt;$ go build gopl.io/ch1/fetch 
 $ ./fetch http://localhost:8000 
 shoes: $50.00 
 socks: $5.00 
+&lt;/code&gt;&lt;/pre&gt;
 
-So far, the server can only list its entire inventory and will do this for every request, regardless of URL. A more realistic server defines multiple different URLs, each triggering a different behavior. Let’s call the existing one /list and add another one called /price that reports the price of a single item, specified as a request parameter like /price?item=socks. 
+&lt;p&gt;So far, the server can only list its entire inventory and will do this for every request, regardless of URL. A more realistic server defines multiple different URLs, each triggering a different behavior. Let’s call the existing one /list and add another one called /price that reports the price of a single item, specified as a request parameter like /price?item=socks.&lt;/p&gt;
 
-```go
-// gopl.io/ch7/http2 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch7/http2 
 func (db database) ServeHTTP(w http.ResponseWriter, 
 req     *http.Request) {
 switch req.URL.Path {
@@ -20852,22 +20857,25 @@ The case for /price calls the URL’s Query method to parse the HTTP request par
 
 Here’s an example session with the new server: 
 
-```go
-$ go build gopl.io/ch7/http2 
-$ go build gopl.io/ch1/fetch 
+&lt;/code&gt;&lt;/pre&gt;
 
-$ ./http2 &amp;amp; 
-$ ./fetch http://localhost:8000/list 
-shoes: $50.00 
-socks: $5.00 
-$ ./fetch http://localhost:8000/price?item=socks 
-$5.00 
-$ ./fetch http://localhost:8000/price?item=shoes 
-$50.00 
-$ ./fetch http://localhost:8000/price?item=hat 
-no such item: &amp;quot;hat&amp;quot; 
-$ ./fetch http://localhost:8000/help 
-no such page: /help 
+&lt;p&gt;$ go build gopl.io/ch7/http2
+$ go build gopl.io/ch1/fetch&lt;/p&gt;
+
+&lt;p&gt;$ ./http2 &amp;amp;
+$ ./fetch &lt;a href=&#34;http://localhost:8000/list&#34;&gt;http://localhost:8000/list&lt;/a&gt;
+shoes: $50.00
+socks: $5.00
+$ ./fetch &lt;a href=&#34;http://localhost:8000/price?item=socks&#34;&gt;http://localhost:8000/price?item=socks&lt;/a&gt;
+$5.00
+$ ./fetch &lt;a href=&#34;http://localhost:8000/price?item=shoes&#34;&gt;http://localhost:8000/price?item=shoes&lt;/a&gt;
+$50.00
+$ ./fetch &lt;a href=&#34;http://localhost:8000/price?item=hat&#34;&gt;http://localhost:8000/price?item=hat&lt;/a&gt;
+no such item: &amp;ldquo;hat&amp;rdquo;
+$ ./fetch &lt;a href=&#34;http://localhost:8000/help&#34;&gt;http://localhost:8000/help&lt;/a&gt;
+no such page: /help&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
 Obviously we could keep adding cases to ServeHTTP, but in a realistic application, it’s convenient to define the logic for each case in a separate function or method. Furthermore, related URLs may need similar logic; several image files may have URLs of the form /images/*.png, for instance. For these reasons, net/http provides ServeMux,a request multiplexer, to simplify the association between URLs and handlers. A ServeMux aggregates a collection of http.Handlers into a single http.Handler. Again, we see that different types satisfying the same interface are substitutable: the web server can dispatch requests to any http.Handler, regardless of which concrete type is behind it. 
 
 For a more complex application, several ServeMuxes may be composed to handle more intricate dispatching requirements. Go doesn’t have a canonical web framework analogous to Ruby’s Rails or Python’s Django. This is not to say that such frameworks don’t exist, but the building blocks in Go’s standard library are flexible enough that frameworks are often unnecessary. Furthermore, although frameworks are convenient in the early phases of a project, their additional complexity can make longer-term maintenance harder. 
@@ -47643,8 +47651,7 @@ not a book that teaches you how to program, this is a book that just
 teaches you how to use Go.&lt;/p&gt;
 
 &lt;p&gt;As with learning new things, probably the best way to do this is to discover it for yourself by creating your own programs. Each chapter therefore includes a number of exercises (and answers) to acquaint you with the language. An exercise is numbered as Qn, where n is a number. After the exercise number another number in parentheses displays the dif.culty of this particular assignment. This dif.culty ranges from 0 to 2:
-0.
-easy;&lt;/p&gt;
+0. easy;&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;intermediate;&lt;/p&gt;&lt;/li&gt;
@@ -47735,15 +47742,17 @@ Go is the .rst C–like language that is widely available, runs on many differen
 &lt;p&gt;Hello World
 In the Go tutorial, Go is presented to the world in the typical manner: letting it print “Hello World” (Ken Thompson and Dennis Ritchie started this when they presented the C language in the 1970s). We don’t think we can do better, so here it is, “Hello World” in Go.&lt;/p&gt;
 
-&lt;p&gt;Listing 1.1. Hello world
-package main
-0 import &amp;ldquo;fmt&amp;rdquo;
-1 // Implements formatted I/O.
-  /* Print something */
-2 func main() {
-3 fmt.Printf(&amp;ldquo;Hello, world; or aa&amp;gt;1µ´aó.µ.; or&amp;hellip;&amp;hellip;.&amp;rdquo;)
-..a
-}&lt;/p&gt;
+&lt;p&gt;Listing 1.1. Hello world&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main 
+0 import &amp;quot;fmt&amp;quot; 
+1 // Implements formatted I/O. 
+  /* Print something */ 
+2 func main() { 
+3 fmt.Printf(&amp;quot;Hello, world; or aa&amp;gt;1µ´aó.µ.; or.......&amp;quot;)
+..a 
+} 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;bYes, that sounds a lot like coroutines, but goroutines are slightly different as we will see in chapter 6.&lt;/p&gt;
 
@@ -47762,7 +47771,7 @@ The line ends with a comment which is started with //;&lt;/p&gt;
 
 &lt;p&gt;Compiling and running code
 The preferred way to build a Go program is to use the go tool. To build helloworld we just enter:
-%   go build helloworld.go&lt;/p&gt;
+&lt;code&gt;%  go build helloworld.go&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;This results in an executable called helloworld.
 %   ./helloworld&lt;/p&gt;
@@ -51792,10 +51801,10 @@ return data, nil
     
     <item>
       <title>Program in Go</title>
-      <link>https://harryho.github.io/cache/golang/program-in-go./</link>
+      <link>https://harryho.github.io/cache/golang/program-in-go/</link>
       <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
       
-      <guid>https://harryho.github.io/cache/golang/program-in-go./</guid>
+      <guid>https://harryho.github.io/cache/golang/program-in-go/</guid>
       <description>
 
 &lt;h2 id=&#34;hello-world&#34;&gt;Hello World&lt;/h2&gt;

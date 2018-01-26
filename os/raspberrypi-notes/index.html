@@ -84,13 +84,13 @@
 
 <ul>
 <li>You know what Raspberry Pi is. <a href="https://www.raspberrypi.org">Raspbery Pi</a></li>
-<li>You have a Raspberry Pi with &lsquo;NOOBS&rsquo; preinstalled SD Card</li>
+<li>You have a Raspberry Pi</li>
 <li>RPi is short for Raspberry Pi<br /></li>
 </ul>
 
 <h2 id="raspberry-pi-model">Raspberry Pi model</h2>
 
-<p>I only have the RPi 1 model B in place. It is a birthday gift. There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. It commes a smal problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don&rsquo;t have a cable long enough to connect the RPi and switch.</p>
+<p>I only have the RPi 1 model B in place. It is a birthday gift. There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. It commes a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don&rsquo;t have a cable long enough to connect the RPi and switch.</p>
 
 <p>The clumsy way to do it is move my kits near to the swtich, but I am too lazy to move things around. I choose to use remote access to control RPi from my laptop.</p>
 
@@ -518,6 +518,62 @@ sudo smbpasswd smbu # setup pasword for remote access
 </tbody>
 </table>
 
+<h3 id="setup-wifi-adapter">Setup Wifi Adapter</h3>
+
+<p>Wifi is not necessary for media centre, but it would save some effort to move your RPi around in your place, especially you want to connect your RPi with different devices from time to time.</p>
+
+<p>As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi drive. If you have the RPi <sup>2</sup>&frasl;<sub>3</sub>, it would be much more easier. My RPi 1 model B comes with kernel 4.18. I cannot find the soruce code which supports this old kernel today.</p>
+
+<p>Finally, I found a post on RPi&rsquo;s forum which solved my problem. Link of (MrEngman&rsquo;s post)[<a href="https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;t=103989&amp;p=1048709&amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709">https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;t=103989&amp;p=1048709&amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709</a>]. He updated on April aobut the dropbox issue and alternative solution.</p>
+
+<p>Download and install the new version of the script with commands</p>
+
+<pre><code>sudo wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
+sudo chmod +x /usr/bin/install-wifi
+
+# Shows details on using it.
+sudo install-wifi -h
+
+
+# To install the driver on your current kernel you should just need to run command
+sudo install-wifi
+
+# Check the wifi interface after installation
+ifconfig -a
+</code></pre>
+
+<p>Setup Wifi password. You can simply do it via GUI application or via command lines if you like. Please check out the official document as below.</p>
+
+<p><a href="https://www.raspberrypi.org/documentation/configuration/wireless/">https://www.raspberrypi.org/documentation/configuration/wireless/</a></p>
+
+<h3 id="install-kodi-as-media-centre">Install Kodi as media centre</h3>
+
+<p>If you have NOOBS in the place, then you have everything you need. Because I don&rsquo;t have it, I follow the official instruction to install kodi. It is a simple way to convert your RPi into a media centre without scratching your head too much.</p>
+
+<pre><code class="language-bash">
+# Install kodi
+sudo apt-get update
+sudo apt-get install kodi
+
+
+# Config kodi
+sudo nano /etc/default/kodi
+ENABLED=1
+
+</code></pre>
+
+<p>Reboot the RPi, before you reboot it make sure your TV&rsquo;s HDMI has plugged into RPi. After a few minutes, you can enjoy your home media centre.</p>
+
+<p>Home page of kodai</p>
+
+<p><img src="/img/kodi-tv-homepage.jpg" alt="KodiTVHomePage" /></p>
+
+<h3 id="install-remote-control-app-on-your-mobile">Install remote control app on your mobile</h3>
+
+<p>Screenshot of kodi mobile app on my android phone.</p>
+
+<p><img src="/img/kodi-mobile-app.png" alt="kodi-mobile-app" /></p>
+
 				</section>
 			</article>
 		</main>
@@ -560,6 +616,9 @@ sudo smbpasswd smbu # setup pasword for remote access
 <li><a href="#windows">Windows</a></li>
 </ul></li>
 <li><a href="#get-accurate-version-of-rpi-model">Get accurate version of RPi model</a></li>
+<li><a href="#setup-wifi-adapter">Setup Wifi Adapter</a></li>
+<li><a href="#install-kodi-as-media-centre">Install Kodi as media centre</a></li>
+<li><a href="#install-remote-control-app-on-your-mobile">Install remote control app on your mobile</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -679,6 +738,12 @@ sudo smbpasswd smbu # setup pasword for remote access
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/docker-note/">Docker Swarm notes</a>
+					</li>
+				
+					<li><a href="/os/kubernetes-note/">Kubernetes notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
 					</li>
 				
@@ -693,6 +758,9 @@ sudo smbpasswd smbu # setup pasword for remote access
 					</li>
 				
 					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-3/">Use Windows command &amp; hotkey as a hacker - Part 3</a>
 					</li>
 				
 					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
@@ -712,6 +780,9 @@ sudo smbpasswd smbu # setup pasword for remote access
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
+					<li><a href="/project/python-flat-api/">FlatApi -- A handy Restful API for python developer</a>
+					</li>
+				
 					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
 					</li>
 				
@@ -754,6 +825,10 @@ sudo smbpasswd smbu # setup pasword for remote access
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/container">container</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/docker">docker</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
@@ -764,6 +839,8 @@ sudo smbpasswd smbu # setup pasword for remote access
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/kubernetes">kubernetes</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -773,6 +850,8 @@ sudo smbpasswd smbu # setup pasword for remote access
 			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/pythoon">pythoon</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/raspberry-pi">raspberry-pi</a>
 		

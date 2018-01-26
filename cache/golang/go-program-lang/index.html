@@ -2970,14 +2970,15 @@ s = []int{} // len(s) == 0, s != nil
 
 <pre><code class="language-go">make([]T, len) 
 make([]T, len, cap) // same as make([]T, cap)[:len] 
-Under the hood, make creates an unnamed array variable and returns a slice of it; the array is accessible only through the returned slice. In the first form, the slice is a view of the entire array. In the second, the slice is a view of only the array’s first len elements, but its capacity includes the entire array. The additional elements are set aside for future growth. 
+</code></pre>
 
-### The append Function 
+<p>Under the hood, make creates an unnamed array variable and returns a slice of it; the array is accessible only through the returned slice. In the first form, the slice is a view of the entire array. In the second, the slice is a view of only the array’s first len elements, but its capacity includes the entire array. The additional elements are set aside for future growth.</p>
 
-The built-in append function appends items to slices: 
+<h3 id="the-append-function">The append Function</h3>
 
-```go
-var runes []rune 
+<p>The built-in append function appends items to slices:</p>
+
+<pre><code class="language-go">var runes []rune 
 for _, r := range &quot;Hello, 
 &quot; {
 runes = append(runes, r) }
@@ -3047,10 +3048,12 @@ Let’s take a closer look at the i=3 iteration. The slice x contains the three 
 
 <p>The built-in append function may use a more sophisticated growth strategy than appendInt’s simplistic one. Usually we don’t know whether a given call to append will cause a reallocation, so we can’t assume that the original slice refers to the same array as the resulting slice, nor that it refers to a different one. Similarly, we must not assume that assignments to elements of the old slice will (or will not) be reflected in the new slice. Consequently, it’s usual to assign the result of a call to append to the same slice variable whose value we passed to append:
 runes = append(runes, r)
-Updating the slice variable is required not just when calling append, but for any function that may change the length or capacity of a slice or make it refer to a different underlying array. To use slices correctly, it’s important to bear in mind that although the elements of the underlying array are indirect, the slice’s pointer, length, and capacity are not. To update them requires an assignment like the one above. In this respect, slices are not “pure” reference types but resemble an aggregate type such as this struct:
-type IntSlice struct {
-ptr *int
-len, cap int }</p>
+Updating the slice variable is required not just when calling append, but for any function that may change the length or capacity of a slice or make it refer to a different underlying array. To use slices correctly, it’s important to bear in mind that although the elements of the underlying array are indirect, the slice’s pointer, length, and capacity are not. To update them requires an assignment like the one above. In this respect, slices are not “pure” reference types but resemble an aggregate type such as this struct:</p>
+
+<pre><code class="language-go">type IntSlice struct {
+ptr *int 
+len, cap int } 
+</code></pre>
 
 <p>Our appendInt function adds a single element to a slice, but the built-in append lets us add more than one new element, or even a whole slice of them.</p>
 
@@ -3101,22 +3104,22 @@ i++
 return strings[:i] 
 
 } 
+</code></pre>
 
-The subtle part is that the input slice and the output slice share the same underlying array. This avoids the need to allocate another array, though of course the contents of data are partly overwritten, as evidenced by the second print statement: 
+<p>The subtle part is that the input slice and the output slice share the same underlying array. This avoids the need to allocate another array, though of course the contents of data are partly overwritten, as evidenced by the second print statement:</p>
 
-```go
-data := []string{&quot;one&quot;, &quot;&quot;, &quot;three&quot;} 
+<pre><code class="language-go">data := []string{&quot;one&quot;, &quot;&quot;, &quot;three&quot;} 
 fmt.Printf(&quot;%q\n&quot;, nonempty(data)) // `[&quot;one&quot; 
 &quot;three&quot;]`
 fmt.Printf(&quot;%q\n&quot;, data) // `[&quot;one&quot; &quot;three&quot; 
 &quot;three&quot;]` 
+</code></pre>
 
-Thus we would usually write: data = nonempty(data) . 
+<p>Thus we would usually write: data = nonempty(data) .</p>
 
-The nonempty function can also be written using append: 
+<p>The nonempty function can also be written using append:</p>
 
-```go
-func nonempty2(strings []string) []string { 
+<pre><code class="language-go">func nonempty2(strings []string) []string { 
 out := strings[:0] // zero-length slice of 
 original
 for _, s := range strings {
@@ -3128,12 +3131,13 @@ out = append(out, s)
 return out 
 
 } 
-Whichever variant we use, reusing an array in this way requires that at most one output value is produced for each input value, which is true of many algorithms that filter out elements of a sequence or combine adjacent ones. Such intricate slice usage is the exception, not the rule, but it can be clear, efficient, and useful on occasion. 
+</code></pre>
 
-A slice can be used to implement a stack. Given an initially empty slice stack, we can push a new value onto the end of the slice with append: 
+<p>Whichever variant we use, reusing an array in this way requires that at most one output value is produced for each input value, which is true of many algorithms that filter out elements of a sequence or combine adjacent ones. Such intricate slice usage is the exception, not the rule, but it can be clear, efficient, and useful on occasion.</p>
 
-```go
-stack = append(stack, v) // push v 
+<p>A slice can be used to implement a stack. Given an initially empty slice stack, we can push a new value onto the end of the slice with append:</p>
+
+<pre><code class="language-go">stack = append(stack, v) // push v 
 </code></pre>
 
 <p>The top of the stack is the last element:</p>
@@ -3154,11 +3158,11 @@ return slice[:len(slice)-1] }
 func main() { 
 s := []int{5, 6, 7, 8, 9} 
 fmt.Println(remove(s, 2)) // &quot;[5 6 8 9]&quot; } 
+</code></pre>
 
-And if we don’t need to preserve the order, we can just move the last element into the gap: 
+<p>And if we don’t need to preserve the order, we can just move the last element into the gap:</p>
 
-```go
-func remove(slice []int, i int) []int {
+<pre><code class="language-go">func remove(slice []int, i int) []int {
 slice[i] = slice[len(slice)-1] 
 return slice[:len(slice)-1] 
 
@@ -3168,7 +3172,6 @@ s := []int{5, 6, 7, 8, 9}
 fmt.Println(remove(s, 2)) // &quot;[5 6 9 8] 
 
 } 
-
 </code></pre>
 
 <p>Exercise 4.3: Rewrite reverse to use an array pointer instead of a slice.</p>
@@ -6858,23 +6861,25 @@ fmt.Sprintf(&quot;$%.2f&quot;, d) }
 
 type database map[string]dollars 
 func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {for item, price := range db {fmt.Fprintf(w, &quot;%s: %s\n&quot;, item, price) }} 
+</code></pre>
 
-If we start the server, 
-$ go build gopl.io/ch7/http1 
+<p>If we start the server,</p>
+
+<pre><code>$ go build gopl.io/ch7/http1 
 $ ./http1 &amp; 
+</code></pre>
 
-then connect to it with the fetch program from Section 1.5 (or a web browser if you prefer), we get the following output: 
+<p>then connect to it with the fetch program from Section 1.5 (or a web browser if you prefer), we get the following output:</p>
 
-```go
-$ go build gopl.io/ch1/fetch 
+<pre><code>$ go build gopl.io/ch1/fetch 
 $ ./fetch http://localhost:8000 
 shoes: $50.00 
 socks: $5.00 
+</code></pre>
 
-So far, the server can only list its entire inventory and will do this for every request, regardless of URL. A more realistic server defines multiple different URLs, each triggering a different behavior. Let’s call the existing one /list and add another one called /price that reports the price of a single item, specified as a request parameter like /price?item=socks. 
+<p>So far, the server can only list its entire inventory and will do this for every request, regardless of URL. A more realistic server defines multiple different URLs, each triggering a different behavior. Let’s call the existing one /list and add another one called /price that reports the price of a single item, specified as a request parameter like /price?item=socks.</p>
 
-```go
-// gopl.io/ch7/http2 
+<pre><code class="language-go">// gopl.io/ch7/http2 
 func (db database) ServeHTTP(w http.ResponseWriter, 
 req     *http.Request) {
 switch req.URL.Path {
@@ -6903,22 +6908,25 @@ The case for /price calls the URL’s Query method to parse the HTTP request par
 
 Here’s an example session with the new server: 
 
-```go
-$ go build gopl.io/ch7/http2 
-$ go build gopl.io/ch1/fetch 
+</code></pre>
 
-$ ./http2 &amp; 
-$ ./fetch http://localhost:8000/list 
-shoes: $50.00 
-socks: $5.00 
-$ ./fetch http://localhost:8000/price?item=socks 
-$5.00 
-$ ./fetch http://localhost:8000/price?item=shoes 
-$50.00 
-$ ./fetch http://localhost:8000/price?item=hat 
-no such item: &quot;hat&quot; 
-$ ./fetch http://localhost:8000/help 
-no such page: /help 
+<p>$ go build gopl.io/ch7/http2
+$ go build gopl.io/ch1/fetch</p>
+
+<p>$ ./http2 &amp;
+$ ./fetch <a href="http://localhost:8000/list">http://localhost:8000/list</a>
+shoes: $50.00
+socks: $5.00
+$ ./fetch <a href="http://localhost:8000/price?item=socks">http://localhost:8000/price?item=socks</a>
+$5.00
+$ ./fetch <a href="http://localhost:8000/price?item=shoes">http://localhost:8000/price?item=shoes</a>
+$50.00
+$ ./fetch <a href="http://localhost:8000/price?item=hat">http://localhost:8000/price?item=hat</a>
+no such item: &ldquo;hat&rdquo;
+$ ./fetch <a href="http://localhost:8000/help">http://localhost:8000/help</a>
+no such page: /help</p>
+
+<pre><code>
 Obviously we could keep adding cases to ServeHTTP, but in a realistic application, it’s convenient to define the logic for each case in a separate function or method. Furthermore, related URLs may need similar logic; several image files may have URLs of the form /images/*.png, for instance. For these reasons, net/http provides ServeMux,a request multiplexer, to simplify the association between URLs and handlers. A ServeMux aggregates a collection of http.Handlers into a single http.Handler. Again, we see that different types satisfying the same interface are substitutable: the web server can dispatch requests to any http.Handler, regardless of which concrete type is behind it. 
 
 For a more complex application, several ServeMuxes may be composed to handle more intricate dispatching requirements. Go doesn’t have a canonical web framework analogous to Ruby’s Rails or Python’s Django. This is not to say that such frameworks don’t exist, but the building blocks in Go’s standard library are flexible enough that frameworks are often unnecessary. Furthermore, although frameworks are convenient in the early phases of a project, their additional complexity can make longer-term maintenance harder. 
@@ -12868,6 +12876,7 @@ sha256sum
 <li><a href="#arrays">Arrays</a></li>
 <li><a href="#slices">Slices</a>
 <ul>
+<li><a href="#the-append-function">The append Function</a></li>
 <li><a href="#in-place-slice-techniques">In-Place Slice Techniques</a></li>
 </ul></li>
 <li><a href="#maps">Maps</a></li>
@@ -13066,6 +13075,12 @@ sha256sum
 					<span class="doc-list-category">Os</span>
 				</a>
 				<ul>
+					<li><a href="/os/docker-note/">Docker Swarm notes</a>
+					</li>
+				
+					<li><a href="/os/kubernetes-note/">Kubernetes notes</a>
+					</li>
+				
 					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
 					</li>
 				
@@ -13079,6 +13094,9 @@ sha256sum
 					</li>
 				
 					<li><a href="/os/ubuntu-desktop-14/">Ubuntu 14 -- desktop setup &amp; dual boot </a>
+					</li>
+				
+					<li><a href="/os/use-windows-command-hotkey-as-hacker-3/">Use Windows command &amp; hotkey as a hacker - Part 3</a>
 					</li>
 				
 					<li><a href="/os/use-windows-command-hotkey-as-hacker-2/">Use Windows command &amp; hotkey as a hacker - Part 2</a>
@@ -13098,6 +13116,9 @@ sha256sum
 					<span class="doc-list-category">Project</span>
 				</a>
 				<ul>
+					<li><a href="/project/python-flat-api/">FlatApi -- A handy Restful API for python developer</a>
+					</li>
+				
 					<li><a href="/project/reetek-angular4-crm/">Angular 4 Crm Project</a>
 					</li>
 				
@@ -13140,6 +13161,10 @@ sha256sum
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/cmd">cmd</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/container">container</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/docker">docker</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/git">git</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/hugo">hugo</a>
@@ -13150,6 +13175,8 @@ sha256sum
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/javascript">javascript</a>
 		
+			<a class="tag-item" href="https://harryho.github.io/tags/kubernetes">kubernetes</a>
+		
 			<a class="tag-item" href="https://harryho.github.io/tags/linux">linux</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/mobile">mobile</a>
@@ -13159,6 +13186,8 @@ sha256sum
 			<a class="tag-item" href="https://harryho.github.io/tags/php">php</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/python">python</a>
+		
+			<a class="tag-item" href="https://harryho.github.io/tags/pythoon">pythoon</a>
 		
 			<a class="tag-item" href="https://harryho.github.io/tags/raspberry-pi">raspberry-pi</a>
 		

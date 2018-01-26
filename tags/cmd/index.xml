@@ -10,6 +10,122 @@
     <atom:link href="https://harryho.github.io/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Use Windows command &amp; hotkey as a hacker - Part 3</title>
+      <link>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-3/</link>
+      <pubDate>Sun, 04 May 2014 10:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-3/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;This article will continue the topic of Windows command &amp;amp; hotkeys. &lt;a href=&#34;https://harryho.github.io/blog/use-windows-command-hotkey-as-hacker-1&#34;&gt;Part-1&lt;/a&gt; shows you common hotkeys and short command lines for &lt;code&gt;Run&lt;/code&gt; windnow dialog. &lt;a href=&#34;https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-2&#34;&gt;Part-2&lt;/a&gt; advanced commands and how to create a batch script with all those commands. Here I am going to show you another secret weapon in Windows system-VBScript/JScript&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;breif-history&#34;&gt;Breif history&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;VBScript/JScript is an Active Scripting language developed by Microsoft that is modeled on Visual Basic. It allows Microsoft Windows system administrators to generate powerful tools for managing computers with error handling, subroutines, and other advanced programming constructs.&lt;/p&gt;
+
+&lt;p&gt;A VBScript script must be executed within a host environment, of which there are several provided with Microsoft Windows, including: Windows Script Host (WSH), Internet Explorer (IE), and Internet Information Services (IIS). VBScript uses the Component Object Model to access elements of the environment within which it is running.&lt;/p&gt;
+
+&lt;p&gt;JScript is Microsoft&amp;rsquo;s dialect of the ECMAScript standard that is used in Microsoft&amp;rsquo;s Internet Explorer. JScript is implemented as an Active Scripting engine. This means that it can be &amp;ldquo;plugged in&amp;rdquo; to OLE Automation applications that support Active Scripting, such as Internet Explorer, Active Server Pages, and Windows Script Host.&lt;/p&gt;
+
+&lt;p&gt;With Cscript.exe, you can run scripts by typing the name of a script file at the command prompt. Like Microsoft Internet Explorer, Windows Script Host serves as a controller of Windows Script compliant scripting engines, but Windows Script Host has very low memory requirements. Windows Script Host is ideal for both interactive and non-interactive scripting needs, such as logon scripting and administrative scripting.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;sample-of-vbscript-file&#34;&gt;Sample of VBScript file&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ps&#34;&gt;Set oFSO = CreateObject(&amp;quot;Scripting.FileSystemObject&amp;quot;^)
+Set oInput = oFSO.OpenTextFile(WScript.Arguments(0^), 1^)
+sData = Replace(oInput.ReadAll, &amp;quot;,&amp;quot; ^&amp;amp; VbCrLf, VbCrLf^)
+Set oOutput = oFSO.CreateTextFile(WScript.Arguments(1^), True^)
+oOutput.Write sData
+oInput.Close
+oOutput.Close
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;replace-content-script&#34;&gt;Replace content script&lt;/h3&gt;
+
+&lt;h4 id=&#34;create-a-file-named-repltxt-bat-and-open-the-file-with-notepad&#34;&gt;Create a file named &lt;code&gt;repltxt.bat&lt;/code&gt; and open the file with &lt;code&gt;Notepad&lt;/code&gt;&lt;/h4&gt;
+
+&lt;h4 id=&#34;copy-paste-the-code-into-the-file-repltxt-bat-then-script-is-ready-to-play&#34;&gt;Copy &amp;amp; paste the code into the file &lt;code&gt;repltxt.bat&lt;/code&gt;, then script is ready to play&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;
+@if (@X)==(@Y) @end /* Harmless hybrid line that begins a JScript comment
+
+::************ Documentation ***********
+::NEWREPL.BAT version 1.0
+:::
+:::NEWREPL  Search  replace
+:::NEWREPL  /?
+:::NEWREPL  /V
+
+
+@echo off
+if .%2 equ . (
+  if &amp;quot;%~1&amp;quot; equ &amp;quot;/?&amp;quot; (
+    echo.&amp;quot;%~f0&amp;quot;
+    &amp;lt;&amp;quot;%~f0&amp;quot; cscript //E:JScript //nologo &amp;quot;%~f0&amp;quot; &amp;quot;^:::&amp;quot; &amp;quot;&amp;quot; a
+    exit /b 0
+  ) else if /i &amp;quot;%~1&amp;quot; equ &amp;quot;/V&amp;quot; (
+    &amp;lt;&amp;quot;%~f0&amp;quot; cscript //E:JScript //nologo &amp;quot;%~f0&amp;quot; &amp;quot;^::(NEWREPL\.BAT version)&amp;quot; &amp;quot;$1&amp;quot; a
+    exit /b 0
+  ) else (
+    call :err &amp;quot;Insufficient arguments&amp;quot;
+    exit /b 2
+  )
+)
+
+cscript //E:JScript //nologo &amp;quot;%~f0&amp;quot; %*
+exit /b %errorlevel%
+
+:err
+&amp;gt;&amp;amp;2 echo ERROR: %~1. Use newrepl /? to get help.
+exit /b
+
+************* JScript portion **********/
+var rtn=1;
+try {
+    var env=WScript.CreateObject(&amp;quot;WScript.Shell&amp;quot;).Environment(&amp;quot;Process&amp;quot;);
+    var args=WScript.Arguments;
+    var search=args.Item(0);
+    var replace=args.Item(1);
+    var options=&amp;quot;g&amp;quot;;
+    if (args.length&amp;gt;2) options+=args.Item(2).toLowerCase();
+    var alterations=(options.indexOf(&amp;quot;a&amp;quot;)&amp;gt;=0);
+    if (alterations) options=options.replace(/a/g,&amp;quot;&amp;quot;);
+    if (options.indexOf(&amp;quot;v&amp;quot;)&amp;gt;=0) {
+        options=options.replace(/v/g,&amp;quot;&amp;quot;);
+        search=env(search);
+        replace=env(replace);
+    }
+    var search=new RegExp(search,options);
+    var str1, str2;
+
+      while (!WScript.StdIn.AtEndOfStream) {
+        str1=WScript.StdIn.ReadLine();
+        str2=str1.replace(search,replace);
+        if (!alterations || str1!=str2) WScript.Stdout.WriteLine(str2);
+        if (str1!=str2) rtn=0;
+    }
+} catch(e) {
+  WScript.Stderr.WriteLine(&amp;quot;JScript runtime error: &amp;quot;+e.message);
+  rtn=3;
+}
+WScript.Quit(rtn);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;the-sample-above-is-a-bit-complicated-and-it-is-combination-of-batch-script-and-jscript&#34;&gt;The sample above is a bit complicated, and it is combination of Batch script and JScript.&lt;/h4&gt;
+
+&lt;h4 id=&#34;the-batch-script-part-checks-and-validate-the-input-arguments-if-there-is-no-issue-then-it-will-trigger-the-jscript-to-complete-the-work&#34;&gt;The batch script part checks and validate the input arguments, if there is no issue, then it will trigger the JScript to complete the work.&lt;/h4&gt;
+
+&lt;h3 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h3&gt;
+
+&lt;p&gt;From the Windows 7 and on, Windows is no longer to recognize the file with suffix &amp;ldquo;vbs&amp;rdquo; as executable file. You need to change the add &amp;ldquo;vbs&amp;rdquo; to Windows&amp;rsquo;s registory.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use Windows command &amp; hotkey as a hacker - Part 2</title>
       <link>https://harryho.github.io/os/use-windows-command-hotkey-as-hacker-2/</link>
       <pubDate>Mon, 24 Mar 2014 10:59:31 +1100</pubDate>
@@ -315,16 +431,20 @@ tree test
 del /s/q test &amp;amp; rd /s/q
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands&#34;&gt;Use pipeline &lt;code&gt;|&lt;/code&gt; to setup a channel between commands pass the data through the commands.&lt;/h3&gt;
+&lt;h3 id=&#34;use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands&#34;&gt;Use pipeline &lt;code&gt;&amp;gt;&lt;/code&gt; to setup a channel between commands pass the data through the commands.&lt;/h3&gt;
 
 &lt;p&gt;Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;REM write some content to a text file all.txt
 echo aaa&amp;gt;all.txt &amp;amp; echo mark aaa &amp;gt;&amp;gt;all.txt &amp;amp; echo mark bbb&amp;gt;&amp;gt;all.txt
 
-REM retrive lines start with mark and write them to mark.txt
-cat all.txt | find &amp;quot;mark&amp;quot;&amp;gt;mark.txt
-cat mark.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;check-cpu-usage-via-command&#34;&gt;Check CPU usage via command&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;wmic cpu get loadpercentage
+@for /f &amp;quot;skip=1&amp;quot; %p in (&#39;wmic cpu get loadpercentage&#39;) do @echo %p%
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;use-for-loop-to-combine-commands-please-check-the-samples-above&#34;&gt;Use &lt;code&gt;for&lt;/code&gt; loop to combine commands. Please check the samples above.&lt;/h3&gt;
