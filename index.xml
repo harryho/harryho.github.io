@@ -933,24 +933,6 @@ $ curl -X DELETE http://localhost:5000/posts
     </item>
     
     <item>
-      <title>Docker Swarm notes</title>
-      <link>https://harryho.github.io/os/docker-note/</link>
-      <pubDate>Tue, 09 May 2017 19:29:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/os/docker-note/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kubernetes notes</title>
-      <link>https://harryho.github.io/os/kubernetes-note/</link>
-      <pubDate>Tue, 09 May 2017 19:29:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/os/kubernetes-note/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Ubuntu 16 server note</title>
       <link>https://harryho.github.io/os/ubuntu-server-16/</link>
       <pubDate>Thu, 04 May 2017 14:59:31 +1100</pubDate>
@@ -2284,6 +2266,170 @@ python3 test.py
 # 2017-04-25 10:25:59.640640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] Creating TensorFlow device (/gpu:0) -&amp;gt; (device: 0, name: GeForce GTX 850M, pci # bus id: 0000:0a:00.0)
 # W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
 &lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tensorflow Notes, Part 2</title>
+      <link>https://harryho.github.io/dev/tensorflow-notes-2/</link>
+      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/dev/tensorflow-notes-2/</guid>
+      <description>
+
+&lt;h3 id=&#34;assumption&#34;&gt;Assumption&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You are using Windows 7 or higher version&lt;/li&gt;
+&lt;li&gt;You are using Anaconda to setup the environment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;install-anaconda&#34;&gt;Install Anaconda&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.continuum.io/downloads&#34;&gt;Please download Anaconda from the official site&lt;/a&gt;
+&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;create-tensorflow-virtualenv-with-python-3-5&#34;&gt;Create tensorflow virtualenv with python 3.5&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Anaconda uses python 3.6 by default. Tensorflow only supports python 3.5.&lt;/p&gt;
+
+&lt;p&gt;cd /path/to/envs
+conda create -n tensorflow&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;install-tensorflow&#34;&gt;Install tensorflow&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;activate tensorflow
+# For CPU
+pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-1.1.0-cp35-cp35m-win_amd64.whl
+
+# Or for GPU
+pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/windows/gpu/tensorflow_gpu-1.1.0-cp35-cp35m-win_amd64.whl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-sample-code-to-test-tensorflow&#34;&gt;Use sample code to test Tensorflow&lt;/h3&gt;
+
+&lt;h4 id=&#34;save-code-below-to-file-test-py&#34;&gt;Save code below to file test.py&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import numpy as np
+import tensorflow as tf
+
+# Model parameters
+W = tf.Variable([.3], tf.float32)
+b = tf.Variable([-.3], tf.float32)
+# Model input and output
+x = tf.placeholder(tf.float32)
+linear_model = W * x + b
+y = tf.placeholder(tf.float32)
+# loss
+loss = tf.reduce_sum(tf.square(linear_model - y)) # sum of the squares
+# optimizer
+optimizer = tf.train.GradientDescentOptimizer(0.01)
+train = optimizer.minimize(loss)
+# training data
+x_train = [1,2,3,4]
+y_train = [0,-1,-2,-3]
+# training loop
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init) # reset values to wrong
+for i in range(1000):
+sess.run(train, {x:x_train, y:y_train})
+
+# evaluate training accuracy
+curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
+print(&amp;quot;W: %s b: %s loss: %s&amp;quot;%(curr_W, curr_b, curr_loss))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;test-with-tensorflow-gpu-gpu-enabled&#34;&gt;Test with tensorflow-gpu (GPU enabled)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;activate tensorflow
+cd /ws/python/tf
+python3 test.py
+
+# You will probably see the result as follow 
+# ....
+# name: GeForce GTX 850M
+# major: 5 minor: 0 memoryClockRate (GHz) 0.9015
+# pciBusID 0000:0a:00.0
+# Total memory: 3.95GiB
+# Free memory: 3.58GiB
+# 2017-04-25 10:25:59.640621: I tensorflow/core/common_runtime/gpu/gpu_device.cc:908] DMA: 0 
+# 2017-04-25 10:25:59.640626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:918] 0:   Y 
+# 2017-04-25 10:25:59.640640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] Creating TensorFlow device (/gpu:0) -&amp;gt; (device: 0, name: GeForce GTX 850M, pci # bus id: 0000:0a:00.0)
+# W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vue 2 Admin Project</title>
+      <link>https://harryho.github.io/project/reetek-vue2-admin/</link>
+      <pubDate>Wed, 07 Dec 2016 16:56:21 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/project/reetek-vue2-admin/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Vue2Admin&lt;/strong&gt; is a fully responsive admin template that is inspired by &lt;a href=&#34;https://almsaeedstudio.com&#34;&gt;AdminLTE&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This template is built-in with Vue 2 at the start.&lt;/li&gt;
+&lt;li&gt;It include Vue Resource, Vuex as well.&lt;/li&gt;
+&lt;li&gt;The plugins for this project are loaded with script loader.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;structure-of-reetek-vue2admin&#34;&gt;Structure of Reetek Vue2Admin&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;path\to\vue2admin
++---build              &amp;lt;-// webpack files
++---config             &amp;lt;-// configuration of dev or prod environment
++---screenshots
++---src                &amp;lt;-// vue components 
+|   +---components
+|   |   +---charts
+|   |   +---dashboard
+|   |   +---forms
+|   |   +---mailbox
+|   |   +---misc
+|   |   +---pages
+|   |   +---tables
+|   |   +---ui
+|   |   \---widget
+|   \---filters
++---static              &amp;lt;-// css, dump data, fonts, image files and plugins
+|   +---css
+|   +---data
+|   +---fonts
+|   +---img
+|   |   +---credit
+|   |   \---stock
+|   \---js
+|       \---plugins         &amp;lt;-// plugins for admin dashboard 
+|           +---AdminLTE
+|           +---bootstrap
+|           +---bootstrap-slider
+|           +---bootstrap-wysihtml5
+|           +---chartjs
+|           +---ckeditor
+|           + ...
+\---test
+    +---e2e
+    \---unit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/vue2admin_screenshot1_sm.png&#34; alt=&#34;Screenshot1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/vue2admin_screenshot2_sm.png&#34; alt=&#34;Screenshot2&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;browse-repository-https-github-com-harryho-vue2admin-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/vue2admin.git&#34;&gt;Repository&lt;/a&gt;&lt;/h2&gt;
 </description>
     </item>
     
