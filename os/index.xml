@@ -27,16 +27,29 @@
 &lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;You know what Raspberry Pi is. &lt;a href=&#34;https://www.raspberrypi.org&#34;&gt;Raspbery Pi&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;You have a Raspberry Pi&lt;/li&gt;
+&lt;li&gt;You have a Raspberry Pi with pre-installed raspbian SD card&lt;/li&gt;
+&lt;li&gt;You are happy to get your hands dirty&lt;/li&gt;
+&lt;li&gt;You have some basic computer concept.&lt;/li&gt;
 &lt;li&gt;RPi is short for Raspberry Pi&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;raspberry-pi-model&#34;&gt;Raspberry Pi model&lt;/h2&gt;
+&lt;h2 id=&#34;my-raspberry-pi-is-a-bit-old&#34;&gt;My Raspberry Pi is a bit old&lt;/h2&gt;
 
-&lt;p&gt;I only have the RPi 1 model B in place. It is a birthday gift. There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. It commes a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don&amp;rsquo;t have a cable long enough to connect the RPi and switch.&lt;/p&gt;
+&lt;p&gt;I only have the RPi 1 model B with pre-installed raspbian SD card in place. It is quite outdated. If you don’t know the model of your RPi, please don’t worry it now. I will explain how to get the info later. I got this RPi as a gift 2 years ago. I left it in the garage and totally forgot it, until I cleaned up my garage a couple months ago. Actually I loved the old model with transparent plastic box more than the new one. I knew if I continued to leave it in the garage, it would be a rubbish soon, because it is not easy to find some equipment or software compatible with the old RPi. Luckily the lifespan of RPi is much longer than the mobile phone, but it still took me some effort to setup the wifi adapter.&lt;/p&gt;
 
-&lt;p&gt;The clumsy way to do it is move my kits near to the swtich, but I am too lazy to move things around. I choose to use remote access to control RPi from my laptop.&lt;/p&gt;
+&lt;p&gt;After 6-hour on and off, I got it up and run. Honestly I’m not a hardware guru, but I’m so happy not to throw this beautiful (my aesthetics is sort of quirky) box into the bin. I captured the home screen of Kodi, the media center and mobile control app.&lt;/p&gt;
+
+&lt;p&gt;Home page of kodai&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/kodi-tv-homepage.jpg&#34; alt=&#34;KodiTVHomePage&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Screenshot of kodi mobile app on my android phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/kodi-mobile-app.png&#34; alt=&#34;kodi-mobile-app&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-start&#34;&gt;How to start&lt;/h2&gt;
+
+&lt;p&gt;There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. There is a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don’t have a cable long enough to connect the RPi and switch.&lt;/p&gt;
 
 &lt;p&gt;First thing first, I need to setup ssh server, and change the configuration to allow password login, also make it auto-start after reboot. To do so I just need monitor and keyboard.&lt;/p&gt;
 
@@ -215,7 +228,11 @@ I believe you can figure it out yourself, if you used Linux as desktop.&lt;/p&gt
 
 &lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/raspberry-pi-vnc.jpg&#34; alt=&#34;Screenshot-VNC&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;setup-samba-to-share-files&#34;&gt;Setup Samba to share files&lt;/h3&gt;
+&lt;p&gt;After all above is done, you have your RPi ready. You can choose what you want to build on it. Considering its CPU and RAM, it is not sufficient to be used as daily desktop PC, but it is still enough to work as a server. e.g. File Server, Web Server, Email Server, FTP server or Media Center.&lt;/p&gt;
+
+&lt;p&gt;Now I want to make a file server and media center on it.&lt;/p&gt;
+
+&lt;h3 id=&#34;setup-file-server-via-samba&#34;&gt;Setup File Server via Samba&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Attach external storage to your RPi. The capacity of preinstalled SD card has only 8G space, so I attached my portal hard drives to RPi. You can attach the PC hard drive, USD or another SD card via adapter. It is really up to what you have in place.&lt;/li&gt;
@@ -464,9 +481,11 @@ sudo smbpasswd smbu # setup pasword for remote access
 
 &lt;h3 id=&#34;setup-wifi-adapter&#34;&gt;Setup Wifi Adapter&lt;/h3&gt;
 
-&lt;p&gt;Wifi is not necessary for media centre, but it would save some effort to move your RPi around in your place, especially you want to connect your RPi with different devices from time to time.&lt;/p&gt;
+&lt;p&gt;Wifi adapter is not necessary for media centre, but it would save some effort to move your RPi around in your place, especially you want to connect your RPi with different devices from time to time.&lt;/p&gt;
 
-&lt;p&gt;As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi drive. If you have the RPi &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;, it would be much more easier. My RPi 1 model B comes with kernel 4.18. I cannot find the soruce code which supports this old kernel today.&lt;/p&gt;
+&lt;p&gt;I bought a D-Link adapter, which is dwa-131 with usb 2.0. This is the oldest one I can find in the store. If you are going to buy wifi adapter for old Unix-like system, please don’t buy the latest model. You will find you are trapped into incompatible issue between wifi drive and Linux kernel. You may have to upgrade the kernel or rebuild the drive.&lt;/p&gt;
+
+&lt;p&gt;As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi adapter drive. If you have the RPi &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;, it would be much more easier. My RPi 1 model B comes with kernel 4.1.18*. I cannot find the source code of wifi drive which supports this old kernel today, and I don’t want to upgrade and rebuild the kernel.&lt;/p&gt;
 
 &lt;p&gt;Finally, I found a post on RPi&amp;rsquo;s forum which solved my problem. Link of &lt;a href=&#34;https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;amp;t=103989&amp;amp;p=1048709&amp;amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709&#34;&gt;MrEngman&amp;rsquo;s post&lt;/a&gt;. He updated on April aobut the dropbox issue and alternative solution.&lt;/p&gt;
 
@@ -506,17 +525,7 @@ ENABLED=1
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Reboot the RPi, before you reboot it make sure your TV&amp;rsquo;s HDMI has plugged into RPi. After a few minutes, you can enjoy your home media centre.&lt;/p&gt;
-
-&lt;p&gt;Home page of kodai&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/kodi-tv-homepage.jpg&#34; alt=&#34;KodiTVHomePage&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;install-remote-control-app-on-your-mobile&#34;&gt;Install remote control app on your mobile&lt;/h3&gt;
-
-&lt;p&gt;Screenshot of kodi mobile app on my android phone.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://harryho.github.io/img/kodi-mobile-app.png&#34; alt=&#34;kodi-mobile-app&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Reboot the RPi, before you reboot it please make sure your TV’s HDMI has plugged into RPi. After a couple minutes, you will see the home page as I posted above. Don’t forget to install remote control app on your mobile. I pretty sure you find some remote control app for Kodi on your phone. Finally, you can enjoy your home media center.&lt;/p&gt;
 </description>
     </item>
     
