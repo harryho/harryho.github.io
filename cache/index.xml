@@ -16798,17 +16798,17 @@ c1)
 
 &lt;p&gt;Of course, we can explicitly pass a pointer to an array so that any modifications the function makes to array elements will be visible to the caller. This function zeroes the contents of a [32]byte array:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;func zero(ptr *[32]byte) { 
-for i := range ptr {
-ptr[i] = 0 
-}
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func zero(ptr *[32]byte) { 
+    for i := range ptr {
+        ptr[i] = 0 
+    }
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The array literal [32]byte{} yields an array of 32 bytes. Each element of the array has the zero value for byte, which is zero. We can use that fact to write a different version of zero:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;func zero(ptr *[32]byte) { 
-*ptr = [32]byte{} 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func zero(ptr *[32]byte) { 
+    *ptr = [32]byte{} 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -16853,8 +16853,7 @@ fmt.Printf(&amp;quot;%s appears in both\n&amp;quot;, s)
 &lt;p&gt;Slicing beyond cap(s) causes a panic, but slicing beyond len(s) extends the slice, so the result may be longer than the original:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;fmt.Println(summer[:20]) // panic: out of range 
-endlessSummer := summer[:5] // extend a slice (within 
-capacity)
+endlessSummer := summer[:5] // extend a slice (within capacity)
 fmt.Println(endlessSummer) // &amp;quot;[June July August September October]&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -16928,12 +16927,10 @@ make([]T, len, cap) // same as make([]T, cap)[:len]
 &lt;p&gt;The built-in append function appends items to slices:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var runes []rune 
-for _, r := range &amp;quot;Hello, 
-&amp;quot; {
-runes = append(runes, r) }
-fmt.Printf(&amp;quot;%q\n&amp;quot;, runes) // &amp;quot;[&#39;H&#39; &#39;e&#39; &#39;l&#39; &#39;l&#39; &#39;o&#39; &#39;,&#39; 
-&#39;&#39;&#39;
-&#39;&#39; &#39;]&amp;quot; 
+for _, r := range &amp;quot;Hello, &amp;quot; {
+    runes = append(runes, r) 
+}
+fmt.Printf(&amp;quot;%q\n&amp;quot;, runes) // &amp;quot;[&#39;H&#39; &#39;e&#39; &#39;l&#39; &#39;l&#39; &#39;o&#39; &#39;,&#39; &#39;&#39;&#39; &#39;&#39; &#39;]&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The loop uses append to build the slice of nine runes encoded by the string literal, although this specific problem is more conveniently solved by using the built-in conversion []rune(&amp;ldquo;Hello,&lt;/p&gt;
@@ -17040,18 +17037,14 @@ import &amp;quot;fmt&amp;quot;
 strings.
 // The underlying array is modified during the call. 
 func nonempty(strings []string) []string { 
-
-i := 0 
-for _, s := range strings {
-
-if s != &amp;quot;&amp;quot; {
-strings[i] = s 
-i++ 
-
-}
-}
-return strings[:i] 
-
+    i := 0 
+    for _, s := range strings {
+        if s != &amp;quot;&amp;quot; {
+            strings[i] = s 
+            i++ 
+        }
+    }
+    return strings[:i] 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17069,16 +17062,13 @@ fmt.Printf(&amp;quot;%q\n&amp;quot;, data) // `[&amp;quot;one&amp;quot; &amp;quo
 &lt;p&gt;The nonempty function can also be written using append:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func nonempty2(strings []string) []string { 
-out := strings[:0] // zero-length slice of 
-original
-for _, s := range strings {
-if s != &amp;quot;&amp;quot; {
-out = append(out, s) 
-
-}
-}
-return out 
-
+out := strings[:0] // zero-length slice of original
+    for _, s := range strings {
+        if s != &amp;quot;&amp;quot; {
+            out = append(out, s) 
+        }
+    }
+    return out 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17102,24 +17092,24 @@ return out
 &lt;p&gt;To remove an element from the middle of a slice, preserving the order of the remaining elements, use copy to slide the higher-numbered elements down by one to fill the gap:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func remove(slice []int, i int) []int {
-copy(slice[i:], slice[i+1:]) 
-return slice[:len(slice)-1] } 
+    copy(slice[i:], slice[i+1:]) 
+    return slice[:len(slice)-1] 
+} 
 func main() { 
-s := []int{5, 6, 7, 8, 9} 
-fmt.Println(remove(s, 2)) // &amp;quot;[5 6 8 9]&amp;quot; } 
+    s := []int{5, 6, 7, 8, 9} 
+    fmt.Println(remove(s, 2)) // &amp;quot;[5 6 8 9]&amp;quot; 
+} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And if we don’t need to preserve the order, we can just move the last element into the gap:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func remove(slice []int, i int) []int {
-slice[i] = slice[len(slice)-1] 
-return slice[:len(slice)-1] 
-
+    slice[i] = slice[len(slice)-1] 
+    return slice[:len(slice)-1] 
 } 
 func main() { 
-s := []int{5, 6, 7, 8, 9} 
-fmt.Println(remove(s, 2)) // &amp;quot;[5 6 9 8] 
-
+    s := []int{5, 6, 7, 8, 9} 
+    fmt.Println(remove(s, 2)) // &amp;quot;[5 6 9 8] 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17145,9 +17135,8 @@ fmt.Println(remove(s, 2)) // &amp;quot;[5 6 9 8]
 
 We can also use a map literal to create a new map populated with some initial key/value pairs: 
 ages := map[string]int{
-&amp;quot;alice&amp;quot;: 31, 
-&amp;quot;charlie&amp;quot;: 34, 
-
+    &amp;quot;alice&amp;quot;: 31, 
+    &amp;quot;charlie&amp;quot;: 34, 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17189,7 +17178,7 @@ of map element
 &lt;p&gt;To enumerate all the key/value pairs in the map, we use a range-based for loop similar to those we saw for slices. Successive iterations of the loop cause the name and age variables to be set to the next key/value pair:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;for name, age := range ages { 
-fmt.Printf(&amp;quot;%s\t%d\n&amp;quot;, name, age) 
+    fmt.Printf(&amp;quot;%s\t%d\n&amp;quot;, name, age) 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17198,25 +17187,24 @@ fmt.Printf(&amp;quot;%s\t%d\n&amp;quot;, name, age)
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;import &amp;quot;sort&amp;quot; 
 var names []string 
 for name := range ages {
-
-names = append(names, name) 
+    names = append(names, name) 
 }
 sort.Strings(names)
 for _, name := range names {
-
-fmt.Printf(&amp;quot;%s\t%d\n&amp;quot;, name, ages[name]) 
+    fmt.Printf(&amp;quot;%s\t%d\n&amp;quot;, name, ages[name]) 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since we know the final size of names from the outset, it is more efficient to allocate an array of the required size up front. The statement below creates a slice that is initially empty but has sufficient capacity to hold all the keys of the ages map:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;names := make([]string, 0, len(ages)) 
-In the first range loop above, we require only the keys of the ages map, so we omit the second loop variable. In the second loop, we require only the elements of the names slice, so we use the blank identifier _ to ignore the first variable, the index. 
+&lt;/code&gt;&lt;/pre&gt;
 
-The zero value for a map type is nil, that is, a reference to no hash table at all. 
+&lt;p&gt;In the first range loop above, we require only the keys of the ages map, so we omit the second loop variable. In the second loop, we require only the elements of the names slice, so we use the blank identifier _ to ignore the first variable, the index.&lt;/p&gt;
 
-```go
-var ages map[string]int
+&lt;p&gt;The zero value for a map type is nil, that is, a reference to no hash table at all.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var ages map[string]int
 fmt.Println(ages == nil) // &amp;quot;true&amp;quot; 
 fmt.Println(len(ages) == 0) // &amp;quot;true&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
@@ -17242,20 +17230,21 @@ Subscripting a map in this context yields two values; the second is a boolean th
 &lt;p&gt;As with slices, maps cannot be compared to each other; the only legal comparison is with nil. To test whether two maps contain the same keys and the same associated values, we must write a loop:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func equal(x, y map[string]int) bool {
-if len(x) != len(y) { 
-return false 
-}
-for k, xv := range x { 
-if yv, ok := y[k]; !ok || yv != xv {return false 
-}
-}
-return true 
-
+    if len(x) != len(y) { 
+        return false 
+    }
+    for k, xv := range x { 
+        if yv, ok := y[k]; !ok || yv != xv {
+            return false 
+        }
+    }
+    return true 
 } 
-Observe how we use !ok to distinguish the “missing” and “present but zero” cases. Had we naïvely written xv != y[k] , the call below would incorrectly report its arguments as equal: 
+&lt;/code&gt;&lt;/pre&gt;
 
-```go
-// True if equal is written incorrectly. equal(map[string]int{&amp;quot;A&amp;quot;: 0}, map[string]int{&amp;quot;B&amp;quot;: 42}) 
+&lt;p&gt;Observe how we use !ok to distinguish the “missing” and “present but zero” cases. Had we naïvely written xv != y[k] , the call below would incorrectly report its arguments as equal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// True if equal is written incorrectly. equal(map[string]int{&amp;quot;A&amp;quot;: 0}, map[string]int{&amp;quot;B&amp;quot;: 42}) 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Go does not provide a set type, but since the keys of a map are distinct, a map can serve this purpose. To illustrate, the program dedup reads a sequence of lines and prints only the first occurrence of each distinct line. (It’s a variant of the dup program that we showed in Section 1.3.) The dedup program uses a map whose keys represent the set of lines that have already appeared to ensure that subsequent occurrences are not printed.&lt;/p&gt;
@@ -17304,40 +17293,42 @@ import (
 &amp;quot;unicode&amp;quot; 
 &amp;quot;unicode/utf8&amp;quot; ) 
 func main() {
-counts := make(map[rune]int) // counts of 
-Unicode characters 
-var utflen [utf8.UTFMax + 1]int // count of lengths of UTF-8 encodings 
-invalid := 0 // count of invalid UTF-8 characters 
+    counts := make(map[rune]int) // counts of 
+    Unicode characters 
+    var utflen [utf8.UTFMax + 1]int // count of lengths of UTF-8 encodings 
+    invalid := 0 // count of invalid UTF-8 characters 
 
-in := bufio.NewReader(os.Stdin) 
-for {
-r, n, err := in.ReadRune() // returns rune, nbytes, error 
-if err == io.EOF {
-break 
-}
-if err != nil {
-fmt.Fprintf(os.Stderr, &amp;quot;charcount: %v\n&amp;quot;, err) 
-os.Exit(1) 
-}
-if r == unicode.ReplacementChar &amp;amp;&amp;amp; n == 1 {
-invalid++ 
-continue 
-}
-counts[r]++
-utflen[n]++ 
-}
-fmt.Printf(&amp;quot;rune\tcount\n&amp;quot;)
-for c, n := range counts {
-fmt.Printf(&amp;quot;%q\t%d\n&amp;quot;, c, n) 
-}
-fmt.Print(&amp;quot;\nlen\tcount\n&amp;quot;)
-for i, n := range utflen {
-if i &amp;gt; 0 {fmt.Printf(&amp;quot;%d\t%d\n&amp;quot;, i, n) 
-}
-}
-if invalid &amp;gt; 0 {
-
-fmt.Printf(&amp;quot;\n%d invalid UTF-8 characters\n&amp;quot;, invalid)}} 
+    in := bufio.NewReader(os.Stdin) 
+    for {
+        r, n, err := in.ReadRune() // returns rune, nbytes, error 
+        if err == io.EOF {
+            break 
+        }
+        if err != nil {
+            fmt.Fprintf(os.Stderr, &amp;quot;charcount: %v\n&amp;quot;, err) 
+            os.Exit(1) 
+        }
+        if r == unicode.ReplacementChar &amp;amp;&amp;amp; n == 1 {
+            invalid++ 
+            continue 
+        }
+        counts[r]++
+        utflen[n]++ 
+    }
+    fmt.Printf(&amp;quot;rune\tcount\n&amp;quot;)
+    for c, n := range counts {
+        fmt.Printf(&amp;quot;%q\t%d\n&amp;quot;, c, n) 
+    }
+    fmt.Print(&amp;quot;\nlen\tcount\n&amp;quot;)
+    for i, n := range utflen {
+        if i &amp;gt; 0 {
+            fmt.Printf(&amp;quot;%d\t%d\n&amp;quot;, i, n) 
+        }
+    }
+    if invalid &amp;gt; 0 {
+        fmt.Printf(&amp;quot;\n%d invalid UTF-8 characters\n&amp;quot;, invalid)
+    }
+} 
 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17347,7 +17338,7 @@ fmt.Printf(&amp;quot;\n%d invalid UTF-8 characters\n&amp;quot;, invalid)}}
 
 &lt;p&gt;As an experiment, we ran charcount on this book itself at one point. Although it’s mostly in English, of course, it does have a fair number of non-ASCII characters. Here are the top ten:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;°27 
+&lt;pre&gt;&lt;code&gt;°27 
 15 
 14 é13 x10 =5×5 
 
@@ -17361,11 +17352,11 @@ len count
 3 70 
 
 40 
+&lt;/code&gt;&lt;/pre&gt;
 
-The value type of a map can itself be a composite type, such as a map or slice. In the following code, the key type of graph is string and the value type is map[string]bool, representing a set of strings. Conceptually, graph maps a string to a set of related strings, its successors in a directed graph. 
+&lt;p&gt;The value type of a map can itself be a composite type, such as a map or slice. In the following code, the key type of graph is string and the value type is map[string]bool, representing a set of strings. Conceptually, graph maps a string to a set of related strings, its successors in a directed graph.&lt;/p&gt;
 
-```go
-// gopl.io/ch4/graph 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch4/graph 
 var graph = make(map[string]map[string]bool) 
 func addEdge(from, to string) { 
 edges := graph[from] 
@@ -17387,18 +17378,20 @@ return graph[from][to]
 &lt;h2 id=&#34;structs&#34;&gt;Structs&lt;/h2&gt;
 
 &lt;p&gt;A struct is an aggregate data type that groups together zero or more named values of arbitrary types as a single entity. Each value is called a field. The classic example of a struct from data processing is the employee record, whose fields are a unique ID, the employee’s name, address, date of birth, position, salary, manager, and the like. All of these fields are collected into a single entity that can be copied as a unit, passed to functions and returned by them, stored in arrays, and so on.
-These two statements declare a struct type called Employee and a variable called dilbert that is an instance of an Employee:
-type Employee struct {
-ID int
-Name string
-Address string
-DoB time.Time
-Position string
-Salary int
-ManagerID int&lt;/p&gt;
+These two statements declare a struct type called Employee and a variable called dilbert that is an instance of an Employee:&lt;/p&gt;
 
-&lt;p&gt;}
-var dilbert Employee&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Employee struct {
+ID int 
+Name string 
+Address string 
+DoB time.Time 
+Position string 
+Salary int 
+ManagerID int 
+
+} 
+var dilbert Employee 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The individual fields of dilbert are accessed using dot notation like dilbert.Name and dilbert.DoB. Because dilbert is a variable, its fields are variables too, so we may assign to a field:&lt;/p&gt;
 
@@ -17414,8 +17407,7 @@ var dilbert Employee&lt;/p&gt;
 &lt;p&gt;The dot notation also works with a pointer to a struct:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var employeeOfTheMonth *Employee = &amp;amp;dilbert 
-employeeOfTheMonth.Position += &amp;quot; (proactive team 
-player)&amp;quot; 
+employeeOfTheMonth.Position += &amp;quot; (proactive team player)&amp;quot; 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The last statement is equivalent to&lt;/p&gt;
@@ -17432,16 +17424,18 @@ id := dilbert.ID EmployeeByID(id).Salary = 0 // fired for... no real reason
 
 &lt;p&gt;The last statement updates the Employee struct that is pointed to by the result of the call to EmployeeByID. If the result type of EmployeeByID were changed to Employee instead of *Employee, the assignment statement would not compile since its left-hand side would not identify a variable.&lt;/p&gt;
 
-&lt;p&gt;Fields are usually written one per line, with the field’s name preceding its type, but consecutive fields of the same type may be combined, as with Name and Address here:
-type Employee struct {
-ID int
-Name, Address string
-DoB time.Time
-Position string&lt;/p&gt;
+&lt;p&gt;Fields are usually written one per line, with the field’s name preceding its type, but consecutive fields of the same type may be combined, as with Name and Address here:&lt;/p&gt;
 
-&lt;p&gt;Salary int
-ManagerID int
-}&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Employee struct {
+    ID int 
+    Name, Address string 
+    DoB time.Time 
+    Position string 
+
+    Salary int 
+    ManagerID int 
+} 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Field order is significant to type identity. Had we also combined the declaration of the Position field (also a string), or interchanged Name and Address, we would be defining a different struct type. Typically we only combine the declarations of related fields.&lt;/p&gt;
 
@@ -17454,36 +17448,39 @@ ManagerID int
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch4/treesort 
 
 type tree struct {
-value int 
-left, right *tree } 
+    value int 
+    left, right *tree 
+} 
+
 // Sort sorts values in place. 
 func Sort(values []int) { 
-var root *tree 
-for _, v := range values {
-root = add(root, v) }
-appendValues(values[:0], root) } // appendValues appends the elements of t to values in 
-order 
-// and returns the resulting slice. 
-func appendValues(values []int, t *tree) []int {
-if t != nil {
-values = appendValues(values, t.left) 
-values = append(values, t.value) 
-values = appendValues(values, t.right) 
-}
-return values 
+    var root *tree 
+    for _, v := range values {
+    root = add(root, v) }
+    appendValues(values[:0], root) } // appendValues appends the elements of t to values in 
+    order 
+    // and returns the resulting slice. 
+    func appendValues(values []int, t *tree) []int {
+    if t != nil {
+    values = appendValues(values, t.left) 
+    values = append(values, t.value) 
+    values = appendValues(values, t.right) 
+    }
+    return values 
 } 
+
 func add(t *tree, value int) *tree {
-if t == nil {
-// Equivalent to return &amp;amp;tree{value: value}. 
-t = new(tree)
-t.value = value 
-return t 
-}
-if value &amp;lt; t.value {
-t.left = add(t.left, value) 
-} else {
-t.right = add(t.right, value) }
-return t 
+    if t == nil {
+    // Equivalent to return &amp;amp;tree{value: value}. 
+    t = new(tree)
+    t.value = value 
+    return t 
+    }
+    if value &amp;lt; t.value {
+    t.left = add(t.left, value) 
+    } else {
+    t.right = add(t.right, value) }
+    return t    
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -17544,8 +17541,7 @@ return e.Salary * percent / 100
 &lt;p&gt;and this is required if the function must modify its argument, since in a call-by-value language like Go, the called function receives only a copy of an argument, not a reference to the original argument.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func AwardAnnualRaise(e *Employee) { 
-e.Salary = e.Salary * 105 / 100 
-
+    e.Salary = e.Salary * 105 / 100 
 } 
 
 Because structs are so commonly dealt with through pointers, it’s possible to use this shorthand notation to create and initialize a struct variable and obtain its address: 
@@ -17572,8 +17568,8 @@ fmt.Println(p == q) // &amp;quot;false&amp;quot;
 &lt;p&gt;Comparable struct types, like other comparable types, may be used as the key type of a map.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type address struct {
-hostname string 
-port int 
+    hostname string 
+    port int 
 
 } 
 
@@ -17583,50 +17579,57 @@ hits := make(map[address]int) hits[address{&amp;quot;golang.org&amp;quot;, 443}]
 &lt;h3 id=&#34;struct-embedding-and-anonymous-fields&#34;&gt;Struct Embedding and Anonymous Fields&lt;/h3&gt;
 
 &lt;p&gt;In this section, we’ll see how Go’s unusual struct embedding mechanism lets us use one named struct type as an anonymous field of another struct type, providing a convenient syntactic shortcut so that a simple dot expression like x.f can stand for a chain of fields like x.d.e.f.
-Consider a 2-D drawing program that provides a library of shapes, such as rectangles, ellipses, stars, and wheels. Here are two of the types it might define:
-type Circle struct {
-X, Y, Radius int
-}&lt;/p&gt;
+Consider a 2-D drawing program that provides a library of shapes, such as rectangles, ellipses, stars, and wheels. Here are two of the types it might define:&lt;/p&gt;
 
-&lt;p&gt;type Wheel struct {
-X, Y, Radius, Spokes int
-}&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Circle struct {
+X, Y, Radius int 
+} 
 
-&lt;p&gt;A Circle has fields for the X and Y coordinates of its center, and a Radius.A Wheel has all the features of a Circle, plus Spokes, the number of inscribed radial spokes. Let’s create a wheel:
-var w Wheel
-w.X = 8
-w.Y = 8
-w.Radius = 5
-w.Spokes = 20&lt;/p&gt;
-
-&lt;p&gt;As the set of shapes grows, we’re bound to notice similarities and repetition among them, so it may be convenient to factor out their common parts:
-type Point struct {
-X, Y int
-}&lt;/p&gt;
-
-&lt;p&gt;type Circle struct {
-Center Point
-Radius int&lt;/p&gt;
-
-&lt;p&gt;}
 type Wheel struct {
-Circle Circle
-Spokes int&lt;/p&gt;
+X, Y, Radius, Spokes int 
+} 
 
-&lt;p&gt;}&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;
+&lt;p&gt;A Circle has fields for the X and Y coordinates of its center, and a Radius.A Wheel has all the features of a Circle, plus Spokes, the number of inscribed radial spokes. Let’s create a wheel:&lt;/p&gt;
 
-The application may be clearer for it, but this change makes accessing the fields of a Wheel more verbose: 
-var w Wheel 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var w Wheel 
+w.X = 8 
+w.Y = 8 
+w.Radius = 5 
+w.Spokes = 20 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As the set of shapes grows, we’re bound to notice similarities and repetition among them, so it may be convenient to factor out their common parts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Point struct {
+X, Y int 
+} 
+
+type Circle struct {
+Center Point 
+Radius int 
+
+} 
+type Wheel struct {
+Circle Circle 
+Spokes int 
+
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The application may be clearer for it, but this change makes accessing the fields of a Wheel more verbose:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var w Wheel 
 w.Circle.Center.X = 8 
 w.Circle.Center.Y = 8 
 w.Circle.Radius = 5 
 w.Spokes = 20 
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;Go lets us declare a field with a type but no name; such fields are called anonymous fields. The type of the field must be a named type or a pointer to a named type. Below, Circle and Wheel have one anonymous field each. We say that a Point is embedded within Circle, and a Circle is embedded within Wheel.&lt;/p&gt;
 
-Go lets us declare a field with a type but no name; such fields are called anonymous fields. The type of the field must be a named type or a pointer to a named type. Below, Circle and Wheel have one anonymous field each. We say that a Point is embedded within Circle, and a Circle is embedded within Wheel. 
-type Circle struct {
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Circle struct {
 Point 
 Radius int 
 
@@ -17653,12 +17656,11 @@ Unfortunately, there’s no corresponding shorthand for the struct literal synta
 compile error: unknown fields 
 w = Wheel{X: 8, Y: 8, Radius: 5, Spokes: 20} // 
 compile error: unknown fields 
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;The struct literal must follow the shape of the type declaration, so we must use one of the two forms below, which are equivalent to each other:&lt;/p&gt;
 
-The struct literal must follow the shape of the type declaration, so we must use one of the two forms below, which are equivalent to each other: 
-
-```go
-// gopl.io/ch4/embed 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch4/embed 
 w = Wheel{Circle{Point{8, 8}, 5}, 20} 
 w = Wheel{
 Circle: Circle{
@@ -17711,11 +17713,11 @@ array [&amp;quot;gold&amp;quot;, &amp;quot;silver&amp;quot;, &amp;quot;bronze&am
 object {&amp;quot;year&amp;quot;: 1980, &amp;quot;event&amp;quot;: &amp;quot;archery&amp;quot;, 
 &amp;quot;medals&amp;quot;: [&amp;quot;gold&amp;quot;, &amp;quot;silver&amp;quot;, 
 &amp;quot;bronze&amp;quot;]} 
+&lt;/code&gt;&lt;/pre&gt;
 
-Consider an application that gathers movie reviews and offers recommendations. Its Movie data type and a typical list of values are declared below. (The string literals after the Year and Color field declarations are field tags; we’ll explain them in a moment.) 
+&lt;p&gt;Consider an application that gathers movie reviews and offers recommendations. Its Movie data type and a typical list of values are declared below. (The string literals after the Year and Color field declarations are field tags; we’ll explain them in a moment.)&lt;/p&gt;
 
-```go
-// gopl.io/ch4/movie 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch4/movie 
 type Movie struct {
 Title string 
 Year int `json:&amp;quot;released&amp;quot;` 
@@ -17932,13 +17934,13 @@ Parse(templ)
 if err != nil {
 log.Fatal(err) 
 } 
+&lt;/code&gt;&lt;/pre&gt;
 
-Because templates are usually fixed at compile time, failure to parse a template indicates a fatal bug in the program. The template.Must helper function makes error handling more convenient: it accepts a template and an error, checks that the error is nil (and panics otherwise), and then returns the template. We’ll come back to this idea in Section 5.9. 
+&lt;p&gt;Because templates are usually fixed at compile time, failure to parse a template indicates a fatal bug in the program. The template.Must helper function makes error handling more convenient: it accepts a template and an error, checks that the error is nil (and panics otherwise), and then returns the template. We’ll come back to this idea in Section 5.9.&lt;/p&gt;
 
-Once the template has been created, augmented with daysAgo, parsed, and checked, we can execute it using a github.IssuesSearchResult as the data source and os.Stdout as the destination: 
+&lt;p&gt;Once the template has been created, augmented with daysAgo, parsed, and checked, we can execute it using a github.IssuesSearchResult as the data source and os.Stdout as the destination:&lt;/p&gt;
 
-```go
-var     report = template.Must(template.New(&amp;quot;issuelist&amp;quot;).Funcs(template.FuncMap{&amp;quot;daysAgo&amp;quot;: daysAgo}). Parse(templ)) 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var     report = template.Must(template.New(&amp;quot;issuelist&amp;quot;).Funcs(template.FuncMap{&amp;quot;daysAgo&amp;quot;: daysAgo}). Parse(templ)) 
 func main() {result, err := github.SearchIssues(os.Args[1:]) if err != nil {
 log.Fatal(err) }if err := report.Execute(os.Stdout, result); err 
 != nil {
@@ -18328,7 +18330,9 @@ log.Println(links, err)&lt;/p&gt;
 
 &lt;p&gt;Well-chosen names can document the significance of a function’s results. Names are particularly valuable when a function returns multiple results of the same type, like&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Size(rect image.Rectangle) (width, height int) func Split(path string) (dir, file string) func HourMinSec(t time.Time) (hour, minute, second int) 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Size(rect image.Rectangle) (width, height int) 
+func Split(path string) (dir, file string) 
+func HourMinSec(t time.Time) (hour, minute, second int) 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;but it’s not always necessary to name multiple results solely for documentation. For instance, convention dictates that a final bool result indicates success; an error result often needs no explanation.&lt;/p&gt;
@@ -18924,18 +18928,17 @@ os.MkdirAll(dirs[i], 0755) // OK
 rmdirs = append(rmdirs, func() {
 os.RemoveAll(dirs[i]) // NOTE: incorrect! 
 }) } 
+&lt;/code&gt;&lt;/pre&gt;
 
-The problem of iteration variable capture is most often encountered when using the go statement (Chapter 8) or with defer (which we will see in a moment) since both may delay the execution of a function value until after the loop has finished. But the problem is not inherent to go or defer. 
+&lt;p&gt;The problem of iteration variable capture is most often encountered when using the go statement (Chapter 8) or with defer (which we will see in a moment) since both may delay the execution of a function value until after the loop has finished. But the problem is not inherent to go or defer.&lt;/p&gt;
 
-## Variadic Functions 
+&lt;h2 id=&#34;variadic-functions&#34;&gt;Variadic Functions&lt;/h2&gt;
 
+&lt;p&gt;A variadic function is one that can be called with varying numbers of arguments. The most familiar examples are fmt.Printf and its variants. Printf requires one fixed argument at the beginning, then accepts any number of subsequent arguments.&lt;/p&gt;
 
-A variadic function is one that can be called with varying numbers of arguments. The most familiar examples are fmt.Printf and its variants. Printf requires one fixed argument at the beginning, then accepts any number of subsequent arguments. 
+&lt;p&gt;To declare a variadic function, the type of the final parameter is preceded by an ellipsis, “&amp;hellip;”, which indicates that the function may be called with any number of arguments of this type.&lt;/p&gt;
 
-To declare a variadic function, the type of the final parameter is preceded by an ellipsis, “...”, which indicates that the function may be called with any number of arguments of this type. 
-
-```go
-// gopl.io/ch5/sum 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch5/sum 
 func sum(vals ...int) int {
 total := 0 
 for _, val := range vals {
@@ -18970,8 +18973,7 @@ fmt.Printf(&amp;quot;%T\n&amp;quot;, g) // &amp;quot;func([]int)&amp;quot;
 
 &lt;p&gt;Variadic functions are often used for string formatting. The errorf function below constructs a formatted error message with a line number at the beginning. The suffix f is a widely followed naming convention for variadic functions that accept a Printf-style format string.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func errorf(linenum int, format string, args 
-...interface{}) {
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func errorf(linenum int, format string, args ...interface{}) {
 fmt.Fprintf(os.Stderr, &amp;quot;Line %d: &amp;quot;, linenum) 
 fmt.Fprintf(os.Stderr, format, args...) 
 fmt.Fprintln(os.Stderr) 
@@ -18993,8 +18995,7 @@ undefined: count&amp;quot;
 []*html.Node 
 
 images := ElementsByTagName(doc, &amp;quot;img&amp;quot;) 
-headings := ElementsByTagName(doc, &amp;quot;h1&amp;quot;, &amp;quot;h2&amp;quot;, &amp;quot;h3&amp;quot;, 
-&amp;quot;h4&amp;quot;) 
+headings := ElementsByTagName(doc, &amp;quot;h1&amp;quot;, &amp;quot;h2&amp;quot;, &amp;quot;h3&amp;quot;, &amp;quot;h4&amp;quot;) 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;deferred-function-calls&#34;&gt;Deferred Function Calls&lt;/h2&gt;
@@ -19011,8 +19012,7 @@ if err != nil {
 return err 
 } 
 
-// Check Content-Type is HTML (e.g., &amp;quot;text/html; 
-charset=utf-8&amp;quot;).
+// Check Content-Type is HTML (e.g., &amp;quot;text/html; charset=utf-8&amp;quot;).
 ct := resp.Header.Get(&amp;quot;Content-Type&amp;quot;) 
 if ct != &amp;quot;text/html&amp;quot; &amp;amp;&amp;amp; !strings.HasPrefix(ct, 
 
@@ -19058,21 +19058,21 @@ resp.Body.Close():&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch5/title2 
 func title(url string) error {
-resp, err := http.Get(url) 
-if err != nil {
-return err 
-}
-defer resp.Body.Close() 
-ct := resp.Header.Get(&amp;quot;Content-Type&amp;quot;) 
-if ct != &amp;quot;text/html&amp;quot; &amp;amp;&amp;amp; !strings.HasPrefix(ct, 
-&amp;quot;text/html;&amp;quot;) {
-return fmt.Errorf(&amp;quot;%s has type %s, not 
-text/html&amp;quot;, url, ct) 
-} 
+    resp, err := http.Get(url) 
+    if err != nil {
+    return err 
+    }
+    defer resp.Body.Close() 
+    ct := resp.Header.Get(&amp;quot;Content-Type&amp;quot;) 
+    if ct != &amp;quot;text/html&amp;quot; &amp;amp;&amp;amp; !strings.HasPrefix(ct, 
+    &amp;quot;text/html;&amp;quot;) {
+    return fmt.Errorf(&amp;quot;%s has type %s, not 
+    text/html&amp;quot;, url, ct) 
+    } 
 
-doc, err := html.Parse(resp.Body) if err != nil {return fmt.Errorf(&amp;quot;parsing %s as HTML: %v&amp;quot;, url, err) } 
-// ...print doc&#39;s title element... 
-return nil 
+    doc, err := html.Parse(resp.Body) if err != nil {return fmt.Errorf(&amp;quot;parsing %s as HTML: %v&amp;quot;, url, err) } 
+    // ...print doc&#39;s title element... 
+    return nil 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -19081,19 +19081,25 @@ return nil
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;io/ioutil 
 package ioutil 
 func ReadFile(filename string) ([]byte, error) { 
-f, err := os.Open(filename) 
+    f, err := os.Open(filename) 
 
-if err != nil {
-return nil, err }
-defer f.Close() 
-return ReadAll(f) } 
-or to unlock a mutex (§9.2): 
-var mu sync.Mutex 
+    if err != nil {
+    return nil, err 
+    }
+    defer f.Close() 
+    return ReadAll(f) 
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or to unlock a mutex (§9.2):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var mu sync.Mutex 
 var m = make(map[string]int) 
 func lookup(key string) int {
-mu.Lock()
-defer mu.Unlock() 
-return m[key] } 
+    mu.Lock()
+    defer mu.Unlock() 
+    return m[key] 
+} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The defer statement can also be used to pair “on entry” and “on exit” actions when debugging a complex function. The bigSlowOperation function below calls trace immediately, which does the “on entry” action then returns a function value that, when called, does the corresponding “on exit” action. By deferring a call to the returned function in this way, we can instrument the entry point and all exit points of a function in a single statement and even pass values, like the start time, between the two actions. But don’t forget the final parentheses in the defer statement, or the “on entry” action will happen on exit and the on-exit action won’t happen at all!&lt;/p&gt;
@@ -19140,20 +19146,19 @@ _ = double(4)
 
 &lt;p&gt;This trick is overkill for a function as simple as double but may be useful in functions with many return statements.&lt;/p&gt;
 
-&lt;p&gt;A deferred anonymous function can even change the values that the enclosing function returns to its caller:
-func triple(x int) (result int) {
-defer func() { result += x }()
-return double(x)&lt;/p&gt;
+&lt;p&gt;A deferred anonymous function can even change the values that the enclosing function returns to its caller:&lt;/p&gt;
 
-&lt;p&gt;}
-fmt.Println(triple(4)) // &amp;ldquo;12&amp;rdquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func triple(x int) (result int) { 
+defer func() { result += x }() 
+return double(x) 
 
-&lt;pre&gt;&lt;code&gt;
+} 
+fmt.Println(triple(4)) // &amp;quot;12&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;
 
-Because deferred functions aren’t executed until the very end of a function’s execution, a defer statement in a loop deserves extra scrutiny. The code below could run out of file descriptors since no file will be closed until all files have been processed: 
+&lt;p&gt;Because deferred functions aren’t executed until the very end of a function’s execution, a defer statement in a loop deserves extra scrutiny. The code below could run out of file descriptors since no file will be closed until all files have been processed:&lt;/p&gt;
 
-```go
-for     _, filename := range filenames {
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;for     _, filename := range filenames {
 f, err := os.Open(filename) 
 if err != nil {
 
@@ -19161,12 +19166,11 @@ return err }defer f.Close() // NOTE: risky; could run out of
 file descriptors
 // ...process f... 
 } 
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;One solution is to move the loop body, including the defer statement, into another function that is called on each iteration.&lt;/p&gt;
 
-One solution is to move the loop body, including the defer statement, into another function that is called on each iteration. 
-
-```go
-for _, filename := range filenames {
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;for _, filename := range filenames {
 if err := doFile(filename); err != nil {
 return err 
 }
@@ -19229,11 +19233,11 @@ case &amp;quot;Clubs&amp;quot;: // ...
 default: 
 panic(fmt.Sprintf(&amp;quot;invalid suit %q&amp;quot;, s)) // Joker? 
 } 
+&lt;/code&gt;&lt;/pre&gt;
 
-It’s good practice to assert that the preconditions of a function hold, but this can easily be done to excess. Unless you can provide a more informative error message or detect an error sooner, there is no point asserting a condition that the runtime will check for you. 
+&lt;p&gt;It’s good practice to assert that the preconditions of a function hold, but this can easily be done to excess. Unless you can provide a more informative error message or detect an error sooner, there is no point asserting a condition that the runtime will check for you.&lt;/p&gt;
 
-```go
-func Reset(x *Buffer) { 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Reset(x *Buffer) { 
 if x == nil {
 panic(&amp;quot;x is nil&amp;quot;) // unnecessary! 
 
@@ -19260,14 +19264,14 @@ return re
 
 &lt;p&gt;The wrapper function makes it convenient for clients to initialize a package-level variable with a compiled regular expression, like this:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var httpSchemeRE = regexp.MustCompile(`^https?:`) // 
-&amp;quot;http:&amp;quot; or &amp;quot;https:&amp;quot; 
-Of course, MustCompile should not be called with untrusted input values. The Must prefix is a common naming convention for functions of this kind, like template.Must in Section 4.6. 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var httpSchemeRE = regexp.MustCompile(`^https?:`) // &amp;quot;http:&amp;quot; or &amp;quot;https:&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;
 
-When a panic occurs, all deferred functions are run in reverse order, starting with those of the topmost function on the stack and proceeding up to main, as the program below demonstrates: 
+&lt;p&gt;Of course, MustCompile should not be called with untrusted input values. The Must prefix is a common naming convention for functions of this kind, like template.Must in Section 4.6.&lt;/p&gt;
 
-```go
-// gopl.io/ch5/defer1 
+&lt;p&gt;When a panic occurs, all deferred functions are run in reverse order, starting with those of the topmost function on the stack and proceeding up to main, as the program below demonstrates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// gopl.io/ch5/defer1 
 func main() {
 f(3) 
 } 
@@ -19276,13 +19280,15 @@ func f(x int) {fmt.Printf(&amp;quot;f(%d)\n&amp;quot;, x+0/x) // panics if x == 
 } 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;When run, the program prints the following to the standard output:
-f(3)
+&lt;p&gt;When run, the program prints the following to the standard output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;f(3)
 f(2)
 f(1)
-defer 1
-defer 2
-defer 3&lt;/p&gt;
+defer 1 
+defer 2 
+defer 3
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;A panic occurs during the call to f(0), causing the three deferred calls to fmt.Printf to run. Then the runtime terminates the program, printing the panic message and a stack dump to the standard error stream (simplified for clarity):&lt;/p&gt;
 
@@ -19466,14 +19472,14 @@ if i &amp;gt; 0 {
 sum += path[i-1].Distance(path[i]) 
 }}
 return sum } 
-Path is a named slice type, not a struct type like Point, yet we can still define methods for it. In allowing methods to be associated with any type, Go is unlike many other object-oriented languages. It is often convenient to define additional behaviors for simple types such as numbers, strings, slices, maps, and sometimes even functions. Methods may be declared on any named type defined in the same package, so long as its underlying type is neither a pointer nor an interface. 
+&lt;/code&gt;&lt;/pre&gt;
 
-The two Distance methods have different types. They’re not related to each other at all, though Path.Distance uses Point.Distance internally to compute the length of each segment that connects adjacent points. 
-Let’s call the new method to compute the perimeter of a right triangle: 
+&lt;p&gt;Path is a named slice type, not a struct type like Point, yet we can still define methods for it. In allowing methods to be associated with any type, Go is unlike many other object-oriented languages. It is often convenient to define additional behaviors for simple types such as numbers, strings, slices, maps, and sometimes even functions. Methods may be declared on any named type defined in the same package, so long as its underlying type is neither a pointer nor an interface.&lt;/p&gt;
 
+&lt;p&gt;The two Distance methods have different types. They’re not related to each other at all, though Path.Distance uses Point.Distance internally to compute the length of each segment that connects adjacent points.
+Let’s call the new method to compute the perimeter of a right triangle:&lt;/p&gt;
 
-```go
-perim := Path{ 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;perim := Path{ 
 {1, 1}, 
 {5, 1}, 
 {5, 4}, 
@@ -20457,20 +20463,19 @@ w = os.Stdout&lt;/p&gt;
 &lt;p&gt;Calling the Write method on an interface value containing an *os.File pointer causes the (*os.File).Write method to be called. The call prints &amp;ldquo;hello&amp;rdquo;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;w.Write([]byte(&amp;quot;hello&amp;quot;)) // &amp;quot;hello&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;
 
-In general, we cannot know at compile time what the dynamic type of an interface value will be, so a call through an interface must use dynamic dispatch. Instead of a direct call, the compiler must generate code to obtain the address of the method named Write from the type descriptor, then make an indirect call to that address. The receiver argument for the call is a copy of the interface’s dynamic value, os.Stdout. The effect is as if we had made this call directly: 
+&lt;p&gt;In general, we cannot know at compile time what the dynamic type of an interface value will be, so a call through an interface must use dynamic dispatch. Instead of a direct call, the compiler must generate code to obtain the address of the method named Write from the type descriptor, then make an indirect call to that address. The receiver argument for the call is a copy of the interface’s dynamic value, os.Stdout. The effect is as if we had made this call directly:&lt;/p&gt;
 
-```go
-os.Stdout.Write([]byte(&amp;quot;hello&amp;quot;)) // &amp;quot;hello&amp;quot; The third statement assigns a value of type *bytes.Buffer to the interface value: 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;os.Stdout.Write([]byte(&amp;quot;hello&amp;quot;)) // &amp;quot;hello&amp;quot; The third statement assigns a value of type *bytes.Buffer to the interface value: 
 w = new(bytes.Buffer) 
+&lt;/code&gt;&lt;/pre&gt;
 
-The dynamic type is now *bytes.Buffer and the dynamic value is a pointer to the newly allocated buffer (Figure 7.3). 
+&lt;p&gt;The dynamic type is now *bytes.Buffer and the dynamic value is a pointer to the newly allocated buffer (Figure 7.3).&lt;/p&gt;
 
+&lt;p&gt;A call to the Write method uses the same mechanism as before:&lt;/p&gt;
 
-A call to the Write method uses the same mechanism as before: 
-
-```go
-w.Write([]byte(&amp;quot;hello&amp;quot;)) // writes &amp;quot;hello&amp;quot; to the 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;w.Write([]byte(&amp;quot;hello&amp;quot;)) // writes &amp;quot;hello&amp;quot; to the 
 bytes.Buffer This time, the type descriptor is *bytes.Buffer, so the (*bytes.Buffer).Write method is called, with the address of the buffer as the value of the receiver parameter. The call appends &amp;quot;hello&amp;quot; to the buffer. 
 
 Finally, the fourth statement assigns nil to the interface value: w = nil 
@@ -20491,14 +20496,13 @@ However, if two interface values are compared and have the same dynamic type, bu
 var x interface{} = []int{1, 2, 3} 
 fmt.Println(x == x) // panic: comparing uncomparable 
 type []int 
+&lt;/code&gt;&lt;/pre&gt;
 
-In this respect, interface types are unusual. Other types are either safely comparable (like basic types and pointers) or not comparable at all (like slices, maps, and functions), but when comparing interface values or aggregate types that contain interface values, we must be aware of the potential for a panic. A similar risk exists when using interfaces as map keys or switch operands. Only compare interface values if you are certain that they contain dynamic values of comparable types. 
+&lt;p&gt;In this respect, interface types are unusual. Other types are either safely comparable (like basic types and pointers) or not comparable at all (like slices, maps, and functions), but when comparing interface values or aggregate types that contain interface values, we must be aware of the potential for a panic. A similar risk exists when using interfaces as map keys or switch operands. Only compare interface values if you are certain that they contain dynamic values of comparable types.&lt;/p&gt;
 
-When handling errors, or during debugging, it is often helpful to report the dynamic type of an interface value. For that, we use the fmt package’s %T verb: 
+&lt;p&gt;When handling errors, or during debugging, it is often helpful to report the dynamic type of an interface value. For that, we use the fmt package’s %T verb:&lt;/p&gt;
 
-
-```go
-var w io.Writer 
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var w io.Writer 
 fmt.Printf(&amp;quot;%T\n&amp;quot;, w) // &amp;quot;&amp;lt;nil&amp;gt;&amp;quot; 
 w = os.Stdout 
 fmt.Printf(&amp;quot;%T\n&amp;quot;, w) // &amp;quot;*os.File&amp;quot; 
@@ -51796,24 +51800,6 @@ return data, nil
 
 } 
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Program in Go</title>
-      <link>https://harryho.github.io/cache/golang/program-in-go/</link>
-      <pubDate>Sun, 10 Apr 2016 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/cache/golang/program-in-go/</guid>
-      <description>
-
-&lt;h2 id=&#34;hello-world&#34;&gt;Hello World&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Please find it from &lt;a href=&#34;https://harryho.github.io/#Go&#34;&gt;Home Page&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;data-type&#34;&gt;Data Type&lt;/h1&gt;
 </description>
     </item>
     
