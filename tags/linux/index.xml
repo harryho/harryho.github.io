@@ -529,6 +529,386 @@ ENABLED=1
     </item>
     
     <item>
+      <title>Lubuntu 16 desktop</title>
+      <link>https://harryho.github.io/os/lubuntu16-desktop/</link>
+      <pubDate>Thu, 04 Jan 2018 13:59:31 +1100</pubDate>
+      
+      <guid>https://harryho.github.io/os/lubuntu16-desktop/</guid>
+      <description>
+
+&lt;p&gt;Prelude&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There is no big difference against setup between Lubuntu and Ubuntu. I just want to keep a latest version of setup for myself as reference&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;assumption&#34;&gt;Assumption&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You have Lubuntu 16 in place&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;things-to-do-after-installing-lubuntu-16&#34;&gt;Things to do after installing Lubuntu 16&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to setup your server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ufw-setup&#34;&gt;UFW setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow ssh
+sudo ufw allow 443/tcp
+sudo ufw allow 8000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ssh-server-setup&#34;&gt;SSH server setup&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;!!! For production environment, SSH should be secured by the CA&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install openssh-server
+
+# backup default config
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+# use any editor to update sshd_config
+sudo nano /etc/ssh/sshd_config
+
+# uncomment  PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-the-software-properties-common-package&#34;&gt;!!! Install the software-properties-common Package&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install software-properties-common python-software-properties
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;time-zone-setup&#34;&gt;Time Zone setup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo dpkg-reconfigure tzdata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-tmux&#34;&gt;Install tmux&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install tmux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most useful tmux commands&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ctrl+b &amp;ldquo; — split pane horizontally.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b % — split pane vertically.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b arrow key — switch pane.&lt;/p&gt;
+
+&lt;p&gt;Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b c — &amp;copy;reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b , — rename reate a new window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b n — move to the (n)ext window.&lt;/p&gt;
+
+&lt;p&gt;Ctrl+b p — move to the (p)revious window.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install git&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-docker-ce-ubuntu-16-lts&#34;&gt;install docker CE (Ubuntu 16 LTS)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Update the apt package index
+sudo apt-get update
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Add Docker’s official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+
+# Verify the last 8 characters of the fingerprint.
+sudo apt-key fingerprint xxxxxxxx
+
+
+#   set up the stable repository
+sudo add-apt-repository \
+   &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&amp;quot;
+
+# apt update
+sudo apt-get update
+
+# install docker CE
+sudo apt-get install docker-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-jdk-9&#34;&gt;Install JDK 9&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Downlaod the JDK from Oracle website.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java9-installer
+
+java -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup environment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install oracle-java9-set-default
+sudo apt autoremove
+
+# Following setup is no longer required
+# sudo su
+# cat &amp;gt;&amp;gt; /etc/environment &amp;lt;&amp;lt;EOL
+# JAVA_HOME=/usr/lib/jvm/java-9-oracle
+# JRE_HOME=/usr/lib/jvm/java-9-oracle/jre
+# EOL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test JDK with a simple HelloWorld program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&amp;quot;user.name&amp;quot;);
+        System.out.println(username+ &amp;quot;: Hello World! &amp;quot;);
+        System.out.println(year + &amp;quot;/&amp;quot; + month + &amp;quot;/&amp;quot; + day + &amp;quot; &amp;quot; + hour + &amp;quot;:&amp;quot; + minute);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Compile and run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;javac HelloWorld.java
+java HelloWorld.java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-nodejs&#34;&gt;Install nodejs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Nodejs 8.x&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install latest npm, yarn and ts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-php&#34;&gt;Install PHP&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add new repo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y python-software-properties
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update -y
+
+apt-cache pkgnames | grep php7.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 1: Install LAMP stack&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y apache2
+sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common \
+    php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Option 2: Install LEMP stack&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install -y nginx
+sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring \
+    php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Disable Apache and Nginx if you install both&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl disable apache2.service
+sudo systemctl disable nginx.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-python2-python3&#34;&gt;Install Python2, Python3&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu has python2 installed by default&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get python-pip
+sudo apt-get install python3-pip
+sudo apt-get install python3-dev python-dev
+
+### Install virtualenv
+sudo pip install virtualenv
+sudo pip3 install virtualenv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install new python 3.6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-go&#34;&gt;Install Go&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Go&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -xvzf go*linux-amd64.tar.gz
+sudo mv go /usr/local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setup GOROOT &amp;amp; GOPATH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export GOROOT=&amp;quot;/usr/local/go&amp;quot;
+export GOPATH=&amp;quot;$HOME/ws/go&amp;quot;
+export PATH=&amp;quot;$GOROOT/bin:$GOPATH/bin:$PATH&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a simple &lt;code&gt;hello.go&lt;/code&gt; file to test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;touch ~/ws/go/src/hello/hello.go&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+    &amp;quot;fmt&amp;quot;
+    &amp;quot;log&amp;quot;
+    &amp;quot;os/user&amp;quot;
+)
+
+func main(){
+    user, err := user.Current()
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf(user.Name + &amp;quot; said : Hello World! \n&amp;quot; )
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run the program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go run $GOPATH/src/hello/hello.go
+go install hello
+$GOPATH/bin/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install hugo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;wget https://github.com/gohugoio/hugo/releases/download/v0.38.2/hugo_0.38.2_Linux-64bit.deb
+sudo dpkg -i hugo*Linux-64bit.deb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-clang-cmake&#34;&gt;Install clang &amp;amp; cmake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install clang
+sudo apt-get install cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-rust&#34;&gt;Install Rust&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -f -L https://static.rust-lang.org/rustup.sh -O
+$ sh rustup.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-vim-8&#34;&gt;Install vim 8&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add ppa repo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+sudo apt install vim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install awesome vimrc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-mysql&#34;&gt;Install MySql&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+sudo apt-get install mysql-server
+systemctl status mysql
+mysqladmin -u root -p version
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Ubuntu 16 server note</title>
       <link>https://harryho.github.io/os/ubuntu-server-16/</link>
       <pubDate>Thu, 04 May 2017 14:59:31 +1100</pubDate>
@@ -2031,78 +2411,6 @@ graphic.target
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;linux /boot/vmluz-x.x.x-x.x.x
 initrd /boot/intrd-plymouth.img
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Brief history of Linux</title>
-      <link>https://harryho.github.io/cache/linux-history/</link>
-      <pubDate>Thu, 10 Jan 2013 14:59:31 +1100</pubDate>
-      
-      <guid>https://harryho.github.io/cache/linux-history/</guid>
-      <description>
-
-&lt;h1 id=&#34;linux&#34;&gt;Linux&lt;/h1&gt;
-
-&lt;h3 id=&#34;breif-history&#34;&gt;Breif History&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;When we are talking about Linux, we cannot miss its ancesor&amp;ndash;Unix. Unix is one of the most popular operating systems worldwide because of its large support base and distribution. It was originally developed at AT&amp;amp;T as a multitasking system for minicomputers and mainframes in the 1970&amp;rsquo;s, but has since grown to become one of the most widely-used operating systems anywhere, despite its sometimes confusing interface and lack of central standardization.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Many hackers feel that Unix is the Right Thing&amp;ndash;the One True Operating System. Hence, the development of Linux by an expanding group of Unix hackers who want to get their hands dirty with their own system.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Linux was originally developed as a hobby project by Linus Torvalds. It was inspired by Minix, a small Unix system developed by Andy Tanenbaum. The first discussions about Linux were on the Usenet newsgroup, comp.os.minix. These discussions were concerned mostly with the development of a small, academic Unix system for Minix users who wanted more.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Linux is a complete multitasking, multiuser operating system, as are all other versions of Unix. This means that many users can log into and run programs on the same machine simultaneously.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;linux-distro&#34;&gt;Linux distro&lt;/h3&gt;
-
-&lt;p&gt;A Linux distribution (often abbreviated as distro) is an operating system made from a software collection, which is based upon the Linux kernel and, often, a package management system. Linux users usually obtain their operating system by downloading one of the Linux distributions, which are available for a wide variety of systems ranging from embedded devices (for example, OpenWrt) and personal computers (for example, Debian, Fedora) to powerful supercomputers (for example, Rocks Cluster Distribution).&lt;/p&gt;
-
-&lt;p&gt;You can check out the more of each Linux distro from &lt;a href=&#34;https://distrowatch.com/&#34;&gt;DistroWatch&lt;/a&gt;. The top 20 ranking Linux distro changes dramatically in last few years. Almost every year, some amazing Linux distro emerged into top 10, even top 5 list, but there are some distroes which are quite stable, and stay into top 10 to 20 over last decade.&lt;/p&gt;
-
-&lt;p&gt;Here we just give the brief history of some stable and most popular distroes. It means the article will only cover the big players in the linux world. Some special and awesome distroes are assumed as minority, such as, Pentoo, Arch Linux, etc. so we won&amp;rsquo;t cover those distroes.&lt;/p&gt;
-
-&lt;h1 id=&#34;debian-ubuntu&#34;&gt;Debian/Ubuntu&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Ubuntu is one of a number of Linux distributions. The source code that makes up the Ubuntu distribution originates from another, much older Linux distribution known as Debian (so called because it was started by two people named Debra and Ian). Debian is still a widely respected operating system but came under criticism for infrequent updates and less than user friendly installation and maintenance (though these areas have shown improvement recently).&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;A South African internet mogul (who made his fortune selling his company to VeriSign for around $500 million) decided it was time for a more user friendly Linux. He took the Debian distribution and worked to make it a more human friendly distribution which he called Ubuntu. He subsequently formed a company called Canonical Ltd to promote and provide support for Ubuntu.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;The word &amp;ldquo;Ubuntu&amp;rdquo; is an ancient Zulu and Xhosa word that means &amp;ldquo;humanity to others&amp;rdquo;. Ubuntu also means &amp;ldquo;I am what I am because of who we all are&amp;rdquo;.The Ubuntu operating system brings the spirit of Ubuntu to the world of computers.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;fedora-centos-redhat&#34;&gt;Fedora/CentOS/Redhat&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;Fedora&lt;/em&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Fedora has received many updates and individual releases over the years. It is a playground for new functionality. Often new technology is found here. It can be compared with other distributions like Arch Linux, except that it is slightly less aggressive in deploying the latest software components for everything. The difference between Fedora and other distributions is the corporate support by Red Hat. That means that professional developers can work on projects that are first tested in Fedora. A lot of these components may then also be picked up by other distributions.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;em&gt;Red Hat Enterprise Linux (RHEL)&lt;/em&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;The Enterprise product of Red Hat is named RHEL for short. The main difference with Fedora is that is focused on companies which prefer stability. The most business-critical services are deployed on this platform. Battle-tested components might finally end up in this distribution.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;em&gt;CentOS&lt;/em&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;CentOS as known as the free enterprise version of RedHat Linux, is one of most popular VPS or dedicated linux. Maybe you are using ubuntu or mint for your development, but many companies or institutes still choose CentOS as their production server, even full stack. Grasp the basic setup CentOS for website or web app or web service is still quite important.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Now CentOS is much more easy to setup for different purpose. Comparing with 10 years ago or more, even you use graphic UI to setup, you still will come across some weird glitch. CentOS has different group for you to install. Every group includes bunch of packages, and it focus on some specific purpose. I believe they meet most IT infra&amp;rsquo;s requirement. So you don&amp;rsquo;t need do much research, and work around to figure out how to build those packages together. Just use following command you can get all group list.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;suse-opensuse&#34;&gt;Suse / OpenSuse&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;SUSE Linux is a computer operating system. It is built on top of the open source Linux kernel and is distributed with system and application software from other open source projects. SUSE Linux is of German origin, basically an acronym of &amp;ldquo;Software und System-Entwicklung&amp;rdquo; (software and systems development), and was mainly developed in Europe. The first version appeared in early 1994, making SUSE one of the oldest existing commercial distributions. It is known for its YaST configuration tool.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Novell bought the SUSE brands and trademarks in 2003. Novell, one of the founding members of the Open Invention Network, decided to make the community an important part of their development process by opening widely the distribution development to outside contributors in 2005, creating the openSUSE distribution and the openSUSE Project. Novell employed more than 500 developers working on SUSE in 2004. On 27 April 2011, Novell (and SUSE) were acquired by The Attachmate Group, which made SUSE an independent business unit. Later, in October 2014, the entire Attachmate Group, including SUSE, was acquired by the British firm Micro Focus International. SUSE continues to operate as an independent business unit.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     

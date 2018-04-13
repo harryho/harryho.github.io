@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>CNTK Notes, Part 1 - Hello World</title>
+    <title>Lubuntu 16 desktop - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -67,39 +67,381 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">CNTK Notes, Part 1</h1>
+				<h1 class="doc-entry-title">Lubuntu 16 desktop</h1>
 				<div class="doc-entry-meta">
-					<span>updated at <time datetime="2016-12-07">07 Dec 2016</time></span>
+					<span>updated at <time datetime="2018-01-04">04 Jan 2018</time></span>
 				</div>
 				<section>
 					
 
-<h3 id="assumption">Assumption</h3>
+<p>Prelude</p>
+
+<blockquote>
+<p>There is no big difference against setup between Lubuntu and Ubuntu. I just want to keep a latest version of setup for myself as reference</p>
+</blockquote>
+
+<h2 id="assumption">Assumption</h2>
 
 <ul>
-<li>You are using Windows 7 or higher version</li>
-<li>You are using Anaconda to setup the environment</li>
+<li>You have Lubuntu 16 in place</li>
 </ul>
 
-<h3 id="create-cntk-virtual-environment">Create CNTK virtual environment</h3>
+<h2 id="things-to-do-after-installing-lubuntu-16">Things to do after installing Lubuntu 16</h2>
 
-<pre><code># use follow command to remove existing virtual environment
-# conda remove -n cntk --all
-conda create -n cntk 
+<ul>
+<li>How to setup your server</li>
+</ul>
+
+<h3 id="ufw-setup">UFW setup</h3>
+
+<pre><code class="language-bash">sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow ssh
+sudo ufw allow 443/tcp
+sudo ufw allow 8000/tcp
 </code></pre>
 
-<h3 id="activate-virtual-environment-and-install-cntk">Activate virtual environment and install CNTK</h3>
+<h3 id="ssh-server-setup">SSH server setup</h3>
 
-<pre><code>activate cntk
-pip install https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc3-cp36-cp36m-win_amd64.whl
+<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server
+
+# backup default config
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+# use any editor to update sshd_config
+sudo nano /etc/ssh/sshd_config
+
+# uncomment  PasswordAuthentication yes to allow remote password login
+# Password authentication is only for test environment
+
+# setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
 </code></pre>
 
-<h3 id="test-cntk">Test CNTK</h3>
+<h3 id="install-the-software-properties-common-package">!!! Install the software-properties-common Package</h3>
 
-<pre><code>python
-&gt;&gt;&gt; import cntk
-&gt;&gt;&gt; cntk.__version__
-'2.0rc3'
+<pre><code class="language-bash">sudo apt-get install software-properties-common python-software-properties
+</code></pre>
+
+<h3 id="time-zone-setup">Time Zone setup</h3>
+
+<pre><code class="language-bash">sudo dpkg-reconfigure tzdata
+</code></pre>
+
+<h3 id="install-tmux">Install tmux</h3>
+
+<pre><code class="language-bash">sudo apt-get install tmux
+</code></pre>
+
+<ul>
+<li>Most useful tmux commands</li>
+</ul>
+
+<blockquote>
+<p>Ctrl+b &ldquo; — split pane horizontally.</p>
+
+<p>Ctrl+b % — split pane vertically.</p>
+
+<p>Ctrl+b arrow key — switch pane.</p>
+
+<p>Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.</p>
+
+<p>Ctrl+b c — &copy;reate a new window.</p>
+
+<p>Ctrl+b , — rename reate a new window.</p>
+
+<p>Ctrl+b n — move to the (n)ext window.</p>
+
+<p>Ctrl+b p — move to the (p)revious window.</p>
+</blockquote>
+
+<h3 id="install-git">Install git</h3>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+</code></pre>
+
+<h3 id="install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</h3>
+
+<pre><code class="language-bash"># Update the apt package index
+sudo apt-get update
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Add Docker’s official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+
+# Verify the last 8 characters of the fingerprint.
+sudo apt-key fingerprint xxxxxxxx
+
+
+#   set up the stable repository
+sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+
+# apt update
+sudo apt-get update
+
+# install docker CE
+sudo apt-get install docker-ce
+</code></pre>
+
+<h3 id="install-jdk-9">Install JDK 9</h3>
+
+<ul>
+<li>Downlaod the JDK from Oracle website.</li>
+</ul>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java9-installer
+
+java -version
+</code></pre>
+
+<ul>
+<li>Setup environment</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install oracle-java9-set-default
+sudo apt autoremove
+
+# Following setup is no longer required
+# sudo su
+# cat &gt;&gt; /etc/environment &lt;&lt;EOL
+# JAVA_HOME=/usr/lib/jvm/java-9-oracle
+# JRE_HOME=/usr/lib/jvm/java-9-oracle/jre
+# EOL
+</code></pre>
+
+<ul>
+<li>Test JDK with a simple HelloWorld program</li>
+</ul>
+
+<pre><code class="language-java">import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&quot;user.name&quot;);
+        System.out.println(username+ &quot;: Hello World! &quot;);
+        System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
+    }
+}
+</code></pre>
+
+<ul>
+<li>Compile and run the program</li>
+</ul>
+
+<pre><code class="language-bash">javac HelloWorld.java
+java HelloWorld.java
+</code></pre>
+
+<h3 id="install-nodejs">Install nodejs</h3>
+
+<ul>
+<li>Install Nodejs 8.x</li>
+</ul>
+
+<pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+<ul>
+<li>Install latest npm, yarn and ts</li>
+</ul>
+
+<pre><code>sudo npm install -g npm
+sudo npm install -g typescript
+sudo mpm install -g yarn
+</code></pre>
+
+<h3 id="install-php">Install PHP</h3>
+
+<ul>
+<li>Add new repo</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install -y python-software-properties
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update -y
+
+apt-cache pkgnames | grep php7.2
+</code></pre>
+
+<ul>
+<li>Option 1: Install LAMP stack</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install -y apache2
+sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common \
+    php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre>
+
+<ul>
+<li>Option 2: Install LEMP stack</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install -y nginx
+sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring \
+    php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre>
+
+<ul>
+<li>Disable Apache and Nginx if you install both</li>
+</ul>
+
+<pre><code class="language-bash">sudo systemctl disable apache2.service
+sudo systemctl disable nginx.service
+</code></pre>
+
+<h3 id="install-python2-python3">Install Python2, Python3</h3>
+
+<ul>
+<li>Ubuntu has python2 installed by default</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get python-pip
+sudo apt-get install python3-pip
+sudo apt-get install python3-dev python-dev
+
+### Install virtualenv
+sudo pip install virtualenv
+sudo pip3 install virtualenv
+</code></pre>
+
+<ul>
+<li>Install new python 3.6</li>
+</ul>
+
+<pre><code>sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.6
+</code></pre>
+
+<h3 id="install-go">Install Go</h3>
+
+<ul>
+<li>Install Go</li>
+</ul>
+
+<pre><code class="language-bash">wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+
+
+# check hash
+shasum -a 256 go*linux-amd64.tar.gz
+
+# install tar ball
+sudo tar -xvzf go*linux-amd64.tar.gz
+sudo mv go /usr/local
+</code></pre>
+
+<ul>
+<li>Setup GOROOT &amp; GOPATH</li>
+</ul>
+
+<pre><code class="language-bash">export GOROOT=&quot;/usr/local/go&quot;
+export GOPATH=&quot;$HOME/ws/go&quot;
+export PATH=&quot;$GOROOT/bin:$GOPATH/bin:$PATH&quot;
+</code></pre>
+
+<ul>
+<li>Create a simple <code>hello.go</code> file to test</li>
+</ul>
+
+<p><code>touch ~/ws/go/src/hello/hello.go</code></p>
+
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+    &quot;os/user&quot;
+)
+
+func main(){
+    user, err := user.Current()
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )
+}
+</code></pre>
+
+<ul>
+<li>Run the program</li>
+</ul>
+
+<pre><code class="language-bash">go run $GOPATH/src/hello/hello.go
+go install hello
+$GOPATH/bin/hello
+</code></pre>
+
+<ul>
+<li>Install hugo</li>
+</ul>
+
+<pre><code>wget https://github.com/gohugoio/hugo/releases/download/v0.38.2/hugo_0.38.2_Linux-64bit.deb
+sudo dpkg -i hugo*Linux-64bit.deb
+</code></pre>
+
+<h3 id="install-clang-cmake">Install clang &amp; cmake</h3>
+
+<pre><code class="language-bash">sudo apt-get install clang
+sudo apt-get install cmake
+</code></pre>
+
+<h3 id="install-rust">Install Rust</h3>
+
+<pre><code class="language-bash">$ curl -f -L https://static.rust-lang.org/rustup.sh -O
+$ sh rustup.sh
+</code></pre>
+
+<h3 id="install-vim-8">Install vim 8</h3>
+
+<ul>
+<li>Add ppa repo</li>
+</ul>
+
+<pre><code>sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+sudo apt install vim
+</code></pre>
+
+<ul>
+<li>Install awesome vimrc</li>
+</ul>
+
+<pre><code>git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+</code></pre>
+
+<h3 id="install-mysql">Install MySql</h3>
+
+<pre><code>wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+sudo apt-get install mysql-server
+systemctl status mysql
+mysqladmin -u root -p version
 </code></pre>
 
 				</section>
@@ -115,18 +457,31 @@ pip install https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc3-cp36-cp36m-win_amd6
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">CNTK Notes, Part 1</a></strong></li>
+				<li><strong><a href="#title">Lubuntu 16 desktop</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li>
-<ul>
 <li><a href="#assumption">Assumption</a></li>
-<li><a href="#create-cntk-virtual-environment">Create CNTK virtual environment</a></li>
-<li><a href="#activate-virtual-environment-and-install-cntk">Activate virtual environment and install CNTK</a></li>
-<li><a href="#test-cntk">Test CNTK</a></li>
+<li><a href="#things-to-do-after-installing-lubuntu-16">Things to do after installing Lubuntu 16</a>
+<ul>
+<li><a href="#ufw-setup">UFW setup</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a></li>
+<li><a href="#install-the-software-properties-common-package">!!! Install the software-properties-common Package</a></li>
+<li><a href="#time-zone-setup">Time Zone setup</a></li>
+<li><a href="#install-tmux">Install tmux</a></li>
+<li><a href="#install-git">Install git</a></li>
+<li><a href="#install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</a></li>
+<li><a href="#install-jdk-9">Install JDK 9</a></li>
+<li><a href="#install-nodejs">Install nodejs</a></li>
+<li><a href="#install-php">Install PHP</a></li>
+<li><a href="#install-python2-python3">Install Python2, Python3</a></li>
+<li><a href="#install-go">Install Go</a></li>
+<li><a href="#install-clang-cmake">Install clang &amp; cmake</a></li>
+<li><a href="#install-rust">Install Rust</a></li>
+<li><a href="#install-vim-8">Install vim 8</a></li>
+<li><a href="#install-mysql">Install MySql</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -203,9 +558,8 @@ pip install https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc3-cp36-cp36m-win_amd6
 					<span class="doc-list-category">Dev</span>
 				</a>
 				<ul>
-					<li>
-						<span class="active">CNTK Notes, Part 1</span>
-						</li>
+					<li><a href="/dev/cntk-notes-1/">CNTK Notes, Part 1</a>
+					</li>
 				
 					<li><a href="/dev/tensorflow-notes-1/">Tensorflow Notes, Part 1</a>
 					</li>
@@ -247,8 +601,9 @@ pip install https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc3-cp36-cp36m-win_amd6
 					<li><a href="/os/raspberrypi-notes/">Raspberry Pi setup</a>
 					</li>
 				
-					<li><a href="/os/lubuntu16-desktop/">Lubuntu 16 desktop</a>
-					</li>
+					<li>
+						<span class="active">Lubuntu 16 desktop</span>
+						</li>
 				
 					<li><a href="/os/ubuntu-server-16/">Ubuntu 16 server note</a>
 					</li>
