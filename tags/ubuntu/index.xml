@@ -385,6 +385,28 @@ sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get install mysql-server
 systemctl status mysql
 mysqladmin -u root -p version
+
+mysql -u root -p mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-postgresql&#34;&gt;Install PostgresQL&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &#39;deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main&#39; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+sudo apt-get update
+sudo apt-get install postgresql-10
+
+sudo su - postgres
+psql -U postgres
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;install-mongodb&#34;&gt;Install mongodb&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo &amp;quot;deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse&amp;quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
