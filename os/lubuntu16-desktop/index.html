@@ -451,11 +451,10 @@ mysql -u root -p mysql
 </code></pre>
 
 <ul>
-<li>create a sample table products
-```</li>
+<li>create a sample table products</li>
 </ul>
 
-<p>CREATE TABLE products (
+<pre><code>CREATE TABLE products (
     id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(255),
     price DECIMAL(10, 2)  NOT NULL,
@@ -463,97 +462,90 @@ mysql -u root -p mysql
     deleted_at datetime,
     tags VARCHAR(255)
     ,PRIMARY KEY (id)
-);</p>
+);
 
-<p>load data local infile &lsquo;/home/<your_name>/db/products.csv&rsquo; into table products fields terminated by &lsquo;,&rsquo; enclosed by &lsquo;&ldquo;&rsquo; lines terminated by &lsquo;\n&rsquo; (id, title, price, created_at, deleted_at, tags);</p>
-
-<pre><code>
-### Install PostgresQL
-
-* psql is case sensitive
-
+load data local infile '/home/&lt;your_name&gt;/db/products.csv' into table products fields terminated by ',' enclosed by '&quot;' lines terminated by '\n' (id, title, price, created_at, deleted_at, tags);
 </code></pre>
 
-<p>echo &lsquo;deb <a href="http://apt.postgresql.org/pub/repos/apt/">http://apt.postgresql.org/pub/repos/apt/</a> xenial-pgdg main&rsquo; &gt;&gt; /etc/apt/sources.list.d/pgdg.list
-wget &ndash;quiet -O - <a href="https://www.postgresql.org/media/keys/ACCC4CF8.asc">https://www.postgresql.org/media/keys/ACCC4CF8.asc</a> | sudo apt-key add -</p>
+<h3 id="install-postgresql">Install PostgresQL</h3>
 
-<p>sudo apt-get update
-sudo apt-get install postgresql-10</p>
+<ul>
+<li>psql is case sensitive</li>
+</ul>
 
-<p>sudo su - postgres
-psql -U postgres</p>
+<pre><code>echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' &gt;&gt; /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-<h1 id="create-a-dump-databbase">Create a dump databbase</h1>
+sudo apt-get update
+sudo apt-get install postgresql-10
 
-<p>curl -L -O <a href="http://cl.ly/173L141n3402/download/example.dump">http://cl.ly/173L141n3402/download/example.dump</a>
+sudo su - postgres
+psql -U postgres
+
+# Create a dump databbase
+curl -L -O http://cl.ly/173L141n3402/download/example.dump
 createdb pgguide
-pg_restore &ndash;no-owner &ndash;dbname pgguide example.dump
-psql &ndash;dbname pgguide</p>
+pg_restore --no-owner --dbname pgguide example.dump
+psql --dbname pgguide
 
-<p>psql</p>
+psql 
 
-<h1 id="rename-database-use-double-quote">Rename database &ndash; use double quote</h1>
-
-<p>ALTER database &ldquo;pgguide&rdquo; rename to &ldquo;sample&rdquo;</p>
-
-<pre><code>
-* export the database to sql file
-
+# Rename database -- use double quote 
+ALTER database &quot;pgguide&quot; rename to &quot;sample&quot;
 </code></pre>
 
-<p>sudo su postgres
-pg_dump sample &gt;&gt; sample.sql</p>
+<ul>
+<li>export the database to sql file</li>
+</ul>
 
-<pre><code>
-* export table to csv file
-
+<pre><code>sudo su postgres
+pg_dump sample &gt;&gt; sample.sql
 </code></pre>
 
-<p>COPY products to &lsquo;/home/<your_name>/db/products.csv&rsquo; delimiter &lsquo;,&rsquo; csv;</p>
+<ul>
+<li>export table to csv file</li>
+</ul>
 
-<pre><code>
-* export data to json file
-
+<pre><code>COPY products to '/home/&lt;your_name&gt;/db/products.csv' delimiter ',' csv; 
 </code></pre>
 
-<p>select json_agg(t) from (select * from products) t \t on \pset format unaligned \g products.json;</p>
+<ul>
+<li>export data to json file</li>
+</ul>
 
-<pre><code>
-
-
-### Install mongodb
-
+<pre><code>select json_agg(t) from (select * from products) t \t on \pset format unaligned \g products.json
 </code></pre>
 
-<p>sudo apt-key adv &ndash;keyserver hkp://keyserver.ubuntu.com:80 &ndash;recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-echo &ldquo;deb [ arch=amd64,arm64 ] <a href="https://repo.mongodb.org/apt/ubuntu">https://repo.mongodb.org/apt/ubuntu</a> xenial/mongodb-org/3.6 multiverse&rdquo; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list</p>
+<h3 id="install-mongodb">Install mongodb</h3>
 
-<p>sudo apt-get update
-sudo apt-get install -y mongodb-org</p>
+<pre><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo &quot;deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse&quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
 
-<p>sudo service mongod start
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+sudo service mongod start
 sudo service mongod stop
-sudo service mongod status</p>
-
-<pre><code>
-* Create a database `sample` and insert one record into document `products`
+sudo service mongod status
 
 </code></pre>
 
-<p>use sample
-db.products.insertOne({id: 1, title: &ldquo;Dictionary&rdquo;, price: 9.99, created_at: &ldquo;2011-01-02 07:00:00+11&rdquo;, tags: &ldquo;{Book}&rdquo;});</p>
+<ul>
+<li>Create a database <code>sample</code> and insert one record into document <code>products</code></li>
+</ul>
 
-<p>db.products.find();</p>
+<pre><code>use sample
+db.products.insertOne({id: 1, title: &quot;Dictionary&quot;, price: 9.99, created_at: &quot;2011-01-02 07:00:00+11&quot;, tags: &quot;{Book}&quot;});
 
-<pre><code>
-* Import json into database
-
-
+db.products.find();
 </code></pre>
 
-<p>mongoimport &ndash;db sample &ndash;collection products &ndash;drop &ndash;jsonArray &ndash;file ~/db/products.json</p>
+<ul>
+<li>Import json into database</li>
+</ul>
 
-<p>```</p>
+<pre><code>mongoimport --db sample --collection products --drop --jsonArray --file ~/db/products.json
+</code></pre>
 
 				</section>
 			</article>
@@ -593,10 +585,10 @@ db.products.insertOne({id: 1, title: &ldquo;Dictionary&rdquo;, price: 9.99, crea
 <li><a href="#install-rust">Install Rust</a></li>
 <li><a href="#install-vim-8">Install vim 8</a></li>
 <li><a href="#install-mysql">Install MySql</a></li>
+<li><a href="#install-postgresql">Install PostgresQL</a></li>
+<li><a href="#install-mongodb">Install mongodb</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#create-a-dump-databbase">Create a dump databbase</a></li>
-<li><a href="#rename-database-use-double-quote">Rename database &ndash; use double quote</a></li>
 </ul>
 </nav>
 		</div>
