@@ -380,6 +380,10 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 &lt;h3 id=&#34;install-mysql&#34;&gt;Install MySql&lt;/h3&gt;
 
+&lt;ul&gt;
+&lt;li&gt;Install mysql&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;pre&gt;&lt;code&gt;wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get install mysql-server
@@ -389,25 +393,110 @@ mysqladmin -u root -p version
 mysql -u root -p mysql
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;install-postgresql&#34;&gt;Install PostgresQL&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;create a sample table products
+```&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;echo &#39;deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main&#39; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+&lt;p&gt;CREATE TABLE products (
+    id INT AUTO_INCREMENT NOT NULL,
+    title VARCHAR(255),
+    price DECIMAL(10, 2)  NOT NULL,
+    created_at datetime,
+    deleted_at datetime,
+    tags VARCHAR(255)
+    ,PRIMARY KEY (id)
+);&lt;/p&gt;
 
-sudo apt-get update
-sudo apt-get install postgresql-10
+&lt;p&gt;load data local infile &amp;lsquo;/home/&lt;your_name&gt;/db/products.csv&amp;rsquo; into table products fields terminated by &amp;lsquo;,&amp;rsquo; enclosed by &amp;lsquo;&amp;ldquo;&amp;rsquo; lines terminated by &amp;lsquo;\n&amp;rsquo; (id, title, price, created_at, deleted_at, tags);&lt;/p&gt;
 
-sudo su - postgres
-psql -U postgres
+&lt;pre&gt;&lt;code&gt;
+### Install PostgresQL
+
+* psql is case sensitive
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;install-mongodb&#34;&gt;Install mongodb&lt;/h3&gt;
+&lt;p&gt;echo &amp;lsquo;deb &lt;a href=&#34;http://apt.postgresql.org/pub/repos/apt/&#34;&gt;http://apt.postgresql.org/pub/repos/apt/&lt;/a&gt; xenial-pgdg main&amp;rsquo; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pgdg.list
+wget &amp;ndash;quiet -O - &lt;a href=&#34;https://www.postgresql.org/media/keys/ACCC4CF8.asc&#34;&gt;https://www.postgresql.org/media/keys/ACCC4CF8.asc&lt;/a&gt; | sudo apt-key add -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-echo &amp;quot;deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse&amp;quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+&lt;p&gt;sudo apt-get update
+sudo apt-get install postgresql-10&lt;/p&gt;
+
+&lt;p&gt;sudo su - postgres
+psql -U postgres&lt;/p&gt;
+
+&lt;h1 id=&#34;create-a-dump-databbase&#34;&gt;Create a dump databbase&lt;/h1&gt;
+
+&lt;p&gt;curl -L -O &lt;a href=&#34;http://cl.ly/173L141n3402/download/example.dump&#34;&gt;http://cl.ly/173L141n3402/download/example.dump&lt;/a&gt;
+createdb pgguide
+pg_restore &amp;ndash;no-owner &amp;ndash;dbname pgguide example.dump
+psql &amp;ndash;dbname pgguide&lt;/p&gt;
+
+&lt;p&gt;psql&lt;/p&gt;
+
+&lt;h1 id=&#34;rename-database-use-double-quote&#34;&gt;Rename database &amp;ndash; use double quote&lt;/h1&gt;
+
+&lt;p&gt;ALTER database &amp;ldquo;pgguide&amp;rdquo; rename to &amp;ldquo;sample&amp;rdquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+* export the database to sql file
 
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sudo su postgres
+pg_dump sample &amp;gt;&amp;gt; sample.sql&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+* export table to csv file
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;COPY products to &amp;lsquo;/home/&lt;your_name&gt;/db/products.csv&amp;rsquo; delimiter &amp;lsquo;,&amp;rsquo; csv;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+* export data to json file
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;select json_agg(t) from (select * from products) t \t on \pset format unaligned \g products.json;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+
+
+### Install mongodb
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sudo apt-key adv &amp;ndash;keyserver hkp://keyserver.ubuntu.com:80 &amp;ndash;recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo &amp;ldquo;deb [ arch=amd64,arm64 ] &lt;a href=&#34;https://repo.mongodb.org/apt/ubuntu&#34;&gt;https://repo.mongodb.org/apt/ubuntu&lt;/a&gt; xenial/mongodb-org/3.6 multiverse&amp;rdquo; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list&lt;/p&gt;
+
+&lt;p&gt;sudo apt-get update
+sudo apt-get install -y mongodb-org&lt;/p&gt;
+
+&lt;p&gt;sudo service mongod start
+sudo service mongod stop
+sudo service mongod status&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+* Create a database `sample` and insert one record into document `products`
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;use sample
+db.products.insertOne({id: 1, title: &amp;ldquo;Dictionary&amp;rdquo;, price: 9.99, created_at: &amp;ldquo;2011-01-02 07:00:00+11&amp;rdquo;, tags: &amp;ldquo;{Book}&amp;rdquo;});&lt;/p&gt;
+
+&lt;p&gt;db.products.find();&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+* Import json into database
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mongoimport &amp;ndash;db sample &amp;ndash;collection products &amp;ndash;drop &amp;ndash;jsonArray &amp;ndash;file ~/db/products.json&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
 </description>
     </item>
     
