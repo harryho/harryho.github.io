@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pythoon on Hello World</title>
-    <link>https://harryho.github.io/tags/pythoon/index.xml</link>
+    <link>https://harryho.github.io/tags/pythoon/</link>
     <description>Recent content in Pythoon on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
-    <atom:link href="https://harryho.github.io/tags/pythoon/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Aug 2017 16:56:21 +1100</lastBuildDate>
+    
+	<atom:link href="https://harryho.github.io/tags/pythoon/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>FlatApi -- A handy Restful API for python developer</title>
@@ -15,102 +18,9 @@
       <pubDate>Thu, 03 Aug 2017 16:56:21 +1100</pubDate>
       
       <guid>https://harryho.github.io/project/python-flat-api/</guid>
-      <description>
-
-&lt;p&gt;FlatApi is a &lt;strong&gt;zero coding&lt;/strong&gt; and &lt;strong&gt;zero configuration&lt;/strong&gt; restful API server inspired by Json-Server_ and Eve_. It is designed to be used as fake restful api for development, especially for people want to use Python stack. Setup process is &lt;strong&gt;less than 10 seconds&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;FlatApi is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Zero coding and configuration to setup Restful API&lt;/strong&gt; FlatApi is designed to use without coding and configuration by default. You just need one config to setup all endpoints you need, then you can use it immediately.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flask based web server&lt;/strong&gt; FlatApi is built on the top of _Flask&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Json flat file database&lt;/strong&gt; FlatApi uses FlatApi_ to manage the Json flat file database. FlatApi is a document oriented database.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Caching memory storage availble&lt;/strong&gt; FlatApi supports caching momery storage after version 4.0.0.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Install Package&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ pip uninstall flatapi
-$ pip install --no-cache-dir flatapi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Quick Start&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Launch FlatApi without configuration&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Start the FlatApi - Sample 1 
-$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi -S MEMORY -G NO
-# Start the FlatApi - Sample 2
-$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi --storage MEMORY -cfgfile NO
-# Start the FlatApi with prefix - Sample 3
-$ python3 /&amp;lt;path_to_package&amp;gt;/flatapi --storage memory -cfgfile no -X api
-
-
-
-\(^_^)/ Hi
-
-Loading  is done.
-
-There is no config file found. Flat Api uses internal configuration.
-
-Resource :
-/&amp;lt;string:doc&amp;gt; -- The doc is the collection name
-                    you want to post or put the object.
-/&amp;lt;string:doc&amp;gt;/&amp;lt;int:id&amp;gt; --The id is the unique id for query or delete.
-
-Database: Memory
-
-* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Test api via postman&lt;/p&gt;
-
-&lt;p&gt;It would be a much more handy and easy way to play around with the API immediately.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GET /posts       --&amp;gt; Get all posts
-POST /posts      --&amp;gt; Add new post
-PUT /posts/1     --&amp;gt; Update existing post which id is 1
-DELETE /posts/1  --&amp;gt; Delete a post which id is 1
-DELETE /posts    --&amp;gt; Delete all posts
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Test api via curl&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Add a new post
-$ curl -d &amp;quot;{\&amp;quot;text\&amp;quot;:\&amp;quot;post 1\&amp;quot;,\&amp;quot;author\&amp;quot;:\&amp;quot;harry\&amp;quot;}&amp;quot; -H &amp;quot;Content-Type: application/json&amp;quot; -X POST http://localhost:5000/posts
-{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}
-
-# Get post by Id
-$ curl -X GET http://localhost:5000/posts/1
-{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}
-
-# Get all posts
-$ curl -X GET http://localhost:5000/posts
-[{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post 1&amp;quot;, &amp;quot;id&amp;quot;: 1}]
-
-# Update  the post
-$ curl -d &amp;quot;{\&amp;quot;text\&amp;quot;:\&amp;quot;post updated\&amp;quot;,\&amp;quot;author\&amp;quot;:\&amp;quot;harry\&amp;quot;}&amp;quot; -H &amp;quot;Content-Type: application/json&amp;quot; -X PUT http://localhost:5000/posts/1
-[{&amp;quot;author&amp;quot;: &amp;quot;harry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;post updated&amp;quot;, &amp;quot;id&amp;quot;: 1}]
-
-# Delete 
-$ curl -X DELETE http://localhost:5000/posts 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;browse-repository-https-github-com-harryho-flat-api-git&#34;&gt;Browse &lt;a href=&#34;https://github.com/harryho/flat-api.git&#34;&gt;Repository&lt;/a&gt;&lt;/h2&gt;
-</description>
+      <description>FlatApi is a zero coding and zero configuration restful API server inspired by Json-Server_ and Eve_. It is designed to be used as fake restful api for development, especially for people want to use Python stack. Setup process is less than 10 seconds.
+FlatApi is:
+ Zero coding and configuration to setup Restful API FlatApi is designed to use without coding and configuration by default. You just need one config to setup all endpoints you need, then you can use it immediately.</description>
     </item>
     
   </channel>

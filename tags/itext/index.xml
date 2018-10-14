@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Itext on Hello World</title>
-    <link>https://harryho.github.io/tags/itext/index.xml</link>
+    <link>https://harryho.github.io/tags/itext/</link>
     <description>Recent content in Itext on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015, harryho; All rights reserved.</copyright>
-    <atom:link href="https://harryho.github.io/tags/itext/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Aug 2016 11:59:31 +1100</lastBuildDate>
+    
+	<atom:link href="https://harryho.github.io/tags/itext/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Git Notes</title>
@@ -15,124 +18,12 @@
       <pubDate>Thu, 11 Aug 2016 11:59:31 +1100</pubDate>
       
       <guid>https://harryho.github.io/dev/git-notes/</guid>
-      <description>&lt;p&gt;Create a new branch with git and manage branches&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Create the branch on your local machine and switch in this branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git checkout -b [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Push the branch on github :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  $ git push origin [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When you want to commit something in your branch, be sure to be in your branch.&lt;/p&gt;
-
-&lt;p&gt;You can see all branches created by using :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Which will show :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;* approval_messages
-  master
-  master_clean
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add a new remote for your branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git remote add [name_of_your_remote]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Push changes from your commit into your branch :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git push [name_of_your_new_remote] [name_of_your_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Update your branch when the original branch from official repository has been updated :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git fetch [name_of_your_remote]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then you need to apply to merge changes, if your branch is derivated from develop you need to do :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git merge [name_of_your_remote]/develop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Delete a branch on your local filesystem :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch -d [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To force the deletion of local branch on your filesystem :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git branch -D [name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Delete the branch on github :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git push origin :[name_of_your_new_branch]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Compare two branch:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git diff [name_of_branch1]..[name_of_branch2]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Branch merge&lt;/p&gt;
-
-&lt;p&gt;Example&lt;/p&gt;
-
-&lt;p&gt;Fast-Forward Merge&lt;/p&gt;
-
-&lt;p&gt;Our first example demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Start a new feature
-git checkout -b new-feature master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Start a feature&amp;quot;
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Finish a feature&amp;quot;
-# Merge in the new-feature branch
-git checkout master
-git merge new-feature
-git branch -d new-feature
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.&lt;/p&gt;
-
-&lt;p&gt;Also note that Git should not complain about the git branch -d, since new-feature is now accessible from the master branch.&lt;/p&gt;
-
-&lt;p&gt;3-Way Merge&lt;/p&gt;
-
-&lt;p&gt;The next example is very similar, but requires a 3-way merge because master progresses while the feature is in-progress. This is a common scenario for large features or when several developers are working on a project simultaneously.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Start a new feature
-git checkout -b new-feature master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Start a feature&amp;quot;
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Finish a feature&amp;quot;
-# Develop the master branch
-git checkout master
-# Edit some files
-git add &amp;lt;file&amp;gt;
-git commit -m &amp;quot;Make some super-stable changes to master&amp;quot;
-# Merge in the new-feature branch
-git merge new-feature
-git branch -d new-feature
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Create a new branch with git and manage branches
+ Create the branch on your local machine and switch in this branch :
+$ git checkout -b [name_of_your_new_branch]  Push the branch on github :
+ $ git push origin [name_of_your_new_branch]   When you want to commit something in your branch, be sure to be in your branch.
+You can see all branches created by using :
+$ git branch  Which will show :</description>
     </item>
     
   </channel>
