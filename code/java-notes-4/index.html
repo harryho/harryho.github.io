@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>Java Notes - Part 3: Date Time API  - Hello World</title>
+    <title>Java Notes - Part 4: Lambda API  - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -83,247 +83,12 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">Java Notes - Part 3: Date Time API </h1>
+				<h1 class="doc-entry-title">Java Notes - Part 4: Lambda API </h1>
 				<div class="doc-entry-meta">
 					<span>updated at <time datetime="2015-02-10">10 Feb 2015</time></span>
 				</div>
 				<section>
 					
-
-<h1 id="date-time-api">Date-Time API</h1>
-
-<p>Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are</p>
-
-<ul>
-<li>Instant
-
-<ul>
-<li>represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event</li>
-</ul></li>
-
-<li><p>LocalDate,  LocalTime, LocalDateTime</p>
-
-<ul>
-<li>represents human readable date, time, and datetime without a time zone.</li>
-</ul></li>
-
-<li><p>OffsetTime, OffsetDateTime</p>
-
-<ul>
-<li>It represent a time and datetime with a zone offset from UTC.
-<br /></li>
-</ul></li>
-
-<li><p>ZonedDateTime</p>
-
-<ul>
-<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
-<br /></li>
-</ul></li>
-</ul>
-
-<h2 id="iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</h2>
-
-<ul>
-<li>[date]T[time][zone offset]</li>
-<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day<br /></li>
-<li>Epoch is Midnight January 1, 1970 UTC</li>
-</ul>
-
-<h2 id="useful-datetime-related-enums">Useful Datetime-Related Enums</h2>
-
-<ul>
-<li>Month</li>
-<li>DayOfWeek</li>
-<li>ChronoField</li>
-<li>ChronoUnit</li>
-</ul>
-
-<h3 id="period">Period</h3>
-
-<p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
-
-<h3 id="partial">Partial</h3>
-
-<p>Partials
-A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.</p>
-
-<h3 id="adjusting-dates">Adjusting Dates</h3>
-
-<p>Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the <code>TemporalAdjuster</code> interface. The interface has one method, adjustInto(), that takes a Temporal and returns a <code>Temporal</code>.</p>
-
-<h3 id="formatting">Formatting</h3>
-
-<p>The most important point to keep in mind is that formatting and parsing are
-always performed by an object of the DateTimeFormatter class.</p>
-
-<h2 id="datetimeapidemo">DateTimeApiDemo</h2>
-
-<pre><code class="language-java">import java.time.Duration;
-import java.time.DayOfWeek;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime; 
-import java.time.LocalDateTime; 
-
-import java.time.Month;
-import java.time.MonthDay;
-
-import java.time.OffsetDateTime;
-import java.time.Period;
-
-
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAdjusters;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
-
-
-import java.time.Year;
-import java.time.YearMonth;
-
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
-
-import java.util.Locale;
-import java.util.Set;
-
-
-import static java.time.Month.JANUARY;
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HOURS;
-import static java.time.temporal.ChronoUnit.MINUTES;
-
-
-public class DateTimeApiDemo {
-
-    
-    public static String format(Temporal co, String pattern) {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
-        return fmt.format(co);
-    }
-
-    public static void parseStr(DateTimeFormatter formatter, String text) {
-        try {
-            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
-            if (ta instanceof OffsetDateTime) {
-                OffsetDateTime odt = OffsetDateTime.from(ta);
-                System.out.println(&quot;OffsetDateTime: &quot; + odt);
-            } else if (ta instanceof LocalDateTime) {
-                LocalDateTime ldt = LocalDateTime.from(ta);
-                System.out.println(&quot;LocalDateTime: &quot; + ldt);
-            } else if (ta instanceof LocalDate) {
-                LocalDate ld = LocalDate.from(ta);
-                System.out.println(&quot;LocalDate: &quot; + ld);
-            } else {
-                System.out.println(&quot;Parsing returned: &quot; + ta);
-            }
-        } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void main(String[] args) {
-
-        // Get current date, time, and datetime 
-        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
-        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
-        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
-        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
-
-        //  ofXXX() method
-        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
-        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
-        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
-        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
-
-        // The plusXXX( ) and minusXXX( ) Methods
-        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
-        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
-        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
-        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
-        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
-        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
-
-        // Instant 
-        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
-        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
-
-        Duration d1 = Duration.ofSeconds(55);
-        Duration d2 = Duration.ofSeconds(-17);
-
-        // Compare instants
-        System.out.println(&quot;i1.isBefore(i2):&quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
-        System.out.println(&quot;i1.isAfter(i2):&quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
-
-        // Add and subtract durations to instants
-        Instant i3 = i1.plus(d1);
-        Instant i4 = i2.minus(d2);
-        System.out.println(&quot;i1.plus(d1):&quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
-
-        System.out.println(&quot;i2.minus(d2):&quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
-
-        // Add two durations
-        System.out.println(&quot;d1.plus(d2):&quot; + d1.plus(d2)); // d1.plus(d2):PT38S
-
-
-        // Print All Zone Id
-        Set&lt;String&gt; zoneIds = ZoneId.getAvailableZoneIds();
-        for (String zoneId: zoneIds) {
-          System.out.println(zoneId);
-        }
-
-        // DayOfWeek
-        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
-
-        // Chrono 
-
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(&quot;Year: &quot; + now.get(ChronoField.YEAR));
-        System.out.println(&quot;Month: &quot; + now.get(ChronoField.MONTH_OF_YEAR));
-        System.out.println(&quot;Day: &quot; + now.get(ChronoField.DAY_OF_MONTH));
-        System.out.println(&quot;Hour-of-day: &quot; + now.get(ChronoField.HOUR_OF_DAY));
-        System.out.println(&quot;Hour-of-AMPM: &quot; + now.get(ChronoField.HOUR_OF_AMPM));
-        System.out.println(&quot;AMPM-of-day: &quot; + now.get(ChronoField.AMPM_OF_DAY));
-
-        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
-        Period p2 = Period.ofDays(25); // 25 days
-        Period p3 = Period.ofMonths(-3); // -3 months
-        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
-
-        // Date Adjuster
-        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
-        System.out.println(ld3);
-        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
-        System.out.println(ld3);
-
-        // Date Time Format         
-        System.out.println(format(ld, &quot;M/d/yyyy&quot;));
-        System.out.println(format(ld, &quot;MM/dd/yyyy&quot;));
-        System.out.println(format(ld, &quot;MMM dd, yyyy&quot;));
-        System.out.println(format(ld, &quot;MMMM dd, yyyy&quot;));
-        System.out.println(format(ld, &quot;EEEE, MMMM dd, yyyy&quot;));
-        System.out.println(format(ld, &quot;'Month' q 'in' QQQ&quot;));
-        System.out.println(format(ld, &quot;[MM-dd-yyyy][' at' HH:mm:ss]&quot;));
-
-        // Parse date time
-        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd['T'HH:mm:ss[Z]]&quot;);
-        parseStr(parser, &quot;2012-05-31&quot;); //  LocalDate: 2012-05-31
-        parseStr(parser, &quot;2012-05-31T16:30:12&quot;); // LocalDateTime: 2012-05-31T16:30:12
-        parseStr(parser, &quot;2012-05-31T16:30:12-0500&quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
-        parseStr(parser, &quot;2012-05-31Hello&quot;); // Text '2012-05-31Hello' could not be parsed, unparsed text found at index 10
-
-
-
-    }
-}
-
-</code></pre>
 
 <h1 id="lamda">Lamda</h1>
 
@@ -742,22 +507,10 @@ final class Person {
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">Java Notes - Part 3: Date Time API </a></strong></li>
+				<li><strong><a href="#title">Java Notes - Part 4: Lambda API </a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
-<li><a href="#date-time-api">Date-Time API</a>
-<ul>
-<li><a href="#iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</a></li>
-<li><a href="#useful-datetime-related-enums">Useful Datetime-Related Enums</a>
-<ul>
-<li><a href="#period">Period</a></li>
-<li><a href="#partial">Partial</a></li>
-<li><a href="#adjusting-dates">Adjusting Dates</a></li>
-<li><a href="#formatting">Formatting</a></li>
-</ul></li>
-<li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
-</ul></li>
 <li><a href="#lamda">Lamda</a>
 <ul>
 <li><a href="#lambda-best-practices">Lambda Best Practices</a>
@@ -829,12 +582,12 @@ final class Person {
 					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
 					</li>
 				
-					<li>
-						<span class="active">Java Notes - Part 3: Date Time API </span>
-						</li>
-				
-					<li><a href="/code/java-notes-4/">Java Notes - Part 4: Lambda API </a>
+					<li><a href="/code/java-notes-3/">Java Notes - Part 3: Date Time API </a>
 					</li>
+				
+					<li>
+						<span class="active">Java Notes - Part 4: Lambda API </span>
+						</li>
 				
 					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
 					</li>
