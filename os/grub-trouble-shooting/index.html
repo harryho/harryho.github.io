@@ -88,7 +88,11 @@
 					<span>updated at <time datetime="2017-09-20">20 Sep 2017</time></span>
 				</div>
 				<section>
-					<p><strong>Change BIOS</strong>
+					
+
+<h3 id="update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</h3>
+
+<p><strong>Change BIOS</strong>
 * Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).
 * Some PC&rsquo;s BIOS has <code>BOOT</code> tab option, open the <code>BOOT</code> tab, you will find the <code>OS Boot Manager</code>. It is the simplest way to fix the issue. If your PC&rsquo;s BIOS has no such setting feature, you need to check the next section.</p>
 
@@ -124,6 +128,38 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 
 </code></pre>
 
+<h3 id="boot-from-grub-command-promp">Boot from Grub command promp</h3>
+
+<ul>
+<li><p>Use <ESC> to navigate to grub command promp from Grub menu</p></li>
+
+<li><p>List all available dirves by typing <code>ls</code>. After that, you willl see a couple drives. If you have multiple hard drive, USB or SD Card pluged in.</p></li>
+</ul>
+
+<pre><code>(hd0) (hd0,gpt4) (hd0, gpt3) (hd0,gpt2) (hd0, gpt1)  (hd1) (hd1,msdos2)(hd1, msdos2)(hd2)
+
+# Get more detail of drives
+ls -l
+</code></pre>
+
+<ul>
+<li>From the above detail information, you might find the hard drive of your PC. Continue to use <code>ls</code> to locate the actual boot file to confirm the drive contains the boot file.</li>
+</ul>
+
+<pre><code># Assume the (hd0,gpt2) contains the linux kernal boot file. 
+ls -a (hd0,gpt2)/
+</code></pre>
+
+<ul>
+<li>Set root drive</li>
+</ul>
+
+<pre><code>set root=(hd0,gpt2)
+linux (hd0,gpt2)/boot/vmlinuz-linux-4.4.x-xxx-generic
+initrd (hd0,gpt2)/boot/initrd.img-linux-4.4.x-xxx-generic
+normal
+</code></pre>
+
 				</section>
 			</article>
 		</main>
@@ -139,7 +175,18 @@ bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 			<ul>
 				<li><strong><a href="#title">Grub Trouble Shooting</a></strong></li>
 			</ul>
-			
+			<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</a></li>
+<li><a href="#boot-from-grub-command-promp">Boot from Grub command promp</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
 		</div>
 	</div>
 	<div class="sidebar-module">

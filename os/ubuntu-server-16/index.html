@@ -103,11 +103,160 @@
 <li>You are familiar with basic bash/shell command</li>
 </ul>
 
-<h2 id="things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</h2>
+<h2 id="wireless-setup">Wireless Setup</h2>
+
+<blockquote>
+<p>If you install ubuntu server on a laptop, you might end up to setup the wifi first. Usually you won&rsquo;t bring the cable with your laptop wherever you go, also you might just have no cable or run out all cables. Now let&rsquo;s dive into how to setup the wifi on sever.</p>
+</blockquote>
 
 <ul>
-<li>How to setup your server</li>
+<li>Find out network control installed on your laptop. The column link lists the name of interfaces. The interface name on your laptop will be possible slightly a bit different. It depends on laptop maker. Basically the interface with the type <strong>wlan</strong> is your wifi interface.</li>
 </ul>
+
+<pre><code class="language-bash">networkctl 
+</code></pre>
+
+<ul>
+<li><p>You will see network interfaces on your laptop. enp1s0 is the ethernet interface., and <code>wlp3s0</code> is your wifi interface</p>
+
+<pre><code>IDX LINK           TYPE         OPERATIONAL              SETUP
+    1   lo         loopback     n/a                      unmanaged
+    2   enp1s0     ether        n/a                      unmanaged
+    3   wlp3s0     wlan         n/a                      unmanaged
+</code></pre></li>
+
+<li><p>Disable IP V6 if you don&rsquo;t use it. (Highly recommanded for personal laptop user)</p>
+
+<ul>
+<li>Add  following setting to file  <code>/etc/sysctl.conf</code></li>
+</ul>
+
+<pre><code class="language-bash">net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+</code></pre>
+
+<ul>
+<li>Reconfigure by running the following command</li>
+</ul>
+
+<pre><code class="language-bash">sudo sysctl -p
+
+# Check the ipv6 status. If you see 1 after running command below, it means ipv6
+# has been disabled
+cat /proc/sys/net/ipv6/conf/all/disable_ipv6
+        
+</code></pre></li>
+
+<li><p>Find out the status <code>wpa_supplicant</code></p>
+
+<pre><code class="language-bash">sudo systemctl status wpa_supplicant
+
+# If you find &quot;disabled&quot; in the output, you can simply enable it as below
+
+sudo systemctl enable wpa_supplicant
+
+</code></pre></li>
+
+<li><p>Find out your wifi ESSID</p>
+
+<pre><code class="language-bash">sudo iwlist wlp3s0 scan | grep ESSID
+
+# If you get error message like &quot;network is down&quot;, use ifconfig to bring it up and 
+# re-run previous commmand    
+sudo ifconfig wlp3s0 up
+</code></pre></li>
+
+<li><p>Setup the wpa passphrase for your wifi</p></li>
+</ul>
+
+<pre><code class="language-bash">   # Use following command to add pass phrase to your wpa_supplicant
+   # 
+   # wpa_passphrase &lt;your-ESSID&gt; &lt;your-passphrase&gt; | sudo tee /etc/wpa_supplicant.conf
+
+   # If your ESSID is mywifi and password of wifi is mypasswork, then you will end up the 
+   # command below
+   wpa_passphrase mywifi mypasswork | sudo tee /etc/wpa_supplicant.conf
+
+</code></pre>
+
+<ul>
+<li>Config your wpa supplicant for your wifi interface and run the comand as background process</li>
+</ul>
+
+<pre><code class="language-bash">   sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlp3s0 &gt; /dev/null 2&gt;1&amp; &amp;
+</code></pre>
+
+<ul>
+<li><p>Add SSID scan into config <code>/etc/wpa_supplicant.conf</code></p>
+
+<pre><code class="language-bash">network={
+    ssid=&quot;mywifi&quot;
+    #psk=&quot;mypassword&quot;
+    psk=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    scan_ssid=1
+}
+</code></pre></li>
+
+<li><p>Get IP address from external DHCP</p></li>
+</ul>
+
+<pre><code class="language-bash">  sudo dhclient wlp3s0
+
+  # Check the ip address
+  ifconfig wlp3s0
+</code></pre>
+
+<h3 id="wifi-trouble-shooting">Wifi Trouble Shooting</h3>
+
+<ul>
+<li><p>There is no ip address assigned to your wifi interface</p>
+
+<ul>
+<li><p>Check out the wpa_supplicant status
+<code>sudo systemctl status wpa_supplicant</code></p></li>
+
+<li><p>If you find some error like &lsquo;Failed to construct signal&rsquo;, it means
+some network service has been disabled</p></li>
+</ul>
+
+<p><code>sudo systemctl list-unit-files  --state disabled | grep network</code></p>
+
+<ul>
+<li>Enable <code>systemd-networkd.service</code>, <code>networking.service</code> if they are disabled</li>
+</ul></li>
+
+<li><p>The error message comes after the <code>dhclient</code></p>
+
+<ul>
+<li>Enable the <code>squid.service</code></li>
+</ul></li>
+
+<li><p>Auto connect to wifi on Starup</p></li>
+</ul>
+
+<pre><code class="language-bash">sudo cp /lib/systemd/system/wpa_supplicant.service /etc/systemd/system/wpa_supplicant.service
+
+sudo vi /etc/systemd/system/wpa_supplicant.service
+</code></pre>
+
+<ul>
+<li><p>Replace the following line
+<code>ExecStart=/sbin/wpa_supplicant -u -s -O /run/wpa_supplicant</code>
+with
+<code>ExecStart=/sbin/wpa_supplicant -u -s -c /etc/wpa_supplicant.conf -i wlp3s0</code></p></li>
+
+<li><p>Add wifi  interface into auto startup file <code>/etc/network/interfaces</code></p></li>
+</ul>
+
+<pre><code class="language-bash">auto lo
+iface lo net loopback
+
+auto wlp3s0
+iface wlp3s0 net dchp
+</code></pre>
+
+<h2 id="things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</h2>
 
 <h3 id="ufw-setup">UFW setup</h3>
 
@@ -446,6 +595,10 @@ $ sh rustup.sh
 <li>
 <ul>
 <li><a href="#assumption">Assumption</a></li>
+<li><a href="#wireless-setup">Wireless Setup</a>
+<ul>
+<li><a href="#wifi-trouble-shooting">Wifi Trouble Shooting</a></li>
+</ul></li>
 <li><a href="#things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</a>
 <ul>
 <li><a href="#ufw-setup">UFW setup</a></li>
