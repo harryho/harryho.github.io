@@ -9,7 +9,7 @@
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
     <title>Use Windows command &amp; hotkey as a hacker - Part 2 - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/dracula.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -169,7 +169,8 @@ runas /user:yourpc\administrator &quot;cmd&quot;
 
 REM ##BE CAREFUL When you try the command below ##  
 REM it shows how to create, delete files as admin under C drive root.  
-runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot; 
+runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; \
+    dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot; 
 
 </code></pre>
 
@@ -360,14 +361,16 @@ REM get list of tasks in details
 SCHTASKS /Query /FO LIST /V     
 
 REM get table of running tasks in details and output to csv file 
-SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot;&gt;running_tasks.csv
+SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot; &gt;running_tasks.csv
 </code></pre>
 
 <h2 id="combination-of-multiple-commands">Combination of multiple commands</h2>
 
 <p>As we know, usually each command is designed to complete some specific actions, but sometimes we have to combine different commands together to achieve what we want. There are a few ways to put the commands together.</p>
 
-<h3 id="use-to-simply-connect-to-commands">Use <code>&amp;</code> to simply connect to commands</h3>
+<h3 id="use">Use <code>&amp;</code></h3>
+
+<p>It is used to connect to two commands  and execute them sequentially</p>
 
 <ul>
 <li>Delete a folder with non-empty subdirectries <code>test</code> we need to combine <code>del</code> and <code>rd</code> together. Actually we can two commands one by one, but we can put it together and just execute once.<br /></li>
@@ -388,7 +391,9 @@ tree test
 del /s/q test &amp; rd /s/q
 </code></pre>
 
-<h3 id="use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>&gt;</code> to setup a channel between commands pass the data through the commands.</h3>
+<h3 id="use-pipeline">Use pipeline <code>&gt;</code></h3>
+
+<p>It is used to setup a channel between commands pass the data through the commands.</p>
 
 <p>Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.</p>
 
@@ -404,7 +409,9 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 
 </code></pre>
 
-<h3 id="use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</h3>
+<h3 id="use-for">Use <code>for</code></h3>
+
+<p>It is used to loop to combine commands. Please check out the samples for <code>tasklist</code> or <code>netstat</code>.</p>
 
 <h2 id="script">script</h2>
 
@@ -427,7 +434,11 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 <pre><code class="language-bash">
 @echo off
 
-@echo.&quot;Assumption: You have multiple temp folders in different drives. You want to delete log files inside temp folder and its subdirectries. Before you delete them, you want to list all files first, file list should be sorted by time&quot;
+@echo.&quot;Task: &quot;
+@echo.&quot;You have multiple temp folders in different drives. &quot;
+@echo.&quot;You want to delete log files inside temp folder and its subdirectries. &quot;
+@echo.&quot;Before you delete them, you want to list all files first, file list&quot;
+@echo.&quot;should be sorted by time&quot;
 
 :again 
    echo &quot;Checking all Recycle bins for each drive ...&quot;
@@ -497,10 +508,10 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 </ul></li>
 <li><a href="#combination-of-multiple-commands">Combination of multiple commands</a>
 <ul>
-<li><a href="#use-to-simply-connect-to-commands">Use <code>&amp;</code> to simply connect to commands</a></li>
-<li><a href="#use-pipeline-to-setup-a-channel-between-commands-pass-the-data-through-the-commands">Use pipeline <code>&gt;</code> to setup a channel between commands pass the data through the commands.</a></li>
+<li><a href="#use">Use <code>&amp;</code></a></li>
+<li><a href="#use-pipeline">Use pipeline <code>&gt;</code></a></li>
 <li><a href="#check-cpu-usage-via-command">Check CPU usage via command</a></li>
-<li><a href="#use-for-loop-to-combine-commands-please-check-the-samples-above">Use <code>for</code> loop to combine commands. Please check the samples above.</a></li>
+<li><a href="#use-for">Use <code>for</code></a></li>
 </ul></li>
 <li><a href="#script">script</a>
 <ul>
@@ -544,16 +555,16 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 					<span class="doc-list-category">Code</span>
 				</a>
 				<ul>
-					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					<li><a href="/code/lcthw-lectures.2/">C Lecture - 2</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					<li><a href="/code/lcthw-lectures.4/">C Lecture - 4</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					<li><a href="/code/lcthw-lectures.3/">C Lecture - 3</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					<li><a href="/code/lcthw-lectures.1/">C Lecture - 1</a>
 					</li>
 				
 					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
@@ -568,7 +579,7 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 					<li><a href="/code/java-notes-4/">Java Notes - Part 4: Lambda API </a>
 					</li>
 				
-					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					<li><a href="/code/javascript-oop/">JavaScript and OOP</a>
 					</li>
 				
 					<li><a href="/code/java-notes-2/">Java Notes - Part 2: Currency</a>

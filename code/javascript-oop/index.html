@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>JavaScript and Object Oriented Programming - Hello World</title>
+    <title>JavaScript and OOP - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/dracula.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -83,7 +83,7 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">JavaScript and Object Oriented Programming</h1>
+				<h1 class="doc-entry-title">JavaScript and OOP</h1>
 				<div class="doc-entry-meta">
 					<span>updated at <time datetime="2014-03-20">20 Mar 2014</time></span>
 				</div>
@@ -96,7 +96,7 @@
 <li>Please find the answer on <a href="/#JavaScript">Home Page</a></li>
 </ul>
 
-<h2 id="what-is-object-oriented-programming">What is Object Oriented Programming?</h2>
+<h2 id="what-is-oop">What is OOP?</h2>
 
 <blockquote>
 <p>Object-oriented programming (OOP) is a programming paradigm based on the concept of &ldquo;objects&rdquo;, which may contain data, in the form of fields, as known as attributes or properties; and actions, in the form of functions, as known as methods.</p>
@@ -290,23 +290,31 @@ var objectA = new MyClass();
 var objectB = new MyClass();
 
 console.log( 'object A:', objectA.name ,  'object B:', objectB.name  );
-console.log( 'MyClass.prototype  === objectA.constructor.prototype ? ', MyClass.prototype === objectA.constructor.prototype );
-console.log( 'MyClass.prototype  === objectB.constructor.prototype ? ', MyClass.prototype  === objectB.constructor.prototype );
+console.log( 'MyClass.prototype  === objectA.constructor.prototype ? ', 
+    MyClass.prototype === objectA.constructor.prototype );
+console.log( 'MyClass.prototype  === objectB.constructor.prototype ? ', 
+    MyClass.prototype  === objectB.constructor.prototype );
 
-console.log( &quot; objectA.propObject : &quot;, objectA.propObject , &quot; objectB.propObject : &quot;,  objectB.propObject  );
+console.log( &quot; objectA.propObject : &quot;, objectA.propObject , 
+    &quot; objectB.propObject : &quot;,  objectB.propObject  );
 
 objectA.propObject.id = 1; 
 objectA.propObject.property = 'AAA'; 
 
-console.log( &quot; objectA.propObject : &quot;, objectA.propObject,  &quot; objectB.propObject : &quot;,  objectB.propObject  );
+console.log( &quot; objectA.propObject : &quot;, objectA.propObject,  
+    &quot; objectB.propObject : &quot;,  objectB.propObject  );
 /*
 output :
 
 MyClass object B: MyClass
 MyClass.prototype  === objectA.constructor.prototype ?  true
 MyClass.prototype  === objectB.constructor.prototype ?  true
-objectA.propObject :  Object {id: 0, property: &quot;property&quot;}  objectB.propObject :  Object {id: 0, property: &quot;property&quot;}
-objectA.propObject :  Object {id: 1, property: &quot;AAA&quot;}  objectB.propObject :  Object {id: 1, property: &quot;AAA&quot;}  
+
+objectA.propObject :  Object {id: 0, property: &quot;property&quot;}  
+objectB.propObject :  Object {id: 0, property: &quot;property&quot;}
+
+objectA.propObject :  Object {id: 1, property: &quot;AAA&quot;}  
+objectB.propObject :  Object {id: 1, property: &quot;AAA&quot;}  
 */
 </code></pre>
 
@@ -339,7 +347,11 @@ function Pet(name, master) {
         this.offsprings.push(obj);
     },
     this.getInfo = function () {
-        console.log(&quot; species: &quot;, this.species, &quot; name: &quot;, this.name, &quot; master : &quot;, this.master.name, &quot; &quot;, this.master.gender);
+        console.log(&quot; species: &quot;, this.species, 
+            &quot; name: &quot;, this.name, 
+            &quot; master : &quot;, this.master.name, 
+            &quot; &quot;, this.master.gender);
+
         this.offsprings.forEach(function (e) {
             console.log(&quot; has baby :  &quot;, e.name, &quot; &quot;, e.species);
         });
@@ -410,7 +422,11 @@ Dog.prototype = {
         self.offsprings.push(obj);
     },
     getInfo: function (self) {
-        console.log(&quot; species: &quot;, self.species, &quot; name: &quot;, self.name, &quot; master : &quot;, self.master.name, &quot; &quot;, this.master.gender);
+        console.log(&quot; species: &quot;, self.species, 
+            &quot; name: &quot;, self.name, 
+            &quot; master : &quot;, self.master.name, 
+            &quot; &quot;, this.master.gender);
+
         self.offsprings.forEach(function (e) {
             console.log(&quot; has baby :  &quot;, e.name, &quot; &quot;, e.species);
         });
@@ -468,7 +484,10 @@ Pet.prototype.deliverBaby = function (obj) {
 };
 
 Pet.prototype.getInfo = function () {
-    console.log(&quot; species: &quot;, this.species, &quot; name: &quot;, this.name, &quot; master : &quot;, (this.master?this.master.name:''), &quot; &quot;,  (this.master?this.master.gender:''));
+    console.log(&quot; species: &quot;, self.species, 
+            &quot; name: &quot;, self.name, 
+            &quot; master : &quot;, self.master.name, 
+            &quot; &quot;, this.master.gender);
     this.offsprings.forEach(function (e) {
         console.log(&quot; has baby :  &quot;, e.name, &quot; &quot;, e.species);
     });
@@ -539,7 +558,11 @@ var Pet = {
         this.offsprings.push(obj);
     },
     getInfo: function () {
-        console.log(&quot; species: &quot;, this.species, &quot; name: &quot;, name, &quot; master : &quot;, this.master.name, &quot; &quot;, this.master.gender);
+        console.log(&quot; species: &quot;, this.species, 
+        &quot; name: &quot;, name, 
+        &quot; master : &quot;, this.master.name,
+         &quot; &quot;, this.master.gender);
+
         this.offsprings.forEach(function (e) {
             console.log(&quot; has baby :  &quot;, e.name, &quot; &quot;, e.species);
         });
@@ -550,7 +573,11 @@ var Dog = clone(Pet);
 Dog.species = 'Dog';
 
 Dog.getInfo = function () {
-    console.log(&quot; Override -- species: &quot;, this.species, &quot; name: &quot;, this.name, &quot; master : &quot;, this.master.name, &quot; &quot;, this.master.gender);
+    console.log(&quot; Override -- species: &quot;, this.species, 
+    &quot; name: &quot;, this.name,
+    &quot; master : &quot;, this.master.name, 
+    &quot; &quot;, this.master.gender);
+
     this.offsprings.forEach(function (e) {
         console.log(&quot; has baby :  &quot;, e.name, &quot; &quot;, e.species);
     });
@@ -625,7 +652,8 @@ This allows you to add new methods to a prototype which will be automatically ma
 
 console.log(  closureObject.publicProperty );
 console.log(  closureObject._privateProperty ); 
-// console.log(  closureObject._privateMethod() ); // This will cause Uncaught TypeError
+// console.log(  closureObject._privateMethod() ); 
+// This will cause Uncaught TypeError
 console.log(  closureObject.getPrivateProperty() );
 
 closureObject.setPrivateProperty( 'public');
@@ -635,9 +663,9 @@ console.log(  closureObject.getPrivateProperty() );
 output:
 
 Public Property
-undefined             // privateProperty can not be accessed directly
+undefined      //--&gt; privateProperty can not be accessed directly
 private               
-public                // privateProperty can be updated by public method
+public            //--&gt; privateProperty can be updated by public method
 */
 </code></pre>
 
@@ -729,8 +757,8 @@ A common pattern that you will see in many libraries, widgets, and plugins</p>
         if (obj === null || typeof obj !== 'object') {
             return obj;
         }
-
-        var temp = obj.constructor(); // give temp the original obj's constructor
+        // give temp the original obj's constructor
+        var temp = obj.constructor(); 
         for (var key in obj) {
             temp[key] = clone(obj[key]);
         } 
@@ -804,8 +832,17 @@ console.log(rtkns.utils.toString( client2));
 /*
 
 output:
-{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,&quot;name&quot;:&quot;client 1&quot;,&quot;email&quot;:&quot;client1.email@test.com&quot;,&quot;orders&quot;:[{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,&quot;amount&quot;:100,&quot;description&quot;:&quot;order 1&quot;}]}
-VM95:2 {&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,&quot;name&quot;:&quot;client 2&quot;,&quot;email&quot;:&quot;client2.email@test.com&quot;,&quot;orders&quot;:[{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,&quot;amount&quot;:600,&quot;description&quot;:&quot;order 2&quot;}]}
+{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,
+    &quot;name&quot;:&quot;client 1&quot;,&quot;email&quot;:&quot;client1.email@test.com&quot;,
+    &quot;orders&quot;:[{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,
+        &quot;created&quot;:null,&quot;modified&quot;:null,
+        &quot;amount&quot;:100,&quot;description&quot;:&quot;order 1&quot;}]}
+    
+{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,&quot;created&quot;:null,&quot;modified&quot;:null,
+    &quot;name&quot;:&quot;client 2&quot;,&quot;email&quot;:&quot;client2.email@test.com&quot;,
+    &quot;orders&quot;:[{&quot;id&quot;:0,&quot;createdBy&quot;:&quot;&quot;,&quot;modifiedBy&quot;:&quot;&quot;,
+        &quot;created&quot;:null,&quot;modified&quot;:null,
+        &quot;amount&quot;:600,&quot;description&quot;:&quot;order 2&quot;}]}
 */
 </code></pre>
 
@@ -844,7 +881,10 @@ var Interface = function(interfaceName, interfaceMembers) {
 };
 
 Interface.errorDetect = function(interfaceName, interfaceMember) {
-    throw Error('errorDetect: Class does not implement interface member ' + interfaceName + '.' + interfaceMember + '()');
+    throw Error('errorDetect: Class does not implement interface member '
+     + interfaceName 
+     + '.' 
+     + interfaceMember + '()');
 };
 
 Interface.ensureImplement = function(obj /*, interfaces */ ) {
@@ -899,7 +939,8 @@ console.log(Interface.ensureImplement( loggerB, ILog));
 /*
 output:
 true
-Uncaught Error: errorDetect: Class does not implement interface member ILog.logError()
+Uncaught Error: errorDetect: Class does not
+ implement interface member ILog.logError()
 ...
 */
 
@@ -939,14 +980,14 @@ true
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">JavaScript and Object Oriented Programming</a></strong></li>
+				<li><strong><a href="#title">JavaScript and OOP</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li>
 <ul>
 <li><a href="#what-is-javascript">What is JavaScript?</a></li>
-<li><a href="#what-is-object-oriented-programming">What is Object Oriented Programming?</a></li>
+<li><a href="#what-is-oop">What is OOP?</a></li>
 <li><a href="#assumption">Assumption</a></li>
 <li><a href="#data-types">Data types</a></li>
 <li><a href="#object-and-prototype">Object and prototype</a></li>
@@ -1000,16 +1041,16 @@ true
 					<span class="doc-list-category">Code</span>
 				</a>
 				<ul>
-					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					<li><a href="/code/lcthw-lectures.2/">C Lecture - 2</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					<li><a href="/code/lcthw-lectures.4/">C Lecture - 4</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					<li><a href="/code/lcthw-lectures.3/">C Lecture - 3</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					<li><a href="/code/lcthw-lectures.1/">C Lecture - 1</a>
 					</li>
 				
 					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
@@ -1025,7 +1066,7 @@ true
 					</li>
 				
 					<li>
-						<span class="active">JavaScript and Object Oriented Programming</span>
+						<span class="active">JavaScript and OOP</span>
 						</li>
 				
 					<li><a href="/code/java-notes-2/">Java Notes - Part 2: Currency</a>

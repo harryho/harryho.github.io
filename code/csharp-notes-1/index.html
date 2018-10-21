@@ -9,7 +9,7 @@
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
     <title>C# Notes -- Part 1 - Hello World</title>
     
-    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/railscasts.css">
+    <link rel="stylesheet" href="https://harryho.github.io/css/highlight/dracula.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/theme.css">
@@ -297,14 +297,18 @@ public class ExpressionBuilder
                 if (exp == null)
                     exp = GetExpression&lt;T&gt;(param, filters[0], filters[1]);
                 else
-                    exp = Expression.AndAlso(exp, GetExpression&lt;T&gt;(param, filters[0], filters[1]));
+                    exp = Expression.AndAlso(
+                        exp, 
+                        GetExpression&lt;T&gt;(param, filters[0], filters[1]));
 
                 filters.Remove(f1);
                 filters.Remove(f2);
 
                 if (filters.Count == 1)
                 {
-                    exp = Expression.AndAlso(exp, GetExpression&lt;T&gt;(param, filters[0]));
+                    exp = Expression.AndAlso(
+                        exp, 
+                        GetExpression&lt;T&gt;(param, filters[0]));
                     filters.RemoveAt(0);
                 }
             }
@@ -313,7 +317,9 @@ public class ExpressionBuilder
         return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(exp, param);
     }
 
-    private static ConstantExpression ConvetValueType(MemberExpression member, object value)
+    private static ConstantExpression ConvetValueType(
+        MemberExpression member, 
+        object value)
     {
         if (member.Type == typeof(int))
         {
@@ -335,42 +341,66 @@ public class ExpressionBuilder
         return Expression.Constant(value);
     }
 
-    private static Expression GetExpression&lt;T&gt;(ParameterExpression param, Filter filter)
+    private static Expression GetExpression&lt;T&gt;(
+        ParameterExpression param, 
+        Filter filter)
     {
 
-        MemberExpression member = Expression.Property(param, filter.Property);
+        MemberExpression member = Expression.Property(
+            param, filter.Property);
 
         switch (filter.Op)
         {
             case Op.Equals:
-                return Expression.Equal(member, Expression.Constant(filter.Val, member.Type));
+                return Expression.Equal(
+                    member, 
+                    Expression.Constant(filter.Val, member.Type));
 
             case Op.GreaterThan:
-                return Expression.GreaterThan(member, ConvetValueType(member, filter.Val));
+                return Expression.GreaterThan(
+                    member, 
+                    ConvetValueType(member, filter.Val));
 
             case Op.GreaterThanOrEqual:
-                return Expression.GreaterThanOrEqual(member, ConvetValueType(member, filter.Val));
+                return Expression.GreaterThanOrEqual(
+                    member, 
+                    ConvetValueType(member, filter.Val));
 
             case Op.LessThan:
-                return Expression.LessThan(member, ConvetValueType(member, filter.Val));
+                return Expression.LessThan(
+                    member, 
+                    ConvetValueType(member, filter.Val));
 
             case Op.LessThanOrEqual:
-                return Expression.LessThanOrEqual(member, ConvetValueType(member, filter.Val));
+                return Expression.LessThanOrEqual(
+                    member, 
+                    ConvetValueType(member, filter.Val));
 
             case Op.Contains:
-                return Expression.Call(member, containsMethod, Expression.Constant(filter.Val, member.Type));
+                return Expression.Call(
+                    member, 
+                    containsMethod, 
+                    Expression.Constant(filter.Val, member.Type));
 
             case Op.StartsWith:
-                return Expression.Call(member, startsWithMethod, Expression.Constant(filter.Val, member.Type));
+                return Expression.Call(
+                    member, 
+                    startsWithMethod, Expression.Constant(
+                        filter.Val, 
+                        member.Type));
 
             case Op.EndsWith:
-                return Expression.Call(member, endsWithMethod, Expression.Constant(filter.Val, member.Type));
+                return Expression.Call(
+                    member, 
+                    endsWithMethod, 
+                    Expression.Constant(filter.Val, member.Type));
         }
 
         return null;
     }
 
-    private static BinaryExpression GetExpression&lt;T&gt;(ParameterExpression param, Filter filter1, Filter filter2)
+    private static BinaryExpression GetExpression&lt;T&gt;(\
+        ParameterExpression param, Filter filter1, Filter filter2)
     {
         Expression bin1 = GetExpression&lt;T&gt;(param, filter1);
         Expression bin2 = GetExpression&lt;T&gt;(param, filter2);
@@ -395,21 +425,31 @@ public static class PredicateBuilder
     public static Expression&lt;Func&lt;T, bool&gt;&gt; True&lt;T&gt;() { return f =&gt; true; }
     public static Expression&lt;Func&lt;T, bool&gt;&gt; False&lt;T&gt;() { return f =&gt; false; }
 
-    public static Expression&lt;Func&lt;T, bool&gt;&gt; Or&lt;T&gt;(this Expression&lt;Func&lt;T, bool&gt;&gt; expr1, Expression&lt;Func&lt;T, bool&gt;&gt; expr2)
+    public static Expression&lt;Func&lt;T, bool&gt;&gt; Or&lt;T&gt;(
+        this Expression&lt;Func&lt;T, bool&gt;&gt; expr1, Expression&lt;Func&lt;T, bool&gt;&gt; expr2)
     {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;
-                (Expression.OrElse(expr1.Body, secondBody), expr1.Parameters);
+        var secondBody = expr2.Body.Replace(
+            expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(
+            Expression.OrElse(expr1.Body, secondBody), 
+            expr1.Parameters);
     }
 
-    public static Expression&lt;Func&lt;T, bool&gt;&gt; And&lt;T&gt;(this Expression&lt;Func&lt;T, bool&gt;&gt; expr1, Expression&lt;Func&lt;T, bool&gt;&gt; expr2)
+    public static Expression&lt;Func&lt;T, bool&gt;&gt; And&lt;T&gt;(
+        this Expression&lt;Func&lt;T, bool&gt;&gt; expr1, 
+        Expression&lt;Func&lt;T, bool&gt;&gt; expr2)
     {
-        var secondBody = expr2.Body.Replace(expr2.Parameters[0], expr1.Parameters[0]);
-        return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;
-                (Expression.AndAlso(expr1.Body, secondBody), expr1.Parameters);
+        var secondBody = expr2.Body.Replace(
+            expr2.Parameters[0], expr1.Parameters[0]);
+        return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt; (
+                    Expression.AndAlso(expr1.Body, secondBody), 
+                    expr1.Parameters);
     }
 
-    public static Expression Replace(this Expression expression, Expression searchEx, Expression replaceEx)
+    public static Expression Replace(
+        this Expression expression, 
+        Expression searchEx, 
+        Expression replaceEx)
     {
         return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
     }
@@ -510,16 +550,16 @@ public static class PredicateBuilder
 					<span class="doc-list-category">Code</span>
 				</a>
 				<ul>
-					<li><a href="/code/lcthw-lectures.2/">LCTHW C Lectures 2</a>
+					<li><a href="/code/lcthw-lectures.2/">C Lecture - 2</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.4/">LCTHW C Lectures 4</a>
+					<li><a href="/code/lcthw-lectures.4/">C Lecture - 4</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.3/">LCTHW C Lectures 3</a>
+					<li><a href="/code/lcthw-lectures.3/">C Lecture - 3</a>
 					</li>
 				
-					<li><a href="/code/lcthw-lectures.1/">LCTHW C Lectures 1</a>
+					<li><a href="/code/lcthw-lectures.1/">C Lecture - 1</a>
 					</li>
 				
 					<li>
@@ -535,7 +575,7 @@ public static class PredicateBuilder
 					<li><a href="/code/java-notes-4/">Java Notes - Part 4: Lambda API </a>
 					</li>
 				
-					<li><a href="/code/javascript-oop/">JavaScript and Object Oriented Programming</a>
+					<li><a href="/code/javascript-oop/">JavaScript and OOP</a>
 					</li>
 				
 					<li><a href="/code/java-notes-2/">Java Notes - Part 2: Currency</a>
