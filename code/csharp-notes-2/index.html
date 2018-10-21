@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Hello World">
     <link rel="icon" href="https://harryho.github.io/favicon.ico">
-    <title>C# Notes -- Part 2 - Hello World</title>
+    <title>C# Note - 2 - Hello World</title>
     
     <link rel="stylesheet" href="https://harryho.github.io/css/highlight/dracula.css">
     <link rel="stylesheet" href="https://harryho.github.io/css/bootstrap.min.css">
@@ -83,7 +83,7 @@
 		<main role="main">
 			<article>
 				<a id="title"></a>
-				<h1 class="doc-entry-title">C# Notes -- Part 2</h1>
+				<h1 class="doc-entry-title">C# Note - 2</h1>
 				<div class="doc-entry-meta">
 					<span>updated at <time datetime="2015-04-10">10 Apr 2015</time></span>
 				</div>
@@ -98,7 +98,7 @@
 
 <h1 id="solution">Solution</h1>
 
-<h2 id="options-as-scheduled-backgroud-service">Options as scheduled backgroud service</h2>
+<h2 id="option-1">Option 1</h2>
 
 <h3 id="windows-task-scheduler">Windows Task Scheduler</h3>
 
@@ -110,6 +110,8 @@
 <li>Double-click Task Scheduler.</li>
 </ul>
 
+<h2 id="option-2">Option 2</h2>
+
 <h3 id="use-window-service-as-task-scheduler">Use Window Service as task scheduler</h3>
 
 <h4 id="overview-of-design">Overview of design</h4>
@@ -118,7 +120,7 @@
 
 <pre><code class="language-ini">
         +----------------------------------+          Register as
-        |     System.ServiceProces  ------ |--------O Window Service
+        |     System.ServiceProces  -----  |--------o Window Service
         +----------------------------------+
         |  +----------------------------+  |
         |  |   Thread (Infinite)        |  | 
@@ -142,11 +144,11 @@
                  /|\
                   |
         +------------------+
-        |      BaseTask    |  -----------O Customized Task inherit BaseTask   
+        |      BaseTask    |  -----------o Customized Task inherit BaseTask   
         +------------------+
-        | lastProcessTime  | ------------O Last process time 
-        | intervalTime     | ------------O Customize for next process time 
-        | IsReadyProcess() | ------------O Check taks is ready to process 
+        | lastProcessTime  | ------------o Last process time 
+        | intervalTime     | ------------o Customize for next process time 
+        | IsReadyProcess() | ------------o Check taks is ready to process 
         +------------------+
 
 </code></pre>
@@ -434,16 +436,19 @@ namespace MyScheduler
 		<div class="sidebar-toc">
 			<h4 class="sidebar-heading">Table of Contents</h4>
 			<ul>
-				<li><strong><a href="#title">C# Notes -- Part 2</a></strong></li>
+				<li><strong><a href="#title">C# Note - 2</a></strong></li>
 			</ul>
 			<nav id="TableOfContents">
 <ul>
 <li><a href="#problem">Problem</a></li>
 <li><a href="#solution">Solution</a>
 <ul>
-<li><a href="#options-as-scheduled-backgroud-service">Options as scheduled backgroud service</a>
+<li><a href="#option-1">Option 1</a>
 <ul>
 <li><a href="#windows-task-scheduler">Windows Task Scheduler</a></li>
+</ul></li>
+<li><a href="#option-2">Option 2</a>
+<ul>
 <li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
 <ul>
 <li><a href="#overview-of-design">Overview of design</a></li>
@@ -505,11 +510,11 @@ namespace MyScheduler
 					<li><a href="/code/lcthw-lectures.1/">C Lecture - 1</a>
 					</li>
 				
-					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					<li><a href="/code/csharp-notes-1/">C# Note - 1</a>
 					</li>
 				
 					<li>
-						<span class="active">C# Notes -- Part 2</span>
+						<span class="active">C# Note - 2</span>
 						</li>
 				
 					<li><a href="/code/java-notes-3/">Java Notes - Part 3: Date Time API </a>

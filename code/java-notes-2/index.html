@@ -120,7 +120,9 @@
         for (int i = 0; i &lt; threads.length; i++) {
             threads[i].join();
         }
-        System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] All  -threads have finished.&quot;);
+        System.out.println(&quot;[&quot; 
+            + Thread.currentThread().getName() 
+            + &quot;] All  -threads have finished.&quot;);
     }
 }
 </code></pre>
@@ -142,9 +144,13 @@ that tries to access it.</p></li>
 
     public void run() {
         while (counter &lt; 10) {
-            System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;]  -    before: &quot; + counter);
+            System.out.println(&quot;[&quot; 
+                + Thread.currentThread().getName() 
+                + &quot;]  -    before: &quot; + counter);
             counter++;
-            System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;]  -    after: &quot; + counter);
+            System.out.println(&quot;[&quot; 
+                + Thread.currentThread().getName() 
+                + &quot;]  -    after: &quot; + counter);
         }
     }
 
@@ -199,9 +205,13 @@ public class SyncCounter implements Runnable {
     public void run() {
         while (counter &lt; 10) {
             synchronized (SyncCounter.class) {
-                System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] - before: &quot; + counter);
+                System.out.println(&quot;[&quot; 
+                    + Thread.currentThread().getName() 
+                    + &quot;] - before: &quot; + counter);
                 counter++;
-                System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] - after: &quot; + counter);
+                System.out.println(&quot;[&quot; 
+                    + Thread.currentThread().getName() 
+                    + &quot;] - after: &quot; + counter);
             }
         }
     }
@@ -354,14 +364,16 @@ public class SemaphoreDemo {
             binary.acquire();
 
             //mutual exclusive region
-            System.out.println(Thread.currentThread().getName() + &quot; inside mutual exclusive region&quot;);
+            System.out.println(Thread.currentThread().getName() 
+                + &quot; inside mutual exclusive region&quot;);
             Thread.sleep(1000);
 
         } catch (InterruptedException i.e.) {
             ie.printStackTrace();
         } finally {
             binary.release();
-            System.out.println(Thread.currentThread().getName() + &quot; outside of mutual exclusive region&quot;);
+            System.out.println(Thread.currentThread().getName() 
+                + &quot; outside of mutual exclusive region&quot;);
         }
     } 
   
@@ -651,7 +663,9 @@ final class Task implements Runnable{
   
     @Override
     public void run() {
-        System.out.println(&quot;Task ID : &quot; + this.taskId +&quot; performed by &quot; + Thread.currentThread().getName());
+        System.out.println(&quot;Task ID : &quot; 
+            + this.taskId +&quot; performed by &quot; 
+            + Thread.currentThread().getName());
     }  
 }
 
@@ -754,8 +768,7 @@ public class SubmitInvokeDemo {
 <h3 id="join-and-fork-with-executor-service">Join and Fork with Executor Service</h3>
 
 <ul>
-<li>The demo code submit() our tasks to the ExecutorService and then use the returned instance of <code>Future</code> to wait() for the result. The normal
-<code>ExecutorService</code> where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.</li>
+<li>The demo code submit() our tasks to the ExecutorService and then use the returned instance of <code>Future</code> to wait() for the result. The normal <code>ExecutorService</code> where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.</li>
 </ul>
 
 <pre><code class="language-java">import java.util.concurrent.ExecutorService;
@@ -771,7 +784,10 @@ public class FindMinTask implements Callable&lt;Integer&gt; {
     private int endIndex;
     private ExecutorService executorService;
 
-    public FindMinTask(ExecutorService executorService, int[] numbers, int startIndex, int endIndex) {
+    public FindMinTask(
+        ExecutorService executorService, 
+        int[] numbers, int startIndex, int endIndex) {
+
         this.executorService = executorService;
         this.numbers = numbers;
         this.startIndex = startIndex;
@@ -782,11 +798,15 @@ public class FindMinTask implements Callable&lt;Integer&gt; {
 
         int sliceLength = (endIndex - startIndex) + 1;
         if (sliceLength &gt; 2) {
-            FindMinTask lowerFindMin = new FindMinTask(executorService, numbers, startIndex,
+            FindMinTask lowerFindMin = new FindMinTask(
+                    executorService, numbers, startIndex,
                     startIndex + (sliceLength / 2) - 1);
+                    
             Future&lt;Integer&gt; futureLowerFindMin = executorService.submit(lowerFindMin);
-            FindMinTask upperFindMin = new FindMinTask(executorService, numbers, startIndex + (sliceLength / 2),
+            FindMinTask upperFindMin = new FindMinTask(
+                    executorService, numbers, startIndex + (sliceLength / 2),
                     endIndex);
+
             Future&lt;Integer&gt; futureUpperFindMin = executorService.submit(upperFindMin);
             return Math.min(futureLowerFindMin.get(), futureUpperFindMin.get());
         } else {
@@ -794,7 +814,9 @@ public class FindMinTask implements Callable&lt;Integer&gt; {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
+    public static void main(String[] args) 
+        throws InterruptedException, ExecutionException {
+
         int[] numbers = new int[100];
         Random random = new Random(System.currentTimeMillis());
         for (int i = 0; i &lt; numbers.length; i++) {
@@ -802,7 +824,10 @@ public class FindMinTask implements Callable&lt;Integer&gt; {
         }
         ExecutorService executorService = Executors.newFixedThreadPool(64);
         Future&lt;Integer&gt; futureResult = executorService
-                .submit(new FindMinTask(executorService, numbers, 0, numbers.length - 1));
+                .submit(new FindMinTask(
+                        executorService, 
+                        numbers, 0, numbers.length - 1));
+
         System.out.println(futureResult.get());
         executorService.shutdown();
     }
@@ -848,10 +873,12 @@ public class GrayscaleImageAction extends RecursiveAction {
     }
 
     public static void main(String[] args) throws IOException {
-        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        ForkJoinPool pool = new ForkJoinPool(
+                Runtime.getRuntime().availableProcessors());
         BufferedImage bufferedImage = ImageIO.read(new File(args[0]));
         for (int row = 0; row &lt; bufferedImage.getHeight(); row++) {
-            GrayscaleImageAction action = new GrayscaleImageAction(row, bufferedImage);
+            GrayscaleImageAction action = new GrayscaleImageAction(
+                row, bufferedImage);
             pool.execute(action);
         }
         pool.shutdown();
@@ -959,10 +986,10 @@ public class GrayscaleImageAction extends RecursiveAction {
 					<li><a href="/code/lcthw-lectures.1/">C Lecture - 1</a>
 					</li>
 				
-					<li><a href="/code/csharp-notes-1/">C# Notes -- Part 1</a>
+					<li><a href="/code/csharp-notes-1/">C# Note - 1</a>
 					</li>
 				
-					<li><a href="/code/csharp-notes-2/">C# Notes -- Part 2</a>
+					<li><a href="/code/csharp-notes-2/">C# Note - 2</a>
 					</li>
 				
 					<li><a href="/code/java-notes-3/">Java Notes - Part 3: Date Time API </a>
