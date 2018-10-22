@@ -120,15 +120,13 @@
 
 <h2 id="assumption">Assumption</h2>
 
-<h3 id="apache-path-c-apache-version-2-4-x-vc11-x86">Apache path <code>c:\apache</code>. Version 2.4.x, VC11, x86</h3>
-
-<h3 id="php-path-c-php-version-5-6-x-vc11-x86">PHP path <code>c:\php</code>, Version 5.6.x, VC11, x86</h3>
-
-<h3 id="use-localhost-1234-as-test-website-url">Use <code>localhost:1234</code> as test website URL</h3>
-
-<h3 id="project-workspace-path-c-php-workspace">Project workspace path <code>c:\php_workspace</code></h3>
-
-<h3 id="website-root-path-c-php-workspace-phpsite-the-index-php-is-under-this-root-path">Website root path <code>c:\php_workspace\phpsite</code>, the <code>index.php</code> is under this root path</h3>
+<ul>
+<li>Apache path <code>c:\apache</code>. Version 2.4.x, VC11, x86</li>
+<li>PHP path <code>c:\php</code>, Version 5.6.x, VC11, x86</li>
+<li>Use <code>localhost:1234</code> as test website URL</li>
+<li>Project workspace path <code>c:\php_workspace</code></li>
+<li>Website root path <code>c:\php_workspace\phpsite</code>, the <code>index.php</code> is under this root path</li>
+</ul>
 
 <h2 id="prepare-php-for-debugging">Prepare PHP for debugging</h2>
 
@@ -196,16 +194,17 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 
 <p><strong>If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.</strong></p>
 
-<h3 id="open-phpsite-as-php-the-project-with-eclipse-pdt">Open phpsite as PHP the project with Eclipse PDT</h3>
+<ul>
+<li><p>Open phpsite as PHP the project with Eclipse PDT</p></li>
 
-<h3 id="setup-php-web-application-for-debugging">Setup PHP Web Application for debugging</h3>
+<li><p>Setup PHP Web Application for debugging</p>
 
 <ul>
 <li>Choose menu <code>Run</code> &gt; <code>Debug Configurations</code> &gt; <code>PHP Web Application</code></li>
 <li>Add new configuration by clicking <img src="/img/php_pdt_new_debug.png" alt="New" /></li>
-</ul>
+</ul></li>
 
-<h3 id="configure-php-web-server">Configure PHP Web Server</h3>
+<li><p>Configure PHP Web Server</p>
 
 <ul>
 <li>Choose <code>Default PHP Web Server</code> from the dropdown list</li>
@@ -217,15 +216,17 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 <li>Choose the File <code>c:\php_workspace\phpsite\index.php</code> as startup page.</li>
 <li>If the <code>Auto Generated URL</code> is not <code>localhost:1234/index.php</code>, then manually update it.</li>
 <li>After all these done, you can debug your website now.</li>
+</ul></li>
 </ul>
 
 <h2 id="debug-php-with-netbeans">Debug PHP with Netbeans</h2>
 
 <p><strong>If you have PHP 7 installed, please choose the up to PHP 5.6.x as PHP runtime.</strong></p>
 
-<h3 id="open-phpsite-as-php-the-project-with-netbeans">Open phpsite as PHP the project with Netbeans.</h3>
+<ul>
+<li><p>Open phpsite as PHP the project with Netbeans.</p></li>
 
-<h3 id="configure-php-web-server-1">Configure PHP Web Server</h3>
+<li><p>Configure PHP Web Server</p>
 
 <ul>
 <li>On the <code>Projects</code> panel, choose the project <code>phpsite</code> , right click and choose <code>Properties</code></li>
@@ -237,30 +238,33 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 <li>Add a new path mapping. Enter <code>/</code> as <code>Path on Server</code>, Put <code>c:\php_workspace\phpsite</code> as <code>Path in File system</code>, then leave other setting as default.</li>
 <li>Leave other default setting and click button <code>OK</code></li>
 <li>Now you can debug php site with Netbeans</li>
+</ul></li>
 </ul>
 
 <h2 id="use-nginx-instead-of-apache">Use Nginx instead of Apache</h2>
 
-<h3 id="download-runhiddenconsole">Download <code>RunHiddenConsole</code></h3>
+<ul>
+<li><p>Download <code>RunHiddenConsole</code></p>
 
 <ul>
 <li>Download <a href="http://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip">RunHiddenConsole</a></li>
 <li>Extract the file <code>RunHiddenConsole.exe</code> to folder <code>c:\bin\</code></li>
-</ul>
+</ul></li>
 
-<h3 id="install-nginx-32-bit-version">Install Nginx 32 bit version.</h3>
+<li><p>Install Nginx 32 bit version.</p>
 
 <ul>
 <li>We assume the ngnix&rsquo;s path is <code>c:\nginx\</code></li>
-</ul>
+</ul></li>
 
-<h3 id="confirm-php-cgi-exe-is-within-the-php-folder-c-php">Confirm <code>php-cgi.exe</code> is within the PHP folder <code>c:\php</code>.</h3>
+<li><p>Confirm <code>php-cgi.exe</code> is within the PHP folder <code>c:\php</code>.</p></li>
 
-<h3 id="setup-nginx-fastcgi-with-php">Setup Nginx FastCGI with PHP</h3>
+<li><p>Setup Nginx FastCGI with PHP</p>
 
 <ul>
 <li>Back the original <code>nginx.conf</code></li>
 <li>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</li>
+</ul></li>
 </ul>
 
 <pre><code class="language-dos">@ECHO OFF
@@ -485,36 +489,16 @@ sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/20-xde
 <li><a href="#use-amp-package-as-smart-choice">Use AMP package as smart choice</a></li>
 <li><a href="#manage-your-shits-without-amp-package">Manage your shits without AMP package</a></li>
 </ul></li>
-<li><a href="#assumption">Assumption</a>
-<ul>
-<li><a href="#apache-path-c-apache-version-2-4-x-vc11-x86">Apache path <code>c:\apache</code>. Version 2.4.x, VC11, x86</a></li>
-<li><a href="#php-path-c-php-version-5-6-x-vc11-x86">PHP path <code>c:\php</code>, Version 5.6.x, VC11, x86</a></li>
-<li><a href="#use-localhost-1234-as-test-website-url">Use <code>localhost:1234</code> as test website URL</a></li>
-<li><a href="#project-workspace-path-c-php-workspace">Project workspace path <code>c:\php_workspace</code></a></li>
-<li><a href="#website-root-path-c-php-workspace-phpsite-the-index-php-is-under-this-root-path">Website root path <code>c:\php_workspace\phpsite</code>, the <code>index.php</code> is under this root path</a></li>
-</ul></li>
+<li><a href="#assumption">Assumption</a></li>
 <li><a href="#prepare-php-for-debugging">Prepare PHP for debugging</a>
 <ul>
 <li><a href="#download-xdebug-and-install-it">Download XDebug and install it</a></li>
 <li><a href="#setup-apache-to-load-php">Setup Apache to load PHP</a></li>
 </ul></li>
-<li><a href="#debug-php-with-pdt">Debug PHP with PDT</a>
-<ul>
-<li><a href="#open-phpsite-as-php-the-project-with-eclipse-pdt">Open phpsite as PHP the project with Eclipse PDT</a></li>
-<li><a href="#setup-php-web-application-for-debugging">Setup PHP Web Application for debugging</a></li>
-<li><a href="#configure-php-web-server">Configure PHP Web Server</a></li>
-</ul></li>
-<li><a href="#debug-php-with-netbeans">Debug PHP with Netbeans</a>
-<ul>
-<li><a href="#open-phpsite-as-php-the-project-with-netbeans">Open phpsite as PHP the project with Netbeans.</a></li>
-<li><a href="#configure-php-web-server-1">Configure PHP Web Server</a></li>
-</ul></li>
+<li><a href="#debug-php-with-pdt">Debug PHP with PDT</a></li>
+<li><a href="#debug-php-with-netbeans">Debug PHP with Netbeans</a></li>
 <li><a href="#use-nginx-instead-of-apache">Use Nginx instead of Apache</a>
 <ul>
-<li><a href="#download-runhiddenconsole">Download <code>RunHiddenConsole</code></a></li>
-<li><a href="#install-nginx-32-bit-version">Install Nginx 32 bit version.</a></li>
-<li><a href="#confirm-php-cgi-exe-is-within-the-php-folder-c-php">Confirm <code>php-cgi.exe</code> is within the PHP folder <code>c:\php</code>.</a></li>
-<li><a href="#setup-nginx-fastcgi-with-php">Setup Nginx FastCGI with PHP</a></li>
 <li><a href="#php-5-x-anp-php-7-x-on-ubuntu-16">PHP 5.x anp PHP 7.x on Ubuntu 16</a></li>
 </ul></li>
 <li><a href="#add-repo">Add repo</a>
