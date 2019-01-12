@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Hello World</title>
+    <link>/code/python/</link>
+    <description>Recent content in Python on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/code/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python Notes - 1</title>
+      <link>/code/python/python-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-1/</guid>
+      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.  # list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 2</title>
+      <link>/code/python/python-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-2/</guid>
+      <description>Closure &amp;amp; Decorator LEGB rules  Local, Enclosing, Gloable, Built-in  Local function  Useful for specialized, one-off functions Aid in code organization and readability Similar to lambdas, but more general May contain multiple expressions May contain statements  Closure  Closure maintain references to objects from earlier scopes LEGB does not apply when making new bindings Usage of nonlocal
+ Example  def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 3</title>
+      <link>/code/python/python-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-3/</guid>
+      <description>String &amp;amp; Representation str()  print() -&amp;gt; str() -&amp;gt; __str(self)__ Fallback to repr(). By default, str() simply calls repr() Produces a readable, human-friendly representation of an object It is also the string constructor  repr()  Exactness is more important than human-friendliness Suited for debugging. Unambiguous, precise, include type Includes identifying information. Generally best for logging and developers The default repr() is not very helpful As a rule, you should always write a repr() for your classes standard library reprlib.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 4</title>
+      <link>/code/python/python-note-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-4/</guid>
+      <description>Iterables &amp;amp; Iteration Comprehensions  Comprehensions can process more than one input sequence Multiple input sequences in comprehensions work like nested for-loops Comprehensions can also have multiple if-clauses interspersed with the for-clauses Later clauses in a comprehension can reference variables bound in earlier clauses Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences Python provides a number of functional-style tools for working with iterators map() calls a function for each element in its input sequences map() returns an iterable object, not a fully-evaluated collection map() results are lazily evaluated, meaning that you must access them to force their calculation map() results are typically evaluated through the use of iteration constructs such as for-loops You must provide as many input sequences to map() as the callable argument has parameters map() takes one element from each input sequence for each output element it produces map() stops producing output when its shortest input sequence is exhausted map() can be used to implement the same behavior as comprehensions in some cases filter() selects values from an input sequence which match a specified criteria filter() passes each element in its input sequence to the function argument filter() returns an iterable over the input elements for which the function argument is truthy Like map(), filter() produces its output lazily If you pass None as the first argument to filter(), it yields the input values which evaluate to True in a boolean context reduce() cumulatively applies a function to the elements of an input sequence reduce() calls the input function with two arguments: the accumulated result so far, and the next element in the sequence reduce() is a generalization of summation reduce() returns the accumulated result after all of the input has been processed If you pass an empty sequence to reduce() it will raise a TypeError reduce() accepts an optional initial value argument This initial value is conceptually added to the front of the input sequence The initial value is returned if the input sequence is empty The map() and reduce() functions in Python are related to the ideas in the map-reduce algorithm Example</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 5</title>
+      <link>/code/python/python-note-5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-5/</guid>
+      <description>Inheritance &amp;amp; Polymorphism  Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name Subclasses have all of the methods of their base class It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction Python treats __init__() like any other method Base class __init__() is not called if overridden Use super() to call base class __init__() isinstance() takes an object as its first argument and a type as its second isinstance() determines if its first argument is an instance of the second argument, or any subclass of the second argument isinstance() can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types Checking for specific types is rare in Python and is sometimes regarded as bad design isinstance() determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument Multiple inheritance means having more than one direct base class You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition A class can have as many base classes as you want Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction __bases__ is a tuple of types on a class object which defines the base classes for the class __bases__ is in the same order as in the class definition __bases__ is populated for both single and multiple inheritance Method resolution order defines the order in which Python will search an inheritance graph for methods MRO is short for Method Resolution Order MRO is stored as a tuple of types in the __mro__ attribute of a class The mro() method on type objects returns the contents of __mro__ as a list To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method MRO is dependent on base class declaration order MRO is calculated by Python using the C3 algorithm MRO honors base-class ordering from class definitions MRO puts subclasses before base classes The relative order of classes in an MRO is consistent across all classes It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached super() operates by using the elements in an MRO that come after some specified type super() returns a proxy object which forwards calls to the correct objects There are two distinct types of super() proxies, bound and unbound Unbound super() proxies are primarily used for implementing other Python features Bound proxies can be bound to either class objects or instances Calling super() with a base-class and derived-class argument returns a proxy bound to a class Calling super() with a class and an instance of that class returns a proxy bound to an instance A super() proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you However, classmethods resolved by class-bound proxies can be called directly Python will raise a TypeError if the second argument is not a subclass or instance of the first argument Inappropriate use of super() can violate some design constraints * Calling super() with no arguments inside an instance method produces an instance-bound proxy Calling super() with no arguments inside a classmethod produces a class-bound proxy In both cases, the no-argument form of super() is the same as calling super() with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second Since super() works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another The class object is at the core of Python&amp;rsquo;s object model object is the ultimate base class for all other classes in Python If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 6</title>
+      <link>/code/python/python-note-6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-6/</guid>
+      <description>Collection Collection protocols  To implement a protocol, objects must support certain operations. Most collections implement container, sized and iterable. All except dict and set are sequences Container: membership testing using in and not in Sized: Determine number of elements with len(s) Iterable: Can produce an iterator with iter(s), e.g.
+ for item in iterable: do_something(item) `len(s)`  Sequence:
+ Retrieve elements by index, e.g. item = seq[index] Find items by value index = seq.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 7</title>
+      <link>/code/python/python-note-7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-7/</guid>
+      <description>Exception &amp;amp; Assertion  Avoid bad practices in Python exception handling. Always specify an exception type with except, but don&amp;rsquo;t be too general.
+ Don&amp;rsquo;t Use Assertions for checking arguments EXamples
+ lookup exception  def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() #### test result #### Handled IndexError #### Handled KeyError   unicode exception  def unicode_exception(): try: b&#39;\x81&#39;.</description>
+    </item>
+    
+    <item>
+      <title>Python Notes - 8</title>
+      <link>/code/python/python-note-8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/python/python-note-8/</guid>
+      <description>Context managers context manager  context manager an object designed to be used in a with-statement
+with context-manager: body with context-manager: context-manager.begin() body context-manager.end() with context-manager: setup() body teardown() with context-manager: context-manager.begin() body context-manager.end() with context-manager: allocation() body deallocation() with context-manager: enter() body exit()  A context-manager ensures that resources are properly and automatically managed
+ enter() prepares the manager for use exit() cleans it up  Context-manager Protocol</description>
+    </item>
+    
+  </channel>
+</rss>

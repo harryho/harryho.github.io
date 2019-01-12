@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-13T00:47:36 AEDT">
+<title>Python Notes - 2 :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+	<link href="/theme-flex/variant-gray.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79101-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+  </head>
+  <body data-url="/code/python/python-note-2/">
+    
+      <header>
+  <div class="logo">
+    
+  
+    
+        <a class="baselink" href="/">Hello World </a>
+    
+    
+ 
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+  <div>
+    <div class="searchbox">
+      <input data-search-input id="search-by" type="text" placeholder="Search...">
+    </div>
+    <script type="text/javascript" src="/js/lunr.min.js"></script>
+    <script type="text/javascript" src="/js/auto-complete.js"></script>
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <script type="text/javascript">
+      
+          var baseurl = "\/";
+      
+    </script>
+    <script type="text/javascript" src="/js/search.js"></script>
+  </div>
+  </nav>
+
+
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blog/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blog/">Blog</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blog/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blog/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blog/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blog/build-mobile-app/">
+            Build mobile app with web dev skills
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blog/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/jira-notes/" class="dd-item">
+        <div>
+          <a href="/blog/jira-notes/">
+            JIRA Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blog/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/code/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/code/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-3/">
+            Java Note - 3: Path and Files API
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-4/">
+            Java Note - 4: Date Time API 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-5/">
+            Java Note - 5: Lambda API 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/python/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/code/python/">Python</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+        </ul>
+    </li>
+    <li data-nav-id="/code/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/code/shell/ps-note-1/">
+            Powershell Notes - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/dev/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/dev/">Dev</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/dev/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/cntk-notes-1/">
+            CNTK Notes - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-debug/" class="dd-item">
+        <div>
+          <a href="/dev/php-debug/">
+            Debug PHP with Eclipse PDT and Netbeans
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/git-notes/" class="dd-item">
+        <div>
+          <a href="/dev/git-notes/">
+            Git Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-web/" class="dd-item">
+        <div>
+          <a href="/dev/php-web/">
+            Introduction of PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/python-django/" class="dd-item">
+        <div>
+          <a href="/dev/python-django/">
+            Python Web framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-2/">
+            Tensorflow Notes - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-1/">
+            Tensorflow Notes, Part 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-1/">
+            Use Windows command &amp; hotkey as a hacker - Part 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-2/">
+            Use Windows command &amp; hotkey as a hacker - Part 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-3/">
+            Use Windows command &amp; hotkey as a hacker - Part 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/project/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/project/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/project/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/project/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/project/python-flat-api/">
+            FlatApi -- A handy Restful API for python developer
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/zf2-mvc-starter/">
+            Zendframework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section><center>
+
+
+
+
+
+
+
+
+
+</center>
+
+
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blog/" >
+   Blog</option>
+    <option value="/code/" >
+   Coding</option> 
+    <option value="/code/c/" >
+   C / C&#43;&#43;</option>
+    <option value="/code/c-sharp/" >
+   C#</option>
+    <option value="/code/java/" >
+   Java</option>
+    <option value="/code/python/" >
+   Python</option> 
+      <option value="/code/python/python-note-1/" > Python Notes - 1</option>
+      <option value="/code/python/python-note-2/"  selected> Python Notes - 2</option>
+      <option value="/code/python/python-note-3/" > Python Notes - 3</option>
+      <option value="/code/python/python-note-4/" > Python Notes - 4</option>
+      <option value="/code/python/python-note-5/" > Python Notes - 5</option>
+      <option value="/code/python/python-note-6/" > Python Notes - 6</option>
+      <option value="/code/python/python-note-7/" > Python Notes - 7</option>
+      <option value="/code/python/python-note-8/" > Python Notes - 8</option>
+  
+    <option value="/code/shell/" >
+   Shell</option>
+  
+    <option value="/dev/" >
+   Dev</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/project/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+   
+
+    <h1>Python Notes - 2</h1>
+    
+    
+    
+    
+
+<h5 id="closure-decorator">Closure &amp; Decorator</h5>
+
+<h6 id="legb-rules">LEGB rules</h6>
+
+<ul>
+<li>Local, Enclosing, Gloable, Built-in</li>
+</ul>
+
+<h6 id="local-function">Local function</h6>
+
+<ul>
+<li>Useful for specialized, one-off functions</li>
+<li>Aid in code organization and readability</li>
+<li>Similar to lambdas, but more general</li>
+<li>May contain multiple expressions</li>
+<li>May contain statements</li>
+</ul>
+
+<h6 id="closure">Closure</h6>
+
+<ul>
+<li>Closure maintain references to objects from earlier scopes</li>
+<li>LEGB does not apply when making new bindings</li>
+
+<li><p>Usage of nonlocal</p>
+
+<ul>
+<li>Example</li>
+</ul>
+
+<pre><code>def make_timer():
+    last_called = None
+
+    def elapsed():
+        nonlocal last_called
+        now = time.time()
+        if last_called is None:
+            last_called = now
+            return None
+        result = now - last_called
+        last_called = now
+        return result
+    return elapsed
+
+
+if __name__ == &quot;__main__&quot;:
+    mt = make_timer()
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+</code></pre></li>
+
+<li><p>Use as function factory</p>
+
+<ul>
+<li>Example
+<br /></li>
+</ul>
+
+<pre><code class="language-python">
+def raise_to(exp):
+    def raise_to_exp(x):
+        return pow(x, exp)
+    return raise_to_exp
+
+if __name__ == &quot;__main__&quot;:
+    square=raise_to(2)
+    cube= raise_to(3)
+    print(square(2))
+    print(cube(2))
+
+#### test result:
+#### 4
+#### 8
+
+</code></pre></li>
+</ul>
+
+<h6 id="decorator">Decorator</h6>
+
+<ul>
+<li>Replace, enhance, or modify existing functions</li>
+<li>Does not change the original function definition</li>
+<li>Calling code does not need to change</li>
+<li>Decorator mechanism uses the modified function’s original name</li>
+
+<li><p>Example</p>
+
+<ul>
+<li>use function as decorator</li>
+</ul>
+
+<pre><code class="language-python">def escape_unicode(f):
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
+
+if __name__ == &quot;__main__&quot;:
+    print(hello_greek())
+
+#### test result:
+#### '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+</code></pre>
+
+<ul>
+<li>Example: multiple decorators including function and instance</li>
+</ul>
+
+<pre><code class="language-python">class Trace:
+    def __init__(self):
+        self.enabled = True
+
+    def __call__(self, f):
+        @functools.wraps(f)
+        def wrap(*args, **kwargs):
+            if self.enabled:
+                print('Calling {}'.format(f.__name__))
+            return f(*args, **kwargs)
+        return wrap
+
+def escape_unicode(f):
+    @functools.wraps(f)
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
+
+@tracer
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
+
+#### test result
+#### Calling hello_greek
+#### '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+
+</code></pre>
+
+<ul>
+<li>Use as validator</li>
+</ul>
+
+<pre><code class="language-python">def check_non_negative(index):
+    def validator(f):
+        def wrap(*args):
+            if args[index] &lt; 0:
+                raise ValueError(
+                    'Arg {} must be non-negative'.format(index)
+                )
+            return f(*args)
+        return wrap
+    return validator
+
+@check_non_negative(1)
+def create_seq(value, size):
+    return [value]*size  
+
+if __name__ == &quot;__main__&quot;:
+    create_seq('0', -3)
+
+#### test result
+....
+'Arg {} must be non-negative'.format(index)
+ValueError: Arg 1 must be non-negative
+</code></pre></li>
+</ul>
+
+<h5 id="properties-class">Properties &amp; Class</h5>
+
+<h6 id="staticmethod">@staticmethod</h6>
+
+<ul>
+<li>No access needed to either class or instance objects.</li>
+<li>Most likely an implementation detail of the class.</li>
+<li>May be able to be moved to become a module-scope function</li>
+</ul>
+
+<h6 id="classmethod">@classmethod</h6>
+
+<ul>
+<li>Requires access to the class object to call other class methods or the constructor</li>
+<li>Always use self for the first argument to instance methods.</li>
+<li>Always use cls for the first argument to class methods.</li>
+<li>Use case: use as named constructors</li>
+</ul>
+
+<pre><code class="language-python">class FileStream(object):
+
+    @classmethod
+    def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
+        with open(filepath, 'r') as fileobj:
+            for obj in cls(fileobj, ignore_comments, *args, **kwargs):
+                yield obj
+
+    @classmethod
+    def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
+        raise NotImplemented #### Placeholder until implemented
+
+    def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
+        ...
+</code></pre>
+
+<h6 id="property">@property</h6>
+
+<ul>
+<li>Encapsulation</li>
+
+<li><p>Example</p>
+
+<pre><code class="language-python">class A
+@property
+def  prop(self):
+    return self._prop
+
+@prop.setter
+def prop(self, value):
+    self._prop = value
+</code></pre></li>
+</ul>
+
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/code/python/python-note-1/" title="Python Notes - 1"> <i class="fa fa-chevron-left"></i><label>Python Notes - 1</label></a>
+    <a class="nav nav-next" href="/code/python/python-note-3/" title="Python Notes - 3" style="margin-right: 0px;"><label>Python Notes - 3</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/python">python</a>
+      
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

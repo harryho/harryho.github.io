@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-13T00:47:35 AEDT">
+<title>Ubuntu 14 -- server setup :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+	<link href="/theme-flex/variant-gray.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79101-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+  </head>
+  <body data-url="/os/ubuntu-server-14/">
+    
+      <header>
+  <div class="logo">
+    
+  
+    
+        <a class="baselink" href="/">Hello World </a>
+    
+    
+ 
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+  <div>
+    <div class="searchbox">
+      <input data-search-input id="search-by" type="text" placeholder="Search...">
+    </div>
+    <script type="text/javascript" src="/js/lunr.min.js"></script>
+    <script type="text/javascript" src="/js/auto-complete.js"></script>
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <script type="text/javascript">
+      
+          var baseurl = "\/";
+      
+    </script>
+    <script type="text/javascript" src="/js/search.js"></script>
+  </div>
+  </nav>
+
+
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blog/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blog/">Blog</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blog/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blog/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blog/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blog/build-mobile-app/">
+            Build mobile app with web dev skills
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blog/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/jira-notes/" class="dd-item">
+        <div>
+          <a href="/blog/jira-notes/">
+            JIRA Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blog/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/code/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-3/">
+            Java Note - 3: Path and Files API
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-4/">
+            Java Note - 4: Date Time API 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-5/">
+            Java Note - 5: Lambda API 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-1/">
+            Python Notes - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-2/">
+            Python Notes - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-3/">
+            Python Notes - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-4/">
+            Python Notes - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-5/">
+            Python Notes - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-6/">
+            Python Notes - 6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-7/">
+            Python Notes - 7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-8/">
+            Python Notes - 8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/code/shell/ps-note-1/">
+            Powershell Notes - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/dev/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/dev/">Dev</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/dev/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/cntk-notes-1/">
+            CNTK Notes - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-debug/" class="dd-item">
+        <div>
+          <a href="/dev/php-debug/">
+            Debug PHP with Eclipse PDT and Netbeans
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/git-notes/" class="dd-item">
+        <div>
+          <a href="/dev/git-notes/">
+            Git Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-web/" class="dd-item">
+        <div>
+          <a href="/dev/php-web/">
+            Introduction of PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/python-django/" class="dd-item">
+        <div>
+          <a href="/dev/python-django/">
+            Python Web framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-2/">
+            Tensorflow Notes - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-1/">
+            Tensorflow Notes, Part 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item active">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-1/">
+            Use Windows command &amp; hotkey as a hacker - Part 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-2/">
+            Use Windows command &amp; hotkey as a hacker - Part 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-3/">
+            Use Windows command &amp; hotkey as a hacker - Part 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/project/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/project/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/project/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/project/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/project/python-flat-api/">
+            FlatApi -- A handy Restful API for python developer
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/zf2-mvc-starter/">
+            Zendframework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section><center>
+
+
+
+
+
+
+
+
+
+</center>
+
+
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blog/" >
+   Blog</option>
+    <option value="/code/" >
+   Coding</option>
+    <option value="/dev/" >
+   Dev</option>
+    <option value="/os/" >
+   OS</option> 
+      <option value="/os/centos-fedora-desktop/" > CentOS 6/7 Multi-Boot Setup</option>
+      <option value="/os/centos-server-7/" > CentOS 7 Server note</option>
+      <option value="/os/grub-trouble-shooting/" > Grub Trouble Shooting</option>
+      <option value="/os/lubuntu16-desktop/" > Lubuntu 16 desktop</option>
+      <option value="/os/raspberrypi-notes/" > Raspberry Pi setup</option>
+      <option value="/os/ubuntu-desktop-14/" > Ubuntu 14 -- desktop setup &amp; dual boot </option>
+      <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
+      <option value="/os/ubuntu-server-14/"  selected> Ubuntu 14 -- server setup</option>
+      <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-1/" > Use Windows command &amp; hotkey as a hacker - Part 1</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-2/" > Use Windows command &amp; hotkey as a hacker - Part 2</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-3/" > Use Windows command &amp; hotkey as a hacker - Part 3</option>
+  
+    <option value="/project/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+   
+
+    <h1>Ubuntu 14 -- server setup</h1>
+    
+    
+    
+    
+
+<p>Prelude</p>
+
+<blockquote>
+<p><em>This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow <a href="/os/ubuntu-desktop-14/">Ubuntu deskstop setup</a></em></p>
+</blockquote>
+
+<h5 id="brief-history">Brief history</h5>
+
+<ul>
+<li>Please find it from <a href="/blog/linux-history/">Brief history of Linux</a></li>
+</ul>
+
+<h5 id="assumption">Assumption</h5>
+
+<ul>
+<li>You are familiar with Ubuntu, at least you have some experience working on Linux system.</li>
+<li>You are familiar with bash/shell script</li>
+<li>You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.<br /></li>
+</ul>
+
+<h5 id="things-to-do-after-installing-ubuntu-server">Things to do after installing Ubuntu server</h5>
+
+<ul>
+<li>How to setup your server</li>
+</ul>
+
+<h4 id="ufw-setup">UFW setup</h4>
+
+<pre><code class="language-bash">sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow ssh
+sudo ufw allow 443/tcp
+sudo ufw allow 8000/tcp
+</code></pre>
+
+<h4 id="ssh-server-setup">SSH server setup</h4>
+
+<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+#### backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+#### use any editor to update sshd_config 
+sudo nano /etc/ssh/sshd_config
+
+#### uncomment  PasswordAuthentication yes to allow remote password login
+#### Password authentication is only for test environment
+
+#### setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
+</code></pre>
+
+<h4 id="time-zone-setup">Time Zone setup</h4>
+
+<pre><code class="language-bash">sudo dpkg-reconfigure tzdata
+</code></pre>
+
+<h4 id="install-software-properties-common-package">install software-properties-common Package</h4>
+
+<pre><code class="language-bash">software-properties-common python-software-properties
+</code></pre>
+
+<p>Install byobu screen</p>
+
+<pre><code class="language-bash">sudo apt-get install byobu screen 
+
+#### Launch byobu
+byobu
+#### F9 for help 
+#### change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6
+</code></pre>
+
+<h4 id="install-docker-ubuntu-14-04-lts">install docker (Ubuntu 14.04 LTS)</h4>
+
+<pre><code class="language-bash">#### add GBG Key
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+#### add docker.list
+sudo touch /etc/apt/sources.list.d/docker.list
+####  repo 
+sudo vi /etc/apt/sources.list.d/docker.list
+####  add following repo ath the end of file 
+deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
+#### apt update 
+sudo apt-get update
+#### verify 
+apt-cache policy docker-engine
+#### install docker engine
+
+</code></pre>
+
+<h4 id="build-vim">build vim</h4>
+
+<ul>
+<li>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>,</code>syntastic`, etc.</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get build-dep vim
+git clone https://github.com/vim/vim.git ~/forks/vim
+cd ~/forks/vim
+##### make distclean &amp;&amp; make clean
+##### build script from this repo
+make VIMRUNTIMEDIR=/usr/share/vim/vim74
+sudo make install
+</code></pre>
+
+<h4 id="install-jdk-8">Install JDK 8</h4>
+
+<ul>
+<li>If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.</li>
+<li>Setup oracle jdk ppa and install oracle jdk from ppa.</li>
+</ul>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java8-set-default     
+</code></pre>
+
+<h4 id="install-openjdk">Install OpenJdk</h4>
+
+<ul>
+<li>Setup OpenJdk ppa and install it from ppa</li>
+</ul>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update 
+sudo apt-get install openjdk-8-jdk
+sudo update-alternatives --config java
+</code></pre>
+
+<ul>
+<li>Type in a number to select a Java version.</li>
+<li>set default Java Compiler</li>
+</ul>
+
+<pre><code class="language-bash">sudo update-alternatives --config javac
+java -version
+</code></pre>
+
+<ul>
+<li><p>How to stop mysql auto startup</p></li>
+
+<li><p>Comment out the line below in the config file ( /etc/init/mysql.conf )</p>
+
+<ul>
+<li>Start on (net-device-up</li>
+</ul></li>
+</ul>
+
+<h4 id="install-nodejs">Install nodejs</h4>
+
+<pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install nodejs
+sudo apt-get install build-essential
+</code></pre>
+
+<p>Setup NPM</p>
+
+<ul>
+<li>You can use default <code>npm</code> on your server after you install nodejs, but there is a better way to manage your <code>npm</code>. It allows you easily to control your packages.<br /></li>
+</ul>
+
+<pre><code class="language-bash">cd 
+mkdir .node_modules
+npm config list
+npm config get prefix
+#### /usr or  /usr/share
+npm config set prefix $HOME/.node_modules
+cat .npmrc
+#### /home/hho/.node_modules
+npm install -g npm
+which npm
+#### /usr/bin/npm
+</code></pre>
+
+<ul>
+<li>Open .profile add following to end of file</li>
+</ul>
+
+<pre><code class="language-bash">export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;
+</code></pre>
+
+<h4 id="install-nvm">Install nvm</h4>
+
+<ul>
+<li>Using <code>nvm</code> is no longer popular and best option. I will recommand you just use <code>npm</code> to manage eveything you need.</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
+source ~/.profile
+nvm ls-remote
+nvm install 0.11.13
+nvm use 0.11.13
+nvm alias default 0.11.13
+nvm use default
+</code></pre>
+
+<h4 id="install-php-compser">Install PHP &amp; Compser</h4>
+
+<pre><code class="language-bash">sudo apt-get install curl php5-cli git
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+</code></pre>
+
+<h4 id="install-python2-python3">Install Python2, Python3</h4>
+
+<ul>
+<li>Ubuntu has python instaleld by default</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get python pip 
+sudo apt-get install python3 pip3
+#### Install virtualenv 
+sudo pip install virtualenv
+sudo pip3 install virtualenv
+</code></pre>
+
+<h4 id="install-go">Install Go</h4>
+
+<pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
+sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
+
+sudo vi /etc/profile
+GOPATH=&quot;/YOUR/USER/HOME/go&quot;
+GOROOT=&quot;/usr/local/go&quot;
+PATH=$GOROOT/bin:$PATH
+</code></pre>
+
+<h4 id="install-r">Install R</h4>
+
+<pre><code class="language-bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
+sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
+sudo apt-get update
+sudo apt-get install r-base
+</code></pre>
+
+<h4 id="install-rust">Install Rust</h4>
+
+<pre><code class="language-bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
+</code></pre>
+
+<p><em>Uninstall Rust</em></p>
+
+<pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
+</code></pre>
+
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/os/centos-server-7/" title="CentOS 7 Server note"> <i class="fa fa-chevron-left"></i><label>CentOS 7 Server note</label></a>
+    <a class="nav nav-next" href="/os/ubuntu-desktop-14/" title="Ubuntu 14 -- desktop setup &amp; dual boot " style="margin-right: 0px;"><label>Ubuntu 14 -- desktop setup &amp; dual boot </label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/linux">linux</a>
+      
+        <a class="label label-default" href="/tags/ubuntu">ubuntu</a>
+      
+    </div>
+    
+
+    
+
+    
+    <div class="date">
+        <i class='fa fa-calendar'></i> Last update on 04/03/2016
+    </div>
+    
+
+    
+  </div>
+
+
+	
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

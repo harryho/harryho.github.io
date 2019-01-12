@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-13T00:47:35 AEDT">
+<title>Raspberry Pi setup :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+	<link href="/theme-flex/variant-gray.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79101-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+  </head>
+  <body data-url="/os/raspberrypi-notes/">
+    
+      <header>
+  <div class="logo">
+    
+  
+    
+        <a class="baselink" href="/">Hello World </a>
+    
+    
+ 
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+  <div>
+    <div class="searchbox">
+      <input data-search-input id="search-by" type="text" placeholder="Search...">
+    </div>
+    <script type="text/javascript" src="/js/lunr.min.js"></script>
+    <script type="text/javascript" src="/js/auto-complete.js"></script>
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <script type="text/javascript">
+      
+          var baseurl = "\/";
+      
+    </script>
+    <script type="text/javascript" src="/js/search.js"></script>
+  </div>
+  </nav>
+
+
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blog/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blog/">Blog</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blog/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blog/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blog/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blog/build-mobile-app/">
+            Build mobile app with web dev skills
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blog/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/jira-notes/" class="dd-item">
+        <div>
+          <a href="/blog/jira-notes/">
+            JIRA Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blog/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blog/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/code/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/code/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/code/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-3/">
+            Java Note - 3: Path and Files API
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-4/">
+            Java Note - 4: Date Time API 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/code/java/java-note-5/">
+            Java Note - 5: Lambda API 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-1/">
+            Python Notes - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-2/">
+            Python Notes - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-3/">
+            Python Notes - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-4/">
+            Python Notes - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-5/">
+            Python Notes - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-6/">
+            Python Notes - 6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-7/">
+            Python Notes - 7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/code/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/code/python/python-note-8/">
+            Python Notes - 8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/code/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/code/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/code/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/code/shell/ps-note-1/">
+            Powershell Notes - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/dev/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/dev/">Dev</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/dev/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/cntk-notes-1/">
+            CNTK Notes - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-debug/" class="dd-item">
+        <div>
+          <a href="/dev/php-debug/">
+            Debug PHP with Eclipse PDT and Netbeans
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/git-notes/" class="dd-item">
+        <div>
+          <a href="/dev/git-notes/">
+            Git Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/php-web/" class="dd-item">
+        <div>
+          <a href="/dev/php-web/">
+            Introduction of PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/python-django/" class="dd-item">
+        <div>
+          <a href="/dev/python-django/">
+            Python Web framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-2/">
+            Tensorflow Notes - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/dev/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/dev/tensorflow-notes-1/">
+            Tensorflow Notes, Part 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item active">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-1/">
+            Use Windows command &amp; hotkey as a hacker - Part 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-2/">
+            Use Windows command &amp; hotkey as a hacker - Part 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/os/use-windows-command-hotkey-as-hacker-3/">
+            Use Windows command &amp; hotkey as a hacker - Part 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/project/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/project/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/project/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/project/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/project/python-flat-api/">
+            FlatApi -- A handy Restful API for python developer
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/project/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/project/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/project/zf2-mvc-starter/">
+            Zendframework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section><center>
+
+
+
+
+
+
+
+
+
+</center>
+
+
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blog/" >
+   Blog</option>
+    <option value="/code/" >
+   Coding</option>
+    <option value="/dev/" >
+   Dev</option>
+    <option value="/os/" >
+   OS</option> 
+      <option value="/os/centos-fedora-desktop/" > CentOS 6/7 Multi-Boot Setup</option>
+      <option value="/os/centos-server-7/" > CentOS 7 Server note</option>
+      <option value="/os/grub-trouble-shooting/" > Grub Trouble Shooting</option>
+      <option value="/os/lubuntu16-desktop/" > Lubuntu 16 desktop</option>
+      <option value="/os/raspberrypi-notes/"  selected> Raspberry Pi setup</option>
+      <option value="/os/ubuntu-desktop-14/" > Ubuntu 14 -- desktop setup &amp; dual boot </option>
+      <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
+      <option value="/os/ubuntu-server-14/" > Ubuntu 14 -- server setup</option>
+      <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-1/" > Use Windows command &amp; hotkey as a hacker - Part 1</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-2/" > Use Windows command &amp; hotkey as a hacker - Part 2</option>
+      <option value="/os/use-windows-command-hotkey-as-hacker-3/" > Use Windows command &amp; hotkey as a hacker - Part 3</option>
+  
+    <option value="/project/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+   
+
+    <h1>Raspberry Pi setup</h1>
+    
+    
+    
+    
+
+<p>Prelude</p>
+
+<blockquote>
+<p>*This note is mainly to record how to setup Raspberry Pi as file server.</p>
+</blockquote>
+
+<h5 id="assumption">Assumption</h5>
+
+<ul>
+<li>You have a Raspberry Pi with pre-installed raspbian SD card</li>
+<li>You are happy to get your hands dirty</li>
+<li>You have some basic computer concept.</li>
+<li>RPi is short for Raspberry Pi<br /></li>
+</ul>
+
+<h5 id="my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</h5>
+
+<p>I only have the RPi 1 model B with pre-installed raspbian SD card in place. It is quite outdated. If you don’t know the model of your RPi, please don’t worry it now. I will explain how to get the info later. I got this RPi as a gift 2 years ago. I left it in the garage and totally forgot it, until I cleaned up my garage a couple months ago. Actually I loved the old model with transparent plastic box more than the new one. I knew if I continued to leave it in the garage, it would be a rubbish soon, because it is not easy to find some equipment or software compatible with the old RPi. Luckily the lifespan of RPi is much longer than the mobile phone, but it still took me some effort to setup the wifi adapter.</p>
+
+<p>After 6-hour on and off, I got it up and run. Honestly I’m not a hardware guru, but I’m so happy not to throw this beautiful (my aesthetics is sort of quirky) box into the bin. I captured the home screen of Kodi, the media center and mobile control app.</p>
+
+<p>Home page of kodai</p>
+
+<p><img src="/img/kodi-tv-homepage.jpg" alt="KodiTVHomePage" /></p>
+
+<p>Screenshot of kodi mobile app on my android phone.</p>
+
+<p><img src="/img/kodi-mobile-app.png" alt="kodi-mobile-app" /></p>
+
+<h5 id="how-to-start">How to start</h5>
+
+<p>There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. There is a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don’t have a cable long enough to connect the RPi and switch.</p>
+
+<p>First thing first, I need to setup ssh server, and change the configuration to allow password login, also make it auto-start after reboot. To do so I just need monitor and keyboard.</p>
+
+<h4 id="connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</h4>
+
+<ul>
+<li>Reset pasword of <code>pi</code></li>
+</ul>
+
+<pre><code class="language-bash">sudo passwd pi
+</code></pre>
+
+<h4 id="ssh-server-setup">SSH server setup</h4>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+#### backup default config 
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
+sudo chmod a-w /etc/ssh/sshd_config.ori
+
+#### use any editor to update sshd_config 
+sudo nano /etc/ssh/sshd_config 
+
+#### uncomment  PasswordAuthentication yes to allow remote password login
+
+#### setup ssh auto-start onboot
+sudo update-rc.d ssh defaults
+
+#### reboot
+sudo reboot
+
+#### Check the ssh is running after reboot
+sudo service ssh status 
+
+#### You should see sth as below
+[ok] sshd is running
+
+#### Turn off Pi 
+sudo poweroff
+</code></pre>
+
+<h4 id="connect-rpi-with-the-switch">Connect RPi with the switch</h4>
+
+<p>After all above is done, you can disconnect the monitor and keyboard, and connect the RPi with the switch (or modem). Once the power is on, you should be able to access the RPi from you PC or laptop.</p>
+
+<h4 id="find-the-ip-address">Find the ip address</h4>
+
+<p>Access the admin home page of my switch via browser. e.g. <code>http://192.168.0.1/index.html</code> (The actual URL depends on your switch or modem. You can find it on the label sticked on the back or bottom.)</p>
+
+<p>If you forget your password to login the admin page, you still can reset your swtich. If your modem is 3 in 1 model including switch, you need to make sure you have the <code>ID and Password</code> to access the internet before you reset it.</p>
+
+<p>After you login successfully, you just need to expand main menus find a menu called <code>DHCP</code>. e.g.</p>
+
+<pre><code>Basic Setup
+|__ ...
+Advanced Setup
+|__ ...
+Device
+|__ DHCP
+|__ WAN
+|__ ...
+
+</code></pre>
+
+<p>You will see table as blew.</p>
+
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>MAC Address</th>
+<th>IP Address</th>
+<th>Expires In</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>PC-1</td>
+<td>2f:3f:09:ff:f5:24</td>
+<td>192.168.1.7</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>PC-2</td>
+<td>c0:9f:05:ff:f9:14</td>
+<td>192.168.1.8</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>Laptop-1</td>
+<td>b0:f6:05:e2:f5:99</td>
+<td>192.168.1.9</td>
+<td>x hours x mins</td>
+</tr>
+
+<tr>
+<td>raspberrypi</td>
+<td>a5:06:b2:07:c4:03</td>
+<td>192.168.1.10</td>
+<td>x hours x mins</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="access-rpi-with-your-laptop">Access RPi with your laptop</h4>
+
+<ul>
+<li>From Linux or Mac</li>
+</ul>
+
+<pre><code>ssh username@192.168.1.10
+
+#### type yes 
+#### type the password 
+
+</code></pre>
+
+<ul>
+<li>For widnows</li>
+</ul>
+
+<p>You need to download a ssh tool. If you installed git before, you would have it on your computer. Otherwise, you need to install a SSH too. I recommend you to install <a href="http://www.putty.org/">Putty</a>. It is free and quite handy.</p>
+
+<p>After you install and launch Putty, you just need to type in the IP address <code>192.168.1.10</code> to the field <code>Host Name (or IP Address)</code>, then click button <code>Open</code>.</p>
+
+<pre><code>#### type in pi as login user
+login as: pi
+
+#### type in password
+pi@192.168.1.10's password: 
+
+</code></pre>
+
+<h4 id="access-rpi-via-vnc">Access RPi via VNC</h4>
+
+<h5 id="setup-vnc-server-on-rpi">Setup VNC server on RPi</h5>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install tightvncserver
+</code></pre>
+
+<ul>
+<li>Launch VNC server and setup pasword</li>
+</ul>
+
+<pre><code class="language-bash">/usr/bin/tightvncserver
+
+#### Setup password for remote access. 
+#### View only password is not necessary
+
+#### setup VNC server to auto start
+sudo update_rc.d tightvncserver defaults
+
+sudo reboot
+</code></pre>
+
+<h5 id="setup-vnc-client-on-your-pc">Setup VNC client on your PC</h5>
+
+<p>Linux: Use <strong>xRDP</strong>
+I believe you can figure it out yourself, if you used Linux as desktop.</p>
+
+<p>Windows: Install <a href="https://www.realvnc.com/en/connect/download/viewer/">RealVNC Viewer</a> as VNC client</p>
+
+<ul>
+<li>Laucn the VNC Viewer and create a new connection</li>
+</ul>
+
+<p><img src="/img/raspberry-pi-vnc-new-client.jpg" alt="Screen-VNC-new-connection" /></p>
+
+<ul>
+<li>Type in the VNC password and you can login RPi with GUI</li>
+</ul>
+
+<p><img src="/img/raspberry-pi-vnc.jpg" alt="Screenshot-VNC" /></p>
+
+<p>After all above is done, you have your RPi ready. You can choose what you want to build on it. Considering its CPU and RAM, it is not sufficient to be used as daily desktop PC, but it is still enough to work as a server. e.g. File Server, Web Server, Email Server, FTP server or Media Center.</p>
+
+<p>Now I want to make a file server and media center on it.</p>
+
+<h4 id="setup-file-server-via-samba">Setup File Server via Samba</h4>
+
+<ul>
+<li>Attach external storage to your RPi. The capacity of preinstalled SD card has only 8G space, so I attached my portal hard drives to RPi. You can attach the PC hard drive, USD or another SD card via adapter. It is really up to what you have in place.</li>
+</ul>
+
+<blockquote>
+<p>I want to make one as public share folder without authentication, and the other needs password to access.</p>
+</blockquote>
+
+<ul>
+<li>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get install ntfs-3g
+</code></pre>
+
+<ul>
+<li>Get drive info after attach two hard drives</li>
+</ul>
+
+<pre><code class="language-bash">sudo lsblk
+
+#### You will see the tree structure of drives
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    0   1.8T  0 disk
+└─sda1        8:1    0   1.8T  0 part /media/mydrive1
+└─sda2        8:2    0   870G  0 part /media/mydrive2
+mmcblk0     179:0    0   7.4G  0 disk
+├─mmcblk0p1 179:1    0    56M  0 part /boot
+└─mmcblk0p2 179:2    0   7.4G  0 part /
+</code></pre>
+
+<ul>
+<li>Remount the drives with proper name</li>
+</ul>
+
+<pre><code class="language-bash">sudo su #### switch to root
+cd /media
+umount mydrive1 
+umount mydrive2
+
+mkdir public private 
+mount -o rw /sda/sda1 public
+mount -o rw /sda/sda2 private
+</code></pre>
+
+<ul>
+<li>Change <code>fstab</code> to support read and write permission</li>
+</ul>
+
+<pre><code class="language-bash">sudo nano /etc/fstab
+</code></pre>
+
+<ul>
+<li>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></li>
+</ul>
+
+<pre><code>/dev/sda1  /media/public       ntfs   nofail,noatime    0    0
+/dev/sda2  /media/private       ntfs   nofail,noatime    0    0
+</code></pre>
+
+<ul>
+<li>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></li>
+</ul>
+
+<pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    0   1.8T  0 disk
+└─sda1        8:1    0   1.8T  0 part /media/public
+└─sda2        8:2    0   870G  0 part /media/private
+mmcblk0     179:0    0   7.4G  0 disk
+├─mmcblk0p1 179:1    0    56M  0 part /boot
+└─mmcblk0p2 179:2    0   7.4G  0 part /
+</code></pre>
+
+<ul>
+<li>Install Samba</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install samba samba-common-bin
+</code></pre>
+
+<ul>
+<li>Setup Samba configuration</li>
+</ul>
+
+<h5 id="backup-original-config-and-update-the-config">Backup original config and update the config</h5>
+
+<pre><code class="language-bash">sudo su
+cd /etc/samba
+cp smb.conf smb.conf.ori
+
+nano smb.conf
+</code></pre>
+
+<h5 id="change-the-line-wins-support-no-to-wins-support-yes">Change the line <code>####   wins support = no</code> to <code>wins support = yes</code></h5>
+
+<h5 id="add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</h5>
+
+<pre><code>[public]
+comment = Share Folder
+path = /media/public
+create mask = 0665
+directory mask = 0775
+read only = no
+guest ok = yes
+
+[private]
+comment = Private Folder
+path = /media/private
+valid users = root,smbu
+force user = smbu
+create mask = 0777
+directory mask = 0777
+writable = yes
+browsable = yes
+read only = no
+guest ok = yes
+</code></pre>
+
+<h5 id="add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</h5>
+
+<pre><code class="language-bash">sudo useradd smbu
+sudo passwd smbu
+sudo usermod -a -G root smbu
+sudo smbpasswd smbu #### setup pasword for remote access
+</code></pre>
+
+<ul>
+<li>Access the network folder</li>
+</ul>
+
+<h5 id="linx">Linx</h5>
+
+<p>I have no any problem to access the both netowrk drives via Linux.</p>
+
+<h5 id="windows">Windows</h5>
+
+<p>It took me some time to make it work for me. There are some bullet points, which may help you for trouble shooting.</p>
+
+<ul>
+<li>Please use <code>WORKGROUP</code> instead of domain.</li>
+<li>Please keep name of workgroup as <code>WORKGROUP</code></li>
+<li>Turn on the network discovery<br />
+<code>Control Panel &gt; All Control Panel Items&gt; Network and Sharing Cente &gt; Advanced sharing settings</code></li>
+<li>Reboot the PC or laptop</li>
+</ul>
+
+<h4 id="get-accurate-version-of-rpi-model">Get accurate version of RPi model</h4>
+
+<ul>
+<li>Get the revision code</li>
+</ul>
+
+<pre><code class="language-bash">cat /etc/cpuinfo
+</code></pre>
+
+<ul>
+<li>Check the table below to find your model</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>MODEL AND PI REVISION</th>
+<th>MEMORY</th>
+<th>HARDWARE REVISION CODE FROM CPUINFO</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Model B Revision 1.0</td>
+<td>256MB</td>
+<td>0002</td>
+</tr>
+
+<tr>
+<td>Model B Revision 1.0 + ECN0001 (no fuses, D14 removed)</td>
+<td>256MB</td>
+<td>0003</td>
+</tr>
+
+<tr>
+<td>Model B Revision 2.0 Mounting holes</td>
+<td>256MB</td>
+<td>0004 0005 0006</td>
+</tr>
+
+<tr>
+<td>Model A Mounting holes</td>
+<td>256MB</td>
+<td>0007,0008,0009</td>
+</tr>
+
+<tr>
+<td>Model B Revision 2.0 Mounting holes</td>
+<td>512MB</td>
+<td>000d 000e 000f</td>
+</tr>
+
+<tr>
+<td>Model B+</td>
+<td>512MB</td>
+<td>0010</td>
+</tr>
+
+<tr>
+<td>Compute Module</td>
+<td>512MB</td>
+<td>0011</td>
+</tr>
+
+<tr>
+<td>Model A+</td>
+<td>256MB</td>
+<td>0012</td>
+</tr>
+
+<tr>
+<td>Pi 2 Model B</td>
+<td>1GB</td>
+<td>a01041 (Sony, UK) a21041 (Embest, China)</td>
+</tr>
+
+<tr>
+<td>PiZero</td>
+<td>512MB</td>
+<td>900092(no camera connector) 900093(camera connector)</td>
+</tr>
+
+<tr>
+<td>Pi 3 Model B</td>
+<td>1GB</td>
+<td>a02082 (Sony, UK) a22082 (Embest, China)</td>
+</tr>
+
+<tr>
+<td>PiZero W</td>
+<td>512MB</td>
+<td>9000c1</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="setup-wifi-adapter">Setup Wifi Adapter</h4>
+
+<p>Wifi adapter is not necessary for media centre, but it would save some effort to move your RPi around in your place, especially you want to connect your RPi with different devices from time to time.</p>
+
+<p>I bought a D-Link adapter, which is dwa-131 with usb 2.0. This is the oldest one I can find in the store. If you are going to buy wifi adapter for old Unix-like system, please don’t buy the latest model. You will find you are trapped into incompatible issue between wifi drive and Linux kernel. You may have to upgrade the kernel or rebuild the drive.</p>
+
+<p>As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi adapter drive. If you have the RPi <sup>2</sup>&frasl;<sub>3</sub>, it would be much more easier. My RPi 1 model B comes with kernel 4.1.18*. I cannot find the source code of wifi drive which supports this old kernel today, and I don’t want to upgrade and rebuild the kernel.</p>
+
+<p>Finally, I found a post on RPi&rsquo;s forum which solved my problem. Link of <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;t=103989&amp;p=1048709&amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709">MrEngman&rsquo;s post</a>. He updated on April aobut the dropbox issue and alternative solution.</p>
+
+<p>Download and install the new version of the script with commands</p>
+
+<pre><code>sudo wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
+sudo chmod +x /usr/bin/install-wifi
+
+#### Shows details on using it.
+sudo install-wifi -h
+
+
+#### To install the driver on your current kernel you should just need to run command
+sudo install-wifi
+
+#### Check the wifi interface after installation
+ifconfig -a
+</code></pre>
+
+<p>Setup Wifi password. You can simply do it via GUI application or via command lines if you like. Please check out the official document as below.</p>
+
+<p><a href="https://www.raspberrypi.org/documentation/configuration/wireless/">https://www.raspberrypi.org/documentation/configuration/wireless/</a></p>
+
+<h4 id="install-kodi-as-media-centre">Install Kodi as media centre</h4>
+
+<p>If you have NOOBS in the place, then you have everything you need. Because I don&rsquo;t have it, I follow the official instruction to install kodi. It is a simple way to convert your RPi into a media centre without scratching your head too much.</p>
+
+<pre><code class="language-bash">
+#### Install kodi
+sudo apt-get update
+sudo apt-get install kodi
+
+
+#### Config kodi
+sudo nano /etc/default/kodi
+ENABLED=1
+
+</code></pre>
+
+<p>Reboot the RPi, before you reboot it please make sure your TV’s HDMI has plugged into RPi. After a couple minutes, you will see the home page as I posted above. Don’t forget to install remote control app on your mobile. I pretty sure you find some remote control app for Kodi on your phone. Finally, you can enjoy your home media center.</p>
+
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/os/" title="OS"> <i class="fa fa-chevron-left"></i><label>OS</label></a>
+    <a class="nav nav-next" href="/os/lubuntu16-desktop/" title="Lubuntu 16 desktop" style="margin-right: 0px;"><label>Lubuntu 16 desktop</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/linux">linux</a>
+      
+        <a class="label label-default" href="/tags/raspberry-pi">raspberry pi</a>
+      
+    </div>
+    
+
+    
+
+    
+    <div class="date">
+        <i class='fa fa-calendar'></i> Last update on 06/01/2018
+    </div>
+    
+
+    
+  </div>
+
+
+	
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+    
+
+    
+    
+
+    
+  </body>
+</html>
