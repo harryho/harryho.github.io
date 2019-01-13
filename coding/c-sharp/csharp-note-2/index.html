@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-14T01:57:34 AEDT">
+<title>C# Note - 2 :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="How to build a configurable scheduled task on Window Service?">
+
+
+
+    
+  </head>
+  <body data-url="/coding/c-sharp/csharp-note-2/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech stacks
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/git-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item active">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Python Note1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Python Note2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            Python Note3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Python Note4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Python Note5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Python Note6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Python Note7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Python Note8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-1/">
+            Windows command &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-2/">
+            Windows command &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-3/">
+            Windows command &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/coding/" >
+   Coding</option> 
+    <option value="/coding/c/" >
+   C / C&#43;&#43;</option>
+    <option value="/coding/c-sharp/" >
+   C#</option> 
+      <option value="/coding/c-sharp/csharp-note-1/" > C# Note - 1</option>
+      <option value="/coding/c-sharp/csharp-note-2/"  selected> C# Note - 2</option>
+  
+    <option value="/coding/java/" >
+   Java</option>
+    <option value="/coding/python/" >
+   Python</option>
+    <option value="/coding/shell/" >
+   Shell</option>
+  
+    <option value="/frameworks/" >
+   Frameworks</option>
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/projects/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>C# Note - 2</h1>
+        
+
+<h2 id="problem">Problem</h2>
+
+<blockquote>
+<p><em>Set up the some scheduled tasks running in the backgroud to take care of data update or sync for every 15 mins, or everyday or every week</em></p>
+</blockquote>
+
+<h2 id="solution">Solution</h2>
+
+<h3 id="option-1">Option 1</h3>
+
+<h2 id="windows-task-scheduler">Windows Task Scheduler</h2>
+
+<ul>
+<li>Click the Start button.</li>
+<li>Click Control Panel.</li>
+<li>Click System and Maintenance.</li>
+<li>Click Administrative Tools.</li>
+<li>Double-click Task Scheduler.</li>
+</ul>
+
+<h3 id="option-2">Option 2</h3>
+
+<h2 id="use-window-service-as-task-scheduler">Use Window Service as task scheduler</h2>
+
+<h3 id="overview-of-design">Overview of design</h3>
+
+<p><strong>The design here is a simplified version, which I built for previous projects. In the real world, I need to tailor it for different project with different purpose, but fundamental design of architect is the same. IMO, the design below can support most cases, which needs scheduled backgroud task service.</strong></p>
+
+<pre><code class="language-ini">
+        +----------------------------------+          Register as
+        |     System.ServiceProces  -----  |--------o Window Service
+        +----------------------------------+
+        |  +----------------------------+  |
+        |  |   Thread (Infinite)        |  | 
+        |  +----------------------------+  |
+        |  |  +----------------------+  |  |
+        |  |  | MySchedulerService   |  |  | 
+        |  |  +----------------------+  |  |
+        |  |  | while ( true )       |  |  |
+        |  |  | {                    |  |  |
+        |  |  |    Task.Process()    |  |  |
+        |  |  | }                    |  |  | 
+        |  |  +----------------------+  |  | 
+        |  +----------------------------+  |
+        +----------------------------------+ 
+
+            +------------+
+            | ITask      |
+            +------------+
+            | Process()  |
+            +------------+
+                 /|\
+                  |
+        +------------------+
+        |      BaseTask    |  -----------o Customized Task inherit BaseTask   
+        +------------------+
+        | lastProcessTime  | ------------o Last process time 
+        | intervalTime     | ------------o Customize for next process time 
+        | IsReadyProcess() | ------------o Check taks is ready to process 
+        +------------------+
+
+</code></pre>
+
+<h3 id="create-customized-window-service">Create customized Window Service</h3>
+
+<h3 id="use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</h3>
+
+<ul>
+<li>The System.ServiceProcess allow you to implement, install, and control Windows service applications. Services are long-running executables that run without a user interface.</li>
+<li>The project must have main method the entry point</li>
+</ul>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System.ServiceProcess;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            #if DEBUG
+                MySchedulerService debugService = new MySchedulerService();
+                debugService.onDebug();
+                System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+            #else
+                ServiceBase.Run(new ServiceBase[] { new MySchedulerService() });
+            #endif
+        }
+    }
+}
+
+</code></pre>
+
+<h3 id="create-customized-servicebase">Create customized ServiceBase</h3>
+
+<ul>
+<li>Implementing a service involves inheriting from the ServiceBase class and defining specific behavior to process when start, stop, pause, and continue commands are passed in, as well as custom behavior and actions to take when the system shuts down.</li>
+</ul>
+
+<pre><code class="language-cs">
+namespace MyScheduler
+{
+    using System;
+    using System.IO;
+    using System.Collections.Generic;
+    using System.Threading;
+
+    public partial class MySchedulerService : System.ServiceProcess.ServiceBase
+    {
+        public const string START_SERVICE = &quot;start.service&quot;;
+        public const string STOP_SERVICE = &quot;stop.service&quot;;
+
+        public void onDebug()
+        {
+            OnStart(null);
+        }
+
+        protected override void OnStart(string[] args)
+        {
+            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory 
+                    + TART_SERVICE);
+            ThreadStart tsTask = new ThreadStart(TaskLoop);
+            Thread rtkTask = new Thread(tsTask);
+            rtkTask.Start();
+        }
+
+        static void TaskLoop()
+        {
+            while (true)
+            {
+                // Exceute scheduled task
+                ScheduledTask();
+                // Then, wait for certain time interval
+                System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            }
+        }
+
+        static void ScheduledTask()
+        {
+            // Task code which is executed periodically
+            try
+            {
+                // Call customized tasks
+                var types = Assembly.GetExecutingAssembly()
+                                        .GetExportedTypes()
+                                        .Where(p =&gt; typeof(ITask)
+                                             .IsAssignableFrom(p.BaseType));
+
+                foreach (var t in types)
+                {
+                    var task = (ITask)Activator.CreateInstance(t);
+                    if (taskSettings.Keys.Contains(t.Name))
+                    {
+                        task.TaskSetting = taskSettings[t.Name];
+                    }
+                    tasks.Add(task);
+                }
+            }
+            catch (Exception e)
+            {
+                // TO Something here               
+            }
+        }
+
+        protected override void OnStop()
+        {
+            // Insert code here to close all the open IO or conection.
+            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory
+                         + STOP_SERVICE);
+        }
+
+        private void InitializeComponent()
+        {
+            this.ServiceName = &quot;MySchedulerService&quot;;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            OnStop();
+            base.Dispose(disposing);
+        }
+    }
+}
+
+</code></pre>
+
+<h3 id="task-interface-and-class">Task interface and class</h3>
+
+<ul>
+<li>interface ITask has only one method</li>
+</ul>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    public interface ITask
+    {
+        void Process();
+    }
+}
+</code></pre>
+
+<ul>
+<li>BaseTask</li>
+</ul>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System;
+
+    public class BaseTask : ITask
+    {
+        protected DateTime? lastProcessTime = null;
+
+        // interval time uses second as unit
+        // e.g. 1 min of intervaling time is 60 
+        protected int intervalTime = 0 ;  
+
+        protected bool IsReadyToProcess()
+        {
+            bool isReadyToProcess = true;
+
+            if (lastProcessTime.HasValue)
+            {
+                if (lastProcessTime.Value.AddSeconds(intervalTime) &gt; DateTime.Now)
+                {
+                    isReadyToProcess = false;
+                }
+            } 
+            return isReadyToProcess;
+        }
+
+        public virtual void Process()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>Sample Task1 and Task2</li>
+</ul>
+
+<p><strong>Task1</strong></p>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System;
+    using System.Linq;
+    using System.Data.Entity;
+
+    public class Task1 : BaseTask
+    {
+        public override void Process()
+        {
+            if (base.IsReadyToProcess())
+            {                
+                System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory
+                         + &quot;Task-1-&quot; + DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;));
+            }
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Task2</strong></p>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System;
+    using System.Linq;
+    using System.Data.Entity;
+
+    public class Task2 : BaseTask
+    {
+        public override void Process()
+        {
+            if (base.IsReadyToProcess())
+            {                
+                System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory 
+                        + &quot;Task-2-&quot; 
+                        + DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;));
+            }
+        }
+    }
+}
+</code></pre>
+
+<h2 id="create-window-service-installer">Create Window Service installer</h2>
+
+<ul>
+<li>In Solution Explorer, double-click MyScheduledService.cs.</li>
+<li>In the Code Editor window, right-click <code>Design View</code>, and then click <code>Properties</code></li>
+<li>In the <code>Properties</code> pane, click the <code>Add Installer</code> link.</li>
+<li>In the Properties pane for MyScheduledServiceInstaller, change the <code>ServiceNameproperty</code> to <code>MyScheduledService</code>.</li>
+<li>In the Code Editor window in <code>Design view</code>, click <code>MyScheduledServiceProcessInstaller</code>.</li>
+<li>In the Properties pane, change the <code>Account</code> property to <code>LocalSystem</code> (The <code>LocalService</code> and <code>NetworkService</code> values are available only in Microsoft Windows XP).</li>
+</ul>
+
+<p><strong>PreInstaller</strong></p>
+
+<ul>
+<li>It inherits from System.Configuration.Install.Installer. This is the base class for all custom installers in the .NET Framework. Installers are components that help install applications on a computer.</li>
+</ul>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    [RunInstaller(true)]
+    public partial class ProjectInstaller : System.Configuration.Install.Installer
+    {
+        public ProjectInstaller()
+        {
+            InitializeComponent();
+        }
+
+        private void MySchedulerServiceInstaller_AfterInstall(
+                object sender, InstallEventArgs e)
+        {
+        }
+    }
+}
+</code></pre>
+
+<h2 id="install-window-service">Install Window Service</h2>
+
+<pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /i &lt;app_path&gt;\MyScheduler.exe 
+</code></pre>
+
+<h2 id="uninstall-window-service">Uninstall Window Service</h2>
+
+<pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &lt;app_path&gt;\MyScheduler.exe 
+</code></pre>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution">Solution</a>
+<ul>
+<li><a href="#option-1">Option 1</a></li>
+</ul></li>
+<li><a href="#windows-task-scheduler">Windows Task Scheduler</a>
+<ul>
+<li><a href="#option-2">Option 2</a></li>
+</ul></li>
+<li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
+<ul>
+<li><a href="#overview-of-design">Overview of design</a></li>
+<li><a href="#create-customized-window-service">Create customized Window Service</a></li>
+<li><a href="#use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</a></li>
+<li><a href="#create-customized-servicebase">Create customized ServiceBase</a></li>
+<li><a href="#task-interface-and-class">Task interface and class</a></li>
+</ul></li>
+<li><a href="#create-window-service-installer">Create Window Service installer</a></li>
+<li><a href="#install-window-service">Install Window Service</a></li>
+<li><a href="#uninstall-window-service">Uninstall Window Service</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/coding/c-sharp/csharp-note-1/" title="C# Note - 1"> <i class="fa fa-chevron-left"></i><label>C# Note - 1</label></a>
+    <a class="nav nav-next" href="/coding/c-sharp/csharp-note-3/" title="C# Note - 3" style="margin-right: 0px;"><label>C# Note - 3</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/csharp">CSharp</a>
+      
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    <!-- @  2019 Harry Ho -->
+
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-14T01:57:35 AEDT">
+<title>Java Note - 5: Lambda  :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="Lambda expressions are Java&#39;s first step into functional programming">
+
+
+
+    
+  </head>
+  <body data-url="/coding/java/java-note-5/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech stacks
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/git-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item active">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Python Note1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Python Note2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            Python Note3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Python Note4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Python Note5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Python Note6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Python Note7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Python Note8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-1/">
+            Windows command &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-2/">
+            Windows command &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-3/">
+            Windows command &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/coding/" >
+   Coding</option> 
+    <option value="/coding/c/" >
+   C / C&#43;&#43;</option>
+    <option value="/coding/c-sharp/" >
+   C#</option>
+    <option value="/coding/java/" >
+   Java</option> 
+      <option value="/coding/java/java-note-1/" > Java Note - 1: Enum</option>
+      <option value="/coding/java/java-note-2/" > Java Note - 2: Concurrency</option>
+      <option value="/coding/java/java-note-3/" > Java Note - 3: Path and Files</option>
+      <option value="/coding/java/java-note-4/" > Java Note - 4: Date Time </option>
+      <option value="/coding/java/java-note-5/"  selected> Java Note - 5: Lambda </option>
+  
+    <option value="/coding/python/" >
+   Python</option>
+    <option value="/coding/shell/" >
+   Shell</option>
+  
+    <option value="/frameworks/" >
+   Frameworks</option>
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/projects/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Java Note - 5: Lambda </h1>
+        
+
+<h2 id="lamda">Lamda</h2>
+
+<h3 id="lambda-best-practices">Lambda Best Practices</h3>
+
+<h2 id="use-interfaces">Use Interfaces</h2>
+
+<p>The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
+in type signatures. In general, you should avoid using the functional interface types directly and instead
+provide single-method interfaces as arguments to your methods. These interfaces become a way to create
+self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
+for your user to provide an actual Java type.</p>
+
+<h2 id="use-method-reference">Use Method Reference</h2>
+
+<p>As much as possible, use a method reference instead of a lambda. Method references are not only shorter
+and easier to read, but using method references will get you thinking directly about the methods as values.</p>
+
+<h2 id="define-lambdas-inline">Define Lambdas Inline</h2>
+
+<p>When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
+lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
+inline is that it will allow your code to be more flexible when types change: you are letting type inference do
+more heavy lifting for you, and adapting your code to changing contexts.</p>
+
+<h2 id="lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</h2>
+
+<p>As we go through the rest of this book, we will see many places where lambdas make concurrent programming
+much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
+much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
+instance method handles, since thread-dangerous state can often be hiding within those instances.</p>
+
+<h2 id="don-t-use-null">Don’t Use Null</h2>
+
+<p>The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
+no need for it. Whenever you have a method, you should be explicit about whether or not you accept
+null, and you generally shouldn’t accept it. This will save you from NullPointerException cropping up
+in obnoxious places, far from the site of the actual error. This is an especially painful problem when you
+start working with streams and lambdas, because the stack trace may not be very useful for you when
+you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
+soon as it occurs.</p>
+
+<h2 id="don-t-release-zalgo">Don’t Release Zalgo</h2>
+
+<ul>
+<li>Don&rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.</li>
+</ul>
+
+<h2 id="build-complexity-from-simple-parts">Build Complexity from Simple Parts</h2>
+
+<h2 id="use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</h2>
+
+<h3 id="common-functional-interfaces">Common functional Interfaces</h3>
+
+<table>
+<thead>
+<tr>
+<th>Functional Interface</th>
+<th>Parameter Types</th>
+<th>Return</th>
+<th>Abstract Description Method</th>
+<th>Description</th>
+<th>Other Methods</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Runnable</td>
+<td>none</td>
+<td>void</td>
+<td>run</td>
+<td>Runs an action</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Supplier<T></td>
+<td>none</td>
+<td>T</td>
+<td>get</td>
+<td>Supplies a value of type T</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Consumer<T></td>
+<td>T</td>
+<td>void</td>
+<td>accept</td>
+<td>Consumes a  value of type T</td>
+<td>chain</td>
+</tr>
+
+<tr>
+<td>BiConsumer<T, U></td>
+<td>T, U</td>
+<td>void</td>
+<td>accept</td>
+<td>Consumes a  value of type T and U</td>
+<td>chain</td>
+</tr>
+
+<tr>
+<td>Function<T, R></td>
+<td>T</td>
+<td>R</td>
+<td>apply</td>
+<td>A function with argument oftype T</td>
+<td>compose, andThen,identity</td>
+</tr>
+
+<tr>
+<td>BiFunction<T, U, R></td>
+<td>T, U</td>
+<td>R</td>
+<td>apply</td>
+<td>A function with argument of type T and U</td>
+<td>andThen</td>
+</tr>
+
+<tr>
+<td>UnaryOperator<T></td>
+<td>T</td>
+<td>T</td>
+<td>apply</td>
+<td>A unary operator on type T</td>
+<td>compose, andThen, identity</td>
+</tr>
+
+<tr>
+<td>BiUnaryOperator<T,T></td>
+<td>T,T</td>
+<td>T</td>
+<td>apply</td>
+<td>A binary operator on type T</td>
+<td>andThen</td>
+</tr>
+
+<tr>
+<td>Predicate<T></td>
+<td>T</td>
+<td>boolean</td>
+<td>test</td>
+<td>A Boolean-valued function</td>
+<td>and,  or, negate, isEqual</td>
+</tr>
+
+<tr>
+<td>BiPredicate<T,T></td>
+<td>T,T</td>
+<td>boolean</td>
+<td>test</td>
+<td>A Boolean-valued function with tow arguments</td>
+<td>and,  or, negate</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="method-reference">Method Reference</h3>
+
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TypeName::staticMethod</td>
+<td>A method reference to a static method of a class, an interface, or an enum</td>
+</tr>
+
+<tr>
+<td>objectRef::instanceMethod</td>
+<td>A method reference to an instance method of the specified object</td>
+</tr>
+
+<tr>
+<td>ClassName::instanceMethod</td>
+<td>A method reference to an instance method of an arbitrary object of the specified class</td>
+</tr>
+
+<tr>
+<td>TypeName.super::instanceMethod</td>
+<td>A method reference to an instance method of the supertype of a particular object</td>
+</tr>
+
+<tr>
+<td>ClassName::new</td>
+<td>A constructor reference to the constructor of the specified class</td>
+</tr>
+
+<tr>
+<td>ArrayTypeName::new</td>
+<td>An array constructor reference to the constructor of the specified</td>
+</tr>
+
+<tr>
+<td>array type</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="lambda-demo">Lambda Demo</h3>
+
+<pre><code class="language-java">import java.util.Locale;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
+
+public class LambdaDemo {
+
+    public static void main(String[] args) {
+
+        // FunctionalInterface 
+        System.out.println(&quot;x + y:&quot; + engine((x, y) -&gt; x + y)); // 6
+        System.out.println(&quot;x - y:&quot; + engine((x, y) -&gt; x * y)); // 8
+        System.out.println(&quot;x * y:&quot; + engine((x, y) -&gt; x / y)); // 0 
+        System.out.println(&quot;x / y:&quot; + engine((x, y) -&gt; x % y)); // 2
+
+        String[] strArray = new String[] { &quot;abc&quot;, &quot;klm&quot;, &quot;xyz&quot;, &quot;pqr&quot; };
+        List list = Arrays.asList(strArray);
+
+        // Default Methods
+        list.forEach(System.out::println);
+
+        // abc
+        // klm
+        // xyz
+        // pqr
+
+        Arrays.sort(strArray, (first, second) -&gt; first.compareToIgnoreCase(second));
+        list = Arrays.asList(strArray);
+
+        System.out.println(&quot;After sorting ... &quot;);
+        list.forEach(System.out::println);
+
+        // After sorting ...
+        // abc
+        // klm
+        // pqr
+        // xyz
+
+        // Common Functional Interfaces
+        // Runnable
+        repeat(5, () -&gt; System.out.println(&quot;Hello&quot;));
+
+        UnaryOperator&lt;String&gt; upperCase = str -&gt; str.toUpperCase();
+        BinaryOperator&lt;String&gt; concat = (left, right) -&gt; left + right;
+
+        System.out.println(&quot; UnaryOperator upperCase &quot; + upperCase.apply(&quot;hello&quot;));
+        System.out.println(&quot;  BinaryOperator&lt;String&gt; concat &quot; + concat.apply(&quot;hello&quot;, &quot;world&quot;));
+
+        // Function 
+        Function&lt;Long, Long&gt; square = x -&gt; x * x;
+        Function&lt;Long, Long&gt; plusOne = x -&gt; x + 1;
+        // Function with andThen, 
+        Function&lt;Long, Long&gt; squarePlusOne = square.andThen(plusOne);
+        Function&lt;Long, Long&gt; plusOneSquare = square.compose(plusOne);
+        System.out.println(&quot; 5 squarePlusOne is &quot; + squarePlusOne.apply(5L)); // 26 
+        System.out.println(&quot; 5 plusOneSquare is  &quot; + plusOneSquare.apply(5L)); // 36
+
+        // Predicate
+        Predicate&lt;Integer&gt; divisibleByThree = x -&gt; x % 3 == 0;
+        Predicate&lt;Integer&gt; divisibleByFive = x -&gt; x % 5 == 0;
+        Predicate&lt;Integer&gt; isNegative = x -&gt; x &lt; 0;
+        // Predicate with AND , OR , NOT
+        Predicate&lt;Integer&gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
+        Predicate&lt;Integer&gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
+        Predicate&lt;Integer&gt; isPositive = isNegative.negate();
+
+        System.out.println(&quot; 15 is divisibleByThreeAndFive &quot; + divisibleByThreeAndFive.test(15));
+        System.out.println(&quot; 7 is divisibleByThreeAndFive &quot; + divisibleByThreeOrFive.test(7));
+        System.out.println(&quot; -1 is isPositive &quot; + isPositive.test(7));
+
+        // static method reference 
+        Function&lt;Integer, String&gt; toBinary = x -&gt; Integer.toBinaryString(x);
+        System.out.println(toBinary.apply(19));
+
+        // Using a method reference
+        Function&lt;Integer, String&gt; toBinary2 = Integer::toBinaryString;
+        System.out.println(toBinary2.apply(19));
+
+        // static method lambda expression
+        BiFunction&lt;Integer, Integer, Integer&gt; sum = (a, b) -&gt; Integer.sum(a, b);
+        System.out.println(sum.apply(3, 4));
+
+        // Instance method
+        Supplier&lt;Person&gt; personSup = () -&gt; new Person();
+        Function&lt;String, Person&gt; personFunc = (x) -&gt; new Person(x);
+
+        BiFunction&lt;String, String, Person&gt; personBiFunc = (x, y) -&gt; new Person(x, y);
+        // Consumer&lt;String&gt; personCon = (Person p) -&gt; p.setTitle;
+
+        System.out.println(personSup.get());
+        // Person() constructor called
+        // name = Unknown, title = Unknown
+        System.out.println(personFunc.apply(&quot;John Doe&quot;));
+        // Person( fullName ) constructor called
+        // name = John Doe, title = Unknown
+
+        System.out.println(personBiFunc.apply(&quot;John&quot;, &quot;Doe&quot;));
+        // Person(firstName, lastName ) constructor called
+        // name = John, title = Unknown
+
+
+        // Recursive Lambda Expressions
+        IntFunction&lt;Long&gt; factorialCalc = new IntFunction&lt;Long&gt;() {
+            @Override
+            public Long apply(int n) {
+                if (n &lt; 0) {
+                    String msg = &quot;Number must not be negative.&quot;;
+                    throw new IllegalArgumentException(msg);
+                }
+                if (n == 0) {
+                    return 1L;
+                } else {
+                    return n * this.apply(n - 1);
+                }
+            }
+        };
+
+        int n = 5;
+        long fact = factorialCalc.apply(n);
+        System.out.println(&quot;Factorial of &quot; + n + &quot; is &quot; + fact);
+        // Factorial of 5 is 120
+
+
+        
+    }
+
+
+
+
+    private static int engine(Calculator calculator) {
+        int x = 2, y = 4;
+        return calculator.calculate(x, y);
+    }
+
+    public static void repeat(int n, Runnable action) {
+        for (int i = 0; i &lt; n; i++)
+            action.run();
+    }
+}
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int x, int y);
+}
+
+final class Person {
+    String firstName;
+    String lastName;
+    String fullName;
+    String title;
+
+    public Person() {
+        System.out.println(&quot; Person() constructor called &quot;);
+    }
+
+    public Person(String fullName) {
+        this.fullName = fullName;
+        System.out.println(&quot; Person( fullName ) constructor called &quot;);
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&quot; Person(firstName, lastName ) constructor called &quot;);
+    }
+
+    public void setTitle(String t) {
+        this.title = t;
+        System.out.println(&quot; Person setTitle ( t ) called &quot;);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFullName() {
+        return fullName == null ?( firstName != null ? firstName : &quot;Unknown&quot; ): fullName;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;name = &quot; + getFullName() + &quot;, title = &quot; + (title != null ? title : &quot;Unknown&quot;);
+    }
+}
+
+
+</code></pre>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#lamda">Lamda</a>
+<ul>
+<li><a href="#lambda-best-practices">Lambda Best Practices</a></li>
+</ul></li>
+<li><a href="#use-interfaces">Use Interfaces</a></li>
+<li><a href="#use-method-reference">Use Method Reference</a></li>
+<li><a href="#define-lambdas-inline">Define Lambdas Inline</a></li>
+<li><a href="#lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</a></li>
+<li><a href="#don-t-use-null">Don’t Use Null</a></li>
+<li><a href="#don-t-release-zalgo">Don’t Release Zalgo</a></li>
+<li><a href="#build-complexity-from-simple-parts">Build Complexity from Simple Parts</a></li>
+<li><a href="#use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</a>
+<ul>
+<li><a href="#common-functional-interfaces">Common functional Interfaces</a></li>
+<li><a href="#method-reference">Method Reference</a></li>
+<li><a href="#lambda-demo">Lambda Demo</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/coding/java/java-note-4/" title="Java Note - 4: Date Time "> <i class="fa fa-chevron-left"></i><label>Java Note - 4: Date Time </label></a>
+    <a class="nav nav-next" href="/coding/java/java-note-7/" title="Java Note - 7: Stream API" style="margin-right: 0px;"><label>Java Note - 7: Stream API</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/java">java</a>
+      
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    <!-- @  2019 Harry Ho -->
+
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-01-14T01:57:35 AEDT">
+<title>Java Note - 4: Date Time  :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime">
+
+
+
+    
+  </head>
+  <body data-url="/coding/java/java-note-4/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+    
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech stacks
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/git-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item active">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Python Note1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Python Note2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            Python Note3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Python Note4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Python Note5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Python Note6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Python Note7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Python Note8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-1/">
+            Windows command &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-2/">
+            Windows command &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-3/">
+            Windows command &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/coding/" >
+   Coding</option> 
+    <option value="/coding/c/" >
+   C / C&#43;&#43;</option>
+    <option value="/coding/c-sharp/" >
+   C#</option>
+    <option value="/coding/java/" >
+   Java</option> 
+      <option value="/coding/java/java-note-1/" > Java Note - 1: Enum</option>
+      <option value="/coding/java/java-note-2/" > Java Note - 2: Concurrency</option>
+      <option value="/coding/java/java-note-3/" > Java Note - 3: Path and Files</option>
+      <option value="/coding/java/java-note-4/"  selected> Java Note - 4: Date Time </option>
+      <option value="/coding/java/java-note-5/" > Java Note - 5: Lambda </option>
+  
+    <option value="/coding/python/" >
+   Python</option>
+    <option value="/coding/shell/" >
+   Shell</option>
+  
+    <option value="/frameworks/" >
+   Frameworks</option>
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/projects/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Java Note - 4: Date Time </h1>
+        
+
+<h2 id="date-time-api">Date-Time API</h2>
+
+<p>Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are</p>
+
+<ul>
+<li>Instant
+
+<ul>
+<li>represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event</li>
+</ul></li>
+
+<li><p>LocalDate,  LocalTime, LocalDateTime</p>
+
+<ul>
+<li>represents human readable date, time, and datetime without a time zone.</li>
+</ul></li>
+
+<li><p>OffsetTime, OffsetDateTime</p>
+
+<ul>
+<li>It represent a time and datetime with a zone offset from UTC.
+<br /></li>
+</ul></li>
+
+<li><p>ZonedDateTime</p>
+
+<ul>
+<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
+<br /></li>
+</ul></li>
+</ul>
+
+<h3 id="iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</h3>
+
+<ul>
+<li>[date]T[time][zone offset]</li>
+<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day<br /></li>
+<li>Epoch is Midnight January 1, 1970 UTC</li>
+</ul>
+
+<h3 id="useful-datetime-related-enums">Useful Datetime-Related Enums</h3>
+
+<ul>
+<li>Month</li>
+<li>DayOfWeek</li>
+<li>ChronoField</li>
+<li>ChronoUnit</li>
+</ul>
+
+<h2 id="period">Period</h2>
+
+<p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
+
+<h2 id="partial">Partial</h2>
+
+<p>Partials
+A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.</p>
+
+<h2 id="adjusting-dates">Adjusting Dates</h2>
+
+<p>Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the <code>TemporalAdjuster</code> interface. The interface has one method, adjustInto(), that takes a Temporal and returns a <code>Temporal</code>.</p>
+
+<h2 id="formatting">Formatting</h2>
+
+<p>The most important point to keep in mind is that formatting and parsing are
+always performed by an object of the DateTimeFormatter class.</p>
+
+<h3 id="datetimeapidemo">DateTimeApiDemo</h3>
+
+<pre><code class="language-java">import java.time.Duration;
+import java.time.DayOfWeek;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime; 
+import java.time.LocalDateTime; 
+
+import java.time.Month;
+import java.time.MonthDay;
+
+import java.time.OffsetDateTime;
+import java.time.Period;
+
+
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+
+
+import java.time.Year;
+import java.time.YearMonth;
+
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+
+import java.util.Locale;
+import java.util.Set;
+
+
+import static java.time.Month.JANUARY;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
+public class DateTimeApiDemo {
+
+    
+    public static String format(Temporal co, String pattern) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        return fmt.format(co);
+    }
+
+    public static void parseStr(DateTimeFormatter formatter, String text) {
+        try {
+            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
+            if (ta instanceof OffsetDateTime) {
+                OffsetDateTime odt = OffsetDateTime.from(ta);
+                System.out.println(&quot;OffsetDateTime: &quot; + odt);
+            } else if (ta instanceof LocalDateTime) {
+                LocalDateTime ldt = LocalDateTime.from(ta);
+                System.out.println(&quot;LocalDateTime: &quot; + ldt);
+            } else if (ta instanceof LocalDate) {
+                LocalDate ld = LocalDate.from(ta);
+                System.out.println(&quot;LocalDate: &quot; + ld);
+            } else {
+                System.out.println(&quot;Parsing returned: &quot; + ta);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Get current date, time, and datetime 
+        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
+        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
+        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
+        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
+
+        //  ofXXX() method
+        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
+        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
+        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
+        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
+
+        // The plusXXX( ) and minusXXX( ) Methods
+        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
+        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
+        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
+        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
+        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
+        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
+
+        // Instant 
+        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
+        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
+
+        Duration d1 = Duration.ofSeconds(55);
+        Duration d2 = Duration.ofSeconds(-17);
+
+        // Compare instants
+        System.out.println(&quot;i1.isBefore(i2):&quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
+        System.out.println(&quot;i1.isAfter(i2):&quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
+
+        // Add and subtract durations to instants
+        Instant i3 = i1.plus(d1);
+        Instant i4 = i2.minus(d2);
+        System.out.println(&quot;i1.plus(d1):&quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
+
+        System.out.println(&quot;i2.minus(d2):&quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
+
+        // Add two durations
+        System.out.println(&quot;d1.plus(d2):&quot; + d1.plus(d2)); // d1.plus(d2):PT38S
+
+
+        // Print All Zone Id
+        Set&lt;String&gt; zoneIds = ZoneId.getAvailableZoneIds();
+        for (String zoneId: zoneIds) {
+          System.out.println(zoneId);
+        }
+
+        // DayOfWeek
+        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
+
+        // Chrono 
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(&quot;Year: &quot; + now.get(ChronoField.YEAR));
+        System.out.println(&quot;Month: &quot; + now.get(ChronoField.MONTH_OF_YEAR));
+        System.out.println(&quot;Day: &quot; + now.get(ChronoField.DAY_OF_MONTH));
+        System.out.println(&quot;Hour-of-day: &quot; + now.get(ChronoField.HOUR_OF_DAY));
+        System.out.println(&quot;Hour-of-AMPM: &quot; + now.get(ChronoField.HOUR_OF_AMPM));
+        System.out.println(&quot;AMPM-of-day: &quot; + now.get(ChronoField.AMPM_OF_DAY));
+
+        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
+        Period p2 = Period.ofDays(25); // 25 days
+        Period p3 = Period.ofMonths(-3); // -3 months
+        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
+
+        // Date Adjuster
+        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        System.out.println(ld3);
+        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+        System.out.println(ld3);
+
+        // Date Time Format         
+        System.out.println(format(ld, &quot;M/d/yyyy&quot;));
+        System.out.println(format(ld, &quot;MM/dd/yyyy&quot;));
+        System.out.println(format(ld, &quot;MMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;MMMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;EEEE, MMMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;'Month' q 'in' QQQ&quot;));
+        System.out.println(format(ld, &quot;[MM-dd-yyyy][' at' HH:mm:ss]&quot;));
+
+        // Parse date time
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd['T'HH:mm:ss[Z]]&quot;);
+        parseStr(parser, &quot;2012-05-31&quot;); //  LocalDate: 2012-05-31
+        parseStr(parser, &quot;2012-05-31T16:30:12&quot;); // LocalDateTime: 2012-05-31T16:30:12
+        parseStr(parser, &quot;2012-05-31T16:30:12-0500&quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
+        parseStr(parser, &quot;2012-05-31Hello&quot;); // Text '2012-05-31Hello' could not be parsed, unparsed text found at index 10
+
+
+
+    }
+}
+
+</code></pre>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#date-time-api">Date-Time API</a>
+<ul>
+<li><a href="#iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</a></li>
+<li><a href="#useful-datetime-related-enums">Useful Datetime-Related Enums</a></li>
+</ul></li>
+<li><a href="#period">Period</a></li>
+<li><a href="#partial">Partial</a></li>
+<li><a href="#adjusting-dates">Adjusting Dates</a></li>
+<li><a href="#formatting">Formatting</a>
+<ul>
+<li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/coding/java/java-note-3/" title="Java Note - 3: Path and Files"> <i class="fa fa-chevron-left"></i><label>Java Note - 3: Path and Files</label></a>
+    <a class="nav nav-next" href="/coding/java/java-note-5/" title="Java Note - 5: Lambda " style="margin-right: 0px;"><label>Java Note - 5: Lambda </label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/java">java</a>
+      
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    <!-- @  2019 Harry Ho -->
+
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

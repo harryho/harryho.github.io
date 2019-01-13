@@ -314,8 +314,32 @@ article section.page {
   overflow-y: auto;
   padding: 0 0rem; 
 }
-  article > section.page >div.main-content {
+  article > section.page >div.main-page {
     padding: 0 1rem;
+    list-style: none;
+  
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  article > section.page>div.main-page >div.main-content {
+    flex: 1 1 70%;
+  }
+  article > section.page>div.main-page  .toc {
+    flex: 2 2  5%;
+  }
+  article > section.page>div.main-page  .toc  ul {
+    list-style-type: none;
+  }
+
+  article > section.page>div.main-page  .toc  >nav {
+    position: sticky;
+    top: 4rem;
   }
   article section.page h1:first-of-type {
     margin: 3rem 0rem;
@@ -684,8 +708,9 @@ ul.children.children-card {
   section {
     margin-right: 0; }
 
-  section > .toc {
-    display: none; } }
+  section  .toc {
+    display: none; }   
+  }
 @media (max-width: 768px) {
   article {
     -webkit-box-orient: vertical;
@@ -706,6 +731,9 @@ ul.children.children-card {
   }
   article > section.page #navigation label {
     display: none; }
+
+  section  .toc {
+      display: none; } 
 
   section {
     margin: 0;
