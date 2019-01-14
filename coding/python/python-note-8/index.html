@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-14T13:22:35 AEDT">
+<meta name="revised" content="2019-01-14T14:25:22 AEDT">
 <title>Python Note 8 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Python Note 8">
+<meta name="description" content="Context Manager,  Introspection">
 
 
 
@@ -34,7 +34,6 @@
   
 
 
-    
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
   <nav class="shortcuts">
@@ -591,7 +590,6 @@
 <pre><code>with context-manager:
     body
 
-
 with context-manager:
     context-manager.begin()
     body
@@ -663,15 +661,15 @@ __exit__(self,
 
 <pre><code class="language-python">@contextlib.contextmanager
 def my_context_manager():
-## &lt;ENTER&gt;
-try:
-yield [value]
-## &lt;NORMAL EXIT&gt;
-except:
-## &lt;EXCEPTIONAL EXIT&gt;
-raise
-with my_context_manager() as x:
-## . . .
+    ## &lt;ENTER&gt;
+    try:
+    yield [value]
+    ## &lt;NORMAL EXIT&gt;
+    except:
+    ## &lt;EXCEPTIONAL EXIT&gt;
+    raise
+    with my_context_manager() as x:
+    ## . . .
 </code></pre></li>
 
 <li><p><code>contextmanager</code> lets you define context-managers with simple control flow It allows you to leverage the statefulness of generators</p></li>
