@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-14T15:11:34 AEDT">
+<meta name="revised" content="2019-01-20T12:47:17 AEDT">
 <title>Git Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -570,12 +570,12 @@
 
 <h3 id="create-the-branch-on-your-local-machine-and-switch-in-this-branch">Create the branch on your local machine and switch in this branch</h3>
 
-<pre><code>    $ git checkout -b [name_of_your_new_branch]
+<pre><code>$ git checkout -b [name_of_your_new_branch]
 </code></pre>
 
 <h3 id="push-the-branch-on-git-repository-github-bitbucket">Push the branch on git-repository (Github, Bitbucket)</h3>
 
-<pre><code>    $ git push origin [name_of_your_new_branch]
+<pre><code>$ git push origin [name_of_your_new_branch]
 </code></pre>
 
 <p>When you want to commit something in your branch, be sure to be in your branch.</p>
@@ -585,15 +585,15 @@
 <ul>
 <li><p>You can see all branches created by using :</p>
 
-<pre><code>$ git branch
-</code></pre></li>
+<p>$ git branch</p></li>
 
 <li><p>Which will show :</p>
 
-<pre><code>* approval_messages
+<ul>
+<li>approval_messages
 master
-master_clean
-</code></pre></li>
+master_clean</li>
+</ul></li>
 </ul>
 
 <h2 id="manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</h2>
@@ -700,6 +700,94 @@ $ git branch -d new-feature
 ```
 </code></pre>
 
+<h3 id="rebase-for-merge">Rebase for merge</h3>
+
+<p>Problem: You are working with a few experienced devs constantly improving an online shooping site. After you complete the first assignment and ready to commit to master you find someone merged a change that affects or overlaps with the ones you made, and it could lead to bugs in the online-shoppping website.</p>
+
+<p>Solution: Situations like these are a big example of when you&rsquo;d want to rebase. Let&rsquo;s say when you created your branch off of the master branch, the master branch was on commit No. 1. Every commit in your branch was put on top of commit #1. When you&rsquo;re ready to merge your branch to master, you find  other developers have some changes and the most recent commit is commit No. 4. <strong>Rebasing is taking all your branch&rsquo;s commits and adding them on top of commit No. 4 instead of commit No. 1.</strong> If you consider commit No. 1 as the &ldquo;base&rdquo; of your branch, you&rsquo;re changing that base to the most recent one, commit No. 4. Hence why it&rsquo;s called rebasing!</p>
+
+<h4 id="rebase-with-conflict">Rebase with conflict</h4>
+
+<pre><code>```bash
+git rebase master
+
+# When there is conflict, the rebase will pause. 
+# You have to manually solve the conflict
+# Add the resolved files to stage and commit it
+git add &lt;Resolved-File&gt;
+git commit 
+
+# Conttinue the rebase process
+git rebase --continue
+
+```
+</code></pre>
+
+<h4 id="rebase-interactively">Rebase interactively</h4>
+
+<p>Rebase to master branch</p>
+
+<pre><code>$ git rebase -i master 
+</code></pre>
+
+<p>Rebase with fixup and squash</p>
+
+<pre><code>* squash (s for short), which melds the commit into the previous one (the one in the line before)
+* fixup (f for short), which acts like “squash”, but discards this commit’s message
+
+```bash
+# Commit your changes
+$ git add. 
+$ git commit 
+
+
+$ git rebase  -i master
+# Update the prop up  editor
+# fixup &lt;COMMIT-ID&gt;
+# squahs   &lt;COMMIT-ID&gt; &lt;Message&gt;
+```
+</code></pre>
+
+<p>Rebase with autosquash</p>
+
+<pre><code>$ git rebase -i --autosquash master
+</code></pre>
+
+<h2 id="git-reword">Git reword</h2>
+
+<p>Reword the last commit message. The command below will open an editor to let you change previous commit message</p>
+
+<pre><code>$ git commit --amend   
+</code></pre>
+
+<p>Reword the last commit message and author.</p>
+
+<pre><code>$ git commit --amend   --author=&quot;Other author &lt;other_author@test.com&gt;&quot;
+</code></pre>
+
+<h2 id="git-submodule">Git Submodule</h2>
+
+<p>Add other repository into your existing project as submodule</p>
+
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-repo-folder&gt;
+</code></pre>
+
+<p>Add other repository into your existing project as submodule under specific location</p>
+
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-specific-location&gt;/&lt;your-repo-folder&gt;
+</code></pre>
+
+<p>Add other repository into your existing project for specific branch</p>
+
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  -b &lt;branch-name&gt; &lt;your-repo-folder&gt;    
+</code></pre>
+
+<p>Initialize and update submoule</p>
+
+<pre><code>$ git submodule init
+$ git submodule update 
+</code></pre>
+
     </div>
 
     <div class="toc" >
@@ -719,7 +807,14 @@ $ git branch -d new-feature
 <ul>
 <li><a href="#fast-forward-merge">Fast-Forward Merge</a></li>
 <li><a href="#3-way-merge">3-Way Merge</a></li>
+<li><a href="#rebase-for-merge">Rebase for merge</a>
+<ul>
+<li><a href="#rebase-with-conflict">Rebase with conflict</a></li>
+<li><a href="#rebase-interactively">Rebase interactively</a></li>
 </ul></li>
+</ul></li>
+<li><a href="#git-reword">Git reword</a></li>
+<li><a href="#git-submodule">Git Submodule</a></li>
 </ul></li>
 </ul>
 </nav>
