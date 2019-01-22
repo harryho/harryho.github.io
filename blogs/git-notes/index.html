@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-20T12:47:17 AEDT">
+<meta name="revised" content="2019-01-23T01:29:18 AEDT">
 <title>Git Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -107,6 +107,13 @@
         <div>
           <a href="/blogs/javascript-oop/">
             JavaScript and OOP
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/k8s-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-notes/">
+            Kubernetes Practices
           </a>
         </div>
     </li>
@@ -448,6 +455,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-18-k8s/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-18-k8s/">
+            Ubuntu 18 &amp; Kubernetes
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -536,6 +550,7 @@
       <option value="/blogs/create-a-blog-on-github-pages/" > Create a blog site on GitHub Pages</option>
       <option value="/blogs/git-notes/"  selected> Git Practices</option>
       <option value="/blogs/javascript-oop/" > JavaScript and OOP</option>
+      <option value="/blogs/k8s-notes/" > Kubernetes Practices</option>
   
     <option value="/coding/" >
    Coding</option>
@@ -580,23 +595,12 @@
 
 <p>When you want to commit something in your branch, be sure to be in your branch.</p>
 
-<h2 id="list-all-branches">List all branches</h2>
-
-<ul>
-<li><p>You can see all branches created by using :</p>
-
-<p>$ git branch</p></li>
-
-<li><p>Which will show :</p>
-
-<ul>
-<li>approval_messages
-master
-master_clean</li>
-</ul></li>
-</ul>
-
 <h2 id="manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</h2>
+
+<p>List all branches</p>
+
+<pre><code>$ git branch
+</code></pre>
 
 <p>Add a new remote for your branch :</p>
 
@@ -648,8 +652,7 @@ master_clean</li>
 
 <p>Our first example demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.</p>
 
-<pre><code>```bash
-## Start a new feature
+<pre><code class="language-bash">## Start a new feature
 $ git checkout -b new-feature master
 
 ## Edit some files    
@@ -664,7 +667,6 @@ $ git commit -m &quot;Finish a feature&quot;
 $ git checkout master
 $ git merge new-feature
 $ git branch -d new-feature
-```
 </code></pre>
 
 <p>This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.</p>
@@ -675,8 +677,7 @@ $ git branch -d new-feature
 
 <p>The next example is very similar, but requires a 3-way merge because master progresses while the feature is in-progress. This is a common scenario for large features or when several developers are working on a project simultaneously.</p>
 
-<pre><code>```bash
-## Start a new feature
+<pre><code class="language-bash">## Start a new feature
 $ git checkout -b new-feature master
 
 ## Edit some files
@@ -697,7 +698,6 @@ $ git commit -m &quot;Make some super-stable changes to master&quot;
 ## Merge in the new-feature branch
 $ git merge new-feature
 $ git branch -d new-feature
-```
 </code></pre>
 
 <h3 id="rebase-for-merge">Rebase for merge</h3>
@@ -708,8 +708,7 @@ $ git branch -d new-feature
 
 <h4 id="rebase-with-conflict">Rebase with conflict</h4>
 
-<pre><code>```bash
-git rebase master
+<pre><code class="language-bash">git rebase master
 
 # When there is conflict, the rebase will pause. 
 # You have to manually solve the conflict
@@ -719,8 +718,6 @@ git commit
 
 # Conttinue the rebase process
 git rebase --continue
-
-```
 </code></pre>
 
 <h4 id="rebase-interactively">Rebase interactively</h4>
@@ -732,11 +729,12 @@ git rebase --continue
 
 <p>Rebase with fixup and squash</p>
 
-<pre><code>* squash (s for short), which melds the commit into the previous one (the one in the line before)
-* fixup (f for short), which acts like “squash”, but discards this commit’s message
+<ul>
+<li>squash (s for short), which melds the commit into the previous one (the one in the line before)</li>
+<li>fixup (f for short), which acts like “squash”, but discards this commit’s message</li>
+</ul>
 
-```bash
-# Commit your changes
+<pre><code class="language-bash"># Commit your changes
 $ git add. 
 $ git commit 
 
@@ -745,7 +743,6 @@ $ git rebase  -i master
 # Update the prop up  editor
 # fixup &lt;COMMIT-ID&gt;
 # squahs   &lt;COMMIT-ID&gt; &lt;Message&gt;
-```
 </code></pre>
 
 <p>Rebase with autosquash</p>
@@ -800,7 +797,6 @@ $ git submodule update
 <li><a href="#create-the-branch-on-your-local-machine-and-switch-in-this-branch">Create the branch on your local machine and switch in this branch</a></li>
 <li><a href="#push-the-branch-on-git-repository-github-bitbucket">Push the branch on git-repository (Github, Bitbucket)</a></li>
 </ul></li>
-<li><a href="#list-all-branches">List all branches</a></li>
 <li><a href="#manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</a></li>
 <li><a href="#delete-branch">Delete branch</a></li>
 <li><a href="#branch-merge">Branch merge</a>
