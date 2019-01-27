@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-23T01:29:18 AEDT">
-<title>Mobile :: Hello World</title>
+<meta name="revised" content="2019-01-27T15:49:51 AEDT">
+<title>Qemu &amp; Virtual Machine :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Use Qemu to create virtual machines">
 
 
 
     
   </head>
-  <body data-url="/tags/mobile/">
+  <body data-url="/hacks/qemu-notes/">
     
       <header>
   <div class="logo">
@@ -349,16 +349,24 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item haschildren
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/hacks/php-debug/" class="dd-item">
         <div>
           <a href="/hacks/php-debug/">
             Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item active">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
           </a>
         </div>
     </li>
@@ -548,7 +556,13 @@
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
-   Hacks</option>
+   Hacks</option> 
+      <option value="/hacks/php-debug/" > Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/"  selected> Qemu &amp; Virtual Machine</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-1/" > Windows command &amp; hotkey - 1</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-2/" > Windows command &amp; hotkey - 2</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-3/" > Windows command &amp; hotkey - 3</option>
+  
     <option value="/os/" >
    OS</option>
     <option value="/projects/" >
@@ -567,59 +581,109 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Qemu &amp; Virtual Machine</h1>
+        
 
+<blockquote>
+<p><strong>What is Qemu</strong></p>
+</blockquote>
 
+<p><a href="https://wiki.qemu.org/Main_Page">QEMU</a> is a virtualization technology emulator that allows you to run operating systems and Linux distributions easily on your current system without the need to install them or burn their ISO files. It is like VMware or VirtualBox. You can use it at anytime to emulate running any operating system you want on a lot of devices and architecture.</p>
 
-<div class="extra-pagination inner">
-<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
+<p>QEMU is free and open source. And is licensed under GPL 2. it has the ability to run under both KVM and XEN models (if you enabled virtualization technology from your BIOS first) and offers a lot of options and virtualization options. In this article, we’ll explain how to use QEMU and install it.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>Install <a href="https://www.qemu.org/download/#linux">Qemu</a> on Linux (Ubuntu / Cent OS) or MacBook</li>
+<li>Create a folder to store the images files. e.g. ~/ws/vms</li>
+</ul>
+
+<h2 id="assumptions">Assumptions</h2>
+
+<ul>
+<li>Assume the new iso files are stored in folder &ldquo;Download&rdquo;</li>
+<li>Architect of your machine is x86_64</li>
+</ul>
+
+<h2 id="create-new-image">Create new image</h2>
+
+<h3 id="create-a-new-image">Create a new image</h3>
+
+<p>Use <code>qemu-img</code> to create an image file with a maximum size of 10GB</p>
+
+<pre><code>qemu-img create -f qcow2 ~/ws/vms/ubuntu16-vm.img 10G
+</code></pre>
+
+<h3 id="resize-the-maximum">Resize the maximum</h3>
+
+<p>Resize the maximum of the existing image by adding 30GB</p>
+
+<pre><code>qemu-img resize ~/ws/vms/ubuntu16-vm.img +30G
+</code></pre>
+
+<h3 id="create-new-vm">Create new vm</h3>
+
+<p>Create a new VM (virtual machine) on the image file</p>
+
+<pre><code>qemu-system-x86_64 -m 2048 -boot d -enable-kvm \
+-smp 2 -net nic -net user \
+-hda ~/ws/vms/ubuntu16-vm.img \
+-cdrom ~/Downloads/ubuntu-16.04.iso
+</code></pre>
+
+<p><code>-m 2048</code>: Here we chose the RAM amount that we want to provide for QEMU when running the ISO file. We chose 2048MB here. You can change it if you like according to your needs.</p>
+
+<p><code>-boot -d</code>: The boot option allows us to specify the boot order, which device should be booted first? <code>-d</code> means that the CD-ROM will be the first, then QEMU will boot normally to the hard drive image. We have used the <code>-cdrom</code>: option as you can see at the end of the command. You can use <code>-c</code> if you want to boot the hard drive image first.</p>
+
+<p><code>-enable-kvm</code>: This is a very important option. It allows us to use the KVM technology to emulate the architecture we want. Without it, QEMU will use software rendering which is very slow. That’s why we must use this option, just make sure that the virtualization options are enabled from your computer BIOS.</p>
+
+<p><code>-smp 2</code>: If we want to use more than 1 core for the emulated operating system, we can use this option. We chose to use 2 cores to run the virtual image which will make it faster. You should change this number according to your computer’s CPU.</p>
+
+<p><code>-net nic -net user</code>: By using these options, we will enable an Ethernet Internet connection to be available in the running virtual machine by default.</p>
+
+<p><code>-hda testing-image.img</code>: Here we specified the path for the hard drive which will be used. In our case, it was the testing-image.img file which we created before.</p>
+
+<p><code>-cdrom ubuntu-16.04.iso</code>: Finally we told QEMU that we want to boot our ISO file “ubuntu-16.04.iso”.</p>
+
+<h3 id="start-the-new-virtual-machine">Start the new Virtual Machine</h3>
+
+<pre><code>  qemu-system-x86_64 -m 2048 -boot d -enable-kvm \
+    -smp 2 -net nic -net user \
+    -hda ~/ws/vms/ubuntu16-vm.img 
+</code></pre>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#assumptions">Assumptions</a></li>
+<li><a href="#create-new-image">Create new image</a>
+<ul>
+<li><a href="#create-a-new-image">Create a new image</a></li>
+<li><a href="#resize-the-maximum">Resize the maximum</a></li>
+<li><a href="#create-new-vm">Create new vm</a></li>
+<li><a href="#start-the-new-virtual-machine">Start the new Virtual Machine</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
+    </div>
 
 </div>
-
-
-   <article class="post blogs">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/blogs/build-mobile-app/">Build mobile app with web tech stacks</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>What is mobile app  A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps
-Native apps are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.
-HTML5 apps use standard web technologies—typically HTML5, JavaScript and CSS. <a class="read-more" href="/blogs/build-mobile-app/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-          
-            
-                <a class="label label-default" href="/tags/mobile/">mobile</a>
-            
-        
-
-    </footer>
-</article>
-
-
-<div style="margin-bottom:2rem"></div>
-
-<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
-
-
-
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-next" href="/os/" title="OS" style="margin-right: 0px;"><label>OS</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/hacks/php-debug/" title="Debug PHP with Free IDE"> <i class="fa fa-chevron-left"></i><label>Debug PHP with Free IDE</label></a>
+    <a class="nav nav-next" href="/coding/" title="Coding" style="margin-right: 0px;"><label>Coding</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -633,10 +697,6 @@ HTML5 apps use standard web technologies—typically HTML5, JavaScript and CSS. 
     
 
     
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 10/07/2016
-    </div>
-    
 
     
   </div>
@@ -646,8 +706,7 @@ HTML5 apps use standard web technologies—typically HTML5, JavaScript and CSS. 
 
 
   
-    <!-- @  2019 Harry Ho -->
-
+    
   
 
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-23T01:29:18 AEDT">
+<meta name="revised" content="2019-01-27T15:49:51 AEDT">
 <title>C Lecture - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -67,6 +67,55 @@
       <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech stacks
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github-pages/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github-pages/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/git-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/k8s-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-notes/">
+            Kubernetes Practices
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/" class="dd-item parent haschildren
@@ -312,6 +361,13 @@
         <div>
           <a href="/hacks/php-debug/">
             Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
           </a>
         </div>
     </li>
@@ -2505,7 +2561,7 @@ int test_check(char *file_name)
     char *block = NULL;
 
     block = malloc(100);
-    check_mem(block);       // should work
+    check_mem(block);		// should work
 
     input = fopen(file_name, &quot;r&quot;);
     check(input, &quot;Failed to open %s.&quot;, file_name);
@@ -2810,7 +2866,7 @@ void scope_demo(int count)
     log_info(&quot;count is: %d&quot;, count);
 
     if (count &gt; 10) {
-        int numbers = 100;  // BAD! BUGS!
+        int numbers = 100;	// BAD! BUGS!
 
         log_info(&quot;count in this scope is %d&quot;, numbers);
     }
@@ -3449,8 +3505,8 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind test test test
+	./logfind || true
+	./logfind test test test
 
 </code></pre>
 
@@ -3515,11 +3571,11 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind error
+	./logfind || true
+	./logfind error
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -3620,11 +3676,11 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind error
+	./logfind || true
+	./logfind error
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -3732,11 +3788,11 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind MAX_LINE
+	./logfind || true
+	./logfind MAX_LINE
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -3888,13 +3944,13 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind MAX_LINE
-    ./logfind error MAX LINE
-    ./logfind -o error MAX LINE
+	./logfind || true
+	./logfind MAX_LINE
+	./logfind error MAX LINE
+	./logfind -o error MAX LINE
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -4106,13 +4162,13 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind MAX_LINE
-    ./logfind error MAX LINE
-    ./logfind -o error MAX LINE
+	./logfind || true
+	./logfind MAX_LINE
+	./logfind error MAX LINE
+	./logfind -o error MAX LINE
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -4268,13 +4324,13 @@ error:
 <pre><code class="language-makefile">CFLAGS=-Wall -g
 
 all: logfind
-    ./logfind || true
-    ./logfind MAX_LINE
-    ./logfind error MAX LINE
-    ./logfind -o error MAX LINE
+	./logfind || true
+	./logfind MAX_LINE
+	./logfind error MAX LINE
+	./logfind -o error MAX LINE
 
 clean:
-    rm -f logfind
+	rm -f logfind
 
 </code></pre>
 
@@ -5022,8 +5078,7 @@ int main(int argc, char *argv[])
 
 
   
-    <!-- @  2019 Harry Ho -->
-
+    
   
 
 

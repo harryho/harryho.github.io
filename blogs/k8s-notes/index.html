@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-23T01:29:18 AEDT">
+<meta name="revised" content="2019-01-27T15:49:51 AEDT">
 <title>Kubernetes Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -363,6 +363,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
         <div>
           <a href="/hacks/use-windows-command-hotkey-as-hacker-1/">
@@ -650,7 +657,8 @@ kubectl describe deployments/kubernetes-bootcamp
 kubectl scale deployments/kubernetes-bootcamp --replicas=2
 
 # Get NodePort
-export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp \
+    -o go-template='{{(index .spec.ports 0).nodePort}}')
 echo NODE_PORT=$NODE_PORT
 
 # Test load balance
@@ -713,8 +721,7 @@ curl $(minikube ip):$NODE_PORT
 
 
   
-    <!-- @  2019 Harry Ho -->
-
+    
   
 
 

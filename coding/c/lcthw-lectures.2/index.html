@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-23T01:29:18 AEDT">
+<meta name="revised" content="2019-01-27T15:49:51 AEDT">
 <title>C Lecture - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -361,6 +361,13 @@
         <div>
           <a href="/hacks/php-debug/">
             Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
           </a>
         </div>
     </li>
@@ -989,7 +996,7 @@ int List_bubble_sort(List * list, List_compare cmp)
     int sorted = 1;
 
     if (List_count(list) &lt;= 1) {
-        return 0;       // already sorted
+        return 0;		// already sorted
     }
 
     do {
@@ -2351,7 +2358,7 @@ Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash)
     map-&gt;hash = hash == NULL ? default_hash : hash;
     map-&gt;buckets = DArray_create(
             sizeof(DArray *), DEFAULT_NUMBER_OF_BUCKETS);
-    map-&gt;buckets-&gt;end = map-&gt;buckets-&gt;max;  // fake out expanding it
+    map-&gt;buckets-&gt;end = map-&gt;buckets-&gt;max;	// fake out expanding it
     check_mem(map-&gt;buckets);
 
     return map;
@@ -2477,7 +2484,7 @@ void *Hashmap_get(Hashmap * map, void *key)
 
     return node-&gt;data;
 
-error:          // fallthrough
+error:			// fallthrough
     return NULL;
 }
 
@@ -2649,7 +2656,7 @@ uint32_t Hashmap_djb_hash(void *data)
     int i = 0;
 
     for (i = 0; i &lt; blength(s); i++) {
-        hash = ((hash &lt;&lt; 5) + hash) + bchare(s, i, 0);  /* hash * 33 + c */
+        hash = ((hash &lt;&lt; 5) + hash) + bchare(s, i, 0);	/* hash * 33 + c */
     }
 
     return hash;
@@ -2769,7 +2776,7 @@ static inline const unsigned char *String_base_search(const unsigned
         haystack += skip_chars[haystack[last]];
     }
 
-error:          // fallthrough
+error:			// fallthrough
     return NULL;
 }
 
@@ -4103,8 +4110,7 @@ and some non-tree structures like skip lists.</li>
 
 
   
-    <!-- @  2019 Harry Ho -->
-
+    
   
 
 
