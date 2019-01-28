@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-01-27T15:49:51 AEDT">
+<meta name="revised" content="2019-01-28T22:25:26 AEDT">
 <title>Qemu &amp; Virtual Machine :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -399,6 +399,13 @@
       <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/os/cass-note/" class="dd-item">
+        <div>
+          <a href="/os/cass-note/">
+            Cassandra Practices
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
         <div>
           <a href="/os/centos-fedora-desktop/">
@@ -586,13 +593,11 @@
             <h1>Qemu &amp; Virtual Machine</h1>
         
 
-<blockquote>
-<p><strong>What is Qemu</strong></p>
-</blockquote>
+<p><strong><em>What is Qemu ?</em></strong></p>
 
-<p><a href="https://wiki.qemu.org/Main_Page">QEMU</a> is a virtualization technology emulator that allows you to run operating systems and Linux distributions easily on your current system without the need to install them or burn their ISO files. It is like VMware or VirtualBox. You can use it at anytime to emulate running any operating system you want on a lot of devices and architecture.</p>
+<p><a href="https://wiki.qemu.org/Main_Page">QEMU</a>  is free and open source. And is licensed under GPL 2. it has the ability to run under both KVM and XEN models (if you enabled virtualization technology from your BIOS first) and offers a lot of options and virtualization options. In this article, we’ll explain how to use QEMU and install it.</p>
 
-<p>QEMU is free and open source. And is licensed under GPL 2. it has the ability to run under both KVM and XEN models (if you enabled virtualization technology from your BIOS first) and offers a lot of options and virtualization options. In this article, we’ll explain how to use QEMU and install it.</p>
+<p>QEMU is a virtualization technology emulator that allows you to run operating systems and Linux distributions easily on your current system without the need to install them or burn their ISO files. It is like VMware or VirtualBox. You can use it at anytime to emulate running any operating system you want on a lot of devices and architecture.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -606,6 +611,7 @@
 <ul>
 <li>Assume the new iso files are stored in folder &ldquo;Download&rdquo;</li>
 <li>Architect of your machine is x86_64</li>
+<li>Install Ubuntu as VM on Qemu</li>
 </ul>
 
 <h2 id="create-new-image">Create new image</h2>
@@ -648,12 +654,19 @@
 
 <p><code>-cdrom ubuntu-16.04.iso</code>: Finally we told QEMU that we want to boot our ISO file “ubuntu-16.04.iso”.</p>
 
-<h3 id="start-the-new-virtual-machine">Start the new Virtual Machine</h3>
+<h3 id="start-the-new-vm">Start the new VM</h3>
 
 <pre><code>  qemu-system-x86_64 -m 2048 -boot d -enable-kvm \
     -smp 2 -net nic -net user \
     -hda ~/ws/vms/ubuntu16-vm.img 
 </code></pre>
+
+<h3 id="post-create-vm">Post-Create VM</h3>
+
+<ul>
+<li>Install <code>spice-vdagent</code> to Copy content from Host to Guest</li>
+<li>Install <code>tmux</code></li>
+</ul>
 
     </div>
 
@@ -669,7 +682,8 @@
 <li><a href="#create-a-new-image">Create a new image</a></li>
 <li><a href="#resize-the-maximum">Resize the maximum</a></li>
 <li><a href="#create-new-vm">Create new vm</a></li>
-<li><a href="#start-the-new-virtual-machine">Start the new Virtual Machine</a></li>
+<li><a href="#start-the-new-vm">Start the new VM</a></li>
+<li><a href="#post-create-vm">Post-Create VM</a></li>
 </ul></li>
 </ul></li>
 </ul>

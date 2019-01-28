@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-01-28T22:25:26 AEDT">
-<title>Coding :: Hello World</title>
+<title>Cassandra Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Install Cassandra on Ubuntu 16">
 
 
 
     
   </head>
-  <body data-url="/coding/">
+  <body data-url="/os/cass-note/">
     
       <header>
   <div class="logo">
@@ -118,11 +118,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item parent active haschildren
+    <li data-nav-id="/coding/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -393,13 +392,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item haschildren
+    <li data-nav-id="/os/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/os/">OS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/os/cass-note/" class="dd-item">
+      <li data-nav-id="/os/cass-note/" class="dd-item active">
         <div>
           <a href="/os/cass-note/">
             Cassandra Practices
@@ -558,25 +558,26 @@
           
     <option value="/blogs/" >
    Blogs</option>
-    <option value="/coding/"  selected>
-   Coding</option> 
-    <option value="/coding/c/" >
-   C / C&#43;&#43;</option>
-    <option value="/coding/c-sharp/" >
-   C#</option>
-    <option value="/coding/java/" >
-   Java</option>
-    <option value="/coding/python/" >
-   Python</option>
-    <option value="/coding/shell/" >
-   Shell</option>
-  
+    <option value="/coding/" >
+   Coding</option>
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
    Hacks</option>
     <option value="/os/" >
-   OS</option>
+   OS</option> 
+      <option value="/os/cass-note/"  selected> Cassandra Practices</option>
+      <option value="/os/centos-fedora-desktop/" > CentOS 6/7 Multi-Boot Setup</option>
+      <option value="/os/centos-server-7/" > CentOS 7 Server note</option>
+      <option value="/os/grub-trouble-shooting/" > Grub Trouble Shooting</option>
+      <option value="/os/lubuntu16-desktop/" > Lubuntu 16 desktop</option>
+      <option value="/os/raspberrypi-notes/" > Raspberry Pi setup</option>
+      <option value="/os/ubuntu-desktop-14/" > Ubuntu 14 -- desktop setup &amp; dual boot </option>
+      <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
+      <option value="/os/ubuntu-server-14/" > Ubuntu 14 -- server setup</option>
+      <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
+      <option value="/os/ubuntu-18-k8s/" > Ubuntu 18 &amp; Kubernetes</option>
+  
     <option value="/projects/" >
    Projects</option>
 
@@ -593,66 +594,97 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Cassandra Practices</h1>
+        
 
+<p><em>Apache Cassandra is a free open-source database system that is NoSQL based. Meaning Cassandra does not use the table model seen in MySQL, MSSQL or PostgreSQL, but instead uses a cluster model. It’s designed to handle large amounts of data and is highly scalable.</em></p>
 
+<h2 id="prerequisites">Prerequisites</h2>
 
-<ul class="children children-card">
+<h3 id="install-java-jre-8">Install Java(JRE) 8+</h3>
 
-<span><card>
-		<a href="/coding/c/" >C / C&#43;&#43;</a></card>
-		<p>  C Lecture - 1 Exercise 0 ~ 31 ... &nbsp;&nbsp;&nbsp;&nbsp;
-  C Lecture - 2 Exercise 32 ~ 40 ... &nbsp;&nbsp;&nbsp;&nbsp;
-  C Lecture - 3 Exercise 41~ 48 ... &nbsp;&nbsp;&nbsp;&nbsp;
-  C Lecture - 4 Exercise 48 ~ 51 ... &nbsp;&nbsp;&nbsp;&nbsp;
-  </p>
-</span>
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
+sudo apt-get install oracle-java8-set-default
+java -version
+</code></pre>
 
-<span><card>
-		<a href="/coding/c-sharp/" >C#</a></card>
-		<p>  C# Note - 1 How to create C# console application without Visual Studio ... &nbsp;&nbsp;&nbsp;&nbsp;
-  C# Note - 2 How to build a configurable scheduled task on Window Service ... &nbsp;&nbsp;&nbsp;&nbsp;
-  </p>
-</span>
+<h3 id="install-python-2-7">Install Python 2.7+</h3>
 
-<span><card>
-		<a href="/coding/java/" >Java</a></card>
-		<p>Java Note - 1: Enum Replace constant property of the interface or abstract class with Enum ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Java Note - 2: Concurrency Common good practice for Java Concurrency programming ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Java Note - 3: Path and Files Some good part of Java 7 - Path and Files API ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Java Note - 4: Date Time  Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime .</p>
-</span>
+<pre><code class="language-bash">sudo apt install python
+python --version
+</code></pre>
 
-<span><card>
-		<a href="/coding/python/" >Python</a></card>
-		<p>Python Note 1 Good practices for package &amp; module ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 2 Closure &amp; Decorator ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 3 String &amp; Representation ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 4 Iterables &amp; Iteration ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 5 Python Note 5 ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 6 Collection ... &nbsp;&nbsp;&nbsp;&nbsp;
-  Python Note 7 Exception &amp; Assertion ... &nbsp;&nbsp;&nbsp;&nbsp;</p>
-</span>
+<h2 id="install-cassandra">Install Cassandra</h2>
 
-<span><card>
-		<a href="/coding/shell/" >Shell</a></card>
-		<p>  Powershell Note - 1 Introduction of Powershell ... &nbsp;&nbsp;&nbsp;&nbsp;
-  </p>
-</span>
+<ul>
+<li>First, we have to add Cassandra repository to source list by running following command. The <code>39x</code> is the version. Use 40x if Cassandra 4.0 is the newest version:</li>
 </ul>
 
+<pre><code class="language-bash">echo &quot;deb http://www.apache.org/dist/cassandra/debian 39x main&quot; | \
+sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+</code></pre>
 
+<ul>
+<li>Next, run the cURL command to add the repository keys :</li>
+</ul>
 
+<pre><code class="language-bash">curl https://www.apache.org/dist/cassandra/KEYS | \
+sudo apt-key add -
+</code></pre>
 
+<ul>
+<li>We can now update the repositories and install Cassandra:</li>
+</ul>
 
+<pre><code class="language-bash">sudo apt-get update
+sudo apt install cassandra
+# optional - It works on MacBook
+sudo reboot
+</code></pre>
 
+<ul>
+<li>Check Cassandra status</li>
+</ul>
 
+<pre><code class="language-bash">nodetool status
+</code></pre>
+
+<ul>
+<li>CQL</li>
+</ul>
+
+<pre><code class="language-bash">cqlsh
+</code></pre>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a>
+<ul>
+<li><a href="#install-java-jre-8">Install Java(JRE) 8+</a></li>
+<li><a href="#install-python-2-7">Install Python 2.7+</a></li>
+</ul></li>
+<li><a href="#install-cassandra">Install Cassandra</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/hacks/qemu-notes/" title="Qemu &amp; Virtual Machine"> <i class="fa fa-chevron-left"></i><label>Qemu &amp; Virtual Machine</label></a>
-    <a class="nav nav-next" href="/coding/c/" title="C / C&#43;&#43;" style="margin-right: 0px;"><label>C / C&#43;&#43;</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/os/centos-fedora-desktop/" title="CentOS 6/7 Multi-Boot Setup"> <i class="fa fa-chevron-left"></i><label>CentOS 6/7 Multi-Boot Setup</label></a>
+    <a class="nav nav-next" href="/blogs/" title="Blogs" style="margin-right: 0px;"><label>Blogs</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
