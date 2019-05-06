@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-07T01:18:14 AEST">
-<title>Python Note 3 :: Hello World</title>
+<meta name="revised" content="2019-05-07T01:18:13 AEST">
+<title>Cassandra Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="String &amp; Representation">
+<meta name="description" content="Cassandra Introduction &amp; Good practices ...">
 
 
 
     
   </head>
-  <body data-url="/coding/python/python-note-3/">
+  <body data-url="/hacks/cass-note/">
     
       <header>
   <div class="logo">
@@ -118,11 +118,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -226,11 +225,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/python/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/python/">Python</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
@@ -247,7 +245,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-3/" class="dd-item active">
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
         <div>
           <a href="/coding/python/python-note-3/">
             Python Note 3
@@ -351,13 +349,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item haschildren
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/hacks/cass-note/" class="dd-item">
+      <li data-nav-id="/hacks/cass-note/" class="dd-item active">
         <div>
           <a href="/hacks/cass-note/">
             Cassandra Practices
@@ -553,31 +552,18 @@
     <option value="/blogs/" >
    Blogs</option>
     <option value="/coding/" >
-   Coding</option> 
-    <option value="/coding/c/" >
-   C / C&#43;&#43;</option>
-    <option value="/coding/c-sharp/" >
-   C#</option>
-    <option value="/coding/java/" >
-   Java</option>
-    <option value="/coding/python/" >
-   Python</option> 
-      <option value="/coding/python/python-note-1/" > Python Note 1</option>
-      <option value="/coding/python/python-note-2/" > Python Note 2</option>
-      <option value="/coding/python/python-note-3/"  selected> Python Note 3</option>
-      <option value="/coding/python/python-note-4/" > Python Note 4</option>
-      <option value="/coding/python/python-note-5/" > Python Note 5</option>
-      <option value="/coding/python/python-note-6/" > Python Note 6</option>
-      <option value="/coding/python/python-note-7/" > Python Note 7</option>
-      <option value="/coding/python/python-note-8/" > Python Note 8</option>
-  
-    <option value="/coding/shell/" >
-   Shell</option>
-  
+   Coding</option>
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
-   Hacks</option>
+   Hacks</option> 
+      <option value="/hacks/cass-note/"  selected> Cassandra Practices</option>
+      <option value="/hacks/php-debug/" > Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/" > Qemu &amp; Virtual Machine</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-1/" > Windows command &amp; hotkey - 1</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-2/" > Windows command &amp; hotkey - 2</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-3/" > Windows command &amp; hotkey - 3</option>
+  
     <option value="/os/" >
    OS</option>
     <option value="/projects/" >
@@ -598,378 +584,68 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Python Note 3</h1>
+            <h1>Cassandra Practices</h1>
         
 
-<h2 id="string-representation">String &amp; Representation</h2>
+<p><em>Apache Cassandra is a free open-source database system that is NoSQL based. Meaning Cassandra does not use the table model seen in MySQL, MSSQL or PostgreSQL, but instead uses a cluster model. It’s designed to handle large amounts of data and is highly scalable.</em></p>
 
-<h3 id="str">str()</h3>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<ul>
-<li><code>print()</code> -&gt; <code>str()</code> -&gt;  <code>__str(self)__</code></li>
-<li>Fallback to <code>repr()</code>. By default, <code>str()</code> simply calls <code>repr()</code></li>
-<li>Produces a readable, human-friendly representation of an object</li>
-<li>It is also the string constructor</li>
-</ul>
+<h3 id="install-java-jre-8">Install Java(JRE) 8+</h3>
 
-<h3 id="repr">repr()</h3>
-
-<ul>
-<li>Exactness is more important than human-friendliness</li>
-<li>Suited for debugging. Unambiguous, precise, include type</li>
-<li>Includes identifying information.</li>
-<li>Generally best for logging and developers</li>
-<li>The default repr() is not very helpful</li>
-<li>As a rule, you should always write a repr() for your classes</li>
-
-<li><p>standard library <code>reprlib.repr()</code> is a replacement for <code>repr()</code></p>
-
-<ul>
-<li>Example</li>
-</ul>
-
-<pre><code class="language-python">&gt;&gt;&gt; l = ['a'] * 1000
-&gt;&gt;&gt; import reprlib
-&gt;&gt;&gt; reprlib.repr(l)
-&quot;['a', 'a', 'a', 'a', 'a', 'a', ...]&quot;
-</code></pre></li>
-</ul>
-
-<h3 id="format">format</h3>
-
-<ul>
-<li><code>&quot;{:f}&quot;.format(obj)</code> -&gt; <code>__format__(self, f)</code></li>
-<li>Fallback to <code>str()</code></li>
-</ul>
-
-<h3 id="built-in-functions">built-in functions</h3>
-
-<ul>
-<li><code>ascii()</code> replaces non-ASCII characters with escape sequences</li>
-<li><code>chr()</code> converts an integer Unicode codepoint to a single character string</li>
-<li><code>ord()</code> converts a single character to its integer Unicode codepoint</li>
-</ul>
-
-<h2 id="numeric-scalar-types">Numeric &amp; scalar types</h2>
-
-<h3 id="int">int</h3>
-
-<ul>
-<li>unlimited precision signed integer</li>
-
-<li><p>bool in an int</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; False - True
--1
-&gt;&gt;&gt; False - False
-0
-&gt;&gt;&gt; True - False
-1
-&gt;&gt;&gt; True - True
-0
-</code></pre></li>
-</ul>
-
-<h3 id="float">float</h3>
-
-<ul>
-<li>IEEE-754 double precision (64-bit)</li>
-<li>53 bits of binary precision</li>
-<li>15 to 17 bits of decimal precision</li>
-
-<li><p>Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.</p>
-
-<ul>
-<li><p>0.001 has value 0/2 + 0/4 + <sup>1</sup>&frasl;<sub>8</sub>. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2</p></li>
-
-<li><p>Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.</p></li>
-</ul></li>
-
-<li><p>Example of float data</p>
-
-<pre><code class="language-python">
-&gt;&gt;&gt; f=0.9-0.8
-&gt;&gt;&gt; f
-0.09999999999999998
-&gt;&gt;&gt; f=0.2-0.1
-&gt;&gt;&gt; f
-0.1
-&gt;&gt;&gt; f=0.8-0.7
-&gt;&gt;&gt; f
-0.10000000000000009
-&gt;&gt;&gt; float(2**53)
-9007199254740992.0
-&gt;&gt;&gt; float(2**53+1)
-9007199254740992.0
-&gt;&gt;&gt; float(2**53+2)
-9007199254740994.0
-&gt;&gt;&gt; float(2**53+3)
-9007199254740996.0
-&gt;&gt;&gt; float(2**53+4)
-9007199254740996.0
-
-</code></pre></li>
-</ul>
-
-<h3 id="decimal">decimal</h3>
-
-<ul>
-<li>standard library module decimal containing the class Decimal</li>
-<li>decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision</li>
-<li>identity is preserved. <code>x == (x // y) * y + x % y</code>, so integer division and modulus are consistent</li>
-
-<li><p>Example</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; from decimal import Decimal
-&gt;&gt;&gt; Decimal(0.6)-Decimal(0.5)
-Decimal('0.09999999999999997779553950750')
-&gt;&gt;&gt; Decimal('0.6')-Decimal('0.5')
-Decimal('0.1')
-&gt;&gt;&gt; Decimal(0.2)-Decimal(0.1)
-Decimal('0.1000000000000000055511151231')
-&gt;&gt;&gt; Decimal(0.8)-Decimal(0.7)
-Decimal('0.1000000000000000888178419700')
-&gt;&gt;&gt; Decimal('0.8')-Decimal('0.7')
-Decimal('0.1')
-
-## Change the precise 
-&gt;&gt;&gt; import decimal
-&gt;&gt;&gt; decimal.getcontext().prec=4
-&gt;&gt;&gt; Decimal(-7) / Decimal(3)
-Decimal('-2.333')
-
-## Python handle different type in different way with % 
-&gt;&gt;&gt; Decimal(-7) % Decimal(3)
-Decimal('-1')  ## 
-&gt;&gt;&gt; Decimal(-7) // Decimal(3)
-Decimal('-2')  ## The next multiple of 3 towards zero is -6
-&gt;&gt;&gt; (-7) // (3) 
--3  ## The largest multiple of 3 less than -7 is -9
-&gt;&gt;&gt; (-7) % (3)
-2  ## The 
-</code></pre></li>
-</ul>
-
-<h3 id="fraction">fraction</h3>
-
-<ul>
-<li><p>standard library module fractions containing the class Fraction for rational numbers</p>
-
-<ul>
-<li>Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.</li>
-</ul></li>
-
-<li><p>Example</p>
-
-<pre><code class="language-python">
-&gt;&gt;&gt;from fractions import Fraction
-&gt;&gt;&gt;f = Fraction(&quot;2/3&quot;)
-&gt;&gt;&gt;f
-Faction(2,3)
-&gt;&gt;&gt; Fraction(0.2)
-Fraction(3602879701896397, 18014398509481984)
-&gt;&gt;&gt; Fraction(0.5)
-Fraction(1, 2)
-&gt;&gt;&gt; Fraction(Decimal('0.3'))
-Fraction(3, 10)
-&gt;&gt;&gt; Fraction(Decimal('0.3')) // Fraction(6, 7)
-0
-&gt;&gt;&gt; Fraction(Decimal('0.3')) % Fraction(6, 7)
-Fraction(3, 10)
-&gt;&gt;&gt; Fraction(Decimal('0.3')) - Fraction(6, 7)
-Fraction(-39, 70)
-&gt;&gt;&gt; Fraction(Decimal('0.3')) + Fraction(6, 7)
-Fraction(81, 70)
-&gt;&gt;&gt; Fraction(Decimal('0.3')) * Fraction(6, 7)
-Fraction(9, 35)
-
-&gt;&gt;&gt; from math import floor, ceil
-&gt;&gt;&gt; ceil(Fraction('8/7'))
-2
-&gt;&gt;&gt; floor(Fraction('8/7'))
-1
-</code></pre></li>
-</ul>
-
-<h3 id="number-base-conversions">number base conversions</h3>
-
-<table>
-<thead>
-<tr>
-<th>bin()</th>
-<th>oct()</th>
-<th>hex()</th>
-<th>int(x, base)</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>base 2</td>
-<td>base 8</td>
-<td>base 16</td>
-<td>bases 2 to 36</td>
-</tr>
-</tbody>
-</table>
-
-<ul>
-<li>Example</li>
-</ul>
-
-<pre><code class="language-python">&gt;&gt;&gt; 0b0101
-5
-&gt;&gt;&gt; 0o63527
-26455
-&gt;&gt;&gt; 0o63
-51
-&gt;&gt;&gt; 0xad2
-2770
-&gt;&gt;&gt; hex(22)
-'0x16'
-&gt;&gt;&gt; oct(22)
-'0o26'
-&gt;&gt;&gt; bin(22)
-'0b10110'
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
+sudo apt-get install oracle-java8-set-default
+java -version
 </code></pre>
 
-<h3 id="complex">complex</h3>
+<h3 id="install-python-2-7">Install Python 2.7+</h3>
+
+<pre><code class="language-bash">sudo apt install python
+python --version
+</code></pre>
+
+<h2 id="install-cassandra">Install Cassandra</h2>
 
 <ul>
-<li>complex construction string argument may have parentheses but must not contain spaces</li>
-<li><code>cmath</code> standard Library module contains complex equivalents of math</li>
-
-<li><p>Example</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; 1+1j
-(1+1j)
-&gt;&gt;&gt; type(1+1j)
-&lt;class 'complex'&gt;
-&gt;&gt;&gt; (1+1j) + (1-1j)
-(2+0j)
-&gt;&gt;&gt; (1+1j) + (2-2j)
-(3-1j)
-&gt;&gt;&gt; (1+1j) - (2-2j)
-(-1+3j)
-&gt;&gt;&gt; complex('-2+1j')
-(-2+1j)
-&gt;&gt;&gt; complex('(-2+1j)')
-(-2+1j)
-&gt;&gt;&gt; complex(-2, 1)
-(-2+1j)
-
-
-</code></pre></li>
+<li>First, we have to add Cassandra repository to source list by running following command. The <code>39x</code> is the version. Use 40x if Cassandra 4.0 is the newest version:</li>
 </ul>
 
-<h3 id="date-time">date &amp; time</h3>
-
-<hr />
-
-<ul>
-<li>Gregorian calendar</li>
-
-<li><p><code>weekday()</code></p>
-
-<pre><code>0 Monday
-1 Tuesday
-2 Wednesday
-3 Thursday
-4 Friday
-5 Saturday
-6 Sunday
-</code></pre></li>
-
-<li><p><code>isoweekday()</code></p>
-
-<pre><code>1 Monday
-2 Tuesday
-3 Wednesday
-4 Thursday
-5 Friday
-6 Saturday
-7 Sunday   
-</code></pre></li>
-
-<li><p>timedelta</p>
+<pre><code class="language-bash">echo &quot;deb http://www.apache.org/dist/cassandra/debian 39x main&quot; | \
+sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+</code></pre>
 
 <ul>
-<li>Constructor accepts and sums
-• days
-• seconds
-• microseconds
-• milliseconds
-• minutes
-• hours
-• weeks</li>
-<li>Instances store only
-• days
-• seconds
-• microseconds</li>
-</ul></li>
-
-<li><p>Example</p>
-
-<pre><code class="language-python">from datetime import (date, time)
-from datetime import datetime as Datetime
-from datetime import timedelta
-from datetime import (tzinfo, timezone)
-
-### date
-
-&gt;&gt;&gt; datetime.date(2000,month=2, day=10)
-datetime.date(2000, 2, 10)
-&gt;&gt;&gt; datetime.date.today()
-datetime.date(2014, 3, 14)
-&gt;&gt;&gt; datetime.date.fromtimestamp(99999999)
-datetime.date(1973, 3, 3)
-&gt;&gt;&gt; datetime.date.fromordinal(9999)
-datetime.date(28, 5, 17)
-&gt;&gt;&gt; datetime.date.max
-datetime.date(9999, 12, 31)
-&gt;&gt;&gt; datetime.date.min
-datetime.date(1, 1, 1)
-&gt;&gt;&gt; datetime.date.today().weekday()
-4
-&gt;&gt;&gt; datetime.date.today().isoweekday()
-5
-&gt;&gt;&gt; d = datetime.date.fromtimestamp(99999999)
-&gt;&gt;&gt; d.strftime('%A %d %B %b')
-'Saturday 03 March Mar'
-&gt;&gt;&gt; d.strftime('%A %d %B %b %Y')
-'Saturday 03 March Mar 1973'
-&gt;&gt;&gt; &quot;The date is {:%A %d %B %b %y}&quot;.format(d)
-'The date is Saturday 03 March Mar 73'
-&gt;&gt;&gt; &quot;{date:%A} {date.day} {date:%B} {date:%Y}&quot;.format(date=d)
-'Saturday 3 March 1973'
-
-### time
-
-&gt;&gt;&gt; t=datetime.time(23,59,1,7451)   
-&gt;&gt;&gt; t.isoformat()
-'23:59:01.007451'
-&gt;&gt;&gt; t.strftime('%Hh%Mm%Ss')
-'23h59m01s'
-&gt;&gt;&gt; datetime.time.max
-datetime.time(23, 59, 59, 999999)
-&gt;&gt;&gt; datetime.time.min
-datetime.time(0, 0)
-
-### datetime
-
-&gt;&gt;&gt; datetime.datetime(2001,6,7,8,15,25,895)
-datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
-&gt;&gt;&gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
-&gt;&gt;&gt; dt.isoformat()
-'2001-06-07T08:15:25.000895'
-
-### timedelta
-&gt;&gt;&gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
-&gt;&gt;&gt; td
-datetime.timedelta(15, 3660, 1002)
-
-</code></pre></li>
+<li>Next, run the cURL command to add the repository keys :</li>
 </ul>
+
+<pre><code class="language-bash">curl https://www.apache.org/dist/cassandra/KEYS | \
+sudo apt-key add -
+</code></pre>
+
+<ul>
+<li>We can now update the repositories and install Cassandra:</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt install cassandra
+# optional - It works on MacBook
+sudo reboot
+</code></pre>
+
+<ul>
+<li>Check Cassandra status</li>
+</ul>
+
+<pre><code class="language-bash">nodetool status
+</code></pre>
+
+<ul>
+<li>CQL</li>
+</ul>
+
+<pre><code class="language-bash">cqlsh
+</code></pre>
 
     </div>
 
@@ -978,23 +654,12 @@ datetime.timedelta(15, 3660, 1002)
 <ul>
 <li>
 <ul>
-<li><a href="#string-representation">String &amp; Representation</a>
+<li><a href="#prerequisites">Prerequisites</a>
 <ul>
-<li><a href="#str">str()</a></li>
-<li><a href="#repr">repr()</a></li>
-<li><a href="#format">format</a></li>
-<li><a href="#built-in-functions">built-in functions</a></li>
+<li><a href="#install-java-jre-8">Install Java(JRE) 8+</a></li>
+<li><a href="#install-python-2-7">Install Python 2.7+</a></li>
 </ul></li>
-<li><a href="#numeric-scalar-types">Numeric &amp; scalar types</a>
-<ul>
-<li><a href="#int">int</a></li>
-<li><a href="#float">float</a></li>
-<li><a href="#decimal">decimal</a></li>
-<li><a href="#fraction">fraction</a></li>
-<li><a href="#number-base-conversions">number base conversions</a></li>
-<li><a href="#complex">complex</a></li>
-<li><a href="#date-time">date &amp; time</a></li>
-</ul></li>
+<li><a href="#install-cassandra">Install Cassandra</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1006,8 +671,8 @@ datetime.timedelta(15, 3660, 1002)
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/python/python-note-2/" title="Python Note 2"> <i class="fa fa-chevron-left"></i><label>Python Note 2</label></a>
-    <a class="nav nav-next" href="/coding/python/python-note-4/" title="Python Note 4" style="margin-right: 0px;"><label>Python Note 4</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/hacks/use-windows-command-hotkey-as-hacker-1/" title="Windows command &amp; hotkey - 1"> <i class="fa fa-chevron-left"></i><label>Windows command &amp; hotkey - 1</label></a>
+    <a class="nav nav-next" href="/hacks/php-debug/" title="Debug PHP with Free IDE" style="margin-right: 0px;"><label>Debug PHP with Free IDE</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1016,12 +681,6 @@ datetime.timedelta(15, 3660, 1002)
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     
