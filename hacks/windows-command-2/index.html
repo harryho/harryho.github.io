@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-05-08T22:46:41 AEST">
-<title>CentOS 6/7 Multi-Boot Setup :: Hello World</title>
+<title>Windows cmd &amp; hotkey - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="A note for everyone who wants to use Commnd and Hot Key as hacker ">
 
 
 
     
   </head>
-  <body data-url="/os/centos-fedora-desktop/">
+  <body data-url="/hacks/windows-command-2/">
     
       <header>
   <div class="logo">
@@ -349,10 +349,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item haschildren
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/hacks/cass-note/" class="dd-item">
@@ -390,7 +391,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/hacks/windows-command-2/" class="dd-item">
+      <li data-nav-id="/hacks/windows-command-2/" class="dd-item active">
         <div>
           <a href="/hacks/windows-command-2/">
             Windows cmd &amp; hotkey - 2
@@ -406,14 +407,13 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item parent haschildren
+    <li data-nav-id="/os/" class="dd-item haschildren
         ">
       <div>
-      <a href="/os/">OS</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item active">
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
         <div>
           <a href="/os/centos-fedora-desktop/">
             CentOS 6/7 Multi-Boot Setup
@@ -563,19 +563,17 @@
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
-   Hacks</option>
-    <option value="/os/" >
-   OS</option> 
-      <option value="/os/centos-fedora-desktop/"  selected> CentOS 6/7 Multi-Boot Setup</option>
-      <option value="/os/centos-server-7/" > CentOS 7 Server note</option>
-      <option value="/os/grub-trouble-shooting/" > Grub Trouble Shooting</option>
-      <option value="/os/lubuntu16-desktop/" > Lubuntu 16 desktop</option>
-      <option value="/os/raspberrypi-notes/" > Raspberry Pi setup</option>
-      <option value="/os/ubuntu-desktop-14/" > Ubuntu 14 -- desktop setup &amp; dual boot </option>
-      <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
-      <option value="/os/ubuntu-server-14/" > Ubuntu 14 -- server setup</option>
-      <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
+   Hacks</option> 
+      <option value="/hacks/cass-note/" > Cassandra Practices</option>
+      <option value="/hacks/kube-cluster/" > Create Kubernetes Cluster</option>
+      <option value="/hacks/php-debug/" > Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/" > Qemu &amp; Virtual Machine</option>
+      <option value="/hacks/windows-command-1/" > Windows cmd &amp; hotkey - 1</option>
+      <option value="/hacks/windows-command-2/"  selected> Windows cmd &amp; hotkey - 2</option>
+      <option value="/hacks/windows-command-3/" > Windows cmd &amp; hotkey - 3</option>
   
+    <option value="/os/" >
+   OS</option>
     <option value="/projects/" >
    Projects</option>
 
@@ -594,222 +592,390 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>CentOS 6/7 Multi-Boot Setup</h1>
+            <h1>Windows cmd &amp; hotkey - 2</h1>
         
 
-<h2 id="bootable-usb-preparation">Bootable usb preparation</h2>
+<p><em>This article will continue the topic of Windows command &amp; hotkeys. Part-1 shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the advanced commands and how to create a batch script with all those commands.</em></p>
 
-<blockquote>
-<p>Download dvd iso from url or torrent
-Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the USB as origin )</p>
-</blockquote>
+<p><em>Let me clarify something first. Advanced command here does not mean that commands here are very complicated or much more powerful than common ones, which have been shown in the Part-1. Here we call them advanced, because they are used by experienced users to complete their given tasks, and those commands are used seldom by majority people. Comparing with Part-1, advanced commands have some specific features which allow them to do some special jobs, which usually are done by system admin. Advanced command is known as Admin command as well.</em></p>
 
-<h2 id="install-centos-on-virtual-machine">Install CentOS on virtual machine</h2>
+<h2 id="advanced-commands-and-usages">Advanced commands and usages</h2>
+
+<h3 id="attrib">attrib</h3>
 
 <ul>
-<li><p>Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p></li>
-
-<li><p>CentOS provide a friendly and nice installation process. If you choose VMWare or VirtulBox as machine, you can open <a href="http://www.tecmint.com/centos-7-installation">installation steps</a> on your browser or use ipad /tablet to access this page. You just need to follow the instruction step by step, it will be done within an hour or more(it varies in computing power of PC).</p></li>
+<li>Type <code>attrib +h a.txt</code> to hide file and use <code>attrib -h a.txt</code> to unhide it.</li>
+<li>Type <code>attrib +r a.txt</code> to change file to read-only and reverse the action by <code>-r</code></li>
 </ul>
 
-<h2 id="prepare-vm-for-centos">Prepare VM for CentOS</h2>
+<h3 id="env">env</h3>
 
 <ul>
-<li><p>Create a new virtual machine.</p>
+<li>Type <code>env&gt;env.txt &amp; notepad env.txt</code> Display all environment variable in text file</li>
+</ul>
+
+<h3 id="set">set</h3>
 
 <ul>
-<li>Type in the name of vm. e.g. CentOS</li>
-<li>Select the type of Linux</li>
-<li>You can choose RedHat(<sup>32</sup>&frasl;<sub>64</sub> bit ) or something else. It doesn&rsquo;t matter. We don&rsquo;t use any built-in xxx.iso files from VirtualBox. Then click <code>Next</code></li>
-<li>Select the memory size for the CentOS. It is up  to you. I prefer 4GB, but 2GB is necessary. And then click <code>Next</code>.</li>
-<li>Select &ldquo;Create a virtual hard drive now&rdquo;, and then click <code>Next</code>.</li>
-<li>Select defaut VDI, then click <code>Next</code>.</li>
+<li>Type <code>set path</code> to display <strong>PATH</strong> environment variable, which is useful to check if your <strong>PATH</strong> has been setup properly.</li>
+<li>Type <code>set /P a=b</code> to set b as value to variable a. It will be used in bat/cmd script.</li>
+</ul>
 
-<li><p>Select &ldquo;Dynamically allocated&rdquo;, then click <code>Next</code>.</p>
+<h3 id="net">net</h3>
+
+<p><strong>get sub-commands</strong> &ndash; type <code>net /?</code></p>
+
+<pre><code class="language-dos">    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+     HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START | 
+     STATISTICS | STOP | TIME | USE | USER | VIEW ]
+</code></pre>
+
+<p><strong>get sub-command&rsquo;s help</strong> &ndash; type <code>net [sub-command] /?</code></p>
+
+<p><strong>net view</strong></p>
 
 <ul>
-<li>Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
-<li>Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
+<li>Use <code>net view</code> to show a list of computers and network devices on the network.</li>
+</ul>
+
+<p><strong>net statistics</strong></p>
+
+<ul>
+<li>Use <code>net statistics workstation(/server)</code> to show the network statistics log for the Server or Workstation service</li>
+</ul>
+
+<p><strong>net localgroup</strong></p>
+
+<ul>
+<li>Use <code>net localgroup</code> to show a list of local user group on your computer.</li>
+</ul>
+
+<p><strong>net user</strong></p>
+
+<ul>
+<li>Type <code>net user %username%</code> to retrieve your user information</li>
+<li>Type <code>net user adminstrator</code> to check the status of administrator</li>
+<li>Type <code>net user administrator /active:yes</code> to activate adminstrator and inactivate by replacing <code>yes</code> with<code>no</code></li>
+</ul>
+
+<p><strong>net accounts</strong></p>
+
+<ul>
+<li>Use <code>net accounts &lt;user&gt;</code> to show current user&rsquo;s password and login requirement.</li>
+<li>Use <code>net accounts &lt;user&gt; /minpwlen:6</code> to set password minimum length requirement for user.</li>
+<li>Use <code>net accounts &lt;user&gt; /maxpwage:30</code> to force user to reset password every 30 days, or use <code>unlimited</code> to replace the number <code>30</code>, then user&rsquo;s password will never expire.</li>
+<li>User <code>net accounts /unique:5</code> to prevent user reuse previous passwords, and default value is 5.</li>
+</ul>
+
+<h3 id="runas">runas</h3>
+
+<pre><code class="language-dos">start command prompt as administrator
+runas /user:yourpc\administrator &quot;cmd&quot;
+
+REM ##BE CAREFUL When you try the command below ### 
+REM it shows how to create, delete files as admin under C drive root.  
+runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &amp; \
+    dir c:\z.txt &amp; pause &amp; del c:\z.txt &quot; 
+
+</code></pre>
+
+<h3 id="sc">sc</h3>
+
+<ul>
+<li>sc command usage: <code>sc &lt;server&gt; [command] [service name] &lt;option1&gt; &lt;option2&gt;...</code></li>
+</ul>
+
+<p><strong>sc query</strong></p>
+
+<ul>
+<li>Basic usage<br /></li>
+</ul>
+
+<pre><code class="language-dos">REM query all service on the PC -- &lt;yourpcname&gt;
+sc \\&lt;yourpcname&gt; query
+
+REM query status of given service 
+sc query &lt;servicename&gt;
+sc query state= all | find &quot;SERVICE_NAME&quot; 
+</code></pre>
+
+<ul>
+<li><p>Retrieve service name and state. type parameter can be used twice in some case.</p>
+
+<ul>
+<li>state = {active | inactive | all}</li>
+<li>type = {driver | service | all}</li>
+<li>type= {own | share | interact | kernel | filesys | rec | adapt}</li>
 </ul></li>
 
-<li><p>Config the CentOS hardware setting on VirtulBox or VMWare.</p></li>
-</ul>
-
-<p><strong>VirtualBox</strong></p>
+<li><p><strong><em>IMPORTANT</em></strong></p>
 
 <ul>
-<li>On VirtualBox toolbar, there is a <code>Start</code> button. Click <code>Start</code>, then go the Storage item.</li>
-<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.<br /></li>
-<li>Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
-<li>Leave all the other setting as default. Click the <code>Start</code>button on the toolbar.</li>
-</ul>
-
-<p><strong>VMWare</strong></p>
-
-<ul>
-<li>On VMware, you can find CD/DVD button on the tab page of new virtual machine.</li>
-<li>Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
-<li>Leave all the other setting as default. Click the <code>Power on this virtual machine</code> option on the tab page.</li>
+<li>The command options for SC are case sensitive.</li>
+<li>If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled.</li>
+<li>Extra space within option is necessary. e.g. <code>state= all</code></li>
 </ul></li>
 </ul>
 
-<h2 id="config-centos-default-setting">Config CentOS default setting</h2>
+<pre><code class="language-dos">REM query all services which are inactive and type are driver and kernel
+sc query state= inactive type= driver type= kernel
 
-<p>After the CentOS starts, we can config the default setting of CentOS. Don&rsquo;t be panic, the configuration envrionment is very nice. You don&rsquo;t need to type any command line so far.</p>
+REM get all services name
+for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @echo %s 
+
+REM get all services name and state
+for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
+    for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE&quot; ') 
+        do @echo %s -- %t
+)
+</code></pre>
+
+<p><strong>sc queryex</strong></p>
+
+<pre><code class="language-dos">REM get all services name and pid
+for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
+    for /f &quot;tokens=3&quot; %t in ('sc queryex %s ^| find &quot;PID&quot; ') 
+        do @echo %s -- %t
+)
+
+REM get all services name and pid
+for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
+    for /f &quot;tokens=3&quot; %t in ('sc queryex %s ^| find &quot;BINARY_PATH_NAME&quot; ') 
+        do @echo %s -- %t
+) 
+</code></pre>
+
+<p><strong>sc qc</strong></p>
+
+<pre><code class="language-dos">REM get all services name and path
+for /f &quot;tokens=2&quot; %s in ('sc queryex state^= all ^| find &quot;SERVICE_NAME&quot;') do @(     
+    for /f &quot;tokens=3 delims==:&quot; %t in ('sc qc %s ^| find &quot;BINARY_PATH_NAME&quot; ') 
+    do @echo %s -- C:%t
+)   
+</code></pre>
+
+<p><strong>sc start/stop</strong></p>
+
+<pre><code class="language-dos">REM start and stop service
+sc start  &lt;servicename&gt;
+
+REM query service state
+sc query &lt;servicename&gt;
+
+REM stop service
+sc stop  &lt;servicename&gt;
+</code></pre>
+
+<h3 id="ipconfig">ipconfig</h3>
 
 <ul>
-<li><p>Prepare the installation.</p>
+<li>Type <code>ipconfig /all</code> to display full configuration information.</li>
+<li>Type <code>ipconfig /flushdns</code>    to purge the DNS Resolver cache.</li>
+</ul>
+
+<h3 id="tasklist">tasklist</h3>
+
+<p><strong>syntax</strong></p>
 
 <ul>
-<li>Choose the language of CentOS. Then click Continue.</li>
-<li>On the Installation Summary screen, there is warning icon attached to the hard drive icon, which is under SYSTEM section with a lable &ldquo;INSTALLATION DESTINATION&rdquo;. Click that label.<br /></li>
-<li>You will see the partition is already done automatically. I&rsquo;d like you to leave it as until you are familar with the CentOS. Then click Done button on the header.</li>
-<li>Leave the SOFTWARE SELECTION as Minimal Install; NETWORK &amp; HOSTNAME as Not connected. Then click Begin Installation button.</li>
+<li>tasklist[.exe] [/s computer] [/u domain\user [/p password]] [/fo {TABLE|LIST|CSV}] [/nh] [/fi FilterName [/fi FilterName2 [ &hellip; ]]] [/m [ModuleName] | /svc | /v</li>
+<li>FilterName: Status, Imagename,</li>
+<li>Find process by pid</li>
+</ul>
+
+<pre><code class="language-dos">REM get the mysqld process info
+tasklist /v /fo list /fi &quot;imagename eq mysqld.exe&quot;
+
+REM get the mongod process info
+tasklist /v /fo list /fi &quot;imagename eq mongod.exe&quot;
+
+REM get list of running processes under given user  
+tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq running&quot;
+
+REM get list of non-responding processes under given user   
+tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq not responding&quot; 
+
+REM get process by PID
+tasklist /fi &quot;pid eq 4444&quot;
+</code></pre>
+
+<h3 id="netstat">netstat</h3>
+
+<ul>
+<li>Type <code>netstat</code> to get all ports and IP addresses, which are connected or listening</li>
+<li>Type PID of process which is using some given port, such as 80, 443, 22, etc.</li>
+</ul>
+
+<pre><code class="language-bash">netstat -ano | find &quot;:80&quot; 
+</code></pre>
+
+<ul>
+<li>Type the application which is using given port.</li>
+</ul>
+
+<pre><code class="language-bash">for /f &quot;tokens=5&quot; %p in ( 'netstat -ano ^| find &quot;:80&quot;') do @(     
+    for /f &quot;tokens=1&quot; %s in ( 'tasklist /fi &quot;pid eq %p&quot; ^| find &quot;%p&quot;') do @(
+        echo PID:%p -- APP: %s
+    ) 
+)
+</code></pre>
+
+<h3 id="taskkill">taskkill</h3>
+
+<p><strong>syntax</strong></p>
+
+<pre><code class="language-dos">taskkill [/S system [/U username [/P [password]]]]
+         { [/FI filter] [/PID processid | /IM imagename] } [/F] [/T]
+</code></pre>
+
+<p><strong>samples</strong></p>
+
+<pre><code class="language-dos">REM force to stop notepad application and any children processes
+taskkill /F /IM notepad.exe /
+
+REM stop process by PID and any children processes
+taskkill /PID 1230 /PID 1241 /PID 1253 /T
+
+REM force to stop applications which PID is equal or greater than 10000
+REM and windows title of app is not starts with untitle
+taskkill /F /FI &quot;PID ge 1000&quot; /FI &quot;WINDOWTITLE ne untitle*&quot;
+taskkill /F /FI &quot;USERNAME eq NT AUTHORITY\SYSTEM&quot; /IM notepad.exe
+</code></pre>
+
+<h3 id="schtasks">schtasks</h3>
+
+<ul>
+<li><p>Syntax &ndash; <code>schtasks /parameter [arguments]</code></p>
+
+<ul>
+<li>parameters include &ndash; Change, Create, Delete, End, Query, Run, ShowSid<br /></li>
 </ul></li>
 
-<li><p>Setup account</p>
-
-<ul>
-<li>Setup password of root account. Please remember the password. If you forget it you need to reset the root&rsquo;s password. To do that you need to do a few things which depends on the CentOS version. As a beginner, please don&rsquo;t make it too complicated.</li>
-<li>Create your account. e.g. harryporter Mark your account as administrator to save some effort. Please remember your password and don&rsquo;t make it too complicated.&rsquo;</li>
-<li>The progress of installation is complete. Click Finish configuration button.
-w$w4 d. After a few seconds, you will the Reboot button. Then click it.</li>
-</ul></li>
+<li><p>Type <code>schtasks</code> to list all scheduled tasks</p></li>
 </ul>
 
-<h2 id="manage-centos-packages-and-software">Manage CentOS packages and software</h2>
+<p><strong>schtasks /Query</strong></p>
+
+<pre><code class="language-dos">REM get help info                                                                 
+SCHTASKS /Query /?
+
+REM query tasks which are scheduled on given system
+SCHTASKS /Query /S system /U user /P
+
+REM get list of tasks in details
+SCHTASKS /Query /FO LIST /V     
+
+REM get table of running tasks in details and output to csv file 
+SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot; &gt;running_tasks.csv
+</code></pre>
+
+<h2 id="combination-of-multiple-commands">Combination of multiple commands</h2>
+
+<p>As we know, usually each command is designed to complete some specific actions, but sometimes we have to combine different commands together to achieve what we want. There are a few ways to put the commands together.</p>
+
+<h3 id="use">Use <code>&amp;</code></h3>
+
+<p>It is used to connect to two commands  and execute them sequentially</p>
 
 <ul>
-<li>there are two management tools rpm and yum. To make it easy, we just talk about yum. It is a very handy tool. Comparing with the windows built-in program management tool, it is much powerful than that. It provides necessary functions for admin. If you need to maintain the Linux server, then you will use it in your daily task.</li>
-<li>Use <code>man yum</code> to take a look the description of yum. You do not need to understand all usage of yum. Just have an overview is enough.</li>
-<li>There are a few useful and common yum commands.<br /></li>
+<li>Delete a folder with non-empty subdirectries <code>test</code> we need to combine <code>del</code> and <code>rd</code> together. Actually we can two commands one by one, but we can put it together and just execute once.<br /></li>
 </ul>
 
-<pre><code class="language-bash">yum list installed | less
-yum search &lt;pacakge_name&gt;
-yum grouplist
+<pre><code class="language-bash">REM show the folder with non-empty subdirectries
+tree test
+
+\path\to\TEST
++---subdir1
+|       file1
+|       file2
+|       
+\---subdir2
+        file1
+        file2
+
+del /s/q test &amp; rd /s/q
 </code></pre>
 
-<h3 id="install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</h3>
+<h3 id="use-pipeline">Use pipeline <code>&gt;</code></h3>
 
-<h2 id="setup-network-via-cable">Setup network ( via cable )</h2>
+<p>It is used to setup a channel between commands pass the data through the commands.</p>
 
-<p>If you install a minimal version without network configuration, you will find you can not ping public domain. Here I am going to show you how to setup the connection.</p>
+<p>Actually you have seen many samples from above advanced commands. I just use a very simple one to show you how it works.</p>
+
+<pre><code class="language-dos">REM write some content to a text file all.txt
+echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&gt;all.txt
+
+</code></pre>
+
+<h3 id="check-cpu-usage">Check CPU usage</h3>
+
+<pre><code class="language-dos">wmic cpu get loadpercentage
+@for /f &quot;skip=1&quot; %p in ('wmic cpu get loadpercentage') do @echo %p%
+
+</code></pre>
+
+<h3 id="use-for">Use <code>for</code></h3>
+
+<p>It is used to loop to combine commands. Please check out the samples for <code>tasklist</code> or <code>netstat</code>.</p>
+
+<h2 id="script">script</h2>
+
+<h3 id="basic-hello-world-script">Basic hello world script</h3>
 
 <ul>
-<li>You can use <code>ip a</code> command to check the status of all network interface.</li>
-<li>You will see all the state of interfaces would be DOWN OR UNKNOWN.</li>
+<li>You can find it on the <a href="https://harryho.github.io">home page</a></li>
 </ul>
 
-<pre><code class="language-bash">
-## lo ****  qdisc pfifo_fast noqueue UNKNOWN
-## eth0 **** qdisc pfifo_fast state DOWN
-
-</code></pre>
+<h3 id="customized-script">Customized script</h3>
 
 <ul>
-<li>Use <code>## ifup eth0</code> to start the ech0 then you can access internet. It is a bit tedious to start the network service every time we reboot the system. Next step we will setup network service to start automatically after the system is up.</li>
-<li>There is a configuration file which can help you setup internet connection after the startup. Ususally the configuration is under this path <code>/etc/sysconfig/network-scripts</code>, and file name would <code>ifcfg-eth&lt;*&gt;</code>. So we check the real file name at first.</li>
+<li>This sample script is used to query temp folders and clean up log files within the folder.</li>
+<li>We assume you have multiple temp folders in different drives and You want to delete log files inside temp folder and its subdirectries from time to time. Before you delete them, you want to list all files first. You can confirm if you want to delete them or not.</li>
+<li>Create a file named clean-logs.bat</li>
+<li>Copy the sample code and tailor anything you want.</li>
+<li>The sample shows you how to create interative command script and how to combine commands together with the condition statement and loop statement.<br /></li>
 </ul>
 
-<pre><code class="language-bash">ls /etc/sysconfig/network-scripts/ifcfg-*
+<pre><code class="language-dos">
+@echo off
 
-## Following are sample of files which will sit in your system. 
-/etc/sysconfig/network-scripts/ifcfg-eth0
-/etc/sysconfig/network-scripts/ifcfg-lo
-</code></pre>
+@echo.&quot;Task: &quot;
+@echo.&quot;You have multiple temp folders in different drives. &quot;
+@echo.&quot;You want to delete log files inside temp folder and its subdirectries. &quot;
+@echo.&quot;Before you delete them, you want to list all files first, file list&quot;
+@echo.&quot;should be sorted by time&quot;
 
-<p>Now we need to update this file via nano or vi. If you have no any experience of vi, I recommended an interactive online tutorial for you. Just 20 mins, you can master basic vi usage.
-<a href="http://www.openvim.com/tutorial.html">http://www.openvim.com/tutorial.html</a></p>
+:again 
+   echo &quot;Checking all Recycle bins for each drive ...&quot;
+   echo.-----------------------
+   for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
+        for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
+            echo.%%x\temp\%%s
+        )
+   )
 
-<p>We use vi to open the config file.</p>
+   set /p answer=Do you want to clean up log files (Y/N)?
+   if /i &quot;%answer:~,1%&quot; EQU &quot;Y&quot; ( 
+       @echo.Y
+       goto clean
+   )
+   if /i &quot;%answer:~,1%&quot; EQU &quot;N&quot; ( 
+       @echo.N 
+       goto end 
+   )  
+   echo Please type Y for Yes or N for No
+   goto again
 
-<pre><code class="language-bash">## vi /etc/sysconfig/network-scripts/ifcfg-eth0
-</code></pre>
+:clean
+    echo.'deleting logs'
+    for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
+        for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
+            del &quot;%%x\temp\%%s&quot;
+        )
+    )
 
-<p>You will a setting below.
-ONBOOT=no</p>
-
-<p>You just need to update it to ONBOOT=yes, then save it and reboot CentOS to test the result.</p>
-
-<pre><code class="language-bash">## reboot
-</code></pre>
-
-<p>After you reboot and login CentOS, you can use ping to test if your system can access internet, then configuration is updated successful.</p>
-
-<h3 id="setup-wifi">Setup Wifi</h3>
-
-<ul>
-<li>Setup Wifi during the installation. After the installation, you will find the Wifi is not available on Cent OS</li>
-<li>Mount the DVD or iso file</li>
-<li>use yum to install the NetworkManager-wifi package</li>
-</ul>
-
-<pre><code class="language-bash">yum --disablerepo=\* install /path/to/dvd/Packages/NetworkManager-wifi* 
-</code></pre>
-
-<h3 id="multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</h3>
-
-<h2 id="partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</h2>
-
-<blockquote>
-<p>Fedora, CentOS and Redhat share the almost the same installation process.
-Click on the <code>Installation Destination</code> icon to change this to custom partitioning
-Under the Other Storage Options, choose I will configure partitioning then click Done
-Following is sample of partition setup of multiple boot system.</p>
-</blockquote>
-
-<pre><code class="language-ini">sda
-  +----sda1        nfts               500M         Windows recovery
-  +----sda2        efi       /boot    100M         grub2 , Windows boot manager
-  +----sda3                  /        10M            
-  +----sda4        ntfs      /      40000M         Window 7/8/10
-  +----sda5                  swap   &lt;Double size of your RAM size&gt;   
-  +----sda6        ext4      /      20000M         Ubuntu 14 desktop
-  +----sda7        ext4      /      20000M         Fedora 20 desktop           
-  +----sda8        ext4      /      20000M         CentOS 6 desktop
-  +----sda9        ext4      /      20000M         OpenSuse desktop
-  + ...
-
-</code></pre>
-
-<h2 id="troubleshooting">Troubleshooting</h2>
-
-<h3 id="ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</h3>
-
-<p>Use command <code>ip</code></p>
-
-<pre><code>ip addr
-ip -s link
-</code></pre>
-
-<h3 id="enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</h3>
-
-<p>If you cannot ping any domain, use <code>dhclient -v</code> to check if the internet is available.</p>
-
-<p>Setup the network enabled onboot</p>
-
-<pre><code>## cd /etc/sysconfig/network-scripts/ 
-## sed -i -e 's@^ONBOOT=&quot;no@ONBOOT=&quot;yes@' ifcfg-e.xx.xxx
-</code></pre>
-
-<h3 id="boot-centos-in-terminal">Boot CentOS in terminal</h3>
-
-<pre><code>## cat /etc/inittab
-## systemctl get-default 
-graphic.target
-## systemctl set-default multi-user.target
-</code></pre>
-
-<h3 id="fedora-boot-error">Fedora boot error</h3>
-
-<ul>
-<li>Please check the grub.cfg if you get booting error</li>
-<li>You can try following command to boot Fedora from Grub menu</li>
-</ul>
-
-<pre><code class="language-bash">linux /boot/vmluz-x.x.x-x.x.x
-initrd /boot/intrd-plymouth.img
+:end
+    echo.'exiting program'
 </code></pre>
 
     </div>
@@ -819,26 +985,31 @@ initrd /boot/intrd-plymouth.img
 <ul>
 <li>
 <ul>
-<li><a href="#bootable-usb-preparation">Bootable usb preparation</a></li>
-<li><a href="#install-centos-on-virtual-machine">Install CentOS on virtual machine</a></li>
-<li><a href="#prepare-vm-for-centos">Prepare VM for CentOS</a></li>
-<li><a href="#config-centos-default-setting">Config CentOS default setting</a></li>
-<li><a href="#manage-centos-packages-and-software">Manage CentOS packages and software</a>
+<li><a href="#advanced-commands-and-usages">Advanced commands and usages</a>
 <ul>
-<li><a href="#install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</a></li>
+<li><a href="#attrib">attrib</a></li>
+<li><a href="#env">env</a></li>
+<li><a href="#set">set</a></li>
+<li><a href="#net">net</a></li>
+<li><a href="#runas">runas</a></li>
+<li><a href="#sc">sc</a></li>
+<li><a href="#ipconfig">ipconfig</a></li>
+<li><a href="#tasklist">tasklist</a></li>
+<li><a href="#netstat">netstat</a></li>
+<li><a href="#taskkill">taskkill</a></li>
+<li><a href="#schtasks">schtasks</a></li>
 </ul></li>
-<li><a href="#setup-network-via-cable">Setup network ( via cable )</a>
+<li><a href="#combination-of-multiple-commands">Combination of multiple commands</a>
 <ul>
-<li><a href="#setup-wifi">Setup Wifi</a></li>
-<li><a href="#multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</a></li>
+<li><a href="#use">Use <code>&amp;</code></a></li>
+<li><a href="#use-pipeline">Use pipeline <code>&gt;</code></a></li>
+<li><a href="#check-cpu-usage">Check CPU usage</a></li>
+<li><a href="#use-for">Use <code>for</code></a></li>
 </ul></li>
-<li><a href="#partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a>
+<li><a href="#script">script</a>
 <ul>
-<li><a href="#ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</a></li>
-<li><a href="#enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</a></li>
-<li><a href="#boot-centos-in-terminal">Boot CentOS in terminal</a></li>
-<li><a href="#fedora-boot-error">Fedora boot error</a></li>
+<li><a href="#basic-hello-world-script">Basic hello world script</a></li>
+<li><a href="#customized-script">Customized script</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -851,8 +1022,8 @@ initrd /boot/intrd-plymouth.img
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/os/ubuntu-desktop-14-extra-tools/" title="Ubuntu 14 -- desktop, extra tools"> <i class="fa fa-chevron-left"></i><label>Ubuntu 14 -- desktop, extra tools</label></a>
-    <a class="nav nav-next" href="/blogs/" title="Blogs" style="margin-right: 0px;"><label>Blogs</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/hacks/windows-command-3/" title="Windows cmd &amp; hotkey - 3"> <i class="fa fa-chevron-left"></i><label>Windows cmd &amp; hotkey - 3</label></a>
+    <a class="nav nav-next" href="/hacks/windows-command-1/" title="Windows cmd &amp; hotkey - 1" style="margin-right: 0px;"><label>Windows cmd &amp; hotkey - 1</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -864,11 +1035,9 @@ initrd /boot/intrd-plymouth.img
     
     <div class="tags"> 
       
-        <a class="label label-default" href="/tags/linux">linux</a>
+        <a class="label label-default" href="/tags/windows">windows</a>
       
-        <a class="label label-default" href="/tags/ubuntu">ubuntu</a>
-      
-        <a class="label label-default" href="/tags/centos">centos</a>
+        <a class="label label-default" href="/tags/cmd">cmd</a>
       
     </div>
     
@@ -877,7 +1046,7 @@ initrd /boot/intrd-plymouth.img
 
     
     <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 10/01/2014
+        <i class='fa fa-calendar'></i> Last update on 24/03/2012
     </div>
     
 
