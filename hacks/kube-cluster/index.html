@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2019-05-08T22:32:50 AEST">
+<title>Create Kubernetes Cluster :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="5 Mins to create a kubernetes cluster on Ubuntu or Centos Linux machine">
+
+
+
+    
+  </head>
+  <body data-url="/hacks/kube-cluster/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/git-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/k8s-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-notes/">
+            Kubernetes Practices
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            C# Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Python Note 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Python Note 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            Python Note 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Python Note 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Python Note 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Python Note 6
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Python Note 7
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Python Note 8
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
+        <div>
+          <a href="/hacks/cass-note/">
+            Cassandra Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/kube-cluster/" class="dd-item active">
+        <div>
+          <a href="/hacks/kube-cluster/">
+            Create Kubernetes Cluster
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-1/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-1/">
+            Windows command &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-2/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-2/">
+            Windows command &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/use-windows-command-hotkey-as-hacker-3/" class="dd-item">
+        <div>
+          <a href="/hacks/use-windows-command-hotkey-as-hacker-3/">
+            Windows command &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/reetek-angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-angular4-crm/">
+            Angular 4 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-react-crm/">
+            React Redux Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/reetek-vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/reetek-vue2-crm/">
+            Vue 2 Crm Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/coding/" >
+   Coding</option>
+    <option value="/frameworks/" >
+   Frameworks</option>
+    <option value="/hacks/" >
+   Hacks</option> 
+      <option value="/hacks/cass-note/" > Cassandra Practices</option>
+      <option value="/hacks/kube-cluster/"  selected> Create Kubernetes Cluster</option>
+      <option value="/hacks/php-debug/" > Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/" > Qemu &amp; Virtual Machine</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-1/" > Windows command &amp; hotkey - 1</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-2/" > Windows command &amp; hotkey - 2</option>
+      <option value="/hacks/use-windows-command-hotkey-as-hacker-3/" > Windows command &amp; hotkey - 3</option>
+  
+    <option value="/os/" >
+   OS</option>
+    <option value="/projects/" >
+   Projects</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Create Kubernetes Cluster</h1>
+        
+
+<h2 id="what-will-you-get-after-completing-steps-below">What will you get after completing steps below</h2>
+
+<h3 id="screenshot-of-cluster-s-dashboard">Screenshot of cluster&rsquo;s dashboard</h3>
+
+<p><img src="/img/kube_pods_metrics.jpg" alt="kube cluster dashboard" /></p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>You have a Linux machine in place. Physical or virtual machine doesn&rsquo;t mather.</li>
+<li>The Linux OS is supposed to be one of folllowing distroes: the Ubuntu 16+, 18+ or CentOS 7.</li>
+<li>Internet is available on your machine</li>
+</ul>
+
+<h2 id="caveat">Caveat</h2>
+
+<h3 id="use-virtual-machine-to-test-it-before-runing-it-on-physical-machine">Use Virtual Machine to test it before runing it on physical machine</h3>
+
+<h3 id="virtualbox-or-vmware-is-a-good-option">VirtualBox or VMWare is a good option.</h3>
+
+<h3 id="kubernetes-is-supposed-to-run-on-linux-server-but-it-should-be-able-to-run-on-desktop-version-as-well">Kubernetes is supposed to run on Linux server, but it should be able to run on desktop version as well.</h3>
+
+<h2 id="steps-to-use-the-script">Steps to use the script</h2>
+
+<h3 id="setup-ssh-server-if-you-need">Setup SSH Server if you need</h3>
+
+<h3 id="get-the-script-from-my-github-repo">Get the script from my github repo</h3>
+
+<h3 id="switch-to-root-user-and-run-the-script">Switch to root user and run the script</h3>
+
+<pre><code class="language-bash"># Ubuntu
+wget https://github.com/harryho/kube-cluster-in-5mins/blob/master/ubuntu/kube-cluster.sh
+
+# CentOS
+wget https://github.com/harryho/kube-cluster-in-5mins/blob/master/centos/kube-cluster.sh
+
+# Switch user
+sudo su
+./kube-cluster.sh -h
+
+</code></pre>
+
+<h2 id="trouble-shooting">Trouble shooting</h2>
+
+<ul>
+<li>Hardware ( Enable VT-x,  2+ Core , 2G RAM )</li>
+<li>The scripts only support ubuntu 16+ or CentOS 7+</li>
+
+<li><p>Swap must be off</p>
+
+<ul>
+<li>disable swap immediately</li>
+</ul>
+
+<pre><code class="language-bash">sudo swapoff -a
+</code></pre>
+
+<ul>
+<li>comment out the swap drive from fstab</li>
+</ul>
+
+<pre><code># swap was on ...
+# UUID=XXXXXXX-XXXXX-XXXX
+</code></pre></li>
+</ul>
+
+<h2 id="repository-of-scripts-https-github-com-harryho-kube-cluster-in-5mins-git"><a href="https://github.com/harryho/kube-cluster-in-5mins.git">Repository of scripts</a></h2>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#what-will-you-get-after-completing-steps-below">What will you get after completing steps below</a>
+<ul>
+<li><a href="#screenshot-of-cluster-s-dashboard">Screenshot of cluster&rsquo;s dashboard</a></li>
+</ul></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#caveat">Caveat</a>
+<ul>
+<li><a href="#use-virtual-machine-to-test-it-before-runing-it-on-physical-machine">Use Virtual Machine to test it before runing it on physical machine</a></li>
+<li><a href="#virtualbox-or-vmware-is-a-good-option">VirtualBox or VMWare is a good option.</a></li>
+<li><a href="#kubernetes-is-supposed-to-run-on-linux-server-but-it-should-be-able-to-run-on-desktop-version-as-well">Kubernetes is supposed to run on Linux server, but it should be able to run on desktop version as well.</a></li>
+</ul></li>
+<li><a href="#steps-to-use-the-script">Steps to use the script</a>
+<ul>
+<li><a href="#setup-ssh-server-if-you-need">Setup SSH Server if you need</a></li>
+<li><a href="#get-the-script-from-my-github-repo">Get the script from my github repo</a></li>
+<li><a href="#switch-to-root-user-and-run-the-script">Switch to root user and run the script</a></li>
+</ul></li>
+<li><a href="#trouble-shooting">Trouble shooting</a></li>
+<li><a href="#repository-of-scripts-https-github-com-harryho-kube-cluster-in-5mins-git"><a href="https://github.com/harryho/kube-cluster-in-5mins.git">Repository of scripts</a></a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/hacks/cass-note/" title="Cassandra Practices"> <i class="fa fa-chevron-left"></i><label>Cassandra Practices</label></a>
+    <a class="nav nav-next" href="/hacks/php-debug/" title="Debug PHP with Free IDE" style="margin-right: 0px;"><label>Debug PHP with Free IDE</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/kubernetes">kubernetes</a>
+      
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

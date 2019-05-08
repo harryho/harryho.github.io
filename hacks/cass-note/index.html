@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-07T01:19:23 AEST">
+<meta name="revised" content="2019-05-08T22:32:50 AEST">
 <title>Cassandra Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -84,7 +84,7 @@
       <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
         <div>
           <a href="/blogs/build-mobile-app/">
-            Build mobile app with web tech stacks
+            Build mobile app with web tech
           </a>
         </div>
     </li>
@@ -363,6 +363,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/hacks/kube-cluster/" class="dd-item">
+        <div>
+          <a href="/hacks/kube-cluster/">
+            Create Kubernetes Cluster
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/hacks/php-debug/" class="dd-item">
         <div>
           <a href="/hacks/php-debug/">
@@ -558,6 +565,7 @@
     <option value="/hacks/" >
    Hacks</option> 
       <option value="/hacks/cass-note/"  selected> Cassandra Practices</option>
+      <option value="/hacks/kube-cluster/" > Create Kubernetes Cluster</option>
       <option value="/hacks/php-debug/" > Debug PHP with Free IDE</option>
       <option value="/hacks/qemu-notes/" > Qemu &amp; Virtual Machine</option>
       <option value="/hacks/use-windows-command-hotkey-as-hacker-1/" > Windows command &amp; hotkey - 1</option>
@@ -589,7 +597,7 @@
 
 <p><em>Apache Cassandra is a free open-source database system that is NoSQL based. Meaning Cassandra does not use the table model seen in MySQL, MSSQL or PostgreSQL, but instead uses a cluster model. It’s designed to handle large amounts of data and is highly scalable.</em></p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</h2>
 
 <h3 id="install-java-jre-8">Install Java(JRE) 8+</h3>
 
@@ -640,11 +648,146 @@ sudo reboot
 <pre><code class="language-bash">nodetool status
 </code></pre>
 
-<ul>
-<li>CQL</li>
-</ul>
+<h2 id="install-cassandra-with-docker">Install Cassandra with Docker</h2>
 
-<pre><code class="language-bash">cqlsh
+<h3 id="create-node-n1">Create node n1</h3>
+
+<pre><code>docker run --name n1 -d tobert/cassandra -dc DC1 -rack RAC1
+docker ps
+</code></pre>
+
+<h3 id="get-ip-of-node-n1">Get IP of node n1</h3>
+
+<pre><code>IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
+echo $IP
+</code></pre>
+
+<h3 id="check-status-of-n1">Check status of n1</h3>
+
+<pre><code>docker exec -it n1  nodetool status
+
+# You will see status of Datacenter D1 below
+
+# Datacenter: DC1
+# ===============
+# Status=Up/Down
+# |/ State=Normal/Leaving/Joining/Moving
+# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
+UN  172.17.0.2  51.53 KB   256     100.0%    8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
+</code></pre>
+
+<h3 id="create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</h3>
+
+<pre><code>docker run --name=n2 -d tobert/cassandra -dc DC1 -rack RAC2 --seeds $IP
+
+docker exec -it n1  nodetool status
+
+# You will see status of Datacenter D1 below
+
+# Datacenter: DC1
+# ===============
+# Status=Up/Down
+# |/ State=Normal/Leaving/Joining/Moving
+# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
+# UN  172.17.0.3  72.01 KB   256     100.0%  cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
+# UN  172.17.0.2  51.53 KB   256     100.0%  8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
+</code></pre>
+
+<h3 id="check-node-n2-configuration">Check node n2 configuration</h3>
+
+<pre><code>docker exec -it n2  cat /data/conf/cassandra.yaml | grep endpoint
+docker exec -it n2  cat /data/conf/cassandra-rackdc.properties | grep  -e &quot;dc&quot;  -e &quot;rack&quot;
+</code></pre>
+
+<h3 id="create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</h3>
+
+<pre><code>docker run --name=n3 -d tobert/cassandra -dc DC2 -rack RAC1 --seeds $IP
+docker exec -it n1  nodetool status
+
+# You will see status below. It may take a few seconds to get everything up and run.
+
+# Datacenter: DC1
+# ===============
+# Status=Up/Down
+# |/ State=Normal/Leaving/Joining/Moving
+# --  Address     Load    Tokens  Owns (effective)  Host ID  Rack
+# UN  172.17.0.3  134.03 KB  256     66.1%             cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
+# UN  172.17.0.2  102.84 KB  256     64.5%             8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
+
+# Datacenter: DC2
+# ===============
+# Status=Up/Down
+# |/ State=Normal/Leaving/Joining/Moving
+# --  Address   Load   Tokens  Owns (effective)  Host ID   Rack
+UN  172.17.0.4  14.38 KB   256     69.4%             0fad8335-763d-42fa-9934-3ed10c44eaa8  RAC1
+</code></pre>
+
+<h3 id="setup-replication-strategy">Setup replication strategy</h3>
+
+<pre><code>docker 
+create keyspace csdb with replication = {'class':'NetworkTopologyStrategy','DC1':2,'DC2':1}
+</code></pre>
+
+<h3 id="check-csdb-status">Check csdb status</h3>
+
+<pre><code>docker exec -it n1 nodetool describering csdb
+
+# Run nodetool status and note that the one node in DC2 owns all the data
+docker exec -it n1 nodetool status csdb  
+
+# Stop and remove all four docker containers:
+docker stop n1 n2 n3 n4; docker rm n1 n2 n3 n4
+</code></pre>
+
+<h2 id="create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</h2>
+
+<h3 id="create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</h3>
+
+<pre><code>docker run --name=n1 -v $PWD/ws/ps/cassdev/scripts:/scripts -d tobert/cassandra
+docker exec -it n1  nodetool status
+
+IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
+echo $IP
+
+docker run --name=n2 -d tobert/cassandra --seeds $IP
+docker run --name=n3 -d tobert/cassandra --seeds $IP
+
+docker exec -it n1 /bin/bash
+cd scripts
+</code></pre>
+
+<h3 id="list-scripts">List scripts</h3>
+
+<pre><code>docker exec -it n1 /bin/bash
+cd /scrpts &amp;&amp; ls
+</code></pre>
+
+<h3 id="create-keyspace-with-simple-replication">Create keyspace with simple replication</h3>
+
+<pre><code>docker exec -it n1 cqlsh
+create keyspace csdb with replication = 
+{'class':'SimpleStrategy', 'replication_factor':1};
+</code></pre>
+
+<h3 id="create-table-and-insert-data-with-script">Create table and insert data with script</h3>
+
+<pre><code>docker exec -it n1 cqlsh
+
+&gt; desc keyspaces;
+&gt; desc tables;
+&gt; use ussdb;
+&gt; source '/scripts/courses.cql'
+&gt; source '/scripts/users.cql'
+</code></pre>
+
+<h3 id="cql">CQL</h3>
+
+<pre><code>docker exec -it n1 cqlsh
+
+&gt; use ussdb;
+&gt; desc tables;
+&gt; select * from users;
+&gt; select * from courses;
 </code></pre>
 
     </div>
@@ -654,12 +797,31 @@ sudo reboot
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a>
+<li><a href="#install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</a>
 <ul>
 <li><a href="#install-java-jre-8">Install Java(JRE) 8+</a></li>
 <li><a href="#install-python-2-7">Install Python 2.7+</a></li>
 </ul></li>
 <li><a href="#install-cassandra">Install Cassandra</a></li>
+<li><a href="#install-cassandra-with-docker">Install Cassandra with Docker</a>
+<ul>
+<li><a href="#create-node-n1">Create node n1</a></li>
+<li><a href="#get-ip-of-node-n1">Get IP of node n1</a></li>
+<li><a href="#check-status-of-n1">Check status of n1</a></li>
+<li><a href="#create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</a></li>
+<li><a href="#check-node-n2-configuration">Check node n2 configuration</a></li>
+<li><a href="#create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</a></li>
+<li><a href="#setup-replication-strategy">Setup replication strategy</a></li>
+<li><a href="#check-csdb-status">Check csdb status</a></li>
+</ul></li>
+<li><a href="#create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</a>
+<ul>
+<li><a href="#create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</a></li>
+<li><a href="#list-scripts">List scripts</a></li>
+<li><a href="#create-keyspace-with-simple-replication">Create keyspace with simple replication</a></li>
+<li><a href="#create-table-and-insert-data-with-script">Create table and insert data with script</a></li>
+<li><a href="#cql">CQL</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -672,7 +834,7 @@ sudo reboot
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/hacks/use-windows-command-hotkey-as-hacker-1/" title="Windows command &amp; hotkey - 1"> <i class="fa fa-chevron-left"></i><label>Windows command &amp; hotkey - 1</label></a>
-    <a class="nav nav-next" href="/hacks/php-debug/" title="Debug PHP with Free IDE" style="margin-right: 0px;"><label>Debug PHP with Free IDE</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/hacks/kube-cluster/" title="Create Kubernetes Cluster" style="margin-right: 0px;"><label>Create Kubernetes Cluster</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
