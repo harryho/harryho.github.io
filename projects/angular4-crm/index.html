@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-05-08T23:08:30 AEST">
-<title>Csharp :: Hello World</title>
+<title>Angular 4 Crm Project :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Ng4Crm is reusable CRM project for real-world business based on Angular 4">
 
 
 
     
   </head>
-  <body data-url="/tags/csharp/">
+  <body data-url="/projects/angular4-crm/">
     
       <header>
   <div class="logo">
@@ -477,13 +477,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/projects/" class="dd-item haschildren
+    <li data-nav-id="/projects/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/projects/">Projects</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/projects/angular4-crm/" class="dd-item">
+      <li data-nav-id="/projects/angular4-crm/" class="dd-item active">
         <div>
           <a href="/projects/angular4-crm/">
             Angular 4 Crm Project
@@ -566,7 +567,16 @@
     <option value="/os/" >
    OS</option>
     <option value="/projects/" >
-   Projects</option>
+   Projects</option> 
+      <option value="/projects/angular4-crm/"  selected> Angular 4 Crm Project</option>
+      <option value="/projects/angularjs-webpack-es6-starter/" > Angularjs Webpack ES6 Starter</option>
+      <option value="/projects/python-flat-api/" > FlatApi - Restful API for python dev</option>
+      <option value="/projects/laravel-mvc-starter/" > Laravel MVC Starter</option>
+      <option value="/projects/react-crm/" > React Redux CRM Project</option>
+      <option value="/projects/vue2-admin/" > Vue 2 Admin Project</option>
+      <option value="/projects/vue2-crm/" > Vue 2 CRM Project</option>
+      <option value="/projects/zf2-mvc-starter/" > Zend Framework 2 MVC Starter</option>
+  
 
 
 
@@ -581,83 +591,115 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Angular 4 Crm Project</h1>
+        
 
+<h2 id="summary">Summary</h2>
 
+<p><strong>Ng4Crm</strong> is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp; Bootstrap 3.</p>
 
-<div class="extra-pagination inner">
-<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
+<p>This project starts from a popular starter project <a href="https://github.com/AngularClass/angular-starter">AngularClass/AngularStarter</a>. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.</p>
+
+<h2 id="features"><strong>Features</strong></h2>
+
+<ul>
+<li>This project is built on the top of AngularClass/Angular-Starter.</li>
+<li>The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.</li>
+<li>This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.</li>
+<li>It uses Json-Server as fake Restful API. (You can simple replace it with your own API)</li>
+</ul>
+
+<h3 id="structure-of-ng4crm">Structure of Ng4Crm</h3>
+
+<pre><code class="language-ini">path\to\ng4crm
++---config             &lt;-// configuration of dev or prod environment
++---db                 &lt;-// json files for json-server
+|   +---db.json        &lt;-// dummy db
+|   \---routes.json    &lt;-// configure fake restful api
++---screenshots
++---src                &lt;-// vue components 
+|   +---app
+|   |   +---_gurad             &lt;-// auth guard for authentication
+|   |   +---_models             &lt;-// common models for whole app
+|   |   +---_services            &lt;-// common services for whole app
+|   |   +---about                &lt;-// about component   
+|   |   +---customer              &lt;-// customer component
+|   |   +---dashboard            &lt;-// dashboard component  
+|   |   +---notfoundpage         &lt;-// notfoundpage component  
+|   |   +---login                &lt;-// login component  
+|   |   +---order                &lt;-// customer component 
+|   |   +---root                &lt;-// root component 
+|   |   +---shared                &lt;-// common component for whole app
+|   |   +---app.component.ts
+|   |   +---app.module.ts
+|   |   +---app.routes.ts
+|   |   +---app.services.ts
+|   |   +---environment.ts
+|   |   \---...
+|   +---assets         &lt;-//   images  and css from third parties
+|   +---styles         &lt;-//   customized css files
+|   +---main.browser.aot.ts     
+|   +---main.browser.ts  
+|   +---polyfills.browser.ts  
+|   \---...
+\...
+
+</code></pre>
+
+<h2 id="screenshots">Screenshots</h2>
+
+<blockquote>
+<p><img src="/img/ng4crm-screenshot-1.jpg" alt="Screenshot1" /></p>
+
+<p><img src="/img/ng4crm-screenshot-2.jpg" alt="Screenshot2" /></p>
+
+<p><img src="/img/ng4crm-screenshot-3.jpg" alt="Screenshot3" /></p>
+
+<p><img src="/img/ng4crm-screenshot-4.jpg" alt="Screenshot4" /></p>
+</blockquote>
+
+<h3 id="browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></h3>
+
+<p><strong>Alternatives</strong></p>
+
+<p>There are two similar projects respectively built on the Vue.js and React. If you have interests in those technical stacks. You can find and clone those projects below.</p>
+
+<ul>
+<li><a href="/projects/vue2-crm">Vue2 Crm</a>.</li>
+<li><a href="/projects/react-crm">React Redux Crm</a>.</li>
+</ul>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#features"><strong>Features</strong></a>
+<ul>
+<li><a href="#structure-of-ng4crm">Structure of Ng4Crm</a></li>
+</ul></li>
+<li><a href="#screenshots">Screenshots</a>
+<ul>
+<li><a href="#browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
+    </div>
 
 </div>
-
-
-   <article class="post coding">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/coding/c-sharp/">C#</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>  C# Note - 1 How to create C# console application without Visual Studio ... &nbsp;&nbsp;&nbsp;&nbsp;
-  C# Note - 2 How to build a configurable scheduled task on Window Service ... &nbsp;&nbsp;&nbsp;&nbsp;
-   <a class="read-more" href="/coding/c-sharp/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-          
-            
-                <a class="label label-default" href="/tags/c/">c#</a>
-            
-                <a class="label label-default" href="/tags/csharp/">csharp</a>
-            
-        
-
-    </footer>
-</article>
-
-   <article class="post coding">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/coding/c-sharp/csharp-note-2/">C# Note - 2</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Problem  Set up the some scheduled tasks running in the backgroud to take care of data update or sync for every 15 mins, or everyday or every week
- Solution Option 1 Windows Task Scheduler  Click the Start button. Click Control Panel. Click System and Maintenance. Click Administrative Tools. Double-click Task Scheduler.  Option 2 Use Window Service as task scheduler Overview of design The design here is a simplified version, which I built for previous projects. <a class="read-more" href="/coding/c-sharp/csharp-note-2/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-          
-            
-                <a class="label label-default" href="/tags/csharp/">CSharp</a>
-            
-        
-
-    </footer>
-</article>
-
-
-<div style="margin-bottom:2rem"></div>
-
-<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
-
-
-
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-next" href="/os/" title="OS" style="margin-right: 0px;"><label>OS</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/projects/python-flat-api/" title="FlatApi - Restful API for python dev"> <i class="fa fa-chevron-left"></i><label>FlatApi - Restful API for python dev</label></a>
+    <a class="nav nav-next" href="/projects/laravel-mvc-starter/" title="Laravel MVC Starter" style="margin-right: 0px;"><label>Laravel MVC Starter</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -667,9 +709,19 @@
 
 <div class="footline">
     
+    <div class="tags"> 
+      
+        <a class="label label-default" href="/tags/javascript">javascript</a>
+      
+    </div>
+    
 
     
 
+    
+    <div class="date">
+        <i class='fa fa-calendar'></i> Last update on 07/12/2016
+    </div>
     
 
     
