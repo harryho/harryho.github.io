@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:56 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>Azure Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -226,6 +211,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -288,6 +288,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -296,10 +303,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -582,18 +632,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>Azure Practices</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>Azure Practices</h1>
-        
+    
 
 <blockquote>
 <p><em>Here we are going to explore how to deploy web applications to Azure. From sep 2015, Microsoft launched new portal for Azure. To be honest, new portal is amazing, IMO, it is one of best changes from Microsoft.</em></p>
@@ -641,17 +700,15 @@
 <li>Change previous publish profile from Web Deploy to Web Deploy Package and create a package in local somewhere e.g. C:\webdeploy\webapp.zip</li>
 </ul></li>
 
-<li><p>Deploy to azure ( Start PowerShell as admin )</p></li>
-</ul>
+<li><p>Deploy to azure ( Start PowerShell as admin )</p>
 
-<pre><code>  Add-AzureAccount
-  Get-AzureSubscription -Default `
-  Publish-AzureWebsiteProject -Name 'webdeploy' -Package 'C:\webdeploy\webapp.zip'
-</code></pre>
+<pre><code>Add-AzureAccount
+Get-AzureSubscription -Default `
+Publish-AzureWebsiteProject -Name 'webdeploy' -Package 'C:\webdeploy\webapp.zip'
+</code></pre></li>
 
-<ul>
-<li>Deploy website to dev slot
-**Publish&hellip; &gt; Profile &gt; Expand the webdeploy &gt; Deployment slots &gt; dev &gt; Next &gt; Publish</li>
+<li><p>Deploy website to dev slot
+**Publish&hellip; &gt; Profile &gt; Expand the webdeploy &gt; Deployment slots &gt; dev &gt; Next &gt; Publish</p></li>
 </ul>
 
 <h3 id="webjobs">Webjobs</h3>
@@ -669,44 +726,40 @@
 <li><p>demoWeb ( folder )
 *#**  Index.html</p></li>
 
-<li><p>Deploy project to azure git repo ( Start powershell as admin)</p></li>
-</ul>
+<li><p>Deploy project to azure git repo ( Start powershell as admin)</p>
 
-<pre><code class="language-bash">  git init 
-  git status 
-  git config user.name &quot;harryho&quot; 
-  git config user.email &quot;hho@hho.com&quot; 
-  git commit -m &quot;initial commit&quot;
-  git remote add azure https://xxxxxxx.git 
-  git remote -v
-  git push azure master 
-</code></pre>
+<pre><code class="language-bash">git init 
+git status 
+git config user.name &quot;harryho&quot; 
+git config user.email &quot;hho@hho.com&quot; 
+git commit -m &quot;initial commit&quot;
+git remote add azure https://xxxxxxx.git 
+git remote -v
+git push azure master 
+</code></pre></li>
 
-<ul>
 <li><p>Use Kudu</p>
 
 <ul>
 <li>DEVELOPMENT TOOLS &gt; Advanced Tools</li>
 </ul></li>
 
-<li><p>Create a webjob and deploy to azure (Start powershell as admin)</p></li>
-</ul>
+<li><p>Create a webjob and deploy to azure (Start powershell as admin)</p>
 
-<pre><code class="language-bash">  mkdir webjob01
-  cd webjob01
-  echo &quot;Get-Date | Out-File -FilePath 'd:\home\site\wwwroot\dateoutput.txt -Append' &quot;&gt;getdatejob.ps1
-  .\getdatejob.ps1
-  cat .\dateoutput.txt
+<pre><code class="language-bash">mkdir webjob01
+cd webjob01
+echo &quot;Get-Date | Out-File -FilePath 'd:\home\site\wwwroot\dateoutput.txt -Append' &quot;&gt;getdatejob.ps1
+.\getdatejob.ps1
+cat .\dateoutput.txt
 
-  7z a -tzip getdatejob.zip *.ps1
-  7z l getdatejob.zip
+7z a -tzip getdatejob.zip *.ps1
+7z l getdatejob.zip
 
-  help New-AzureWebisteJob
-  New-AzureWebsiteJob -Name 'WebAppV1301' -JobName 'GetDateJob01'  -JobType Continuous -JobFile '.\getdatejob.zip'        
+help New-AzureWebisteJob
+New-AzureWebsiteJob -Name 'WebAppV1301' -JobName 'GetDateJob01'  -JobType Continuous -JobFile '.\getdatejob.zip'        
 
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>Create webjob from visual studio</p>
 
 <ul>
@@ -751,57 +804,51 @@
 <h3 id="self-signed-ssl-setup">Self-signed SSL setup</h3>
 
 <ul>
-<li>Create a text file named serverauth.cnf, then copy the following content into it, and then save it in a working directory.</li>
-</ul>
+<li><p>Create a text file named serverauth.cnf, then copy the following content into it, and then save it in a working directory.</p>
 
-<pre><code class="language-ini">  [ req ]
-  default_bits           = 2048
-  default_keyfile        = privkey.pem
-  distinguished_name     = req_distinguished_name
-  attributes             = req_attributes
-  x509_extensions        = v3_ca
+<pre><code class="language-ini">[ req ]
+default_bits           = 2048
+default_keyfile        = privkey.pem
+distinguished_name     = req_distinguished_name
+attributes             = req_attributes
+x509_extensions        = v3_ca
 
-  [ req_distinguished_name ]
-  countryName         = Country Name (2 letter code)
-  countryName_min         = 2
-  countryName_max         = 2
-  stateOrProvinceName     = State or Province Name (full name)
-  localityName            = Locality Name (eg, city)
-  0.organizationName      = Organization Name (eg, company)
-  organizationalUnitName      = Organizational Unit Name (eg, section)
-  commonName          = Common Name (eg, your app's domain name)
-  commonName_max          = 64
-  emailAddress            = Email Address
-  emailAddress_max        = 40
+[ req_distinguished_name ]
+countryName         = Country Name (2 letter code)
+countryName_min         = 2
+countryName_max         = 2
+stateOrProvinceName     = State or Province Name (full name)
+localityName            = Locality Name (eg, city)
+0.organizationName      = Organization Name (eg, company)
+organizationalUnitName      = Organizational Unit Name (eg, section)
+commonName          = Common Name (eg, your app's domain name)
+commonName_max          = 64
+emailAddress            = Email Address
+emailAddress_max        = 40
 
-  [ req_attributes ]
-  challengePassword       = A challenge password
-  challengePassword_min       = 4
-  challengePassword_max       = 20
+[ req_attributes ]
+challengePassword       = A challenge password
+challengePassword_min       = 4
+challengePassword_max       = 20
 
-  [ v3_ca ]
-  subjectKeyIdentifier=hash
-  authorityKeyIdentifier=keyid:always,issuer:always
-  basicConstraints = CA:false
-  keyUsage=nonRepudiation, digitalSignature, keyEncipherment
-  extendedKeyUsage = serverAuth  
-</code></pre>
+[ v3_ca ]
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer:always
+basicConstraints = CA:false
+keyUsage=nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth  
+</code></pre></li>
 
-<ul>
-<li>In a command-line terminal, <code>CD</code> into your working directory and run the following command. Remember set your domain name as common name.</li>
-</ul>
+<li><p>In a command-line terminal, <code>CD</code> into your working directory and run the following command. Remember set your domain name as common name.</p>
 
 <pre><code>openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Export the certificate to a .pfx file by running the following command. When prompted, define a password to secure the .pfx file.</li>
-</ul>
+<li><p>Export the certificate to a .pfx file by running the following command. When prompted, define a password to secure the .pfx file.</p>
 
 <pre><code>openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>Add SSL binding</p>
 
 <ul>
@@ -813,54 +860,31 @@
 <ul>
 <li>DEVELOPMENT TOOLS &gt; Advanced Tools &gt; Debug Console&gt; Powershell</li>
 <li>Navigate from site &gt; wwwroot .</li>
-<li>Edit Web.config. Add url rewite into Web.config proply</li>
-</ul></li>
-</ul>
+
+<li><p>Edit Web.config. Add url rewite into Web.config proply</p>
 
 <pre><code class="language-xml">&lt;configuration&gt;
-  &lt;system.webServer&gt;
-    &lt;rewrite&gt;
-      &lt;rules&gt;
-        &lt;rule name=&quot;HTTP/S to HTTPS Redirect&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
-        &lt;match url=&quot;(.*)&quot; /&gt;
-        &lt;conditions logicalGrouping=&quot;MatchAny&quot;&gt;
-          &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^1$&quot; /&gt;
-          &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^0$&quot; /&gt;
-        &lt;/conditions&gt;
-        &lt;action type=&quot;Redirect&quot; url=&quot;https://{HTTP_HOST}/OWA/&quot; redirectType=&quot;Permanent&quot; /&gt;
-        &lt;/rule&gt;
-      &lt;/rules&gt;
-    &lt;/rewrite&gt;
-  &lt;/system.webServer&gt;
+&lt;system.webServer&gt;
+&lt;rewrite&gt;
+&lt;rules&gt;
+&lt;rule name=&quot;HTTP/S to HTTPS Redirect&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
+&lt;match url=&quot;(.*)&quot; /&gt;
+&lt;conditions logicalGrouping=&quot;MatchAny&quot;&gt;
+  &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^1$&quot; /&gt;
+  &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^0$&quot; /&gt;
+&lt;/conditions&gt;
+&lt;action type=&quot;Redirect&quot; url=&quot;https://{HTTP_HOST}/OWA/&quot; redirectType=&quot;Permanent&quot; /&gt;
+&lt;/rule&gt;
+&lt;/rules&gt;
+&lt;/rewrite&gt;
+&lt;/system.webServer&gt;
 &lt;/configuration&gt;
-</code></pre>
+</code></pre></li>
+</ul></li>
 
-<ul>
-<li>Restart the web.config (Optional ). Cleanup the browser cache and hard refresh</li>
+<li><p>Restart the web.config (Optional ). Cleanup the browser cache and hard refresh</p></li>
 </ul>
 
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#getting-started">Getting Started</a></li>
-<li><a href="#app-service">App Service</a>
-<ul>
-<li><a href="#web-app">Web app</a></li>
-<li><a href="#webjobs">Webjobs</a></li>
-<li><a href="#custom-domain">Custom Domain</a></li>
-<li><a href="#self-signed-ssl-setup">Self-signed SSL setup</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-    </div>
-
-</div>
 
     
     
@@ -914,7 +938,6 @@
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

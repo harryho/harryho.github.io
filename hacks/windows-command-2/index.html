@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:56 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>Windows cmd &amp; hotkey - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -225,6 +210,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -287,6 +287,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -295,10 +302,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -582,18 +632,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>Windows cmd &amp; hotkey - 2</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>Windows cmd &amp; hotkey - 2</h1>
-        
+    
 
 <p><em>This article will continue the topic of Windows command &amp; hotkeys. Part-1 shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. The rest of this topic will focus on the advanced commands and how to create a batch script with all those commands.</em></p>
 
@@ -688,8 +747,7 @@ runas /user:yourpc\administrator &quot;cmd /C type \&quot;\&quot;&gt;c:\z.txt &a
 <p><strong>sc query</strong></p>
 
 <ul>
-<li>Basic usage<br /></li>
-</ul>
+<li><p>Basic usage</p>
 
 <pre><code class="language-dos">REM query all service on the PC -- &lt;yourpcname&gt;
 sc \\&lt;yourpcname&gt; query
@@ -697,9 +755,8 @@ sc \\&lt;yourpcname&gt; query
 REM query status of given service 
 sc query &lt;servicename&gt;
 sc query state= all | find &quot;SERVICE_NAME&quot; 
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>Retrieve service name and state. type parameter can be used twice in some case.</p>
 
 <ul>
@@ -713,9 +770,8 @@ sc query state= all | find &quot;SERVICE_NAME&quot;
 <ul>
 <li>The command options for SC are case sensitive.</li>
 <li>If you run this inside a batch file, the percent signs (e.g. at %s) need to be doubled.</li>
-<li>Extra space within option is necessary. e.g. <code>state= all</code></li>
-</ul></li>
-</ul>
+
+<li><p>Extra space within option is necessary. e.g. <code>state= all</code></p>
 
 <pre><code class="language-dos">REM query all services which are inactive and type are driver and kernel
 sc query state= inactive type= driver type= kernel
@@ -725,10 +781,12 @@ for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_N
 
 REM get all services name and state
 for /f &quot;tokens=2&quot; %s in ('sc query state^= all ^| find &quot;SERVICE_NAME&quot;') do @(
-    for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE&quot; ') 
-        do @echo %s -- %t
+for /f &quot;tokens=4&quot; %t in ('sc query %s ^| find &quot;STATE&quot; ') 
+do @echo %s -- %t
 )
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <p><strong>sc queryex</strong></p>
 
@@ -780,8 +838,8 @@ sc stop  &lt;servicename&gt;
 <ul>
 <li>tasklist[.exe] [/s computer] [/u domain\user [/p password]] [/fo {TABLE|LIST|CSV}] [/nh] [/fi FilterName [/fi FilterName2 [ &hellip; ]]] [/m [ModuleName] | /svc | /v</li>
 <li>FilterName: Status, Imagename,</li>
-<li>Find process by pid</li>
-</ul>
+
+<li><p>Find process by pid</p>
 
 <pre><code class="language-dos">REM get the mysqld process info
 tasklist /v /fo list /fi &quot;imagename eq mysqld.exe&quot;
@@ -797,28 +855,28 @@ tasklist /fi &quot;USERNAME ne NT AUTHORITY\SYSTEM&quot; /fi &quot;STATUS eq not
 
 REM get process by PID
 tasklist /fi &quot;pid eq 4444&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="netstat">netstat</h3>
 
 <ul>
 <li>Type <code>netstat</code> to get all ports and IP addresses, which are connected or listening</li>
-<li>Type PID of process which is using some given port, such as 80, 443, 22, etc.</li>
-</ul>
+
+<li><p>Type PID of process which is using some given port, such as 80, 443, 22, etc.</p>
 
 <pre><code class="language-bash">netstat -ano | find &quot;:80&quot; 
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Type the application which is using given port.</li>
-</ul>
+<li><p>Type the application which is using given port.</p>
 
 <pre><code class="language-bash">for /f &quot;tokens=5&quot; %p in ( 'netstat -ano ^| find &quot;:80&quot;') do @(     
-    for /f &quot;tokens=1&quot; %s in ( 'tasklist /fi &quot;pid eq %p&quot; ^| find &quot;%p&quot;') do @(
-        echo PID:%p -- APP: %s
-    ) 
+for /f &quot;tokens=1&quot; %s in ( 'tasklist /fi &quot;pid eq %p&quot; ^| find &quot;%p&quot;') do @(
+    echo PID:%p -- APP: %s
+) 
 )
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="taskkill">taskkill</h3>
 
@@ -878,8 +936,7 @@ SCHTASKS /Query /FO TABLE /NH /V | find &quot;Running&quot; &gt;running_tasks.cs
 <p>It is used to connect to two commands  and execute them sequentially</p>
 
 <ul>
-<li>Delete a folder with non-empty subdirectries <code>test</code> we need to combine <code>del</code> and <code>rd</code> together. Actually we can two commands one by one, but we can put it together and just execute once.<br /></li>
-</ul>
+<li><p>Delete a folder with non-empty subdirectries <code>test</code> we need to combine <code>del</code> and <code>rd</code> together. Actually we can two commands one by one, but we can put it together and just execute once.</p>
 
 <pre><code class="language-bash">REM show the folder with non-empty subdirectries
 tree test
@@ -890,11 +947,12 @@ tree test
 |       file2
 |       
 \---subdir2
-        file1
-        file2
+    file1
+    file2
 
 del /s/q test &amp; rd /s/q
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="use-pipeline">Use pipeline <code>&gt;</code></h3>
 
@@ -933,8 +991,8 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 <li>We assume you have multiple temp folders in different drives and You want to delete log files inside temp folder and its subdirectries from time to time. Before you delete them, you want to list all files first. You can confirm if you want to delete them or not.</li>
 <li>Create a file named clean-logs.bat</li>
 <li>Copy the sample code and tailor anything you want.</li>
-<li>The sample shows you how to create interative command script and how to combine commands together with the condition statement and loop statement.<br /></li>
-</ul>
+
+<li><p>The sample shows you how to create interative command script and how to combine commands together with the condition statement and loop statement.</p>
 
 <pre><code class="language-dos">
 @echo off
@@ -946,77 +1004,39 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 @echo.&quot;should be sorted by time&quot;
 
 :again 
-   echo &quot;Checking all Recycle bins for each drive ...&quot;
-   echo.-----------------------
-   for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
-        for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
-            echo.%%x\temp\%%s
-        )
-   )
+echo &quot;Checking all Recycle bins for each drive ...&quot;
+echo.-----------------------
+for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
+    for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
+        echo.%%x\temp\%%s
+    )
+)
 
-   set /p answer=Do you want to clean up log files (Y/N)?
-   if /i &quot;%answer:~,1%&quot; EQU &quot;Y&quot; ( 
-       @echo.Y
-       goto clean
-   )
-   if /i &quot;%answer:~,1%&quot; EQU &quot;N&quot; ( 
-       @echo.N 
-       goto end 
-   )  
-   echo Please type Y for Yes or N for No
-   goto again
+set /p answer=Do you want to clean up log files (Y/N)?
+if /i &quot;%answer:~,1%&quot; EQU &quot;Y&quot; ( 
+   @echo.Y
+   goto clean
+)
+if /i &quot;%answer:~,1%&quot; EQU &quot;N&quot; ( 
+   @echo.N 
+   goto end 
+)  
+echo Please type Y for Yes or N for No
+goto again
 
 :clean
-    echo.'deleting logs'
-    for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
-        for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
-            del &quot;%%x\temp\%%s&quot;
-        )
+echo.'deleting logs'
+for /f  %%x in ('wmic logicaldisk get caption  ^| find &quot;:&quot;') do @(
+    for /f &quot;tokens=*&quot; %%s in ('tree /f /a %%x\temp ^| find  &quot;log&quot; '  ) do @(
+        del &quot;%%x\temp\%%s&quot;
     )
+)
 
 :end
-    echo.'exiting program'
-</code></pre>
-
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#advanced-commands-and-usages">Advanced commands and usages</a>
-<ul>
-<li><a href="#attrib">attrib</a></li>
-<li><a href="#env">env</a></li>
-<li><a href="#set">set</a></li>
-<li><a href="#net">net</a></li>
-<li><a href="#runas">runas</a></li>
-<li><a href="#sc">sc</a></li>
-<li><a href="#ipconfig">ipconfig</a></li>
-<li><a href="#tasklist">tasklist</a></li>
-<li><a href="#netstat">netstat</a></li>
-<li><a href="#taskkill">taskkill</a></li>
-<li><a href="#schtasks">schtasks</a></li>
-</ul></li>
-<li><a href="#combination-of-multiple-commands">Combination of multiple commands</a>
-<ul>
-<li><a href="#use">Use <code>&amp;</code></a></li>
-<li><a href="#use-pipeline">Use pipeline <code>&gt;</code></a></li>
-<li><a href="#check-cpu-usage">Check CPU usage</a></li>
-<li><a href="#use-for">Use <code>for</code></a></li>
-</ul></li>
-<li><a href="#script">script</a>
-<ul>
-<li><a href="#basic-hello-world-script">Basic hello world script</a></li>
-<li><a href="#customized-script">Customized script</a></li>
-</ul></li>
-</ul></li>
+echo.'exiting program'
+</code></pre></li>
 </ul>
-</nav>
-    </div>
 
-</div>
 
     
     
@@ -1072,7 +1092,6 @@ echo aaa&gt;all.txt &amp; echo mark aaa &gt;&gt;all.txt &amp; echo mark bbb&gt;&
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

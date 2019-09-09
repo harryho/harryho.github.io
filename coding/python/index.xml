@@ -16,7 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/python/python-note-1/</guid>
-      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.  # list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
+      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.
+# list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
     </item>
     
     <item>
@@ -26,7 +27,8 @@
       
       <guid>/coding/python/python-note-2/</guid>
       <description>Closure &amp;amp; Decorator LEGB rules  Local, Enclosing, Gloable, Built-in  Local function  Useful for specialized, one-off functions Aid in code organization and readability Similar to lambdas, but more general May contain multiple expressions May contain statements  Closure  Closure maintain references to objects from earlier scopes LEGB does not apply when making new bindings Usage of nonlocal
- Example  def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
+ Example
+def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
     </item>
     
     <item>
@@ -75,7 +77,8 @@
       <guid>/coding/python/python-note-7/</guid>
       <description>Exception &amp;amp; Assertion  Avoid bad practices in Python exception handling. Always specify an exception type with except, but don&amp;rsquo;t be too general.
  Don&amp;rsquo;t Use Assertions for checking arguments EXamples
- lookup exception  def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError   unicode exception  def unicode_exception(): try: b&#39;\x81&#39;.</description>
+ lookup exception
+def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError  unicode exception</description>
     </item>
     
     <item>
@@ -87,6 +90,15 @@
       <description>Context managers context manager  context manager an object designed to be used in a with-statement
 with context-manager: body with context-manager: context-manager.begin() body context-manager.end() with context-manager: setup() body teardown() with context-manager: context-manager.begin() body context-manager.end() with context-manager: allocation() body deallocation() with context-manager: enter() body exit()  A context-manager ensures that resources are properly and automatically managed
  enter() prepares the manager for use exit() cleans it up  Context-manager Protocol</description>
+    </item>
+    
+    <item>
+      <title>Python Note 9</title>
+      <link>/coding/python/python-note-9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-9/</guid>
+      <description>ABC - Abstract Base Classes Abstract base classes complement duck-typing by providing a way to define interfaces when other techniques like hasattr() would be clumsy or subtly wrong (for example with magic methods). ABCs introduce virtual subclasses, which are classes that don’t inherit from a class but are still recognized by isinstance() and issubclass(); see the abc module documentation. Python comes with many built-in ABCs for data structures (in the collections module), numbers (in the numbers module), and streams (in the io module).</description>
     </item>
     
   </channel>

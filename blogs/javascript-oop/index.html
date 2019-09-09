@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:56 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>JavaScript and OOP :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -226,6 +211,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -288,6 +288,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -296,10 +303,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -582,18 +632,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>JavaScript and OOP</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>JavaScript and OOP</h1>
-        
+    
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -650,18 +709,17 @@ object {}
 <ul>
 <li><p>Object has properties and method. Object&rsquo;s method are the actions that can be performed on objects, they are one of most powerful feature for developers. Let&rsquo;s see how we can create object with properties and methods.</p></li>
 
-<li><p>Create three cars with basic object usage.</p></li>
-</ul>
+<li><p>Create three cars with basic object usage.</p>
 
 <pre><code class="language-javascript">
 var car1 = { color: 'red', make:'Toyota', model:'Sedan', getInfo: function (){
-        console.log( this );
+    console.log( this );
 }};
 var car2 = { color: 'black', make:'BMW', model:'Coupe', getInfo: function (){
-        console.log( this );
+    console.log( this );
 }};
 var car3 = { color: 'white', make:'Subaru', model:'SUV', getInfo:function (){
-        console.log( this );
+    console.log( this );
 }};
 car1.getInfo();
 car2.getInfo(); 
@@ -673,20 +731,18 @@ Object {color: &quot;red&quot;, make: &quot;Toyota&quot;, model: &quot;Sedan&quo
 Object {color: &quot;black&quot;, make: &quot;BMW&quot;, model: &quot;Coupe&quot;} 
 Object {color: &quot;white&quot;, make: &quot;Subaru&quot;, model: &quot;SUV&quot;}
 */
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.</li>
-</ul>
+<li><p>You will find the same method defined in every object. Can we make it better to just define the method once? The answer is Yes. Use an object constructor to create an object prototype. Any new object inherit the same propotype will have the same properties and methods.</p>
 
 <pre><code class="language-javascript">
 var Car = function(color, make, model, getInfo ) {
-    this.color='';
-    this.make='';
-    this.model='';
-    this.getInfo= function( time ){
-            console.log( this );
-    };
+this.color='';
+this.make='';
+this.model='';
+this.getInfo= function( time ){
+        console.log( this );
+};
 };
 
 var car1 = new Car('red','Toyota','Sedan');
@@ -695,23 +751,21 @@ var car3 = new Car('white','Subaru','SUV');
 car1.getInfo();
 car2.getInfo(); 
 car3.getInfo();
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>You will get same result as before. If you compare two blocks of code, you may think the second way has more code than the first one. Let&rsquo;s image if you need to create 20 objects and every object with 20 methods, then you totaly need to write 20 X 20 = 400 methods. Object&rsquo;s prototype is powerful, but we need to be careful when we want to use it, especially the <code>this</code> prototype. We need discuss this more in detail.</p></li>
 
-<li><p>Other sample of prototype</p></li>
-</ul>
+<li><p>Other sample of prototype</p>
 
 <pre><code class="language-javascript">var Car = function(color, make, model ) {
-    this.color='';
-    this.make='';
-    this.model='';
+this.color='';
+this.make='';
+this.model='';
 };
 Car.prototype = {        
-    getInfo : function( ){
-            console.log( this );
-    }
+getInfo : function( ){
+        console.log( this );
+}
 };
 var car1 = new Car('red','Toyota','Sedan');
 var car2 = new Car('black','BMW', 'Coupe');
@@ -719,10 +773,9 @@ var car3 = new Car('white','Subaru','SUV');
 car1.getInfo();
 car2.getInfo(); 
 car3.getInfo();
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.</li>
+<li><p>The last way to use prototype is kind of verbose. The second one is more concise and nice is most popular paradigm.</p></li>
 </ul>
 
 <h2 id="class-and-inheritance">Class and inheritance</h2>
@@ -1134,27 +1187,25 @@ This allows you to add new methods to a prototype which will be automatically ma
 <p>The module pattern makes use of one of the nicer features of JavaScript – closures – in order to give you some control of the privacy of your methods so that third party applications cannot access private data or override it.</p>
 
 <ul>
-<li>Simple closure<br />
-<br /></li>
-</ul>
+<li><p>Simple closure</p>
 
 <pre><code class="language-javascript">var closureObject = (function() {
-    var _privateProperty = 'private';
-    var _privateMethod = function () {
-        console.log( ' private method ');
-    };
-    return {
-        publicProperty: 'Public Property',
-        publicMethod: function() {
-            console.log( ' Call ', _privateMethod() , ' from public method ');
-        },
-        setPrivateProperty: function ( newValue ){
-            _privateProperty= newValue;
-        },
-        getPrivateProperty: function( ){
-            return _privateProperty;
-        }
+var _privateProperty = 'private';
+var _privateMethod = function () {
+    console.log( ' private method ');
+};
+return {
+    publicProperty: 'Public Property',
+    publicMethod: function() {
+        console.log( ' Call ', _privateMethod() , ' from public method ');
+    },
+    setPrivateProperty: function ( newValue ){
+        _privateProperty= newValue;
+    },
+    getPrivateProperty: function( ){
+        return _privateProperty;
     }
+}
 }());
 
 console.log(  closureObject.publicProperty );
@@ -1174,7 +1225,8 @@ undefined      //--&gt; privateProperty can not be accessed directly
 private               
 public            //--&gt; privateProperty can be updated by public method
 */
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p>From above sample code, you can the JavaScript can easily implement the encapsulation as OOP language. Closure is the base the module pattern, and module is the base of namespace. Maybe you will wonder why we need module and namespace,just closure is good enough for us control the API. If we take a second thought we will realize if some application has the same object called closureObject, both will crash at run time. As a simple solution, we can make a very long, different and ridiculous name to avoid the conflict, but it is not a nice solution. Then module turns out as a better way to solve this problem.</p>
 
@@ -1183,53 +1235,53 @@ public            //--&gt; privateProperty can be updated by public method
 <p>Module is not rock science. Actually it is quite easy to implement.</p>
 
 <ul>
-<li>Simple module sample</li>
-</ul>
+<li><p>Simple module sample</p>
 
 <pre><code class="language-javascript">var myModule = (function(undefined) {
-    var _privateProperty = 'private';
-    var _privateMethod = function () {
-        console.log( ' private method ');
-    };
-    return {
-        publicProperty: 'Public Property',
-        publicMethod: function() {
-            console.log( ' Call ', _privateMethod() , ' from public method ');
-        },
-        setPrivateProperty: function ( newValue ){
-            _privateProperty= newValue;
-        },
-        getPrivateProperty: function( ){
-            return _privateProperty;
-        }
+var _privateProperty = 'private';
+var _privateMethod = function () {
+    console.log( ' private method ');
+};
+return {
+    publicProperty: 'Public Property',
+    publicMethod: function() {
+        console.log( ' Call ', _privateMethod() , ' from public method ');
+    },
+    setPrivateProperty: function ( newValue ){
+        _privateProperty= newValue;
+    },
+    getPrivateProperty: function( ){
+        return _privateProperty;
     }
+}
 }());
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p>You may say &ldquo;What? closure is module.&rdquo; Yes, you can say that. The little difference is the auguements during auto initialization. By having an function argument undefined (the name actually does not matter) which you don&rsquo;t pass a parameter to, you could make sure you have a variable which really is undefined. This technique ensures that it will work as expected, in case it will be excluded to unintential amendment by other script.</p>
 
 <p>Once we create our module, we can simply extend the module with the same technique.</p>
 
 <ul>
-<li>Module&rsquo;s extension with override or new api</li>
-</ul>
+<li><p>Module&rsquo;s extension with override or new api</p>
 
 <pre><code class="language-javascript">var myModule = (function() {
-    ....
+....
 }());
 
 var extendModule = (function( m){
-     m.publicMethod = function ( newArgument ) { // overload publicMethod 
-          //   TODO
-     };
+ m.publicMethod = function ( newArgument ) { // overload publicMethod 
+      //   TODO
+ };
 
-     m.newApi = function () {  // 
-         // TODO
-     };
+ m.newApi = function () {  // 
+     // TODO
+ };
 
 }(myModule));
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="namespace">Namespace</h3>
 
@@ -1416,28 +1468,27 @@ Interface.ensureImplement = function(obj /*, interfaces */ ) {
 <p><strong>How to use this interface</strong></p>
 
 <ul>
-<li>Samples below show you how  the Interface can ensure the object implement multiple interfaces.</li>
-</ul>
+<li><p>Samples below show you how  the Interface can ensure the object implement multiple interfaces.</p>
 
 <pre><code class="language-javascript">// Sample 1 with only one interface
 
 var ILog = Interface('ILog', {
-    logInfo:function(){},
-    logWarning:function(){},
-    logError:function(){},
+logInfo:function(){},
+logWarning:function(){},
+logError:function(){},
 }); 
 
 
 var loggerA = {
-    logInfo:function(){},
-    logWarning:function(){},
-    logError:function(){},
+logInfo:function(){},
+logWarning:function(){},
+logError:function(){},
 };
 
 // loggerB does not implement all methods
 var loggerB = {
-    logInfo:function(){},
-    logWarning:function(){},
+logInfo:function(){},
+logWarning:function(){},
 };
 
 console.log(Interface.ensureImplement( loggerA, ILog));
@@ -1447,23 +1498,23 @@ console.log(Interface.ensureImplement( loggerB, ILog));
 output:
 true
 Uncaught Error: errorDetect: Class does not
- implement interface member ILog.logError()
+implement interface member ILog.logError()
 ...
 */
 
 // Sample 2 with 2 interfaces
 
 var Submarine = Interface('Submarine', {
-    operateUnderwater:function(){}
+operateUnderwater:function(){}
 }); 
 
 var Car = Interface('Car', {
-    operateOnRoad:function(){}
+operateOnRoad:function(){}
 }); 
 
 var SubmarineCar = {
-    operateUnderwater:function(){},
-    operateOnRoad:function(){},
+operateUnderwater:function(){},
+operateOnRoad:function(){},
 };
 
 console.log(Interface.ensureImplement( SubmarineCar, Submarine, Car ));
@@ -1472,39 +1523,9 @@ console.log(Interface.ensureImplement( SubmarineCar, Submarine, Car ));
 output:
 true
 */
-</code></pre>
-
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#what-is-javascript">What is JavaScript?</a></li>
-<li><a href="#what-is-oop">What is OOP?</a></li>
-<li><a href="#data-types">Data types</a></li>
-<li><a href="#object-and-prototype">Object and prototype</a></li>
-<li><a href="#class-and-inheritance">Class and inheritance</a>
-<ul>
-<li><a href="#object-based-inheritance">Object-based Inheritance</a></li>
-<li><a href="#classical-inheritance">Classical inheritance</a></li>
-<li><a href="#prototypal-inheritance">Prototypal inheritance</a></li>
-</ul></li>
-<li><a href="#module-and-namespace">Module and namespace</a>
-<ul>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#module">Module</a></li>
-<li><a href="#namespace">Namespace</a></li>
-</ul></li>
-<li><a href="#interfaces">Interfaces</a></li>
-</ul></li>
+</code></pre></li>
 </ul>
-</nav>
-    </div>
 
-</div>
 
     
     
@@ -1552,7 +1573,6 @@ true
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

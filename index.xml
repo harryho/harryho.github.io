@@ -6,10 +6,32 @@
     <description>Recent content on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jan 2018 14:59:31 +1100</lastBuildDate>
+    <lastBuildDate>Thu, 20 Sep 2018 14:59:31 +1100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dual Boot Windows 10 &amp; Ubuntu 18</title>
+      <link>/os/dual-boot-win10-ubuntu18/</link>
+      <pubDate>Thu, 20 Sep 2018 14:59:31 +1100</pubDate>
+      
+      <guid>/os/dual-boot-win10-ubuntu18/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu Desktop 18 LTS note</title>
+      <link>/os/ubuntu-desktop-18/</link>
+      <pubDate>Wed, 04 Jul 2018 14:59:31 +1100</pubDate>
+      
+      <guid>/os/ubuntu-desktop-18/</guid>
+      <description>Prelude  This article is mainly to record the stuff to do post Ubuntu Desktop 18.04 Installation.
+ Purpose All actions post installation is to make the Ubuntu Desktop a wonderful toolkit for developer.
+Prerequisite  Install all essentials
+sudo apt install -y git curl sudo apt-get install -y apt-transport-https ca-certificates gnupg-agent sudo apt install -y software-properties-common   Install &amp;amp; Setup Zsh  Install Zsh
+sudo apt install -y zsh  Setup Zsh</description>
+    </item>
     
     <item>
       <title>Raspberry Pi setup</title>
@@ -285,7 +307,8 @@ Features  This starter was built on the zend framework 2.x. This starter uses my
       
       <guid>/frameworks/python-django/</guid>
       <description>Install Python &amp;amp; pip &amp;amp; virtualenv  Windows: Please find in from Home Page Ubuntu: Please find it from Ubuntu setup Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip. You can simply use pip or pip3 install any package you need.  Install Django Windows
- Install django  create a folder virtualenvs within the location of python 3 create a new virtualenv named django18 Activate the new virtual env Install Django 1.</description>
+ Install django
+ create a folder virtualenvs within the location of python 3 create a new virtualenv named django18 Activate the new virtual env Install Django 1.</description>
     </item>
     
     <item>
@@ -470,6 +493,17 @@ Install Cassandra on Ubuntu Install Java(JRE) 8+ sudo add-apt-repository ppa:web
     </item>
     
     <item>
+      <title>Cron Job Note - 1</title>
+      <link>/coding/shell/cron_job/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/shell/cron_job/</guid>
+      <description>Introduction Cron job is one of most common techniques used on every Unix / Linux.
+Common Use Cases House keeping - Clean up the backup  Run every night to remove the daily backup tar ball Assumption:
+ The script file named housekeeping.sh. The script sits inside folder bin which is under your user account. All backup files have the .tar as extension. The script will check the backup tar balls within the folder bacup, which is under your user account as well.</description>
+    </item>
+    
+    <item>
       <title>Debug PHP with Free IDE</title>
       <link>/hacks/php-debug/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -498,7 +532,7 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       <guid>/coding/java/java-note-2/</guid>
       <description>Thread Join  The join method allows one thread to wait for the completion of another. join responds to an interrupt by exiting with an InterruptedException.
  Demo code of thread join
-  public class JoinDemo implements Runnable { private Random rand = new Random(System.currentTimeMillis()); public void run() { //simulate some CPU expensive task for (int i = 0; i &amp;lt; 100000000; i++) { rand.nextInt(); } System.out.println(&amp;quot;[&amp;quot; + Thread.</description>
+public class JoinDemo implements Runnable { private Random rand = new Random(System.currentTimeMillis()); public void run() { //simulate some CPU expensive task for (int i = 0; i &amp;lt; 100000000; i++) { rand.nextInt(); } System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] finished .</description>
     </item>
     
     <item>
@@ -550,12 +584,52 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
     </item>
     
     <item>
+      <title>JS &amp; ES Note - 1</title>
+      <link>/coding/javascript/js-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/javascript/js-note-1/</guid>
+      <description>The most confused keyword and feature I am sure you know I am talking about. Yes, this is not only a powerful feature, but also often misinterpreted keyword.
+In JavaScript, we also have this concept inside a Function constructor when it is invoked using the “new” keyword, however it is not the only rule and “this” can often refer to a different object from a different execution context.
+this can be anything  this represents different things.</description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 1</title>
+      <link>/coding/sql/mysql-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-1/</guid>
+      <description>Create a new database -- Drop the old one DROP SCHEMA IF EXISTS new_dbu -- Create a new db CREATE DATABASE new_db CHARACTER SET utf8 COLLATE utf8_general_ci;  Create a table DROP TABLE IF EXISTS new_table; CREATE TABLE new_table ( id int NOT NULL AUTO_INCREMENT, name varchar(50), title varchar(50), email varchar(250), created_date datetime, modified_date datetime, PRIMARY KEY (id) );  Query  JOIN and INNER JOIN
+SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 2</title>
+      <link>/coding/sql/mysql-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-2/</guid>
+      <description> Function DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT BEGIN DECLARE vv_number VARCHAR(500); SELECT REPLACE(in_value, &#39;+&#39;,&#39;&#39;) INTO vv_number; RETURN CASE WHEN LEFT(vv_number, 2) IN (&#39;02&#39;,&#39;03&#39;,&#39;07&#39;,&#39;08&#39;) THEN LENGTH(vv_number) = 10 ELSE 0 END; END $$ DELIMITER ;  Stored proc sample DROP PROCEDURE IF EXISTS stored_proc_1; DELIMITER $ CREATE PROCEDURE stored_proc_1 ( ) BEGIN SELECT * FROM table_1; END DELIMITER ;  </description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 3</title>
+      <link>/coding/sql/mysql-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-3/</guid>
+      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  </description>
+    </item>
+    
+    <item>
       <title>Powershell Note - 1</title>
       <link>/coding/shell/ps-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/shell/ps-note-1/</guid>
-      <description>Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable   PS C:\&amp;gt;$psversiontable ## You might see sth below Name Value ---- ----- PSVersion 4.0 WSManStackVersion 3.0 SerializationVersion 1.1.0.1 CLRVersion 4.0.30319.42000 BuildVersion 6.</description>
+      <description>Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable
+PS C:\&amp;gt;$psversiontable ## You might see sth below Name Value ---- ----- PSVersion 4.0 WSManStackVersion 3.0 SerializationVersion 1.1.0.1 CLRVersion 4.0.30319.42000 BuildVersion 6.3.9600.18773 PSCompatibleVersions {1.</description>
     </item>
     
     <item>
@@ -564,7 +638,8 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/python/python-note-1/</guid>
-      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.  # list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
+      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.
+# list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
     </item>
     
     <item>
@@ -574,7 +649,8 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       
       <guid>/coding/python/python-note-2/</guid>
       <description>Closure &amp;amp; Decorator LEGB rules  Local, Enclosing, Gloable, Built-in  Local function  Useful for specialized, one-off functions Aid in code organization and readability Similar to lambdas, but more general May contain multiple expressions May contain statements  Closure  Closure maintain references to objects from earlier scopes LEGB does not apply when making new bindings Usage of nonlocal
- Example  def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
+ Example
+def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
     </item>
     
     <item>
@@ -623,7 +699,8 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       <guid>/coding/python/python-note-7/</guid>
       <description>Exception &amp;amp; Assertion  Avoid bad practices in Python exception handling. Always specify an exception type with except, but don&amp;rsquo;t be too general.
  Don&amp;rsquo;t Use Assertions for checking arguments EXamples
- lookup exception  def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError   unicode exception  def unicode_exception(): try: b&#39;\x81&#39;.</description>
+ lookup exception
+def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError  unicode exception</description>
     </item>
     
     <item>
@@ -635,6 +712,15 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       <description>Context managers context manager  context manager an object designed to be used in a with-statement
 with context-manager: body with context-manager: context-manager.begin() body context-manager.end() with context-manager: setup() body teardown() with context-manager: context-manager.begin() body context-manager.end() with context-manager: allocation() body deallocation() with context-manager: enter() body exit()  A context-manager ensures that resources are properly and automatically managed
  enter() prepares the manager for use exit() cleans it up  Context-manager Protocol</description>
+    </item>
+    
+    <item>
+      <title>Python Note 9</title>
+      <link>/coding/python/python-note-9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-9/</guid>
+      <description>ABC - Abstract Base Classes Abstract base classes complement duck-typing by providing a way to define interfaces when other techniques like hasattr() would be clumsy or subtly wrong (for example with magic methods). ABCs introduce virtual subclasses, which are classes that don’t inherit from a class but are still recognized by isinstance() and issubclass(); see the abc module documentation. Python comes with many built-in ABCs for data structures (in the collections module), numbers (in the numbers module), and streams (in the io module).</description>
     </item>
     
     <item>

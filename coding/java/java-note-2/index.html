@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:57 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>Java Note - 2: Concurrency :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -227,6 +212,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -289,6 +289,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -297,10 +304,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -477,6 +520,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -573,10 +623,14 @@
       <option value="/coding/java/java-note-4/" > Java Note - 4: Date Time </option>
       <option value="/coding/java/java-note-5/" > Java Note - 5: Lambda </option>
   
+    <option value="/coding/javascript/" >
+   JavaScript</option>
     <option value="/coding/python/" >
    Python</option>
     <option value="/coding/shell/" >
    Shell</option>
+    <option value="/coding/sql/" >
+   SQL</option>
   
     <option value="/frameworks/" >
    Frameworks</option>
@@ -592,18 +646,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>Java Note - 2: Concurrency</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>Java Note - 2: Concurrency</h1>
-        
+    
 
 <h2 id="thread">Thread</h2>
 
@@ -612,35 +675,35 @@
 <ul>
 <li><p>The join method allows one thread to wait for the completion of another. join responds to an interrupt by exiting with an InterruptedException.</p></li>
 
-<li><p>Demo code of thread join</p></li>
-</ul>
+<li><p>Demo code of thread join</p>
 
 <pre><code class="language-java">public class JoinDemo implements Runnable {
-    private Random rand = new Random(System.currentTimeMillis());
+private Random rand = new Random(System.currentTimeMillis());
 
-    public void run() {
-        //simulate some CPU expensive task
-        for (int i = 0; i &lt; 100000000; i++) {
-            rand.nextInt();
-        }
-        System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] finished  .&quot;);
+public void run() {
+    //simulate some CPU expensive task
+    for (int i = 0; i &lt; 100000000; i++) {
+        rand.nextInt();
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i] = new Thread(new JoinDemo(), &quot;joinThread &quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i].join();
-        }
-        System.out.println(&quot;[&quot; 
-            + Thread.currentThread().getName() 
-            + &quot;] All  -threads have finished.&quot;);
-    }
+    System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] finished  .&quot;);
 }
-</code></pre>
+
+public static void main(String[] args) throws InterruptedException {
+    Thread[] threads = new Thread[5];
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i] = new Thread(new JoinDemo(), &quot;joinThread &quot; + i);
+        threads[i].start();
+    }
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i].join();
+    }
+    System.out.println(&quot;[&quot; 
+        + Thread.currentThread().getName() 
+        + &quot;] All  -threads have finished.&quot;);
+}
+}
+</code></pre></li>
+</ul>
 
 <h3 id="common-problem-of-multithred-program">Common problem of multithred program</h3>
 
@@ -651,34 +714,33 @@ Although the behavior of the scheduler is completely deterministic, it is hard t
 at a given point in time. This makes access to shared resources critical as it is hard to predict which thread will be the first thread
 that tries to access it.</p></li>
 
-<li><p>Sample code without sync can show you what the problem is. If you run the following sample code, you may get different output from mine here. It is also common Thread safe issue for multiple threads program.</p></li>
-</ul>
+<li><p>Sample code without sync can show you what the problem is. If you run the following sample code, you may get different output from mine here. It is also common Thread safe issue for multiple threads program.</p>
 
 <pre><code class="language-java">public class NotSyncCounter implements Runnable {
-    private static int counter = 0;
+private static int counter = 0;
 
-    public void run() {
-        while (counter &lt; 10) {
-            System.out.println(&quot;[&quot; 
-                + Thread.currentThread().getName() 
-                + &quot;]  -    before: &quot; + counter);
-            counter++;
-            System.out.println(&quot;[&quot; 
-                + Thread.currentThread().getName() 
-                + &quot;]  -    after: &quot; + counter);
-        }
+public void run() {
+    while (counter &lt; 10) {
+        System.out.println(&quot;[&quot; 
+            + Thread.currentThread().getName() 
+            + &quot;]  -    before: &quot; + counter);
+        counter++;
+        System.out.println(&quot;[&quot; 
+            + Thread.currentThread().getName() 
+            + &quot;]  -    after: &quot; + counter);
     }
+}
 
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i] = new Thread(new NotSyncCounter(), &quot;  -    thread-&quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i].join();
-        }
+public static void main(String[] args) throws InterruptedException {
+    Thread[] threads = new Thread[5];
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i] = new Thread(new NotSyncCounter(), &quot;  -    thread-&quot; + i);
+        threads[i].start();
     }
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i].join();
+    }
+}
 }
 
 
@@ -705,45 +767,44 @@ that tries to access it.</p></li>
 // [  -    thread-1]  -    after: 8
 // [  -    thread-2]  -    before: 7
 // [  -    thread-2]  -    after: 11
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>To solve the problme, there is <code>synchronized</code> keyword in Java available for us to handle the multiple threads program.</p></li>
 
-<li><p>Demo code of <code>synchronized</code> to solve the problem on above sample.</p></li>
-</ul>
+<li><p>Demo code of <code>synchronized</code> to solve the problem on above sample.</p>
 
 <pre><code class="language-java">
 public class SyncCounter implements Runnable {
-    private static int counter = 0;
+private static int counter = 0;
 
-    public void run() {
-        while (counter &lt; 10) {
-            synchronized (SyncCounter.class) {
-                System.out.println(&quot;[&quot; 
-                    + Thread.currentThread().getName() 
-                    + &quot;] - before: &quot; + counter);
-                counter++;
-                System.out.println(&quot;[&quot; 
-                    + Thread.currentThread().getName() 
-                    + &quot;] - after: &quot; + counter);
-            }
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[5];
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i] = new Thread(new SyncCounter(), &quot;  -    thread-&quot; + i);
-            threads[i].start();
-        }
-        for (int i = 0; i &lt; threads.length; i++) {
-            threads[i].join();
+public void run() {
+    while (counter &lt; 10) {
+        synchronized (SyncCounter.class) {
+            System.out.println(&quot;[&quot; 
+                + Thread.currentThread().getName() 
+                + &quot;] - before: &quot; + counter);
+            counter++;
+            System.out.println(&quot;[&quot; 
+                + Thread.currentThread().getName() 
+                + &quot;] - after: &quot; + counter);
         }
     }
 }
 
-</code></pre>
+public static void main(String[] args) throws InterruptedException {
+    Thread[] threads = new Thread[5];
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i] = new Thread(new SyncCounter(), &quot;  -    thread-&quot; + i);
+        threads[i].start();
+    }
+    for (int i = 0; i &lt; threads.length; i++) {
+        threads[i].join();
+    }
+}
+}
+
+</code></pre></li>
+</ul>
 
 <h2 id="deadlock">Deadlock</h2>
 
@@ -754,65 +815,65 @@ public class SyncCounter implements Runnable {
 * Circular wait: During runtime a constellation occurs in which two (or more) threads are each waiting on the other thread to free a resource that it has locked.</p>
 
 <ul>
-<li>Monitor with wait and notify</li>
-</ul>
+<li><p>Monitor with wait and notify</p>
 
 <pre><code class="language-java">
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SyncWaitNotfiyDemo {
-    private static final Queue &lt;Integer&gt;queue = new ConcurrentLinkedQueue&lt;Integer&gt;();
+private static final Queue &lt;Integer&gt;queue = new ConcurrentLinkedQueue&lt;Integer&gt;();
 
-    public Integer getNextInt() {
-        Integer retVal = null;
-        synchronized (queue) {
-            try {
-                while (queue.isEmpty()) {
-                    queue.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+public Integer getNextInt() {
+    Integer retVal = null;
+    synchronized (queue) {
+        try {
+            while (queue.isEmpty()) {
+                queue.wait();
             }
-            retVal = queue.poll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        return retVal;
+        retVal = queue.poll();
     }
+    return retVal;
+}
 
-    public synchronized void putInt(Integer value) {
-        synchronized (queue) {
-            queue.add(value);
-            queue.notify();
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        final SyncWaitNotfiyDemo queue = new SyncWaitNotfiyDemo();
-
-        Thread thread1 = new Thread(new Runnable() {
-            public void run() {
-                for (int i = 0; i &lt; 10; i++) {
-                    queue.putInt(i);
-                }
-            }
-        });
-
-        Thread thread2 = new Thread(new Runnable() {
-            public void run() {
-                for (int i = 0; i &lt; 10; i++) {
-                    Integer nextInt = queue.getNextInt();
-                    System.out.println(&quot;Next int: &quot; + nextInt);
-                }
-            }
-        });
-
-        thread1.start();
-        thread2.start();
-        thread1.join();
-        thread2.join();
+public synchronized void putInt(Integer value) {
+    synchronized (queue) {
+        queue.add(value);
+        queue.notify();
     }
 }
-</code></pre>
+
+public static void main(String[] args) throws InterruptedException {
+    final SyncWaitNotfiyDemo queue = new SyncWaitNotfiyDemo();
+
+    Thread thread1 = new Thread(new Runnable() {
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                queue.putInt(i);
+            }
+        }
+    });
+
+    Thread thread2 = new Thread(new Runnable() {
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                Integer nextInt = queue.getNextInt();
+                System.out.println(&quot;Next int: &quot; + nextInt);
+            }
+        }
+    });
+
+    thread1.start();
+    thread2.start();
+    thread1.join();
+    thread2.join();
+}
+}
+</code></pre></li>
+</ul>
 
 <h2 id="useful-concurrent-collections">Useful concurrent collections</h2>
 
@@ -847,51 +908,50 @@ public class SyncWaitNotfiyDemo {
 <h2 id="counter-semaphore">Counter Semaphore</h2>
 
 <ul>
-<li>Counting Semaphore in Java maintains specified number of pass or permits, In order to access a shared resource, Current Thread must acquire a permit. If permit is already exhausted by other thread than it can wait until a permit is available due to release of permit from different thread. This concurrency utility can be very useful to implement producer consumer design pattern or implement bounded pool or resources like Thread Pool, DB Connection pool etc.</li>
-</ul>
+<li><p>Counting Semaphore in Java maintains specified number of pass or permits, In order to access a shared resource, Current Thread must acquire a permit. If permit is already exhausted by other thread than it can wait until a permit is available due to release of permit from different thread. This concurrency utility can be very useful to implement producer consumer design pattern or implement bounded pool or resources like Thread Pool, DB Connection pool etc.</p>
 
 <pre><code class="language-java">
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreDemo {
 
-    Semaphore binary = new Semaphore(1);
+Semaphore binary = new Semaphore(1);
   
-    public static void main(String args[]) {
-        final SemaphoreDemo test = new SemaphoreDemo();
-        new Thread(){
-            @Override
-            public void run(){
-              test.mutualExclusion(); 
-            }
-        }.start();
-      
-        new Thread(){
-            @Override
-            public void run(){
-              test.mutualExclusion(); 
-            }
-        }.start();
-      
-    }
-  
-    private void mutualExclusion() {
-        try {
-            binary.acquire();
-
-            //mutual exclusive region
-            System.out.println(Thread.currentThread().getName() 
-                + &quot; inside mutual exclusive region&quot;);
-            Thread.sleep(1000);
-
-        } catch (InterruptedException i.e.) {
-            ie.printStackTrace();
-        } finally {
-            binary.release();
-            System.out.println(Thread.currentThread().getName() 
-                + &quot; outside of mutual exclusive region&quot;);
+public static void main(String args[]) {
+    final SemaphoreDemo test = new SemaphoreDemo();
+    new Thread(){
+        @Override
+        public void run(){
+          test.mutualExclusion(); 
         }
-    } 
+    }.start();
+      
+    new Thread(){
+        @Override
+        public void run(){
+          test.mutualExclusion(); 
+        }
+    }.start();
+      
+}
+  
+private void mutualExclusion() {
+    try {
+        binary.acquire();
+
+        //mutual exclusive region
+        System.out.println(Thread.currentThread().getName() 
+            + &quot; inside mutual exclusive region&quot;);
+        Thread.sleep(1000);
+
+    } catch (InterruptedException i.e.) {
+        ie.printStackTrace();
+    } finally {
+        binary.release();
+        System.out.println(Thread.currentThread().getName() 
+            + &quot; outside of mutual exclusive region&quot;);
+    }
+} 
   
 }
 
@@ -901,7 +961,8 @@ public class SemaphoreDemo {
 // Thread-1 inside mutual exclusive region
 // Thread-1 outside of mutual exclusive region
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="countdownlatch">CountDownLatch</h2>
 
@@ -910,8 +971,7 @@ public class SemaphoreDemo {
 
 <li><p>The difficulty to use it properly is where to use <code>CountDownLatch</code>. First, let us figour out how <code>CountDownLatch</code> works. usaullly main thread of application,  which calls CountDownLatch.await() will wait until count reaches zero or its interrupted by another Thread. All other thread are required to do count down by calling CountDownLatch.countDown() once they are completed. One disadvantage of <code>CountDownLatch</code> is not reusable, once its count reaches zero.</p></li>
 
-<li><p>Sample program requires 3 services namely CacheService, AlertService  and ValidationService  to be started and ready before application can handle any request.</p></li>
-</ul>
+<li><p>Sample program requires 3 services namely CacheService, AlertService  and ValidationService  to be started and ready before application can handle any request.</p>
 
 <pre><code class="language-java">import java.util.Date;
 import java.util.concurrent.CountDownLatch;
@@ -920,67 +980,67 @@ import java.util.logging.Logger;
 
 public class CountDownLatchDemo {
 
-    public static void main(String args[]) {
-       final CountDownLatch latch = new CountDownLatch(3);
-       Thread cacheService = new Thread(new Service(&quot;CacheService&quot;, 1000, latch));
-       Thread alertService = new Thread(new Service(&quot;AlertService&quot;, 1000, latch));
-       Thread validationService = new Thread(new Service(&quot;ValidationService&quot;, 1000, latch));
+public static void main(String args[]) {
+   final CountDownLatch latch = new CountDownLatch(3);
+   Thread cacheService = new Thread(new Service(&quot;CacheService&quot;, 1000, latch));
+   Thread alertService = new Thread(new Service(&quot;AlertService&quot;, 1000, latch));
+   Thread validationService = new Thread(new Service(&quot;ValidationService&quot;, 1000, latch));
       
-       cacheService.start(); //separate thread will initialize CacheService
-       alertService.start(); //another thread for AlertService initialization
-       validationService.start();
+   cacheService.start(); //separate thread will initialize CacheService
+   alertService.start(); //another thread for AlertService initialization
+   validationService.start();
       
       
-       //count is 3 since we have 3 Threads (Services)
+   //count is 3 since we have 3 Threads (Services)
       
-       try{
-            latch.await();  //main thread is waiting on CountDownLatch to finish
-            System.out.println(&quot;All services are up, Application is starting now&quot;);
-       }catch(InterruptedException ie){
-           ie.printStackTrace();
-       }
+   try{
+        latch.await();  //main thread is waiting on CountDownLatch to finish
+        System.out.println(&quot;All services are up, Application is starting now&quot;);
+   }catch(InterruptedException ie){
+       ie.printStackTrace();
+   }
       
-    }
+}
   
 }
 
 /**
- * Service class which will be executed by Thread using CountDownLatch synchronizer.
- */
+* Service class which will be executed by Thread using CountDownLatch synchronizer.
+*/
 class Service implements Runnable{
-    private final String name;
-    private final int timeToStart;
-    private final CountDownLatch latch;
+private final String name;
+private final int timeToStart;
+private final CountDownLatch latch;
   
-    public Service(String name, int timeToStart, CountDownLatch latch){
-        this.name = name;
-        this.timeToStart = timeToStart;
-        this.latch = latch;
+public Service(String name, int timeToStart, CountDownLatch latch){
+    this.name = name;
+    this.timeToStart = timeToStart;
+    this.latch = latch;
+}
+  
+@Override
+public void run() {
+    try {
+        Thread.sleep(timeToStart);
+    } catch (InterruptedException ex) {
+        Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
     }
-  
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(timeToStart);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println( name + &quot; is Up&quot;);
-        latch.countDown(); //reduce count of CountDownLatch by 1
-    }  
+    System.out.println( name + &quot; is Up&quot;);
+    latch.countDown(); //reduce count of CountDownLatch by 1
+}  
 }
 
 
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="cylicbarrier">CylicBarrier</h2>
 
 <ul>
 <li><p><code>CyclicBarrier</code> is similar to <code>CountDownLatch</code> which we have seen in the last article  What is <code>CountDownLatch</code> in Java and allows multiple threads to wait for each other (barrier) before proceeding. The difference between <code>CountDownLatch</code> and <code>CyclicBarrier</code> is an also very popular multi-threading interview question in Java. <code>CyclicBarrier</code> is a natural requirement for a concurrent program because it can be used to perform final part of the task once individual tasks  are completed.</p></li>
 
-<li><p>The demo of <code>CyclicBarrier</code> on which we initialize <code>CyclicBarrier</code> with 3 parties, means in order to cross barrier, 3 thread needs to call await() method. each thread calls await method in short duration but they don&rsquo;t proceed until all 3 threads reached the barrier, once all thread reach the barrier, barrier gets broker and each thread started their execution from that point.</p></li>
-</ul>
+<li><p>The demo of <code>CyclicBarrier</code> on which we initialize <code>CyclicBarrier</code> with 3 parties, means in order to cross barrier, 3 thread needs to call await() method. each thread calls await method in short duration but they don&rsquo;t proceed until all 3 threads reached the barrier, once all thread reach the barrier, barrier gets broker and each thread started their execution from that point.</p>
 
 <pre><code class="language-java">import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.`CyclicBarrier`;
@@ -989,50 +1049,50 @@ import java.util.logging.Logger;
 
 public class CyclicBarrierDemo {
 
-    //Runnable task for each thread
-    private static class Task implements Runnable {
+//Runnable task for each thread
+private static class Task implements Runnable {
 
-        private CyclicBarrier barrier;
+    private CyclicBarrier barrier;
 
-        public Task(CyclicBarrier barrier) {
-            this.barrier = barrier;
+    public Task(CyclicBarrier barrier) {
+        this.barrier = barrier;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(Thread.currentThread().getName() + &quot; is waiting on barrier&quot;);
+            barrier.await();
+            System.out.println(Thread.currentThread().getName() + &quot; has crossed the barrier&quot;);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BrokenBarrierException ex) {
+            Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+}
 
+public static void main(String args[]) {
+
+    //creating CyclicBarrier with 3 parties i.e. 3 Threads needs to call await()
+    final CyclicBarrier cb = new CyclicBarrier(3, new Runnable(){
         @Override
-        public void run() {
-            try {
-                System.out.println(Thread.currentThread().getName() + &quot; is waiting on barrier&quot;);
-                barrier.await();
-                System.out.println(Thread.currentThread().getName() + &quot; has crossed the barrier&quot;);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BrokenBarrierException ex) {
-                Logger.getLogger(CyclicBarrierDemo.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        public void run(){
+            //This task will be executed once all thread reaches barrier
+            System.out.println(&quot;All parties are arrived at barrier, lets play&quot;);
         }
-    }
+    });
 
-    public static void main(String args[]) {
+    //starting each of thread
+    Thread t1 = new Thread(new Task(cb), &quot;Thread 1&quot;);
+    Thread t2 = new Thread(new Task(cb), &quot;Thread 2&quot;);
+    Thread t3 = new Thread(new Task(cb), &quot;Thread 3&quot;);
 
-        //creating CyclicBarrier with 3 parties i.e. 3 Threads needs to call await()
-        final CyclicBarrier cb = new CyclicBarrier(3, new Runnable(){
-            @Override
-            public void run(){
-                //This task will be executed once all thread reaches barrier
-                System.out.println(&quot;All parties are arrived at barrier, lets play&quot;);
-            }
-        });
-
-        //starting each of thread
-        Thread t1 = new Thread(new Task(cb), &quot;Thread 1&quot;);
-        Thread t2 = new Thread(new Task(cb), &quot;Thread 2&quot;);
-        Thread t3 = new Thread(new Task(cb), &quot;Thread 3&quot;);
-
-        t1.start();
-        t2.start();
-        t3.start();
+    t1.start();
+    t2.start();
+    t3.start();
       
-    }
+}
 }
 
 // Output:
@@ -1044,7 +1104,8 @@ public class CyclicBarrierDemo {
 // Thread 1 has crossed the barrier
 // Thread 2 has crossed the barrier
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="producer-consumer-pattern">Producer / Consumer pattern</h2>
 
@@ -1052,8 +1113,7 @@ public class CyclicBarrierDemo {
 <li><p>Producer Consumer Design pattern is a classic concurrency or threading pattern which reduces coupling between
 Producer and Consumer by separating Identification of work with Execution of Work. In producer consumer design pattern a shared queue is used to control the flow and this separation allows you to code producer and consumer separately.</p></li>
 
-<li><p>It is everywhere in real life and depict coordination and collaboration. Like one person is preparing food (Producer) while other one is serving food (Consumer), both will use shared table for putting food plates and taking food plates. Producer which is the person preparing food will wait if table is full and Consumer (Person who is serving food) will wait if table is empty. table is a shared object here. On Java library Executor framework itself implement Producer Consumer design pattern be separating responsibility of addition and execution of task.</p></li>
-</ul>
+<li><p>It is everywhere in real life and depict coordination and collaboration. Like one person is preparing food (Producer) while other one is serving food (Consumer), both will use shared table for putting food plates and taking food plates. Producer which is the person preparing food will wait if table is full and Consumer (Person who is serving food) will wait if table is empty. table is a shared object here. On Java library Executor framework itself implement Producer Consumer design pattern be separating responsibility of addition and execution of task.</p>
 
 <pre><code class="language-java">import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -1062,64 +1122,64 @@ import java.util.logging.Logger;
 
 public class ProducerConsumerPattern {
 
-    public static void main(String args[]){
+public static void main(String args[]){
   
-     //Creating shared object
-     BlockingQueue sharedQueue = new LinkedBlockingQueue();
+ //Creating shared object
+ BlockingQueue sharedQueue = new LinkedBlockingQueue();
  
-     //Creating Producer and Consumer Thread
-     Thread prodThread = new Thread(new Producer(sharedQueue));
-     Thread consThread = new Thread(new Consumer(sharedQueue));
+ //Creating Producer and Consumer Thread
+ Thread prodThread = new Thread(new Producer(sharedQueue));
+ Thread consThread = new Thread(new Consumer(sharedQueue));
 
-     //Starting producer and Consumer thread
-     prodThread.start();
-     consThread.start();
-    }
+ //Starting producer and Consumer thread
+ prodThread.start();
+ consThread.start();
+}
  
 }
 
 //Producer Class in java
 class Producer implements Runnable {
 
-    private final BlockingQueue sharedQueue;
+private final BlockingQueue sharedQueue;
 
-    public Producer(BlockingQueue sharedQueue) {
-        this.sharedQueue = sharedQueue;
-    }
+public Producer(BlockingQueue sharedQueue) {
+    this.sharedQueue = sharedQueue;
+}
 
-    @Override
-    public void run() {
-        for(int i=0; i&lt;10; i++){
-            try {
-                System.out.println(&quot;Produced: &quot; + i);
-                sharedQueue.put(i);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
-            }
+@Override
+public void run() {
+    for(int i=0; i&lt;10; i++){
+        try {
+            System.out.println(&quot;Produced: &quot; + i);
+            sharedQueue.put(i);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+}
 
 }
 
 //Consumer Class in Java
 class Consumer implements Runnable{
 
-    private final BlockingQueue sharedQueue;
+private final BlockingQueue sharedQueue;
 
-    public Consumer (BlockingQueue sharedQueue) {
-        this.sharedQueue = sharedQueue;
-    }
+public Consumer (BlockingQueue sharedQueue) {
+    this.sharedQueue = sharedQueue;
+}
   
-    @Override
-    public void run() {
-        while(true){
-            try {
-                System.out.println(&quot;Consumed: &quot;+ sharedQueue.take());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
-            }
+@Override
+public void run() {
+    while(true){
+        try {
+            System.out.println(&quot;Consumed: &quot;+ sharedQueue.take());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+}
   
   
 }
@@ -1146,43 +1206,43 @@ class Consumer implements Runnable{
 // Consumed: 8
 // Consumed: 9
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="executor-thread-pool">Executor &ndash; Thread Pool</h2>
 
 <ul>
 <li><p>Java 1.5 introduced Thread pool in Java in the form of Executor framework, which allows Java programmer to decouple submission of a task to execution of the task. It also introduced a full feature built-in Thread Pool framework commonly known as Executor framework. Executor framework also provides different kind of Thread Pool e.g. <code>SingleThreadExecutor</code> which creates just one worker thread or <code>CachedThreadPool</code> which creates worker threads as and when necessary.</p></li>
 
-<li><p>Demo of thread pool</p></li>
-</ul>
+<li><p>Demo of thread pool</p>
 
 <pre><code class="language-java">import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ThreadPoolDemo {
 
-    public static void main(String args[]) {
-       ExecutorService service = Executors.newFixedThreadPool(10);
-       for (int i =0; i&lt;100; i++){
-           service.submit(new Task(i));
-       }
-    }
+public static void main(String args[]) {
+   ExecutorService service = Executors.newFixedThreadPool(10);
+   for (int i =0; i&lt;100; i++){
+       service.submit(new Task(i));
+   }
+}
   
 }
 
 final class Task implements Runnable{
-    private int taskId;
+private int taskId;
   
-    public Task(int id){
-        this.taskId = id;
-    }
+public Task(int id){
+    this.taskId = id;
+}
   
-    @Override
-    public void run() {
-        System.out.println(&quot;Task ID : &quot; 
-            + this.taskId +&quot; performed by &quot; 
-            + Thread.currentThread().getName());
-    }  
+@Override
+public void run() {
+    System.out.println(&quot;Task ID : &quot; 
+        + this.taskId +&quot; performed by &quot; 
+        + Thread.currentThread().getName());
+}  
 }
 
 // Output:
@@ -1195,7 +1255,8 @@ final class Task implements Runnable{
 // Task ID : 3 performed by pool-1-thread-4
 // Task ID : 1 performed by pool-1-thread-2
 // ...
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="submit-runnable">Submit(Runnable)</h2>
 
@@ -1284,8 +1345,7 @@ public class SubmitInvokeDemo {
 <h2 id="join-and-fork-with-executor-service">Join and Fork with Executor Service</h2>
 
 <ul>
-<li>The demo code submit() our tasks to the ExecutorService and then use the returned instance of <code>Future</code> to wait() for the result. The normal <code>ExecutorService</code> where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.</li>
-</ul>
+<li><p>The demo code submit() our tasks to the ExecutorService and then use the returned instance of <code>Future</code> to wait() for the result. The normal <code>ExecutorService</code> where you would have to block the current thread while waiting for a result. If we would only provide as many threads to the pool as we have CPUs available, the program would run out of resources and hang indefinitely.</p>
 
 <pre><code class="language-java">import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -1295,68 +1355,68 @@ import java.util.concurrent.ExecutionException;
 import java.util.Random;
 
 public class FindMinTask implements Callable&lt;Integer&gt; {
-    private int[] numbers;
-    private int startIndex;
-    private int endIndex;
-    private ExecutorService executorService;
+private int[] numbers;
+private int startIndex;
+private int endIndex;
+private ExecutorService executorService;
 
-    public FindMinTask(
-        ExecutorService executorService, 
-        int[] numbers, int startIndex, int endIndex) {
+public FindMinTask(
+    ExecutorService executorService, 
+    int[] numbers, int startIndex, int endIndex) {
 
-        this.executorService = executorService;
-        this.numbers = numbers;
-        this.startIndex = startIndex;
-        this.endIndex = endIndex;
-    }
+    this.executorService = executorService;
+    this.numbers = numbers;
+    this.startIndex = startIndex;
+    this.endIndex = endIndex;
+}
 
-    public Integer call() throws Exception {
+public Integer call() throws Exception {
 
-        int sliceLength = (endIndex - startIndex) + 1;
-        if (sliceLength &gt; 2) {
-            FindMinTask lowerFindMin = new FindMinTask(
-                    executorService, numbers, startIndex,
-                    startIndex + (sliceLength / 2) - 1);
+    int sliceLength = (endIndex - startIndex) + 1;
+    if (sliceLength &gt; 2) {
+        FindMinTask lowerFindMin = new FindMinTask(
+                executorService, numbers, startIndex,
+                startIndex + (sliceLength / 2) - 1);
                     
-            Future&lt;Integer&gt; futureLowerFindMin = executorService.submit(lowerFindMin);
-            FindMinTask upperFindMin = new FindMinTask(
-                    executorService, numbers, startIndex + (sliceLength / 2),
-                    endIndex);
+        Future&lt;Integer&gt; futureLowerFindMin = executorService.submit(lowerFindMin);
+        FindMinTask upperFindMin = new FindMinTask(
+                executorService, numbers, startIndex + (sliceLength / 2),
+                endIndex);
 
-            Future&lt;Integer&gt; futureUpperFindMin = executorService.submit(upperFindMin);
-            return Math.min(futureLowerFindMin.get(), futureUpperFindMin.get());
-        } else {
-            return Math.min(numbers[startIndex], numbers[endIndex]);
-        }
-    }
-
-    public static void main(String[] args) 
-        throws InterruptedException, ExecutionException {
-
-        int[] numbers = new int[100];
-        Random random = new Random(System.currentTimeMillis());
-        for (int i = 0; i &lt; numbers.length; i++) {
-            numbers[i] = random.nextInt(100);
-        }
-        ExecutorService executorService = Executors.newFixedThreadPool(64);
-        Future&lt;Integer&gt; futureResult = executorService
-                .submit(new FindMinTask(
-                        executorService, 
-                        numbers, 0, numbers.length - 1));
-
-        System.out.println(futureResult.get());
-        executorService.shutdown();
+        Future&lt;Integer&gt; futureUpperFindMin = executorService.submit(upperFindMin);
+        return Math.min(futureLowerFindMin.get(), futureUpperFindMin.get());
+    } else {
+        return Math.min(numbers[startIndex], numbers[endIndex]);
     }
 }
-</code></pre>
+
+public static void main(String[] args) 
+    throws InterruptedException, ExecutionException {
+
+    int[] numbers = new int[100];
+    Random random = new Random(System.currentTimeMillis());
+    for (int i = 0; i &lt; numbers.length; i++) {
+        numbers[i] = random.nextInt(100);
+    }
+    ExecutorService executorService = Executors.newFixedThreadPool(64);
+    Future&lt;Integer&gt; futureResult = executorService
+            .submit(new FindMinTask(
+                    executorService, 
+                    numbers, 0, numbers.length - 1));
+
+    System.out.println(futureResult.get());
+    executorService.shutdown();
+}
+}
+</code></pre></li>
+</ul>
 
 <h2 id="join-and-fork-with-joinforkpool">Join and Fork with JoinForkPool</h2>
 
 <ul>
 <li><p>The <code>ForkJoinPool</code> implements the already mentioned work-stealing strategy, i.e. every time a running thread has to wait for some result; the thread removes the current task from the work queue and executes some other task ready to run. This way the current thread is not blocked and can be used to execute other tasks. Once the result for the originally suspended task has been computed the task gets executed again and the join() method returns the result. This is an important difference between <code>JoinForkPool</code> and <code>ExecutorService</code>.</p></li>
 
-<li><p>Demo of JoinForkPool</p></li>
-</ul>
+<li><p>Demo of JoinForkPool</p>
 
 <pre><code class="language-java">import java.awt.*;
 import java.awt.image.*;
@@ -1366,86 +1426,45 @@ import javax.imageio.*;
 import java.util.concurrent.RecursiveAction;
 
 public class GrayscaleImageAction extends RecursiveAction {
-    private static final long serialVersionUID = 1L;
-    private int row;
-    private BufferedImage bufferedImage;
+private static final long serialVersionUID = 1L;
+private int row;
+private BufferedImage bufferedImage;
 
-    public GrayscaleImageAction(int row, BufferedImage bufferedImage) {
-        this.row = row;
-        this.bufferedImage = bufferedImage;
-    }
+public GrayscaleImageAction(int row, BufferedImage bufferedImage) {
+    this.row = row;
+    this.bufferedImage = bufferedImage;
+}
 
-    @Override
-    protected void compute() {
-        for (int column = 0; column &lt; bufferedImage.getWidth(); column++) {
-            int rgb = bufferedImage.getRGB(column, row);
-            int r = (rgb &gt;&gt; 16) &amp; 0xFF;
-            int g = (rgb &gt;&gt; 8) &amp; 0xFF;
-            int b = (rgb &amp; 0xFF);
-            int gray = (int) (0.2126 * (float) r + 0.7152 * (float) g + 0.0722 * (float) b);
-            gray = (gray &lt;&lt; 16) + (gray &lt;&lt; 8) + gray;
-            bufferedImage.setRGB(column, row, gray);
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        ForkJoinPool pool = new ForkJoinPool(
-                Runtime.getRuntime().availableProcessors());
-        BufferedImage bufferedImage = ImageIO.read(new File(args[0]));
-        for (int row = 0; row &lt; bufferedImage.getHeight(); row++) {
-            GrayscaleImageAction action = new GrayscaleImageAction(
-                row, bufferedImage);
-            pool.execute(action);
-        }
-        pool.shutdown();
-        ImageIO.write(bufferedImage, &quot;jpg&quot;, new File(args[1]));
+@Override
+protected void compute() {
+    for (int column = 0; column &lt; bufferedImage.getWidth(); column++) {
+        int rgb = bufferedImage.getRGB(column, row);
+        int r = (rgb &gt;&gt; 16) &amp; 0xFF;
+        int g = (rgb &gt;&gt; 8) &amp; 0xFF;
+        int b = (rgb &amp; 0xFF);
+        int gray = (int) (0.2126 * (float) r + 0.7152 * (float) g + 0.0722 * (float) b);
+        gray = (gray &lt;&lt; 16) + (gray &lt;&lt; 8) + gray;
+        bufferedImage.setRGB(column, row, gray);
     }
 }
 
-</code></pre>
+public static void main(String[] args) throws IOException {
+    ForkJoinPool pool = new ForkJoinPool(
+            Runtime.getRuntime().availableProcessors());
+    BufferedImage bufferedImage = ImageIO.read(new File(args[0]));
+    for (int row = 0; row &lt; bufferedImage.getHeight(); row++) {
+        GrayscaleImageAction action = new GrayscaleImageAction(
+            row, bufferedImage);
+        pool.execute(action);
+    }
+    pool.shutdown();
+    ImageIO.write(bufferedImage, &quot;jpg&quot;, new File(args[1]));
+}
+}
 
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#thread">Thread</a>
-<ul>
-<li><a href="#join">Join</a></li>
-<li><a href="#common-problem-of-multithred-program">Common problem of multithred program</a></li>
-</ul></li>
-<li><a href="#deadlock">Deadlock</a></li>
-<li><a href="#useful-concurrent-collections">Useful concurrent collections</a>
-<ul>
-<li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
-<li><a href="#copyonwritearraylist-and-copyonwritearrayset">CopyOnWriteArrayList and CopyOnWriteArraySet</a></li>
-<li><a href="#blockingqueue-and-deque">BlockingQueue and <code>Deque</code></a></li>
-<li><a href="#concurrentskiplistmap-and-concurrentskiplistset">ConcurrentSkipListMap and ConcurrentSkipListSet</a></li>
-<li><a href="#synchronizer">Synchronizer</a></li>
-</ul></li>
-<li><a href="#counter-semaphore">Counter Semaphore</a></li>
-<li><a href="#countdownlatch">CountDownLatch</a></li>
-<li><a href="#cylicbarrier">CylicBarrier</a></li>
-<li><a href="#producer-consumer-pattern">Producer / Consumer pattern</a></li>
-<li><a href="#executor-thread-pool">Executor &ndash; Thread Pool</a></li>
-<li><a href="#submit-runnable">Submit(Runnable)</a></li>
-<li><a href="#submit-callable">Submit(Callable)</a></li>
-<li><a href="#invokeany">InvokeAny()</a></li>
-<li><a href="#invokeall">InvokeAll()</a></li>
-<li><a href="#demo-of-submit-invokeany">Demo of submit, InvokeAny</a>
-<ul>
-<li><a href="#join-and-fork">Join and Fork</a></li>
-</ul></li>
-<li><a href="#join-and-fork-with-executor-service">Join and Fork with Executor Service</a></li>
-<li><a href="#join-and-fork-with-joinforkpool">Join and Fork with JoinForkPool</a></li>
-</ul></li>
+</code></pre></li>
 </ul>
-</nav>
-    </div>
 
-</div>
 
     
     
@@ -1495,7 +1514,6 @@ public class GrayscaleImageAction extends RecursiveAction {
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

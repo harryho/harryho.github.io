@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Hello World</title>
+    <link>/coding/sql/</link>
+    <description>Recent content in SQL on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/coding/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySql Note - 1</title>
+      <link>/coding/sql/mysql-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-1/</guid>
+      <description>Create a new database -- Drop the old one DROP SCHEMA IF EXISTS new_dbu -- Create a new db CREATE DATABASE new_db CHARACTER SET utf8 COLLATE utf8_general_ci;  Create a table DROP TABLE IF EXISTS new_table; CREATE TABLE new_table ( id int NOT NULL AUTO_INCREMENT, name varchar(50), title varchar(50), email varchar(250), created_date datetime, modified_date datetime, PRIMARY KEY (id) );  Query  JOIN and INNER JOIN
+SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 2</title>
+      <link>/coding/sql/mysql-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-2/</guid>
+      <description> Function DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT BEGIN DECLARE vv_number VARCHAR(500); SELECT REPLACE(in_value, &#39;+&#39;,&#39;&#39;) INTO vv_number; RETURN CASE WHEN LEFT(vv_number, 2) IN (&#39;02&#39;,&#39;03&#39;,&#39;07&#39;,&#39;08&#39;) THEN LENGTH(vv_number) = 10 ELSE 0 END; END $$ DELIMITER ;  Stored proc sample DROP PROCEDURE IF EXISTS stored_proc_1; DELIMITER $ CREATE PROCEDURE stored_proc_1 ( ) BEGIN SELECT * FROM table_1; END DELIMITER ;  </description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 3</title>
+      <link>/coding/sql/mysql-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/mysql-note-3/</guid>
+      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  </description>
+    </item>
+    
+  </channel>
+</rss>

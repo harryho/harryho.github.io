@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:56 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>Raspberry Pi setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -225,6 +210,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -287,6 +287,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -295,10 +302,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -575,6 +625,7 @@
       <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
       <option value="/os/ubuntu-server-14/" > Ubuntu 14 -- server setup</option>
       <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
+      <option value="/os/ubuntu-desktop-18/" > Ubuntu Desktop 18 LTS note</option>
   
     <option value="/projects/" >
    Projects</option>
@@ -584,18 +635,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>Raspberry Pi setup</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>Raspberry Pi setup</h1>
-        
+    
 
 <p>Prelude</p>
 
@@ -635,11 +695,11 @@
 <h3 id="connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</h3>
 
 <ul>
-<li>Reset pasword of <code>pi</code></li>
-</ul>
+<li><p>Reset pasword of <code>pi</code></p>
 
 <pre><code class="language-bash">sudo passwd pi
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="ssh-server-setup">SSH server setup</h3>
 
@@ -739,18 +799,16 @@ Device
 <h3 id="access-rpi-with-your-laptop">Access RPi with your laptop</h3>
 
 <ul>
-<li>From Linux or Mac</li>
-</ul>
+<li><p>From Linux or Mac</p>
 
 <pre><code>ssh username@192.168.1.10
 
 ### type yes 
 ### type the password 
 
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>For widnows</li>
+<li><p>For widnows</p></li>
 </ul>
 
 <p>You need to download a ssh tool. If you installed git before, you would have it on your computer. Otherwise, you need to install a SSH too. I recommend you to install <a href="http://www.putty.org/">Putty</a>. It is free and quite handy.</p>
@@ -774,8 +832,7 @@ sudo apt-get install tightvncserver
 </code></pre>
 
 <ul>
-<li>Launch VNC server and setup pasword</li>
-</ul>
+<li><p>Launch VNC server and setup pasword</p>
 
 <pre><code class="language-bash">/usr/bin/tightvncserver
 
@@ -786,7 +843,8 @@ sudo apt-get install tightvncserver
 sudo update_rc.d tightvncserver defaults
 
 sudo reboot
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="setup-vnc-client-on-your-pc">Setup VNC client on your PC</h3>
 
@@ -822,15 +880,12 @@ I believe you can figure it out yourself, if you used Linux as desktop.</p>
 </blockquote>
 
 <ul>
-<li>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</li>
-</ul>
+<li><p>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</p>
 
 <pre><code class="language-bash">sudo apt-get install ntfs-3g
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Get drive info after attach two hard drives</li>
-</ul>
+<li><p>Get drive info after attach two hard drives</p>
 
 <pre><code class="language-bash">sudo lsblk
 
@@ -842,11 +897,9 @@ sda           8:0    0   1.8T  0 disk
 mmcblk0     179:0    0   7.4G  0 disk
 ├─mmcblk0p1 179:1    0    56M  0 part /boot
 └─mmcblk0p2 179:2    0   7.4G  0 part /
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Remount the drives with proper name</li>
-</ul>
+<li><p>Remount the drives with proper name</p>
 
 <pre><code class="language-bash">sudo su ### switch to root
 cd /media
@@ -856,26 +909,20 @@ umount mydrive2
 mkdir public private 
 mount -o rw /sda/sda1 public
 mount -o rw /sda/sda2 private
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Change <code>fstab</code> to support read and write permission</li>
-</ul>
+<li><p>Change <code>fstab</code> to support read and write permission</p>
 
 <pre><code class="language-bash">sudo nano /etc/fstab
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></li>
-</ul>
+<li><p>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></p>
 
 <pre><code>/dev/sda1  /media/public       ntfs   nofail,noatime    0    0
 /dev/sda2  /media/private       ntfs   nofail,noatime    0    0
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></li>
-</ul>
+<li><p>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></p>
 
 <pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 sda           8:0    0   1.8T  0 disk
@@ -884,19 +931,16 @@ sda           8:0    0   1.8T  0 disk
 mmcblk0     179:0    0   7.4G  0 disk
 ├─mmcblk0p1 179:1    0    56M  0 part /boot
 └─mmcblk0p2 179:2    0   7.4G  0 part /
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Install Samba</li>
-</ul>
+<li><p>Install Samba</p>
 
 <pre><code class="language-bash">sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install samba samba-common-bin
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Setup Samba configuration</li>
+<li><p>Setup Samba configuration</p></li>
 </ul>
 
 <h2 id="backup-original-config-and-update-the-config">Backup original config and update the config</h2>
@@ -965,14 +1009,12 @@ sudo smbpasswd smbu ## setup pasword for remote access
 <h2 id="get-accurate-version-of-rpi-model">Get accurate version of RPi model</h2>
 
 <ul>
-<li>Get the revision code</li>
-</ul>
+<li><p>Get the revision code</p>
 
 <pre><code class="language-bash">cat /etc/cpuinfo
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Check the table below to find your model</li>
+<li><p>Check the table below to find your model</p></li>
 </ul>
 
 <table>
@@ -1107,55 +1149,12 @@ ENABLED=1
 
 <p>Reboot the RPi, before you reboot it please make sure your TV’s HDMI has plugged into RPi. After a couple minutes, you will see the home page as I posted above. Don’t forget to install remote control app on your mobile. I pretty sure you find some remote control app for Kodi on your phone. Finally, you can enjoy your home media center.</p>
 
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</a></li>
-<li><a href="#how-to-start">How to start</a>
-<ul>
-<li><a href="#connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</a></li>
-<li><a href="#ssh-server-setup">SSH server setup</a></li>
-<li><a href="#connect-rpi-with-the-switch">Connect RPi with the switch</a></li>
-<li><a href="#find-the-ip-address">Find the ip address</a></li>
-<li><a href="#access-rpi-with-your-laptop">Access RPi with your laptop</a></li>
-</ul></li>
-<li><a href="#access-rpi-via-vnc">Access RPi via VNC</a>
-<ul>
-<li><a href="#setup-vnc-server-on-rpi">Setup VNC server on RPi</a></li>
-<li><a href="#setup-vnc-client-on-your-pc">Setup VNC client on your PC</a></li>
-<li><a href="#setup-file-server-via-samba">Setup File Server via Samba</a></li>
-</ul></li>
-<li><a href="#backup-original-config-and-update-the-config">Backup original config and update the config</a>
-<ul>
-<li><a href="#change-the-line-below">Change the line below:</a></li>
-<li><a href="#add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</a></li>
-<li><a href="#add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</a></li>
-</ul></li>
-<li><a href="#access-the-network-folder">Access the network folder</a>
-<ul>
-<li><a href="#linx">Linx</a></li>
-<li><a href="#windows">Windows</a></li>
-</ul></li>
-<li><a href="#get-accurate-version-of-rpi-model">Get accurate version of RPi model</a></li>
-<li><a href="#setup-wifi-adapter">Setup Wifi Adapter</a></li>
-<li><a href="#install-kodi-as-media-centre">Install Kodi as media centre</a></li>
-</ul></li>
-</ul>
-</nav>
-    </div>
-
-</div>
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/os/" title="OS"> <i class="fa fa-chevron-left"></i><label>OS</label></a>
+<a class="nav nav-prev" href="/os/ubuntu-desktop-18/" title="Ubuntu Desktop 18 LTS note"> <i class="fa fa-chevron-left"></i><label>Ubuntu Desktop 18 LTS note</label></a>
     <a class="nav nav-next" href="/os/lubuntu16-desktop/" title="Lubuntu 16 desktop" style="margin-right: 0px;"><label>Lubuntu 16 desktop</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
@@ -1205,7 +1204,6 @@ ENABLED=1
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:57 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>Debug PHP with Free IDE :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -225,6 +210,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -287,6 +287,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -295,10 +302,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -582,18 +632,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>Debug PHP with Free IDE</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>Debug PHP with Free IDE</h1>
-        
+    
 
 <h2 id="pdt-and-netbeans">PDT and Netbeans</h2>
 
@@ -642,8 +701,7 @@
 
 <li><p>Type <code>c:\php\php.exe -i | clip</code> to copy the php info to memory. And then paste the content to the input area, and click <code>Analyse my phpinfo() output</code>. It will show the correct file to download.</p></li>
 
-<li><p>Download the dll file and put it into php folder <code>c:\php\ext</code>. Update the <code>php.ini</code> file by adding the following lines at the bottom of file.</p></li>
-</ul>
+<li><p>Download the dll file and put it into php folder <code>c:\php\ext</code>. Update the <code>php.ini</code> file by adding the following lines at the bottom of file.</p>
 
 <pre><code class="language-ini">[XDebug]
 zend_extension=&quot;c:/php/ext/php_xdebug-x.x.x-x.x-vcxx.dll&quot;
@@ -652,14 +710,15 @@ xdebug.remote_host=localhost
 xdebug.remote_port=9000
 xdebug.remote_autostart=1
 xdebug.remote_connect_back=1
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="setup-apache-to-load-php">Setup Apache to load PHP</h3>
 
 <ul>
 <li>Add php module loading inside your apache configuration file.</li>
-<li>On the file <code>c:\apache\conf\httpd.conf</code> with nodepad and update as following setting</li>
-</ul>
+
+<li><p>On the file <code>c:\apache\conf\httpd.conf</code> with nodepad and update as following setting</p>
 
 <pre><code class="language-apache">
 ### Update apache root
@@ -681,7 +740,7 @@ LoadModule php5_module &quot;c:/php/php5apache2_4.dll&quot;
 AddHandler application/x-httpd-php .php
 
 &lt;FilesMatch \.php$&gt;
-      SetHandler application/x-httpd-php
+  SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;
 
 ### Change origin doc root htdocs 
@@ -689,11 +748,12 @@ AddHandler application/x-httpd-php .php
 DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 
 &lt;Directory &quot;c:/php_workspace/phpsite&quot;&gt;
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
+Options Indexes FollowSymLinks
+AllowOverride All
+Require all granted
 &lt;/Directory&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="debug-php-with-pdt">Debug PHP with PDT</h2>
 
@@ -768,9 +828,8 @@ DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 
 <ul>
 <li>Back the original <code>nginx.conf</code></li>
-<li>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</li>
-</ul></li>
-</ul>
+
+<li><p>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</p>
 
 <pre><code class="language-dos">@ECHO OFF
 ECHO Start PHP FastCGI...
@@ -778,43 +837,44 @@ SET PATH=c:\php;%PATH%
 c:\bin\RunHiddenConsole.exe c:\php\php-cgi.exe -b 127.0.0.1:9000
 ECHO Start Nginx ...
 c:\bin\RunHiddenConsole.exe c:\nginx\nginx.exe 
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Open the <code>nginx.conf</code> via notepad</li>
-<li>Replace the <code>server</code> block with following setting</li>
-</ul>
+<li><p>Open the <code>nginx.conf</code> via notepad</p></li>
+
+<li><p>Replace the <code>server</code> block with following setting</p>
 
 <pre><code class="language-nginx">server {
-        listen       1234;
-        server_name  localhost;
-        root          c:/php_workspace/phpsite;
-        #charset koi8-r;
+listen       1234;
+server_name  localhost;
+root          c:/php_workspace/phpsite;
+#charset koi8-r;
 
-        ### Static
-        location / {
-            index  index.php;
-        ###    try_files $uri $uri/ @missing;
-        }
-        location ~ /\.ht {
-            deny  all;
-        }
-        location ~ /\.rewrite {
-            deny  all;
-        }
+### Static
+location / {
+    index  index.php;
+###    try_files $uri $uri/ @missing;
+}
+location ~ /\.ht {
+    deny  all;
+}
+location ~ /\.rewrite {
+    deny  all;
+}
         
-        ### PHP FastCGI
-        location ~ \.php$ {
-            root           c:/php_workspace/phpsite;
-            ### root  html; 
-            fastcgi_pass   127.0.0.1:41234;
-           fastcgi_index  index.php;
-           fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
-           include        fastcgi_params;
-        }
+### PHP FastCGI
+location ~ \.php$ {
+    root           c:/php_workspace/phpsite;
+    ### root  html; 
+    fastcgi_pass   127.0.0.1:41234;
+   fastcgi_index  index.php;
+   fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
+   include        fastcgi_params;
+}
 
 }
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <p>cat file | xclip -selection clipboard</p>
 
@@ -970,51 +1030,6 @@ xdebug.remote_port=9000
 sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 </code></pre>
 
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#pdt-and-netbeans">PDT and Netbeans</a></li>
-<li><a href="#amp-package-or-without-amp">AMP package or without AMP</a>
-<ul>
-<li><a href="#use-amp-package-as-smart-choice">Use AMP package as smart choice</a></li>
-<li><a href="#manage-your-shits-without-amp-package">Manage your shits without AMP package</a></li>
-</ul></li>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#prepare-php-for-debugging">Prepare PHP for debugging</a>
-<ul>
-<li><a href="#download-xdebug-and-install-it">Download XDebug and install it</a></li>
-<li><a href="#setup-apache-to-load-php">Setup Apache to load PHP</a></li>
-</ul></li>
-<li><a href="#debug-php-with-pdt">Debug PHP with PDT</a></li>
-<li><a href="#debug-php-with-netbeans">Debug PHP with Netbeans</a></li>
-<li><a href="#use-nginx-instead-of-apache">Use Nginx instead of Apache</a>
-<ul>
-<li><a href="#php-5-x-anp-php-7-x-on-ubuntu-16">PHP 5.x anp PHP 7.x on Ubuntu 16</a></li>
-</ul></li>
-<li><a href="#add-repo">Add repo</a>
-<ul>
-<li><a href="#trouble-shooting">Trouble shooting</a></li>
-</ul></li>
-<li><a href="#update">Update</a></li>
-<li><a href="#build-xdebug-for-different-php">Build xdebug for different PHP</a>
-<ul>
-<li><a href="#php-5-6">PHP 5.6</a></li>
-<li><a href="#create-xdebug-ini-with-mods-available">Create xdebug.ini with <code>mods-available</code></a></li>
-<li><a href="#create-symbolic-links">Create symbolic links</a></li>
-<li><a href="#php-7-0">PHP 7.0</a></li>
-<li><a href="#create-xdebug-ini-with-mods-available-1">Create xdebug.ini with <code>mods-available</code></a></li>
-<li><a href="#create-symbolic-links-1">Create symbolic links</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-    </div>
-
-</div>
 
     
     
@@ -1064,7 +1079,6 @@ sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/20-xde
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

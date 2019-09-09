@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-05-08T23:10:56 AEST">
+<meta name="revised" content="2019-09-10T00:02:17 AEST">
 <title>PHP Web Framework :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -36,22 +37,6 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-  <nav class="shortcuts">
-    <div>
-      <div class="searchbox">
-        <input data-search-input id="search-by" type="text" placeholder="Search...">
-      </div>
-      <script type="text/javascript" src="/js/lunr.min.js"></script>
-      <script type="text/javascript" src="/js/auto-complete.js"></script>
-      <link href="/css/auto-complete.css" rel="stylesheet">
-      <script type="text/javascript">
-        
-            var baseurl = "\/";
-        
-      </script>
-      <script type="text/javascript" src="/js/search.js"></script>
-    </div>
-  </nav>
 </header>
 <article>
   <aside>
@@ -225,6 +210,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/javascript/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
@@ -287,6 +287,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            Python Note 9
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
@@ -295,10 +302,46 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron_job/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-1/">
+            MySql Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-2/">
+            MySql Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/sql/mysql-note-3/">
+            MySql Note - 3
           </a>
         </div>
     </li>
@@ -476,6 +519,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/projects/" class="dd-item haschildren
@@ -580,18 +630,27 @@
         </select>
       </center>
     </div>
-
-
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/js/auto-complete.js"></script>
+        <link href="/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "\/";
+          
+        </script>
+        <script type="text/javascript" src="/js/search.js"></script>
+      </div>
     
 
-
+    <h1>PHP Web Framework</h1>
     
     
     
-<div class="main-page">
-    <div class="flex-item main-content">
-            <h1>PHP Web Framework</h1>
-        
+    
 
 <blockquote>
 <p><em>Here we are going to explore some PHP web frameworks.</em></p>
@@ -704,8 +763,8 @@
 
 <ul>
 <li>Create data model</li>
-<li>Following is the sample code</li>
-</ul>
+
+<li><p>Following is the sample code</p>
 
 <pre><code class="language-php">&lt;?php
 
@@ -714,24 +773,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'content'];
+protected $fillable = ['title', 'content'];
 
-    public function getTitleAttribute($value) {
-        return strtoupper($value);
-    }
+public function getTitleAttribute($value) {
+    return strtoupper($value);
 }
-</code></pre>
+}
+</code></pre></li>
 
-<ul>
-<li>Use artisan to create the table</li>
-</ul>
+<li><p>Use artisan to create the table</p>
 
 <pre><code class="language-bash">
 php artisan migrate -VVV 
 
 ## Use following command to seek dump or initial data
 php artisan db:seed
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
@@ -797,36 +855,34 @@ class AppServiceProvider extends ServiceProvider
 <h2 id="install-prestashop-without-amp-package">Install Prestashop without AMP package</h2>
 
 <ul>
-<li>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</li>
-</ul>
+<li><p>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</p>
 
 <pre><code class="language-ini">path\to\prestashop_workspace
 \---prestashop
-    +---admin 
-    +---cache 
-    +---classes  
-    +---config 
-    +---controllers 
-    +---css
-    +---docs
-    +---download
-    +---img 
-    +---install    
-    +---js   
-    +---localization
-    +---log
-    +---mails
-    +---modules  
-    +---override
-    +---pdf
-    +---themes
-    +---tools 
-    +---translations
-    +---upload
-    \---webservice
-</code></pre>
++---admin 
++---cache 
++---classes  
++---config 
++---controllers 
++---css
++---docs
++---download
++---img 
++---install    
++---js   
++---localization
++---log
++---mails
++---modules  
++---override
++---pdf
++---themes
++---tools 
++---translations
++---upload
+\---webservice
+</code></pre></li>
 
-<ul>
 <li><p>Start your MySQL or check the status of MySQL</p>
 
 <ul>
@@ -835,14 +891,12 @@ class AppServiceProvider extends ServiceProvider
 
 <li><p>Launch installer page with php server</p></li>
 
-<li><p>Start a command prompt</p></li>
-</ul>
+<li><p>Start a command prompt</p>
 
 <pre><code class="language-bash">cd /path/to/prestashop_workspace
 php -S 0.0.0.0:1234 -t prestashop
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>Open the link <code>http://localhost:1234/install/index.php</code> with browser, then you can start installation process.</p></li>
 
 <li><p>Choose language and click <code>Next</code>, and then select the checkbox &ldquo;I agree bah lah bah lah &hellip;. &rdquo; and click <code>Next</code></p></li>
@@ -865,15 +919,12 @@ php -S 0.0.0.0:1234 -t prestashop
 <li><p>If you got error <code>prestashop database not found</code>, you need to create a database on mysql server.</p>
 
 <ul>
-<li>I simply create a new database immediately with one command line</li>
-</ul>
+<li><p>I simply create a new database immediately with one command line</p>
 
 <pre><code class="language-sql">CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Test the connection again. You will get the green light
-<br /></li>
+<li><p>Test the connection again. You will get the green light</p></li>
 </ul></li>
 
 <li><p>Click <code>Next</code> and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click <code>Next</code></p></li>
@@ -892,12 +943,12 @@ php -S 0.0.0.0:1234 -t prestashop
 <ul>
 <li><p>Forgot admin&rsquo;s password or somehow you have to reset password and you cannot get admin&rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&rsquo;s password from database.</p></li>
 
-<li><p>Tailor the SQL below. Then you should be able to use new password to login.</p></li>
-</ul>
+<li><p>Tailor the SQL below. Then you should be able to use new password to login.</p>
 
 <pre><code class="language-sql">UPDATE ps_employee SET passwd = MD5('&lt;_COOKIE_KEY_&gt;password') 
 WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h2 id="troubleshooting-1">Troubleshooting</h2>
 
@@ -912,20 +963,18 @@ WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
 </blockquote>
 
 <ul>
-<li>Update files <code>DbPDO.php</code> , <code>MySQL.php</code> and <code>DbMySQLi.php</code> as follow.</li>
-</ul>
+<li><p>Update files <code>DbPDO.php</code> , <code>MySQL.php</code> and <code>DbMySQLi.php</code> as follow.</p>
 
-<pre><code class="language-php">    // $sql = 'SHOW VARIABLES WHERE Variable_name = \'have_innodb\'';
-    $sql = &quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE 'INNO%'&quot;;
+<pre><code class="language-php">// $sql = 'SHOW VARIABLES WHERE Variable_name = \'have_innodb\'';
+$sql = &quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE 'INNO%'&quot;;
 
-    ...
+...
     
-    // if (!$row || strtolower($row['Value']) != 'yes')
-    if (!$row || strtolower($row['Value']) === 'no') 
-</code></pre>
+// if (!$row || strtolower($row['Value']) != 'yes')
+if (!$row || strtolower($row['Value']) === 'no') 
+</code></pre></li>
 
-<ul>
-<li>Restart the server and the proble will be fixed.</li>
+<li><p>Restart the server and the proble will be fixed.</p></li>
 </ul>
 
 <h3 id="cors">CORS</h3>
@@ -933,15 +982,15 @@ WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
 <ul>
 <li><p>Enable module header in <code>httpd.conf</code></p></li>
 
-<li><p>Add header settings</p></li>
-</ul>
+<li><p>Add header settings</p>
 
 <pre><code class="language-apache">Header always set Access-Control-Max-Age &quot;1000&quot;
 
 #  &quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&quot;
 Header always set Access-Control-Allow-Headers  &quot;USE ABOVE COMMENT AS DEFAULT VALUE&quot;
 Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE, PUT&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="too-big-header-file">Too big header file</h3>
 
@@ -959,70 +1008,6 @@ fastcgi_buffers 4 256k;
 fastcgi_busy_buffers_size 256k;</p></li>
 </ul>
 
-    </div>
-
-    <div class="toc" >
-        <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#php-development-environment-setup">PHP development environment setup</a>
-<ul>
-<li><a href="#install-php-5-6-x">Install PHP 5.6.x</a></li>
-<li><a href="#composer">Composer</a></li>
-</ul></li>
-<li><a href="#linux">Linux</a></li>
-<li><a href="#windows">Windows</a>
-<ul>
-<li><a href="#zend-framework">Zend Framework</a></li>
-<li><a href="#zend-framework-2-x">Zend Framework 2.x</a></li>
-</ul></li>
-<li><a href="#create-zend-framework-2-project-from-scratch">Create Zend Framework 2 project from scratch</a>
-<ul>
-<li><a href="#clone-zend-framework-skeleton-project-as-new-project">* Clone Zend Framework skeleton project as new project.</a></li>
-<li><a href="#install-zend-framework-with-composer">* Install zend framework with composer</a></li>
-<li><a href="#start-app-with-php-built-in-server">* Start app with php built-in server</a></li>
-<li><a href="#use-apache-server">* Use apache server</a></li>
-</ul></li>
-<li><a href="#use-zf2-mvc-starter-project">Use Zf2-MVC-Starter project</a>
-<ul>
-<li><a href="#laravel">Laravel</a></li>
-<li><a href="#laravel-5-x">Laravel 5.x</a></li>
-</ul></li>
-<li><a href="#install-laravel-global">Install laravel global</a></li>
-<li><a href="#enable-the-mbs-string-extension">Enable the <code>mbs-string</code> extension</a>
-<ul>
-<li><a href="#update-php-ini-config">update <code>php.ini</code> config</a></li>
-</ul></li>
-<li><a href="#create-new-project-from-scratch">Create new project from scratch</a>
-<ul>
-<li><a href="#create-new-project">Create new project</a></li>
-<li><a href="#migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</a></li>
-</ul></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#use-lavarel-mvc-starter-project">Use Lavarel MVC Starter project</a></li>
-<li><a href="#use-laravel-rest-starter-project">Use Laravel Rest Starter project</a>
-<ul>
-<li><a href="#prestashop">PrestaShop</a></li>
-<li><a href="#prestashop-1-5-4">Prestashop 1.5.4</a></li>
-</ul></li>
-<li><a href="#download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></a></li>
-<li><a href="#install-prestashop">Install Prestashop</a></li>
-<li><a href="#install-prestashop-with-amp-package">Install Prestashop with AMP package</a></li>
-<li><a href="#install-prestashop-without-amp-package">Install Prestashop without AMP package</a></li>
-<li><a href="#forgot-admin-s-password">Forgot admin&rsquo;s password</a></li>
-<li><a href="#troubleshooting-1">Troubleshooting</a>
-<ul>
-<li><a href="#innodb-error">InnoDB error</a></li>
-<li><a href="#cors">CORS</a></li>
-<li><a href="#too-big-header-file">Too big header file</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-    </div>
-
-</div>
 
     
     
@@ -1076,7 +1061,6 @@ fastcgi_busy_buffers_size 256k;</p></li>
 <script src="/js/featherlight.min.js"></script>
 
 
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
