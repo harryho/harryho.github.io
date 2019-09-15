@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-15T15:43:12 AEST">
+<meta name="revised" content="2019-09-15T19:25:36 AEST">
 <title>C# Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -37,6 +37,22 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
 </header>
 <article>
   <aside>
@@ -682,27 +698,18 @@
         </select>
       </center>
     </div>
-      <div>
-        <div class="searchbox">
-          <input data-search-input id="search-by" type="text" placeholder="Search...">
-        </div>
-        <script type="text/javascript" src="/js/lunr.min.js"></script>
-        <script type="text/javascript" src="/js/auto-complete.js"></script>
-        <link href="/css/auto-complete.css" rel="stylesheet">
-        <script type="text/javascript">
-          
-              var baseurl = "\/";
-          
-        </script>
-        <script type="text/javascript" src="/js/search.js"></script>
-      </div>
+
+
     
 
-    <h1>C# Note - 2</h1>
+
     
     
     
-    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>C# Note - 2</h1>
+        
 
 <h2 id="problem">Problem</h2>
 
@@ -1034,6 +1041,39 @@ public partial class ProjectInstaller : System.Configuration.Install.Installer
 <pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &lt;app_path&gt;\MyScheduler.exe 
 </code></pre>
 
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution">Solution</a>
+<ul>
+<li><a href="#option-1">Option 1</a></li>
+</ul></li>
+<li><a href="#windows-task-scheduler">Windows Task Scheduler</a>
+<ul>
+<li><a href="#option-2">Option 2</a></li>
+</ul></li>
+<li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
+<ul>
+<li><a href="#overview-of-design">Overview of design</a></li>
+<li><a href="#create-customized-window-service">Create customized Window Service</a></li>
+<li><a href="#use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</a></li>
+<li><a href="#create-customized-servicebase">Create customized ServiceBase</a></li>
+<li><a href="#task-interface-and-class">Task interface and class</a></li>
+</ul></li>
+<li><a href="#create-window-service-installer">Create Window Service installer</a></li>
+<li><a href="#install-window-service">Install Window Service</a></li>
+<li><a href="#uninstall-window-service">Uninstall Window Service</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
@@ -1077,6 +1117,7 @@ public partial class ProjectInstaller : System.Configuration.Install.Installer
 <script src="/js/featherlight.min.js"></script>
 
 
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 

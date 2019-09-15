@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-15T15:43:12 AEST">
+<meta name="revised" content="2019-09-15T19:25:36 AEST">
 <title>Debug PHP with Free IDE :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -37,6 +37,22 @@
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
 </header>
 <article>
   <aside>
@@ -668,27 +684,18 @@
         </select>
       </center>
     </div>
-      <div>
-        <div class="searchbox">
-          <input data-search-input id="search-by" type="text" placeholder="Search...">
-        </div>
-        <script type="text/javascript" src="/js/lunr.min.js"></script>
-        <script type="text/javascript" src="/js/auto-complete.js"></script>
-        <link href="/css/auto-complete.css" rel="stylesheet">
-        <script type="text/javascript">
-          
-              var baseurl = "\/";
-          
-        </script>
-        <script type="text/javascript" src="/js/search.js"></script>
-      </div>
+
+
     
 
-    <h1>Debug PHP with Free IDE</h1>
+
     
     
     
-    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Debug PHP with Free IDE</h1>
+        
 
 <h2 id="pdt-and-netbeans">PDT and Netbeans</h2>
 
@@ -1066,6 +1073,51 @@ xdebug.remote_port=9000
 sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 </code></pre>
 
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#pdt-and-netbeans">PDT and Netbeans</a></li>
+<li><a href="#amp-package-or-without-amp">AMP package or without AMP</a>
+<ul>
+<li><a href="#use-amp-package-as-smart-choice">Use AMP package as smart choice</a></li>
+<li><a href="#manage-your-shits-without-amp-package">Manage your shits without AMP package</a></li>
+</ul></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#prepare-php-for-debugging">Prepare PHP for debugging</a>
+<ul>
+<li><a href="#download-xdebug-and-install-it">Download XDebug and install it</a></li>
+<li><a href="#setup-apache-to-load-php">Setup Apache to load PHP</a></li>
+</ul></li>
+<li><a href="#debug-php-with-pdt">Debug PHP with PDT</a></li>
+<li><a href="#debug-php-with-netbeans">Debug PHP with Netbeans</a></li>
+<li><a href="#use-nginx-instead-of-apache">Use Nginx instead of Apache</a>
+<ul>
+<li><a href="#php-5-x-anp-php-7-x-on-ubuntu-16">PHP 5.x anp PHP 7.x on Ubuntu 16</a></li>
+</ul></li>
+<li><a href="#add-repo">Add repo</a>
+<ul>
+<li><a href="#trouble-shooting">Trouble shooting</a></li>
+</ul></li>
+<li><a href="#update">Update</a></li>
+<li><a href="#build-xdebug-for-different-php">Build xdebug for different PHP</a>
+<ul>
+<li><a href="#php-5-6">PHP 5.6</a></li>
+<li><a href="#create-xdebug-ini-with-mods-available">Create xdebug.ini with <code>mods-available</code></a></li>
+<li><a href="#create-symbolic-links">Create symbolic links</a></li>
+<li><a href="#php-7-0">PHP 7.0</a></li>
+<li><a href="#create-xdebug-ini-with-mods-available-1">Create xdebug.ini with <code>mods-available</code></a></li>
+<li><a href="#create-symbolic-links-1">Create symbolic links</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
@@ -1109,6 +1161,7 @@ sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/20-xde
 <script src="/js/featherlight.min.js"></script>
 
 
+<link href="/css/github.css" rel="stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
