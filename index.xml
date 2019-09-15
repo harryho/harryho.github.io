@@ -6,7 +6,7 @@
     <description>Recent content on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Sep 2018 14:59:31 +1100</lastBuildDate>
+    <lastBuildDate>Fri, 30 Nov 2018 14:59:31 +1100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,10 +14,11 @@
     <item>
       <title>Dual Boot Windows 10 &amp; Ubuntu 18</title>
       <link>/os/dual-boot-win10-ubuntu18/</link>
-      <pubDate>Thu, 20 Sep 2018 14:59:31 +1100</pubDate>
+      <pubDate>Fri, 30 Nov 2018 14:59:31 +1100</pubDate>
       
       <guid>/os/dual-boot-win10-ubuntu18/</guid>
-      <description></description>
+      <description>Dual boot Ubuntu 18 with Windows 10  I have a couple Linux workstations, but all of them are old PC or laptop. Today I get a chance to test Ubuntu on a brand new laptop. Here I are going to write down all I did to create this dual boot laptop
+ Caution The laptop I worked on is Lenovo IdeaPad S model with UEFI firmware, but it doesn&amp;rsquo;t mean all Lenovo laptops will work in the same way, not to mention other brand&amp;rsquo;s laptop.</description>
     </item>
     
     <item>
@@ -494,13 +495,22 @@ Install Cassandra on Ubuntu Install Java(JRE) 8+ sudo add-apt-repository ppa:web
     
     <item>
       <title>Cron Job Note - 1</title>
-      <link>/coding/shell/cron_job/</link>
+      <link>/coding/shell/cron-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/shell/cron_job/</guid>
+      <guid>/coding/shell/cron-note-1/</guid>
       <description>Introduction Cron job is one of most common techniques used on every Unix / Linux.
 Common Use Cases House keeping - Clean up the backup  Run every night to remove the daily backup tar ball Assumption:
  The script file named housekeeping.sh. The script sits inside folder bin which is under your user account. All backup files have the .tar as extension. The script will check the backup tar balls within the folder bacup, which is under your user account as well.</description>
+    </item>
+    
+    <item>
+      <title>Cron Job Note - 2</title>
+      <link>/coding/shell/cron-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/shell/cron-note-2/</guid>
+      <description>Refresh the database (NoSQL) - Cassandra Backup the Cassandra database nightly  There is a keyspace named hho_ks in the Cassandra nodes store the production data. Every night the staging Cassandra server will be refreshed with production&amp;rsquo;s snapshot This solution is not built on the incremental snapshot. The production and staging nodes are running within the same subnet. The backup script will be run nightly on production server Cron job setting</description>
     </item>
     
     <item>
@@ -609,7 +619,8 @@ SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-2/</guid>
-      <description> Function DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT BEGIN DECLARE vv_number VARCHAR(500); SELECT REPLACE(in_value, &#39;+&#39;,&#39;&#39;) INTO vv_number; RETURN CASE WHEN LEFT(vv_number, 2) IN (&#39;02&#39;,&#39;03&#39;,&#39;07&#39;,&#39;08&#39;) THEN LENGTH(vv_number) = 10 ELSE 0 END; END $$ DELIMITER ;  Stored proc sample DROP PROCEDURE IF EXISTS stored_proc_1; DELIMITER $ CREATE PROCEDURE stored_proc_1 ( ) BEGIN SELECT * FROM table_1; END DELIMITER ;  </description>
+      <description>Function  Check the input string is OZ land line
+DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT BEGIN DECLARE vv_number VARCHAR(500); SELECT REPLACE(in_value, &#39;+&#39;,&#39;&#39;) INTO vv_number; RETURN CASE WHEN LEFT(vv_number, 2) IN (&#39;02&#39;,&#39;03&#39;,&#39;07&#39;,&#39;08&#39;) THEN LENGTH(vv_number) = 10 ELSE 0 END; END $$ DELIMITER ; -- SELECT isAusLandLine(&#39;03123322&#39;) from dual; -- TRUE -- SELECT isAusLandLine(&#39;06123322&#39;) from dual; -- FALSE  EXtract the Json to String</description>
     </item>
     
     <item>
@@ -618,7 +629,7 @@ SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-3/</guid>
-      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  </description>
+      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another simple command to show all SHOW FULL PROCESSLIST;  </description>
     </item>
     
     <item>

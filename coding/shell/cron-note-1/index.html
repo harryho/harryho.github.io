@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-15T13:03:18 AEST">
-<title>Python Note 6 :: Hello World</title>
+<title>Cron Job Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Collection">
+<meta name="description" content="Common Cron Job examples">
 
 
 
     
   </head>
-  <body data-url="/coding/python/python-note-6/">
+  <body data-url="/coding/shell/cron-note-1/">
     
       <header>
   <div class="logo">
@@ -239,11 +239,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/python/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/python/">Python</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
@@ -281,7 +280,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-6/" class="dd-item active">
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
         <div>
           <a href="/coding/python/python-note-6/">
             Python Note 6
@@ -311,13 +310,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+    <li data-nav-id="/coding/shell/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/shell/">Shell</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item active">
         <div>
           <a href="/coding/shell/cron-note-1/">
             Cron Job Note - 1
@@ -649,19 +649,13 @@
     <option value="/coding/javascript/" >
    JavaScript</option>
     <option value="/coding/python/" >
-   Python</option> 
-      <option value="/coding/python/python-note-1/" > Python Note 1</option>
-      <option value="/coding/python/python-note-2/" > Python Note 2</option>
-      <option value="/coding/python/python-note-3/" > Python Note 3</option>
-      <option value="/coding/python/python-note-4/" > Python Note 4</option>
-      <option value="/coding/python/python-note-5/" > Python Note 5</option>
-      <option value="/coding/python/python-note-6/"  selected> Python Note 6</option>
-      <option value="/coding/python/python-note-7/" > Python Note 7</option>
-      <option value="/coding/python/python-note-8/" > Python Note 8</option>
-      <option value="/coding/python/python-note-9/" > Python Note 9</option>
-  
+   Python</option>
     <option value="/coding/shell/" >
-   Shell</option>
+   Shell</option> 
+      <option value="/coding/shell/cron-note-1/"  selected> Cron Job Note - 1</option>
+      <option value="/coding/shell/cron-note-2/" > Cron Job Note - 2</option>
+      <option value="/coding/shell/ps-note-1/" > Powershell Note - 1</option>
+  
     <option value="/coding/sql/" >
    SQL</option>
   
@@ -695,331 +689,156 @@
       </div>
     
 
-    <h1>Python Note 6</h1>
+    <h1>Cron Job Note - 1</h1>
     
     
     
     
 
-<h2 id="collection">Collection</h2>
+<h2 id="introduction">Introduction</h2>
 
-<h3 id="collection-protocols">Collection protocols</h3>
+<p>Cron job is one of most common techniques used on every Unix / Linux.</p>
+
+<h2 id="common-use-cases">Common Use Cases</h2>
+
+<h3 id="house-keeping-clean-up-the-backup">House keeping - Clean up the backup</h3>
 
 <ul>
-<li>To implement a protocol, objects must support certain operations.</li>
-<li>Most collections implement container, sized and iterable.</li>
-<li>All except dict and set are sequences</li>
-<li><strong>Container</strong>: membership testing using <code>in</code> and <code>not in</code></li>
-<li><strong>Sized</strong>: Determine number of elements with <code>len(s)</code></li>
+<li>Run every night to remove the daily backup tar ball</li>
 
-<li><p><strong>Iterable</strong>: Can produce an iterator with <code>iter(s)</code>, e.g.</p>
+<li><p>Assumption:</p>
 
-<pre><code>    for item in iterable:
-        do_something(item) `len(s)`
+<ul>
+<li>The script file named  <code>housekeeping.sh</code>.</li>
+<li>The script sits inside folder <code>bin</code> which is under your user account.</li>
+<li>All backup files have the .tar as extension.</li>
+<li>The script will check the backup tar balls within the folder <code>bacup</code>, which is under your user account as well.</li>
+<li>The script will remove the latest backup if total backup files are over 5.</li>
+</ul></li>
+
+<li><p>Cron Job setting</p>
+
+<pre><code class="language-bash">20 15 * * * /home/${USER}/bin/housekeeping 2&gt;&amp;1  | logger
 </code></pre></li>
 
-<li><p><strong>Sequence</strong>:</p>
+<li><p>The script file</p>
 
-<ul>
-<li>Retrieve elements by index, e.g. <code>item = seq[index]</code></li>
-<li>Find items by value <code>index = seq.index(item)</code></li>
-<li>Count items <code>num = seq.count(item)</code></li>
-<li>Produce a reversed sequence <code>r = reversed(seq)</code></li>
-</ul></li>
+<pre><code class="language-bash">#!/bin/bash
 
-<li><p><strong>Set</strong>: set algebra operations, including method and infix operators . e.g.</p>
+# crontab config 
 
-<ul>
-<li>subset</li>
-<li>proper subset</li>
-<li>equal</li>
-<li>not equal</li>
-<li>proper superset</li>
-<li>superset</li>
-<li>intersections</li>
-<li>union</li>
-<li>symmetric difference</li>
-<li>difference</li>
-</ul></li>
+# 20 15 * * * /home/${USER}/bin/housekeeping 2&gt;&amp;1 
 
-<li><p>Built-in collections</p></li>
+# script location: /home/$(USER}/bin
+# log file location: /home/$(USER}/log
+
+logfile=/home/${USER}/log/housekeeping.log;
+backup_dir=/home/${USER}/data/backups
+
+# Log the start time
+echo $(date)&gt;&gt; $logfile;
+
+fln=$(($(find ${backup_dir} -type f -name &quot;*.tar&quot; | egrep -i &quot;.tar&quot; | wc -l)+0));
+
+# Log the number of files 
+echo $fln&gt;&gt;$logfile;
+
+if [[ $fln -ge 6 ]]; then
+for t in $(find ${backup_dir} -type f -name &quot;*.tar&quot; | sort | egrep -m1 &quot;.tar&quot;);
+do
+rm -rf   $t;
+# Log the removed file
+echo &quot;remove $t&quot; &gt;&gt; $logfile;
+done;
+fi;
+
+</code></pre></li>
 </ul>
 
-<table>
-<thead>
-<tr>
-<th>Protocol</th>
-<th>Implementing Collections</th>
-</tr>
-</thead>
+<h3 id="backup-the-database">Backup the database</h3>
 
-<tbody>
-<tr>
-<td>Container</td>
-<td>str, list, range, tuple, set, bytes, dict</td>
-</tr>
-
-<tr>
-<td>Sized</td>
-<td>str, list, range, tuple, set, bytes, dict</td>
-</tr>
-
-<tr>
-<td>Iterable</td>
-<td>str, list, range, tuple, set, bytes, dict</td>
-</tr>
-
-<tr>
-<td>Sequence</td>
-<td>str, list, range, tuple, bytes</td>
-</tr>
-
-<tr>
-<td>Set</td>
-<td>set</td>
-</tr>
-
-<tr>
-<td>Mutable Sequence</td>
-<td>list</td>
-</tr>
-
-<tr>
-<td>Mutable Set</td>
-<td>set</td>
-</tr>
-
-<tr>
-<td>Mutable Mapping</td>
-<td>dict</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="example">Example</h3>
+<h4 id="backup-the-mysql-database-nightly">Backup the MySql database nightly</h4>
 
 <ul>
-<li><p>sortedset</p>
+<li><p>The database backup dump will be stored into the folder named after the brand name, e.g. the folder facebook for Facebook</p></li>
 
-<pre><code class="language-python">from bisect import bisect_left
-from collections.abc import Sequence, Set
-from itertools import chain
+<li><p>The script of backup  <code>backup.sh</code></p>
 
+<pre><code class="language-bash">
+# Every Backup directory has file named ENVIRONMENT
+# 
+# ENVIRONMENT contains the setting like db, server, etc.
+#
+#    DB_HOST=your_database_host_server
+#    DATABASE=the_target_database
+#    DB_USER=db_login_id
+#    DB_PASSWORD=db_password
+#    BACKUPS_TO_KEEP=5
+#
 
-class SortedSet(Sequence, Set):
 
-def __init__(self, items=None):
-    self._items = sorted(set(items)) if items is not None else []
+# THIS SCRIPT MAY ONLY BE RUN ONCE EACH DAY
+# Usge:
+#   ./backup.sh facebook 
+#
+[[ -z &quot;$1&quot; ]] &amp;&amp; echo &quot;Must run script with brand name, which has matching folder in /var/backup/&quot; &amp;&amp; exit 1
 
-def __contains__(self, item):
-    try:
-        self.index(item)
-        return True
-    except ValueError:
-        return False
+BACKUP_DIR=/var/backup/${1}
+source ${BACKUP_DIR}/ENVIRONMENT
 
-def __len__(self):
-    return len(self._items)
+LATEST_DUMP_TARBALL=latest-dump.tgz
+DATE=$(date +%d-%m-%Y) # dd-mm-yyyy
+LATEST_BACKUP_DIR=${BACKUP_DIR}/${DATE}
 
-def __iter__(self):
-    return iter(self._items)
+echo &quot;$(date): Beginning backup of ${DATABASE} on ${DB_HOST}&quot;
+mkdir -p ${LATEST_BACKUP_DIR}
+cd ${LATEST_BACKUP_DIR}
+START=$(date +%s)
 
-def __getitem__(self, index):
-    result = self._items[index]
-    return SortedSet(result) if isinstance(index, slice) else result
+# Set procedure definer to ussadmin
+SQL=&quot;UPDATE mysql.proc p \
+SET definer = '${DB_USER}@%' \
+WHERE db = '${DATABASE}' \
+AND definer &lt;&gt; '${DB_USER}@%';&quot;
 
-def __repr__(self):
-    return &quot;SortedSet({})&quot;.format(repr(self._items) if self._items else '')
+mysql -h ${DB_HOST} -P 3306 ${DATABASE} -u ${DB_USER} -p${DB_PASSWORD} -e&quot;${SQL}&quot;
 
-def __eq__(self, rhs):
-    if not isinstance(rhs, SortedSet):
-        return False
-    return self._items == rhs._items
+mysqldump -h ${DB_HOST} -P 3306 ${DATABASE} \
+--routines \
+--lock-tables=false \
+-u ${DB_USER} -p${DB_PASSWORD} &gt; ./dump.sql
 
-def _is_unique_and_sorted(self):
-    return all(self[i] &lt; self[i + 1] for i in range(len(self) - 1))
+EXPORT_RESULT=$?
 
-def index(self, item):
-    assert self._is_unique_and_sorted()
-    index = bisect_left(self._items, item)
-    if (index != len(self._items)) and self._items[index] == item:
-        return index
-    raise ValueError(&quot;{} not found&quot;.format(repr(item)))
+END=$(date +%s)
+echo &quot;Export duration: $(( $END - $START ))s&quot;
 
-def count(self, item):
-    assert self._is_unique_and_sorted()
-    return int(item in self._items)
+echo &quot;Gzipping dump file into tarball&quot;
 
-def __add__(self, rhs):
-    return SortedSet(chain(self._items, rhs._items))
+START=$(date +%s)
+tar czf dump.tgz dump.sql
+[[ $? ]] &amp;&amp;  rm -f dump.sql
+END=$(date +%s)
 
-def __mul__(self, rhs):
-    return SortedSet(self) if rhs &gt; 0 else SortedSet()
+echo &quot;Gzipping duration: $(( $END - $START ))s&quot;
 
-def __rmul__(self, lhs):
-    return self * lhs
+echo &quot;Creating ${BACKUP_DIR}/${LATEST_DUMP_TARBALL}&quot;
 
-def issubset(self, iterable):
-    return self &lt;= SortedSet(iterable)
+if [[ ${EXPORT_RESULT} ]]; then
 
-def issuperset(self, iterable):
-    return self &gt;= SortedSet(iterable)
+    if [[ -f ${BACKUP_DIR}/${LATEST_DUMP_TARBALL} ]]; then
+        rm --force ${BACKUP_DIR}/${LATEST_DUMP_TARBALL};
+    fi
 
-def intersection(self, iterable):
-    return self &amp; SortedSet(iterable)
+    ln -s ${LATEST_BACKUP_DIR}/dump.tgz ${BACKUP_DIR}/${LATEST_DUMP_TARBALL};
 
-def union(self, iterable):
-    return self | SortedSet(iterable)
+else
+    echo &quot;Export operation did not return 0, skipping symlink update&quot;
+fi
 
-def symmetric_difference(self, iterable):
-    return self ^ SortedSet(iterable)
+echo &quot;$(date): Completed backup for ${DATABASE} on ${DB_HOST}&quot;
 
-def difference(self, iterable):
-    return self - SortedSet(iterable)
-</code></pre></li>
 
-<li><p>test case</p>
-
-<pre><code class="language-python">import unittest
-from sorted_set import SortedSet
-
-
-class TestConstruction(unittest.TestCase):
-
-def test_empty(self):
-    s = SortedSet([])
-
-def test_from_sequence(self):
-    s = SortedSet([7, 8, 3, 1])
-
-def test_with_duplicates(self):
-    s = SortedSet([8, 8, 8])
-
-def test_from_iterable(self):
-    def gen6842():
-        yield 6
-        yield 8
-        yield 4
-        yield 2
-    g = gen6842()
-    s = SortedSet(g)
-
-def test_default_empty(self):
-    s = SortedSet()
-
-
-class TestContainerProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([6, 7, 3, 9])
-
-def test_positive_contained(self):
-    self.assertTrue(6 in self.s)
-
-def test_negative_contained(self):
-    self.assertFalse(2 in self.s)
-
-def test_positive_not_contained(self):
-    self.assertTrue(5 not in self.s)
-
-def test_negative_not_contained(self):
-    self.assertFalse(9 not in self.s)
-
-
-class TestSizedProtocol(unittest.TestCase):
-
-def test_empty(self):
-    s = SortedSet()
-    self.assertEqual(len(s), 0)
-
-def test_one(self):
-    s = SortedSet([42])
-    self.assertEqual(len(s), 1)
-
-def test_ten(self):
-    s = SortedSet(range(10))
-    self.assertEqual(len(s), 10)
-
-def test_with_duplicates(self):
-    s = SortedSet([5, 5, 5])
-    self.assertEqual(len(s), 1)
-
-
-class TestIterableProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([7, 2, 1, 1, 9])
-
-def test_iter(self):
-    i = iter(self.s)
-    self.assertEqual(next(i), 1)
-    self.assertEqual(next(i), 2)
-    self.assertEqual(next(i), 7)
-    self.assertEqual(next(i), 9)
-    self.assertRaises(StopIteration, lambda: next(i))
-
-def test_for_loop(self):
-    index = 0
-    expected = [1, 2, 7, 9]
-    for item in self.s:
-        self.assertEqual(item, expected[index])
-        index += 1
-
-
-class TestSequenceProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([1, 4, 9, 13, 15])
-
-def test_index_zero(self):
-    self.assertEqual(self.s[0], 1)
-
-def test_index_four(self):
-    self.assertEqual(self.s[4], 15)
-
-def test_index_one_beyond_the_end(self):
-    with self.assertRaises(IndexError):
-        self.s[5]
-
-def test_index_minus_one(self):
-    self.assertEqual(self.s[-1], 15)
-
-def test_index_minus_five(self):
-    self.assertEqual(self.s[-5], 1)
-
-def test_index_one_before_the_beginning(self):
-    with self.assertRaises(IndexError):
-        self.s[-6]
-
-def test_slice_from_start(self):
-    self.assertEqual(self.s[:3], SortedSet([1, 4, 9]))
-
-def test_slice_to_end(self):
-    self.assertEqual(self.s[3:], SortedSet([13, 15]))
-
-def test_slice_empty(self):
-    self.assertEqual(self.s[10:], SortedSet())
-
-def test_slice_arbitrary(self):
-    self.assertEqual(self.s[2:4], SortedSet([9, 13]))
-
-def test_slice_full(self):
-    self.assertEqual(self.s[:], self.s)
-
-
-class TestReprProtocol(unittest.TestCase):
-
-def test_repr_empty(self):
-    s = SortedSet()
-    self.assertEqual(repr(s), &quot;SortedSet()&quot;)
-
-def test_repr_some(self):
-    s = SortedSet([42, 40, 19])
-    self.assertEqual(repr(s), &quot;SortedSet([19, 40, 42])&quot;)
-
-
-if __name__ == '__main__':
-unittest.main()
 </code></pre></li>
 </ul>
 
@@ -1028,8 +847,8 @@ unittest.main()
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/python/python-note-5/" title="Python Note 5"> <i class="fa fa-chevron-left"></i><label>Python Note 5</label></a>
-    <a class="nav nav-next" href="/coding/python/python-note-7/" title="Python Note 7" style="margin-right: 0px;"><label>Python Note 7</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/shell/" title="Shell"> <i class="fa fa-chevron-left"></i><label>Shell</label></a>
+    <a class="nav nav-next" href="/coding/shell/cron-note-2/" title="Cron Job Note - 2" style="margin-right: 0px;"><label>Cron Job Note - 2</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1038,12 +857,6 @@ unittest.main()
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     

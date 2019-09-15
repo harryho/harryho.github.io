@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-10T00:52:27 AEST">
+<meta name="revised" content="2019-09-15T13:03:18 AEST">
 <title>Python Note 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -175,6 +175,12 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/golang/" class="dd-item
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a>
+      </div>
+    </li>
     <li data-nav-id="/coding/java/" class="dd-item haschildren
         ">
       <div>
@@ -311,10 +317,17 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
         <div>
-          <a href="/coding/shell/cron_job/">
+          <a href="/coding/shell/cron-note-1/">
             Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
           </a>
         </div>
     </li>
@@ -478,6 +491,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
         <div>
           <a href="/os/grub-trouble-shooting/">
@@ -622,21 +642,14 @@
    C / C&#43;&#43;</option>
     <option value="/coding/c-sharp/" >
    C#</option>
+    <option value="/coding/golang/" >
+   Golang</option>
     <option value="/coding/java/" >
    Java</option>
     <option value="/coding/javascript/" >
    JavaScript</option>
     <option value="/coding/python/" >
    Python</option> 
-      <option value="/coding/python/python-note-1/"  selected> Python Note 1</option>
-      <option value="/coding/python/python-note-2/" > Python Note 2</option>
-      <option value="/coding/python/python-note-3/" > Python Note 3</option>
-      <option value="/coding/python/python-note-4/" > Python Note 4</option>
-      <option value="/coding/python/python-note-5/" > Python Note 5</option>
-      <option value="/coding/python/python-note-6/" > Python Note 6</option>
-      <option value="/coding/python/python-note-7/" > Python Note 7</option>
-      <option value="/coding/python/python-note-8/" > Python Note 8</option>
-      <option value="/coding/python/python-note-9/" > Python Note 9</option>
   
     <option value="/coding/shell/" >
    Shell</option>
@@ -716,7 +729,7 @@
 <li><p>The code of module0.py</p>
 
 <pre><code class="language-python">def test():
-print('module0 -- test !')
+    print('module0 -- test !')
 </code></pre></li>
 
 <li><p>Test module importing</p>
@@ -782,20 +795,17 @@ module0 -- test !
 
 <li><p>Basic structure of package0</p>
 
-<pre><code>path_root  &lt;--// it must be attached sys.path
+<pre><code class="language-bash">path_root  &lt;--// it must be attached sys.path
 +---package0    &lt;--// package root 
 +---__init__.py  &lt;--// package init file
 \---module0.py
 </code></pre></li>
-</ul>
 
-<p><code>
-* Sample code -</code><strong>init</strong>.py` ( The sample code is for demo purpose)</p>
+<li><p>Sample code -  <code>__init__.py</code> ( The sample code is for demo purpose)</p>
 
 <pre><code class="language-python">print('package0 --init...')
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>Test</p>
 
 <pre><code>python
@@ -811,15 +821,15 @@ module0 -- test !
 <li><p>Sample code of <code>module0.py</code></p>
 
 <pre><code class="language-python">class FileReader:
-def __init__(self, filename):
-    self.filename = filename
-    self.f = open(self.filename, 'rt')
+    def __init__(self, filename):
+        self.filename = filename
+        self.f = open(self.filename, 'rt')
 
-def close(self):
-    self.f.close()
-    
-def read(self):
-    return self.f.read()
+    def close(self):
+        self.f.close()
+        
+    def read(self):
+        return self.f.read()
 
 </code></pre></li>
 
@@ -1076,13 +1086,13 @@ _NamespacePath(['path_root2\\package0'])
 <pre><code class="language-python">from package1 import FileReader
 
 if __name__ == &quot;__main__&quot;:
-app = FileReader('C:/ws/python/plural/pbb/gh/test.gz')
-print(app.read())
-app.close()
+    app = FileReader('C:/ws/python/plural/pbb/gh/test.gz')
+    print(app.read())
+    app.close()
 
-app = FileReader('C:/ws/python/plural/pbb/gh/test.bz2')
-print(app.read())
-app.close()
+    app = FileReader('C:/ws/python/plural/pbb/gh/test.bz2')
+    print(app.read())
+    app.close()
 </code></pre></li>
 </ul>
 

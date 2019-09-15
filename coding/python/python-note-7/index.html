@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-10T00:52:27 AEST">
+<meta name="revised" content="2019-09-15T13:03:18 AEST">
 <title>Python Note 7 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -175,6 +175,12 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/golang/" class="dd-item
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a>
+      </div>
+    </li>
     <li data-nav-id="/coding/java/" class="dd-item haschildren
         ">
       <div>
@@ -311,10 +317,17 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
         <div>
-          <a href="/coding/shell/cron_job/">
+          <a href="/coding/shell/cron-note-1/">
             Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
           </a>
         </div>
     </li>
@@ -478,6 +491,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
         <div>
           <a href="/os/grub-trouble-shooting/">
@@ -622,6 +642,8 @@
    C / C&#43;&#43;</option>
     <option value="/coding/c-sharp/" >
    C#</option>
+    <option value="/coding/golang/" >
+   Golang</option>
     <option value="/coding/java/" >
    Java</option>
     <option value="/coding/javascript/" >
@@ -692,21 +714,21 @@
 <li><p>lookup exception</p>
 
 <pre><code class="language-python">def lookups():
-s = [1, 4, 6]
-try:
-    item = s[5]
-except LookupError:
-    print(&quot;Handled IndexError&quot;)
+    s = [1, 4, 6]
+    try:
+        item = s[5]
+    except LookupError:
+        print(&quot;Handled IndexError&quot;)
 
-d = dict(a=65, b=66, c=67)
-try:
-    value = d['x']
-except LookupError:
-    print(&quot;Handled KeyError&quot;)
+    d = dict(a=65, b=66, c=67)
+    try:
+        value = d['x']
+    except LookupError:
+        print(&quot;Handled KeyError&quot;)
 
 if __name__ == '__main__':
-lookups()
-    
+    lookups()
+
 ## test result 
 ## Handled IndexError
 ## Handled KeyError
@@ -716,17 +738,17 @@ lookups()
 
 <pre><code class="language-python">def unicode_exception():
 try:
-b'\x81'.decode('utf-8')
+    b'\x81'.decode('utf-8')
 except UnicodeError as e:
-print(e)
-print(&quot;encoding:&quot;, e.encoding)
-print(&quot;reason:&quot;, e.reason)
-print(&quot;object:&quot;, e.object)
-print(&quot;start:&quot;, e.start)
-print(&quot;end&quot;, e.end)
+    print(e)
+    print(&quot;encoding:&quot;, e.encoding)
+    print(&quot;reason:&quot;, e.reason)
+    print(&quot;object:&quot;, e.object)
+    print(&quot;start:&quot;, e.start)
+    print(&quot;end&quot;, e.end)
 
 if __name__ == '__main__':
-unicode_exception()
+    unicode_exception()
 
 ## test result
 ## 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
@@ -745,44 +767,44 @@ import io
 
 class TriangleError(Exception):
 
-def __init__(self, text, sides):
-    super().__init__(text)
-    self._sides = tuple(sides)
+    def __init__(self, text, sides):
+        super().__init__(text)
+        self._sides = tuple(sides)
 
-@property
-def sides(self):
-    return self._sides
+    @property
+    def sides(self):
+        return self._sides
 
-def __str__(self):
-    return &quot;'{}' for sides {}&quot;.format(self.args[0], self._sides)
+    def __str__(self):
+        return &quot;'{}' for sides {}&quot;.format(self.args[0], self._sides)
 
-def __repr__(self):
-    return &quot;TriangleError({!r}, {!r}&quot;.format(self.args[0], self._sides)
+    def __repr__(self):
+        return &quot;TriangleError({!r}, {!r}&quot;.format(self.args[0], self._sides)
 
 
 def triangle_area(a, b, c):
-sides = sorted((a, b, c))
-if sides[2] &gt; sides[0] + sides[1]:
-    raise TriangleError(&quot;Illegal triangle&quot;, sides)
-p = (a + b + c) / 2
-a = math.sqrt(p * (p - a) * (p - b) * (p - c))
-return a
+    sides = sorted((a, b, c))
+    if sides[2] &gt; sides[0] + sides[1]:
+        raise TriangleError(&quot;Illegal triangle&quot;, sides)
+    p = (a + b + c) / 2
+    a = math.sqrt(p * (p - a) * (p - b) * (p - c))
+    return a
 
 
 def triangle_exception():
-try:
-    a = triangle_area(3, 4, 10)
-    print(a)
-except TriangleError as e:
     try:
-        print(e, file=sys.stdin)
-    except io.UnsupportedOperation as f:
-        print(e)
-        print(f)
-        print(f.__context__ is e)
+        a = triangle_area(3, 4, 10)
+        print(a)
+    except TriangleError as e:
+        try:
+            print(e, file=sys.stdin)
+        except io.UnsupportedOperation as f:
+            print(e)
+            print(f)
+            print(f.__context__ is e)
 
 if __name__ == '__main__':
-triangle_exception()
+    triangle_exception()
 
 ## test result
 ## 'Illegal triangle' for sides (3, 4, 10)
@@ -796,28 +818,28 @@ triangle_exception()
 import traceback
 
 class InclinationError(Exception):
-pass
+    pass
 
 
 def inclination(dx, dy):
-try:
-    return math.degrees(math.atan(dy / dx))
-except ZeroDivisionError as e:
-    raise InclinationError(&quot;Slope cannot be vertical&quot;) from e
+    try:
+        return math.degrees(math.atan(dy / dx))
+    except ZeroDivisionError as e:
+        raise InclinationError(&quot;Slope cannot be vertical&quot;) from e
 
 
 def traceback_inclination():
-try:
-    inclination(0, 5)
-except InclinationError as e:
-    print(e.__traceback__)
-    traceback.print_tb(e.__traceback__)
-    s = traceback.format_tb(e.__traceback__)
-    print(s)
+    try:
+        inclination(0, 5)
+    except InclinationError as e:
+        print(e.__traceback__)
+        traceback.print_tb(e.__traceback__)
+        s = traceback.format_tb(e.__traceback__)
+        print(s)
 
 if __name__ == '__main__':
-traceback_inclination()
-print(&quot;Done.&quot;)
+    traceback_inclination()
+    print(&quot;Done.&quot;)
 
 ## test result
 
@@ -841,38 +863,38 @@ print(&quot;Done.&quot;)
 <pre><code class="language-python">from pprint import pprint as pp
 
 def wrap(text, line_length):
-&quot;&quot;&quot;Wrap a string to a specified line length.
+    &quot;&quot;&quot;Wrap a string to a specified line length.
 
-Args:
-    text: The string to wrap.
-    line_length: The line length in characters.
+    Args:
+        text: The string to wrap.
+        line_length: The line length in characters.
 
-Returns:
-    A wrapped string.
+    Returns:
+        A wrapped string.
 
-Raises:
-    ValueError: If line_length is not positive.
-&quot;&quot;&quot;
-if line_length &lt; 1:
-    raise ValueError(&quot;line_length {} is not positive&quot;.format(line_length))
+    Raises:
+        ValueError: If line_length is not positive.
+    &quot;&quot;&quot;
+    if line_length &lt; 1:
+        raise ValueError(&quot;line_length {} is not positive&quot;.format(line_length))
 
-words = text.split()
+    words = text.split()
 
-if max(map(len, words)) &gt; line_length:
-    raise ValueError(&quot;line_length must be at least as long as the longest word&quot;)
+    if max(map(len, words)) &gt; line_length:
+        raise ValueError(&quot;line_length must be at least as long as the longest word&quot;)
 
-lines_of_words = []
-current_line_length = line_length
-for word in words:
-    if current_line_length + len(word) &gt; line_length:
-        lines_of_words.append([])  ## new line
-        current_line_length = 0
-    lines_of_words[-1].append(word)
-    current_line_length += len(word) + len(' ')
-lines = [' '.join(line_of_words) for line_of_words in lines_of_words]
-result = '\n'.join(lines)
-assert all(len(line) &lt;= line_length for line in result.splitlines())
-return result
+    lines_of_words = []
+    current_line_length = line_length
+    for word in words:
+        if current_line_length + len(word) &gt; line_length:
+            lines_of_words.append([])  ## new line
+            current_line_length = 0
+        lines_of_words[-1].append(word)
+        current_line_length += len(word) + len(' ')
+    lines = [' '.join(line_of_words) for line_of_words in lines_of_words]
+    result = '\n'.join(lines)
+    assert all(len(line) &lt;= line_length for line in result.splitlines())
+    return result
 
 wealth_of_nations = &quot;The annual labour of every nation is the fund which or&quot; \
 &quot;iginally supplies it with all the necessaries and conveniencies of life wh&quot; \
@@ -884,7 +906,7 @@ wealth_of_nations = &quot;The annual labour of every nation is the fund which or
 &quot; necessaries and conveniencies for which it has occasion.&quot;
 
 if __name__ == &quot;__main__&quot;:
-pp(wrap( wealth_of_nations, 40))
+    pp(wrap( wealth_of_nations, 40))
 
 ## test result
 ## ('The annual labour of every nation is the\n'

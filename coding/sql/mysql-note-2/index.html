@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-10T00:52:27 AEST">
+<meta name="revised" content="2019-09-15T13:03:18 AEST">
 <title>MySql Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -175,6 +175,12 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/coding/golang/" class="dd-item
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a>
+      </div>
+    </li>
     <li data-nav-id="/coding/java/" class="dd-item haschildren
         ">
       <div>
@@ -224,6 +230,13 @@
       <a href="/coding/javascript/">JavaScript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
@@ -303,10 +316,17 @@
       <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/shell/cron_job/" class="dd-item">
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
         <div>
-          <a href="/coding/shell/cron_job/">
+          <a href="/coding/shell/cron-note-1/">
             Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
           </a>
         </div>
     </li>
@@ -471,6 +491,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
         <div>
           <a href="/os/grub-trouble-shooting/">
@@ -615,6 +642,8 @@
    C / C&#43;&#43;</option>
     <option value="/coding/c-sharp/" >
    C#</option>
+    <option value="/coding/golang/" >
+   Golang</option>
     <option value="/coding/java/" >
    Java</option>
     <option value="/coding/javascript/" >
@@ -668,41 +697,106 @@
 
 <h3 id="function">Function</h3>
 
-<pre><code class="language-sql">
-DROP FUNCTION IF EXISTS isAusLandLine;
+<ul>
+<li><p>Check the input string is OZ land line</p>
+
+<pre><code class="language-sql">DROP FUNCTION IF EXISTS isAusLandLine;
 DELIMITER $$
 CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT
 BEGIN
-    DECLARE vv_number VARCHAR(500);
+DECLARE vv_number VARCHAR(500);
 
-    SELECT REPLACE(in_value, '+','') INTO vv_number;
+SELECT REPLACE(in_value, '+','') INTO vv_number;
 
-    RETURN CASE WHEN LEFT(vv_number, 2) IN ('02','03','07','08') THEN LENGTH(vv_number) = 10 ELSE 0 END;
+RETURN CASE WHEN LEFT(vv_number, 2) IN ('02','03','07','08') THEN LENGTH(vv_number) = 10 ELSE 0 END;
 END $$
 
 DELIMITER ;
 
-</code></pre>
+-- SELECT isAusLandLine('03123322') from dual; -- TRUE
 
-<h3 id="stored-proc-sample">Stored proc sample</h3>
+-- SELECT isAusLandLine('06123322') from dual; -- FALSE
 
-<pre><code class="language-sql">
-DROP PROCEDURE IF EXISTS stored_proc_1;
+</code></pre></li>
+
+<li><p>EXtract the Json to String</p>
+
+<pre><code class="language-sql">DROP FUNCTION IF EXISTS json_extract_string;
 
 DELIMITER $
 
-CREATE PROCEDURE stored_proc_1 (
-
-)
+CREATE FUNCTION `json_extract_string`(
+p_json text,
+p_key text
+) RETURNS varchar(40) CHARSET latin1
 BEGIN
+SET p_json = replace(p_json, '\\&quot;', '&quot;');
+SET p_json = replace(p_json, '&quot; :', '&quot;:');
+SET p_json = replace(p_json, ': &quot;', ':&quot;');
+SET p_json = replace(p_json, ': [', ':[');
 
-SELECT * FROM table_1;
-END
+SET @pattern_start_type = '&quot;';
+SET @pattern_end_type = '&quot;';
+SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
 
+IF LOCATE(@pattern, p_json) &gt; 0 THEN
+  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
+ELSE
+  SET @pattern_start_type = '[';
+  SET @pattern_end_type = ']';
+  SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
+  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
+END IF;
+
+if @start_i = CHAR_LENGTH(@pattern) then
+  SET @end_i = 0;
+else
+  SET @end_i = LOCATE(@pattern_end_type, p_json, @start_i) - @start_i;
+end if;
+RETURN SUBSTR(p_json, @start_i, @end_i);
+END $
 
 DELIMITER ;
 
-</code></pre>
+-- SELECT json_extract_string('{&quot;key&quot;: 123}' ) from dual; -- 123
+
+</code></pre></li>
+</ul>
+
+<h3 id="stored-proc-sample">Stored proc sample</h3>
+
+<ul>
+<li><p>Create a stored proc to execute dynamic SQL script based on the previous execution result</p>
+
+<pre><code class="language-sql">DROP PROCEDURE IF EXISTS RunIf;
+
+DELIMITER $$
+
+create procedure RunIf(ifExpr MEDIUMTEXT, execStmt MEDIUMTEXT)
+BEGIN
+set @sql = concat('select @result := (', ifExpr, ')');
+prepare stmt from @sql;
+EXECUTE stmt;
+DEALLOCATE prepare stmt;
+IF (@result = true) THEN
+  set @sql = execStmt;
+  PREPARE stmt FROM @sql;
+  EXECUTE stmt;
+  DEALLOCATE prepare stmt;
+END IF;
+end
+$$
+
+DELIMITER ;
+
+-- CALL( CALL RunIf('EXISTS (SELECT * FROM information_schema.columns 
+-- WHERE table_schema = DATABASE() AND table_name = \'TargeTable\' 
+-- AND column_name = \'description\')',
+--  'ALTER TABLE TargeTable DROP COLUMN description');)
+
+
+</code></pre></li>
+</ul>
 
 
     
