@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-18T23:56:21 AEST">
-<title>SQL :: Hello World</title>
+<title>Golang Note - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Golang Introduction: Struct &amp; Interface ">
 
 
 
     
   </head>
-  <body data-url="/coding/sql/">
+  <body data-url="/coding/golang/go-note-3/">
     
       <header>
   <div class="logo">
@@ -191,10 +191,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -211,7 +212,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-3/">
             Golang Note - 3
@@ -398,11 +399,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/sql/" class="dd-item parent active haschildren
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/sql/">SQL</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
@@ -702,7 +702,11 @@
     <option value="/coding/c-sharp/" >
    C#</option>
     <option value="/coding/golang/" >
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" > Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" > Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/"  selected> Golang Note - 3</option>
+  
     <option value="/coding/java/" >
    Java</option>
     <option value="/coding/javascript/" >
@@ -713,12 +717,8 @@
    RustLang</option>
     <option value="/coding/shell/" >
    Shell</option>
-    <option value="/coding/sql/"  selected>
-   SQL</option> 
-      <option value="/coding/sql/mysql-note-1/" > MySql Note - 1</option>
-      <option value="/coding/sql/mysql-note-2/" > MySql Note - 2</option>
-      <option value="/coding/sql/mysql-note-3/" > MySql Note - 3</option>
-  
+    <option value="/coding/sql/" >
+   SQL</option>
   
     <option value="/frameworks/" >
    Frameworks</option>
@@ -742,33 +742,370 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Golang Note - 3</h1>
+        
 
-<ul class="children children-card">
+<h3 id="struct">Struct</h3>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-1/" >MySql Note - 1</a></card>
-        <p><span>Introduction of SQL for MySql ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<blockquote>
+<p>Go supports user-defined or custom types in the form of alias types or structs. A struct tries to represent a real-world entity with its properties. Structs are composite types, to use when you want to define a type which consist of a number of properties, each having their own type and value, grouping pieces of data together.</p>
+</blockquote>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-2/" >MySql Note - 2</a></card>
-        <p><span>MySql Stored Proc  &amp; Function  ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<h4 id="struct-with-tags">Struct with tags</h4>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-3/" >MySql Note - 3</a></card>
-        <p><span>MySql schema &amp; permission  ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<ul>
+<li><p>A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label. The tag-content cannot be used in normal programming, only the package reflect can access it.</p></li>
+
+<li><p>Sample</p>
+
+<pre><code class="language-go">package main
+import (
+&quot;fmt&quot;
+&quot;reflect&quot;
+)
+
+type TagType struct { //tags
+	field1 bool   &quot;An important answer&quot;
+	field2 string &quot;The name of the thing&quot;
+	field3 int    &quot;How much there are&quot;
+}
+
+func main() {
+	tt := TagType{true, &quot;Barak Obama&quot;, 1}
+	for i := 0; i &lt; 3; i++ {
+		refTag(tt, i)
+	}
+}
+func refTag(tt TagType, ix int) {
+	ttType := reflect.TypeOf(tt)
+ixField := ttType.Field(ix)
+fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
+}
+
+</code></pre></li>
 </ul>
 
+<h4 id="anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</h4>
 
+<ul>
+<li>It can only have one anonymous field of each data type in a struct.</li>
+
+<li><p>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</p>
+
+<pre><code class="language-go">type innerS struct {
+	in1 int
+	in2 int
+}
+type outerS struct {
+	b int
+	c float32
+	int // anonymous field
+	innerS // anonymous field
+}
+func Func(){
+	outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
+	fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
+}
+
+</code></pre></li>
+</ul>
+
+<h4 id="conflicting-names">Conflicting names</h4>
+
+<ul>
+<li><p>The rules when there are two fields with the same name</p>
+
+<ul>
+<li><p>An outer name hides an inner name. This provides a way to override a field or method.</p></li>
+
+<li><p>If the same name appears twice at the same level, it is an error if the name is used by the program</p></li>
+</ul></li>
+</ul>
+
+<h3 id="method">Method</h3>
+
+<ul>
+<li><p>method is a function that acts on variable of a certain type, called the receiver</p></li>
+
+<li><p>The receiver type can be (almost) anything, not only a struct type: any type can have methods, even a function type or alias types for int, bool, string or array. The receiver also cannot be an interface type.</p></li>
+
+<li><p>sample</p>
+
+<pre><code class="language-go">type List []int
+func (l List) Len() int { return len(l) }
+func (l *List) Append(val int) { *l = append(*l, val) }
+</code></pre></li>
+
+<li><p>Receiver is most often a pointer to the receiver_type for performance reasons.</p></li>
+</ul>
+
+<h4 id="embedded-methods">Embedded methods</h4>
+
+<ul>
+<li><p>There are basically 2 ways for doing this:</p>
+
+<ul>
+<li><p><strong>Aggregation</strong> (or composition): include a named field of the type of the wanted functionality</p></li>
+
+<li><p><strong>Embedding</strong>: Embed (anonymously) the type of the wanted functionality, like demonstrated</p></li>
+</ul></li>
+
+<li><p>The aggregated type requires a method to return the pointer. Mostly the method will looks like the type name, as a constructor method</p></li>
+
+<li><p>The embedded type does not need to a pointer</p></li>
+</ul>
+
+<h4 id="multiple-inheritance">Multiple inheritance</h4>
+
+<pre><code class="language-go">
+type Phone struct {}
+
+func (*Phone) Call() { 
+    return &quot;Ring Ring !!! &quot;
+}
+
+type Camera struct {}
+
+func (*Camera) TakePhoto() {
+    return &quot;Take a photo !!!&quot;
+}
+
+type CameraPhone struct {
+    Phone
+    Camera
+}
+
+func main () {
+    cp := new(CameraPhone)
+    fmt.Println( cp.Call())
+    fmt.Println( cp.TakePhoto())
+}
+</code></pre>
+
+<h3 id="interface">Interface</h3>
+
+<ul>
+<li><p>Go contains the very flexible concept of interfaces, with which a lot of aspects of object-orientation can be made available. Interfaces in Go provide a way to specify the behavior of an object: if something can do this, then it can be used here.</p></li>
+
+<li><p>Sample of interface syntax</p>
+
+<pre><code class="language-go">type Namer interface {
+Method1(param_list) return_type
+Method2(param_list) return_type
+...
+}
+</code></pre></li>
+
+<li><p>Type switch</p>
+
+<pre><code class="language-go">type Shape interface {
+	Area() float32
+}
+type Square struct {
+	side float32
+}
+
+type Circle struct {
+	radius float32
+}
+
+func (sq *Square) Area() float32 {
+	return sq.side * sq.side
+}
+
+func (c *Circle) Area() float32 {
+	return c.radius * c.radius * math.Pi
+}
+
+type Rectangle struct {
+	length, width float32
+}
+
+func (r Rectangle) Area() float32 {
+	return r.length * r.width
+}
+
+func main() {
+	shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
+	fmt.Println(&quot;Looping through shapes for area ...&quot;)
+	for n, _ := range shapes {
+		fmt.Println(&quot;Shape details: &quot;, shapes[n])
+		fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
+	}
+
+	var shape Shape
+	shape = &amp;Square{4}
+
+	switch t := shape.(type) {
+	case *Square:
+		fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
+	case *Circle:
+		fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
+	case *Rectangle:
+		fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
+	case nil:
+		fmt.Println(&quot;nil value: nothing to check?&quot;)
+	default:
+		fmt.Printf(&quot;Unexpected type %T&quot;, t)
+	}
+}
+
+// Looping through shapes for area ...
+// Shape details:  {5 3}
+// Area of this shape is:  15
+// Shape details:  &amp;{5}
+// Area of this shape is:  25
+// Shape details:  &amp;{5}
+// Area of this shape is:  78.53982
+// Type Square *main.Square with value &amp;{4}
+</code></pre></li>
+</ul>
+
+<h4 id="empty-interface">Empty Interface</h4>
+
+<ul>
+<li><p>The empty or minimal interface has no methods and so doesn’t make any demands at all. So any variable, any type implements it (not only reference types as Object in Java/C#), and any or Any (Sample code below) is really a good name as alias and abbreviation!</p>
+
+<pre><code class="language-go">type Any interface{}
+</code></pre></li>
+
+<li><p>Type classifier</p>
+
+<pre><code class="language-go">func classifier(items ...interface{}) {
+	for i, x := range items {
+		switch x.(type) {
+		case bool:
+			fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+		case float64:
+			fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+		case int, int64:
+			fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+		case nil:
+			fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+		case string:
+			fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+		default:
+			fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+		}
+	}
+}
+</code></pre></li>
+</ul>
+
+<h4 id="interface-to-interface">Interface to interface</h4>
+
+<ul>
+<li><p>An interface value can also be assigned to another interface value, as long as the underlying value implements the necessary methods.</p></li>
+
+<li><p>This conversion is checked at runtime, and when it fails a runtime error occurs: this is one of the dynamic aspects of Go, comparable to dynamic languages like Ruby and Python.</p></li>
+</ul>
+
+<h3 id="reflection">Reflection</h3>
+
+<h4 id="methods-and-types-in-reflect">Methods and types in reflect</h4>
+
+<ul>
+<li><p>Reflection in computing is the ability of a program to examine its own structure, particularly through the types; it’s a form of metaprogramming.</p></li>
+
+<li><p>Two simple functions, reflect.TypeOf and reflect.ValueOf, retrieve Type and Value pieces out of any value.</p></li>
+</ul>
+
+<h4 id="modify-a-value-through-reflection">Modify a value through reflection</h4>
+
+<ul>
+<li>Pass the address instead of copy of value</li>
+
+<li><p>Use the Elem() function work on it which indirects through the pointer</p>
+
+<pre><code class="language-go">func modifyValByReflect() {
+	var x float64 = 3.4
+	v := reflect.ValueOf(x)                      // Pass value
+	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+	v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
+	fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
+	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+	v = v.Elem()
+	fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
+	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
+	v.SetFloat(3.1415)                           // this works!
+	fmt.Println(v.Interface())
+	fmt.Println(v) // &lt;float64 Value&gt;
+}
+</code></pre></li>
+</ul>
+
+<h4 id="dynamic-typing">Dynamic typing</h4>
+
+<ul>
+<li><p>A refactoring pattern that is very useful is extracting interfaces, reducing thereby the number of types and methods needed, without having the need to manage a whole class-hierarchy as in more traditional class-based OO-languages.</p></li>
+
+<li><p>Go is the only one which combines interface values, static type checking (does a type implement the interface?), dynamic runtime conversion and no requirement for explicitly declaring that a type satisfies an interface. This property also allows interfaces to be defined and used without having to modify existing code.</p></li>
+</ul>
+
+<h3 id="oo-of-go">OO of Go</h3>
+
+<ul>
+<li><p>Encapsulation (data hiding): in contrast to other OO languages where there are 4 or more access-levels, Go simplifies this to only 2:</p>
+
+<ul>
+<li><p>package scope: ‘object’ is only known in its own package, how? it starts with a lowercase letter</p></li>
+
+<li><p>exported: ‘object’ is visible outside of its package, how? it starts with an uppercase letter A type can only have methods defined in its own package.</p></li>
+</ul></li>
+
+<li><p>Inheritance: how? composition: embedding of 1 (or more) type(s) with the desired behavior (fields and methods); multiple inheritance is possible through embedding multiple types</p></li>
+
+<li><p>Polymorphism: how? interfaces: a variable of a type can be assigned to a variable of any interface it implements. Types and interfaces are loosely coupled, again multiple inheritance is possible through implementing multiple interfaces. Go’s interfaces aren’t a variant on Java or C# interfaces, they’re much more: they are independent and are key to large-scale programming and adaptable, evolutionary design.</p></li>
+</ul>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#struct">Struct</a>
+<ul>
+<li><a href="#struct-with-tags">Struct with tags</a></li>
+<li><a href="#anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</a></li>
+<li><a href="#conflicting-names">Conflicting names</a></li>
+</ul></li>
+<li><a href="#method">Method</a>
+<ul>
+<li><a href="#embedded-methods">Embedded methods</a></li>
+<li><a href="#multiple-inheritance">Multiple inheritance</a></li>
+</ul></li>
+<li><a href="#interface">Interface</a>
+<ul>
+<li><a href="#empty-interface">Empty Interface</a></li>
+<li><a href="#interface-to-interface">Interface to interface</a></li>
+</ul></li>
+<li><a href="#reflection">Reflection</a>
+<ul>
+<li><a href="#methods-and-types-in-reflect">Methods and types in reflect</a></li>
+<li><a href="#modify-a-value-through-reflection">Modify a value through reflection</a></li>
+<li><a href="#dynamic-typing">Dynamic typing</a></li>
+</ul></li>
+<li><a href="#oo-of-go">OO of Go</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/shell/ps-note-1/" title="Powershell Note - 1"> <i class="fa fa-chevron-left"></i><label>Powershell Note - 1</label></a>
-    <a class="nav nav-next" href="/coding/sql/mysql-note-1/" title="MySql Note - 1" style="margin-right: 0px;"><label>MySql Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-2/" title="Golang Note - 2"> <i class="fa fa-chevron-left"></i><label>Golang Note - 2</label></a>
+    <a class="nav nav-next" href="/coding/java/" title="Java" style="margin-right: 0px;"><label>Java</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

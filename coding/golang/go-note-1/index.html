@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-16T22:24:23 AEST">
+<meta name="revised" content="2019-09-18T23:56:21 AEST">
 <title>Golang Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -205,6 +205,20 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-2/">
+            Golang Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-3/">
+            Golang Note - 3
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/java/" class="dd-item haschildren
@@ -349,6 +363,12 @@
         </div>
     </li>
         </ul>
+    </li>
+    <li data-nav-id="/coding/rustlang/" class="dd-item
+        ">
+      <div>
+      <a href="/coding/rustlang/">RustLang</a>
+      </div>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
         ">
@@ -684,6 +704,8 @@
     <option value="/coding/golang/" >
    Golang</option> 
       <option value="/coding/golang/go-note-1/"  selected> Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" > Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" > Golang Note - 3</option>
   
     <option value="/coding/java/" >
    Java</option>
@@ -691,6 +713,8 @@
    JavaScript</option>
     <option value="/coding/python/" >
    Python</option>
+    <option value="/coding/rustlang/" >
+   RustLang</option>
     <option value="/coding/shell/" >
    Shell</option>
     <option value="/coding/sql/" >
@@ -873,6 +897,93 @@ fmt.Printf( &quot; slice = %v \n&quot;, slice)
 </code></pre></li>
 </ul>
 
+<h4 id="re-slicing">Re-slicing</h4>
+
+<ul>
+<li><p>Changing the length of the slice is called re-slicing, it is done e.g. like: <code>slice1 = slice1[0:end]</code> where end is another end-index (length) than before.</p></li>
+
+<li><p>Resizing a slice by 1 can be done as follows: <code>sl = sl[0:len(sl)+1] // extend length by 1</code></p></li>
+
+<li><p>A slice can be resized until it occupies the whole underlying array.</p></li>
+</ul>
+
+<h4 id="copy-and-append-slices">Copy and append slices</h4>
+
+<pre><code class="language-go">package main
+import “fmt”
+func main() {
+
+    sl_from := []int{1,2,3}
+    sl_to := make([]int,10)
+    n := copy(sl_to, sl_from)
+    fmt.Println(sl_to)
+    // output: [1 2 3 0 0 0 0 0 0 0]
+
+    fmt.Printf(&quot;Copied %d elements\n&quot;, n) // n == 3
+
+    sl3 := []int{1,2,3}
+    sl3 = append(sl3, 4, 5, 6)
+    fmt.Println(sl3)
+}
+</code></pre>
+
+<h3 id="make-and-new">make() and new()</h3>
+
+<ul>
+<li><p>new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T: it returns a pointer to a newly allocated zero value of type T, ready for use; it applies to value types like arrays and structs; it is equivalent to &amp;T{ }</p></li>
+
+<li><p>make(T) returns an initialized value of type T; it applies only to the 3 built-in reference types: slices, maps and channels.</p></li>
+
+<li><p>In other words, new allocates; make initializes.</p>
+
+<pre><code class="language-go">var p *[]int = new([]int) // *p == nil; with len and cap 0
+// or use assignment operator
+p := new([]int)
+
+var v []int = make([]int, 10, 50)
+// or use assignment operator
+v := make([]int, 10, 50)
+
+</code></pre></li>
+</ul>
+
+<h3 id="good-practices">Good practices</h3>
+
+<h4 id="use-buffer-to-concat-string">Use Buffer to concat string</h4>
+
+<ul>
+<li><p>Go has a package bytes with manipulation functions for that kind of type Buffer. The sample below is much more memory and CPU-efficient than +=, especially if the number of strings to concatenate is large.</p>
+
+<pre><code class="language-go">var buffer bytes.Buffer
+for {
+    if s, ok := getNextString(); ok { //method getNextString() not shown here
+        buffer.WriteString(s)
+    } else {
+        break
+}
+}
+
+fmt.Print(buffer.String(), “\n”)
+
+</code></pre></li>
+</ul>
+
+<h4 id="substr">Substr</h4>
+
+<p>Slice makes substringing more easier than other language.  <code>subStr := str[start:end]</code></p>
+
+<h4 id="change-a-character-in-string">Change a character in string</h4>
+
+<ul>
+<li><p>To do this you first have to convert the string to an array of bytes, then an array-item of a certain index can be changed, and then the array must be converted back to a new string.</p>
+
+<pre><code class="language-go">str := &quot;golang&quot;
+chars:= []byte(str)
+chars[1] = '0'
+newStr := string(chars) // g0lang
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc" >
@@ -891,6 +1002,15 @@ fmt.Printf( &quot; slice = %v \n&quot;, slice)
 <ul>
 <li><a href="#array">Array</a></li>
 <li><a href="#slice">Slice</a></li>
+<li><a href="#re-slicing">Re-slicing</a></li>
+<li><a href="#copy-and-append-slices">Copy and append slices</a></li>
+</ul></li>
+<li><a href="#make-and-new">make() and new()</a></li>
+<li><a href="#good-practices">Good practices</a>
+<ul>
+<li><a href="#use-buffer-to-concat-string">Use Buffer to concat string</a></li>
+<li><a href="#substr">Substr</a></li>
+<li><a href="#change-a-character-in-string">Change a character in string</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -905,7 +1025,7 @@ fmt.Printf( &quot; slice = %v \n&quot;, slice)
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/coding/golang/" title="Golang"> <i class="fa fa-chevron-left"></i><label>Golang</label></a>
-    <a class="nav nav-next" href="/coding/java/" title="Java" style="margin-right: 0px;"><label>Java</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/coding/golang/go-note-2/" title="Golang Note - 2" style="margin-right: 0px;"><label>Golang Note - 2</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

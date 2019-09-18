@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-16T22:24:23 AEST">
+<meta name="revised" content="2019-09-18T23:56:21 AEST">
 <title>JS &amp; ES Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="The most confused [this] in JavaScript">
+<meta name="description" content="The most unpredictable [this] in JavaScript">
 
 
 
@@ -204,6 +204,20 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-2/">
+            Golang Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-3/">
+            Golang Note - 3
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/java/" class="dd-item haschildren
@@ -349,6 +363,12 @@
         </div>
     </li>
         </ul>
+    </li>
+    <li data-nav-id="/coding/rustlang/" class="dd-item
+        ">
+      <div>
+      <a href="/coding/rustlang/">RustLang</a>
+      </div>
     </li>
     <li data-nav-id="/coding/shell/" class="dd-item haschildren
         ">
@@ -693,6 +713,8 @@
   
     <option value="/coding/python/" >
    Python</option>
+    <option value="/coding/rustlang/" >
+   RustLang</option>
     <option value="/coding/shell/" >
    Shell</option>
     <option value="/coding/sql/" >
@@ -725,7 +747,7 @@
             <h1>JS &amp; ES Note - 1</h1>
         
 
-<h2 id="the-most-confused-keyword-and-feature">The most confused keyword and feature</h2>
+<h2 id="the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</h2>
 
 <p>You may already guessed what I am talking about. Yes,  the<strong>this</strong> keyword. It is not only a powerful feature, but also often misinterpreted keyword.</p>
 
@@ -780,16 +802,78 @@ Object [global] {global: [Circular],...}
 
 <h3 id="this-inside-a-function"><strong>this</strong> inside a function</h3>
 
-<p>From 2015, ECMAScript 6, aka ES 2015, has been supported by most modern browesers. So when we talk about function in JavaScript, literally we are talking two slightly different functions. One is defined with keyword <code>function</code>, another one is aka arrow function or fat arrow. For most scenario, arrow function is the same as old style function, but fat arrow hanles the <strong>this</strong> keyword in a more stable and predictable way.</p>
+<p>From 2015, ECMAScript 6, aka ES 2015, has been supported by most modern browsers. So when we talk about function in JavaScript, literally we are talking two slightly different functions. One is defined with keyword <code>function</code>, another one is aka arrow function or fat arrow. For most scenario, arrow function is the same as old style function, but fat arrow handles the <strong>this</strong> keyword in a more stable and predictable way.</p>
 
 <blockquote>
-<p>Mozila - MDN: The value of this is determined by how a function is called (runtime binding). It can&rsquo;t be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind() method to set the value of a function&rsquo;s this regardless of how it&rsquo;s called. The arrow functions which don&rsquo;t provide their own this binding (it retains the this value of the enclosing lexical context).</p>
+<p>Mozilla - MDN: The value of this is determined by how a function is called (runtime binding). It can&rsquo;t be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind() method to set the value of a function&rsquo;s this regardless of how it&rsquo;s called. The arrow functions which don&rsquo;t provide their own this binding (it retains the this value of the enclosing lexical context).</p>
 </blockquote>
 
-<p>According MDN&rsquo;s explanation, the arrow function is a better implementation. It is more predictable and stable. Arrow function is highly recommanded to replace the old style function.</p>
+<p>According MDN&rsquo;s explanation, the arrow function is a better implementation. It is more predictable and stable. Arrow function is highly recommended to replace the old style function.</p>
 
-<pre><code class="language-js">
-var obj3 = {
+<h4 id="this-inside-a-regular-function"><strong>this</strong> inside a regular function</h4>
+
+<ul>
+<li><p>The samples below show the different *this*es</p>
+
+<pre><code class="language-js">var obj0 = {
+  prop: 'obj0',
+  func_1: function () {
+      console.log(' func_1-&gt; ', this);
+      var func_2 = {
+          prop: 'func_2',
+          func_3: function () {
+              console.log(' func_3 -&gt; ', this);
+          }
+      };
+      func_2.func_3();
+  }
+};
+obj0.func_1();
+////////////////////////////////
+var obj1 = {
+  prop: 'obj1',
+  func_1: function () {
+      console.log(' func_1-&gt; ', this);
+      func_2 = function () {
+          this.prop = 'func_2';
+          var func_3 = function () {
+              this.p = 'func_3';
+              console.log(' func_3 -&gt; ', this);
+          }
+          return func_3
+      };
+      func_2()();
+  }
+};
+obj1.func_1();
+</code></pre></li>
+
+<li><p>Test (Fat Arrow)</p>
+
+<pre><code class="language-js">var obj2 = {
+prop: 123,
+func_1: () =&gt; {
+    console.log(' func_1-&gt; ', this);
+    func_2 = {
+        prop: 'func_2',
+        func_3: () =&gt; {
+            this.p = 'func_3';
+            console.log(' func_3 -&gt; ', this);
+        }
+    };
+    func_2.func_3();
+}
+};
+obj2.func_1();
+</code></pre></li>
+</ul>
+
+<h4 id="fat-arrow-has-no-binding">Fat arrow has no binding</h4>
+
+<ul>
+<li><p>The sample below show the different binding behavior between regular function and arrow function</p>
+
+<pre><code class="language-js">var obj3 = {
   p: 'obj3',
   toBeCalled: function() {
     console.log(' this is toBeCalled ', this.p);
@@ -821,7 +905,8 @@ testBind2(obj4);
 /// output
 ///  this is toBeCalled  undefined
 
-</code></pre>
+</code></pre></li>
+</ul>
 
     </div>
 
@@ -830,10 +915,14 @@ testBind2(obj4);
 <ul>
 <li>
 <ul>
-<li><a href="#the-most-confused-keyword-and-feature">The most confused keyword and feature</a>
+<li><a href="#the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</a>
 <ul>
 <li><a href="#this-can-be-anything"><strong>this</strong> can be anything</a></li>
-<li><a href="#this-inside-a-function"><strong>this</strong> inside a function</a></li>
+<li><a href="#this-inside-a-function"><strong>this</strong> inside a function</a>
+<ul>
+<li><a href="#this-inside-a-regular-function"><strong>this</strong> inside a regular function</a></li>
+<li><a href="#fat-arrow-has-no-binding">Fat arrow has no binding</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>

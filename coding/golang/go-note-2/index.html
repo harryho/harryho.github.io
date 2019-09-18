@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-18T23:56:21 AEST">
-<title>SQL :: Hello World</title>
+<title>Golang Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Golang Introduction: Map &amp; Function ">
 
 
 
     
   </head>
-  <body data-url="/coding/sql/">
+  <body data-url="/coding/golang/go-note-2/">
     
       <header>
   <div class="logo">
@@ -191,10 +191,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -204,7 +205,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-2/">
             Golang Note - 2
@@ -398,11 +399,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/sql/" class="dd-item parent active haschildren
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/sql/">SQL</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
@@ -702,7 +702,11 @@
     <option value="/coding/c-sharp/" >
    C#</option>
     <option value="/coding/golang/" >
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" > Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/"  selected> Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" > Golang Note - 3</option>
+  
     <option value="/coding/java/" >
    Java</option>
     <option value="/coding/javascript/" >
@@ -713,12 +717,8 @@
    RustLang</option>
     <option value="/coding/shell/" >
    Shell</option>
-    <option value="/coding/sql/"  selected>
-   SQL</option> 
-      <option value="/coding/sql/mysql-note-1/" > MySql Note - 1</option>
-      <option value="/coding/sql/mysql-note-2/" > MySql Note - 2</option>
-      <option value="/coding/sql/mysql-note-3/" > MySql Note - 3</option>
-  
+    <option value="/coding/sql/" >
+   SQL</option>
   
     <option value="/frameworks/" >
    Frameworks</option>
@@ -742,33 +742,191 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Golang Note - 2</h1>
+        
 
-<ul class="children children-card">
+<h3 id="map">Map</h3>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-1/" >MySql Note - 1</a></card>
-        <p><span>Introduction of SQL for MySql ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<ul>
+<li><p>Maps are a special kind of data structure: an unordered collection of pairs of items, where one element of the pair is the key, and the other element, associated with the key, is the data or the value, hence they are also called associative arrays or dictionaries.</p></li>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-2/" >MySql Note - 2</a></card>
-        <p><span>MySql Stored Proc  &amp; Function  ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<li><p>The key type can be any type for which the operations == and != are defined, like string, int, float. The value type can be any type.</p></li>
 
-<span><card>
-        <a href="/coding/sql/mysql-note-3/" >MySql Note - 3</a></card>
-        <p><span>MySql schema &amp; permission  ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<li><p>Map is much faster than a linear search, but still around 100x slower than direct indexing in an array or slice; so if performance is very important try to solve the problem with slices.</p></li>
 </ul>
 
+<h4 id="definition">Definition</h4>
 
+<p>Maps are reference types: memory is allocated with the make -function</p>
+
+<pre><code>Initialization of a map: `var map1[keytype]valuetype = make(map[keytype]valuetype)`
+
+or shorter with: `map1 := make(map[keytype]valuetype)`
+
+mapCreated is made in this way: `mapCreated := make(map[string]float)`
+
+which is equivalent to: `mapCreated := map[string]float{}`
+</code></pre>
+
+<h4 id="does-the-key-exist">Does the key exist</h4>
+
+<ul>
+<li><p>Delete the pair from the map</p>
+
+<pre><code>if _, ok := map1[key1]; ok {
+delete(map1, key1)
+}
+
+</code></pre></li>
+</ul>
+
+<h3 id="function">Function</h3>
+
+<ul>
+<li><p>Function overloading, that is coding two or more functions in a program with the same function name but a different parameter list and/or a different return-type(s), is not allowed in Go.</p></li>
+
+<li><p>The default way in Go is to pass a variable as an argument to a function by value: a copy is made of that variable (and the data in it).</p></li>
+
+<li><p>Named variables used as result parameters are automatically initialized to their zero-value, and once they receive their value, a simple (empty) return statement is sufficient; furthermore even when there is only 1 named return variable, it has to be put inside ( )</p></li>
+</ul>
+
+<h4 id="defer">Defer</h4>
+
+<ul>
+<li><p>The defer keyword allows us to postpone the execution of a statement or a function until the end of the enclosing (calling) function: it executes something (a function or an expression) when the enclosing function returns (after every return and even when an error occurred in the midst of executing the function, not only a return at the end of the function), but before the }</p></li>
+
+<li><p>When many defer’s are issued in the code, they are executed at the end of the function in the inverse order (like a stack or LIFO): the last defer is first executed, and so on.</p></li>
+
+<li><p>Sample</p>
+
+<pre><code class="language-go">func f() {
+for i := 0; i &lt; 5; i++ {
+    defer fmt.Printf(“%d “, i)
+}
+}
+// output : 4 3 2 1 0
+</code></pre></li>
+
+<li><p>Defer allows us to guarantee that certain clean-up tasks are performed before we return from a function.</p></li>
+</ul>
+
+<h4 id="recursive">Recursive</h4>
+
+<ul>
+<li>A function that call itself in its body is called recursive.</li>
+
+<li><p>An important problem when using recursive functions is stack overflow: this can occur when a large number of recursive calls are needed and the programs runs out of allocated stack memory. This can be solved by using a technique called lazy evaluation, implemented in Go with a channel and a goroutine.</p>
+
+<pre><code class="language-go">package main
+import &quot;fmt&quot;
+
+func main() {
+result := 0
+for i:=0; i &lt;= 10; i++ {
+    result = fibonacci(i)
+    fmt.Printf(&quot;fibonacci(%d) is: %d\n&quot;, i, result)
+}
+}
+
+func fibonacci(n int) (res int) {
+	if n &lt;= 1 {
+		res = 1
+	} else {
+		res = fibonacci(n-1) + fibonacci(n-2)
+	}
+	return
+}
+</code></pre></li>
+</ul>
+
+<h4 id="callback">Callback</h4>
+
+<ul>
+<li><p>Functions can be used as parameters in another function, the passed function can then be called within the body of that function, that is why it is commonly called a callback.</p>
+
+<pre><code class="language-go">func main() {
+	callback(1, Add)
+}
+func Add(a, b int) {
+	fmt.Printf(&quot;The sum of %d and %d is: %d\n&quot;, a, b, a+b)
+}
+func callback(y int, f func(int, int)) {
+	f(y, 2)
+	// this becomes Add(1, 2)
+}
+</code></pre></li>
+</ul>
+
+<h4 id="closures-function-literals">Closures (function literals)</h4>
+
+<ul>
+<li><p>Sample</p>
+
+<pre><code class="language-go">plus := func(x, y int) int { return x + y }
+plus( 1,2) // 3
+
+// invoke func immediatley
+func(x, y int) int { return x + y }( 1, 2) // 3
+
+</code></pre></li>
+</ul>
+
+<h4 id="closures-return-another-function">Closures - return another function</h4>
+
+<ul>
+<li><p>Use return function for Debugging</p>
+
+<pre><code class="language-go">where := func() {
+_, file, line, _ := runtime.Caller(1)
+log.Printf(“%s:%d”, file, line)
+}
+
+func Func () {
+//....do sth 
+where ()
+// ....do another thing
+}
+</code></pre></li>
+</ul>
+
+    </div>
+
+    <div class="toc" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#map">Map</a>
+<ul>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#does-the-key-exist">Does the key exist</a></li>
+</ul></li>
+<li><a href="#function">Function</a>
+<ul>
+<li><a href="#defer">Defer</a></li>
+<li><a href="#recursive">Recursive</a></li>
+<li><a href="#callback">Callback</a></li>
+<li><a href="#closures-function-literals">Closures (function literals)</a></li>
+<li><a href="#closures-return-another-function">Closures - return another function</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/shell/ps-note-1/" title="Powershell Note - 1"> <i class="fa fa-chevron-left"></i><label>Powershell Note - 1</label></a>
-    <a class="nav nav-next" href="/coding/sql/mysql-note-1/" title="MySql Note - 1" style="margin-right: 0px;"><label>MySql Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-1/" title="Golang Note - 1"> <i class="fa fa-chevron-left"></i><label>Golang Note - 1</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-3/" title="Golang Note - 3" style="margin-right: 0px;"><label>Golang Note - 3</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
