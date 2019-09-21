@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-21T14:53:55 AEST">
-<title>MySql Note - 1 :: Hello World</title>
+<title>Kubernetes Cluster in 5min :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of SQL for MySql">
+<meta name="description" content="5 Mins to create a kubernetes cluster on Ubuntu or Centos Linux machine">
 
 
 
     
   </head>
-  <body data-url="/coding/sql/mysql-note-1/">
+  <body data-url="/projects/kube-cluster/">
     
       <header>
   <div class="logo">
@@ -119,11 +119,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -421,14 +420,13 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/sql/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/sql/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/sql/">SQL</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/sql/">SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item active">
+      <li data-nav-id="/coding/sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/sql/mysql-note-1/">
             MySql Note - 1
@@ -631,10 +629,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/projects/" class="dd-item haschildren
+    <li data-nav-id="/projects/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/projects/">Projects</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/projects/angular4-crm/" class="dd-item">
@@ -658,7 +657,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/projects/kube-cluster/" class="dd-item">
+      <li data-nav-id="/projects/kube-cluster/" class="dd-item active">
         <div>
           <a href="/projects/kube-cluster/">
             Kubernetes Cluster in 5min
@@ -719,30 +718,7 @@
     <option value="/blogs/" >
    Blogs</option>
     <option value="/coding/" >
-   Coding</option> 
-    <option value="/coding/c/" >
-   C / C&#43;&#43;</option>
-    <option value="/coding/c-sharp/" >
-   C#</option>
-    <option value="/coding/golang/" >
-   Golang</option>
-    <option value="/coding/java/" >
-   Java</option>
-    <option value="/coding/javascript/" >
-   JavaScript</option>
-    <option value="/coding/python/" >
-   Python</option>
-    <option value="/coding/rustlang/" >
-   Rustlang</option>
-    <option value="/coding/shell/" >
-   Shell</option>
-    <option value="/coding/sql/" >
-   SQL</option> 
-      <option value="/coding/sql/mysql-note-1/"  selected> MySql Note - 1</option>
-      <option value="/coding/sql/mysql-note-2/" > MySql Note - 2</option>
-      <option value="/coding/sql/mysql-note-3/" > MySql Note - 3</option>
-  
-  
+   Coding</option>
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
@@ -750,7 +726,17 @@
     <option value="/os/" >
    OS</option>
     <option value="/projects/" >
-   Projects</option>
+   Projects</option> 
+      <option value="/projects/angular4-crm/" > Angular 4 CRM Project</option>
+      <option value="/projects/angularjs-webpack-es6-starter/" > Angularjs Webpack ES6 Starter</option>
+      <option value="/projects/python-flat-api/" > FlatApi - Restful API for python dev</option>
+      <option value="/projects/kube-cluster/"  selected> Kubernetes Cluster in 5min</option>
+      <option value="/projects/laravel-mvc-starter/" > Laravel MVC Starter</option>
+      <option value="/projects/react-crm/" > React Redux CRM Project</option>
+      <option value="/projects/vue2-admin/" > Vue 2 Admin Project</option>
+      <option value="/projects/vue2-crm/" > Vue 2 CRM Project</option>
+      <option value="/projects/zf2-mvc-starter/" > Zend Framework 2 MVC Starter</option>
+  
 
 
 
@@ -767,60 +753,75 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>MySql Note - 1</h1>
+            <h1>Kubernetes Cluster in 5min</h1>
         
 
-<h3 id="create-a-new-database">Create a new database</h3>
+<h2 id="what-will-you-get-after-completing-steps-below">What will you get after completing steps below</h2>
 
-<pre><code class="language-sql">-- Drop the old one  
-DROP SCHEMA  IF EXISTS new_dbu
+<h3 id="screenshot-of-cluster-s-dashboard">Screenshot of cluster&rsquo;s dashboard</h3>
 
--- Create a new db 
-CREATE DATABASE new_db CHARACTER SET utf8 
-COLLATE utf8_general_ci;
+<p><img src="/img/kube_pods_metrics.jpg" alt="kube cluster dashboard" /></p>
 
-</code></pre>
-
-<h3 id="create-a-table">Create a table</h3>
-
-<pre><code class="language-sql">DROP TABLE IF EXISTS new_table; 
-
-CREATE TABLE new_table (
-    id int NOT NULL AUTO_INCREMENT,
-    name varchar(50),
-    title varchar(50),
-    email varchar(250),
-    created_date datetime,
-    modified_date datetime,
-    PRIMARY KEY (id)
-);
-
-
-</code></pre>
-
-<h3 id="query">Query</h3>
+<h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-<li><p>JOIN and INNER JOIN</p>
+<li>You have a Linux machine in place. Physical or virtual machine doesn&rsquo;t mather.</li>
+<li>The Linux OS is supposed to be one of following distroes: the Ubuntu 16+, 18+ or CentOS 7.</li>
+<li>Internet is available on your machine</li>
+</ul>
 
-<pre><code class="language-sql">SELECT * FROM new_table_a na 
-     JOIN new_table_b nb ON nb.new_table_a_id = na.id
-     LIMIT 10;
+<h2 id="caveat">Caveat</h2>
+
+<ul>
+<li>Use Virtual Machine to test it before running it on physical machine</li>
+<li>VirtualBox or VMWare is a good option.</li>
+<li>Kubernetes is supposed to run on Linux server, but it should be able to run on desktop version as well.</li>
+</ul>
+
+<h2 id="steps-to-use-the-script">Steps to use the script</h2>
+
+<ul>
+<li>Setup SSH Server if you need</li>
+<li>Get the script from my github repo</li>
+
+<li><p>Switch to root user and run the script</p>
+
+<pre><code class="language-bash"># Ubuntu
+wget https://github.com/harryho/kube-cluster-in-5mins/blob/master/ubuntu/kube-cluster.sh
+
+# CentOS
+wget https://github.com/harryho/kube-cluster-in-5mins/blob/master/centos/kube-cluster.sh
+
+# Switch user
+sudo su
+./kube-cluster.sh -h
 
 </code></pre></li>
 </ul>
 
-<h3 id="useful-temporary-table">Useful temporary table</h3>
+<h2 id="trouble-shooting">Trouble shooting</h2>
 
-<pre><code class="language-sql">
-DROP TEMPORARY TABLE IF EXISTS tmp_table; 
+<ul>
+<li>Hardware ( Enable VT-x,  2+ Core , 2G RAM )</li>
+<li>The scripts only support ubuntu 16+ or CentOS 7+</li>
 
-CREATE TEMPORARY TABLE tmp_table AS 
-SELECT * FROM new_table;
+<li><p>Swap must be off</p>
 
-SELECT * FROM tmp_table;
+<ul>
+<li><p>disable swap immediately</p>
 
-</code></pre>
+<pre><code class="language-bash">sudo swapoff -a
+</code></pre></li>
+
+<li><p>comment out the swap drive from fstab</p>
+
+<pre><code># swap was on ...
+# UUID=XXXXXXX-XXXXX-XXXX
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h2 id="repository-of-scripts-https-github-com-harryho-kube-cluster-in-5mins-git"><a href="https://github.com/harryho/kube-cluster-in-5mins.git">Repository of scripts</a></h2>
 
     </div>
 
@@ -829,13 +830,15 @@ SELECT * FROM tmp_table;
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#what-will-you-get-after-completing-steps-below">What will you get after completing steps below</a>
 <ul>
-<li><a href="#create-a-new-database">Create a new database</a></li>
-<li><a href="#create-a-table">Create a table</a></li>
-<li><a href="#query">Query</a></li>
-<li><a href="#useful-temporary-table">Useful temporary table</a></li>
+<li><a href="#screenshot-of-cluster-s-dashboard">Screenshot of cluster&rsquo;s dashboard</a></li>
 </ul></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#caveat">Caveat</a></li>
+<li><a href="#steps-to-use-the-script">Steps to use the script</a></li>
+<li><a href="#trouble-shooting">Trouble shooting</a></li>
+<li><a href="#repository-of-scripts-https-github-com-harryho-kube-cluster-in-5mins-git"><a href="https://github.com/harryho/kube-cluster-in-5mins.git">Repository of scripts</a></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -847,8 +850,8 @@ SELECT * FROM tmp_table;
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/sql/" title="SQL"> <i class="fa fa-chevron-left"></i><label>SQL</label></a>
-    <a class="nav nav-next" href="/coding/sql/mysql-note-2/" title="MySql Note - 2" style="margin-right: 0px;"><label>MySql Note - 2</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/projects/zf2-mvc-starter/" title="Zend Framework 2 MVC Starter"> <i class="fa fa-chevron-left"></i><label>Zend Framework 2 MVC Starter</label></a>
+    <a class="nav nav-next" href="/frameworks/" title="Frameworks" style="margin-right: 0px;"><label>Frameworks</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
