@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-18T23:56:21 AEST">
+<meta name="revised" content="2019-09-21T14:40:51 AEST">
 <title>Cron Job Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -215,6 +215,20 @@
         <div>
           <a href="/coding/golang/go-note-3/">
             Golang Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-4/">
+            Golang Note - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-91/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-91/">
+            Golang Note - 91
           </a>
         </div>
     </li>
@@ -760,14 +774,14 @@
 
 <li><p>Cron job setting</p>
 
-<pre><code class="language-bash">00 20   * * *   &lt;user_account&gt;  /home/&lt;user_account&gt;/cass_staging_refresh/cass_prod_snapshot.sh &gt;&gt; /home/&lt;user_account&gt;/cass_staging_refresh/refresh.log 2&gt;&amp;1
+<pre><code class="language-bash">00 20   * * *   &lt;user_account&gt;  /home/&lt;user_account&gt;/refresh/cass_snapshot.sh &gt;&gt; /home/&lt;user_account&gt;/refresh/refresh.log 2&gt;&amp;1
 </code></pre></li>
 
-<li><p>The script to create a snapshot:   <code>cass_prod_snapshot.sh</code></p>
+<li><p>The script to create a snapshot:   <code>cass_snapshot.sh</code></p>
 
 <pre><code class="language-bash">#!/bin/bash
 
-# the log file sits home/&lt;user_account&gt;/cass_staging_refresh/refresh.log 
+# the log file sits home/&lt;user_account&gt;/refresh/refresh.log 
 
 # SET staging Cassandra IP
 CASS_STG_IP=0.0.0.0
@@ -819,7 +833,7 @@ scp hho_ks.cql &lt;user_account&gt;@${CASS_STG_IP}:/home/&lt;user_account&gt;/
 
 # Refresh snapshots on staging Cassandra
 echo &quot;$(date): SSH to staging Cassandra ${CASS_STG_IP}&quot;
-sudo ssh &lt;user_account&gt;@${CASS_STG_IP} 'bash -s' &lt; /home/&lt;user_account&gt;/cass_staging_refresh/cass_staging_refresh.sh
+sudo ssh &lt;user_account&gt;@${CASS_STG_IP} 'bash -s' &lt; /home/&lt;user_account&gt;/refresh/cass_refresh.sh
 
 echo &quot;$(date): Completed refresh of staging Cassandra ${CASS_STG_IP}&quot;
 END=$(date +%s)
@@ -829,7 +843,7 @@ echo &quot;Refresh duration: $(( $END - $START ))s&quot;
 
 <li><p>Refresh the staging Cassandra node</p></li>
 
-<li><p>The script to refresh the staging node: <code>cass_staging_refresh</code></p>
+<li><p>The script to refresh the staging node: <code>cass_refresh</code></p>
 
 <pre><code class="language-bash">#!/bin/bash
 

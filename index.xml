@@ -553,6 +553,24 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
+      <title>Golang Note - 4</title>
+      <link>/coding/golang/go-note-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-4/</guid>
+      <description>IO - Read &amp;amp; Write Read from user input var ( firstName, lastName, s string i int f float32 input = &amp;quot;56.12 / 5212 / Go&amp;quot; format = &amp;quot;%f / %d / %s&amp;quot; ) func main() { fmt.Println(&amp;quot;Please enter your full name: &amp;quot;) fmt.Scanln(&amp;amp;firstName, &amp;amp;lastName) // fmt.Scanf(&amp;quot;%s %s&amp;quot;, &amp;amp;firstName, &amp;amp;lastName) fmt.Printf(&amp;quot;Hi %s %s!\n&amp;quot;, firstName, lastName) // Hi Chris Naegels fmt.Sscanf(input, format, &amp;amp;f, &amp;amp;i, &amp;amp;s) fmt.Println(&amp;quot;From the string we read: &amp;quot;, f, i, s) // ouwtput: From the string we read: 56.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 91</title>
+      <link>/coding/golang/go-note-91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-91/</guid>
+      <description>Convenient logging methods Stringer package main import ( &amp;quot;fmt&amp;quot; ) // Animal has a Name and an Age to represent an animal. type Animal struct { Name string Age uint } // String makes Animal satisfy the Stringer interface. func (a Animal) String() string { return fmt.Sprintf(&amp;quot;%v (%d)&amp;quot;, a.Name, a.Age) } func main() { a := Animal{ Name: &amp;quot;Gopher&amp;quot;, Age: 2, } fmt.Println(a) // Gopher (2) }  GoStringer package main import ( &amp;quot;fmt&amp;quot; ) // Address has a City, State and a Country.</description>
+    </item>
+    
+    <item>
       <title>Java Note - 1: Enum</title>
       <link>/coding/java/java-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -679,7 +697,7 @@ DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLin
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-3/</guid>
-      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another simple command to show all SHOW FULL PROCESSLIST;  </description>
+      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another short cut to show all process SHOW FULL PROCESSLIST;  </description>
     </item>
     
     <item>

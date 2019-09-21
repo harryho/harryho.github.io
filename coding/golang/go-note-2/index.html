@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-18T23:56:21 AEST">
+<meta name="revised" content="2019-09-21T14:40:51 AEST">
 <title>Golang Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -216,6 +216,20 @@
         <div>
           <a href="/coding/golang/go-note-3/">
             Golang Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-4/">
+            Golang Note - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-91/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-91/">
+            Golang Note - 91
           </a>
         </div>
     </li>
@@ -697,28 +711,6 @@
    Blogs</option>
     <option value="/coding/" >
    Coding</option> 
-    <option value="/coding/c/" >
-   C / C&#43;&#43;</option>
-    <option value="/coding/c-sharp/" >
-   C#</option>
-    <option value="/coding/golang/" >
-   Golang</option> 
-      <option value="/coding/golang/go-note-1/" > Golang Note - 1</option>
-      <option value="/coding/golang/go-note-2/"  selected> Golang Note - 2</option>
-      <option value="/coding/golang/go-note-3/" > Golang Note - 3</option>
-  
-    <option value="/coding/java/" >
-   Java</option>
-    <option value="/coding/javascript/" >
-   JavaScript</option>
-    <option value="/coding/python/" >
-   Python</option>
-    <option value="/coding/rustlang/" >
-   RustLang</option>
-    <option value="/coding/shell/" >
-   Shell</option>
-    <option value="/coding/sql/" >
-   SQL</option>
   
     <option value="/frameworks/" >
    Frameworks</option>
@@ -761,14 +753,27 @@
 
 <p>Maps are reference types: memory is allocated with the make -function</p>
 
-<pre><code>Initialization of a map: `var map1[keytype]valuetype = make(map[keytype]valuetype)`
+<ul>
+<li><p>Initialization of a map:</p>
 
-or shorter with: `map1 := make(map[keytype]valuetype)`
+<pre><code>var map1[keytype]valuetype = make(map[keytype]valuetype)
+</code></pre></li>
 
-mapCreated is made in this way: `mapCreated := make(map[string]float)`
+<li><p>or shorter with:</p>
 
-which is equivalent to: `mapCreated := map[string]float{}`
-</code></pre>
+<pre><code>map1 := make(map[keytype]valuetype)
+</code></pre></li>
+
+<li><p>mapCreated is made in this way:</p>
+
+<pre><code>mapCreated := make(map[string]float)
+</code></pre></li>
+
+<li><p>which is equivalent to:</p>
+
+<pre><code>mapCreated := map[string]float{}
+</code></pre></li>
+</ul>
 
 <h4 id="does-the-key-exist">Does the key exist</h4>
 
@@ -778,7 +783,6 @@ which is equivalent to: `mapCreated := map[string]float{}`
 <pre><code>if _, ok := map1[key1]; ok {
 delete(map1, key1)
 }
-
 </code></pre></li>
 </ul>
 
@@ -802,9 +806,9 @@ delete(map1, key1)
 <li><p>Sample</p>
 
 <pre><code class="language-go">func f() {
-for i := 0; i &lt; 5; i++ {
-    defer fmt.Printf(“%d “, i)
-}
+    for i := 0; i &lt; 5; i++ {
+        defer fmt.Printf(“%d “, i)
+    }
 }
 // output : 4 3 2 1 0
 </code></pre></li>
@@ -823,20 +827,20 @@ for i := 0; i &lt; 5; i++ {
 import &quot;fmt&quot;
 
 func main() {
-result := 0
-for i:=0; i &lt;= 10; i++ {
-    result = fibonacci(i)
-    fmt.Printf(&quot;fibonacci(%d) is: %d\n&quot;, i, result)
-}
+    result := 0
+    for i:=0; i &lt;= 10; i++ {
+        result = fibonacci(i)
+        fmt.Printf(&quot;fibonacci(%d) is: %d\n&quot;, i, result)
+    }
 }
 
 func fibonacci(n int) (res int) {
-	if n &lt;= 1 {
-		res = 1
-	} else {
-		res = fibonacci(n-1) + fibonacci(n-2)
-	}
-	return
+    if n &lt;= 1 {
+        res = 1
+    } else {
+        res = fibonacci(n-1) + fibonacci(n-2)
+    }
+    return
 }
 </code></pre></li>
 </ul>
@@ -869,7 +873,6 @@ plus( 1,2) // 3
 
 // invoke func immediatley
 func(x, y int) int { return x + y }( 1, 2) // 3
-
 </code></pre></li>
 </ul>
 
@@ -879,14 +882,14 @@ func(x, y int) int { return x + y }( 1, 2) // 3
 <li><p>Use return function for Debugging</p>
 
 <pre><code class="language-go">where := func() {
-_, file, line, _ := runtime.Caller(1)
-log.Printf(“%s:%d”, file, line)
+    _, file, line, _ := runtime.Caller(1)
+    log.Printf(“%s:%d”, file, line)
 }
 
 func Func () {
-//....do sth 
-where ()
-// ....do another thing
+    //....do sth 
+    where ()
+    // ....do another thing
 }
 </code></pre></li>
 </ul>
