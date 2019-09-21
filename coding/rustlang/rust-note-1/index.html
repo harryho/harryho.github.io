@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-21T14:44:02 AEST">
-<title>CentOS 7 Server note :: Hello World</title>
+<title>Rust-lang Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Rust-lang Introduction: Mutability, Shadowing, Data Types, Ownership, Borrowing,  ">
 
 
 
     
   </head>
-  <body data-url="/os/centos-server-7/">
+  <body data-url="/coding/rustlang/rust-note-1/">
     
       <header>
   <div class="logo">
@@ -119,10 +119,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item haschildren
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -376,13 +377,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
+    <li data-nav-id="/coding/rustlang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/rustlang/">Rustlang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/rustlang/">Rustlang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
+      <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item active">
         <div>
           <a href="/coding/rustlang/rust-note-1/">
             Rust-lang Note - 1
@@ -551,11 +553,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item parent haschildren
+    <li data-nav-id="/os/" class="dd-item haschildren
         ">
       <div>
-      <a href="/os/">OS</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
@@ -565,7 +566,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/os/centos-server-7/" class="dd-item active">
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
         <div>
           <a href="/os/centos-server-7/">
             CentOS 7 Server note
@@ -718,25 +719,34 @@
     <option value="/blogs/" >
    Blogs</option>
     <option value="/coding/" >
-   Coding</option>
+   Coding</option> 
+    <option value="/coding/c/" >
+   C / C&#43;&#43;</option>
+    <option value="/coding/c-sharp/" >
+   C#</option>
+    <option value="/coding/golang/" >
+   Golang</option>
+    <option value="/coding/java/" >
+   Java</option>
+    <option value="/coding/javascript/" >
+   JavaScript</option>
+    <option value="/coding/python/" >
+   Python</option>
+    <option value="/coding/rustlang/" >
+   Rustlang</option> 
+      <option value="/coding/rustlang/rust-note-1/"  selected> Rust-lang Note - 1</option>
+  
+    <option value="/coding/shell/" >
+   Shell</option>
+    <option value="/coding/sql/" >
+   SQL</option>
+  
     <option value="/frameworks/" >
    Frameworks</option>
     <option value="/hacks/" >
    Hacks</option>
     <option value="/os/" >
-   OS</option> 
-      <option value="/os/centos-fedora-desktop/" > CentOS 6/7 Multi-Boot Setup</option>
-      <option value="/os/centos-server-7/"  selected> CentOS 7 Server note</option>
-      <option value="/os/dual-boot-win10-ubuntu18/" > Dual Boot Windows 10 &amp; Ubuntu 18</option>
-      <option value="/os/grub-trouble-shooting/" > Grub Trouble Shooting</option>
-      <option value="/os/lubuntu16-desktop/" > Lubuntu 16 desktop</option>
-      <option value="/os/raspberrypi-notes/" > Raspberry Pi setup</option>
-      <option value="/os/ubuntu-desktop-14/" > Ubuntu 14 -- desktop setup &amp; dual boot </option>
-      <option value="/os/ubuntu-desktop-14-extra-tools/" > Ubuntu 14 -- desktop, extra tools</option>
-      <option value="/os/ubuntu-server-14/" > Ubuntu 14 -- server setup</option>
-      <option value="/os/ubuntu-server-16/" > Ubuntu 16 server note</option>
-      <option value="/os/ubuntu-desktop-18/" > Ubuntu Desktop 18 LTS note</option>
-  
+   OS</option>
     <option value="/projects/" >
    Projects</option>
 
@@ -755,335 +765,129 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>CentOS 7 Server note</h1>
+            <h1>Rust-lang Note - 1</h1>
         
 
-<p>Prelude</p>
+<h3 id="mutability">Mutability</h3>
 
-<blockquote>
-<p>This article is mainly to help experienced user install and setup CentOS 7 Server.</p>
-</blockquote>
+<p>Rust encourages you to favor immutability. It’s important that we get compile-time errors when we attempt to change a value that we previously designated as immutable because this very situation can lead to bugs.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>But mutability can be very useful. To make them mutable is simply adding mut in front of the variable name. In addition to allowing this value to change, mut conveys intent to future readers of the code by indicating that other parts of the code will be changing this variable value.</p>
 
-<ul>
-<li>You are familiar with CentOS, at least you have some experience working on Linux system.</li>
-<li>You are familiar with basic bash/shell command</li>
-</ul>
-
-<h2 id="things-to-do-after-installing-centos-server">Things to do after installing CentOS server</h2>
+<h4 id="shadowing">Shadowing</h4>
 
 <ul>
-<li>How to setup your server</li>
-</ul>
+<li><p>Rustaceans say that the first variable is shadowed by the second, which means that the second variable’s value is what appears when the variable is used.</p></li>
 
-<h2 id="firewall-setup">Firewall setup</h2>
+<li><p>Sample</p>
 
-<pre><code class="language-bash">sudo firewall-cmd --permanent --add-port=22/tcp
-sudo firewall-cmd --permanent --add-port=21/tcp
-sudo firewall-cmd --permanent --add-port=80/tcp
-sudo firewall-cmd --permanent --add-port=443/tcp
-sudo firewall-cmd --permanent --add-port=8080/tcp
+<pre><code class="language-rs">fn main() {
+let x = 5;
 
-sudo firewall-cmd --reload
-</code></pre>
+let x = x + 1;
 
-<h2 id="ssh-server-setup">SSH server setup</h2>
+let x = x * 2;
 
-<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
-
-<ul>
-<li><p>Install SSH if it is not done yet</p>
-
-<pre><code class="language-bash">## yum install openssh openssh-server openssh-clients openssl-libs
-</code></pre></li>
-
-<li><p>Configure SSH</p>
-
-<pre><code class="language-bash">## backup default config 
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
-sudo chmod a-w /etc/ssh/sshd_config.ori
-
-## use any editor to update sshd_config 
-sudo vi /etc/ssh/sshd_config 
-
-## uncomment PasswordAuthentication yes to allow remote password login
-## Password authentication is only for test environment
-
-## setup ssh auto-start onboot
-sudo systemctl restart sshd 
-</code></pre></li>
-</ul>
-
-<h2 id="update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</h2>
-
-<pre><code class="language-bash">ls -l /etc/localtime ## check the time zone
-
-sudo timedatectl list | grep New_York ## find the time zone by the city
-sudo timedatectl set-timezone America/New_York
-</code></pre>
-
-<h2 id="install-git">Install Git</h2>
-
-<ul>
-<li><p>Option 1: You can use <code>yum</code> to install git, but it is quite out-of-date. The version of git is 1.8.x</p>
-
-<pre><code class="language-bash">sudo yum install git
-git --version
-</code></pre></li>
-
-<li><p>Option 2: Download the latest stable release of Git and compile the software from source. (<strong>Recommended</strong>)</p></li>
-</ul>
-
-<h3 id="install-build-tools">Install build tools</h3>
-
-<pre><code>sudo yum groupinstall &quot;Development Tools&quot;
-
-sudo yum install gettext-devel openssl-devel perl-CPAN perl-devel \
-    zlib-devel libcurl-devel expat-devel
-
-sudo yum install yum-utils
-</code></pre>
-
-<h3 id="download-the-latest-release">Download the latest release</h3>
-
-<pre><code>wget https://github.com/git/git/archive/v2.x.x.tar.gz -O git.tar.gz
-tar -zxf git.tar.gz
-cd git-*
-make configure
-./configure --prefix=/usr/local
-sudo make install
-git --version
-</code></pre>
-
-<h2 id="setup-a-better-vim">Setup a better Vim</h2>
-
-<pre><code class="language-bash">sudo yum isntall vim-enhanced
-
-</code></pre>
-
-<h2 id="install-tmux">Install Tmux</h2>
-
-<pre><code class="language-bash">sudo yum install tmux
-</code></pre>
-
-<ul>
-<li>Most useful tmux commands</li>
-</ul>
-
-<blockquote>
-<p>Ctrl+b &ldquo; — split pane horizontally.</p>
-
-<p>Ctrl+b % — split pane vertically.</p>
-
-<p>Ctrl+b arrow key — switch pane.</p>
-
-<p>Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.</p>
-
-<p>Ctrl+b c — &copy;reate a new window.</p>
-
-<p>Ctrl+b , — rename reate a new window.</p>
-
-<p>Ctrl+b n — move to the (n)ext window.</p>
-
-<p>Ctrl+b p — move to the (p)revious window.</p>
-</blockquote>
-
-<h2 id="install-python-3">Install python 3</h2>
-
-<p>You will only find Python 2 on CentOS by default. In order to install the latest python3, we need to install <code>IUS</code> to which stands for Inline with Upstream Stable.</p>
-
-<pre><code class="language-bash">sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-sudo yum -y install python36u
-
-### Install development package
-sudo yum -y insall python-devel python36u-devel
-</code></pre>
-
-<h2 id="install-nodejs">Install nodejs</h2>
-
-<ul>
-<li><p>Nodejs 6.x</p>
-
-<pre><code class="language-bash">sudo yum -y install nodejs
-</code></pre></li>
-
-<li><p>Nodejs 8.x</p>
-
-<pre><code class="language-bash">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-</code></pre></li>
-
-<li><p>Upgrade NPM</p>
-
-<pre><code>sudo npm install -g npm
-sudo npm install -g typescript
-sudo mpm install -g yarn
-</code></pre></li>
-</ul>
-
-<h2 id="install-docker-ce-centos-7">install docker CE (CentOS 7)</h2>
-
-<pre><code class="language-bash">## add repo
-sudo yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-
-## check docker.list
-yum list docker-ce --showduplicates | sort -r
-
-## install docker engine
-sudo yum install docker-ce
-
-docker -v 
-</code></pre>
-
-<h2 id="install-jdk-8">Install JDK 8</h2>
-
-<ul>
-<li><p>Downlaod the JDK from Oracle website.</p>
-
-<pre><code class="language-bash">
-## At the confirmation prompt, enter y 
-## then RETURN to continue with the installation.
-sudo yum install java-1.8.0-openjdk-devel
-
-
-java -version
-</code></pre></li>
-
-<li><p>Test JDK with a simple HelloWorld program</p>
-
-<pre><code class="language-java">import java.util.Calendar;
-
-class HelloWorld {
-public static void main(String[] args) {
-    Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH) + 1;
-    int day = cal.get(Calendar.DATE);
-    int hour = cal.get(Calendar.HOUR_OF_DAY);
-    int minute = cal.get(Calendar.MINUTE);
-    String username = System.getProperty(&quot;user.name&quot;);
-    System.out.println(username+ &quot;: Hello World! &quot;);
-    System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
+println!(&quot;The value of x is: {}&quot;, x); // 12
 }
-}
+
 </code></pre></li>
 
-<li><p>Compile and run the program</p>
+<li><p>Shadowing is different from marking a variable as mut, because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword. By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.</p></li>
 
-<pre><code class="language-bash">javac HelloWorld.java
-java HelloWorld.java
-</code></pre></li>
+<li><p>The other difference between mut and shadowing is that because we’re effectively creating a new variable when we use the let keyword again, we can change the type of the value but reuse the same name.</p></li>
 </ul>
 
-<h2 id="install-go">Install Go</h2>
+<h3 id="data-types">Data types</h3>
+
+<p>Every value in Rust is of a certain data type, which tells Rust what kind of data is being specified so it knows how to work with that data. We’ll look at two data type subsets: scalar and compound.</p>
 
 <ul>
-<li><p>Install Go</p>
+<li><p>A scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.</p></li>
 
-<pre><code class="language-bash">cd /tmp
-curl -LO https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
-
-## check hash
-shasum -a 256 go*linux-amd64.tar.gz
-
-## install tar ball
-sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
-</code></pre></li>
-
-<li><p>Setup GOROOT</p>
-
-<pre><code class="language-bash">cd /etc/profile.d
-## Create a path.sh script
-sudo vi path.sh
-</code></pre></li>
-
-<li><p>Copy following code into <code>path.sh</code></p>
-
-<pre><code>export PATH=$PATH:/usr/local/go/bin
-</code></pre></li>
-
-<li><p>Setup local GOBIN, GOPATH</p>
-
-<pre><code class="language-bash">export GOBIN=&quot;$HOME/projects/go/bin&quot;
-export GOPATH=&quot;$HOME/projects/go/src&quot;
-export PATH
-</code></pre></li>
-
-<li><p>Create a simple <code>hello.go</code> file to test</p>
-
-<pre><code class="language-go">package main                                                        
-                                                                    
-import (                                                            
-&quot;fmt&quot;                                                           
-&quot;log&quot;                                                           
-&quot;os/user&quot;                                                       
-)                                                                   
-                                                                    
-func main(){                                                        
-user, err := user.Current()                                 
-if err != nil {                                             
-        log.Fatal(err)                                      
-}                                                            
-fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )            
-}                                                                   
-</code></pre></li>
-
-<li><p>Run the program</p>
-
-<pre><code class="language-bash">go run $GOPATH/hello.go
-go install $GOPATH/hello.go
-$GOBIN/hello
-</code></pre></li>
+<li><p>Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.</p></li>
 </ul>
 
-<h2 id="install-cmake">Install Cmake</h2>
+<h4 id="type-parse">Type parse</h4>
 
-<pre><code class="language-bash">sudo yum install epel-release
-sudo yum install cmake3
-sudo ln -s /usr/bin/cmake3 /usr/bin/cmake
+<pre><code class="language-rs">let guess: u32 = &quot;42&quot;.parse().expect(&quot;Not a number!&quot;);
 </code></pre>
 
-<h2 id="install-rust">Install Rust</h2>
-
-<pre><code class="language-bash">curl -f -L https://static.rust-lang.org/rustup.sh -O
-sh rustup.sh
-rustc --version
-</code></pre>
-
-<h2 id="install-php-7">Install PHP 7</h2>
+<h4 id="the-tuple-type">The Tuple Type</h4>
 
 <ul>
-<li><p>install and enable EPEL and Remi repository</p>
-
-<pre><code class="language-bash">sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-</code></pre></li>
-
-<li><p>install <code>yum-utils</code></p>
-
-<pre><code>sudo yum install yum-utils
-</code></pre></li>
-
-<li><p>Enable PHP 7 repo</p>
-
-<pre><code>sudo yum-config-manager --enable remi-php72  
-</code></pre></li>
-
-<li><p>Install PHP</p>
-
-<pre><code>sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
-php-ldap php-zip php-fileinfo 
-</code></pre></li>
+<li>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</li>
 </ul>
 
-<h2 id="install-clang">Install clang</h2>
+<h3 id="ownership">Ownership</h3>
 
-<pre><code class="language-bash">sudo yum install llvm
-sudo yum install clang
+<p>Rust’s central feature is ownership. Although the feature is straightforward to explain, it has deep implications for the rest of the language.</p>
 
-</code></pre>
+<h4 id="ownership-rules">Ownership Rules</h4>
+
+<ul>
+<li>Each value in Rust has a variable that’s called its owner.</li>
+<li>There can only be one owner at a time.</li>
+<li>When the owner goes out of scope, the value will be dropped.</li>
+</ul>
+
+<h4 id="variable-scope">Variable Scope</h4>
+
+<ul>
+<li>A scope is the range within a program for which an item is valid.</li>
+</ul>
+
+<h4 id="memory-and-allocation">Memory and Allocation</h4>
+
+<ul>
+<li><p>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</p></li>
+
+<li><p>Explanation of memory allocation and free</p>
+
+<pre><code class="language-go">{
+let s = String::from(&quot;hello&quot;); // s is valid from this point forward
+}   // this scope is now over, and s is no longer valid
+</code></pre></li>
+
+<li><p>There is a natural point at which we can return the memory our String needs to the operating system: when s goes out of scope. When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.</p></li>
+</ul>
+
+<h4 id="move-or-clone-or-copy">Move or Clone or Copy</h4>
+
+<ul>
+<li><p>Sample of move; the scalar type has no this problem</p>
+
+<pre><code class="language-rs">let s1 = String::from(&quot;hello&quot;);
+let s2 = s1;  // move value from s1 to s2
+          // s1 is no longer valid 
+
+println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after move
+</code></pre></li>
+
+<li><p>If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called clone.</p>
+
+<pre><code class="language-rs">let s2 = s1.clone();
+</code></pre></li>
+
+<li><p>Rust has a special annotation called the Copy trait that we can place on types like integers that are stored on the stack. If a type has the Copy trait, an older variable is still usable after assignment. Rust won’t let us annotate a type with the Copy trait if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error.</p></li>
+
+<li><p>Types for copy</p>
+
+<ul>
+<li>All the integer types, such as u32.</li>
+<li>The Boolean type, bool, with values true and false.</li>
+<li>All the floating point types, such as f64.</li>
+<li>The character type, char.</li>
+<li>Tuples, if they only contain types that are also Copy. For example, (i32, i32) is Copy, but (i32, String) is not.</li>
+</ul></li>
+</ul>
+
+<h3 id="references-borrowing">References &amp; Borrowing</h3>
+
+<ul>
+<li>At any given time, you can have either one mutable reference or any number of immutable references.</li>
+<li>References must always be valid.</li>
+</ul>
 
     </div>
 
@@ -1092,27 +896,26 @@ sudo yum install clang
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#things-to-do-after-installing-centos-server">Things to do after installing CentOS server</a></li>
-<li><a href="#firewall-setup">Firewall setup</a></li>
-<li><a href="#ssh-server-setup">SSH server setup</a></li>
-<li><a href="#update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</a></li>
-<li><a href="#install-git">Install Git</a>
+<li>
 <ul>
-<li><a href="#install-build-tools">Install build tools</a></li>
-<li><a href="#download-the-latest-release">Download the latest release</a></li>
+<li><a href="#mutability">Mutability</a>
+<ul>
+<li><a href="#shadowing">Shadowing</a></li>
 </ul></li>
-<li><a href="#setup-a-better-vim">Setup a better Vim</a></li>
-<li><a href="#install-tmux">Install Tmux</a></li>
-<li><a href="#install-python-3">Install python 3</a></li>
-<li><a href="#install-nodejs">Install nodejs</a></li>
-<li><a href="#install-docker-ce-centos-7">install docker CE (CentOS 7)</a></li>
-<li><a href="#install-jdk-8">Install JDK 8</a></li>
-<li><a href="#install-go">Install Go</a></li>
-<li><a href="#install-cmake">Install Cmake</a></li>
-<li><a href="#install-rust">Install Rust</a></li>
-<li><a href="#install-php-7">Install PHP 7</a></li>
-<li><a href="#install-clang">Install clang</a></li>
+<li><a href="#data-types">Data types</a>
+<ul>
+<li><a href="#type-parse">Type parse</a></li>
+<li><a href="#the-tuple-type">The Tuple Type</a></li>
+</ul></li>
+<li><a href="#ownership">Ownership</a>
+<ul>
+<li><a href="#ownership-rules">Ownership Rules</a></li>
+<li><a href="#variable-scope">Variable Scope</a></li>
+<li><a href="#memory-and-allocation">Memory and Allocation</a></li>
+<li><a href="#move-or-clone-or-copy">Move or Clone or Copy</a></li>
+</ul></li>
+<li><a href="#references-borrowing">References &amp; Borrowing</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1124,8 +927,8 @@ sudo yum install clang
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/os/ubuntu-server-16/" title="Ubuntu 16 server note"> <i class="fa fa-chevron-left"></i><label>Ubuntu 16 server note</label></a>
-    <a class="nav nav-next" href="/os/ubuntu-server-14/" title="Ubuntu 14 -- server setup" style="margin-right: 0px;"><label>Ubuntu 14 -- server setup</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/rustlang/" title="Rustlang"> <i class="fa fa-chevron-left"></i><label>Rustlang</label></a>
+    <a class="nav nav-next" href="/coding/shell/" title="Shell" style="margin-right: 0px;"><label>Shell</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1138,10 +941,6 @@ sudo yum install clang
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 03/02/2017
-    </div>
     
 
     
