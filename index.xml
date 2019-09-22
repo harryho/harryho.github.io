@@ -553,11 +553,32 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
-      <title>Golang Note - 91</title>
-      <link>/coding/golang/go-note-91/</link>
+      <title>Golang Note - 5</title>
+      <link>/coding/golang/go-note-5/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/golang/go-note-91/</guid>
+      <guid>/coding/golang/go-note-5/</guid>
+      <description>Error handling  Go does not have an exception mechanism, like the try/catch in Java or .NET for instance: you cannot throw exceptions. Instead it has a defer-panic-and-recover mechanism.
+ The Go way to handle errors is for functions and methods to return an error object as their only or last return value—or nil if no error occurred—and for calling functions to always check the error they receive.
+ Handle the errors and return from the function in which the error occurred with an error message to the user: that way if something does go wrong, your program will continue to function and the user will be notified.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 6</title>
+      <link>/coding/golang/go-note-6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-6/</guid>
+      <description>Goroutine  A goroutine is implemented as a function or method (this can also be an anonymous or lambda function) and called (invoked) with the keyword go. This starts the function running in parallel with the current computation but in the same address space and with its own stack.
+ Go’s concurrency primitives provide the basis for a good concurrency program design: expressing program structure so as to represent independently executing actions; so Go’s emphasis is not in the 1 st place on parallelism: concurrent programs may or may not be parallel.</description>
+    </item>
+    
+    <item>
+      <title>Golang snippets</title>
+      <link>/coding/golang/go-note-99/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-99/</guid>
       <description>Convenient logging methods Stringer package main import ( &amp;quot;fmt&amp;quot; ) // Animal has a Name and an Age to represent an animal. type Animal struct { Name string Age uint } // String makes Animal satisfy the Stringer interface. func (a Animal) String() string { return fmt.Sprintf(&amp;quot;%v (%d)&amp;quot;, a.Name, a.Age) } func main() { a := Animal{ Name: &amp;quot;Gopher&amp;quot;, Age: 2, } fmt.Println(a) // Gopher (2) }  GoStringer package main import ( &amp;quot;fmt&amp;quot; ) // Address has a City, State and a Country.</description>
     </item>
     
@@ -630,6 +651,17 @@ public class JoinDemo implements Runnable { private Random rand = new Random(Sys
       
       <guid>/coding/java/java-note-6/</guid>
       <description>Lambda and Collection Iterations Collections and Maps Filtering Mapping LambdaCollectionDemo Lambda Collection Map Demo public class LambdaCollectionMapDemo { public static void main(String[] args) { // FunctionalInterface System.out.println(&amp;quot;x + y:&amp;quot; + engine((x, y) -&amp;gt; x + y));// w w w .j av a 2s. c om System.out.println(&amp;quot;x - y:&amp;quot; + engine((x, y) -&amp;gt; x * y)); System.out.println(&amp;quot;x * y:&amp;quot; + engine((x, y) -&amp;gt; x / y)); System.out.println(&amp;quot;x / y:&amp;quot; + engine((x, y) -&amp;gt; x % y)); String[] strArray = new String[] { &amp;quot;abc&amp;quot;, &amp;quot;klm&amp;quot;, &amp;quot;xyz&amp;quot;, &amp;quot;pqr&amp;quot; }; List list = Arrays.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript, ECMAScript snippet</title>
+      <link>/coding/javascript/js-note-99/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/javascript/js-note-99/</guid>
+      <description>Setup the global node modules  Add an environment variable to tell node where the global node module sits
+# I use nvm to manage my node and node modules export NODE_PATH=${HOME}/.nvm/versions/node/&amp;lt;node_version&amp;gt;/lib/node_modules  If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.
+ Create a new folder under your home directory Install npm to new global node module update environment variables in the profile</description>
     </item>
     
     <item>

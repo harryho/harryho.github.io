@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-22T21:17:48 AEST">
-<title>Golang Note - 4 :: Hello World</title>
+<title>Golang Note - 6 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -18,13 +18,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Golang Introduction: IO, JSON, XML , Gob, Crypto ">
+<meta name="description" content="Goroutine &amp; Channels">
 
 
 
     
   </head>
-  <body data-url="/coding/golang/go-note-4/">
+  <body data-url="/coding/golang/go-note-6/">
     
       <header>
   <div class="logo">
@@ -219,7 +219,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item active">
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
         <div>
           <a href="/coding/golang/go-note-4/">
             Golang Note - 4
@@ -233,7 +233,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-6/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-6/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-6/">
             Golang Note - 6
@@ -750,9 +750,9 @@
       <option value="/coding/golang/go-note-1/" > Golang Note - 1</option>
       <option value="/coding/golang/go-note-2/" > Golang Note - 2</option>
       <option value="/coding/golang/go-note-3/" > Golang Note - 3</option>
-      <option value="/coding/golang/go-note-4/"  selected> Golang Note - 4</option>
+      <option value="/coding/golang/go-note-4/" > Golang Note - 4</option>
       <option value="/coding/golang/go-note-5/" > Golang Note - 5</option>
-      <option value="/coding/golang/go-note-6/" > Golang Note - 6</option>
+      <option value="/coding/golang/go-note-6/"  selected> Golang Note - 6</option>
       <option value="/coding/golang/go-note-99/" > Golang snippets</option>
   
     <option value="/coding/java/" >
@@ -792,597 +792,760 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Golang Note - 4</h1>
+            <h1>Golang Note - 6</h1>
         
 
-<h3 id="io-read-write">IO - Read &amp; Write</h3>
-
-<h4 id="read-from-user-input">Read from user input</h4>
-
-<pre><code class="language-go">var (
-	firstName, lastName, s string
-	i                      int
-	f                      float32
-	input                  = &quot;56.12 / 5212 / Go&quot;
-	format                 = &quot;%f / %d / %s&quot;
-)
-
-func main() {
-	fmt.Println(&quot;Please enter your full name: &quot;)
-	fmt.Scanln(&amp;firstName, &amp;lastName)
-	// fmt.Scanf(&quot;%s %s&quot;, &amp;firstName, &amp;lastName)
-	fmt.Printf(&quot;Hi %s %s!\n&quot;, firstName, lastName) // Hi Chris Naegels
-	fmt.Sscanf(input, format, &amp;f, &amp;i, &amp;s)
-	fmt.Println(&quot;From the string we read: &quot;, f, i, s)
-	// ouwtput: From the string we read: 56.12 5212 Go
-}
-</code></pre>
-
-<h4 id="read-command-line-argument">Read command-line argument</h4>
-
-<pre><code class="language-go">func main() {
-	who := &quot;Harry &quot;
-	if len(os.Args) &gt; 1 {
-		who += strings.Join(os.Args[1:], &quot; &quot;)
-	}
-	fmt.Println(&quot;Good Morning&quot;, who)
-}
-</code></pre>
-
-<h4 id="read-from-file">Read from file</h4>
+<h3 id="goroutine">Goroutine</h3>
 
 <ul>
-<li><p>Read by lines</p>
+<li><p>A goroutine is implemented as a function or method (this can also be an anonymous or lambda function) and called (invoked) with the keyword go. This starts the function running in parallel with the current computation but in the same address space and with its own stack.</p></li>
+
+<li><p>Go’s concurrency primitives provide the basis for a good concurrency program design: expressing program structure so as to represent independently executing actions; so Go’s emphasis is not in the 1 st place on parallelism: concurrent programs may or may not be parallel. Parallelism is the ability to make things run quickly by using multiple processors. But it turns out most often that a well designed concurrent program also has excellent performing parallel capabilities.</p></li>
+</ul>
+
+<h4 id="basic-goroutine">Basic Goroutine</h4>
+
+<ul>
+<li><p>Sample 1: The code below will not print out anything, because the main exits before the &ldquo;hello&rdquo; goroutine kicks off. Actually the main is another goroutine which always runs first.</p>
 
 <pre><code class="language-go">func main() {
-	inputFile, inputError := os.Open(&quot;hello.go&quot;)
-	if inputError != nil {
-		fmt.Printf(&quot;An error occurred on opening the inputfile\n&quot; +
-			&quot;Does the file exist?\n&quot; +
-			&quot;Have you got acces to it?\n&quot;)
-		return // exit the function on error
-	}
-	defer inputFile.Close()  // Close file before exits the main func
-	inputReader := bufio.NewReader(inputFile)
-	for {
-		inputString, readerError := inputReader.ReadString('\n')
-		if readerError == io.EOF {
-			return
+	go func() {
+		println(&quot;Hello&quot;) 
+	}()
+}
+</code></pre></li>
+
+<li><p>Sample 2: Add timer to set main goroutine sleep a while, and let the &ldquo;hello&rdquo;
+goroutine to start.</p>
+
+<pre><code class="language-go">func main() {
+	go func() {
+		println(&quot;Hello&quot;) // Hello
+}()
+time.Sleep(3000)
+}
+</code></pre></li>
+
+<li><p>Sample 3: The code below will print &ldquo;hello&rdquo; 10 times and then print &ldquo;world&rdquo; 10 times.</p>
+
+<pre><code class="language-go">func main() {
+	go func() {
+		for i := 0; i &lt; 10; i++ {
+        println(&quot;Hello&quot;)
+        time.Sleep(2000)
 		}
-		fmt.Printf(&quot;The input was: %s&quot;, inputString)
+	}()
+	go func() {
+		for i := 0; i &lt; 10; i++ {
+			println(&quot;World&quot;)
+		}
+	}()
+	time.Sleep(9999)
+}
+</code></pre></li>
+
+<li><p>Sample 4: The code below will print &ldquo;hello&rdquo; and &ldquo;world&rdquo; in different order.</p>
+
+<pre><code class="language-go">func main() {
+	runtime.GOMAXPROCS(4)
+	go func() {
+		for i := 0; i &lt; 10; i++ {
+			println(&quot;Hello&quot;)
+			time.Sleep(500)
+		}
+
+	}()
+	go func() {
+		for i := 0; i &lt; 10; i++ {
+			println(&quot;World&quot;)
+			time.Sleep(500)
+		}
+	}()
+	time.Sleep(999999)
+}
+</code></pre></li>
+
+<li><p>Sample 5: File watcher</p>
+
+<pre><code class="language-go">
+const watchedPath = &quot;./source&quot;
+
+func main() {
+	for {
+		d, _ := os.Open(watchedPath)
+		files, _ := d.Readdir(-1)
+		for _, fi := range files {
+			filePath := watchedPath + &quot;/&quot; + fi.Name()
+			f, _ := os.Open(filePath)
+			data, _ := ioutil.ReadAll(f)
+			f.Close()
+			os.Remove(filePath)
+			go func(data string) {
+				reader := csv.NewReader(strings.NewReader(data))
+				records, _ := reader.ReadAll()
+				for _, r := range records {
+					invoice := new(Invoice)
+					invoice.Number = r[0]
+					invoice.Amount, _ = strconv.ParseFloat(r[1], 64)
+					invoice.PurchaseOrderNumber, _ = strconv.Atoi(r[2])
+					unixTime, _ := strconv.ParseInt(r[3], 10, 64)
+					invoice.InvoiceDate = time.Unix(unixTime, 0)
+					
+					fmt.Printf(&quot;Received Invoice '%v' for $%.2f and submitted for processing\n&quot;, invoice.Number, invoice.Amount)
+				}
+			}(string(data))
+		}
+		d.Close()
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+type Invoice struct {
+	Number string
+	Amount float64
+	PurchaseOrderNumber int
+	InvoiceDate time.Time
+}
+</code></pre></li>
+</ul>
+
+<h4 id="using-gomaxprocs">Using GOMAXPROCS</h4>
+
+<ul>
+<li><p>When GOMAXPROCS is greater than 1, they run on a thread pool with that many threads.With the gccgo compiler GOMAXPROCS is effectively equal to the number of running goroutines.</p></li>
+
+<li><p>Observations from experiments: on a 1 CPU laptop performance improved when GOMAXPROCS was increased to 9. On a 32 core machine, the best performance was reached with GOMAXPROCS=8, a higher number didn’t increase performance in that benchmark.</p></li>
+</ul>
+
+<h3 id="channels">Channels</h3>
+
+<h4 id="channels-for-communication-between-goroutines">Channels for communication between goroutines</h4>
+
+<ul>
+<li><p>Go has a special type, the channel, which is a like a conduit (pipe) through which you can send typed values and which takes care of communication between goroutines, avoiding all the pitfalls of shared memory; the very act of communication through a channel guarantees synchronization.</p></li>
+
+<li><p>Data are passed around on channels: only one goroutine has access to a data item at any given time: so data races cannot occur, by design. The ownership of the data (that is the ability to read and write it) is passed around.</p></li>
+
+<li><p>A channel is in fact a typed message queue: data can be transmitted through it. It is a First In First Out (FIFO) structure and so they preserve the order of the items that are sent into them (for those who are familiar with it, a channel can be compared to a two-way pipe in Unix shells).</p></li>
+
+<li><p>A channel is also a reference type, so we have to use the make() function to allocate memory for it.</p></li>
+</ul>
+
+<p><strong>NOTE: Don’t use print statements to indicate the order of sending to and receiving from a channel: this could be out of order with what actually happens due to the time lag between the print statement and the actual channel sending and receiving.</strong></p>
+
+<h4 id="blocking-of-channels">Blocking of channels</h4>
+
+<ul>
+<li><p>A send operation on a channel (and the goroutine or function that contains it) blocks until a receiver is available for the same channel</p></li>
+
+<li><p>A receive operation for a channel blocks (and the goroutine or function that contains it) until a sender is available for the same channel</p></li>
+</ul>
+
+<h5 id="goroutine-sync-through-one-or-more-channels">Goroutine sync through one or more channels</h5>
+
+<ul>
+<li><p>Blocking - deadlock</p></li>
+
+<li><p>Sample 1 :  deadlock because of lack of sender</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string)
+	fmt.Println(&lt;-ch)
+}
+//fatal error: all goroutines are asleep - deadlock!
+</code></pre></li>
+
+<li><p>Sample 2: deadlock because of lack of receiver</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 1)
+	ch &lt;- &quot;Hello&quot;
+	
+}
+</code></pre></li>
+
+<li><p>Sample 3</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 1)
+	ch &lt;- &quot;Hello&quot;
+	fmt.Println(&lt;-ch) // Hello
+}
+</code></pre></li>
+</ul>
+
+<h5 id="async-channels-channel-with-buffer">Async channels - channel with buffer</h5>
+
+<ul>
+<li><p>Channel with buffer</p>
+
+<pre><code class="language-go">buf := 100
+ch1 := make(chan string, buf)
+</code></pre></li>
+
+<li><p>Sample 4: deadlock again because the 2nd sender can not send message</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 1)
+	ch &lt;- &quot;Hello&quot;
+	ch &lt;- &quot;Hello&quot;
+	fmt.Println(&lt;-ch)
+	fmt.Println(&lt;-ch)
+}
+</code></pre></li>
+
+<li><p>Sample 5</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 2)
+	ch &lt;- &quot;Hello&quot;
+	ch &lt;- &quot;Hello&quot;
+	fmt.Println(&lt;-ch) //Hello
+	fmt.Println(&lt;-ch) // Hello
+}
+</code></pre></li>
+</ul>
+
+<h5 id="closing-channel">Closing channel</h5>
+
+<ul>
+<li><p>Sample 6: Closing channel will not impact the receiver to get the message</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 1)
+	ch &lt;- &quot;Hello&quot;
+	ch &lt;- &quot;Hello&quot;
+	fmt.Println(&lt;-ch)
+	fmt.Println(&lt;-ch)
+}
+</code></pre></li>
+
+<li><p>Sample 7: Sender cannot send message to closing channel</p>
+
+<pre><code class="language-go">func main() {
+	ch := make(chan string, 2)
+	ch &lt;- &quot;Hello&quot;
+	ch &lt;- &quot;Hello&quot;
+	fmt.Println(&lt;-ch) //Hello
+fmt.Println(&lt;-ch) // Hello
+ch &lt;- &quot;Hello&quot; // panic: send on closed channel
+}
+</code></pre></li>
+</ul>
+
+<h5 id="semaphore-pattern">Semaphore pattern</h5>
+
+<ul>
+<li><p>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</p>
+
+<pre><code class="language-go">func compute(ch chan int) {
+	ch &lt;- someComputation()
+	// when it completes, signal on the channel.
+}
+
+func main() {
+	ch := make(chan int) // allocate a channel.
+	go compute(ch)       // start something in a goroutine
+	doSomethingElseForAWhile()
+	result := &lt;-ch
+}
+</code></pre></li>
+</ul>
+
+<h5 id="implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</h5>
+
+<ul>
+<li><p>There is no semaphore implementation in Go’s sync package, but they can be emulated easily using a buffered channel:</p>
+
+<ul>
+<li>the buffered channel is the number of resources we wish to synchronize</li>
+<li>the length (number of elements currently stored) of the channel is the number of resources currently being used.</li>
+<li>the capacity minus the length of the channel is the number of free resources (the integer value of traditional semaphores)</li>
+</ul></li>
+
+<li><p>Sample 8: semaphore pattern</p>
+
+<pre><code class="language-go">type Empty interface {}
+var empty Empty
+//  do sth ...
+data := make([]float64, N)
+res := make([]float64, N)
+sem := make(chan Empty, N) // semaphore
+// do sth  ...
+for i, xi := range data {
+	go func (i int, xi float64) {
+		res[i] = doSomething(i,xi)
+		sem &lt;- empty
+	} (i, xi)
+}
+// wait for goroutines to finish
+for i := 0; i &lt; N; i++ { &lt;-sem }
+
+</code></pre></li>
+
+<li><p>Semaphore operations sample pattern</p>
+
+<pre><code class="language-go">// acquire n resources
+func (s semaphore) P(n int) {
+	e := new(Empty)
+	for i := 0; i &lt; n; i++ {
+		s &lt;- e
+	}
+}
+// release n resources
+func (s semaphore) V(n int) {
+	for i := 0; i &lt; n; i++ {
+		&lt;-s
+	}
+}
+</code></pre></li>
+
+<li><p>Semaphore for a mutex:</p>
+
+<pre><code class="language-go">/* mutexes */
+func (s semaphore) Lock() {
+	s.P(1)
+}
+func (s semaphore) Unlock() {
+	s.V(1)
+}
+/* signal-wait */
+func (s semaphore) Wait(n int) {
+	s.P(n)
+}
+func (s semaphore) Signal() {
+	s.V(1)
+}
+</code></pre></li>
+</ul>
+
+<h5 id="channel-factory-pattern">Channel Factory pattern</h5>
+
+<ul>
+<li><p>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</p>
+
+<pre><code class="language-go">func main() {
+	stream := pump()
+	go suck(stream)
+	// the above 2 lines can be shortened to: go suck( pump() )
+	time.Sleep(1e9)
+}
+func pump() chan int {
+	ch := make(chan int)
+	go func() {
+		for i := 0; ; i++ {
+			ch &lt;- i
+		}
+	}()
+	return ch
+}
+func suck(ch chan int) {
+	for {
+		fmt.Println(&lt;-ch)
 	}
 }
 </code></pre></li>
 </ul>
 
-<p><strong><em>NOTE: The End-of-line characters of text-files in Unix end on \n, but in Windows this is \r\n. By using the method ReadString or ReadBytes with \n as a delimiter you don’t have to worry about this.</em></strong></p>
+<h5 id="for-range-applied-to-channels">For—range applied to channels</h5>
 
 <ul>
-<li><p>Read entire file into a string</p>
+<li><p>The range clause on for loops accepts a channel ch as an operand, in which case the for loops over the values received from the channel.</p></li>
 
-<pre><code class="language-go">func main() {
-	inputFile := &quot;hello.go&quot;
-	outputFile := &quot;hello.go.txt&quot;
-	buf, err := ioutil.ReadFile(inputFile)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, &quot;File Error: %s\n&quot;, err)
-		// panic(err.Error())
-	}
-	fmt.Printf(&quot;%s\n&quot;, string(buf))
-	err = ioutil.WriteFile(outputFile, buf, 0x644)
-	if err != nil {
-		panic(err.Error())
-	}
+<li><p>Obviously another goroutine must be writing to ch (otherwise the execution blocks in the for-loop) and must close ch when it is done writing.</p>
+
+<pre><code class="language-go">
+func main() {
+	suck(pump())
+	time.Sleep(1e9)
+}
+func pump() chan int {
+	ch := make(chan int)
+	go func() {
+		for i := 0; ; i++ {
+			ch &lt;- i
+		}
+	}()
+	return ch
+}
+func suck(ch chan int) {
+	go func() {
+		for v := range ch {
+			fmt.Println(v)
+		}
+	}()
 }
 </code></pre></li>
 
-<li><p>Read into buffer</p>
+<li></li>
+</ul>
+
+<h5 id="iterator-pattern">Iterator pattern</h5>
+
+<ul>
+<li><p>Another common case where we have to populate a channel with the items of a container type which contains an 394The Way to Go index-addressable field items . For this we can define a method which returns a read-only channel.</p></li>
+
+<li><p>Inside the goroutine, a for-loop iterates over the elements in the container c (for tree or graph algorithms, this simple for-loop could be replaced with a depth-first search)</p>
+
+<pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
+	ch := make(chan item)
+	go func() {
+		for i := 0; i &lt; c.Len(); i++ {
+			// or use a for-range loop
+			ch &lt;- c.items[i]
+		}
+	}()
+	return ch
+}
+
+// The code which calls this method can then iterate over the container
+for x := range container.Iter() { ... }
+
+</code></pre></li>
+</ul>
+
+<h4 id="producer-consumer-pattern">Producer Consumer pattern</h4>
+
+<ul>
+<li><p>A Produce() function which delivers the values needed by a Consume function. Both could be run as a separate goroutine, Produce putting the values on a channel which is read by Consume.</p>
 
 <pre><code class="language-go">for {
-n, err := inputReader.Read(buf)
-if (n == 0) { break}
+	Consume(Produce())
 }
 </code></pre></li>
+</ul>
 
-<li><p>Read columns of data, such as csv</p>
+<h5 id="channel-directionality">Channel directionality</h5>
+
+<pre><code>    var send_only chan&lt;- int // channel can only receive data
+    var recv_only &lt;-chan int // channel can only send data
+</code></pre>
+
+<ul>
+<li>Receive-only channels ( &lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</li>
+</ul>
+
+<h5 id="pipe-filter-pattern">Pipe &amp; Filter pattern</h5>
+
+<ul>
+<li><p>A goroutine channel process will processes what it receives from an input channel and sends this to an output channel</p>
 
 <pre><code class="language-go">func main() {
-	file, err := os.Open(&quot;csv_data.txt&quot;)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-	var col1, col2, col3 []string
-	for {
-		var v1, v2, v3 string
-		_, err := fmt.Fscanln(file, &amp;v1, &amp;v2, &amp;v3)
-		// scans until newline
-		if err != nil {
-			break
-		}
-		col1 = append(col1, v1)
-		col2 = append(col2, v2)
-		col3 = append(col3, v3)
-	}
-	fmt.Println(&quot; Col 1 &quot;,col1)
-	fmt.Println(&quot; Col 3 &quot;,col2)
-	fmt.Println(&quot; Col 3 &quot;,col3)
-}
-</code></pre></li>
-
-<li><p>Read from compressed file</p>
-
-<pre><code class="language-go">func main() {
-	fName := &quot;public.zip&quot;
-	var r *bufio.Reader
-	fi, err := os.Open(fName)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, &quot;%v, Can’t open %s: error: %s\n&quot;, os.Args[0],
-			fName, err)
-		os.Exit(1)
-	}
-	fz, err := gzip.NewReader(fi)
-	if err != nil {
-		r = bufio.NewReader(fi)
-	} else {
-		r = bufio.NewReader(fz)
-	}
-	for {
-		line, err := r.ReadString('\n')
-		if err != nil {
-
-			fmt.Println(&quot;Done reading file&quot;)
-			os.Exit(0)
-		}
-		fmt.Println(line)
-	}
-}
-</code></pre></li>
-</ul>
-
-<h4 id="read-with-flag-package">Read with flag package</h4>
-
-<ul>
-<li>The package flag has an extended functionality for parsing of command-line options.</li>
-
-<li><p>flag.PrintDefaults() prints out the usage information of the defined flag(s)</p>
-
-<pre><code class="language-go">var NewLine = flag.Bool(&quot;n&quot;, false, &quot;print on newline&quot;)
-
-// echo -n flag, of type *bool
-const (
-	Space   = &quot; &quot;
-	Newline = &quot;\n&quot;
-)
-
-func main() {
-	flag.PrintDefaults()
-	flag.Parse()
-	var s string = &quot;&quot;
-	for i := 0; i &lt; flag.NArg(); i++ {
-		if i &gt; 0 {
-			s += Space
-		}
-		s += flag.Arg(i)
-	}
-	if *NewLine { // -n is parsed, flag becomes true
-		s += Newline
-	}
-	os.Stdout.WriteString(s)
-}
-// :: Output
-// -------------------------
-// command: go run program.go -n abc
-// out : 
-//   -n	print on newline
-// abc
-//----------------------------
-// command: go run program.go -a abc
-// flag provided but not defined: -a
-// Usage of /tmp/go-build701354435/b001/exe/program:
-//   -n	print on newline
-// exit status 2
-</code></pre></li>
-</ul>
-
-<h4 id="read-with-flag-parsing-buffer">Read with flag parsing &amp; buffer</h4>
-
-<ul>
-<li>Assume there is a file named test.txt with some content</li>
-
-<li><p>Run Command: go build program.go &amp;&amp; ./program test</p>
-
-<pre><code class="language-go">func cat(r *bufio.Reader) {
-	for {
-		buf, err := r.ReadBytes('\n')
-		if err == io.EOF {
-			break
-		}
-		fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
-	}
-	return
-}
-func main() {
-	flag.Parse()
-	if flag.NArg() == 0 {
-		cat(bufio.NewReader(os.Stdin))
-	}
-
-	for i := 0; i &lt; flag.NArg(); i++ {
-		f, err := os.Open(flag.Arg(i))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-				os.Args[0], flag.Arg(i), err.Error())
-			continue
-		}
-		cat(bufio.NewReader(f))
-	}
-}
-</code></pre></li>
-</ul>
-
-<h4 id="read-with-flag-parsing-slice">Read with flag parsing &amp; slice</h4>
-
-<ul>
-<li><p>Only different from previous sample is the cat function</p>
-
-<pre><code class="language-go">func cat(f *os.File) {
-	const NBUF = 512
-	var buf [NBUF]byte
-	for {
-		switch nr, err := f.Read(buf[:]); true {
-		case nr &lt; 0:
-			fmt.Fprintf(os.Stderr, &quot;cat: error reading: %s\n&quot;, err.Error())
-			os.Exit(1)
-		case nr == 0: // EOF
-			return
-		case nr &gt; 0:
-			if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
-				fmt.Fprintf(os.Stderr, &quot;cat: error writing: %s\n&quot;,
-					ew)
-			}
-		}
-	}
-}
-
-func main() {
-	flag.Parse()
-	if flag.NArg() == 0 {
-		cat(os.Stdin)
-	}
-
-	for i := 0; i &lt; flag.NArg(); i++ {
-		f, err := os.Open(flag.Arg(i))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-				os.Args[0], flag.Arg(i), err.Error())
-			os.Exit(1)
-		}
-		cat(f)
-		f.Close()
-	}
-}
-</code></pre></li>
-</ul>
-
-<h4 id="write-to-a-file">Write to a file</h4>
-
-<ul>
-<li><p>Flags for open output file</p>
-
-<ul>
-<li>os.O_RDONLY: the read flag for read-only access</li>
-<li>os.WRONLY: the write flag for write-only access</li>
-<li>os.O_CREATE : the create flag: create the file if it doesn’t exist</li>
-<li>os.O_TRUNC : the truncate flag: truncate to size 0 if the file already exists</li>
-</ul></li>
-
-<li><p>Write with buffer</p>
-
-<pre><code class="language-go">func main() {
-	outputFile, outputError := os.OpenFile(&quot;output.txt&quot;,
-		os.O_WRONLY|os.O_CREATE, 0666)
-	if outputError != nil {
-		fmt.Printf(&quot;An error occurred with file creation\n&quot;)
-		return
-	}
-	defer outputFile.Close()
-	outputWriter := bufio.NewWriter(outputFile)
-	outputString := &quot;hello world!\n&quot;
-	for i := 0; i &lt; 10; i++ {
-		outputWriter.WriteString(outputString)
-	}
-	outputWriter.Flush()
-}
-</code></pre></li>
-
-<li><p>Write a file without buffer</p>
-
-<ul>
-<li><p>Write the same content as previous sample</p>
-
-<pre><code class="language-go">func main() {
-	os.Stdout.WriteString(&quot;hello, world\n&quot;)
-	f, _ := os.OpenFile(&quot;output.txt&quot;, os.O_CREATE|os.O_WRONLY, 0)
-	defer f.Close()
-	for i := 0; i &lt; 10; i++ {
-		f.WriteString(&quot;hello world!\n&quot;)
-	}
-}
-</code></pre></li>
-</ul></li>
-</ul>
-
-<h4 id="write-to-standard-output-interface-fmt-fprintf">Write to standard output - interface: fmt.Fprintf</h4>
-
-<ul>
-<li>The fmt.Fprintf writes to a variable of type io.Writer.</li>
-
-<li><p>Any type that has a Write method, including os.Stdout, files (like os.File), pipes, network connections, channels, etc&hellip;, and also to write buffers from the bufio package.</p>
-
-<pre><code class="language-go">func main() {
-	// unbuffered: os.Stdout implements io.Writer
-	fmt.Fprintf(os.Stdout, &quot;%s\n&quot;, &quot;hello world! - unbuffered&quot;)
-	// buffered:
-	buf := bufio.NewWriter(os.Stdout)
-	// and now so does buf:
-	fmt.Fprintf(buf, &quot;%s\n&quot;, &quot;hello world! - buffered&quot;)
-	buf.Flush()
-}
-
-</code></pre></li>
-</ul>
-
-<h4 id="copy">Copy</h4>
-
-<ul>
-<li><p>Simply use io.Copy method</p>
-
-<pre><code class="language-go">func main() {
-	CopyFile(&quot;target_hello.txt&quot;, &quot;hello.go&quot;)
-	fmt.Println(&quot;Copy done!&quot;)
+	sendChan := make(chan int)
+	receiveChan := make(chan string)
+	go processChannel(sendChan, receiveChan)
 
 }
-func CopyFile(dstName, srcName string) (written int64, err error) {
-	src, err := os.Open(srcName)
-	if err != nil {
-		return
-	}
-	defer src.Close()
-	dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
-	if err != nil {
-		return
-	}
-	defer dst.Close()
-	return io.Copy(dst, src)
-}
-</code></pre></li>
-</ul>
 
-<h3 id="json">JSON</h3>
-
-<ul>
-<li><p>Mapping of Go type and Js type</p>
-
-<ul>
-<li>Go: bool -&gt; Js: boolean</li>
-<li>Go: float64 -&gt; Js: numbers</li>
-<li>Go: string -&gt; Js: strings</li>
-
-<li><p>Go: nil -&gt; Js: null</p>
-
-<pre><code class="language-go">type Address struct {
-	Type    string
-	City    string
-	Country string
-}
-type VCard struct {
-	FirstName string
-	LastName  string
-	Addresses []*Address
-	Remark    string
-}
-
-func main() {
-	pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-	wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-	vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-	// fmt.Printf(&quot;%v: \n&quot;, vc)
-	// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-	// JSON format:
-	js, _ := json.Marshal(vc)
-	fmt.Printf(&quot;JSON format: %s&quot;, js)
-	// using an encoder:
-	file, _ := os.OpenFile(&quot;vcard.json&quot;, os.O_CREATE|os.O_WRONLY, 0)
-	defer file.Close()
-	enc := json.NewEncoder(file)
-	err := enc.Encode(vc)
-	if err != nil {
-		fmt.Println(&quot;Error in encoding json&quot;)
-	}
-}
-
-// cat vcard.json | jq  # jq is a tool for json file
-// ----------------------------------------------------
-// {
-//   &quot;FirstName&quot;: &quot;Jan&quot;,
-//   &quot;LastName&quot;: &quot;Kersschot&quot;,
-//   &quot;Addresses&quot;: [
-//     {
-//       &quot;Type&quot;: &quot;private&quot;,
-//       &quot;City&quot;: &quot;Aartselaar&quot;,
-//       &quot;Country&quot;: &quot;Belgium&quot;
-//     },
-//     {
-//       &quot;Type&quot;: &quot;work&quot;,
-//       &quot;City&quot;: &quot;Boom&quot;,
-//       &quot;Country&quot;: &quot;Belgium&quot;
-//     }
-//   ],
-//   &quot;Remark&quot;: &quot;none&quot;
-// }
-</code></pre></li>
-</ul></li>
-</ul>
-
-<h3 id="xml">XML</h3>
-
-<ul>
-<li><p>Sample xml</p>
-
-<pre><code class="language-xml">&lt;Person&gt;
-&lt;FirstName&gt;Laura&lt;/FirstName&gt;
-&lt;LastName&gt;Lynn&lt;/LastName&gt;
-&lt;/Person&gt;
-</code></pre></li>
-
-<li><p>The encoding/xml package also implements a simle xml parser (SAX) to read XML-data and parse it into its constituents.</p>
-
-<pre><code class="language-go">
-var t, token xml.Token
-var err error
-
-func main() {
-	input :=
-		&quot;&lt;Person&gt;&lt;FirstName&gt;Laura&lt;/FirstName&gt;&lt;LastName&gt;Lynn&lt;/LastName&gt;&lt;/Person&gt;&quot;
-	inputReader := strings.NewReader(input)
-	p := xml.NewDecoder(inputReader)
-	for t, err = p.Token(); err == nil; t, err = p.Token() {
-		switch token := t.(type) {
-		case xml.StartElement:
-			name := token.Name.Local
-			fmt.Printf(&quot;Token name: %s\n&quot;, name)
-			for _, attr := range token.Attr {
-				attrName := attr.Name.Local
-				attrValue := attr.Value
-				fmt.Printf(&quot;An attribute is: %s %s\n&quot;, attrName,
-					attrValue)
-				// ...
-			}
-		case xml.EndElement:
-			fmt.Println(&quot;End of token&quot;)
-		case xml.CharData:
-			content := string([]byte(token))
-			fmt.Printf(&quot;This is the content: %v\n&quot;, content)
+func processChannel(in &lt;-chan int, out chan&lt;- string) {
+	for inValue := range in {
+		result := strconv.Itoa(inValue) // processing inValue
 		// ...
-		default:
-			// ...
+		out &lt;- result
+	}
+}
+</code></pre></li>
+
+<li><p>Prime number generator sample</p>
+
+<pre><code class="language-go">func generate() chan int {
+	ch := make(chan int)
+	go func() {
+		for i := 2; ; i++ {
+			ch &lt;- i
+		}
+	}()
+	return ch
+}
+
+// Filter out input values divisible by prime, send rest to returned channel
+func filter(in chan int, prime int) chan int {
+	out := make(chan int)
+	go func() {
+		for {
+			if i := &lt;-in; i%prime != 0 {
+				out &lt;- i
+			}
+		}
+	}()
+	return out
+}
+
+func sieve() chan int {
+	out := make(chan int)
+	go func() {
+		ch := generate()
+		for {
+			prime := &lt;-ch
+			ch = filter(ch, prime)
+			out &lt;- prime
+		}
+	}()
+	return out
+}
+
+func main() {
+	primes := sieve()
+	for {
+		fmt.Println(&lt;-primes)
+	}
+}
+</code></pre></li>
+</ul>
+
+<h5 id="goroutine-with-select">Goroutine with select</h5>
+
+<ul>
+<li><p>The select chooses which of the multiple communications listed by its cases can proceed. The default clause is optional; fall through behavior, like in the normal switch, is not permitted.</p>
+
+<ul>
+<li>It all are blocked, it waits until one can proceed.</li>
+<li>If multiple can proceed, it chooses one at random.</li>
+<li>When none of the channel operations can proceed and the default clause is present, then this is executed: the default is always runnable (that is: ready to execute).</li>
+</ul></li>
+
+<li><p>Using a send operation in a select statement with a default case guarantees that the send will be non-blocking! If there are no cases, the select blocks execution forever.</p></li>
+
+<li><p>Sample 9</p>
+
+<pre><code class="language-go">func main() {
+	runtime.GOMAXPROCS(2) // in goroutine_select2.go
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+	go pump1(ch1)
+	go pump2(ch2)
+	go suck(ch1, ch2)
+	time.Sleep(1e9)
+}
+func pump1(ch chan int) {
+	for i := 0; ; i++ {
+		ch &lt;- i * 2
+	}
+}
+func pump2(ch chan int) {
+	for i := 0; ; i++ {
+		ch &lt;- i + 5
+	}
+}
+func suck(ch1 chan int, ch2 chan int) {
+	for {
+		select {
+		case v := &lt;-ch1:
+
+			fmt.Printf(&quot;Received on channel 1: %d\n&quot;, v)
+		case v := &lt;-ch2:
+			fmt.Printf(&quot;Received on channel 2: %d\n&quot;, v)
 		}
 	}
 }
-
-//----------------------
-// Token name: Person
-// Token name: FirstName
-// This is the content: Laura
-// End of token
-// Token name: LastName
-// This is the content: Lynn
-// End of token
-// End of token
 </code></pre></li>
 </ul>
 
-<h3 id="gob-go-binary-format">Gob - Go binary format</h3>
+<h5 id="timeout-ticker">Timeout &amp; Ticker</h5>
 
 <ul>
-<li><p>Simulate network communication</p>
+<li><p>Ticker: a struct time.Ticker which is an object that repeatedly sends a time value on a contained channel C at a specified time interval</p>
 
-<pre><code class="language-go">type P struct {
-	X, Y, Z int
-	Name    string
-}
-type Q struct {
-	X, Y *int32
-	Name string
-}
-
-func main() {
-	// Initialize the encoder and decoder. Normally enc and dec would
-	// be bound to network connections and the encoder and decoder
-	// would run in different processes.
-	var network bytes.Buffer
-	// Stand-in for a network connection
-	enc := gob.NewEncoder(&amp;network) // Will write to network.
-	dec := gob.NewDecoder(&amp;network)
-	// Will read from network.
-	// Encode (send) the value.
-	err := enc.Encode(P{3, 4, 5, &quot;Pythagoras&quot;})
-	if err != nil {
-		log.Fatal(&quot;encode error:&quot;, err)
-	}
-	// Decode (receive) the value.
-	var q Q
-	err = dec.Decode(&amp;q)
-	if err != nil {
-		log.Fatal(&quot;decode error:&quot;, err)
-	}
-fmt.Printf(&quot;%q: {%d,%d}\n&quot;, q.Name, *q.X, *q.Y)
-// &quot;Pythagoras&quot;: {3,4}
+<pre><code class="language-go">type Ticker struct {
+	C &lt;-chan Time // the channel on which the ticks are delivered.
+				// contains filtered or unexported fields
+	// ...
 }
 </code></pre></li>
 
-<li><p>Simulate file operation</p>
+<li><p>A ticker is stopped with Stop(), use this in a defer statement.</p>
 
-<pre><code class="language-go">type Address struct {
-	Type    string
-	City    string
-	Country string
+<pre><code class="language-go">ticker := time.NewTicker(updateInterval)
+defer ticker.Stop()
+// ...
+select {
+	case u:= &lt;- ch1:
+		// ...
+	case v:= &lt;- ch2:
+		// ...
+	case &lt;- ticker.C:
+		logState(status) // call some logging function logState
+	default: // no value ready to be received
+		// ...
 }
-type VCard struct {
-	FirstName string
-	LastName  string
-	Addresses []*Address
-	Remark    string
-}
+</code></pre></li>
 
-func main() {
-	pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-	wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-	vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-	// fmt.Printf(&quot;%v: \n&quot;, vc)
-	// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-	// using an encoder:
-	file, _ := os.OpenFile(&quot;vcard.gob&quot;, os.O_CREATE|os.O_WRONLY, 0)
-	defer file.Close()
-	enc := gob.NewEncoder(file)
-	err := enc.Encode(vc)
-	if err != nil {
-		log.Println(&quot;Error in encoding gob&quot;)
+<li><p>Handy to use when you have to limit the rate of processing per unit time. The time.Tick() function with signature func Tick(d Duration) &lt;-chan Time is useful when you only need access to the return channel and don’t need to shutdown it.</p></li>
+
+<li><p>Sample below is good use case for time.Tick function</p>
+
+<pre><code class="language-go">rate_per_sec := 10
+var dur Duration = 1e9 / rate_per_sec
+chRate := time.Tick(dur) // a tick every 1/10th of a second
+for req := range requests {
+	&lt;- chRate // rate limit our Service.Method RPC calls
+	go client.Call(&quot;Service.Method&quot;, req, ...) // client.Call is RPC call
+}
+</code></pre></li>
+
+<li><p>A Timer type looks exactly the same as a Ticker type (it is constructed with NewTimer(d but it sends the time only once, after a Duration d.</p></li>
+
+<li><p>After Duration d the current time is sent on the returned channel; so this is equivalent to NewTimer(d).C; it resembles Tick(), but After() sends the time only once.</p></li>
+
+<li><p>Sample of timer</p>
+
+<pre><code class="language-go">func main() {
+	tick := time.Tick(1e8)
+	boom := time.After(5e8)
+	for {
+		select {
+			case &lt;-tick:
+				fmt.Println(&quot;tick.&quot;)
+			case &lt;-boom:
+				fmt.Println(&quot;BOOM!&quot;)
+				return
+			default:
+				fmt.Println(&quot; .&quot;)
+				time.Sleep(5e7)
+		}
 	}
 }
 </code></pre></li>
 </ul>
 
-<h3 id="crypto">Crypto</h3>
+<h4 id="lazy-generator">Lazy generator</h4>
 
 <ul>
-<li>The hash package: implements the adler32, crc32, crc64 and fnv checksums;</li>
+<li><p>A generator is a function that returns the next value in a sequence each time the function is called.</p></li>
 
-<li><p>The crypto package: implements other hashing algorithms like md4, md5, sha1, etc. and
-complete encryption implementations for aes, blowfish, rc4, rsa, xtea, etc.</p>
+<li><p>It is a producer that only returns the next value, not the entire sequence; this is called lazy evaluation:only compute what you need at the moment, saving valuable resources (memory and CPU): it is a technology for the evaluation of expressions on demand.</p></li>
+</ul>
 
-<pre><code class="language-go">
+<h5 id="basic-lazy-generator">Basic lazy generator</h5>
+
+<pre><code class="language-go">var resume chan int
+
+func integers() chan int {
+	yield := make(chan int)
+	count := 0
+	go func() {
+		for {
+			yield &lt;- count
+			count++
+		}
+	}()
+	return yield
+}
+func generateInteger() int {
+	return &lt;-resume
+}
 func main() {
-	hasher := sha1.New()
-	io.WriteString(hasher, &quot;test&quot;)
-	b := []byte{}
-	fmt.Printf(&quot;Result: %x\n&quot;, hasher.Sum(b))
-	fmt.Printf(&quot;Result: %d\n&quot;, hasher.Sum(b))
-	hasher.Reset()
-	data := []byte(&quot;We shall overcome!&quot;)
-	n, err := hasher.Write(data)
-	if n != len(data) || err != nil {
-		log.Printf(&quot;Hash write error: %v / %v&quot;, n, err)
+	resume = integers()
+	fmt.Println(generateInteger()) //=&gt; 0
+	fmt.Println(generateInteger()) //=&gt; 1
+	fmt.Println(generateInteger()) //=&gt; 2
+}
+</code></pre>
+
+<h5 id="generic-lazy-generator">Generic Lazy Generator</h5>
+
+<ul>
+<li><p>By making clever use of the empty interface, closures and higher order functions we can implement a generic builder BuildLazyEvaluator for the lazy evaluation function (this should best placed inside a utility package). The builder takes a function that has to be evaluated and an initial state as arguments and returns a function without arguments returning the desired value. The passed evaluation function has to calculate the next return value as well as the next state based on the state argument. Inside the builder a channel and a goroutine with an endless loop are created. The return values are passed to the channel from which they are fetched by the returned function for later usage. Each time a value is fetched the next one will be calculated.</p>
+
+<pre><code class="language-go">type Any interface{}
+type EvalFunc func(Any) (Any, Any)
+
+func main() {
+	evenFunc := func(state Any) (Any, Any) {
+		oldSate := state.(int)
+		newState := oldSate + 2
+		return oldSate, newState
 	}
-	checksum := hasher.Sum(b)
-	fmt.Printf(&quot;Result: %x\n&quot;, checksum)
+	even := BuildLazyIntEvaluator(evenFunc, 0)
+	for i := 0; i &lt; 10; i++ {
+		fmt.Printf(&quot;%vth even: %v\n&quot;, i, even())
+	}
 }
 
-//----------------------------------
-// Result: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
-// Result: [169 74 143 229 204 177 155 166 28 76 8 115 211 145 233 135 152 47 187 211]
-// Checksum: e2222bfc59850bbb00a722e764a555603bb59b2a
+func BuildLazyEvaluator(evalFunc EvalFunc, initState Any) func() Any {
+	retValChan := make(chan Any)
+	loopFunc := func() {
+		var actState Any = initState
+		var retVal Any
+		for {
+			retVal, actState = evalFunc(actState)
+			retValChan &lt;- retVal
+		}
+	}
+	retFunc := func() Any {
+		return &lt;-retValChan
+	}
+	go loopFunc()
+	return retFunc
+}
+
+func BuildLazyIntEvaluator(evalFunc EvalFunc, initState Any) func() int {
+	evalFn := BuildLazyEvaluator(evalFunc, initState)
+	return func() int {
+		return evalFn().(int)
+	}
+}
+</code></pre></li>
+</ul>
+
+<h4 id="multiplexing">Multiplexing</h4>
+
+<ul>
+<li><p>Client-server applications are the kind of applications where goroutines and channels shine.</p></li>
+
+<li><p>Server side simulator sample</p>
+
+<pre><code class="language-go">type Request struct {
+	a, b      int
+	replyChan chan int // reply channel inside the Request
+}
+
+type binOp func(a, b int) int
+
+func run(op binOp, req *Request) {
+	req.replyChan &lt;- op(req.a, req.b)
+}
+
+func server(op binOp, service chan *Request, quitChan chan bool) {
+	for {
+		select {
+		case req := &lt;-service:
+			go run(op, req)
+		case &lt;-quitChan:
+			return
+		}
+	}
+}
+func startServer(op binOp) (service chan *Request, quitChan chan bool) {
+	service = make(chan *Request)
+	quitChan = make(chan bool)
+	go server(op, service, quitChan)
+	return service, quitChan
+}
+
+func main() {
+	adder, quitChan := startServer(func(a, b int) int { return a + b })
+	const N = 100
+	var reqs [N]Request
+	for i := 0; i &lt; N; i++ {
+		req := &amp;reqs[i]
+		req.a = i
+		req.b = i + N
+		req.replyChan = make(chan int)
+		adder &lt;- req
+	}
+	// checks:
+	for i := N - 1; i &gt;= 0; i-- { // doesn’t matter what order
+		if &lt;-reqs[i].replyChan != N+2*i {
+			fmt.Println(&quot;fail at&quot;, i)
+		} else {
+
+			fmt.Println(&quot;Request &quot;, i, &quot;is ok!&quot;)
+		}
+	}
+	quitChan &lt;- true
+	fmt.Println(&quot;done&quot;)
+}
 </code></pre></li>
 </ul>
 
@@ -1395,22 +1558,39 @@ func main() {
 <ul>
 <li>
 <ul>
-<li><a href="#io-read-write">IO - Read &amp; Write</a>
+<li><a href="#goroutine">Goroutine</a>
 <ul>
-<li><a href="#read-from-user-input">Read from user input</a></li>
-<li><a href="#read-command-line-argument">Read command-line argument</a></li>
-<li><a href="#read-from-file">Read from file</a></li>
-<li><a href="#read-with-flag-package">Read with flag package</a></li>
-<li><a href="#read-with-flag-parsing-buffer">Read with flag parsing &amp; buffer</a></li>
-<li><a href="#read-with-flag-parsing-slice">Read with flag parsing &amp; slice</a></li>
-<li><a href="#write-to-a-file">Write to a file</a></li>
-<li><a href="#write-to-standard-output-interface-fmt-fprintf">Write to standard output - interface: fmt.Fprintf</a></li>
-<li><a href="#copy">Copy</a></li>
+<li><a href="#basic-goroutine">Basic Goroutine</a></li>
+<li><a href="#using-gomaxprocs">Using GOMAXPROCS</a></li>
 </ul></li>
-<li><a href="#json">JSON</a></li>
-<li><a href="#xml">XML</a></li>
-<li><a href="#gob-go-binary-format">Gob - Go binary format</a></li>
-<li><a href="#crypto">Crypto</a></li>
+<li><a href="#channels">Channels</a>
+<ul>
+<li><a href="#channels-for-communication-between-goroutines">Channels for communication between goroutines</a></li>
+<li><a href="#blocking-of-channels">Blocking of channels</a>
+<ul>
+<li><a href="#goroutine-sync-through-one-or-more-channels">Goroutine sync through one or more channels</a></li>
+<li><a href="#async-channels-channel-with-buffer">Async channels - channel with buffer</a></li>
+<li><a href="#closing-channel">Closing channel</a></li>
+<li><a href="#semaphore-pattern">Semaphore pattern</a></li>
+<li><a href="#implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</a></li>
+<li><a href="#channel-factory-pattern">Channel Factory pattern</a></li>
+<li><a href="#for-range-applied-to-channels">For—range applied to channels</a></li>
+<li><a href="#iterator-pattern">Iterator pattern</a></li>
+</ul></li>
+<li><a href="#producer-consumer-pattern">Producer Consumer pattern</a>
+<ul>
+<li><a href="#channel-directionality">Channel directionality</a></li>
+<li><a href="#pipe-filter-pattern">Pipe &amp; Filter pattern</a></li>
+<li><a href="#goroutine-with-select">Goroutine with select</a></li>
+<li><a href="#timeout-ticker">Timeout &amp; Ticker</a></li>
+</ul></li>
+<li><a href="#lazy-generator">Lazy generator</a>
+<ul>
+<li><a href="#basic-lazy-generator">Basic lazy generator</a></li>
+<li><a href="#generic-lazy-generator">Generic Lazy Generator</a></li>
+</ul></li>
+<li><a href="#multiplexing">Multiplexing</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1423,8 +1603,8 @@ func main() {
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/golang/go-note-3/" title="Golang Note - 3"> <i class="fa fa-chevron-left"></i><label>Golang Note - 3</label></a>
-    <a class="nav nav-next" href="/coding/golang/go-note-5/" title="Golang Note - 5" style="margin-right: 0px;"><label>Golang Note - 5</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-5/" title="Golang Note - 5"> <i class="fa fa-chevron-left"></i><label>Golang Note - 5</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-99/" title="Golang snippets" style="margin-right: 0px;"><label>Golang snippets</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
