@@ -5,20 +5,19 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-22T21:17:48 AEST">
-<title>Rust-lang Note - 1 :: Hello World</title>
+<meta name="revised" content="2019-09-25T21:52:07 AEST">
+<title>Rustlang Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Rust-lang Introduction: Mutability, Shadowing, Data Types, Ownership, Borrowing,  ">
+<meta name="description" content="Rustlang Introduction: Mutability, Shadowing, Data Types, Ownership, Borrowing ">
 
 
 
@@ -408,7 +407,28 @@
       <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item active">
         <div>
           <a href="/coding/rustlang/rust-note-1/">
-            Rust-lang Note - 1
+            Rustlang Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Rustlang Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-3/">
+            Rustlang Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-4/">
+            Rustlang Note - 4
           </a>
         </div>
     </li>
@@ -755,7 +775,10 @@
    Python</option>
     <option value="/coding/rustlang/" >
    Rustlang</option> 
-      <option value="/coding/rustlang/rust-note-1/"  selected> Rust-lang Note - 1</option>
+      <option value="/coding/rustlang/rust-note-1/"  selected> Rustlang Note - 1</option>
+      <option value="/coding/rustlang/rust-note-2/" > Rustlang Note - 2</option>
+      <option value="/coding/rustlang/rust-note-3/" > Rustlang Note - 3</option>
+      <option value="/coding/rustlang/rust-note-4/" > Rustlang Note - 4</option>
   
     <option value="/coding/shell/" >
    Shell</option>
@@ -786,7 +809,7 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Rust-lang Note - 1</h1>
+            <h1>Rustlang Note - 1</h1>
         
 
 <h3 id="mutability">Mutability</h3>
@@ -836,7 +859,13 @@
 <h4 id="the-tuple-type">The Tuple Type</h4>
 
 <ul>
-<li>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</li>
+<li><p>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</p>
+
+<pre><code class="language-rs">let tup: (i32, f64, u8) = (500, 6.4, 1);
+let tup = (500, 6.4, 1);
+let (x, y, z) = tup;
+println!(&quot;The value of y is: {}&quot;, y); //6.4
+</code></pre></li>
 </ul>
 
 <h3 id="ownership">Ownership</h3>
@@ -909,6 +938,222 @@ println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after m
 <li>References must always be valid.</li>
 </ul>
 
+<h4 id="slice">Slice</h4>
+
+<ul>
+<li>Another data type that does not have ownership is the slice. Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection.</li>
+</ul>
+
+<h3 id="struct">Struct</h3>
+
+<ul>
+<li><p>Structs are similar to tuples, which were discussed in Chapter 3. Like tuples, the pieces of a struct can be different types. Unlike with tuples, you’ll name each piece of data so it’s clear what the values mean.</p></li>
+
+<li><p>sample code of strut</p>
+
+<pre><code class="language-rs">struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+
+
+fn build_user(email: String, username: String) -&gt; User {
+    User {
+        email: email,
+        username: username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+</code></pre></li>
+
+<li><p>Creating Instances From Other Instances</p>
+
+<pre><code class="language-rs">let user2 = User {
+    email: String::from(&quot;another@example.com&quot;),
+    username: String::from(&quot;anotherusername567&quot;),
+    ..user1
+};
+</code></pre></li>
+</ul>
+
+<h4 id="unit-like-struct">Unit-Like Struct</h4>
+
+<ul>
+<li>structs that don’t have any fields! These are called unit-like structs because they behave similarly to (), the unit type.</li>
+</ul>
+
+<h4 id="methods">Methods</h4>
+
+<ul>
+<li><p>Methods are similar to functions: they’re declared with the fn keyword and their name, they can have parameters and a return value, and they contain some code that is run when they’re called from somewhere else. However, methods are different from functions in that they’re defined within the context of a struct (or an enum or a trait object. Their first parameter is always self, which represents the instance of the struct the method is being called on.</p>
+
+<pre><code class="language-rs">#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&amp;self, other: &amp;Rectangle) -&gt; bool {
+        self.width &gt; other.width &amp;&amp; self.height &gt; other.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        &quot;The area of the rectangle is {} square pixels.&quot;,
+        rect1.area()
+    );
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!(&quot;Can rect1 hold rect2? {}&quot;, rect1.can_hold(&amp;rect2));
+    println!(&quot;Can rect1 hold rect3? {}&quot;, rect1.can_hold(&amp;rect3));
+}
+</code></pre></li>
+</ul>
+
+<h3 id="enum-option">Enum &amp; Option</h3>
+
+<ul>
+<li><p>Enums allow you to define a type by enumerating its possible values. First, we’ll define and use an enum to show how an enum can encode meaning along with data.</p></li>
+
+<li><p>A particularly useful enum, called Option, which expresses that a value can be either something or nothing.</p></li>
+
+<li><p>Pattern matching in the match expression makes it easy to run different code for different values of an enum.</p></li>
+
+<li><p>Sample from Rust standard library</p>
+
+<pre><code class="language-rs">struct Ipv4Addr {
+    // --snip--
+}
+
+struct Ipv6Addr {
+    // --snip--
+}
+
+enum IpAddr {
+    V4(Ipv4Addr),
+    V6(Ipv6Addr),
+}
+</code></pre></li>
+
+<li><p>Rust does not have nulls, but it does have an enum that can encode the concept of a value being present or absent. This enum is Option<T></p>
+
+<pre><code class="language-rs">enum Option&lt;T&gt; {
+    Some(T),
+    None,
+}
+</code></pre></li>
+</ul>
+
+<h4 id="match">Match</h4>
+
+<ul>
+<li><p>Rust has an extremely powerful control flow operator called match that allows you to compare a value against a series of patterns and then execute code based on which pattern matches. Patterns can be made up of literal values, variable names, wildcards, and many other things;</p>
+
+<pre><code class="language-rs">
+#![allow(unused_variables)]
+fn main() {
+    enum Coin {
+        Penny,
+        Nickel,
+        Dime,
+        Quarter,
+    }
+
+    fn value_in_cents(coin: Coin) -&gt; u8 {
+        match coin {
+            Coin::Penny =&gt; 1,
+            Coin::Nickel =&gt; 5,
+            Coin::Dime =&gt; 10,
+            Coin::Quarter =&gt; 25,
+        }
+    }
+}
+</code></pre></li>
+
+<li><p>Match with Option<T></p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+fn plus_one(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+    match x {
+        None =&gt; None,
+        Some(i) =&gt; Some(i + 1),
+    }
+}
+
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
+}
+</code></pre></li>
+</ul>
+
+<h4 id="matches-are-exhaustive">Matches Are Exhaustive</h4>
+
+<ul>
+<li><p>Rust knows that we didn’t cover every possible case and even knows which pattern we forgot! Matches in Rust are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of Option<T>, when Rust prevents us from forgetting to explicitly handle the None case.</p></li>
+
+<li><p>The _ Placeholder</p>
+
+<pre><code class="language-rs">let some_u8_value = 0u8;
+match some_u8_value {
+    1 =&gt; println!(&quot;one&quot;),
+    3 =&gt; println!(&quot;three&quot;),
+    5 =&gt; println!(&quot;five&quot;),
+    7 =&gt; println!(&quot;seven&quot;),
+    _ =&gt; (),
+}
+</code></pre></li>
+</ul>
+
+<h3 id="control-flow-with-if-let">Control Flow with if let</h3>
+
+<ul>
+<li><p>The if let syntax lets you combine if and let into a less verbose way to handle values that match one pattern while ignoring the rest.</p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+    let some_u8_value = Some(0u8);
+    match some_u8_value {
+        Some(3) =&gt; println!(&quot;three&quot;),
+        _ =&gt; (),
+    }
+}
+</code></pre></li>
+
+<li><p>with else</p>
+
+<pre><code class="language-rs">let mut count = 0;
+if let Coin::Quarter(state) = coin {
+    println!(&quot;State quarter from {:?}!&quot;, state);
+} else {
+    count += 1;
+}
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc" >
@@ -934,7 +1179,21 @@ println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after m
 <li><a href="#memory-and-allocation">Memory and Allocation</a></li>
 <li><a href="#move-or-clone-or-copy">Move or Clone or Copy</a></li>
 </ul></li>
-<li><a href="#references-borrowing">References &amp; Borrowing</a></li>
+<li><a href="#references-borrowing">References &amp; Borrowing</a>
+<ul>
+<li><a href="#slice">Slice</a></li>
+</ul></li>
+<li><a href="#struct">Struct</a>
+<ul>
+<li><a href="#unit-like-struct">Unit-Like Struct</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul></li>
+<li><a href="#enum-option">Enum &amp; Option</a>
+<ul>
+<li><a href="#match">Match</a></li>
+<li><a href="#matches-are-exhaustive">Matches Are Exhaustive</a></li>
+</ul></li>
+<li><a href="#control-flow-with-if-let">Control Flow with if let</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -948,7 +1207,7 @@ println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after m
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/coding/rustlang/" title="Rustlang"> <i class="fa fa-chevron-left"></i><label>Rustlang</label></a>
-    <a class="nav nav-next" href="/coding/shell/" title="Shell" style="margin-right: 0px;"><label>Shell</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/coding/rustlang/rust-note-2/" title="Rustlang Note - 2" style="margin-right: 0px;"><label>Rustlang Note - 2</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-22T21:17:48 AEST">
+<meta name="revised" content="2019-09-25T21:52:06 AEST">
 <title>Golang Note - 6 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -13,7 +13,6 @@
 <link href="/theme-flex/style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link href="/css/github.css" rel="stylesheet">
 <script src="/js/jquery-2.x.min.js"></script>
 <script type="text/javascript">
       var baseurl = "\/";
@@ -408,7 +407,28 @@
       <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
         <div>
           <a href="/coding/rustlang/rust-note-1/">
-            Rust-lang Note - 1
+            Rustlang Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Rustlang Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-3/">
+            Rustlang Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-4/">
+            Rustlang Note - 4
           </a>
         </div>
     </li>
@@ -741,32 +761,6 @@
    Blogs</option>
     <option value="/coding/" >
    Coding</option> 
-    <option value="/coding/c/" >
-   C / C&#43;&#43;</option>
-    <option value="/coding/c-sharp/" >
-   C#</option>
-    <option value="/coding/golang/" >
-   Golang</option> 
-      <option value="/coding/golang/go-note-1/" > Golang Note - 1</option>
-      <option value="/coding/golang/go-note-2/" > Golang Note - 2</option>
-      <option value="/coding/golang/go-note-3/" > Golang Note - 3</option>
-      <option value="/coding/golang/go-note-4/" > Golang Note - 4</option>
-      <option value="/coding/golang/go-note-5/" > Golang Note - 5</option>
-      <option value="/coding/golang/go-note-6/"  selected> Golang Note - 6</option>
-      <option value="/coding/golang/go-note-99/" > Golang snippets</option>
-  
-    <option value="/coding/java/" >
-   Java</option>
-    <option value="/coding/javascript/" >
-   JavaScript</option>
-    <option value="/coding/python/" >
-   Python</option>
-    <option value="/coding/rustlang/" >
-   Rustlang</option>
-    <option value="/coding/shell/" >
-   Shell</option>
-    <option value="/coding/sql/" >
-   SQL</option>
   
     <option value="/frameworks/" >
    Frameworks</option>
@@ -810,7 +804,7 @@
 
 <pre><code class="language-go">func main() {
 	go func() {
-		println(&quot;Hello&quot;) 
+		println(&quot;Hello&quot;)
 	}()
 }
 </code></pre></li>
@@ -1033,7 +1027,7 @@ ch &lt;- &quot;Hello&quot; // panic: send on closed channel
 </code></pre></li>
 </ul>
 
-<h5 id="semaphore-pattern">Semaphore pattern</h5>
+<h4 id="semaphore-pattern">Semaphore pattern</h4>
 
 <ul>
 <li><p>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</p>
@@ -1119,7 +1113,7 @@ func (s semaphore) Signal() {
 </code></pre></li>
 </ul>
 
-<h5 id="channel-factory-pattern">Channel Factory pattern</h5>
+<h4 id="channel-factory-pattern">Channel Factory pattern</h4>
 
 <ul>
 <li><p>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</p>
@@ -1217,15 +1211,17 @@ for x := range container.Iter() { ... }
 
 <h5 id="channel-directionality">Channel directionality</h5>
 
-<pre><code>    var send_only chan&lt;- int // channel can only receive data
-    var recv_only &lt;-chan int // channel can only send data
-</code></pre>
-
 <ul>
-<li>Receive-only channels ( &lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</li>
+<li><p>A channel type may be annotated to specify that it may only send or only receive</p>
+
+<pre><code>var send_only chan&lt;- int // channel can only receive data
+var recv_only &lt;-chan int // channel can only send data
+</code></pre></li>
+
+<li><p>Receive-only channels ( &lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</p></li>
 </ul>
 
-<h5 id="pipe-filter-pattern">Pipe &amp; Filter pattern</h5>
+<h4 id="pipe-filter-pattern">Pipe &amp; Filter pattern</h4>
 
 <ul>
 <li><p>A goroutine channel process will processes what it receives from an input channel and sends this to an output channel</p>
@@ -1571,16 +1567,22 @@ func main() {
 <li><a href="#goroutine-sync-through-one-or-more-channels">Goroutine sync through one or more channels</a></li>
 <li><a href="#async-channels-channel-with-buffer">Async channels - channel with buffer</a></li>
 <li><a href="#closing-channel">Closing channel</a></li>
-<li><a href="#semaphore-pattern">Semaphore pattern</a></li>
+</ul></li>
+<li><a href="#semaphore-pattern">Semaphore pattern</a>
+<ul>
 <li><a href="#implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</a></li>
-<li><a href="#channel-factory-pattern">Channel Factory pattern</a></li>
+</ul></li>
+<li><a href="#channel-factory-pattern">Channel Factory pattern</a>
+<ul>
 <li><a href="#for-range-applied-to-channels">For—range applied to channels</a></li>
 <li><a href="#iterator-pattern">Iterator pattern</a></li>
 </ul></li>
 <li><a href="#producer-consumer-pattern">Producer Consumer pattern</a>
 <ul>
 <li><a href="#channel-directionality">Channel directionality</a></li>
-<li><a href="#pipe-filter-pattern">Pipe &amp; Filter pattern</a></li>
+</ul></li>
+<li><a href="#pipe-filter-pattern">Pipe &amp; Filter pattern</a>
+<ul>
 <li><a href="#goroutine-with-select">Goroutine with select</a></li>
 <li><a href="#timeout-ticker">Timeout &amp; Ticker</a></li>
 </ul></li>
