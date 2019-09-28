@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-29T02:51:31 AEST">
-<title>Python Note 2 :: Hello World</title>
+<title>Golang Note - 9 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Closure &amp; Decorator">
+<meta name="description" content="Common pitfalls">
 
 
 
     
   </head>
-  <body data-url="/coding/python/python-note-2/">
+  <body data-url="/coding/golang/go-note-9/">
     
       <header>
   <div class="logo">
@@ -204,10 +204,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -266,7 +267,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-9/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-9/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-9/">
             Golang Note - 9
@@ -368,11 +369,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/python/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/python/">Python</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
@@ -382,7 +382,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-2/" class="dd-item active">
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
         <div>
           <a href="/coding/python/python-note-2/">
             Python Note 2
@@ -797,7 +797,19 @@
    C#</option>
     <option value="/coding/golang/" >
   - 
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" >-- Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" >-- Golang Note - 3</option>
+      <option value="/coding/golang/go-note-4/" >-- Golang Note - 4</option>
+      <option value="/coding/golang/go-note-5/" >-- Golang Note - 5</option>
+      <option value="/coding/golang/go-note-6/" >-- Golang Note - 6</option>
+      <option value="/coding/golang/go-note-7/" >-- Golang Note - 7</option>
+      <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
+      <option value="/coding/golang/go-note-9/"  selected>-- Golang Note - 9</option>
+      <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
     <option value="/coding/java/" >
   - 
    Java</option>
@@ -806,17 +818,7 @@
    JavaScript</option>
     <option value="/coding/python/" >
   - 
-   Python</option> 
-      <option value="/coding/python/python-note-1/" >-- Python Note 1</option>
-      <option value="/coding/python/python-note-2/"  selected>-- Python Note 2</option>
-      <option value="/coding/python/python-note-3/" >-- Python Note 3</option>
-      <option value="/coding/python/python-note-4/" >-- Python Note 4</option>
-      <option value="/coding/python/python-note-5/" >-- Python Note 5</option>
-      <option value="/coding/python/python-note-6/" >-- Python Note 6</option>
-      <option value="/coding/python/python-note-7/" >-- Python Note 7</option>
-      <option value="/coding/python/python-note-8/" >-- Python Note 8</option>
-      <option value="/coding/python/python-note-9/" >-- Python Note 9</option>
-  
+   Python</option>
     <option value="/coding/rustlang/" >
   - 
    Rustlang</option>
@@ -851,233 +853,273 @@
     
 <div class="main-page">
     <div class="flex-item main-content max70width">
-            <h1>Python Note 2</h1>
+            <h1>Golang Note - 9</h1>
         
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
-
-<h3 id="legb-rules">LEGB rules</h3>
+<h3 id="shadowing">Shadowing</h3>
 
 <ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
-</ul>
+<li><p>Hiding (shadowing) a variable by misusing short declaration.</p></li>
 
-<h3 id="local-function">Local function</h3>
+<li><p>Such mistakes occur mostly inside the  if-body or for-loop</p>
 
-<ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
-</ul>
+<pre><code class="language-go">var remember bool = false
+    if something {
+        remember := true // Wrong.
+    }
+// use remember
 
-<h3 id="closure">Closure</h3>
-
-<ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
-
-<li><p>Usage of nonlocal</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-</code></pre></li>
-</ul></li>
-
-<li><p>Use as function factory</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-## test result:
-## 4
-## 8
-
-</code></pre></li>
-</ul></li>
-</ul>
-
-<h3 id="decorator">Decorator</h3>
-
-<ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
-
-<li><p>Example</p>
-
-<ul>
-<li><p>use function as decorator</p>
-
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-## test result:
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-</code></pre></li>
-
-<li><p>Example: multiple decorators including function and instance</p>
-
-<pre><code class="language-python">class Trace:
-    def __init__(self):
-        self.enabled = True
-
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-## test result
-## Calling hello_greek
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
-</code></pre></li>
-
-<li><p>Use as validator</p>
-
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
-
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
-
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
-
-## test result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
+func shadow() (err error) {
+    x, err := check1() // x is created; err is assigned to
+    if err != nil {
+        return // err correctly returned
+    }
+        
+    if y, err := check2(x); err != nil { // y and inner err are created
+        return // inner err shadows outer err so nil is wrongly returned!
+    } else {
+        fmt.Println(y)
+    }
+    return
+}
 </code></pre></li>
 </ul>
 
-<h2 id="properties-class">Properties &amp; Class</h2>
-
-<h3 id="staticmethod">@staticmethod</h3>
+<h3 id="misusing-strings">Misusing strings</h3>
 
 <ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
+<li><p>String concatenations of the kind a += b are inefficient, especially when performed inside a loop.</p></li>
+
+<li><p>Instead one should use a bytes.Buffer to accumulate string content</p>
+
+<pre><code class="language-go">var b bytes.Buffer
+// ...
+for condition {
+    b.WriteString(str) // appends string str to the buffer
+}
+return b.String()
+</code></pre></li>
 </ul>
 
-<h3 id="classmethod">@classmethod</h3>
+<h3 id="using-deffer-incorrectly">Using deffer incorrectly</h3>
 
 <ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
+<li><p>Using defer for closing a file in the wrong scope</p></li>
 
-<li><p>Use case: use as named constructors</p>
+<li><p>It mostly occurs in the for-loop body. Suppose you are processing a range of files in a for-loop, and you want to make sure the files are closed after processing by using defer,</p></li>
 
-<pre><code class="language-python">class FileStream(object):
+<li><p>BAD defer sample</p>
 
-@classmethod
-def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-    with open(filepath, 'r') as fileobj:
-        for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-            yield obj
+<pre><code class="language-go">for _, file := range files {
+    if f, err = os.Open(file); err != nil {
+    return
+    }
+                        
+    defer f.Close() // This is /wrong/. 
+    // The file is not closed when this loop iteration ends.
 
-@classmethod
-def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-    raise NotImplemented ## Placeholder until implemented
-
-def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-    ...
+    // perform operations on f:
+    f.Process(data)
+}
 </code></pre></li>
-</ul></li>
+
+<li><p>Defer is only executed at the return of a function, not at the end of a loop or some other limited scope.</p></li>
+
+<li><p>DO NOT use defer to close the file in the for-loop body</p>
+
+<pre><code class="language-go">for _, file := range files {
+    if f, err = os.Open(file); err != nil {
+        return
+    }
+    // perform operations on f:
+    f.Process(data)
+    // close f:
+    f.Close()
+}
+</code></pre></li>
 </ul>
 
-<h3 id="property">@property</h3>
+<h3 id="confusing-new-and-make">Confusing new() and make()</h3>
 
 <ul>
-<li><p>Encapsulation</p>
+<li>for slices, maps and channels, use make</li>
+<li>for arrays, structs, and all value types, use new</li>
+</ul>
+
+<h3 id="no-need-for-slice">No need for slice</h3>
 
 <ul>
-<li><p>Example</p>
+<li><p>No need to pass a pointer to a slice to a function</p></li>
 
-<pre><code class="language-python">class A
-    @property
-    def  prop(self):
-        return self._prop
+<li><p>A slice is a pointer to an underlying array. Passing a slice as a parameter to a function is probably what you always want: namely passing a pointer to a variable to be able to change it, and not passing a copy of the data.</p></li>
 
-    @prop.setter
-    def prop(self, value):
-        self._prop = value
+<li><p>Do not dereference a slice when used as a parameter!</p>
+
+<pre><code class="language-go">// correct way
+func findBiggest( listOfNumbers []int ) int {}
+// wrong way 
+func findBiggest( listOfNumbers *[]int ) int {}
 </code></pre></li>
-</ul></li>
+</ul>
+
+<h3 id="using-pointers-to-interface">Using pointers to interface</h3>
+
+<ul>
+<li><p>Look at the following program: nexter is an interface with a method next() meaning read the next byte. nextFew1 has this interface type as parameter and reads the next num bytes, returning them as a slice: this is ok.</p>
+
+<pre><code class="language-go">package main
+import (
+   &quot;fmt&quot;
+)
+type nexter interface {
+  next() byte
+}
+func nextFew1(n nexter, num int) []byte {
+    var b []byte
+    for i:=0; i &lt; num; i++ {
+        b[i] = n.next()
+    }
+   return b
+}
+func nextFew2(n *nexter, num int) []byte {
+    var b []byte
+    for i:=0; i &lt; num; i++ {
+        b[i] = n.next() // compile error:
+        // n.next undefined (type *nexter has no field or method next)
+    }
+    return b
+}
+func main() {
+  fmt.Println(&quot;Hello World!&quot;)
+}
+</code></pre></li>
+</ul>
+
+<h3 id="misusing-pointers">Misusing pointers</h3>
+
+<ul>
+<li><p>Passing a value as a parameter in a function or as receiver to a method may seem a misuse of memory, because a value is always copied. But on the other hand values are allocated on the stack, which is quick and relatively cheap.</p></li>
+
+<li><p>If you would pass a pointer to the value instead the Go compiler in most cases will see this as the making of an object, and will move this object to the heap, so also causing an additional memory allocation: therefore nothing was gained in using a pointer instead of the value!</p></li>
+</ul>
+
+<h3 id="misusing-goroutines-and-channel">Misusing goroutines and channel</h3>
+
+<ul>
+<li><p>In practice often you don’t need the concurrency, or you don’t need the overhead of the goroutines with channels, passing parameters using the stack is in many cases far more efficient.</p></li>
+
+<li><p>Moreover it is likely to leak memory if you break or return or panic your way out of the loop, because the goroutine then blocks in the middle of doing something. In real code, it is often better to just write a simple procedural loop. Use goroutines and channels only where concurrency is important!</p>
+
+<pre><code class="language-go">var values = [5]int{10, 11, 12, 13, 14}
+
+func main() {
+    // version A:
+    fmt.Println(&quot;\nVersion A:&quot;)
+    for ix := range values { // ix is the index
+        func() {
+            fmt.Print(ix, &quot; &quot;)
+        }() // call closure, prints each index
+    }
+    fmt.Println()
+    // version B: same as A, but call closure as a goroutine
+    fmt.Println(&quot;\nVersion B:&quot;)
+    for ix := range values {
+        go func() {
+            fmt.Print(ix, &quot; &quot;)
+        }()
+    }
+    fmt.Println()
+    time.Sleep(5e9)
+    // version C: the right way
+    fmt.Println(&quot;\n\nVersion C:&quot;)
+    for ix := range values {
+        go func(ix interface{}) {
+            fmt.Print(ix, &quot; &quot;)
+        }(ix)
+    }
+    fmt.Println()
+    time.Sleep(5e9)
+    // version D: print out the values:
+    fmt.Println(&quot;\n\nVersion D:&quot;)
+    for ix := range values {
+
+        val := values[ix]
+        go func() {
+            fmt.Print(val, &quot; &quot;)
+        }()
+    }
+    time.Sleep(1e9)
+}
+
+//----- output -------------
+// Version A:
+// 0 1 2 3 4 
+
+// Version B:
+// 4 4 4 4 4 
+
+// Version C:
+// 1 3 4 0 2 
+
+// Version D:
+// 14 10 13 12 11
+</code></pre></li>
+</ul>
+
+<h3 id="bad-error-handling">Bad error handling</h3>
+
+<h4 id="don-t-use-booleans">Don’t use booleans:</h4>
+
+<ul>
+<li><p>Making a boolean variable whose value is a test on the error-condition like in the following is superfluous</p>
+
+<pre><code class="language-go">var good bool
+// test for an error, good becomes true or false
+if !good {
+return errors.New(“things aren’t good”)
+}
+////--------------
+//... 
+err1 := api.Func1()
+if err1 != nil { … }
+</code></pre></li>
+</ul>
+
+<h4 id="don-t-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</h4>
+
+<ul>
+<li><p>BAD sample.</p>
+
+<pre><code class="language-go">// ... 
+err1 := api.Func1()
+if err1 != nil {
+    fmt.Println(“err: “ + err.Error())
+    return
+}
+err2 := api.Func2()
+if err2 != nil {
+    //...
+    return
+}
+</code></pre></li>
+
+<li><p>With the above pattern, it is hard to tell what is normal program logic and what is error checking/reporting. Also notice that most of the code is dedicated to error conditions at any point in the code. A good solution is to wrap your error conditions in a closure wherever possible</p>
+
+<pre><code class="language-go">err := func () error {
+    if req.Method != “GET” {
+    return errors.New(“expected GET”)
+    }
+    if input := parseInput(req); input != “command” {
+    return errors.New(“malformed command”)
+    }
+    // other error conditions can be tested here
+} ()
+if err != nil {
+    w.WriteHeader(400)
+    io.WriteString(w, err)
+    return
+}
+</code></pre></li>
 </ul>
 
     </div>
@@ -1087,18 +1129,21 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<li>
 <ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
+<li><a href="#shadowing">Shadowing</a></li>
+<li><a href="#misusing-strings">Misusing strings</a></li>
+<li><a href="#using-deffer-incorrectly">Using deffer incorrectly</a></li>
+<li><a href="#confusing-new-and-make">Confusing new() and make()</a></li>
+<li><a href="#no-need-for-slice">No need for slice</a></li>
+<li><a href="#using-pointers-to-interface">Using pointers to interface</a></li>
+<li><a href="#misusing-pointers">Misusing pointers</a></li>
+<li><a href="#misusing-goroutines-and-channel">Misusing goroutines and channel</a></li>
+<li><a href="#bad-error-handling">Bad error handling</a>
+<ul>
+<li><a href="#don-t-use-booleans">Don’t use booleans:</a></li>
+<li><a href="#don-t-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</a></li>
 </ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
-<ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1111,8 +1156,8 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/python/python-note-1/" title="Python Note 1"> <i class="fa fa-chevron-left"></i><label>Python Note 1</label></a>
-    <a class="nav nav-next" href="/coding/python/python-note-3/" title="Python Note 3" style="margin-right: 0px;"><label>Python Note 3</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-8/" title="Golang Note - 8"> <i class="fa fa-chevron-left"></i><label>Golang Note - 8</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-10/" title="Golang Note - 10" style="margin-right: 0px;"><label>Golang Note - 10</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1121,12 +1166,6 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     

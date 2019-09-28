@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2019-09-29T02:51:31 AEST">
-<title>Python Note 2 :: Hello World</title>
+<title>Golang Note - 8 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Closure &amp; Decorator">
+<meta name="description" content="Package, Visibility, Pitfalls">
 
 
 
     
   </head>
-  <body data-url="/coding/python/python-note-2/">
+  <body data-url="/coding/golang/go-note-8/">
     
       <header>
   <div class="logo">
@@ -204,10 +204,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -259,7 +260,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-8/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-8/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-8/">
             Golang Note - 8
@@ -368,11 +369,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/python/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/python/">Python</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
@@ -382,7 +382,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-2/" class="dd-item active">
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
         <div>
           <a href="/coding/python/python-note-2/">
             Python Note 2
@@ -797,7 +797,19 @@
    C#</option>
     <option value="/coding/golang/" >
   - 
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" >-- Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" >-- Golang Note - 3</option>
+      <option value="/coding/golang/go-note-4/" >-- Golang Note - 4</option>
+      <option value="/coding/golang/go-note-5/" >-- Golang Note - 5</option>
+      <option value="/coding/golang/go-note-6/" >-- Golang Note - 6</option>
+      <option value="/coding/golang/go-note-7/" >-- Golang Note - 7</option>
+      <option value="/coding/golang/go-note-8/"  selected>-- Golang Note - 8</option>
+      <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
+      <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
     <option value="/coding/java/" >
   - 
    Java</option>
@@ -806,17 +818,7 @@
    JavaScript</option>
     <option value="/coding/python/" >
   - 
-   Python</option> 
-      <option value="/coding/python/python-note-1/" >-- Python Note 1</option>
-      <option value="/coding/python/python-note-2/"  selected>-- Python Note 2</option>
-      <option value="/coding/python/python-note-3/" >-- Python Note 3</option>
-      <option value="/coding/python/python-note-4/" >-- Python Note 4</option>
-      <option value="/coding/python/python-note-5/" >-- Python Note 5</option>
-      <option value="/coding/python/python-note-6/" >-- Python Note 6</option>
-      <option value="/coding/python/python-note-7/" >-- Python Note 7</option>
-      <option value="/coding/python/python-note-8/" >-- Python Note 8</option>
-      <option value="/coding/python/python-note-9/" >-- Python Note 9</option>
-  
+   Python</option>
     <option value="/coding/rustlang/" >
   - 
    Rustlang</option>
@@ -851,233 +853,41 @@
     
 <div class="main-page">
     <div class="flex-item main-content max70width">
-            <h1>Python Note 2</h1>
+            <h1>Golang Note - 8</h1>
         
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
-
-<h3 id="legb-rules">LEGB rules</h3>
+<h3 id="package">Package</h3>
 
 <ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
+<li><p>Package is a way to structure code: a program is constructed as a “package” (often abbreviated as pkg), which may use facilities from other packages. Every go-file belongs to one (and only one) package (like a library or namespace in other languages). Many different .go files can belong to one package, so the filename(s) and package name are generally not the same.</p></li>
+
+<li><p>The package to which the code-file belongs must be indicated on the first line, e.g.: package main . A standalone executable belongs to package main. Each Go application contains one package called main. An application can consist of different packages, but even if you use only package main, you don’t have to stuff all code in 1 big file: you can make a number of smaller files each having package main as 1 st codeline. If you compile a source file with a package name other than main, like pack1, the object file is stored in pack1.a; a package name is written in lowercase letters.</p></li>
 </ul>
 
-<h3 id="local-function">Local function</h3>
+<h4 id="standard-library">Standard library</h4>
 
 <ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
+<li><p>The Go installation contains a number of ready-to-use packages, which form the standard library.</p></li>
+
+<li><p>To build a program, the packages, and the files within them, must be compiled in the correct order. Package dependencies determine the order in which to build packages.</p></li>
 </ul>
 
-<h3 id="closure">Closure</h3>
+<h4 id="import">Import</h4>
 
 <ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
-
-<li><p>Usage of nonlocal</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-</code></pre></li>
-</ul></li>
-
-<li><p>Use as function factory</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-## test result:
-## 4
-## 8
-
-</code></pre></li>
-</ul></li>
+<li>A Go program is created by linking together a set of packages through the import keyword.</li>
 </ul>
 
-<h3 id="decorator">Decorator</h3>
+<h3 id="visibility-rule">VISIBILITY RULE</h3>
 
 <ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
-
-<li><p>Example</p>
-
-<ul>
-<li><p>use function as decorator</p>
-
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-## test result:
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-</code></pre></li>
-
-<li><p>Example: multiple decorators including function and instance</p>
-
-<pre><code class="language-python">class Trace:
-    def __init__(self):
-        self.enabled = True
-
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-## test result
-## Calling hello_greek
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
-</code></pre></li>
-
-<li><p>Use as validator</p>
-
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
-
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
-
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
-
-## test result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
-</code></pre></li>
+<li>When the identifier ( of a constant, variable, type, function, struct field, &hellip;) starts with an uppercase letter, like Group1, then the ‘object’ with this identifier is visible in code outside the package (thus available to client-programs, ‘importers’ of the package), it is said to be exported (like public in OO languages). Identifiers which start with a lowercase letter are not visible outside the package, but they are visible and usable in the whole package (like private).</li>
 </ul>
 
-<h2 id="properties-class">Properties &amp; Class</h2>
-
-<h3 id="staticmethod">@staticmethod</h3>
+<h4 id="package-alias">package alias</h4>
 
 <ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
-</ul>
-
-<h3 id="classmethod">@classmethod</h3>
-
-<ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
-
-<li><p>Use case: use as named constructors</p>
-
-<pre><code class="language-python">class FileStream(object):
-
-@classmethod
-def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-    with open(filepath, 'r') as fileobj:
-        for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-            yield obj
-
-@classmethod
-def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-    raise NotImplemented ## Placeholder until implemented
-
-def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-    ...
-</code></pre></li>
-</ul></li>
-</ul>
-
-<h3 id="property">@property</h3>
-
-<ul>
-<li><p>Encapsulation</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">class A
-    @property
-    def  prop(self):
-        return self._prop
-
-    @prop.setter
-    def prop(self, value):
-        self._prop = value
-</code></pre></li>
-</ul></li>
+<li>A package can, if this is useful (for shortening, name conflicts, &hellip;), also be given another name (an alias), like: import fm “fmt” .</li>
 </ul>
 
     </div>
@@ -1087,18 +897,17 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<li>
 <ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
+<li><a href="#package">Package</a>
+<ul>
+<li><a href="#standard-library">Standard library</a></li>
+<li><a href="#import">Import</a></li>
 </ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
+<li><a href="#visibility-rule">VISIBILITY RULE</a>
 <ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
+<li><a href="#package-alias">package alias</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1111,8 +920,8 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/python/python-note-1/" title="Python Note 1"> <i class="fa fa-chevron-left"></i><label>Python Note 1</label></a>
-    <a class="nav nav-next" href="/coding/python/python-note-3/" title="Python Note 3" style="margin-right: 0px;"><label>Python Note 3</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-7/" title="Golang Note - 7"> <i class="fa fa-chevron-left"></i><label>Golang Note - 7</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-9/" title="Golang Note - 9" style="margin-right: 0px;"><label>Golang Note - 9</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1121,12 +930,6 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     

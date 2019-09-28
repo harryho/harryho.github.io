@@ -71,6 +71,49 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
+      <title>Golang Note - 7</title>
+      <link>/coding/golang/go-note-7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-7/</guid>
+      <description>Channel directionality  A channel type may be annotated to specify that it may only send or only receive
+var send_only chan&amp;lt;- int // channel can only receive data var recv_only &amp;lt;-chan int // channel can only send data  Receive-only channels ( &amp;lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 8</title>
+      <link>/coding/golang/go-note-8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-8/</guid>
+      <description>Package  Package is a way to structure code: a program is constructed as a “package” (often abbreviated as pkg), which may use facilities from other packages. Every go-file belongs to one (and only one) package (like a library or namespace in other languages). Many different .go files can belong to one package, so the filename(s) and package name are generally not the same.
+ The package to which the code-file belongs must be indicated on the first line, e.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 9</title>
+      <link>/coding/golang/go-note-9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-9/</guid>
+      <description>Shadowing  Hiding (shadowing) a variable by misusing short declaration.
+ Such mistakes occur mostly inside the if-body or for-loop
+var remember bool = false if something { remember := true // Wrong. } // use remember func shadow() (err error) { x, err := check1() // x is created; err is assigned to if err != nil { return // err correctly returned } if y, err := check2(x); err !</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 10</title>
+      <link>/coding/golang/go-note-10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-10/</guid>
+      <description>Strings Change a character  How to change a character in a string
+str:=&amp;quot;hello&amp;quot; c:=[]byte(s) c[0]=’c’ s2:= string(c) // s2 == &amp;quot;cello&amp;quot;   Substring  How to take a part(substring) of a string str
+substr := str[n:m]   for-loop  How to loop over a string str with for or for-range:
+// gives only the bytes: for i:=0; i &amp;lt; len(str); i++ { … = str[i] } // gives the Unicode characters: for ix, ch := range str { // … }   bytes of str  Number of bytes in a string str</description>
+    </item>
+    
+    <item>
       <title>Golang snippets</title>
       <link>/coding/golang/go-note-99/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
