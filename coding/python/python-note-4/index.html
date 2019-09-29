@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T03:04:19 AEST">
+<meta name="revised" content="2019-09-29T13:17:41 AEST">
 <title>Python Note 4 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -864,37 +864,11 @@
 <li>Comprehensions can also have multiple if-clauses interspersed with the for-clauses</li>
 <li>Later clauses in a comprehension can reference variables bound in earlier clauses</li>
 <li>Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences</li>
-<li>Python provides a number of functional-style tools for working with iterators</li>
-<li><code>map()</code> calls a function for each element in its input sequences</li>
-<li><code>map()</code> returns an iterable object, not a fully-evaluated collection</li>
-<li><code>map()</code> results are lazily evaluated, meaning that you must access them to
-force their calculation</li>
-<li><code>map()</code> results are typically evaluated through the use of iteration constructs such as for-loops</li>
-<li>You must provide as many input sequences to <code>map()</code> as the callable argument has parameters</li>
-<li><code>map()</code> takes one element from each input sequence for each output element
-it produces</li>
-<li><code>map()</code> stops producing output when its shortest input sequence is exhausted</li>
-<li><code>map()</code> can be used to implement the same behavior as comprehensions in some cases</li>
-<li><code>filter()</code> selects values from an input sequence which match a specified criteria</li>
-<li><code>filter()</code> passes each element in its input sequence to the function argument</li>
-<li><code>filter()</code> returns an iterable over the input elements for which the function argument is truthy</li>
-<li>Like <code>map()</code>, <code>filter()</code> produces its output lazily</li>
-<li>If you pass None as the first argument to <code>filter()</code>, it yields the input values which evaluate to True in a boolean context <code>reduce()</code> cumulatively applies a function to the elements of an input sequence</li>
-<li><code>reduce()</code> calls the input function with two arguments: the accumulated result so far, and the next element in the sequence</li>
-<li><code>reduce()</code> is a generalization of summation</li>
-<li><code>reduce()</code> returns the accumulated result after all of the input has been processed</li>
-<li>If you pass an empty sequence to <code>reduce()</code> it will raise a TypeError</li>
-<li><code>reduce()</code> accepts an optional initial value argument</li>
-<li>This initial value is conceptually added to the front of the input sequence</li>
-<li>The initial value is returned if the input sequence is empty</li>
-<li>The <code>map()</code> and <code>reduce()</code> functions in Python are related to the ideas in the map-reduce algorithm</li>
 </ul>
 
-<h3 id="example">Example</h3>
+<h4 id="example">Example</h4>
 
-<pre><code>```python
-
-## Comprehensions    
+<pre><code class="language-python">## Comprehensions    
 &gt;&gt;&gt; points
 [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
 &gt;&gt;&gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
@@ -910,9 +884,32 @@ it produces</li>
 &gt;&gt;&gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
 &gt;&gt;&gt; points_e
 [[], [-1], [-1, 0]]
+</code></pre>
 
-## map
-&gt;&gt;&gt; sizes =['small','medium', 'large']
+<h3 id="functional-style-tools">Functional-style tools</h3>
+
+<ul>
+<li>Python provides a number of functional-style tools for working with iterators</li>
+</ul>
+
+<h4 id="map">Map</h4>
+
+<ul>
+<li><code>map()</code> calls a function for each element in its input sequences</li>
+<li><code>map()</code> returns an iterable object, not a fully-evaluated collection</li>
+<li><code>map()</code> results are lazily evaluated, meaning that you must access them to
+force their calculation</li>
+<li><code>map()</code> results are typically evaluated through the use of iteration constructs such as for-loops</li>
+<li>You must provide as many input sequences to <code>map()</code> as the callable argument has parameters</li>
+<li><code>map()</code> takes one element from each input sequence for each output element
+it produces</li>
+<li><code>map()</code> stops producing output when its shortest input sequence is exhausted</li>
+<li><code>map()</code> can be used to implement the same behavior as comprehensions in some cases</li>
+</ul>
+
+<h5 id="example-1">Example</h5>
+
+<pre><code class="language-python">&gt;&gt;&gt; sizes =['small','medium', 'large']
 &gt;&gt;&gt; colors = ['lavender', 'teal', 'burnt orange']
 &gt;&gt;&gt; animals = ['koala', 'platypus', 'salamander']
 &gt;&gt;&gt; def combine( size, color, animal):
@@ -926,16 +923,44 @@ it produces</li>
 ...
 &gt;&gt;&gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
 ['0 - small lavender koala', '1 - medium teal platypus', '2 - large burnt orange salamander']
+</code></pre>
 
-## filter
+<h4 id="filter">Filter</h4>
+
+<ul>
+<li><code>filter()</code> selects values from an input sequence which match a specified criteria</li>
+<li><code>filter()</code> passes each element in its input sequence to the function argument</li>
+<li><code>filter()</code> returns an iterable over the input elements for which the function argument is truthy</li>
+<li>Like <code>map()</code>, <code>filter()</code> produces its output lazily If you pass None as the first argument to <code>filter()</code>, it yields the input values which evaluate to True in a boolean context <code>reduce()</code> cumulatively applies a function to the elements of an input sequence</li>
+</ul>
+
+<h5 id="example-2">Example</h5>
+
+<pre><code class="language-python">## filter
 &gt;&gt;&gt; negs = filter(lambda x: x&lt;0 , [3, -1, 2,-4,0,9,-33])
 &gt;&gt;&gt; list(negs)
 [-1, -4, -33]
 &gt;&gt;&gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], '', 'yes'])
 &gt;&gt;&gt; list(map(type, list(notnones)))
 [&lt;class 'int'&gt;, &lt;class 'bool'&gt;, &lt;class 'tuple'&gt;, &lt;class 'list'&gt;, &lt;class 'str'&gt;]
+</code></pre>
 
-## reduce
+<h4 id="reduce">Reduce</h4>
+
+<ul>
+<li><code>reduce()</code> calls the input function with two arguments: the accumulated result so far, and the next element in the sequence</li>
+<li><code>reduce()</code> is a generalization of summation</li>
+<li><code>reduce()</code> returns the accumulated result after all of the input has been processed</li>
+<li>If you pass an empty sequence to <code>reduce()</code> it will raise a TypeError</li>
+<li><code>reduce()</code> accepts an optional initial value argument</li>
+<li>This initial value is conceptually added to the front of the input sequence</li>
+<li>The initial value is returned if the input sequence is empty</li>
+<li>The <code>map()</code> and <code>reduce()</code> functions in Python are related to the ideas in the map-reduce algorithm</li>
+</ul>
+
+<h5 id="example-3">Example</h5>
+
+<pre><code class="language-python">## reduce
 &gt;&gt;&gt; from functools import reduce
 &gt;&gt;&gt; import operator
 &gt;&gt;&gt; reduce(operator.add, [1,2,3,4,5])
@@ -951,11 +976,9 @@ mul 1 2
 mul 2 3
 mul 6 4
 24
-
-
-
-```
 </code></pre>
+
+<h3 id="the-next-function">The next() function</h3>
 
 <ul>
 <li>Python&rsquo;s next() function calls <code>__next__()</code> on its argument</li>
@@ -966,11 +989,9 @@ mul 6 4
 <li><code>__iter__()</code> should return an iterator for the iterable object</li>
 <li>Objects with a <code>__getitem__()</code> method that accepts consecutive integer indices starting at zero are also iterables</li>
 <li>Iterables implemented via <code>__getitem__()</code> must raise <code>IndexError</code> when they are exhausted</li>
+</ul>
 
-<li><p>Example</p>
-
-<ul>
-<li><p>Iterator</p>
+<h5 id="example-of-iterator">Example of Iterator</h5>
 
 <pre><code class="language-python">class ExampleIterator:
 def __init__(self, data):
@@ -987,39 +1008,39 @@ def __next__(self):
     rslt = self.data[self.index]
     self.index += 1
     return rslt
-</code></pre></li>
+</code></pre>
 
-<li><p>Iterable</p>
+<h5 id="example-of-iterable">Example of Iterable</h5>
 
 <pre><code class="language-python">class ExampleIterable:
-def __init__(self):
-    self.data = [1, 2, 3]
+    def __init__(self):
+        self.data = [1, 2, 3]
 
-def __iter__(self):
-    return ExampleIterator(self.data)
-</code></pre></li>
+    def __iter__(self):
+        return ExampleIterator(self.data)
+</code></pre>
 
-<li><p>AnotherIterable</p>
+<h5 id="example-of-anotheriterable">Example of AnotherIterable</h5>
 
 <pre><code class="language-python">class AnotherIterable:
-def __init__(self):
-    self.data = [1, 2, 3]
+    def __init__(self):
+        self.data = [1, 2, 3]
 
-def __getitem__(self, idx):
-    return self.data[idx]
-</code></pre></li>
-</ul></li>
+    def __getitem__(self, idx):
+        return self.data[idx]
+</code></pre>
 
-<li><p>The extended form of <code>iter()</code> accepts a zero-argument callable and a sentinel value</p></li>
+<h3 id="the-iter-function">The iter() function</h3>
 
-<li><p>Extended <code>iter()</code> repeatedly calls the callable argument until it returns the sentinel value</p></li>
+<ul>
+<li>The extended form of <code>iter()</code> accepts a zero-argument callable and a sentinel value</li>
+<li>Extended <code>iter()</code> repeatedly calls the callable argument until it returns the sentinel value</li>
+<li>The values produced by extended <code>iter()</code> are those returned from the callable</li>
+</ul>
 
-<li><p>The values produced by extended <code>iter()</code> are those returned from the callable</p></li>
+<h5 id="example-4">Example</h5>
 
-<li><p>Example</p>
-
-<pre><code class="language-python">
-&gt;&gt;&gt; ts = iter(datetime.datetime.now, None)
+<pre><code class="language-python">&gt;&gt;&gt; ts = iter(datetime.datetime.now, None)
 &gt;&gt;&gt; next(ts)
 datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
 &gt;&gt;&gt; next(ts)
@@ -1044,16 +1065,14 @@ You are reading
 the file
 you won't read
 the
-</code></pre></li>
-
-<li><p>One use case for extended <code>iter()</code> is to iterate using simple functions</p></li>
-
-<li><p>Protocol conforming iterators must also be iterable</p></li>
-
-<li><p>Example</p>
+</code></pre>
 
 <ul>
-<li><p>Sensor</p>
+<li>One use case for extended <code>iter()</code> is to iterate using simple functions</li>
+<li>Protocol conforming iterators must also be iterable</li>
+</ul>
+
+<h5 id="example-of-sensor">Example of Sensor</h5>
 
 <pre><code class="language-python">import datetime
 import itertools
@@ -1061,22 +1080,20 @@ import random
 import time
 
 class Sensor:
-def __iter__(self):
-    return self
+    def __iter__(self):
+        return self
 
-def __next__(self):
-    return random.random()
+    def __next__(self):
+        return random.random()
 
 sensor = Sensor()
 timestamps = iter(datetime.datetime.now, None)
 
 for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
-print(stamp, value)
-time.sleep(1)
+    print(stamp, value)
+    time.sleep(1)
 
-</code></pre></li>
-</ul></li>
-</ul>
+</code></pre>
 
     </div>
 
@@ -1087,8 +1104,42 @@ time.sleep(1)
 <ul>
 <li><a href="#iterables-iteration">Iterables &amp; Iteration</a>
 <ul>
-<li><a href="#comprehensions">Comprehensions</a></li>
+<li><a href="#comprehensions">Comprehensions</a>
+<ul>
 <li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#functional-style-tools">Functional-style tools</a>
+<ul>
+<li><a href="#map">Map</a>
+<ul>
+<li><a href="#example-1">Example</a></li>
+</ul></li>
+<li><a href="#filter">Filter</a>
+<ul>
+<li><a href="#example-2">Example</a></li>
+</ul></li>
+<li><a href="#reduce">Reduce</a>
+<ul>
+<li><a href="#example-3">Example</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#the-next-function">The next() function</a>
+<ul>
+<li>
+<ul>
+<li><a href="#example-of-iterator">Example of Iterator</a></li>
+<li><a href="#example-of-iterable">Example of Iterable</a></li>
+<li><a href="#example-of-anotheriterable">Example of AnotherIterable</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#the-iter-function">The iter() function</a>
+<ul>
+<li>
+<ul>
+<li><a href="#example-4">Example</a></li>
+<li><a href="#example-of-sensor">Example of Sensor</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1111,12 +1162,6 @@ time.sleep(1)
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     

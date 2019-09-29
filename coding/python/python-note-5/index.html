@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T03:04:19 AEST">
+<meta name="revised" content="2019-09-29T13:17:41 AEST">
 <title>Python Note 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -915,8 +915,10 @@
 
 <h3 id="explanation-with-example">Explanation with example</h3>
 
+<h4 id="example-code">Example code</h4>
+
 <ul>
-<li><p>Example to demo the weird <code>super()</code> in Python</p>
+<li><p>The code below demonstrates the weird <code>super()</code> in Python</p>
 
 <pre><code class="language-python">from pprint import pprint as pp
 
@@ -1015,9 +1017,17 @@ if __name__ == &quot;__main__&quot;:
 ## Its `super` &quot;Magic&quot; really confuses many people.
 
 </code></pre></li>
+</ul>
 
-<li><p>Let&rsquo;s break down the how the super works with sample code</p></li>
+<h4 id="explanation-with-break-down">Explanation with break down</h4>
 
+<ul>
+<li>Let&rsquo;s break down the how the super works with sample code</li>
+</ul>
+
+<h5 id="case-1-parent-and-child">Case 1: Parent and child</h5>
+
+<ul>
 <li><p>Case 1:</p>
 
 <ul>
@@ -1034,7 +1044,11 @@ if __name__ == &quot;__main__&quot;:
 
 <li><p><code>super</code> uses the method from <code>Parent</code> which is after <code>Child</code>, and bind the <code>Child</code> class object</p></li>
 </ul></li>
+</ul>
 
+<h5 id="case-2-grandparent-and-grandchild">Case 2: Grandparent and grandchild</h5>
+
+<ul>
 <li><p>Case 2:</p>
 
 <ul>
@@ -1054,7 +1068,11 @@ if __name__ == &quot;__main__&quot;:
 
 <li><p><code>super</code> uses the method from <code>Child</code> which is after <code>GrandChild</code>, and bind the <code>GrandChild</code> class object</p></li>
 </ul></li>
+</ul>
 
+<h5 id="case-3-grandparent-children-grandchild">Case 3: Grandparent, children &amp; grandchild</h5>
+
+<ul>
 <li><p>Case 3:</p>
 
 <ul>
@@ -1085,7 +1103,16 @@ if __name__ == &quot;__main__&quot;:
 <ul>
 <li><a href="#inheritance-polymorphism">Inheritance &amp; Polymorphism</a>
 <ul>
-<li><a href="#explanation-with-example">Explanation with example</a></li>
+<li><a href="#explanation-with-example">Explanation with example</a>
+<ul>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#explanation-with-break-down">Explanation with break down</a>
+<ul>
+<li><a href="#case-1-parent-and-child">Case 1: Parent and child</a></li>
+<li><a href="#case-2-grandparent-and-grandchild">Case 2: Grandparent and grandchild</a></li>
+<li><a href="#case-3-grandparent-children-grandchild">Case 3: Grandparent, children &amp; grandchild</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1108,12 +1135,6 @@ if __name__ == &quot;__main__&quot;:
 <footer>
 
 <div class="footline">
-    
-    <div class="tags"> 
-      
-        <a class="label label-default" href="/tags/python">python</a>
-      
-    </div>
     
 
     
