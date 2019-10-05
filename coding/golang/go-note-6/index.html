@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T13:17:40 AEST">
+<meta name="revised" content="2019-10-05T17:07:36 AEST">
 <title>Golang Note - 6 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -278,6 +278,13 @@
         <div>
           <a href="/coding/golang/go-note-10/">
             Golang Note - 10
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-11/">
+            Golang Note - 11
           </a>
         </div>
     </li>
@@ -734,31 +741,38 @@
       <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
         <div>
-          <a href="/coding/c/lcthw-lectures.1/">
-            C Lecture - 1
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
         <div>
-          <a href="/coding/c/lcthw-lectures.2/">
-            C Lecture - 2
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
         <div>
-          <a href="/coding/c/lcthw-lectures.3/">
-            C Lecture - 3
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
         <div>
-          <a href="/coding/c/lcthw-lectures.4/">
-            C Lecture - 4
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
           </a>
         </div>
     </li>
@@ -801,6 +815,7 @@
       <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
       <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
       <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-11/" >-- Golang Note - 11</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
     <option value="/coding/java/" >
@@ -1237,19 +1252,19 @@ func suck(ch chan int) {
 <h5 id="iterator-pattern">Iterator pattern</h5>
 
 <ul>
-<li><p>Another common case where we have to populate a channel with the items of a container type which contains an 394The Way to Go index-addressable field items . For this we can define a method which returns a read-only channel.</p></li>
+<li><p>Another common case where we have to populate a channel with the items of a container type which contains an index-addressable field items . For this we can define a method which returns a read-only channel.</p></li>
 
 <li><p>Inside the goroutine, a for-loop iterates over the elements in the container c (for tree or graph algorithms, this simple for-loop could be replaced with a depth-first search)</p>
 
 <pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
-	ch := make(chan item)
-	go func() {
-		for i := 0; i &lt; c.Len(); i++ {
-			// or use a for-range loop
-			ch &lt;- c.items[i]
-		}
-	}()
-	return ch
+    ch := make(chan item)
+    go func() {
+        for i := 0; i &lt; c.Len(); i++ {
+            // or use a for-range loop
+            ch &lt;- c.items[i]
+        }
+    }()
+    return ch
 }
 
 // The code which calls this method can then iterate over the container
@@ -1280,15 +1295,15 @@ func produce () {
 
 func consume () {
     for {
-    msg := &lt;-msgs
-    fmt.Println(msg)
-}
+        msg := &lt;-msgs
+        fmt.Println(msg)
+    }
 }
 
 func main () {
-go produce()
-go consume()
-&lt;- done
+    go produce()
+    go consume()
+    &lt;- done
 }
 </code></pre></li>
 </ul>

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T13:17:40 AEST">
+<meta name="revised" content="2019-10-05T17:07:36 AEST">
 <title>Ubuntu 16 server note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -276,6 +276,13 @@
         <div>
           <a href="/coding/golang/go-note-10/">
             Golang Note - 10
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-11/">
+            Golang Note - 11
           </a>
         </div>
     </li>
@@ -1123,17 +1130,17 @@ EOL
 <pre><code class="language-java">import java.util.Calendar;
 
 class HelloWorld {
-public static void main(String[] args) {
-    Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH) + 1;
-    int day = cal.get(Calendar.DATE);
-    int hour = cal.get(Calendar.HOUR_OF_DAY);
-    int minute = cal.get(Calendar.MINUTE);
-    String username = System.getProperty(&quot;user.name&quot;);
-    System.out.println(username+ &quot;: Hello World! &quot;);
-    System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
-}
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&quot;user.name&quot;);
+        System.out.println(username+ &quot;: Hello World! &quot;);
+        System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
+    }
 }
 </code></pre></li>
 
@@ -1244,19 +1251,19 @@ export PATH=&quot;$GOPATH/bin:$PATH&quot;
 <li><p>Create a simple <code>hello.go</code> file to test</p>
 
 <pre><code class="language-go">package main                                                        
-                                                                    
+                                                                        
 import (                                                            
-&quot;fmt&quot;                                                           
-&quot;log&quot;                                                           
-&quot;os/user&quot;                                                       
+    &quot;fmt&quot;                                                           
+    &quot;log&quot;                                                           
+    &quot;os/user&quot;                                                       
 )
 
 func main(){                                                        
-user, err := user.Current()                                 
-if err != nil {                                             
-    log.Fatal(err)                                      
-}                                                                 
-fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )      
+    user, err := user.Current()                                 
+    if err != nil {                                             
+        log.Fatal(err)                                      
+    }                                                                 
+    fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )      
 }                                                                   
 </code></pre></li>
 

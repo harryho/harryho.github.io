@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T13:17:40 AEST">
+<meta name="revised" content="2019-10-05T17:07:36 AEST">
 <title>Golang Note - 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -278,6 +278,13 @@
         <div>
           <a href="/coding/golang/go-note-10/">
             Golang Note - 10
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-11/">
+            Golang Note - 11
           </a>
         </div>
     </li>
@@ -808,6 +815,7 @@
       <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
       <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
       <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-11/" >-- Golang Note - 11</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
     <option value="/coding/java/" >
@@ -898,7 +906,7 @@
 </code></pre></li>
 </ul>
 
-<h4 id="run-time-exceptions-panicking">Run-time exceptions &amp; panicking</h4>
+<h3 id="run-time-exceptions-panicking">Run-time exceptions &amp; panicking</h3>
 
 <ul>
 <li><p>When execution errors occur, such as attempting to index an array out of bounds or a type assertion failing, the Go runtime triggers a run-time panic with a value of the interface type runtime.Error, and the program crashes with a message of the error; this value has a RuntimeError()-method, to distinguish it from a normal error.</p></li>
@@ -908,7 +916,7 @@
 <li><p>If panic is called from a nested function, it immediately stops execution of the current function, all defer statements are guaranteed to execute and then control is given to the function caller, which receives this call to panic. This bubbles up to the top level, executing defers, and at the top of the stack the program crashes and the error condition is reported on the command-line using the value given to panic: this termination sequence is called <strong>panicking</strong>.</p></li>
 </ul>
 
-<h3 id="error-handling-and-panicking-in-custom-package">Error-handling and panicking in custom package</h3>
+<h3 id="error-handling-panicking-in-custom-package">Error-handling &amp; panicking in custom package</h3>
 
 <ul>
 <li><p>Best practice for custom package</p>
@@ -916,9 +924,227 @@
 <p>a. Always recover from panic in your package: no explicit panic() should be allowed to cross a package boundary</p>
 
 <p>b. Return errors as error values to the callers of your package.</p></li>
+
+<li><p>Sample</p>
+
+<ul>
+<li><p>Parse package</p>
+
+<pre><code class="language-go">package parse
+import (
+    &quot;fmt&quot;
+    &quot;strings&quot;
+    &quot;strconv&quot;
+)
+// A ParseError indicates an error in converting a word into an integer.
+type ParseError struct {
+    Index int // The index into the space-separated list of words.
+    Word string // The word that generated the parse error.
+    // The raw error that precipitated this error, if any.
+    Error err
+}
+// String returns a human-readable error message.
+func (e *ParseError) String() string {
+    return fmt.Sprintf(&quot;pkg parse: error parsing %q as int&quot;, e.Word)
+}
+// Parse parses the space-separated words in in put as integers.
+func Parse(input string) (numbers []int, err error) {
+    defer func() {
+        if r := recover(); r != nil {
+            var ok bool
+            err, ok = r.(error)
+            if !ok {
+            err = fmt.Errorf(&quot;pkg: %v&quot;, r)
+            }
+        }
+    }()
+    fields := strings.Fields(input)
+    numbers = fields2numbers(fields) // here panic can occur
+    return
+}
+            
+func fields2numbers(fields []string) (numbers []int) {
+    if len(fields) == 0 {
+        panic(&quot;no words to parse&quot;)
+    }
+    for idx, field := range fields {
+        num, err := strconv.Atoi(field)
+        if err != nil {
+        panic(&amp;ParseError{idx, field, err})
+        }
+    numbers = append(numbers, num)
+}
+return
+}
+</code></pre></li>
+
+<li><p>main package</p>
+
+<pre><code class="language-go">func main() {
+    var examples = []string{
+        &quot;1 2 3 4 5&quot;,
+        &quot;100 50 25 12.5 6.25&quot;,
+        &quot;2 + 2 = 4&quot;,
+        &quot;1st class&quot;,
+        &quot;&quot;
+    }
+
+    for _, ex := range examples {
+        fmt.Printf(&quot;Parsing %q:\n &quot;, ex)
+        nums, err := parse.Parse(ex)
+        if err != nil {
+            // here String() method from ParseError is used
+            fmt.Println(err)
+        continue
+    }
+
+    fmt.Println(nums)
+}
+
+/* Output:
+    Parsing &quot;w1 2 3 4 5&quot;:
+    360
+    Ivo Balbaert
+    [1 2 3 4 5]
+    Parsing &quot;100 50 25 12.5 6.25&quot;:
+    pkg parse: error parsing &quot;12.5&quot; as int
+    Parsing &quot;2 + 2 = 4&quot;:
+    pkg parse: error parsing &quot;+&quot; as int
+    Parsing &quot;1st class&quot;:
+    pkg parse: error parsing &quot;1st&quot; as int
+    Parsing &quot;&quot;:
+    pkg: no words to parse
+*/
+
+</code></pre></li>
+</ul></li>
 </ul>
 
-<h4 id="testing">Testing</h4>
+<h3 id="recover">Recover</h3>
+
+<ul>
+<li><p>recover is only useful when called inside a deferred function (see § 6.4) : it then retrieves the error value passed through the call of panic; when used in normal execution a call to recover will return nil and have no other effect.</p></li>
+
+<li><p>Summarized: panic causes the stack to unwind until a deferred recover() is found or the program terminates</p></li>
+</ul>
+
+<h4 id="similar-try-catch-block-in-go">Similar try-catch block in Go</h4>
+
+<pre><code class="language-go">func protect(g func()) {
+    defer func() {
+        log.Println(&quot;done&quot;)
+        // Println executes normally even if there is a panic
+        if err := recover(); err != nil {
+          log.Printf(&quot;run time panic: %v&quot;, err)
+        }
+    }()
+    log.Println(&quot;start&quot;)
+    g() // possible runtime-error
+}
+</code></pre>
+
+<h4 id="sample-of-panic-defer-recover">Sample of panic, defer &amp; recover</h4>
+
+<pre><code class="language-go">func badCall() {
+	panic(&quot;bad end&quot;)
+}
+
+func test() {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Printf(&quot;Panicking %s\r\n&quot;, e)
+		}
+	}()
+	badCall()
+	fmt.Printf(&quot;After bad call\r\n&quot;)
+}
+
+func main() {
+	fmt.Printf(&quot;Calling test\r\n&quot;)
+	test()
+	fmt.Printf(&quot;Test completed\r\n&quot;)
+}
+</code></pre>
+
+<h3 id="an-error-handling-scheme-with-closures">An error-handling scheme with closures</h3>
+
+<ul>
+<li><p>Combining the defer/panic/recover mechanism with closures can result in a far more elegant scheme that we will now discuss. However it is only applicable when all functions have the same signature, which is rather restrictive.</p></li>
+
+<li><p>The scheme uses 2 helper functions:</p>
+
+<p>i) check: a function which tests whether an error occurred, and panics if so:</p>
+
+<pre><code class="language-go">func check(err error) { if err != nil { panic(err) } }
+</code></pre>
+
+<p>ii) errorhandler: this is a wrapper function. It takes a function fn of our type fType1 and returns such a function by calling fn. However it contains the defer/recover mechanism</p>
+
+<pre><code class="language-go">func errorHandler(fn fType1) fType1 {
+    return func(a type1, b type2) {
+        defer func() {
+        if e, ok := recover().(error); ok {
+           log.Printf(&quot;run time panic: %v&quot;, err)
+
+        }
+        }()
+        fn(a, b)
+    }
+}
+</code></pre></li>
+</ul>
+
+<h3 id="start-external-program">Start external program</h3>
+
+<pre><code class="language-go">func main() {
+	// 1) os.StartProcess //
+	/*********************/
+	/* Linux: */
+	env := os.Environ()
+	procAttr := &amp;os.ProcAttr{
+		Env: env,
+		Files: []*os.File{
+			os.Stdin,
+			os.Stdout,
+			os.Stderr,
+		},
+	}
+	pid, err := os.StartProcess(&quot;/bin/ls&quot;, []string{&quot;ls&quot;, &quot;-l&quot;}, procAttr)
+	if err != nil {
+		fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+		os.Exit(1)
+	}
+	fmt.Printf(&quot;The process id is %v&quot;, pid)
+	/* Output:
+	The process id is &amp;{21275 0 0 {{0 0} 0 0 0 0}}The process id is &amp;{21276 0 0 {{0 0} 0 0 0 0}}total 54
+	-rwxrwxrwx 1 root root   250 Sep 21 19:33 csv_data.txt
+	-rwxrwxrwx 1 root root 25227 Oct  4 23:34 hello.go
+	-rwxrwxrwx 1 root root  6708 Sep 21 10:25 hello.go.txt
+	-rwxrwxrwx 1 root root   130 Sep 21 11:08 output.txt
+	-rwxrwxrwx 1 root root  8898 Sep 21 12:10 target_hello.txt
+	-rwxrwxrwx 1 root root  1619 Sep 22 14:40 urlshorten.go.txt
+	-rwxrwxrwx 1 root root   182 Sep 21 13:50 vcard.json
+	*/
+	// 2nd example: show all processes
+	pid, err = os.StartProcess(&quot;/bin/ps&quot;, []string{&quot;-e&quot;, &quot;opid,ppid,comm&quot;}, procAttr)
+	if err != nil {
+		fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+		os.Exit(1)
+	}
+	fmt.Printf(&quot;The process id is %v&quot;, pid)
+	// 2) cmd.Run //
+	/***************/
+	cmd := exec.Command(&quot;gedit&quot;) // this opens a gedit-window
+	err = cmd.Run()
+	if err != nil {
+		fmt.Printf(&quot;Error %v executing command!&quot;, err)
+		os.Exit(1)
+	}
+	fmt.Printf(&quot;The command is %v&quot;, cmd)
+}
+</code></pre>
+
+<h3 id="testing">Testing</h3>
 
 <ul>
 <li><p>Table-driven test</p>
@@ -962,12 +1188,17 @@ func TestFunction(t *testing.T) {
 <li><a href="#error-handling">Error handling</a>
 <ul>
 <li><a href="#error-interface">Error interface</a></li>
+</ul></li>
 <li><a href="#run-time-exceptions-panicking">Run-time exceptions &amp; panicking</a></li>
-</ul></li>
-<li><a href="#error-handling-and-panicking-in-custom-package">Error-handling and panicking in custom package</a>
+<li><a href="#error-handling-panicking-in-custom-package">Error-handling &amp; panicking in custom package</a></li>
+<li><a href="#recover">Recover</a>
 <ul>
-<li><a href="#testing">Testing</a></li>
+<li><a href="#similar-try-catch-block-in-go">Similar try-catch block in Go</a></li>
+<li><a href="#sample-of-panic-defer-recover">Sample of panic, defer &amp; recover</a></li>
 </ul></li>
+<li><a href="#an-error-handling-scheme-with-closures">An error-handling scheme with closures</a></li>
+<li><a href="#start-external-program">Start external program</a></li>
+<li><a href="#testing">Testing</a></li>
 </ul></li>
 </ul></li>
 </ul>

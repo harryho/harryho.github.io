@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-09-29T13:17:40 AEST">
+<meta name="revised" content="2019-10-05T17:07:36 AEST">
 <title>Golang Note - 10 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -278,6 +278,13 @@
         <div>
           <a href="/coding/golang/go-note-10/">
             Golang Note - 10
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-11/">
+            Golang Note - 11
           </a>
         </div>
     </li>
@@ -808,6 +815,7 @@
       <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
       <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
       <option value="/coding/golang/go-note-10/"  selected>-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-11/" >-- Golang Note - 11</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
     <option value="/coding/java/" >
@@ -1012,6 +1020,31 @@ Found: for row := range arr2Dim {
 <pre><code class="language-go">delete(map1, key1)
 </code></pre>
 
+<h3 id="interface">Interface</h3>
+
+<h4 id="test-if-a-value-implements-stringer">Test if a value implements Stringer</h4>
+
+<pre><code class="language-go">if v, ok := v.(Stringer); ok {
+    fmt.Printf(&quot;implements String(): %s\n&quot;, v.String());
+}
+</code></pre>
+
+<h4 id="a-type-classifier">A type classifier:</h4>
+
+<pre><code class="language-go">func classifier(items ...interface{}) {
+    for i, x := range items {
+        switch x.(type) {
+            case bool: fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+            case float64: fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+            case int, int64: fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+            case nil: fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+            case string: fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+            default: fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+        }
+    }
+}
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1043,6 +1076,11 @@ Found: for row := range arr2Dim {
 <li><a href="#test-if-key-exists">Test if key exists</a></li>
 <li><a href="#deleting-a-key-in-a-map">Deleting a key in a map</a></li>
 </ul></li>
+<li><a href="#interface">Interface</a>
+<ul>
+<li><a href="#test-if-a-value-implements-stringer">Test if a value implements Stringer</a></li>
+<li><a href="#a-type-classifier">A type classifier:</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1056,7 +1094,7 @@ Found: for row := range arr2Dim {
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/coding/golang/go-note-9/" title="Golang Note - 9"> <i class="fa fa-chevron-left"></i><label>Golang Note - 9</label></a>
-    <a class="nav nav-next" href="/coding/golang/go-note-99/" title="Golang snippets" style="margin-right: 0px;"><label>Golang snippets</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/coding/golang/go-note-11/" title="Golang Note - 11" style="margin-right: 0px;"><label>Golang Note - 11</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
