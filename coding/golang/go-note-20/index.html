@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-07T00:56:18 AEDT">
-<title>Powershell Note - 1 :: Hello World</title>
+<meta name="revised" content="2019-10-07T00:56:17 AEDT">
+<title>Golang Note - 20 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of Powershell ">
+<meta name="description" content="Good practice advice - Part 1">
 
 
 
     
   </head>
-  <body data-url="/coding/shell/ps-note-1/">
+  <body data-url="/coding/golang/go-note-20/">
     
       <header>
   <div class="logo">
@@ -204,10 +204,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -280,7 +281,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-20/">
             Golang Note - 20
@@ -496,11 +497,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/shell/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/shell/">Shell</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
@@ -517,7 +517,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item active">
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
@@ -818,7 +818,22 @@
    C#</option>
     <option value="/coding/golang/" >
   - 
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" >-- Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" >-- Golang Note - 3</option>
+      <option value="/coding/golang/go-note-4/" >-- Golang Note - 4</option>
+      <option value="/coding/golang/go-note-5/" >-- Golang Note - 5</option>
+      <option value="/coding/golang/go-note-6/" >-- Golang Note - 6</option>
+      <option value="/coding/golang/go-note-7/" >-- Golang Note - 7</option>
+      <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
+      <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
+      <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-20/"  selected>-- Golang Note - 20</option>
+      <option value="/coding/golang/go-note-21/" >-- Golang Note - 21</option>
+      <option value="/coding/golang/go-note-22/" >-- Golang Note - 22</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
     <option value="/coding/java/" >
   - 
    Java</option>
@@ -833,11 +848,7 @@
    Rustlang</option>
     <option value="/coding/shell/" >
   - 
-   Shell</option> 
-      <option value="/coding/shell/cron-note-1/" >-- Cron Job Note - 1</option>
-      <option value="/coding/shell/cron-note-2/" >-- Cron Job Note - 2</option>
-      <option value="/coding/shell/ps-note-1/"  selected>-- Powershell Note - 1</option>
-  
+   Shell</option>
     <option value="/coding/sql/" >
   - 
    SQL</option>
@@ -866,42 +877,189 @@
     
 <div class="main-page">
     <div class="flex-item main-content max70width">
-            <h1>Powershell Note - 1</h1>
+            <h1>Golang Note - 20</h1>
         
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="strings">Strings</h3>
+
+<h4 id="change-a-character">Change a character</h4>
 
 <ul>
-<li>The OS of Windows 7 or later version</li>
-<li>Install Powershell 4 or later version. You can find it on <a href="www.microsoft.com">Microsoft</a> website</li>
-<li>Has basic computer knowledge</li>
-</ul>
+<li><p>How to change a character in a string</p>
 
-<h2 id="launch-ps-command-prompt">Launch PS command prompt</h2>
-
-<ul>
-<li>Type command on windows command prompt: <strong>powershell</strong></li>
-</ul>
-
-<h3 id="get-ps-version">Get PS Version</h3>
-
-<ul>
-<li><p>Type <strong>$psversiontable</strong></p>
-
-<pre><code>PS C:\&gt;$psversiontable
-## You might see sth below
-
-Name                           Value
-----                           -----
-PSVersion                      4.0
-WSManStackVersion              3.0
-SerializationVersion           1.1.0.1
-CLRVersion                     4.0.30319.42000
-BuildVersion                   6.3.9600.18773
-PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
-PSRemotingProtocolVersion      2.2
+<pre><code class="language-go">str:=&quot;hello&quot;
+c:=[]byte(s)
+c[0]=’c’
+s2:= string(c) // s2 == &quot;cello&quot;
 </code></pre></li>
 </ul>
+
+<h4 id="substring">Substring</h4>
+
+<ul>
+<li><p>How to take a part(substring) of a string str</p>
+
+<pre><code class="language-go">substr := str[n:m]
+</code></pre></li>
+</ul>
+
+<h4 id="for-loop">for-loop</h4>
+
+<ul>
+<li><p>How to loop over a string str with for or for-range:</p>
+
+<pre><code class="language-go">// gives only the bytes:
+for i:=0; i &lt; len(str); i++ {
+ … = str[i]
+}
+// gives the Unicode characters:
+for ix, ch := range str {
+// …
+} 
+</code></pre></li>
+</ul>
+
+<h4 id="bytes-of-str">bytes of str</h4>
+
+<ul>
+<li><p>Number of bytes in a string str</p>
+
+<pre><code class="language-go">len(str)
+</code></pre></li>
+
+<li><p>Number of characters in a string str</p>
+
+<pre><code class="language-go">utf8.RuneCountInString(str) // FATEST 
+len([]int(str))
+</code></pre></li>
+</ul>
+
+<h4 id="concat-strings">Concat strings</h4>
+
+<ul>
+<li><p>Best performance with byte buffer</p>
+
+<pre><code class="language-go">var buffer bytes.Buffer
+for {
+    if s, ok := getNextString(); ok { //method getNextString() not shown here
+        buffer.WriteString(s)
+    } else {
+        break
+    }
+}
+</code></pre></li>
+
+<li><p>Simple way</p>
+
+<pre><code class="language-go">strings.Join()
+</code></pre></li>
+</ul>
+
+<h4 id="command-line-args">Command-line args</h4>
+
+<ul>
+<li>Use flag and os package</li>
+</ul>
+
+<h3 id="array">Array</h3>
+
+<h4 id="cut-the-last-element">Cut the last element</h4>
+
+<ul>
+<li><p>How to cut the last element of an array or slice line</p>
+
+<pre><code class="language-go">line = line[:len(line)-1]
+</code></pre></li>
+</ul>
+
+<h4 id="loop-over-the-array">Loop over the array</h4>
+
+<ul>
+<li><p>for-loop</p>
+
+<pre><code class="language-go">for i:=0; i &lt; len(arr); i++ {
+… = arr[i]
+}
+</code></pre></li>
+
+<li><p>for range</p>
+
+<pre><code class="language-go">for ix, value := range arr {
+…
+}
+</code></pre></li>
+</ul>
+
+<h4 id="search-value-in-2d-array">Search value in 2D array</h4>
+
+<pre><code class="language-go">found := false
+Found: for row := range arr2Dim {
+    for column := range arr2Dim[row] {
+        if arr2Dim[row][column] == V {
+            found = true
+            break Found
+        }
+    }
+}
+</code></pre>
+
+<h4 id="reverse">Reverse</h4>
+
+<pre><code class="language-go">func ReverseInts(s []int) {
+    first := 0
+    last := len(s) - 1
+    for first &lt; last {
+        s[first], s[last] = s[last], s[first]
+        first++
+        last--
+    }
+}
+</code></pre>
+
+<h3 id="maps">Maps</h3>
+
+<h4 id="loop-with-range">loop with range</h4>
+
+<pre><code class="language-go">for key, value := range map1 {
+… 
+}
+</code></pre>
+
+<h4 id="test-if-key-exists">Test if key exists</h4>
+
+<pre><code class="language-go">val1, isPresent = map1[key1]
+// which gives: val or zero-value, true or false
+</code></pre>
+
+<h4 id="deleting-a-key-in-a-map">Deleting a key in a map</h4>
+
+<pre><code class="language-go">delete(map1, key1)
+</code></pre>
+
+<h3 id="interface">Interface</h3>
+
+<h4 id="test-if-a-value-implements-stringer">Test if a value implements Stringer</h4>
+
+<pre><code class="language-go">if v, ok := v.(Stringer); ok {
+    fmt.Printf(&quot;implements String(): %s\n&quot;, v.String());
+}
+</code></pre>
+
+<h4 id="a-type-classifier">A type classifier:</h4>
+
+<pre><code class="language-go">func classifier(items ...interface{}) {
+    for i, x := range items {
+        switch x.(type) {
+            case bool: fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+            case float64: fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+            case int, int64: fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+            case nil: fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+            case string: fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+            default: fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+        }
+    }
+}
+</code></pre>
 
     </div>
 
@@ -910,10 +1068,35 @@ PSRemotingProtocolVersion      2.2
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#launch-ps-command-prompt">Launch PS command prompt</a>
+<li>
 <ul>
-<li><a href="#get-ps-version">Get PS Version</a></li>
+<li><a href="#strings">Strings</a>
+<ul>
+<li><a href="#change-a-character">Change a character</a></li>
+<li><a href="#substring">Substring</a></li>
+<li><a href="#for-loop">for-loop</a></li>
+<li><a href="#bytes-of-str">bytes of str</a></li>
+<li><a href="#concat-strings">Concat strings</a></li>
+<li><a href="#command-line-args">Command-line args</a></li>
+</ul></li>
+<li><a href="#array">Array</a>
+<ul>
+<li><a href="#cut-the-last-element">Cut the last element</a></li>
+<li><a href="#loop-over-the-array">Loop over the array</a></li>
+<li><a href="#search-value-in-2d-array">Search value in 2D array</a></li>
+<li><a href="#reverse">Reverse</a></li>
+</ul></li>
+<li><a href="#maps">Maps</a>
+<ul>
+<li><a href="#loop-with-range">loop with range</a></li>
+<li><a href="#test-if-key-exists">Test if key exists</a></li>
+<li><a href="#deleting-a-key-in-a-map">Deleting a key in a map</a></li>
+</ul></li>
+<li><a href="#interface">Interface</a>
+<ul>
+<li><a href="#test-if-a-value-implements-stringer">Test if a value implements Stringer</a></li>
+<li><a href="#a-type-classifier">A type classifier:</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -926,8 +1109,8 @@ PSRemotingProtocolVersion      2.2
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/shell/cron-note-2/" title="Cron Job Note - 2"> <i class="fa fa-chevron-left"></i><label>Cron Job Note - 2</label></a>
-    <a class="nav nav-next" href="/coding/sql/" title="SQL" style="margin-right: 0px;"><label>SQL</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-10/" title="Golang Note - 10"> <i class="fa fa-chevron-left"></i><label>Golang Note - 10</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-21/" title="Golang Note - 21" style="margin-right: 0px;"><label>Golang Note - 21</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

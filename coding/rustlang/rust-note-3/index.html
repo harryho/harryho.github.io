@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-05T17:07:52 AEST">
+<meta name="revised" content="2019-10-07T00:56:18 AEDT">
 <title>Rustlang Note - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -142,7 +142,7 @@
     <li data-nav-id="/coding/c/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/c/">C </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
@@ -280,10 +280,24 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
         <div>
-          <a href="/coding/golang/go-note-11/">
-            Golang Note - 11
+          <a href="/coding/golang/go-note-20/">
+            Golang Note - 20
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-21/">
+            Golang Note - 21
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-22/">
+            Golang Note - 22
           </a>
         </div>
     </li>
@@ -381,66 +395,31 @@
       <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+      <li data-nav-id="/coding/javascript/js-note-1/" class="dd-item">
         <div>
-          <a href="/coding/python/python-note-1/">
-            Python Note 1
+          <a href="/coding/javascript/js-note-1/">
+            JS &amp; ES Note - 1
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+      <li data-nav-id="/coding/javascript/js-note-2/" class="dd-item">
         <div>
-          <a href="/coding/python/python-note-2/">
-            Python Note 2
+          <a href="/coding/javascript/js-note-2/">
+            JS &amp; ES Note - 2
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+      <li data-nav-id="/coding/javascript/js-note-3/" class="dd-item">
         <div>
-          <a href="/coding/python/python-note-3/">
-            Python Note 3
+          <a href="/coding/javascript/js-note-3/">
+            JS &amp; ES Note - 3
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+      <li data-nav-id="/coding/javascript/js-note-99/" class="dd-item">
         <div>
-          <a href="/coding/python/python-note-4/">
-            Python Note 4
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/python/python-note-5/">
-            Python Note 5
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
-        <div>
-          <a href="/coding/python/python-note-6/">
-            Python Note 6
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
-        <div>
-          <a href="/coding/python/python-note-7/">
-            Python Note 7
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
-        <div>
-          <a href="/coding/python/python-note-8/">
-            Python Note 8
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
-        <div>
-          <a href="/coding/python/python-note-9/">
-            Python Note 9
+          <a href="/coding/javascript/js-note-99/">
+            JS &amp; ES snippet
           </a>
         </div>
     </li>
@@ -798,7 +777,7 @@
    Coding</option> 
     <option value="/coding/c/" >
   - 
-   C / C&#43;&#43;</option>
+   C </option>
     <option value="/coding/c-sharp/" >
   - 
    C#</option>
@@ -898,8 +877,8 @@ panic = 'abort'
 <li><p>Result enum is defined as having two variants, Ok and Err</p>
 
 <pre><code class="language-rs">enum Result&lt;T, E&gt; {
-Ok(T),
-Err(E),
+    Ok(T),
+    Err(E),
 }
 </code></pre></li>
 
@@ -909,18 +888,18 @@ Err(E),
 use std::io::ErrorKind;
 
 fn main() {
-let f = File::open(&quot;hello.txt&quot;);
+    let f = File::open(&quot;hello.txt&quot;);
 
-let f = match f {
-    Ok(file) =&gt; file,
-    Err(error) =&gt; match error.kind() {
-        ErrorKind::NotFound =&gt; match File::create(&quot;hello.txt&quot;) {
-            Ok(fc) =&gt; fc,
-            Err(e) =&gt; panic!(&quot;Problem creating the file: {:?}&quot;, e),
+    let f = match f {
+        Ok(file) =&gt; file,
+        Err(error) =&gt; match error.kind() {
+            ErrorKind::NotFound =&gt; match File::create(&quot;hello.txt&quot;) {
+                Ok(fc) =&gt; fc,
+                Err(e) =&gt; panic!(&quot;Problem creating the file: {:?}&quot;, e),
+            },
+            other_error =&gt; panic!(&quot;Problem opening the file: {:?}&quot;, other_error),
         },
-        other_error =&gt; panic!(&quot;Problem opening the file: {:?}&quot;, other_error),
-    },
-};
+    };
 }
 </code></pre></li>
 </ul>
@@ -935,9 +914,9 @@ let f = match f {
 <pre><code class="language-rs">use std::fs::File;
 
 fn main() {
-let f = File::open(&quot;hello.txt&quot;).unwrap();
-let f = File::open(&quot;hello.txt&quot;)
-            .expect(&quot;Failed to open hello.txt&quot;);
+    let f = File::open(&quot;hello.txt&quot;).unwrap();
+    let f = File::open(&quot;hello.txt&quot;)
+                .expect(&quot;Failed to open hello.txt&quot;);
 }
 </code></pre></li>
 </ul>
@@ -991,16 +970,16 @@ use std::io::Read;
 use std::fs::File;
 
 fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
-let mut s = String::new();
+    let mut s = String::new();
 
-File::open(&quot;hello.txt&quot;)?.read_to_string(&amp;mut s)?;
+    File::open(&quot;hello.txt&quot;)?.read_to_string(&amp;mut s)?;
 
-Ok(s)
+    Ok(s)
 }
 </code></pre></li>
 </ul>
 
-<h5 id="the-operator-can-only-be-used-in-functions-that-return-result">The ? Operator Can Only Be Used in Functions That Return Result</h5>
+<h5 id="the-operator-can-only-be-used-in-functions">The ? Operator Can Only Be Used in Functions</h5>
 
 <ul>
 <li>The ? operator can only be used in functions that have a return type of Result, because it is defined to work in the same way as the match expression</li>
@@ -1034,43 +1013,43 @@ Ok(s)
 <li><p>Sample of validation with loop</p>
 
 <pre><code class="language-rs">loop {
-// --snip--
+    // --snip--
 
-let guess: i32 = match guess.trim().parse() {
-    Ok(num) =&gt; num,
-    Err(_) =&gt; continue,
-};
+    let guess: i32 = match guess.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; continue,
+    };
 
-if guess &lt; 1 || guess &gt; 100 {
-    println!(&quot;The secret number will be between 1 and 100.&quot;);
-    continue;
-}
+    if guess &lt; 1 || guess &gt; 100 {
+        println!(&quot;The secret number will be between 1 and 100.&quot;);
+        continue;
+    }
 
-match guess.cmp(&amp;secret_number) {
-// --snip--
+    match guess.cmp(&amp;secret_number) {
+    // --snip--
 }
 </code></pre></li>
 
 <li><p>Above  is not an ideal solution.  it’s safe for functions to use the new type in their signatures and confidently use the values they receive.</p>
 
 <pre><code class="language-rs">pub struct Guess {
-value: i32,
+    value: i32,
 }
 
 impl Guess {
-pub fn new(value: i32) -&gt; Guess {
-    if value &lt; 1 || value &gt; 100 {
-        panic!(&quot;Guess value must be between 1 and 100, got {}.&quot;, value);
+    pub fn new(value: i32) -&gt; Guess {
+        if value &lt; 1 || value &gt; 100 {
+            panic!(&quot;Guess value must be between 1 and 100, got {}.&quot;, value);
+        }
+
+        Guess {
+            value
+        }
     }
 
-    Guess {
-        value
+    pub fn value(&amp;self) -&gt; i32 {
+        self.value
     }
-}
-
-pub fn value(&amp;self) -&gt; i32 {
-    self.value
-}
 }
 </code></pre></li>
 
@@ -1097,7 +1076,7 @@ pub fn value(&amp;self) -&gt; i32 {
 <li><a href="#shortcuts-for-panic-on-error-unwrap-and-expect">Shortcuts for Panic on Error: unwrap and expect</a></li>
 <li><a href="#propagating-errors">Propagating Errors</a>
 <ul>
-<li><a href="#the-operator-can-only-be-used-in-functions-that-return-result">The ? Operator Can Only Be Used in Functions That Return Result</a></li>
+<li><a href="#the-operator-can-only-be-used-in-functions">The ? Operator Can Only Be Used in Functions</a></li>
 </ul></li>
 <li><a href="#to-panic-or-not-to-panic">To panic! or Not to panic!</a></li>
 <li><a href="#guidelines-for-error-handling">Guidelines for Error Handling</a></li>

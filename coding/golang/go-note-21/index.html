@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-07T00:56:18 AEDT">
-<title>Powershell Note - 1 :: Hello World</title>
+<meta name="revised" content="2019-10-07T00:56:17 AEDT">
+<title>Golang Note - 21 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of Powershell ">
+<meta name="description" content="Good practice advice - Part 2">
 
 
 
     
   </head>
-  <body data-url="/coding/shell/ps-note-1/">
+  <body data-url="/coding/golang/go-note-21/">
     
       <header>
   <div class="logo">
@@ -204,10 +204,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -287,7 +288,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-21/">
             Golang Note - 21
@@ -496,11 +497,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/shell/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/shell/">Shell</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
@@ -517,7 +517,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item active">
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
@@ -818,7 +818,22 @@
    C#</option>
     <option value="/coding/golang/" >
   - 
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" >-- Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" >-- Golang Note - 3</option>
+      <option value="/coding/golang/go-note-4/" >-- Golang Note - 4</option>
+      <option value="/coding/golang/go-note-5/" >-- Golang Note - 5</option>
+      <option value="/coding/golang/go-note-6/" >-- Golang Note - 6</option>
+      <option value="/coding/golang/go-note-7/" >-- Golang Note - 7</option>
+      <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
+      <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
+      <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-20/" >-- Golang Note - 20</option>
+      <option value="/coding/golang/go-note-21/"  selected>-- Golang Note - 21</option>
+      <option value="/coding/golang/go-note-22/" >-- Golang Note - 22</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
     <option value="/coding/java/" >
   - 
    Java</option>
@@ -833,11 +848,7 @@
    Rustlang</option>
     <option value="/coding/shell/" >
   - 
-   Shell</option> 
-      <option value="/coding/shell/cron-note-1/" >-- Cron Job Note - 1</option>
-      <option value="/coding/shell/cron-note-2/" >-- Cron Job Note - 2</option>
-      <option value="/coding/shell/ps-note-1/"  selected>-- Powershell Note - 1</option>
-  
+   Shell</option>
     <option value="/coding/sql/" >
   - 
    SQL</option>
@@ -866,42 +877,345 @@
     
 <div class="main-page">
     <div class="flex-item main-content max70width">
-            <h1>Powershell Note - 1</h1>
+            <h1>Golang Note - 21</h1>
         
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="goroutines-and-channels">Goroutines and channels</h3>
 
 <ul>
-<li>The OS of Windows 7 or later version</li>
-<li>Install Powershell 4 or later version. You can find it on <a href="www.microsoft.com">Microsoft</a> website</li>
-<li>Has basic computer knowledge</li>
+<li>Performance advice:</li>
 </ul>
 
-<h2 id="launch-ps-command-prompt">Launch PS command prompt</h2>
+<blockquote>
+<p>A rule of thumb if you use parallelism to gain efficiency over serial computation: the amount of work done inside goroutine has to be much higher than the costs associated with creating goroutines and sending data back and forth between them.</p>
+</blockquote>
+
+<h4 id="using-buffered-channels">Using buffered channels</h4>
 
 <ul>
-<li>Type command on windows command prompt: <strong>powershell</strong></li>
+<li><p>Using buffered channels for performance:</p>
+
+<p>A buffered channel can easily double its throughput, depending on the context the performance gain can be 10x or more. You can further try to optimize by adjusting the capacity of the channel.</p></li>
 </ul>
 
-<h3 id="get-ps-version">Get PS Version</h3>
+<h4 id="limiting-the-number-of-items-in-a-channel">Limiting the number of items in a channel</h4>
 
 <ul>
-<li><p>Type <strong>$psversiontable</strong></p>
+<li>Limiting the number of items in a channel and packing them in arrays:
+Channels become a bottleneck if you pass a lot of individual items through them. You can work around this by packing chunks of data into arrays and then unpacking on the other end. This can be a speed gain of a factor 10x.</li>
+</ul>
 
-<pre><code>PS C:\&gt;$psversiontable
-## You might see sth below
+<h4 id="loop-over-a-channel">loop over a channel</h4>
 
-Name                           Value
-----                           -----
-PSVersion                      4.0
-WSManStackVersion              3.0
-SerializationVersion           1.1.0.1
-CLRVersion                     4.0.30319.42000
-BuildVersion                   6.3.9600.18773
-PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
-PSRemotingProtocolVersion      2.2
+<ul>
+<li><p>How to loop over a channel ch with a for—range:</p>
+
+<pre><code class="language-go">for v := range ch {
+    // do something with v
+}
 </code></pre></li>
 </ul>
+
+<h4 id="test-a-channel-is-closed">Test a channel is closed</h4>
+
+<ul>
+<li><p>How to test if a channel ch is closed:</p>
+
+<pre><code class="language-go">//read channel until it closes or error-condition
+for {
+    if input, open := &lt;-ch; !open {
+    break
+    }
+    fmt.Printf(“%s “, input)
+}
+</code></pre></li>
+</ul>
+
+<h4 id="samaphore-pattern">Samaphore pattern</h4>
+
+<ul>
+<li><p>How to use a channel to let the main program wait until the goroutine completes?
+(Semaphore pattern)</p>
+
+<pre><code class="language-go">
+ch := make(chan int) // Allocate a channel.
+// Start something in a goroutine; when it completes, signal on the channel.
+go func() {
+// doSomething
+ch &lt;- 1 // Send a signal; value does not matter.
+}()
+doSomethingElseForAWhile()
+&lt;-ch // Wait for goroutine to finish; discard sent value.
+// If the routine must block forever, omit ch &lt;- 1 from the lambda function.
+</code></pre></li>
+</ul>
+
+<h4 id="channel-factory-pattern">Channel Factory pattern</h4>
+
+<ul>
+<li><p>Channel Factory pattern: the function is a channel factory and starts a lambda
+function as goroutine populating the channel</p>
+
+<pre><code class="language-go">func pump() chan int {
+    ch := make(chan int)
+    go func() {
+        for i := 0; ; i++ {
+            ch &lt;- i
+        }
+    }()
+    return ch
+}
+</code></pre></li>
+</ul>
+
+<h4 id="channel-iterator-pattern">Channel Iterator pattern</h4>
+
+<ul>
+<li><pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
+	ch := make(chan item)
+	go func() {
+		for i := 0; i &lt; c.Len(); i++ {
+			// or use a for-range loop
+			ch &lt;- c.items[i]
+		}
+	}()
+	return ch
+}
+
+// The code which calls this method can then iterate over the container
+for x := range container.Iter() { ... }
+</code></pre></li>
+</ul>
+
+<h4 id="limiting-the-number-of-requests">Limiting the number of requests</h4>
+
+<ul>
+<li><p>Limiting the number of requests processed concurrently</p>
+
+<pre><code class="language-go">const (
+	AvailableMemory         = 10 &lt;&lt; 20                                  // 10 MB, for example
+	AverageMemoryPerRequest = 10 &lt;&lt; 10                                  // 10 KB
+	MAXREQS                 = AvailableMemory / AverageMemoryPerRequest // here amounts to 1000
+)
+
+var sem = make(chan int, MAXREQS)
+
+type Request struct {
+	a, b   int
+	replyc chan int
+}
+
+func process(r *Request) {
+	// Do something
+	// May take a long time and use a lot of memory or CPU
+}
+func handle(r *Request) {
+	process(r)
+	// signal done: enable next request to start
+	// by making 1 empty place in the buffer
+	&lt;-sem
+}
+func Server(queue chan *Request) {
+	for {
+		sem &lt;- 1
+		// blocks when channel is full (1000 requests are active)
+		// so wait here until there is capacity to process a request
+		// (doesn’t matter what we put in it)
+		request := &lt;-queue
+		go handle(request)
+	}
+}
+
+func main() {
+	fmt.Println(&quot; AvailableMemory &quot;, AvailableMemory)
+	fmt.Println(&quot; AverageMemoryPerRequest &quot;, AverageMemoryPerRequest)
+	queue := make(chan *Request)
+	go Server(queue)
+}
+</code></pre></li>
+</ul>
+
+<h4 id="parallelling-computing-over-a-few-cores">Parallelling computing over a few cores</h4>
+
+<ul>
+<li><p>Parallelling a computing over a numbers of CPU cores</p>
+
+<pre><code class="language-go">const NCPU = 4
+
+func DoAll() {
+	sem := make(chan int, NCPU) // Buffering optional but sensible.
+	for i := 0; i &lt; NCPU; i++ {
+		go DoPart(sem)
+
+	}
+	// Drain the channel sem, waiting for NCPU tasks to complete
+	for i := 0; i &lt; NCPU; i++ {
+		&lt;-sem // wait for one task to complete
+	}
+	// All done.
+}
+func DoPart(sem chan int) {
+	// do the part of the computation
+
+	sem &lt;- 1 // signal that this piece is done
+}
+
+func main() {
+	runtime.GOMAXPROCS(NCPU)
+	DoAll()
+}
+</code></pre></li>
+</ul>
+
+<h4 id="paralleling-computing-over-a-large-amount-of-data">Paralleling computing over a large amount of data</h4>
+
+<pre><code class="language-go">func ParallelProcessData (in &lt;- chan *Data, out &lt;- chan *Data) {
+    // make channels:
+    preOut := make(chan *Data, 100)
+    stepAOut := make(chan *Data, 100)
+    stepBOut := make(chan *Data, 100)
+    stepCOut := make(chan *Data, 100)
+    // start parallel computations:
+    go PreprocessData(in, preOut)
+    go ProcessStepA(preOut, stepAOut)
+    go ProcessStepB(stepAOut, stepBOut)
+    go ProcessStepC(stepBOut, stepCOut)
+    go PostProcessData(stepCOut, out
+}
+</code></pre>
+
+<h4 id="simple-timeout-pattern">Simple timeout pattern</h4>
+
+<pre><code class="language-go">timeout := make(chan bool, 1)
+go func() {
+    time.Sleep(1e9) // one second
+    timeout &lt;- true
+}()
+    
+select {
+    case &lt;-ch:
+    // a read from ch has occurred
+    case &lt;-timeout:
+    // the read from ch has timed out
+}
+</code></pre>
+
+<h4 id="use-in-out-channel-instead-of-lock">Use in- &amp; out- channel instead of lock</h4>
+
+<pre><code class="language-go">func Worker(in, out chan *Task) {
+    for {
+        t := &lt;-in
+        process(t)
+        out &lt;- t
+    }
+}
+</code></pre>
+
+<h4 id="concurrent-access-to-object">Concurrent access to object</h4>
+
+<pre><code class="language-go">type Person struct {
+	Name   string
+	salary float64
+	chF    chan func()
+}
+
+func NewPerson(name string, salary float64) *Person {
+	p := &amp;Person{name, salary, make(chan func())}
+	go p.backend()
+	return p
+}
+func (p *Person) backend() {
+	for f := range p.chF {
+		f()
+	}
+}
+
+// Set salary.
+func (p *Person) SetSalary(sal float64) {
+	p.chF &lt;- func() { p.salary = sal }
+}
+
+// Retrieve salary.
+func (p *Person) Salary() float64 {
+	fChan := make(chan float64)
+	p.chF &lt;- func() { fChan &lt;- p.salary }
+	return &lt;-fChan
+}
+func (p *Person) String() string {
+	return &quot;Person - name is: &quot; + p.Name + &quot; - salary is: &quot; + strconv.
+		FormatFloat(p.Salary(), 'f', 2, 64)
+}
+func main() {
+	bs := NewPerson(&quot;Smith Bill&quot;, 2500.5)
+	fmt.Println(bs)
+	bs.SetSalary(4000.25)
+	fmt.Println(&quot;Salary changed:&quot;)
+	fmt.Println(bs)
+}
+/* Output Person - name is: Smith Bill - salary is: 2500.50
+Salary changed:
+Person - name is: Smith Bill - salary is: 4000.25 *
+*/
+</code></pre>
+
+<h4 id="abandon-synchronous-calls">Abandon synchronous calls</h4>
+
+<ul>
+<li><p>Abandon synchronous calls that run too long</p>
+
+<pre><code class="language-go">ch := make(chan error, 1)
+go func() { ch &lt;- client.Call(“Service.Method”, args, &amp;reply) } ()
+select {
+    case resp := &lt;-ch:
+    // use resp and reply
+    case &lt;-time.After(timeoutNs):
+    // call timed out
+    break
+}
+</code></pre></li>
+</ul>
+
+<h4 id="benchmarking-goroutines">Benchmarking goroutines</h4>
+
+<pre><code class="language-go">func main() {
+	fmt.Println(&quot;sync&quot;, testing.Benchmark(BenchmarkChannelSync).String())
+	fmt.Println(&quot;buffered&quot;, testing.Benchmark(BenchmarkChannelBuffered).String())
+}
+
+func BenchmarkChannelSync(b *testing.B) {
+	ch := make(chan int)
+	go func() {
+		for i := 0; i &lt; b.N; i++ {
+			ch &lt;- i
+		}
+		close(ch)
+	}()
+	for _ = range ch {
+	}
+}
+
+func BenchmarkChannelBuffered(b *testing.B) {
+	ch := make(chan int, 128)
+	go func() {
+		for i := 0; i &lt; b.N; i++ {
+			ch &lt;- i
+		}
+		close(ch)
+	}()
+	for _ = range ch {
+	}
+}
+
+/* Output:
+sync  3000000	       420 ns/op
+buffered 10000000	       103 ns/op
+*/
+</code></pre>
+
+<h4 id="stopping-a-goroutine">Stopping a goroutine</h4>
+
+<pre><code class="language-go">runtime.Goexit()
+</code></pre>
 
     </div>
 
@@ -910,10 +1224,27 @@ PSRemotingProtocolVersion      2.2
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#launch-ps-command-prompt">Launch PS command prompt</a>
+<li>
 <ul>
-<li><a href="#get-ps-version">Get PS Version</a></li>
+<li><a href="#goroutines-and-channels">Goroutines and channels</a>
+<ul>
+<li><a href="#using-buffered-channels">Using buffered channels</a></li>
+<li><a href="#limiting-the-number-of-items-in-a-channel">Limiting the number of items in a channel</a></li>
+<li><a href="#loop-over-a-channel">loop over a channel</a></li>
+<li><a href="#test-a-channel-is-closed">Test a channel is closed</a></li>
+<li><a href="#samaphore-pattern">Samaphore pattern</a></li>
+<li><a href="#channel-factory-pattern">Channel Factory pattern</a></li>
+<li><a href="#channel-iterator-pattern">Channel Iterator pattern</a></li>
+<li><a href="#limiting-the-number-of-requests">Limiting the number of requests</a></li>
+<li><a href="#parallelling-computing-over-a-few-cores">Parallelling computing over a few cores</a></li>
+<li><a href="#paralleling-computing-over-a-large-amount-of-data">Paralleling computing over a large amount of data</a></li>
+<li><a href="#simple-timeout-pattern">Simple timeout pattern</a></li>
+<li><a href="#use-in-out-channel-instead-of-lock">Use in- &amp; out- channel instead of lock</a></li>
+<li><a href="#concurrent-access-to-object">Concurrent access to object</a></li>
+<li><a href="#abandon-synchronous-calls">Abandon synchronous calls</a></li>
+<li><a href="#benchmarking-goroutines">Benchmarking goroutines</a></li>
+<li><a href="#stopping-a-goroutine">Stopping a goroutine</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -926,8 +1257,8 @@ PSRemotingProtocolVersion      2.2
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/shell/cron-note-2/" title="Cron Job Note - 2"> <i class="fa fa-chevron-left"></i><label>Cron Job Note - 2</label></a>
-    <a class="nav nav-next" href="/coding/sql/" title="SQL" style="margin-right: 0px;"><label>SQL</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-20/" title="Golang Note - 20"> <i class="fa fa-chevron-left"></i><label>Golang Note - 20</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-22/" title="Golang Note - 22" style="margin-right: 0px;"><label>Golang Note - 22</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

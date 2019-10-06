@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-07T00:56:18 AEDT">
-<title>Powershell Note - 1 :: Hello World</title>
+<meta name="revised" content="2019-10-07T00:56:17 AEDT">
+<title>Golang Note - 22 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of Powershell ">
+<meta name="description" content="Good practice advice - Part 3">
 
 
 
     
   </head>
-  <body data-url="/coding/shell/ps-note-1/">
+  <body data-url="/coding/golang/go-note-22/">
     
       <header>
   <div class="logo">
@@ -204,10 +204,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+    <li data-nav-id="/coding/golang/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/golang/">Golang</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
@@ -294,7 +295,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item active">
         <div>
           <a href="/coding/golang/go-note-22/">
             Golang Note - 22
@@ -496,11 +497,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/shell/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/shell/">Shell</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
@@ -517,7 +517,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item active">
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
         <div>
           <a href="/coding/shell/ps-note-1/">
             Powershell Note - 1
@@ -818,7 +818,22 @@
    C#</option>
     <option value="/coding/golang/" >
   - 
-   Golang</option>
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Golang Note - 1</option>
+      <option value="/coding/golang/go-note-2/" >-- Golang Note - 2</option>
+      <option value="/coding/golang/go-note-3/" >-- Golang Note - 3</option>
+      <option value="/coding/golang/go-note-4/" >-- Golang Note - 4</option>
+      <option value="/coding/golang/go-note-5/" >-- Golang Note - 5</option>
+      <option value="/coding/golang/go-note-6/" >-- Golang Note - 6</option>
+      <option value="/coding/golang/go-note-7/" >-- Golang Note - 7</option>
+      <option value="/coding/golang/go-note-8/" >-- Golang Note - 8</option>
+      <option value="/coding/golang/go-note-9/" >-- Golang Note - 9</option>
+      <option value="/coding/golang/go-note-10/" >-- Golang Note - 10</option>
+      <option value="/coding/golang/go-note-20/" >-- Golang Note - 20</option>
+      <option value="/coding/golang/go-note-21/" >-- Golang Note - 21</option>
+      <option value="/coding/golang/go-note-22/"  selected>-- Golang Note - 22</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
     <option value="/coding/java/" >
   - 
    Java</option>
@@ -833,11 +848,7 @@
    Rustlang</option>
     <option value="/coding/shell/" >
   - 
-   Shell</option> 
-      <option value="/coding/shell/cron-note-1/" >-- Cron Job Note - 1</option>
-      <option value="/coding/shell/cron-note-2/" >-- Cron Job Note - 2</option>
-      <option value="/coding/shell/ps-note-1/"  selected>-- Powershell Note - 1</option>
-  
+   Shell</option>
     <option value="/coding/sql/" >
   - 
    SQL</option>
@@ -866,41 +877,39 @@
     
 <div class="main-page">
     <div class="flex-item main-content max70width">
-            <h1>Powershell Note - 1</h1>
+            <h1>Golang Note - 22</h1>
         
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="error">Error</h3>
 
 <ul>
-<li>The OS of Windows 7 or later version</li>
-<li>Install Powershell 4 or later version. You can find it on <a href="www.microsoft.com">Microsoft</a> website</li>
-<li>Has basic computer knowledge</li>
-</ul>
+<li><p>How to stop a program when an error occurs:</p>
 
-<h2 id="launch-ps-command-prompt">Launch PS command prompt</h2>
-
-<ul>
-<li>Type command on windows command prompt: <strong>powershell</strong></li>
-</ul>
-
-<h3 id="get-ps-version">Get PS Version</h3>
-
-<ul>
-<li><p>Type <strong>$psversiontable</strong></p>
-
-<pre><code>PS C:\&gt;$psversiontable
-## You might see sth below
-
-Name                           Value
-----                           -----
-PSVersion                      4.0
-WSManStackVersion              3.0
-SerializationVersion           1.1.0.1
-CLRVersion                     4.0.30319.42000
-BuildVersion                   6.3.9600.18773
-PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
-PSRemotingProtocolVersion      2.2
+<pre><code class="language-go">if err != nil {
+	fmt.Printf(&quot;Program stopping with error %v&quot;, err)
+	os.Exit(1)
+}
+// OR :
+if err != nil {
+	panic(&quot;ERROR occurred: &quot; + err.Error())
+}
 </code></pre></li>
+</ul>
+
+<h3 id="performance-best-practices-and-advice">Performance best practices and advice</h3>
+
+<ul>
+<li>Use the initializing declaration form := wherever possible (in functions).</li>
+<li>Use bytes if possible instead of strings</li>
+<li>Use slices instead of arrays.</li>
+<li>Use arrays or slices instead of a map where possible (see ref. 15)</li>
+<li>Use for range over a slice if you only need the value and not the index; this is slightly faster than having to do a slice lookup for every element.</li>
+<li>When the array is sparse (containing many 0 or nil-values), using a map can result in lower memory consumption.</li>
+<li>Specify an initial capacity for maps.</li>
+<li>When defining methods: use a pointer to a type (struct) as a receiver.</li>
+<li>Use constants or flags to extract constant values from the code.</li>
+<li>Use caching whenever possible when large amounts of memory are being allocated.</li>
+<li>Use template caching</li>
 </ul>
 
     </div>
@@ -910,10 +919,10 @@ PSRemotingProtocolVersion      2.2
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#launch-ps-command-prompt">Launch PS command prompt</a>
+<li>
 <ul>
-<li><a href="#get-ps-version">Get PS Version</a></li>
+<li><a href="#error">Error</a></li>
+<li><a href="#performance-best-practices-and-advice">Performance best practices and advice</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -926,8 +935,8 @@ PSRemotingProtocolVersion      2.2
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/shell/cron-note-2/" title="Cron Job Note - 2"> <i class="fa fa-chevron-left"></i><label>Cron Job Note - 2</label></a>
-    <a class="nav nav-next" href="/coding/sql/" title="SQL" style="margin-right: 0px;"><label>SQL</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/golang/go-note-21/" title="Golang Note - 21"> <i class="fa fa-chevron-left"></i><label>Golang Note - 21</label></a>
+    <a class="nav nav-next" href="/coding/golang/go-note-99/" title="Golang snippets" style="margin-right: 0px;"><label>Golang snippets</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

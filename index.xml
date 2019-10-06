@@ -22,6 +22,16 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
+      <title>Python Note 1</title>
+      <link>/coding/python/python-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-1/</guid>
+      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.
+# list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
+    </item>
+    
+    <item>
       <title>Golang Note - 2</title>
       <link>/coding/golang/go-note-2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -29,6 +39,17 @@ Go is easy to become functional with and appropriate for junior developers to wo
       <guid>/coding/golang/go-note-2/</guid>
       <description>Map  Maps are a special kind of data structure: an unordered collection of pairs of items, where one element of the pair is the key, and the other element, associated with the key, is the data or the value, hence they are also called associative arrays or dictionaries.
  The key type can be any type for which the operations == and != are defined, like string, int, float.</description>
+    </item>
+    
+    <item>
+      <title>Python Note 2</title>
+      <link>/coding/python/python-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-2/</guid>
+      <description>Closure &amp;amp; Decorator LEGB rules  Local, Enclosing, Gloable, Built-in  Local function  Useful for specialized, one-off functions Aid in code organization and readability Similar to lambdas, but more general May contain multiple expressions May contain statements  Closure  Closure maintain references to objects from earlier scopes LEGB does not apply when making new bindings Usage of nonlocal
+ Example
+def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
     </item>
     
     <item>
@@ -42,12 +63,30 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
+      <title>Python Note 3</title>
+      <link>/coding/python/python-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-3/</guid>
+      <description>String &amp;amp; Representation str()  print() -&amp;gt; str() -&amp;gt; __str(self)__ Fallback to repr(). By default, str() simply calls repr() Produces a readable, human-friendly representation of an object It is also the string constructor  repr()  Exactness is more important than human-friendliness Suited for debugging. Unambiguous, precise, include type Includes identifying information. Generally best for logging and developers The default repr() is not very helpful As a rule, you should always write a repr() for your classes standard library reprlib.</description>
+    </item>
+    
+    <item>
       <title>Golang Note - 4</title>
       <link>/coding/golang/go-note-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/golang/go-note-4/</guid>
       <description>IO - Read &amp;amp; Write Read from user input var ( firstName, lastName, s string i int f float32 input = &amp;quot;56.12 / 5212 / Go&amp;quot; format = &amp;quot;%f / %d / %s&amp;quot; ) func main() { fmt.Println(&amp;quot;Please enter your full name: &amp;quot;) fmt.Scanln(&amp;amp;firstName, &amp;amp;lastName) // fmt.Scanf(&amp;quot;%s %s&amp;quot;, &amp;amp;firstName, &amp;amp;lastName) fmt.Printf(&amp;quot;Hi %s %s!\n&amp;quot;, firstName, lastName) // Hi Chris Naegels fmt.Sscanf(input, format, &amp;amp;f, &amp;amp;i, &amp;amp;s) fmt.Println(&amp;quot;From the string we read: &amp;quot;, f, i, s) // ouwtput: From the string we read: 56.</description>
+    </item>
+    
+    <item>
+      <title>Python Note 4</title>
+      <link>/coding/python/python-note-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-4/</guid>
+      <description>Iterables &amp;amp; Iteration Comprehensions  Comprehensions can process more than one input sequence Multiple input sequences in comprehensions work like nested for-loops Comprehensions can also have multiple if-clauses interspersed with the for-clauses Later clauses in a comprehension can reference variables bound in earlier clauses Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences  Example ## Comprehensions &amp;gt;&amp;gt;&amp;gt; points [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)] &amp;gt;&amp;gt;&amp;gt; points_c=[(x,y) for x in range(3) for y in range(4) ] &amp;gt;&amp;gt;&amp;gt; points_c [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)] &amp;gt;&amp;gt;&amp;gt; points_d=[(x,y) .</description>
     </item>
     
     <item>
@@ -62,6 +101,15 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
+      <title>Python Note 5</title>
+      <link>/coding/python/python-note-5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-5/</guid>
+      <description>Inheritance &amp;amp; Polymorphism  Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name Subclasses have all of the methods of their base class It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction Python treats __init__() like any other method Base class __init__() is not called if overridden Use super() to call base class __init__() isinstance() takes an object as its first argument and a type as its second isinstance() determines if its first argument is an instance of the second argument, or any subclass of the second argument isinstance() can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types Checking for specific types is rare in Python and is sometimes regarded as bad design isinstance() determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument Multiple inheritance means having more than one direct base class You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition A class can have as many base classes as you want Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction __bases__ is a tuple of types on a class object which defines the base classes for the class __bases__ is in the same order as in the class definition __bases__ is populated for both single and multiple inheritance Method resolution order defines the order in which Python will search an inheritance graph for methods MRO is short for Method Resolution Order MRO is stored as a tuple of types in the __mro__ attribute of a class The mro() method on type objects returns the contents of __mro__ as a list To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method MRO is dependent on base class declaration order MRO is calculated by Python using the C3 algorithm MRO honors base-class ordering from class definitions MRO puts subclasses before base classes The relative order of classes in an MRO is consistent across all classes It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached super() operates by using the elements in an MRO that come after some specified type super() returns a proxy object which forwards calls to the correct objects There are two distinct types of super() proxies, bound and unbound Unbound super() proxies are primarily used for implementing other Python features Bound proxies can be bound to either class objects or instances Calling super() with a base-class and derived-class argument returns a proxy bound to a class Calling super() with a class and an instance of that class returns a proxy bound to an instance A super() proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you However, classmethods resolved by class-bound proxies can be called directly Python will raise a TypeError if the second argument is not a subclass or instance of the first argument Inappropriate use of super() can violate some design constraints * Calling super() with no arguments inside an instance method produces an instance-bound proxy Calling super() with no arguments inside a classmethod produces a class-bound proxy In both cases, the no-argument form of super() is the same as calling super() with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second Since super() works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another The class object is at the core of Python&amp;rsquo;s object model object is the ultimate base class for all other classes in Python If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.</description>
+    </item>
+    
+    <item>
       <title>Golang Note - 6</title>
       <link>/coding/golang/go-note-6/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -69,6 +117,17 @@ Go is easy to become functional with and appropriate for junior developers to wo
       <guid>/coding/golang/go-note-6/</guid>
       <description>Goroutine  A goroutine is implemented as a function or method (this can also be an anonymous or lambda function) and called (invoked) with the keyword go. This starts the function running in parallel with the current computation but in the same address space and with its own stack.
  Go’s concurrency primitives provide the basis for a good concurrency program design: expressing program structure so as to represent independently executing actions; so Go’s emphasis is not in the 1 st place on parallelism: concurrent programs may or may not be parallel.</description>
+    </item>
+    
+    <item>
+      <title>Python Note 6</title>
+      <link>/coding/python/python-note-6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-6/</guid>
+      <description>Collection Collection protocols  To implement a protocol, objects must support certain operations. Most collections implement container, sized and iterable. All except dict and set are sequences Container: membership testing using in and not in Sized: Determine number of elements with len(s) Iterable: Can produce an iterator with iter(s), e.g.
+ for item in iterable: do_something(item) `len(s)`  Sequence:
+ Retrieve elements by index, e.g. item = seq[index] Find items by value index = seq.</description>
     </item>
     
     <item>
@@ -82,6 +141,18 @@ var send_only chan&amp;lt;- int // channel can only receive data var recv_only &
     </item>
     
     <item>
+      <title>Python Note 7</title>
+      <link>/coding/python/python-note-7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-7/</guid>
+      <description>Exception &amp;amp; Assertion  Avoid bad practices in Python exception handling. Always specify an exception type with except, but don&amp;rsquo;t be too general.
+ Don&amp;rsquo;t Use Assertions for checking arguments EXamples
+ lookup exception
+def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError  unicode exception</description>
+    </item>
+    
+    <item>
       <title>Golang Note - 8</title>
       <link>/coding/golang/go-note-8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -89,6 +160,17 @@ var send_only chan&amp;lt;- int // channel can only receive data var recv_only &
       <guid>/coding/golang/go-note-8/</guid>
       <description>Package  Package is a way to structure code: a program is constructed as a “package” (often abbreviated as pkg), which may use facilities from other packages. Every go-file belongs to one (and only one) package (like a library or namespace in other languages). Many different .go files can belong to one package, so the filename(s) and package name are generally not the same.
  The package to which the code-file belongs must be indicated on the first line, e.</description>
+    </item>
+    
+    <item>
+      <title>Python Note 8</title>
+      <link>/coding/python/python-note-8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-8/</guid>
+      <description>Context managers context manager  context manager an object designed to be used in a with-statement
+with context-manager: body with context-manager: context-manager.begin() body context-manager.end() with context-manager: setup() body teardown() with context-manager: context-manager.begin() body context-manager.end() with context-manager: allocation() body deallocation() with context-manager: enter() body exit()  A context-manager ensures that resources are properly and automatically managed
+ enter() prepares the manager for use exit() cleans it up  Context-manager Protocol</description>
     </item>
     
     <item>
@@ -103,11 +185,29 @@ var remember bool = false if something { remember := true // Wrong. } // use rem
     </item>
     
     <item>
+      <title>Python Note 9</title>
+      <link>/coding/python/python-note-9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/python/python-note-9/</guid>
+      <description>ABC - Abstract Base Classes Abstract base classes complement duck-typing by providing a way to define interfaces when other techniques like hasattr() would be clumsy or subtly wrong (for example with magic methods). ABCs introduce virtual subclasses, which are classes that don’t inherit from a class but are still recognized by isinstance() and issubclass(); see the abc module documentation. Python comes with many built-in ABCs for data structures (in the collections module), numbers (in the numbers module), and streams (in the io module).</description>
+    </item>
+    
+    <item>
       <title>Golang Note - 10</title>
       <link>/coding/golang/go-note-10/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/golang/go-note-10/</guid>
+      <description>Template  Package template implements data-driven templates for generating textual output. Templates are executed by applying them to a data structure. Annotations in the template refer to elements of the data structure (typically a field of a struct or a key in a map) to control execution and derive values to be displayed. Execution of the template walks the structure and sets the cursor, represented by a period &amp;lsquo;.&amp;rsquo; and called &amp;ldquo;dot&amp;rdquo;, to the value at the current location in the structure as execution proceeds.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 20</title>
+      <link>/coding/golang/go-note-20/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-20/</guid>
       <description>Strings Change a character  How to change a character in a string
 str:=&amp;quot;hello&amp;quot; c:=[]byte(s) c[0]=’c’ s2:= string(c) // s2 == &amp;quot;cello&amp;quot;   Substring  How to take a part(substring) of a string str
 substr := str[n:m]   for-loop  How to loop over a string str with for or for-range:
@@ -115,14 +215,24 @@ substr := str[n:m]   for-loop  How to loop over a string str with for or for-ran
     </item>
     
     <item>
-      <title>Golang Note - 11</title>
-      <link>/coding/golang/go-note-11/</link>
+      <title>Golang Note - 21</title>
+      <link>/coding/golang/go-note-21/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/golang/go-note-11/</guid>
+      <guid>/coding/golang/go-note-21/</guid>
       <description>Goroutines and channels  Performance advice:   A rule of thumb if you use parallelism to gain efficiency over serial computation: the amount of work done inside goroutine has to be much higher than the costs associated with creating goroutines and sending data back and forth between them.
  Using buffered channels  Using buffered channels for performance:
 A buffered channel can easily double its throughput, depending on the context the performance gain can be 10x or more.</description>
+    </item>
+    
+    <item>
+      <title>Golang Note - 22</title>
+      <link>/coding/golang/go-note-22/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/golang/go-note-22/</guid>
+      <description>Error  How to stop a program when an error occurs:
+if err != nil { fmt.Printf(&amp;quot;Program stopping with error %v&amp;quot;, err) os.Exit(1) } // OR : if err != nil { panic(&amp;quot;ERROR occurred: &amp;quot; + err.Error()) }   Performance best practices and advice  Use the initializing declaration form := wherever possible (in functions). Use bytes if possible instead of strings Use slices instead of arrays. Use arrays or slices instead of a map where possible (see ref.</description>
     </item>
     
     <item>
@@ -777,7 +887,7 @@ DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLin
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-3/</guid>
-      <description> Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another short cut to show all process SHOW FULL PROCESSLIST;  </description>
+      <description>Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another short cut to show all process SHOW FULL PROCESSLIST;  Get the information of stored proc or function SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.</description>
     </item>
     
     <item>
@@ -788,97 +898,6 @@ DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLin
       <guid>/coding/shell/ps-note-1/</guid>
       <description>Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable
 PS C:\&amp;gt;$psversiontable ## You might see sth below Name Value ---- ----- PSVersion 4.0 WSManStackVersion 3.0 SerializationVersion 1.1.0.1 CLRVersion 4.0.30319.42000 BuildVersion 6.3.9600.18773 PSCompatibleVersions {1.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 1</title>
-      <link>/coding/python/python-note-1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-1/</guid>
-      <description>Package &amp;amp; Module  Packages are modules that contain other modules. Packages are generally implemented as directories containing a special __init__.py file. The __init__.py file is executed when the package is imported. Packages can contain sub packages which themselves are implemented with __init__.py files in directories. The module objects for packages have a __path__ attribute.  sys.path  List of directories which Python searches for modules.
-# list directories &amp;gt;&amp;gt;&amp;gt;import sys &amp;gt;&amp;gt;&amp;gt;sys.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 2</title>
-      <link>/coding/python/python-note-2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-2/</guid>
-      <description>Closure &amp;amp; Decorator LEGB rules  Local, Enclosing, Gloable, Built-in  Local function  Useful for specialized, one-off functions Aid in code organization and readability Similar to lambdas, but more general May contain multiple expressions May contain statements  Closure  Closure maintain references to objects from earlier scopes LEGB does not apply when making new bindings Usage of nonlocal
- Example
-def make_timer(): last_called = None def elapsed(): nonlocal last_called now = time.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 3</title>
-      <link>/coding/python/python-note-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-3/</guid>
-      <description>String &amp;amp; Representation str()  print() -&amp;gt; str() -&amp;gt; __str(self)__ Fallback to repr(). By default, str() simply calls repr() Produces a readable, human-friendly representation of an object It is also the string constructor  repr()  Exactness is more important than human-friendliness Suited for debugging. Unambiguous, precise, include type Includes identifying information. Generally best for logging and developers The default repr() is not very helpful As a rule, you should always write a repr() for your classes standard library reprlib.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 4</title>
-      <link>/coding/python/python-note-4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-4/</guid>
-      <description>Iterables &amp;amp; Iteration Comprehensions  Comprehensions can process more than one input sequence Multiple input sequences in comprehensions work like nested for-loops Comprehensions can also have multiple if-clauses interspersed with the for-clauses Later clauses in a comprehension can reference variables bound in earlier clauses Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences  Example ## Comprehensions &amp;gt;&amp;gt;&amp;gt; points [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)] &amp;gt;&amp;gt;&amp;gt; points_c=[(x,y) for x in range(3) for y in range(4) ] &amp;gt;&amp;gt;&amp;gt; points_c [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)] &amp;gt;&amp;gt;&amp;gt; points_d=[(x,y) .</description>
-    </item>
-    
-    <item>
-      <title>Python Note 5</title>
-      <link>/coding/python/python-note-5/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-5/</guid>
-      <description>Inheritance &amp;amp; Polymorphism  Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name Subclasses have all of the methods of their base class It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction Python treats __init__() like any other method Base class __init__() is not called if overridden Use super() to call base class __init__() isinstance() takes an object as its first argument and a type as its second isinstance() determines if its first argument is an instance of the second argument, or any subclass of the second argument isinstance() can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types Checking for specific types is rare in Python and is sometimes regarded as bad design isinstance() determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument Multiple inheritance means having more than one direct base class You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition A class can have as many base classes as you want Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction __bases__ is a tuple of types on a class object which defines the base classes for the class __bases__ is in the same order as in the class definition __bases__ is populated for both single and multiple inheritance Method resolution order defines the order in which Python will search an inheritance graph for methods MRO is short for Method Resolution Order MRO is stored as a tuple of types in the __mro__ attribute of a class The mro() method on type objects returns the contents of __mro__ as a list To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method MRO is dependent on base class declaration order MRO is calculated by Python using the C3 algorithm MRO honors base-class ordering from class definitions MRO puts subclasses before base classes The relative order of classes in an MRO is consistent across all classes It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached super() operates by using the elements in an MRO that come after some specified type super() returns a proxy object which forwards calls to the correct objects There are two distinct types of super() proxies, bound and unbound Unbound super() proxies are primarily used for implementing other Python features Bound proxies can be bound to either class objects or instances Calling super() with a base-class and derived-class argument returns a proxy bound to a class Calling super() with a class and an instance of that class returns a proxy bound to an instance A super() proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you However, classmethods resolved by class-bound proxies can be called directly Python will raise a TypeError if the second argument is not a subclass or instance of the first argument Inappropriate use of super() can violate some design constraints * Calling super() with no arguments inside an instance method produces an instance-bound proxy Calling super() with no arguments inside a classmethod produces a class-bound proxy In both cases, the no-argument form of super() is the same as calling super() with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second Since super() works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another The class object is at the core of Python&amp;rsquo;s object model object is the ultimate base class for all other classes in Python If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 6</title>
-      <link>/coding/python/python-note-6/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-6/</guid>
-      <description>Collection Collection protocols  To implement a protocol, objects must support certain operations. Most collections implement container, sized and iterable. All except dict and set are sequences Container: membership testing using in and not in Sized: Determine number of elements with len(s) Iterable: Can produce an iterator with iter(s), e.g.
- for item in iterable: do_something(item) `len(s)`  Sequence:
- Retrieve elements by index, e.g. item = seq[index] Find items by value index = seq.</description>
-    </item>
-    
-    <item>
-      <title>Python Note 7</title>
-      <link>/coding/python/python-note-7/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-7/</guid>
-      <description>Exception &amp;amp; Assertion  Avoid bad practices in Python exception handling. Always specify an exception type with except, but don&amp;rsquo;t be too general.
- Don&amp;rsquo;t Use Assertions for checking arguments EXamples
- lookup exception
-def lookups(): s = [1, 4, 6] try: item = s[5] except LookupError: print(&amp;quot;Handled IndexError&amp;quot;) d = dict(a=65, b=66, c=67) try: value = d[&#39;x&#39;] except LookupError: print(&amp;quot;Handled KeyError&amp;quot;) if __name__ == &#39;__main__&#39;: lookups() ## test result ## Handled IndexError ## Handled KeyError  unicode exception</description>
-    </item>
-    
-    <item>
-      <title>Python Note 8</title>
-      <link>/coding/python/python-note-8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-8/</guid>
-      <description>Context managers context manager  context manager an object designed to be used in a with-statement
-with context-manager: body with context-manager: context-manager.begin() body context-manager.end() with context-manager: setup() body teardown() with context-manager: context-manager.begin() body context-manager.end() with context-manager: allocation() body deallocation() with context-manager: enter() body exit()  A context-manager ensures that resources are properly and automatically managed
- enter() prepares the manager for use exit() cleans it up  Context-manager Protocol</description>
-    </item>
-    
-    <item>
-      <title>Python Note 9</title>
-      <link>/coding/python/python-note-9/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/python/python-note-9/</guid>
-      <description>ABC - Abstract Base Classes Abstract base classes complement duck-typing by providing a way to define interfaces when other techniques like hasattr() would be clumsy or subtly wrong (for example with magic methods). ABCs introduce virtual subclasses, which are classes that don’t inherit from a class but are still recognized by isinstance() and issubclass(); see the abc module documentation. Python comes with many built-in ABCs for data structures (in the collections module), numbers (in the numbers module), and streams (in the io module).</description>
     </item>
     
     <item>

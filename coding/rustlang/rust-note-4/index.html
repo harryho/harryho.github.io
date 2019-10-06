@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-05T17:07:52 AEST">
+<meta name="revised" content="2019-10-07T00:56:18 AEDT">
 <title>Rustlang Note - 4 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -142,7 +142,7 @@
     <li data-nav-id="/coding/c/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/c/">C / C&#43;&#43;</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/c/">C </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
@@ -280,10 +280,24 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/golang/go-note-11/" class="dd-item">
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
         <div>
-          <a href="/coding/golang/go-note-11/">
-            Golang Note - 11
+          <a href="/coding/golang/go-note-20/">
+            Golang Note - 20
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-21/">
+            Golang Note - 21
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-22/">
+            Golang Note - 22
           </a>
         </div>
     </li>
@@ -798,7 +812,7 @@
    Coding</option> 
     <option value="/coding/c/" >
   - 
-   C / C&#43;&#43;</option>
+   C </option>
     <option value="/coding/c-sharp/" >
   - 
    C#</option>
@@ -886,23 +900,23 @@
 <li><p>A sample below which won&rsquo;t compile</p>
 
 <pre><code class="language-rs">struct Point&lt;T&gt; {
-x: T,
-y: T,
+    x: T,
+    y: T,
 }
 
 fn main() {
-let wont_work = Point { x: 5, y: 4.0 };
-//                           ^^^ expected integral variable, found
-//                   floating-point variable
-//                   note: expected type `{integer}`
+    let wont_work = Point { x: 5, y: 4.0 };
+    //                           ^^^ expected integral variable, found
+    //                   floating-point variable
+    //                   note: expected type `{integer}`
 }
 </code></pre></li>
 
 <li><p>Above sample can be refactored as below to make it work</p>
 
 <pre><code class="language-rs">struct Point&lt;Y,U&gt;{
-x: T,
-y: U,
+    x: T,
+    y: U,
 }
 </code></pre></li>
 
@@ -910,42 +924,42 @@ y: U,
 
 <pre><code class="language-rs">
 enum Option&lt;T&gt; {
-Some(T),
-None,
+    Some(T),
+    None,
 }
 
 enum Result&lt;T, E&gt; {
-Ok(T),
-Err(E),
+    Ok(T),
+    Err(E),
 }
 </code></pre></li>
 
 <li><p>implement methods on structs and enums, and use generic types in their definitions</p>
 
 <pre><code class="language-rs">struct Point&lt;T&gt; {
-x: T,
-y: T,
+    x: T,
+    y: T,
 }
 
 impl&lt;T&gt; Point&lt;T&gt; {
-fn x(&amp;self) -&gt; &amp;T {
-    &amp;self.x
-}
+    fn x(&amp;self) -&gt; &amp;T {
+        &amp;self.x
+    }
 }
 
 fn main() {
-let p = Point { x: 5, y: 10 };
+    let p = Point { x: 5, y: 10 };
 
-println!(&quot;p.x = {}&quot;, p.x());
+    println!(&quot;p.x = {}&quot;, p.x());
 }
 </code></pre></li>
 
 <li><p>implement methods with concrete type f32, meaning we don’t declare any types after impl.</p>
 
 <pre><code class="language-rs">impl Point&lt;f32&gt; {
-fn distance_from_origin(&amp;self) -&gt; f32 {
-    (self.x.powi(2) + self.y.powi(2)).sqrt()
-}
+    fn distance_from_origin(&amp;self) -&gt; f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
 }
 </code></pre></li>
 
@@ -954,26 +968,26 @@ fn distance_from_origin(&amp;self) -&gt; f32 {
 <li><p>Sample below the method mixup on the Point<T, U> struct from Listing 10-8. The method takes another Point as a parameter, which might have different types from the self Point we’re calling mixup on. The method creates a new Point instance with the x value from the self Point (of type T) and the y value from the passed-in Point (of type W).</p>
 
 <pre><code class="language-rs">struct Point&lt;T, U&gt; {
-x: T,
-y: U,
+    x: T,
+    y: U,
 }
 
 impl&lt;T, U&gt; Point&lt;T, U&gt; {
-fn mixup&lt;V, W&gt;(self, other: Point&lt;V, W&gt;) -&gt; Point&lt;T, W&gt; {
-    Point {
-        x: self.x,
-        y: other.y,
+    fn mixup&lt;V, W&gt;(self, other: Point&lt;V, W&gt;) -&gt; Point&lt;T, W&gt; {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
     }
-}
 }
 
 fn main() {
-let p1 = Point { x: 5, y: 10.4 };
-let p2 = Point { x: &quot;Hello&quot;, y: 'c'};
+    let p1 = Point { x: 5, y: 10.4 };
+    let p2 = Point { x: &quot;Hello&quot;, y: 'c'};
 
-let p3 = p1.mixup(p2);
+    let p3 = p1.mixup(p2);
 
-println!(&quot;p3.x = {}, p3.y = {}&quot;, p3.x, p3.y); // p3.x = 5, p3.y = c
+    println!(&quot;p3.x = {}, p3.y = {}&quot;, p3.x, p3.y); // p3.x = 5, p3.y = c
 }
 </code></pre></li>
 
@@ -997,18 +1011,18 @@ let float = Some(5.0);
 
 // Rust will create specific definition as following
 enum Option_i32 {
-Some(i32),
-None,
+    Some(i32),
+    None,
 }
 
 enum Option_f64 {
-Some(f64),
-None,
+    Some(f64),
+    None,
 }
 
 fn main() {
-let integer = Option_i32::Some(5);
-let float = Option_f64::Some(5.0);
+    let integer = Option_i32::Some(5);
+    let float = Option_f64::Some(5.0);
 }
 </code></pre></li>
 
