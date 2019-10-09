@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-07T00:56:18 AEDT">
+<meta name="revised" content="2019-10-09T23:17:42 AEDT">
 <title>Rustlang Note - 4 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -184,21 +184,28 @@
       <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-1/">
-            C# Note - 1
+            Console App
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-4/">
+             Generic Predicate &amp; Expression
           </a>
         </div>
     </li>
       <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-2/">
-            C# Note - 2
+            Scheduled task with window service
           </a>
         </div>
     </li>
       <li data-nav-id="/coding/c-sharp/csharp-note-3/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-3/">
-            C# Note - 3
+            Thread &amp; Task
           </a>
         </div>
     </li>
@@ -922,8 +929,7 @@ fn main() {
 
 <li><p>define enums to hold generic data types in their variants.</p>
 
-<pre><code class="language-rs">
-enum Option&lt;T&gt; {
+<pre><code class="language-rs">enum Option&lt;T&gt; {
     Some(T),
     None,
 }
@@ -1040,8 +1046,359 @@ fn main() {
 <h4 id="defining-a-trait">Defining a trait</h4>
 
 <ul>
-<li>A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.</li>
+<li><p>A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.</p></li>
+
+<li><p>Sample of trait</p>
+
+<pre><code class="language-rs">pub trait Summary {
+    fn summarize(&amp;self) -&gt; String;
+}
+</code></pre></li>
 </ul>
+
+<h4 id="implementing-a-trait">Implementing a trait</h4>
+
+<ul>
+<li><p>Implementing a trait on a type is similar to implementing regular methods. The difference is that after impl, we put the trait name that we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for.</p>
+
+<pre><code class="language-rs">pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;{}, by {} ({})&quot;, self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;{}: {}&quot;, self.username, self.content)
+    }
+}
+</code></pre>
+
+<ul>
+<li><p>Test the implementation</p>
+
+<pre><code class="language-rs">let tweet = Tweet {
+username: String::from(&quot;horse_ebooks&quot;),
+content: String::from(&quot;of course, as you probably already know, people&quot;),
+reply: false,
+retweet: false,
+};
+
+println!(&quot;1 new tweet: {}&quot;, tweet.summarize());
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h4 id="default-implementation">Default implementation</h4>
+
+<ul>
+<li><p>Sample</p>
+
+<pre><code class="language-rs">pub trait Summary {
+    fn summarize(&amp;self) -&gt; String {
+        String::from(&quot;(Read more...)&quot;)
+    }
+}
+</code></pre></li>
+
+<li><p>Default implementations can call other methods in the same trait, even if those other methods don’t have a default implementation. In this way, a trait can provide a lot of useful functionality and only require implementors to specify a small part of it.</p>
+
+<pre><code class="language-rs">pub trait Summary {
+    fn summarize_author(&amp;self) -&gt; String;
+
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;(Read more from {}...)&quot;, self.summarize_author())
+    }
+}
+
+impl Summary for Tweet {
+    fn summarize_author(&amp;self) -&gt; String {
+        format!(&quot;@{}&quot;, self.username)
+    }
+}
+
+let tweet = Tweet {
+    username: String::from(&quot;horse_ebooks&quot;),
+    content: String::from(&quot;of course, as you probably already know, people&quot;),
+    reply: false,
+    retweet: false,
+};
+
+println!(&quot;1 new tweet: {}&quot;, tweet.summarize());
+</code></pre></li>
+</ul>
+
+<h4 id="traits-as-parameters">Traits as Parameters</h4>
+
+<ul>
+<li><p>use traits to define functions that accept many different types.</p></li>
+
+<li><p>Sample: Instead of a concrete type for the item parameter, we specify the impl keyword and the trait name.</p>
+
+<pre><code class="language-rs">pub fn notify(item: impl Summary) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize());
+}
+</code></pre></li>
+
+<li><p>Anotehr sample</p>
+
+<pre><code class="language-rs">pub fn notify&lt;T: Summary&gt;(item1: T, item2: T) {}
+</code></pre></li>
+</ul>
+
+<h4 id="clearer-trait-bounds-with-where-clauses">Clearer Trait Bounds with where Clauses</h4>
+
+<ul>
+<li><p>Using too many trait bounds has its downsides. Each generic has its own trait bounds, so functions with multiple generic type parameters can contain lots of trait bound information between the function’s name and its parameter list, making the function signature hard to read.</p></li>
+
+<li><p>Sample with where</p>
+
+<pre><code class="language-rs">fn some_function&lt;T, U&gt;(t: T, u: U) -&gt; i32
+    where T: Display + Clone,
+        U: Clone + Debug {}
+</code></pre></li>
+</ul>
+
+<h4 id="returning-types-that-implement-traits">Returning Types that Implement Traits</h4>
+
+<ul>
+<li><p>use the impl Trait syntax in the return position to return a value of some type that implements a trait</p></li>
+
+<li><p>However, you can only use impl Trait if you’re returning a single type</p>
+
+<pre><code class="language-rs">fn returns_summarizable() -&gt; impl Summary {
+Tweet {
+    username: String::from(&quot;horse_ebooks&quot;),
+    content: String::from(&quot;of course, as you probably already know, people&quot;),
+    reply: false,
+    retweet: false,
+}
+}
+</code></pre></li>
+</ul>
+
+<h4 id="fixing-the-largest-function-with-trait-bounds">Fixing the largest Function with Trait Bounds</h4>
+
+<ul>
+<li><p>Without the PartialOrd trait, the largest will throw error &ldquo;an implementation of <code>std::cmp::PartialOrd</code> might be missing for <code>T</code>&ldquo;</p></li>
+
+<li><p>Without the Copy trait, the largest function will throw compilation error as well</p>
+
+<pre><code class="language-rs">fn largest&lt;T: PartialOrd + Copy&gt;(list: &amp;[T]) -&gt; T {
+    let mut largest = list[0]; // Without copy -- error: &quot;cannot move out of here&quot;  
+
+    for &amp;item in list.iter() {
+        if item &gt; largest { // // Without copy -- error: &quot;cannot move out of borrowed content&quot;
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&amp;number_list);
+    println!(&quot;The largest number is {}&quot;, result);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&amp;char_list);
+    println!(&quot;The largest char is {}&quot;, result);
+}
+</code></pre></li>
+</ul>
+
+<h4 id="using-trait-bounds-to-conditionally-implement-methods">Using Trait Bounds to Conditionally Implement Methods</h4>
+
+<ul>
+<li><p>By using a trait bound with an impl block that uses generic type parameters, we can implement methods conditionally for types that implement the specified traits.</p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+use std::fmt::Display;
+
+struct Pair&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Pair&lt;T&gt; {
+    fn new(x: T, y: T) -&gt; Self {
+        Self {
+            x,
+            y,
+        }
+    }
+}
+
+impl&lt;T: Display + PartialOrd&gt; Pair&lt;T&gt; {
+    fn cmp_display(&amp;self) {
+        if self.x &gt;= self.y {
+            println!(&quot;The largest member is x = {}&quot;, self.x);
+        } else {
+            println!(&quot;The largest member is y = {}&quot;, self.y);
+        }
+    }
+}
+</code></pre></li>
+</ul>
+
+<h3 id="lifetimes">Lifetimes</h3>
+
+<h4 id="preventing-dangling-references-with-lifetimes">Preventing Dangling References with Lifetimes</h4>
+
+<ul>
+<li><p>Rust requires us to annotate the relationships using generic lifetime parameters to ensure the actual references used at runtime will definitely be valid.</p></li>
+
+<li><p>The main aim of lifetimes is to prevent dangling references, which cause a program to reference data other than the data it’s intended to reference.</p>
+
+<pre><code class="language-rs">{
+    let r;                // ---------+-- 'a
+                          //          |
+    {                     //          |
+        let x = 5;        // -+-- 'b  |
+        r = &amp;x;           //  |       |
+    }                     // -+       |
+                          //          |
+    println!(&quot;r: {}&quot;, r); //          |
+}                         // ---------+
+</code></pre></li>
+</ul>
+
+<h4 id="generic-lifetimes-in-functions">Generic Lifetimes in Functions</h4>
+
+<p>*</p>
+
+<h4 id="lifetime-annotation-syntax">Lifetime Annotation Syntax</h4>
+
+<pre><code class="language-rs">&amp;i32        // a reference
+&amp;'a i32     // a reference with an explicit lifetime
+&amp;'a mut i32 // a mutable reference with an explicit lifetime
+</code></pre>
+
+<h4 id="lifetime-annotations-in-function-signatures">Lifetime Annotations in Function Signatures</h4>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+    let string1 = String::from(&quot;abcd&quot;);
+    let string2 = &quot;xyz&quot;;
+
+    let result = longest(string1.as_str(), string2);
+    println!(&quot;The longest string is {}&quot;, result);
+}
+
+
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+
+</code></pre>
+
+<h4 id="lifetime-elision">Lifetime Elision</h4>
+
+<pre><code class="language-rs">
+fn first_word(s: &amp;str) -&gt; &amp;str {
+    let bytes = s.as_bytes();
+
+    for (i, &amp;item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &amp;s[0..i];
+        }
+    }
+
+    &amp;s[..]
+}
+</code></pre>
+
+<ul>
+<li><p>The patterns programmed into Rust’s analysis of references are called the lifetime elision rules. These aren’t rules for programmers to follow; they’re a set of particular cases that the compiler will consider, and if your code fits these cases, you don’t need to write the lifetimes explicitly.</p></li>
+
+<li><p>The elision rules don’t provide full inference. If Rust deterministically applies the rules but there is still ambiguity as to what lifetimes the references have, the compiler won’t guess what the lifetime of the remaining references should be.</p></li>
+
+<li><p>Lifetimes on function or method parameters are called input lifetimes, and lifetimes on return values are called output lifetimes.</p></li>
+</ul>
+
+<h4 id="lifetime-elision-rules">Lifetime Elision Rules</h4>
+
+<ul>
+<li><p>The compiler uses three rules to figure out what lifetimes references have when there aren’t explicit annotations. The first rule applies to input lifetimes, and the second and third rules apply to output lifetimes. If the compiler gets to the end of the three rules and there are still references for which it can’t figure out lifetimes, the compiler will stop with an error. These rules apply to fn definitions as well as impl blocks.</p></li>
+
+<li><p>The second rule is if there is exactly one input lifetime parameter, that lifetime is assigned to all output lifetime parameters</p></li>
+
+<li><p>The third rule is if there are multiple input lifetime parameters, but one of them is &amp;self or &amp;mut self because this is a method, the lifetime of self is assigned to all output lifetime parameters.</p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+    struct ImportantExcerpt&lt;'a&gt; {
+        part: &amp;'a str,
+    }
+
+    impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+        fn announce_and_return_part(&amp;self, announcement: &amp;str) -&gt; &amp;str {
+            println!(&quot;Attention please: {}&quot;, announcement);
+            self.part
+        }
+    }
+}
+</code></pre></li>
+</ul>
+
+<h4 id="lifetime-annotations-in-method-definitions">Lifetime Annotations in Method Definitions</h4>
+
+<ul>
+<li><p>Lifetime names for struct fields always need to be declared after the impl keyword and then used after the struct’s name, because those lifetimes are part of the struct’s type.</p></li>
+
+<li><p>In method signatures inside the impl block, references might be tied to the lifetime of references in the struct’s fields, or they might be independent. In addition, the lifetime elision rules often make it so that lifetime annotations aren’t necessary in method signatures.</p>
+
+<pre><code class="language-rs">impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
+    fn level(&amp;self) -&gt; i32 {
+        3
+    }
+}
+</code></pre></li>
+</ul>
+
+<h4 id="the-static-lifetime">The Static Lifetime</h4>
+
+<pre><code class="language-rs">let s: &amp;'static str = &quot;I have a static lifetime.&quot;;
+</code></pre>
+
+<h4 id="generic-type-trait-bounds-lifetimes">Generic Type, Trait Bounds &amp; Lifetimes</h4>
+
+<pre><code class="language-rs">use std::fmt::Display;
+
+fn longest_with_an_announcement&lt;'a, T&gt;(x: &amp;'a str, y: &amp;'a str, ann: T) -&gt; &amp;'a str
+    where T: Display
+{
+    println!(&quot;Announcement! {}&quot;, ann);
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+</code></pre>
 
     </div>
 
@@ -1061,6 +1418,25 @@ fn main() {
 <li><a href="#traits-defining-shared-behavior">Traits: Defining Shared Behavior</a>
 <ul>
 <li><a href="#defining-a-trait">Defining a trait</a></li>
+<li><a href="#implementing-a-trait">Implementing a trait</a></li>
+<li><a href="#default-implementation">Default implementation</a></li>
+<li><a href="#traits-as-parameters">Traits as Parameters</a></li>
+<li><a href="#clearer-trait-bounds-with-where-clauses">Clearer Trait Bounds with where Clauses</a></li>
+<li><a href="#returning-types-that-implement-traits">Returning Types that Implement Traits</a></li>
+<li><a href="#fixing-the-largest-function-with-trait-bounds">Fixing the largest Function with Trait Bounds</a></li>
+<li><a href="#using-trait-bounds-to-conditionally-implement-methods">Using Trait Bounds to Conditionally Implement Methods</a></li>
+</ul></li>
+<li><a href="#lifetimes">Lifetimes</a>
+<ul>
+<li><a href="#preventing-dangling-references-with-lifetimes">Preventing Dangling References with Lifetimes</a></li>
+<li><a href="#generic-lifetimes-in-functions">Generic Lifetimes in Functions</a></li>
+<li><a href="#lifetime-annotation-syntax">Lifetime Annotation Syntax</a></li>
+<li><a href="#lifetime-annotations-in-function-signatures">Lifetime Annotations in Function Signatures</a></li>
+<li><a href="#lifetime-elision">Lifetime Elision</a></li>
+<li><a href="#lifetime-elision-rules">Lifetime Elision Rules</a></li>
+<li><a href="#lifetime-annotations-in-method-definitions">Lifetime Annotations in Method Definitions</a></li>
+<li><a href="#the-static-lifetime">The Static Lifetime</a></li>
+<li><a href="#generic-type-trait-bounds-lifetimes">Generic Type, Trait Bounds &amp; Lifetimes</a></li>
 </ul></li>
 </ul></li>
 </ul></li>

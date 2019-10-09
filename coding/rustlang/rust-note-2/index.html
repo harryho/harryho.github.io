@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-07T00:56:18 AEDT">
+<meta name="revised" content="2019-10-09T23:17:42 AEDT">
 <title>Rustlang Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -184,21 +184,28 @@
       <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-1/">
-            C# Note - 1
+            Console App
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-4/">
+             Generic Predicate &amp; Expression
           </a>
         </div>
     </li>
       <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-2/">
-            C# Note - 2
+            Scheduled task with window service
           </a>
         </div>
     </li>
       <li data-nav-id="/coding/c-sharp/csharp-note-3/" class="dd-item">
         <div>
           <a href="/coding/c-sharp/csharp-note-3/">
-            C# Note - 3
+            Thread &amp; Task
           </a>
         </div>
     </li>
@@ -831,10 +838,6 @@
     <option value="/coding/rustlang/" >
   - 
    Rustlang</option> 
-      <option value="/coding/rustlang/rust-note-1/" >-- Rustlang Note - 1</option>
-      <option value="/coding/rustlang/rust-note-2/"  selected>-- Rustlang Note - 2</option>
-      <option value="/coding/rustlang/rust-note-3/" >-- Rustlang Note - 3</option>
-      <option value="/coding/rustlang/rust-note-4/" >-- Rustlang Note - 4</option>
   
     <option value="/coding/shell/" >
   - 
@@ -1078,10 +1081,9 @@ println!(&quot;{}: {}&quot;, key, value);
 
 <h4 id="updating-a-hash-map">Updating a Hash Map</h4>
 
-<h5 id="overwrites-value">Overwrites value</h5>
+<p><strong>Overwrites value</strong></p>
 
-<ul>
-<li><p>If we insert a key and a value into a hash map and then insert that same key with a different value, the value associated with that key will be replaced.</p>
+<p>If we insert a key and a value into a hash map and then insert that same key with a different value, the value associated with that key will be replaced.</p>
 
 <pre><code class="language-rs">
 use std::collections::HashMap;
@@ -1092,10 +1094,9 @@ scores.insert(String::from(&quot;Blue&quot;), 10);
 scores.insert(String::from(&quot;Blue&quot;), 25);
 
 println!(&quot;{:?}&quot;, scores);
-</code></pre></li>
-</ul>
+</code></pre>
 
-<h5 id="only-inserting-a-value-if-the-key-has-no-value">Only Inserting a Value If the Key Has No Value</h5>
+<p><strong>Only Inserting a Value If the Key Has No Value</strong></p>
 
 <ul>
 <li><p>It’s common to check whether a particular key has a value and, if it doesn’t, insert a value for it. Hash maps have a special API for this called entry that takes the key you want to check as a parameter. The return value of the entry method is an enum called Entry that represents a value that might or might not exist.</p>
@@ -1116,10 +1117,9 @@ println!(&quot;{:?}&quot;, scores);
 </code></pre></li>
 </ul>
 
-<h5 id="updating-a-value-based-on-the-old-value">Updating a Value Based on the Old Value</h5>
+<p><strong>Updating a Value Based on the Old Value</strong></p>
 
-<ul>
-<li><p>Another common use case for hash maps is to look up a key’s value and then update it based on the old value.</p>
+<p>Another common use case for hash maps is to look up a key’s value and then update it based on the old value.</p>
 
 <pre><code class="language-rs">use std::collections::HashMap;
 
@@ -1128,13 +1128,12 @@ let text = &quot;hello world wonderful world&quot;;
 let mut map = HashMap::new();
 
 for word in text.split_whitespace() {
-let count = map.entry(word).or_insert(0);
-*count += 1;
+    let count = map.entry(word).or_insert(0);
+    *count += 1;
 }
 
 println!(&quot;{:?}&quot;, map);
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="hashing-functions">Hashing Functions</h3>
 
@@ -1174,12 +1173,7 @@ println!(&quot;{:?}&quot;, map);
 <li><a href="#new-hashmap">New hashmap</a></li>
 <li><a href="#hash-maps-and-ownership">Hash Maps and Ownership</a></li>
 <li><a href="#accessing-values-in-a-hash-map">Accessing Values in a Hash Map</a></li>
-<li><a href="#updating-a-hash-map">Updating a Hash Map</a>
-<ul>
-<li><a href="#overwrites-value">Overwrites value</a></li>
-<li><a href="#only-inserting-a-value-if-the-key-has-no-value">Only Inserting a Value If the Key Has No Value</a></li>
-<li><a href="#updating-a-value-based-on-the-old-value">Updating a Value Based on the Old Value</a></li>
-</ul></li>
+<li><a href="#updating-a-hash-map">Updating a Hash Map</a></li>
 </ul></li>
 <li><a href="#hashing-functions">Hashing Functions</a></li>
 </ul></li>
