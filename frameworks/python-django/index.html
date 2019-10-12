@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-09T23:17:42 AEDT">
+<meta name="revised" content="2019-10-12T15:23:22 AEDT">
 <title>Python Web Framework :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of Django - Most popular python web framework">
+<meta name="description" content="Introduction of Django: Most popular python web framework">
 
 
 
@@ -845,71 +845,87 @@
     
     
 <div class="main-page">
-    <div class="flex-item main-content max70width">
+    <div class="flex-item main-content">
             <h1>Python Web Framework</h1>
         
 
-<h2 id="install-python-pip-virtualenv">Install Python &amp; pip &amp; virtualenv</h2>
+<blockquote>
+<p>Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.</p>
+</blockquote>
+
+<h2 id="install-python-pip-and-virtualenv">Install Python, pip and virtualenv</h2>
 
 <ul>
-<li>Windows: Please find in from <a href="/">Home Page</a></li>
-<li>Ubuntu: Please find it from <a href="ubuntu-server-14">Ubuntu setup</a></li>
-<li>Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip.</li>
-<li>You can simply use pip or pip3 install any package you need.</li>
+<li><p>Windows: Please find in from Home Page</p></li>
+
+<li><p>Ubuntu: Please find it from <a href="/os/ubuntu-server-14">Ubuntu setup</a></p></li>
+
+<li><p>Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip.</p></li>
+
+<li><p>You can simply use pip or pip3 install any package you need.</p></li>
 </ul>
 
-<h2 id="install-django">Install Django</h2>
+<h2 id="windows"><strong>Windows</strong></h2>
 
-<p><strong>Windows</strong></p>
-
-<ul>
-<li><p>Install django</p>
+<h3 id="install-django">Install django</h3>
 
 <ul>
-<li>create a folder virtualenvs within the location of python 3</li>
-<li>create a new virtualenv named django18</li>
-<li>Activate the new virtual env</li>
+<li><p>create a folder virtualenvs within the location of python 3</p></li>
 
-<li><p>Install Django 1.x.x (LTS version )</p>
+<li><p>create a new virtualenv named django18</p></li>
+
+<li><p>Activate the new virtual env</p></li>
+
+<li><p>Install Django 1.x.x (LTS version)</p>
 
 <pre><code class="language-bash">cd  /path/to/python3
 cd  virtualenvs
+
 virtualenv django18
+
 cd django18
+
 Scripts\activate
+
 which python
+
 pip install django==1.x.x
 </code></pre></li>
-</ul></li>
 </ul>
 
-<h2 id="create-django-project">Create django project</h2>
+<h3 id="create-django-project">Create django project</h3>
 
 <ul>
-<li>SET PATH in current command promp</li>
-<li>Navigate to workspace folder</li>
-<li>Create new django project</li>
+<li><p>SET PATH in current command promp</p></li>
+
+<li><p>Navigate to workspace folder</p></li>
+
+<li><p>Create new django project</p></li>
 
 <li><p>Start the app</p>
 
-<pre><code class="language-bash">SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+<pre><code class="language-bat">SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+
 which django-admin
+
 cd c:\ws\python\django\
+
 django-admin startproject demo
+
 cd demo
+
 python manage.py runserver
 </code></pre></li>
-
-<li><p>Create a new app module</p></li>
 </ul>
 
-<p><code>python manage.py startapp main</code></p>
+<h3 id="create-a-new-app-module">Create a new app module</h3>
 
-<ul>
-<li>Create a new db</li>
-</ul>
+<pre><code class="language-bash">python manage.py startapp main
+</code></pre>
 
-<p>**  following commands are just tested in django 1.8</p>
+<h3 id="create-a-new-db">Create a new db</h3>
+
+<p><strong>following commands are just tested in django 1.8</strong></p>
 
 <pre><code class="language-python">python manage.py syncdb 
 python manage.py makemigrations new_app 
@@ -919,8 +935,7 @@ pyrhon manage.py sqlmigrate new_app 0001
 python manage.py migrate new_app 0001
 </code></pre>
 
-<ul>
-<li><p>use python shell Model API</p>
+<h3 id="use-python-shell-model-api">use python shell Model API</h3>
 
 <pre><code class="language-python">python manage.py shell
 &gt;&gt;&gt; from XXX.models import ModelClass
@@ -931,32 +946,35 @@ python manage.py migrate new_app 0001
 &gt;&gt;&gt; mc.save()
 &gt;&gt;&gt; mc = ModelClass.objects.get(pd=1)
 &gt;&gt;&gt; mc.delete()    
-</code></pre></li>
-</ul>
+</code></pre>
 
-<p><strong>Linux</strong></p>
+<h2 id="linux"><strong>Linux</strong></h2>
 
 <pre><code class="language-bash">pip install virtualenv
+
 pip3 install virtualenv
+
 cd ~
+
 mkdir .envs
 
 ## create python2 env
 virtualenv -p /usr/bin/python2.7 py2env
+
 virtualenv -p /usr/bin/python3.4 py3env
 
 cd py2env 
 source bin/activate
+
 ## Check python path 
 which python
+
 ## Exit
 deactivate
 
 </code></pre>
 
-<ul>
-<li>Activate virtual environment need to use source instead of executing sh file</li>
-</ul>
+<p><strong>Activate virtual environment need to use source instead of executing sh file</strong></p>
 
     </div>
 
@@ -965,9 +983,16 @@ deactivate
 <ul>
 <li>
 <ul>
-<li><a href="#install-python-pip-virtualenv">Install Python &amp; pip &amp; virtualenv</a></li>
-<li><a href="#install-django">Install Django</a></li>
+<li><a href="#install-python-pip-and-virtualenv">Install Python, pip and virtualenv</a></li>
+<li><a href="#windows"><strong>Windows</strong></a>
+<ul>
+<li><a href="#install-django">Install django</a></li>
 <li><a href="#create-django-project">Create django project</a></li>
+<li><a href="#create-a-new-app-module">Create a new app module</a></li>
+<li><a href="#create-a-new-db">Create a new db</a></li>
+<li><a href="#use-python-shell-model-api">use python shell Model API</a></li>
+</ul></li>
+<li><a href="#linux"><strong>Linux</strong></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -993,10 +1018,6 @@ deactivate
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 28/09/2015
-    </div>
     
 
     

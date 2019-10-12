@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-09T23:17:42 AEDT">
+<meta name="revised" content="2019-10-12T15:23:22 AEDT">
 <title>MySql Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -872,11 +872,19 @@
     
     
 <div class="main-page">
-    <div class="flex-item main-content max70width">
+    <div class="flex-item main-content">
             <h1>MySql Note - 2</h1>
         
 
-<h3 id="function">Function</h3>
+<h2 id="function-udf">Function - UDF</h2>
+
+<blockquote>
+<p>For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.h.</p>
+
+<p>A UDF contains code that becomes part of the running server, so when you write a UDF, you are bound by any and all constraints that apply to writing server code. For example, you may have problems if you attempt to use functions from the libstdc++ library. T</p>
+</blockquote>
+
+<h3 id="function-sample">Function sample</h3>
 
 <ul>
 <li><p>Check the input string is OZ land line</p>
@@ -948,6 +956,20 @@ DELIMITER ;
 </code></pre></li>
 </ul>
 
+<h2 id="stord-procedure">Stord procedure</h2>
+
+<blockquote>
+<p>MySQL supports stored routines (procedures and functions). A stored routine is a set of SQL statements that can be stored in the server. Once this has been done, clients don&rsquo;t need to keep reissuing the individual statements but can refer to the stored routine instead.</p>
+</blockquote>
+
+<p>Stored routines can be particularly useful in certain situations:</p>
+
+<ul>
+<li><p>When multiple client applications are written in different languages or work on different platforms, but need to perform the same database operations.</p></li>
+
+<li><p>When security is paramount. Banks, for example, use stored procedures and functions for all common operations. This provides a consistent and secure environment, and routines can ensure that each operation is properly logged. In such a setup, applications and users would have no access to the database tables directly, but can only execute specific stored routines.</p></li>
+</ul>
+
 <h3 id="stored-proc-sample">Stored proc sample</h3>
 
 <ul>
@@ -990,9 +1012,12 @@ DELIMITER ;
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#function-udf">Function - UDF</a>
 <ul>
-<li><a href="#function">Function</a></li>
+<li><a href="#function-sample">Function sample</a></li>
+</ul></li>
+<li><a href="#stord-procedure">Stord procedure</a>
+<ul>
 <li><a href="#stored-proc-sample">Stored proc sample</a></li>
 </ul></li>
 </ul></li>

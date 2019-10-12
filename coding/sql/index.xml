@@ -16,8 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-1/</guid>
-      <description>Create a new database -- Drop the old one DROP SCHEMA IF EXISTS new_dbu -- Create a new db CREATE DATABASE new_db CHARACTER SET utf8 COLLATE utf8_general_ci;  Create a table DROP TABLE IF EXISTS new_table; CREATE TABLE new_table ( id int NOT NULL AUTO_INCREMENT, name varchar(50), title varchar(50), email varchar(250), created_date datetime, modified_date datetime, PRIMARY KEY (id) );  Query  JOIN and INNER JOIN
-SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
+      <description>MySQL is the world&amp;rsquo;s most popular open source database. Whether you are a fast growing web property, technology ISV or large enterprise, MySQL can cost-effectively help you deliver high performance, scalable database applications.
+ Create a new database -- Drop the old one DROP SCHEMA IF EXISTS new_dbu -- Create a new db CREATE DATABASE new_db CHARACTER SET utf8 COLLATE utf8_general_ci;  Create a table DROP TABLE IF EXISTS new_table; CREATE TABLE new_table ( id int NOT NULL AUTO_INCREMENT, name varchar(50), title varchar(50), email varchar(250), created_date datetime, modified_date datetime, PRIMARY KEY (id) );  Query  JOIN and INNER JOIN</description>
     </item>
     
     <item>
@@ -26,8 +26,7 @@ SELECT * FROM new_table_a na JOIN new_table_b nb ON nb.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-2/</guid>
-      <description>Function  Check the input string is OZ land line
-DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT BEGIN DECLARE vv_number VARCHAR(500); SELECT REPLACE(in_value, &#39;+&#39;,&#39;&#39;) INTO vv_number; RETURN CASE WHEN LEFT(vv_number, 2) IN (&#39;02&#39;,&#39;03&#39;,&#39;07&#39;,&#39;08&#39;) ss THEN LENGTH(vv_number) = 10 ELSE 0 END; END $$ DELIMITER ; -- SELECT isAusLandLine(&#39;03123322&#39;) from dual; -- TRUE -- SELECT isAusLandLine(&#39;06123322&#39;) from dual; -- FALSE  EXtract the Json to String</description>
+      <description>Function - UDF  For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.</description>
     </item>
     
     <item>
@@ -36,7 +35,8 @@ DROP FUNCTION IF EXISTS isAusLandLine; DELIMITER $$ CREATE FUNCTION isAusLandLin
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/sql/mysql-note-3/</guid>
-      <description>Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.TABLES WHERE table_schema = @target_schema ORDER BY data_length DESC LIMIT 50;  Check out running process SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.PROCESSES WHERE command &amp;lt;&amp;gt; &#39;Sleep&#39; AND db = target_schema ; -- Another short cut to show all process SHOW FULL PROCESSLIST;  Get the information of stored proc or function SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT * FROM information_schema.</description>
+      <description>Information schema  INFORMATION_SCHEMA provides access to database metadata, information about the MySQL server such as the name of a database or table, the data type of a column, or access privileges. Other terms that are sometimes used for this information are data dictionary and system catalog.
+ Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.</description>
     </item>
     
   </channel>
