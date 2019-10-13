@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-13T21:20:36 AEDT">
-<title>CentOS 6/7 Multi-Boot Setup :: Hello World</title>
+<meta name="revised" content="2019-10-13T21:20:35 AEDT">
+<title>Git Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Useful Git commands  &amp; practices for repository management">
 
 
 
     
   </head>
-  <body data-url="/os/centos-fedora-desktop/">
+  <body data-url="/hacks/git-notes/">
     
       <header>
   <div class="logo">
@@ -562,13 +562,14 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item haschildren
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/hacks/git-notes/" class="dd-item">
+      <li data-nav-id="/hacks/git-notes/" class="dd-item active">
         <div>
           <a href="/hacks/git-notes/">
             Git Practices
@@ -669,11 +670,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item parent haschildren
+    <li data-nav-id="/os/" class="dd-item haschildren
         ">
       <div>
-      <a href="/os/">OS</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
@@ -746,7 +746,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item active">
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
         <div>
           <a href="/os/centos-fedora-desktop/">
             CentOS 6/7 Multi-Boot Setup
@@ -817,23 +817,19 @@
     <option value="/coding/" >
    Coding</option>
     <option value="/hacks/" >
-   Hacks</option>
+   Hacks</option> 
+      <option value="/hacks/git-notes/"  selected>- Git Practices</option>
+      <option value="/hacks/windows-command-3/" >- Windows cmd &amp; hotkey - 3</option>
+      <option value="/hacks/windows-command-2/" >- Windows cmd &amp; hotkey - 2</option>
+      <option value="/hacks/windows-command-1/" >- Windows cmd &amp; hotkey - 1</option>
+      <option value="/hacks/cass-note/" >- Cassandra Practices</option>
+      <option value="/hacks/php-debug/" >- Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/" >- Qemu &amp; Virtual Machine</option>
+  
     <option value="/blogs/" >
    Blogs</option>
     <option value="/os/" >
-   OS</option> 
-      <option value="/os/dual-boot-win10-ubuntu18/" >- Dual Boot Windows 10 &amp; Ubuntu 18</option>
-      <option value="/os/ubuntu-desktop-18/" >- Ubuntu Desktop 18 LTS note</option>
-      <option value="/os/raspberrypi-notes/" >- Raspberry Pi setup</option>
-      <option value="/os/lubuntu16-desktop/" >- Lubuntu 16 desktop</option>
-      <option value="/os/grub-trouble-shooting/" >- Grub Trouble Shooting</option>
-      <option value="/os/ubuntu-server-16/" >- Ubuntu 16 server note</option>
-      <option value="/os/centos-server-7/" >- CentOS 7 Server note</option>
-      <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
-      <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
-      <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
-      <option value="/os/centos-fedora-desktop/"  selected>- CentOS 6/7 Multi-Boot Setup</option>
-  
+   OS</option>
     <option value="/frameworks/" >
    Frameworks</option>
 
@@ -852,226 +848,257 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>CentOS 6/7 Multi-Boot Setup</h1>
+            <h1>Git Practices</h1>
         
 
-<h2 id="bootable-usb-preparation">Bootable usb preparation</h2>
+<h2 id="create-a-new-branch-with-git">Create a new branch with git</h2>
 
-<blockquote>
-<p>Download dvd iso from url or torrent
-Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the USB as origin )</p>
-</blockquote>
-
-<h2 id="install-centos-on-virtual-machine">Install CentOS on virtual machine</h2>
+<h3 id="create-the-branch-locally">Create the branch locally</h3>
 
 <ul>
-<li><p>Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p></li>
+<li><p>Create the branch on your local machine and switch in this branch</p>
 
-<li><p>CentOS provide a friendly and nice installation process. If you choose VMWare or VirtulBox as machine, you can open <a href="http://www.tecmint.com/centos-7-installation">installation steps</a> on your browser or use ipad /tablet to access this page. You just need to follow the instruction step by step, it will be done within an hour or more(it varies in computing power of PC).</p></li>
-</ul>
-
-<h2 id="prepare-vm-for-centos">Prepare VM for CentOS</h2>
-
-<ul>
-<li><p>Create a new virtual machine.</p>
-
-<ul>
-<li>Type in the name of vm. e.g. CentOS</li>
-<li>Select the type of Linux</li>
-<li>You can choose RedHat(<sup>32</sup>&frasl;<sub>64</sub> bit ) or something else. It doesn&rsquo;t matter. We don&rsquo;t use any built-in xxx.iso files from VirtualBox. Then click <code>Next</code></li>
-<li>Select the memory size for the CentOS. It is up  to you. I prefer 4GB, but 2GB is necessary. And then click <code>Next</code>.</li>
-<li>Select &ldquo;Create a virtual hard drive now&rdquo;, and then click <code>Next</code>.</li>
-<li>Select defaut VDI, then click <code>Next</code>.</li>
-
-<li><p>Select &ldquo;Dynamically allocated&rdquo;, then click <code>Next</code>.</p>
-
-<ul>
-<li>Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
-<li>Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
-</ul></li>
-
-<li><p>Config the CentOS hardware setting on VirtulBox or VMWare.</p></li>
-</ul>
-
-<p><strong>VirtualBox</strong></p>
-
-<ul>
-<li>On VirtualBox toolbar, there is a <code>Start</code> button. Click <code>Start</code>, then go the Storage item.</li>
-<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.<br /></li>
-<li>Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
-<li>Leave all the other setting as default. Click the <code>Start</code>button on the toolbar.</li>
-</ul>
-
-<p><strong>VMWare</strong></p>
-
-<ul>
-<li>On VMware, you can find CD/DVD button on the tab page of new virtual machine.</li>
-<li>Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
-<li>Leave all the other setting as default. Click the <code>Power on this virtual machine</code> option on the tab page.</li>
-</ul></li>
-</ul>
-
-<h2 id="config-centos-default-setting">Config CentOS default setting</h2>
-
-<p>After the CentOS starts, we can config the default setting of CentOS. Don&rsquo;t be panic, the configuration envrionment is very nice. You don&rsquo;t need to type any command line so far.</p>
-
-<ul>
-<li><p>Prepare the installation.</p>
-
-<ul>
-<li>Choose the language of CentOS. Then click Continue.</li>
-<li>On the Installation Summary screen, there is warning icon attached to the hard drive icon, which is under SYSTEM section with a lable &ldquo;INSTALLATION DESTINATION&rdquo;. Click that label.<br /></li>
-<li>You will see the partition is already done automatically. I&rsquo;d like you to leave it as until you are familar with the CentOS. Then click Done button on the header.</li>
-<li>Leave the SOFTWARE SELECTION as Minimal Install; NETWORK &amp; HOSTNAME as Not connected. Then click Begin Installation button.</li>
-</ul></li>
-
-<li><p>Setup account</p>
-
-<ul>
-<li>Setup password of root account. Please remember the password. If you forget it you need to reset the root&rsquo;s password. To do that you need to do a few things which depends on the CentOS version. As a beginner, please don&rsquo;t make it too complicated.</li>
-<li>Create your account. e.g. harryporter Mark your account as administrator to save some effort. Please remember your password and don&rsquo;t make it too complicated.&rsquo;</li>
-<li>The progress of installation is complete. Click Finish configuration button.
-w$w4 d. After a few seconds, you will the Reboot button. Then click it.</li>
-</ul></li>
-</ul>
-
-<h2 id="manage-centos-packages-and-software">Manage CentOS packages and software</h2>
-
-<ul>
-<li>there are two management tools rpm and yum. To make it easy, we just talk about yum. It is a very handy tool. Comparing with the windows built-in program management tool, it is much powerful than that. It provides necessary functions for admin. If you need to maintain the Linux server, then you will use it in your daily task.</li>
-<li>Use <code>man yum</code> to take a look the description of yum. You do not need to understand all usage of yum. Just have an overview is enough.</li>
-
-<li><p>There are a few useful and common yum commands.</p>
-
-<pre><code class="language-bash">yum list installed | less
-yum search &lt;pacakge_name&gt;
-yum grouplist
+<pre><code>$ git checkout -b [name_of_your_new_branch]
 </code></pre></li>
 </ul>
 
-<h3 id="install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</h3>
-
-<h2 id="setup-network-via-cable">Setup network ( via cable )</h2>
-
-<p>If you install a minimal version without network configuration, you will find you can not ping public domain. Here I am going to show you how to setup the connection.</p>
+<h3 id="push-the-branch">Push the branch</h3>
 
 <ul>
-<li>You can use <code>ip a</code> command to check the status of all network interface.</li>
+<li><p>Push the branch on git-repository (Github, Bitbucket)</p>
 
-<li><p>You will see all the state of interfaces would be DOWN OR UNKNOWN.</p>
-
-<pre><code class="language-bash">
-## lo ****  qdisc pfifo_fast noqueue UNKNOWN
-## eth0 **** qdisc pfifo_fast state DOWN
-
-</code></pre></li>
-
-<li><p>Use <code>## ifup eth0</code> to start the ech0 then you can access internet. It is a bit tedious to start the network service every time we reboot the system. Next step we will setup network service to start automatically after the system is up.</p></li>
-
-<li><p>There is a configuration file which can help you setup internet connection after the startup. Ususally the configuration is under this path <code>/etc/sysconfig/network-scripts</code>, and file name would <code>ifcfg-eth&lt;*&gt;</code>. So we check the real file name at first.</p>
-
-<pre><code class="language-bash">ls /etc/sysconfig/network-scripts/ifcfg-*
-
-## Following are sample of files which will sit in your system. 
-/etc/sysconfig/network-scripts/ifcfg-eth0
-/etc/sysconfig/network-scripts/ifcfg-lo
+<pre><code>$ git push origin [name_of_your_new_branch]
 </code></pre></li>
 </ul>
 
-<p>Now we need to update this file via nano or vi. If you have no any experience of vi, I recommended an interactive online tutorial for you. Just 20 mins, you can master basic vi usage.
-<a href="http://www.openvim.com/tutorial.html">http://www.openvim.com/tutorial.html</a></p>
+<p>When you want to commit something in your branch, be sure to be in your branch.</p>
 
-<p>We use vi to open the config file.</p>
+<h2 id="manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</h2>
 
-<pre><code class="language-bash">## vi /etc/sysconfig/network-scripts/ifcfg-eth0
+<p>List all branches</p>
+
+<pre><code>$ git branch
 </code></pre>
 
-<p>You will a setting below.
-ONBOOT=no</p>
+<p>Add a new remote for your branch :</p>
 
-<p>You just need to update it to ONBOOT=yes, then save it and reboot CentOS to test the result.</p>
-
-<pre><code class="language-bash">## reboot
+<pre><code>$ git remote add [name_of_your_remote]
 </code></pre>
 
-<p>After you reboot and login CentOS, you can use ping to test if your system can access internet, then configuration is updated successful.</p>
+<p>Push changes from your commit into your branch :</p>
 
-<h3 id="setup-wifi">Setup Wifi</h3>
+<pre><code>$ git push [name_of_your_new_remote] [name_of_your_branch]
+</code></pre>
+
+<p>Update your branch when the original branch from official repository has been updated :</p>
+
+<pre><code>$ git fetch [name_of_your_remote]
+</code></pre>
+
+<p>Then you need to apply to merge changes, if your branch is derivated from develop you need to do :</p>
+
+<pre><code>$ git merge [name_of_your_remote]/develop
+</code></pre>
+
+<h2 id="delete-branch">Delete branch</h2>
+
+<p>Delete a branch on your local filesystem :</p>
+
+<pre><code>$ git branch -d [name_of_your_new_branch]
+</code></pre>
+
+<p>To force the deletion of local branch on your filesystem :</p>
+
+<pre><code>$ git branch -D [name_of_your_new_branch]
+</code></pre>
+
+<p>Delete the branch on github :</p>
+
+<pre><code>$ git push origin :[name_of_your_new_branch]
+</code></pre>
+
+<p>Compare two branch:</p>
+
+<pre><code>$ git diff [name_of_branch1]..[name_of_branch2]
+</code></pre>
+
+<hr />
+
+<h2 id="branch-merge">Branch merge</h2>
+
+<h3 id="fast-forward-merge">Fast-Forward Merge</h3>
+
+<p>Our first example demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.</p>
+
+<pre><code class="language-bash">## Start a new feature
+$ git checkout -b new-feature master
+
+## Edit some files    
+$ git add &lt;file&gt;
+$ git commit -m &quot;Start a feature&quot;
+
+## Edit some files    
+$ git add &lt;file&gt;
+$ git commit -m &quot;Finish a feature&quot;
+
+## Merge in the new-feature branch    
+$ git checkout master
+$ git merge new-feature
+$ git branch -d new-feature
+</code></pre>
+
+<p>This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.</p>
+
+<p>Also note that Git should not complain about the git branch -d, since new-feature is now accessible from the master branch.</p>
+
+<h3 id="3-way-merge">3-Way Merge</h3>
+
+<p>The next example is very similar, but requires a 3-way merge because master progresses while the feature is in-progress. This is a common scenario for large features or when several developers are working on a project simultaneously.</p>
+
+<pre><code class="language-bash">## Start a new feature
+$ git checkout -b new-feature master
+
+## Edit some files
+$ git add &lt;file&gt;
+$ git commit -m &quot;Start a feature&quot;
+
+## Edit some files
+$ git add &lt;file&gt;
+$ git commit -m &quot;Finish a feature&quot;
+
+## Develop the master branch
+$ git checkout master
+
+## Edit some files
+$ git add &lt;file&gt;
+$ git commit -m &quot;Make some super-stable changes to master&quot;
+
+## Merge in the new-feature branch
+$ git merge new-feature
+$ git branch -d new-feature
+</code></pre>
+
+<h3 id="rebase-for-merge">Rebase for merge</h3>
+
+<p>Problem: You are working with a few experienced devs constantly improving an online shooping site. After you complete the first assignment and ready to commit to master you find someone merged a change that affects or overlaps with the ones you made, and it could lead to bugs in the online-shoppping website.</p>
+
+<p>Solution: Situations like these are a big example of when you&rsquo;d want to rebase. Let&rsquo;s say when you created your branch off of the master branch, the master branch was on commit No. 1. Every commit in your branch was put on top of commit #1. When you&rsquo;re ready to merge your branch to master, you find  other developers have some changes and the most recent commit is commit No. 4. <strong>Rebasing is taking all your branch&rsquo;s commits and adding them on top of commit No. 4 instead of commit No. 1.</strong> If you consider commit No. 1 as the &ldquo;base&rdquo; of your branch, you&rsquo;re changing that base to the most recent one, commit No. 4. Hence why it&rsquo;s called rebasing!</p>
+
+<h4 id="rebase-with-conflict">Rebase with conflict</h4>
+
+<pre><code class="language-bash">git rebase master
+
+# When there is conflict, the rebase will pause. 
+# You have to manually solve the conflict
+# Add the resolved files to stage and commit it
+git add &lt;Resolved-File&gt;
+git commit 
+
+# Conttinue the rebase process
+git rebase --continue
+</code></pre>
+
+<h4 id="rebase-interactively">Rebase interactively</h4>
+
+<p>Rebase to master branch</p>
+
+<pre><code>$ git rebase -i master 
+</code></pre>
+
+<p>Rebase with fixup and squash</p>
 
 <ul>
-<li>Setup Wifi during the installation. After the installation, you will find the Wifi is not available on Cent OS</li>
-<li>Mount the DVD or iso file</li>
+<li>squash (s for short), which melds the commit into the previous one (the one in the line before)</li>
 
-<li><p>use yum to install the NetworkManager-wifi package</p>
+<li><p>fixup (f for short), which acts like “squash”, but discards this commit’s message</p>
 
-<pre><code class="language-bash">yum --disablerepo=\* install /path/to/dvd/Packages/NetworkManager-wifi* 
+<pre><code class="language-bash"># Commit your changes
+$ git add. 
+$ git commit 
+
+
+$ git rebase  -i master
+# Update the prop up  editor
+# fixup &lt;COMMIT-ID&gt;
+# squahs   &lt;COMMIT-ID&gt; &lt;Message&gt;
 </code></pre></li>
 </ul>
 
-<h3 id="multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</h3>
+<p>Rebase with autosquash</p>
 
-<h2 id="partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</h2>
-
-<blockquote>
-<p>Fedora, CentOS and Redhat share the almost the same installation process.
-Click on the <code>Installation Destination</code> icon to change this to custom partitioning
-Under the Other Storage Options, choose I will configure partitioning then click Done
-Following is sample of partition setup of multiple boot system.</p>
-</blockquote>
-
-<pre><code class="language-ini">sda
-  +----sda1        nfts               500M         Windows recovery
-  +----sda2        efi       /boot    100M         grub2 , Windows boot manager
-  +----sda3                  /        10M            
-  +----sda4        ntfs      /      40000M         Window 7/8/10
-  +----sda5                  swap   &lt;Double size of your RAM size&gt;   
-  +----sda6        ext4      /      20000M         Ubuntu 14 desktop
-  +----sda7        ext4      /      20000M         Fedora 20 desktop           
-  +----sda8        ext4      /      20000M         CentOS 6 desktop
-  +----sda9        ext4      /      20000M         OpenSuse desktop
-  + ...
-
+<pre><code>$ git rebase -i --autosquash master
 </code></pre>
 
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h2 id="git-reword">Git reword</h2>
 
-<h3 id="ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</h3>
+<p>Reword the last commit message. The command below will open an editor to let you change previous commit message</p>
 
-<p>Use command <code>ip</code></p>
-
-<pre><code>ip addr
-ip -s link
+<pre><code>$ git commit --amend   
 </code></pre>
 
-<h3 id="enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</h3>
+<p>Reword the last commit message and author.</p>
 
-<p>If you cannot ping any domain, use <code>dhclient -v</code> to check if the internet is available.</p>
-
-<p>Setup the network enabled onboot</p>
-
-<pre><code>## cd /etc/sysconfig/network-scripts/ 
-## sed -i -e 's@^ONBOOT=&quot;no@ONBOOT=&quot;yes@' ifcfg-e.xx.xxx
+<pre><code>$ git commit --amend   --author=&quot;Other author &lt;other_author@test.com&gt;&quot;
 </code></pre>
 
-<h3 id="boot-centos-in-terminal">Boot CentOS in terminal</h3>
+<h2 id="git-submodule">Git Submodule</h2>
 
-<pre><code>## cat /etc/inittab
-## systemctl get-default 
-graphic.target
-## systemctl set-default multi-user.target
+<p>Add other repository into your existing project as submodule</p>
+
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-repo-folder&gt;
 </code></pre>
 
-<h3 id="fedora-boot-error">Fedora boot error</h3>
+<p>Add other repository into your existing project as submodule under specific location</p>
 
-<ul>
-<li>Please check the grub.cfg if you get booting error</li>
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-specific-location&gt;/&lt;your-repo-folder&gt;
+</code></pre>
 
-<li><p>You can try following command to boot Fedora from Grub menu</p>
+<p>Add other repository into your existing project for specific branch</p>
 
-<pre><code class="language-bash">linux /boot/vmluz-x.x.x-x.x.x
-initrd /boot/intrd-plymouth.img
-</code></pre></li>
-</ul>
+<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  -b &lt;branch-name&gt; &lt;your-repo-folder&gt;    
+</code></pre>
+
+<p>Initialize and update submoule</p>
+
+<pre><code>$ git submodule init
+$ git submodule update 
+</code></pre>
+
+<h2 id="git-tag">Git tag</h2>
+
+<p>Listing the existing tags</p>
+
+<pre><code>$ git tag -l
+</code></pre>
+
+<p>Creating Tags</p>
+
+<p>Git supports two types of tags: lightweight and annotated. IMO, I always prefer the annotated tag, because the tag is supposed to mark milestone in the repository&rsquo;s history.</p>
+
+<p>Annotated Tags</p>
+
+<pre><code>$ git tag -a v1.1 -m &quot;release version 1.1&quot;
+</code></pre>
+
+<p>Lightweight tags</p>
+
+<pre><code>$ git tag -a v1.1-lw
+</code></pre>
+
+<p>Push tags</p>
+
+<pre><code>$ git push origin v1.1
+</code></pre>
+
+<p>Delete a tag (local)</p>
+
+<pre><code>$ git tag -D v1.1
+</code></pre>
+
+<p>Delete a tag (remote)</p>
+
+<pre><code>$ git push --delete origin v1.1
+</code></pre>
 
     </div>
 
@@ -1080,27 +1107,26 @@ initrd /boot/intrd-plymouth.img
 <ul>
 <li>
 <ul>
-<li><a href="#bootable-usb-preparation">Bootable usb preparation</a></li>
-<li><a href="#install-centos-on-virtual-machine">Install CentOS on virtual machine</a></li>
-<li><a href="#prepare-vm-for-centos">Prepare VM for CentOS</a></li>
-<li><a href="#config-centos-default-setting">Config CentOS default setting</a></li>
-<li><a href="#manage-centos-packages-and-software">Manage CentOS packages and software</a>
+<li><a href="#create-a-new-branch-with-git">Create a new branch with git</a>
 <ul>
-<li><a href="#install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</a></li>
+<li><a href="#create-the-branch-locally">Create the branch locally</a></li>
+<li><a href="#push-the-branch">Push the branch</a></li>
 </ul></li>
-<li><a href="#setup-network-via-cable">Setup network ( via cable )</a>
+<li><a href="#manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</a></li>
+<li><a href="#delete-branch">Delete branch</a></li>
+<li><a href="#branch-merge">Branch merge</a>
 <ul>
-<li><a href="#setup-wifi">Setup Wifi</a></li>
-<li><a href="#multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</a></li>
-</ul></li>
-<li><a href="#partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a>
+<li><a href="#fast-forward-merge">Fast-Forward Merge</a></li>
+<li><a href="#3-way-merge">3-Way Merge</a></li>
+<li><a href="#rebase-for-merge">Rebase for merge</a>
 <ul>
-<li><a href="#ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</a></li>
-<li><a href="#enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</a></li>
-<li><a href="#boot-centos-in-terminal">Boot CentOS in terminal</a></li>
-<li><a href="#fedora-boot-error">Fedora boot error</a></li>
+<li><a href="#rebase-with-conflict">Rebase with conflict</a></li>
+<li><a href="#rebase-interactively">Rebase interactively</a></li>
 </ul></li>
+</ul></li>
+<li><a href="#git-reword">Git reword</a></li>
+<li><a href="#git-submodule">Git Submodule</a></li>
+<li><a href="#git-tag">Git tag</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1112,8 +1138,8 @@ initrd /boot/intrd-plymouth.img
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/os/ubuntu-desktop-14-extra-tools/" title="Ubuntu 14 -- desktop, extra tools"> <i class="fa fa-chevron-left"></i><label>Ubuntu 14 -- desktop, extra tools</label></a>
-    <a class="nav nav-next" href="/frameworks/" title="Frameworks" style="margin-right: 0px;"><label>Frameworks</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/hacks/" title="Hacks"> <i class="fa fa-chevron-left"></i><label>Hacks</label></a>
+    <a class="nav nav-next" href="/hacks/windows-command-3/" title="Windows cmd &amp; hotkey - 3" style="margin-right: 0px;"><label>Windows cmd &amp; hotkey - 3</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1128,7 +1154,7 @@ initrd /boot/intrd-plymouth.img
 
     
     <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 10/01/2014
+        <i class='fa fa-calendar'></i> Last update on 11/08/2016
     </div>
     
 
