@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-13T21:20:36 AEDT">
+<meta name="revised" content="2019-11-09T22:02:59 AEDT">
 <title>Cron Job Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -480,6 +480,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Project, Vector, String &amp; Hashmap
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
         <div>
           <a href="/coding/rustlang/rust-note-3/">
@@ -491,13 +498,6 @@
         <div>
           <a href="/coding/rustlang/rust-note-4/">
             Generic Type &amp; Trait 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/rustlang/rust-note-2/">
-            Project, Vector, String &amp; Hashmap
           </a>
         </div>
     </li>
@@ -560,6 +560,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
         </ul>
@@ -616,6 +623,13 @@
         <div>
           <a href="/hacks/qemu-notes/">
             Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/vbox-notes/">
+            VirtualBox Notes
           </a>
         </div>
     </li>
@@ -878,6 +892,10 @@
 
 <h3 id="refresh-the-database-nosql-cassandra">Refresh the database (NoSQL) - Cassandra</h3>
 
+<blockquote>
+<p>The sample script is used to backup the data from production database and refresh the data to staging or test database. It is not supposed to restore data because of database corruption.</p>
+</blockquote>
+
 <h4 id="backup-the-cassandra-database-nightly">Backup the Cassandra database nightly</h4>
 
 <ul>
@@ -889,14 +907,14 @@
 
 <li><p>Cron job setting</p>
 
-<pre><code class="language-bash">00 20   * * *   &lt;user_account&gt;  /home/&lt;user_account&gt;/refresh/cass_snapshot.sh &gt;&gt; /home/&lt;user_account&gt;/refresh/refresh.log 2&gt;&amp;1
+<pre><code class="language-bash">00 20   * * *   &lt;user&gt;  /home/&lt;user&gt;/bin/cass_snapshot.sh &gt;&gt; /home/&lt;user&gt;/bin/refresh.log 2&gt;&amp;1
 </code></pre></li>
 
 <li><p>The script to create a snapshot:   <code>cass_snapshot.sh</code></p>
 
 <pre><code class="language-bash">#!/bin/bash
 
-# the log file sits home/&lt;user_account&gt;/refresh/refresh.log 
+# the log file sits home/&lt;user&gt;/bin/refresh.log 
 
 # SET staging Cassandra IP
 CASS_STG_IP=0.0.0.0
@@ -943,12 +961,12 @@ sudo tar -zcvf snapshots.tar.gz snapshots/ &gt; /dev/null 2&gt;&amp;1  # ~30mins
 
 # Copy tarball and schema script to staging Cassandra
 echo &quot;$(date): Copy tarball and schema script to staging Cassandra ${CASS_STG_IP}&quot;
-scp snapshots.tar.gz &lt;user_account&gt;@${CASS_STG_IP}:/home/&lt;user_account&gt;/ # ~5mins
-scp hho_ks.cql &lt;user_account&gt;@${CASS_STG_IP}:/home/&lt;user_account&gt;/
+scp snapshots.tar.gz &lt;user&gt;@${CASS_STG_IP}:/home/&lt;user&gt;/ # ~5mins
+scp hho_ks.cql &lt;user&gt;@${CASS_STG_IP}:/home/&lt;user&gt;/
 
 # Refresh snapshots on staging Cassandra
 echo &quot;$(date): SSH to staging Cassandra ${CASS_STG_IP}&quot;
-sudo ssh &lt;user_account&gt;@${CASS_STG_IP} 'bash -s' &lt; /home/&lt;user_account&gt;/refresh/cass_refresh.sh
+sudo ssh &lt;user&gt;@${CASS_STG_IP} 'bash -s' &lt; /home/&lt;user&gt;/bin/cass_refresh.sh
 
 echo &quot;$(date): Completed refresh of staging Cassandra ${CASS_STG_IP}&quot;
 END=$(date +%s)
@@ -968,7 +986,8 @@ cd
 rm -rf snapshots
 tar -zxvf snapshots.tar.gz &gt; /dev/null 2&gt;&amp;1 # ~5mins
 
-# Attempt to drop keyspace hho_ks (will likely throw a java.lang.RuntimeException)
+# Attempt to drop keyspace hho_ks 
+# It will likely throw a java.lang.RuntimeException
 echo &quot;$(date): Drop keyspace hho_ks&quot;
 cqlsh -e &quot;drop keyspace hho_ks&quot; &gt; /dev/null 2&gt;&amp;1 
 sleep 1m
@@ -985,7 +1004,8 @@ sleep 5m
 # Check Cassandra service status
 # sudo systemctl status cassandra
 
-# Attempt to drop keyspace hho_ks again (will likely compliain: Cannot drop non existing keyspace 'hho_ks')
+# Attempt to drop keyspace hho_ks again 
+# It will likely complain: Cannot drop non existing keyspace 'hho_ks'
 cqlsh -e &quot;drop keyspace hho_ks&quot; &gt; /dev/null 2&gt;&amp;1 
 sleep 1m
 

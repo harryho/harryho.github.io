@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-10-13T21:20:35 AEDT">
+<meta name="revised" content="2019-11-09T22:02:59 AEDT">
 <title>PHP Web Framework :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -479,6 +479,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Project, Vector, String &amp; Hashmap
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
         <div>
           <a href="/coding/rustlang/rust-note-3/">
@@ -490,13 +497,6 @@
         <div>
           <a href="/coding/rustlang/rust-note-4/">
             Generic Type &amp; Trait 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/rustlang/rust-note-2/">
-            Project, Vector, String &amp; Hashmap
           </a>
         </div>
     </li>
@@ -558,6 +558,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
         </ul>
@@ -614,6 +621,13 @@
         <div>
           <a href="/hacks/qemu-notes/">
             Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/vbox-notes/">
+            VirtualBox Notes
           </a>
         </div>
     </li>
@@ -858,38 +872,37 @@
 <h3 id="install-php-5-6-x">Install PHP 5.6.x</h3>
 
 <ul>
-<li>Please find the instruction from <a href="/#php">home page</a></li>
+<li><p>Please find the instruction from <a href="/#php">home page</a></p></li>
+
+<li><p>Composer</p></li>
 </ul>
 
-<h3 id="composer">Composer</h3>
-
-<h2 id="linux">Linux</h2>
+<h3 id="linux">Linux</h3>
 
 <ul>
 <li>Use <code>curl -s https://getcomposer.org/installer | php --</code> to install composer on Linux</li>
 <li>use &lsquo;composer -v &rsquo; to verify.</li>
 </ul>
 
-<h2 id="windows">Windows</h2>
+<h3 id="windows">Windows</h3>
 
 <ul>
 <li>Download the <a href="https://getcomposer.org/download/">composer</a> and install php on your PC</li>
 <li>Use <code>composer -v</code> to verify the composer is ready.</li>
 </ul>
 
-<h3 id="zend-framework">Zend Framework</h3>
+<h2 id="zend-framework">Zend Framework</h2>
 
 <blockquote>
-<p>Zend Framework is a collection of 60+ packages for professional PHP development. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.</p>
+<p>Zend Framework 2.x is a collection of 60+ packages for professional PHP development. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.</p>
 </blockquote>
 
-<h3 id="zend-framework-2-x">Zend Framework 2.x</h3>
+<h3 id="create-zend-framework-2-project">Create Zend Framework 2 project</h3>
 
-<h2 id="create-zend-framework-2-project-from-scratch">Create Zend Framework 2 project from scratch</h2>
+<pre><code>* Clone Zend Framework skeleton project as new project. 
 
-<h3 id="clone-zend-framework-skeleton-project-as-new-project">* Clone Zend Framework skeleton project as new project.</h3>
-
-<h3 id="install-zend-framework-with-composer">* Install zend framework with composer</h3>
+* Install zend framework with composer
+</code></pre>
 
 <pre><code class="language-bash">    cd  /path/to/newproject
     git clone git://github.com/zend framework/ZendSkeletonApplication.git
@@ -898,7 +911,7 @@
     php composer.phar install
 </code></pre>
 
-<h3 id="start-app-with-php-built-in-server">* Start app with php built-in server</h3>
+<h3 id="start-app-with-php-built-in-server">Start app with php built-in server</h3>
 
 <p><strong>Linux</strong></p>
 
@@ -910,53 +923,52 @@
 <pre><code class="language-bash">php -S 0.0.0.0:8080 -t public public/index.php
 </code></pre>
 
-<h3 id="use-apache-server">* Use apache server</h3>
+<h3 id="use-apache-server">Use apache server</h3>
 
-<pre><code class="language-apache"> &lt;VirtualHost *:80&gt;
-     ServerName zf2-tutorial.localhost
-     DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
-     SetEnv APPLICATION_ENV &quot;development&quot;
-     &lt;Directory /path/to/newproject/ZendSkeletonApplication/public&gt;
-         DirectoryIndex index.php
-         AllowOverride All
-         Require all granted
-     &lt;/Directory&gt;
- &lt;/VirtualHost&gt;
-</code></pre>
+<ul>
+<li><p>Apache configuration</p>
 
-<h2 id="use-zf2-mvc-starter-project">Use Zf2-MVC-Starter project</h2>
+<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+ ServerName zf2-tutorial.localhost
+ DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
+ SetEnv APPLICATION_ENV &quot;development&quot;
+ &lt;Directory /path/to/newproject/ZendSkeletonApplication/public&gt;
+     DirectoryIndex index.php
+     AllowOverride All
+     Require all granted
+ &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre></li>
+
+<li><p>Zf2-MVC-Starter project</p>
 
 <ul>
 <li>Please find the project introduction <a href="/projects/zf2-mvc-starter/">here</a>.</li>
+</ul></li>
 </ul>
 
-<h3 id="laravel">Laravel</h3>
+<h2 id="laravel">Laravel</h2>
 
 <blockquote>
 <p>Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance, and its orientation toward syntactic sugar.</p>
 </blockquote>
 
-<h3 id="laravel-5-x">Laravel 5.x</h3>
+<h3 id="install-laravel-global">Install laravel global</h3>
 
-<h2 id="install-laravel-global">Install laravel global</h2>
+<pre><code>* Use `composer global laravel/installer`
 
-<pre><code>Use `composer global laravel/installer`
+* Enable the `mbs-string` extension
+
+* update `php.ini` config 
+
+* Open `php.ini` with notepad
+
+* Change `;extension=php_mbstring.dll` to `extension=php_mbstring.dll`
 </code></pre>
 
-<h2 id="enable-the-mbs-string-extension">Enable the <code>mbs-string</code> extension</h2>
+<h3 id="create-new-project-from-scratch">Create new project from scratch</h3>
 
-<h3 id="update-php-ini-config">update <code>php.ini</code> config</h3>
-
-<ul>
-<li>Open <code>php.ini</code> with notepad</li>
-<li>Change <code>;extension=php_mbstring.dll</code> to <code>extension=php_mbstring.dll</code></li>
-</ul>
-
-<h2 id="create-new-project-from-scratch">Create new project from scratch</h2>
-
-<h3 id="create-new-project">Create new project</h3>
-
-<h3 id="migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</h3>
+<h4 id="migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</h4>
 
 <ul>
 <li>Create data model</li>
@@ -988,7 +1000,7 @@ php artisan db:seed
 </code></pre></li>
 </ul>
 
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="troubleshooting">Troubleshooting</h3>
 
 <p><strong>Fix the error of Specified key was too long</strong></p>
 
@@ -1022,34 +1034,32 @@ class AppServiceProvider extends ServiceProvider
 }
 </code></pre>
 
-<h2 id="use-lavarel-mvc-starter-project">Use Lavarel MVC Starter project</h2>
+<h3 id="lavarel-mvc-starter-project">Lavarel MVC Starter project</h3>
 
 <pre><code>* Please find the project introduction [here](/projects/lara-mvc-starter/). 
 </code></pre>
 
 <h2 id="use-laravel-rest-starter-project">Use Laravel Rest Starter project</h2>
 
-<h3 id="prestashop">PrestaShop</h3>
+<h2 id="prestashop">PrestaShop</h2>
 
 <blockquote>
 <p>PrestaShop is a free, open source e-commerce solution. The software is published under the Open Software License (OSL). It is written in the PHP programming language with support for the MySQL database management system.</p>
 </blockquote>
 
-<h3 id="prestashop-1-5-4">Prestashop 1.5.4</h3>
+<h3 id="download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></h3>
 
-<h2 id="download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></h2>
-
-<h2 id="install-prestashop">Install Prestashop</h2>
+<h3 id="install-prestashop">Install Prestashop</h3>
 
 <p>There is a instruction page inside the zip file. You can follow the instructions to complete the installation. There is no EasyPHP, Wamp, XAMPP, or any similar AMP (Apache+MySQL+PHP) package installed on my PC, but I have PHP, Apache, MySQL installed. Actually EasyPHP, Wamp are just the bundle of PHP development tools, which include PHP, Apache, MySQL. I don&rsquo;t want to install too many duplicate softwares and packages on my PC, so I prefer to install Prestashop with what I have on my PC. Which strategy is up to you.</p>
 
-<h2 id="install-prestashop-with-amp-package">Install Prestashop with AMP package</h2>
+<h3 id="install-prestashop-with-amp-package">Install Prestashop with AMP package</h3>
 
 <ul>
 <li>Follow the instruction page within zip file.</li>
 </ul>
 
-<h2 id="install-prestashop-without-amp-package">Install Prestashop without AMP package</h2>
+<h3 id="install-prestashop-without-amp-package">Install Prestashop without AMP package</h3>
 
 <ul>
 <li><p>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</p>
@@ -1135,7 +1145,7 @@ php -S 0.0.0.0:1234 -t prestashop
 <li><p>Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.</p></li>
 </ul>
 
-<h2 id="forgot-admin-s-password">Forgot admin&rsquo;s password</h2>
+<h3 id="forgot-admin-s-password">Forgot admin&rsquo;s password</h3>
 
 <ul>
 <li><p>Forgot admin&rsquo;s password or somehow you have to reset password and you cannot get admin&rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&rsquo;s password from database.</p></li>
@@ -1147,9 +1157,9 @@ WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
 </code></pre></li>
 </ul>
 
-<h2 id="troubleshooting-1">Troubleshooting</h2>
+<h3 id="troubleshooting-1">Troubleshooting</h3>
 
-<h3 id="innodb-error">InnoDB error</h3>
+<h4 id="innodb-error">InnoDB error</h4>
 
 <ul>
 <li>Error : InnoDB is not supported by your MySQL server</li>
@@ -1174,7 +1184,7 @@ if (!$row || strtolower($row['Value']) === 'no')
 <li><p>Restart the server and the proble will be fixed.</p></li>
 </ul>
 
-<h3 id="cors">CORS</h3>
+<h4 id="cors">CORS</h4>
 
 <ul>
 <li><p>Enable module header in <code>httpd.conf</code></p></li>
@@ -1189,7 +1199,7 @@ Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE,
 </code></pre></li>
 </ul>
 
-<h3 id="too-big-header-file">Too big header file</h3>
+<h4 id="too-big-header-file">Too big header file</h4>
 
 <ul>
 <li><p>Add this to your <code>http {}</code> of the nginx.conf file normally located at <code>/etc/nginx/nginx.conf</code>:</p>
@@ -1215,43 +1225,28 @@ fastcgi_busy_buffers_size 256k;</p></li>
 <li><a href="#php-development-environment-setup">PHP development environment setup</a>
 <ul>
 <li><a href="#install-php-5-6-x">Install PHP 5.6.x</a></li>
-<li><a href="#composer">Composer</a></li>
-</ul></li>
 <li><a href="#linux">Linux</a></li>
-<li><a href="#windows">Windows</a>
-<ul>
-<li><a href="#zend-framework">Zend Framework</a></li>
-<li><a href="#zend-framework-2-x">Zend Framework 2.x</a></li>
+<li><a href="#windows">Windows</a></li>
 </ul></li>
-<li><a href="#create-zend-framework-2-project-from-scratch">Create Zend Framework 2 project from scratch</a>
+<li><a href="#zend-framework">Zend Framework</a>
 <ul>
-<li><a href="#clone-zend-framework-skeleton-project-as-new-project">* Clone Zend Framework skeleton project as new project.</a></li>
-<li><a href="#install-zend-framework-with-composer">* Install zend framework with composer</a></li>
-<li><a href="#start-app-with-php-built-in-server">* Start app with php built-in server</a></li>
-<li><a href="#use-apache-server">* Use apache server</a></li>
+<li><a href="#create-zend-framework-2-project">Create Zend Framework 2 project</a></li>
+<li><a href="#start-app-with-php-built-in-server">Start app with php built-in server</a></li>
+<li><a href="#use-apache-server">Use apache server</a></li>
 </ul></li>
-<li><a href="#use-zf2-mvc-starter-project">Use Zf2-MVC-Starter project</a>
+<li><a href="#laravel">Laravel</a>
 <ul>
-<li><a href="#laravel">Laravel</a></li>
-<li><a href="#laravel-5-x">Laravel 5.x</a></li>
-</ul></li>
 <li><a href="#install-laravel-global">Install laravel global</a></li>
-<li><a href="#enable-the-mbs-string-extension">Enable the <code>mbs-string</code> extension</a>
-<ul>
-<li><a href="#update-php-ini-config">update <code>php.ini</code> config</a></li>
-</ul></li>
 <li><a href="#create-new-project-from-scratch">Create new project from scratch</a>
 <ul>
-<li><a href="#create-new-project">Create new project</a></li>
 <li><a href="#migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</a></li>
 </ul></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#use-lavarel-mvc-starter-project">Use Lavarel MVC Starter project</a></li>
-<li><a href="#use-laravel-rest-starter-project">Use Laravel Rest Starter project</a>
-<ul>
-<li><a href="#prestashop">PrestaShop</a></li>
-<li><a href="#prestashop-1-5-4">Prestashop 1.5.4</a></li>
+<li><a href="#lavarel-mvc-starter-project">Lavarel MVC Starter project</a></li>
 </ul></li>
+<li><a href="#use-laravel-rest-starter-project">Use Laravel Rest Starter project</a></li>
+<li><a href="#prestashop">PrestaShop</a>
+<ul>
 <li><a href="#download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></a></li>
 <li><a href="#install-prestashop">Install Prestashop</a></li>
 <li><a href="#install-prestashop-with-amp-package">Install Prestashop with AMP package</a></li>
@@ -1262,6 +1257,7 @@ fastcgi_busy_buffers_size 256k;</p></li>
 <li><a href="#innodb-error">InnoDB error</a></li>
 <li><a href="#cors">CORS</a></li>
 <li><a href="#too-big-header-file">Too big header file</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>

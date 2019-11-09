@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Data Types &amp; Ownership</title>
+      <link>/coding/rustlang/rust-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/rustlang/rust-note-1/</guid>
+      <description>Mutability Rust encourages you to favor immutability. It’s important that we get compile-time errors when we attempt to change a value that we previously designated as immutable because this very situation can lead to bugs.
+But mutability can be very useful. To make them mutable is simply adding mut in front of the variable name. In addition to allowing this value to change, mut conveys intent to future readers of the code by indicating that other parts of the code will be changing this variable value.</description>
+    </item>
+    
+    <item>
       <title>Getting started</title>
       <link>/coding/golang/go-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -53,6 +63,27 @@ def make_timer(): last_called = None def elapsed(): nonlocal last_called now = t
     </item>
     
     <item>
+      <title>Project, Vector, String &amp; Hashmap</title>
+      <link>/coding/rustlang/rust-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/rustlang/rust-note-2/</guid>
+      <description>Project management  Rust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are private, and what names are in each scope in your programs.
+ Packages: A Cargo feature that lets you build, test, and share crates Crates: A tree of modules that produces a library or executable Modules and use: Let you control the organization, scope, and privacy of paths Paths: A way of naming an item, such as a struct, function, or module   Package &amp;amp; Crate  A package is one or more crates that provide a set of functionality.</description>
+    </item>
+    
+    <item>
+      <title>Error handling</title>
+      <link>/coding/rustlang/rust-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/rustlang/rust-note-3/</guid>
+      <description>Error  Rust groups errors into two major categories: recoverable and unrecoverable errors.
+ Rust doesn’t have exceptions. Instead, it has the type Resultfor recoverable errors and the panic! macro that stops execution when the program encounters an unrecoverable error.
+  panic! - Unrecoverable Errors  Rust has the panic! macro. When the panic! macro executes, your program will print a failure message, unwind and clean up the stack, and then quit.</description>
+    </item>
+    
+    <item>
       <title>String &amp; Representation</title>
       <link>/coding/python/python-note-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -69,6 +100,17 @@ def make_timer(): last_called = None def elapsed(): nonlocal last_called now = t
       <guid>/coding/golang/go-note-3/</guid>
       <description>Struct  Go supports user-defined or custom types in the form of alias types or structs. A struct tries to represent a real-world entity with its properties. Structs are composite types, to use when you want to define a type which consist of a number of properties, each having their own type and value, grouping pieces of data together.
  Struct with tags  A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label.</description>
+    </item>
+    
+    <item>
+      <title>Generic Type &amp; Trait </title>
+      <link>/coding/rustlang/rust-note-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/rustlang/rust-note-4/</guid>
+      <description>Generic Type  Generics are abstract stand-ins for concrete types or other properties. When we’re writing code, we can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.  Removing Duplication by Extracting a Function  steps we took to change the duplication code :
+ Identify duplicate code.
+ Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.</description>
     </item>
     
     <item>
@@ -484,7 +526,9 @@ Manage branches (Push, Fetch &amp;amp; Merge) List all branches</description>
       
       <guid>/frameworks/php-web/</guid>
       <description>Here we are going to explore some PHP web frameworks.
- PHP development environment setup Install PHP 5.6.x  Please find the instruction from home page  Composer Linux  Use curl -s https://getcomposer.org/installer | php -- to install composer on Linux use &amp;lsquo;composer -v &amp;rsquo; to verify.  Windows  Download the composer and install php on your PC Use composer -v to verify the composer is ready.</description>
+ PHP development environment setup Install PHP 5.6.x  Please find the instruction from home page
+ Composer
+  Linux  Use curl -s https://getcomposer.org/installer | php -- to install composer on Linux use &amp;lsquo;composer -v &amp;rsquo; to verify.  Windows  Download the composer and install php on your PC Use composer -v to verify the composer is ready.</description>
     </item>
     
     <item>
@@ -711,17 +755,8 @@ Common Use Cases House keeping - Clean up the backup  Run every night to remove 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/shell/cron-note-2/</guid>
-      <description>Refresh the database (NoSQL) - Cassandra Backup the Cassandra database nightly  There is a keyspace named hho_ks in the Cassandra nodes store the production data. Every night the staging Cassandra server will be refreshed with production&amp;rsquo;s snapshot This solution is not built on the incremental snapshot. The production and staging nodes are running within the same subnet. The backup script will be run nightly on production server Cron job setting</description>
-    </item>
-    
-    <item>
-      <title>Data Types &amp; Ownership</title>
-      <link>/coding/rustlang/rust-note-1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/rustlang/rust-note-1/</guid>
-      <description>Mutability Rust encourages you to favor immutability. It’s important that we get compile-time errors when we attempt to change a value that we previously designated as immutable because this very situation can lead to bugs.
-But mutability can be very useful. To make them mutable is simply adding mut in front of the variable name. In addition to allowing this value to change, mut conveys intent to future readers of the code by indicating that other parts of the code will be changing this variable value.</description>
+      <description>Refresh the database (NoSQL) - Cassandra  The sample script is used to backup the data from production database and refresh the data to staging or test database. It is not supposed to restore data because of database corruption.
+ Backup the Cassandra database nightly  There is a keyspace named hho_ks in the Cassandra nodes store the production data. Every night the staging Cassandra server will be refreshed with production&amp;rsquo;s snapshot This solution is not built on the incremental snapshot.</description>
     </item>
     
     <item>
@@ -731,28 +766,6 @@ But mutability can be very useful. To make them mutable is simply adding mut in 
       
       <guid>/hacks/php-debug/</guid>
       <description>PDT and Netbeans  PDT and Netbeans are two most popluar free PHP IDEs. We choose such IDE for productivity, so code intelligence and debug are two key factors, which let us love IDE. Because both are not created for PHP development at the start, there is no built-in server to support the PHP web debug. When we want to use it to debug, we would come across some wierd problems.</description>
-    </item>
-    
-    <item>
-      <title>Error handling</title>
-      <link>/coding/rustlang/rust-note-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/rustlang/rust-note-3/</guid>
-      <description>Error  Rust groups errors into two major categories: recoverable and unrecoverable errors.
- Rust doesn’t have exceptions. Instead, it has the type Resultfor recoverable errors and the panic! macro that stops execution when the program encounters an unrecoverable error.
-  panic! - Unrecoverable Errors  Rust has the panic! macro. When the panic! macro executes, your program will print a failure message, unwind and clean up the stack, and then quit.</description>
-    </item>
-    
-    <item>
-      <title>Generic Type &amp; Trait </title>
-      <link>/coding/rustlang/rust-note-4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/rustlang/rust-note-4/</guid>
-      <description>Generic Type  Generics are abstract stand-ins for concrete types or other properties. When we’re writing code, we can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.  Removing Duplication by Extracting a Function  steps we took to change the duplication code :
- Identify duplicate code.
- Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.</description>
     </item>
     
     <item>
@@ -908,6 +921,18 @@ It groups containers that make up an application into logical units for easy man
     </item>
     
     <item>
+      <title>PostgresQL Note - 1</title>
+      <link>/coding/sql/pgsql-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/sql/pgsql-note-1/</guid>
+      <description>PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+ Getting Started  Switch to user postges
+sudo su - postgres psql  Create new login id as super admin
+  It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole.</description>
+    </item>
+    
+    <item>
       <title>Powershell Note - 1</title>
       <link>/coding/shell/ps-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -915,16 +940,6 @@ It groups containers that make up an application into logical units for easy man
       <guid>/coding/shell/ps-note-1/</guid>
       <description>PowerShell is a task-based command-line shell and scripting language built on .NET. PowerShell helps system administrators and power-users rapidly automate tasks that manage operating systems (Linux, macOS, and Windows) and processes.
  Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable</description>
-    </item>
-    
-    <item>
-      <title>Project, Vector, String &amp; Hashmap</title>
-      <link>/coding/rustlang/rust-note-2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/rustlang/rust-note-2/</guid>
-      <description>Project management  Rust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are private, and what names are in each scope in your programs.
- Packages: A Cargo feature that lets you build, test, and share crates Crates: A tree of modules that produces a library or executable Modules and use: Let you control the organization, scope, and privacy of paths Paths: A way of naming an item, such as a struct, function, or module   Package &amp;amp; Crate  A package is one or more crates that provide a set of functionality.</description>
     </item>
     
     <item>
@@ -966,6 +981,15 @@ QEMU is a virtualization technology emulator that allows you to run operating sy
       
       <guid>/coding/c-sharp/csharp-note-3/</guid>
       <description>C# Thread &amp;amp; Task  From Net 4.0, .Net applicatoin introduced Parallel Framework Extensions (PFx), along the way it delivered an entirely new model for async processing in .NET. In .NET 4.0 the thread pool queue was redesigned with the new requirements of PFx in mind. Instead of using a simple linked list, the queue was built with arrays of work items with the arrays connected into a linked list.</description>
+    </item>
+    
+    <item>
+      <title>VirtualBox Notes</title>
+      <link>/hacks/vbox-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/hacks/vbox-notes/</guid>
+      <description>Network Not attached. In this mode, Oracle VM VirtualBox reports to the guest that a network card is present, but that there is no connection. This is as if no Ethernet cable was plugged into the card. Using this mode, it is possible to &amp;ldquo;pull&amp;rdquo; the virtual Ethernet cable and disrupt the connection, which can be useful to inform a guest operating system that no network connection is available and enforce a reconfiguration.</description>
     </item>
     
   </channel>

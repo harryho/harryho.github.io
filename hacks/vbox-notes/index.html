@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-11-09T22:02:59 AEDT">
-<title>Project, Vector, String &amp; Hashmap :: Hello World</title>
+<meta name="revised" content="2019-11-09T22:03:00 AEDT">
+<title>VirtualBox Notes :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Rustlang Introduction: Project management, Vector, String and Hashmap">
+<meta name="description" content="VirtualBox practices">
 
 
 
     
   </head>
-  <body data-url="/coding/rustlang/rust-note-2/">
+  <body data-url="/hacks/vbox-notes/">
     
       <header>
   <div class="logo">
@@ -132,11 +132,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -467,11 +466,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/rustlang/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/rustlang/">Rustlang</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/rustlang/">Rustlang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
@@ -481,7 +479,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item active">
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
         <div>
           <a href="/coding/rustlang/rust-note-2/">
             Project, Vector, String &amp; Hashmap
@@ -571,10 +569,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item haschildren
+    <li data-nav-id="/hacks/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/hacks/git-notes/" class="dd-item">
@@ -626,7 +625,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item active">
         <div>
           <a href="/hacks/vbox-notes/">
             VirtualBox Notes
@@ -830,42 +829,18 @@
     <option value="/projects/" >
    Projects</option>
     <option value="/coding/" >
-   Coding</option> 
-    <option value="/coding/c/" >
-  - 
-   C </option>
-    <option value="/coding/c-sharp/" >
-  - 
-   C#</option>
-    <option value="/coding/golang/" >
-  - 
-   Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
-    <option value="/coding/javascript/" >
-  - 
-   JavaScript</option>
-    <option value="/coding/python/" >
-  - 
-   Python</option>
-    <option value="/coding/rustlang/" >
-  - 
-   Rustlang</option> 
-      <option value="/coding/rustlang/rust-note-1/" >-- Data Types &amp; Ownership</option>
-      <option value="/coding/rustlang/rust-note-2/"  selected>-- Project, Vector, String &amp; Hashmap</option>
-      <option value="/coding/rustlang/rust-note-3/" >-- Error handling</option>
-      <option value="/coding/rustlang/rust-note-4/" >-- Generic Type &amp; Trait </option>
-  
-    <option value="/coding/shell/" >
-  - 
-   Shell</option>
-    <option value="/coding/sql/" >
-  - 
-   SQL</option>
-  
+   Coding</option>
     <option value="/hacks/" >
-   Hacks</option>
+   Hacks</option> 
+      <option value="/hacks/git-notes/" >- Git Practices</option>
+      <option value="/hacks/windows-command-3/" >- Windows cmd &amp; hotkey - 3</option>
+      <option value="/hacks/windows-command-2/" >- Windows cmd &amp; hotkey - 2</option>
+      <option value="/hacks/windows-command-1/" >- Windows cmd &amp; hotkey - 1</option>
+      <option value="/hacks/cass-note/" >- Cassandra Practices</option>
+      <option value="/hacks/php-debug/" >- Debug PHP with Free IDE</option>
+      <option value="/hacks/qemu-notes/" >- Qemu &amp; Virtual Machine</option>
+      <option value="/hacks/vbox-notes/"  selected>- VirtualBox Notes</option>
+  
     <option value="/blogs/" >
    Blogs</option>
     <option value="/os/" >
@@ -888,278 +863,96 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Project, Vector, String &amp; Hashmap</h1>
+            <h1>VirtualBox Notes</h1>
         
 
-<h3 id="project-management">Project management</h3>
-
-<ul>
-<li><p>Rust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are private, and what names are in each scope in your programs.</p>
-
-<ul>
-<li>Packages: A Cargo feature that lets you build, test, and share crates</li>
-<li>Crates: A tree of modules that produces a library or executable</li>
-<li>Modules and use: Let you control the organization, scope, and privacy of paths</li>
-<li>Paths: A way of naming an item, such as a struct, function, or module</li>
-</ul></li>
-</ul>
-
-<h4 id="package-crate">Package &amp; Crate</h4>
-
-<ul>
-<li><p>A package is one or more crates that provide a set of functionality. A package contains a Cargo.toml file that describes how to build those crates.</p></li>
-
-<li><p>A crate will group related functionality together in a scope so the functionality is easy to share between multiple projects.</p></li>
-</ul>
-
-<h4 id="module">Module</h4>
-
-<ul>
-<li>Modules let us organize code within a crate into groups for readability and easy reuse. Modules also control the privacy of items, which is whether an item can be used by outside code (public) or is an internal implementation detail and not available for outside use (private).</li>
-</ul>
-
-<h4 id="path">Path</h4>
-
-<ul>
-<li><p>A path can take two forms:</p>
-
-<ul>
-<li>An absolute path starts from a crate root by using a crate name or a literal crate.</li>
-<li>A relative path starts from the current module and uses self, super, or an identifier in the current module.</li>
-</ul></li>
-</ul>
-
-<h3 id="vector">Vector</h3>
-
-<ul>
-<li><p>Vectors allow you to store more than one value in a single data structure that puts all the values next to each other in memory.</p>
-
-<pre><code class="language-rs">let v = vec![1, 2, 3, 4, 5];
-
-let third: &amp;i32 = &amp;v[2];
-println!(&quot;The third element is {}&quot;, third);
-
-match v.get(2) {
-    Some(third) =&gt; println!(&quot;The third element is {}&quot;, third),
-    None =&gt; println!(&quot;There is no third element.&quot;),
-}
-</code></pre></li>
-</ul>
-
-<h4 id="iterating-over-the-values">Iterating over the Values</h4>
-
-<ul>
-<li><p>Immutable</p>
-
-<pre><code class="language-rs">let v = vec![100, 32, 57];
-for i in &amp;v {
-    println!(&quot;{}&quot;, i);
-}
-</code></pre></li>
-
-<li><p>Mutable</p>
-
-<pre><code class="language-rs">let mut v = vec![100, 32, 57];
-for i in &amp;mut v {
-    *i += 50;
-}
-</code></pre></li>
-</ul>
-
-<h3 id="string">String</h3>
-
-<ul>
-<li><p>Rust has only one string type in the core language, which is the string slice str that is usually seen in its borrowed form &amp;str.</p></li>
-
-<li><p>The String type, which is provided by Rust’s standard library rather than coded into the core language, is a growable, mutable, owned, UTF-8 encoded string type. When Rustaceans refer to “strings” in Rust, they usually mean the String and the string slice &amp;str types, not just one of those types.</p></li>
-
-<li><p>Rust’s standard library also includes a number of other string types, such as OsString, OsStr, CString, and CStr. Library crates can provide even more options for storing string data.</p></li>
-</ul>
-
-<h4 id="new-string">New string</h4>
-
-<ul>
-<li><p>use new function</p>
-
-<pre><code class="language-rs">let mut s = String::new();
-</code></pre></li>
-</ul>
-
-<h4 id="updating-a-string">Updating a String</h4>
-
-<ul>
-<li><p>A String can grow in size and its contents by using the push_str method to append a string slice.</p></li>
-
-<li><p>The push method takes a single character as a parameter and adds it to the String.</p>
-
-<pre><code class="language-rs">let mut s1 = String::from(&quot;foo&quot;);
-let s2 = &quot;bar&quot;;
-s1.push_str(s2);
-println!(&quot;s1 is {}&quot;, s1);
-println!(&quot;s2 is {}&quot;, s2);
-   
-let mut s3 = String::from(&quot;lo&quot;);
-s3.push('l'); 
-println!(&quot;s3 is {}&quot;, s3);
-</code></pre></li>
-
-<li><p>Concatenation with the + Operator or the format! Macro</p>
-
-<pre><code class="language-rs">let s1 = String::from(&quot;Hello, &quot;);
-let s2 = String::from(&quot;world!&quot;);
-let s3 = s1 + &amp;s2; // note s1 has been moved here and can no longer be used
-</code></pre></li>
-
-<li><p>Iterates char of string</p>
-
-<pre><code class="language-rs">for c in &quot;नमस्ते&quot;.chars() {
-println!(&quot;{}&quot;, c);
-}
-
-for b in &quot;नमस्ते&quot;.bytes() {
-println!(&quot;{}&quot;, b);
-}
-</code></pre></li>
-</ul>
-
-<h4 id="strings-are-not-so-simple">Strings Are Not So Simple</h4>
-
-<ul>
-<li>To summarize, strings are complicated. Different programming languages make different choices about how to present this complexity to the programmer. Rust has chosen to make the correct handling of String data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront.</li>
-</ul>
-
-<h3 id="hashmap">Hashmap</h3>
-
-<ul>
-<li><p>The type HashMap<K, V> stores a mapping of keys of type K to values of type V. It does this via a hashing function, which determines how it places these keys and values into memory.</p></li>
-
-<li><p>Hash maps are useful when you want to look up data not by using an index, as you can with vectors, but by using a key that can be of any type.</p></li>
-</ul>
-
-<h4 id="new-hashmap">New hashmap</h4>
-
-<ul>
-<li><p>create an empty hash map with new and add elements with insert.</p>
-
-<pre><code class="language-rs">use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from(&quot;Blue&quot;), 10);
-scores.insert(String::from(&quot;Yellow&quot;), 50);
-</code></pre></li>
-
-<li><p>Another way of constructing a hash map is by using the collect method on a vector of tuples, where each tuple consists of a key and its value. The collect method gathers data into a number of collection types, including HashMap.</p>
-
-<pre><code class="language-rs">use std::collections::HashMap;
-
-let teams  = vec![String::from(&quot;Blue&quot;), String::from(&quot;Yellow&quot;)];
-let initial_scores = vec![10, 50];
-
-let scores: HashMap&lt;_, _&gt; = teams.iter().zip(initial_scores.iter()).collect();
-</code></pre></li>
-</ul>
-
-<h4 id="hash-maps-and-ownership">Hash Maps and Ownership</h4>
-
-<ul>
-<li><p>For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values.</p>
-
-<pre><code class="language-rs">use std::collections::HashMap;
-
-let field_name = String::from(&quot;Favorite color&quot;);
-let field_value = String::from(&quot;Blue&quot;);
-
-let mut map = HashMap::new();
-map.insert(field_name, field_value);
-
-println!(&quot;field_name: {} field_value: {}&quot;, field_name, field_value);
-// error[E0382]: borrow of moved value: `field_name`
-// error[E0382]: borrow of moved value: `field_value`
-</code></pre></li>
-</ul>
-
-<h4 id="accessing-values-in-a-hash-map">Accessing Values in a Hash Map</h4>
-
-<ul>
-<li><p>get a value out of the hash map by providing its key to the get method</p>
-
-<pre><code class="language-rs">use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from(&quot;Blue&quot;), 10);
-scores.insert(String::from(&quot;Yellow&quot;), 50);
-
-for (key, value) in &amp;scores {
-println!(&quot;{}: {}&quot;, key, value);
-}
-</code></pre></li>
-</ul>
-
-<h4 id="updating-a-hash-map">Updating a Hash Map</h4>
-
-<p><strong>Overwrites value</strong></p>
-
-<p>If we insert a key and a value into a hash map and then insert that same key with a different value, the value associated with that key will be replaced.</p>
-
-<pre><code class="language-rs">
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from(&quot;Blue&quot;), 10);
-scores.insert(String::from(&quot;Blue&quot;), 25);
-
-println!(&quot;{:?}&quot;, scores);
-</code></pre>
-
-<p><strong>Only Inserting a Value If the Key Has No Value</strong></p>
-
-<ul>
-<li><p>It’s common to check whether a particular key has a value and, if it doesn’t, insert a value for it. Hash maps have a special API for this called entry that takes the key you want to check as a parameter. The return value of the entry method is an enum called Entry that represents a value that might or might not exist.</p>
-
-<pre><code class="language-rs">#![allow(unused_variables)]
-fn main() {
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-scores.insert(String::from(&quot;Blue&quot;), 10);
-
-scores.entry(String::from(&quot;Yellow&quot;)).or_insert(50);
-scores.entry(String::from(&quot;Blue&quot;)).or_insert(50);
-
-println!(&quot;{:?}&quot;, scores);
-// {&quot;Blue&quot;: 10, &quot;Yellow&quot;: 50}
-}
-</code></pre></li>
-</ul>
-
-<p><strong>Updating a Value Based on the Old Value</strong></p>
-
-<p>Another common use case for hash maps is to look up a key’s value and then update it based on the old value.</p>
-
-<pre><code class="language-rs">use std::collections::HashMap;
-
-let text = &quot;hello world wonderful world&quot;;
-
-let mut map = HashMap::new();
-
-for word in text.split_whitespace() {
-    let count = map.entry(word).or_insert(0);
-    *count += 1;
-}
-
-println!(&quot;{:?}&quot;, map);
-</code></pre>
-
-<h3 id="hashing-functions">Hashing Functions</h3>
-
-<ul>
-<li><p>By default, HashMap uses a “cryptographically strong”1 hashing function that can provide resistance to Denial of Service (DoS) attacks. This is not the fastest hashing algorithm available, but the trade-off for better security that comes with the drop in performance is worth it.</p></li>
-
-<li><p>A hasher is a type that implements the BuildHasher trait.</p></li>
-</ul>
+<h2 id="network">Network</h2>
+
+<h3 id="not-attached">Not attached.</h3>
+
+<p>In this mode, Oracle VM VirtualBox reports to the guest that a network card is present, but that there is no connection. This is as if no Ethernet cable was plugged into the card. Using this mode, it is possible to &ldquo;pull&rdquo; the virtual Ethernet cable and disrupt the connection, which can be useful to inform a guest operating system that no network connection is available and enforce a reconfiguration.</p>
+
+<h3 id="network-address-translation-nat">Network Address Translation (NAT).</h3>
+
+<p>If all you want is to browse the Web, download files, and view email inside the guest, then this default mode should be sufficient for you, and you can skip the rest of this section. Please note that there are certain limitations when using Windows file sharing. See Section 6.3.3, “NAT Limitations”.</p>
+
+<h3 id="nat-network">NAT Network.</h3>
+
+<p>A NAT network is a type of internal network that allows outbound connections. See Section 6.4, “Network Address Translation Service”.</p>
+
+<h3 id="bridged-networking">Bridged networking.</h3>
+
+<p>This is for more advanced networking needs, such as network simulations and running servers in a guest. When enabled, Oracle VM VirtualBox connects to one of your installed network cards and exchanges network packets directly, circumventing your host operating system&rsquo;s network stack.</p>
+
+<h3 id="internal-networking">Internal networking.</h3>
+
+<p>This can be used to create a different kind of software-based network which is visible to selected virtual machines, but not to applications running on the host or to the outside world.</p>
+
+<h3 id="host-only-networking">Host-only networking.</h3>
+
+<p>This can be used to create a network containing the host and a set of virtual machines, without the need for the host&rsquo;s physical network interface. Instead, a virtual network interface, similar to a loopback interface, is created on the host, providing connectivity among virtual machines and the host.</p>
+
+<h3 id="overview-of-networking-modes">Overview of networking modes</h3>
+
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th align="center">VM -&gt; Host</th>
+<th align="center">VM &lt;- Host</th>
+<th align="center">VM1&lt;-&gt;VM2</th>
+<th align="center">VM-&gt;Net/LAN</th>
+<th align="center">VM&lt;-Net/LAN</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Host-only</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+
+<tr>
+<td>Internal</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">+</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+
+<tr>
+<td>Bridged</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+
+<tr>
+<td>NAT</td>
+<td align="center">+</td>
+<td align="center">Port forward</td>
+<td align="center">–</td>
+<td align="center">+</td>
+<td align="center">Port forward</td>
+</tr>
+
+<tr>
+<td>NATservice</td>
+<td align="center">+</td>
+<td align="center">Port forward</td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">Port forward</td>
+</tr>
+</tbody>
+</table>
 
     </div>
 
@@ -1168,32 +961,15 @@ println!(&quot;{:?}&quot;, map);
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#network">Network</a>
 <ul>
-<li><a href="#project-management">Project management</a>
-<ul>
-<li><a href="#package-crate">Package &amp; Crate</a></li>
-<li><a href="#module">Module</a></li>
-<li><a href="#path">Path</a></li>
-</ul></li>
-<li><a href="#vector">Vector</a>
-<ul>
-<li><a href="#iterating-over-the-values">Iterating over the Values</a></li>
-</ul></li>
-<li><a href="#string">String</a>
-<ul>
-<li><a href="#new-string">New string</a></li>
-<li><a href="#updating-a-string">Updating a String</a></li>
-<li><a href="#strings-are-not-so-simple">Strings Are Not So Simple</a></li>
-</ul></li>
-<li><a href="#hashmap">Hashmap</a>
-<ul>
-<li><a href="#new-hashmap">New hashmap</a></li>
-<li><a href="#hash-maps-and-ownership">Hash Maps and Ownership</a></li>
-<li><a href="#accessing-values-in-a-hash-map">Accessing Values in a Hash Map</a></li>
-<li><a href="#updating-a-hash-map">Updating a Hash Map</a></li>
-</ul></li>
-<li><a href="#hashing-functions">Hashing Functions</a></li>
+<li><a href="#not-attached">Not attached.</a></li>
+<li><a href="#network-address-translation-nat">Network Address Translation (NAT).</a></li>
+<li><a href="#nat-network">NAT Network.</a></li>
+<li><a href="#bridged-networking">Bridged networking.</a></li>
+<li><a href="#internal-networking">Internal networking.</a></li>
+<li><a href="#host-only-networking">Host-only networking.</a></li>
+<li><a href="#overview-of-networking-modes">Overview of networking modes</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1206,8 +982,8 @@ println!(&quot;{:?}&quot;, map);
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/rustlang/rust-note-1/" title="Data Types &amp; Ownership"> <i class="fa fa-chevron-left"></i><label>Data Types &amp; Ownership</label></a>
-    <a class="nav nav-next" href="/coding/rustlang/rust-note-3/" title="Error handling" style="margin-right: 0px;"><label>Error handling</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/hacks/qemu-notes/" title="Qemu &amp; Virtual Machine"> <i class="fa fa-chevron-left"></i><label>Qemu &amp; Virtual Machine</label></a>
+    <a class="nav nav-next" href="/blogs/" title="Blogs" style="margin-right: 0px;"><label>Blogs</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
