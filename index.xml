@@ -892,40 +892,59 @@ It groups containers that make up an application into logical units for easy man
     </item>
     
     <item>
-      <title>MySql Note - 1</title>
-      <link>/coding/sql/mysql-note-1/</link>
+      <title>MS Sql Server Note - 1</title>
+      <link>/coding/db-sql/mssql-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/sql/mysql-note-1/</guid>
+      <guid>/coding/db-sql/mssql-note-1/</guid>
+      <description>Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet).
+ Get db/table size or space -- Get database size SELECT sys.databases.name, CONVERT(VARCHAR,SUM(size)*8/1024)+&#39; MB&#39; AS [Total disk space] , CONVERT(VARCHAR,SUM(size)*8/1024/1024)+&#39; GB&#39; AS [Total disk space] FROM sys.</description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 1</title>
+      <link>/coding/db-sql/mysql-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/db-sql/mysql-note-1/</guid>
       <description>MySQL is the world&amp;rsquo;s most popular open source database. Whether you are a fast growing web property, technology ISV or large enterprise, MySQL can cost-effectively help you deliver high performance, scalable database applications.
- Create a new database -- Drop the old one DROP SCHEMA IF EXISTS new_dbu -- Create a new db CREATE DATABASE new_db CHARACTER SET utf8 COLLATE utf8_general_ci;  Create a table DROP TABLE IF EXISTS new_table; CREATE TABLE new_table ( id int NOT NULL AUTO_INCREMENT, name varchar(50), title varchar(50), email varchar(250), created_date datetime, modified_date datetime, PRIMARY KEY (id) );  Query  JOIN and INNER JOIN</description>
+ Prerequisite  Install MySql 5.6+ on your PC or server  Launch &amp;amp; Stop MySql server # use systemctl systemctl status mysql.service systemctl restart mysql.service # use service service mysql status service mysql restart  Set root password mysql_secure_installation  Reset root password -- MySql 5.</description>
     </item>
     
     <item>
       <title>MySql Note - 2</title>
-      <link>/coding/sql/mysql-note-2/</link>
+      <link>/coding/db-sql/mysql-note-2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/sql/mysql-note-2/</guid>
-      <description>Function - UDF  For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.</description>
+      <guid>/coding/db-sql/mysql-note-2/</guid>
+      <description>As one of most popular open source databases, MySql is mainly used as data storage, aka database. To store the data into MySql server, we need to use SQL - Structural Query Language. But before we store the data to MySql, we need to define the schema which tells MySql how to organize the data in the proper manner. To define the schema, there is a special set of SQL, which we call it DDL - Data Definition Language, such as, CREATE, DROP, ALTER, etc.</description>
     </item>
     
     <item>
       <title>MySql Note - 3</title>
-      <link>/coding/sql/mysql-note-3/</link>
+      <link>/coding/db-sql/mysql-note-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/sql/mysql-note-3/</guid>
+      <guid>/coding/db-sql/mysql-note-3/</guid>
+      <description>Function - UDF  For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.</description>
+    </item>
+    
+    <item>
+      <title>MySql Note - 4</title>
+      <link>/coding/db-sql/mysql-note-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/db-sql/mysql-note-4/</guid>
       <description>Information schema  INFORMATION_SCHEMA provides access to database metadata, information about the MySQL server such as the name of a database or table, the data type of a column, or access privileges. Other terms that are sometimes used for this information are data dictionary and system catalog.
  Check out table size SET @target_schema=&#39;THE_TARGET_SCHEMA&#39;; SELECT TABLE_NAME, table_rows, data_length, index_length, round(((data_length + index_length) / 1024 / 1024 /1024),2) &#39;Size in GB&#39;, round(((data_length + index_length) / 1024 / 1024 ),2) &#39;Size in MB&#39; FROM information_schema.</description>
     </item>
     
     <item>
       <title>PostgresQL Note - 1</title>
-      <link>/coding/sql/pgsql-note-1/</link>
+      <link>/coding/db-sql/pgsql-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/sql/pgsql-note-1/</guid>
+      <guid>/coding/db-sql/pgsql-note-1/</guid>
       <description>PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
  Getting Started  Switch to user postges
 sudo su - postgres psql  Create new login id as super admin
