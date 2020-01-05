@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:35 AEDT">
+<meta name="revised" content="2020-01-05T12:03:47 AEDT">
 <title>Good practice 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -1006,15 +1013,17 @@ function as goroutine populating the channel</p>
 <h4 id="channel-iterator-pattern">Channel Iterator pattern</h4>
 
 <ul>
-<li><pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
-	ch := make(chan item)
-	go func() {
-		for i := 0; i &lt; c.Len(); i++ {
-			// or use a for-range loop
-			ch &lt;- c.items[i]
-		}
-	}()
-	return ch
+<li><p>Channel Iterator pattern: Implement the Iter() method of a container returns a channel for the calling for-loop to read from.</p>
+
+<pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
+    ch := make(chan item)
+    go func() {
+        for i := 0; i &lt; c.Len(); i++ {
+            // or use a for-range loop
+            ch &lt;- c.items[i]
+        }
+    }()
+    return ch
 }
 
 // The code which calls this method can then iterate over the container
@@ -1028,44 +1037,44 @@ for x := range container.Iter() { ... }
 <li><p>Limiting the number of requests processed concurrently</p>
 
 <pre><code class="language-go">const (
-	AvailableMemory         = 10 &lt;&lt; 20                                  // 10 MB, for example
-	AverageMemoryPerRequest = 10 &lt;&lt; 10                                  // 10 KB
-	MAXREQS                 = AvailableMemory / AverageMemoryPerRequest // here amounts to 1000
+    AvailableMemory         = 10 &lt;&lt; 20                                  // 10 MB, for example
+    AverageMemoryPerRequest = 10 &lt;&lt; 10                                  // 10 KB
+    MAXREQS                 = AvailableMemory / AverageMemoryPerRequest // here amounts to 1000
 )
 
 var sem = make(chan int, MAXREQS)
 
 type Request struct {
-	a, b   int
-	replyc chan int
+    a, b   int
+    replyc chan int
 }
 
 func process(r *Request) {
-	// Do something
-	// May take a long time and use a lot of memory or CPU
+    // Do something
+    // May take a long time and use a lot of memory or CPU
 }
 func handle(r *Request) {
-	process(r)
-	// signal done: enable next request to start
-	// by making 1 empty place in the buffer
-	&lt;-sem
+    process(r)
+    // signal done: enable next request to start
+    // by making 1 empty place in the buffer
+    &lt;-sem
 }
 func Server(queue chan *Request) {
-	for {
-		sem &lt;- 1
-		// blocks when channel is full (1000 requests are active)
-		// so wait here until there is capacity to process a request
-		// (doesn’t matter what we put in it)
-		request := &lt;-queue
-		go handle(request)
-	}
+    for {
+        sem &lt;- 1
+        // blocks when channel is full (1000 requests are active)
+        // so wait here until there is capacity to process a request
+        // (doesn’t matter what we put in it)
+        request := &lt;-queue
+        go handle(request)
+    }
 }
 
 func main() {
-	fmt.Println(&quot; AvailableMemory &quot;, AvailableMemory)
-	fmt.Println(&quot; AverageMemoryPerRequest &quot;, AverageMemoryPerRequest)
-	queue := make(chan *Request)
-	go Server(queue)
+    fmt.Println(&quot; AvailableMemory &quot;, AvailableMemory)
+    fmt.Println(&quot; AverageMemoryPerRequest &quot;, AverageMemoryPerRequest)
+    queue := make(chan *Request)
+    go Server(queue)
 }
 </code></pre></li>
 </ul>
@@ -1078,26 +1087,26 @@ func main() {
 <pre><code class="language-go">const NCPU = 4
 
 func DoAll() {
-	sem := make(chan int, NCPU) // Buffering optional but sensible.
-	for i := 0; i &lt; NCPU; i++ {
-		go DoPart(sem)
+sem := make(chan int, NCPU) // Buffering optional but sensible.
+for i := 0; i &lt; NCPU; i++ {
+    go DoPart(sem)
 
-	}
-	// Drain the channel sem, waiting for NCPU tasks to complete
-	for i := 0; i &lt; NCPU; i++ {
-		&lt;-sem // wait for one task to complete
-	}
-	// All done.
+}
+// Drain the channel sem, waiting for NCPU tasks to complete
+for i := 0; i &lt; NCPU; i++ {
+    &lt;-sem // wait for one task to complete
+}
+// All done.
 }
 func DoPart(sem chan int) {
-	// do the part of the computation
+// do the part of the computation
 
-	sem &lt;- 1 // signal that this piece is done
+sem &lt;- 1 // signal that this piece is done
 }
 
 func main() {
-	runtime.GOMAXPROCS(NCPU)
-	DoAll()
+runtime.GOMAXPROCS(NCPU)
+DoAll()
 }
 </code></pre></li>
 </ul>
@@ -1149,43 +1158,43 @@ select {
 <h4 id="concurrent-access-to-object">Concurrent access to object</h4>
 
 <pre><code class="language-go">type Person struct {
-	Name   string
-	salary float64
-	chF    chan func()
+    Name   string
+    salary float64
+    chF    chan func()
 }
 
 func NewPerson(name string, salary float64) *Person {
-	p := &amp;Person{name, salary, make(chan func())}
-	go p.backend()
-	return p
+    p := &amp;Person{name, salary, make(chan func())}
+    go p.backend()
+    return p
 }
 func (p *Person) backend() {
-	for f := range p.chF {
-		f()
-	}
+    for f := range p.chF {
+        f()
+    }
 }
 
 // Set salary.
 func (p *Person) SetSalary(sal float64) {
-	p.chF &lt;- func() { p.salary = sal }
+    p.chF &lt;- func() { p.salary = sal }
 }
 
 // Retrieve salary.
 func (p *Person) Salary() float64 {
-	fChan := make(chan float64)
-	p.chF &lt;- func() { fChan &lt;- p.salary }
-	return &lt;-fChan
+    fChan := make(chan float64)
+    p.chF &lt;- func() { fChan &lt;- p.salary }
+    return &lt;-fChan
 }
 func (p *Person) String() string {
-	return &quot;Person - name is: &quot; + p.Name + &quot; - salary is: &quot; + strconv.
-		FormatFloat(p.Salary(), 'f', 2, 64)
+    return &quot;Person - name is: &quot; + p.Name + &quot; - salary is: &quot; + strconv.
+        FormatFloat(p.Salary(), 'f', 2, 64)
 }
 func main() {
-	bs := NewPerson(&quot;Smith Bill&quot;, 2500.5)
-	fmt.Println(bs)
-	bs.SetSalary(4000.25)
-	fmt.Println(&quot;Salary changed:&quot;)
-	fmt.Println(bs)
+    bs := NewPerson(&quot;Smith Bill&quot;, 2500.5)
+    fmt.Println(bs)
+    bs.SetSalary(4000.25)
+    fmt.Println(&quot;Salary changed:&quot;)
+    fmt.Println(bs)
 }
 /* Output Person - name is: Smith Bill - salary is: 2500.50
 Salary changed:
@@ -1213,37 +1222,37 @@ select {
 <h4 id="benchmarking-goroutines">Benchmarking goroutines</h4>
 
 <pre><code class="language-go">func main() {
-	fmt.Println(&quot;sync&quot;, testing.Benchmark(BenchmarkChannelSync).String())
-	fmt.Println(&quot;buffered&quot;, testing.Benchmark(BenchmarkChannelBuffered).String())
+    fmt.Println(&quot;sync&quot;, testing.Benchmark(BenchmarkChannelSync).String())
+    fmt.Println(&quot;buffered&quot;, testing.Benchmark(BenchmarkChannelBuffered).String())
 }
 
 func BenchmarkChannelSync(b *testing.B) {
-	ch := make(chan int)
-	go func() {
-		for i := 0; i &lt; b.N; i++ {
-			ch &lt;- i
-		}
-		close(ch)
-	}()
-	for _ = range ch {
-	}
+    ch := make(chan int)
+    go func() {
+        for i := 0; i &lt; b.N; i++ {
+            ch &lt;- i
+        }
+        close(ch)
+    }()
+    for _ = range ch {
+    }
 }
 
 func BenchmarkChannelBuffered(b *testing.B) {
-	ch := make(chan int, 128)
-	go func() {
-		for i := 0; i &lt; b.N; i++ {
-			ch &lt;- i
-		}
-		close(ch)
-	}()
-	for _ = range ch {
-	}
+    ch := make(chan int, 128)
+    go func() {
+        for i := 0; i &lt; b.N; i++ {
+            ch &lt;- i
+        }
+        close(ch)
+    }()
+    for _ = range ch {
+    }
 }
 
 /* Output:
-sync  3000000	       420 ns/op
-buffered 10000000	       103 ns/op
+sync  3000000           420 ns/op
+buffered 10000000           103 ns/op
 */
 </code></pre>
 

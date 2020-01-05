@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:35 AEDT">
+<meta name="revised" content="2020-01-05T12:03:47 AEDT">
 <title>Struct &amp; Interface :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -845,48 +852,6 @@
    Projects</option>
     <option value="/coding/" >
    Coding</option> 
-    <option value="/coding/c/" >
-  - 
-   C </option>
-    <option value="/coding/c-sharp/" >
-  - 
-   C#</option>
-    <option value="/coding/db-sql/" >
-  - 
-   DB &amp; SQL</option>
-    <option value="/coding/golang/" >
-  - 
-   Golang</option> 
-      <option value="/coding/golang/go-note-1/" >-- Getting started</option>
-      <option value="/coding/golang/go-note-2/" >-- Map, Function &amp; Closure</option>
-      <option value="/coding/golang/go-note-3/"  selected>-- Struct &amp; Interface</option>
-      <option value="/coding/golang/go-note-4/" >-- IO, Json &amp; XML</option>
-      <option value="/coding/golang/go-note-5/" >-- Error handling</option>
-      <option value="/coding/golang/go-note-6/" >-- Goroutine &amp; Channel - 1</option>
-      <option value="/coding/golang/go-note-7/" >-- Goroutine &amp; Channel - 2</option>
-      <option value="/coding/golang/go-note-8/" >-- Packaging</option>
-      <option value="/coding/golang/go-note-9/" >-- Pitfalls</option>
-      <option value="/coding/golang/go-note-10/" >-- Template</option>
-      <option value="/coding/golang/go-note-20/" >-- Good practice - 1</option>
-      <option value="/coding/golang/go-note-21/" >-- Good practice 2</option>
-      <option value="/coding/golang/go-note-22/" >-- Good practice 3</option>
-      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
-  
-    <option value="/coding/java/" >
-  - 
-   Java</option>
-    <option value="/coding/javascript/" >
-  - 
-   JavaScript</option>
-    <option value="/coding/python/" >
-  - 
-   Python</option>
-    <option value="/coding/rustlang/" >
-  - 
-   Rustlang</option>
-    <option value="/coding/shell/" >
-  - 
-   Shell</option>
   
     <option value="/blogs/" >
    Blogs</option>
@@ -935,19 +900,19 @@ import (
 )
 
 type TagType struct { //tags
-	field1 bool   &quot;An important answer&quot;
-	field2 string &quot;The name of the thing&quot;
-	field3 int    &quot;How much there are&quot;
+field1 bool   &quot;An important answer&quot;
+field2 string &quot;The name of the thing&quot;
+field3 int    &quot;How much there are&quot;
 }
 
 func main() {
-	tt := TagType{true, &quot;Barak Obama&quot;, 1}
-	for i := 0; i &lt; 3; i++ {
-		refTag(tt, i)
-	}
+tt := TagType{true, &quot;Barak Obama&quot;, 1}
+for i := 0; i &lt; 3; i++ {
+    refTag(tt, i)
+}
 }
 func refTag(tt TagType, ix int) {
-	ttType := reflect.TypeOf(tt)
+ttType := reflect.TypeOf(tt)
 ixField := ttType.Field(ix)
 fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
 }
@@ -963,18 +928,18 @@ fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
 <li><p>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</p>
 
 <pre><code class="language-go">type innerS struct {
-	in1 int
-	in2 int
+in1 int
+in2 int
 }
 type outerS struct {
-	b int
-	c float32
-	int // anonymous field
-	innerS // anonymous field
+b int
+c float32
+int // anonymous field
+innerS // anonymous field
 }
 func Func(){
-	outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
-	fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
+outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
+fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
 }
 
 </code></pre></li>
@@ -1069,55 +1034,55 @@ Method2(param_list) return_type
 <li><p>Type switch</p>
 
 <pre><code class="language-go">type Shape interface {
-	Area() float32
+Area() float32
 }
 type Square struct {
-	side float32
+side float32
 }
 
 type Circle struct {
-	radius float32
+radius float32
 }
 
 func (sq *Square) Area() float32 {
-	return sq.side * sq.side
+return sq.side * sq.side
 }
 
 func (c *Circle) Area() float32 {
-	return c.radius * c.radius * math.Pi
+return c.radius * c.radius * math.Pi
 }
 
 type Rectangle struct {
-	length, width float32
+length, width float32
 }
 
 func (r Rectangle) Area() float32 {
-	return r.length * r.width
+return r.length * r.width
 }
 
 func main() {
-	shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
-	fmt.Println(&quot;Looping through shapes for area ...&quot;)
-	for n, _ := range shapes {
-		fmt.Println(&quot;Shape details: &quot;, shapes[n])
-		fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
-	}
+shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
+fmt.Println(&quot;Looping through shapes for area ...&quot;)
+for n, _ := range shapes {
+    fmt.Println(&quot;Shape details: &quot;, shapes[n])
+    fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
+}
 
-	var shape Shape
-	shape = &amp;Square{4}
+var shape Shape
+shape = &amp;Square{4}
 
-	switch t := shape.(type) {
-	case *Square:
-		fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
-	case *Circle:
-		fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
-	case *Rectangle:
-		fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
-	case nil:
-		fmt.Println(&quot;nil value: nothing to check?&quot;)
-	default:
-		fmt.Printf(&quot;Unexpected type %T&quot;, t)
-	}
+switch t := shape.(type) {
+case *Square:
+    fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
+case *Circle:
+    fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
+case *Rectangle:
+    fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
+case nil:
+    fmt.Println(&quot;nil value: nothing to check?&quot;)
+default:
+    fmt.Printf(&quot;Unexpected type %T&quot;, t)
+}
 }
 
 // Looping through shapes for area ...
@@ -1142,22 +1107,22 @@ func main() {
 <li><p>Type classifier</p>
 
 <pre><code class="language-go">func classifier(items ...interface{}) {
-	for i, x := range items {
-		switch x.(type) {
-		case bool:
-			fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
-		case float64:
-			fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
-		case int, int64:
-			fmt.Printf(&quot;param #%d is an int\n&quot;, i)
-		case nil:
-			fmt.Printf(&quot;param #%d is nil\n&quot;, i)
-		case string:
-			fmt.Printf(&quot;param #%d is a string\n&quot;, i)
-		default:
-			fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
-		}
-	}
+for i, x := range items {
+    switch x.(type) {
+    case bool:
+        fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+    case float64:
+        fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+    case int, int64:
+        fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+    case nil:
+        fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+    case string:
+        fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+    default:
+        fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+    }
+}
 }
 </code></pre></li>
 </ul>
@@ -1188,18 +1153,18 @@ func main() {
 <li><p>Use the Elem() function work on it which indirects through the pointer</p>
 
 <pre><code class="language-go">func modifyValByReflect() {
-	var x float64 = 3.4
-	v := reflect.ValueOf(x)                      // Pass value
-	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
-	v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
-	fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
-	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
-	v = v.Elem()
-	fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
-	fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
-	v.SetFloat(3.1415)                           // this works!
-	fmt.Println(v.Interface())
-	fmt.Println(v) // &lt;float64 Value&gt;
+var x float64 = 3.4
+v := reflect.ValueOf(x)                      // Pass value
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
+fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+v = v.Elem()
+fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
+v.SetFloat(3.1415)                           // this works!
+fmt.Println(v.Interface())
+fmt.Println(v) // &lt;float64 Value&gt;
 }
 </code></pre></li>
 </ul>

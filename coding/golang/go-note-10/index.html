@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:35 AEDT">
+<meta name="revised" content="2020-01-05T12:03:47 AEDT">
 <title>Template :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -934,8 +941,8 @@
 <h4 id="example-of-letter-code">Example of letter code</h4>
 
 <pre><code class="language-go">func main() {
-	// Define a template.
-	const letter = `
+    // Define a template.
+    const letter = `
 Dear {{.Name}},
 {{if .Attended}}
 It was a pleasure to see you at the wedding.
@@ -949,27 +956,27 @@ Best wishes,
 Josie
 `
 
-	// Prepare some data to insert into the template.
-	type Recipient struct {
-		Name, Gift string
-		Attended   bool
-	}
-	var recipients = []Recipient{
-		{&quot;Aunt Mildred&quot;, &quot;bone china tea set&quot;, true},
-		{&quot;Uncle John&quot;, &quot;moleskin pants&quot;, false},
-		{&quot;Cousin Rodney&quot;, &quot;&quot;, false},
-	}
+    // Prepare some data to insert into the template.
+    type Recipient struct {
+        Name, Gift string
+        Attended   bool
+    }
+    var recipients = []Recipient{
+        {&quot;Aunt Mildred&quot;, &quot;bone china tea set&quot;, true},
+        {&quot;Uncle John&quot;, &quot;moleskin pants&quot;, false},
+        {&quot;Cousin Rodney&quot;, &quot;&quot;, false},
+    }
 
-	// Create a new template and parse the letter into it.
-	t := template.Must(template.New(&quot;letter&quot;).Parse(letter))
+    // Create a new template and parse the letter into it.
+    t := template.Must(template.New(&quot;letter&quot;).Parse(letter))
 
-	// Execute the template for each recipient.
-	for _, r := range recipients {
-		err := t.Execute(os.Stdout, r)
-		if err != nil {
-			log.Println(&quot;executing template:&quot;, err)
-		}
-	}
+    // Execute the template for each recipient.
+    for _, r := range recipients {
+        err := t.Execute(os.Stdout, r)
+        if err != nil {
+            log.Println(&quot;executing template:&quot;, err)
+        }
+    }
 
 }
 
@@ -982,56 +989,56 @@ Josie
 
 <pre><code class="language-go">// templateFile defines the contents of a template to be stored in a file, for testing.
 type templateFile struct {
-	name     string
-	contents string
+name     string
+contents string
 }
 
 func createTestDir(files []templateFile) string {
-	dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, file := range files {
-		f, err := os.Create(filepath.Join(dir, file.name))
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer f.Close()
-		_, err = io.WriteString(f, file.contents)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	return dir
+dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
+if err != nil {
+    log.Fatal(err)
+}
+for _, file := range files {
+    f, err := os.Create(filepath.Join(dir, file.name))
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer f.Close()
+    _, err = io.WriteString(f, file.contents)
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+return dir
 }
 
 func main() {
-	// Here we create a temporary directory and populate it with our sample
-	// template definition files; usually the template files would already
-	// exist in some location known to the program.
-	dir := createTestDir([]templateFile{
-		// T0.tmpl is a plain template file that just invokes T1.
-		{&quot;T0.tmpl&quot;, `T0 invokes T1: ({{template &quot;T1&quot;}})`},
-		// T1.tmpl defines a template, T1 that invokes T2.
-		{&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-		// T2.tmpl defines a template T2.
-		{&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-	})
-	// Clean up after the test; another quirk of running as an example.
-	defer os.RemoveAll(dir)
+// Here we create a temporary directory and populate it with our sample
+// template definition files; usually the template files would already
+// exist in some location known to the program.
+dir := createTestDir([]templateFile{
+    // T0.tmpl is a plain template file that just invokes T1.
+    {&quot;T0.tmpl&quot;, `T0 invokes T1: ({{template &quot;T1&quot;}})`},
+    // T1.tmpl defines a template, T1 that invokes T2.
+    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
+    // T2.tmpl defines a template T2.
+    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
+})
+// Clean up after the test; another quirk of running as an example.
+defer os.RemoveAll(dir)
 
-	// pattern is the glob pattern used to find all the template files.
-	pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
+// pattern is the glob pattern used to find all the template files.
+pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
 
-	// Here starts the example proper.
-	// T0.tmpl is the first name matched, so it becomes the starting template,
-	// the value returned by ParseGlob.
-	tmpl := template.Must(template.ParseGlob(pattern))
+// Here starts the example proper.
+// T0.tmpl is the first name matched, so it becomes the starting template,
+// the value returned by ParseGlob.
+tmpl := template.Must(template.ParseGlob(pattern))
 
-	err := tmpl.Execute(os.Stdout, nil)
-	if err != nil {
-		log.Fatalf(&quot;template execution: %s&quot;, err)
-	}
+err := tmpl.Execute(os.Stdout, nil)
+if err != nil {
+    log.Fatalf(&quot;template execution: %s&quot;, err)
+}
 }
 </code></pre></li>
 </ul>
@@ -1044,68 +1051,68 @@ func main() {
 <pre><code class="language-go">
 // templateFile defines the contents of a template to be stored in a file, for testing.
 type templateFile struct {
-	name     string
-	contents string
+name     string
+contents string
 }
 
 func createTestDir(files []templateFile) string {
-	dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, file := range files {
-		f, err := os.Create(filepath.Join(dir, file.name))
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer f.Close()
-		_, err = io.WriteString(f, file.contents)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	return dir
+dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
+if err != nil {
+    log.Fatal(err)
+}
+for _, file := range files {
+    f, err := os.Create(filepath.Join(dir, file.name))
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer f.Close()
+    _, err = io.WriteString(f, file.contents)
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+return dir
 }
 
 func main() {
-	// Here we create a temporary directory and populate it with our sample
-	// template definition files; usually the template files would already
-	// exist in some location known to the program.
-	dir := createTestDir([]templateFile{
-		// T1.tmpl defines a template, T1 that invokes T2.
-		{&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-		// T2.tmpl defines a template T2.
-		{&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-	})
-	// Clean up after the test; another quirk of running as an example.
-	defer os.RemoveAll(dir)
+// Here we create a temporary directory and populate it with our sample
+// template definition files; usually the template files would already
+// exist in some location known to the program.
+dir := createTestDir([]templateFile{
+    // T1.tmpl defines a template, T1 that invokes T2.
+    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
+    // T2.tmpl defines a template T2.
+    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
+})
+// Clean up after the test; another quirk of running as an example.
+defer os.RemoveAll(dir)
 
-	// pattern is the glob pattern used to find all the template files.
-	pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
+// pattern is the glob pattern used to find all the template files.
+pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
 
-	// Here starts the example proper.
-	// Load the helpers.
-	templates := template.Must(template.ParseGlob(pattern))
-	// Add one driver template to the bunch; we do this with an explicit template definition.
-	_, err := templates.Parse(&quot;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&quot;)
-	if err != nil {
-		log.Fatal(&quot;parsing driver1: &quot;, err)
-	}
-	// Add another driver template.
-	_, err = templates.Parse(&quot;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&quot;)
-	if err != nil {
-		log.Fatal(&quot;parsing driver2: &quot;, err)
-	}
-	// We load all the templates before execution. This package does not require
-	// that behavior but html/template's escaping does, so it's a good habit.
-	err = templates.ExecuteTemplate(os.Stdout, &quot;driver1&quot;, nil)
-	if err != nil {
-		log.Fatalf(&quot;driver1 execution: %s&quot;, err)
-	}
-	err = templates.ExecuteTemplate(os.Stdout, &quot;driver2&quot;, nil)
-	if err != nil {
-		log.Fatalf(&quot;driver2 execution: %s&quot;, err)
-	}
+// Here starts the example proper.
+// Load the helpers.
+templates := template.Must(template.ParseGlob(pattern))
+// Add one driver template to the bunch; we do this with an explicit template definition.
+_, err := templates.Parse(&quot;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&quot;)
+if err != nil {
+    log.Fatal(&quot;parsing driver1: &quot;, err)
+}
+// Add another driver template.
+_, err = templates.Parse(&quot;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&quot;)
+if err != nil {
+    log.Fatal(&quot;parsing driver2: &quot;, err)
+}
+// We load all the templates before execution. This package does not require
+// that behavior but html/template's escaping does, so it's a good habit.
+err = templates.ExecuteTemplate(os.Stdout, &quot;driver1&quot;, nil)
+if err != nil {
+    log.Fatalf(&quot;driver1 execution: %s&quot;, err)
+}
+err = templates.ExecuteTemplate(os.Stdout, &quot;driver2&quot;, nil)
+if err != nil {
+    log.Fatalf(&quot;driver2 execution: %s&quot;, err)
+}
 }
 
 </code></pre></li>

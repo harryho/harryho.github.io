@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:35 AEDT">
+<meta name="revised" content="2020-01-05T12:03:47 AEDT">
 <title>Golang snippets :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -845,6 +852,48 @@
    Projects</option>
     <option value="/coding/" >
    Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option>
+    <option value="/coding/golang/" >
+  - 
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Getting started</option>
+      <option value="/coding/golang/go-note-2/" >-- Map, Function &amp; Closure</option>
+      <option value="/coding/golang/go-note-3/" >-- Struct &amp; Interface</option>
+      <option value="/coding/golang/go-note-4/" >-- IO, Json &amp; XML</option>
+      <option value="/coding/golang/go-note-5/" >-- Error handling</option>
+      <option value="/coding/golang/go-note-6/" >-- Goroutine &amp; Channel - 1</option>
+      <option value="/coding/golang/go-note-7/" >-- Goroutine &amp; Channel - 2</option>
+      <option value="/coding/golang/go-note-8/" >-- Packaging</option>
+      <option value="/coding/golang/go-note-9/" >-- Pitfalls</option>
+      <option value="/coding/golang/go-note-10/" >-- Template</option>
+      <option value="/coding/golang/go-note-20/" >-- Good practice - 1</option>
+      <option value="/coding/golang/go-note-21/" >-- Good practice 2</option>
+      <option value="/coding/golang/go-note-22/" >-- Good practice 3</option>
+      <option value="/coding/golang/go-note-99/"  selected>-- Golang snippets</option>
+  
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/javascript/" >
+  - 
+   JavaScript</option>
+    <option value="/coding/python/" >
+  - 
+   Python</option>
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
   
     <option value="/blogs/" >
    Blogs</option>
@@ -880,26 +929,26 @@
 <pre><code class="language-go">package main
 
 import (
-	&quot;fmt&quot;
+    &quot;fmt&quot;
 )
 
 // Animal has a Name and an Age to represent an animal.
 type Animal struct {
-	Name string
-	Age  uint
+    Name string
+    Age  uint
 }
 
 // String makes Animal satisfy the Stringer interface.
 func (a Animal) String() string {
-	return fmt.Sprintf(&quot;%v (%d)&quot;, a.Name, a.Age)
+    return fmt.Sprintf(&quot;%v (%d)&quot;, a.Name, a.Age)
 }
 
 func main() {
-	a := Animal{
-		Name: &quot;Gopher&quot;,
-		Age:  2,
-	}
-	fmt.Println(a) // Gopher (2)
+    a := Animal{
+        Name: &quot;Gopher&quot;,
+        Age:  2,
+    }
+    fmt.Println(a) // Gopher (2)
 }
 </code></pre>
 
@@ -908,55 +957,55 @@ func main() {
 <pre><code class="language-go">package main
 
 import (
-	&quot;fmt&quot;
+    &quot;fmt&quot;
 )
 
 // Address has a City, State and a Country.
 type Address struct {
-	City    string
-	State   string
-	Country string
+    City    string
+    State   string
+    Country string
 }
 
 // Person has a Name, Age and Address.
 type Person struct {
-	Name string
-	Age  uint
-	Addr *Address
+    Name string
+    Age  uint
+    Addr *Address
 }
 
 // GoString makes Person satisfy the GoStringer interface.
 // The return value is valid Go code that can be used to reproduce the Person struct.
 func (p Person) GoString() string {
-	if p.Addr != nil {
-		return fmt.Sprintf(
-			&quot;Person{Name: %q, Age: %d, Addr: &amp;Address{City: %q, State: %q, Country: %q}}&quot;, 
-			p.Name, int(p.Age), p.Addr.City, p.Addr.State, p.Addr.Country)
-	}
-	return fmt.Sprintf(&quot;Person{Name: %q, Age: %d}&quot;, p.Name, int(p.Age))
+    if p.Addr != nil {
+        return fmt.Sprintf(
+            &quot;Person{Name: %q, Age: %d, Addr: &amp;Address{City: %q, State: %q, Country: %q}}&quot;, 
+            p.Name, int(p.Age), p.Addr.City, p.Addr.State, p.Addr.Country)
+    }
+    return fmt.Sprintf(&quot;Person{Name: %q, Age: %d}&quot;, p.Name, int(p.Age))
 }
 
 func main() {
-	p1 := Person{
-		Name: &quot;Warren&quot;,
-		Age:  31,
-		Addr: &amp;Address{
-			City:    &quot;Denver&quot;,
-			State:   &quot;CO&quot;,
-			Country: &quot;U.S.A.&quot;,
-		},
-	}
-	// If GoString() wasn't implemented, the output of `fmt.Printf(&quot;%#v&quot;, p1)` would be similar to
-	// Person{Name:&quot;Warren&quot;, Age:0x1f, Addr:(*main.Address)(0x10448240)}
-	fmt.Printf(&quot;%#v\n&quot;, p1)
+    p1 := Person{
+        Name: &quot;Warren&quot;,
+        Age:  31,
+        Addr: &amp;Address{
+            City:    &quot;Denver&quot;,
+            State:   &quot;CO&quot;,
+            Country: &quot;U.S.A.&quot;,
+        },
+    }
+    // If GoString() wasn't implemented, the output of `fmt.Printf(&quot;%#v&quot;, p1)` would be similar to
+    // Person{Name:&quot;Warren&quot;, Age:0x1f, Addr:(*main.Address)(0x10448240)}
+    fmt.Printf(&quot;%#v\n&quot;, p1)
 
-	p2 := Person{
-		Name: &quot;Theia&quot;,
-		Age:  4,
-	}
-	// If GoString() wasn't implemented, the output of `fmt.Printf(&quot;%#v&quot;, p2)` would be similar to
-	// Person{Name:&quot;Theia&quot;, Age:0x4, Addr:(*main.Address)(nil)}
-	fmt.Printf(&quot;%#v\n&quot;, p2)
+    p2 := Person{
+        Name: &quot;Theia&quot;,
+        Age:  4,
+    }
+    // If GoString() wasn't implemented, the output of `fmt.Printf(&quot;%#v&quot;, p2)` would be similar to
+    // Person{Name:&quot;Theia&quot;, Age:0x4, Addr:(*main.Address)(nil)}
+    fmt.Printf(&quot;%#v\n&quot;, p2)
 
 }
 
@@ -970,44 +1019,44 @@ func main() {
 <h4 id="read-file">Read file</h4>
 
 <pre><code class="language-go">func main() {
-	file, err := os.Open(&quot;input.dat&quot;)
+    file, err := os.Open(&quot;input.dat&quot;)
 
-	if err != nil {
-		fmt.Printf(&quot;An error occurred on opening the input file\n&quot; +
-			&quot;Does the file exist?\n&quot; +
-			&quot;Have you got acces to it?\n&quot;)
-		return
-	}
-	defer file.Close()
-	iReader := bufio.NewReader(file)
-	for {
-		str, err := iReader.ReadString('\n')
-		if err != nil {
-			return // error or EOF
-		}
-		fmt.Printf(&quot;The input was: %s&quot;, str)
-	}
+    if err != nil {
+        fmt.Printf(&quot;An error occurred on opening the input file\n&quot; +
+            &quot;Does the file exist?\n&quot; +
+            &quot;Have you got acces to it?\n&quot;)
+        return
+    }
+    defer file.Close()
+    iReader := bufio.NewReader(file)
+    for {
+        str, err := iReader.ReadString('\n')
+        if err != nil {
+            return // error or EOF
+        }
+        fmt.Printf(&quot;The input was: %s&quot;, str)
+    }
 }
 </code></pre>
 
 <h4 id="read-write-with-sliced-buffer">Read &amp; Write with sliced buffer</h4>
 
 <pre><code class="language-go">func cat(f *os.File) {
-	const NBUF = 512
-	var buf [NBUF]byte
-	for {
-		switch nr, er := f.Read(buf[:]); true {
-		case nr &lt; 0:
-			fmt.Fprintf(os.Stderr, &quot;cat: error reading from %s: %s\n&quot;, f, er)
-			os.Exit(1)
-		case nr == 0: // EOF
-			return
-		case nr &gt; 0:
-			if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
-				fmt.Fprintf(os.Stderr, &quot;cat: error writing from %s: %s\n&quot;, f, ew)
-			}
-		}
-	}
+    const NBUF = 512
+    var buf [NBUF]byte
+    for {
+        switch nr, er := f.Read(buf[:]); true {
+        case nr &lt; 0:
+            fmt.Fprintf(os.Stderr, &quot;cat: error reading from %s: %s\n&quot;, f, er)
+            os.Exit(1)
+        case nr == 0: // EOF
+            return
+        case nr &gt; 0:
+            if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
+                fmt.Fprintf(os.Stderr, &quot;cat: error writing from %s: %s\n&quot;, f, ew)
+            }
+        }
+    }
 }
 </code></pre>
 

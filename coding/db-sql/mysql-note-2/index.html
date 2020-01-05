@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:36 AEDT">
+<meta name="revised" content="2020-01-05T12:03:48 AEDT">
 <title>MySql Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -17,7 +17,8 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of SQL for MySql: DDL - Data Definition Language">
+<meta name="description" content="Introduction of SQL: DDL - Data Definition Language 
+ DML - Data Manipulation Language">
 
 
 
@@ -218,13 +219,6 @@
             <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -253,10 +247,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -854,12 +862,13 @@
     <option value="/coding/db-sql/" >
   - 
    DB &amp; SQL</option> 
-      <option value="/coding/db-sql/mssql-note-1/" >-- MS Sql Server Note - 1</option>
       <option value="/coding/db-sql/mysql-note-1/" >-- MySql Note - 1</option>
       <option value="/coding/db-sql/mysql-note-2/"  selected>-- MySql Note - 2</option>
       <option value="/coding/db-sql/mysql-note-3/" >-- MySql Note - 3</option>
       <option value="/coding/db-sql/mysql-note-4/" >-- MySql Note - 4</option>
+      <option value="/coding/db-sql/mysql-note-5/" >-- MySql Note - 5</option>
       <option value="/coding/db-sql/pgsql-note-1/" >-- PostgresQL Note - 1</option>
+      <option value="/coding/db-sql/mssql-note-1/" >-- Sql Server Note - 1</option>
   
     <option value="/coding/golang/" >
   - 
@@ -963,6 +972,14 @@ SELECT * FROM tmp_table;
 
 </code></pre>
 
+<h3 id="update-data-from-other-table">Update data from other table</h3>
+
+<pre><code class="language-sql">UPDATE tableB
+INNER JOIN tableA ON tableB.name = tableA.name
+SET tableB.value = IF(tableA.value &gt; 0, tableA.value, tableB.value)
+WHERE tableA.name = 'Joe'
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -976,6 +993,7 @@ SELECT * FROM tmp_table;
 <li><a href="#create-a-table">Create a table</a></li>
 <li><a href="#query">Query</a></li>
 <li><a href="#useful-temporary-table">Useful temporary table</a></li>
+<li><a href="#update-data-from-other-table">Update data from other table</a></li>
 </ul></li>
 </ul></li>
 </ul>

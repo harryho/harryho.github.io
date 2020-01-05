@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-01-05T12:03:47 AEDT">
-<title>OS :: Hello World</title>
+<meta name="revised" content="2020-01-05T12:03:48 AEDT">
+<title>MySql Note - 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Json Support ">
 
 
 
     
   </head>
-  <body data-url="/os/">
+  <body data-url="/coding/db-sql/mysql-note-5/">
     
       <header>
   <div class="logo">
@@ -132,10 +132,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item haschildren
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -210,10 +211,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/db-sql/" class="dd-item haschildren
+    <li data-nav-id="/coding/db-sql/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/db-sql/">DB &amp; SQL</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
@@ -244,7 +246,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item active">
         <div>
           <a href="/coding/db-sql/mysql-note-5/">
             MySql Note - 5
@@ -704,11 +706,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item parent active haschildren
+    <li data-nav-id="/os/" class="dd-item haschildren
         ">
       <div>
-      <a href="/os/">OS</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
@@ -850,25 +851,49 @@
     <option value="/projects/" >
    Projects</option>
     <option value="/coding/" >
-   Coding</option>
+   Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option> 
+      <option value="/coding/db-sql/mysql-note-1/" >-- MySql Note - 1</option>
+      <option value="/coding/db-sql/mysql-note-2/" >-- MySql Note - 2</option>
+      <option value="/coding/db-sql/mysql-note-3/" >-- MySql Note - 3</option>
+      <option value="/coding/db-sql/mysql-note-4/" >-- MySql Note - 4</option>
+      <option value="/coding/db-sql/mysql-note-5/"  selected>-- MySql Note - 5</option>
+      <option value="/coding/db-sql/pgsql-note-1/" >-- PostgresQL Note - 1</option>
+      <option value="/coding/db-sql/mssql-note-1/" >-- Sql Server Note - 1</option>
+  
+    <option value="/coding/golang/" >
+  - 
+   Golang</option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/javascript/" >
+  - 
+   JavaScript</option>
+    <option value="/coding/python/" >
+  - 
+   Python</option>
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
+  
     <option value="/blogs/" >
    Blogs</option>
     <option value="/hacks/" >
    Hacks</option>
-    <option value="/os/"  selected>
-   OS</option> 
-      <option value="/os/dual-boot-win10-ubuntu18/" >- Dual Boot Windows 10 &amp; Ubuntu 18</option>
-      <option value="/os/ubuntu-desktop-18/" >- Ubuntu Desktop 18 LTS note</option>
-      <option value="/os/raspberrypi-notes/" >- Raspberry Pi setup</option>
-      <option value="/os/lubuntu16-desktop/" >- Lubuntu 16 desktop</option>
-      <option value="/os/grub-trouble-shooting/" >- Grub Trouble Shooting</option>
-      <option value="/os/ubuntu-server-16/" >- Ubuntu 16 server note</option>
-      <option value="/os/centos-server-7/" >- CentOS 7 Server note</option>
-      <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
-      <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
-      <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
-      <option value="/os/centos-fedora-desktop/" >- CentOS 6/7 Multi-Boot Setup</option>
-  
+    <option value="/os/" >
+   OS</option>
     <option value="/frameworks/" >
    Frameworks</option>
 
@@ -885,81 +910,289 @@
     
     
     
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>MySql Note - 5</h1>
+        
 
-<ul class="children children-card">
+<h2 id="json-support">Json support</h2>
 
-<span><card>
-        <a href="/os/dual-boot-win10-ubuntu18/" >Dual Boot Windows 10 &amp; Ubuntu 18</a></card>
-        <p><span>Steps to create a machine with dual-boot OS: Windows 10 and Ubuntu 18 ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<p>As of MySQL 5.7.8, MySQL supports a native JSON data type defined by RFC 7159 that enables efficient access to data in JSON (JavaScript Object Notation) documents. The JSON data type provides these advantages over storing JSON-format strings in a string column:</p>
 
-<span><card>
-        <a href="/os/ubuntu-desktop-18/" >Ubuntu Desktop 18 LTS note</a></card>
-        <p><span>Post-installation for Ubuntu 18 desktop ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
+<ul>
+<li><p>Automatic validation of JSON documents stored in JSON columns. Invalid documents produce an error.</p></li>
 
-<span><card>
-        <a href="/os/raspberrypi-notes/" >Raspberry Pi setup</a></card>
-        <p><span>How to setup Raspberry Pi as file server ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
-
-<span><card>
-        <a href="/os/lubuntu16-desktop/" >Lubuntu 16 desktop</a></card>
-        <p><span>Post-installation for Lubuntu 16 desktop ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
-
-<span><card>
-        <a href="/os/grub-trouble-shooting/" >Grub Trouble Shooting</a></card>
-        <p><span>Common steps to trouble shoot the Grub booting problem  ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
-
-<span><card>
-        <a href="/os/ubuntu-server-16/" >Ubuntu 16 server note</a></card>
-        <p>Prelude
- This article is mainly to help experienced user install and setup Ubuntu 16 LTS Server. If you are looking for the information for Ubuntu 14, please go to the page Ubuntu 14 server setup
- Prerequisites  You are familiar with Ubuntu, at least you have some experience working on Linux system. You are familiar with basic bash/shell command  Wireless Setup  If you install ubuntu server on a laptop, you might end up to setup the wifi first.</p>
-</span>
-
-<span><card>
-        <a href="/os/centos-server-7/" >CentOS 7 Server note</a></card>
-        <p>Prelude
- This article is mainly to help experienced user install and setup CentOS 7 Server.
- Prerequisites  You are familiar with CentOS, at least you have some experience working on Linux system. You are familiar with basic bash/shell command  Things to do after installing CentOS server  How to setup your server  Firewall setup sudo firewall-cmd --permanent --add-port=22/tcp sudo firewall-cmd --permanent --add-port=21/tcp sudo firewall-cmd --permanent --add-port=80/tcp sudo firewall-cmd --permanent --add-port=443/tcp sudo firewall-cmd --permanent --add-port=8080/tcp sudo firewall-cmd --reload  SSH server setup !</p>
-</span>
-
-<span><card>
-        <a href="/os/ubuntu-server-14/" >Ubuntu 14 -- server setup</a></card>
-        <p>Prelude
- This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow Ubuntu deskstop setup
- Prerequisites  You are familiar with Ubuntu, at least you have some experience working on Linux system. You are familiar with bash/shell script You are going to setup Ubuntu server for special purpose.</p>
-</span>
-
-<span><card>
-        <a href="/os/ubuntu-desktop-14/" >Ubuntu 14 -- desktop setup &amp; dual boot </a></card>
-        <p><span>Post-installation for Ubuntu 14 desktop ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
-
-<span><card>
-        <a href="/os/ubuntu-desktop-14-extra-tools/" >Ubuntu 14 -- desktop, extra tools</a></card>
-        <p><span>Post-installation for Ubuntu 14 desktop - Part 2 ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-</span>
-
-<span><card>
-        <a href="/os/centos-fedora-desktop/" >CentOS 6/7 Multi-Boot Setup</a></card>
-        <p>Bootable usb preparation  Download dvd iso from url or torrent Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the USB as origin )
- Install CentOS on virtual machine  Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.
- CentOS provide a friendly and nice installation process.</p>
-</span>
+<li><p>Optimized storage format. JSON documents stored in JSON columns are converted to an internal format that permits quick read access to document elements. When the server later must read a JSON value stored in this binary format, the value need not be parsed from a text representation. The binary format is structured to enable the server to look up subobjects or nested values directly by key or array index without reading all values before or after them in the document.</p></li>
 </ul>
 
+<h3 id="caveats">Caveats</h3>
 
+<ul>
+<li><p>The size of any JSON document stored in a JSON column is limited to the value of the max_allowed_packet system variable.</p></li>
+
+<li><p>A JSON column cannot have a non-NULL default value.</p></li>
+</ul>
+
+<h3 id="json-functions">Json functions</h3>
+
+<blockquote>
+<p>Along with the JSON data type, a set of SQL functions is available to enable operations on JSON values, such as creation, manipulation, and searching.</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">-&gt;</td>
+<td align="left">Return value from JSON column after evaluating path; equivalent to JSON_EXTRACT().</td>
+</tr>
+
+<tr>
+<td align="left">-&gt;&gt;</td>
+<td align="left">Return value from JSON column after evaluating path and unquoting the result; equivalent to JSON_UNQUOTE(JSON_EXTRACT()).</td>
+</tr>
+
+<tr>
+<td align="left">JSON_APPEND()</td>
+<td align="left">(deprecated 5.7.9)  Append data to JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_ARRAY()</td>
+<td align="left">Create JSON array</td>
+</tr>
+
+<tr>
+<td align="left">JSON_ARRAY_APPEND()</td>
+<td align="left">Append data to JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_ARRAY_INSERT()</td>
+<td align="left">Insert into JSON array</td>
+</tr>
+
+<tr>
+<td align="left">JSON_CONTAINS()</td>
+<td align="left">Whether JSON document contains specific object at path</td>
+</tr>
+
+<tr>
+<td align="left">JSON_CONTAINS_PATH()</td>
+<td align="left">Whether JSON document contains any data at path</td>
+</tr>
+
+<tr>
+<td align="left">JSON_DEPTH()</td>
+<td align="left">Maximum depth of JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_EXTRACT()</td>
+<td align="left">Return data from JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_INSERT()</td>
+<td align="left">Insert data into JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_KEYS()</td>
+<td align="left">Array of keys from JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_LENGTH()</td>
+<td align="left">Number of elements in JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_MERGE()</td>
+<td align="left">(deprecated 5.7.22)  Merge JSON documents, preserving duplicate keys. Deprecated synonym for JSON_MERGE_PRESERVE()</td>
+</tr>
+
+<tr>
+<td align="left">JSON_MERGE_PATCH()</td>
+<td align="left">Merge JSON documents, replacing values of duplicate keys</td>
+</tr>
+
+<tr>
+<td align="left">JSON_MERGE_PRESERVE()</td>
+<td align="left">Merge JSON documents, preserving duplicate keys</td>
+</tr>
+
+<tr>
+<td align="left">JSON_OBJECT()</td>
+<td align="left">Create JSON object</td>
+</tr>
+
+<tr>
+<td align="left">JSON_PRETTY()</td>
+<td align="left">Print a JSON document in human-readable format</td>
+</tr>
+
+<tr>
+<td align="left">JSON_QUOTE()</td>
+<td align="left">Quote JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_REMOVE()</td>
+<td align="left">Remove data from JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_REPLACE()</td>
+<td align="left">Replace values in JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_SEARCH()</td>
+<td align="left">Path to value within JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_SET()</td>
+<td align="left">Insert data into JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_STORAGE_SIZE()</td>
+<td align="left">Space used for storage of binary representation of a JSON document</td>
+</tr>
+
+<tr>
+<td align="left">JSON_TYPE()</td>
+<td align="left">Type of JSON value</td>
+</tr>
+
+<tr>
+<td align="left">JSON_UNQUOTE()</td>
+<td align="left">Unquote JSON value</td>
+</tr>
+
+<tr>
+<td align="left">JSON_VALID()</td>
+<td align="left">Whether JSON value is valid</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="export-table-to-json-file">Export table to json file</h3>
+
+<ul>
+<li><p>Return json object</p>
+
+<pre><code class="language-sql">
+---  Return record as json in query
+
+SELECT 
+json_object( 
+'entityId',  entityId,
+'categoryName',  categoryName,
+'description',  description,
+'picture',  picture
+) as json, 'Category' 
+FROM  Category 
+WHERE entityId = 1 ; 
+</code></pre></li>
+
+<li><p>Json object result</p>
+
+<pre><code class="language-json">{
+&quot;picture&quot;: null,
+&quot;entityId&quot;: 1,
+&quot;description&quot;: &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
+&quot;categoryName&quot;: &quot;Beverages&quot;
+}
+
+</code></pre></li>
+
+<li><p>Return record as json array</p>
+
+<pre><code class="language-sql">
+-- Use json_array and json_object functions 
+
+DROP TEMPORARY TABLE IF EXISTS tmp_json_data;
+
+CREATE TEMPORARY TABLE tmp_json_data (
+jsonText TEXT
+) 
+SELECT 
+json_object( 
+'entityId',  entityId,
+'categoryName',  categoryName,
+'description',  description,
+'picture',  picture
+) as json 
+INTO jsonText
+FROM  Category ; 
+  
+SET SESSION  group_concat_max_len = 9999;
+
+SELECT concat('[', group_concat(jsonText),']') jsonArray
+FROM tmp_json_data;
+</code></pre></li>
+
+<li><p>Json array result</p>
+
+<pre><code class="language-json">[
+{
+  &quot;categoryName&quot; : &quot;Beverages&quot;,
+  &quot;description&quot; : &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
+  &quot;entityId&quot; : 1,
+  &quot;picture&quot; : null
+},
+{
+  &quot;categoryName&quot; : &quot;Condiments&quot;,
+  &quot;description&quot; : &quot;Sweet and savory sauces, relishes, spreads, and seasonings&quot;,
+  &quot;entityId&quot; : 2,
+  &quot;picture&quot; : null
+},
+{
+  &quot;categoryName&quot; : &quot;Confections&quot;,
+  &quot;description&quot; : &quot;Desserts, candies, and sweet breads&quot;,
+  &quot;entityId&quot; : 3,
+  &quot;picture&quot; : null
+}
+]
+
+</code></pre></li>
+</ul>
+
+    </div>
+
+    <div class="toc toc-fixed" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#json-support">Json support</a>
+<ul>
+<li><a href="#caveats">Caveats</a></li>
+<li><a href="#json-functions">Json functions</a></li>
+<li><a href="#export-table-to-json-file">Export table to json file</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
 
     
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/hacks/vbox-notes/" title="VirtualBox Notes"> <i class="fa fa-chevron-left"></i><label>VirtualBox Notes</label></a>
-    <a class="nav nav-next" href="/os/dual-boot-win10-ubuntu18/" title="Dual Boot Windows 10 &amp; Ubuntu 18" style="margin-right: 0px;"><label>Dual Boot Windows 10 &amp; Ubuntu 18</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/db-sql/mysql-note-4/" title="MySql Note - 4"> <i class="fa fa-chevron-left"></i><label>MySql Note - 4</label></a>
+    <a class="nav nav-next" href="/coding/db-sql/pgsql-note-1/" title="PostgresQL Note - 1" style="margin-right: 0px;"><label>PostgresQL Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -972,10 +1205,6 @@
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 30/11/2018
-    </div>
     
 
     

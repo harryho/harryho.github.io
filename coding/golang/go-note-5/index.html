@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:35 AEDT">
+<meta name="revised" content="2020-01-05T12:03:47 AEDT">
 <title>Error handling :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -1097,23 +1104,23 @@ return
 <h4 id="sample-of-panic-defer-recover">Sample of panic, defer &amp; recover</h4>
 
 <pre><code class="language-go">func badCall() {
-	panic(&quot;bad end&quot;)
+    panic(&quot;bad end&quot;)
 }
 
 func test() {
-	defer func() {
-		if e := recover(); e != nil {
-			fmt.Printf(&quot;Panicking %s\r\n&quot;, e)
-		}
-	}()
-	badCall()
-	fmt.Printf(&quot;After bad call\r\n&quot;)
+    defer func() {
+        if e := recover(); e != nil {
+            fmt.Printf(&quot;Panicking %s\r\n&quot;, e)
+        }
+    }()
+    badCall()
+    fmt.Printf(&quot;After bad call\r\n&quot;)
 }
 
 func main() {
-	fmt.Printf(&quot;Calling test\r\n&quot;)
-	test()
-	fmt.Printf(&quot;Test completed\r\n&quot;)
+    fmt.Printf(&quot;Calling test\r\n&quot;)
+    test()
+    fmt.Printf(&quot;Test completed\r\n&quot;)
 }
 </code></pre>
 
@@ -1148,50 +1155,50 @@ func main() {
 <h3 id="start-external-program">Start external program</h3>
 
 <pre><code class="language-go">func main() {
-	// 1) os.StartProcess //
-	/*********************/
-	/* Linux: */
-	env := os.Environ()
-	procAttr := &amp;os.ProcAttr{
-		Env: env,
-		Files: []*os.File{
-			os.Stdin,
-			os.Stdout,
-			os.Stderr,
-		},
-	}
-	pid, err := os.StartProcess(&quot;/bin/ls&quot;, []string{&quot;ls&quot;, &quot;-l&quot;}, procAttr)
-	if err != nil {
-		fmt.Printf(&quot;Error %v starting process!&quot;, err) //
-		os.Exit(1)
-	}
-	fmt.Printf(&quot;The process id is %v&quot;, pid)
-	/* Output:
-	The process id is &amp;{21275 0 0 {{0 0} 0 0 0 0}}The process id is &amp;{21276 0 0 {{0 0} 0 0 0 0}}total 54
-	-rwxrwxrwx 1 root root   250 Sep 21 19:33 csv_data.txt
-	-rwxrwxrwx 1 root root 25227 Oct  4 23:34 hello.go
-	-rwxrwxrwx 1 root root  6708 Sep 21 10:25 hello.go.txt
-	-rwxrwxrwx 1 root root   130 Sep 21 11:08 output.txt
-	-rwxrwxrwx 1 root root  8898 Sep 21 12:10 target_hello.txt
-	-rwxrwxrwx 1 root root  1619 Sep 22 14:40 urlshorten.go.txt
-	-rwxrwxrwx 1 root root   182 Sep 21 13:50 vcard.json
-	*/
-	// 2nd example: show all processes
-	pid, err = os.StartProcess(&quot;/bin/ps&quot;, []string{&quot;-e&quot;, &quot;opid,ppid,comm&quot;}, procAttr)
-	if err != nil {
-		fmt.Printf(&quot;Error %v starting process!&quot;, err) //
-		os.Exit(1)
-	}
-	fmt.Printf(&quot;The process id is %v&quot;, pid)
-	// 2) cmd.Run //
-	/***************/
-	cmd := exec.Command(&quot;gedit&quot;) // this opens a gedit-window
-	err = cmd.Run()
-	if err != nil {
-		fmt.Printf(&quot;Error %v executing command!&quot;, err)
-		os.Exit(1)
-	}
-	fmt.Printf(&quot;The command is %v&quot;, cmd)
+    // 1) os.StartProcess //
+    /*********************/
+    /* Linux: */
+    env := os.Environ()
+    procAttr := &amp;os.ProcAttr{
+        Env: env,
+        Files: []*os.File{
+            os.Stdin,
+            os.Stdout,
+            os.Stderr,
+        },
+    }
+    pid, err := os.StartProcess(&quot;/bin/ls&quot;, []string{&quot;ls&quot;, &quot;-l&quot;}, procAttr)
+    if err != nil {
+        fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+        os.Exit(1)
+    }
+    fmt.Printf(&quot;The process id is %v&quot;, pid)
+    /* Output:
+    The process id is &amp;{21275 0 0 {{0 0} 0 0 0 0}}The process id is &amp;{21276 0 0 {{0 0} 0 0 0 0}}total 54
+    -rwxrwxrwx 1 root root   250 Sep 21 19:33 csv_data.txt
+    -rwxrwxrwx 1 root root 25227 Oct  4 23:34 hello.go
+    -rwxrwxrwx 1 root root  6708 Sep 21 10:25 hello.go.txt
+    -rwxrwxrwx 1 root root   130 Sep 21 11:08 output.txt
+    -rwxrwxrwx 1 root root  8898 Sep 21 12:10 target_hello.txt
+    -rwxrwxrwx 1 root root  1619 Sep 22 14:40 urlshorten.go.txt
+    -rwxrwxrwx 1 root root   182 Sep 21 13:50 vcard.json
+    */
+    // 2nd example: show all processes
+    pid, err = os.StartProcess(&quot;/bin/ps&quot;, []string{&quot;-e&quot;, &quot;opid,ppid,comm&quot;}, procAttr)
+    if err != nil {
+        fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+        os.Exit(1)
+    }
+    fmt.Printf(&quot;The process id is %v&quot;, pid)
+    // 2) cmd.Run //
+    /***************/
+    cmd := exec.Command(&quot;gedit&quot;) // this opens a gedit-window
+    err = cmd.Run()
+    if err != nil {
+        fmt.Printf(&quot;Error %v executing command!&quot;, err)
+        os.Exit(1)
+    }
+    fmt.Printf(&quot;The command is %v&quot;, cmd)
 }
 </code></pre>
 

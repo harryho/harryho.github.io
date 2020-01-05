@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2019-12-24T00:36:36 AEDT">
+<meta name="revised" content="2020-01-05T12:03:48 AEDT">
 <title>Java Note - 3: Path and Files :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -217,13 +217,6 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            MS Sql Server Note - 1
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-1/">
@@ -252,10 +245,24 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql Note - 5
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
         <div>
           <a href="/coding/db-sql/pgsql-note-1/">
             PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -929,44 +936,44 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
-	@Override
-	public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
-		System.out.println( &quot;post visit dir :  &quot;+  dir );
-		return FileVisitResult.CONTINUE;
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
         }
 
         @Override
-	public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
-		System.out.println( &quot;post visit dir :  &quot;+  dir );
-		return FileVisitResult.CONTINUE;
+    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
         }
 
-	@Override
-	public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
-			throws IOException {
-		 if ( attr.isSymbolicLink() )
-		  { System.out.println( &quot; symbolic link  :  &quot;+  file  );
-		  
-		  }else if (  attr.isSymbolicLink() ){			  
-			  System.out.println( &quot; regular file : &quot;+ file );
-		  }
-		return FileVisitResult.CONTINUE;
-	}
-	 
-	@Override
-	public FileVisitResult visitFileFailed(Path file, IOException exc)
-			throws IOException {		
-		 System.err.println( exc.getMessage());
-		return FileVisitResult.CONTINUE;
-	}
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
+            throws IOException {
+         if ( attr.isSymbolicLink() )
+          { System.out.println( &quot; symbolic link  :  &quot;+  file  );
+          
+          }else if (  attr.isSymbolicLink() ){              
+              System.out.println( &quot; regular file : &quot;+ file );
+          }
+        return FileVisitResult.CONTINUE;
+    }
+     
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc)
+            throws IOException {        
+         System.err.println( exc.getMessage());
+        return FileVisitResult.CONTINUE;
+    }
 }
 </code></pre>
 
 <p>To use this customized  is so easy. Just 3 lines coding you can test it by yourself.</p>
 
-<pre><code>		CustomFileVisitor fileVisitor = new CustomFileVisitor();
-		Path path = Paths.get(&quot;TestDir&quot;);
-		Files.walkFileTree(path, fileVisitor);
+<pre><code>        CustomFileVisitor fileVisitor = new CustomFileVisitor();
+        Path path = Paths.get(&quot;TestDir&quot;);
+        Files.walkFileTree(path, fileVisitor);
 </code></pre>
 
 <h3 id="arm">ARM</h3>
@@ -980,24 +987,24 @@ public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
 <pre><code class="language-java">FileInputStream exchangeCurrencyReader= null;
 FileOutputStream exchangeCurrencyWriter = null;
 try {
-	exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
-	exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
-	int var;
-	while (var = exchangeCurrencyReader.read()) != -1)
-		exchangeCurrencyWriter.write(var);
+    exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+    exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
+    int var;
+    while (var = exchangeCurrencyReader.read()) != -1)
+        exchangeCurrencyWriter.write(var);
 } 
 finally {
-	if (exchangeCurrencyReader!= null)
-		exchangeCurrencyReader.close();
-	if (exchangeCurrencyWriter!= null)
-		exchangeCurrencyWriter.close();
+    if (exchangeCurrencyReader!= null)
+        exchangeCurrencyReader.close();
+    if (exchangeCurrencyWriter!= null)
+        exchangeCurrencyWriter.close();
 }
 </code></pre>
 
 <p><em>Code in Java 7</em></p>
 
 <pre><code class="language-java">try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
-	FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;)){
+    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;)){
       int var;
       while((var= exchangeCurrencyReader.read()) != -1 )
             exchangeCurrencyWriter.write();
@@ -1027,31 +1034,31 @@ import java.util.Map;
 
 public class FileWatchService {
 
-	public static void watchFileUpdate() {
-		try (WatchService service = FileSystems.getDefault().newWatchService()) {
-			Map&lt;WatchKey, Path&gt; eventMap = new HashMap&lt;&gt;();
-			Path dir = Paths.get(&quot;TestDir&quot;);
+    public static void watchFileUpdate() {
+        try (WatchService service = FileSystems.getDefault().newWatchService()) {
+            Map&lt;WatchKey, Path&gt; eventMap = new HashMap&lt;&gt;();
+            Path dir = Paths.get(&quot;TestDir&quot;);
 
-			eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
+            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
 
-			WatchKey key;
-			do {
-				key = service.take();
-				Path eventPath = eventMap.get(key);
-				for (WatchEvent&lt;?&gt; event : key.pollEvents()) {
-					WatchEvent.Kind&lt;?&gt; kind = event.kind();
-					Path path = (Path) event.context();
-					System.out.println(eventPath + &quot; : &quot; + kind + &quot;  : &quot; + path);
-				}
-			} while (key.reset());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main (String [] args ){
-	   watchFileUpdate();
-	}
+            WatchKey key;
+            do {
+                key = service.take();
+                Path eventPath = eventMap.get(key);
+                for (WatchEvent&lt;?&gt; event : key.pollEvents()) {
+                    WatchEvent.Kind&lt;?&gt; kind = event.kind();
+                    Path path = (Path) event.context();
+                    System.out.println(eventPath + &quot; : &quot; + kind + &quot;  : &quot; + path);
+                }
+            } while (key.reset());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main (String [] args ){
+       watchFileUpdate();
+    }
 }
 </code></pre>
 
