@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-02T12:45:25 AEDT">
+<meta name="revised" content="2020-02-02T13:37:18 AEDT">
 <title>Digitial Ocean Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -950,17 +950,17 @@
 
 <pre><code># Add new user 
 # set password
-adduser hho
+adduser &lt;admin_user&gt;
 
 # user to sudo group
-usermod -aG sudo hho
+usermod -aG sudo &lt;admin_user&gt;
 
 </code></pre>
 
 <h4 id="set-ssh-access-for-new-user">Set SSH access for new user</h4>
 
 <pre><code># Switch session to new user 
-su - hho
+su - &lt;admin_user&gt;
 
 # navigate to user home 
 cd
@@ -971,13 +971,13 @@ chmod 700 ~/.ssh
 
 # Copy root key
 sudo cp /root/.ssh/authorized_keys ~/.ssh/authorized_keys
-chmod 644 /home/hho/.ssh/authorized_keys
-sudo chown -R hho:hho ~/
+chmod 644 /home/&lt;admin_user&gt;/.ssh/authorized_keys
+sudo chown -R &lt;admin_user&gt;:&lt;admin_user&gt; ~/
 </code></pre>
 
 <h4 id="login-as-new-user-via-ssh">Login as new user via SSH</h4>
 
-<pre><code>ssh -i ~/.ssh/&lt;your_droplet_rsa&gt; hho@&lt;your_droplet_ip&gt;
+<pre><code>ssh -i ~/.ssh/&lt;your_droplet_rsa&gt; &lt;admin_user&gt;@&lt;your_droplet_ip&gt;
 </code></pre>
 
 <h4 id="set-root-password-disable-ssh">Set root password &amp; disable SSH</h4>
