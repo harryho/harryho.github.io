@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2020-02-02T12:45:25 AEDT">
-<title>Git Practices :: Hello World</title>
+<title>Digitial Ocean Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Useful Git commands  &amp; practices for repository management">
+<meta name="description" content="User Setup, Security Update &amp; Features">
 
 
 
     
   </head>
-  <body data-url="/hacks/git-notes/">
+  <body data-url="/cloud/digito-note-2/">
     
       <header>
   <div class="logo">
@@ -611,14 +611,13 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item parent haschildren
+    <li data-nav-id="/hacks/" class="dd-item haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/hacks/git-notes/" class="dd-item active">
+      <li data-nav-id="/hacks/git-notes/" class="dd-item">
         <div>
           <a href="/hacks/git-notes/">
             Git Practices
@@ -676,10 +675,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/cloud/" class="dd-item haschildren
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/cloud/aws-note-1/" class="dd-item">
@@ -703,7 +703,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/digito-note-2/" class="dd-item">
+      <li data-nav-id="/cloud/digito-note-2/" class="dd-item active">
         <div>
           <a href="/cloud/digito-note-2/">
             Digitial Ocean Note - 2
@@ -909,18 +909,14 @@
     <option value="/coding/" >
    Coding</option>
     <option value="/hacks/" >
-   Hacks</option> 
-      <option value="/hacks/git-notes/"  selected>- Git Practices</option>
-      <option value="/hacks/windows-command-3/" >- Windows cmd &amp; hotkey - 3</option>
-      <option value="/hacks/windows-command-2/" >- Windows cmd &amp; hotkey - 2</option>
-      <option value="/hacks/windows-command-1/" >- Windows cmd &amp; hotkey - 1</option>
-      <option value="/hacks/cass-note/" >- Cassandra Practices</option>
-      <option value="/hacks/php-debug/" >- Debug PHP with Free IDE</option>
-      <option value="/hacks/qemu-notes/" >- Qemu &amp; Virtual Machine</option>
-      <option value="/hacks/vbox-notes/" >- VirtualBox Notes</option>
-  
+   Hacks</option>
     <option value="/cloud/" >
-   Cloud</option>
+   Cloud</option> 
+      <option value="/cloud/aws-note-1/" >- AWS Note - 1</option>
+      <option value="/cloud/aws-note-2/" >- AWS Note - 2</option>
+      <option value="/cloud/digito-note-1/" >- Digitial Ocean Note - 1</option>
+      <option value="/cloud/digito-note-2/"  selected>- Digitial Ocean Note - 2</option>
+  
     <option value="/os/" >
    OS</option>
     <option value="/blogs/" >
@@ -943,257 +939,118 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Git Practices</h1>
+            <h1>Digitial Ocean Note - 2</h1>
         
 
-<h2 id="create-a-new-branch-with-git">Create a new branch with git</h2>
+<h2 id="user-setup">User Setup</h2>
 
-<h3 id="create-the-branch-locally">Create the branch locally</h3>
+<h3 id="create-a-new-admin-user">Create a new admin user</h3>
+
+<h4 id="add-a-new-user">Add a new user</h4>
+
+<pre><code># Add new user 
+# set password
+adduser hho
+
+# user to sudo group
+usermod -aG sudo hho
+
+</code></pre>
+
+<h4 id="set-ssh-access-for-new-user">Set SSH access for new user</h4>
+
+<pre><code># Switch session to new user 
+su - hho
+
+# navigate to user home 
+cd
+
+# Prepare ssh directory
+mkdir .ssh
+chmod 700 ~/.ssh
+
+# Copy root key
+sudo cp /root/.ssh/authorized_keys ~/.ssh/authorized_keys
+chmod 644 /home/hho/.ssh/authorized_keys
+sudo chown -R hho:hho ~/
+</code></pre>
+
+<h4 id="login-as-new-user-via-ssh">Login as new user via SSH</h4>
+
+<pre><code>ssh -i ~/.ssh/&lt;your_droplet_rsa&gt; hho@&lt;your_droplet_ip&gt;
+</code></pre>
+
+<h4 id="set-root-password-disable-ssh">Set root password &amp; disable SSH</h4>
+
+<pre><code>sudo passwd
+
+# rename key file
+sudo mv /root/.ssh/authorized_keys  /root/.ssh/disabled_authorized_keys
+</code></pre>
+
+<h3 id="security-update">Security Update</h3>
+
+<pre><code># Update only for security
+sudo apt-get install unattended-upgrades
+
+# Update security packages
+sudo unattended-upgrade -d --dry-run
+sudo unattended-upgrade -d
+
+# Update quietly
+sudo unattended-upgrade
+</code></pre>
+
+<h3 id="tagging-cloud-firewall">Tagging &amp; Cloud Firewall</h3>
 
 <ul>
-<li><p>Create the branch on your local machine and switch in this branch</p>
-
-<pre><code>$ git checkout -b [name_of_your_new_branch]
-</code></pre></li>
-</ul>
-
-<h3 id="push-the-branch">Push the branch</h3>
+<li>Tags are custom labels you apply to Droplets that have multiple uses
 
 <ul>
-<li><p>Push the branch on git-repository (Github, Bitbucket)</p>
-
-<pre><code>$ git push origin [name_of_your_new_branch]
-</code></pre></li>
-</ul>
-
-<p>When you want to commit something in your branch, be sure to be in your branch.</p>
-
-<h2 id="manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</h2>
-
-<p>List all branches</p>
-
-<pre><code>$ git branch
-</code></pre>
-
-<p>Add a new remote for your branch :</p>
-
-<pre><code>$ git remote add [name_of_your_remote]
-</code></pre>
-
-<p>Push changes from your commit into your branch :</p>
-
-<pre><code>$ git push [name_of_your_new_remote] [name_of_your_branch]
-</code></pre>
-
-<p>Update your branch when the original branch from official repository has been updated :</p>
-
-<pre><code>$ git fetch [name_of_your_remote]
-</code></pre>
-
-<p>Then you need to apply to merge changes, if your branch is derivated from develop you need to do :</p>
-
-<pre><code>$ git merge [name_of_your_remote]/develop
-</code></pre>
-
-<h2 id="delete-branch">Delete branch</h2>
-
-<p>Delete a branch on your local filesystem :</p>
-
-<pre><code>$ git branch -d [name_of_your_new_branch]
-</code></pre>
-
-<p>To force the deletion of local branch on your filesystem :</p>
-
-<pre><code>$ git branch -D [name_of_your_new_branch]
-</code></pre>
-
-<p>Delete the branch on github :</p>
-
-<pre><code>$ git push origin :[name_of_your_new_branch]
-</code></pre>
-
-<p>Compare two branch:</p>
-
-<pre><code>$ git diff [name_of_branch1]..[name_of_branch2]
-</code></pre>
-
-<hr />
-
-<h2 id="branch-merge">Branch merge</h2>
-
-<h3 id="fast-forward-merge">Fast-Forward Merge</h3>
-
-<p>Our first example demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.</p>
-
-<pre><code class="language-bash">## Start a new feature
-$ git checkout -b new-feature master
-
-## Edit some files    
-$ git add &lt;file&gt;
-$ git commit -m &quot;Start a feature&quot;
-
-## Edit some files    
-$ git add &lt;file&gt;
-$ git commit -m &quot;Finish a feature&quot;
-
-## Merge in the new-feature branch    
-$ git checkout master
-$ git merge new-feature
-$ git branch -d new-feature
-</code></pre>
-
-<p>This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.</p>
-
-<p>Also note that Git should not complain about the git branch -d, since new-feature is now accessible from the master branch.</p>
-
-<h3 id="3-way-merge">3-Way Merge</h3>
-
-<p>The next example is very similar, but requires a 3-way merge because master progresses while the feature is in-progress. This is a common scenario for large features or when several developers are working on a project simultaneously.</p>
-
-<pre><code class="language-bash">## Start a new feature
-$ git checkout -b new-feature master
-
-## Edit some files
-$ git add &lt;file&gt;
-$ git commit -m &quot;Start a feature&quot;
-
-## Edit some files
-$ git add &lt;file&gt;
-$ git commit -m &quot;Finish a feature&quot;
-
-## Develop the master branch
-$ git checkout master
-
-## Edit some files
-$ git add &lt;file&gt;
-$ git commit -m &quot;Make some super-stable changes to master&quot;
-
-## Merge in the new-feature branch
-$ git merge new-feature
-$ git branch -d new-feature
-</code></pre>
-
-<h3 id="rebase-for-merge">Rebase for merge</h3>
-
-<p>Problem: You are working with a few experienced devs constantly improving an online shooping site. After you complete the first assignment and ready to commit to master you find someone merged a change that affects or overlaps with the ones you made, and it could lead to bugs in the online-shoppping website.</p>
-
-<p>Solution: Situations like these are a big example of when you&rsquo;d want to rebase. Let&rsquo;s say when you created your branch off of the master branch, the master branch was on commit No. 1. Every commit in your branch was put on top of commit #1. When you&rsquo;re ready to merge your branch to master, you find  other developers have some changes and the most recent commit is commit No. 4. <strong>Rebasing is taking all your branch&rsquo;s commits and adding them on top of commit No. 4 instead of commit No. 1.</strong> If you consider commit No. 1 as the &ldquo;base&rdquo; of your branch, you&rsquo;re changing that base to the most recent one, commit No. 4. Hence why it&rsquo;s called rebasing!</p>
-
-<h4 id="rebase-with-conflict">Rebase with conflict</h4>
-
-<pre><code class="language-bash">git rebase master
-
-# When there is conflict, the rebase will pause. 
-# You have to manually solve the conflict
-# Add the resolved files to stage and commit it
-git add &lt;Resolved-File&gt;
-git commit 
-
-# Conttinue the rebase process
-git rebase --continue
-</code></pre>
-
-<h4 id="rebase-interactively">Rebase interactively</h4>
-
-<p>Rebase to master branch</p>
-
-<pre><code>$ git rebase -i master 
-</code></pre>
-
-<p>Rebase with fixup and squash</p>
+<li>Add tags to your droplet. e.g. my-web-server</li>
+</ul></li>
+<li>DigitalOcean Cloud Firewalls are a free, network-based, stateful firewall service for your DigitalOcean Droplets. They block all traffic that isn’t expressly permitted by a rule. You can define the Droplets protected by a firewall individually or by using tags.</li>
+<li>Always setup Firewall for your droplets
 
 <ul>
-<li>squash (s for short), which melds the commit into the previous one (the one in the line before)</li>
-
-<li><p>fixup (f for short), which acts like “squash”, but discards this commit’s message</p>
-
-<pre><code class="language-bash"># Commit your changes
-$ git add. 
-$ git commit 
-
-
-$ git rebase  -i master
-# Update the prop up  editor
-# fixup &lt;COMMIT-ID&gt;
-# squahs   &lt;COMMIT-ID&gt; &lt;Message&gt;
-</code></pre></li>
+<li>Set SSH permission for only given IP address</li>
+<li>Set HTTP for port 80</li>
+<li>Set HTTPS for port 443</li>
+</ul></li>
 </ul>
 
-<p>Rebase with autosquash</p>
+<h2 id="other-features">Other Features</h2>
 
-<pre><code>$ git rebase -i --autosquash master
-</code></pre>
+<h3 id="floating-ips">Floating IPs</h3>
 
-<h2 id="git-reword">Git reword</h2>
+<p>DigitalOcean Floating IPs are publicly-accessible static IP addresses that you can assign to Droplets. A floating IP provides an additional static address you can use to access a Droplet without replacing or changing the Droplet’s original public IP address.</p>
 
-<p>Reword the last commit message. The command below will open an editor to let you change previous commit message</p>
+<h3 id="block-storage-volumes">Block Storage Volumes</h3>
 
-<pre><code>$ git commit --amend   
-</code></pre>
+<p>DigitalOcean Block Storage is a flexible, convenient way of managing additional storage (in units called volumes) for your Droplets. Volumes are independent resources that you can move between Droplets within the same region. You can increase the size of a volume without powering down the Droplet it’s attached to. They’re most useful when you need more storage space but don’t need the additional processing power or memory that a larger Droplet would provide,</p>
 
-<p>Reword the last commit message and author.</p>
+<h3 id="load-balancers">Load Balancers</h3>
 
-<pre><code>$ git commit --amend   --author=&quot;Other author &lt;other_author@test.com&gt;&quot;
-</code></pre>
+<p>DigitalOcean Load Balancers are a fully-managed, highly available load balancing service. Load balancers distribute traffic to groups of Droplets, which decouples the overall health of a backend service from the health of a single server to ensure that your services stay online.</p>
 
-<h2 id="git-submodule">Git Submodule</h2>
+<h2 id="known-limits">Known Limits</h2>
 
-<p>Add other repository into your existing project as submodule</p>
+<ul>
+<li><p>Some Droplet network traffic is restricted to help prevent malicious actions, like reflected DDoS attacks</p>
 
-<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-repo-folder&gt;
-</code></pre>
+<ul>
+<li>TCP and UDP traffic on port 11211 inbound from external networks (due to the Memcached amplification attacks in March 2018)</li>
+<li>Multicast traffic.</li>
+<li>Traffic not matching a Droplet&rsquo;s IP address/MAC address.</li>
+<li>SMTP via Floating IPs and IPv6.</li>
+</ul></li>
 
-<p>Add other repository into your existing project as submodule under specific location</p>
+<li><p>Users can create up to 100 volumes and up to a total of 16 TiB of disk space per region. You can contact our support team to request an increase. You can attach a maximum of 7 volumes to any one node or Droplet, and this limit cannot be changed.</p></li>
 
-<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  &lt;your-specific-location&gt;/&lt;your-repo-folder&gt;
-</code></pre>
+<li><p>General Purpose plans are not yet compatible with DigitalOcean Kubernetes or Managed Databases.</p></li>
 
-<p>Add other repository into your existing project for specific branch</p>
-
-<pre><code>$ git submodule add &lt;Git-Repository-URL&gt;  -b &lt;branch-name&gt; &lt;your-repo-folder&gt;    
-</code></pre>
-
-<p>Initialize and update submoule</p>
-
-<pre><code>$ git submodule init
-$ git submodule update 
-</code></pre>
-
-<h2 id="git-tag">Git tag</h2>
-
-<p>Listing the existing tags</p>
-
-<pre><code>$ git tag -l
-</code></pre>
-
-<p>Creating Tags</p>
-
-<p>Git supports two types of tags: lightweight and annotated. IMO, I always prefer the annotated tag, because the tag is supposed to mark milestone in the repository&rsquo;s history.</p>
-
-<p>Annotated Tags</p>
-
-<pre><code>$ git tag -a v1.1 -m &quot;release version 1.1&quot;
-</code></pre>
-
-<p>Lightweight tags</p>
-
-<pre><code>$ git tag -a v1.1-lw
-</code></pre>
-
-<p>Push tags</p>
-
-<pre><code>$ git push origin v1.1
-</code></pre>
-
-<p>Delete a tag (local)</p>
-
-<pre><code>$ git tag -D v1.1
-</code></pre>
-
-<p>Delete a tag (remote)</p>
-
-<pre><code>$ git push --delete origin v1.1
-</code></pre>
+<li><p>You can&rsquo;t create more than 10 Droplets at the same time using the control panel or the API</p></li>
+</ul>
 
     </div>
 
@@ -1202,26 +1059,25 @@ $ git submodule update
 <ul>
 <li>
 <ul>
-<li><a href="#create-a-new-branch-with-git">Create a new branch with git</a>
+<li><a href="#user-setup">User Setup</a>
 <ul>
-<li><a href="#create-the-branch-locally">Create the branch locally</a></li>
-<li><a href="#push-the-branch">Push the branch</a></li>
-</ul></li>
-<li><a href="#manage-branches-push-fetch-merge">Manage branches (Push, Fetch &amp; Merge)</a></li>
-<li><a href="#delete-branch">Delete branch</a></li>
-<li><a href="#branch-merge">Branch merge</a>
+<li><a href="#create-a-new-admin-user">Create a new admin user</a>
 <ul>
-<li><a href="#fast-forward-merge">Fast-Forward Merge</a></li>
-<li><a href="#3-way-merge">3-Way Merge</a></li>
-<li><a href="#rebase-for-merge">Rebase for merge</a>
+<li><a href="#add-a-new-user">Add a new user</a></li>
+<li><a href="#set-ssh-access-for-new-user">Set SSH access for new user</a></li>
+<li><a href="#login-as-new-user-via-ssh">Login as new user via SSH</a></li>
+<li><a href="#set-root-password-disable-ssh">Set root password &amp; disable SSH</a></li>
+</ul></li>
+<li><a href="#security-update">Security Update</a></li>
+<li><a href="#tagging-cloud-firewall">Tagging &amp; Cloud Firewall</a></li>
+</ul></li>
+<li><a href="#other-features">Other Features</a>
 <ul>
-<li><a href="#rebase-with-conflict">Rebase with conflict</a></li>
-<li><a href="#rebase-interactively">Rebase interactively</a></li>
+<li><a href="#floating-ips">Floating IPs</a></li>
+<li><a href="#block-storage-volumes">Block Storage Volumes</a></li>
+<li><a href="#load-balancers">Load Balancers</a></li>
 </ul></li>
-</ul></li>
-<li><a href="#git-reword">Git reword</a></li>
-<li><a href="#git-submodule">Git Submodule</a></li>
-<li><a href="#git-tag">Git tag</a></li>
+<li><a href="#known-limits">Known Limits</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1233,8 +1089,8 @@ $ git submodule update
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/hacks/" title="Hacks"> <i class="fa fa-chevron-left"></i><label>Hacks</label></a>
-    <a class="nav nav-next" href="/hacks/windows-command-3/" title="Windows cmd &amp; hotkey - 3" style="margin-right: 0px;"><label>Windows cmd &amp; hotkey - 3</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/digito-note-1/" title="Digitial Ocean Note - 1"> <i class="fa fa-chevron-left"></i><label>Digitial Ocean Note - 1</label></a>
+    <a class="nav nav-next" href="/os/" title="OS" style="margin-right: 0px;"><label>OS</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1247,10 +1103,6 @@ $ git submodule update
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 11/08/2016
-    </div>
     
 
     
