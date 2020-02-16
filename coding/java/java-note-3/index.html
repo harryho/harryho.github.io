@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Java Note - 3: Path and Files :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -381,41 +381,6 @@
             <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item active">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
@@ -912,35 +877,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +939,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,143 +956,175 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Java Note - 3: Path and Files</h1>
-        <h2 id="prerequisites">Prerequisites</h2>
+        
+
+<h2 id="prerequisites">Prerequisites</h2>
+
 <blockquote>
 <p><em>Java 7+</em></p>
 </blockquote>
+
 <h2 id="good-stuff-from-not-shiny-java-7">Good stuff from not shiny Java 7</h2>
+
 <p>If you are planning to refactor your code, please give a second thought. It is time to dump to try these new features. When the Java 7 was released, I was kind of disappointed without lambda, jigsaw as most developers, but when I tried new Path, Files API, I found that is great improvement. The enhancement of this new IO is really useful. It save so much effort for Java developer.</p>
-<p>To be hoenst, before Java 7, Coding file manipulation in Java is very headache task. I say &ldquo;headache&rdquo; it doesn't mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.</p>
+
+<p>To be hoenst, before Java 7, Coding file manipulation in Java is very headache task. I say &ldquo;headache&rdquo; it doesn&rsquo;t mean it is difficult. Just comparing with other program lanugage, you had to take much more effort to take care of the boilerplate, and all are tedious job. That is why sometimes I prefer cmd in Window or bash in Linux to complete the task instead of using Java to handle file manipulation. Now I think I can refactor old file manipulation coding and make it much more elegant.</p>
+
 <h3 id="better-file-visitor-implementation">Better file visitor implementation</h3>
+
 <p>Following is simple customizaed file visitor which has been the part of my old util.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.io.IOException<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.FileVisitResult<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.Path<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.SimpleFileVisitor<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.attribute.BasicFileAttributes<span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomFileVisitor</span> <span style="color:#66d9ef">extends</span> SimpleFileVisitor<span style="color:#f92672">&lt;</span>Path<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> FileVisitResult <span style="color:#a6e22e">postVisitDirectory</span><span style="color:#f92672">(</span>Path dir <span style="color:#f92672">,</span> IOException arg1<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34;post visit dir :  &#34;</span><span style="color:#f92672">+</span>  dir <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> FileVisitResult<span style="color:#f92672">.</span><span style="color:#a6e22e">CONTINUE</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
+<pre><code class="language-java">import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 
-        <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> FileVisitResult <span style="color:#a6e22e">preVisitDirectory</span><span style="color:#f92672">(</span>Path dir <span style="color:#f92672">,</span> IOException arg1<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34;post visit dir :  &#34;</span><span style="color:#f92672">+</span>  dir <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> FileVisitResult<span style="color:#f92672">.</span><span style="color:#a6e22e">CONTINUE</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
+public class CustomFileVisitor extends SimpleFileVisitor&lt;Path&gt; {
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
 
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> FileVisitResult <span style="color:#a6e22e">visitFile</span><span style="color:#f92672">(</span>Path file<span style="color:#f92672">,</span> BasicFileAttributes attr<span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span> attr<span style="color:#f92672">.</span><span style="color:#a6e22e">isSymbolicLink</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">)</span>
-          <span style="color:#f92672">{</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34; symbolic link  :  &#34;</span><span style="color:#f92672">+</span>  file  <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        @Override
+    public FileVisitResult preVisitDirectory(Path dir , IOException arg1) throws IOException {
+        System.out.println( &quot;post visit dir :  &quot;+  dir );
+        return FileVisitResult.CONTINUE;
+        }
+
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attr)
+            throws IOException {
+         if ( attr.isSymbolicLink() )
+          { System.out.println( &quot; symbolic link  :  &quot;+  file  );
           
-          <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>  attr<span style="color:#f92672">.</span><span style="color:#a6e22e">isSymbolicLink</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">)</span><span style="color:#f92672">{</span>              
-              System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34; regular file : &#34;</span><span style="color:#f92672">+</span> file <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-          <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">return</span> FileVisitResult<span style="color:#f92672">.</span><span style="color:#a6e22e">CONTINUE</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+          }else if (  attr.isSymbolicLink() ){              
+              System.out.println( &quot; regular file : &quot;+ file );
+          }
+        return FileVisitResult.CONTINUE;
+    }
      
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> FileVisitResult <span style="color:#a6e22e">visitFileFailed</span><span style="color:#f92672">(</span>Path file<span style="color:#f92672">,</span> IOException exc<span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>        
-         System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> exc<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> FileVisitResult<span style="color:#f92672">.</span><span style="color:#a6e22e">CONTINUE</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>To use this customized  is so easy. Just 3 lines coding you can test it by yourself.</p>
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc)
+            throws IOException {        
+         System.err.println( exc.getMessage());
+        return FileVisitResult.CONTINUE;
+    }
+}
+</code></pre>
+
+<p>To use this customized  is so easy. Just 3 lines coding you can test it by yourself.</p>
+
 <pre><code>        CustomFileVisitor fileVisitor = new CustomFileVisitor();
         Path path = Paths.get(&quot;TestDir&quot;);
         Files.walkFileTree(path, fileVisitor);
-</code></pre><h3 id="arm">ARM</h3>
-<p>Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the <code>using</code> statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men's mistakes; fools by their own.</p>
+</code></pre>
+
+<h3 id="arm">ARM</h3>
+
+<p>Automatic resource management is another attractive features of Java 7 and project coin. As name itself implies that now JVM is going to be handling all the external resource and make programmer free to bother about resource management, especially for people like me miss the <code>using</code> statement in C#. Sometimes I wonder why Java is such stubborn not to learn some good features from C#. As we know, C# comes after Java and copies most concept at the early stage, but it really pushed Object Oriented Concept (OOC) to a new level and inspired Java world a lot with its many good feature. I really hope someday I can code in Java as simple as C#. Wise men learn by other men&rsquo;s mistakes; fools by their own.</p>
+
 <p>In the past, java programmers use any external resources like file, printer or any devices to close after my program execution complete. Normally we close the resources which we have open in beginning of our program or we decide that if program finish normally how to manage the resource or if our program finish abnormally how to close the resource. Following are comparison of old and new style.</p>
+
 <p><em>Snippet of old style</em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">FileInputStream exchangeCurrencyReader<span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-FileOutputStream exchangeCurrencyWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-<span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-    exchangeCurrencyReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AUDvsUSD.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    exchangeCurrencyWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AUDvsUSD.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">int</span> var<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>var <span style="color:#f92672">=</span> exchangeCurrencyReader<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">)</span>
-        exchangeCurrencyWriter<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>var<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span> 
-<span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>exchangeCurrencyReader<span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
-        exchangeCurrencyReader<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>exchangeCurrencyWriter<span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
-        exchangeCurrencyWriter<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p><em>Code in Java 7</em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">try</span> <span style="color:#f92672">(</span> FileInputStream exchangeCurrencyReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AUDvsUSD.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    FileOutputStream exchangeCurrencyWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AUDvsUSD.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-      <span style="color:#66d9ef">int</span> var<span style="color:#f92672">;</span>
-      <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>var<span style="color:#f92672">=</span> exchangeCurrencyReader<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">)</span>
-            exchangeCurrencyWriter<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
 
-</code></pre></div><p>In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.</p>
+<pre><code class="language-java">FileInputStream exchangeCurrencyReader= null;
+FileOutputStream exchangeCurrencyWriter = null;
+try {
+    exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+    exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;);
+    int var;
+    while (var = exchangeCurrencyReader.read()) != -1)
+        exchangeCurrencyWriter.write(var);
+} 
+finally {
+    if (exchangeCurrencyReader!= null)
+        exchangeCurrencyReader.close();
+    if (exchangeCurrencyWriter!= null)
+        exchangeCurrencyWriter.close();
+}
+</code></pre>
+
+<p><em>Code in Java 7</em></p>
+
+<pre><code class="language-java">try ( FileInputStream exchangeCurrencyReader = new FileInputStream(&quot;AUDvsUSD.txt&quot;);
+    FileOutputStream exchangeCurrencyWriter = new FileOutputStream(&quot;AUDvsUSD.txt&quot;)){
+      int var;
+      while((var= exchangeCurrencyReader.read()) != -1 )
+            exchangeCurrencyWriter.write();
+}
+
+</code></pre>
+
+<p>In the code above we have declare two file stream one is input file we are reading from one file and writing to another file. After the whole process both streams will be closed automatically either the code has been executed properly or not. Both exchangeCurrencyReader.close() and exchangeCurrencyWriter.close() methods will be called automatically which is the best part of ARM. We should not miss good part from Java 7.</p>
+
 <h3 id="new-file-change-monitor-service">New file change monitor service</h3>
+
 <p>After some homework for new features of Java 7, I am tring to use file watch serviice from Java 7 to replace old file monitor program. It is great and quite simple to use. I have updated to production.</p>
+
 <p>Usually most Java based system somehow needs such monitor function, there will be separate process or thread to run this service, and there should be a call back handler triggered by this service. Everytime there is any file amended, the service will trigger the call back handler to complete some tasks.</p>
+
 <p>Following is sample of file watching service. I removed call back part which is relevant to the business.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.nio.file.FileSystems<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.Path<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.Paths<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.StandardWatchEventKinds<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.WatchEvent<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.WatchKey<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.file.WatchService<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.HashMap<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.Map<span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileWatchService</span> <span style="color:#f92672">{</span>
+<pre><code class="language-java">import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.HashMap;
+import java.util.Map;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">watchFileUpdate</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">try</span> <span style="color:#f92672">(</span>WatchService service <span style="color:#f92672">=</span> FileSystems<span style="color:#f92672">.</span><span style="color:#a6e22e">getDefault</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">newWatchService</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            Map<span style="color:#f92672">&lt;</span>WatchKey<span style="color:#f92672">,</span> Path<span style="color:#f92672">&gt;</span> eventMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Path dir <span style="color:#f92672">=</span> Paths<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TestDir&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+public class FileWatchService {
 
-            eventMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>dir<span style="color:#f92672">.</span><span style="color:#a6e22e">register</span><span style="color:#f92672">(</span>service<span style="color:#f92672">,</span> StandardWatchEventKinds<span style="color:#f92672">.</span><span style="color:#a6e22e">ENTRY_MODIFY</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>dir<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    public static void watchFileUpdate() {
+        try (WatchService service = FileSystems.getDefault().newWatchService()) {
+            Map&lt;WatchKey, Path&gt; eventMap = new HashMap&lt;&gt;();
+            Path dir = Paths.get(&quot;TestDir&quot;);
 
-            WatchKey key<span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
-                key <span style="color:#f92672">=</span> service<span style="color:#f92672">.</span><span style="color:#a6e22e">take</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                Path eventPath <span style="color:#f92672">=</span> eventMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>key<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>WatchEvent<span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> event <span style="color:#f92672">:</span> key<span style="color:#f92672">.</span><span style="color:#a6e22e">pollEvents</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                    WatchEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">Kind</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> kind <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span><span style="color:#a6e22e">kind</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                    Path path <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Path<span style="color:#f92672">)</span> event<span style="color:#f92672">.</span><span style="color:#a6e22e">context</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>eventPath <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; : &#34;</span> <span style="color:#f92672">+</span> kind <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  : &#34;</span> <span style="color:#f92672">+</span> path<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span>
-            <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>key<span style="color:#f92672">.</span><span style="color:#a6e22e">reset</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
+            eventMap.put(dir.register(service, StandardWatchEventKinds.ENTRY_MODIFY),dir);
+
+            WatchKey key;
+            do {
+                key = service.take();
+                Path eventPath = eventMap.get(key);
+                for (WatchEvent&lt;?&gt; event : key.pollEvents()) {
+                    WatchEvent.Kind&lt;?&gt; kind = event.kind();
+                    Path path = (Path) event.context();
+                    System.out.println(eventPath + &quot; : &quot; + kind + &quot;  : &quot; + path);
+                }
+            } while (key.reset());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span> <span style="color:#f92672">(</span>String <span style="color:#f92672">[</span><span style="color:#f92672">]</span> args <span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-       watchFileUpdate<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.</p>
+    public static void main (String [] args ){
+       watchFileUpdate();
+    }
+}
+</code></pre>
+
+<p>The sample above shows one kind of events. Actually if you check the API doc, there are another two kinds of event. One is  StandardWatchEventKinds.ENTRY_CREATE , the other is  StandardWatchEventKinds.ENTRY_DELETE. These events cover almostly all business requirements.</p>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#good-stuff-from-not-shiny-java-7">Good stuff from not shiny Java 7</a>
-      <ul>
-        <li><a href="#better-file-visitor-implementation">Better file visitor implementation</a></li>
-        <li><a href="#arm">ARM</a></li>
-        <li><a href="#new-file-change-monitor-service">New file change monitor service</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#good-stuff-from-not-shiny-java-7">Good stuff from not shiny Java 7</a>
+<ul>
+<li><a href="#better-file-visitor-implementation">Better file visitor implementation</a></li>
+<li><a href="#arm">ARM</a></li>
+<li><a href="#new-file-change-monitor-service">New file change monitor service</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

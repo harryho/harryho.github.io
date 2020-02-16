@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Goroutine &amp; Channel - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -740,6 +740,83 @@
       <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/blogs/" class="dd-item haschildren
@@ -835,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -935,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -954,493 +1000,535 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Goroutine &amp; Channel - 2</h1>
-        <h3 id="channel-directionality">Channel directionality</h3>
+        
+
+<h3 id="channel-directionality">Channel directionality</h3>
+
 <ul>
-<li>
-<p>A channel type may be annotated to specify that it may only send or only receive</p>
-<pre><code>  var send_only chan&lt;- int // channel can only receive data
-  var recv_only &lt;-chan int // channel can only send data
-</code></pre>
-</li>
-<li>
-<p>Receive-only channels ( &lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</p>
-</li>
+<li><p>A channel type may be annotated to specify that it may only send or only receive</p>
+
+<pre><code>var send_only chan&lt;- int // channel can only receive data
+var recv_only &lt;-chan int // channel can only send data
+</code></pre></li>
+
+<li><p>Receive-only channels ( &lt;-chan T ) cannot be closed, because closing a channel is intended as a way for a sender to signal that no more values will be sent to the channel, so it has no meaning for receive-only channels.</p></li>
 </ul>
-<h4 id="pipe--filter-pattern">Pipe &amp; Filter pattern</h4>
+
+<h4 id="pipe-filter-pattern">Pipe &amp; Filter pattern</h4>
+
 <ul>
-<li>
-<p>A goroutine channel process will processes what it receives from an input channel and sends this to an output channel</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">sendChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#a6e22e">receiveChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">processChannel</span>(<span style="color:#a6e22e">sendChan</span>, <span style="color:#a6e22e">receiveChan</span>)
+<li><p>A goroutine channel process will processes what it receives from an input channel and sends this to an output channel</p>
+
+<pre><code class="language-go">func main() {
+    sendChan := make(chan int)
+    receiveChan := make(chan string)
+    go processChannel(sendChan, receiveChan)
 
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">processChannel</span>(<span style="color:#a6e22e">in</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">out</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">string</span>) {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">inValue</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">in</span> {
-        <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Itoa</span>(<span style="color:#a6e22e">inValue</span>) <span style="color:#75715e">// processing inValue
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">result</span>
+func processChannel(in &lt;-chan int, out chan&lt;- string) {
+    for inValue := range in {
+        result := strconv.Itoa(inValue) // processing inValue
+        // ...
+        out &lt;- result
     }
 }
-</code></pre></div></li>
-<li>
-<p>Prime number generator sample</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">generate</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">2</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+</code></pre></li>
+
+<li><p>Prime number generator sample</p>
+
+<pre><code class="language-go">func generate() chan int {
+    ch := make(chan int)
+    go func() {
+        for i := 2; ; i++ {
+            ch &lt;- i
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+    return ch
 }
 
-<span style="color:#75715e">// Filter out input values divisible by prime, send rest to returned channel
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">in</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">prime</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> {
-            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">in</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">%</span><span style="color:#a6e22e">prime</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> {
-                <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+// Filter out input values divisible by prime, send rest to returned channel
+func filter(in chan int, prime int) chan int {
+    out := make(chan int)
+    go func() {
+        for {
+            if i := &lt;-in; i%prime != 0 {
+                out &lt;- i
             }
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+    return out
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sieve</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">generate</span>()
-        <span style="color:#66d9ef">for</span> {
-            <span style="color:#a6e22e">prime</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>
-            <span style="color:#a6e22e">ch</span> = <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">ch</span>, <span style="color:#a6e22e">prime</span>)
-            <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">prime</span>
+func sieve() chan int {
+    out := make(chan int)
+    go func() {
+        ch := generate()
+        for {
+            prime := &lt;-ch
+            ch = filter(ch, prime)
+            out &lt;- prime
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+    return out
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">primes</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sieve</span>()
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">primes</span>)
+func main() {
+    primes := sieve()
+    for {
+        fmt.Println(&lt;-primes)
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h5 id="goroutine-with-select">Goroutine with select</h5>
+
 <ul>
-<li>
-<p>The select chooses which of the multiple communications listed by its cases can proceed. The default clause is optional; fall through behavior, like in the normal switch, is not permitted.</p>
+<li><p>The select chooses which of the multiple communications listed by its cases can proceed. The default clause is optional; fall through behavior, like in the normal switch, is not permitted.</p>
+
 <ul>
 <li>It all are blocked, it waits until one can proceed.</li>
 <li>If multiple can proceed, it chooses one at random.</li>
 <li>When none of the channel operations can proceed and the default clause is present, then this is executed: the default is always runnable (that is: ready to execute).</li>
-</ul>
-</li>
-<li>
-<p>Using a send operation in a select statement with a default case guarantees that the send will be non-blocking! If there are no cases, the select blocks execution forever.</p>
-</li>
-<li>
-<p>Sample 9</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">// in goroutine_select2.go
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#a6e22e">ch2</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">pump1</span>(<span style="color:#a6e22e">ch1</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">pump2</span>(<span style="color:#a6e22e">ch2</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">ch1</span>, <span style="color:#a6e22e">ch2</span>)
-    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1e9</span>)
-}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pump1</span>(<span style="color:#a6e22e">ch</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
-    }
-}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pump2</span>(<span style="color:#a6e22e">ch</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>
-    }
-}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">ch1</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">ch2</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#66d9ef">select</span> {
-        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch1</span>:
+</ul></li>
 
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received on channel 1: %d\n&#34;</span>, <span style="color:#a6e22e">v</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch2</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received on channel 2: %d\n&#34;</span>, <span style="color:#a6e22e">v</span>)
+<li><p>Using a send operation in a select statement with a default case guarantees that the send will be non-blocking! If there are no cases, the select blocks execution forever.</p></li>
+
+<li><p>Sample 9</p>
+
+<pre><code class="language-go">func main() {
+    runtime.GOMAXPROCS(2) // in goroutine_select2.go
+    ch1 := make(chan int)
+    ch2 := make(chan int)
+    go pump1(ch1)
+    go pump2(ch2)
+    go suck(ch1, ch2)
+    time.Sleep(1e9)
+}
+func pump1(ch chan int) {
+    for i := 0; ; i++ {
+        ch &lt;- i * 2
+    }
+}
+func pump2(ch chan int) {
+    for i := 0; ; i++ {
+        ch &lt;- i + 5
+    }
+}
+func suck(ch1 chan int, ch2 chan int) {
+    for {
+        select {
+        case v := &lt;-ch1:
+
+            fmt.Printf(&quot;Received on channel 1: %d\n&quot;, v)
+        case v := &lt;-ch2:
+            fmt.Printf(&quot;Received on channel 2: %d\n&quot;, v)
         }
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
-<h5 id="timeout--ticker">Timeout &amp; Ticker</h5>
+
+<h5 id="timeout-ticker">Timeout &amp; Ticker</h5>
+
 <ul>
-<li>
-<p>Ticker: a struct time.Ticker which is an object that repeatedly sends a time value on a contained channel C at a specified time interval</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Ticker</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">C</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">Time</span> <span style="color:#75715e">// the channel on which the ticks are delivered.
-</span><span style="color:#75715e"></span>                <span style="color:#75715e">// contains filtered or unexported fields
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
-<li>
-<p>A ticker is stopped with Stop(), use this in a defer statement.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">ticker</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTicker</span>(<span style="color:#a6e22e">updateInterval</span>)
-<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">ticker</span>.<span style="color:#a6e22e">Stop</span>()
-<span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> {
-    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">u</span><span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch1</span>:
-        <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch2</span>:
-        <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ticker</span>.<span style="color:#a6e22e">C</span>:
-        <span style="color:#a6e22e">logState</span>(<span style="color:#a6e22e">status</span>) <span style="color:#75715e">// call some logging function logState
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">default</span>: <span style="color:#75715e">// no value ready to be received
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
-<li>
-<p>Handy to use when you have to limit the rate of processing per unit time. The time.Tick() function with signature func Tick(d Duration) &lt;-chan Time is useful when you only need access to the return channel and don’t need to shutdown it.</p>
-</li>
-<li>
-<p>Sample below is good use case for time.Tick function</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">rate_per_sec</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">10</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dur</span> <span style="color:#a6e22e">Duration</span> = <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">rate_per_sec</span>
-<span style="color:#a6e22e">chRate</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">dur</span>) <span style="color:#75715e">// a tick every 1/10th of a second
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">requests</span> {
-    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">chRate</span> <span style="color:#75715e">// rate limit our Service.Method RPC calls
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;Service.Method&#34;</span>, <span style="color:#a6e22e">req</span>, <span style="color:#f92672">...</span>) <span style="color:#75715e">// client.Call is RPC call
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
-<li>
-<p>A Timer type looks exactly the same as a Ticker type (it is constructed with NewTimer(d but it sends the time only once, after a Duration d.</p>
-</li>
-<li>
-<p>After Duration d the current time is sent on the returned channel; so this is equivalent to NewTimer(d).C; it resembles Tick(), but After() sends the time only once.</p>
-</li>
-<li>
-<p>Sample of timer</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">tick</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#ae81ff">1e8</span>)
-    <span style="color:#a6e22e">boom</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">After</span>(<span style="color:#ae81ff">5e8</span>)
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#66d9ef">select</span> {
-            <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">tick</span>:
-                <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;tick.&#34;</span>)
-            <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">boom</span>:
-                <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;BOOM!&#34;</span>)
-                <span style="color:#66d9ef">return</span>
-            <span style="color:#66d9ef">default</span>:
-                <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; .&#34;</span>)
-                <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">5e7</span>)
+<li><p>Ticker: a struct time.Ticker which is an object that repeatedly sends a time value on a contained channel C at a specified time interval</p>
+
+<pre><code class="language-go">type Ticker struct {
+    C &lt;-chan Time // the channel on which the ticks are delivered.
+                // contains filtered or unexported fields
+    // ...
+}
+</code></pre></li>
+
+<li><p>A ticker is stopped with Stop(), use this in a defer statement.</p>
+
+<pre><code class="language-go">ticker := time.NewTicker(updateInterval)
+defer ticker.Stop()
+// ...
+select {
+    case u:= &lt;- ch1:
+        // ...
+    case v:= &lt;- ch2:
+        // ...
+    case &lt;- ticker.C:
+        logState(status) // call some logging function logState
+    default: // no value ready to be received
+        // ...
+}
+</code></pre></li>
+
+<li><p>Handy to use when you have to limit the rate of processing per unit time. The time.Tick() function with signature func Tick(d Duration) &lt;-chan Time is useful when you only need access to the return channel and don’t need to shutdown it.</p></li>
+
+<li><p>Sample below is good use case for time.Tick function</p>
+
+<pre><code class="language-go">rate_per_sec := 10
+var dur Duration = 1e9 / rate_per_sec
+chRate := time.Tick(dur) // a tick every 1/10th of a second
+for req := range requests {
+    &lt;- chRate // rate limit our Service.Method RPC calls
+    go client.Call(&quot;Service.Method&quot;, req, ...) // client.Call is RPC call
+}
+</code></pre></li>
+
+<li><p>A Timer type looks exactly the same as a Ticker type (it is constructed with NewTimer(d but it sends the time only once, after a Duration d.</p></li>
+
+<li><p>After Duration d the current time is sent on the returned channel; so this is equivalent to NewTimer(d).C; it resembles Tick(), but After() sends the time only once.</p></li>
+
+<li><p>Sample of timer</p>
+
+<pre><code class="language-go">func main() {
+    tick := time.Tick(1e8)
+    boom := time.After(5e8)
+    for {
+        select {
+            case &lt;-tick:
+                fmt.Println(&quot;tick.&quot;)
+            case &lt;-boom:
+                fmt.Println(&quot;BOOM!&quot;)
+                return
+            default:
+                fmt.Println(&quot; .&quot;)
+                time.Sleep(5e7)
         }
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="generator">Generator</h3>
-<h4 id="lazy-generator">Lazy generator</h4>
-<ul>
-<li>
-<p>A generator is a function that returns the next value in a sequence each time the function is called.</p>
-</li>
-<li>
-<p>It is a producer that only returns the next value, not the entire sequence; this is called lazy evaluation:only compute what you need at the moment, saving valuable resources (memory and CPU): it is a technology for the evaluation of expressions on demand.</p>
-</li>
-</ul>
-<h5 id="basic-lazy-generator">Basic lazy generator</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">resume</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">integers</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">yield</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> {
-            <span style="color:#a6e22e">yield</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">count</span>
-            <span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
+<h4 id="lazy-generator">Lazy generator</h4>
+
+<ul>
+<li><p>A generator is a function that returns the next value in a sequence each time the function is called.</p></li>
+
+<li><p>It is a producer that only returns the next value, not the entire sequence; this is called lazy evaluation:only compute what you need at the moment, saving valuable resources (memory and CPU): it is a technology for the evaluation of expressions on demand.</p></li>
+</ul>
+
+<h5 id="basic-lazy-generator">Basic lazy generator</h5>
+
+<pre><code class="language-go">var resume chan int
+
+func integers() chan int {
+    yield := make(chan int)
+    count := 0
+    go func() {
+        for {
+            yield &lt;- count
+            count++
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">yield</span>
+    return yield
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">generateInteger</span>() <span style="color:#66d9ef">int</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">resume</span>
+func generateInteger() int {
+    return &lt;-resume
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">resume</span> = <span style="color:#a6e22e">integers</span>()
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">generateInteger</span>()) <span style="color:#75715e">//=&gt; 0
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">generateInteger</span>()) <span style="color:#75715e">//=&gt; 1
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">generateInteger</span>()) <span style="color:#75715e">//=&gt; 2
-</span><span style="color:#75715e"></span>}
-</code></pre></div><h5 id="generic-lazy-generator">Generic Lazy Generator</h5>
+func main() {
+    resume = integers()
+    fmt.Println(generateInteger()) //=&gt; 0
+    fmt.Println(generateInteger()) //=&gt; 1
+    fmt.Println(generateInteger()) //=&gt; 2
+}
+</code></pre>
+
+<h5 id="generic-lazy-generator">Generic Lazy Generator</h5>
+
 <ul>
-<li>
-<p>By making clever use of the empty interface, closures and higher order functions we can implement a generic builder BuildLazyEvaluator for the lazy evaluation function (this should best placed inside a utility package). The builder takes a function that has to be evaluated and an initial state as arguments and returns a function without arguments returning the desired value. The passed evaluation function has to calculate the next return value as well as the next state based on the state argument. Inside the builder a channel and a goroutine with an endless loop are created. The return values are passed to the channel from which they are fetched by the returned function for later usage. Each time a value is fetched the next one will be calculated.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Any</span> <span style="color:#66d9ef">interface</span>{}
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">EvalFunc</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">Any</span>) (<span style="color:#a6e22e">Any</span>, <span style="color:#a6e22e">Any</span>)
+<li><p>By making clever use of the empty interface, closures and higher order functions we can implement a generic builder BuildLazyEvaluator for the lazy evaluation function (this should best placed inside a utility package). The builder takes a function that has to be evaluated and an initial state as arguments and returns a function without arguments returning the desired value. The passed evaluation function has to calculate the next return value as well as the next state based on the state argument. Inside the builder a channel and a goroutine with an endless loop are created. The return values are passed to the channel from which they are fetched by the returned function for later usage. Each time a value is fetched the next one will be calculated.</p>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">evenFunc</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">state</span> <span style="color:#a6e22e">Any</span>) (<span style="color:#a6e22e">Any</span>, <span style="color:#a6e22e">Any</span>) {
-        <span style="color:#a6e22e">oldSate</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">state</span>.(<span style="color:#66d9ef">int</span>)
-        <span style="color:#a6e22e">newState</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oldSate</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">oldSate</span>, <span style="color:#a6e22e">newState</span>
+<pre><code class="language-go">type Any interface{}
+type EvalFunc func(Any) (Any, Any)
+
+func main() {
+    evenFunc := func(state Any) (Any, Any) {
+        oldSate := state.(int)
+        newState := oldSate + 2
+        return oldSate, newState
     }
-    <span style="color:#a6e22e">even</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">BuildLazyIntEvaluator</span>(<span style="color:#a6e22e">evenFunc</span>, <span style="color:#ae81ff">0</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%vth even: %v\n&#34;</span>, <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">even</span>())
+    even := BuildLazyIntEvaluator(evenFunc, 0)
+    for i := 0; i &lt; 10; i++ {
+        fmt.Printf(&quot;%vth even: %v\n&quot;, i, even())
     }
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">BuildLazyEvaluator</span>(<span style="color:#a6e22e">evalFunc</span> <span style="color:#a6e22e">EvalFunc</span>, <span style="color:#a6e22e">initState</span> <span style="color:#a6e22e">Any</span>) <span style="color:#66d9ef">func</span>() <span style="color:#a6e22e">Any</span> {
-    <span style="color:#a6e22e">retValChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">Any</span>)
-    <span style="color:#a6e22e">loopFunc</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">actState</span> <span style="color:#a6e22e">Any</span> = <span style="color:#a6e22e">initState</span>
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">retVal</span> <span style="color:#a6e22e">Any</span>
-        <span style="color:#66d9ef">for</span> {
-            <span style="color:#a6e22e">retVal</span>, <span style="color:#a6e22e">actState</span> = <span style="color:#a6e22e">evalFunc</span>(<span style="color:#a6e22e">actState</span>)
-            <span style="color:#a6e22e">retValChan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">retVal</span>
+func BuildLazyEvaluator(evalFunc EvalFunc, initState Any) func() Any {
+    retValChan := make(chan Any)
+    loopFunc := func() {
+        var actState Any = initState
+        var retVal Any
+        for {
+            retVal, actState = evalFunc(actState)
+            retValChan &lt;- retVal
         }
     }
-    <span style="color:#a6e22e">retFunc</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>() <span style="color:#a6e22e">Any</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">retValChan</span>
+    retFunc := func() Any {
+        return &lt;-retValChan
     }
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">loopFunc</span>()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">retFunc</span>
+    go loopFunc()
+    return retFunc
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">BuildLazyIntEvaluator</span>(<span style="color:#a6e22e">evalFunc</span> <span style="color:#a6e22e">EvalFunc</span>, <span style="color:#a6e22e">initState</span> <span style="color:#a6e22e">Any</span>) <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">evalFn</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">BuildLazyEvaluator</span>(<span style="color:#a6e22e">evalFunc</span>, <span style="color:#a6e22e">initState</span>)
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">evalFn</span>().(<span style="color:#66d9ef">int</span>)
+func BuildLazyIntEvaluator(evalFunc EvalFunc, initState Any) func() int {
+    evalFn := BuildLazyEvaluator(evalFunc, initState)
+    return func() int {
+        return evalFn().(int)
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="future">Future</h3>
+
 <blockquote>
 <p>A related idea is that of futures: sometimes you know you need to compute a value before you need to actually use the value. In this case, you can potentially start computing the value on another processor and have it ready when you need it.</p>
 </blockquote>
+
 <ul>
-<li>
-<p>Futures are easy to implement via closures and goroutines, the idea is similar to generators, except
-a future needs only to return one value.</p>
-</li>
-<li>
-<p>Matrix package will look like the code below</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// futures used internally
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">futureMatrix</span> <span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">Matrix</span>;
+<li><p>Futures are easy to implement via closures and goroutines, the idea is similar to generators, except
+a future needs only to return one value.</p></li>
 
-<span style="color:#75715e">// API remains the same
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Inverse</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>) <span style="color:#a6e22e">Matrix</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">InverseAsync</span>(<span style="color:#a6e22e">promise</span>(<span style="color:#a6e22e">a</span>))
-}
+<li><p>Matrix package will look like the code below</p>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Product</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>, <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">Matrix</span>) <span style="color:#a6e22e">Matrix</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ProductAsync</span>(<span style="color:#a6e22e">promise</span>(<span style="color:#a6e22e">a</span>), <span style="color:#a6e22e">promise</span>(<span style="color:#a6e22e">b</span>))
+<pre><code class="language-go">// futures used internally
+type futureMatrix chan Matrix;
+
+// API remains the same
+func Inverse (a Matrix) Matrix {
+    return &lt;-InverseAsync(promise(a))
 }
 
-<span style="color:#75715e">// expose async version of the API
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">InverseAsync</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">futureMatrix</span>) <span style="color:#a6e22e">futureMatrix</span> {
-    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">make</span> (<span style="color:#a6e22e">futureMatrix</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span> () { <span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">inverse</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">a</span>) } ()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>
+func Product (a Matrix, b Matrix) Matrix {
+    return &lt;-ProductAsync(promise(a), promise(b))
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ProductAsync</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">futureMatrix</span>) <span style="color:#a6e22e">futureMatrix</span> {
-    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">make</span> (<span style="color:#a6e22e">futureMatrix</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span> () { <span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">product</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">a</span>) } ()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>
+// expose async version of the API
+func InverseAsync (a futureMatrix) futureMatrix {
+    c := make (futureMatrix)
+    go func () { c &lt;- inverse(&lt;-a) } ()
+    return c
 }
 
-<span style="color:#75715e">// actual implementation is the same as before
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">product</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>, <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">Matrix</span>) <span style="color:#a6e22e">Matrix</span> {
-    <span style="color:#f92672">...</span>.
+func ProductAsync (a futureMatrix) futureMatrix {
+    c := make (futureMatrix)
+    go func () { c &lt;- product(&lt;-a) } ()
+    return c
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">inverse</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>) <span style="color:#a6e22e">Matrix</span> {
-    <span style="color:#f92672">...</span>.
+// actual implementation is the same as before
+func product (a Matrix, b Matrix) Matrix {
+    ....
 }
 
-<span style="color:#75715e">// utility fxn: create a futureMatrix from a given matrix
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">promise</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>) <span style="color:#a6e22e">futureMatrix</span> {
-    <span style="color:#a6e22e">future</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">make</span> (<span style="color:#a6e22e">futureMatrix</span>, <span style="color:#ae81ff">1</span>)
-    <span style="color:#a6e22e">future</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">a</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">future</span>;
-}
-</code></pre></div></li>
-<li>
-<p>Use the matrix package</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">InverseProduct</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>, <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">Matrix</span>) {
-    <span style="color:#a6e22e">a_inv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Inverse</span>(<span style="color:#a6e22e">a</span>)
-    <span style="color:#a6e22e">b_inv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Inverse</span>(<span style="color:#a6e22e">b</span>)
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Product</span>(<span style="color:#a6e22e">a_inv</span>, <span style="color:#a6e22e">b_inv</span>)
+func inverse (a Matrix) Matrix {
+    ....
 }
 
-<span style="color:#75715e">// async way
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">InverseProduct</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Matrix</span>, <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">Matrix</span>) {
-    <span style="color:#a6e22e">a_inv_future</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">InverseAsync</span>(<span style="color:#a6e22e">a</span>);
-    <span style="color:#a6e22e">b_inv_future</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">InverseAsync</span>(<span style="color:#a6e22e">b</span>);
-    <span style="color:#a6e22e">a_inv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">a_inv_future</span>;
-    <span style="color:#a6e22e">b_inv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">b_inv_future</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Product</span>(<span style="color:#a6e22e">a_inv</span>, <span style="color:#a6e22e">b_inv</span>);
+// utility fxn: create a futureMatrix from a given matrix
+func promise (a Matrix) futureMatrix {
+    future := make (futureMatrix, 1)
+    future &lt;- a;
+    return future;
 }
-</code></pre></div></li>
+</code></pre></li>
+
+<li><p>Use the matrix package</p>
+
+<pre><code class="language-go">func InverseProduct (a Matrix, b Matrix) {
+    a_inv := Inverse(a)
+    b_inv := Inverse(b)
+    return Product(a_inv, b_inv)
+}
+
+// async way
+func InverseProduct (a Matrix, b Matrix) {
+    a_inv_future := InverseAsync(a);
+    b_inv_future := InverseAsync(b);
+    a_inv := &lt;-a_inv_future;
+    b_inv := &lt;-b_inv_future;
+    return Product(a_inv, b_inv);
+}
+</code></pre></li>
 </ul>
+
 <h4 id="multiplexing">Multiplexing</h4>
+
 <ul>
-<li>
-<p>Client-server applications are the kind of applications where goroutines and channels shine.</p>
-</li>
-<li>
-<p>Server side simulator sample</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Request</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>      <span style="color:#66d9ef">int</span>
-    <span style="color:#a6e22e">replyChan</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> <span style="color:#75715e">// reply channel inside the Request
-</span><span style="color:#75715e"></span>}
+<li><p>Client-server applications are the kind of applications where goroutines and channels shine.</p></li>
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">binOp</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+<li><p>Server side simulator sample</p>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">op</span> <span style="color:#a6e22e">binOp</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>) {
-    <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">replyChan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">op</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">b</span>)
+<pre><code class="language-go">type Request struct {
+    a, b      int
+    replyChan chan int // reply channel inside the Request
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">server</span>(<span style="color:#a6e22e">op</span> <span style="color:#a6e22e">binOp</span>, <span style="color:#a6e22e">service</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">quitChan</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>) {
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#66d9ef">select</span> {
-        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">service</span>:
-            <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">op</span>, <span style="color:#a6e22e">req</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">quitChan</span>:
-            <span style="color:#66d9ef">return</span>
+type binOp func(a, b int) int
+
+func run(op binOp, req *Request) {
+    req.replyChan &lt;- op(req.a, req.b)
+}
+
+func server(op binOp, service chan *Request, quitChan chan bool) {
+    for {
+        select {
+        case req := &lt;-service:
+            go run(op, req)
+        case &lt;-quitChan:
+            return
         }
     }
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">startServer</span>(<span style="color:#a6e22e">op</span> <span style="color:#a6e22e">binOp</span>) (<span style="color:#a6e22e">service</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">quitChan</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>) {
-    <span style="color:#a6e22e">service</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>)
-    <span style="color:#a6e22e">quitChan</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">server</span>(<span style="color:#a6e22e">op</span>, <span style="color:#a6e22e">service</span>, <span style="color:#a6e22e">quitChan</span>)
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">service</span>, <span style="color:#a6e22e">quitChan</span>
+func startServer(op binOp) (service chan *Request, quitChan chan bool) {
+    service = make(chan *Request)
+    quitChan = make(chan bool)
+    go server(op, service, quitChan)
+    return service, quitChan
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">adder</span>, <span style="color:#a6e22e">quitChan</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">startServer</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span> })
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">N</span> = <span style="color:#ae81ff">100</span>
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">reqs</span> [<span style="color:#a6e22e">N</span>]<span style="color:#a6e22e">Request</span>
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">req</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">reqs</span>[<span style="color:#a6e22e">i</span>]
-        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">a</span> = <span style="color:#a6e22e">i</span>
-        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">N</span>
-        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">replyChan</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-        <span style="color:#a6e22e">adder</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">req</span>
+func main() {
+    adder, quitChan := startServer(func(a, b int) int { return a + b })
+    const N = 100
+    var reqs [N]Request
+    for i := 0; i &lt; N; i++ {
+        req := &amp;reqs[i]
+        req.a = i
+        req.b = i + N
+        req.replyChan = make(chan int)
+        adder &lt;- req
     }
-    <span style="color:#75715e">// checks:
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">N</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> { <span style="color:#75715e">// doesn’t matter what order
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">reqs</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">replyChan</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">N</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">i</span> {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;fail at&#34;</span>, <span style="color:#a6e22e">i</span>)
-        } <span style="color:#66d9ef">else</span> {
+    // checks:
+    for i := N - 1; i &gt;= 0; i-- { // doesn’t matter what order
+        if &lt;-reqs[i].replyChan != N+2*i {
+            fmt.Println(&quot;fail at&quot;, i)
+        } else {
 
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Request &#34;</span>, <span style="color:#a6e22e">i</span>, <span style="color:#e6db74">&#34;is ok!&#34;</span>)
+            fmt.Println(&quot;Request &quot;, i, &quot;is ok!&quot;)
         }
     }
-    <span style="color:#a6e22e">quitChan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">true</span>
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;done&#34;</span>)
+    quitChan &lt;- true
+    fmt.Println(&quot;done&quot;)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="parallel-for-loop">Parallel For-Loop</h3>
+
 <ul>
-<li>
-<p>In summary, we need a channel for synchronization purposes (used as a semaphore) when implementing a parallel for-loop, but we do not need to communicate with goroutine through channels when the stack works perfectly well.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">xi</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">float</span> <span style="color:#66d9ef">chan</span>);
-<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">float</span> <span style="color:#66d9ef">chan</span>);
-<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>,<span style="color:#a6e22e">xi</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
-    <span style="color:#a6e22e">xch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">float</span> <span style="color:#66d9ef">chan</span>);
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span> () {
-        <span style="color:#a6e22e">xi</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">xch</span>;
-        <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">doSomething</span>(<span style="color:#a6e22e">xi</span>);
+<li><p>In summary, we need a channel for synchronization purposes (used as a semaphore) when implementing a parallel for-loop, but we do not need to communicate with goroutine through channels when the stack works perfectly well.</p>
+
+<pre><code class="language-go">xi := make(float chan);
+out := make(float chan);
+for _,xi := range data {
+    xch := make(float chan);
+    go func () {
+        xi := &lt;- xch;
+        out &lt;- doSomething(xi);
     }()
-    <span style="color:#a6e22e">xch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">xi</span>;
+    xch &lt;- xi;
 }
-</code></pre></div></li>
-<li>
-<p>Another sample of parallel-loop with semaphore</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">VectorScalarAdd</span> (<span style="color:#a6e22e">v</span> []<span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">float</span>) {
-    <span style="color:#a6e22e">sem</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">make</span> (<span style="color:#a6e22e">semaphore</span>, len(<span style="color:#a6e22e">v</span>));
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>,<span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">v</span> {
-        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>) {
-            <span style="color:#a6e22e">v</span> [<span style="color:#a6e22e">i</span>] <span style="color:#f92672">+=</span> <span style="color:#a6e22e">s</span>; 
-            <span style="color:#a6e22e">sem</span>.<span style="color:#a6e22e">Signal</span>();
-        } (<span style="color:#a6e22e">i</span>);
+</code></pre></li>
+
+<li><p>Another sample of parallel-loop with semaphore</p>
+
+<pre><code class="language-go">func VectorScalarAdd (v []float, s float) {
+    sem := make (semaphore, len(v));
+    for i,_ := range v {
+        go func (i int) {
+            v [i] += s; 
+            sem.Signal();
+        } (i);
     }()
-    <span style="color:#a6e22e">sem</span>.<span style="color:#a6e22e">Wait</span>(len(<span style="color:#a6e22e">v</span>));
+    sem.Wait(len(v));
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="concurrent-access-to-object-with-channel">Concurrent access to object with channel.</h4>
+
 <ul>
-<li>
-<p>To safeguard concurrent modifications of an object instead of using locking with a sync Mutex we can also use a backend goroutine for the sequential execution of anonymous functions.</p>
-</li>
-<li>
-<p>In the following program we have a type Person which now contains a field chF, a channel of anonymous functions. This is initialized in the constructor-method NewPerson, which also starts a method backend() as a goroutine.This method executes in an infinite loop all the functions placed on chF, effectively serializing them and thus providing safe concurrent access. The methods that change and retrieve the salary make an anonymous function which does that and put this function on chF, and backend() will sequentially execute them.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Name</span>   <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">salary</span> <span style="color:#66d9ef">float64</span>
-    <span style="color:#a6e22e">chF</span>    <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">func</span>()
+<li><p>To safeguard concurrent modifications of an object instead of using locking with a sync Mutex we can also use a backend goroutine for the sequential execution of anonymous functions.</p></li>
+
+<li><p>In the following program we have a type Person which now contains a field chF, a channel of anonymous functions. This is initialized in the constructor-method NewPerson, which also starts a method backend() as a goroutine.This method executes in an infinite loop all the functions placed on chF, effectively serializing them and thus providing safe concurrent access. The methods that change and retrieve the salary make an anonymous function which does that and put this function on chF, and backend() will sequentially execute them.</p>
+
+<pre><code class="language-go">type Person struct {
+    Name   string
+    salary float64
+    chF    chan func()
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewPerson</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">salary</span> <span style="color:#66d9ef">float64</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span> {
-    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Person</span>{<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">salary</span>, make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">func</span>())}
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">backend</span>()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>
+func NewPerson(name string, salary float64) *Person {
+    p := &amp;Person{name, salary, make(chan func())}
+    go p.backend()
+    return p
 }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">backend</span>() {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> {
-        <span style="color:#a6e22e">f</span>()
+func (p *Person) backend() {
+    for f := range p.chF {
+        f()
     }
 }
 
-<span style="color:#75715e">// Set salary.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">SetSalary</span>(<span style="color:#a6e22e">sal</span> <span style="color:#66d9ef">float64</span>) {
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">salary</span> = <span style="color:#a6e22e">sal</span> }
+// Set salary.
+func (p *Person) SetSalary(sal float64) {
+    p.chF &lt;- func() { p.salary = sal }
 }
 
-<span style="color:#75715e">// Retrieve salary.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">Salary</span>() <span style="color:#66d9ef">float64</span> {
-    <span style="color:#a6e22e">fChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">float64</span>)
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">fChan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">salary</span> }
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">fChan</span>
+// Retrieve salary.
+func (p *Person) Salary() float64 {
+    fChan := make(chan float64)
+    p.chF &lt;- func() { fChan &lt;- p.salary }
+    return &lt;-fChan
 }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Person - name is: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - salary is: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatFloat</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Salary</span>(), <span style="color:#e6db74">&#39;f&#39;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">64</span>)
+func (p *Person) String() string {
+    return &quot;Person - name is: &quot; + p.Name + &quot; - salary is: &quot; + strconv.FormatFloat(p.Salary(), 'f', 2, 64)
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">bs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewPerson</span>(<span style="color:#e6db74">&#34;Smith Bill&#34;</span>, <span style="color:#ae81ff">2500.5</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">bs</span>)
-    <span style="color:#a6e22e">bs</span>.<span style="color:#a6e22e">SetSalary</span>(<span style="color:#ae81ff">4000.25</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Salary changed:&#34;</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">bs</span>)
+func main() {
+    bs := NewPerson(&quot;Smith Bill&quot;, 2500.5)
+    fmt.Println(bs)
+    bs.SetSalary(4000.25)
+    fmt.Println(&quot;Salary changed:&quot;)
+    fmt.Println(bs)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#channel-directionality">Channel directionality</a></li>
-        <li><a href="#generator">Generator</a></li>
-        <li><a href="#future">Future</a></li>
-        <li><a href="#parallel-for-loop">Parallel For-Loop</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#channel-directionality">Channel directionality</a>
+<ul>
+<li><a href="#pipe-filter-pattern">Pipe &amp; Filter pattern</a>
+<ul>
+<li><a href="#goroutine-with-select">Goroutine with select</a></li>
+<li><a href="#timeout-ticker">Timeout &amp; Ticker</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#generator">Generator</a>
+<ul>
+<li><a href="#lazy-generator">Lazy generator</a>
+<ul>
+<li><a href="#basic-lazy-generator">Basic lazy generator</a></li>
+<li><a href="#generic-lazy-generator">Generic Lazy Generator</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#future">Future</a>
+<ul>
+<li><a href="#multiplexing">Multiplexing</a></li>
+</ul></li>
+<li><a href="#parallel-for-loop">Parallel For-Loop</a>
+<ul>
+<li><a href="#concurrent-access-to-object-with-channel">Concurrent access to object with channel.</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

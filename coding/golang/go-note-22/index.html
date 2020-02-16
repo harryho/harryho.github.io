@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Good practice 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1012,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1031,19 +1000,26 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Good practice 3</h1>
-        <h3 id="error">Error</h3>
+        
+
+<h3 id="error">Error</h3>
+
 <ul>
-<li>How to stop a program when an error occurs:</li>
+<li><p>How to stop a program when an error occurs:</p>
+
+<pre><code class="language-go">if err != nil {
+fmt.Printf(&quot;Program stopping with error %v&quot;, err)
+os.Exit(1)
+}
+// OR :
+if err != nil {
+panic(&quot;ERROR occurred: &quot; + err.Error())
+}
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Program stopping with error %v&#34;</span>, <span style="color:#a6e22e">err</span>)
-    <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
-}
-<span style="color:#75715e">// OR :
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    panic(<span style="color:#e6db74">&#34;ERROR occurred: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
-}
-</code></pre></div><h3 id="performance-best-practices-and-advice">Performance best practices and advice</h3>
+
+<h3 id="performance-best-practices-and-advice">Performance best practices and advice</h3>
+
 <ul>
 <li>Use the initializing declaration form := wherever possible (in functions).</li>
 <li>Use bytes if possible instead of strings</li>
@@ -1062,14 +1038,16 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#error">Error</a></li>
-        <li><a href="#performance-best-practices-and-advice">Performance best practices and advice</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#error">Error</a></li>
+<li><a href="#performance-best-practices-and-advice">Performance best practices and advice</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

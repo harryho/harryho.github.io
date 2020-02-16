@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Error handling :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1012,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1031,317 +1000,346 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Error handling</h1>
-        <h3 id="error-handling">Error handling</h3>
+        
+
+<h3 id="error-handling">Error handling</h3>
+
 <ul>
-<li>
-<p>Go does not have an exception mechanism, like the try/catch in Java or .NET for instance: you cannot throw exceptions. Instead it has a defer-panic-and-recover mechanism.</p>
-</li>
-<li>
-<p>The Go way to handle errors is for functions and methods to return an error object as their only or last return value—or nil if no error occurred—and for calling functions to always check the error they receive.</p>
-</li>
-<li>
-<p>Handle the errors and return from the function in which the error occurred with an error message to the user: that way if something does go wrong, your program will continue to function and the user will be notified. The purpose of panic-and-recover is to deal with genuinely exceptional (so unexpected) problems and not with normal errors.</p>
-</li>
-<li>
-<p>The idiomatic way in Go to detect and report error-conditions</p>
+<li><p>Go does not have an exception mechanism, like the try/catch in Java or .NET for instance: you cannot throw exceptions. Instead it has a defer-panic-and-recover mechanism.</p></li>
+
+<li><p>The Go way to handle errors is for functions and methods to return an error object as their only or last return value—or nil if no error occurred—and for calling functions to always check the error they receive.</p></li>
+
+<li><p>Handle the errors and return from the function in which the error occurred with an error message to the user: that way if something does go wrong, your program will continue to function and the user will be notified. The purpose of panic-and-recover is to deal with genuinely exceptional (so unexpected) problems and not with normal errors.</p></li>
+
+<li><p>The idiomatic way in Go to detect and report error-conditions</p>
+
 <ul>
 <li>A function which can result in an error returns two variables, a value and an error-code; the latter is nil in case of success, and != nil in case of an error-condition.</li>
 <li>After the function call the error is checked, in case of an error ( if error != nil) the execution of the actual function (or if necessary the entire program) is stopped.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <p><strong>!!Never ignore errors, because ignoring them can lead to program crashes!!</strong></p>
+
 <h4 id="error-interface">Error interface</h4>
+
 <ul>
-<li>
-<p>Go has a predefined error interface type:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">error</span> <span style="color:#66d9ef">interface</span> {
-    <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span>
+<li><p>Go has a predefined error interface type:</p>
+
+<pre><code class="language-go">type error interface {
+    Error() string
 }
-</code></pre></div></li>
-<li>
-<p>Defining errors</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;math - square root of negative number&#34;</span>)
-</code></pre></div></li>
-<li>
-<p>Making an error-object with fmt</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span> &lt; <span style="color:#ae81ff">0</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;math: square root of negative number %g&#34;</span>, <span style="color:#a6e22e">f</span>)
+</code></pre></li>
+
+<li><p>Defining errors</p>
+
+<pre><code class="language-go">err := errors.New(&quot;math - square root of negative number&quot;)
+</code></pre></li>
+
+<li><p>Making an error-object with fmt</p>
+
+<pre><code class="language-go">if f &lt; 0 {
+    return 0, fmt.Errorf(&quot;math: square root of negative number %g&quot;, f)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
-<h3 id="run-time-exceptions--panicking">Run-time exceptions &amp; panicking</h3>
+
+<h3 id="run-time-exceptions-panicking">Run-time exceptions &amp; panicking</h3>
+
 <ul>
-<li>
-<p>When execution errors occur, such as attempting to index an array out of bounds or a type assertion failing, the Go runtime triggers a run-time panic with a value of the interface type runtime.Error, and the program crashes with a message of the error; this value has a RuntimeError()-method, to distinguish it from a normal error.</p>
-</li>
-<li>
-<p>A panic can also be initiated from code with the panic function is used, which effectively creates a run-time error that will stop the program. It takes 1 argument of any type, usually a string, to be printed out when the program dies. The Go runtime takes care to stop the program and issuing some debug information.</p>
-</li>
-<li>
-<p>If panic is called from a nested function, it immediately stops execution of the current function, all defer statements are guaranteed to execute and then control is given to the function caller, which receives this call to panic. This bubbles up to the top level, executing defers, and at the top of the stack the program crashes and the error condition is reported on the command-line using the value given to panic: this termination sequence is called <strong>panicking</strong>.</p>
-</li>
+<li><p>When execution errors occur, such as attempting to index an array out of bounds or a type assertion failing, the Go runtime triggers a run-time panic with a value of the interface type runtime.Error, and the program crashes with a message of the error; this value has a RuntimeError()-method, to distinguish it from a normal error.</p></li>
+
+<li><p>A panic can also be initiated from code with the panic function is used, which effectively creates a run-time error that will stop the program. It takes 1 argument of any type, usually a string, to be printed out when the program dies. The Go runtime takes care to stop the program and issuing some debug information.</p></li>
+
+<li><p>If panic is called from a nested function, it immediately stops execution of the current function, all defer statements are guaranteed to execute and then control is given to the function caller, which receives this call to panic. This bubbles up to the top level, executing defers, and at the top of the stack the program crashes and the error condition is reported on the command-line using the value given to panic: this termination sequence is called <strong>panicking</strong>.</p></li>
 </ul>
-<h3 id="error-handling--panicking-in-custom-package">Error-handling &amp; panicking in custom package</h3>
+
+<h3 id="error-handling-panicking-in-custom-package">Error-handling &amp; panicking in custom package</h3>
+
 <ul>
-<li>
-<p>Best practice for custom package</p>
+<li><p>Best practice for custom package</p>
+
 <p>a. Always recover from panic in your package: no explicit panic() should be allowed to cross a package boundary</p>
-<p>b. Return errors as error values to the callers of your package.</p>
-</li>
-<li>
-<p>Sample</p>
+
+<p>b. Return errors as error values to the callers of your package.</p></li>
+
+<li><p>Sample</p>
+
 <ul>
-<li>
-<p>Parse package</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">parse</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;fmt&#34;</span>
-    <span style="color:#e6db74">&#34;strings&#34;</span>
-    <span style="color:#e6db74">&#34;strconv&#34;</span>
+<li><p>Parse package</p>
+
+<pre><code class="language-go">package parse
+import (
+    &quot;fmt&quot;
+    &quot;strings&quot;
+    &quot;strconv&quot;
 )
-<span style="color:#75715e">// A ParseError indicates an error in converting a word into an integer.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ParseError</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Index</span> <span style="color:#66d9ef">int</span> <span style="color:#75715e">// The index into the space-separated list of words.
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Word</span> <span style="color:#66d9ef">string</span> <span style="color:#75715e">// The word that generated the parse error.
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// The raw error that precipitated this error, if any.
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Error</span> <span style="color:#a6e22e">err</span>
+// A ParseError indicates an error in converting a word into an integer.
+type ParseError struct {
+    Index int // The index into the space-separated list of words.
+    Word string // The word that generated the parse error.
+    // The raw error that precipitated this error, if any.
+    Error err
 }
-<span style="color:#75715e">// String returns a human-readable error message.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ParseError</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;pkg parse: error parsing %q as int&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Word</span>)
+// String returns a human-readable error message.
+func (e *ParseError) String() string {
+    return fmt.Sprintf(&quot;pkg parse: error parsing %q as int&quot;, e.Word)
 }
-<span style="color:#75715e">// Parse parses the space-separated words in in put as integers.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">input</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">numbers</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
-    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> recover(); <span style="color:#a6e22e">r</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ok</span> <span style="color:#66d9ef">bool</span>
-            <span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">ok</span> = <span style="color:#a6e22e">r</span>.(<span style="color:#66d9ef">error</span>)
-            <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
-            <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;pkg: %v&#34;</span>, <span style="color:#a6e22e">r</span>)
+// Parse parses the space-separated words in in put as integers.
+func Parse(input string) (numbers []int, err error) {
+    defer func() {
+        if r := recover(); r != nil {
+            var ok bool
+            err, ok = r.(error)
+            if !ok {
+            err = fmt.Errorf(&quot;pkg: %v&quot;, r)
             }
         }
     }()
-    <span style="color:#a6e22e">fields</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">input</span>)
-    <span style="color:#a6e22e">numbers</span> = <span style="color:#a6e22e">fields2numbers</span>(<span style="color:#a6e22e">fields</span>) <span style="color:#75715e">// here panic can occur
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
+    fields := strings.Fields(input)
+    numbers = fields2numbers(fields) // here panic can occur
+    return
 }
-          
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fields2numbers</span>(<span style="color:#a6e22e">fields</span> []<span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">numbers</span> []<span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">fields</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-        panic(<span style="color:#e6db74">&#34;no words to parse&#34;</span>)
+            
+func fields2numbers(fields []string) (numbers []int) {
+    if len(fields) == 0 {
+        panic(&quot;no words to parse&quot;)
     }
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">idx</span>, <span style="color:#a6e22e">field</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">fields</span> {
-        <span style="color:#a6e22e">num</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Atoi</span>(<span style="color:#a6e22e">field</span>)
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        panic(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ParseError</span>{<span style="color:#a6e22e">idx</span>, <span style="color:#a6e22e">field</span>, <span style="color:#a6e22e">err</span>})
+    for idx, field := range fields {
+        num, err := strconv.Atoi(field)
+        if err != nil {
+        panic(&amp;ParseError{idx, field, err})
         }
-    <span style="color:#a6e22e">numbers</span> = append(<span style="color:#a6e22e">numbers</span>, <span style="color:#a6e22e">num</span>)
+    numbers = append(numbers, num)
 }
-<span style="color:#66d9ef">return</span>
+return
 }
-</code></pre></div></li>
-<li>
-<p>main package</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">examples</span> = []<span style="color:#66d9ef">string</span>{
-        <span style="color:#e6db74">&#34;1 2 3 4 5&#34;</span>,
-        <span style="color:#e6db74">&#34;100 50 25 12.5 6.25&#34;</span>,
-        <span style="color:#e6db74">&#34;2 + 2 = 4&#34;</span>,
-        <span style="color:#e6db74">&#34;1st class&#34;</span>,
-        <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></li>
+
+<li><p>main package</p>
+
+<pre><code class="language-go">func main() {
+    var examples = []string{
+        &quot;1 2 3 4 5&quot;,
+        &quot;100 50 25 12.5 6.25&quot;,
+        &quot;2 + 2 = 4&quot;,
+        &quot;1st class&quot;,
+        &quot;&quot;
     }
 
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ex</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">examples</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Parsing %q:\n &#34;</span>, <span style="color:#a6e22e">ex</span>)
-        <span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parse</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">ex</span>)
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-            <span style="color:#75715e">// here String() method from ParseError is used
-</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
-        <span style="color:#66d9ef">continue</span>
+    for _, ex := range examples {
+        fmt.Printf(&quot;Parsing %q:\n &quot;, ex)
+        nums, err := parse.Parse(ex)
+        if err != nil {
+            // here String() method from ParseError is used
+            fmt.Println(err)
+        continue
     }
 
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>)
+    fmt.Println(nums)
 }
 
-<span style="color:#75715e">/* Output:
-</span><span style="color:#75715e">    Parsing &#34;w1 2 3 4 5&#34;:
-</span><span style="color:#75715e">    360
-</span><span style="color:#75715e">    Ivo Balbaert
-</span><span style="color:#75715e">    [1 2 3 4 5]
-</span><span style="color:#75715e">    Parsing &#34;100 50 25 12.5 6.25&#34;:
-</span><span style="color:#75715e">    pkg parse: error parsing &#34;12.5&#34; as int
-</span><span style="color:#75715e">    Parsing &#34;2 + 2 = 4&#34;:
-</span><span style="color:#75715e">    pkg parse: error parsing &#34;+&#34; as int
-</span><span style="color:#75715e">    Parsing &#34;1st class&#34;:
-</span><span style="color:#75715e">    pkg parse: error parsing &#34;1st&#34; as int
-</span><span style="color:#75715e">    Parsing &#34;&#34;:
-</span><span style="color:#75715e">    pkg: no words to parse
-</span><span style="color:#75715e">*/</span>
+/* Output:
+    Parsing &quot;w1 2 3 4 5&quot;:
+    360
+    Ivo Balbaert
+    [1 2 3 4 5]
+    Parsing &quot;100 50 25 12.5 6.25&quot;:
+    pkg parse: error parsing &quot;12.5&quot; as int
+    Parsing &quot;2 + 2 = 4&quot;:
+    pkg parse: error parsing &quot;+&quot; as int
+    Parsing &quot;1st class&quot;:
+    pkg parse: error parsing &quot;1st&quot; as int
+    Parsing &quot;&quot;:
+    pkg: no words to parse
+*/
 
-</code></pre></div></li>
+</code></pre></li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h3 id="recover">Recover</h3>
+
 <ul>
-<li>
-<p>recover is only useful when called inside a deferred function (see § 6.4) : it then retrieves the error value passed through the call of panic; when used in normal execution a call to recover will return nil and have no other effect.</p>
-</li>
-<li>
-<p>Summarized: panic causes the stack to unwind until a deferred recover() is found or the program terminates</p>
-</li>
+<li><p>recover is only useful when called inside a deferred function (see § 6.4) : it then retrieves the error value passed through the call of panic; when used in normal execution a call to recover will return nil and have no other effect.</p></li>
+
+<li><p>Summarized: panic causes the stack to unwind until a deferred recover() is found or the program terminates</p></li>
 </ul>
+
 <h4 id="similar-try-catch-block-in-go">Similar try-catch block in Go</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">protect</span>(<span style="color:#a6e22e">g</span> <span style="color:#66d9ef">func</span>()) {
-    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;done&#34;</span>)
-        <span style="color:#75715e">// Println executes normally even if there is a panic
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> recover(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-          <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;run time panic: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+
+<pre><code class="language-go">func protect(g func()) {
+    defer func() {
+        log.Println(&quot;done&quot;)
+        // Println executes normally even if there is a panic
+        if err := recover(); err != nil {
+          log.Printf(&quot;run time panic: %v&quot;, err)
         }
     }()
-    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;start&#34;</span>)
-    <span style="color:#a6e22e">g</span>() <span style="color:#75715e">// possible runtime-error
-</span><span style="color:#75715e"></span>}
-</code></pre></div><h4 id="sample-of-panic-defer--recover">Sample of panic, defer &amp; recover</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">badCall</span>() {
-    panic(<span style="color:#e6db74">&#34;bad end&#34;</span>)
+    log.Println(&quot;start&quot;)
+    g() // possible runtime-error
+}
+</code></pre>
+
+<h4 id="sample-of-panic-defer-recover">Sample of panic, defer &amp; recover</h4>
+
+<pre><code class="language-go">func badCall() {
+    panic(&quot;bad end&quot;)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">test</span>() {
-    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> recover(); <span style="color:#a6e22e">e</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Panicking %s\r\n&#34;</span>, <span style="color:#a6e22e">e</span>)
+func test() {
+    defer func() {
+        if e := recover(); e != nil {
+            fmt.Printf(&quot;Panicking %s\r\n&quot;, e)
         }
     }()
-    <span style="color:#a6e22e">badCall</span>()
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;After bad call\r\n&#34;</span>)
+    badCall()
+    fmt.Printf(&quot;After bad call\r\n&quot;)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Calling test\r\n&#34;</span>)
-    <span style="color:#a6e22e">test</span>()
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Test completed\r\n&#34;</span>)
+func main() {
+    fmt.Printf(&quot;Calling test\r\n&quot;)
+    test()
+    fmt.Printf(&quot;Test completed\r\n&quot;)
 }
-</code></pre></div><h3 id="an-error-handling-scheme-with-closures">An error-handling scheme with closures</h3>
+</code></pre>
+
+<h3 id="an-error-handling-scheme-with-closures">An error-handling scheme with closures</h3>
+
 <ul>
-<li>
-<p>Combining the defer/panic/recover mechanism with closures can result in a far more elegant scheme that we will now discuss. However it is only applicable when all functions have the same signature, which is rather restrictive.</p>
-</li>
-<li>
-<p>The scheme uses 2 helper functions:</p>
+<li><p>Combining the defer/panic/recover mechanism with closures can result in a far more elegant scheme that we will now discuss. However it is only applicable when all functions have the same signature, which is rather restrictive.</p></li>
+
+<li><p>The scheme uses 2 helper functions:</p>
+
 <p>i) check: a function which tests whether an error occurred, and panics if so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">check</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) { <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { panic(<span style="color:#a6e22e">err</span>) } }
-</code></pre></div><p>ii) errorhandler: this is a wrapper function. It takes a function fn of our type fType1 and returns such a function by calling fn. However it contains the defer/recover mechanism</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">errorHandler</span>(<span style="color:#a6e22e">fn</span> <span style="color:#a6e22e">fType1</span>) <span style="color:#a6e22e">fType1</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">type1</span>, <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">type2</span>) {
-        <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> recover().(<span style="color:#66d9ef">error</span>); <span style="color:#a6e22e">ok</span> {
-           <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;run time panic: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+
+<pre><code class="language-go">func check(err error) { if err != nil { panic(err) } }
+</code></pre>
+
+<p>ii) errorhandler: this is a wrapper function. It takes a function fn of our type fType1 and returns such a function by calling fn. However it contains the defer/recover mechanism</p>
+
+<pre><code class="language-go">func errorHandler(fn fType1) fType1 {
+    return func(a type1, b type2) {
+        defer func() {
+        if e, ok := recover().(error); ok {
+           log.Printf(&quot;run time panic: %v&quot;, err)
 
         }
         }()
-        <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
+        fn(a, b)
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="start-external-program">Start external program</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#75715e">// 1) os.StartProcess //
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">/*********************/</span>
-    <span style="color:#75715e">/* Linux: */</span>
-    <span style="color:#a6e22e">env</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Environ</span>()
-    <span style="color:#a6e22e">procAttr</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ProcAttr</span>{
-        <span style="color:#a6e22e">Env</span>: <span style="color:#a6e22e">env</span>,
-        <span style="color:#a6e22e">Files</span>: []<span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>{
-            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdin</span>,
-            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>,
-            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>,
+
+<pre><code class="language-go">func main() {
+    // 1) os.StartProcess //
+    /*********************/
+    /* Linux: */
+    env := os.Environ()
+    procAttr := &amp;os.ProcAttr{
+        Env: env,
+        Files: []*os.File{
+            os.Stdin,
+            os.Stdout,
+            os.Stderr,
         },
     }
-    <span style="color:#a6e22e">pid</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StartProcess</span>(<span style="color:#e6db74">&#34;/bin/ls&#34;</span>, []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;ls&#34;</span>, <span style="color:#e6db74">&#34;-l&#34;</span>}, <span style="color:#a6e22e">procAttr</span>)
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Error %v starting process!&#34;</span>, <span style="color:#a6e22e">err</span>) <span style="color:#75715e">//
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+    pid, err := os.StartProcess(&quot;/bin/ls&quot;, []string{&quot;ls&quot;, &quot;-l&quot;}, procAttr)
+    if err != nil {
+        fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+        os.Exit(1)
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;The process id is %v&#34;</span>, <span style="color:#a6e22e">pid</span>)
-    <span style="color:#75715e">/* Output:
-</span><span style="color:#75715e">    The process id is &amp;{21275 0 0 {{0 0} 0 0 0 0}}The process id is &amp;{21276 0 0 {{0 0} 0 0 0 0}}total 54
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root   250 Sep 21 19:33 csv_data.txt
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root 25227 Oct  4 23:34 hello.go
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root  6708 Sep 21 10:25 hello.go.txt
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root   130 Sep 21 11:08 output.txt
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root  8898 Sep 21 12:10 target_hello.txt
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root  1619 Sep 22 14:40 urlshorten.go.txt
-</span><span style="color:#75715e">    -rwxrwxrwx 1 root root   182 Sep 21 13:50 vcard.json
-</span><span style="color:#75715e">    */</span>
-    <span style="color:#75715e">// 2nd example: show all processes
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">pid</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StartProcess</span>(<span style="color:#e6db74">&#34;/bin/ps&#34;</span>, []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;-e&#34;</span>, <span style="color:#e6db74">&#34;opid,ppid,comm&#34;</span>}, <span style="color:#a6e22e">procAttr</span>)
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Error %v starting process!&#34;</span>, <span style="color:#a6e22e">err</span>) <span style="color:#75715e">//
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+    fmt.Printf(&quot;The process id is %v&quot;, pid)
+    /* Output:
+    The process id is &amp;{21275 0 0 {{0 0} 0 0 0 0}}The process id is &amp;{21276 0 0 {{0 0} 0 0 0 0}}total 54
+    -rwxrwxrwx 1 root root   250 Sep 21 19:33 csv_data.txt
+    -rwxrwxrwx 1 root root 25227 Oct  4 23:34 hello.go
+    -rwxrwxrwx 1 root root  6708 Sep 21 10:25 hello.go.txt
+    -rwxrwxrwx 1 root root   130 Sep 21 11:08 output.txt
+    -rwxrwxrwx 1 root root  8898 Sep 21 12:10 target_hello.txt
+    -rwxrwxrwx 1 root root  1619 Sep 22 14:40 urlshorten.go.txt
+    -rwxrwxrwx 1 root root   182 Sep 21 13:50 vcard.json
+    */
+    // 2nd example: show all processes
+    pid, err = os.StartProcess(&quot;/bin/ps&quot;, []string{&quot;-e&quot;, &quot;opid,ppid,comm&quot;}, procAttr)
+    if err != nil {
+        fmt.Printf(&quot;Error %v starting process!&quot;, err) //
+        os.Exit(1)
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;The process id is %v&#34;</span>, <span style="color:#a6e22e">pid</span>)
-    <span style="color:#75715e">// 2) cmd.Run //
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">/***************/</span>
-    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;gedit&#34;</span>) <span style="color:#75715e">// this opens a gedit-window
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">Run</span>()
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Error %v executing command!&#34;</span>, <span style="color:#a6e22e">err</span>)
-        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+    fmt.Printf(&quot;The process id is %v&quot;, pid)
+    // 2) cmd.Run //
+    /***************/
+    cmd := exec.Command(&quot;gedit&quot;) // this opens a gedit-window
+    err = cmd.Run()
+    if err != nil {
+        fmt.Printf(&quot;Error %v executing command!&quot;, err)
+        os.Exit(1)
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;The command is %v&#34;</span>, <span style="color:#a6e22e">cmd</span>)
+    fmt.Printf(&quot;The command is %v&quot;, cmd)
 }
-</code></pre></div><h3 id="testing">Testing</h3>
+</code></pre>
+
+<h3 id="testing">Testing</h3>
+
 <ul>
-<li>
-<p>Table-driven test</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tests</span> = [] <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">in</span>
-    <span style="color:#75715e">// Test table
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">out</span> <span style="color:#66d9ef">string</span>
+<li><p>Table-driven test</p>
+
+<pre><code class="language-go">var tests = [] struct {
+    in
+    // Test table
+    string
+    out string
 }{
-    {<span style="color:#e6db74">&#34;in1&#34;</span>, <span style="color:#e6db74">&#34;exp1&#34;</span>},
-    {<span style="color:#e6db74">&#34;in2&#34;</span>, <span style="color:#e6db74">&#34;exp2&#34;</span>},
-    {<span style="color:#e6db74">&#34;in3&#34;</span>, <span style="color:#e6db74">&#34;exp3&#34;</span>},
-<span style="color:#75715e">// ....
-</span><span style="color:#75715e"></span>}
+    {&quot;in1&quot;, &quot;exp1&quot;},
+    {&quot;in2&quot;, &quot;exp2&quot;},
+    {&quot;in3&quot;, &quot;exp3&quot;},
+// ....
+}
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">verify</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">testnum</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">testcase</span>, <span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">output</span>, <span style="color:#a6e22e">expected</span> <span style="color:#66d9ef">string</span>) {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">output</span> {
-        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;%d. %s with input = %s: output %s != %s&#34;</span>, <span style="color:#a6e22e">testnum</span>, <span style="color:#a6e22e">testcase</span>, <span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">output</span>, <span style="color:#a6e22e">expected</span>)
+func verify(t *testing.T, testnum int, testcase, input, output, expected string) {
+    if input != output {
+        t.Errorf(&quot;%d. %s with input = %s: output %s != %s&quot;, testnum, testcase, input, output, expected)
     }
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestFunction</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">tt</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tests</span> {
-        <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">FuncToBeTested</span>(<span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">in</span>)
-        <span style="color:#a6e22e">verify</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">i</span>, <span style="color:#e6db74">&#34;FuncToBeTested: &#34;</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">in</span>, <span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">out</span>)
+func TestFunction(t *testing.T) {
+    for i, tt := range tests {
+        s := FuncToBeTested(tt.in)
+        verify(t, i, &quot;FuncToBeTested: &quot;, tt.in, s, tt.out)
     }
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#error-handling">Error handling</a></li>
-        <li><a href="#run-time-exceptions--panicking">Run-time exceptions & panicking</a></li>
-        <li><a href="#error-handling--panicking-in-custom-package">Error-handling & panicking in custom package</a></li>
-        <li><a href="#recover">Recover</a></li>
-        <li><a href="#an-error-handling-scheme-with-closures">An error-handling scheme with closures</a></li>
-        <li><a href="#start-external-program">Start external program</a></li>
-        <li><a href="#testing">Testing</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#error-handling">Error handling</a>
+<ul>
+<li><a href="#error-interface">Error interface</a></li>
+</ul></li>
+<li><a href="#run-time-exceptions-panicking">Run-time exceptions &amp; panicking</a></li>
+<li><a href="#error-handling-panicking-in-custom-package">Error-handling &amp; panicking in custom package</a></li>
+<li><a href="#recover">Recover</a>
+<ul>
+<li><a href="#similar-try-catch-block-in-go">Similar try-catch block in Go</a></li>
+<li><a href="#sample-of-panic-defer-recover">Sample of panic, defer &amp; recover</a></li>
+</ul></li>
+<li><a href="#an-error-handling-scheme-with-closures">An error-handling scheme with closures</a></li>
+<li><a href="#start-external-program">Start external program</a></li>
+<li><a href="#testing">Testing</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

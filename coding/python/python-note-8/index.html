@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Context :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1007,8 +978,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1026,537 +995,538 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Context</h1>
-        <h2 id="context-managers">Context managers</h2>
+        
+
+<h2 id="context-managers">Context managers</h2>
+
 <h3 id="context-manager">context manager</h3>
+
 <ul>
-<li>
-<p>context manager an object designed to be used in a with-statement</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
+<li><p>context manager an object designed to be used in a with-statement</p>
+
+<pre><code class="language-python">with context-manager:
     body
 
-<span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
-    context<span style="color:#f92672">-</span>manager<span style="color:#f92672">.</span>begin()
+with context-manager:
+    context-manager.begin()
     body
-    context<span style="color:#f92672">-</span>manager<span style="color:#f92672">.</span>end()
+    context-manager.end()
 
-<span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
+with context-manager:
     setup()
     body
     teardown()
 
-<span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
-    context<span style="color:#f92672">-</span>manager<span style="color:#f92672">.</span>begin()
+with context-manager:
+    context-manager.begin()
     body
-    context<span style="color:#f92672">-</span>manager<span style="color:#f92672">.</span>end()        
+    context-manager.end()        
 
-<span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
+with context-manager:
     allocation()
     body
     deallocation()
 
-<span style="color:#66d9ef">with</span> context<span style="color:#f92672">-</span>manager:
+with context-manager:
     enter()
     body
     exit()
 
-</code></pre></div></li>
-<li>
-<p>A context-manager ensures that resources are properly and automatically managed</p>
+</code></pre></li>
+
+<li><p>A context-manager ensures that resources are properly and automatically managed</p>
+
 <ul>
 <li>enter() prepares the manager for use</li>
 <li>exit() cleans it up</li>
-</ul>
-</li>
-<li>
-<p>Context-manager Protocol</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">__enter__(self)
+</ul></li>
+
+<li><p>Context-manager Protocol</p>
+
+<pre><code class="language-python">__enter__(self)
 
 __exit__(self,
-        exc_type, <span style="color:#75715e">## exception type </span>
-        exc_val,  <span style="color:#75715e">## exception object</span>
-        exc_tb)    <span style="color:#75715e">## exception traceback</span>
-</code></pre></div><ul>
-<li>
-<p><code>__enter__()</code></p>
+    exc_type, ## exception type 
+    exc_val,  ## exception object
+    exc_tb)    ## exception traceback
+</code></pre></li>
+
+<li><p><code>__enter__()</code></p>
+
 <ul>
 <li>called before entering with-statement body</li>
 <li>return value bound to as variable</li>
 <li>can return value of any type</li>
 <li>commonly returns context-manager itself</li>
+</ul></li>
+
+<li><p><code>__exit__()</code> called when with-statement body exits</p></li>
+
+<li><p>By default <code>__exit__()</code> propagates exceptions thrown from the with-statement’s code block</p></li>
+
+<li><p><code>__exit__()</code> should never explicitly re-raise exceptions</p></li>
+
+<li><p><code>__exit__()</code> should only raise exceptions if it fails itself</p></li>
 </ul>
-</li>
-<li>
-<p><code>__exit__()</code> called when with-statement body exits</p>
-</li>
-<li>
-<p>By default <code>__exit__()</code> propagates exceptions thrown from the with-statement’s code block</p>
-</li>
-<li>
-<p><code>__exit__()</code> should never explicitly re-raise exceptions</p>
-</li>
-<li>
-<p><code>__exit__()</code> should only raise exceptions if it fails itself</p>
-</li>
-</ul>
+
 <h2 id="contextlib">contextlib</h2>
+
 <ul>
-<li>
-<p><code>contextlib</code> : standard library module for working with context managers</p>
-</li>
-<li>
-<p><code>contextmanager</code> is a decorator you can use to create new context managers</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@contextlib.contextmanager</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_context_manager</span>():
-    <span style="color:#75715e">## &lt;ENTER&gt;</span>
-    <span style="color:#66d9ef">try</span>:
-    <span style="color:#66d9ef">yield</span> [value]
-    <span style="color:#75715e">## &lt;NORMAL EXIT&gt;</span>
-    <span style="color:#66d9ef">except</span>:
-    <span style="color:#75715e">## &lt;EXCEPTIONAL EXIT&gt;</span>
-    <span style="color:#66d9ef">raise</span>
-    <span style="color:#66d9ef">with</span> my_context_manager() <span style="color:#66d9ef">as</span> x:
-    <span style="color:#75715e">## . . .</span>
-</code></pre></div></li>
-<li>
-<p><code>contextmanager</code> lets you define context-managers with simple control flow It allows you to leverage the statefulness of generators</p>
-</li>
-<li>
-<p><code>contextmanager</code> uses standard exception handling to propagate exceptions</p>
-</li>
-<li>
-<p><code>contextmanager</code> explicitly re-raises – or doesn’t catch – to propagate exceptions</p>
-</li>
-<li>
-<p><code>contextmanager</code> swallows exceptions by not re-raising them</p>
-</li>
-<li>
-<p>Exceptions propagated from <strong>inner</strong> context managers will be seen by <strong>outer</strong> context managers</p>
-</li>
-<li>
-<p>multiple context managers with-statements can use as many context-managers as you need</p>
-</li>
-<li>
-<p>Never pass list</p>
+<li><code>contextlib</code> : standard library module for working with context managers</li>
+
+<li><p><code>contextmanager</code> is a decorator you can use to create new context managers</p>
+
+<pre><code class="language-python">@contextlib.contextmanager
+def my_context_manager():
+    ## &lt;ENTER&gt;
+    try:
+    yield [value]
+    ## &lt;NORMAL EXIT&gt;
+    except:
+    ## &lt;EXCEPTIONAL EXIT&gt;
+    raise
+    with my_context_manager() as x:
+    ## . . .
+</code></pre></li>
+
+<li><p><code>contextmanager</code> lets you define context-managers with simple control flow It allows you to leverage the statefulness of generators</p></li>
+
+<li><p><code>contextmanager</code> uses standard exception handling to propagate exceptions</p></li>
+
+<li><p><code>contextmanager</code> explicitly re-raises – or doesn’t catch – to propagate exceptions</p></li>
+
+<li><p><code>contextmanager</code> swallows exceptions by not re-raising them</p></li>
+
+<li><p>Exceptions propagated from <strong>inner</strong> context managers will be seen by <strong>outer</strong> context managers</p></li>
+
+<li><p>multiple context managers with-statements can use as many context-managers as you need</p></li>
+
+<li><p>Never pass list</p>
+
 <ul>
-<li>
-<p>Example &ndash; The code below is the same</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> cm1() <span style="color:#66d9ef">as</span> a, cm2() <span style="color:#66d9ef">as</span> b:
+<li><p>Example &ndash; The code below is the same</p>
+
+<pre><code class="language-python">with cm1() as a, cm2() as b:
     BODY
 
-<span style="color:#66d9ef">with</span> cm1() <span style="color:#66d9ef">as</span> a:
-    <span style="color:#66d9ef">with</span> cm2() <span style="color:#66d9ef">as</span> b:
+with cm1() as a:
+    with cm2() as b:
         BODY
-</code></pre></div></li>
-</ul>
-</li>
-<li>
-<p>Examples</p>
+</code></pre></li>
+</ul></li>
+
+<li><p>Examples</p>
+
 <p>&ndash; simple sample</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextlib
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggingContextManager</span>:
-    <span style="color:#66d9ef">def</span> __enter__(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LoggingContextManager.__enter__()</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">You</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">re in a with-block!</span><span style="color:#e6db74">&#34;</span>
+<pre><code class="language-python">import contextlib
 
-    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
-        <span style="color:#66d9ef">if</span> exc_type <span style="color:#f92672">is</span> None:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LoggingContextManager.__exit__: </span><span style="color:#e6db74">&#39;</span>
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">normal exit detected</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LoggingContextManager.__exit__: </span><span style="color:#e6db74">&#39;</span>
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Exception detected! </span><span style="color:#e6db74">&#39;</span>
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">type={}, value={}, traceback={}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(
+class LoggingContextManager:
+    def __enter__(self):
+        print('LoggingContextManager.__enter__()')
+        return &quot;You're in a with-block!&quot;
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            print('LoggingContextManager.__exit__: '
+                'normal exit detected')
+        else:
+            print('LoggingContextManager.__exit__: '
+                'Exception detected! '
+                'type={}, value={}, traceback={}'.format(
                     exc_type, exc_val, exc_tb))                     
 
-<span style="color:#a6e22e">@contextlib.contextmanager</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logging_context_manager</span>():
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging_context_manager: enter</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">try</span>:
-        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">You</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">re in a with-block!</span><span style="color:#e6db74">&#34;</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging_context_manager: normal exit</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging_context_manager: exceptional exit</span><span style="color:#e6db74">&#39;</span>,
-            sys<span style="color:#f92672">.</span>exc_info())
-        <span style="color:#66d9ef">raise</span>
+@contextlib.contextmanager
+def logging_context_manager():
+    print('logging_context_manager: enter')
+    try:
+        yield &quot;You're in a with-block!&quot;
+        print('logging_context_manager: normal exit')
+    except Exception:
+        print('logging_context_manager: exceptional exit',
+            sys.exc_info())
+        raise
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    <span style="color:#66d9ef">with</span> LoggingContextManager() <span style="color:#66d9ef">as</span> log:
-        <span style="color:#66d9ef">pass</span>
+if __name__ == &quot;__main__&quot;:
+    with LoggingContextManager() as log:
+        pass
 
-    <span style="color:#66d9ef">with</span> logging_context_manager() <span style="color:#66d9ef">as</span> clog:
-        <span style="color:#66d9ef">pass</span>
+    with logging_context_manager() as clog:
+        pass
 
-<span style="color:#75715e">## test result</span>
-<span style="color:#75715e">## LoggingContextManager.__enter__()</span>
-<span style="color:#75715e">## LoggingContextManager.__exit__: normal exit detected</span>
-<span style="color:#75715e">## logging_context_manager: enter</span>
-<span style="color:#75715e">## logging_context_manager: normal exit</span>
+## test result
+## LoggingContextManager.__enter__()
+## LoggingContextManager.__exit__: normal exit detected
+## logging_context_manager: enter
+## logging_context_manager: normal exit
 
 
-</code></pre></div><ul>
-<li>nested</li>
+</code></pre>
+
+<ul>
+<li><p>nested</p>
+
+<pre><code class="language-python">            
+@contextlib.contextmanager
+def nest_test(name):
+print('Entering', name)
+yield name
+print('Exiting', name)
+
+
+
+
+if __name__ == &quot;__main__&quot;:
+with nest_test('outer') as n1, nest_test('inner nested in ' + n1):
+    pass
+
+## test result
+## Entering outer
+## Entering inner nested in outer
+## Exiting inner nested in outer
+## Exiting outer
+            
+</code></pre></li>
+
+<li><p>db &amp; transaction</p>
+
+<pre><code class="language-python">import contextlib
+
+class Connection:
+def __init__(self):
+    self.xid = 0
+
+def _start_transaction(self, read_only=True):
+    print('starting transaction', self.xid)
+    rslt = self.xid
+    self.xid = self.xid + 1
+    return rslt
+
+def _commit_transaction(self, xid):
+    print('committing transaction', xid)
+
+def _rollback_transaction(self, xid):
+    print('rolling back transaction', xid)
+
+class Transaction:
+def __init__(self, conn, read_only=True):
+    self.conn = conn
+    self.xid = conn._start_transaction(read_only=read_only)
+
+def commit(self):
+    self.conn._commit_transaction(self.xid)
+
+def rollback(self):
+    self.conn._rollback_transaction(self.xid)
+
+@contextlib.contextmanager
+def start_transaction(connection):
+tx = Transaction(connection)
+
+try:
+    yield tx
+except Exception:
+    tx.rollback()
+    raise
+
+tx.commit()
+</code></pre></li>
+</ul></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">          
-<span style="color:#a6e22e">@contextlib.contextmanager</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nest_test</span>(name):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Entering</span><span style="color:#e6db74">&#39;</span>, name)
-    <span style="color:#66d9ef">yield</span> name
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Exiting</span><span style="color:#e6db74">&#39;</span>, name)
 
-
-
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    <span style="color:#66d9ef">with</span> nest_test(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">outer</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> n1, nest_test(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">inner nested in </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> n1):
-        <span style="color:#66d9ef">pass</span>
-
-<span style="color:#75715e">## test result</span>
-<span style="color:#75715e">## Entering outer</span>
-<span style="color:#75715e">## Entering inner nested in outer</span>
-<span style="color:#75715e">## Exiting inner nested in outer</span>
-<span style="color:#75715e">## Exiting outer</span>
-          
-</code></pre></div><ul>
-<li>db &amp; transaction</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextlib
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Connection</span>:
-    <span style="color:#66d9ef">def</span> __init__(self):
-        self<span style="color:#f92672">.</span>xid <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_start_transaction</span>(self, read_only<span style="color:#f92672">=</span>True):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">starting transaction</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>xid)
-        rslt <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>xid
-        self<span style="color:#f92672">.</span>xid <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>xid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">return</span> rslt
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_commit_transaction</span>(self, xid):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">committing transaction</span><span style="color:#e6db74">&#39;</span>, xid)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_rollback_transaction</span>(self, xid):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rolling back transaction</span><span style="color:#e6db74">&#39;</span>, xid)
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Transaction</span>:
-    <span style="color:#66d9ef">def</span> __init__(self, conn, read_only<span style="color:#f92672">=</span>True):
-        self<span style="color:#f92672">.</span>conn <span style="color:#f92672">=</span> conn
-        self<span style="color:#f92672">.</span>xid <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>_start_transaction(read_only<span style="color:#f92672">=</span>read_only)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">commit</span>(self):
-        self<span style="color:#f92672">.</span>conn<span style="color:#f92672">.</span>_commit_transaction(self<span style="color:#f92672">.</span>xid)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rollback</span>(self):
-        self<span style="color:#f92672">.</span>conn<span style="color:#f92672">.</span>_rollback_transaction(self<span style="color:#f92672">.</span>xid)
-
-<span style="color:#a6e22e">@contextlib.contextmanager</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_transaction</span>(connection):
-    tx <span style="color:#f92672">=</span> Transaction(connection)
-
-    <span style="color:#66d9ef">try</span>:
-        <span style="color:#66d9ef">yield</span> tx
-    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>:
-        tx<span style="color:#f92672">.</span>rollback()
-        <span style="color:#66d9ef">raise</span>
-
-    tx<span style="color:#f92672">.</span>commit()
-</code></pre></div></li>
-</ul>
 <h3 id="introspection">Introspection</h3>
+
 <ul>
-<li>
-<p>type of object is type</p>
-</li>
-<li>
-<p>Example</p>
+<li><p>type of object is type</p></li>
+
+<li><p>Example</p>
+
 <ul>
-<li>
-<p>introspector</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> inspect
-<span style="color:#f92672">import</span> reprlib
-<span style="color:#f92672">import</span> itertools
-<span style="color:#75715e">## from sorted_set import SortedSet</span>
+<li><p>introspector</p>
 
-<span style="color:#f92672">from</span> bisect <span style="color:#f92672">import</span> bisect_left
-<span style="color:#f92672">from</span> collections.abc <span style="color:#f92672">import</span> Sequence, Set
-<span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> chain
+<pre><code class="language-python">import inspect
+import reprlib
+import itertools
+## from sorted_set import SortedSet
+
+from bisect import bisect_left
+from collections.abc import Sequence, Set
+from itertools import chain
 
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SortedSet</span>(Sequence, Set):
+class SortedSet(Sequence, Set):
 
-    <span style="color:#66d9ef">def</span> __init__(self, items<span style="color:#f92672">=</span>None):
-        self<span style="color:#f92672">.</span>_items <span style="color:#f92672">=</span> sorted(set(items)) <span style="color:#66d9ef">if</span> items <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> []
+    def __init__(self, items=None):
+        self._items = sorted(set(items)) if items is not None else []
 
-    <span style="color:#66d9ef">def</span> __contains__(self, item):
-        <span style="color:#66d9ef">try</span>:
-            self<span style="color:#f92672">.</span>index(item)
-            <span style="color:#66d9ef">return</span> True
-        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
-            <span style="color:#66d9ef">return</span> False
+    def __contains__(self, item):
+        try:
+            self.index(item)
+            return True
+        except ValueError:
+            return False
 
-    <span style="color:#66d9ef">def</span> __len__(self):
-        <span style="color:#66d9ef">return</span> len(self<span style="color:#f92672">.</span>_items)
+    def __len__(self):
+        return len(self._items)
 
-    <span style="color:#66d9ef">def</span> __iter__(self):
-        <span style="color:#66d9ef">return</span> iter(self<span style="color:#f92672">.</span>_items)
+    def __iter__(self):
+        return iter(self._items)
 
-    <span style="color:#66d9ef">def</span> __getitem__(self, index):
-        result <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_items[index]
-        <span style="color:#66d9ef">return</span> SortedSet(result) <span style="color:#66d9ef">if</span> isinstance(index, slice) <span style="color:#66d9ef">else</span> result
+    def __getitem__(self, index):
+        result = self._items[index]
+        return SortedSet(result) if isinstance(index, slice) else result
 
-    <span style="color:#66d9ef">def</span> __repr__(self):
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SortedSet({})</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(
-            repr(self<span style="color:#f92672">.</span>_items) <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_items <span style="color:#66d9ef">else</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+    def __repr__(self):
+        return &quot;SortedSet({})&quot;.format(
+            repr(self._items) if self._items else ''
         )
 
-    <span style="color:#66d9ef">def</span> __eq__(self, rhs):
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(rhs, SortedSet):
-            <span style="color:#66d9ef">return</span> NotImplemented
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_items <span style="color:#f92672">==</span> rhs<span style="color:#f92672">.</span>_items
+    def __eq__(self, rhs):
+        if not isinstance(rhs, SortedSet):
+            return NotImplemented
+        return self._items == rhs._items
 
-    <span style="color:#66d9ef">def</span> __ne__(self, rhs):
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(rhs, SortedSet):
-            <span style="color:#66d9ef">return</span> NotImplemented
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_items <span style="color:#f92672">!=</span> rhs<span style="color:#f92672">.</span>_items
+    def __ne__(self, rhs):
+        if not isinstance(rhs, SortedSet):
+            return NotImplemented
+        return self._items != rhs._items
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_is_unique_and_sorted</span>(self):
-        <span style="color:#66d9ef">return</span> all(self[i] <span style="color:#f92672">&lt;</span> self[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(self) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))
+    def _is_unique_and_sorted(self):
+        return all(self[i] &lt; self[i + 1] for i in range(len(self) - 1))
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(self, item):
-        <span style="color:#66d9ef">assert</span> self<span style="color:#f92672">.</span>_is_unique_and_sorted()
-        index <span style="color:#f92672">=</span> bisect_left(self<span style="color:#f92672">.</span>_items, item)
-        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">!=</span> len(self<span style="color:#f92672">.</span>_items)) <span style="color:#f92672">and</span> (self<span style="color:#f92672">.</span>_items[index] <span style="color:#f92672">==</span> item):
-            <span style="color:#66d9ef">return</span> index
-        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{} not found</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(repr(item)))
+    def index(self, item):
+        assert self._is_unique_and_sorted()
+        index = bisect_left(self._items, item)
+        if (index != len(self._items)) and (self._items[index] == item):
+            return index
+        raise ValueError(&quot;{} not found&quot;.format(repr(item)))
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(self, item):
-        <span style="color:#66d9ef">assert</span> self<span style="color:#f92672">.</span>_is_unique_and_sorted()
-        <span style="color:#66d9ef">return</span> int(item <span style="color:#f92672">in</span> self)
+    def count(self, item):
+        assert self._is_unique_and_sorted()
+        return int(item in self)
 
-    <span style="color:#66d9ef">def</span> __add__(self, rhs):
-        <span style="color:#66d9ef">return</span> SortedSet(chain(self<span style="color:#f92672">.</span>_items, rhs<span style="color:#f92672">.</span>_items))
+    def __add__(self, rhs):
+        return SortedSet(chain(self._items, rhs._items))
 
-    <span style="color:#66d9ef">def</span> __mul__(self, rhs):
-        <span style="color:#66d9ef">return</span> self <span style="color:#66d9ef">if</span> rhs <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> SortedSet()
+    def __mul__(self, rhs):
+        return self if rhs &gt; 0 else SortedSet()
 
-    <span style="color:#66d9ef">def</span> __rmul__(self, lhs):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">*</span> lhs
+    def __rmul__(self, lhs):
+        return self * lhs
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">issubset</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> SortedSet(iterable)
+    def issubset(self, iterable):
+        return self &lt;= SortedSet(iterable)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">issuperset</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> SortedSet(iterable)
+    def issuperset(self, iterable):
+        return self &gt;= SortedSet(iterable)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">intersection</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&amp;</span> SortedSet(iterable)
+    def intersection(self, iterable):
+        return self &amp; SortedSet(iterable)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">union</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">|</span> SortedSet(iterable)
+    def union(self, iterable):
+        return self | SortedSet(iterable)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">symmetric_difference</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">^</span> SortedSet(iterable)
+    def symmetric_difference(self, iterable):
+        return self ^ SortedSet(iterable)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">difference</span>(self, iterable):
-        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">-</span> SortedSet(iterable)
+    def difference(self, iterable):
+        return self - SortedSet(iterable)
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">full_sig</span>(method):
-    <span style="color:#66d9ef">try</span>:
-        <span style="color:#66d9ef">return</span> method<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> str(inspect<span style="color:#f92672">.</span>signature(method))
-    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
-        <span style="color:#66d9ef">return</span> method<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(...)</span><span style="color:#e6db74">&#39;</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">brief_doc</span>(obj):
-    doc <span style="color:#f92672">=</span> obj<span style="color:#f92672">.</span>__doc__
-    <span style="color:#66d9ef">if</span> doc <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-        lines <span style="color:#f92672">=</span> doc<span style="color:#f92672">.</span>splitlines()
-        <span style="color:#66d9ef">if</span> len(lines) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
-            <span style="color:#66d9ef">return</span> lines[<span style="color:#ae81ff">0</span>]
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+def full_sig(method):
+    try:
+        return method.__name__ + str(inspect.signature(method))
+    except ValueError:
+        return method.__name__ + '(...)'
 
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_table</span>(rows_of_columns, <span style="color:#f92672">*</span>headers):
-    num_columns <span style="color:#f92672">=</span> len(rows_of_columns[<span style="color:#ae81ff">0</span>])
-    num_headers <span style="color:#f92672">=</span> len(headers)
-    <span style="color:#66d9ef">if</span> len(headers) <span style="color:#f92672">!=</span> num_columns:
-        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">TypeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Expected {} header arguments, </span><span style="color:#e6db74">&#34;</span>
-                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">got {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(num_columns, num_headers))
-    rows_of_columns_with_header <span style="color:#f92672">=</span> itertools<span style="color:#f92672">.</span>chain([headers], rows_of_columns)
-    columns_of_rows <span style="color:#f92672">=</span> list(zip(<span style="color:#f92672">*</span>rows_of_columns_with_header))
-    column_widths <span style="color:#f92672">=</span> [max(map(len, column)) <span style="color:#66d9ef">for</span> column <span style="color:#f92672">in</span> columns_of_rows]
-    column_specs <span style="color:#f92672">=</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{{:{w}}}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(w<span style="color:#f92672">=</span>width) <span style="color:#66d9ef">for</span> width <span style="color:#f92672">in</span> column_widths)
-    format_spec <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(column_specs)
-    <span style="color:#66d9ef">print</span>(format_spec<span style="color:#f92672">.</span>format(<span style="color:#f92672">*</span>headers))
-    rules <span style="color:#f92672">=</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">*</span> width <span style="color:#66d9ef">for</span> width <span style="color:#f92672">in</span> column_widths)
-    <span style="color:#66d9ef">print</span>(format_spec<span style="color:#f92672">.</span>format(<span style="color:#f92672">*</span>rules))
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows_of_columns:
-        <span style="color:#66d9ef">print</span>(format_spec<span style="color:#f92672">.</span>format(<span style="color:#f92672">*</span>row))
+def brief_doc(obj):
+    doc = obj.__doc__
+    if doc is not None:
+        lines = doc.splitlines()
+        if len(lines) &gt; 0:
+            return lines[0]
+    return ''
 
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dump</span>(obj):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Type</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">====</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(type(obj))
-    <span style="color:#66d9ef">print</span>()
+def print_table(rows_of_columns, *headers):
+    num_columns = len(rows_of_columns[0])
+    num_headers = len(headers)
+    if len(headers) != num_columns:
+        raise TypeError(&quot;Expected {} header arguments, &quot;
+                        &quot;got {}&quot;.format(num_columns, num_headers))
+    rows_of_columns_with_header = itertools.chain([headers], rows_of_columns)
+    columns_of_rows = list(zip(*rows_of_columns_with_header))
+    column_widths = [max(map(len, column)) for column in columns_of_rows]
+    column_specs = ('{{:{w}}}'.format(w=width) for width in column_widths)
+    format_spec = ' '.join(column_specs)
+    print(format_spec.format(*headers))
+    rules = ('-' * width for width in column_widths)
+    print(format_spec.format(*rules))
+    for row in rows_of_columns:
+        print(format_spec.format(*row))
 
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Documentation</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=============</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(inspect<span style="color:#f92672">.</span>getdoc(obj))
-    <span style="color:#66d9ef">print</span>()
 
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Attributes</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">==========</span><span style="color:#e6db74">&#34;</span>)
-    all_attr_names <span style="color:#f92672">=</span> SortedSet(dir(obj))
-    method_names <span style="color:#f92672">=</span> SortedSet(
-        filter(<span style="color:#66d9ef">lambda</span> attr_name: callable(getattr(obj, attr_name)),
+def dump(obj):
+    print(&quot;Type&quot;)
+    print(&quot;====&quot;)
+    print(type(obj))
+    print()
+
+    print(&quot;Documentation&quot;)
+    print(&quot;=============&quot;)
+    print(inspect.getdoc(obj))
+    print()
+
+    print(&quot;Attributes&quot;)
+    print(&quot;==========&quot;)
+    all_attr_names = SortedSet(dir(obj))
+    method_names = SortedSet(
+        filter(lambda attr_name: callable(getattr(obj, attr_name)),
             all_attr_names))
-    <span style="color:#66d9ef">assert</span> method_names <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> all_attr_names
-    attr_names <span style="color:#f92672">=</span> all_attr_names <span style="color:#f92672">-</span> method_names
-    attr_names_and_values <span style="color:#f92672">=</span> [(name, reprlib<span style="color:#f92672">.</span>repr(getattr(obj, name)))
-                            <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> attr_names]
-    print_table(attr_names_and_values, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Value</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>()
+    assert method_names &lt;= all_attr_names
+    attr_names = all_attr_names - method_names
+    attr_names_and_values = [(name, reprlib.repr(getattr(obj, name)))
+                            for name in attr_names]
+    print_table(attr_names_and_values, &quot;Name&quot;, &quot;Value&quot;)
+    print()
 
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Methods</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=======</span><span style="color:#e6db74">&#34;</span>)
-    methods <span style="color:#f92672">=</span> (getattr(obj, method_name) <span style="color:#66d9ef">for</span> method_name <span style="color:#f92672">in</span> method_names)
-    method_names_and_doc <span style="color:#f92672">=</span> [(full_sig(method), brief_doc(method))
-                            <span style="color:#66d9ef">for</span> method <span style="color:#f92672">in</span> methods]
-    print_table(method_names_and_doc, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Description</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>()
+    print(&quot;Methods&quot;)
+    print(&quot;=======&quot;)
+    methods = (getattr(obj, method_name) for method_name in method_names)
+    method_names_and_doc = [(full_sig(method), brief_doc(method))
+                            for method in methods]
+    print_table(method_names_and_doc, &quot;Name&quot;, &quot;Description&quot;)
+    print()
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    dump(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>)
+if __name__ == &quot;__main__&quot;:
+    dump('a')
 
-<span style="color:#75715e">## test result</span>
-<span style="color:#75715e">## Type</span>
-<span style="color:#75715e">## ====</span>
-<span style="color:#75715e">## &lt;class &#39;str&#39;&gt;</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">## Documentation</span>
-<span style="color:#75715e">## =============</span>
-<span style="color:#75715e">## str(object=&#39;&#39;) -&gt; str</span>
-<span style="color:#75715e">## str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</span>
-<span style="color:#75715e">## Create a new string object from the given object. If encoding or</span>
-<span style="color:#75715e">## errors is specified, then the object must expose a data buffer</span>
-<span style="color:#75715e">## that will be decoded using the given encoding and error handler.</span>
-<span style="color:#75715e">## Otherwise, returns the result of object.__str__() (if defined)</span>
-<span style="color:#75715e">## or repr(object).</span>
-<span style="color:#75715e">## encoding defaults to sys.getdefaultencoding().</span>
-<span style="color:#75715e">## errors defaults to &#39;strict&#39;.</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">## Attributes</span>
-<span style="color:#75715e">## ==========</span>
-<span style="color:#75715e">## Name    Value                         </span>
-<span style="color:#75715e">## ------- ------------------------------</span>
-<span style="color:#75715e">## __doc__ &#34;str(object=&#39;... to &#39;strict&#39;.&#34;</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">## Methods</span>
-<span style="color:#75715e">## =======</span>
-<span style="color:#75715e">## Name              Description                                                            </span>
-<span style="color:#75715e">## ----------------- -----------------------------------------------------------------------</span>
-<span style="color:#75715e">## __add__(value, /)               Return self+value.                                                     </span>
-<span style="color:#75715e">## str(...)                        str(object=&#39;&#39;) -&gt; str                                                  </span>
-<span style="color:#75715e">## __contains__(key, /)            Return key in self.                                                    </span>
-<span style="color:#75715e">## __delattr__(name, /)            Implement delattr(self, name).                                         </span>
-<span style="color:#75715e">## __dir__(...)                    __dir__() -&gt; list                                                      </span>
-<span style="color:#75715e">## __eq__(value, /)                Return self==value.                                                    </span>
-<span style="color:#75715e">## __format__(...)                 S.__format__(format_spec) -&gt; str                                       </span>
-<span style="color:#75715e">## __ge__(value, /)                Return self&gt;=value.                                                    </span>
-<span style="color:#75715e">## __getattribute__(name, /)       Return getattr(self, name).                                            </span>
-<span style="color:#75715e">## __getitem__(key, /)             Return self[key].                                                      </span>
-<span style="color:#75715e">## __getnewargs__(...)                                                                                    </span>
-<span style="color:#75715e">## __gt__(value, /)                Return self&gt;value.                                                     </span>
-<span style="color:#75715e">## __hash__()                      Return hash(self).                                                     </span>
-<span style="color:#75715e">## __init__(*args, **kwargs)       Initialize self.  See help(type(self)) for accurate signature.         </span>
-<span style="color:#75715e">## __init_subclass__(...)          This method is called when a class is subclassed.                      </span>
-<span style="color:#75715e">## __iter__()                      Implement iter(self).                                                  </span>
-<span style="color:#75715e">## __le__(value, /)                Return self&lt;=value.                                                    </span>
-<span style="color:#75715e">## __len__()                       Return len(self).                                                      </span>
-<span style="color:#75715e">## __lt__(value, /)                Return self&lt;value.                                                     </span>
-<span style="color:#75715e">## __mod__(value, /)               Return self%value.                                                     </span>
-<span style="color:#75715e">## __mul__(value, /)               Return self*value.n                                                    </span>
-<span style="color:#75715e">## __ne__(value, /)                Return self!=value.                                                    </span>
-<span style="color:#75715e">## __new__(*args, **kwargs)        Create and return a new object.  See help(type) for accurate signature.</span>
-<span style="color:#75715e">## __reduce__(...)                 helper for pickle                                                      </span>
-<span style="color:#75715e">## __reduce_ex__(...)              helper for pickle                                                      </span>
-<span style="color:#75715e">## __repr__()                      Return repr(self).                                                     </span>
-<span style="color:#75715e">## __rmod__(value, /)              Return value%self.                                                     </span>
-<span style="color:#75715e">## __rmul__(value, /)              Return self*value.                                                     </span>
-<span style="color:#75715e">## __setattr__(name, value, /)     Implement setattr(self, name, value).                                  </span>
-<span style="color:#75715e">## __sizeof__(...)                 S.__sizeof__() -&gt; size of S in memory, in bytes                        </span>
-<span style="color:#75715e">## __str__()                       Return str(self).                                                      </span>
-<span style="color:#75715e">## __subclasshook__(...)           Abstract classes can override this to customize issubclass().          </span>
-<span style="color:#75715e">## capitalize(...)                 S.capitalize() -&gt; str                                                  </span>
-<span style="color:#75715e">## casefold(...)                   S.casefold() -&gt; str                                                    </span>
-<span style="color:#75715e">## center(...)                     S.center(width[, fillchar]) -&gt; str                                     </span>
-<span style="color:#75715e">## count(...)                      S.count(sub[, start[, end]]) -&gt; int                                    </span>
-<span style="color:#75715e">## encode(...)                     S.encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;) -&gt; bytes                   </span>
-<span style="color:#75715e">## endswith(...)                   S.endswith(suffix[, start[, end]]) -&gt; bool                             </span>
-<span style="color:#75715e">## expandtabs(...)                 S.expandtabs(tabsize=8) -&gt; str                                         </span>
-<span style="color:#75715e">## find(...)                       S.find(sub[, start[, end]]) -&gt; int                                     </span>
-<span style="color:#75715e">## format(...)                     S.format(*args, **kwargs) -&gt; str      </span>
-<span style="color:#75715e">## format_map(...)                 S.format_map(mapping) -&gt; str                                           </span>
-<span style="color:#75715e">## index(...)                      S.index(sub[, start[, end]]) -&gt; int                                    </span>
-<span style="color:#75715e">## isalnum(...)                    S.isalnum() -&gt; bool                                                    </span>
-<span style="color:#75715e">## isalpha(...)                    S.isalpha() -&gt; bool                                                    </span>
-<span style="color:#75715e">## isdecimal(...)                  S.isdecimal() -&gt; bool                                                  </span>
-<span style="color:#75715e">## isdigit(...)                    S.isdigit() -&gt; bool                                                    </span>
-<span style="color:#75715e">## isidentifier(...)               S.isidentifier() -&gt; bool                                               </span>
-<span style="color:#75715e">## islower(...)                    S.islower() -&gt; bool                                                    </span>
-<span style="color:#75715e">## isnumeric(...)                  S.isnumeric() -&gt; bool                                                  </span>
-<span style="color:#75715e">## isprintable(...)                S.isprintable() -&gt; bool                                                </span>
-<span style="color:#75715e">## isspace(...)                    S.isspace() -&gt; bool                                                    </span>
-<span style="color:#75715e">## istitle(...)                    S.istitle() -&gt; bool                                                    </span>
-<span style="color:#75715e">## isupper(...)                    S.isupper() -&gt; bool                                                    </span>
-<span style="color:#75715e">## join(...)                       S.join(iterable) -&gt; str                                                </span>
-<span style="color:#75715e">## ljust(...)                      S.ljust(width[, fillchar]) -&gt; str                                      </span>
-<span style="color:#75715e">## lower(...)                      S.lower() -&gt; str                                                       </span>
-<span style="color:#75715e">## lstrip(...)                     S.lstrip([chars]) -&gt; str                                               </span>
-<span style="color:#75715e">## maketrans(x, y=None, z=None, /) Return a translation table usable for str.translate().                 </span>
-<span style="color:#75715e">## partition(...)                  S.partition(sep) -&gt; (head, sep, tail)                                  </span>
-<span style="color:#75715e">## replace(...)                    S.replace(old, new[, count]) -&gt; str                                    </span>
-<span style="color:#75715e">## rfind(...)                      S.rfind(sub[, start[, end]]) -&gt; int                                    </span>
-<span style="color:#75715e">## rindex(...)                     S.rindex(sub[, start[, end]]) -&gt; int                                   </span>
-<span style="color:#75715e">## rjust(...)                      S.rjust(width[, fillchar]) -&gt; str                                      </span>
-<span style="color:#75715e">## rpartition(...)                 S.rpartition(sep) -&gt; (head, sep, tail)                                 </span>
-<span style="color:#75715e">## rsplit(...)                     S.rsplit(sep=None, maxsplit=-1) -&gt; list of strings                     </span>
-<span style="color:#75715e">## rstrip(...)                     S.rstrip([chars]) -&gt; str                                               </span>
-<span style="color:#75715e">## split(...)                      S.split(sep=None, maxsplit=-1) -&gt; list of strings                      </span>
-<span style="color:#75715e">## splitlines(...)                 S.splitlines([keepends]) -&gt; list of strings                            </span>
-<span style="color:#75715e">## startswith(...)                 S.startswith(prefix[, start[, end]]) -&gt; bool                           </span>
-<span style="color:#75715e">## strip(...)                      S.strip([chars]) -&gt; str                                                </span>
-<span style="color:#75715e">## swapcase(...)                   S.swapcase() -&gt; str                                                    </span>
-<span style="color:#75715e">## title(...)                      S.title() -&gt; str                                                       </span>
-<span style="color:#75715e">## translate(...)                  S.translate(table) -&gt; str                                              </span>
-<span style="color:#75715e">## upper(...)                      S.upper() -&gt; str                                                       </span>
-<span style="color:#75715e">## zfill(...)                      S.zfill(width) -&gt; str   </span>
+## test result
+## Type
+## ====
+## &lt;class 'str'&gt;
+#
+## Documentation
+## =============
+## str(object='') -&gt; str
+## str(bytes_or_buffer[, encoding[, errors]]) -&gt; str
+## Create a new string object from the given object. If encoding or
+## errors is specified, then the object must expose a data buffer
+## that will be decoded using the given encoding and error handler.
+## Otherwise, returns the result of object.__str__() (if defined)
+## or repr(object).
+## encoding defaults to sys.getdefaultencoding().
+## errors defaults to 'strict'.
+#
+## Attributes
+## ==========
+## Name    Value                         
+## ------- ------------------------------
+## __doc__ &quot;str(object='... to 'strict'.&quot;
+#
+## Methods
+## =======
+## Name              Description                                                            
+## ----------------- -----------------------------------------------------------------------
+## __add__(value, /)               Return self+value.                                                     
+## str(...)                        str(object='') -&gt; str                                                  
+## __contains__(key, /)            Return key in self.                                                    
+## __delattr__(name, /)            Implement delattr(self, name).                                         
+## __dir__(...)                    __dir__() -&gt; list                                                      
+## __eq__(value, /)                Return self==value.                                                    
+## __format__(...)                 S.__format__(format_spec) -&gt; str                                       
+## __ge__(value, /)                Return self&gt;=value.                                                    
+## __getattribute__(name, /)       Return getattr(self, name).                                            
+## __getitem__(key, /)             Return self[key].                                                      
+## __getnewargs__(...)                                                                                    
+## __gt__(value, /)                Return self&gt;value.                                                     
+## __hash__()                      Return hash(self).                                                     
+## __init__(*args, **kwargs)       Initialize self.  See help(type(self)) for accurate signature.         
+## __init_subclass__(...)          This method is called when a class is subclassed.                      
+## __iter__()                      Implement iter(self).                                                  
+## __le__(value, /)                Return self&lt;=value.                                                    
+## __len__()                       Return len(self).                                                      
+## __lt__(value, /)                Return self&lt;value.                                                     
+## __mod__(value, /)               Return self%value.                                                     
+## __mul__(value, /)               Return self*value.n                                                    
+## __ne__(value, /)                Return self!=value.                                                    
+## __new__(*args, **kwargs)        Create and return a new object.  See help(type) for accurate signature.
+## __reduce__(...)                 helper for pickle                                                      
+## __reduce_ex__(...)              helper for pickle                                                      
+## __repr__()                      Return repr(self).                                                     
+## __rmod__(value, /)              Return value%self.                                                     
+## __rmul__(value, /)              Return self*value.                                                     
+## __setattr__(name, value, /)     Implement setattr(self, name, value).                                  
+## __sizeof__(...)                 S.__sizeof__() -&gt; size of S in memory, in bytes                        
+## __str__()                       Return str(self).                                                      
+## __subclasshook__(...)           Abstract classes can override this to customize issubclass().          
+## capitalize(...)                 S.capitalize() -&gt; str                                                  
+## casefold(...)                   S.casefold() -&gt; str                                                    
+## center(...)                     S.center(width[, fillchar]) -&gt; str                                     
+## count(...)                      S.count(sub[, start[, end]]) -&gt; int                                    
+## encode(...)                     S.encode(encoding='utf-8', errors='strict') -&gt; bytes                   
+## endswith(...)                   S.endswith(suffix[, start[, end]]) -&gt; bool                             
+## expandtabs(...)                 S.expandtabs(tabsize=8) -&gt; str                                         
+## find(...)                       S.find(sub[, start[, end]]) -&gt; int                                     
+## format(...)                     S.format(*args, **kwargs) -&gt; str      
+## format_map(...)                 S.format_map(mapping) -&gt; str                                           
+## index(...)                      S.index(sub[, start[, end]]) -&gt; int                                    
+## isalnum(...)                    S.isalnum() -&gt; bool                                                    
+## isalpha(...)                    S.isalpha() -&gt; bool                                                    
+## isdecimal(...)                  S.isdecimal() -&gt; bool                                                  
+## isdigit(...)                    S.isdigit() -&gt; bool                                                    
+## isidentifier(...)               S.isidentifier() -&gt; bool                                               
+## islower(...)                    S.islower() -&gt; bool                                                    
+## isnumeric(...)                  S.isnumeric() -&gt; bool                                                  
+## isprintable(...)                S.isprintable() -&gt; bool                                                
+## isspace(...)                    S.isspace() -&gt; bool                                                    
+## istitle(...)                    S.istitle() -&gt; bool                                                    
+## isupper(...)                    S.isupper() -&gt; bool                                                    
+## join(...)                       S.join(iterable) -&gt; str                                                
+## ljust(...)                      S.ljust(width[, fillchar]) -&gt; str                                      
+## lower(...)                      S.lower() -&gt; str                                                       
+## lstrip(...)                     S.lstrip([chars]) -&gt; str                                               
+## maketrans(x, y=None, z=None, /) Return a translation table usable for str.translate().                 
+## partition(...)                  S.partition(sep) -&gt; (head, sep, tail)                                  
+## replace(...)                    S.replace(old, new[, count]) -&gt; str                                    
+## rfind(...)                      S.rfind(sub[, start[, end]]) -&gt; int                                    
+## rindex(...)                     S.rindex(sub[, start[, end]]) -&gt; int                                   
+## rjust(...)                      S.rjust(width[, fillchar]) -&gt; str                                      
+## rpartition(...)                 S.rpartition(sep) -&gt; (head, sep, tail)                                 
+## rsplit(...)                     S.rsplit(sep=None, maxsplit=-1) -&gt; list of strings                     
+## rstrip(...)                     S.rstrip([chars]) -&gt; str                                               
+## split(...)                      S.split(sep=None, maxsplit=-1) -&gt; list of strings                      
+## splitlines(...)                 S.splitlines([keepends]) -&gt; list of strings                            
+## startswith(...)                 S.startswith(prefix[, start[, end]]) -&gt; bool                           
+## strip(...)                      S.strip([chars]) -&gt; str                                                
+## swapcase(...)                   S.swapcase() -&gt; str                                                    
+## title(...)                      S.title() -&gt; str                                                       
+## translate(...)                  S.translate(table) -&gt; str                                              
+## upper(...)                      S.upper() -&gt; str                                                       
+## zfill(...)                      S.zfill(width) -&gt; str   
 
-</code></pre></div></li>
-</ul>
-</li>
+</code></pre></li>
+</ul></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#context-managers">Context managers</a>
-      <ul>
-        <li><a href="#context-manager">context manager</a></li>
-      </ul>
-    </li>
-    <li><a href="#contextlib">contextlib</a>
-      <ul>
-        <li><a href="#introspection">Introspection</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#context-managers">Context managers</a>
+<ul>
+<li><a href="#context-manager">context manager</a></li>
+</ul></li>
+<li><a href="#contextlib">contextlib</a>
+<ul>
+<li><a href="#introspection">Introspection</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

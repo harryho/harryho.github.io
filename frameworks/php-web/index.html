@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>PHP Web Framework :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -974,8 +945,6 @@
       <option value="/frameworks/php-web/"  selected>- PHP Web Framework</option>
       <option value="/frameworks/python-django/" >- Python Web Framework</option>
   
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -993,75 +962,100 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>PHP Web Framework</h1>
-        <blockquote>
+        
+
+<blockquote>
 <p><em>Here we are going to explore some PHP web frameworks.</em></p>
 </blockquote>
+
 <h2 id="php-development-environment-setup">PHP development environment setup</h2>
-<h3 id="install-php-56x">Install PHP 5.6.x</h3>
+
+<h3 id="install-php-5-6-x">Install PHP 5.6.x</h3>
+
 <ul>
-<li>
-<p>Please find the instruction from <a href="/#php">home page</a></p>
-</li>
-<li>
-<p>Composer</p>
-</li>
+<li><p>Please find the instruction from <a href="/#php">home page</a></p></li>
+
+<li><p>Composer</p></li>
 </ul>
+
 <h3 id="linux">Linux</h3>
+
 <ul>
 <li>Use <code>curl -s https://getcomposer.org/installer | php --</code> to install composer on Linux</li>
-<li>use &lsquo;composer -v ' to verify.</li>
+<li>use &lsquo;composer -v &rsquo; to verify.</li>
 </ul>
+
 <h3 id="windows">Windows</h3>
+
 <ul>
 <li>Download the <a href="https://getcomposer.org/download/">composer</a> and install php on your PC</li>
 <li>Use <code>composer -v</code> to verify the composer is ready.</li>
 </ul>
+
 <h2 id="zend-framework">Zend Framework</h2>
+
 <blockquote>
 <p>Zend Framework 2.x is a collection of 60+ packages for professional PHP development. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.</p>
 </blockquote>
+
 <h3 id="create-zend-framework-2-project">Create Zend Framework 2 project</h3>
+
 <pre><code>* Clone Zend Framework skeleton project as new project. 
 
 * Install zend framework with composer
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    cd  /path/to/newproject
+
+<pre><code class="language-bash">    cd  /path/to/newproject
     git clone git://github.com/zend framework/ZendSkeletonApplication.git
     cd ZendSkeletonApplication
     php composer.phar self-update
     php composer.phar install
-</code></pre></div><h3 id="start-app-with-php-built-in-server">Start app with php built-in server</h3>
+</code></pre>
+
+<h3 id="start-app-with-php-built-in-server">Start app with php built-in server</h3>
+
 <p><strong>Linux</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php -S 0.0.0.0:8080 -t public/ public/index.php
-</code></pre></div><p><strong>Windows</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php -S 0.0.0.0:8080 -t public public/index.php
-</code></pre></div><h3 id="use-apache-server">Use apache server</h3>
+
+<pre><code class="language-bash">php -S 0.0.0.0:8080 -t public/ public/index.php
+</code></pre>
+
+<p><strong>Windows</strong></p>
+
+<pre><code class="language-bash">php -S 0.0.0.0:8080 -t public public/index.php
+</code></pre>
+
+<h3 id="use-apache-server">Use apache server</h3>
+
 <ul>
-<li>Apache configuration</li>
+<li><p>Apache configuration</p>
+
+<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+ ServerName zf2-tutorial.localhost
+ DocumentRoot /path/to/newproject/ZendSkeletonApplication/public
+ SetEnv APPLICATION_ENV &quot;development&quot;
+ &lt;Directory /path/to/newproject/ZendSkeletonApplication/public&gt;
+     DirectoryIndex index.php
+     AllowOverride All
+     Require all granted
+ &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre></li>
+
+<li><p>Zf2-MVC-Starter project</p>
+
+<ul>
+<li>Please find the project introduction <a href="/projects/zf2-mvc-starter/">here</a>.</li>
+</ul></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"> <span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">*:80</span><span style="color:#f92672">&gt;</span>
-     ServerName zf2-tutorial.localhost
-     DocumentRoot <span style="color:#e6db74">/path/to/newproject/ZendSkeletonApplication/public</span>
-     SetEnv APPLICATION_ENV <span style="color:#e6db74">&#34;development&#34;</span>
-     <span style="color:#f92672">&lt;Directory</span> <span style="color:#e6db74">/path/to/newproject/ZendSkeletonApplication/public</span><span style="color:#f92672">&gt;</span>
-         DirectoryIndex index.php
-         AllowOverride <span style="color:#66d9ef">All</span>
-         Require <span style="color:#66d9ef">all</span> granted
-     <span style="color:#f92672">&lt;/Directory</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span>
- <span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span>
-</code></pre></div><ul>
-<li>
-<p>Zf2-MVC-Starter project</p>
-</li>
-<li>
-<p>Please find the project introduction <a href="/projects/zf2-mvc-starter/">here</a>.</p>
-</li>
-</ul>
+
 <h2 id="laravel">Laravel</h2>
+
 <blockquote>
 <p>Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern. Some of the features of Laravel are a modular packaging system with a dedicated dependency manager, different ways for accessing relational databases, utilities that aid in application deployment and maintenance, and its orientation toward syntactic sugar.</p>
 </blockquote>
+
 <h3 id="install-laravel-global">Install laravel global</h3>
+
 <pre><code>* Use `composer global laravel/installer`
 
 * Enable the `mbs-string` extension
@@ -1072,36 +1066,46 @@
 
 * Change `;extension=php_mbstring.dll` to `extension=php_mbstring.dll`
 </code></pre>
+
 <h3 id="create-new-project-from-scratch">Create new project from scratch</h3>
+
 <h4 id="migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</h4>
+
 <ul>
 <li>Create data model</li>
-<li>Following is the sample code</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App</span>;
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Database\Eloquent\Model</span>;
+<li><p>Following is the sample code</p>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Article</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Model</span>
+<pre><code class="language-php">&lt;?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Article extends Model
 {
-    <span style="color:#66d9ef">protected</span> $fillable <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;content&#39;</span>];
+protected $fillable = ['title', 'content'];
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTitleAttribute</span>($value) {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strtoupper</span>($value);
-    }
+public function getTitleAttribute($value) {
+    return strtoupper($value);
 }
-</code></pre></div><ul>
-<li>Use artisan to create the table</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+}
+</code></pre></li>
+
+<li><p>Use artisan to create the table</p>
+
+<pre><code class="language-bash">
 php artisan migrate -VVV 
 
-<span style="color:#75715e">## Use following command to seek dump or initial data</span>
+## Use following command to seek dump or initial data
 php artisan db:seed
-</code></pre></div><h3 id="troubleshooting">Troubleshooting</h3>
+</code></pre></li>
+</ul>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
 <p><strong>Fix the error of Specified key was too long</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace App\Providers;
+
+<pre><code class="language-php">namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -1129,215 +1133,235 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
-</code></pre></div><h3 id="lavarel-mvc-starter-project">Lavarel MVC Starter project</h3>
+</code></pre>
+
+<h3 id="lavarel-mvc-starter-project">Lavarel MVC Starter project</h3>
+
 <pre><code>* Please find the project introduction [here](/projects/lara-mvc-starter/). 
 </code></pre>
+
 <h2 id="use-laravel-rest-starter-project">Use Laravel Rest Starter project</h2>
+
 <h2 id="prestashop">PrestaShop</h2>
+
 <blockquote>
 <p>PrestaShop is a free, open source e-commerce solution. The software is published under the Open Software License (OSL). It is written in the PHP programming language with support for the MySQL database management system.</p>
 </blockquote>
-<h3 id="download-the-zip-file-from-download-pagehttpswwwprestashopcomendevelopers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></h3>
+
+<h3 id="download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></h3>
+
 <h3 id="install-prestashop">Install Prestashop</h3>
-<p>There is a instruction page inside the zip file. You can follow the instructions to complete the installation. There is no EasyPHP, Wamp, XAMPP, or any similar AMP (Apache+MySQL+PHP) package installed on my PC, but I have PHP, Apache, MySQL installed. Actually EasyPHP, Wamp are just the bundle of PHP development tools, which include PHP, Apache, MySQL. I don't want to install too many duplicate softwares and packages on my PC, so I prefer to install Prestashop with what I have on my PC. Which strategy is up to you.</p>
+
+<p>There is a instruction page inside the zip file. You can follow the instructions to complete the installation. There is no EasyPHP, Wamp, XAMPP, or any similar AMP (Apache+MySQL+PHP) package installed on my PC, but I have PHP, Apache, MySQL installed. Actually EasyPHP, Wamp are just the bundle of PHP development tools, which include PHP, Apache, MySQL. I don&rsquo;t want to install too many duplicate softwares and packages on my PC, so I prefer to install Prestashop with what I have on my PC. Which strategy is up to you.</p>
+
 <h3 id="install-prestashop-with-amp-package">Install Prestashop with AMP package</h3>
+
 <ul>
 <li>Follow the instruction page within zip file.</li>
 </ul>
+
 <h3 id="install-prestashop-without-amp-package">Install Prestashop without AMP package</h3>
+
 <ul>
-<li>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">path\to\prestashop_workspace</span>
-<span style="color:#a6e22e">\---prestashop</span>
-    <span style="color:#a6e22e">+---admin </span>
-    <span style="color:#a6e22e">+---cache </span>
-    <span style="color:#a6e22e">+---classes  </span>
-    <span style="color:#a6e22e">+---config </span>
-    <span style="color:#a6e22e">+---controllers </span>
-    <span style="color:#a6e22e">+---css</span>
-    <span style="color:#a6e22e">+---docs</span>
-    <span style="color:#a6e22e">+---download</span>
-    <span style="color:#a6e22e">+---img </span>
-    <span style="color:#a6e22e">+---install    </span>
-    <span style="color:#a6e22e">+---js   </span>
-    <span style="color:#a6e22e">+---localization</span>
-    <span style="color:#a6e22e">+---log</span>
-    <span style="color:#a6e22e">+---mails</span>
-    <span style="color:#a6e22e">+---modules  </span>
-    <span style="color:#a6e22e">+---override</span>
-    <span style="color:#a6e22e">+---pdf</span>
-    <span style="color:#a6e22e">+---themes</span>
-    <span style="color:#a6e22e">+---tools </span>
-    <span style="color:#a6e22e">+---translations</span>
-    <span style="color:#a6e22e">+---upload</span>
-    <span style="color:#a6e22e">\---webservice</span>
-</code></pre></div><ul>
-<li>
-<p>Start your MySQL or check the status of MySQL</p>
+<li><p>Unzip file to <code>path\to\prestashop_workspace</code>. Your folder structure will look like this.</p>
+
+<pre><code class="language-ini">path\to\prestashop_workspace
+\---prestashop
++---admin 
++---cache 
++---classes  
++---config 
++---controllers 
++---css
++---docs
++---download
++---img 
++---install    
++---js   
++---localization
++---log
++---mails
++---modules  
++---override
++---pdf
++---themes
++---tools 
++---translations
++---upload
+\---webservice
+</code></pre></li>
+
+<li><p>Start your MySQL or check the status of MySQL</p>
+
 <ul>
 <li>Use your MySQL client tool to connect to your MySQL server.</li>
-</ul>
-</li>
-<li>
-<p>Launch installer page with php server</p>
-</li>
-<li>
-<p>Start a command prompt</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/prestashop_workspace
+</ul></li>
+
+<li><p>Launch installer page with php server</p></li>
+
+<li><p>Start a command prompt</p>
+
+<pre><code class="language-bash">cd /path/to/prestashop_workspace
 php -S 0.0.0.0:1234 -t prestashop
-</code></pre></div><ul>
-<li>
-<p>Open the link <code>http://localhost:1234/install/index.php</code> with browser, then you can start installation process.</p>
-</li>
-<li>
-<p>Choose language and click <code>Next</code>, and then select the checkbox &ldquo;I agree bah lah bah lah &hellip;. &quot; and click <code>Next</code></p>
-</li>
-<li>
-<p>If there is an error <code>GD Library is not installed</code> prompt, you just need to enable the library on <code>php.ini</code></p>
+</code></pre></li>
+
+<li><p>Open the link <code>http://localhost:1234/install/index.php</code> with browser, then you can start installation process.</p></li>
+
+<li><p>Choose language and click <code>Next</code>, and then select the checkbox &ldquo;I agree bah lah bah lah &hellip;. &rdquo; and click <code>Next</code></p></li>
+
+<li><p>If there is an error <code>GD Library is not installed</code> prompt, you just need to enable the library on <code>php.ini</code></p>
+
 <ul>
 <li>DO NOT close your browser.</li>
 <li>Stop the php server by <code>Ctrl + C</code> in the command prompt.</li>
 <li>Use notepad to open the file <code>php.ini</code> under the <code>\path\to\php</code></li>
 <li>Uncomment the config <code>;extension=php_gd2.dll</code> =&gt; <code>extension=php_gd2.dll</code></li>
-<li>Start the php server again</li>
-</ul>
-</li>
-<li>
-<p>Click the <code>Refresh this settings</code>, and click <code>Next</code></p>
-</li>
-<li>
-<p>Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click <code>Test your database connection</code>.</p>
-</li>
-<li>
-<p>If you got error <code>prestashop database not found</code>, you need to create a database on mysql server.</p>
+<li>Start the php server again
+<br /></li>
+</ul></li>
+
+<li><p>Click the <code>Refresh this settings</code>, and click <code>Next</code></p></li>
+
+<li><p>Fill the login user and password. If your MySQL port is not 3306, please attach your port to the server address input field. Click <code>Test your database connection</code>.</p></li>
+
+<li><p>If you got error <code>prestashop database not found</code>, you need to create a database on mysql server.</p>
+
 <ul>
-<li>I simply create a new database immediately with one command line</li>
+<li><p>I simply create a new database immediately with one command line</p>
+
+<pre><code class="language-sql">CREATE DATABASE prestashop CHAR SET utf8 COLLATE 'utf8_unicode_ci';
+</code></pre></li>
+
+<li><p>Test the connection again. You will get the green light</p></li>
+</ul></li>
+
+<li><p>Click <code>Next</code> and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click <code>Next</code></p></li>
+
+<li><p>Setup your sample store. Click <code>Next</code>. Then the installer will help you finish the initialization.</p></li>
+
+<li><p>After the store setup, you can access the website by clicking <code>Font site</code>, but you can not access back office, as known as admin panel.</p></li>
+
+<li><p>Don&rsquo;t panic. It is easy to fix. Stop the php server by clicking <code>Ctrl+C</code>, and delete the folder <code>install</code> under the root, and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder <code>admin</code> under <code>prestashop</code> has been renamed to <code>adminXXXX</code>. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be <code>http://localhost:1234/adminXXXX</code>.</p></li>
+
+<li><p>Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> prestashop CHAR <span style="color:#66d9ef">SET</span> utf8 <span style="color:#66d9ef">COLLATE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf8_unicode_ci</span><span style="color:#e6db74">&#39;</span>;
-</code></pre></div><ul>
-<li>Test the connection again. You will get the green light</li>
-</ul>
-</li>
-<li>
-<p>Click <code>Next</code> and you can start to setup your store informaiton, such as, store name, admin account, etc. Then click <code>Next</code></p>
-</li>
-<li>
-<p>Setup your sample store. Click <code>Next</code>. Then the installer will help you finish the initialization.</p>
-</li>
-<li>
-<p>After the store setup, you can access the website by clicking <code>Font site</code>, but you can not access back office, as known as admin panel.</p>
-</li>
-<li>
-<p>Don't panic. It is easy to fix. Stop the php server by clicking <code>Ctrl+C</code>, and delete the folder <code>install</code> under the root, and then start the server again. Open the folder with prestashop, you will find something interesting. The original folder <code>admin</code> under <code>prestashop</code> has been renamed to <code>adminXXXX</code>. X is a number. It is Prestashop special trick to secure your admin folder. Now you need to use this new name as path to acces back office. Your new back office link will be <code>http://localhost:1234/adminXXXX</code>.</p>
-</li>
-<li>
-<p>Open the new link in browser and type in your admin id and password. Now you can start managing your Prestashop site. Enjoy it.</p>
-</li>
-</ul>
-<h3 id="forgot-admins-password">Forgot admin's password</h3>
+
+<h3 id="forgot-admin-s-password">Forgot admin&rsquo;s password</h3>
+
 <ul>
-<li>
-<p>Forgot admin's password or somehow you have to reset password and you cannot get admin's password from previous adminstrator. For such case, there is a simple way to update admin's password from database.</p>
-</li>
-<li>
-<p>Tailor the SQL below. Then you should be able to use new password to login.</p>
-</li>
+<li><p>Forgot admin&rsquo;s password or somehow you have to reset password and you cannot get admin&rsquo;s password from previous adminstrator. For such case, there is a simple way to update admin&rsquo;s password from database.</p></li>
+
+<li><p>Tailor the SQL below. Then you should be able to use new password to login.</p>
+
+<pre><code class="language-sql">UPDATE ps_employee SET passwd = MD5('&lt;_COOKIE_KEY_&gt;password') 
+WHERE ps_employee.id_employee = &lt;ID_EMPLOYEE&gt;;
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> ps_employee <span style="color:#66d9ef">SET</span> passwd <span style="color:#f92672">=</span> MD5(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&lt;_COOKIE_KEY_&gt;password</span><span style="color:#e6db74">&#39;</span>) 
-<span style="color:#66d9ef">WHERE</span> ps_employee.id_employee <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>ID_EMPLOYEE<span style="color:#f92672">&gt;</span>;
-</code></pre></div><h3 id="troubleshooting-1">Troubleshooting</h3>
+
+<h3 id="troubleshooting-1">Troubleshooting</h3>
+
 <h4 id="innodb-error">InnoDB error</h4>
+
 <ul>
 <li>Error : InnoDB is not supported by your MySQL server</li>
 </ul>
+
 <blockquote>
 <p>You got error because Prestashop 1.5 is not working properly with MySQL 5.4 and later.</p>
 </blockquote>
-<ul>
-<li>Update files <code>DbPDO.php</code> , <code>MySQL.php</code> and <code>DbMySQLi.php</code> as follow.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    // $sql = &#39;SHOW VARIABLES WHERE Variable_name = \&#39;have_innodb\&#39;&#39;;
-    $sql = &#34;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE &#39;INNO%&#39;&#34;;
 
-    ...
+<ul>
+<li><p>Update files <code>DbPDO.php</code> , <code>MySQL.php</code> and <code>DbMySQLi.php</code> as follow.</p>
+
+<pre><code class="language-php">// $sql = 'SHOW VARIABLES WHERE Variable_name = \'have_innodb\'';
+$sql = &quot;SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE LIKE 'INNO%'&quot;;
+
+...
     
-    // if (!$row || strtolower($row[&#39;Value&#39;]) != &#39;yes&#39;)
-    if (!$row || strtolower($row[&#39;Value&#39;]) === &#39;no&#39;) 
-</code></pre></div><ul>
-<li>Restart the server and the proble will be fixed.</li>
-</ul>
-<h4 id="cors">CORS</h4>
-<ul>
-<li>
-<p>Enable module header in <code>httpd.conf</code></p>
-</li>
-<li>
-<p>Add header settings</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache">Header always set Access-Control-Max-Age <span style="color:#e6db74">&#34;1000&#34;</span>
+// if (!$row || strtolower($row['Value']) != 'yes')
+if (!$row || strtolower($row['Value']) === 'no') 
+</code></pre></li>
 
-<span style="color:#75715e">#  &#34;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&#34;</span>
-Header always set Access-Control-Allow-Headers  <span style="color:#e6db74">&#34;USE ABOVE COMMENT AS DEFAULT VALUE&#34;</span>
-Header always set Access-Control-Allow-Methods <span style="color:#e6db74">&#34;POST, GET, OPTIONS, DELETE, PUT&#34;</span>
-</code></pre></div><h4 id="too-big-header-file">Too big header file</h4>
+<li><p>Restart the server and the proble will be fixed.</p></li>
+</ul>
+
+<h4 id="cors">CORS</h4>
+
 <ul>
-<li>
-<p>Add this to your <code>http {}</code> of the nginx.conf file normally located at <code>/etc/nginx/nginx.conf</code>:</p>
+<li><p>Enable module header in <code>httpd.conf</code></p></li>
+
+<li><p>Add header settings</p>
+
+<pre><code class="language-apache">Header always set Access-Control-Max-Age &quot;1000&quot;
+
+#  &quot;X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding&quot;
+Header always set Access-Control-Allow-Headers  &quot;USE ABOVE COMMENT AS DEFAULT VALUE&quot;
+Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS, DELETE, PUT&quot;
+</code></pre></li>
+</ul>
+
+<h4 id="too-big-header-file">Too big header file</h4>
+
+<ul>
+<li><p>Add this to your <code>http {}</code> of the nginx.conf file normally located at <code>/etc/nginx/nginx.conf</code>:</p>
+
 <p>proxy_buffer_size   128k;
 proxy_buffers   4 256k;
-proxy_busy_buffers_size   256k;</p>
-</li>
-<li>
-<p>Then add this to your php location block, this will be located in your vhost file look for the block that begins with <code>location ~ .php$ {</code></p>
+proxy_busy_buffers_size   256k;</p></li>
+
+<li><p>Then add this to your php location block, this will be located in your vhost file look for the block that begins with <code>location ~ .php$ {</code></p>
+
 <p>fastcgi_buffer_size 128k;
 fastcgi_buffers 4 256k;
-fastcgi_busy_buffers_size 256k;</p>
-</li>
+fastcgi_busy_buffers_size 256k;</p></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#php-development-environment-setup">PHP development environment setup</a>
-      <ul>
-        <li><a href="#install-php-56x">Install PHP 5.6.x</a></li>
-        <li><a href="#linux">Linux</a></li>
-        <li><a href="#windows">Windows</a></li>
-      </ul>
-    </li>
-    <li><a href="#zend-framework">Zend Framework</a>
-      <ul>
-        <li><a href="#create-zend-framework-2-project">Create Zend Framework 2 project</a></li>
-        <li><a href="#start-app-with-php-built-in-server">Start app with php built-in server</a></li>
-        <li><a href="#use-apache-server">Use apache server</a></li>
-      </ul>
-    </li>
-    <li><a href="#laravel">Laravel</a>
-      <ul>
-        <li><a href="#install-laravel-global">Install laravel global</a></li>
-        <li><a href="#create-new-project-from-scratch">Create new project from scratch</a></li>
-        <li><a href="#troubleshooting">Troubleshooting</a></li>
-        <li><a href="#lavarel-mvc-starter-project">Lavarel MVC Starter project</a></li>
-      </ul>
-    </li>
-    <li><a href="#use-laravel-rest-starter-project">Use Laravel Rest Starter project</a></li>
-    <li><a href="#prestashop">PrestaShop</a>
-      <ul>
-        <li><a href="#download-the-zip-file-from-download-pagehttpswwwprestashopcomendevelopers-versions">Download the zip file from download page</a></li>
-        <li><a href="#install-prestashop">Install Prestashop</a></li>
-        <li><a href="#install-prestashop-with-amp-package">Install Prestashop with AMP package</a></li>
-        <li><a href="#install-prestashop-without-amp-package">Install Prestashop without AMP package</a></li>
-        <li><a href="#forgot-admins-password">Forgot admin's password</a></li>
-        <li><a href="#troubleshooting-1">Troubleshooting</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#php-development-environment-setup">PHP development environment setup</a>
+<ul>
+<li><a href="#install-php-5-6-x">Install PHP 5.6.x</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#windows">Windows</a></li>
+</ul></li>
+<li><a href="#zend-framework">Zend Framework</a>
+<ul>
+<li><a href="#create-zend-framework-2-project">Create Zend Framework 2 project</a></li>
+<li><a href="#start-app-with-php-built-in-server">Start app with php built-in server</a></li>
+<li><a href="#use-apache-server">Use apache server</a></li>
+</ul></li>
+<li><a href="#laravel">Laravel</a>
+<ul>
+<li><a href="#install-laravel-global">Install laravel global</a></li>
+<li><a href="#create-new-project-from-scratch">Create new project from scratch</a>
+<ul>
+<li><a href="#migrate-database-and-seed-dummy-data">Migrate database and seed dummy data</a></li>
+</ul></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#lavarel-mvc-starter-project">Lavarel MVC Starter project</a></li>
+</ul></li>
+<li><a href="#use-laravel-rest-starter-project">Use Laravel Rest Starter project</a></li>
+<li><a href="#prestashop">PrestaShop</a>
+<ul>
+<li><a href="#download-the-zip-file-from-download-page-https-www-prestashop-com-en-developers-versions">Download the zip file from <a href="https://www.prestashop.com/en/developers-versions">download page</a></a></li>
+<li><a href="#install-prestashop">Install Prestashop</a></li>
+<li><a href="#install-prestashop-with-amp-package">Install Prestashop with AMP package</a></li>
+<li><a href="#install-prestashop-without-amp-package">Install Prestashop without AMP package</a></li>
+<li><a href="#forgot-admin-s-password">Forgot admin&rsquo;s password</a></li>
+<li><a href="#troubleshooting-1">Troubleshooting</a>
+<ul>
+<li><a href="#innodb-error">InnoDB error</a></li>
+<li><a href="#cors">CORS</a></li>
+<li><a href="#too-big-header-file">Too big header file</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

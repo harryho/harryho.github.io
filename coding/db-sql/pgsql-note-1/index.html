@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:21 AEDT">
 <title>PostgresQL Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1005,8 +976,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1024,71 +993,87 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>PostgresQL Note - 1</h1>
-        <blockquote>
+        
+
+<blockquote>
 <p>PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.</p>
 </blockquote>
+
 <h3 id="getting-started">Getting Started</h3>
+
 <ul>
-<li>Switch to user postges</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo su - postgres
+<li><p>Switch to user postges</p>
+
+<pre><code class="language-bash">sudo su - postgres
 
 psql
-</code></pre></div><ul>
-<li>Create new login id as super admin</li>
+</code></pre></li>
+
+<li><p>Create new login id as super admin</p></li>
 </ul>
+
 <p>It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole. In PostgreSQL this is done by creating a role that represents the group, and then granting membership in the group role to individual user roles.</p>
+
 <blockquote>
 <p>In the SQL standard, there is a clear distinction between users and roles, and users do not automatically inherit privileges while roles do. This behavior can be obtained in PostgreSQL by giving roles being used as SQL roles the INHERIT attribute, while giving roles being used as SQL users the NOINHERIT attribute. However, PostgreSQL defaults to giving all roles the INHERIT attribute, for backward compatibility with pre-8.1 releases in which users always had use of permissions granted to groups they were members of.</p>
-</blockquote>
-<blockquote>
+
 <p>The role attributes LOGIN, SUPERUSER, CREATEDB, and CREATEROLE can be thought of as special privileges, but they are never inherited as ordinary privileges on database objects are. You must actually SET ROLE to a specific role having one of these attributes in order to make use of the attribute.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">ROLE</span> user_id <span style="color:#66d9ef">WITH</span>
+
+<pre><code class="language-sql">CREATE ROLE user_id WITH
 LOGIN
   SUPERUSER
-  <span style="color:#66d9ef">CREATEDB</span>
+  CREATEDB
   CREATEROLE
   INHERIT
   REPLICATION
-  <span style="color:#66d9ef">CONNECTION</span> <span style="color:#66d9ef">LIMIT</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
-  PASSWORD <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">your_password</span><span style="color:#e6db74">&#39;</span>;
+  CONNECTION LIMIT -1
+  PASSWORD 'your_password';
   
-<span style="color:#66d9ef">GRANT</span> postgres, pg_monitor, pg_read_all_settings, 
-pg_read_all_stats, pg_signal_backend, pg_stat_scan_tables <span style="color:#ae81ff">4</span>
-<span style="color:#66d9ef">TO</span> hho <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">ADMIN</span> <span style="color:#66d9ef">OPTION</span>;
+GRANT postgres, pg_monitor, pg_read_all_settings, 
+pg_read_all_stats, pg_signal_backend, pg_stat_scan_tables 4
+TO hho WITH ADMIN OPTION;
 
-</code></pre></div><ul>
-<li>Change password</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">USER</span> user_id <span style="color:#66d9ef">WITH</span> PASSWORD <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">new_password</span><span style="color:#e6db74">&#39;</span>;
-</code></pre></div><ul>
-<li>Once the group role exists, you can add and remove members using the GRANT and REVOKE commands</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">GRANT</span> postgres <span style="color:#66d9ef">TO</span> new_role;
-<span style="color:#66d9ef">REVOKE</span> postgres <span style="color:#66d9ef">FROM</span> new_role;
-</code></pre></div><ul>
-<li>Create new database with new login id and load sql script to initialize the database</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">sudo su <span style="color:#f92672">-</span> user_id psql <span style="color:#f92672">-</span><span style="color:#66d9ef">c</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">createdb db_01;</span><span style="color:#e6db74">&#39;</span>
+</code></pre>
 
-sudo su <span style="color:#f92672">-</span> user_id psql  <span style="color:#f92672">-</span>d postgres <span style="color:#f92672">-</span>f init_db.<span style="color:#66d9ef">sql</span>
-</code></pre></div><ul>
-<li>Grant the privilege of database <strong>db_01</strong> to other user</li>
+<ul>
+<li><p>Change password</p>
+
+<pre><code class="language-sql">ALTER USER user_id WITH PASSWORD 'new_password';
+</code></pre></li>
+
+<li><p>Once the group role exists, you can add and remove members using the GRANT and REVOKE commands</p>
+
+<pre><code class="language-sql">GRANT postgres TO new_role;
+REVOKE postgres FROM new_role;
+</code></pre></li>
+
+<li><p>Create new database with new login id and load sql script to initialize the database</p>
+
+<pre><code class="language-sql">sudo su - user_id psql -c 'createdb db_01;'
+
+sudo su - user_id psql  -d postgres -f init_db.sql
+</code></pre></li>
+
+<li><p>Grant the privilege of database <strong>db_01</strong> to other user</p>
+
+<pre><code class="language-sql">GRANT ALL PRIVILEGES ON DATABASE db_01 to another_user;
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"> <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DATABASE</span> db_01 <span style="color:#66d9ef">to</span> another_user;
-</code></pre></div>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#getting-started">Getting Started</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

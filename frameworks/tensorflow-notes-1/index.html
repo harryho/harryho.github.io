@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Tensorflow Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -974,8 +945,6 @@
       <option value="/frameworks/php-web/" >- PHP Web Framework</option>
       <option value="/frameworks/python-django/" >- Python Web Framework</option>
   
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -993,140 +962,163 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Tensorflow Note - 1</h1>
-        <blockquote>
+        
+
+<blockquote>
 <p>TensorFlow is an end-to-end open source platform for machine learning. It has a comprehensive, flexible ecosystem of tools, libraries and community resources that lets researchers push the state-of-the-art in ML and developers easily build and deploy ML powered applications.</p>
 </blockquote>
+
 <h3 id="prerequisites">Prerequisites</h3>
+
 <ul>
 <li>You are using Ubuntu 16</li>
 <li>Your machine has Nvidia GPU card installed</li>
-<li>If you are using Ubuntu 14, the installation of CUDA and cuDNN will be a bit different. Please check Google's instructions.</li>
+<li>If you are using Ubuntu 14, the installation of CUDA and cuDNN will be a bit different. Please check Google&rsquo;s instructions.</li>
 </ul>
+
 <h3 id="install-python3-and-pip3">Install python3 and pip3</h3>
+
 <ul>
 <li><a href="https://harryho.github.io/os/ubuntu-server-14">Please find instructions here</a></li>
 </ul>
+
 <h3 id="install-virtualenv-via-pip3">Install virtualenv via pip3</h3>
+
 <pre><code>pip3 install virtualenv
 </code></pre>
+
 <h3 id="create-two-tensorflow-virtualenvs">Create two tensorflow virtualenvs.</h3>
+
 <pre><code>mkdir ~/.envs
 virtualenv --system-site-packages ~/.envs/tf  ### CPU only
 virtualenv --system-site-packages ~/.envs/tfgpu   ### GPU enabled
 </code></pre>
+
 <h3 id="install-tensorflow-for-different-virtualenvs">Install tensorflow for different virtualenvs</h3>
+
 <pre><code>source ~/.envs/tf/bin/activate
 source ~/.envs/tfgpu/bin/activate
 
 pip3 install tensorflow ### CPU only
 pip3 install tensorflow-gpu ### GPU enabled
 </code></pre>
+
 <h3 id="install-cuda-and-cudnn-for-tensorflow-gpu">Install CUDA and cuDNN for tensorflow-gpu</h3>
+
 <ul>
-<li>
-<p>Use following command to check you GPU information</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lspic -nn | grep <span style="color:#e6db74">&#39;\[03&#39;</span> <span style="color:#f92672">]</span>
+<li><p>Use following command to check you GPU information</p>
+
+<pre><code class="language-bash">lspic -nn | grep '\[03' ]
 lshw -numeric -C display
 
-<span style="color:#75715e">### GPU info sample</span>
-<span style="color:#75715e">### NVIDIA Corporation GM107M [GeForce GTX 850M]</span>
-</code></pre></div></li>
-<li>
-<p>Download and install Nvidia driver based on above <a href="http://www.geforce.com/drivers">GPU info</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">chmod +x NVIDIA-Linux-xxxx.run
+### GPU info sample
+### NVIDIA Corporation GM107M [GeForce GTX 850M]
+</code></pre></li>
+
+<li><p>Download and install Nvidia driver based on above <a href="http://www.geforce.com/drivers">GPU info</a></p>
+
+<pre><code class="language-bash">chmod +x NVIDIA-Linux-xxxx.run
 sudo ./NVIDIA-Linux-xxxx.run
-</code></pre></div></li>
-<li>
-<p>Download and install <a href="https://developer.nvidia.com/cuda-downloads">CUDA from NVIDIA</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dpkg -i cuda-repo-xxxxx.deb
+</code></pre></li>
+
+<li><p>Download and install <a href="https://developer.nvidia.com/cuda-downloads">CUDA from NVIDIA</a></p>
+
+<pre><code class="language-bash">sudo dpkg -i cuda-repo-xxxxx.deb
 sudo apt-get udpate
 sudo apt-get install cuda
-</code></pre></div></li>
-<li>
-<p>Setup CUDA_HOME</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">### CUDA</span>
-export CUDA_HOME<span style="color:#f92672">=</span>/usr/local/cuda-8.0 
-export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>CUDA_HOME<span style="color:#e6db74">}</span>/lib64
-</code></pre></div></li>
-<li>
-<p>Download and install <a href="https://developer.nvidia.com/cudnn">cuDNN for CUDA</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">### extra the cuDNN tar ball</span>
+</code></pre></li>
+
+<li><p>Setup CUDA_HOME</p>
+
+<pre><code class="language-bash">### CUDA
+export CUDA_HOME=/usr/local/cuda-8.0 
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+</code></pre></li>
+
+<li><p>Download and install <a href="https://developer.nvidia.com/cudnn">cuDNN for CUDA</a></p>
+
+<pre><code class="language-bash">### extra the cuDNN tar ball
 tar -xvf cudnn-8.0
 cd cuda 
 sudo cp lib64/* /usr/local/cuda-8.0/lib64
 sudo cp include/* /usr/local/cuda-8.0/include
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</h3>
+
 <ul>
-<li>
-<p>Save code below to file test.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<li><p>Save code below to file test.py</p>
 
-<span style="color:#75715e">### Model parameters</span>
-W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable([<span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>], tf<span style="color:#f92672">.</span>float32)
-b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable([<span style="color:#f92672">-</span><span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>], tf<span style="color:#f92672">.</span>float32)
-<span style="color:#75715e">### Model input and output</span>
-x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32)
-linear_model <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b
-y <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32)
-<span style="color:#75715e">### loss</span>
-loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_sum(tf<span style="color:#f92672">.</span>square(linear_model <span style="color:#f92672">-</span> y)) <span style="color:#75715e">### sum of the squares</span>
-<span style="color:#75715e">### optimizer</span>
-optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>GradientDescentOptimizer(<span style="color:#ae81ff">0.01</span>)
-train <span style="color:#f92672">=</span> optimizer<span style="color:#f92672">.</span>minimize(loss)
-<span style="color:#75715e">### training data</span>
-x_train <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]
-y_train <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>]
-<span style="color:#75715e">### training loop</span>
-init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>global_variables_initializer()
-sess <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Session()
-sess<span style="color:#f92672">.</span>run(init) <span style="color:#75715e">### reset values to wrong</span>
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
-sess<span style="color:#f92672">.</span>run(train, {x:x_train, y:y_train})
+<pre><code class="language-python">import numpy as np
+import tensorflow as tf
 
-<span style="color:#75715e">### evaluate training accuracy</span>
-curr_W, curr_b, curr_loss  <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run([W, b, loss], {x:x_train, y:y_train})
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">W: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> b: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> loss: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(curr_W, curr_b, curr_loss))
-</code></pre></div></li>
-<li>
-<p>Test with tensorflow-gpu (GPU enabled)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source ~/.envs/tfgpu/bin/activate
+### Model parameters
+W = tf.Variable([.3], tf.float32)
+b = tf.Variable([-.3], tf.float32)
+### Model input and output
+x = tf.placeholder(tf.float32)
+linear_model = W * x + b
+y = tf.placeholder(tf.float32)
+### loss
+loss = tf.reduce_sum(tf.square(linear_model - y)) ### sum of the squares
+### optimizer
+optimizer = tf.train.GradientDescentOptimizer(0.01)
+train = optimizer.minimize(loss)
+### training data
+x_train = [1,2,3,4]
+y_train = [0,-1,-2,-3]
+### training loop
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init) ### reset values to wrong
+for i in range(1000):
+sess.run(train, {x:x_train, y:y_train})
+
+### evaluate training accuracy
+curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
+print(&quot;W: %s b: %s loss: %s&quot;%(curr_W, curr_b, curr_loss))
+</code></pre></li>
+
+<li><p>Test with tensorflow-gpu (GPU enabled)</p>
+
+<pre><code class="language-bash">source ~/.envs/tfgpu/bin/activate
 python3 test.py
 
-<span style="color:#75715e">## You will probably see the result as follow</span> 
-<span style="color:#75715e">## ....</span>
-<span style="color:#75715e">## name: GeForce GTX 850M</span>
-<span style="color:#75715e">## major: 5 minor: 0 memoryClockRate (GHz) 0.9015</span>
-<span style="color:#75715e">## pciBusID 0000:0a:00.0</span>
-<span style="color:#75715e">## Total memory: 3.95GiB</span>
-<span style="color:#75715e">## Free memory: 3.58GiB</span>
-<span style="color:#75715e">## 2017-04-25 10:25:59.640621: I tensorflow/core/common_runtime/gpu/gpu_device.cc:908] DMA: 0</span> 
-<span style="color:#75715e">## 2017-04-25 10:25:59.640626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:918] 0:   Y</span> 
-<span style="color:#75715e">## 2017-04-25 10:25:59.640640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]</span> 
-<span style="color:#75715e">### Creating TensorFlow device (/gpu:0) -&gt; (device: 0, name: GeForce GTX 850M, pci ## bus id: 0000:0a:00.0)</span>
-<span style="color:#75715e">## W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11</span>
-</code></pre></div></li>
+## You will probably see the result as follow 
+## ....
+## name: GeForce GTX 850M
+## major: 5 minor: 0 memoryClockRate (GHz) 0.9015
+## pciBusID 0000:0a:00.0
+## Total memory: 3.95GiB
+## Free memory: 3.58GiB
+## 2017-04-25 10:25:59.640621: I tensorflow/core/common_runtime/gpu/gpu_device.cc:908] DMA: 0 
+## 2017-04-25 10:25:59.640626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:918] 0:   Y 
+## 2017-04-25 10:25:59.640640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] 
+### Creating TensorFlow device (/gpu:0) -&gt; (device: 0, name: GeForce GTX 850M, pci ## bus id: 0000:0a:00.0)
+## W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#install-python3-and-pip3">Install python3 and pip3</a></li>
-        <li><a href="#install-virtualenv-via-pip3">Install virtualenv via pip3</a></li>
-        <li><a href="#create-two-tensorflow-virtualenvs">Create two tensorflow virtualenvs.</a></li>
-        <li><a href="#install-tensorflow-for-different-virtualenvs">Install tensorflow for different virtualenvs</a></li>
-        <li><a href="#install-cuda-and-cudnn-for-tensorflow-gpu">Install CUDA and cuDNN for tensorflow-gpu</a></li>
-        <li><a href="#use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#install-python3-and-pip3">Install python3 and pip3</a></li>
+<li><a href="#install-virtualenv-via-pip3">Install virtualenv via pip3</a></li>
+<li><a href="#create-two-tensorflow-virtualenvs">Create two tensorflow virtualenvs.</a></li>
+<li><a href="#install-tensorflow-for-different-virtualenvs">Install tensorflow for different virtualenvs</a></li>
+<li><a href="#install-cuda-and-cudnn-for-tensorflow-gpu">Install CUDA and cuDNN for tensorflow-gpu</a></li>
+<li><a href="#use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

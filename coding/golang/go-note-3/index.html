@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Struct &amp; Interface :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1012,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1031,325 +1000,356 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Struct &amp; Interface</h1>
-        <h3 id="struct">Struct</h3>
+        
+
+<h3 id="struct">Struct</h3>
+
 <blockquote>
 <p>Go supports user-defined or custom types in the form of alias types or structs. A struct tries to represent a real-world entity with its properties. Structs are composite types, to use when you want to define a type which consist of a number of properties, each having their own type and value, grouping pieces of data together.</p>
 </blockquote>
+
 <h4 id="struct-with-tags">Struct with tags</h4>
+
 <ul>
-<li>
-<p>A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label. The tag-content cannot be used in normal programming, only the package reflect can access it.</p>
-</li>
-<li>
-<p>Sample</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-<span style="color:#e6db74">&#34;fmt&#34;</span>
-<span style="color:#e6db74">&#34;reflect&#34;</span>
+<li><p>A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label. The tag-content cannot be used in normal programming, only the package reflect can access it.</p></li>
+
+<li><p>Sample</p>
+
+<pre><code class="language-go">package main
+import (
+&quot;fmt&quot;
+&quot;reflect&quot;
 )
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TagType</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">//tags
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">field1</span> <span style="color:#66d9ef">bool</span>   <span style="color:#e6db74">&#34;An important answer&#34;</span>
-    <span style="color:#a6e22e">field2</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">&#34;The name of the thing&#34;</span>
-    <span style="color:#a6e22e">field3</span> <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">&#34;How much there are&#34;</span>
+type TagType struct { //tags
+field1 bool   &quot;An important answer&quot;
+field2 string &quot;The name of the thing&quot;
+field3 int    &quot;How much there are&quot;
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">tt</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">TagType</span>{<span style="color:#66d9ef">true</span>, <span style="color:#e6db74">&#34;Barak Obama&#34;</span>, <span style="color:#ae81ff">1</span>}
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">refTag</span>(<span style="color:#a6e22e">tt</span>, <span style="color:#a6e22e">i</span>)
-    }
+func main() {
+tt := TagType{true, &quot;Barak Obama&quot;, 1}
+for i := 0; i &lt; 3; i++ {
+    refTag(tt, i)
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">refTag</span>(<span style="color:#a6e22e">tt</span> <span style="color:#a6e22e">TagType</span>, <span style="color:#a6e22e">ix</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#a6e22e">ttType</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">TypeOf</span>(<span style="color:#a6e22e">tt</span>)
-    <span style="color:#a6e22e">ixField</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ttType</span>.<span style="color:#a6e22e">Field</span>(<span style="color:#a6e22e">ix</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, <span style="color:#a6e22e">ixField</span>.<span style="color:#a6e22e">Tag</span>)
+}
+func refTag(tt TagType, ix int) {
+ttType := reflect.TypeOf(tt)
+ixField := ttType.Field(ix)
+fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
 }
 
-</code></pre></div><h4 id="anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</h4>
+</code></pre></li>
+</ul>
+
+<h4 id="anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</h4>
+
 <ul>
 <li>It can only have one anonymous field of each data type in a struct.</li>
-<li>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">innerS</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">in1</span> <span style="color:#66d9ef">int</span>
-    <span style="color:#a6e22e">in2</span> <span style="color:#66d9ef">int</span>
-}
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">outerS</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>
-    <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">float32</span>
-    <span style="color:#66d9ef">int</span> <span style="color:#75715e">// anonymous field
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">innerS</span> <span style="color:#75715e">// anonymous field
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Func</span>(){
-    <span style="color:#a6e22e">outer2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">outerS</span>{<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7.5</span>, <span style="color:#ae81ff">60</span>, <span style="color:#a6e22e">innerS</span>{<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span>}}
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;output : &#34;</span>, <span style="color:#a6e22e">outer2</span>) <span style="color:#75715e">// output: {6 7.5 60 {5 10}}
-</span><span style="color:#75715e"></span>}
 
-</code></pre></div><h4 id="conflicting-names">Conflicting names</h4>
-<ul>
-<li>
-<p>The rules when there are two fields with the same name</p>
-<ul>
-<li>
-<p>An outer name hides an inner name. This provides a way to override a field or method.</p>
-</li>
-<li>
-<p>If the same name appears twice at the same level, it is an error if the name is used by the program</p>
-</li>
+<li><p>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</p>
+
+<pre><code class="language-go">type innerS struct {
+in1 int
+in2 int
+}
+type outerS struct {
+b int
+c float32
+int // anonymous field
+innerS // anonymous field
+}
+func Func(){
+outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
+fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
+}
+
+</code></pre></li>
 </ul>
-</li>
+
+<h4 id="conflicting-names">Conflicting names</h4>
+
+<ul>
+<li><p>The rules when there are two fields with the same name</p>
+
+<ul>
+<li><p>An outer name hides an inner name. This provides a way to override a field or method.</p></li>
+
+<li><p>If the same name appears twice at the same level, it is an error if the name is used by the program</p></li>
+</ul></li>
 </ul>
+
 <h3 id="method">Method</h3>
+
 <ul>
-<li>
-<p>method is a function that acts on variable of a certain type, called the receiver</p>
-</li>
-<li>
-<p>The receiver type can be (almost) anything, not only a struct type: any type can have methods, even a function type or alias types for int, bool, string or array. The receiver also cannot be an interface type.</p>
-</li>
-<li>
-<p>sample</p>
-</li>
+<li><p>method is a function that acts on variable of a certain type, called the receiver</p></li>
+
+<li><p>The receiver type can be (almost) anything, not only a struct type: any type can have methods, even a function type or alias types for int, bool, string or array. The receiver also cannot be an interface type.</p></li>
+
+<li><p>sample</p>
+
+<pre><code class="language-go">type List []int
+func (l List) Len() int { return len(l) }
+func (l *List) Append(val int) { *l = append(*l, val) }
+</code></pre></li>
+
+<li><p>Receiver is most often a pointer to the receiver_type for performance reasons.</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">List</span> []<span style="color:#66d9ef">int</span>
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">l</span> <span style="color:#a6e22e">List</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span> { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">l</span>) }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">l</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">List</span>) <span style="color:#a6e22e">Append</span>(<span style="color:#a6e22e">val</span> <span style="color:#66d9ef">int</span>) { <span style="color:#f92672">*</span><span style="color:#a6e22e">l</span> = append(<span style="color:#f92672">*</span><span style="color:#a6e22e">l</span>, <span style="color:#a6e22e">val</span>) }
-</code></pre></div><ul>
-<li>Receiver is most often a pointer to the receiver_type for performance reasons.</li>
-</ul>
+
 <h4 id="embedded-methods">Embedded methods</h4>
+
 <ul>
-<li>
-<p>There are basically 2 ways for doing this:</p>
+<li><p>There are basically 2 ways for doing this:</p>
+
 <ul>
-<li>
-<p><strong>Aggregation</strong> (or composition): include a named field of the type of the wanted functionality</p>
-</li>
-<li>
-<p><strong>Embedding</strong>: Embed (anonymously) the type of the wanted functionality, like demonstrated</p>
-</li>
+<li><p><strong>Aggregation</strong> (or composition): include a named field of the type of the wanted functionality</p></li>
+
+<li><p><strong>Embedding</strong>: Embed (anonymously) the type of the wanted functionality, like demonstrated</p></li>
+</ul></li>
+
+<li><p>The aggregated type requires a method to return the pointer. Mostly the method will looks like the type name, as a constructor method</p></li>
+
+<li><p>The embedded type does not need to a pointer</p></li>
 </ul>
-</li>
-<li>
-<p>The aggregated type requires a method to return the pointer. Mostly the method will looks like the type name, as a constructor method</p>
-</li>
-<li>
-<p>The embedded type does not need to a pointer</p>
-</li>
-</ul>
+
 <h4 id="multiple-inheritance">Multiple inheritance</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Phone</span> <span style="color:#66d9ef">struct</span> {}
 
-<span style="color:#66d9ef">func</span> (<span style="color:#f92672">*</span><span style="color:#a6e22e">Phone</span>) <span style="color:#a6e22e">Call</span>() { 
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Ring Ring !!! &#34;</span>
+<pre><code class="language-go">
+type Phone struct {}
+
+func (*Phone) Call() { 
+    return &quot;Ring Ring !!! &quot;
 }
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Camera</span> <span style="color:#66d9ef">struct</span> {}
+type Camera struct {}
 
-<span style="color:#66d9ef">func</span> (<span style="color:#f92672">*</span><span style="color:#a6e22e">Camera</span>) <span style="color:#a6e22e">TakePhoto</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Take a photo !!!&#34;</span>
+func (*Camera) TakePhoto() {
+    return &quot;Take a photo !!!&quot;
 }
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CameraPhone</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Phone</span>
-    <span style="color:#a6e22e">Camera</span>
+type CameraPhone struct {
+    Phone
+    Camera
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span> () {
-    <span style="color:#a6e22e">cp</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">CameraPhone</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">Call</span>())
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">TakePhoto</span>())
+func main () {
+    cp := new(CameraPhone)
+    fmt.Println( cp.Call())
+    fmt.Println( cp.TakePhoto())
 }
-</code></pre></div><h3 id="interface">Interface</h3>
+</code></pre>
+
+<h3 id="interface">Interface</h3>
+
 <ul>
-<li>
-<p>Go contains the very flexible concept of interfaces, with which a lot of aspects of object-orientation can be made available. Interfaces in Go provide a way to specify the behavior of an object: if something can do this, then it can be used here.</p>
-</li>
-<li>
-<p>Sample of interface syntax</p>
-</li>
+<li><p>Go contains the very flexible concept of interfaces, with which a lot of aspects of object-orientation can be made available. Interfaces in Go provide a way to specify the behavior of an object: if something can do this, then it can be used here.</p></li>
+
+<li><p>Sample of interface syntax</p>
+
+<pre><code class="language-go">type Namer interface {
+Method1(param_list) return_type
+Method2(param_list) return_type
+...
+}
+</code></pre></li>
+
+<li><p>Type switch</p>
+
+<pre><code class="language-go">type Shape interface {
+Area() float32
+}
+type Square struct {
+side float32
+}
+
+type Circle struct {
+radius float32
+}
+
+func (sq *Square) Area() float32 {
+return sq.side * sq.side
+}
+
+func (c *Circle) Area() float32 {
+return c.radius * c.radius * math.Pi
+}
+
+type Rectangle struct {
+length, width float32
+}
+
+func (r Rectangle) Area() float32 {
+return r.length * r.width
+}
+
+func main() {
+shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
+fmt.Println(&quot;Looping through shapes for area ...&quot;)
+for n, _ := range shapes {
+    fmt.Println(&quot;Shape details: &quot;, shapes[n])
+    fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
+}
+
+var shape Shape
+shape = &amp;Square{4}
+
+switch t := shape.(type) {
+case *Square:
+    fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
+case *Circle:
+    fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
+case *Rectangle:
+    fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
+case nil:
+    fmt.Println(&quot;nil value: nothing to check?&quot;)
+default:
+    fmt.Printf(&quot;Unexpected type %T&quot;, t)
+}
+}
+
+// Looping through shapes for area ...
+// Shape details:  {5 3}
+// Area of this shape is:  15
+// Shape details:  &amp;{5}
+// Area of this shape is:  25
+// Shape details:  &amp;{5}
+// Area of this shape is:  78.53982
+// Type Square *main.Square with value &amp;{4}
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Namer</span> <span style="color:#66d9ef">interface</span> {
-<span style="color:#a6e22e">Method1</span>(<span style="color:#a6e22e">param_list</span>) <span style="color:#a6e22e">return_type</span>
-<span style="color:#a6e22e">Method2</span>(<span style="color:#a6e22e">param_list</span>) <span style="color:#a6e22e">return_type</span>
-<span style="color:#f92672">...</span>
-}
-</code></pre></div><ul>
-<li>Type switch</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Shape</span> <span style="color:#66d9ef">interface</span> {
-    <span style="color:#a6e22e">Area</span>() <span style="color:#66d9ef">float32</span>
-}
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Square</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">side</span> <span style="color:#66d9ef">float32</span>
-}
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">radius</span> <span style="color:#66d9ef">float32</span>
-}
+<h4 id="empty-interface">Empty Interface</h4>
 
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sq</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Square</span>) <span style="color:#a6e22e">Area</span>() <span style="color:#66d9ef">float32</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sq</span>.<span style="color:#a6e22e">side</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">sq</span>.<span style="color:#a6e22e">side</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Circle</span>) <span style="color:#a6e22e">Area</span>() <span style="color:#66d9ef">float32</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pi</span>
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">width</span> <span style="color:#66d9ef">float32</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Rectangle</span>) <span style="color:#a6e22e">Area</span>() <span style="color:#66d9ef">float32</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">shapes</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Shape</span>{<span style="color:#a6e22e">Rectangle</span>{<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>}, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Square</span>{<span style="color:#ae81ff">5</span>}, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Circle</span>{<span style="color:#ae81ff">5</span>}}
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Looping through shapes for area ...&#34;</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">shapes</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Shape details: &#34;</span>, <span style="color:#a6e22e">shapes</span>[<span style="color:#a6e22e">n</span>])
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Area of this shape is: &#34;</span>, <span style="color:#a6e22e">shapes</span>[<span style="color:#a6e22e">n</span>].<span style="color:#a6e22e">Area</span>())
-    }
-
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">shape</span> <span style="color:#a6e22e">Shape</span>
-    <span style="color:#a6e22e">shape</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Square</span>{<span style="color:#ae81ff">4</span>}
-
-    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">shape</span>.(<span style="color:#66d9ef">type</span>) {
-    <span style="color:#66d9ef">case</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Square</span>:
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Type Square %T with value %v\n&#34;</span>, <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">t</span>)
-    <span style="color:#66d9ef">case</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Circle</span>:
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Type Circle %T with value %v\n&#34;</span>, <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">t</span>)
-    <span style="color:#66d9ef">case</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Rectangle</span>:
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Type Rectangle %T with value %v\n&#34;</span>, <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">t</span>)
-    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">nil</span>:
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;nil value: nothing to check?&#34;</span>)
-    <span style="color:#66d9ef">default</span>:
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Unexpected type %T&#34;</span>, <span style="color:#a6e22e">t</span>)
-    }
-}
-
-<span style="color:#75715e">// Looping through shapes for area ...
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Shape details:  {5 3}
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Area of this shape is:  15
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Shape details:  &amp;{5}
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Area of this shape is:  25
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Shape details:  &amp;{5}
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Area of this shape is:  78.53982
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Type Square *main.Square with value &amp;{4}
-</span></code></pre></div><h4 id="empty-interface">Empty Interface</h4>
 <ul>
-<li>The empty or minimal interface has no methods and so doesn’t make any demands at all. So any variable, any type implements it (not only reference types as Object in Java/C#), and any or Any (Sample code below) is really a good name as alias and abbreviation!</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Any</span> <span style="color:#66d9ef">interface</span>{}
-</code></pre></div><ul>
-<li>Type classifier</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">classifier</span>(<span style="color:#a6e22e">items</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">items</span> {
-        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">x</span>.(<span style="color:#66d9ef">type</span>) {
-        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">bool</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a bool\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">float64</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a float64\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int64</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is an int\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">nil</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is nil\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">string</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a string\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        <span style="color:#66d9ef">default</span>:
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d’s type is unknown\n&#34;</span>, <span style="color:#a6e22e">i</span>)
-        }
+<li><p>The empty or minimal interface has no methods and so doesn’t make any demands at all. So any variable, any type implements it (not only reference types as Object in Java/C#), and any or Any (Sample code below) is really a good name as alias and abbreviation!</p>
+
+<pre><code class="language-go">type Any interface{}
+</code></pre></li>
+
+<li><p>Type classifier</p>
+
+<pre><code class="language-go">func classifier(items ...interface{}) {
+for i, x := range items {
+    switch x.(type) {
+    case bool:
+        fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+    case float64:
+        fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+    case int, int64:
+        fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+    case nil:
+        fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+    case string:
+        fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+    default:
+        fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
     }
 }
-</code></pre></div><h4 id="interface-to-interface">Interface to interface</h4>
-<ul>
-<li>
-<p>An interface value can also be assigned to another interface value, as long as the underlying value implements the necessary methods.</p>
-</li>
-<li>
-<p>This conversion is checked at runtime, and when it fails a runtime error occurs: this is one of the dynamic aspects of Go, comparable to dynamic languages like Ruby and Python.</p>
-</li>
+}
+</code></pre></li>
 </ul>
+
+<h4 id="interface-to-interface">Interface to interface</h4>
+
+<ul>
+<li><p>An interface value can also be assigned to another interface value, as long as the underlying value implements the necessary methods.</p></li>
+
+<li><p>This conversion is checked at runtime, and when it fails a runtime error occurs: this is one of the dynamic aspects of Go, comparable to dynamic languages like Ruby and Python.</p></li>
+</ul>
+
 <h3 id="reflection">Reflection</h3>
+
 <h4 id="methods-and-types-in-reflect">Methods and types in reflect</h4>
+
 <ul>
-<li>
-<p>Reflection in computing is the ability of a program to examine its own structure, particularly through the types; it’s a form of metaprogramming.</p>
-</li>
-<li>
-<p>Two simple functions, reflect.TypeOf and reflect.ValueOf, retrieve Type and Value pieces out of any value.</p>
-</li>
+<li><p>Reflection in computing is the ability of a program to examine its own structure, particularly through the types; it’s a form of metaprogramming.</p></li>
+
+<li><p>Two simple functions, reflect.TypeOf and reflect.ValueOf, retrieve Type and Value pieces out of any value.</p></li>
 </ul>
+
 <h4 id="modify-a-value-through-reflection">Modify a value through reflection</h4>
+
 <ul>
 <li>Pass the address instead of copy of value</li>
-<li>Use the Elem() function work on it which indirects through the pointer</li>
+
+<li><p>Use the Elem() function work on it which indirects through the pointer</p>
+
+<pre><code class="language-go">func modifyValByReflect() {
+var x float64 = 3.4
+v := reflect.ValueOf(x)                      // Pass value
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
+fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+v = v.Elem()
+fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
+fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
+v.SetFloat(3.1415)                           // this works!
+fmt.Println(v.Interface())
+fmt.Println(v) // &lt;float64 Value&gt;
+}
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">modifyValByReflect</span>() {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span> = <span style="color:#ae81ff">3.4</span>
-    <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">x</span>)                      <span style="color:#75715e">// Pass value
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Settability of v:&#34;</span>, <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">CanSet</span>()) <span style="color:#75715e">// false
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">v</span> = <span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span>)                      <span style="color:#75715e">// Note: take the address of x.
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;type of v:&#34;</span>, <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Type</span>())          <span style="color:#75715e">// float64
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Settability of v:&#34;</span>, <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">CanSet</span>()) <span style="color:#75715e">// false
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">v</span> = <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Elem</span>()
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;The Elem of v is: &#34;</span>, <span style="color:#a6e22e">v</span>)         <span style="color:#75715e">// &lt;float64 Value&gt;
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Settability of v:&#34;</span>, <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">CanSet</span>()) <span style="color:#75715e">// true
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">SetFloat</span>(<span style="color:#ae81ff">3.1415</span>)                           <span style="color:#75715e">// this works!
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">Interface</span>())
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>) <span style="color:#75715e">// &lt;float64 Value&gt;
-</span><span style="color:#75715e"></span>}
-</code></pre></div><h4 id="dynamic-typing">Dynamic typing</h4>
+
+<h4 id="dynamic-typing">Dynamic typing</h4>
+
 <ul>
-<li>
-<p>A refactoring pattern that is very useful is extracting interfaces, reducing thereby the number of types and methods needed, without having the need to manage a whole class-hierarchy as in more traditional class-based OO-languages.</p>
-</li>
-<li>
-<p>Go is the only one which combines interface values, static type checking (does a type implement the interface?), dynamic runtime conversion and no requirement for explicitly declaring that a type satisfies an interface. This property also allows interfaces to be defined and used without having to modify existing code.</p>
-</li>
+<li><p>A refactoring pattern that is very useful is extracting interfaces, reducing thereby the number of types and methods needed, without having the need to manage a whole class-hierarchy as in more traditional class-based OO-languages.</p></li>
+
+<li><p>Go is the only one which combines interface values, static type checking (does a type implement the interface?), dynamic runtime conversion and no requirement for explicitly declaring that a type satisfies an interface. This property also allows interfaces to be defined and used without having to modify existing code.</p></li>
 </ul>
+
 <h3 id="oo-of-go">OO of Go</h3>
+
 <ul>
-<li>
-<p>Encapsulation (data hiding): in contrast to other OO languages where there are 4 or more access-levels, Go simplifies this to only 2:</p>
+<li><p>Encapsulation (data hiding): in contrast to other OO languages where there are 4 or more access-levels, Go simplifies this to only 2:</p>
+
 <ul>
-<li>
-<p>package scope: ‘object’ is only known in its own package, how? it starts with a lowercase letter</p>
-</li>
-<li>
-<p>exported: ‘object’ is visible outside of its package, how? it starts with an uppercase letter A type can only have methods defined in its own package.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Inheritance: how? composition: embedding of 1 (or more) type(s) with the desired behavior (fields and methods); multiple inheritance is possible through embedding multiple types</p>
-</li>
-<li>
-<p>Polymorphism: how? interfaces: a variable of a type can be assigned to a variable of any interface it implements. Types and interfaces are loosely coupled, again multiple inheritance is possible through implementing multiple interfaces. Go’s interfaces aren’t a variant on Java or C# interfaces, they’re much more: they are independent and are key to large-scale programming and adaptable, evolutionary design.</p>
-</li>
+<li><p>package scope: ‘object’ is only known in its own package, how? it starts with a lowercase letter</p></li>
+
+<li><p>exported: ‘object’ is visible outside of its package, how? it starts with an uppercase letter A type can only have methods defined in its own package.</p></li>
+</ul></li>
+
+<li><p>Inheritance: how? composition: embedding of 1 (or more) type(s) with the desired behavior (fields and methods); multiple inheritance is possible through embedding multiple types</p></li>
+
+<li><p>Polymorphism: how? interfaces: a variable of a type can be assigned to a variable of any interface it implements. Types and interfaces are loosely coupled, again multiple inheritance is possible through implementing multiple interfaces. Go’s interfaces aren’t a variant on Java or C# interfaces, they’re much more: they are independent and are key to large-scale programming and adaptable, evolutionary design.</p></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#struct">Struct</a></li>
-        <li><a href="#method">Method</a></li>
-        <li><a href="#interface">Interface</a></li>
-        <li><a href="#reflection">Reflection</a></li>
-        <li><a href="#oo-of-go">OO of Go</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#struct">Struct</a>
+<ul>
+<li><a href="#struct-with-tags">Struct with tags</a></li>
+<li><a href="#anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</a></li>
+<li><a href="#conflicting-names">Conflicting names</a></li>
+</ul></li>
+<li><a href="#method">Method</a>
+<ul>
+<li><a href="#embedded-methods">Embedded methods</a></li>
+<li><a href="#multiple-inheritance">Multiple inheritance</a></li>
+</ul></li>
+<li><a href="#interface">Interface</a>
+<ul>
+<li><a href="#empty-interface">Empty Interface</a></li>
+<li><a href="#interface-to-interface">Interface to interface</a></li>
+</ul></li>
+<li><a href="#reflection">Reflection</a>
+<ul>
+<li><a href="#methods-and-types-in-reflect">Methods and types in reflect</a></li>
+<li><a href="#modify-a-value-through-reflection">Modify a value through reflection</a></li>
+<li><a href="#dynamic-typing">Dynamic typing</a></li>
+</ul></li>
+<li><a href="#oo-of-go">OO of Go</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

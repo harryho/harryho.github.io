@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Good practice 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1012,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1031,315 +1000,378 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Good practice 2</h1>
-        <h3 id="goroutines-and-channels">Goroutines and channels</h3>
+        
+
+<h3 id="goroutines-and-channels">Goroutines and channels</h3>
+
 <ul>
 <li>Performance advice:</li>
 </ul>
+
 <blockquote>
 <p>A rule of thumb if you use parallelism to gain efficiency over serial computation: the amount of work done inside goroutine has to be much higher than the costs associated with creating goroutines and sending data back and forth between them.</p>
 </blockquote>
+
 <h4 id="using-buffered-channels">Using buffered channels</h4>
+
 <ul>
-<li>
-<p>Using buffered channels for performance:</p>
-<p>A buffered channel can easily double its throughput, depending on the context the performance gain can be 10x or more. You can further try to optimize by adjusting the capacity of the channel.</p>
-</li>
+<li><p>Using buffered channels for performance:</p>
+
+<p>A buffered channel can easily double its throughput, depending on the context the performance gain can be 10x or more. You can further try to optimize by adjusting the capacity of the channel.</p></li>
 </ul>
+
 <h4 id="limiting-the-number-of-items-in-a-channel">Limiting the number of items in a channel</h4>
+
 <ul>
 <li>Limiting the number of items in a channel and packing them in arrays:
 Channels become a bottleneck if you pass a lot of individual items through them. You can work around this by packing chunks of data into arrays and then unpacking on the other end. This can be a speed gain of a factor 10x.</li>
 </ul>
+
 <h4 id="loop-over-a-channel">loop over a channel</h4>
+
 <ul>
-<li>
-<p>How to loop over a channel ch with a for—range:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span> {
-    <span style="color:#75715e">// do something with v
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
+<li><p>How to loop over a channel ch with a for—range:</p>
+
+<pre><code class="language-go">for v := range ch {
+    // do something with v
+}
+</code></pre></li>
 </ul>
+
 <h4 id="test-a-channel-is-closed">Test a channel is closed</h4>
+
 <ul>
-<li>
-<p>How to test if a channel ch is closed:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//read channel until it closes or error-condition
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">open</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>; !<span style="color:#a6e22e">open</span> {
-    <span style="color:#66d9ef">break</span>
+<li><p>How to test if a channel ch is closed:</p>
+
+<pre><code class="language-go">//read channel until it closes or error-condition
+for {
+    if input, open := &lt;-ch; !open {
+    break
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#f92672">%</span><span style="color:#a6e22e">s</span> <span style="color:#960050;background-color:#1e0010">“</span>, <span style="color:#a6e22e">input</span>)
+    fmt.Printf(“%s “, input)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="samaphore-pattern">Samaphore pattern</h4>
+
 <ul>
-<li>
-<p>How to use a channel to let the main program wait until the goroutine completes?
+<li><p>How to use a channel to let the main program wait until the goroutine completes?
 (Semaphore pattern)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
-<span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) <span style="color:#75715e">// Allocate a channel.
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Start something in a goroutine; when it completes, signal on the channel.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-<span style="color:#75715e">// doSomething
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">// Send a signal; value does not matter.
-</span><span style="color:#75715e"></span>}()
-<span style="color:#a6e22e">doSomethingElseForAWhile</span>()
-<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span> <span style="color:#75715e">// Wait for goroutine to finish; discard sent value.
-</span><span style="color:#75715e"></span><span style="color:#75715e">// If the routine must block forever, omit ch &lt;- 1 from the lambda function.
-</span></code></pre></div></li>
+
+<pre><code class="language-go">
+ch := make(chan int) // Allocate a channel.
+// Start something in a goroutine; when it completes, signal on the channel.
+go func() {
+// doSomething
+ch &lt;- 1 // Send a signal; value does not matter.
+}()
+doSomethingElseForAWhile()
+&lt;-ch // Wait for goroutine to finish; discard sent value.
+// If the routine must block forever, omit ch &lt;- 1 from the lambda function.
+</code></pre></li>
 </ul>
+
 <h4 id="channel-factory-pattern">Channel Factory pattern</h4>
+
 <ul>
-<li>
-<p>Channel Factory pattern: the function is a channel factory and starts a lambda
+<li><p>Channel Factory pattern: the function is a channel factory and starts a lambda
 function as goroutine populating the channel</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pump</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+
+<pre><code class="language-go">func pump() chan int {
+    ch := make(chan int)
+    go func() {
+        for i := 0; ; i++ {
+            ch &lt;- i
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+    return ch
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="channel-iterator-pattern">Channel Iterator pattern</h4>
+
 <ul>
-<li>
-<p>Channel Iterator pattern: Implement the Iter() method of a container returns a channel for the calling for-loop to read from.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">container</span>) <span style="color:#a6e22e">Iter</span>() <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">items</span> {
-    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">item</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Len</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-            <span style="color:#75715e">// or use a for-range loop
-</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">items</span>[<span style="color:#a6e22e">i</span>]
+<li><p>Channel Iterator pattern: Implement the Iter() method of a container returns a channel for the calling for-loop to read from.</p>
+
+<pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
+    ch := make(chan item)
+    go func() {
+        for i := 0; i &lt; c.Len(); i++ {
+            // or use a for-range loop
+            ch &lt;- c.items[i]
         }
     }()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+    return ch
 }
 
-<span style="color:#75715e">// The code which calls this method can then iterate over the container
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">container</span>.<span style="color:#a6e22e">Iter</span>() { <span style="color:#f92672">...</span> }
-</code></pre></div></li>
+// The code which calls this method can then iterate over the container
+for x := range container.Iter() { ... }
+</code></pre></li>
 </ul>
+
 <h4 id="limiting-the-number-of-requests">Limiting the number of requests</h4>
+
 <ul>
-<li>
-<p>Limiting the number of requests processed concurrently</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> (
-    <span style="color:#a6e22e">AvailableMemory</span>         = <span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">20</span>                                  <span style="color:#75715e">// 10 MB, for example
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">AverageMemoryPerRequest</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">10</span>                                  <span style="color:#75715e">// 10 KB
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">MAXREQS</span>                 = <span style="color:#a6e22e">AvailableMemory</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">AverageMemoryPerRequest</span> <span style="color:#75715e">// here amounts to 1000
-</span><span style="color:#75715e"></span>)
+<li><p>Limiting the number of requests processed concurrently</p>
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sem</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">MAXREQS</span>)
+<pre><code class="language-go">const (
+    AvailableMemory         = 10 &lt;&lt; 20                                  // 10 MB, for example
+    AverageMemoryPerRequest = 10 &lt;&lt; 10                                  // 10 KB
+    MAXREQS                 = AvailableMemory / AverageMemoryPerRequest // here amounts to 1000
+)
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Request</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>   <span style="color:#66d9ef">int</span>
-    <span style="color:#a6e22e">replyc</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>
+var sem = make(chan int, MAXREQS)
+
+type Request struct {
+    a, b   int
+    replyc chan int
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>) {
-    <span style="color:#75715e">// Do something
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// May take a long time and use a lot of memory or CPU
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>) {
-    <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">r</span>)
-    <span style="color:#75715e">// signal done: enable next request to start
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// by making 1 empty place in the buffer
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">sem</span>
+func process(r *Request) {
+    // Do something
+    // May take a long time and use a lot of memory or CPU
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Server</span>(<span style="color:#a6e22e">queue</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>) {
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#a6e22e">sem</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#75715e">// blocks when channel is full (1000 requests are active)
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// so wait here until there is capacity to process a request
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// (doesn’t matter what we put in it)
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">request</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">queue</span>
-        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">request</span>)
+func handle(r *Request) {
+    process(r)
+    // signal done: enable next request to start
+    // by making 1 empty place in the buffer
+    &lt;-sem
+}
+func Server(queue chan *Request) {
+    for {
+        sem &lt;- 1
+        // blocks when channel is full (1000 requests are active)
+        // so wait here until there is capacity to process a request
+        // (doesn’t matter what we put in it)
+        request := &lt;-queue
+        go handle(request)
     }
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; AvailableMemory &#34;</span>, <span style="color:#a6e22e">AvailableMemory</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; AverageMemoryPerRequest &#34;</span>, <span style="color:#a6e22e">AverageMemoryPerRequest</span>)
-    <span style="color:#a6e22e">queue</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">Server</span>(<span style="color:#a6e22e">queue</span>)
+func main() {
+    fmt.Println(&quot; AvailableMemory &quot;, AvailableMemory)
+    fmt.Println(&quot; AverageMemoryPerRequest &quot;, AverageMemoryPerRequest)
+    queue := make(chan *Request)
+    go Server(queue)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="parallelling-computing-over-a-few-cores">Parallelling computing over a few cores</h4>
+
 <ul>
-<li>Parallelling a computing over a numbers of CPU cores</li>
+<li><p>Parallelling a computing over a numbers of CPU cores</p>
+
+<pre><code class="language-go">const NCPU = 4
+
+func DoAll() {
+sem := make(chan int, NCPU) // Buffering optional but sensible.
+for i := 0; i &lt; NCPU; i++ {
+    go DoPart(sem)
+
+}
+// Drain the channel sem, waiting for NCPU tasks to complete
+for i := 0; i &lt; NCPU; i++ {
+    &lt;-sem // wait for one task to complete
+}
+// All done.
+}
+func DoPart(sem chan int) {
+// do the part of the computation
+
+sem &lt;- 1 // signal that this piece is done
+}
+
+func main() {
+runtime.GOMAXPROCS(NCPU)
+DoAll()
+}
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NCPU</span> = <span style="color:#ae81ff">4</span>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DoAll</span>() {
-    <span style="color:#a6e22e">sem</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">NCPU</span>) <span style="color:#75715e">// Buffering optional but sensible.
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">NCPU</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">DoPart</span>(<span style="color:#a6e22e">sem</span>)
+<h4 id="paralleling-computing-over-a-large-amount-of-data">Paralleling computing over a large amount of data</h4>
 
-    }
-    <span style="color:#75715e">// Drain the channel sem, waiting for NCPU tasks to complete
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">NCPU</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">sem</span> <span style="color:#75715e">// wait for one task to complete
-</span><span style="color:#75715e"></span>    }
-    <span style="color:#75715e">// All done.
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DoPart</span>(<span style="color:#a6e22e">sem</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#75715e">// do the part of the computation
-</span><span style="color:#75715e"></span>
-    <span style="color:#a6e22e">sem</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">// signal that this piece is done
-</span><span style="color:#75715e"></span>}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#a6e22e">NCPU</span>)
-    <span style="color:#a6e22e">DoAll</span>()
+<pre><code class="language-go">func ParallelProcessData (in &lt;- chan *Data, out &lt;- chan *Data) {
+    // make channels:
+    preOut := make(chan *Data, 100)
+    stepAOut := make(chan *Data, 100)
+    stepBOut := make(chan *Data, 100)
+    stepCOut := make(chan *Data, 100)
+    // start parallel computations:
+    go PreprocessData(in, preOut)
+    go ProcessStepA(preOut, stepAOut)
+    go ProcessStepB(stepAOut, stepBOut)
+    go ProcessStepC(stepBOut, stepCOut)
+    go PostProcessData(stepCOut, out
 }
-</code></pre></div><h4 id="paralleling-computing-over-a-large-amount-of-data">Paralleling computing over a large amount of data</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ParallelProcessData</span> (<span style="color:#a6e22e">in</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>, <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>) {
-    <span style="color:#75715e">// make channels:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">preOut</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>, <span style="color:#ae81ff">100</span>)
-    <span style="color:#a6e22e">stepAOut</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>, <span style="color:#ae81ff">100</span>)
-    <span style="color:#a6e22e">stepBOut</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>, <span style="color:#ae81ff">100</span>)
-    <span style="color:#a6e22e">stepCOut</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Data</span>, <span style="color:#ae81ff">100</span>)
-    <span style="color:#75715e">// start parallel computations:
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">PreprocessData</span>(<span style="color:#a6e22e">in</span>, <span style="color:#a6e22e">preOut</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">ProcessStepA</span>(<span style="color:#a6e22e">preOut</span>, <span style="color:#a6e22e">stepAOut</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">ProcessStepB</span>(<span style="color:#a6e22e">stepAOut</span>, <span style="color:#a6e22e">stepBOut</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">ProcessStepC</span>(<span style="color:#a6e22e">stepBOut</span>, <span style="color:#a6e22e">stepCOut</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">PostProcessData</span>(<span style="color:#a6e22e">stepCOut</span>, <span style="color:#a6e22e">out</span>
-}
-</code></pre></div><h4 id="simple-timeout-pattern">Simple timeout pattern</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">timeout</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>, <span style="color:#ae81ff">1</span>)
-<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1e9</span>) <span style="color:#75715e">// one second
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">timeout</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">true</span>
+</code></pre>
+
+<h4 id="simple-timeout-pattern">Simple timeout pattern</h4>
+
+<pre><code class="language-go">timeout := make(chan bool, 1)
+go func() {
+    time.Sleep(1e9) // one second
+    timeout &lt;- true
 }()
     
-<span style="color:#66d9ef">select</span> {
-    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>:
-    <span style="color:#75715e">// a read from ch has occurred
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">timeout</span>:
-    <span style="color:#75715e">// the read from ch has timed out
-</span><span style="color:#75715e"></span>}
-</code></pre></div><h4 id="use-in---out--channel-instead-of-lock">Use in- &amp; out- channel instead of lock</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Worker</span>(<span style="color:#a6e22e">in</span>, <span style="color:#a6e22e">out</span> <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Task</span>) {
-    <span style="color:#66d9ef">for</span> {
-        <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">in</span>
-        <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">t</span>)
-        <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>
+select {
+    case &lt;-ch:
+    // a read from ch has occurred
+    case &lt;-timeout:
+    // the read from ch has timed out
+}
+</code></pre>
+
+<h4 id="use-in-out-channel-instead-of-lock">Use in- &amp; out- channel instead of lock</h4>
+
+<pre><code class="language-go">func Worker(in, out chan *Task) {
+    for {
+        t := &lt;-in
+        process(t)
+        out &lt;- t
     }
 }
-</code></pre></div><h4 id="concurrent-access-to-object">Concurrent access to object</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Name</span>   <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">salary</span> <span style="color:#66d9ef">float64</span>
-    <span style="color:#a6e22e">chF</span>    <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">func</span>()
+</code></pre>
+
+<h4 id="concurrent-access-to-object">Concurrent access to object</h4>
+
+<pre><code class="language-go">type Person struct {
+    Name   string
+    salary float64
+    chF    chan func()
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewPerson</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">salary</span> <span style="color:#66d9ef">float64</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span> {
-    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Person</span>{<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">salary</span>, make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">func</span>())}
-    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">backend</span>()
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>
+func NewPerson(name string, salary float64) *Person {
+    p := &amp;Person{name, salary, make(chan func())}
+    go p.backend()
+    return p
 }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">backend</span>() {
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> {
-        <span style="color:#a6e22e">f</span>()
+func (p *Person) backend() {
+    for f := range p.chF {
+        f()
     }
 }
 
-<span style="color:#75715e">// Set salary.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">SetSalary</span>(<span style="color:#a6e22e">sal</span> <span style="color:#66d9ef">float64</span>) {
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">salary</span> = <span style="color:#a6e22e">sal</span> }
+// Set salary.
+func (p *Person) SetSalary(sal float64) {
+    p.chF &lt;- func() { p.salary = sal }
 }
 
-<span style="color:#75715e">// Retrieve salary.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">Salary</span>() <span style="color:#66d9ef">float64</span> {
-    <span style="color:#a6e22e">fChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">float64</span>)
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">chF</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">fChan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">salary</span> }
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">fChan</span>
+// Retrieve salary.
+func (p *Person) Salary() float64 {
+    fChan := make(chan float64)
+    p.chF &lt;- func() { fChan &lt;- p.salary }
+    return &lt;-fChan
 }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Person - name is: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - salary is: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.
-        <span style="color:#a6e22e">FormatFloat</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Salary</span>(), <span style="color:#e6db74">&#39;f&#39;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">64</span>)
+func (p *Person) String() string {
+    return &quot;Person - name is: &quot; + p.Name + &quot; - salary is: &quot; + strconv.
+        FormatFloat(p.Salary(), 'f', 2, 64)
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">bs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewPerson</span>(<span style="color:#e6db74">&#34;Smith Bill&#34;</span>, <span style="color:#ae81ff">2500.5</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">bs</span>)
-    <span style="color:#a6e22e">bs</span>.<span style="color:#a6e22e">SetSalary</span>(<span style="color:#ae81ff">4000.25</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Salary changed:&#34;</span>)
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">bs</span>)
+func main() {
+    bs := NewPerson(&quot;Smith Bill&quot;, 2500.5)
+    fmt.Println(bs)
+    bs.SetSalary(4000.25)
+    fmt.Println(&quot;Salary changed:&quot;)
+    fmt.Println(bs)
 }
-<span style="color:#75715e">/* Output Person - name is: Smith Bill - salary is: 2500.50
-</span><span style="color:#75715e">Salary changed:
-</span><span style="color:#75715e">Person - name is: Smith Bill - salary is: 4000.25 *
-</span><span style="color:#75715e">*/</span>
-</code></pre></div><h4 id="abandon-synchronous-calls">Abandon synchronous calls</h4>
+/* Output Person - name is: Smith Bill - salary is: 2500.50
+Salary changed:
+Person - name is: Smith Bill - salary is: 4000.25 *
+*/
+</code></pre>
+
+<h4 id="abandon-synchronous-calls">Abandon synchronous calls</h4>
+
 <ul>
-<li>
-<p>Abandon synchronous calls that run too long</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">error</span>, <span style="color:#ae81ff">1</span>)
-<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">Service</span>.<span style="color:#a6e22e">Method</span><span style="color:#960050;background-color:#1e0010">”</span>, <span style="color:#a6e22e">args</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">reply</span>) } ()
-<span style="color:#66d9ef">select</span> {
-    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>:
-    <span style="color:#75715e">// use resp and reply
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">After</span>(<span style="color:#a6e22e">timeoutNs</span>):
-    <span style="color:#75715e">// call timed out
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">break</span>
+<li><p>Abandon synchronous calls that run too long</p>
+
+<pre><code class="language-go">ch := make(chan error, 1)
+go func() { ch &lt;- client.Call(“Service.Method”, args, &amp;reply) } ()
+select {
+    case resp := &lt;-ch:
+    // use resp and reply
+    case &lt;-time.After(timeoutNs):
+    // call timed out
+    break
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="benchmarking-goroutines">Benchmarking goroutines</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;sync&#34;</span>, <span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">Benchmark</span>(<span style="color:#a6e22e">BenchmarkChannelSync</span>).<span style="color:#a6e22e">String</span>())
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;buffered&#34;</span>, <span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">Benchmark</span>(<span style="color:#a6e22e">BenchmarkChannelBuffered</span>).<span style="color:#a6e22e">String</span>())
+
+<pre><code class="language-go">func main() {
+    fmt.Println(&quot;sync&quot;, testing.Benchmark(BenchmarkChannelSync).String())
+    fmt.Println(&quot;buffered&quot;, testing.Benchmark(BenchmarkChannelBuffered).String())
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">BenchmarkChannelSync</span>(<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">B</span>) {
-    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+func BenchmarkChannelSync(b *testing.B) {
+    ch := make(chan int)
+    go func() {
+        for i := 0; i &lt; b.N; i++ {
+            ch &lt;- i
         }
-        close(<span style="color:#a6e22e">ch</span>)
+        close(ch)
     }()
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span> = <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span> {
+    for _ = range ch {
     }
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">BenchmarkChannelBuffered</span>(<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">B</span>) {
-    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">128</span>)
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+func BenchmarkChannelBuffered(b *testing.B) {
+    ch := make(chan int, 128)
+    go func() {
+        for i := 0; i &lt; b.N; i++ {
+            ch &lt;- i
         }
-        close(<span style="color:#a6e22e">ch</span>)
+        close(ch)
     }()
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span> = <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span> {
+    for _ = range ch {
     }
 }
 
-<span style="color:#75715e">/* Output:
-</span><span style="color:#75715e">sync  3000000           420 ns/op
-</span><span style="color:#75715e">buffered 10000000           103 ns/op
-</span><span style="color:#75715e">*/</span>
-</code></pre></div><h4 id="stopping-a-goroutine">Stopping a goroutine</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">Goexit</span>()
-</code></pre></div>
+/* Output:
+sync  3000000           420 ns/op
+buffered 10000000           103 ns/op
+*/
+</code></pre>
+
+<h4 id="stopping-a-goroutine">Stopping a goroutine</h4>
+
+<pre><code class="language-go">runtime.Goexit()
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#goroutines-and-channels">Goroutines and channels</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#goroutines-and-channels">Goroutines and channels</a>
+<ul>
+<li><a href="#using-buffered-channels">Using buffered channels</a></li>
+<li><a href="#limiting-the-number-of-items-in-a-channel">Limiting the number of items in a channel</a></li>
+<li><a href="#loop-over-a-channel">loop over a channel</a></li>
+<li><a href="#test-a-channel-is-closed">Test a channel is closed</a></li>
+<li><a href="#samaphore-pattern">Samaphore pattern</a></li>
+<li><a href="#channel-factory-pattern">Channel Factory pattern</a></li>
+<li><a href="#channel-iterator-pattern">Channel Iterator pattern</a></li>
+<li><a href="#limiting-the-number-of-requests">Limiting the number of requests</a></li>
+<li><a href="#parallelling-computing-over-a-few-cores">Parallelling computing over a few cores</a></li>
+<li><a href="#paralleling-computing-over-a-large-amount-of-data">Paralleling computing over a large amount of data</a></li>
+<li><a href="#simple-timeout-pattern">Simple timeout pattern</a></li>
+<li><a href="#use-in-out-channel-instead-of-lock">Use in- &amp; out- channel instead of lock</a></li>
+<li><a href="#concurrent-access-to-object">Concurrent access to object</a></li>
+<li><a href="#abandon-synchronous-calls">Abandon synchronous calls</a></li>
+<li><a href="#benchmarking-goroutines">Benchmarking goroutines</a></li>
+<li><a href="#stopping-a-goroutine">Stopping a goroutine</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

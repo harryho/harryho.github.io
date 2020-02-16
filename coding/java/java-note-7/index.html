@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Java Note - 7: Stream API :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +974,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,90 +991,101 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Java Note - 7: Stream API</h1>
-        <h2 id="stream">Stream</h2>
-<h3 id="iterations">Iterations</h3>
-<h3 id="collections-and-maps">Collections and Maps</h3>
-<h2 id="filtering">Filtering</h2>
-<h2 id="mapping">Mapping</h2>
-<h3 id="lambdacollectiondemo">LambdaCollectionDemo</h3>
-<h3 id="lambda-collection-map-demo">Lambda Collection Map Demo</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LambdaCollectionMapDemo</span> <span style="color:#f92672">{</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-
-        <span style="color:#75715e">// FunctionalInterface 
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x + y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">// w w  w .j  av a 2s.  c om
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x - y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">*</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x * y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">/</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x / y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">%</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-
-        String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> strArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;abc&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;klm&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;xyz&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;pqr&#34;</span> <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
-        List list <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-
-        <span style="color:#75715e">// Default Methods
-</span><span style="color:#75715e"></span>        list<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>println<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-
-        Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">,</span> <span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> first<span style="color:#f92672">.</span><span style="color:#a6e22e">compareToIgnoreCase</span><span style="color:#f92672">(</span>second<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        list <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;After sorting ... &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        list<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>println<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-
-
-
-        <span style="color:#75715e">// Common Functional Interfaces
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Runnable
-</span><span style="color:#75715e"></span>        repeat<span style="color:#f92672">(</span>5<span style="color:#f92672">,</span> <span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">;</span>
-
-        <span style="color:#75715e">// UnaryOperator
-</span><span style="color:#75715e"></span>        UnaryOperator<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> upperCase <span style="color:#f92672">=</span> str <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">toUpperCase</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// BiUnaryOperator
-</span><span style="color:#75715e"></span>        BinaryOperator<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> concat <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>left<span style="color:#f92672">,</span>right<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> left <span style="color:#f92672">+</span> right<span style="color:#f92672">;</span>
-
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34; UnaryOperator upperCase &#34;</span><span style="color:#f92672">+</span>upperCase<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span> <span style="color:#e6db74">&#34;  BinaryOperator&lt;String&gt; concat &#34;</span><span style="color:#f92672">+</span> concat<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;world&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
         
 
-    <span style="color:#f92672">}</span>
+<h2 id="stream">Stream</h2>
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">engine</span><span style="color:#f92672">(</span>Calculator calculator<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 2<span style="color:#f92672">,</span> y <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> calculator<span style="color:#f92672">.</span><span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+<h3 id="iterations">Iterations</h3>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">repeat</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> Runnable action<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
-            action<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+<h3 id="collections-and-maps">Collections and Maps</h3>
 
-<span style="color:#a6e22e">@FunctionalInterface</span>
-<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Calculator</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> y<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
+<h2 id="filtering">Filtering</h2>
 
-</code></pre></div>
+<h2 id="mapping">Mapping</h2>
+
+<h3 id="lambdacollectiondemo">LambdaCollectionDemo</h3>
+
+<h3 id="lambda-collection-map-demo">Lambda Collection Map Demo</h3>
+
+<pre><code class="language-java">
+
+public class LambdaCollectionMapDemo {
+
+    public static void main(String[] args) {
+
+        // FunctionalInterface 
+        System.out.println(&quot;x + y:&quot; + engine((x, y) -&gt; x + y));// w w  w .j  av a 2s.  c om
+        System.out.println(&quot;x - y:&quot; + engine((x, y) -&gt; x * y));
+        System.out.println(&quot;x * y:&quot; + engine((x, y) -&gt; x / y));
+        System.out.println(&quot;x / y:&quot; + engine((x, y) -&gt; x % y));
+
+        String[] strArray = new String[] { &quot;abc&quot;, &quot;klm&quot;, &quot;xyz&quot;, &quot;pqr&quot; };
+        List list = Arrays.asList(strArray);
+
+        // Default Methods
+        list.forEach(System.out::println);
+
+        Arrays.sort(strArray, (first, second) -&gt; first.compareToIgnoreCase(second));
+        list = Arrays.asList(strArray);
+
+        System.out.println(&quot;After sorting ... &quot;);
+        list.forEach(System.out::println);
+
+
+
+        // Common Functional Interfaces
+        // Runnable
+        repeat(5, () -&gt; System.out.println(&quot;Hello&quot;)) ;
+
+        // UnaryOperator
+        UnaryOperator&lt;String&gt; upperCase = str -&gt; str.toUpperCase();
+        // BiUnaryOperator
+        BinaryOperator&lt;String&gt; concat = (left,right) -&gt; left + right;
+
+        System.out.println( &quot; UnaryOperator upperCase &quot;+upperCase.apply( &quot;hello&quot;) );
+        System.out.println( &quot;  BinaryOperator&lt;String&gt; concat &quot;+ concat.apply(&quot;hello&quot;,&quot;world&quot;));
+        
+
+    }
+
+    private static int engine(Calculator calculator) {
+        int x = 2, y = 4;
+        return calculator.calculate(x, y);
+    }
+
+    public static void repeat(int n, Runnable action) {
+        for (int i = 0; i &lt; n; i++)
+            action.run();
+    }
+}
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int x, int y);
+}
+
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#stream">Stream</a>
-      <ul>
-        <li><a href="#iterations">Iterations</a></li>
-        <li><a href="#collections-and-maps">Collections and Maps</a></li>
-      </ul>
-    </li>
-    <li><a href="#filtering">Filtering</a></li>
-    <li><a href="#mapping">Mapping</a>
-      <ul>
-        <li><a href="#lambdacollectiondemo">LambdaCollectionDemo</a></li>
-        <li><a href="#lambda-collection-map-demo">Lambda Collection Map Demo</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#stream">Stream</a>
+<ul>
+<li><a href="#iterations">Iterations</a></li>
+<li><a href="#collections-and-maps">Collections and Maps</a></li>
+</ul></li>
+<li><a href="#filtering">Filtering</a></li>
+<li><a href="#mapping">Mapping</a>
+<ul>
+<li><a href="#lambdacollectiondemo">LambdaCollectionDemo</a></li>
+<li><a href="#lambda-collection-map-demo">Lambda Collection Map Demo</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

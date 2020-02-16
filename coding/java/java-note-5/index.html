@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Java Note - 5: Lambda  :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +974,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,28 +991,41 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Java Note - 5: Lambda </h1>
-        <h2 id="lamda">Lamda</h2>
+        
+
+<h2 id="lamda">Lamda</h2>
+
 <h3 id="lambda-best-practices">Lambda Best Practices</h3>
+
 <h2 id="use-interfaces">Use Interfaces</h2>
+
 <p>The most common misstep taken by an over-eager functional programmer is the use of functional interfaces
 in type signatures. In general, you should avoid using the functional interface types directly and instead
 provide single-method interfaces as arguments to your methods. These interfaces become a way to create
 self-documenting code and to provide meaningful type information, as well as leaving open the opportunity
 for your user to provide an actual Java type.</p>
+
 <h2 id="use-method-reference">Use Method Reference</h2>
+
 <p>As much as possible, use a method reference instead of a lambda. Method references are not only shorter
 and easier to read, but using method references will get you thinking directly about the methods as values.</p>
+
 <h2 id="define-lambdas-inline">Define Lambdas Inline</h2>
+
 <p>When you do use lambdas, define them inline. Unless you are doing some kind of fancy manipulation of your
 lambda, there is no reason to be assigning them to a variable. The reason that you want to define your lambdas
 inline is that it will allow your code to be more flexible when types change: you are letting type inference do
 more heavy lifting for you, and adapting your code to changing contexts.</p>
+
 <h2 id="lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</h2>
+
 <p>As we go through the rest of this book, we will see many places where lambdas make concurrent programming
 much easier. Many of the structures built off of lambdas will perform concurrent executions, sometimes without
 much warning. Because of this, your lambdas always need to be threadsafe. Pay particular attention to this with
 instance method handles, since thread-dangerous state can often be hiding within those instances.</p>
-<h2 id="dont-use-null">Don’t Use Null</h2>
+
+<h2 id="don-t-use-null">Don’t Use Null</h2>
+
 <p>The null keyword should never be used in your code. Now that Java has the Optional type, there is simply
 no need for it. Whenever you have a method, you should be explicit about whether or not you accept
 null, and you generally shouldn’t accept it. This will save you from NullPointerException cropping up
@@ -1051,13 +1033,19 @@ in obnoxious places, far from the site of the actual error. This is an especiall
 start working with streams and lambdas, because the stack trace may not be very useful for you when
 you go to debug. The solution is to never accept null and to aggressively check for it, exploding loudly as
 soon as it occurs.</p>
-<h2 id="dont-release-zalgo">Don’t Release Zalgo</h2>
+
+<h2 id="don-t-release-zalgo">Don’t Release Zalgo</h2>
+
 <ul>
-<li>Don't mix asynchronous and synchronous execution in the same lamda expressoin.</li>
+<li>Don&rsquo;t mix asynchronous and synchronous execution in the same lamda expressoin.</li>
 </ul>
+
 <h2 id="build-complexity-from-simple-parts">Build Complexity from Simple Parts</h2>
+
 <h2 id="use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</h2>
+
 <h3 id="common-functional-interfaces">Common functional Interfaces</h3>
+
 <table>
 <thead>
 <tr>
@@ -1069,6 +1057,7 @@ soon as it occurs.</p>
 <th>Other Methods</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>Runnable</td>
@@ -1078,72 +1067,81 @@ soon as it occurs.</p>
 <td>Runs an action</td>
 <td></td>
 </tr>
+
 <tr>
-<td>Supplier<!-- raw HTML omitted --></td>
+<td>Supplier<T></td>
 <td>none</td>
 <td>T</td>
 <td>get</td>
 <td>Supplies a value of type T</td>
 <td></td>
 </tr>
+
 <tr>
-<td>Consumer<!-- raw HTML omitted --></td>
+<td>Consumer<T></td>
 <td>T</td>
 <td>void</td>
 <td>accept</td>
 <td>Consumes a  value of type T</td>
 <td>chain</td>
 </tr>
+
 <tr>
-<td>BiConsumer&lt;T, U&gt;</td>
+<td>BiConsumer<T, U></td>
 <td>T, U</td>
 <td>void</td>
 <td>accept</td>
 <td>Consumes a  value of type T and U</td>
 <td>chain</td>
 </tr>
+
 <tr>
-<td>Function&lt;T, R&gt;</td>
+<td>Function<T, R></td>
 <td>T</td>
 <td>R</td>
 <td>apply</td>
 <td>A function with argument oftype T</td>
 <td>compose, andThen,identity</td>
 </tr>
+
 <tr>
-<td>BiFunction&lt;T, U, R&gt;</td>
+<td>BiFunction<T, U, R></td>
 <td>T, U</td>
 <td>R</td>
 <td>apply</td>
 <td>A function with argument of type T and U</td>
 <td>andThen</td>
 </tr>
+
 <tr>
-<td>UnaryOperator<!-- raw HTML omitted --></td>
+<td>UnaryOperator<T></td>
 <td>T</td>
 <td>T</td>
 <td>apply</td>
 <td>A unary operator on type T</td>
 <td>compose, andThen, identity</td>
 </tr>
+
 <tr>
-<td>BiUnaryOperator&lt;T,T&gt;</td>
+<td>BiUnaryOperator<T,T></td>
 <td>T,T</td>
 <td>T</td>
 <td>apply</td>
 <td>A binary operator on type T</td>
 <td>andThen</td>
 </tr>
+
 <tr>
-<td>Predicate<!-- raw HTML omitted --></td>
+<td>Predicate<T></td>
 <td>T</td>
 <td>boolean</td>
 <td>test</td>
 <td>A Boolean-valued function</td>
 <td>and,  or, negate, isEqual</td>
 </tr>
+
 <tr>
-<td>BiPredicate&lt;T,T&gt;</td>
+<td>BiPredicate<T,T></td>
 <td>T,T</td>
 <td>boolean</td>
 <td>test</td>
@@ -1152,7 +1150,9 @@ soon as it occurs.</p>
 </tr>
 </tbody>
 </table>
+
 <h3 id="method-reference">Method Reference</h3>
+
 <table>
 <thead>
 <tr>
@@ -1160,254 +1160,267 @@ soon as it occurs.</p>
 <th>Description</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>TypeName::staticMethod</td>
 <td>A method reference to a static method of a class, an interface, or an enum</td>
 </tr>
+
 <tr>
 <td>objectRef::instanceMethod</td>
 <td>A method reference to an instance method of the specified object</td>
 </tr>
+
 <tr>
 <td>ClassName::instanceMethod</td>
 <td>A method reference to an instance method of an arbitrary object of the specified class</td>
 </tr>
+
 <tr>
 <td>TypeName.super::instanceMethod</td>
 <td>A method reference to an instance method of the supertype of a particular object</td>
 </tr>
+
 <tr>
 <td>ClassName::new</td>
 <td>A constructor reference to the constructor of the specified class</td>
 </tr>
+
 <tr>
 <td>ArrayTypeName::new</td>
 <td>An array constructor reference to the constructor of the specified</td>
 </tr>
+
 <tr>
 <td>array type</td>
 <td></td>
 </tr>
 </tbody>
 </table>
+
 <h3 id="lambda-demo">Lambda Demo</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Locale<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.Arrays<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.Supplier<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.Consumer<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.Function<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.BiFunction<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.Predicate<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.UnaryOperator<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.BinaryOperator<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.function.IntFunction<span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LambdaDemo</span> <span style="color:#f92672">{</span>
+<!-- <iframe height="800px" width="100%" src="https://repl.it/@harryh0/LambdaDemo?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+[lambda-demo](https://repl.it/@harryh0/AttentiveElementaryTriangles) -->
 
-        <span style="color:#75715e">// FunctionalInterface 
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x + y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 6
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x * y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">*</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 8
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x / y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">/</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 0 
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;x % y:&#34;</span> <span style="color:#f92672">+</span> engine<span style="color:#f92672">(</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">%</span> y<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2
-</span><span style="color:#75715e"></span>
-        String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> strArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;abc&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;klm&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;xyz&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;pqr&#34;</span> <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
-        List list <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<pre><code class="language-java">import java.util.Locale;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
 
-        <span style="color:#75715e">// Default Methods
-</span><span style="color:#75715e"></span>        list<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>println<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+public class LambdaDemo {
 
-        <span style="color:#75715e">// abc
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// klm
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// xyz
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// pqr
-</span><span style="color:#75715e"></span>
-        Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">,</span> <span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> first<span style="color:#f92672">.</span><span style="color:#a6e22e">compareToIgnoreCase</span><span style="color:#f92672">(</span>second<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        list <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>strArray<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    public static void main(String[] args) {
 
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;After sorting ... &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        list<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>println<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // FunctionalInterface 
+        System.out.println(&quot;x + y:&quot; + engine((x, y) -&gt; x + y)); // 6
+        System.out.println(&quot;x * y:&quot; + engine((x, y) -&gt; x * y)); // 8
+        System.out.println(&quot;x / y:&quot; + engine((x, y) -&gt; x / y)); // 0 
+        System.out.println(&quot;x % y:&quot; + engine((x, y) -&gt; x % y)); // 2
 
-        <span style="color:#75715e">// After sorting ...
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// abc
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// klm
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// pqr
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// xyz
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Common Functional Interfaces
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Runnable
-</span><span style="color:#75715e"></span>        repeat<span style="color:#f92672">(</span>5<span style="color:#f92672">,</span> <span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        String[] strArray = new String[] { &quot;abc&quot;, &quot;klm&quot;, &quot;xyz&quot;, &quot;pqr&quot; };
+        List list = Arrays.asList(strArray);
 
-        UnaryOperator<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> upperCase <span style="color:#f92672">=</span> str <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">toUpperCase</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        BinaryOperator<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> concat <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>left<span style="color:#f92672">,</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> left <span style="color:#f92672">+</span> right<span style="color:#f92672">;</span>
+        // Default Methods
+        list.forEach(System.out::println);
 
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; UnaryOperator upperCase &#34;</span> <span style="color:#f92672">+</span> upperCase<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;  BinaryOperator&lt;String&gt; concat &#34;</span> <span style="color:#f92672">+</span> concat<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;world&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // abc
+        // klm
+        // xyz
+        // pqr
 
-        <span style="color:#75715e">// Function 
-</span><span style="color:#75715e"></span>        Function<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> Long<span style="color:#f92672">&gt;</span> square <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">*</span> x<span style="color:#f92672">;</span>
-        Function<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> Long<span style="color:#f92672">&gt;</span> plusOne <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Function with andThen, 
-</span><span style="color:#75715e"></span>        Function<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> Long<span style="color:#f92672">&gt;</span> squarePlusOne <span style="color:#f92672">=</span> square<span style="color:#f92672">.</span><span style="color:#a6e22e">andThen</span><span style="color:#f92672">(</span>plusOne<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Function<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> Long<span style="color:#f92672">&gt;</span> plusOneSquare <span style="color:#f92672">=</span> square<span style="color:#f92672">.</span><span style="color:#a6e22e">compose</span><span style="color:#f92672">(</span>plusOne<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; 5 squarePlusOne is &#34;</span> <span style="color:#f92672">+</span> squarePlusOne<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>5L<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 26 
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; 5 plusOneSquare is  &#34;</span> <span style="color:#f92672">+</span> plusOneSquare<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>5L<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 36
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Predicate
-</span><span style="color:#75715e"></span>        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> divisibleByThree <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">%</span> 3 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> divisibleByFive <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">%</span> 5 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> isNegative <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Predicate with AND , OR , NOT
-</span><span style="color:#75715e"></span>        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> divisibleByThreeAndFive <span style="color:#f92672">=</span> divisibleByThree<span style="color:#f92672">.</span><span style="color:#a6e22e">and</span><span style="color:#f92672">(</span>divisibleByFive<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> divisibleByThreeOrFive <span style="color:#f92672">=</span> divisibleByThree<span style="color:#f92672">.</span><span style="color:#a6e22e">or</span><span style="color:#f92672">(</span>divisibleByFive<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Predicate<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> isPositive <span style="color:#f92672">=</span> isNegative<span style="color:#f92672">.</span><span style="color:#a6e22e">negate</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Arrays.sort(strArray, (first, second) -&gt; first.compareToIgnoreCase(second));
+        list = Arrays.asList(strArray);
 
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; 15 is divisibleByThreeAndFive &#34;</span> <span style="color:#f92672">+</span> divisibleByThreeAndFive<span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">(</span>15<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; 7 is divisibleByThreeAndFive &#34;</span> <span style="color:#f92672">+</span> divisibleByThreeOrFive<span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">(</span>7<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; -1 is isPositive &#34;</span> <span style="color:#f92672">+</span> isPositive<span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">(</span>7<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        System.out.println(&quot;After sorting ... &quot;);
+        list.forEach(System.out::println);
 
-        <span style="color:#75715e">// static method reference 
-</span><span style="color:#75715e"></span>        Function<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> toBinary <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">toBinaryString</span><span style="color:#f92672">(</span>x<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>toBinary<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>19<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // After sorting ...
+        // abc
+        // klm
+        // pqr
+        // xyz
 
-        <span style="color:#75715e">// Using a method reference
-</span><span style="color:#75715e"></span>        Function<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> toBinary2 <span style="color:#f92672">=</span> Integer<span style="color:#f92672">:</span><span style="color:#f92672">:</span>toBinaryString<span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>toBinary2<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>19<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // Common Functional Interfaces
+        // Runnable
+        repeat(5, () -&gt; System.out.println(&quot;Hello&quot;));
 
-        <span style="color:#75715e">// static method lambda expression
-</span><span style="color:#75715e"></span>        BiFunction<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span> sum <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>sum<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>3<span style="color:#f92672">,</span> 4<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        UnaryOperator&lt;String&gt; upperCase = str -&gt; str.toUpperCase();
+        BinaryOperator&lt;String&gt; concat = (left, right) -&gt; left + right;
 
-        <span style="color:#75715e">// Instance method
-</span><span style="color:#75715e"></span>        Supplier<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> personSup <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">new</span> Person<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Function<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Person<span style="color:#f92672">&gt;</span> personFunc <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>x<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">new</span> Person<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        System.out.println(&quot; UnaryOperator upperCase &quot; + upperCase.apply(&quot;hello&quot;));
+        System.out.println(&quot;  BinaryOperator&lt;String&gt; concat &quot; + concat.apply(&quot;hello&quot;, &quot;world&quot;));
 
-        BiFunction<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">,</span> Person<span style="color:#f92672">&gt;</span> personBiFunc <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">new</span> Person<span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Consumer&lt;String&gt; personCon = (Person p) -&gt; p.setTitle;
-</span><span style="color:#75715e"></span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>personSup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Person() constructor called
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// name = Unknown, title = Unknown
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>personFunc<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;John Doe&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Person( fullName ) constructor called
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// name = John Doe, title = Unknown
-</span><span style="color:#75715e"></span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>personBiFunc<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;John&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Doe&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Person(firstName, lastName ) constructor called
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// name = John, title = Unknown
-</span><span style="color:#75715e"></span>
+        // Function 
+        Function&lt;Long, Long&gt; square = x -&gt; x * x;
+        Function&lt;Long, Long&gt; plusOne = x -&gt; x + 1;
+        // Function with andThen, 
+        Function&lt;Long, Long&gt; squarePlusOne = square.andThen(plusOne);
+        Function&lt;Long, Long&gt; plusOneSquare = square.compose(plusOne);
+        System.out.println(&quot; 5 squarePlusOne is &quot; + squarePlusOne.apply(5L)); // 26 
+        System.out.println(&quot; 5 plusOneSquare is  &quot; + plusOneSquare.apply(5L)); // 36
 
-        <span style="color:#75715e">// Recursive Lambda Expressions
-</span><span style="color:#75715e"></span>        IntFunction<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">&gt;</span> factorialCalc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IntFunction<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#a6e22e">@Override</span>
-            <span style="color:#66d9ef">public</span> Long <span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                    String msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Number must not be negative.&#34;</span><span style="color:#f92672">;</span>
-                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span>msg<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span>
-                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                    <span style="color:#66d9ef">return</span> 1L<span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-                    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+        // Predicate
+        Predicate&lt;Integer&gt; divisibleByThree = x -&gt; x % 3 == 0;
+        Predicate&lt;Integer&gt; divisibleByFive = x -&gt; x % 5 == 0;
+        Predicate&lt;Integer&gt; isNegative = x -&gt; x &lt; 0;
+        // Predicate with AND , OR , NOT
+        Predicate&lt;Integer&gt; divisibleByThreeAndFive = divisibleByThree.and(divisibleByFive);
+        Predicate&lt;Integer&gt; divisibleByThreeOrFive = divisibleByThree.or(divisibleByFive);
+        Predicate&lt;Integer&gt; isPositive = isNegative.negate();
 
-        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> 5<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">long</span> fact <span style="color:#f92672">=</span> factorialCalc<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>n<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Factorial of &#34;</span> <span style="color:#f92672">+</span> n <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; is &#34;</span> <span style="color:#f92672">+</span> fact<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// Factorial of 5 is 120   
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+        System.out.println(&quot; 15 is divisibleByThreeAndFive &quot; + divisibleByThreeAndFive.test(15));
+        System.out.println(&quot; 7 is divisibleByThreeAndFive &quot; + divisibleByThreeOrFive.test(7));
+        System.out.println(&quot; -1 is isPositive &quot; + isPositive.test(7));
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">engine</span><span style="color:#f92672">(</span>Calculator calculator<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 2<span style="color:#f92672">,</span> y <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> calculator<span style="color:#f92672">.</span><span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>x<span style="color:#f92672">,</span> y<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+        // static method reference 
+        Function&lt;Integer, String&gt; toBinary = x -&gt; Integer.toBinaryString(x);
+        System.out.println(toBinary.apply(19));
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">repeat</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> Runnable action<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
-            action<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+        // Using a method reference
+        Function&lt;Integer, String&gt; toBinary2 = Integer::toBinaryString;
+        System.out.println(toBinary2.apply(19));
 
-<span style="color:#a6e22e">@FunctionalInterface</span>
-<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Calculator</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> y<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
+        // static method lambda expression
+        BiFunction&lt;Integer, Integer, Integer&gt; sum = (a, b) -&gt; Integer.sum(a, b);
+        System.out.println(sum.apply(3, 4));
 
-<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
-    String firstName<span style="color:#f92672">;</span>
-    String lastName<span style="color:#f92672">;</span>
-    String fullName<span style="color:#f92672">;</span>
-    String title<span style="color:#f92672">;</span>
+        // Instance method
+        Supplier&lt;Person&gt; personSup = () -&gt; new Person();
+        Function&lt;String, Person&gt; personFunc = (x) -&gt; new Person(x);
 
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; Person() constructor called &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+        BiFunction&lt;String, String, Person&gt; personBiFunc = (x, y) -&gt; new Person(x, y);
+        // Consumer&lt;String&gt; personCon = (Person p) -&gt; p.setTitle;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>String fullName<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fullName</span> <span style="color:#f92672">=</span> fullName<span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; Person( fullName ) constructor called &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+        System.out.println(personSup.get());
+        // Person() constructor called
+        // name = Unknown, title = Unknown
+        System.out.println(personFunc.apply(&quot;John Doe&quot;));
+        // Person( fullName ) constructor called
+        // name = John Doe, title = Unknown
 
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>String firstName<span style="color:#f92672">,</span> String lastName<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> firstName<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> lastName<span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; Person(firstName, lastName ) constructor called &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTitle</span><span style="color:#f92672">(</span>String t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> t<span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; Person setTitle ( t ) called &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getFirstName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> firstName<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getFullName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> fullName <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span><span style="color:#f92672">(</span> firstName <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> firstName <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Unknown&#34;</span> <span style="color:#f92672">)</span><span style="color:#f92672">:</span> fullName<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;name = &#34;</span> <span style="color:#f92672">+</span> getFullName<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, title = &#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>title <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> title <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Unknown&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+        System.out.println(personBiFunc.apply(&quot;John&quot;, &quot;Doe&quot;));
+        // Person(firstName, lastName ) constructor called
+        // name = John, title = Unknown
 
 
-</code></pre></div>
+        // Recursive Lambda Expressions
+        IntFunction&lt;Long&gt; factorialCalc = new IntFunction&lt;Long&gt;() {
+            @Override
+            public Long apply(int n) {
+                if (n &lt; 0) {
+                    String msg = &quot;Number must not be negative.&quot;;
+                    throw new IllegalArgumentException(msg);
+                }
+                if (n == 0) {
+                    return 1L;
+                } else {
+                    return n * this.apply(n - 1);
+                }
+            }
+        };
+
+        int n = 5;
+        long fact = factorialCalc.apply(n);
+        System.out.println(&quot;Factorial of &quot; + n + &quot; is &quot; + fact);
+        // Factorial of 5 is 120   
+    }
+
+    private static int engine(Calculator calculator) {
+        int x = 2, y = 4;
+        return calculator.calculate(x, y);
+    }
+
+    public static void repeat(int n, Runnable action) {
+        for (int i = 0; i &lt; n; i++)
+            action.run();
+    }
+}
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int x, int y);
+}
+
+final class Person {
+    String firstName;
+    String lastName;
+    String fullName;
+    String title;
+
+    public Person() {
+        System.out.println(&quot; Person() constructor called &quot;);
+    }
+
+    public Person(String fullName) {
+        this.fullName = fullName;
+        System.out.println(&quot; Person( fullName ) constructor called &quot;);
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&quot; Person(firstName, lastName ) constructor called &quot;);
+    }
+
+    public void setTitle(String t) {
+        this.title = t;
+        System.out.println(&quot; Person setTitle ( t ) called &quot;);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFullName() {
+        return fullName == null ?( firstName != null ? firstName : &quot;Unknown&quot; ): fullName;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;name = &quot; + getFullName() + &quot;, title = &quot; + (title != null ? title : &quot;Unknown&quot;);
+    }
+}
+
+
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#lamda">Lamda</a>
-      <ul>
-        <li><a href="#lambda-best-practices">Lambda Best Practices</a></li>
-      </ul>
-    </li>
-    <li><a href="#use-interfaces">Use Interfaces</a></li>
-    <li><a href="#use-method-reference">Use Method Reference</a></li>
-    <li><a href="#define-lambdas-inline">Define Lambdas Inline</a></li>
-    <li><a href="#lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</a></li>
-    <li><a href="#dont-use-null">Don’t Use Null</a></li>
-    <li><a href="#dont-release-zalgo">Don’t Release Zalgo</a></li>
-    <li><a href="#build-complexity-from-simple-parts">Build Complexity from Simple Parts</a></li>
-    <li><a href="#use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</a>
-      <ul>
-        <li><a href="#common-functional-interfaces">Common functional Interfaces</a></li>
-        <li><a href="#method-reference">Method Reference</a></li>
-        <li><a href="#lambda-demo">Lambda Demo</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#lamda">Lamda</a>
+<ul>
+<li><a href="#lambda-best-practices">Lambda Best Practices</a></li>
+</ul></li>
+<li><a href="#use-interfaces">Use Interfaces</a></li>
+<li><a href="#use-method-reference">Use Method Reference</a></li>
+<li><a href="#define-lambdas-inline">Define Lambdas Inline</a></li>
+<li><a href="#lambdas-should-always-be-threadsafe">Lambdas Should Always Be Threadsafe</a></li>
+<li><a href="#don-t-use-null">Don’t Use Null</a></li>
+<li><a href="#don-t-release-zalgo">Don’t Release Zalgo</a></li>
+<li><a href="#build-complexity-from-simple-parts">Build Complexity from Simple Parts</a></li>
+<li><a href="#use-types-and-the-compiler-to-your-advantage">Use Types and the Compiler to Your Advantage</a>
+<ul>
+<li><a href="#common-functional-interfaces">Common functional Interfaces</a></li>
+<li><a href="#method-reference">Method Reference</a></li>
+<li><a href="#lambda-demo">Lambda Demo</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

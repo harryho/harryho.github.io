@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Raspberry Pi setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -980,8 +951,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -999,64 +968,93 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Raspberry Pi setup</h1>
-        <p>Prelude</p>
+        
+
+<p>Prelude</p>
+
 <blockquote>
 <p>*This note is mainly to record how to setup Raspberry Pi as file server.</p>
 </blockquote>
+
 <h2 id="prerequisites">Prerequisites</h2>
+
 <ul>
 <li>You have a Raspberry Pi with pre-installed raspbian SD card</li>
 <li>You are happy to get your hands dirty</li>
 <li>You have some basic computer concept.</li>
-<li>RPi is short for Raspberry Pi</li>
+<li>RPi is short for Raspberry Pi<br /></li>
 </ul>
-<h2 id="my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</h2>
-<p>I only have the RPi 1 model B with pre-installed raspbian SD card in place. It is quite outdated. If you don’t know the model of your RPi, please don’t worry it now. I will explain how to get the info later. I got this RPi as a gift 2 years ago. I left it in the garage and totally forgot it, until I cleaned up my garage a couple months ago. Actually I loved the old model with transparent plastic box more than the new one. I knew if I continued to leave it in the garage, it would be a rubbish soon, because it is not easy to find some equipment or software compatible with the old RPi. Luckily the lifespan of RPi is much longer than the mobile phone, but it still took me some effort to setup the wifi adapter.</p>
-<p>After 6-hour on and off, I got it up and run. Honestly I’m not a hardware guru, but I’m so happy not to throw this beautiful (my aesthetics is sort of quirky) box into the bin. I captured the home screen of Kodi, the media center and mobile control app.</p>
-<p>Home page of kodai</p>
-<p><img src="/img/kodi-tv-homepage.jpg" alt="KodiTVHomePage"></p>
-<p>Screenshot of kodi mobile app on my android phone.</p>
-<p><img src="/img/kodi-mobile-app.png" alt="kodi-mobile-app"></p>
-<h2 id="how-to-start">How to start</h2>
-<p>There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. There is a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don’t have a cable long enough to connect the RPi and switch.</p>
-<p>First thing first, I need to setup ssh server, and change the configuration to allow password login, also make it auto-start after reboot. To do so I just need monitor and keyboard.</p>
-<h3 id="connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</h3>
-<ul>
-<li>Reset pasword of <code>pi</code></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo passwd pi
-</code></pre></div><h3 id="ssh-server-setup">SSH server setup</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install openssh-server 
 
-<span style="color:#75715e">### backup default config</span> 
+<h2 id="my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</h2>
+
+<p>I only have the RPi 1 model B with pre-installed raspbian SD card in place. It is quite outdated. If you don’t know the model of your RPi, please don’t worry it now. I will explain how to get the info later. I got this RPi as a gift 2 years ago. I left it in the garage and totally forgot it, until I cleaned up my garage a couple months ago. Actually I loved the old model with transparent plastic box more than the new one. I knew if I continued to leave it in the garage, it would be a rubbish soon, because it is not easy to find some equipment or software compatible with the old RPi. Luckily the lifespan of RPi is much longer than the mobile phone, but it still took me some effort to setup the wifi adapter.</p>
+
+<p>After 6-hour on and off, I got it up and run. Honestly I’m not a hardware guru, but I’m so happy not to throw this beautiful (my aesthetics is sort of quirky) box into the bin. I captured the home screen of Kodi, the media center and mobile control app.</p>
+
+<p>Home page of kodai</p>
+
+<p><img src="/img/kodi-tv-homepage.jpg" alt="KodiTVHomePage" /></p>
+
+<p>Screenshot of kodi mobile app on my android phone.</p>
+
+<p><img src="/img/kodi-mobile-app.png" alt="kodi-mobile-app" /></p>
+
+<h2 id="how-to-start">How to start</h2>
+
+<p>There is no wifi or bluetooth support on this model. I have to connect this tiny box to my switch via cable all the time. There is a small problem, because my switch is far away from my laptop, monitor, keyboard, etc. and I don’t have a cable long enough to connect the RPi and switch.</p>
+
+<p>First thing first, I need to setup ssh server, and change the configuration to allow password login, also make it auto-start after reboot. To do so I just need monitor and keyboard.</p>
+
+<h3 id="connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</h3>
+
+<ul>
+<li><p>Reset pasword of <code>pi</code></p>
+
+<pre><code class="language-bash">sudo passwd pi
+</code></pre></li>
+</ul>
+
+<h3 id="ssh-server-setup">SSH server setup</h3>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+### backup default config 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
 sudo chmod a-w /etc/ssh/sshd_config.ori
 
-<span style="color:#75715e">### use any editor to update sshd_config</span> 
+### use any editor to update sshd_config 
 sudo nano /etc/ssh/sshd_config 
 
-<span style="color:#75715e">### uncomment  PasswordAuthentication yes to allow remote password login</span>
+### uncomment  PasswordAuthentication yes to allow remote password login
 
-<span style="color:#75715e">### setup ssh auto-start onboot</span>
+### setup ssh auto-start onboot
 sudo update-rc.d ssh defaults
 
-<span style="color:#75715e">### reboot</span>
+### reboot
 sudo reboot
 
-<span style="color:#75715e">### Check the ssh is running after reboot</span>
+### Check the ssh is running after reboot
 sudo service ssh status 
 
-<span style="color:#75715e">### You should see sth as below</span>
-<span style="color:#f92672">[</span>ok<span style="color:#f92672">]</span> sshd is running
+### You should see sth as below
+[ok] sshd is running
 
-<span style="color:#75715e">### Turn off Pi</span> 
+### Turn off Pi 
 sudo poweroff
-</code></pre></div><h3 id="connect-rpi-with-the-switch">Connect RPi with the switch</h3>
+</code></pre>
+
+<h3 id="connect-rpi-with-the-switch">Connect RPi with the switch</h3>
+
 <p>After all above is done, you can disconnect the monitor and keyboard, and connect the RPi with the switch (or modem). Once the power is on, you should be able to access the RPi from you PC or laptop.</p>
+
 <h3 id="find-the-ip-address">Find the ip address</h3>
+
 <p>Access the admin home page of my switch via browser. e.g. <code>http://192.168.0.1/index.html</code> (The actual URL depends on your switch or modem. You can find it on the label sticked on the back or bottom.)</p>
+
 <p>If you forget your password to login the admin page, you still can reset your swtich. If your modem is 3 in 1 model including switch, you need to make sure you have the <code>ID and Password</code> to access the internet before you reset it.</p>
+
 <p>After you login successfully, you just need to expand main menus find a menu called <code>DHCP</code>. e.g.</p>
+
 <pre><code>Basic Setup
 |__ ...
 Advanced Setup
@@ -1066,7 +1064,10 @@ Device
 |__ WAN
 |__ ...
 
-</code></pre><p>You will see table as blew.</p>
+</code></pre>
+
+<p>You will see table as blew.</p>
+
 <table>
 <thead>
 <tr>
@@ -1076,6 +1077,7 @@ Device
 <th>Expires In</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>PC-1</td>
@@ -1083,18 +1085,21 @@ Device
 <td>192.168.1.7</td>
 <td>x hours x mins</td>
 </tr>
+
 <tr>
 <td>PC-2</td>
 <td>c0:9f:05:ff:f9:14</td>
 <td>192.168.1.8</td>
 <td>x hours x mins</td>
 </tr>
+
 <tr>
 <td>Laptop-1</td>
 <td>b0:f6:05:e2:f5:99</td>
 <td>192.168.1.9</td>
 <td>x hours x mins</td>
 </tr>
+
 <tr>
 <td>raspberrypi</td>
 <td>a5:06:b2:07:c4:03</td>
@@ -1103,84 +1108,113 @@ Device
 </tr>
 </tbody>
 </table>
+
 <h3 id="access-rpi-with-your-laptop">Access RPi with your laptop</h3>
+
 <ul>
-<li>From Linux or Mac</li>
-</ul>
+<li><p>From Linux or Mac</p>
+
 <pre><code>ssh username@192.168.1.10
 
 ### type yes 
 ### type the password 
 
-</code></pre><ul>
-<li>For widnows</li>
+</code></pre></li>
+
+<li><p>For widnows</p></li>
 </ul>
+
 <p>You need to download a ssh tool. If you installed git before, you would have it on your computer. Otherwise, you need to install a SSH too. I recommend you to install <a href="http://www.putty.org/">Putty</a>. It is free and quite handy.</p>
+
 <p>After you install and launch Putty, you just need to type in the IP address <code>192.168.1.10</code> to the field <code>Host Name (or IP Address)</code>, then click button <code>Open</code>.</p>
+
 <pre><code>### type in pi as login user
 login as: pi
 
 ### type in password
 pi@192.168.1.10's password: 
 
-</code></pre><h2 id="access-rpi-via-vnc">Access RPi via VNC</h2>
+</code></pre>
+
+<h2 id="access-rpi-via-vnc">Access RPi via VNC</h2>
+
 <h3 id="setup-vnc-server-on-rpi">Setup VNC server on RPi</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+
+<pre><code class="language-bash">sudo apt-get update
 sudo apt-get install tightvncserver
-</code></pre></div><ul>
-<li>Launch VNC server and setup pasword</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/bin/tightvncserver
+</code></pre>
 
-<span style="color:#75715e">### Setup password for remote access.</span> 
-<span style="color:#75715e">### View only password is not necessary</span>
+<ul>
+<li><p>Launch VNC server and setup pasword</p>
 
-<span style="color:#75715e">### setup VNC server to auto start</span>
+<pre><code class="language-bash">/usr/bin/tightvncserver
+
+### Setup password for remote access. 
+### View only password is not necessary
+
+### setup VNC server to auto start
 sudo update_rc.d tightvncserver defaults
 
 sudo reboot
-</code></pre></div><h3 id="setup-vnc-client-on-your-pc">Setup VNC client on your PC</h3>
+</code></pre></li>
+</ul>
+
+<h3 id="setup-vnc-client-on-your-pc">Setup VNC client on your PC</h3>
+
 <p>Linux: Use <strong>xRDP</strong>
 I believe you can figure it out yourself, if you used Linux as desktop.</p>
+
 <p>Windows: Install <a href="https://www.realvnc.com/en/connect/download/viewer/">RealVNC Viewer</a> as VNC client</p>
+
 <ul>
 <li>Laucn the VNC Viewer and create a new connection</li>
 </ul>
-<p><img src="/img/raspberry-pi-vnc-new-client.jpg" alt="Screen-VNC-new-connection"></p>
+
+<p><img src="/img/raspberry-pi-vnc-new-client.jpg" alt="Screen-VNC-new-connection" /></p>
+
 <ul>
 <li>Type in the VNC password and you can login RPi with GUI</li>
 </ul>
-<p><img src="/img/raspberry-pi-vnc.jpg" alt="Screenshot-VNC"></p>
+
+<p><img src="/img/raspberry-pi-vnc.jpg" alt="Screenshot-VNC" /></p>
+
 <p>After all above is done, you have your RPi ready. You can choose what you want to build on it. Considering its CPU and RAM, it is not sufficient to be used as daily desktop PC, but it is still enough to work as a server. e.g. File Server, Web Server, Email Server, FTP server or Media Center.</p>
+
 <p>Now I want to make a file server and media center on it.</p>
+
 <h3 id="setup-file-server-via-samba">Setup File Server via Samba</h3>
+
 <ul>
 <li>Attach external storage to your RPi. The capacity of preinstalled SD card has only 8G space, so I attached my portal hard drives to RPi. You can attach the PC hard drive, USD or another SD card via adapter. It is really up to what you have in place.</li>
 </ul>
+
 <blockquote>
 <p>I want to make one as public share folder without authentication, and the other needs password to access.</p>
 </blockquote>
-<ul>
-<li>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install ntfs-3g
-</code></pre></div><ul>
-<li>Get drive info after attach two hard drives</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo lsblk
 
-<span style="color:#75715e">### You will see the tree structure of drives</span>
+<ul>
+<li><p>If your hard drive or USB is <code>ntfs</code>, the RPi might not recognize your device. You can simply install a package to make it work.</p>
+
+<pre><code class="language-bash">sudo apt-get install ntfs-3g
+</code></pre></li>
+
+<li><p>Get drive info after attach two hard drives</p>
+
+<pre><code class="language-bash">sudo lsblk
+
+### You will see the tree structure of drives
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda           8:0    <span style="color:#ae81ff">0</span>   1.8T  <span style="color:#ae81ff">0</span> disk
-└─sda1        8:1    <span style="color:#ae81ff">0</span>   1.8T  <span style="color:#ae81ff">0</span> part /media/mydrive1
-└─sda2        8:2    <span style="color:#ae81ff">0</span>   870G  <span style="color:#ae81ff">0</span> part /media/mydrive2
-mmcblk0     179:0    <span style="color:#ae81ff">0</span>   7.4G  <span style="color:#ae81ff">0</span> disk
-├─mmcblk0p1 179:1    <span style="color:#ae81ff">0</span>    56M  <span style="color:#ae81ff">0</span> part /boot
-└─mmcblk0p2 179:2    <span style="color:#ae81ff">0</span>   7.4G  <span style="color:#ae81ff">0</span> part /
-</code></pre></div><ul>
-<li>Remount the drives with proper name</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo su <span style="color:#75715e">### switch to root</span>
+sda           8:0    0   1.8T  0 disk
+└─sda1        8:1    0   1.8T  0 part /media/mydrive1
+└─sda2        8:2    0   870G  0 part /media/mydrive2
+mmcblk0     179:0    0   7.4G  0 disk
+├─mmcblk0p1 179:1    0    56M  0 part /boot
+└─mmcblk0p2 179:2    0   7.4G  0 part /
+</code></pre></li>
+
+<li><p>Remount the drives with proper name</p>
+
+<pre><code class="language-bash">sudo su ### switch to root
 cd /media
 umount mydrive1 
 umount mydrive2
@@ -1188,18 +1222,21 @@ umount mydrive2
 mkdir public private 
 mount -o rw /sda/sda1 public
 mount -o rw /sda/sda2 private
-</code></pre></div><ul>
-<li>Change <code>fstab</code> to support read and write permission</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/fstab
-</code></pre></div><ul>
-<li>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></li>
-</ul>
+</code></pre></li>
+
+<li><p>Change <code>fstab</code> to support read and write permission</p>
+
+<pre><code class="language-bash">sudo nano /etc/fstab
+</code></pre></li>
+
+<li><p>Add following lines to the end of file. The format type of my drives are <code>ntfs</code>. If you are not sure what file system type is, you can run this command to check <code>sudo lsblk -o name,fstype</code></p>
+
 <pre><code>/dev/sda1  /media/public       ntfs   nofail,noatime    0    0
 /dev/sda2  /media/private       ntfs   nofail,noatime    0    0
-</code></pre><ul>
-<li>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></li>
-</ul>
+</code></pre></li>
+
+<li><p>After you complete above changes, you will see the difference by typing the command <code>sudo lsblk</code></p>
+
 <pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 sda           8:0    0   1.8T  0 disk
 └─sda1        8:1    0   1.8T  0 part /media/public
@@ -1207,25 +1244,34 @@ sda           8:0    0   1.8T  0 disk
 mmcblk0     179:0    0   7.4G  0 disk
 ├─mmcblk0p1 179:1    0    56M  0 part /boot
 └─mmcblk0p2 179:2    0   7.4G  0 part /
-</code></pre><ul>
-<li>Install Samba</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+</code></pre></li>
+
+<li><p>Install Samba</p>
+
+<pre><code class="language-bash">sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install samba samba-common-bin
-</code></pre></div><ul>
-<li>Setup Samba configuration</li>
+</code></pre></li>
+
+<li><p>Setup Samba configuration</p></li>
 </ul>
+
 <h2 id="backup-original-config-and-update-the-config">Backup original config and update the config</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo su
+
+<pre><code class="language-bash">sudo su
 cd /etc/samba
 cp smb.conf smb.conf.ori
 
 nano smb.conf
-</code></pre></div><h3 id="change-the-line-below">Change the line below:</h3>
+</code></pre>
+
+<h3 id="change-the-line-below">Change the line below:</h3>
+
 <pre><code>* `wins support = no` to `wins support = yes`
 </code></pre>
+
 <h3 id="add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</h3>
+
 <pre><code>[public]
 comment = Share Folder
 path = /media/public
@@ -1245,31 +1291,45 @@ writable = yes
 browsable = yes
 read only = no
 guest ok = yes
-</code></pre><h3 id="add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo useradd smbu
+</code></pre>
+
+<h3 id="add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</h3>
+
+<pre><code class="language-bash">sudo useradd smbu
 sudo passwd smbu
 sudo usermod -a -G root smbu
-sudo smbpasswd smbu <span style="color:#75715e">## setup pasword for remote access</span>
-</code></pre></div><h2 id="access-the-network-folder">Access the network folder</h2>
+sudo smbpasswd smbu ## setup pasword for remote access
+</code></pre>
+
+<h2 id="access-the-network-folder">Access the network folder</h2>
+
 <h3 id="linx">Linx</h3>
+
 <p>I have no any problem to access the both netowrk drives via Linux.</p>
+
 <h3 id="windows">Windows</h3>
+
 <p>It took me some time to make it work for me. There are some bullet points, which may help you for trouble shooting.</p>
+
 <ul>
 <li>Please use <code>WORKGROUP</code> instead of domain.</li>
 <li>Please keep name of workgroup as <code>WORKGROUP</code></li>
-<li>Turn on the network discovery  <br>
+<li>Turn on the network discovery<br />
 <code>Control Panel &gt; All Control Panel Items&gt; Network and Sharing Cente &gt; Advanced sharing settings</code></li>
 <li>Reboot the PC or laptop</li>
 </ul>
+
 <h2 id="get-accurate-version-of-rpi-model">Get accurate version of RPi model</h2>
+
 <ul>
-<li>Get the revision code</li>
+<li><p>Get the revision code</p>
+
+<pre><code class="language-bash">cat /etc/cpuinfo
+</code></pre></li>
+
+<li><p>Check the table below to find your model</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /etc/cpuinfo
-</code></pre></div><ul>
-<li>Check the table below to find your model</li>
-</ul>
+
 <table>
 <thead>
 <tr>
@@ -1278,62 +1338,74 @@ sudo smbpasswd smbu <span style="color:#75715e">## setup pasword for remote acce
 <th>HARDWARE REVISION CODE FROM CPUINFO</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>Model B Revision 1.0</td>
 <td>256MB</td>
 <td>0002</td>
 </tr>
+
 <tr>
 <td>Model B Revision 1.0 + ECN0001 (no fuses, D14 removed)</td>
 <td>256MB</td>
 <td>0003</td>
 </tr>
+
 <tr>
 <td>Model B Revision 2.0 Mounting holes</td>
 <td>256MB</td>
 <td>0004 0005 0006</td>
 </tr>
+
 <tr>
 <td>Model A Mounting holes</td>
 <td>256MB</td>
 <td>0007,0008,0009</td>
 </tr>
+
 <tr>
 <td>Model B Revision 2.0 Mounting holes</td>
 <td>512MB</td>
 <td>000d 000e 000f</td>
 </tr>
+
 <tr>
 <td>Model B+</td>
 <td>512MB</td>
 <td>0010</td>
 </tr>
+
 <tr>
 <td>Compute Module</td>
 <td>512MB</td>
 <td>0011</td>
 </tr>
+
 <tr>
 <td>Model A+</td>
 <td>256MB</td>
 <td>0012</td>
 </tr>
+
 <tr>
 <td>Pi 2 Model B</td>
 <td>1GB</td>
 <td>a01041 (Sony, UK) a21041 (Embest, China)</td>
 </tr>
+
 <tr>
 <td>PiZero</td>
 <td>512MB</td>
 <td>900092(no camera connector) 900093(camera connector)</td>
 </tr>
+
 <tr>
 <td>Pi 3 Model B</td>
 <td>1GB</td>
 <td>a02082 (Sony, UK) a22082 (Embest, China)</td>
 </tr>
+
 <tr>
 <td>PiZero W</td>
 <td>512MB</td>
@@ -1341,12 +1413,19 @@ sudo smbpasswd smbu <span style="color:#75715e">## setup pasword for remote acce
 </tr>
 </tbody>
 </table>
+
 <h2 id="setup-wifi-adapter">Setup Wifi Adapter</h2>
+
 <p>Wifi adapter is not necessary for media centre, but it would save some effort to move your RPi around in your place, especially you want to connect your RPi with different devices from time to time.</p>
+
 <p>I bought a D-Link adapter, which is dwa-131 with usb 2.0. This is the oldest one I can find in the store. If you are going to buy wifi adapter for old Unix-like system, please don’t buy the latest model. You will find you are trapped into incompatible issue between wifi drive and Linux kernel. You may have to upgrade the kernel or rebuild the drive.</p>
-<p>As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi adapter drive. If you have the RPi 2⁄3, it would be much more easier. My RPi 1 model B comes with kernel 4.1.18*. I cannot find the source code of wifi drive which supports this old kernel today, and I don’t want to upgrade and rebuild the kernel.</p>
-<p>Finally, I found a post on RPi's forum which solved my problem. Link of <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;t=103989&amp;p=1048709&amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709">MrEngman's post</a>. He updated on April aobut the dropbox issue and alternative solution.</p>
+
+<p>As you know, there is always some hiccup to find the correct wifi drive to support your portable wifi adapter. It took me a while to find the proper way to install the wifi adapter drive. If you have the RPi <sup>2</sup>&frasl;<sub>3</sub>, it would be much more easier. My RPi 1 model B comes with kernel 4.1.18*. I cannot find the source code of wifi drive which supports this old kernel today, and I don’t want to upgrade and rebuild the kernel.</p>
+
+<p>Finally, I found a post on RPi&rsquo;s forum which solved my problem. Link of <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=45&amp;t=103989&amp;p=1048709&amp;hilit=Realtek+RTL8192EU+ID+0BDA%3A818B+WiFi+drivers+for+Raspbian#p1048709">MrEngman&rsquo;s post</a>. He updated on April aobut the dropbox issue and alternative solution.</p>
+
 <p>Download and install the new version of the script with commands</p>
+
 <pre><code>sudo wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
 sudo chmod +x /usr/bin/install-wifi
 
@@ -1359,62 +1438,69 @@ sudo install-wifi
 
 ### Check the wifi interface after installation
 ifconfig -a
-</code></pre><p>Setup Wifi password. You can simply do it via GUI application or via command lines if you like. Please check out the official document as below.</p>
+</code></pre>
+
+<p>Setup Wifi password. You can simply do it via GUI application or via command lines if you like. Please check out the official document as below.</p>
+
 <p><a href="https://www.raspberrypi.org/documentation/configuration/wireless/">https://www.raspberrypi.org/documentation/configuration/wireless/</a></p>
+
 <h2 id="install-kodi-as-media-centre">Install Kodi as media centre</h2>
-<p>If you have NOOBS in the place, then you have everything you need. Because I don't have it, I follow the official instruction to install kodi. It is a simple way to convert your RPi into a media centre without scratching your head too much.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#75715e">### Install kodi</span>
+
+<p>If you have NOOBS in the place, then you have everything you need. Because I don&rsquo;t have it, I follow the official instruction to install kodi. It is a simple way to convert your RPi into a media centre without scratching your head too much.</p>
+
+<pre><code class="language-bash">
+### Install kodi
 sudo apt-get update
 sudo apt-get install kodi
 
 
-<span style="color:#75715e">### Config kodi</span>
+### Config kodi
 sudo nano /etc/default/kodi
-ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+ENABLED=1
 
-</code></pre></div><p>Reboot the RPi, before you reboot it please make sure your TV’s HDMI has plugged into RPi. After a couple minutes, you will see the home page as I posted above. Don’t forget to install remote control app on your mobile. I pretty sure you find some remote control app for Kodi on your phone. Finally, you can enjoy your home media center.</p>
+</code></pre>
+
+<p>Reboot the RPi, before you reboot it please make sure your TV’s HDMI has plugged into RPi. After a couple minutes, you will see the home page as I posted above. Don’t forget to install remote control app on your mobile. I pretty sure you find some remote control app for Kodi on your phone. Finally, you can enjoy your home media center.</p>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</a></li>
-    <li><a href="#how-to-start">How to start</a>
-      <ul>
-        <li><a href="#connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</a></li>
-        <li><a href="#ssh-server-setup">SSH server setup</a></li>
-        <li><a href="#connect-rpi-with-the-switch">Connect RPi with the switch</a></li>
-        <li><a href="#find-the-ip-address">Find the ip address</a></li>
-        <li><a href="#access-rpi-with-your-laptop">Access RPi with your laptop</a></li>
-      </ul>
-    </li>
-    <li><a href="#access-rpi-via-vnc">Access RPi via VNC</a>
-      <ul>
-        <li><a href="#setup-vnc-server-on-rpi">Setup VNC server on RPi</a></li>
-        <li><a href="#setup-vnc-client-on-your-pc">Setup VNC client on your PC</a></li>
-        <li><a href="#setup-file-server-via-samba">Setup File Server via Samba</a></li>
-      </ul>
-    </li>
-    <li><a href="#backup-original-config-and-update-the-config">Backup original config and update the config</a>
-      <ul>
-        <li><a href="#change-the-line-below">Change the line below:</a></li>
-        <li><a href="#add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</a></li>
-        <li><a href="#add-new-user-smbu-for-remote-access-in-case-you">Add new user smbu for remote access. In case you</a></li>
-      </ul>
-    </li>
-    <li><a href="#access-the-network-folder">Access the network folder</a>
-      <ul>
-        <li><a href="#linx">Linx</a></li>
-        <li><a href="#windows">Windows</a></li>
-      </ul>
-    </li>
-    <li><a href="#get-accurate-version-of-rpi-model">Get accurate version of RPi model</a></li>
-    <li><a href="#setup-wifi-adapter">Setup Wifi Adapter</a></li>
-    <li><a href="#install-kodi-as-media-centre">Install Kodi as media centre</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#my-raspberry-pi-is-a-bit-old">My Raspberry Pi is a bit old</a></li>
+<li><a href="#how-to-start">How to start</a>
+<ul>
+<li><a href="#connect-the-rpi-with-monitor-and-keyboard">Connect the RPi with monitor and keyboard</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a></li>
+<li><a href="#connect-rpi-with-the-switch">Connect RPi with the switch</a></li>
+<li><a href="#find-the-ip-address">Find the ip address</a></li>
+<li><a href="#access-rpi-with-your-laptop">Access RPi with your laptop</a></li>
+</ul></li>
+<li><a href="#access-rpi-via-vnc">Access RPi via VNC</a>
+<ul>
+<li><a href="#setup-vnc-server-on-rpi">Setup VNC server on RPi</a></li>
+<li><a href="#setup-vnc-client-on-your-pc">Setup VNC client on your PC</a></li>
+<li><a href="#setup-file-server-via-samba">Setup File Server via Samba</a></li>
+</ul></li>
+<li><a href="#backup-original-config-and-update-the-config">Backup original config and update the config</a>
+<ul>
+<li><a href="#change-the-line-below">Change the line below:</a></li>
+<li><a href="#add-follow-lines-to-end-of-the-file">Add follow lines to end of the file</a></li>
+<li><a href="#add-new-user-smbu-for-remote-access-in-case-you">Add new user <code>smbu</code> for remote access. In case you</a></li>
+</ul></li>
+<li><a href="#access-the-network-folder">Access the network folder</a>
+<ul>
+<li><a href="#linx">Linx</a></li>
+<li><a href="#windows">Windows</a></li>
+</ul></li>
+<li><a href="#get-accurate-version-of-rpi-model">Get accurate version of RPi model</a></li>
+<li><a href="#setup-wifi-adapter">Setup Wifi Adapter</a></li>
+<li><a href="#install-kodi-as-media-centre">Install Kodi as media centre</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

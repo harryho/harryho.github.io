@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>AWS Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -975,8 +946,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -994,9 +963,14 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>AWS Note - 2</h1>
-        <h3 id="vpc">VPC</h3>
-<p>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS.</p>
+        
+
+<h3 id="vpc">VPC</h3>
+
+<p>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&rsquo;ve defined. This virtual network closely resembles a traditional network that you&rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.</p>
+
 <h4 id="key-concepts">Key concepts</h4>
+
 <ul>
 <li>A virtual private cloud (VPC) is a virtual network dedicated to your AWS account.</li>
 <li>A subnet is a range of IP addresses in your VPC.</li>
@@ -1004,21 +978,33 @@
 <li>An internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet. It therefore imposes no availability risks or bandwidth constraints on your network traffic.</li>
 <li>A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. Instances in your VPC do not require public IP addresses to communicate with resources in the service. Traffic between your VPC and the other service does not leave the Amazon network.</li>
 </ul>
+
 <h3 id="subnet">Subnet</h3>
+
 <p>When you create a VPC, you must specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC.</p>
+
 <h4 id="public-subnet">Public subnet</h4>
-<p>A subnet's traffic is routed to an internet gateway.</p>
+
+<p>A subnet&rsquo;s traffic is routed to an internet gateway.</p>
+
 <h4 id="private-subnet">Private subnet</h4>
-<p>A subnet doesn't have a route an internet gateway.</p>
+
+<p>A subnet doesn&rsquo;t have a route an internet gateway.</p>
+
 <h4 id="vpn-only-subnet">VPN-only subnet</h4>
+
 <p>A subnet has traffic routed to a virtual private gateway for a Site-to-Site VPN connection.</p>
+
 <h4 id="sizing-for-ipv4">Sizing for IPv4</h4>
+
 <ul>
-<li>10.0.0.0 - 10.255.255.255 (10/8 prefix)</li>
-<li>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</li>
-<li>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</li>
+<li>10.0.0.0 - 10.255.255.255 (10 / 8 prefix)</li>
+<li>172.16.0.0 - 172.31.255.255 (172.16 / 12 prefix)</li>
+<li>192.168.0.0 - 192.168.255.255 (192.168 / 16 prefix)</li>
 </ul>
+
 <h4 id="basic-demo">Basic demo</h4>
+
 <link href="/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
 <script defer src="/mermaid/mermaid.js">mermaid.initialize({startOnLoad:true});</script>
 <div class="mermaid" align="center" >
@@ -1041,6 +1027,7 @@ graph RL
         subgraph VPN_Subnet
              VPNIPv4(10.0.3.0/24)
              EC2_E
+             EC2_F
         end
         subgraph Public_Subnet
             PubIPv4(10.0.1.0/24)
@@ -1063,14 +1050,26 @@ graph RL
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#vpc">VPC</a></li>
-        <li><a href="#subnet">Subnet</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#vpc">VPC</a>
+<ul>
+<li><a href="#key-concepts">Key concepts</a></li>
+</ul></li>
+<li><a href="#subnet">Subnet</a>
+<ul>
+<li><a href="#public-subnet">Public subnet</a></li>
+<li><a href="#private-subnet">Private subnet</a></li>
+<li><a href="#vpn-only-subnet">VPN-only subnet</a></li>
+<li><a href="#sizing-for-ipv4">Sizing for IPv4</a></li>
+<li><a href="#basic-demo">Basic demo</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

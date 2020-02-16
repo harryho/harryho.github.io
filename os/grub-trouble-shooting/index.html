@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Grub Trouble Shooting :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -980,8 +951,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -999,74 +968,85 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Grub Trouble Shooting</h1>
-        <h2 id="update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</h2>
-<p><strong>Change BIOS</strong></p>
-<ul>
-<li>Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).</li>
-<li>Some PC's BIOS has <code>BOOT</code> tab option, open the <code>BOOT</code> tab, you will find the <code>OS Boot Manager</code>. It is the simplest way to fix the issue. If your PC's BIOS has no such setting feature, you need to check the next section.</li>
-</ul>
-<p><strong>Change the Windows Boot Manager</strong></p>
-<ul>
-<li>Login windows with common prompt</li>
-<li>Restart windows, meanwhile press shift key</li>
-<li>In the options page, choose change to other options</li>
-<li>Troubleshooting</li>
-<li>Command Prompt</li>
-<li>Login in Windows with Common prompt</li>
-<li>Use BCDEdit to change windows boot manager. Change to boot ubuntu at first</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">REM backup
-bcdedit /enum &gt; X:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\p</span>ublic<span style="color:#ae81ff">\d</span>ocuments<span style="color:#ae81ff">\b</span>cdedit.txt
+        
+
+<h2 id="update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</h2>
+
+<p><strong>Change BIOS</strong>
+* Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).
+* Some PC&rsquo;s BIOS has <code>BOOT</code> tab option, open the <code>BOOT</code> tab, you will find the <code>OS Boot Manager</code>. It is the simplest way to fix the issue. If your PC&rsquo;s BIOS has no such setting feature, you need to check the next section.</p>
+
+<p><strong>Change the Windows Boot Manager</strong>
+* Login windows with common prompt
+* Restart windows, meanwhile press shift key
+* In the options page, choose change to other options
+* Troubleshooting
+* Command Prompt
+* Login in Windows with Common prompt
+* Use BCDEdit to change windows boot manager. Change to boot ubuntu at first</p>
+
+<pre><code class="language-bash">REM backup
+bcdedit /enum &gt; X:\Users\public\documents\bcdedit.txt
 REM change the bootmgr 
-bcdedit /set <span style="color:#f92672">{</span>bootmgr<span style="color:#f92672">}</span> path <span style="color:#ae81ff">\E</span>FI<span style="color:#ae81ff">\u</span>buntu<span style="color:#ae81ff">\g</span>rubx64.efi
-</code></pre></div><ul>
-<li>After you reboot system, you will see the Grub 2 menu as follow.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">                             GNU GRUB version 2.0
+bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
+</code></pre>
+
+<ul>
+<li><p>After you reboot system, you will see the Grub 2 menu as follow.</p>
+
+<pre><code class="language-bash">                         GNU GRUB version 2.0
 ---------------------------------------------------------------------------------- 
 | Ubuntu 
-| Advanced options <span style="color:#66d9ef">for</span> Unbuntu
-| Windows Boot Manager <span style="color:#f92672">(</span> on /dev/sda2 <span style="color:#f92672">)</span>
-| Fedora <span style="color:#ae81ff">20</span>
-| Advanced options <span style="color:#66d9ef">for</span> Fedora <span style="color:#ae81ff">20</span>
+| Advanced options for Unbuntu
+| Windows Boot Manager ( on /dev/sda2 )
+| Fedora 20
+| Advanced options for Fedora 20
 | OpenSuse 
-| Advanced options <span style="color:#66d9ef">for</span> OpenSuse
+| Advanced options for OpenSuse
 | ....
 
-</code></pre></div><h2 id="boot-from-grub-command-promp">Boot from Grub command promp</h2>
-<ul>
-<li>
-<p>Use <!-- raw HTML omitted --> to navigate to grub command promp from Grub menu</p>
-</li>
-<li>
-<p>List all available dirves by typing <code>ls</code>. After that, you willl see a couple drives. If you have multiple hard drive, USB or SD Card pluged in.</p>
-</li>
+</code></pre></li>
 </ul>
+
+<h2 id="boot-from-grub-command-promp">Boot from Grub command promp</h2>
+
+<ul>
+<li><p>Use <ESC> to navigate to grub command promp from Grub menu</p></li>
+
+<li><p>List all available dirves by typing <code>ls</code>. After that, you willl see a couple drives. If you have multiple hard drive, USB or SD Card pluged in.</p>
+
 <pre><code>(hd0) (hd0,gpt4) (hd0, gpt3) (hd0,gpt2) (hd0, gpt1)  (hd1) (hd1,msdos2)(hd1, msdos2)(hd2)
 
 ## Get more detail of drives
 ls -l
-</code></pre><ul>
-<li>From the above detail information, you might find the hard drive of your PC. Continue to use <code>ls</code> to locate the actual boot file to confirm the drive contains the boot file.</li>
-</ul>
+</code></pre></li>
+
+<li><p>From the above detail information, you might find the hard drive of your PC. Continue to use <code>ls</code> to locate the actual boot file to confirm the drive contains the boot file.</p>
+
 <pre><code>## Assume the (hd0,gpt2) contains the linux kernal boot file. 
 ls -a (hd0,gpt2)/
-</code></pre><ul>
-<li>Set root drive</li>
-</ul>
+</code></pre></li>
+
+<li><p>Set root drive</p>
+
 <pre><code>set root=(hd0,gpt2)
 linux (hd0,gpt2)/boot/vmlinuz-linux-4.4.x-xxx-generic
 initrd (hd0,gpt2)/boot/initrd.img-linux-4.4.x-xxx-generic
 normal
-</code></pre>
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</a></li>
-    <li><a href="#boot-from-grub-command-promp">Boot from Grub command promp</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#update-grub-menu-for-dual-os-boot">Update Grub Menu for dual OS boot</a></li>
+<li><a href="#boot-from-grub-command-promp">Boot from Grub command promp</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

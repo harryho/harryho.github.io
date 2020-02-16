@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Inheritance &amp; Polymorphism :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1007,8 +978,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1026,12 +995,15 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Inheritance &amp; Polymorphism</h1>
-        <h2 id="inheritance--polymorphism">Inheritance &amp; Polymorphism</h2>
+        
+
+<h2 id="inheritance-polymorphism">Inheritance &amp; Polymorphism</h2>
+
 <ul>
-<li>Specify single inheritance by putting a base class in parentheses after defining a class's name</li>
+<li>Specify single inheritance by putting a base class in parentheses after defining a class&rsquo;s name</li>
 <li>Subclasses have all of the methods of their base class</li>
-<li>It's often best to explicitly call a base class initializer from a subclass's initializer</li>
-<li>If a class with a single base class doesn't define an initializer, the base class's initializer will be called automatically on construction</li>
+<li>It&rsquo;s often best to explicitly call a base class initializer from a subclass&rsquo;s initializer</li>
+<li>If a class with a single base class doesn&rsquo;t define an initializer, the base class&rsquo;s initializer will be called automatically on construction</li>
 <li>Python treats <code>__init__()</code> like any other method</li>
 <li>Base class <code>__init__()</code> is not called if overridden</li>
 <li>Use <code>super()</code> to call base class <code>__init__()</code></li>
@@ -1041,7 +1013,7 @@
 <li>Checking for specific types is rare in Python and is sometimes regarded as bad design</li>
 <li><code>isinstance()</code> determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument</li>
 <li>Multiple inheritance means having more than one direct base class</li>
-<li>You declare multiple base classes with a comma-separated list of class names in parentheses after a class's name in a class definition</li>
+<li>You declare multiple base classes with a comma-separated list of class names in parentheses after a class&rsquo;s name in a class definition</li>
 <li>A class can have as many base classes as you want</li>
 <li>Python uses a well-defined &ldquo;method resolution order&rdquo; to resolve methods at runtime</li>
 <li>If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction</li>
@@ -1052,7 +1024,7 @@
 <li>MRO is short for Method Resolution Order</li>
 <li>MRO is stored as a tuple of types in the <code>__mro__</code> attribute of a class</li>
 <li>The <code>mro()</code> method on type objects returns the contents of <code>__mro__</code> as a list</li>
-<li>To resolve a method, Python uses the first entry in a class's MRO which has the requested method</li>
+<li>To resolve a method, Python uses the first entry in a class&rsquo;s MRO which has the requested method</li>
 <li>MRO is dependent on base class declaration order</li>
 <li>MRO is calculated by Python using the C3 algorithm</li>
 <li>MRO honors base-class ordering from class definitions</li>
@@ -1067,161 +1039,166 @@
 <li>Calling <code>super()</code> with a base-class and derived-class argument returns a proxy bound to a class</li>
 <li>Calling <code>super()</code> with a class and an instance of that class returns a proxy bound to an instance</li>
 <li>A <code>super()</code> proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution</li>
-<li>Since class-bound proxies aren't bound to an instance, you can’t directly call instance methods that they resolve for you</li>
+<li>Since class-bound proxies aren&rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you</li>
 <li>However, classmethods resolved by class-bound proxies can be called directly</li>
 <li>Python will raise a TypeError if the second argument is not a subclass or instance of the first argument</li>
 <li>Inappropriate use of <code>super()</code> can violate some design constraints * Calling <code>super()</code> with no arguments inside an instance method produces an instance-bound proxy</li>
 <li>Calling <code>super()</code> with no arguments inside a classmethod produces a class-bound proxy</li>
-<li>In both cases, the no-argument form of <code>super()</code> is the same as calling <code>super()</code> with the method's class as the first argument and the method's first argument as the second</li>
-<li>Since <code>super()</code> works on MROs and not just a class's base classes, class can be designed to cooperate without prior knowledge of one another</li>
-<li>The class object is at the core of Python's object model</li>
+<li>In both cases, the no-argument form of <code>super()</code> is the same as calling <code>super()</code> with the method&rsquo;s class as the first argument and the method&rsquo;s first argument as the second</li>
+<li>Since <code>super()</code> works on MROs and not just a class&rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another</li>
+<li>The class object is at the core of Python&rsquo;s object model</li>
 <li>object is the ultimate base class for all other classes in Python</li>
-<li>If you don't specify a base class for a class, Python automatically uses object as the base</li>
-<li>Because object is in every class's inheritance graph, it shows up in every MRO.</li>
-<li>object provides hooks for Python's comparison operators</li>
+<li>If you don&rsquo;t specify a base class for a class, Python automatically uses object as the base</li>
+<li>Because object is in every class&rsquo;s inheritance graph, it shows up in every MRO.</li>
+<li>object provides hooks for Python&rsquo;s comparison operators</li>
 <li>object provides default <code>__repr__()</code> and <code>__str__()</code> implementations</li>
 <li>object implements the core attribute lookup and management functionality in Python</li>
 <li>Inheritance in Python is best used as a way to share implementation</li>
 </ul>
+
 <h3 id="explanation-with-example">Explanation with example</h3>
+
 <h4 id="example-code">Example code</h4>
+
 <ul>
-<li>
-<p>The code below demonstrates the weird <code>super()</code> in Python</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint <span style="color:#66d9ef">as</span> pp
+<li><p>The code below demonstrates the weird <code>super()</code> in Python</p>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Parent</span>(object):
-    name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Parent</span><span style="color:#e6db74">&#39;</span>
+<pre><code class="language-python">from pprint import pprint as pp
 
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_otherthing</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">This is from Parent.  {} do_otherthing</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-        <span style="color:#75715e">## print(&#39;This is from Parent. do_otherthing {}&#39;.format(self.name))</span>
+class Parent(object):
+    name = 'Parent'
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">This is from Parent. The name is {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-  
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Child</span>(Parent):
-    name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Child</span><span style="color:#e6db74">&#39;</span>
+    @classmethod
+    def do_otherthing(self):
+        print('This is from Parent.  {} do_otherthing'.format(self.name))
+        ## print('This is from Parent. do_otherthing {}'.format(self.name))
 
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_otherthing</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">This is from Child. {} do_otherthing</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-        <span style="color:#75715e">## print(&#39;This is from Child. do_otherthing {}&#39;.format(self.name))</span>
+    def do_something(self):
+        print('This is from Parent. The name is {}'.format(self.name))
+    
+class Child(Parent):
+    name = 'Child'
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">This is from Child. The name is {} </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-  
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OtherChild</span>(Parent):
-    name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">OtherChild</span><span style="color:#e6db74">&#39;</span>
-  
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">This is from OtherChild. The name is {} </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name)) 
-  
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OtherOtherChild</span>(Parent):
-    name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">OtherOtherChild</span><span style="color:#e6db74">&#39;</span>
-  
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">This is from OtherOtherChild. The name is {} </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-  
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GrandChild</span>(Child, OtherChild, OtherOtherChild):
-    name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">GrandChild</span><span style="color:#e6db74">&#39;</span>
+    @classmethod
+    def do_otherthing(self):
+        print('This is from Child. {} do_otherthing'.format(self.name))
+        ## print('This is from Child. do_otherthing {}'.format(self.name))
 
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_otherthing</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">This is from GrandChild. {} do_otherthing</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
+    def do_something(self):
+        print(&quot;This is from Child. The name is {} &quot;.format(self.name))
+    
+class OtherChild(Parent):
+    name = 'OtherChild'
+    
+    def do_something(self):
+        print(&quot;This is from OtherChild. The name is {} &quot;.format(self.name)) 
+    
+class OtherOtherChild(Parent):
+    name = 'OtherOtherChild'
+    
+    def do_something(self):
+        print(&quot;This is from OtherOtherChild. The name is {} &quot;.format(self.name))
+    
+class GrandChild(Child, OtherChild, OtherOtherChild):
+    name = 'GrandChild'
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">This is from GrandChild. The name is {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
+    @classmethod
+    def do_otherthing(self):
+        print('This is from GrandChild. {} do_otherthing'.format(self.name))
 
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    pp(Child<span style="color:#f92672">.</span>__mro__)
-    pp(GrandChild<span style="color:#f92672">.</span>__mro__)
-
-    c <span style="color:#f92672">=</span> Child()
-    c<span style="color:#f92672">.</span>do_something()
-    gc <span style="color:#f92672">=</span> GrandChild()
-    gc<span style="color:#f92672">.</span>do_something()
-
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Class bound super()</span><span style="color:#e6db74">&#39;</span>)
-    super(Child, Child)<span style="color:#f92672">.</span>do_otherthing()
-    super(Child, GrandChild)<span style="color:#f92672">.</span>do_otherthing()
-    super(GrandChild, GrandChild)<span style="color:#f92672">.</span>do_otherthing()
-
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Instance bound super()</span><span style="color:#e6db74">&#39;</span>)
-    super(Child, gc)<span style="color:#f92672">.</span>do_something()
-    super(OtherChild, gc)<span style="color:#f92672">.</span>do_something()
-    super(GrandChild , gc)<span style="color:#f92672">.</span>do_something()
-
-<span style="color:#75715e">### test result </span>
-
-<span style="color:#75715e">#(&lt;class &#39;__main__.Child&#39;&gt;, </span>
-<span style="color:#75715e">#&lt;class &#39;__main__.Parent&#39;&gt;, </span>
-<span style="color:#75715e">#&lt;class &#39;object&#39;&gt;)</span>
-<span style="color:#75715e">#(&lt;class &#39;__main__.GrandChild&#39;&gt;,</span>
-<span style="color:#75715e">## &lt;class &#39;__main__.Child&#39;&gt;,</span>
-<span style="color:#75715e">## &lt;class &#39;__main__.OtherChild&#39;&gt;,</span>
-<span style="color:#75715e">## &lt;class &#39;__main__.OtherOtherChild&#39;&gt;,</span>
-<span style="color:#75715e">## &lt;class &#39;__main__.Parent&#39;&gt;,</span>
-<span style="color:#75715e">## &lt;class &#39;object&#39;&gt;)</span>
-<span style="color:#75715e">## This is from Child. The name is Child </span>
-<span style="color:#75715e">## This is from GrandChild. The name is GrandChild</span>
-<span style="color:#75715e">## Class bound super()</span>
-<span style="color:#75715e">## This is from Parent.  Child do_otherthing</span>
-<span style="color:#75715e">## This is from Parent.  GrandChild do_otherthing</span>
-<span style="color:#75715e">## This is from Child. GrandChild do_otherthing</span>
-<span style="color:#75715e">## Instance bound super()</span>
-<span style="color:#75715e">## This is from OtherChild. The name is GrandChild </span>
-<span style="color:#75715e">## This is from OtherOtherChild. The name is GrandChild </span>
-<span style="color:#75715e">## This is from Child. The name is GrandChild </span>
+    def do_something(self):
+        print(&quot;This is from GrandChild. The name is {}&quot;.format(self.name))
 
 
-<span style="color:#75715e">## Multi-inheritance in Python is very different from </span>
-<span style="color:#75715e">## other OO language like C++, C#, Java</span>
-<span style="color:#75715e">## Above result make me surprised a the first time, </span>
-<span style="color:#75715e">## but after I check the MRO then I can understand </span>
-<span style="color:#75715e">## why many veterans suggest to avoid multi-inheritance. </span>
-<span style="color:#75715e">## Its `super` &#34;Magic&#34; really confuses many people.</span>
+if __name__ == &quot;__main__&quot;:
+    pp(Child.__mro__)
+    pp(GrandChild.__mro__)
 
-</code></pre></div></li>
+    c = Child()
+    c.do_something()
+    gc = GrandChild()
+    gc.do_something()
+
+    print('Class bound super()')
+    super(Child, Child).do_otherthing()
+    super(Child, GrandChild).do_otherthing()
+    super(GrandChild, GrandChild).do_otherthing()
+
+    print('Instance bound super()')
+    super(Child, gc).do_something()
+    super(OtherChild, gc).do_something()
+    super(GrandChild , gc).do_something()
+
+### test result 
+
+#(&lt;class '__main__.Child'&gt;, 
+#&lt;class '__main__.Parent'&gt;, 
+#&lt;class 'object'&gt;)
+#(&lt;class '__main__.GrandChild'&gt;,
+## &lt;class '__main__.Child'&gt;,
+## &lt;class '__main__.OtherChild'&gt;,
+## &lt;class '__main__.OtherOtherChild'&gt;,
+## &lt;class '__main__.Parent'&gt;,
+## &lt;class 'object'&gt;)
+## This is from Child. The name is Child 
+## This is from GrandChild. The name is GrandChild
+## Class bound super()
+## This is from Parent.  Child do_otherthing
+## This is from Parent.  GrandChild do_otherthing
+## This is from Child. GrandChild do_otherthing
+## Instance bound super()
+## This is from OtherChild. The name is GrandChild 
+## This is from OtherOtherChild. The name is GrandChild 
+## This is from Child. The name is GrandChild 
+
+
+## Multi-inheritance in Python is very different from 
+## other OO language like C++, C#, Java
+## Above result make me surprised a the first time, 
+## but after I check the MRO then I can understand 
+## why many veterans suggest to avoid multi-inheritance. 
+## Its `super` &quot;Magic&quot; really confuses many people.
+
+</code></pre></li>
 </ul>
+
 <h4 id="explanation-with-break-down">Explanation with break down</h4>
+
 <ul>
-<li>Let's break down the how the super works with sample code</li>
+<li>Let&rsquo;s break down the how the super works with sample code</li>
 </ul>
+
 <h5 id="case-1-parent-and-child">Case 1: Parent and child</h5>
+
 <ul>
-<li>Case 1:
+<li><p>Case 1:</p>
+
 <ul>
-<li>
-<p>code : <code>super(Child, Child).do_otherthing()</code></p>
-</li>
-<li>
-<p><code>super</code> takes the MRO of its second argument <code>Child</code></p>
+<li>code : <code>super(Child, Child).do_otherthing()</code></li>
+
+<li><p><code>super</code> takes the MRO of its second argument <code>Child</code></p>
+
 <pre><code>&lt;class '__main__.Child'&gt;, 
 &lt;class '__main__.Parent'&gt;, 
 &lt;class 'object'&gt;
 </code></pre></li>
-<li>
-<p><code>super</code> finds the first argument <code>Child</code> in that MRO, and uses everything after it in the MRO for method resolution</p>
-</li>
-<li>
-<p><code>super</code> uses the method from <code>Parent</code> which is after <code>Child</code>, and bind the <code>Child</code> class object</p>
-</li>
+
+<li><p><code>super</code> finds the first argument <code>Child</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>Parent</code> which is after <code>Child</code>, and bind the <code>Child</code> class object</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h5 id="case-2-grandparent-and-grandchild">Case 2: Grandparent and grandchild</h5>
+
 <ul>
-<li>
-<p>Case 2:</p>
+<li><p>Case 2:</p>
+
 <ul>
-<li>
-<p>code : <code>super(GrandChild, GrandChild).do_otherthing()</code></p>
-</li>
-<li>
-<p><code>super</code> takes the MRO of its second argument <code>GrandChild</code></p>
+<li>code : <code>super(GrandChild, GrandChild).do_otherthing()</code></li>
+
+<li><p><code>super</code> takes the MRO of its second argument <code>GrandChild</code></p>
+
 <pre><code>&lt;class '__main__.GrandChild'&gt;,
 &lt;class '__main__.Child'&gt;,
 &lt;class '__main__.OtherChild'&gt;,
@@ -1229,25 +1206,23 @@
 &lt;class '__main__.Parent'&gt;,
 &lt;class 'object'&gt;
 </code></pre></li>
-<li>
-<p><code>super</code> finds the first argument <code>GrandChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p>
-</li>
-<li>
-<p><code>super</code> uses the method from <code>Child</code> which is after <code>GrandChild</code>, and bind the <code>GrandChild</code> class object</p>
-</li>
+
+<li><p><code>super</code> finds the first argument <code>GrandChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>Child</code> which is after <code>GrandChild</code>, and bind the <code>GrandChild</code> class object</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5 id="case-3-grandparent-children--grandchild">Case 3: Grandparent, children &amp; grandchild</h5>
+
+<h5 id="case-3-grandparent-children-grandchild">Case 3: Grandparent, children &amp; grandchild</h5>
+
 <ul>
-<li>
-<p>Case 3:</p>
+<li><p>Case 3:</p>
+
 <ul>
-<li>
-<p>code : <code>super(OtherChild, gc).do_something()</code></p>
-</li>
-<li>
-<p><code>super</code> takes the MRO of the type <code>GrandChild</code> of its second argument <code>gc</code></p>
+<li>code : <code>super(OtherChild, gc).do_something()</code></li>
+
+<li><p><code>super</code> takes the MRO of the type <code>GrandChild</code> of its second argument <code>gc</code></p>
+
 <pre><code>&lt;class '__main__.GrandChild'&gt;,
 &lt;class '__main__.Child'&gt;,
 &lt;class '__main__.OtherChild'&gt;,
@@ -1255,27 +1230,35 @@
 &lt;class '__main__.Parent'&gt;,
 &lt;class 'object'&gt;
 </code></pre></li>
-<li>
-<p><code>super</code> finds the first argument <code>OtherChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p>
-</li>
-<li>
-<p><code>super</code> uses the method from <code>OtherOtherChild</code> which is after <code>OtherChild</code>, and bind the <code>gc</code> class object</p>
-</li>
-</ul>
-</li>
+
+<li><p><code>super</code> finds the first argument <code>OtherChild</code> in that MRO, and uses everything after it in the MRO for method resolution</p></li>
+
+<li><p><code>super</code> uses the method from <code>OtherOtherChild</code> which is after <code>OtherChild</code>, and bind the <code>gc</code> class object</p></li>
+</ul></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#inheritance--polymorphism">Inheritance & Polymorphism</a>
-      <ul>
-        <li><a href="#explanation-with-example">Explanation with example</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#inheritance-polymorphism">Inheritance &amp; Polymorphism</a>
+<ul>
+<li><a href="#explanation-with-example">Explanation with example</a>
+<ul>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#explanation-with-break-down">Explanation with break down</a>
+<ul>
+<li><a href="#case-1-parent-and-child">Case 1: Parent and child</a></li>
+<li><a href="#case-2-grandparent-and-grandchild">Case 2: Grandparent and grandchild</a></li>
+<li><a href="#case-3-grandparent-children-grandchild">Case 3: Grandparent, children &amp; grandchild</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

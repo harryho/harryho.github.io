@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:21 AEDT">
 <title>Scheduled task with window service :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1002,8 +973,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1021,13 +990,20 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Scheduled task with window service</h1>
-        <h2 id="problem">Problem</h2>
+        
+
+<h2 id="problem">Problem</h2>
+
 <blockquote>
 <p><em>Set up the some scheduled tasks running in the backgroud to take care of data update or sync for every 15 mins, or everyday or every week</em></p>
 </blockquote>
+
 <h2 id="solution">Solution</h2>
+
 <h3 id="option-1">Option 1</h3>
+
 <h2 id="windows-task-scheduler">Windows Task Scheduler</h2>
+
 <ul>
 <li>Click the Start button.</li>
 <li>Click Control Panel.</li>
@@ -1035,246 +1011,274 @@
 <li>Click Administrative Tools.</li>
 <li>Double-click Task Scheduler.</li>
 </ul>
+
 <h3 id="option-2">Option 2</h3>
+
 <h2 id="use-window-service-as-task-scheduler">Use Window Service as task scheduler</h2>
+
 <h3 id="overview-of-design">Overview of design</h3>
+
 <p><strong>The design here is a simplified version, which I built for previous projects. In the real world, I need to tailor it for different project with different purpose, but fundamental design of architect is the same. IMO, the design below can support most cases, which needs scheduled backgroud task service.</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini">
-        <span style="color:#a6e22e">+----------------------------------+          Register as</span>
-        <span style="color:#a6e22e">|     System.ServiceProces  -----  |--------o Window Service</span>
-        <span style="color:#a6e22e">+----------------------------------+</span>
-        <span style="color:#a6e22e">|  +----------------------------+  |</span>
-        <span style="color:#a6e22e">|  |   Thread (Infinite)        |  | </span>
-        <span style="color:#a6e22e">|  +----------------------------+  |</span>
-        <span style="color:#a6e22e">|  |  +----------------------+  |  |</span>
-        <span style="color:#a6e22e">|  |  | MySchedulerService   |  |  | </span>
-        <span style="color:#a6e22e">|  |  +----------------------+  |  |</span>
-        <span style="color:#a6e22e">|  |  | while ( true )       |  |  |</span>
-        <span style="color:#a6e22e">|  |  | {                    |  |  |</span>
-        <span style="color:#a6e22e">|  |  |    Task.Process()    |  |  |</span>
-        <span style="color:#a6e22e">|  |  | }                    |  |  | </span>
-        <span style="color:#a6e22e">|  |  +----------------------+  |  | </span>
-        <span style="color:#a6e22e">|  +----------------------------+  |</span>
-        <span style="color:#a6e22e">+----------------------------------+ </span>
 
-            <span style="color:#a6e22e">+------------+</span>
-            <span style="color:#a6e22e">| ITask      |</span>
-            <span style="color:#a6e22e">+------------+</span>
-            <span style="color:#a6e22e">| Process()  |</span>
-            <span style="color:#a6e22e">+------------+</span>
-                 <span style="color:#a6e22e">/|\</span>
-                  <span style="color:#a6e22e">|</span>
-        <span style="color:#a6e22e">+------------------+</span>
-        <span style="color:#a6e22e">|      BaseTask    |  -----------o Customized Task inherit BaseTask   </span>
-        <span style="color:#a6e22e">+------------------+</span>
-        <span style="color:#a6e22e">| lastProcessTime  | ------------o Last process time </span>
-        <span style="color:#a6e22e">| intervalTime     | ------------o Customize for next process time </span>
-        <span style="color:#a6e22e">| IsReadyProcess() | ------------o Check taks is ready to process </span>
-        <span style="color:#a6e22e">+------------------+</span>
+<pre><code class="language-ini">
+        +----------------------------------+          Register as
+        |     System.ServiceProces  -----  |--------o Window Service
+        +----------------------------------+
+        |  +----------------------------+  |
+        |  |   Thread (Infinite)        |  | 
+        |  +----------------------------+  |
+        |  |  +----------------------+  |  |
+        |  |  | MySchedulerService   |  |  | 
+        |  |  +----------------------+  |  |
+        |  |  | while ( true )       |  |  |
+        |  |  | {                    |  |  |
+        |  |  |    Task.Process()    |  |  |
+        |  |  | }                    |  |  | 
+        |  |  +----------------------+  |  | 
+        |  +----------------------------+  |
+        +----------------------------------+ 
 
-</code></pre></div><h3 id="create-customized-window-service">Create customized Window Service</h3>
+            +------------+
+            | ITask      |
+            +------------+
+            | Process()  |
+            +------------+
+                 /|\
+                  |
+        +------------------+
+        |      BaseTask    |  -----------o Customized Task inherit BaseTask   
+        +------------------+
+        | lastProcessTime  | ------------o Last process time 
+        | intervalTime     | ------------o Customize for next process time 
+        | IsReadyProcess() | ------------o Check taks is ready to process 
+        +------------------+
+
+</code></pre>
+
+<h3 id="create-customized-window-service">Create customized Window Service</h3>
+
 <h3 id="use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</h3>
+
 <ul>
 <li>The System.ServiceProcess allow you to implement, install, and control Windows service applications. Services are long-running executables that run without a user interface.</li>
-<li>The project must have main method the entry point</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
-{
-    <span style="color:#66d9ef">using</span> System.ServiceProcess;
 
-    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+<li><p>The project must have main method the entry point</p>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+using System.ServiceProcess;
+
+class Program
+{
+    static void Main(string[] args)
     {
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
-        {
-            <span style="color:#75715e">#if DEBUG
-</span><span style="color:#75715e"></span>                MySchedulerService debugService = <span style="color:#66d9ef">new</span> MySchedulerService();
-                debugService.onDebug();
-                System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-            <span style="color:#75715e">#else
-</span><span style="color:#75715e"></span>                ServiceBase.Run(<span style="color:#66d9ef">new</span> ServiceBase[] { <span style="color:#66d9ef">new</span> MySchedulerService() });
-            <span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span>        }
+        #if DEBUG
+            MySchedulerService debugService = new MySchedulerService();
+            debugService.onDebug();
+            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+        #else
+            ServiceBase.Run(new ServiceBase[] { new MySchedulerService() });
+        #endif
     }
 }
+}
 
-</code></pre></div><h3 id="create-customized-servicebase">Create customized ServiceBase</h3>
-<ul>
-<li>Implementing a service involves inheriting from the ServiceBase class and defining specific behavior to process when start, stop, pause, and continue commands are passed in, as well as custom behavior and actions to take when the system shuts down.</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs">
-<span style="color:#66d9ef">namespace</span> MyScheduler
+
+<h3 id="create-customized-servicebase">Create customized ServiceBase</h3>
+
+<ul>
+<li><p>Implementing a service involves inheriting from the ServiceBase class and defining specific behavior to process when start, stop, pause, and continue commands are passed in, as well as custom behavior and actions to take when the system shuts down.</p>
+
+<pre><code class="language-cs">
+namespace MyScheduler
 {
-    <span style="color:#66d9ef">using</span> System;
-    <span style="color:#66d9ef">using</span> System.IO;
-    <span style="color:#66d9ef">using</span> System.Collections.Generic;
-    <span style="color:#66d9ef">using</span> System.Threading;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Threading;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MySchedulerService</span> : System.ServiceProcess.ServiceBase
+public partial class MySchedulerService : System.ServiceProcess.ServiceBase
+{
+    public const string START_SERVICE = &quot;start.service&quot;;
+    public const string STOP_SERVICE = &quot;stop.service&quot;;
+
+    public void onDebug()
     {
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> START_SERVICE = <span style="color:#e6db74">&#34;start.service&#34;</span>;
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> STOP_SERVICE = <span style="color:#e6db74">&#34;stop.service&#34;</span>;
+        OnStart(null);
+    }
 
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> onDebug()
+    protected override void OnStart(string[] args)
+    {
+        System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory 
+                + TART_SERVICE);
+        ThreadStart tsTask = new ThreadStart(TaskLoop);
+        Thread rtkTask = new Thread(tsTask);
+        rtkTask.Start();
+    }
+
+    static void TaskLoop()
+    {
+        while (true)
         {
-            OnStart(<span style="color:#66d9ef">null</span>);
+            // Exceute scheduled task
+            ScheduledTask();
+            // Then, wait for certain time interval
+            System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(500));
         }
+    }
 
-        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStart(<span style="color:#66d9ef">string</span>[] args)
+    static void ScheduledTask()
+    {
+        // Task code which is executed periodically
+        try
         {
-            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory 
-                    + TART_SERVICE);
-            ThreadStart tsTask = <span style="color:#66d9ef">new</span> ThreadStart(TaskLoop);
-            Thread rtkTask = <span style="color:#66d9ef">new</span> Thread(tsTask);
-            rtkTask.Start();
-        }
+            // Call customized tasks
+            var types = Assembly.GetExecutingAssembly()
+                                    .GetExportedTypes()
+                                    .Where(p =&gt; typeof(ITask)
+                                         .IsAssignableFrom(p.BaseType));
 
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> TaskLoop()
-        {
-            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>)
+            foreach (var t in types)
             {
-                <span style="color:#75715e">// Exceute scheduled task
-</span><span style="color:#75715e"></span>                ScheduledTask();
-                <span style="color:#75715e">// Then, wait for certain time interval
-</span><span style="color:#75715e"></span>                System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(<span style="color:#ae81ff">5</span><span style="color:#ae81ff">0</span><span style="color:#ae81ff">0</span>));
+                var task = (ITask)Activator.CreateInstance(t);
+                if (taskSettings.Keys.Contains(t.Name))
+                {
+                    task.TaskSetting = taskSettings[t.Name];
+                }
+                tasks.Add(task);
             }
         }
-
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> ScheduledTask()
+        catch (Exception e)
         {
-            <span style="color:#75715e">// Task code which is executed periodically
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">try</span>
-            {
-                <span style="color:#75715e">// Call customized tasks
-</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">var</span> types = Assembly.GetExecutingAssembly()
-                                        .GetExportedTypes()
-                                        .Where(p =&gt; <span style="color:#66d9ef">typeof</span>(ITask)
-                                             .IsAssignableFrom(p.BaseType));
-
-                <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">var</span> t <span style="color:#66d9ef">in</span> types)
-                {
-                    <span style="color:#66d9ef">var</span> task = (ITask)Activator.CreateInstance(t);
-                    <span style="color:#66d9ef">if</span> (taskSettings.Keys.Contains(t.Name))
-                    {
-                        task.TaskSetting = taskSettings[t.Name];
-                    }
-                    tasks.Add(task);
-                }
-            }
-            <span style="color:#66d9ef">catch</span> (Exception e)
-            {
-                <span style="color:#75715e">// TO Something here               
-</span><span style="color:#75715e"></span>            }
-        }
-
-        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStop()
-        {
-            <span style="color:#75715e">// Insert code here to close all the open IO or conection.
-</span><span style="color:#75715e"></span>            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory
-                         + STOP_SERVICE);
-        }
-
-        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitializeComponent()
-        {
-            <span style="color:#66d9ef">this</span>.ServiceName = <span style="color:#e6db74">&#34;MySchedulerService&#34;</span>;
-        }
-
-        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Dispose(<span style="color:#66d9ef">bool</span> disposing)
-        {
-            OnStop();
-            <span style="color:#66d9ef">base</span>.Dispose(disposing);
+            // TO Something here               
         }
     }
+
+    protected override void OnStop()
+    {
+        // Insert code here to close all the open IO or conection.
+        System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory
+                     + STOP_SERVICE);
+    }
+
+    private void InitializeComponent()
+    {
+        this.ServiceName = &quot;MySchedulerService&quot;;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        OnStop();
+        base.Dispose(disposing);
+    }
+}
 }
 
-</code></pre></div><h3 id="task-interface-and-class">Task interface and class</h3>
+</code></pre></li>
+</ul>
+
+<h3 id="task-interface-and-class">Task interface and class</h3>
+
 <ul>
-<li>interface ITask has only one method</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
+<li><p>interface ITask has only one method</p>
+
+<pre><code class="language-cs">namespace MyScheduler
 {
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> ITask
-    {
-        <span style="color:#66d9ef">void</span> Process();
-    }
+public interface ITask
+{
+    void Process();
 }
-</code></pre></div><ul>
-<li>BaseTask</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
+}
+</code></pre></li>
+
+<li><p>BaseTask</p>
+
+<pre><code class="language-cs">namespace MyScheduler
 {
-    <span style="color:#66d9ef">using</span> System;
+using System;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BaseTask</span> : ITask
+public class BaseTask : ITask
+{
+    protected DateTime? lastProcessTime = null;
+
+    // interval time uses second as unit
+    // e.g. 1 min of intervaling time is 60 
+    protected int intervalTime = 0 ;  
+
+    protected bool IsReadyToProcess()
     {
-        <span style="color:#66d9ef">protected</span> DateTime? lastProcessTime = <span style="color:#66d9ef">null</span>;
+        bool isReadyToProcess = true;
 
-        <span style="color:#75715e">// interval time uses second as unit
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// e.g. 1 min of intervaling time is 60 
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> intervalTime = <span style="color:#ae81ff">0</span> ;  
-
-        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">bool</span> IsReadyToProcess()
+        if (lastProcessTime.HasValue)
         {
-            <span style="color:#66d9ef">bool</span> isReadyToProcess = <span style="color:#66d9ef">true</span>;
-
-            <span style="color:#66d9ef">if</span> (lastProcessTime.HasValue)
+            if (lastProcessTime.Value.AddSeconds(intervalTime) &gt; DateTime.Now)
             {
-                <span style="color:#66d9ef">if</span> (lastProcessTime.Value.AddSeconds(intervalTime) &gt; DateTime.Now)
-                {
-                    isReadyToProcess = <span style="color:#66d9ef">false</span>;
-                }
-            } 
-            <span style="color:#66d9ef">return</span> isReadyToProcess;
-        }
+                isReadyToProcess = false;
+            }
+        } 
+        return isReadyToProcess;
+    }
 
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Process()
-        {
-            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NotImplementedException();
-        }
+    public virtual void Process()
+    {
+        throw new NotImplementedException();
     }
 }
-</code></pre></div><ul>
-<li>Sample Task1 and Task2</li>
+}
+</code></pre></li>
+
+<li><p>Sample Task1 and Task2</p></li>
 </ul>
+
 <p><strong>Task1</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
-{
-    <span style="color:#66d9ef">using</span> System;
-    <span style="color:#66d9ef">using</span> System.Linq;
-    <span style="color:#66d9ef">using</span> System.Data.Entity;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Task1</span> : BaseTask
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System;
+    using System.Linq;
+    using System.Data.Entity;
+
+    public class Task1 : BaseTask
     {
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Process()
+        public override void Process()
         {
-            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">base</span>.IsReadyToProcess())
+            if (base.IsReadyToProcess())
             {                
                 System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory
-                         + <span style="color:#e6db74">&#34;Task-1-&#34;</span> + DateTime.Now.ToString(<span style="color:#e6db74">&#34;dd-MM-yyyy&#34;</span>));
+                         + &quot;Task-1-&quot; + DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;));
             }
         }
     }
 }
-</code></pre></div><p><strong>Task2</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
-{
-    <span style="color:#66d9ef">using</span> System;
-    <span style="color:#66d9ef">using</span> System.Linq;
-    <span style="color:#66d9ef">using</span> System.Data.Entity;
+</code></pre>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Task2</span> : BaseTask
+<p><strong>Task2</strong></p>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+    using System;
+    using System.Linq;
+    using System.Data.Entity;
+
+    public class Task2 : BaseTask
     {
-        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Process()
+        public override void Process()
         {
-            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">base</span>.IsReadyToProcess())
+            if (base.IsReadyToProcess())
             {                
                 System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory 
-                        + <span style="color:#e6db74">&#34;Task-2-&#34;</span> 
-                        + DateTime.Now.ToString(<span style="color:#e6db74">&#34;dd-MM-yyyy&#34;</span>));
+                        + &quot;Task-2-&quot; 
+                        + DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;));
             }
         }
     }
 }
-</code></pre></div><h2 id="create-window-service-installer">Create Window Service installer</h2>
+</code></pre>
+
+<h2 id="create-window-service-installer">Create Window Service installer</h2>
+
 <ul>
 <li>In Solution Explorer, double-click MyScheduledService.cs.</li>
 <li>In the Code Editor window, right-click <code>Design View</code>, and then click <code>Properties</code></li>
@@ -1283,60 +1287,70 @@
 <li>In the Code Editor window in <code>Design view</code>, click <code>MyScheduledServiceProcessInstaller</code>.</li>
 <li>In the Properties pane, change the <code>Account</code> property to <code>LocalSystem</code> (The <code>LocalService</code> and <code>NetworkService</code> values are available only in Microsoft Windows XP).</li>
 </ul>
-<p><strong>PreInstaller</strong></p>
-<ul>
-<li>It inherits from System.Configuration.Install.Installer. This is the base class for all custom installers in the .NET Framework. Installers are components that help install applications on a computer.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">namespace</span> MyScheduler
-{
-<span style="color:#a6e22e">    [RunInstaller(true)]</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProjectInstaller</span> : System.Configuration.Install.Installer
-    {
-        <span style="color:#66d9ef">public</span> ProjectInstaller()
-        {
-            InitializeComponent();
-        }
 
-        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> MySchedulerServiceInstaller_AfterInstall(
-                <span style="color:#66d9ef">object</span> sender, InstallEventArgs e)
-        {
-        }
+<p><strong>PreInstaller</strong></p>
+
+<ul>
+<li><p>It inherits from System.Configuration.Install.Installer. This is the base class for all custom installers in the .NET Framework. Installers are components that help install applications on a computer.</p>
+
+<pre><code class="language-cs">namespace MyScheduler
+{
+[RunInstaller(true)]
+public partial class ProjectInstaller : System.Configuration.Install.Installer
+{
+    public ProjectInstaller()
+    {
+        InitializeComponent();
+    }
+
+    private void MySchedulerServiceInstaller_AfterInstall(
+            object sender, InstallEventArgs e)
+    {
     }
 }
-</code></pre></div><h2 id="install-window-service">Install Window Service</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#ae81ff">\W</span>indows<span style="color:#ae81ff">\M</span>icrosoft.Net<span style="color:#ae81ff">\F</span>ramework<span style="color:#ae81ff">\v</span>4.0.30319<span style="color:#ae81ff">\I</span>nstallUtil.exe /i &lt;app_path&gt;<span style="color:#ae81ff">\M</span>yScheduler.exe 
-</code></pre></div><h2 id="uninstall-window-service">Uninstall Window Service</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#ae81ff">\W</span>indows<span style="color:#ae81ff">\M</span>icrosoft.Net<span style="color:#ae81ff">\F</span>ramework<span style="color:#ae81ff">\v</span>4.0.30319<span style="color:#ae81ff">\I</span>nstallUtil.exe /u &lt;app_path&gt;<span style="color:#ae81ff">\M</span>yScheduler.exe 
-</code></pre></div>
+}
+</code></pre></li>
+</ul>
+
+<h2 id="install-window-service">Install Window Service</h2>
+
+<pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /i &lt;app_path&gt;\MyScheduler.exe 
+</code></pre>
+
+<h2 id="uninstall-window-service">Uninstall Window Service</h2>
+
+<pre><code class="language-bash">C:\Windows\Microsoft.Net\Framework\v4.0.30319\InstallUtil.exe /u &lt;app_path&gt;\MyScheduler.exe 
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#problem">Problem</a></li>
-    <li><a href="#solution">Solution</a>
-      <ul>
-        <li><a href="#option-1">Option 1</a></li>
-      </ul>
-    </li>
-    <li><a href="#windows-task-scheduler">Windows Task Scheduler</a>
-      <ul>
-        <li><a href="#option-2">Option 2</a></li>
-      </ul>
-    </li>
-    <li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
-      <ul>
-        <li><a href="#overview-of-design">Overview of design</a></li>
-        <li><a href="#create-customized-window-service">Create customized Window Service</a></li>
-        <li><a href="#use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</a></li>
-        <li><a href="#create-customized-servicebase">Create customized ServiceBase</a></li>
-        <li><a href="#task-interface-and-class">Task interface and class</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-window-service-installer">Create Window Service installer</a></li>
-    <li><a href="#install-window-service">Install Window Service</a></li>
-    <li><a href="#uninstall-window-service">Uninstall Window Service</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution">Solution</a>
+<ul>
+<li><a href="#option-1">Option 1</a></li>
+</ul></li>
+<li><a href="#windows-task-scheduler">Windows Task Scheduler</a>
+<ul>
+<li><a href="#option-2">Option 2</a></li>
+</ul></li>
+<li><a href="#use-window-service-as-task-scheduler">Use Window Service as task scheduler</a>
+<ul>
+<li><a href="#overview-of-design">Overview of design</a></li>
+<li><a href="#create-customized-window-service">Create customized Window Service</a></li>
+<li><a href="#use-serviceprocess-to-create-window-service">Use ServiceProcess to create Window Service</a></li>
+<li><a href="#create-customized-servicebase">Create customized ServiceBase</a></li>
+<li><a href="#task-interface-and-class">Task interface and class</a></li>
+</ul></li>
+<li><a href="#create-window-service-installer">Create Window Service installer</a></li>
+<li><a href="#install-window-service">Install Window Service</a></li>
+<li><a href="#uninstall-window-service">Uninstall Window Service</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

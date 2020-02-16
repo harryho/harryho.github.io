@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>JS &amp; ES Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +974,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,13 +991,19 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>JS &amp; ES Note - 1</h1>
-        <h2 id="the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</h2>
+        
+
+<h2 id="the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</h2>
+
 <p>You may already guessed what I am talking about. Yes,  the<strong>this</strong> keyword. It is not only a powerful feature, but also often misinterpreted keyword.</p>
+
 <p>In JavaScript, we also have this concept inside a Function constructor when it is invoked using the “new” keyword, however it is not the only rule and “this” can often refer to a different object from a different execution context.</p>
+
 <h3 id="this-can-be-anything"><strong>this</strong> can be anything</h3>
+
 <ul>
-<li>
-<p><strong>this</strong> represents different things.</p>
+<li><p><strong>this</strong> represents different things.</p>
+
 <pre><code>
 var a = &quot;abc&quot;
 console.log(a);
@@ -1039,148 +1014,164 @@ console.log(a);
 console.log(this);
 
 </code></pre></li>
-</ul>
+
+<li><p>Do you know what output will be?</p>
+
 <ul>
-<li>
-<p>Do you know what output will be?</p>
-<ul>
-<li>Running in the console of Chrome / Firefox</li>
-</ul>
-</li>
-</ul>
+<li><p>Running in the console of Chrome / Firefox</p>
+
 <pre><code>abc
 123
 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-</code></pre><ul>
-<li>Running in the js file via node</li>
-</ul>
+</code></pre></li>
+
+<li><p>Running in the js file via node</p>
+
 <pre><code># Save the content as index.js
 # Run command - node index.js
 
 abc
 abc
 { a: '123' }
-</code></pre><ul>
-<li>Running in the node command prompt</li>
-</ul>
+</code></pre></li>
+
+<li><p>Running in the node command prompt</p>
+
 <pre><code>abc
 123
 Object [global] {global: [Circular],...}
-</code></pre><ul>
-<li>Basically the <strong>this</strong> represents the context environment, AKA, the global object. The best way to confirm what the <strong>this</strong> means is better to print it out.</li>
+</code></pre></li>
+</ul></li>
+
+<li><p>Basically the <strong>this</strong> represents the context environment, AKA, the global object. The best way to confirm what the <strong>this</strong> means is better to print it out.</p></li>
 </ul>
+
 <h3 id="this-inside-a-function"><strong>this</strong> inside a function</h3>
+
 <p>From 2015, ECMAScript 6, aka ES 2015, has been supported by most modern browsers. So when we talk about function in JavaScript, literally we are talking two slightly different functions. One is defined with keyword <code>function</code>, another one is aka arrow function or fat arrow. For most scenario, arrow function is the same as old style function, but fat arrow handles the <strong>this</strong> keyword in a more stable and predictable way.</p>
+
 <blockquote>
-<p>Mozilla - MDN: The value of this is determined by how a function is called (runtime binding). It can't be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind() method to set the value of a function's this regardless of how it's called. The arrow functions which don't provide their own this binding (it retains the this value of the enclosing lexical context).</p>
+<p>Mozilla - MDN: The value of this is determined by how a function is called (runtime binding). It can&rsquo;t be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind() method to set the value of a function&rsquo;s this regardless of how it&rsquo;s called. The arrow functions which don&rsquo;t provide their own this binding (it retains the this value of the enclosing lexical context).</p>
 </blockquote>
-<p>According MDN's explanation, the arrow function is a better implementation. It is more predictable and stable. Arrow function is highly recommended to replace the old style function.</p>
+
+<p>According MDN&rsquo;s explanation, the arrow function is a better implementation. It is more predictable and stable. Arrow function is highly recommended to replace the old style function.</p>
+
 <h4 id="this-inside-a-regular-function"><strong>this</strong> inside a regular function</h4>
+
 <ul>
-<li>
-<p>The samples below show the different <em>this</em>es</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj0</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">prop</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;obj0&#39;</span>,
-    <span style="color:#a6e22e">func_1</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_1-&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">func_2</span> <span style="color:#f92672">=</span> {
-            <span style="color:#a6e22e">prop</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;func_2&#39;</span>,
-            <span style="color:#a6e22e">func_3</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
-                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_3 -&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-            }
-        };
-        <span style="color:#a6e22e">func_2</span>.<span style="color:#a6e22e">func_3</span>();
-    }
+<li><p>The samples below show the different *this*es</p>
+
+<pre><code class="language-js">var obj0 = {
+  prop: 'obj0',
+  func_1: function () {
+      console.log(' func_1-&gt; ', this);
+      var func_2 = {
+          prop: 'func_2',
+          func_3: function () {
+              console.log(' func_3 -&gt; ', this);
+          }
+      };
+      func_2.func_3();
+  }
 };
-<span style="color:#a6e22e">obj0</span>.<span style="color:#a6e22e">func_1</span>();
-<span style="color:#75715e">////////////////////////////////
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj1</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">prop</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;obj1&#39;</span>,
-    <span style="color:#a6e22e">func_1</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_1-&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-        <span style="color:#a6e22e">func_2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">prop</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;func_2&#39;</span>;
-            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">func_3</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
-                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;func_3&#39;</span>;
-                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_3 -&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-            }
-            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">func_3</span>
-        };
-        <span style="color:#a6e22e">func_2</span>()();
-    }
+obj0.func_1();
+////////////////////////////////
+var obj1 = {
+  prop: 'obj1',
+  func_1: function () {
+      console.log(' func_1-&gt; ', this);
+      func_2 = function () {
+          this.prop = 'func_2';
+          var func_3 = function () {
+              this.p = 'func_3';
+              console.log(' func_3 -&gt; ', this);
+          }
+          return func_3
+      };
+      func_2()();
+  }
 };
-<span style="color:#a6e22e">obj1</span>.<span style="color:#a6e22e">func_1</span>();
-</code></pre></div></li>
-<li>
-<p>Test (Fat Arrow)</p>
-</li>
+obj1.func_1();
+</code></pre></li>
+
+<li><p>Test (Fat Arrow)</p>
+
+<pre><code class="language-js">var obj2 = {
+prop: 123,
+func_1: () =&gt; {
+    console.log(' func_1-&gt; ', this);
+    func_2 = {
+        prop: 'func_2',
+        func_3: () =&gt; {
+            this.p = 'func_3';
+            console.log(' func_3 -&gt; ', this);
+        }
+    };
+    func_2.func_3();
+}
+};
+obj2.func_1();
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj2</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">prop</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">123</span>,
-    <span style="color:#a6e22e">func_1</span><span style="color:#f92672">:</span> () =&gt; {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_1-&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-        <span style="color:#a6e22e">func_2</span> <span style="color:#f92672">=</span> {
-            <span style="color:#a6e22e">prop</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;func_2&#39;</span>,
-            <span style="color:#a6e22e">func_3</span><span style="color:#f92672">:</span> () =&gt; {
-                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;func_3&#39;</span>;
-                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; func_3 -&gt; &#39;</span>, <span style="color:#66d9ef">this</span>);
-            }
-        };
-        <span style="color:#a6e22e">func_2</span>.<span style="color:#a6e22e">func_3</span>();
-    }
-};
-<span style="color:#a6e22e">obj2</span>.<span style="color:#a6e22e">func_1</span>();
-</code></pre></div><h4 id="fat-arrow-has-no-binding">Fat arrow has no binding</h4>
+
+<h4 id="fat-arrow-has-no-binding">Fat arrow has no binding</h4>
+
 <ul>
-<li>
-<p>The sample below show the different binding behavior between regular function and arrow function</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj3</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">p</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;obj3&#39;</span>,
-    <span style="color:#a6e22e">toBeCalled</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>() {
-      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; this is toBeCalled &#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">p</span>);
-    },
-    <span style="color:#a6e22e">toBind</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">obj</span>) {
-      <span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">toBeCalled</span>();
-    }
+<li><p>The sample below show the different binding behavior between regular function and arrow function</p>
+
+<pre><code class="language-js">var obj3 = {
+  p: 'obj3',
+  toBeCalled: function() {
+    console.log(' this is toBeCalled ', this.p);
+  },
+  toBind: function(obj) {
+    obj.toBeCalled();
+  }
 };
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testBind</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">obj3</span>.<span style="color:#a6e22e">toBind</span>;
-<span style="color:#a6e22e">testBind</span>(<span style="color:#a6e22e">obj3</span>);
+var testBind = obj3.toBind;
+testBind(obj3);
 
-<span style="color:#75715e">/// output:
-</span><span style="color:#75715e"></span><span style="color:#75715e">///  this is toBeCalled  obj3
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj4</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">p</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;obj4&#39;</span>,
-    <span style="color:#a6e22e">toBeCalled</span><span style="color:#f92672">:</span> () =&gt; {
-      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39; this is toBeCalled &#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">p</span>);
-    },
-    <span style="color:#a6e22e">toBind</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">obj</span> =&gt; {
-      <span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">toBeCalled</span>();
-    }
+/// output:
+///  this is toBeCalled  obj3
+
+var obj4 = {
+  p: 'obj4',
+  toBeCalled: () =&gt; {
+    console.log(' this is toBeCalled ', this.p);
+  },
+  toBind: obj =&gt; {
+    obj.toBeCalled();
+  }
 };
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testBind2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">obj4</span>.<span style="color:#a6e22e">toBind</span>;
-<span style="color:#a6e22e">testBind2</span>(<span style="color:#a6e22e">obj4</span>);
+var testBind2 = obj4.toBind;
+testBind2(obj4);
 
-<span style="color:#75715e">/// output
-</span><span style="color:#75715e"></span><span style="color:#75715e">///  this is toBeCalled  undefined
-</span><span style="color:#75715e"></span>
-</code></pre></div></li>
+/// output
+///  this is toBeCalled  undefined
+
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</a>
-      <ul>
-        <li><a href="#this-can-be-anything">this can be anything</a></li>
-        <li><a href="#this-inside-a-function">this inside a function</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#the-most-unpredictable-keyword-and-feature">The most unpredictable keyword and feature</a>
+<ul>
+<li><a href="#this-can-be-anything"><strong>this</strong> can be anything</a></li>
+<li><a href="#this-inside-a-function"><strong>this</strong> inside a function</a>
+<ul>
+<li><a href="#this-inside-a-regular-function"><strong>this</strong> inside a regular function</a></li>
+<li><a href="#fat-arrow-has-no-binding">Fat arrow has no binding</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

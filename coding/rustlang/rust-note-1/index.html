@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:20 AEDT">
+<meta name="revised" content="2020-02-16T13:53:19 AEDT">
 <title>Data Types &amp; Ownership :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1002,8 +973,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1021,332 +990,393 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Data Types &amp; Ownership</h1>
-        <h3 id="mutability">Mutability</h3>
+        
+
+<h3 id="mutability">Mutability</h3>
+
 <p>Rust encourages you to favor immutability. It’s important that we get compile-time errors when we attempt to change a value that we previously designated as immutable because this very situation can lead to bugs.</p>
+
 <p>But mutability can be very useful. To make them mutable is simply adding mut in front of the variable name. In addition to allowing this value to change, mut conveys intent to future readers of the code by indicating that other parts of the code will be changing this variable value.</p>
+
 <h4 id="shadowing">Shadowing</h4>
+
 <ul>
-<li>
-<p>Rustaceans say that the first variable is shadowed by the second, which means that the second variable’s value is what appears when the variable is used.</p>
-</li>
-<li>
-<p>Sample</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+<li><p>Rustaceans say that the first variable is shadowed by the second, which means that the second variable’s value is what appears when the variable is used.</p></li>
 
-    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+<li><p>Sample</p>
 
-    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+<pre><code class="language-rs">fn main() {
+    let x = 5;
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {}&#34;</span>, x); <span style="color:#75715e">// 12
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
-<li>
-<p>Shadowing is different from marking a variable as mut, because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword. By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.</p>
-</li>
-<li>
-<p>The other difference between mut and shadowing is that because we’re effectively creating a new variable when we use the let keyword again, we can change the type of the value but reuse the same name.</p>
-</li>
+    let x = x + 1;
+
+    let x = x * 2;
+
+    println!(&quot;The value of x is: {}&quot;, x); // 12
+}
+</code></pre></li>
+
+<li><p>Shadowing is different from marking a variable as mut, because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword. By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.</p></li>
+
+<li><p>The other difference between mut and shadowing is that because we’re effectively creating a new variable when we use the let keyword again, we can change the type of the value but reuse the same name.</p></li>
 </ul>
+
 <h3 id="data-types">Data types</h3>
+
 <p>Every value in Rust is of a certain data type, which tells Rust what kind of data is being specified so it knows how to work with that data. We’ll look at two data type subsets: scalar and compound.</p>
+
 <ul>
-<li>
-<p>A scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.</p>
-</li>
-<li>
-<p>Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.</p>
-</li>
+<li><p>A scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.</p></li>
+
+<li><p>Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.</p></li>
 </ul>
+
 <h4 id="type-parse">Type parse</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> guess: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;42&#34;</span>.parse().expect(<span style="color:#e6db74">&#34;Not a number!&#34;</span>);
-</code></pre></div><h4 id="the-tuple-type">The Tuple Type</h4>
+
+<pre><code class="language-rs">let guess: u32 = &quot;42&quot;.parse().expect(&quot;Not a number!&quot;);
+</code></pre>
+
+<h4 id="the-tuple-type">The Tuple Type</h4>
+
 <ul>
-<li>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</li>
+<li><p>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</p>
+
+<pre><code class="language-rs">let tup: (i32, f64, u8) = (500, 6.4, 1);
+let tup = (500, 6.4, 1);
+let (x, y, z) = tup;
+println!(&quot;The value of y is: {}&quot;, y); //6.4
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> tup: (<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">f64</span>, <span style="color:#66d9ef">u8</span>) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">6.4</span>, <span style="color:#ae81ff">1</span>);
-<span style="color:#66d9ef">let</span> tup <span style="color:#f92672">=</span> (<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">6.4</span>, <span style="color:#ae81ff">1</span>);
-<span style="color:#66d9ef">let</span> (x, y, z) <span style="color:#f92672">=</span> tup;
-println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of y is: {}&#34;</span>, y); <span style="color:#75715e">//6.4
-</span></code></pre></div><h3 id="ownership">Ownership</h3>
+
+<h3 id="ownership">Ownership</h3>
+
 <p>Rust’s central feature is ownership. Although the feature is straightforward to explain, it has deep implications for the rest of the language.</p>
+
 <h4 id="ownership-rules">Ownership Rules</h4>
+
 <ul>
 <li>Each value in Rust has a variable that’s called its owner.</li>
 <li>There can only be one owner at a time.</li>
 <li>When the owner goes out of scope, the value will be dropped.</li>
 </ul>
+
 <h4 id="variable-scope">Variable Scope</h4>
+
 <ul>
 <li>A scope is the range within a program for which an item is valid.</li>
 </ul>
+
 <h4 id="memory-and-allocation">Memory and Allocation</h4>
+
 <ul>
-<li>
-<p>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</p>
-</li>
-<li>
-<p>Explanation of memory allocation and free</p>
-</li>
+<li><p>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</p></li>
+
+<li><p>Explanation of memory allocation and free</p>
+
+<pre><code class="language-go">{
+let s = String::from(&quot;hello&quot;); // s is valid from this point forward
+}   // this scope is now over, and s is no longer valid
+</code></pre></li>
+
+<li><p>There is a natural point at which we can return the memory our String needs to the operating system: when s goes out of scope. When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">{
-    <span style="color:#a6e22e">let</span> <span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">String</span>::<span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;hello&#34;</span>); <span style="color:#75715e">// s is valid from this point forward
-</span><span style="color:#75715e"></span>}   <span style="color:#75715e">// this scope is now over, and s is no longer valid
-</span></code></pre></div><ul>
-<li>There is a natural point at which we can return the memory our String needs to the operating system: when s goes out of scope. When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.</li>
-</ul>
+
 <h4 id="move-or-clone-or-copy">Move or Clone or Copy</h4>
+
 <ul>
-<li>Sample of move; the scalar type has no this problem</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
-<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1;  <span style="color:#75715e">// move value from s1 to s2
-</span><span style="color:#75715e"></span>              <span style="color:#75715e">// s1 is no longer valid 
-</span><span style="color:#75715e"></span>
-println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}, world!&#34;</span>, s1); <span style="color:#75715e">// Compile error - value used here after move
-</span></code></pre></div><ul>
-<li>If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called clone.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1.clone();
-</code></pre></div><ul>
-<li>
-<p>Rust has a special annotation called the Copy trait that we can place on types like integers that are stored on the stack. If a type has the Copy trait, an older variable is still usable after assignment. Rust won’t let us annotate a type with the Copy trait if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error.</p>
-</li>
-<li>
-<p>Types for copy</p>
+<li><p>Sample of move; the scalar type has no this problem</p>
+
+<pre><code class="language-rs">let s1 = String::from(&quot;hello&quot;);
+let s2 = s1;  // move value from s1 to s2
+          // s1 is no longer valid 
+
+println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after move
+</code></pre></li>
+
+<li><p>If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called clone.</p>
+
+<pre><code class="language-rs">let s2 = s1.clone();
+</code></pre></li>
+
+<li><p>Rust has a special annotation called the Copy trait that we can place on types like integers that are stored on the stack. If a type has the Copy trait, an older variable is still usable after assignment. Rust won’t let us annotate a type with the Copy trait if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error.</p></li>
+
+<li><p>Types for copy</p>
+
 <ul>
 <li>All the integer types, such as u32.</li>
 <li>The Boolean type, bool, with values true and false.</li>
 <li>All the floating point types, such as f64.</li>
 <li>The character type, char.</li>
 <li>Tuples, if they only contain types that are also Copy. For example, (i32, i32) is Copy, but (i32, String) is not.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="references--borrowing">References &amp; Borrowing</h3>
+
+<h3 id="references-borrowing">References &amp; Borrowing</h3>
+
 <ul>
 <li>At any given time, you can have either one mutable reference or any number of immutable references.</li>
 <li>References must always be valid.</li>
 </ul>
+
 <h4 id="slice">Slice</h4>
+
 <ul>
 <li>Another data type that does not have ownership is the slice. Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection.</li>
 </ul>
+
 <h3 id="struct">Struct</h3>
+
 <ul>
-<li>
-<p>Structs are similar to tuples, which were discussed in Chapter 3. Like tuples, the pieces of a struct can be different types. Unlike with tuples, you’ll name each piece of data so it’s clear what the values mean.</p>
-</li>
-<li>
-<p>sample code of strut</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">User</span> {
+<li><p>Structs are similar to tuples, which were discussed in Chapter 3. Like tuples, the pieces of a struct can be different types. Unlike with tuples, you’ll name each piece of data so it’s clear what the values mean.</p></li>
+
+<li><p>sample code of strut</p>
+
+<pre><code class="language-rs">struct User {
     username: String,
     email: String,
-    sign_in_count: <span style="color:#66d9ef">u64</span>,
-    active: <span style="color:#66d9ef">bool</span>,
+    sign_in_count: u64,
+    active: bool,
 }
 
 
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">build_user</span>(email: String, username: String) -&gt; <span style="color:#a6e22e">User</span> {
+fn build_user(email: String, username: String) -&gt; User {
     User {
-        email: <span style="color:#a6e22e">email</span>,
-        username: <span style="color:#a6e22e">username</span>,
-        active: <span style="color:#a6e22e">true</span>,
-        sign_in_count: <span style="color:#ae81ff">1</span>,
+        email: email,
+        username: username,
+        active: true,
+        sign_in_count: 1,
     }
 }
-</code></pre></div></li>
-<li>
-<p>Creating Instances From Other Instances</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> user2 <span style="color:#f92672">=</span> User {
-    email: String::from(<span style="color:#e6db74">&#34;another@example.com&#34;</span>),
-    username: String::from(<span style="color:#e6db74">&#34;anotherusername567&#34;</span>),
+</code></pre></li>
+
+<li><p>Creating Instances From Other Instances</p>
+
+<pre><code class="language-rs">let user2 = User {
+    email: String::from(&quot;another@example.com&quot;),
+    username: String::from(&quot;anotherusername567&quot;),
     ..user1
 };
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="unit-like-struct">Unit-Like Struct</h4>
+
 <ul>
 <li>structs that don’t have any fields! These are called unit-like structs because they behave similarly to (), the unit type.</li>
 </ul>
+
 <h4 id="methods">Methods</h4>
+
 <ul>
-<li>
-<p>Methods are similar to functions: they’re declared with the fn keyword and their name, they can have parameters and a return value, and they contain some code that is run when they’re called from somewhere else. However, methods are different from functions in that they’re defined within the context of a struct (or an enum or a trait object. Their first parameter is always self, which represents the instance of the struct the method is being called on.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#75715e">#[</span><span style="color:#75715e">derive(Debug)</span><span style="color:#75715e">]</span>
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Rectangle</span> {
-    width: <span style="color:#66d9ef">u32</span>,
-    height: <span style="color:#66d9ef">u32</span>,
+<li><p>Methods are similar to functions: they’re declared with the fn keyword and their name, they can have parameters and a return value, and they contain some code that is run when they’re called from somewhere else. However, methods are different from functions in that they’re defined within the context of a struct (or an enum or a trait object. Their first parameter is always self, which represents the instance of the struct the method is being called on.</p>
+
+<pre><code class="language-rs">#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
 
-<span style="color:#66d9ef">impl</span> Rectangle {
-    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">area</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#66d9ef">u32</span> {
-        self.width <span style="color:#f92672">*</span> self.height
+impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
     }
 
-    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">can_hold</span>(<span style="color:#f92672">&amp;</span>self, other: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">Rectangle</span>) -&gt; <span style="color:#66d9ef">bool</span> {
-        self.width <span style="color:#f92672">&gt;</span> other.width <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> self.height <span style="color:#f92672">&gt;</span> other.height
+    fn can_hold(&amp;self, other: &amp;Rectangle) -&gt; bool {
+        self.width &gt; other.width &amp;&amp; self.height &gt; other.height
     }
 }
 
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">let</span> rect1 <span style="color:#f92672">=</span> Rectangle {
-        width: <span style="color:#ae81ff">30</span>,
-        height: <span style="color:#ae81ff">50</span>,
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
     };
 
-    println<span style="color:#f92672">!</span>(
-        <span style="color:#e6db74">&#34;The area of the rectangle is {} square pixels.&#34;</span>,
+    println!(
+        &quot;The area of the rectangle is {} square pixels.&quot;,
         rect1.area()
     );
 
-    <span style="color:#66d9ef">let</span> rect2 <span style="color:#f92672">=</span> Rectangle {
-        width: <span style="color:#ae81ff">10</span>,
-        height: <span style="color:#ae81ff">40</span>,
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
     };
-    <span style="color:#66d9ef">let</span> rect3 <span style="color:#f92672">=</span> Rectangle {
-        width: <span style="color:#ae81ff">60</span>,
-        height: <span style="color:#ae81ff">45</span>,
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
     };
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Can rect1 hold rect2? {}&#34;</span>, rect1.can_hold(<span style="color:#f92672">&amp;</span>rect2));
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Can rect1 hold rect3? {}&#34;</span>, rect1.can_hold(<span style="color:#f92672">&amp;</span>rect3));
+    println!(&quot;Can rect1 hold rect2? {}&quot;, rect1.can_hold(&amp;rect2));
+    println!(&quot;Can rect1 hold rect3? {}&quot;, rect1.can_hold(&amp;rect3));
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
-<h3 id="enum--option">Enum &amp; Option</h3>
+
+<h3 id="enum-option">Enum &amp; Option</h3>
+
 <ul>
-<li>
-<p>Enums allow you to define a type by enumerating its possible values. First, we’ll define and use an enum to show how an enum can encode meaning along with data.</p>
-</li>
-<li>
-<p>A particularly useful enum, called Option, which expresses that a value can be either something or nothing.</p>
-</li>
-<li>
-<p>Pattern matching in the match expression makes it easy to run different code for different values of an enum.</p>
-</li>
-<li>
-<p>Sample from Rust standard library</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Ipv4Addr</span> {
-    <span style="color:#75715e">// --snip--
-</span><span style="color:#75715e"></span>}
+<li><p>Enums allow you to define a type by enumerating its possible values. First, we’ll define and use an enum to show how an enum can encode meaning along with data.</p></li>
 
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Ipv6Addr</span> {
-    <span style="color:#75715e">// --snip--
-</span><span style="color:#75715e"></span>}
+<li><p>A particularly useful enum, called Option, which expresses that a value can be either something or nothing.</p></li>
 
-<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">IpAddr</span> {
+<li><p>Pattern matching in the match expression makes it easy to run different code for different values of an enum.</p></li>
+
+<li><p>Sample from Rust standard library</p>
+
+<pre><code class="language-rs">struct Ipv4Addr {
+    // --snip--
+}
+
+struct Ipv6Addr {
+    // --snip--
+}
+
+enum IpAddr {
     V4(Ipv4Addr),
     V6(Ipv6Addr),
 }
-</code></pre></div></li>
-<li>
-<p>Rust does not have nulls, but it does have an enum that can encode the concept of a value being present or absent. This enum is Option<!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">enum</span> Option<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</code></pre></li>
+
+<li><p>Rust does not have nulls, but it does have an enum that can encode the concept of a value being present or absent. This enum is Option<T></p>
+
+<pre><code class="language-rs">enum Option&lt;T&gt; {
     Some(T),
     None,
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="match">Match</h4>
+
 <ul>
-<li>
-<p>Rust has an extremely powerful control flow operator called match that allows you to compare a value against a series of patterns and then execute code based on which pattern matches. Patterns can be made up of literal values, variable names, wildcards, and many other things;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">
-<span style="color:#75715e">#![</span><span style="color:#75715e">allow(unused_variables)</span><span style="color:#75715e">]</span>
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Coin</span> {
+<li><p>Rust has an extremely powerful control flow operator called match that allows you to compare a value against a series of patterns and then execute code based on which pattern matches. Patterns can be made up of literal values, variable names, wildcards, and many other things;</p>
+
+<pre><code class="language-rs">
+#![allow(unused_variables)]
+fn main() {
+    enum Coin {
         Penny,
         Nickel,
         Dime,
         Quarter,
     }
 
-    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">value_in_cents</span>(coin: <span style="color:#a6e22e">Coin</span>) -&gt; <span style="color:#66d9ef">u8</span> {
-        <span style="color:#66d9ef">match</span> coin {
-            Coin::Penny <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>,
-            Coin::Nickel <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>,
-            Coin::Dime <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>,
-            Coin::Quarter <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">25</span>,
+    fn value_in_cents(coin: Coin) -&gt; u8 {
+        match coin {
+            Coin::Penny =&gt; 1,
+            Coin::Nickel =&gt; 5,
+            Coin::Dime =&gt; 10,
+            Coin::Quarter =&gt; 25,
         }
     }
 }
-</code></pre></div></li>
-<li>
-<p>Match with Option<!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#75715e">#![</span><span style="color:#75715e">allow(unused_variables)</span><span style="color:#75715e">]</span>
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">plus_one</span>(x: Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> {
-    <span style="color:#66d9ef">match</span> x {
-        None <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> None,
-        Some(i) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> Some(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>),
+</code></pre></li>
+
+<li><p>Match with Option<T></p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+fn plus_one(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+    match x {
+        None =&gt; None,
+        Some(i) =&gt; Some(i + 1),
     }
 }
 
-<span style="color:#66d9ef">let</span> five <span style="color:#f92672">=</span> Some(<span style="color:#ae81ff">5</span>);
-<span style="color:#66d9ef">let</span> six <span style="color:#f92672">=</span> plus_one(five);
-<span style="color:#66d9ef">let</span> none <span style="color:#f92672">=</span> plus_one(None);
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h4 id="matches-are-exhaustive">Matches Are Exhaustive</h4>
+
 <ul>
-<li>
-<p>Rust knows that we didn’t cover every possible case and even knows which pattern we forgot! Matches in Rust are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of Option<!-- raw HTML omitted -->, when Rust prevents us from forgetting to explicitly handle the None case.</p>
-</li>
-<li>
-<p>The _ Placeholder</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> some_u8_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#66d9ef">u8</span>;
-<span style="color:#66d9ef">match</span> some_u8_value {
-    <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;one&#34;</span>),
-    <span style="color:#ae81ff">3</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;three&#34;</span>),
-    <span style="color:#ae81ff">5</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;five&#34;</span>),
-    <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;seven&#34;</span>),
-    _ <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (),
+<li><p>Rust knows that we didn’t cover every possible case and even knows which pattern we forgot! Matches in Rust are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of Option<T>, when Rust prevents us from forgetting to explicitly handle the None case.</p></li>
+
+<li><p>The _ Placeholder</p>
+
+<pre><code class="language-rs">let some_u8_value = 0u8;
+match some_u8_value {
+    1 =&gt; println!(&quot;one&quot;),
+    3 =&gt; println!(&quot;three&quot;),
+    5 =&gt; println!(&quot;five&quot;),
+    7 =&gt; println!(&quot;seven&quot;),
+    _ =&gt; (),
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="control-flow-with-if-let">Control Flow with if let</h3>
+
 <ul>
-<li>
-<p>The if let syntax lets you combine if and let into a less verbose way to handle values that match one pattern while ignoring the rest.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#75715e">#![</span><span style="color:#75715e">allow(unused_variables)</span><span style="color:#75715e">]</span>
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">let</span> some_u8_value <span style="color:#f92672">=</span> Some(<span style="color:#ae81ff">0</span><span style="color:#66d9ef">u8</span>);
-    <span style="color:#66d9ef">match</span> some_u8_value {
-        Some(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;three&#34;</span>),
-        _ <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (),
+<li><p>The if let syntax lets you combine if and let into a less verbose way to handle values that match one pattern while ignoring the rest.</p>
+
+<pre><code class="language-rs">#![allow(unused_variables)]
+fn main() {
+    let some_u8_value = Some(0u8);
+    match some_u8_value {
+        Some(3) =&gt; println!(&quot;three&quot;),
+        _ =&gt; (),
     }
 }
-</code></pre></div></li>
-<li>
-<p>with else</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Coin::Quarter(state) <span style="color:#f92672">=</span> coin {
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;State quarter from {:?}!&#34;</span>, state);
-} <span style="color:#66d9ef">else</span> {
-    count <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</code></pre></li>
+
+<li><p>with else</p>
+
+<pre><code class="language-rs">let mut count = 0;
+if let Coin::Quarter(state) = coin {
+    println!(&quot;State quarter from {:?}!&quot;, state);
+} else {
+    count += 1;
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#mutability">Mutability</a></li>
-        <li><a href="#data-types">Data types</a></li>
-        <li><a href="#ownership">Ownership</a></li>
-        <li><a href="#references--borrowing">References & Borrowing</a></li>
-        <li><a href="#struct">Struct</a></li>
-        <li><a href="#enum--option">Enum & Option</a></li>
-        <li><a href="#control-flow-with-if-let">Control Flow with if let</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#mutability">Mutability</a>
+<ul>
+<li><a href="#shadowing">Shadowing</a></li>
+</ul></li>
+<li><a href="#data-types">Data types</a>
+<ul>
+<li><a href="#type-parse">Type parse</a></li>
+<li><a href="#the-tuple-type">The Tuple Type</a></li>
+</ul></li>
+<li><a href="#ownership">Ownership</a>
+<ul>
+<li><a href="#ownership-rules">Ownership Rules</a></li>
+<li><a href="#variable-scope">Variable Scope</a></li>
+<li><a href="#memory-and-allocation">Memory and Allocation</a></li>
+<li><a href="#move-or-clone-or-copy">Move or Clone or Copy</a></li>
+</ul></li>
+<li><a href="#references-borrowing">References &amp; Borrowing</a>
+<ul>
+<li><a href="#slice">Slice</a></li>
+</ul></li>
+<li><a href="#struct">Struct</a>
+<ul>
+<li><a href="#unit-like-struct">Unit-Like Struct</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul></li>
+<li><a href="#enum-option">Enum &amp; Option</a>
+<ul>
+<li><a href="#match">Match</a></li>
+<li><a href="#matches-are-exhaustive">Matches Are Exhaustive</a></li>
+</ul></li>
+<li><a href="#control-flow-with-if-let">Control Flow with if let</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

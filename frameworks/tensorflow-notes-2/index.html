@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Tensorflow Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -974,8 +945,6 @@
       <option value="/frameworks/php-web/" >- PHP Web Framework</option>
       <option value="/frameworks/python-django/" >- Python Web Framework</option>
   
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -993,27 +962,38 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Tensorflow Note - 2</h1>
-        <h2 id="prerequisites">Prerequisites</h2>
+        
+
+<h2 id="prerequisites">Prerequisites</h2>
+
 <ul>
 <li>You are using Windows 7 or higher version</li>
 <li>You are using Anaconda to setup the environment</li>
 </ul>
+
 <h2 id="install-anaconda">Install Anaconda</h2>
+
 <blockquote>
 <p>Anaconda® is a package manager, an environment manager, a Python/R data science distribution, and a collection of over 1,500+ open source packages. Anaconda is free and easy to install, and it offers free community support.</p>
 </blockquote>
+
 <ul>
-<li><a href="https://www.continuum.io/downloads">Please download Anaconda from the official site</a></li>
+<li><a href="https://www.continuum.io/downloads">Please download Anaconda from the official site</a>
+<br />
+<br /></li>
 </ul>
-<h2 id="create-tensorflow-virtualenv-with-python-35">Create tensorflow virtualenv with python 3.5</h2>
+
+<h2 id="create-tensorflow-virtualenv-with-python-3-5">Create tensorflow virtualenv with python 3.5</h2>
+
 <ul>
-<li>
-<p>Anaconda uses python 3.6 by default. Tensorflow only supports python 3.5.</p>
+<li><p>Anaconda uses python 3.6 by default. Tensorflow only supports python 3.5.</p>
+
 <p>cd /path/to/envs
-conda create -n tensorflow</p>
-</li>
+conda create -n tensorflow</p></li>
 </ul>
+
 <h2 id="install-tensorflow">Install tensorflow</h2>
+
 <pre><code>activate tensorflow
 ## For CPU
 pip install --ignore-installed --upgrade \
@@ -1023,37 +1003,43 @@ pip install --ignore-installed --upgrade \
 pip install --ignore-installed --upgrade \
     https://storage.googleapis.com/tensorflow/windows/gpu/tensorflow_gpu-1.1.0-cp35-cp35m-win_amd64.whl
 </code></pre>
+
 <h2 id="use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</h2>
-<h3 id="save-code-below-to-file-testpy">Save code below to file test.py</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
 
-<span style="color:#75715e">## Model parameters</span>
-W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable([<span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>], tf<span style="color:#f92672">.</span>float32)
-b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable([<span style="color:#f92672">-</span><span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>], tf<span style="color:#f92672">.</span>float32)
-<span style="color:#75715e">## Model input and output</span>
-x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32)
-linear_model <span style="color:#f92672">=</span> W <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b
-y <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32)
-<span style="color:#75715e">## loss</span>
-loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_sum(tf<span style="color:#f92672">.</span>square(linear_model <span style="color:#f92672">-</span> y)) <span style="color:#75715e">## sum of the squares</span>
-<span style="color:#75715e">## optimizer</span>
-optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>GradientDescentOptimizer(<span style="color:#ae81ff">0.01</span>)
-train <span style="color:#f92672">=</span> optimizer<span style="color:#f92672">.</span>minimize(loss)
-<span style="color:#75715e">## training data</span>
-x_train <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]
-y_train <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>]
-<span style="color:#75715e">## training loop</span>
-init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>global_variables_initializer()
-sess <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Session()
-sess<span style="color:#f92672">.</span>run(init) <span style="color:#75715e">## reset values to wrong</span>
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
-sess<span style="color:#f92672">.</span>run(train, {x:x_train, y:y_train})
+<h3 id="save-code-below-to-file-test-py">Save code below to file test.py</h3>
 
-<span style="color:#75715e">## evaluate training accuracy</span>
-curr_W, curr_b, curr_loss  <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run([W, b, loss], {x:x_train, y:y_train})
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">W: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> b: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> loss: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(curr_W, curr_b, curr_loss))
-</code></pre></div><h3 id="test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</h3>
+<pre><code class="language-python">import numpy as np
+import tensorflow as tf
+
+## Model parameters
+W = tf.Variable([.3], tf.float32)
+b = tf.Variable([-.3], tf.float32)
+## Model input and output
+x = tf.placeholder(tf.float32)
+linear_model = W * x + b
+y = tf.placeholder(tf.float32)
+## loss
+loss = tf.reduce_sum(tf.square(linear_model - y)) ## sum of the squares
+## optimizer
+optimizer = tf.train.GradientDescentOptimizer(0.01)
+train = optimizer.minimize(loss)
+## training data
+x_train = [1,2,3,4]
+y_train = [0,-1,-2,-3]
+## training loop
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init) ## reset values to wrong
+for i in range(1000):
+sess.run(train, {x:x_train, y:y_train})
+
+## evaluate training accuracy
+curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
+print(&quot;W: %s b: %s loss: %s&quot;%(curr_W, curr_b, curr_loss))
+</code></pre>
+
+<h3 id="test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</h3>
+
 <pre><code>activate tensorflow
 cd /ws/python/tf
 python3 test.py
@@ -1076,18 +1062,20 @@ python3 test.py
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#install-anaconda">Install Anaconda</a></li>
-    <li><a href="#create-tensorflow-virtualenv-with-python-35">Create tensorflow virtualenv with python 3.5</a></li>
-    <li><a href="#install-tensorflow">Install tensorflow</a></li>
-    <li><a href="#use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</a>
-      <ul>
-        <li><a href="#save-code-below-to-file-testpy">Save code below to file test.py</a></li>
-        <li><a href="#test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#install-anaconda">Install Anaconda</a></li>
+<li><a href="#create-tensorflow-virtualenv-with-python-3-5">Create tensorflow virtualenv with python 3.5</a></li>
+<li><a href="#install-tensorflow">Install tensorflow</a></li>
+<li><a href="#use-sample-code-to-test-tensorflow">Use sample code to test Tensorflow</a>
+<ul>
+<li><a href="#save-code-below-to-file-test-py">Save code below to file test.py</a></li>
+<li><a href="#test-with-tensorflow-gpu-gpu-enabled">Test with tensorflow-gpu (GPU enabled)</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

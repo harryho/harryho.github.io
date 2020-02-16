@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Vue 2 Admin Project :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -978,8 +949,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -997,70 +966,83 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Vue 2 Admin Project</h1>
-        <h2 id="summary">Summary</h2>
+        
+
+<h2 id="summary">Summary</h2>
+
 <p><strong>Vue2Admin</strong> is a fully responsive admin template that is inspired by <a href="https://almsaeedstudio.com">AdminLTE</a>.</p>
+
 <h2 id="features">Features</h2>
+
 <ul>
 <li>This template is built-in with Vue 2 at the start.</li>
 <li>It include Vue Resource, Vuex as well.</li>
 <li>The plugins for this project are loaded with script loader.</li>
 </ul>
+
 <h2 id="structure-of-reetek-vue2admin">Structure of Reetek Vue2Admin</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">path\to\vue2admin</span>
-<span style="color:#a6e22e">+---build              &lt;-// webpack files</span>
-<span style="color:#a6e22e">+---config             &lt;-// configuration of dev or prod environment</span>
-<span style="color:#a6e22e">+---screenshots</span>
-<span style="color:#a6e22e">+---src                &lt;-// vue components </span>
-<span style="color:#a6e22e">|   +---components</span>
-<span style="color:#a6e22e">|   |   +---charts</span>
-<span style="color:#a6e22e">|   |   +---dashboard</span>
-<span style="color:#a6e22e">|   |   +---forms</span>
-<span style="color:#a6e22e">|   |   +---mailbox</span>
-<span style="color:#a6e22e">|   |   +---misc</span>
-<span style="color:#a6e22e">|   |   +---pages</span>
-<span style="color:#a6e22e">|   |   +---tables</span>
-<span style="color:#a6e22e">|   |   +---ui</span>
-<span style="color:#a6e22e">|   |   \---widget</span>
-<span style="color:#a6e22e">|   \---filters</span>
-<span style="color:#a6e22e">+---static              &lt;-// css, dump data, fonts, image files and plugins</span>
-<span style="color:#a6e22e">|   +---css</span>
-<span style="color:#a6e22e">|   +---data</span>
-<span style="color:#a6e22e">|   +---fonts</span>
-<span style="color:#a6e22e">|   +---img</span>
-<span style="color:#a6e22e">|   |   +---credit</span>
-<span style="color:#a6e22e">|   |   \---stock</span>
-<span style="color:#a6e22e">|   \---js</span>
-<span style="color:#a6e22e">|       \---plugins         &lt;-// plugins for admin dashboard </span>
-<span style="color:#a6e22e">|           +---AdminLTE</span>
-<span style="color:#a6e22e">|           +---bootstrap</span>
-<span style="color:#a6e22e">|           +---bootstrap-slider</span>
-<span style="color:#a6e22e">|           +---bootstrap-wysihtml5</span>
-<span style="color:#a6e22e">|           +---chartjs</span>
-<span style="color:#a6e22e">|           +---ckeditor</span>
-<span style="color:#a6e22e">|           + ...</span>
-<span style="color:#a6e22e">\---test</span>
-    <span style="color:#a6e22e">+---e2e</span>
-    <span style="color:#a6e22e">\---unit</span>
-</code></pre></div><h2 id="screenshots">Screenshots</h2>
+
+<pre><code class="language-ini">path\to\vue2admin
++---build              &lt;-// webpack files
++---config             &lt;-// configuration of dev or prod environment
++---screenshots
++---src                &lt;-// vue components 
+|   +---components
+|   |   +---charts
+|   |   +---dashboard
+|   |   +---forms
+|   |   +---mailbox
+|   |   +---misc
+|   |   +---pages
+|   |   +---tables
+|   |   +---ui
+|   |   \---widget
+|   \---filters
++---static              &lt;-// css, dump data, fonts, image files and plugins
+|   +---css
+|   +---data
+|   +---fonts
+|   +---img
+|   |   +---credit
+|   |   \---stock
+|   \---js
+|       \---plugins         &lt;-// plugins for admin dashboard 
+|           +---AdminLTE
+|           +---bootstrap
+|           +---bootstrap-slider
+|           +---bootstrap-wysihtml5
+|           +---chartjs
+|           +---ckeditor
+|           + ...
+\---test
+    +---e2e
+    \---unit
+</code></pre>
+
+<h2 id="screenshots">Screenshots</h2>
+
 <blockquote>
-<p><img src="/img/vue2admin_screenshot1_sm.png" alt="Screenshot1"></p>
+<p><img src="/img/vue2admin_screenshot1_sm.png" alt="Screenshot1" /></p>
+
+<p><img src="/img/vue2admin_screenshot2_sm.png" alt="Screenshot2" /></p>
 </blockquote>
-<blockquote>
-<p><img src="/img/vue2admin_screenshot2_sm.png" alt="Screenshot2"></p>
-</blockquote>
-<h2 id="browse-repositoryhttpsgithubcomharryhovue2admingit">Browse <a href="https://github.com/harryho/vue2admin.git">Repository</a></h2>
+
+<h2 id="browse-repository-https-github-com-harryho-vue2admin-git">Browse <a href="https://github.com/harryho/vue2admin.git">Repository</a></h2>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#structure-of-reetek-vue2admin">Structure of Reetek Vue2Admin</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#browse-repositoryhttpsgithubcomharryhovue2admingit">Browse Repository</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#structure-of-reetek-vue2admin">Structure of Reetek Vue2Admin</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#browse-repository-https-github-com-harryho-vue2admin-git">Browse <a href="https://github.com/harryho/vue2admin.git">Repository</a></a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

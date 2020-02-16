@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>MySql Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1005,8 +976,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1024,69 +993,89 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>MySql Note - 2</h1>
-        <blockquote>
+        
+
+<blockquote>
 <p>As one of most popular open source databases, MySql is mainly used as data storage, aka database. To store the data into MySql server, we need to use SQL - Structural Query Language. But before we store the data to MySql, we need to define the schema which tells MySql how to organize the data in the proper manner. To define the schema, there is a special set of SQL, which we call it DDL - Data Definition Language, such as, CREATE, DROP, ALTER, etc.</p>
 </blockquote>
+
 <h3 id="create-a-new-database">Create a new database</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Drop the old one  
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">SCHEMA</span>  <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> new_dbu
 
-<span style="color:#75715e">-- Create a new db 
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> new_db CHARACTER <span style="color:#66d9ef">SET</span> utf8 
-<span style="color:#66d9ef">COLLATE</span> utf8_general_ci;
+<pre><code class="language-sql">-- Drop the old one  
+DROP SCHEMA  IF EXISTS new_dbu
 
-</code></pre></div><h3 id="create-a-table">Create a table</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> new_table; 
+-- Create a new db 
+CREATE DATABASE new_db CHARACTER SET utf8 
+COLLATE utf8_general_ci;
 
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> new_table (
-    id int <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
-    name varchar(<span style="color:#ae81ff">50</span>),
-    title varchar(<span style="color:#ae81ff">50</span>),
-    email varchar(<span style="color:#ae81ff">250</span>),
+</code></pre>
+
+<h3 id="create-a-table">Create a table</h3>
+
+<pre><code class="language-sql">DROP TABLE IF EXISTS new_table; 
+
+CREATE TABLE new_table (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(50),
+    title varchar(50),
+    email varchar(250),
     created_date datetime,
     modified_date datetime,
-    <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (id)
+    PRIMARY KEY (id)
 );
 
 
-</code></pre></div><h3 id="query">Query</h3>
+</code></pre>
+
+<h3 id="query">Query</h3>
+
 <ul>
-<li>JOIN and INNER JOIN</li>
+<li><p>JOIN and INNER JOIN</p>
+
+<pre><code class="language-sql">SELECT * FROM new_table_a na 
+     JOIN new_table_b nb ON nb.new_table_a_id = na.id
+     LIMIT 10;
+
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> new_table_a na 
-         <span style="color:#66d9ef">JOIN</span> new_table_b nb <span style="color:#66d9ef">ON</span> nb.new_table_a_id <span style="color:#f92672">=</span> na.id
-         <span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">10</span>;
 
-</code></pre></div><h3 id="useful-temporary-table">Useful temporary table</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
-<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TEMPORARY</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> tmp_table; 
+<h3 id="useful-temporary-table">Useful temporary table</h3>
 
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TEMPORARY</span> <span style="color:#66d9ef">TABLE</span> tmp_table <span style="color:#66d9ef">AS</span> 
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> new_table;
+<pre><code class="language-sql">
+DROP TEMPORARY TABLE IF EXISTS tmp_table; 
 
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tmp_table;
+CREATE TEMPORARY TABLE tmp_table AS 
+SELECT * FROM new_table;
 
-</code></pre></div><h3 id="update-data-from-other-table">Update data from other table</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> tableB
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> tableA <span style="color:#66d9ef">ON</span> tableB.name <span style="color:#f92672">=</span> tableA.name
-<span style="color:#66d9ef">SET</span> tableB.value <span style="color:#f92672">=</span> <span style="color:#66d9ef">IF</span>(tableA.value <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, tableA.value, tableB.value)
-<span style="color:#66d9ef">WHERE</span> tableA.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Joe</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div>
+SELECT * FROM tmp_table;
+
+</code></pre>
+
+<h3 id="update-data-from-other-table">Update data from other table</h3>
+
+<pre><code class="language-sql">UPDATE tableB
+INNER JOIN tableA ON tableB.name = tableA.name
+SET tableB.value = IF(tableA.value &gt; 0, tableA.value, tableB.value)
+WHERE tableA.name = 'Joe'
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#create-a-new-database">Create a new database</a></li>
-        <li><a href="#create-a-table">Create a table</a></li>
-        <li><a href="#query">Query</a></li>
-        <li><a href="#useful-temporary-table">Useful temporary table</a></li>
-        <li><a href="#update-data-from-other-table">Update data from other table</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#create-a-new-database">Create a new database</a></li>
+<li><a href="#create-a-table">Create a table</a></li>
+<li><a href="#query">Query</a></li>
+<li><a href="#useful-temporary-table">Useful temporary table</a></li>
+<li><a href="#update-data-from-other-table">Update data from other table</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

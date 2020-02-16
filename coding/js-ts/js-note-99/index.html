@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>JS &amp; ES snippet :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +974,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,87 +991,115 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>JS &amp; ES snippet</h1>
-        <h3 id="setup-the-global-node-modules">Setup the global node modules</h3>
+        
+
+<h3 id="setup-the-global-node-modules">Setup the global node modules</h3>
+
 <ul>
-<li>Add an environment variable to tell node where the global node module sits</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># I use nvm to manage my node and node modules</span>
-export NODE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span>/.nvm/versions/node/&lt;node_version&gt;/lib/node_modules
-</code></pre></div><ul>
-<li>
-<p>If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.</p>
+<li><p>Add an environment variable to tell node where the global node module sits</p>
+
+<pre><code class="language-bash"># I use nvm to manage my node and node modules
+export NODE_PATH=${HOME}/.nvm/versions/node/&lt;node_version&gt;/lib/node_modules
+</code></pre></li>
+
+<li><p>If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.</p>
+
 <ul>
 <li>Create a new folder under your home directory</li>
 <li>Install npm to new global node module</li>
-<li>update environment variables in the profile</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir $HOME/.node_modules
+
+<li><p>update environment variables in the profile</p>
+
+<pre><code class="language-bash">mkdir $HOME/.node_modules
 npm config set prefix $HOME/.node_modules
 npm install -g npm
-echo <span style="color:#e6db74">&#39;export NODE_MODULES=$HOME/.node_modules&#39;</span> &gt;&gt; $HOME/.profile
-echo <span style="color:#e6db74">&#39;export PATH=$PATH:$NODE_MODULES/bin&#39;</span> &gt;&gt; $HOME/.profile
+echo 'export NODE_MODULES=$HOME/.node_modules' &gt;&gt; $HOME/.profile
+echo 'export PATH=$PATH:$NODE_MODULES/bin' &gt;&gt; $HOME/.profile
 source $HOME/.profile
-</code></pre></div></li>
+</code></pre></li>
+</ul></li>
 </ul>
+
 <h3 id="parsing-csv-file">Parsing CSV file</h3>
+
 <h4 id="parse-csv-file-with-fast-csv">Parse csv file with fast-csv</h4>
+
 <ul>
-<li>
-<p>Install package fast-csv globally</p>
-<p>npm install -g fast-csv</p>
-</li>
-<li>
-<p>Assume there is a csv file named test.csv, which contains a few contacts</p>
-</li>
+<li><p>Install package fast-csv globally</p>
+
+<p>npm install -g fast-csv</p></li>
+
+<li><p>Assume there is a csv file named test.csv, which contains a few contacts</p></li>
 </ul>
+
 <h5 id="sample-1">Sample 1</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;fs&#34;</span>)
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">csv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fast-csv&#39;</span>);
 
-<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">createReadStream</span>(<span style="color:#e6db74">&#39;test.csv&#39;</span>)
-    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">parse</span>({<span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span><span style="color:#66d9ef">true</span>}))
-    .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#a6e22e">error</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>))
-    .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#a6e22e">row</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">ROW=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">row</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>))
-    .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;end&#39;</span>, <span style="color:#a6e22e">rowCount</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">Parsed </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">rowCount</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> rows</span><span style="color:#e6db74">`</span>));
+<pre><code class="language-js">const fs = require(&quot;fs&quot;)
+const csv = require('fast-csv');
+
+fs.createReadStream('test.csv')
+    .pipe(csv.parse({headers:true}))
+    .on('error', error =&gt; console.error(error))
+    .on('data', row =&gt; console.log(`ROW=${JSON.stringify(row)}`))
+    .on('end', rowCount =&gt; console.log(`Parsed ${rowCount} rows`));
 
 
-</code></pre></div><h5 id="sample-2">Sample 2</h5>
+</code></pre>
+
+<h5 id="sample-2">Sample 2</h5>
+
 <ul>
-<li>Validate empty field</li>
+<li><p>Validate empty field</p>
+
+<pre><code class="language-js">const csv = require('fast-csv')
+const fs = require('fs')
+const fileStream = fs.createReadStream('test.csv')
+const parser = csv.parse({ ignoreEmpty: true, headers: true, trim: true })
+
+const invalidFilter
+
+fileStream
+.pipe(parser)
+.validate(data =&gt; data.last_name &amp;&amp; data.mobile.startsWith('04'))
+.on('error', error =&gt; console.error(error))
+.on('data', row =&gt; console.log(`Valid [row=${JSON.stringify(row)}]`))
+.on('data-invalid', (row, rowNumber) =&gt; console.log(`Invalid [rowNumber=${rowNumber}] [row=${JSON.stringify(row)}]`))
+.on('end', rowCount =&gt; console.log(`Parsed ${rowCount} rows`))
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">csv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fast-csv&#39;</span>)
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>)
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fileStream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">createReadStream</span>(<span style="color:#e6db74">&#39;test.csv&#39;</span>)
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">parser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">parse</span>({ <span style="color:#a6e22e">ignoreEmpty</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">trim</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">invalidFilter</span>
+<h4 id="sample-3">Sample 3</h4>
 
-<span style="color:#a6e22e">fileStream</span>
-  .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">parser</span>)
-  .<span style="color:#a6e22e">validate</span>(<span style="color:#a6e22e">data</span> =&gt; <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">last_name</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">mobile</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#39;04&#39;</span>))
-  .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#a6e22e">error</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>))
-  .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#a6e22e">row</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">Valid [row=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">row</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">]</span><span style="color:#e6db74">`</span>))
-  .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;data-invalid&#39;</span>, (<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">rowNumber</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">Invalid [rowNumber=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">rowNumber</span><span style="color:#e6db74">}</span><span style="color:#e6db74">] [row=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">row</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">]</span><span style="color:#e6db74">`</span>))
-  .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;end&#39;</span>, <span style="color:#a6e22e">rowCount</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">Parsed </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">rowCount</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> rows</span><span style="color:#e6db74">`</span>))
-</code></pre></div><h4 id="sample-3">Sample 3</h4>
 <ul>
-<li>Transform the csv's delimiter from  &ldquo;,&rdquo; to &ldquo;|&rdquo; , and combine first two columns into one</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<li><p>Transform the csv&rsquo;s delimiter from  &ldquo;,&rdquo; to &ldquo;|&rdquo; , and combine first two columns into one</p>
 
-</code></pre></div>
+<pre><code class="language-js">
+
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#setup-the-global-node-modules">Setup the global node modules</a></li>
-        <li><a href="#parsing-csv-file">Parsing CSV file</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#setup-the-global-node-modules">Setup the global node modules</a></li>
+<li><a href="#parsing-csv-file">Parsing CSV file</a>
+<ul>
+<li><a href="#parse-csv-file-with-fast-csv">Parse csv file with fast-csv</a>
+<ul>
+<li><a href="#sample-1">Sample 1</a></li>
+<li><a href="#sample-2">Sample 2</a></li>
+</ul></li>
+<li><a href="#sample-3">Sample 3</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

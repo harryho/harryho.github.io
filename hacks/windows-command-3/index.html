@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Windows cmd &amp; hotkey - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -977,8 +948,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -996,22 +965,25 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Windows cmd &amp; hotkey - 3</h1>
-        <p><em>This article will continue the topic of Windows command &amp; hotkeys. <a href="/blog/windows-command-1">Part-1</a> shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. <a href="/os/windows-command-2">Part-2</a> advanced commands and how to create a batch script with all those commands. Here I am going to show you another secret weapon in Windows system-VBScript/JScript</em></p>
+        
+
+<p><em>This article will continue the topic of Windows command &amp; hotkeys. <a href="/blog/windows-command-1">Part-1</a> shows you common hotkeys and short command lines for <code>Run</code> windnow dialog. <a href="/os/windows-command-2">Part-2</a> advanced commands and how to create a batch script with all those commands. Here I am going to show you another secret weapon in Windows system-VBScript/JScript</em></p>
+
 <h2 id="breif-history">Breif history</h2>
+
 <blockquote>
 <p>VBScript/JScript is an Active Scripting language developed by Microsoft that is modeled on Visual Basic. It allows Microsoft Windows system administrators to generate powerful tools for managing computers with error handling, subroutines, and other advanced programming constructs.</p>
-</blockquote>
-<blockquote>
+
 <p>A VBScript script must be executed within a host environment, of which there are several provided with Microsoft Windows, including: Windows Script Host (WSH), Internet Explorer (IE), and Internet Information Services (IIS). VBScript uses the Component Object Model to access elements of the environment within which it is running.</p>
-</blockquote>
-<blockquote>
-<p>JScript is Microsoft's dialect of the ECMAScript standard that is used in Microsoft's Internet Explorer. JScript is implemented as an Active Scripting engine. This means that it can be &ldquo;plugged in&rdquo; to OLE Automation applications that support Active Scripting, such as Internet Explorer, Active Server Pages, and Windows Script Host.</p>
-</blockquote>
-<blockquote>
+
+<p>JScript is Microsoft&rsquo;s dialect of the ECMAScript standard that is used in Microsoft&rsquo;s Internet Explorer. JScript is implemented as an Active Scripting engine. This means that it can be &ldquo;plugged in&rdquo; to OLE Automation applications that support Active Scripting, such as Internet Explorer, Active Server Pages, and Windows Script Host.</p>
+
 <p>With Cscript.exe, you can run scripts by typing the name of a script file at the command prompt. Like Microsoft Internet Explorer, Windows Script Host serves as a controller of Windows Script compliant scripting engines, but Windows Script Host has very low memory requirements. Windows Script Host is ideal for both interactive and non-interactive scripting needs, such as logon scripting and administrative scripting.</p>
 </blockquote>
+
 <h2 id="sample-of-vbscript-file">Sample of VBScript file</h2>
-<pre><code class="language-vbs" data-lang="vbs">Set oFSO = CreateObject(&quot;Scripting.FileSystemObject&quot;^)
+
+<pre><code class="language-vbs">Set oFSO = CreateObject(&quot;Scripting.FileSystemObject&quot;^)
 Set oInput = oFSO.OpenTextFile(WScript.Arguments(0^), 1^)
 sData = Replace(oInput.ReadAll, &quot;,&quot; ^&amp; VbCrLf, VbCrLf^)
 Set oOutput = oFSO.CreateTextFile(WScript.Arguments(1^), True^)
@@ -1019,13 +991,17 @@ oOutput.Write sData
 oInput.Close
 oOutput.Close
 
-</code></pre><h2 id="replace-content-script">Replace content script</h2>
+</code></pre>
+
+<h2 id="replace-content-script">Replace content script</h2>
+
 <ul>
 <li>Create a file named <code>repltxt.bat</code></li>
 <li>Copy the code into the file <code>repltxt.bat</code></li>
-<li>Run the script</li>
-</ul>
-<pre><code class="language-vbs" data-lang="vbs">
+
+<li><p>Run the script</p>
+
+<pre><code class="language-vbs">
 @if (@X)==(@Y) @end /* Harmless hybrid line that begins a JScript comment
 
 ::************ Documentation ***********
@@ -1038,17 +1014,17 @@ oOutput.Close
 
 @echo off
 if .%2 equ . (
-  if &quot;%~1&quot; equ &quot;/?&quot; (
-    echo.&quot;%~f0&quot;
-    &lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^:::&quot; &quot;&quot; a
-    exit /b 0
-  ) else if /i &quot;%~1&quot; equ &quot;/V&quot; (
-    &lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^::(NEWREPL\.BAT version)&quot; &quot;$1&quot; a
-    exit /b 0
-  ) else (
-    call :err &quot;Insufficient arguments&quot;
-    exit /b 2
-  )
+if &quot;%~1&quot; equ &quot;/?&quot; (
+echo.&quot;%~f0&quot;
+&lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^:::&quot; &quot;&quot; a
+exit /b 0
+) else if /i &quot;%~1&quot; equ &quot;/V&quot; (
+&lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^::(NEWREPL\.BAT version)&quot; &quot;$1&quot; a
+exit /b 0
+) else (
+call :err &quot;Insufficient arguments&quot;
+exit /b 2
+)
 )
 
 cscript //E:JScript //nologo &quot;%~f0&quot; %*
@@ -1061,49 +1037,57 @@ exit /b
 ************* JScript portion **********/
 var rtn=1;
 try {
-    var env=WScript.CreateObject(&quot;WScript.Shell&quot;).Environment(&quot;Process&quot;);
-    var args=WScript.Arguments;
-    var search=args.Item(0);
-    var replace=args.Item(1);
-    var options=&quot;g&quot;;
-    if (args.length&gt;2) options+=args.Item(2).toLowerCase();
-    var alterations=(options.indexOf(&quot;a&quot;)&gt;=0);
-    if (alterations) options=options.replace(/a/g,&quot;&quot;);
-    if (options.indexOf(&quot;v&quot;)&gt;=0) {
-        options=options.replace(/v/g,&quot;&quot;);
-        search=env(search);
-        replace=env(replace);
-    }
-    var search=new RegExp(search,options);
-    var str1, str2;
+var env=WScript.CreateObject(&quot;WScript.Shell&quot;).Environment(&quot;Process&quot;);
+var args=WScript.Arguments;
+var search=args.Item(0);
+var replace=args.Item(1);
+var options=&quot;g&quot;;
+if (args.length&gt;2) options+=args.Item(2).toLowerCase();
+var alterations=(options.indexOf(&quot;a&quot;)&gt;=0);
+if (alterations) options=options.replace(/a/g,&quot;&quot;);
+if (options.indexOf(&quot;v&quot;)&gt;=0) {
+    options=options.replace(/v/g,&quot;&quot;);
+    search=env(search);
+    replace=env(replace);
+}
+var search=new RegExp(search,options);
+var str1, str2;
 
-      while (!WScript.StdIn.AtEndOfStream) {
-        str1=WScript.StdIn.ReadLine();
-        str2=str1.replace(search,replace);
-        if (!alterations || str1!=str2) WScript.Stdout.WriteLine(str2);
-        if (str1!=str2) rtn=0;
-    }
+  while (!WScript.StdIn.AtEndOfStream) {
+    str1=WScript.StdIn.ReadLine();
+    str2=str1.replace(search,replace);
+    if (!alterations || str1!=str2) WScript.Stdout.WriteLine(str2);
+    if (str1!=str2) rtn=0;
+}
 } catch(e) {
-  WScript.Stderr.WriteLine(&quot;JScript runtime error: &quot;+e.message);
-  rtn=3;
+WScript.Stderr.WriteLine(&quot;JScript runtime error: &quot;+e.message);
+rtn=3;
 }
 WScript.Quit(rtn);
 
-</code></pre><p>The sample above is a bit complicated, and it is combination of Batch script and JScript.
+</code></pre></li>
+</ul>
+
+<p>The sample above is a bit complicated, and it is combination of Batch script and JScript.
 The batch script part checks and validate the input arguments, if there is no issue, then it will trigger the JScript to complete the work.</p>
+
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>From the Windows 7 and on, Windows is no longer to recognize the file with suffix &ldquo;vbs&rdquo; as executable file. You need to change the add &ldquo;vbs&rdquo; to Windows's registory.</p>
+
+<p>From the Windows 7 and on, Windows is no longer to recognize the file with suffix &ldquo;vbs&rdquo; as executable file. You need to change the add &ldquo;vbs&rdquo; to Windows&rsquo;s registory.</p>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#breif-history">Breif history</a></li>
-    <li><a href="#sample-of-vbscript-file">Sample of VBScript file</a></li>
-    <li><a href="#replace-content-script">Replace content script</a></li>
-    <li><a href="#troubleshooting">Troubleshooting</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#breif-history">Breif history</a></li>
+<li><a href="#sample-of-vbscript-file">Sample of VBScript file</a></li>
+<li><a href="#replace-content-script">Replace content script</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

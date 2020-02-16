@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>MySql Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1005,8 +976,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1024,54 +993,72 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>MySql Note - 1</h1>
-        <blockquote>
-<p>MySQL is the world's most popular open source database. Whether you are a fast growing web property, technology ISV or large enterprise, MySQL can cost-effectively help you deliver high performance, scalable database applications.</p>
+        
+
+<blockquote>
+<p>MySQL is the world&rsquo;s most popular open source database. Whether you are a fast growing web property, technology ISV or large enterprise, MySQL can cost-effectively help you deliver high performance, scalable database applications.</p>
 </blockquote>
+
 <h3 id="prerequisite">Prerequisite</h3>
+
 <ul>
 <li>Install MySql 5.6+ on your PC or server</li>
 </ul>
-<h3 id="launch--stop-mysql-server">Launch &amp; Stop MySql server</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># use systemctl</span>
+
+<h3 id="launch-stop-mysql-server">Launch &amp; Stop MySql server</h3>
+
+<pre><code class="language-bash"># use systemctl
 systemctl status mysql.service
 systemctl restart mysql.service
 
-<span style="color:#75715e"># use service</span>
+# use service
 service mysql status
 service mysql restart 
 
-</code></pre></div><h3 id="set-root-password">Set root password</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql_secure_installation
-</code></pre></div><h3 id="reset-root-password">Reset root password</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
-<span style="color:#75715e">-- MySql 5.6.x
-</span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">UPDATE</span> mysql.<span style="color:#66d9ef">user</span> <span style="color:#66d9ef">SET</span> password <span style="color:#f92672">=</span> PASSWORD(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">YourNewPassword</span><span style="color:#e6db74">&#39;</span>) 
-    <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">User</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">root</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">Host</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>;
+</code></pre>
 
-<span style="color:#75715e">-- MySql 5.7+
-</span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">UPDATE</span> mysql.<span style="color:#66d9ef">user</span> <span style="color:#66d9ef">SET</span> authentication_string <span style="color:#f92672">=</span> PASSWORD(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">YourNewPassword</span><span style="color:#e6db74">&#39;</span>) 
-    <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">User</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">root</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">Host</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>; 
+<h3 id="set-root-password">Set root password</h3>
 
-mysql<span style="color:#f92672">&gt;</span> FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
+<pre><code class="language-bash">mysql_secure_installation
+</code></pre>
 
-</code></pre></div><h3 id="connect-to-mysql-server">Connect to MySql server</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -u &lt;user_name&gt; -p  -P &lt;port&gt; -h &lt;host_name&gt;
-</code></pre></div>
+<h3 id="reset-root-password">Reset root password</h3>
+
+<pre><code class="language-sql">
+-- MySql 5.6.x
+mysql&gt; UPDATE mysql.user SET password = PASSWORD('YourNewPassword') 
+    -&gt; WHERE User = 'root' AND Host = 'localhost';
+
+-- MySql 5.7+
+mysql&gt; UPDATE mysql.user SET authentication_string = PASSWORD('YourNewPassword') 
+    -&gt; WHERE User = 'root' AND Host = 'localhost'; 
+
+mysql&gt; FLUSH PRIVILEGES;
+
+</code></pre>
+
+<h3 id="connect-to-mysql-server">Connect to MySql server</h3>
+
+<pre><code class="language-bash">mysql -u &lt;user_name&gt; -p  -P &lt;port&gt; -h &lt;host_name&gt;
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#prerequisite">Prerequisite</a></li>
-        <li><a href="#launch--stop-mysql-server">Launch & Stop MySql server</a></li>
-        <li><a href="#set-root-password">Set root password</a></li>
-        <li><a href="#reset-root-password">Reset root password</a></li>
-        <li><a href="#connect-to-mysql-server">Connect to MySql server</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisite">Prerequisite</a></li>
+<li><a href="#launch-stop-mysql-server">Launch &amp; Stop MySql server</a></li>
+<li><a href="#set-root-password">Set root password</a></li>
+<li><a href="#reset-root-password">Reset root password</a></li>
+<li><a href="#connect-to-mysql-server">Connect to MySql server</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

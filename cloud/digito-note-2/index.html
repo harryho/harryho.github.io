@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>DigitialOcean Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -975,8 +946,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -994,9 +963,14 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>DigitialOcean Note - 2</h1>
-        <h2 id="user-setup">User Setup</h2>
+        
+
+<h2 id="user-setup">User Setup</h2>
+
 <h3 id="create-a-new-admin-user">Create a new admin user</h3>
+
 <h4 id="add-a-new-user">Add a new user</h4>
+
 <pre><code># Add new user 
 # set password
 adduser &lt;admin_user&gt;
@@ -1004,7 +978,10 @@ adduser &lt;admin_user&gt;
 # user to sudo group
 usermod -aG sudo &lt;admin_user&gt;
 
-</code></pre><h4 id="set-ssh-access-for-new-user">Set SSH access for new user</h4>
+</code></pre>
+
+<h4 id="set-ssh-access-for-new-user">Set SSH access for new user</h4>
+
 <pre><code># Switch session to new user 
 su - &lt;admin_user&gt;
 
@@ -1019,14 +996,23 @@ chmod 700 ~/.ssh
 sudo cp /root/.ssh/authorized_keys ~/.ssh/authorized_keys
 chmod 644 /home/&lt;admin_user&gt;/.ssh/authorized_keys
 sudo chown -R &lt;admin_user&gt;:&lt;admin_user&gt; ~/
-</code></pre><h4 id="login-as-new-user-via-ssh">Login as new user via SSH</h4>
+</code></pre>
+
+<h4 id="login-as-new-user-via-ssh">Login as new user via SSH</h4>
+
 <pre><code>ssh -i ~/.ssh/&lt;your_droplet_rsa&gt; &lt;admin_user&gt;@&lt;your_droplet_ip&gt;
-</code></pre><h4 id="set-root-password--disable-ssh">Set root password &amp; disable SSH</h4>
+</code></pre>
+
+<h4 id="set-root-password-disable-ssh">Set root password &amp; disable SSH</h4>
+
 <pre><code>sudo passwd
 
 # rename key file
 sudo mv /root/.ssh/authorized_keys  /root/.ssh/disabled_authorized_keys
-</code></pre><h3 id="security-update">Security Update</h3>
+</code></pre>
+
+<h3 id="security-update">Security Update</h3>
+
 <pre><code># Update only for security
 sudo apt-get install unattended-upgrades
 
@@ -1036,51 +1022,61 @@ sudo unattended-upgrade -d
 
 # Update quietly
 sudo unattended-upgrade
-</code></pre><h3 id="tagging--cloud-firewall">Tagging &amp; Cloud Firewall</h3>
+</code></pre>
+
+<h3 id="tagging-cloud-firewall">Tagging &amp; Cloud Firewall</h3>
+
 <ul>
 <li>Tags are custom labels you apply to Droplets that have multiple uses
+
 <ul>
 <li>Add tags to your droplet. e.g. my-web-server</li>
-</ul>
-</li>
+</ul></li>
 <li>DigitalOcean Cloud Firewalls are a free, network-based, stateful firewall service for your DigitalOcean Droplets. They block all traffic that isn’t expressly permitted by a rule. You can define the Droplets protected by a firewall individually or by using tags.</li>
 <li>Always setup Firewall for your droplets
+
 <ul>
 <li>Set SSH permission for only given IP address</li>
 <li>Set HTTP for port 80</li>
 <li>Set HTTPS for port 443</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="other-features">Other Features</h2>
+
 <h3 id="floating-ips">Floating IPs</h3>
+
 <p>DigitalOcean Floating IPs are publicly-accessible static IP addresses that you can assign to Droplets. A floating IP provides an additional static address you can use to access a Droplet without replacing or changing the Droplet’s original public IP address.</p>
+
 <h3 id="block-storage-volumes">Block Storage Volumes</h3>
+
 <p>DigitalOcean Block Storage is a flexible, convenient way of managing additional storage (in units called volumes) for your Droplets. Volumes are independent resources that you can move between Droplets within the same region. You can increase the size of a volume without powering down the Droplet it’s attached to. They’re most useful when you need more storage space but don’t need the additional processing power or memory that a larger Droplet would provide,</p>
+
 <h3 id="load-balancers">Load Balancers</h3>
+
 <p>DigitalOcean Load Balancers are a fully-managed, highly available load balancing service. Load balancers distribute traffic to groups of Droplets, which decouples the overall health of a backend service from the health of a single server to ensure that your services stay online.</p>
+
 <h2 id="known-limits">Known Limits</h2>
+
 <ul>
-<li>
-<p>Some Droplet network traffic is restricted to help prevent malicious actions, like reflected DDoS attacks</p>
+<li><p>Some Droplet network traffic is restricted to help prevent malicious actions, like reflected DDoS attacks</p>
+
 <ul>
 <li>TCP and UDP traffic on port 11211 inbound from external networks (due to the Memcached amplification attacks in March 2018)</li>
 <li>Multicast traffic.</li>
-<li>Traffic not matching a Droplet's IP address/MAC address.</li>
+<li>Traffic not matching a Droplet&rsquo;s IP address/MAC address.</li>
 <li>SMTP via Floating IPs and IPv6.</li>
+</ul></li>
+
+<li><p>Users can create up to 100 volumes and up to a total of 16 TiB of disk space per region. You can contact our support team to request an increase. You can attach a maximum of 7 volumes to any one node or Droplet, and this limit cannot be changed.</p></li>
+
+<li><p>General Purpose plans are not yet compatible with DigitalOcean Kubernetes or Managed Databases.</p></li>
+
+<li><p>You can&rsquo;t create more than 10 Droplets at the same time using the control panel or the API</p></li>
 </ul>
-</li>
-<li>
-<p>Users can create up to 100 volumes and up to a total of 16 TiB of disk space per region. You can contact our support team to request an increase. You can attach a maximum of 7 volumes to any one node or Droplet, and this limit cannot be changed.</p>
-</li>
-<li>
-<p>General Purpose plans are not yet compatible with DigitalOcean Kubernetes or Managed Databases.</p>
-</li>
-<li>
-<p>You can't create more than 10 Droplets at the same time using the control panel or the API</p>
-</li>
-</ul>
+
 <h3 id="build-web-host">Build Web Host</h3>
+
 <ul>
 <li>Next step is to build a web host in droplet.</li>
 </ul>
@@ -1089,27 +1085,33 @@ sudo unattended-upgrade
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#user-setup">User Setup</a>
-      <ul>
-        <li><a href="#create-a-new-admin-user">Create a new admin user</a></li>
-        <li><a href="#security-update">Security Update</a></li>
-        <li><a href="#tagging--cloud-firewall">Tagging & Cloud Firewall</a></li>
-      </ul>
-    </li>
-    <li><a href="#other-features">Other Features</a>
-      <ul>
-        <li><a href="#floating-ips">Floating IPs</a></li>
-        <li><a href="#block-storage-volumes">Block Storage Volumes</a></li>
-        <li><a href="#load-balancers">Load Balancers</a></li>
-      </ul>
-    </li>
-    <li><a href="#known-limits">Known Limits</a>
-      <ul>
-        <li><a href="#build-web-host">Build Web Host</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#user-setup">User Setup</a>
+<ul>
+<li><a href="#create-a-new-admin-user">Create a new admin user</a>
+<ul>
+<li><a href="#add-a-new-user">Add a new user</a></li>
+<li><a href="#set-ssh-access-for-new-user">Set SSH access for new user</a></li>
+<li><a href="#login-as-new-user-via-ssh">Login as new user via SSH</a></li>
+<li><a href="#set-root-password-disable-ssh">Set root password &amp; disable SSH</a></li>
+</ul></li>
+<li><a href="#security-update">Security Update</a></li>
+<li><a href="#tagging-cloud-firewall">Tagging &amp; Cloud Firewall</a></li>
+</ul></li>
+<li><a href="#other-features">Other Features</a>
+<ul>
+<li><a href="#floating-ips">Floating IPs</a></li>
+<li><a href="#block-storage-volumes">Block Storage Volumes</a></li>
+<li><a href="#load-balancers">Load Balancers</a></li>
+</ul></li>
+<li><a href="#known-limits">Known Limits</a>
+<ul>
+<li><a href="#build-web-host">Build Web Host</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

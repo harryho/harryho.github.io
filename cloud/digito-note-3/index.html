@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>DigitialOcean Note - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -975,8 +946,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -994,178 +963,232 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>DigitialOcean Note - 3</h1>
-        <blockquote>
+        
+
+<blockquote>
 <p>Here I contineu to setup SSL certificates for all sites on my web host</p>
 </blockquote>
+
 <h2 id="ufw">UFW</h2>
+
 <p>UFW, or Uncomplicated Firewall, is a front-end to iptables. Its main goal is to make managing your firewall drop-dead simple and to provide an easy-to-use interface.</p>
+
 <p><strong>DO NOT Enable UFW</strong></p>
+
 <blockquote>
 <p>DO NOT enable UFW without reading through the instructions</p>
 </blockquote>
+
 <h3 id="enable-ip-v6">Enable IP V6</h3>
+
 <ul>
-<li>Open the UFW configuration with vi:</li>
-</ul>
+<li><p>Open the UFW configuration with vi:</p>
+
 <pre><code>sudo vi /etc/default/ufw
-</code></pre><ul>
-<li>Make sure &ldquo;IPV6&rdquo; is set to &ldquo;yes&rdquo;, like so:</li>
-</ul>
+</code></pre></li>
+
+<li><p>Make sure &ldquo;IPV6&rdquo; is set to &ldquo;yes&rdquo;, like so:</p>
+
 <pre><code>...
 IPV6=yes
 ...
-</code></pre><h3 id="set-default-rules">Set default rules</h3>
+</code></pre></li>
+</ul>
+
+<h3 id="set-default-rules">Set default rules</h3>
+
 <pre><code>sudo ufw deny incoming
 sudo ufw allow outgoing
-</code></pre><h3 id="allow-ssh--openssh">Allow SSH / OpenSSH</h3>
+</code></pre>
+
+<h3 id="allow-ssh-openssh">Allow SSH / OpenSSH</h3>
+
 <ul>
-<li>Check app list &amp; enable OpenSSH</li>
-</ul>
+<li><p>Check app list &amp; enable OpenSSH</p>
+
 <pre><code># List applications
 sudo ufw app list
 
 # Allow SSH
 sudo ufw allow OpenSSH
-</code></pre><ul>
-<li>Directly allow port 22 or other SSH port, e.g. 2222</li>
-</ul>
+</code></pre></li>
+
+<li><p>Directly allow port 22 or other SSH port, e.g. 2222</p>
+
 <pre><code>sudo ufw allow 22 
-</code></pre><h3 id="enable-ufw">Enable UFW</h3>
+</code></pre></li>
+</ul>
+
+<h3 id="enable-ufw">Enable UFW</h3>
+
 <pre><code>sudo ufw enable
 sudo ufw sattus verbose
-</code></pre><h2 id="nginx">Nginx</h2>
+</code></pre>
+
+<h2 id="nginx">Nginx</h2>
+
 <h3 id="install-nginx">Install Nginx</h3>
+
 <pre><code>sudo apt install ngix
-</code></pre><h3 id="set-ufw">Set UFW</h3>
+</code></pre>
+
+<h3 id="set-ufw">Set UFW</h3>
+
 <pre><code># show applications 
 sudo ufw app list
 
 # Allow Nginx 
 sudo ufw allow 'Nginx Full'
 sudo ufw reload
-</code></pre><h2 id="build-web-host-block">Build Web Host Block</h2>
+</code></pre>
+
+<h2 id="build-web-host-block">Build Web Host Block</h2>
+
 <h3 id="create-the-directory-structure">Create the Directory Structure</h3>
+
 <ul>
-<li>
-<p>The document root is the directory where the website files for a domain name are stored and served in response to requests. You can set the document root to any location you want.</p>
-</li>
-<li>
-<p>Basically, we will create a separate directory for each domain we want to host on our server inside the /var/www directory, which will store the domain website files.</p>
-</li>
-</ul>
+<li><p>The document root is the directory where the website files for a domain name are stored and served in response to requests. You can set the document root to any location you want.</p></li>
+
+<li><p>Basically, we will create a separate directory for each domain we want to host on our server inside the /var/www directory, which will store the domain website files.</p>
+
 <pre><code>/var/www/
 ├── domain-one.com
 │   └── index.html
-</code></pre><ul>
-<li>Create the root directory domain-one.com:</li>
-</ul>
+</code></pre></li>
+
+<li><p>Create the root directory domain-one.com:</p>
+
 <pre><code>sudo mkdir -p /var/www/domain-one.com
-</code></pre><ul>
-<li>Create an index.html file inside the domain’s root directory.</li>
+</code></pre></li>
+
+<li><p>Create an index.html file inside the domain’s root directory.</p>
+
+<pre><code class="language-bash">sudo touch /var/www/domain-one.com/index.html
+</code></pre></li>
+
+<li><p>Copy following content to the file: <strong>/var/www/domain-one.com/index.html</strong></p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;domain-one.com &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script&gt;
+    document.write(
+        `&lt;h1&gt;Welecome to domain-one.com  
+             ${new Date().toLocaleString()} 
+          &lt;/h1&gt;`
+    );
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+
+<li><p>To avoid any permission issues, change the ownership of the domain document root directory to the Nginx user (www-data):</p>
+
+<pre><code class="language-bash">sudo chown -R www-data: /var/www/domain-one.com
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo touch /var/www/domain-one.com/index.html
-</code></pre></div><ul>
-<li>Copy following content to the file: <strong>/var/www/domain-one.com/index.html</strong></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span> <span style="color:#a6e22e">dir</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ltr&#34;</span>&gt;
-  &lt;<span style="color:#f92672">head</span>&gt;
-    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
-    &lt;<span style="color:#f92672">title</span>&gt;domain-one.com &lt;/<span style="color:#f92672">title</span>&gt;
-  &lt;/<span style="color:#f92672">head</span>&gt;
-  &lt;<span style="color:#f92672">body</span>&gt;
-    &lt;<span style="color:#f92672">script</span>&gt;
-        document.<span style="color:#a6e22e">write</span>(
-            <span style="color:#e6db74">`</span><span style="color:#e6db74">&lt;h1&gt;Welecome to domain-one.com  
-</span><span style="color:#e6db74">                 </span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toLocaleString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74"> 
-</span><span style="color:#e6db74">              &lt;/h1&gt;</span><span style="color:#e6db74">`</span>
-        );
-    &lt;/<span style="color:#f92672">script</span>&gt;
-  &lt;/<span style="color:#f92672">body</span>&gt;
-&lt;/<span style="color:#f92672">html</span>&gt;
-</code></pre></div><ul>
-<li>To avoid any permission issues, change the ownership of the domain document root directory to the Nginx user (www-data):</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo chown -R www-data: /var/www/domain-one.com
-</code></pre></div><h4 id="create-a-server-block">Create a Server Block</h4>
+
+<h4 id="create-a-server-block">Create a Server Block</h4>
+
 <p>By default on Ubuntu systems, Nginx server blocks configuration files are stored in <strong>/etc/nginx/sites-available</strong> directory, which are enabled through symbolic links to the <strong>/etc/nginx/sites-enabled/</strong> directory.</p>
+
 <p>Open your editor of choice and create the following server block file: <strong>/etc/nginx/sites-available/domain-one.com</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
-    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
-    <span style="color:#f92672">listen</span> <span style="color:#e6db74">[::]:80</span>;
 
-    <span style="color:#f92672">root</span> <span style="color:#e6db74">/var/www/domain-one.com</span>;
+<pre><code class="language-nginx">server {
+    listen 80;
+    listen [::]:80;
 
-    <span style="color:#f92672">index</span> <span style="color:#e6db74">index.html</span>;
+    root /var/www/domain-one.com;
 
-    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">domain-one.com</span> <span style="color:#e6db74">www.domain-one.com</span>;
+    index index.html;
 
-    <span style="color:#f92672">access_log</span> <span style="color:#e6db74">/var/log/nginx/domain-one.com.access.log</span>;
-    <span style="color:#f92672">error_log</span> <span style="color:#e6db74">/var/log/nginx/domain-one.com.error.log</span>;
+    server_name domain-one.com www.domain-one.com;
 
-    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
-        <span style="color:#f92672">try_files</span> $uri $uri/ =<span style="color:#ae81ff">404</span>;
+    access_log /var/log/nginx/domain-one.com.access.log;
+    error_log /var/log/nginx/domain-one.com.error.log;
+
+    location / {
+        try_files $uri $uri/ =404;
     }
 }
-</code></pre></div><ul>
-<li>To enable the new server block file, create a symbolic link from the file to the sites-enabled directory, which is read by Nginx during startup:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ln -s /etc/nginx/sites-available/domain-one.com /etc/nginx/sites-enabled/
-</code></pre></div><ul>
-<li>Test the Nginx configuration for correct syntax:</li>
-</ul>
+</code></pre>
+
+<ul>
+<li><p>To enable the new server block file, create a symbolic link from the file to the sites-enabled directory, which is read by Nginx during startup:</p>
+
+<pre><code class="language-bash">sudo ln -s /etc/nginx/sites-available/domain-one.com /etc/nginx/sites-enabled/
+</code></pre></li>
+
+<li><p>Test the Nginx configuration for correct syntax:</p>
+
 <pre><code>sudo nginx -t
 # If there are no errors, the output will look like this:
 # nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 # nginx: configuration file /etc/nginx/nginx.conf test is successful
 
-</code></pre><ul>
-<li>Restart the Nginx service for the changes to take effect</li>
-</ul>
+</code></pre></li>
+
+<li><p>Restart the Nginx service for the changes to take effect</p>
+
 <pre><code>sudo systemctl restart nginx
-</code></pre><h3 id="disable-default-nginx-site">Disable Default Nginx site</h3>
-<ul>
-<li>Chanage the default site configuration as below.</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
-    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span> <span style="color:#e6db74">default_server</span>;
-    <span style="color:#f92672">listen</span> <span style="color:#e6db74">[::]:80</span> <span style="color:#e6db74">default_server</span>;
-    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">_</span>;
-    <span style="color:#f92672">deny</span> <span style="color:#e6db74">all</span>;
-    <span style="color:#f92672">return</span> <span style="color:#ae81ff">444</span>;
-}
-</code></pre></div><h3 id="security">Security</h3>
+
+<h3 id="disable-default-nginx-site">Disable Default Nginx site</h3>
+
 <ul>
-<li>Next steg is to setup Les's Encrpyt.</li>
+<li><p>Chanage the default site configuration as below.</p>
+
+<pre><code class="language-nginx">server {
+listen 80 default_server;
+listen [::]:80 default_server;
+server_name _;
+deny all;
+return 444;
+}
+</code></pre></li>
+</ul>
+
+<h3 id="security">Security</h3>
+
+<ul>
+<li>Next steg is to setup Les&rsquo;s Encrpyt.</li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ufw">UFW</a>
-      <ul>
-        <li><a href="#enable-ip-v6">Enable IP V6</a></li>
-        <li><a href="#set-default-rules">Set default rules</a></li>
-        <li><a href="#allow-ssh--openssh">Allow SSH / OpenSSH</a></li>
-        <li><a href="#enable-ufw">Enable UFW</a></li>
-      </ul>
-    </li>
-    <li><a href="#nginx">Nginx</a>
-      <ul>
-        <li><a href="#install-nginx">Install Nginx</a></li>
-        <li><a href="#set-ufw">Set UFW</a></li>
-      </ul>
-    </li>
-    <li><a href="#build-web-host-block">Build Web Host Block</a>
-      <ul>
-        <li><a href="#create-the-directory-structure">Create the Directory Structure</a></li>
-        <li><a href="#disable-default-nginx-site">Disable Default Nginx site</a></li>
-        <li><a href="#security">Security</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#ufw">UFW</a>
+<ul>
+<li><a href="#enable-ip-v6">Enable IP V6</a></li>
+<li><a href="#set-default-rules">Set default rules</a></li>
+<li><a href="#allow-ssh-openssh">Allow SSH / OpenSSH</a></li>
+<li><a href="#enable-ufw">Enable UFW</a></li>
+</ul></li>
+<li><a href="#nginx">Nginx</a>
+<ul>
+<li><a href="#install-nginx">Install Nginx</a></li>
+<li><a href="#set-ufw">Set UFW</a></li>
+</ul></li>
+<li><a href="#build-web-host-block">Build Web Host Block</a>
+<ul>
+<li><a href="#create-the-directory-structure">Create the Directory Structure</a>
+<ul>
+<li><a href="#create-a-server-block">Create a Server Block</a></li>
+</ul></li>
+<li><a href="#disable-default-nginx-site">Disable Default Nginx site</a></li>
+<li><a href="#security">Security</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>CentOS 6/7 Multi-Boot Setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -980,8 +951,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -999,196 +968,256 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>CentOS 6/7 Multi-Boot Setup</h1>
-        <h2 id="bootable-usb-preparation">Bootable usb preparation</h2>
+        
+
+<h2 id="bootable-usb-preparation">Bootable usb preparation</h2>
+
 <blockquote>
 <p>Download dvd iso from url or torrent
 Use Win32 Image Writer to create usb. ( Bootice is useful tool to reformat the USB as origin )</p>
 </blockquote>
+
 <h2 id="install-centos-on-virtual-machine">Install CentOS on virtual machine</h2>
+
 <ul>
-<li>
-<p>Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p>
-</li>
-<li>
-<p>CentOS provide a friendly and nice installation process. If you choose VMWare or VirtulBox as machine, you can open <a href="http://www.tecmint.com/centos-7-installation">installation steps</a> on your browser or use ipad /tablet to access this page. You just need to follow the instruction step by step, it will be done within an hour or more(it varies in computing power of PC).</p>
-</li>
+<li><p>Before you install, you are better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p></li>
+
+<li><p>CentOS provide a friendly and nice installation process. If you choose VMWare or VirtulBox as machine, you can open <a href="http://www.tecmint.com/centos-7-installation">installation steps</a> on your browser or use ipad /tablet to access this page. You just need to follow the instruction step by step, it will be done within an hour or more(it varies in computing power of PC).</p></li>
 </ul>
+
 <h2 id="prepare-vm-for-centos">Prepare VM for CentOS</h2>
+
 <ul>
-<li>
-<p>Create a new virtual machine.</p>
+<li><p>Create a new virtual machine.</p>
+
 <ul>
 <li>Type in the name of vm. e.g. CentOS</li>
 <li>Select the type of Linux</li>
-<li>You can choose RedHat(32/64 bit ) or something else. It doesn't matter. We don't use any built-in xxx.iso files from VirtualBox. Then click <code>Next</code></li>
+<li>You can choose RedHat(<sup>32</sup>&frasl;<sub>64</sub> bit ) or something else. It doesn&rsquo;t matter. We don&rsquo;t use any built-in xxx.iso files from VirtualBox. Then click <code>Next</code></li>
 <li>Select the memory size for the CentOS. It is up  to you. I prefer 4GB, but 2GB is necessary. And then click <code>Next</code>.</li>
 <li>Select &ldquo;Create a virtual hard drive now&rdquo;, and then click <code>Next</code>.</li>
 <li>Select defaut VDI, then click <code>Next</code>.</li>
-<li>Select &ldquo;Dynamically allocated&rdquo;, then click <code>Next</code>.
+
+<li><p>Select &ldquo;Dynamically allocated&rdquo;, then click <code>Next</code>.</p>
+
 <ul>
-<li>Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I'd like to select 20 or more. Then a virtual machine of CentOS is created.</li>
-<li>Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I'd like to select 20 or more. Then a virtual machine of CentOS is created.</li>
+<li>Choose the location of CentOS. e.g. c:\vbox\centos\centos.vdi. Select the size of VDI file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
+<li>Choose the location of CentOS. e.g. c:\vm\centos\centos.vmdk. Select the size of VMDK file. At least 10G. I&rsquo;d like to select 20 or more. Then a virtual machine of CentOS is created.</li>
+</ul></li>
+
+<li><p>Config the CentOS hardware setting on VirtulBox or VMWare.</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Config the CentOS hardware setting on VirtulBox or VMWare.</p>
+
 <p><strong>VirtualBox</strong></p>
+
 <ul>
 <li>On VirtualBox toolbar, there is a <code>Start</code> button. Click <code>Start</code>, then go the Storage item.</li>
-<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.</li>
+<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.<br /></li>
 <li>Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
 <li>Leave all the other setting as default. Click the <code>Start</code>button on the toolbar.</li>
 </ul>
+
 <p><strong>VMWare</strong></p>
+
 <ul>
 <li>On VMware, you can find CD/DVD button on the tab page of new virtual machine.</li>
 <li>Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
 <li>Leave all the other setting as default. Click the <code>Power on this virtual machine</code> option on the tab page.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="config-centos-default-setting">Config CentOS default setting</h2>
-<p>After the CentOS starts, we can config the default setting of CentOS. Don't be panic, the configuration envrionment is very nice. You don't need to type any command line so far.</p>
+
+<p>After the CentOS starts, we can config the default setting of CentOS. Don&rsquo;t be panic, the configuration envrionment is very nice. You don&rsquo;t need to type any command line so far.</p>
+
 <ul>
-<li>
-<p>Prepare the installation.</p>
+<li><p>Prepare the installation.</p>
+
 <ul>
 <li>Choose the language of CentOS. Then click Continue.</li>
-<li>On the Installation Summary screen, there is warning icon attached to the hard drive icon, which is under SYSTEM section with a lable &ldquo;INSTALLATION DESTINATION&rdquo;. Click that label.</li>
-<li>You will see the partition is already done automatically. I'd like you to leave it as until you are familar with the CentOS. Then click Done button on the header.</li>
+<li>On the Installation Summary screen, there is warning icon attached to the hard drive icon, which is under SYSTEM section with a lable &ldquo;INSTALLATION DESTINATION&rdquo;. Click that label.<br /></li>
+<li>You will see the partition is already done automatically. I&rsquo;d like you to leave it as until you are familar with the CentOS. Then click Done button on the header.</li>
 <li>Leave the SOFTWARE SELECTION as Minimal Install; NETWORK &amp; HOSTNAME as Not connected. Then click Begin Installation button.</li>
-</ul>
-</li>
-<li>
-<p>Setup account</p>
+</ul></li>
+
+<li><p>Setup account</p>
+
 <ul>
-<li>Setup password of root account. Please remember the password. If you forget it you need to reset the root's password. To do that you need to do a few things which depends on the CentOS version. As a beginner, please don't make it too complicated.</li>
-<li>Create your account. e.g. harryporter Mark your account as administrator to save some effort. Please remember your password and don't make it too complicated.&rsquo;</li>
+<li>Setup password of root account. Please remember the password. If you forget it you need to reset the root&rsquo;s password. To do that you need to do a few things which depends on the CentOS version. As a beginner, please don&rsquo;t make it too complicated.</li>
+<li>Create your account. e.g. harryporter Mark your account as administrator to save some effort. Please remember your password and don&rsquo;t make it too complicated.&rsquo;</li>
 <li>The progress of installation is complete. Click Finish configuration button.
 w$w4 d. After a few seconds, you will the Reboot button. Then click it.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="manage-centos-packages-and-software">Manage CentOS packages and software</h2>
+
 <ul>
 <li>there are two management tools rpm and yum. To make it easy, we just talk about yum. It is a very handy tool. Comparing with the windows built-in program management tool, it is much powerful than that. It provides necessary functions for admin. If you need to maintain the Linux server, then you will use it in your daily task.</li>
 <li>Use <code>man yum</code> to take a look the description of yum. You do not need to understand all usage of yum. Just have an overview is enough.</li>
-<li>There are a few useful and common yum commands.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum list installed | less
+
+<li><p>There are a few useful and common yum commands.</p>
+
+<pre><code class="language-bash">yum list installed | less
 yum search &lt;pacakge_name&gt;
 yum grouplist
-</code></pre></div><h3 id="install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</h3>
-<h2 id="setup-network--via-cable-">Setup network ( via cable )</h2>
+</code></pre></li>
+</ul>
+
+<h3 id="install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</h3>
+
+<h2 id="setup-network-via-cable">Setup network ( via cable )</h2>
+
 <p>If you install a minimal version without network configuration, you will find you can not ping public domain. Here I am going to show you how to setup the connection.</p>
+
 <ul>
 <li>You can use <code>ip a</code> command to check the status of all network interface.</li>
-<li>You will see all the state of interfaces would be DOWN OR UNKNOWN.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#75715e">## lo ****  qdisc pfifo_fast noqueue UNKNOWN</span>
-<span style="color:#75715e">## eth0 **** qdisc pfifo_fast state DOWN</span>
 
-</code></pre></div><ul>
-<li>Use <code>## ifup eth0</code> to start the ech0 then you can access internet. It is a bit tedious to start the network service every time we reboot the system. Next step we will setup network service to start automatically after the system is up.</li>
-<li>There is a configuration file which can help you setup internet connection after the startup. Ususally the configuration is under this path <code>/etc/sysconfig/network-scripts</code>, and file name would <code>ifcfg-eth&lt;*&gt;</code>. So we check the real file name at first.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls /etc/sysconfig/network-scripts/ifcfg-*
+<li><p>You will see all the state of interfaces would be DOWN OR UNKNOWN.</p>
 
-<span style="color:#75715e">## Following are sample of files which will sit in your system.</span> 
+<pre><code class="language-bash">
+## lo ****  qdisc pfifo_fast noqueue UNKNOWN
+## eth0 **** qdisc pfifo_fast state DOWN
+
+</code></pre></li>
+
+<li><p>Use <code>## ifup eth0</code> to start the ech0 then you can access internet. It is a bit tedious to start the network service every time we reboot the system. Next step we will setup network service to start automatically after the system is up.</p></li>
+
+<li><p>There is a configuration file which can help you setup internet connection after the startup. Ususally the configuration is under this path <code>/etc/sysconfig/network-scripts</code>, and file name would <code>ifcfg-eth&lt;*&gt;</code>. So we check the real file name at first.</p>
+
+<pre><code class="language-bash">ls /etc/sysconfig/network-scripts/ifcfg-*
+
+## Following are sample of files which will sit in your system. 
 /etc/sysconfig/network-scripts/ifcfg-eth0
 /etc/sysconfig/network-scripts/ifcfg-lo
-</code></pre></div><p>Now we need to update this file via nano or vi. If you have no any experience of vi, I recommended an interactive online tutorial for you. Just 20 mins, you can master basic vi usage. 
+</code></pre></li>
+</ul>
+
+<p>Now we need to update this file via nano or vi. If you have no any experience of vi, I recommended an interactive online tutorial for you. Just 20 mins, you can master basic vi usage.
 <a href="http://www.openvim.com/tutorial.html">http://www.openvim.com/tutorial.html</a></p>
+
 <p>We use vi to open the config file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## vi /etc/sysconfig/network-scripts/ifcfg-eth0</span>
-</code></pre></div><p>You will a setting below.
+
+<pre><code class="language-bash">## vi /etc/sysconfig/network-scripts/ifcfg-eth0
+</code></pre>
+
+<p>You will a setting below.
 ONBOOT=no</p>
+
 <p>You just need to update it to ONBOOT=yes, then save it and reboot CentOS to test the result.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## reboot</span>
-</code></pre></div><p>After you reboot and login CentOS, you can use ping to test if your system can access internet, then configuration is updated successful.</p>
+
+<pre><code class="language-bash">## reboot
+</code></pre>
+
+<p>After you reboot and login CentOS, you can use ping to test if your system can access internet, then configuration is updated successful.</p>
+
 <h3 id="setup-wifi">Setup Wifi</h3>
+
 <ul>
 <li>Setup Wifi during the installation. After the installation, you will find the Wifi is not available on Cent OS</li>
 <li>Mount the DVD or iso file</li>
-<li>use yum to install the NetworkManager-wifi package</li>
+
+<li><p>use yum to install the NetworkManager-wifi package</p>
+
+<pre><code class="language-bash">yum --disablerepo=\* install /path/to/dvd/Packages/NetworkManager-wifi* 
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum --disablerepo<span style="color:#f92672">=</span><span style="color:#ae81ff">\*</span> install /path/to/dvd/Packages/NetworkManager-wifi* 
-</code></pre></div><h3 id="multiple-boot-system--fedora-centos-redhat-">Multiple boot system ( Fedora, CentOS, Redhat )</h3>
+
+<h3 id="multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</h3>
+
 <h2 id="partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</h2>
+
 <blockquote>
-<p>Fedora, CentOS and Redhat share the almost the same installation process. 
+<p>Fedora, CentOS and Redhat share the almost the same installation process.
 Click on the <code>Installation Destination</code> icon to change this to custom partitioning
 Under the Other Storage Options, choose I will configure partitioning then click Done
 Following is sample of partition setup of multiple boot system.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">sda</span>
-  <span style="color:#a6e22e">+----sda1        nfts               500M         Windows recovery</span>
-  <span style="color:#a6e22e">+----sda2        efi       /boot    100M         grub2 , Windows boot manager</span>
-  <span style="color:#a6e22e">+----sda3                  /        10M            </span>
-  <span style="color:#a6e22e">+----sda4        ntfs      /      40000M         Window 7/8/10</span>
-  <span style="color:#a6e22e">+----sda5                  swap   &lt;Double size of your RAM size&gt;   </span>
-  <span style="color:#a6e22e">+----sda6        ext4      /      20000M         Ubuntu 14 desktop</span>
-  <span style="color:#a6e22e">+----sda7        ext4      /      20000M         Fedora 20 desktop           </span>
-  <span style="color:#a6e22e">+----sda8        ext4      /      20000M         CentOS 6 desktop</span>
-  <span style="color:#a6e22e">+----sda9        ext4      /      20000M         OpenSuse desktop</span>
-  <span style="color:#a6e22e">+ ...</span>
 
-</code></pre></div><h2 id="troubleshooting">Troubleshooting</h2>
+<pre><code class="language-ini">sda
+  +----sda1        nfts               500M         Windows recovery
+  +----sda2        efi       /boot    100M         grub2 , Windows boot manager
+  +----sda3                  /        10M            
+  +----sda4        ntfs      /      40000M         Window 7/8/10
+  +----sda5                  swap   &lt;Double size of your RAM size&gt;   
+  +----sda6        ext4      /      20000M         Ubuntu 14 desktop
+  +----sda7        ext4      /      20000M         Fedora 20 desktop           
+  +----sda8        ext4      /      20000M         CentOS 6 desktop
+  +----sda9        ext4      /      20000M         OpenSuse desktop
+  + ...
+
+</code></pre>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
 <h3 id="ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</h3>
+
 <p>Use command <code>ip</code></p>
+
 <pre><code>ip addr
 ip -s link
-</code></pre><h3 id="enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</h3>
+</code></pre>
+
+<h3 id="enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</h3>
+
 <p>If you cannot ping any domain, use <code>dhclient -v</code> to check if the internet is available.</p>
+
 <p>Setup the network enabled onboot</p>
+
 <pre><code>## cd /etc/sysconfig/network-scripts/ 
 ## sed -i -e 's@^ONBOOT=&quot;no@ONBOOT=&quot;yes@' ifcfg-e.xx.xxx
-</code></pre><h3 id="boot-centos-in-terminal">Boot CentOS in terminal</h3>
+</code></pre>
+
+<h3 id="boot-centos-in-terminal">Boot CentOS in terminal</h3>
+
 <pre><code>## cat /etc/inittab
 ## systemctl get-default 
 graphic.target
 ## systemctl set-default multi-user.target
-</code></pre><h3 id="fedora-boot-error">Fedora boot error</h3>
+</code></pre>
+
+<h3 id="fedora-boot-error">Fedora boot error</h3>
+
 <ul>
 <li>Please check the grub.cfg if you get booting error</li>
-<li>You can try following command to boot Fedora from Grub menu</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">linux /boot/vmluz-x.x.x-x.x.x
+
+<li><p>You can try following command to boot Fedora from Grub menu</p>
+
+<pre><code class="language-bash">linux /boot/vmluz-x.x.x-x.x.x
 initrd /boot/intrd-plymouth.img
-</code></pre></div>
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#bootable-usb-preparation">Bootable usb preparation</a></li>
-    <li><a href="#install-centos-on-virtual-machine">Install CentOS on virtual machine</a></li>
-    <li><a href="#prepare-vm-for-centos">Prepare VM for CentOS</a></li>
-    <li><a href="#config-centos-default-setting">Config CentOS default setting</a></li>
-    <li><a href="#manage-centos-packages-and-software">Manage CentOS packages and software</a>
-      <ul>
-        <li><a href="#install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</a></li>
-      </ul>
-    </li>
-    <li><a href="#setup-network--via-cable-">Setup network ( via cable )</a>
-      <ul>
-        <li><a href="#setup-wifi">Setup Wifi</a></li>
-        <li><a href="#multiple-boot-system--fedora-centos-redhat-">Multiple boot system ( Fedora, CentOS, Redhat )</a></li>
-      </ul>
-    </li>
-    <li><a href="#partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</a></li>
-    <li><a href="#troubleshooting">Troubleshooting</a>
-      <ul>
-        <li><a href="#ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</a></li>
-        <li><a href="#enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</a></li>
-        <li><a href="#boot-centos-in-terminal">Boot CentOS in terminal</a></li>
-        <li><a href="#fedora-boot-error">Fedora boot error</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#bootable-usb-preparation">Bootable usb preparation</a></li>
+<li><a href="#install-centos-on-virtual-machine">Install CentOS on virtual machine</a></li>
+<li><a href="#prepare-vm-for-centos">Prepare VM for CentOS</a></li>
+<li><a href="#config-centos-default-setting">Config CentOS default setting</a></li>
+<li><a href="#manage-centos-packages-and-software">Manage CentOS packages and software</a>
+<ul>
+<li><a href="#install-centos-on-pc-or-laptop">Install CentOS on PC or laptop</a></li>
+</ul></li>
+<li><a href="#setup-network-via-cable">Setup network ( via cable )</a>
+<ul>
+<li><a href="#setup-wifi">Setup Wifi</a></li>
+<li><a href="#multiple-boot-system-fedora-centos-redhat">Multiple boot system ( Fedora, CentOS, Redhat )</a></li>
+</ul></li>
+<li><a href="#partition-setup-for-multiple-os-installation">Partition setup for multiple OS installation</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a>
+<ul>
+<li><a href="#ifconfig-not-found-in-centos-minimal-server">ifconfig not found in CentOS minimal server</a></li>
+<li><a href="#enable-network-non-wifi-onboot-after-minimal-installation">Enable Network (Non-wifi) onboot after minimal installation</a></li>
+<li><a href="#boot-centos-in-terminal">Boot CentOS in terminal</a></li>
+<li><a href="#fedora-boot-error">Fedora boot error</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

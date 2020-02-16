@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Angular 4 CRM Project :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -978,8 +949,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -997,74 +966,81 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Angular 4 CRM Project</h1>
-        <h2 id="summary">Summary</h2>
-<p><strong>Ng4Crm</strong> is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp; Bootstrap 3.</p>
-<p>This project starts from a popular starter project <a href="https://github.com/AngularClass/angular-starter">AngularClass/AngularStarter</a>. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.</p>
-<h2 id="--features--"><strong>Features</strong></h2>
-<ul>
-<li>
-<p>This project is built on the top of AngularClass/Angular-Starter.</p>
-</li>
-<li>
-<p>The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.</p>
-</li>
-<li>
-<p>This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.</p>
-</li>
-<li>
-<p>It uses Json-Server as fake Restful API. (You can simple replace it with your own API)</p>
-</li>
-</ul>
-<h2 id="structure-of-ng4crm">Structure of Ng4Crm</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">path\to\ng4crm</span>
-<span style="color:#a6e22e">+---config             &lt;-// configuration of dev or prod environment</span>
-<span style="color:#a6e22e">+---db                 &lt;-// json files for json-server</span>
-<span style="color:#a6e22e">|   +---db.json        &lt;-// dummy db</span>
-<span style="color:#a6e22e">|   \---routes.json    &lt;-// configure fake restful api</span>
-<span style="color:#a6e22e">+---screenshots</span>
-<span style="color:#a6e22e">+---src                &lt;-// vue components </span>
-<span style="color:#a6e22e">|   +---app</span>
-<span style="color:#a6e22e">|   |   +---_gurad             &lt;-// auth guard for authentication</span>
-<span style="color:#a6e22e">|   |   +---_models             &lt;-// common models for whole app</span>
-<span style="color:#a6e22e">|   |   +---_services            &lt;-// common services for whole app</span>
-<span style="color:#a6e22e">|   |   +---about                &lt;-// about component   </span>
-<span style="color:#a6e22e">|   |   +---customer              &lt;-// customer component</span>
-<span style="color:#a6e22e">|   |   +---dashboard            &lt;-// dashboard component  </span>
-<span style="color:#a6e22e">|   |   +---notfoundpage         &lt;-// notfoundpage component  </span>
-<span style="color:#a6e22e">|   |   +---login                &lt;-// login component  </span>
-<span style="color:#a6e22e">|   |   +---order                &lt;-// customer component </span>
-<span style="color:#a6e22e">|   |   +---root                &lt;-// root component </span>
-<span style="color:#a6e22e">|   |   +---shared                &lt;-// common component for whole app</span>
-<span style="color:#a6e22e">|   |   +---app.component.ts</span>
-<span style="color:#a6e22e">|   |   +---app.module.ts</span>
-<span style="color:#a6e22e">|   |   +---app.routes.ts</span>
-<span style="color:#a6e22e">|   |   +---app.services.ts</span>
-<span style="color:#a6e22e">|   |   +---environment.ts</span>
-<span style="color:#a6e22e">|   |   \---...</span>
-<span style="color:#a6e22e">|   +---assets         &lt;-//   images  and css from third parties</span>
-<span style="color:#a6e22e">|   +---styles         &lt;-//   customized css files</span>
-<span style="color:#a6e22e">|   +---main.browser.aot.ts     </span>
-<span style="color:#a6e22e">|   +---main.browser.ts  </span>
-<span style="color:#a6e22e">|   +---polyfills.browser.ts  </span>
-<span style="color:#a6e22e">|   \---...</span>
-<span style="color:#a6e22e">\...</span>
+        
 
-</code></pre></div><h2 id="screenshots">Screenshots</h2>
+<h2 id="summary">Summary</h2>
+
+<p><strong>Ng4Crm</strong> is reusable CRM project for real-world business based on Angular 4, Angular-Material &amp; Bootstrap 3.</p>
+
+<p>This project starts from a popular starter project <a href="https://github.com/AngularClass/angular-starter">AngularClass/AngularStarter</a>. The goal of this project is to create reusable project for real-world business. To achieve this target, we need a solution which should include authentication process, restful API feature with token support and simple but elegant UI design.</p>
+
+<h2 id="features"><strong>Features</strong></h2>
+
+<ul>
+<li><p>This project is built on the top of AngularClass/Angular-Starter.</p></li>
+
+<li><p>The UI part of this project combine Angular-Material and Bootstrap 3. Because the controls from Angular-Material is very limited, there are a few extra components require Bootstrap 3 for help.</p></li>
+
+<li><p>This project includes ng-charts, pagination, progress-bar, confirmation dialog, etc. features.</p></li>
+
+<li><p>It uses Json-Server as fake Restful API. (You can simple replace it with your own API)</p></li>
+</ul>
+
+<h2 id="structure-of-ng4crm">Structure of Ng4Crm</h2>
+
+<pre><code class="language-ini">path\to\ng4crm
++---config             &lt;-// configuration of dev or prod environment
++---db                 &lt;-// json files for json-server
+|   +---db.json        &lt;-// dummy db
+|   \---routes.json    &lt;-// configure fake restful api
++---screenshots
++---src                &lt;-// vue components 
+|   +---app
+|   |   +---_gurad             &lt;-// auth guard for authentication
+|   |   +---_models             &lt;-// common models for whole app
+|   |   +---_services            &lt;-// common services for whole app
+|   |   +---about                &lt;-// about component   
+|   |   +---customer              &lt;-// customer component
+|   |   +---dashboard            &lt;-// dashboard component  
+|   |   +---notfoundpage         &lt;-// notfoundpage component  
+|   |   +---login                &lt;-// login component  
+|   |   +---order                &lt;-// customer component 
+|   |   +---root                &lt;-// root component 
+|   |   +---shared                &lt;-// common component for whole app
+|   |   +---app.component.ts
+|   |   +---app.module.ts
+|   |   +---app.routes.ts
+|   |   +---app.services.ts
+|   |   +---environment.ts
+|   |   \---...
+|   +---assets         &lt;-//   images  and css from third parties
+|   +---styles         &lt;-//   customized css files
+|   +---main.browser.aot.ts     
+|   +---main.browser.ts  
+|   +---polyfills.browser.ts  
+|   \---...
+\...
+
+</code></pre>
+
+<h2 id="screenshots">Screenshots</h2>
+
 <blockquote>
-<p><img src="/img/ng4crm-screenshot-1.jpg" alt="Screenshot1"></p>
+<p><img src="/img/ng4crm-screenshot-1.jpg" alt="Screenshot1" /></p>
+
+<p><img src="/img/ng4crm-screenshot-2.jpg" alt="Screenshot2" /></p>
+
+<p><img src="/img/ng4crm-screenshot-3.jpg" alt="Screenshot3" /></p>
+
+<p><img src="/img/ng4crm-screenshot-4.jpg" alt="Screenshot4" /></p>
 </blockquote>
-<blockquote>
-<p><img src="/img/ng4crm-screenshot-2.jpg" alt="Screenshot2"></p>
-</blockquote>
-<blockquote>
-<p><img src="/img/ng4crm-screenshot-3.jpg" alt="Screenshot3"></p>
-</blockquote>
-<blockquote>
-<p><img src="/img/ng4crm-screenshot-4.jpg" alt="Screenshot4"></p>
-</blockquote>
-<h2 id="browse-repositoryhttpsgithubcomharryhong4crmgit">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></h2>
-<h2 id="--alternatives--"><strong>Alternatives</strong></h2>
+
+<h2 id="browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></h2>
+
+<h2 id="alternatives"><strong>Alternatives</strong></h2>
+
 <p>There are two similar projects respectively built on the Vue.js and React. If you have interests in those technical stacks. You can find and clone those projects below.</p>
+
 <ul>
 <li><a href="/projects/vue2-crm">Vue2 Crm</a>.</li>
 <li><a href="/projects/react-crm">React Redux Crm</a>.</li>
@@ -1074,14 +1050,17 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#--features--">Features</a></li>
-    <li><a href="#structure-of-ng4crm">Structure of Ng4Crm</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#browse-repositoryhttpsgithubcomharryhong4crmgit">Browse Repository</a></li>
-    <li><a href="#--alternatives--">Alternatives</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#features"><strong>Features</strong></a></li>
+<li><a href="#structure-of-ng4crm">Structure of Ng4Crm</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#browse-repository-https-github-com-harryho-ng4crm-git">Browse <a href="https://github.com/harryho/ng4crm.git">Repository</a></a></li>
+<li><a href="#alternatives"><strong>Alternatives</strong></a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

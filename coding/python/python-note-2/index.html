@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:20 AEDT">
+<meta name="revised" content="2020-02-16T13:53:19 AEDT">
 <title>Closure &amp; Decorator :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1007,8 +978,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1026,12 +995,18 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Closure &amp; Decorator</h1>
-        <h2 id="closure--decorator">Closure &amp; Decorator</h2>
+        
+
+<h2 id="closure-decorator">Closure &amp; Decorator</h2>
+
 <h3 id="legb-rules">LEGB rules</h3>
+
 <ul>
 <li>Local, Enclosing, Gloable, Built-in</li>
 </ul>
+
 <h3 id="local-function">Local function</h3>
+
 <ul>
 <li>Useful for specialized, one-off functions</li>
 <li>Aid in code organization and readability</li>
@@ -1039,233 +1014,237 @@
 <li>May contain multiple expressions</li>
 <li>May contain statements</li>
 </ul>
+
 <h3 id="closure">Closure</h3>
-<ul>
-<li>
-<p>Closure maintain references to objects from earlier scopes</p>
-</li>
-<li>
-<p>LEGB does not apply when making new bindings</p>
-</li>
-<li>
-<p>Usage of nonlocal</p>
-<ul>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_timer</span>():
-    last_called <span style="color:#f92672">=</span> None
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">elapsed</span>():
+<ul>
+<li>Closure maintain references to objects from earlier scopes</li>
+<li>LEGB does not apply when making new bindings</li>
+
+<li><p>Usage of nonlocal</p>
+
+<ul>
+<li><p>Example</p>
+
+<pre><code class="language-python">def make_timer():
+    last_called = None
+
+    def elapsed():
         nonlocal last_called
-        now <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
-        <span style="color:#66d9ef">if</span> last_called <span style="color:#f92672">is</span> None:
-            last_called <span style="color:#f92672">=</span> now
-            <span style="color:#66d9ef">return</span> None
-        result <span style="color:#f92672">=</span> now <span style="color:#f92672">-</span> last_called
-        last_called <span style="color:#f92672">=</span> now
-        <span style="color:#66d9ef">return</span> result
-    <span style="color:#66d9ef">return</span> elapsed
+        now = time.time()
+        if last_called is None:
+            last_called = now
+            return None
+        result = now - last_called
+        last_called = now
+        return result
+    return elapsed
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    mt <span style="color:#f92672">=</span> make_timer()
-    <span style="color:#66d9ef">print</span>(mt ())
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">print</span>(mt ())
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">print</span>(mt ())
-</code></pre></div></li>
-</ul>
-</li>
-<li>
-<p>Use as function factory</p>
+if __name__ == &quot;__main__&quot;:
+    mt = make_timer()
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+    print('-----------------------------')
+    print(mt ())
+</code></pre></li>
+</ul></li>
+
+<li><p>Use as function factory</p>
+
 <ul>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">raise_to</span>(exp):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">raise_to_exp</span>(x):
-        <span style="color:#66d9ef">return</span> pow(x, exp)
-    <span style="color:#66d9ef">return</span> raise_to_exp
+<li><p>Example</p>
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    square<span style="color:#f92672">=</span>raise_to(<span style="color:#ae81ff">2</span>)
-    cube<span style="color:#f92672">=</span> raise_to(<span style="color:#ae81ff">3</span>)
-    <span style="color:#66d9ef">print</span>(square(<span style="color:#ae81ff">2</span>))
-    <span style="color:#66d9ef">print</span>(cube(<span style="color:#ae81ff">2</span>))
+<pre><code class="language-python">
+def raise_to(exp):
+    def raise_to_exp(x):
+        return pow(x, exp)
+    return raise_to_exp
 
-<span style="color:#75715e">## test result:</span>
-<span style="color:#75715e">## 4</span>
-<span style="color:#75715e">## 8</span>
+if __name__ == &quot;__main__&quot;:
+    square=raise_to(2)
+    cube= raise_to(3)
+    print(square(2))
+    print(cube(2))
 
-</code></pre></div></li>
+## test result:
+## 4
+## 8
+
+</code></pre></li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h3 id="decorator">Decorator</h3>
+
 <ul>
-<li>
-<p>Replace, enhance, or modify existing functions</p>
-</li>
-<li>
-<p>Does not change the original function definition</p>
-</li>
-<li>
-<p>Calling code does not need to change</p>
-</li>
-<li>
-<p>Decorator mechanism uses the modified function’s original name</p>
-</li>
-<li>
-<p>Example</p>
+<li>Replace, enhance, or modify existing functions</li>
+<li>Does not change the original function definition</li>
+<li>Calling code does not need to change</li>
+<li>Decorator mechanism uses the modified function’s original name</li>
+
+<li><p>Example</p>
+
 <ul>
-<li>
-<p>use function as decorator</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">escape_unicode</span>(f):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        x <span style="color:#f92672">=</span> f(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        <span style="color:#66d9ef">return</span> ascii(x)
-    <span style="color:#66d9ef">return</span> wrap
+<li><p>use function as decorator</p>
+
+<pre><code class="language-python">def escape_unicode(f):
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
 
 
-<span style="color:#a6e22e">@escape_unicode</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_greek</span>():
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">γειά σου κόσμος</span><span style="color:#e6db74">&#39;</span>    
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    <span style="color:#66d9ef">print</span>(hello_greek())
+if __name__ == &quot;__main__&quot;:
+    print(hello_greek())
 
-<span style="color:#75715e">## test result:</span>
-<span style="color:#75715e">## &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;</span>
-</code></pre></div></li>
-<li>
-<p>Example: multiple decorators including function and instance</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Trace</span>:
-    <span style="color:#66d9ef">def</span> __init__(self):
-        self<span style="color:#f92672">.</span>enabled <span style="color:#f92672">=</span> True
+## test result:
+## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+</code></pre></li>
 
-    <span style="color:#66d9ef">def</span> __call__(self, f):
-        <span style="color:#a6e22e">@functools.wraps</span>(f)
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>enabled:
-                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Calling {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(f<span style="color:#f92672">.</span>__name__))
-            <span style="color:#66d9ef">return</span> f(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        <span style="color:#66d9ef">return</span> wrap
+<li><p>Example: multiple decorators including function and instance</p>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">escape_unicode</span>(f):
-    <span style="color:#a6e22e">@functools.wraps</span>(f)
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        x <span style="color:#f92672">=</span> f(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        <span style="color:#66d9ef">return</span> ascii(x)
-    <span style="color:#66d9ef">return</span> wrap
+<pre><code class="language-python">class Trace:
+    def __init__(self):
+        self.enabled = True
 
-<span style="color:#a6e22e">@tracer</span>
-<span style="color:#a6e22e">@escape_unicode</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_greek</span>():
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">γειά σου κόσμος</span><span style="color:#e6db74">&#39;</span>    
+    def __call__(self, f):
+        @functools.wraps(f)
+        def wrap(*args, **kwargs):
+            if self.enabled:
+                print('Calling {}'.format(f.__name__))
+            return f(*args, **kwargs)
+        return wrap
 
-<span style="color:#75715e">## test result</span>
-<span style="color:#75715e">## Calling hello_greek</span>
-<span style="color:#75715e">## &#39;\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2&#39;</span>
+def escape_unicode(f):
+    @functools.wraps(f)
+    def wrap(*args, **kwargs):
+        x = f(*args, **kwargs)
+        return ascii(x)
+    return wrap
 
-</code></pre></div></li>
-<li>
-<p>Use as validator</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_non_negative</span>(index):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validator</span>(f):
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args):
-            <span style="color:#66d9ef">if</span> args[index] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
-                <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(
-                    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Arg {} must be non-negative</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(index)
+@tracer
+@escape_unicode
+def hello_greek():
+    return 'γειά σου κόσμος'    
+
+## test result
+## Calling hello_greek
+## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+
+</code></pre></li>
+
+<li><p>Use as validator</p>
+
+<pre><code class="language-python">def check_non_negative(index):
+    def validator(f):
+        def wrap(*args):
+            if args[index] &lt; 0:
+                raise ValueError(
+                    'Arg {} must be non-negative'.format(index)
                 )
-            <span style="color:#66d9ef">return</span> f(<span style="color:#f92672">*</span>args)
-        <span style="color:#66d9ef">return</span> wrap
-    <span style="color:#66d9ef">return</span> validator
+            return f(*args)
+        return wrap
+    return validator
 
-<span style="color:#a6e22e">@check_non_negative</span>(<span style="color:#ae81ff">1</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_seq</span>(value, size):
-    <span style="color:#66d9ef">return</span> [value]<span style="color:#f92672">*</span>size  
+@check_non_negative(1)
+def create_seq(value, size):
+    return [value]*size  
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    create_seq(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+if __name__ == &quot;__main__&quot;:
+    create_seq('0', -3)
 
-<span style="color:#75715e">## test result</span>
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Arg {} must be non-negative</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(index)
-<span style="color:#a6e22e">ValueError</span>: Arg <span style="color:#ae81ff">1</span> must be non<span style="color:#f92672">-</span>negative
-</code></pre></div></li>
+## test result
+....
+'Arg {} must be non-negative'.format(index)
+ValueError: Arg 1 must be non-negative
+</code></pre></li>
 </ul>
-<h2 id="properties--class">Properties &amp; Class</h2>
+
+<h2 id="properties-class">Properties &amp; Class</h2>
+
 <h3 id="staticmethod">@staticmethod</h3>
+
 <ul>
 <li>No access needed to either class or instance objects.</li>
 <li>Most likely an implementation detail of the class.</li>
 <li>May be able to be moved to become a module-scope function</li>
 </ul>
+
 <h3 id="classmethod">@classmethod</h3>
+
 <ul>
 <li>Requires access to the class object to call other class methods or the constructor</li>
 <li>Always use self for the first argument to instance methods.</li>
 <li>Always use cls for the first argument to class methods.</li>
-<li>Use case: use as named constructors</li>
+
+<li><p>Use case: use as named constructors</p>
+
+<pre><code class="language-python">class FileStream(object):
+
+@classmethod
+def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
+    with open(filepath, 'r') as fileobj:
+        for obj in cls(fileobj, ignore_comments, *args, **kwargs):
+            yield obj
+
+@classmethod
+def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
+    raise NotImplemented ## Placeholder until implemented
+
+def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
+    ...
+</code></pre></li>
+</ul></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileStream</span>(object):
 
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">from_file</span>(cls, filepath, ignore_comments<span style="color:#f92672">=</span>False, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):   
-        <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> fileobj:
-            <span style="color:#66d9ef">for</span> obj <span style="color:#f92672">in</span> cls(fileobj, ignore_comments, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-                <span style="color:#66d9ef">yield</span> obj
-
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">from_socket</span>(cls, socket, ignore_comments<span style="color:#f92672">=</span>False, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">raise</span> NotImplemented <span style="color:#75715e">## Placeholder until implemented</span>
-
-    <span style="color:#66d9ef">def</span> __init__(self, iterable, ignore_comments<span style="color:#f92672">=</span>False, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-</code></pre></div></li>
-</ul>
 <h3 id="property">@property</h3>
-<ul>
-<li>
-<p>Encapsulation</p>
-<ul>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>
-    <span style="color:#a6e22e">@property</span>
-    <span style="color:#66d9ef">def</span>  <span style="color:#a6e22e">prop</span>(self):
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_prop
 
-    <span style="color:#a6e22e">@prop.setter</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prop</span>(self, value):
-        self<span style="color:#f92672">.</span>_prop <span style="color:#f92672">=</span> value
-</code></pre></div></li>
-</ul>
-</li>
+<ul>
+<li><p>Encapsulation</p>
+
+<ul>
+<li><p>Example</p>
+
+<pre><code class="language-python">class A
+    @property
+    def  prop(self):
+        return self._prop
+
+    @prop.setter
+    def prop(self, value):
+        self._prop = value
+</code></pre></li>
+</ul></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#closure--decorator">Closure & Decorator</a>
-      <ul>
-        <li><a href="#legb-rules">LEGB rules</a></li>
-        <li><a href="#local-function">Local function</a></li>
-        <li><a href="#closure">Closure</a></li>
-        <li><a href="#decorator">Decorator</a></li>
-      </ul>
-    </li>
-    <li><a href="#properties--class">Properties & Class</a>
-      <ul>
-        <li><a href="#staticmethod">@staticmethod</a></li>
-        <li><a href="#classmethod">@classmethod</a></li>
-        <li><a href="#property">@property</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<ul>
+<li><a href="#legb-rules">LEGB rules</a></li>
+<li><a href="#local-function">Local function</a></li>
+<li><a href="#closure">Closure</a></li>
+<li><a href="#decorator">Decorator</a></li>
+</ul></li>
+<li><a href="#properties-class">Properties &amp; Class</a>
+<ul>
+<li><a href="#staticmethod">@staticmethod</a></li>
+<li><a href="#classmethod">@classmethod</a></li>
+<li><a href="#property">@property</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

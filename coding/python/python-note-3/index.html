@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>String &amp; Representation :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1007,8 +978,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1026,203 +995,200 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>String &amp; Representation</h1>
-        <h2 id="string--representation">String &amp; Representation</h2>
+        
+
+<h2 id="string-representation">String &amp; Representation</h2>
+
 <h3 id="str">str()</h3>
+
 <ul>
 <li><code>print()</code> -&gt; <code>str()</code> -&gt;  <code>__str(self)__</code></li>
 <li>Fallback to <code>repr()</code>. By default, <code>str()</code> simply calls <code>repr()</code></li>
 <li>Produces a readable, human-friendly representation of an object</li>
 <li>It is also the string constructor</li>
 </ul>
+
 <h3 id="repr">repr()</h3>
+
 <ul>
-<li>
-<p>Exactness is more important than human-friendliness</p>
-</li>
-<li>
-<p>Suited for debugging. Unambiguous, precise, include type</p>
-</li>
-<li>
-<p>Includes identifying information.</p>
-</li>
-<li>
-<p>Generally best for logging and developers</p>
-</li>
-<li>
-<p>The default repr() is not very helpful</p>
-</li>
-<li>
-<p>As a rule, you should always write a repr() for your classes</p>
-</li>
-<li>
-<p>standard library <code>reprlib.repr()</code> is a replacement for <code>repr()</code></p>
+<li>Exactness is more important than human-friendliness</li>
+<li>Suited for debugging. Unambiguous, precise, include type</li>
+<li>Includes identifying information.</li>
+<li>Generally best for logging and developers</li>
+<li>The default repr() is not very helpful</li>
+<li>As a rule, you should always write a repr() for your classes</li>
+
+<li><p>standard library <code>reprlib.repr()</code> is a replacement for <code>repr()</code></p>
+
 <ul>
-<li>Example</li>
+<li><p>Example</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; l = ['a'] * 1000
+&gt;&gt;&gt; import reprlib
+&gt;&gt;&gt; reprlib.repr(l)
+&quot;['a', 'a', 'a', 'a', 'a', 'a', ...]&quot;
+</code></pre></li>
+</ul></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> l <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">import</span> reprlib
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> reprlib<span style="color:#f92672">.</span>repr(l)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, ...]</span><span style="color:#e6db74">&#34;</span>
-</code></pre></div></li>
-</ul>
+
 <h3 id="format">format</h3>
+
 <ul>
 <li><code>&quot;{:f}&quot;.format(obj)</code> -&gt; <code>__format__(self, f)</code></li>
 <li>Fallback to <code>str()</code></li>
 </ul>
+
 <h3 id="built-in-functions">built-in functions</h3>
+
 <ul>
 <li><code>ascii()</code> replaces non-ASCII characters with escape sequences</li>
 <li><code>chr()</code> converts an integer Unicode codepoint to a single character string</li>
 <li><code>ord()</code> converts a single character to its integer Unicode codepoint</li>
 </ul>
-<h2 id="numeric--scalar-types">Numeric &amp; scalar types</h2>
+
+<h2 id="numeric-scalar-types">Numeric &amp; scalar types</h2>
+
 <h3 id="int">int</h3>
+
 <ul>
-<li>
-<p>unlimited precision signed integer</p>
-</li>
-<li>
-<p>bool in an int</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> False <span style="color:#f92672">-</span> True
-<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> False <span style="color:#f92672">-</span> False
-<span style="color:#ae81ff">0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> True <span style="color:#f92672">-</span> False
-<span style="color:#ae81ff">1</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> True <span style="color:#f92672">-</span> True
-<span style="color:#ae81ff">0</span>
-</code></pre></div></li>
+<li>unlimited precision signed integer</li>
+
+<li><p>bool in an int</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; False - True
+-1
+&gt;&gt;&gt; False - False
+0
+&gt;&gt;&gt; True - False
+1
+&gt;&gt;&gt; True - True
+0
+</code></pre></li>
 </ul>
+
 <h3 id="float">float</h3>
-<ul>
-<li>
-<p>IEEE-754 double precision (64-bit)</p>
-</li>
-<li>
-<p>53 bits of binary precision</p>
-</li>
-<li>
-<p>15 to 17 bits of decimal precision</p>
-</li>
-<li>
-<p>Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.</p>
-<ul>
-<li>
-<p>0.001 has value 0/2 + 0/4 + 1/8. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2</p>
-</li>
-<li>
-<p>Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Example of float data</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0.8</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f
-<span style="color:#ae81ff">0.09999999999999998</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0.1</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f
-<span style="color:#ae81ff">0.1</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0.7</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> f
-<span style="color:#ae81ff">0.10000000000000009</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> float(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">53</span>)
-<span style="color:#ae81ff">9007199254740992.0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> float(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">53</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-<span style="color:#ae81ff">9007199254740992.0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> float(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">53</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>)
-<span style="color:#ae81ff">9007199254740994.0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> float(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">53</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>)
-<span style="color:#ae81ff">9007199254740996.0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> float(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">53</span><span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>)
-<span style="color:#ae81ff">9007199254740996.0</span>
 
-</code></pre></div></li>
+<ul>
+<li>IEEE-754 double precision (64-bit)</li>
+<li>53 bits of binary precision</li>
+<li>15 to 17 bits of decimal precision</li>
+
+<li><p>Floating-point numbers are represented in computer hardware as base 2 (binary) fractions.</p>
+
+<ul>
+<li><p>0.001 has value 0/2 + 0/4 + <sup>1</sup>&frasl;<sub>8</sub>. These two fractions have identical values, the only real difference being that the first is written in base 10 fractional notation, and the second in base 2</p></li>
+
+<li><p>Unfortunately, most decimal fractions cannot be represented exactly as binary fractions. A consequence is that, in general, the decimal floating-point numbers you enter are only approximated by the binary floating-point numbers actually stored in the machine.</p></li>
+</ul></li>
+
+<li><p>Example of float data</p>
+
+<pre><code class="language-python">
+&gt;&gt;&gt; f=0.9-0.8
+&gt;&gt;&gt; f
+0.09999999999999998
+&gt;&gt;&gt; f=0.2-0.1
+&gt;&gt;&gt; f
+0.1
+&gt;&gt;&gt; f=0.8-0.7
+&gt;&gt;&gt; f
+0.10000000000000009
+&gt;&gt;&gt; float(2**53)
+9007199254740992.0
+&gt;&gt;&gt; float(2**53+1)
+9007199254740992.0
+&gt;&gt;&gt; float(2**53+2)
+9007199254740994.0
+&gt;&gt;&gt; float(2**53+3)
+9007199254740996.0
+&gt;&gt;&gt; float(2**53+4)
+9007199254740996.0
+
+</code></pre></li>
 </ul>
+
 <h3 id="decimal">decimal</h3>
+
 <ul>
-<li>
-<p>standard library module decimal containing the class Decimal</p>
-</li>
-<li>
-<p>decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision</p>
-</li>
-<li>
-<p>identity is preserved. <code>x == (x // y) * y + x % y</code>, so integer division and modulus are consistent</p>
-</li>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> Decimal
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#ae81ff">0.6</span>)<span style="color:#f92672">-</span>Decimal(<span style="color:#ae81ff">0.5</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.09999999999999997779553950750</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.6</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">-</span>Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.5</span><span style="color:#e6db74">&#39;</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.1</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#ae81ff">0.2</span>)<span style="color:#f92672">-</span>Decimal(<span style="color:#ae81ff">0.1</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.1000000000000000055511151231</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#ae81ff">0.8</span>)<span style="color:#f92672">-</span>Decimal(<span style="color:#ae81ff">0.7</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.1000000000000000888178419700</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.8</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">-</span>Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.7</span><span style="color:#e6db74">&#39;</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.1</span><span style="color:#e6db74">&#39;</span>)
+<li>standard library module decimal containing the class Decimal</li>
+<li>decimal floating point configurable (although finite) precision defaults to 28 digits of decimal precision</li>
+<li>identity is preserved. <code>x == (x // y) * y + x % y</code>, so integer division and modulus are consistent</li>
 
-<span style="color:#75715e">## Change the precise </span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">import</span> decimal
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> decimal<span style="color:#f92672">.</span>getcontext()<span style="color:#f92672">.</span>prec<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>) <span style="color:#f92672">/</span> Decimal(<span style="color:#ae81ff">3</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-2.333</span><span style="color:#e6db74">&#39;</span>)
+<li><p>Example</p>
 
-<span style="color:#75715e">## Python handle different type in different way with % </span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>) <span style="color:#f92672">%</span> Decimal(<span style="color:#ae81ff">3</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-1</span><span style="color:#e6db74">&#39;</span>)  <span style="color:#75715e">## </span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Decimal(<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>) <span style="color:#f92672">/</span><span style="color:#f92672">/</span> Decimal(<span style="color:#ae81ff">3</span>)
-Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-2</span><span style="color:#e6db74">&#39;</span>)  <span style="color:#75715e">## The next multiple of 3 towards zero is -6</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>) <span style="color:#f92672">/</span><span style="color:#f92672">/</span> (<span style="color:#ae81ff">3</span>) 
-<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>  <span style="color:#75715e">## The largest multiple of 3 less than -7 is -9</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>) <span style="color:#f92672">%</span> (<span style="color:#ae81ff">3</span>)
-<span style="color:#ae81ff">2</span>  <span style="color:#75715e">## The </span>
-</code></pre></div></li>
+<pre><code class="language-python">&gt;&gt;&gt; from decimal import Decimal
+&gt;&gt;&gt; Decimal(0.6)-Decimal(0.5)
+Decimal('0.09999999999999997779553950750')
+&gt;&gt;&gt; Decimal('0.6')-Decimal('0.5')
+Decimal('0.1')
+&gt;&gt;&gt; Decimal(0.2)-Decimal(0.1)
+Decimal('0.1000000000000000055511151231')
+&gt;&gt;&gt; Decimal(0.8)-Decimal(0.7)
+Decimal('0.1000000000000000888178419700')
+&gt;&gt;&gt; Decimal('0.8')-Decimal('0.7')
+Decimal('0.1')
+
+## Change the precise 
+&gt;&gt;&gt; import decimal
+&gt;&gt;&gt; decimal.getcontext().prec=4
+&gt;&gt;&gt; Decimal(-7) / Decimal(3)
+Decimal('-2.333')
+
+## Python handle different type in different way with % 
+&gt;&gt;&gt; Decimal(-7) % Decimal(3)
+Decimal('-1')  ## 
+&gt;&gt;&gt; Decimal(-7) // Decimal(3)
+Decimal('-2')  ## The next multiple of 3 towards zero is -6
+&gt;&gt;&gt; (-7) // (3) 
+-3  ## The largest multiple of 3 less than -7 is -9
+&gt;&gt;&gt; (-7) % (3)
+2  ## The 
+</code></pre></li>
 </ul>
+
 <h3 id="fraction">fraction</h3>
+
 <ul>
-<li>
-<p>standard library module fractions containing the class Fraction for rational numbers</p>
+<li><p>standard library module fractions containing the class Fraction for rational numbers</p>
+
 <ul>
 <li>Denominator cannot be zero. e.g. 2 / 3, 2 is numerator, 3 is denominator.</li>
-</ul>
-</li>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">from</span> fractions <span style="color:#f92672">import</span> Fraction
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span>f <span style="color:#f92672">=</span> Fraction(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">2/3</span><span style="color:#e6db74">&#34;</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span>f
-Faction(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(<span style="color:#ae81ff">0.2</span>)
-Fraction(<span style="color:#ae81ff">3602879701896397</span>, <span style="color:#ae81ff">18014398509481984</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(<span style="color:#ae81ff">0.5</span>)
-Fraction(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>))
-Fraction(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#f92672">/</span><span style="color:#f92672">/</span> Fraction(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>)
-<span style="color:#ae81ff">0</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#f92672">%</span> Fraction(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>)
-Fraction(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#f92672">-</span> Fraction(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>)
-Fraction(<span style="color:#f92672">-</span><span style="color:#ae81ff">39</span>, <span style="color:#ae81ff">70</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#f92672">+</span> Fraction(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>)
-Fraction(<span style="color:#ae81ff">81</span>, <span style="color:#ae81ff">70</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> Fraction(Decimal(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.3</span><span style="color:#e6db74">&#39;</span>)) <span style="color:#f92672">*</span> Fraction(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>)
-Fraction(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</span>)
+</ul></li>
 
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> floor, ceil
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> ceil(Fraction(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">8/7</span><span style="color:#e6db74">&#39;</span>))
-<span style="color:#ae81ff">2</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> floor(Fraction(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">8/7</span><span style="color:#e6db74">&#39;</span>))
-<span style="color:#ae81ff">1</span>
-</code></pre></div></li>
+<li><p>Example</p>
+
+<pre><code class="language-python">
+&gt;&gt;&gt;from fractions import Fraction
+&gt;&gt;&gt;f = Fraction(&quot;2/3&quot;)
+&gt;&gt;&gt;f
+Faction(2,3)
+&gt;&gt;&gt; Fraction(0.2)
+Fraction(3602879701896397, 18014398509481984)
+&gt;&gt;&gt; Fraction(0.5)
+Fraction(1, 2)
+&gt;&gt;&gt; Fraction(Decimal('0.3'))
+Fraction(3, 10)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) // Fraction(6, 7)
+0
+&gt;&gt;&gt; Fraction(Decimal('0.3')) % Fraction(6, 7)
+Fraction(3, 10)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) - Fraction(6, 7)
+Fraction(-39, 70)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) + Fraction(6, 7)
+Fraction(81, 70)
+&gt;&gt;&gt; Fraction(Decimal('0.3')) * Fraction(6, 7)
+Fraction(9, 35)
+
+&gt;&gt;&gt; from math import floor, ceil
+&gt;&gt;&gt; ceil(Fraction('8/7'))
+2
+&gt;&gt;&gt; floor(Fraction('8/7'))
+1
+</code></pre></li>
 </ul>
+
 <h3 id="number-base-conversions">number base conversions</h3>
+
 <table>
 <thead>
 <tr>
@@ -1232,6 +1198,7 @@ Fraction(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</s
 <th>int(x, base)</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>base 2</td>
@@ -1241,83 +1208,87 @@ Fraction(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</s
 </tr>
 </tbody>
 </table>
+
 <ul>
-<li>Example</li>
+<li><p>Example</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; 0b0101
+5
+&gt;&gt;&gt; 0o63527
+26455
+&gt;&gt;&gt; 0o63
+51
+&gt;&gt;&gt; 0xad2
+2770
+&gt;&gt;&gt; hex(22)
+'0x16'
+&gt;&gt;&gt; oct(22)
+'0o26'
+&gt;&gt;&gt; bin(22)
+'0b10110'
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0b0101</span>
-<span style="color:#ae81ff">5</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>o63527
-<span style="color:#ae81ff">26455</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>o63
-<span style="color:#ae81ff">51</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0xad2</span>
-<span style="color:#ae81ff">2770</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> hex(<span style="color:#ae81ff">22</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0x16</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> oct(<span style="color:#ae81ff">22</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0o26</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> bin(<span style="color:#ae81ff">22</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0b10110</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><h3 id="complex">complex</h3>
+
+<h3 id="complex">complex</h3>
+
 <ul>
-<li>
-<p>complex construction string argument may have parentheses but must not contain spaces</p>
-</li>
-<li>
-<p><code>cmath</code> standard Library module contains complex equivalents of math</p>
-</li>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>
-(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> type(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>)
-<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">complex</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1j</span>)
-(<span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2j</span>)
-(<span style="color:#ae81ff">3</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2j</span>)
-(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> complex(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-2+1j</span><span style="color:#e6db74">&#39;</span>)
-(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> complex(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(-2+1j)</span><span style="color:#e6db74">&#39;</span>)
-(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> complex(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)
-(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1j</span>)
+<li>complex construction string argument may have parentheses but must not contain spaces</li>
+<li><code>cmath</code> standard Library module contains complex equivalents of math</li>
+
+<li><p>Example</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; 1+1j
+(1+1j)
+&gt;&gt;&gt; type(1+1j)
+&lt;class 'complex'&gt;
+&gt;&gt;&gt; (1+1j) + (1-1j)
+(2+0j)
+&gt;&gt;&gt; (1+1j) + (2-2j)
+(3-1j)
+&gt;&gt;&gt; (1+1j) - (2-2j)
+(-1+3j)
+&gt;&gt;&gt; complex('-2+1j')
+(-2+1j)
+&gt;&gt;&gt; complex('(-2+1j)')
+(-2+1j)
+&gt;&gt;&gt; complex(-2, 1)
+(-2+1j)
 
 
-</code></pre></div></li>
+</code></pre></li>
 </ul>
-<h3 id="date--time">date &amp; time</h3>
-<hr>
+
+<h3 id="date-time">date &amp; time</h3>
+
+<hr />
+
 <ul>
-<li>
-<p>Gregorian calendar</p>
-</li>
-<li>
-<p><code>weekday()</code></p>
-<pre><code>  0 Monday
-  1 Tuesday
-  2 Wednesday
-  3 Thursday
-  4 Friday
-  5 Saturday
-  6 Sunday
-</code></pre>
-</li>
-<li>
-<p><code>isoweekday()</code></p>
-<pre><code>  1 Monday
-  2 Tuesday
-  3 Wednesday
-  4 Thursday
-  5 Friday
-  6 Saturday
-  7 Sunday   
-</code></pre>
-</li>
-<li>
-<p>timedelta</p>
+<li>Gregorian calendar</li>
+
+<li><p><code>weekday()</code></p>
+
+<pre><code>0 Monday
+1 Tuesday
+2 Wednesday
+3 Thursday
+4 Friday
+5 Saturday
+6 Sunday
+</code></pre></li>
+
+<li><p><code>isoweekday()</code></p>
+
+<pre><code>1 Monday
+2 Tuesday
+3 Wednesday
+4 Thursday
+5 Friday
+6 Saturday
+7 Sunday   
+</code></pre></li>
+
+<li><p>timedelta</p>
+
 <ul>
 <li>Constructor accepts and sums
 • days
@@ -1331,96 +1302,97 @@ Fraction(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</s
 • days
 • seconds
 • microseconds</li>
-</ul>
-</li>
-<li>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> (date, time)
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime <span style="color:#66d9ef">as</span> Datetime
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> timedelta
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> (tzinfo, timezone)
+</ul></li>
 
-<span style="color:#75715e">### date</span>
+<li><p>Example</p>
 
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2000</span>,month<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, day<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">10</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2014</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">14</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>fromtimestamp(<span style="color:#ae81ff">99999999</span>)
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">1973</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>fromordinal(<span style="color:#ae81ff">9999</span>)
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">17</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>max
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">9999</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>min
-datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>weekday()
-<span style="color:#ae81ff">4</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>isoweekday()
-<span style="color:#ae81ff">5</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> d <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>fromtimestamp(<span style="color:#ae81ff">99999999</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> d<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">A </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">B </span><span style="color:#e6db74">%</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Saturday 03 March Mar</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> d<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">A </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">B </span><span style="color:#e6db74">%</span><span style="color:#e6db74">b </span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Saturday 03 March Mar 1973</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The date is {:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">A </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">B </span><span style="color:#e6db74">%</span><span style="color:#e6db74">b </span><span style="color:#e6db74">%</span><span style="color:#e6db74">y}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(d)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">The date is Saturday 03 March Mar 73</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{date:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">A} {date.day} {date:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">B} {date:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(date<span style="color:#f92672">=</span>d)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Saturday 3 March 1973</span><span style="color:#e6db74">&#39;</span>
+<pre><code class="language-python">from datetime import (date, time)
+from datetime import datetime as Datetime
+from datetime import timedelta
+from datetime import (tzinfo, timezone)
 
-<span style="color:#75715e">### time</span>
+### date
 
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> t<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>time(<span style="color:#ae81ff">23</span>,<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">7451</span>)   
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> t<span style="color:#f92672">.</span>isoformat()
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">23:59:01.007451</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> t<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Hh</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Mm</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Ss</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">23h59m01s</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>max
-datetime<span style="color:#f92672">.</span>time(<span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">59</span>, <span style="color:#ae81ff">59</span>, <span style="color:#ae81ff">999999</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>min
-datetime<span style="color:#f92672">.</span>time(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+&gt;&gt;&gt; datetime.date(2000,month=2, day=10)
+datetime.date(2000, 2, 10)
+&gt;&gt;&gt; datetime.date.today()
+datetime.date(2014, 3, 14)
+&gt;&gt;&gt; datetime.date.fromtimestamp(99999999)
+datetime.date(1973, 3, 3)
+&gt;&gt;&gt; datetime.date.fromordinal(9999)
+datetime.date(28, 5, 17)
+&gt;&gt;&gt; datetime.date.max
+datetime.date(9999, 12, 31)
+&gt;&gt;&gt; datetime.date.min
+datetime.date(1, 1, 1)
+&gt;&gt;&gt; datetime.date.today().weekday()
+4
+&gt;&gt;&gt; datetime.date.today().isoweekday()
+5
+&gt;&gt;&gt; d = datetime.date.fromtimestamp(99999999)
+&gt;&gt;&gt; d.strftime('%A %d %B %b')
+'Saturday 03 March Mar'
+&gt;&gt;&gt; d.strftime('%A %d %B %b %Y')
+'Saturday 03 March Mar 1973'
+&gt;&gt;&gt; &quot;The date is {:%A %d %B %b %y}&quot;.format(d)
+'The date is Saturday 03 March Mar 73'
+&gt;&gt;&gt; &quot;{date:%A} {date.day} {date:%B} {date:%Y}&quot;.format(date=d)
+'Saturday 3 March 1973'
 
-<span style="color:#75715e">### datetime</span>
+### time
 
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">895</span>)
-datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2001</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">895</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> dt<span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">895</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> dt<span style="color:#f92672">.</span>isoformat()
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2001-06-07T08:15:25.000895</span><span style="color:#e6db74">&#39;</span>
+&gt;&gt;&gt; t=datetime.time(23,59,1,7451)   
+&gt;&gt;&gt; t.isoformat()
+'23:59:01.007451'
+&gt;&gt;&gt; t.strftime('%Hh%Mm%Ss')
+'23h59m01s'
+&gt;&gt;&gt; datetime.time.max
+datetime.time(23, 59, 59, 999999)
+&gt;&gt;&gt; datetime.time.min
+datetime.time(0, 0)
 
-<span style="color:#75715e">### timedelta</span>
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> td <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>timedelta(weeks<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, days<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, minutes<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, microseconds<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, milliseconds<span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> td
-datetime<span style="color:#f92672">.</span>timedelta(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">3660</span>, <span style="color:#ae81ff">1002</span>)
+### datetime
 
-</code></pre></div></li>
+&gt;&gt;&gt; datetime.datetime(2001,6,7,8,15,25,895)
+datetime.datetime(2001, 6, 7, 8, 15, 25, 895)
+&gt;&gt;&gt; dt= datetime.datetime(2001,6,7,8,15,25,895)
+&gt;&gt;&gt; dt.isoformat()
+'2001-06-07T08:15:25.000895'
+
+### timedelta
+&gt;&gt;&gt; td = datetime.timedelta(weeks=2, days=1, hours=1, minutes=1, microseconds=2, milliseconds= 1)
+&gt;&gt;&gt; td
+datetime.timedelta(15, 3660, 1002)
+
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#string--representation">String & Representation</a>
-      <ul>
-        <li><a href="#str">str()</a></li>
-        <li><a href="#repr">repr()</a></li>
-        <li><a href="#format">format</a></li>
-        <li><a href="#built-in-functions">built-in functions</a></li>
-      </ul>
-    </li>
-    <li><a href="#numeric--scalar-types">Numeric & scalar types</a>
-      <ul>
-        <li><a href="#int">int</a></li>
-        <li><a href="#float">float</a></li>
-        <li><a href="#decimal">decimal</a></li>
-        <li><a href="#fraction">fraction</a></li>
-        <li><a href="#number-base-conversions">number base conversions</a></li>
-        <li><a href="#complex">complex</a></li>
-        <li><a href="#date--time">date & time</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#string-representation">String &amp; Representation</a>
+<ul>
+<li><a href="#str">str()</a></li>
+<li><a href="#repr">repr()</a></li>
+<li><a href="#format">format</a></li>
+<li><a href="#built-in-functions">built-in functions</a></li>
+</ul></li>
+<li><a href="#numeric-scalar-types">Numeric &amp; scalar types</a>
+<ul>
+<li><a href="#int">int</a></li>
+<li><a href="#float">float</a></li>
+<li><a href="#decimal">decimal</a></li>
+<li><a href="#fraction">fraction</a></li>
+<li><a href="#number-base-conversions">number base conversions</a></li>
+<li><a href="#complex">complex</a></li>
+<li><a href="#date-time">date &amp; time</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

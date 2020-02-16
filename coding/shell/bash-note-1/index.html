@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Adv Bash - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1004,8 +975,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1023,9 +992,14 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Adv Bash - 1</h1>
-        <h3 id="special-characters">Special Characters</h3>
+        
+
+<h3 id="special-characters">Special Characters</h3>
+
 <p>What makes a character special? If it has a meaning beyond its literal meaning, a meta-meaning, then we refer to it as a special character. Along with commands and keywords, special characters are building blocks of Bash scripts.</p>
+
 <h4 id="special-shell-variables">Special Shell Variables</h4>
+
 <table>
 <thead>
 <tr>
@@ -1033,67 +1007,84 @@
 <th>Meaning</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>$0</td>
 <td>Filename of script</td>
 </tr>
+
 <tr>
 <td>$1</td>
 <td>Positional parameter #1</td>
 </tr>
+
 <tr>
 <td>$2 - $9</td>
 <td>Positional parameters #2 - #9</td>
 </tr>
+
 <tr>
 <td>${10}</td>
 <td>Positional parameter #10</td>
 </tr>
+
 <tr>
 <td>$#</td>
 <td>Number of positional parameters</td>
 </tr>
+
 <tr>
-<td>&ldquo;$*&rdquo;</td>
+<td>&rdquo;$*&rdquo;</td>
 <td>All the positional parameters (as a single word) *</td>
 </tr>
+
 <tr>
-<td>&ldquo;$@&rdquo;</td>
+<td>&rdquo;$@&rdquo;</td>
 <td>All the positional parameters (as separate strings)</td>
 </tr>
+
 <tr>
 <td>${#*}</td>
 <td>Number of positional parameters</td>
 </tr>
+
 <tr>
 <td>${#@}</td>
 <td>Number of positional parameters</td>
 </tr>
+
 <tr>
 <td>$?</td>
 <td>Return value</td>
 </tr>
+
 <tr>
 <td>$$</td>
 <td>Process ID (PID) of script</td>
 </tr>
+
 <tr>
 <td>$-</td>
 <td>Flags passed to script (using set)</td>
 </tr>
+
 <tr>
 <td>$_</td>
 <td>Last argument of previous command</td>
 </tr>
+
 <tr>
 <td>$!</td>
 <td>Process ID (PID) of last job run in background</td>
 </tr>
 </tbody>
 </table>
+
 <h4 id="operator-precedence">Operator Precedence</h4>
+
 <p>In a script, operations execute in order of precedence: the higher precedence operations execute before the lower precedence ones.</p>
+
 <table>
 <thead>
 <tr>
@@ -1102,117 +1093,140 @@
 <th>Comments</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td></td>
 <td>HIGHEST PRECEDENCE</td>
 <td></td>
 </tr>
+
 <tr>
 <td>var++ var&ndash;</td>
 <td>post-increment, post-decrement</td>
 <td>C-style operators</td>
 </tr>
+
 <tr>
 <td>++var &ndash;var</td>
 <td>pre-increment, pre-decrement</td>
 <td></td>
 </tr>
+
 <tr>
 <td>! ~</td>
 <td>negation</td>
 <td>logical / bitwise, inverts sense of following operator</td>
 </tr>
+
 <tr>
 <td>**</td>
 <td>exponentiation</td>
 <td>arithmetic operation</td>
 </tr>
+
 <tr>
 <td>* / %</td>
 <td>multiplication, division, modulo</td>
 <td>arithmetic operation</td>
 </tr>
+
 <tr>
 <td>+ -</td>
 <td>addition, subtraction</td>
 <td>arithmetic operation</td>
 </tr>
+
 <tr>
-<td>&laquo; &raquo;</td>
+<td>&lt;&lt; &gt;&gt;</td>
 <td>left, right</td>
-<td>shift	bitwise</td>
+<td>shift bitwise</td>
 </tr>
+
 <tr>
 <td>-z -n</td>
 <td>unary comparison</td>
 <td>string is/is-not null</td>
 </tr>
+
 <tr>
 <td>-e -f -t -x, etc.</td>
 <td>unary comparison</td>
 <td>file-test</td>
 </tr>
+
 <tr>
 <td>&lt; -lt &gt; -gt &lt;= -le &gt;= -ge</td>
 <td>compound comparison</td>
 <td>string and integer</td>
 </tr>
+
 <tr>
 <td>-nt -ot -ef</td>
 <td>compound comparison</td>
 <td>file-test</td>
 </tr>
+
 <tr>
 <td>== -eq != -ne</td>
 <td>equality / inequality</td>
 <td>test operators, string and integer</td>
 </tr>
+
 <tr>
 <td>&amp;</td>
 <td>AND</td>
 <td>bitwise</td>
 </tr>
+
 <tr>
 <td>^</td>
 <td>XOR</td>
 <td>exclusive OR, bitwise</td>
 </tr>
+
 <tr>
 <td>|</td>
 <td>OR</td>
 <td>bitwise</td>
 </tr>
+
 <tr>
 <td>&amp;&amp; -a</td>
 <td>AND</td>
 <td>logical, compound comparison</td>
 </tr>
+
 <tr>
 <td>| -o</td>
 <td>OR</td>
 <td>logical, compound comparison</td>
 </tr>
+
 <tr>
 <td>?:</td>
 <td>trinary operator</td>
 <td>C-style</td>
 </tr>
+
 <tr>
 <td>=</td>
 <td>assignment</td>
 <td>(do not confuse with equality test)</td>
 </tr>
+
 <tr>
-<td>*= /= %= += -= &laquo;= &raquo;= &amp;=</td>
+<td>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;=</td>
 <td>combination assignment</td>
 <td>times-equal, divide-equal,</td>
 </tr>
+
 <tr>
 <td>,</td>
 <td>comma</td>
 <td>links a sequence of operations</td>
 </tr>
+
 <tr>
 <td></td>
 <td></td>
@@ -1220,7 +1234,9 @@
 </tr>
 </tbody>
 </table>
+
 <h4 id="test-operators-binary-comparison">TEST Operators: Binary Comparison</h4>
+
 <table>
 <thead>
 <tr>
@@ -1230,6 +1246,7 @@
 <th>Meaning</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>Arithmetic Comparison</td>
@@ -1237,86 +1254,125 @@
 <td>String Comparison</td>
 <td></td>
 </tr>
+
 <tr>
 <td>-eq</td>
 <td>Equal to</td>
 <td>=</td>
 <td>Equal to</td>
 </tr>
+
 <tr>
 <td></td>
 <td></td>
 <td>==</td>
 <td>Equal to</td>
 </tr>
+
 <tr>
 <td>-ne</td>
 <td>Not equal to</td>
 <td>!=</td>
 <td>Not equal to</td>
 </tr>
+
 <tr>
 <td>-lt</td>
-<td>Less than	 	&lt;	Less than (ASCII) *</td>
+<td>Less than     &lt;  Less than (ASCII) *</td>
 <td></td>
 <td></td>
 </tr>
+
 <tr>
 <td>-le</td>
 <td>Less than or equal to</td>
 <td></td>
 <td></td>
 </tr>
+
 <tr>
 <td>-gt</td>
 <td>Greater than</td>
 <td>&gt;</td>
 <td>Greater than (ASCII) *</td>
 </tr>
+
 <tr>
 <td>-ge</td>
 <td>Greater than or equal to</td>
 <td></td>
 <td></td>
 </tr>
+
 <tr>
 <td></td>
 <td></td>
 <td>-z</td>
 <td>String is empty</td>
 </tr>
+
 <tr>
 <td></td>
 <td></td>
 <td>-n</td>
 <td>String is not empty</td>
 </tr>
+
 <tr>
 <td>Arithmetic Comparison</td>
 <td>within double parentheses (( &hellip; ))</td>
 <td></td>
 <td></td>
 </tr>
+
+<tr>
+<td>&gt;</td>
+<td>Greater than</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>Less than</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<blockquote>
-<p>|Greater than	 	 	
-=	|Greater than or equal to	 	 	
-&lt;	|Less than	 	 	
-&lt;=	|Less than or equal to</p>
-</blockquote>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#special-characters">Special Characters</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#special-characters">Special Characters</a>
+<ul>
+<li><a href="#special-shell-variables">Special Shell Variables</a></li>
+<li><a href="#operator-precedence">Operator Precedence</a></li>
+<li><a href="#test-operators-binary-comparison">TEST Operators: Binary Comparison</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

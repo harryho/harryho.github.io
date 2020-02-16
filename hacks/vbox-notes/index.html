@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:21 AEDT">
 <title>VirtualBox Notes :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -977,8 +948,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -996,20 +965,36 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>VirtualBox Notes</h1>
-        <h2 id="network">Network</h2>
+        
+
+<h2 id="network">Network</h2>
+
 <h3 id="not-attached">Not attached.</h3>
+
 <p>In this mode, Oracle VM VirtualBox reports to the guest that a network card is present, but that there is no connection. This is as if no Ethernet cable was plugged into the card. Using this mode, it is possible to &ldquo;pull&rdquo; the virtual Ethernet cable and disrupt the connection, which can be useful to inform a guest operating system that no network connection is available and enforce a reconfiguration.</p>
+
 <h3 id="network-address-translation-nat">Network Address Translation (NAT).</h3>
+
 <p>If all you want is to browse the Web, download files, and view email inside the guest, then this default mode should be sufficient for you, and you can skip the rest of this section. Please note that there are certain limitations when using Windows file sharing. See Section 6.3.3, “NAT Limitations”.</p>
+
 <h3 id="nat-network">NAT Network.</h3>
+
 <p>A NAT network is a type of internal network that allows outbound connections. See Section 6.4, “Network Address Translation Service”.</p>
+
 <h3 id="bridged-networking">Bridged networking.</h3>
-<p>This is for more advanced networking needs, such as network simulations and running servers in a guest. When enabled, Oracle VM VirtualBox connects to one of your installed network cards and exchanges network packets directly, circumventing your host operating system's network stack.</p>
+
+<p>This is for more advanced networking needs, such as network simulations and running servers in a guest. When enabled, Oracle VM VirtualBox connects to one of your installed network cards and exchanges network packets directly, circumventing your host operating system&rsquo;s network stack.</p>
+
 <h3 id="internal-networking">Internal networking.</h3>
+
 <p>This can be used to create a different kind of software-based network which is visible to selected virtual machines, but not to applications running on the host or to the outside world.</p>
+
 <h3 id="host-only-networking">Host-only networking.</h3>
-<p>This can be used to create a network containing the host and a set of virtual machines, without the need for the host's physical network interface. Instead, a virtual network interface, similar to a loopback interface, is created on the host, providing connectivity among virtual machines and the host.</p>
+
+<p>This can be used to create a network containing the host and a set of virtual machines, without the need for the host&rsquo;s physical network interface. Instead, a virtual network interface, similar to a loopback interface, is created on the host, providing connectivity among virtual machines and the host.</p>
+
 <h3 id="overview-of-networking-modes">Overview of networking modes</h3>
+
 <table>
 <thead>
 <tr>
@@ -1021,6 +1006,7 @@
 <th align="center">VM&lt;-Net/LAN</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td>Host-only</td>
@@ -1030,6 +1016,7 @@
 <td align="center">–</td>
 <td align="center">–</td>
 </tr>
+
 <tr>
 <td>Internal</td>
 <td align="center">–</td>
@@ -1038,6 +1025,7 @@
 <td align="center">–</td>
 <td align="center">–</td>
 </tr>
+
 <tr>
 <td>Bridged</td>
 <td align="center">+</td>
@@ -1046,6 +1034,7 @@
 <td align="center">+</td>
 <td align="center">+</td>
 </tr>
+
 <tr>
 <td>NAT</td>
 <td align="center">+</td>
@@ -1054,6 +1043,7 @@
 <td align="center">+</td>
 <td align="center">Port forward</td>
 </tr>
+
 <tr>
 <td>NATservice</td>
 <td align="center">+</td>
@@ -1069,19 +1059,21 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#network">Network</a>
-      <ul>
-        <li><a href="#not-attached">Not attached.</a></li>
-        <li><a href="#network-address-translation-nat">Network Address Translation (NAT).</a></li>
-        <li><a href="#nat-network">NAT Network.</a></li>
-        <li><a href="#bridged-networking">Bridged networking.</a></li>
-        <li><a href="#internal-networking">Internal networking.</a></li>
-        <li><a href="#host-only-networking">Host-only networking.</a></li>
-        <li><a href="#overview-of-networking-modes">Overview of networking modes</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#network">Network</a>
+<ul>
+<li><a href="#not-attached">Not attached.</a></li>
+<li><a href="#network-address-translation-nat">Network Address Translation (NAT).</a></li>
+<li><a href="#nat-network">NAT Network.</a></li>
+<li><a href="#bridged-networking">Bridged networking.</a></li>
+<li><a href="#internal-networking">Internal networking.</a></li>
+<li><a href="#host-only-networking">Host-only networking.</a></li>
+<li><a href="#overview-of-networking-modes">Overview of networking modes</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

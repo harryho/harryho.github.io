@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:21 AEDT">
 <title>Thread &amp; Task :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1002,8 +973,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1021,111 +990,118 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Thread &amp; Task</h1>
-        <h2 id="c-thread--task">C# Thread &amp; Task</h2>
+        
+
+<h2 id="c-thread-task">C# Thread &amp; Task</h2>
+
 <blockquote>
 <p>From Net 4.0, .Net applicatoin introduced Parallel Framework Extensions (PFx), along the way it delivered an entirely new model for async processing in
 .NET. In .NET 4.0 the thread pool queue was redesigned with the new requirements of PFx in mind. Instead of using a simple linked list, the queue was built with arrays of work items with the arrays connected into a linked list.</p>
-</blockquote>
-<blockquote>
+
 <p>With the release of .NET 4.0, Microsoft introduced yet another API for building asynchronous applications: the Task Parallel Library (TPL).</p>
 </blockquote>
+
 <h3 id="old-way-of-c-thread">Old way of C# thread</h3>
+
 <ul>
 <li>Early days of .NET applications you will see many following sample codes.</li>
 </ul>
+
 <h2 id="lock-keyword">Lock keyword</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs">    <span style="color:#66d9ef">lock</span>(stateGuard)
+
+<pre><code class="language-cs">    lock(stateGuard)
     {
         cash += amount;
         receivables -= amount;
     }
-</code></pre></div><h2 id="abort">Abort</h2>
-<p><code>Thread.Abort</code> should be avoid at all costs. Its behavior is much safer and predictable since .NET 2.0, but there are still some pretty serious pitfalls with it. The other ways to stop thread.</p>
-<ul>
-<li>Use <code>Thread.Interrupt</code></li>
-<li>Use a stopping flag</li>
-<li>Use <code>WaitHandle</code> events</li>
-</ul>
-<h3 id="new-way-of-c-async--thread">New way of C# Async &amp; Thread</h3>
+</code></pre>
+
+<h2 id="abort">Abort</h2>
+
+<p><code>Thread.Abort</code> should be avoid at all costs. Its behavior is much safer and predictable since .NET 2.0, but there are still some pretty serious pitfalls with it. The other ways to stop thread.
+* Use <code>Thread.Interrupt</code>
+* Use a stopping flag
+* Use <code>WaitHandle</code> events</p>
+
+<h3 id="new-way-of-c-async-thread">New way of C# Async &amp; Thread</h3>
+
 <h2 id="monitor">Monitor</h2>
+
 <ul>
-<li>
-<p>Monitor is no different from lock but the monitor class provides more control over the synchronization of various threads trying to access the same lock of code.</p>
-</li>
-<li>
-<p>Lock and Monitor sample</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>  
+<li><p>Monitor is no different from lock but the monitor class provides more control over the synchronization of various threads trying to access the same lock of code.</p></li>
+
+<li><p>Lock and Monitor sample</p>
+
+<pre><code class="language-cs">class Program  
 {  
-    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> <span style="color:#66d9ef">object</span> _object = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>();  
+static readonly object _object = new object();  
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> PrintNumbers()  
+public static void PrintNumbers()  
+{  
+    Monitor.Enter(_object);  
+    try  
     {  
-        Monitor.Enter(_object);  
-        <span style="color:#66d9ef">try</span>  
+        for (int i = 0; i &lt; 5; i++)  
         {  
-            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">5</span>; i++)  
-            {  
-                Thread.Sleep(<span style="color:#ae81ff">1</span><span style="color:#ae81ff">0</span><span style="color:#ae81ff">0</span>);  
-                Console.Write(i + <span style="color:#e6db74">&#34;,&#34;</span>);  
-            }  
-            Console.WriteLine();  
+            Thread.Sleep(100);  
+            Console.Write(i + &quot;,&quot;);  
         }  
-        <span style="color:#66d9ef">finally</span>  
-        {  
-            Monitor.Exit(_object);  
-        }  
+        Console.WriteLine();  
     }  
-
-    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> TestLock()  
-    {            
-        <span style="color:#66d9ef">lock</span> (_object)  
-        {  
-            Thread.Sleep(<span style="color:#ae81ff">1</span><span style="color:#ae81ff">0</span><span style="color:#ae81ff">0</span>);  
-            Console.WriteLine(Environment.TickCount);  
-        }  
-    }  
-
-    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)      
-    {            
-        Thread[] Threads = <span style="color:#66d9ef">new</span> Thread[<span style="color:#ae81ff">3</span>];  
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">3</span>; i++)  
-        {  
-            Threads[i] = <span style="color:#66d9ef">new</span> Thread(<span style="color:#66d9ef">new</span> ThreadStart(PrintNumbers));  
-            Threads[i].Name = <span style="color:#e6db74">&#34;Child &#34;</span> + i;  
-        }  
-        <span style="color:#66d9ef">foreach</span> (Thread t <span style="color:#66d9ef">in</span> Threads)  
-            t.Start();  
-
-        Console.ReadLine();  
+    finally  
+    {  
+        Monitor.Exit(_object);  
     }  
 }  
-</code></pre></div><ul>
-<li>
-<p>Once you have a lock on a code region, you can use the Monitor.Wait, Monitor.Pulse, and Monitor.PulseAll methods.</p>
-</li>
-<li>
-<p>Lock and monitor are basically used for the same purpose in multithreading, the difference is that only when we want more control over synchronization with multiple threads running for a specific section of code.</p>
-</li>
+
+static void TestLock()  
+{            
+    lock (_object)  
+    {  
+        Thread.Sleep(100);  
+        Console.WriteLine(Environment.TickCount);  
+    }  
+}  
+
+static void Main(string[] args)      
+{            
+    Thread[] Threads = new Thread[3];  
+    for (int i = 0; i &lt; 3; i++)  
+    {  
+        Threads[i] = new Thread(new ThreadStart(PrintNumbers));  
+        Threads[i].Name = &quot;Child &quot; + i;  
+    }  
+    foreach (Thread t in Threads)  
+        t.Start();  
+
+    Console.ReadLine();  
+}  
+}  
+</code></pre></li>
+
+<li><p>Once you have a lock on a code region, you can use the Monitor.Wait, Monitor.Pulse, and Monitor.PulseAll methods.</p></li>
+
+<li><p>Lock and monitor are basically used for the same purpose in multithreading, the difference is that only when we want more control over synchronization with multiple threads running for a specific section of code.</p></li>
 </ul>
+
 <h3 id="monitor-semaphore">Monitor Semaphore</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonitorSemaphore</span>
+
+<pre><code class="language-cs">public class MonitorSemaphore
 {
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> currentCount;
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> <span style="color:#66d9ef">int</span> maxCount;
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> <span style="color:#66d9ef">object</span> guard = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>();
-    <span style="color:#66d9ef">public</span> MonitorSemaphore(<span style="color:#66d9ef">int</span> initialCount, <span style="color:#66d9ef">int</span> maxCount)
+    private int currentCount;
+    private readonly int maxCount;
+    private readonly object guard = new object();
+    public MonitorSemaphore(int initialCount, int maxCount)
     {
-        <span style="color:#66d9ef">this</span>.currentCount = initialCount;
-        <span style="color:#66d9ef">this</span>.maxCount = maxCount;
+        this.currentCount = initialCount;
+        this.maxCount = maxCount;
     }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Enter()
+    public void Enter()
     {
-        <span style="color:#66d9ef">lock</span> (guard)
+        lock (guard)
         {
-            <span style="color:#66d9ef">while</span> (currentCount == maxCount)
+            while (currentCount == maxCount)
             {
                 Monitor.Wait(guard);
             }
@@ -1133,39 +1109,40 @@
         }
     }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Exit()
+    public void Exit()
     {
-        <span style="color:#66d9ef">lock</span> (guard)
+        lock (guard)
         {
             currentCount--;
             Monitor.Pulse(guard);
         }
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> CurrentCount{<span style="color:#66d9ef">get</span> { <span style="color:#66d9ef">return</span> currentCount; }}
+    public int CurrentCount{get { return currentCount; }}
 }
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#c-thread--task">C# Thread & Task</a>
-      <ul>
-        <li><a href="#old-way-of-c-thread">Old way of C# thread</a></li>
-      </ul>
-    </li>
-    <li><a href="#lock-keyword">Lock keyword</a></li>
-    <li><a href="#abort">Abort</a>
-      <ul>
-        <li><a href="#new-way-of-c-async--thread">New way of C# Async & Thread</a></li>
-      </ul>
-    </li>
-    <li><a href="#monitor">Monitor</a>
-      <ul>
-        <li><a href="#monitor-semaphore">Monitor Semaphore</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#c-thread-task">C# Thread &amp; Task</a>
+<ul>
+<li><a href="#old-way-of-c-thread">Old way of C# thread</a></li>
+</ul></li>
+<li><a href="#lock-keyword">Lock keyword</a></li>
+<li><a href="#abort">Abort</a>
+<ul>
+<li><a href="#new-way-of-c-async-thread">New way of C# Async &amp; Thread</a></li>
+</ul></li>
+<li><a href="#monitor">Monitor</a>
+<ul>
+<li><a href="#monitor-semaphore">Monitor Semaphore</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Vue 2 CRM Project :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -978,8 +949,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -997,63 +966,75 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Vue 2 CRM Project</h1>
-        <h2 id="summary">Summary</h2>
+        
+
+<h2 id="summary">Summary</h2>
+
 <p><strong>Vue2Crm</strong> is a reusable Vue.js CRM starter project for real-world business based on Vue 2 PWA template with Vuetify.</p>
+
 <p>The goal of this project is to create a reusable project for real-world business. To achieve this target, we need a solution which includes authentication process, restful API feature and simple but elegant UI design.</p>
-<h2 id="--features--"><strong>Features</strong></h2>
+
+<h2 id="features"><strong>Features</strong></h2>
+
 <ul>
 <li>This starter project is built-in with Vue 2 PWA from scratch.</li>
 <li>The whole UI is built on the Vuetify</li>
 <li>It includes Vuex, Axios as well.</li>
 <li>It uses Json-Server as fake Restful API. (You can simple replace it with your own API)</li>
 </ul>
-<h2 id="structure-of-vue2crm">Structure of Vue2Crm</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">path\to\vue2crm</span>
-<span style="color:#a6e22e">+---build              &lt;-// webpack files</span>
-<span style="color:#a6e22e">+---config             &lt;-// configuration of dev or prod environment</span>
-<span style="color:#a6e22e">+---db                 &lt;-// json files for json-server</span>
-<span style="color:#a6e22e">|   +---db.json        &lt;-// dummy db</span>
-<span style="color:#a6e22e">|   \---routes.json    &lt;-// configure fake restful api</span>
-<span style="color:#a6e22e">+---screenshots</span>
-<span style="color:#a6e22e">+---src                &lt;-// vue components </span>
-<span style="color:#a6e22e">|   +---components</span>
-<span style="color:#a6e22e">|   |   +---404.vue</span>
-<span style="color:#a6e22e">|   |   +---About.vue</span>
-<span style="color:#a6e22e">|   |   +---Customers.vue</span>
-<span style="color:#a6e22e">|   |   +---Customer.vue</span>
-<span style="color:#a6e22e">|   |   +---Orders.vue</span>
-<span style="color:#a6e22e">|   |   +---Order.vue</span>
-<span style="color:#a6e22e">|   |   +---Login.vue</span>
-<span style="color:#a6e22e">|   |   \---...</span>
-<span style="color:#a6e22e">|   +---router         &lt;-// vue-router</span>
-<span style="color:#a6e22e">|   +---utils</span>
-<span style="color:#a6e22e">|   |   +---auth.js    &lt;-// auth service</span>
-<span style="color:#a6e22e">|   |   +---backend-api.js  &lt;-// Axios instance </span>
-<span style="color:#a6e22e">|   |   +---store.js   &lt;-//  Vuex</span>
-<span style="color:#a6e22e">|   \---stylus         &lt;-// Customize stylus</span>
-<span style="color:#a6e22e">+---static              &lt;-// css, fonts, image files</span>
-<span style="color:#a6e22e">|   +---img</span>
-<span style="color:#a6e22e">|   \---manifest.json   &lt;-// PWA manifest file</span>
-<span style="color:#a6e22e">\---test</span>
-    <span style="color:#a6e22e">+---e2e</span>
-    <span style="color:#a6e22e">\---unit</span>
 
-</code></pre></div><h2 id="screenshots">Screenshots</h2>
+<h2 id="structure-of-vue2crm">Structure of Vue2Crm</h2>
+
+<pre><code class="language-ini">path\to\vue2crm
++---build              &lt;-// webpack files
++---config             &lt;-// configuration of dev or prod environment
++---db                 &lt;-// json files for json-server
+|   +---db.json        &lt;-// dummy db
+|   \---routes.json    &lt;-// configure fake restful api
++---screenshots
++---src                &lt;-// vue components 
+|   +---components
+|   |   +---404.vue
+|   |   +---About.vue
+|   |   +---Customers.vue
+|   |   +---Customer.vue
+|   |   +---Orders.vue
+|   |   +---Order.vue
+|   |   +---Login.vue
+|   |   \---...
+|   +---router         &lt;-// vue-router
+|   +---utils
+|   |   +---auth.js    &lt;-// auth service
+|   |   +---backend-api.js  &lt;-// Axios instance 
+|   |   +---store.js   &lt;-//  Vuex
+|   \---stylus         &lt;-// Customize stylus
++---static              &lt;-// css, fonts, image files
+|   +---img
+|   \---manifest.json   &lt;-// PWA manifest file
+\---test
+    +---e2e
+    \---unit
+
+</code></pre>
+
+<h2 id="screenshots">Screenshots</h2>
+
 <blockquote>
-<p><img src="/img/v2crm-screenshot-1.jpg" alt="Screenshot1"></p>
+<p><img src="/img/v2crm-screenshot-1.jpg" alt="Screenshot1" /></p>
+
+<p><img src="/img/v2crm-screenshot-2.jpg" alt="Screenshot2" /></p>
+
+<p><img src="/img/v2crm-screenshot-3.jpg" alt="Screenshot3" /></p>
+
+<p><img src="/img/v2crm-screenshot-4.jpg" alt="Screenshot4" /></p>
 </blockquote>
-<blockquote>
-<p><img src="/img/v2crm-screenshot-2.jpg" alt="Screenshot2"></p>
-</blockquote>
-<blockquote>
-<p><img src="/img/v2crm-screenshot-3.jpg" alt="Screenshot3"></p>
-</blockquote>
-<blockquote>
-<p><img src="/img/v2crm-screenshot-4.jpg" alt="Screenshot4"></p>
-</blockquote>
-<h2 id="browse-repositoryhttpsgithubcomharryhovue2crmgit">Browse <a href="https://github.com/harryho/vue2crm.git">Repository</a></h2>
-<h2 id="--alternatives--"><strong>Alternatives</strong></h2>
+
+<h2 id="browse-repository-https-github-com-harryho-vue2crm-git">Browse <a href="https://github.com/harryho/vue2crm.git">Repository</a></h2>
+
+<h2 id="alternatives"><strong>Alternatives</strong></h2>
+
 <p>There are two similar projects respectively built on the Angular and React. If you have interests in those technical stacks. You can find those projects below.</p>
+
 <ul>
 <li><a href="/projects/angular4-crm">Angular4 Crm</a>.</li>
 <li><a href="/projects/react-crm">React Redux Crm</a>.</li>
@@ -1063,14 +1044,17 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#--features--">Features</a></li>
-    <li><a href="#structure-of-vue2crm">Structure of Vue2Crm</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#browse-repositoryhttpsgithubcomharryhovue2crmgit">Browse Repository</a></li>
-    <li><a href="#--alternatives--">Alternatives</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#features"><strong>Features</strong></a></li>
+<li><a href="#structure-of-vue2crm">Structure of Vue2Crm</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#browse-repository-https-github-com-harryho-vue2crm-git">Browse <a href="https://github.com/harryho/vue2crm.git">Repository</a></a></li>
+<li><a href="#alternatives"><strong>Alternatives</strong></a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:22 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Java Note - 4: Date Time  :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1003,8 +974,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1022,243 +991,264 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Java Note - 4: Date Time </h1>
-        <h2 id="date-time-api">Date-Time API</h2>
+        
+
+<h2 id="date-time-api">Date-Time API</h2>
+
 <p>Through the java.time packages, Java 8 provides a comprehensive Date-Time API to work with date, time, and datetime. By default, most of the classes are based on the ISO-8601 standards. The main classes are</p>
+
 <ul>
-<li>
-<p>Instant</p>
+<li>Instant
+
 <ul>
 <li>represents an instant on the timeline and it is suitable for machines, for example, as timestamps for event</li>
-</ul>
-</li>
-<li>
-<p>LocalDate,  LocalTime, LocalDateTime</p>
+</ul></li>
+
+<li><p>LocalDate,  LocalTime, LocalDateTime</p>
+
 <ul>
 <li>represents human readable date, time, and datetime without a time zone.</li>
-</ul>
-</li>
-<li>
-<p>OffsetTime, OffsetDateTime</p>
+</ul></li>
+
+<li><p>OffsetTime, OffsetDateTime</p>
+
 <ul>
-<li>It represent a time and datetime with a zone offset from UTC.</li>
-</ul>
-</li>
-<li>
-<p>ZonedDateTime</p>
+<li>It represent a time and datetime with a zone offset from UTC.
+<br /></li>
+</ul></li>
+
+<li><p>ZonedDateTime</p>
+
 <ul>
-<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.</li>
+<li>It represents a datetime for a time zone with zone rules, which will adjust the time according to the daylight saving time changes in the time zone.
+<br /></li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h3 id="iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</h3>
+
 <ul>
 <li>[date]T[time][zone offset]</li>
-<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day\</li>
+<li>A date component consists of three calendar fields: year, month, and day. Two fields in a date are separated by a hyphen: year-month-day<br /></li>
 <li>Epoch is Midnight January 1, 1970 UTC</li>
 </ul>
+
 <h3 id="useful-datetime-related-enums">Useful Datetime-Related Enums</h3>
+
 <ul>
 <li>Month</li>
 <li>DayOfWeek</li>
 <li>ChronoField</li>
 <li>ChronoUnit</li>
 </ul>
+
 <h2 id="period">Period</h2>
+
 <p>A period is an amount of time defined in terms of calendar fields years, months, and days. A duration is also an amount of time measured in terms of seconds and nanoseconds. Negative periods are supported. What is the difference between a period and a duration? A duration represents an exact number of nanoseconds, whereas a period represents an inexact amount of time. A period is for humans what a duration is for machines.</p>
+
 <h2 id="partial">Partial</h2>
+
 <p>Partials
 A partial is a date, time, or datetime that does not fully specify an instant on a timeline, but still makes sense to humans. With some more information, a partial may match multiple instants on the timeline.</p>
+
 <h2 id="adjusting-dates">Adjusting Dates</h2>
+
 <p>Sometimes you want to adjust a date and time to have a particular characteristic, for example, the first Monday of the month, the next Tuesday, etc. You can perform adjustments to a date and time using an instance of the <code>TemporalAdjuster</code> interface. The interface has one method, adjustInto(), that takes a Temporal and returns a <code>Temporal</code>.</p>
+
 <h2 id="formatting">Formatting</h2>
+
 <p>The most important point to keep in mind is that formatting and parsing are
 always performed by an object of the DateTimeFormatter class.</p>
+
 <h3 id="datetimeapidemo">DateTimeApiDemo</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.time.Duration<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.DayOfWeek<span style="color:#f92672">;</span>
 
-<span style="color:#f92672">import</span> java.time.format.DateTimeFormatter<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.format.DateTimeParseException<span style="color:#f92672">;</span>
+<pre><code class="language-java">import java.time.Duration;
+import java.time.DayOfWeek;
 
-<span style="color:#f92672">import</span> java.time.Instant<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.LocalDate<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.LocalTime<span style="color:#f92672">;</span> 
-<span style="color:#f92672">import</span> java.time.LocalDateTime<span style="color:#f92672">;</span> 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-<span style="color:#f92672">import</span> java.time.Month<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.MonthDay<span style="color:#f92672">;</span>
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime; 
+import java.time.LocalDateTime; 
 
-<span style="color:#f92672">import</span> java.time.OffsetDateTime<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.Period<span style="color:#f92672">;</span>
+import java.time.Month;
+import java.time.MonthDay;
 
-
-<span style="color:#f92672">import</span> java.time.temporal.Temporal<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.temporal.TemporalAdjusters<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.temporal.ChronoField<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.temporal.TemporalAccessor<span style="color:#f92672">;</span>
+import java.time.OffsetDateTime;
+import java.time.Period;
 
 
-<span style="color:#f92672">import</span> java.time.Year<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.YearMonth<span style="color:#f92672">;</span>
-
-<span style="color:#f92672">import</span> java.time.ZoneOffset<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.ZonedDateTime<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.time.ZoneId<span style="color:#f92672">;</span>
-
-<span style="color:#f92672">import</span> java.util.Locale<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.util.Set<span style="color:#f92672">;</span>
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
 
 
-<span style="color:#f92672">import static</span> java.time.Month.JANUARY<span style="color:#f92672">;</span>
-<span style="color:#f92672">import static</span> java.time.temporal.ChronoUnit.DAYS<span style="color:#f92672">;</span>
-<span style="color:#f92672">import static</span> java.time.temporal.ChronoUnit.HOURS<span style="color:#f92672">;</span>
-<span style="color:#f92672">import static</span> java.time.temporal.ChronoUnit.MINUTES<span style="color:#f92672">;</span>
+import java.time.Year;
+import java.time.YearMonth;
+
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+
+import java.util.Locale;
+import java.util.Set;
 
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DateTimeApiDemo</span> <span style="color:#f92672">{</span>
+import static java.time.Month.JANUARY;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
+public class DateTimeApiDemo {
 
     
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">format</span><span style="color:#f92672">(</span>Temporal co<span style="color:#f92672">,</span> String pattern<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        DateTimeFormatter fmt <span style="color:#f92672">=</span> DateTimeFormatter<span style="color:#f92672">.</span><span style="color:#a6e22e">ofPattern</span><span style="color:#f92672">(</span>pattern<span style="color:#f92672">,</span> Locale<span style="color:#f92672">.</span><span style="color:#a6e22e">US</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">return</span> fmt<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span>co<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+    public static String format(Temporal co, String pattern) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        return fmt.format(co);
+    }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">parseStr</span><span style="color:#f92672">(</span>DateTimeFormatter formatter<span style="color:#f92672">,</span> String text<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-            TemporalAccessor ta <span style="color:#f92672">=</span> formatter<span style="color:#f92672">.</span><span style="color:#a6e22e">parseBest</span><span style="color:#f92672">(</span>text<span style="color:#f92672">,</span> OffsetDateTime<span style="color:#f92672">:</span><span style="color:#f92672">:</span>from<span style="color:#f92672">,</span> LocalDateTime<span style="color:#f92672">:</span><span style="color:#f92672">:</span>from<span style="color:#f92672">,</span> LocalDate<span style="color:#f92672">:</span><span style="color:#f92672">:</span>from<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ta <span style="color:#66d9ef">instanceof</span> OffsetDateTime<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                OffsetDateTime odt <span style="color:#f92672">=</span> OffsetDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">from</span><span style="color:#f92672">(</span>ta<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;OffsetDateTime: &#34;</span> <span style="color:#f92672">+</span> odt<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ta <span style="color:#66d9ef">instanceof</span> LocalDateTime<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                LocalDateTime ldt <span style="color:#f92672">=</span> LocalDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">from</span><span style="color:#f92672">(</span>ta<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;LocalDateTime: &#34;</span> <span style="color:#f92672">+</span> ldt<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ta <span style="color:#66d9ef">instanceof</span> LocalDate<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                LocalDate ld <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">from</span><span style="color:#f92672">(</span>ta<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;LocalDate: &#34;</span> <span style="color:#f92672">+</span> ld<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Parsing returned: &#34;</span> <span style="color:#f92672">+</span> ta<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>DateTimeParseException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
+    public static void parseStr(DateTimeFormatter formatter, String text) {
+        try {
+            TemporalAccessor ta = formatter.parseBest(text, OffsetDateTime::from, LocalDateTime::from, LocalDate::from);
+            if (ta instanceof OffsetDateTime) {
+                OffsetDateTime odt = OffsetDateTime.from(ta);
+                System.out.println(&quot;OffsetDateTime: &quot; + odt);
+            } else if (ta instanceof LocalDateTime) {
+                LocalDateTime ldt = LocalDateTime.from(ta);
+                System.out.println(&quot;LocalDateTime: &quot; + ldt);
+            } else if (ta instanceof LocalDate) {
+                LocalDate ld = LocalDate.from(ta);
+                System.out.println(&quot;LocalDate: &quot; + ld);
+            } else {
+                System.out.println(&quot;Parsing returned: &quot; + ta);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    public static void main(String[] args) {
 
-        <span style="color:#75715e">// Get current date, time, and datetime 
-</span><span style="color:#75715e"></span>        LocalDate dateOnly <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">// 2016-03-12
-</span><span style="color:#75715e"></span>        LocalTime timeOnly <span style="color:#f92672">=</span> LocalTime<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">// 09:17:56.200
-</span><span style="color:#75715e"></span>        LocalDateTime dateTime <span style="color:#f92672">=</span> LocalDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2016-03-12T09:17:56.200
-</span><span style="color:#75715e"></span>        ZonedDateTime dateTimeWithZone <span style="color:#f92672">=</span> ZonedDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">//  ofXXX() method
-</span><span style="color:#75715e"></span>        LocalDate ld1 <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>2012<span style="color:#f92672">,</span> 5<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2012-05-02
-</span><span style="color:#75715e"></span>        LocalDate ld2 <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>2012<span style="color:#f92672">,</span> Month<span style="color:#f92672">.</span><span style="color:#a6e22e">JULY</span><span style="color:#f92672">,</span> 4<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2012-07-04
-</span><span style="color:#75715e"></span>        LocalDate ld3 <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">ofEpochDay</span><span style="color:#f92672">(</span>2002<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 1975-06-26
-</span><span style="color:#75715e"></span>        LocalDate ld4 <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">ofYearDay</span><span style="color:#f92672">(</span>2014<span style="color:#f92672">,</span> 40<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2014-02-09
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// The plusXXX( ) and minusXXX( ) Methods
-</span><span style="color:#75715e"></span>        LocalDate ld <span style="color:#f92672">=</span> LocalDate<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>2015<span style="color:#f92672">,</span> 5<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2015-05-02
-</span><span style="color:#75715e"></span>        LocalDate ldp1 <span style="color:#f92672">=</span> ld<span style="color:#f92672">.</span><span style="color:#a6e22e">plusDays</span><span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2015-05-07
-</span><span style="color:#75715e"></span>        LocalDate ldp2 <span style="color:#f92672">=</span> ld<span style="color:#f92672">.</span><span style="color:#a6e22e">plusMonths</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2015-08-02
-</span><span style="color:#75715e"></span>        LocalDate ldp3 <span style="color:#f92672">=</span> ld<span style="color:#f92672">.</span><span style="color:#a6e22e">plusWeeks</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2015-05-23
-</span><span style="color:#75715e"></span>        LocalDate ldm1 <span style="color:#f92672">=</span> ld<span style="color:#f92672">.</span><span style="color:#a6e22e">minusMonths</span><span style="color:#f92672">(</span>7<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2014-10-02
-</span><span style="color:#75715e"></span>        LocalDate ldm2 <span style="color:#f92672">=</span> ld<span style="color:#f92672">.</span><span style="color:#a6e22e">minusWeeks</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2015-04-11
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Instant 
-</span><span style="color:#75715e"></span>        Instant i1 <span style="color:#f92672">=</span> Instant<span style="color:#f92672">.</span><span style="color:#a6e22e">ofEpochSecond</span><span style="color:#f92672">(</span>20<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// i1:1970-01-01T00:00:20Z
-</span><span style="color:#75715e"></span>        Instant i2 <span style="color:#f92672">=</span> Instant<span style="color:#f92672">.</span><span style="color:#a6e22e">ofEpochSecond</span><span style="color:#f92672">(</span>55<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// i2:1970-01-01T00:00:55Z
-</span><span style="color:#75715e"></span>
-        Duration d1 <span style="color:#f92672">=</span> Duration<span style="color:#f92672">.</span><span style="color:#a6e22e">ofSeconds</span><span style="color:#f92672">(</span>55<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Duration d2 <span style="color:#f92672">=</span> Duration<span style="color:#f92672">.</span><span style="color:#a6e22e">ofSeconds</span><span style="color:#f92672">(</span><span style="color:#f92672">-</span>17<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // Get current date, time, and datetime 
+        LocalDate dateOnly = LocalDate.now();  // 2016-03-12
+        LocalTime timeOnly = LocalTime.now();  // 09:17:56.200
+        LocalDateTime dateTime = LocalDateTime.now(); // 2016-03-12T09:17:56.200
+        ZonedDateTime dateTimeWithZone = ZonedDateTime.now(); // 2016-03-12T09:17:56.202+11:00[Australia/Sydney]
 
-        <span style="color:#75715e">// Compare instants
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;i1.isBefore(i2):&#34;</span> <span style="color:#f92672">+</span> i1<span style="color:#f92672">.</span><span style="color:#a6e22e">isBefore</span><span style="color:#f92672">(</span>i2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// i1.isBefore(i2):true
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;i1.isAfter(i2):&#34;</span> <span style="color:#f92672">+</span> i1<span style="color:#f92672">.</span><span style="color:#a6e22e">isAfter</span><span style="color:#f92672">(</span>i2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// i1.isAfter(i2):false
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Add and subtract durations to instants
-</span><span style="color:#75715e"></span>        Instant i3 <span style="color:#f92672">=</span> i1<span style="color:#f92672">.</span><span style="color:#a6e22e">plus</span><span style="color:#f92672">(</span>d1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        Instant i4 <span style="color:#f92672">=</span> i2<span style="color:#f92672">.</span><span style="color:#a6e22e">minus</span><span style="color:#f92672">(</span>d2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;i1.plus(d1):&#34;</span> <span style="color:#f92672">+</span> i3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// i1.plus(d1):1970-01-01T00:01:15Z
-</span><span style="color:#75715e"></span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;i2.minus(d2):&#34;</span> <span style="color:#f92672">+</span> i4<span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">// i2.minus(d2):1970-01-01T00:01:12Z
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Add two durations
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;d1.plus(d2):&#34;</span> <span style="color:#f92672">+</span> d1<span style="color:#f92672">.</span><span style="color:#a6e22e">plus</span><span style="color:#f92672">(</span>d2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// d1.plus(d2):PT38S
-</span><span style="color:#75715e"></span>
+        //  ofXXX() method
+        LocalDate ld1 = LocalDate.of(2012, 5, 2); // 2012-05-02
+        LocalDate ld2 = LocalDate.of(2012, Month.JULY, 4); // 2012-07-04
+        LocalDate ld3 = LocalDate.ofEpochDay(2002); // 1975-06-26
+        LocalDate ld4 = LocalDate.ofYearDay(2014, 40); // 2014-02-09
 
-        <span style="color:#75715e">// Print All Zone Id
-</span><span style="color:#75715e"></span>        Set<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> zoneIds <span style="color:#f92672">=</span> ZoneId<span style="color:#f92672">.</span><span style="color:#a6e22e">getAvailableZoneIds</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>String zoneId<span style="color:#f92672">:</span> zoneIds<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>zoneId<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
+        // The plusXXX( ) and minusXXX( ) Methods
+        LocalDate ld = LocalDate.of(2015, 5, 2); // 2015-05-02
+        LocalDate ldp1 = ld.plusDays(5); // 2015-05-07
+        LocalDate ldp2 = ld.plusMonths(3); // 2015-08-02
+        LocalDate ldp3 = ld.plusWeeks(3); // 2015-05-23
+        LocalDate ldm1 = ld.minusMonths(7); // 2014-10-02
+        LocalDate ldm2 = ld.minusWeeks(3); // 2015-04-11
 
-        <span style="color:#75715e">// DayOfWeek
-</span><span style="color:#75715e"></span>        DayOfWeek dw1 <span style="color:#f92672">=</span> DayOfWeek<span style="color:#f92672">.</span><span style="color:#a6e22e">from</span><span style="color:#f92672">(</span>ld<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// THURSDAY 
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Chrono 
-</span><span style="color:#75715e"></span>
-        LocalDateTime now <span style="color:#f92672">=</span> LocalDateTime<span style="color:#f92672">.</span><span style="color:#a6e22e">now</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Year: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">YEAR</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Month: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">MONTH_OF_YEAR</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Day: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">DAY_OF_MONTH</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hour-of-day: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">HOUR_OF_DAY</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hour-of-AMPM: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">HOUR_OF_AMPM</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AMPM-of-day: &#34;</span> <span style="color:#f92672">+</span> now<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ChronoField<span style="color:#f92672">.</span><span style="color:#a6e22e">AMPM_OF_DAY</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // Instant 
+        Instant i1 = Instant.ofEpochSecond(20); // i1:1970-01-01T00:00:20Z
+        Instant i2 = Instant.ofEpochSecond(55); // i2:1970-01-01T00:00:55Z
 
-        Period p1 <span style="color:#f92672">=</span> Period<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> 3<span style="color:#f92672">,</span> 5<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 2 years, 3 months, and 5 days
-</span><span style="color:#75715e"></span>        Period p2 <span style="color:#f92672">=</span> Period<span style="color:#f92672">.</span><span style="color:#a6e22e">ofDays</span><span style="color:#f92672">(</span>25<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 25 days
-</span><span style="color:#75715e"></span>        Period p3 <span style="color:#f92672">=</span> Period<span style="color:#f92672">.</span><span style="color:#a6e22e">ofMonths</span><span style="color:#f92672">(</span><span style="color:#f92672">-</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// -3 months
-</span><span style="color:#75715e"></span>        Period p4 <span style="color:#f92672">=</span> Period<span style="color:#f92672">.</span><span style="color:#a6e22e">ofWeeks</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 3 weeks (21 days)
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// Date Adjuster
-</span><span style="color:#75715e"></span>        LocalDate ld3 <span style="color:#f92672">=</span> ld1<span style="color:#f92672">.</span><span style="color:#a6e22e">with</span><span style="color:#f92672">(</span>TemporalAdjusters<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">(</span>DayOfWeek<span style="color:#f92672">.</span><span style="color:#a6e22e">MONDAY</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ld3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        ld3 <span style="color:#f92672">=</span> ld1<span style="color:#f92672">.</span><span style="color:#a6e22e">with</span><span style="color:#f92672">(</span>TemporalAdjusters<span style="color:#f92672">.</span><span style="color:#a6e22e">nextOrSame</span><span style="color:#f92672">(</span>DayOfWeek<span style="color:#f92672">.</span><span style="color:#a6e22e">TUESDAY</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ld3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Duration d1 = Duration.ofSeconds(55);
+        Duration d2 = Duration.ofSeconds(-17);
 
-        <span style="color:#75715e">// Date Time Format         
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;M/d/yyyy&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;MM/dd/yyyy&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;MMM dd, yyyy&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;MMMM dd, yyyy&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;EEEE, MMMM dd, yyyy&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#39;Month&#39; q &#39;in&#39; QQQ&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>format<span style="color:#f92672">(</span>ld<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;[MM-dd-yyyy][&#39; at&#39; HH:mm:ss]&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        // Compare instants
+        System.out.println(&quot;i1.isBefore(i2):&quot; + i1.isBefore(i2)); // i1.isBefore(i2):true
+        System.out.println(&quot;i1.isAfter(i2):&quot; + i1.isAfter(i2)); // i1.isAfter(i2):false
 
-        <span style="color:#75715e">// Parse date time
-</span><span style="color:#75715e"></span>        DateTimeFormatter parser <span style="color:#f92672">=</span> DateTimeFormatter<span style="color:#f92672">.</span><span style="color:#a6e22e">ofPattern</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;yyyy-MM-dd[&#39;T&#39;HH:mm:ss[Z]]&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        parseStr<span style="color:#f92672">(</span>parser<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;2012-05-31&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//  LocalDate: 2012-05-31
-</span><span style="color:#75715e"></span>        parseStr<span style="color:#f92672">(</span>parser<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;2012-05-31T16:30:12&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// LocalDateTime: 2012-05-31T16:30:12
-</span><span style="color:#75715e"></span>        parseStr<span style="color:#f92672">(</span>parser<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;2012-05-31T16:30:12-0500&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// OffsetDateTime: 2012-05-31T16:30:12-05:00
-</span><span style="color:#75715e"></span>        parseStr<span style="color:#f92672">(</span>parser<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;2012-05-31Hello&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// Text &#39;2012-05-31Hello&#39; could not be parsed, unparsed text found at index 10
-</span><span style="color:#75715e"></span>
+        // Add and subtract durations to instants
+        Instant i3 = i1.plus(d1);
+        Instant i4 = i2.minus(d2);
+        System.out.println(&quot;i1.plus(d1):&quot; + i3); // i1.plus(d1):1970-01-01T00:01:15Z
+
+        System.out.println(&quot;i2.minus(d2):&quot; + i4);  // i2.minus(d2):1970-01-01T00:01:12Z
+
+        // Add two durations
+        System.out.println(&quot;d1.plus(d2):&quot; + d1.plus(d2)); // d1.plus(d2):PT38S
 
 
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+        // Print All Zone Id
+        Set&lt;String&gt; zoneIds = ZoneId.getAvailableZoneIds();
+        for (String zoneId: zoneIds) {
+          System.out.println(zoneId);
+        }
 
-</code></pre></div>
+        // DayOfWeek
+        DayOfWeek dw1 = DayOfWeek.from(ld); // THURSDAY 
+
+        // Chrono 
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(&quot;Year: &quot; + now.get(ChronoField.YEAR));
+        System.out.println(&quot;Month: &quot; + now.get(ChronoField.MONTH_OF_YEAR));
+        System.out.println(&quot;Day: &quot; + now.get(ChronoField.DAY_OF_MONTH));
+        System.out.println(&quot;Hour-of-day: &quot; + now.get(ChronoField.HOUR_OF_DAY));
+        System.out.println(&quot;Hour-of-AMPM: &quot; + now.get(ChronoField.HOUR_OF_AMPM));
+        System.out.println(&quot;AMPM-of-day: &quot; + now.get(ChronoField.AMPM_OF_DAY));
+
+        Period p1 = Period.of(2, 3, 5); // 2 years, 3 months, and 5 days
+        Period p2 = Period.ofDays(25); // 25 days
+        Period p3 = Period.ofMonths(-3); // -3 months
+        Period p4 = Period.ofWeeks(3); // 3 weeks (21 days)
+
+        // Date Adjuster
+        LocalDate ld3 = ld1.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        System.out.println(ld3);
+        ld3 = ld1.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+        System.out.println(ld3);
+
+        // Date Time Format         
+        System.out.println(format(ld, &quot;M/d/yyyy&quot;));
+        System.out.println(format(ld, &quot;MM/dd/yyyy&quot;));
+        System.out.println(format(ld, &quot;MMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;MMMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;EEEE, MMMM dd, yyyy&quot;));
+        System.out.println(format(ld, &quot;'Month' q 'in' QQQ&quot;));
+        System.out.println(format(ld, &quot;[MM-dd-yyyy][' at' HH:mm:ss]&quot;));
+
+        // Parse date time
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd['T'HH:mm:ss[Z]]&quot;);
+        parseStr(parser, &quot;2012-05-31&quot;); //  LocalDate: 2012-05-31
+        parseStr(parser, &quot;2012-05-31T16:30:12&quot;); // LocalDateTime: 2012-05-31T16:30:12
+        parseStr(parser, &quot;2012-05-31T16:30:12-0500&quot;); // OffsetDateTime: 2012-05-31T16:30:12-05:00
+        parseStr(parser, &quot;2012-05-31Hello&quot;); // Text '2012-05-31Hello' could not be parsed, unparsed text found at index 10
+
+
+
+    }
+}
+
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#date-time-api">Date-Time API</a>
-      <ul>
-        <li><a href="#iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</a></li>
-        <li><a href="#useful-datetime-related-enums">Useful Datetime-Related Enums</a></li>
-      </ul>
-    </li>
-    <li><a href="#period">Period</a></li>
-    <li><a href="#partial">Partial</a></li>
-    <li><a href="#adjusting-dates">Adjusting Dates</a></li>
-    <li><a href="#formatting">Formatting</a>
-      <ul>
-        <li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#date-time-api">Date-Time API</a>
+<ul>
+<li><a href="#iso-8601-standards-for-datetime">ISO-8601 Standards for Datetime</a></li>
+<li><a href="#useful-datetime-related-enums">Useful Datetime-Related Enums</a></li>
+</ul></li>
+<li><a href="#period">Period</a></li>
+<li><a href="#partial">Partial</a></li>
+<li><a href="#adjusting-dates">Adjusting Dates</a></li>
+<li><a href="#formatting">Formatting</a>
+<ul>
+<li><a href="#datetimeapidemo">DateTimeApiDemo</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

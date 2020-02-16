@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Pitfalls :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -912,35 +912,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1012,8 +983,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1031,278 +1000,299 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Pitfalls</h1>
-        <h3 id="shadowing">Shadowing</h3>
+        
+
+<h3 id="shadowing">Shadowing</h3>
+
 <ul>
-<li>
-<p>Hiding (shadowing) a variable by misusing short declaration.</p>
-</li>
-<li>
-<p>Such mistakes occur mostly inside the  if-body or for-loop</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remember</span> <span style="color:#66d9ef">bool</span> = <span style="color:#66d9ef">false</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">something</span> {
-        <span style="color:#a6e22e">remember</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span> <span style="color:#75715e">// Wrong.
-</span><span style="color:#75715e"></span>    }
-<span style="color:#75715e">// use remember
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">shadow</span>() (<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
-    <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">check1</span>() <span style="color:#75715e">// x is created; err is assigned to
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#75715e">// err correctly returned
-</span><span style="color:#75715e"></span>    }
-      
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">check2</span>(<span style="color:#a6e22e">x</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#75715e">// y and inner err are created
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#75715e">// inner err shadows outer err so nil is wrongly returned!
-</span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">y</span>)
+<li><p>Hiding (shadowing) a variable by misusing short declaration.</p></li>
+
+<li><p>Such mistakes occur mostly inside the  if-body or for-loop</p>
+
+<pre><code class="language-go">var remember bool = false
+    if something {
+        remember := true // Wrong.
     }
-    <span style="color:#66d9ef">return</span>
+// use remember
+
+func shadow() (err error) {
+    x, err := check1() // x is created; err is assigned to
+    if err != nil {
+        return // err correctly returned
+    }
+        
+    if y, err := check2(x); err != nil { // y and inner err are created
+        return // inner err shadows outer err so nil is wrongly returned!
+    } else {
+        fmt.Println(y)
+    }
+    return
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="misusing-strings">Misusing strings</h3>
+
 <ul>
-<li>
-<p>String concatenations of the kind a += b are inefficient, especially when performed inside a loop.</p>
-</li>
-<li>
-<p>Instead one should use a bytes.Buffer to accumulate string content</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
-<span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">condition</span> {
-    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">str</span>) <span style="color:#75715e">// appends string str to the buffer
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">String</span>()
-</code></pre></div></li>
+<li><p>String concatenations of the kind a += b are inefficient, especially when performed inside a loop.</p></li>
+
+<li><p>Instead one should use a bytes.Buffer to accumulate string content</p>
+
+<pre><code class="language-go">var b bytes.Buffer
+// ...
+for condition {
+    b.WriteString(str) // appends string str to the buffer
+}
+return b.String()
+</code></pre></li>
 </ul>
+
 <h3 id="using-deffer-incorrectly">Using deffer incorrectly</h3>
+
 <ul>
-<li>
-<p>Using defer for closing a file in the wrong scope</p>
-</li>
-<li>
-<p>It mostly occurs in the for-loop body. Suppose you are processing a range of files in a for-loop, and you want to make sure the files are closed after processing by using defer,</p>
-</li>
-<li>
-<p>BAD defer sample</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">files</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">file</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    <span style="color:#66d9ef">return</span>
+<li><p>Using defer for closing a file in the wrong scope</p></li>
+
+<li><p>It mostly occurs in the for-loop body. Suppose you are processing a range of files in a for-loop, and you want to make sure the files are closed after processing by using defer,</p></li>
+
+<li><p>BAD defer sample</p>
+
+<pre><code class="language-go">for _, file := range files {
+    if f, err = os.Open(file); err != nil {
+    return
     }
-                      
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>() <span style="color:#75715e">// This is /wrong/. 
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// The file is not closed when this loop iteration ends.
-</span><span style="color:#75715e"></span>
-    <span style="color:#75715e">// perform operations on f:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Process</span>(<span style="color:#a6e22e">data</span>)
+                        
+    defer f.Close() // This is /wrong/. 
+    // The file is not closed when this loop iteration ends.
+
+    // perform operations on f:
+    f.Process(data)
 }
-</code></pre></div></li>
-<li>
-<p>Defer is only executed at the return of a function, not at the end of a loop or some other limited scope.</p>
-</li>
-<li>
-<p>DO NOT use defer to close the file in the for-loop body</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">files</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">file</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#66d9ef">return</span>
+</code></pre></li>
+
+<li><p>Defer is only executed at the return of a function, not at the end of a loop or some other limited scope.</p></li>
+
+<li><p>DO NOT use defer to close the file in the for-loop body</p>
+
+<pre><code class="language-go">for _, file := range files {
+    if f, err = os.Open(file); err != nil {
+        return
     }
-    <span style="color:#75715e">// perform operations on f:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Process</span>(<span style="color:#a6e22e">data</span>)
-    <span style="color:#75715e">// close f:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+    // perform operations on f:
+    f.Process(data)
+    // close f:
+    f.Close()
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="confusing-new-and-make">Confusing new() and make()</h3>
+
 <ul>
 <li>for slices, maps and channels, use make</li>
 <li>for arrays, structs, and all value types, use new</li>
 </ul>
+
 <h3 id="no-need-for-slice">No need for slice</h3>
+
 <ul>
-<li>
-<p>No need to pass a pointer to a slice to a function</p>
-</li>
-<li>
-<p>A slice is a pointer to an underlying array. Passing a slice as a parameter to a function is probably what you always want: namely passing a pointer to a variable to be able to change it, and not passing a copy of the data.</p>
-</li>
-<li>
-<p>Do not dereference a slice when used as a parameter!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// correct way
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">findBiggest</span>( <span style="color:#a6e22e">listOfNumbers</span> []<span style="color:#66d9ef">int</span> ) <span style="color:#66d9ef">int</span> {}
-<span style="color:#75715e">// wrong way 
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">findBiggest</span>( <span style="color:#a6e22e">listOfNumbers</span> <span style="color:#f92672">*</span>[]<span style="color:#66d9ef">int</span> ) <span style="color:#66d9ef">int</span> {}
-</code></pre></div></li>
+<li><p>No need to pass a pointer to a slice to a function</p></li>
+
+<li><p>A slice is a pointer to an underlying array. Passing a slice as a parameter to a function is probably what you always want: namely passing a pointer to a variable to be able to change it, and not passing a copy of the data.</p></li>
+
+<li><p>Do not dereference a slice when used as a parameter!</p>
+
+<pre><code class="language-go">// correct way
+func findBiggest( listOfNumbers []int ) int {}
+// wrong way 
+func findBiggest( listOfNumbers *[]int ) int {}
+</code></pre></li>
 </ul>
+
 <h3 id="using-pointers-to-interface">Using pointers to interface</h3>
+
 <ul>
-<li>
-<p>Look at the following program: nexter is an interface with a method next() meaning read the next byte. nextFew1 has this interface type as parameter and reads the next num bytes, returning them as a slice: this is ok.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-   <span style="color:#e6db74">&#34;fmt&#34;</span>
+<li><p>Look at the following program: nexter is an interface with a method next() meaning read the next byte. nextFew1 has this interface type as parameter and reads the next num bytes, returning them as a slice: this is ok.</p>
+
+<pre><code class="language-go">package main
+import (
+   &quot;fmt&quot;
 )
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">nexter</span> <span style="color:#66d9ef">interface</span> {
-  <span style="color:#a6e22e">next</span>() <span style="color:#66d9ef">byte</span>
+type nexter interface {
+  next() byte
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">nextFew1</span>(<span style="color:#a6e22e">n</span> <span style="color:#a6e22e">nexter</span>, <span style="color:#a6e22e">num</span> <span style="color:#66d9ef">int</span>) []<span style="color:#66d9ef">byte</span> {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">num</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">b</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">next</span>()
+func nextFew1(n nexter, num int) []byte {
+    var b []byte
+    for i:=0; i &lt; num; i++ {
+        b[i] = n.next()
     }
-   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>
+   return b
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">nextFew2</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">nexter</span>, <span style="color:#a6e22e">num</span> <span style="color:#66d9ef">int</span>) []<span style="color:#66d9ef">byte</span> {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">num</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">b</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">next</span>() <span style="color:#75715e">// compile error:
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// n.next undefined (type *nexter has no field or method next)
-</span><span style="color:#75715e"></span>    }
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>
+func nextFew2(n *nexter, num int) []byte {
+    var b []byte
+    for i:=0; i &lt; num; i++ {
+        b[i] = n.next() // compile error:
+        // n.next undefined (type *nexter has no field or method next)
+    }
+    return b
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello World!&#34;</span>)
+func main() {
+  fmt.Println(&quot;Hello World!&quot;)
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h3 id="misusing-pointers">Misusing pointers</h3>
+
 <ul>
-<li>
-<p>Passing a value as a parameter in a function or as receiver to a method may seem a misuse of memory, because a value is always copied. But on the other hand values are allocated on the stack, which is quick and relatively cheap.</p>
-</li>
-<li>
-<p>If you would pass a pointer to the value instead the Go compiler in most cases will see this as the making of an object, and will move this object to the heap, so also causing an additional memory allocation: therefore nothing was gained in using a pointer instead of the value!</p>
-</li>
+<li><p>Passing a value as a parameter in a function or as receiver to a method may seem a misuse of memory, because a value is always copied. But on the other hand values are allocated on the stack, which is quick and relatively cheap.</p></li>
+
+<li><p>If you would pass a pointer to the value instead the Go compiler in most cases will see this as the making of an object, and will move this object to the heap, so also causing an additional memory allocation: therefore nothing was gained in using a pointer instead of the value!</p></li>
 </ul>
+
 <h3 id="misusing-goroutines-and-channel">Misusing goroutines and channel</h3>
+
 <ul>
-<li>
-<p>In practice often you don’t need the concurrency, or you don’t need the overhead of the goroutines with channels, passing parameters using the stack is in many cases far more efficient.</p>
-</li>
-<li>
-<p>Moreover it is likely to leak memory if you break or return or panic your way out of the loop, because the goroutine then blocks in the middle of doing something. In real code, it is often better to just write a simple procedural loop. Use goroutines and channels only where concurrency is important!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">values</span> = [<span style="color:#ae81ff">5</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>}
+<li><p>In practice often you don’t need the concurrency, or you don’t need the overhead of the goroutines with channels, passing parameters using the stack is in many cases far more efficient.</p></li>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#75715e">// version A:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\nVersion A:&#34;</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">values</span> { <span style="color:#75715e">// ix is the index
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">func</span>() {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">ix</span>, <span style="color:#e6db74">&#34; &#34;</span>)
-        }() <span style="color:#75715e">// call closure, prints each index
-</span><span style="color:#75715e"></span>    }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>()
-    <span style="color:#75715e">// version B: same as A, but call closure as a goroutine
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\nVersion B:&#34;</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">values</span> {
-        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">ix</span>, <span style="color:#e6db74">&#34; &#34;</span>)
+<li><p>Moreover it is likely to leak memory if you break or return or panic your way out of the loop, because the goroutine then blocks in the middle of doing something. In real code, it is often better to just write a simple procedural loop. Use goroutines and channels only where concurrency is important!</p>
+
+<pre><code class="language-go">var values = [5]int{10, 11, 12, 13, 14}
+
+func main() {
+    // version A:
+    fmt.Println(&quot;\nVersion A:&quot;)
+    for ix := range values { // ix is the index
+        func() {
+            fmt.Print(ix, &quot; &quot;)
+        }() // call closure, prints each index
+    }
+    fmt.Println()
+    // version B: same as A, but call closure as a goroutine
+    fmt.Println(&quot;\nVersion B:&quot;)
+    for ix := range values {
+        go func() {
+            fmt.Print(ix, &quot; &quot;)
         }()
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>()
-    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">5e9</span>)
-    <span style="color:#75715e">// version C: the right way
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\n\nVersion C:&#34;</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">values</span> {
-        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ix</span> <span style="color:#66d9ef">interface</span>{}) {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">ix</span>, <span style="color:#e6db74">&#34; &#34;</span>)
-        }(<span style="color:#a6e22e">ix</span>)
+    fmt.Println()
+    time.Sleep(5e9)
+    // version C: the right way
+    fmt.Println(&quot;\n\nVersion C:&quot;)
+    for ix := range values {
+        go func(ix interface{}) {
+            fmt.Print(ix, &quot; &quot;)
+        }(ix)
     }
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>()
-    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">5e9</span>)
-    <span style="color:#75715e">// version D: print out the values:
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\n\nVersion D:&#34;</span>)
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">values</span> {
+    fmt.Println()
+    time.Sleep(5e9)
+    // version D: print out the values:
+    fmt.Println(&quot;\n\nVersion D:&quot;)
+    for ix := range values {
 
-        <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">values</span>[<span style="color:#a6e22e">ix</span>]
-        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">val</span>, <span style="color:#e6db74">&#34; &#34;</span>)
+        val := values[ix]
+        go func() {
+            fmt.Print(val, &quot; &quot;)
         }()
     }
-    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1e9</span>)
+    time.Sleep(1e9)
 }
 
-<span style="color:#75715e">//----- output -------------
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Version A:
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 0 1 2 3 4 
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Version B:
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 4 4 4 4 4 
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Version C:
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 1 3 4 0 2 
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Version D:
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 14 10 13 12 11
-</span></code></pre></div></li>
+//----- output -------------
+// Version A:
+// 0 1 2 3 4 
+
+// Version B:
+// 4 4 4 4 4 
+
+// Version C:
+// 1 3 4 0 2 
+
+// Version D:
+// 14 10 13 12 11
+</code></pre></li>
 </ul>
+
 <h3 id="bad-error-handling">Bad error handling</h3>
-<h4 id="dont-use-booleans">Don’t use booleans:</h4>
+
+<h4 id="don-t-use-booleans">Don’t use booleans:</h4>
+
 <ul>
-<li>Making a boolean variable whose value is a test on the error-condition like in the following is superfluous</li>
+<li><p>Making a boolean variable whose value is a test on the error-condition like in the following is superfluous</p>
+
+<pre><code class="language-go">var good bool
+// test for an error, good becomes true or false
+if !good {
+return errors.New(“things aren’t good”)
+}
+////--------------
+//... 
+err1 := api.Func1()
+if err1 != nil { … }
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">good</span> <span style="color:#66d9ef">bool</span>
-<span style="color:#75715e">// test for an error, good becomes true or false
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">good</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">things</span> <span style="color:#a6e22e">aren</span><span style="color:#960050;background-color:#1e0010">’</span><span style="color:#a6e22e">t</span> <span style="color:#a6e22e">good</span><span style="color:#960050;background-color:#1e0010">”</span>)
-}
-<span style="color:#75715e">////--------------
-</span><span style="color:#75715e"></span><span style="color:#75715e">//... 
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">err1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">Func1</span>()
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err1</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#960050;background-color:#1e0010">…</span> }
-</code></pre></div><h4 id="dont-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</h4>
+
+<h4 id="don-t-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</h4>
+
 <ul>
-<li>
-<p>BAD sample.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// ... 
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">err1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">Func1</span>()
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err1</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">err</span>: <span style="color:#960050;background-color:#1e0010">“</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
-    <span style="color:#66d9ef">return</span>
+<li><p>BAD sample.</p>
+
+<pre><code class="language-go">// ... 
+err1 := api.Func1()
+if err1 != nil {
+    fmt.Println(“err: “ + err.Error())
+    return
 }
-<span style="color:#a6e22e">err2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">Func2</span>()
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err2</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    <span style="color:#75715e">//...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
+err2 := api.Func2()
+if err2 != nil {
+    //...
+    return
 }
-</code></pre></div></li>
-<li>
-<p>With the above pattern, it is hard to tell what is normal program logic and what is error checking/reporting. Also notice that most of the code is dedicated to error conditions at any point in the code. A good solution is to wrap your error conditions in a closure wherever possible</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span> () <span style="color:#66d9ef">error</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Method</span> <span style="color:#f92672">!=</span> <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">GET</span><span style="color:#960050;background-color:#1e0010">”</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">expected</span> <span style="color:#a6e22e">GET</span><span style="color:#960050;background-color:#1e0010">”</span>)
+</code></pre></li>
+
+<li><p>With the above pattern, it is hard to tell what is normal program logic and what is error checking/reporting. Also notice that most of the code is dedicated to error conditions at any point in the code. A good solution is to wrap your error conditions in a closure wherever possible</p>
+
+<pre><code class="language-go">err := func () error {
+    if req.Method != “GET” {
+    return errors.New(“expected GET”)
     }
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parseInput</span>(<span style="color:#a6e22e">req</span>); <span style="color:#a6e22e">input</span> <span style="color:#f92672">!=</span> <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">command</span><span style="color:#960050;background-color:#1e0010">”</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">malformed</span> <span style="color:#a6e22e">command</span><span style="color:#960050;background-color:#1e0010">”</span>)
+    if input := parseInput(req); input != “command” {
+    return errors.New(“malformed command”)
     }
-    <span style="color:#75715e">// other error conditions can be tested here
-</span><span style="color:#75715e"></span>} ()
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#ae81ff">400</span>)
-    <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>)
-    <span style="color:#66d9ef">return</span>
+    // other error conditions can be tested here
+} ()
+if err != nil {
+    w.WriteHeader(400)
+    io.WriteString(w, err)
+    return
 }
-</code></pre></div></li>
+</code></pre></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#shadowing">Shadowing</a></li>
-        <li><a href="#misusing-strings">Misusing strings</a></li>
-        <li><a href="#using-deffer-incorrectly">Using deffer incorrectly</a></li>
-        <li><a href="#confusing-new-and-make">Confusing new() and make()</a></li>
-        <li><a href="#no-need-for-slice">No need for slice</a></li>
-        <li><a href="#using-pointers-to-interface">Using pointers to interface</a></li>
-        <li><a href="#misusing-pointers">Misusing pointers</a></li>
-        <li><a href="#misusing-goroutines-and-channel">Misusing goroutines and channel</a></li>
-        <li><a href="#bad-error-handling">Bad error handling</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#shadowing">Shadowing</a></li>
+<li><a href="#misusing-strings">Misusing strings</a></li>
+<li><a href="#using-deffer-incorrectly">Using deffer incorrectly</a></li>
+<li><a href="#confusing-new-and-make">Confusing new() and make()</a></li>
+<li><a href="#no-need-for-slice">No need for slice</a></li>
+<li><a href="#using-pointers-to-interface">Using pointers to interface</a></li>
+<li><a href="#misusing-pointers">Misusing pointers</a></li>
+<li><a href="#misusing-goroutines-and-channel">Misusing goroutines and channel</a></li>
+<li><a href="#bad-error-handling">Bad error handling</a>
+<ul>
+<li><a href="#don-t-use-booleans">Don’t use booleans:</a></li>
+<li><a href="#don-t-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

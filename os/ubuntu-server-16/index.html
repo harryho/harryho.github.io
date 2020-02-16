@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Ubuntu 16 server note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -980,8 +951,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -999,401 +968,487 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Ubuntu 16 server note</h1>
-        <p>Prelude</p>
+        
+
+<p>Prelude</p>
+
 <blockquote>
 <p><em>This article is mainly to help experienced user install and setup Ubuntu 16 LTS Server. If you are looking for the information for Ubuntu 14, please go to the page <a href="/os/ubuntu-server-14/">Ubuntu 14 server setup</a></em></p>
 </blockquote>
+
 <h2 id="prerequisites">Prerequisites</h2>
+
 <ul>
 <li>You are familiar with Ubuntu, at least you have some experience working on Linux system.</li>
 <li>You are familiar with basic bash/shell command</li>
 </ul>
+
 <h2 id="wireless-setup">Wireless Setup</h2>
+
 <blockquote>
-<p>If you install ubuntu server on a laptop, you might end up to setup the wifi first. Usually you won't bring the cable with your laptop wherever you go, also you might just have no cable or run out all cables. Now let's dive into how to setup the wifi on sever.</p>
+<p>If you install ubuntu server on a laptop, you might end up to setup the wifi first. Usually you won&rsquo;t bring the cable with your laptop wherever you go, also you might just have no cable or run out all cables. Now let&rsquo;s dive into how to setup the wifi on sever.</p>
 </blockquote>
+
 <ul>
-<li>Find out network control installed on your laptop. The column link lists the name of interfaces. The interface name on your laptop will be possible slightly a bit different. It depends on laptop maker. Basically the interface with the type <strong>wlan</strong> is your wifi interface.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">networkctl 
-</code></pre></div><ul>
-<li>
-<p>You will see network interfaces on your laptop. enp1s0 is the ethernet interface., and <code>wlp3s0</code> is your wifi interface</p>
+<li><p>Find out network control installed on your laptop. The column link lists the name of interfaces. The interface name on your laptop will be possible slightly a bit different. It depends on laptop maker. Basically the interface with the type <strong>wlan</strong> is your wifi interface.</p>
+
+<pre><code class="language-bash">networkctl 
+</code></pre>
+
+<ul>
+<li><p>You will see network interfaces on your laptop. enp1s0 is the ethernet interface., and <code>wlp3s0</code> is your wifi interface</p>
+
 <pre><code>IDX LINK           TYPE         OPERATIONAL              SETUP
-    1   lo         loopback     n/a                      unmanaged
-    2   enp1s0     ether        n/a                      unmanaged
-    3   wlp3s0     wlan         n/a                      unmanaged
+1   lo         loopback     n/a                      unmanaged
+2   enp1s0     ether        n/a                      unmanaged
+3   wlp3s0     wlan         n/a                      unmanaged
 </code></pre></li>
-<li>
-<p>Disable IP V6 if you don't use it. (Highly recommanded for personal laptop user)</p>
+</ul></li>
+
+<li><p>Disable IP V6 if you don&rsquo;t use it. (Highly recommanded for personal laptop user)</p>
+
 <ul>
-<li>Add  following setting to file  <code>/etc/sysctl.conf</code></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">net.ipv6.conf.all.disable_ipv6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-net.ipv6.conf.default.disable_ipv6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-net.ipv6.conf.lo.disable_ipv6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</code></pre></div><ul>
-<li>Reconfigure by running the following command</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo sysctl -p
+<li><p>Add  following setting to file  <code>/etc/sysctl.conf</code></p>
 
-<span style="color:#75715e">## Check the ipv6 status. If you see 1 after running command below, it means ipv6</span>
-<span style="color:#75715e">## has been disabled</span>
+<pre><code class="language-bash">net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+</code></pre></li>
+
+<li><p>Reconfigure by running the following command</p>
+
+<pre><code class="language-bash">sudo sysctl -p
+
+## Check the ipv6 status. If you see 1 after running command below, it means ipv6
+## has been disabled
 cat /proc/sys/net/ipv6/conf/all/disable_ipv6
-      
-</code></pre></div></li>
-<li>
-<p>Find out the status <code>wpa_supplicant</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status wpa_supplicant
+        
+</code></pre></li>
+</ul></li>
 
-<span style="color:#75715e">## If you find &#34;disabled&#34; in the output, you can simply enable it as below</span>
+<li><p>Find out the status <code>wpa_supplicant</code></p>
+
+<pre><code class="language-bash">sudo systemctl status wpa_supplicant
+
+## If you find &quot;disabled&quot; in the output, you can simply enable it as below
 
 sudo systemctl enable wpa_supplicant
 
-</code></pre></div></li>
-<li>
-<p>Find out your wifi ESSID</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo iwlist wlp3s0 scan | grep ESSID
+</code></pre></li>
 
-<span style="color:#75715e">## If you get error message like &#34;network is down&#34;, use ifconfig to bring it up and</span> 
-<span style="color:#75715e">## re-run previous commmand</span>    
+<li><p>Find out your wifi ESSID</p>
+
+<pre><code class="language-bash">sudo iwlist wlp3s0 scan | grep ESSID
+
+## If you get error message like &quot;network is down&quot;, use ifconfig to bring it up and 
+## re-run previous commmand    
 sudo ifconfig wlp3s0 up
-</code></pre></div></li>
-<li>
-<p>Setup the wpa passphrase for your wifi</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## Use following command to add pass phrase to your wpa_supplicant</span>
-<span style="color:#75715e">##</span> 
-<span style="color:#75715e">## wpa_passphrase &lt;your-ESSID&gt; &lt;your-passphrase&gt; | sudo tee /etc/wpa_supplicant.conf</span>
+</code></pre></li>
 
-<span style="color:#75715e">## If your ESSID is mywifi and password of wifi is mypasswork, then you will end up the</span> 
-<span style="color:#75715e">## command below</span>
+<li><p>Setup the wpa passphrase for your wifi</p>
+
+<pre><code class="language-bash">## Use following command to add pass phrase to your wpa_supplicant
+## 
+## wpa_passphrase &lt;your-ESSID&gt; &lt;your-passphrase&gt; | sudo tee /etc/wpa_supplicant.conf
+
+## If your ESSID is mywifi and password of wifi is mypasswork, then you will end up the 
+## command below
 wpa_passphrase mywifi mypasswork | sudo tee /etc/wpa_supplicant.conf
 
-</code></pre></div></li>
-<li>
-<p>Config your wpa supplicant for your wifi interface and run the comand as background process</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlp3s0 &gt; /dev/null 2&gt;1&amp; &amp;
-</code></pre></div></li>
-<li>
-<p>Add SSID scan into config <code>/etc/wpa_supplicant.conf</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">network<span style="color:#f92672">=</span><span style="color:#f92672">{</span>
-    ssid<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mywifi&#34;</span>
-    <span style="color:#75715e">#psk=&#34;mypassword&#34;</span>
-    psk<span style="color:#f92672">=</span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    scan_ssid<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></li>
-<li>
-<p>Get IP address from external DHCP</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dhclient wlp3s0
+</code></pre></li>
 
-<span style="color:#75715e">## Check the ip address</span>
+<li><p>Config your wpa supplicant for your wifi interface and run the comand as background process</p>
+
+<pre><code class="language-bash">sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlp3s0 &gt; /dev/null 2&gt;1&amp; &amp;
+</code></pre></li>
+
+<li><p>Add SSID scan into config <code>/etc/wpa_supplicant.conf</code></p>
+
+<pre><code class="language-bash">network={
+    ssid=&quot;mywifi&quot;
+    #psk=&quot;mypassword&quot;
+    psk=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    scan_ssid=1
+}
+</code></pre></li>
+
+<li><p>Get IP address from external DHCP</p>
+
+<pre><code class="language-bash">sudo dhclient wlp3s0
+
+## Check the ip address
 ifconfig wlp3s0
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h2 id="wifi-trouble-shooting">Wifi Trouble Shooting</h2>
+
 <ul>
-<li>
-<p>There is no ip address assigned to your wifi interface</p>
+<li><p>There is no ip address assigned to your wifi interface</p>
+
 <ul>
-<li>
-<p>Check out the wpa_supplicant status
-<code>sudo systemctl status wpa_supplicant</code></p>
-</li>
-<li>
-<p>If you find some error like &lsquo;Failed to construct signal&rsquo;, it means
-some network service has been disabled</p>
-</li>
+<li><p>Check out the wpa_supplicant status
+<code>sudo systemctl status wpa_supplicant</code></p></li>
+
+<li><p>If you find some error like &lsquo;Failed to construct signal&rsquo;, it means
+some network service has been disabled</p></li>
 </ul>
+
 <p><code>sudo systemctl list-unit-files  --state disabled | grep network</code></p>
+
 <ul>
 <li>Enable <code>systemd-networkd.service</code>, <code>networking.service</code> if they are disabled</li>
-</ul>
-</li>
-<li>
-<p>The error message comes after the <code>dhclient</code></p>
+</ul></li>
+
+<li><p>The error message comes after the <code>dhclient</code></p>
+
 <ul>
 <li>Enable the <code>squid.service</code></li>
-</ul>
-</li>
-<li>
-<p>Auto connect to wifi on Starup</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp /lib/systemd/system/wpa_supplicant.service /etc/systemd/system/wpa_supplicant.service
+</ul></li>
+
+<li><p>Auto connect to wifi on Starup</p>
+
+<pre><code class="language-bash">sudo cp /lib/systemd/system/wpa_supplicant.service /etc/systemd/system/wpa_supplicant.service
 
 sudo vi /etc/systemd/system/wpa_supplicant.service
-</code></pre></div><ul>
-<li>
-<p>Replace the following line
+</code></pre></li>
+
+<li><p>Replace the following line
 <code>ExecStart=/sbin/wpa_supplicant -u -s -O /run/wpa_supplicant</code>
 with
-<code>ExecStart=/sbin/wpa_supplicant -u -s -c /etc/wpa_supplicant.conf -i wlp3s0</code></p>
-</li>
-<li>
-<p>Add wifi  interface into auto startup file <code>/etc/network/interfaces</code></p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">auto lo
+<code>ExecStart=/sbin/wpa_supplicant -u -s -c /etc/wpa_supplicant.conf -i wlp3s0</code></p></li>
+
+<li><p>Add wifi  interface into auto startup file <code>/etc/network/interfaces</code></p>
+
+<pre><code class="language-bash">auto lo
 iface lo net loopback
 
 auto wlp3s0
 iface wlp3s0 net dchp
-</code></pre></div><h2 id="ufw-setup">UFW setup</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ufw enable
+</code></pre></li>
+</ul>
+
+<h2 id="ufw-setup">UFW setup</h2>
+
+<pre><code class="language-bash">sudo ufw enable
 sudo ufw allow 80/tcp
 sudo ufw allow ssh
 sudo ufw allow 443/tcp
 sudo ufw allow 8000/tcp
-</code></pre></div><h2 id="ssh-server-setup">SSH server setup</h2>
-<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install openssh-server 
+</code></pre>
 
-<span style="color:#75715e">## backup default config</span> 
+<h2 id="ssh-server-setup">SSH server setup</h2>
+
+<p><code>!!! For production environment, SSH should be secured by the CA</code></p>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+## backup default config 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
 
-<span style="color:#75715e">## use any editor to update sshd_config</span> 
+## use any editor to update sshd_config 
 sudo nano /etc/ssh/sshd_config 
 
-<span style="color:#75715e">## uncomment  PasswordAuthentication yes to allow remote password login</span>
-<span style="color:#75715e">## Password authentication is only for test environment</span>
+## uncomment  PasswordAuthentication yes to allow remote password login
+## Password authentication is only for test environment
 
-<span style="color:#75715e">## setup ssh auto-start onboot</span>
+## setup ssh auto-start onboot
 sudo update-rc.d ssh defaults
-</code></pre></div><h2 id="-install-the-software-properties-common-package">!!! Install the software-properties-common Package</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install software-properties-common python-software-properties
-</code></pre></div><h2 id="time-zone-setup">Time Zone setup</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dpkg-reconfigure tzdata
-</code></pre></div><h2 id="install-tmux">Install tmux</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install tmux
+</code></pre>
 
-</code></pre></div><ul>
+<h2 id="install-the-software-properties-common-package">!!! Install the software-properties-common Package</h2>
+
+<pre><code class="language-bash">sudo apt-get install software-properties-common python-software-properties
+</code></pre>
+
+<h2 id="time-zone-setup">Time Zone setup</h2>
+
+<pre><code class="language-bash">sudo dpkg-reconfigure tzdata
+</code></pre>
+
+<h2 id="install-tmux">Install tmux</h2>
+
+<pre><code class="language-bash">sudo apt-get install tmux
+
+</code></pre>
+
+<ul>
 <li>Most useful tmux commands</li>
 </ul>
+
 <blockquote>
-<p>Ctrl+b &quot; — split pane horizontally.</p>
+<p>Ctrl+b &ldquo; — split pane horizontally.</p>
+
 <p>Ctrl+b % — split pane vertically.</p>
+
 <p>Ctrl+b arrow key — switch pane.</p>
+
 <p>Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.</p>
-<p>Ctrl+b c — (c)reate a new window.</p>
+
+<p>Ctrl+b c — &copy;reate a new window.</p>
+
 <p>Ctrl+b , — rename reate a new window.</p>
+
 <p>Ctrl+b n — move to the (n)ext window.</p>
+
 <p>Ctrl+b p — move to the (p)revious window.</p>
 </blockquote>
+
 <h2 id="install-git">Install git</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:git-core/ppa
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:git-core/ppa
 sudo apt-get update
 sudo apt-get install git
-</code></pre></div><h2 id="install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#75715e">## Update the apt package index</span>
+</code></pre>
+
+<h2 id="install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</h2>
+
+<pre><code class="language-bash">
+## Update the apt package index
 sudo apt-get update
 
-<span style="color:#75715e">## Install packages to allow apt to use a repository over HTTPS</span>
-sudo apt-get install <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    apt-transport-https <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    ca-certificates <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    curl <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    software-properties-common
+## Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
 
-<span style="color:#75715e">## Add Docker’s official GPG key</span>
+## Add Docker’s official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 
 
-<span style="color:#75715e">## Verify the last 8 characters of the fingerprint.</span>
+## Verify the last 8 characters of the fingerprint.
 sudo apt-key fingerprint xxxxxxxx
 
 
-<span style="color:#75715e">##   set up the stable repository</span>
-sudo add-apt-repository <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-</span><span style="color:#e6db74">   </span><span style="color:#66d9ef">$(</span>lsb_release -cs<span style="color:#66d9ef">)</span><span style="color:#e6db74"> \
-</span><span style="color:#e6db74">   stable</span><span style="color:#e6db74">&#34;</span>
+##   set up the stable repository
+sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
 
-<span style="color:#75715e">## apt update</span> 
+## apt update 
 sudo apt-get update
 
-<span style="color:#75715e">## install docker CE</span>
+## install docker CE
 sudo apt-get install docker-ce
 
-</code></pre></div><h2 id="install-jdk-8">Install JDK 8</h2>
+</code></pre>
+
+<h2 id="install-jdk-8">Install JDK 8</h2>
+
 <ul>
-<li>Downlaod the JDK from Oracle website.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:webupd8team/java
+<li><p>Downlaod the JDK from Oracle website.</p>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 
 java -version
-</code></pre></div><ul>
-<li>Setup environment</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install oracle-java8-set-default
+</code></pre></li>
+
+<li><p>Setup environment</p>
+
+<pre><code class="language-bash">sudo apt-get install oracle-java8-set-default
 
 sudo su
-cat &gt;&gt; /etc/environment <span style="color:#e6db74">&lt;&lt;EOL
-</span><span style="color:#e6db74">JAVA_HOME=/usr/lib/jvm/java-8-oracle
-</span><span style="color:#e6db74">JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
-</span><span style="color:#e6db74">EOL</span>
-</code></pre></div><ul>
-<li>
-<p>Test JDK with a simple HelloWorld program</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Calendar<span style="color:#f92672">;</span>
+cat &gt;&gt; /etc/environment &lt;&lt;EOL
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
+EOL
+</code></pre></li>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelloWorld</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        Calendar cal <span style="color:#f92672">=</span> Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">int</span> year <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">YEAR</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">int</span> month <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">MONTH</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">int</span> day <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">DATE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">int</span> hour <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">HOUR_OF_DAY</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">int</span> minute <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">MINUTE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        String username <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">getProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;user.name&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>username<span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: Hello World! &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>year <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> month <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> day <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> hour <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:&#34;</span> <span style="color:#f92672">+</span> minute<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></li>
-<li>
-<p>Compile and run the program</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">javac HelloWorld.java
+<li><p>Test JDK with a simple HelloWorld program</p>
+
+<pre><code class="language-java">import java.util.Calendar;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String username = System.getProperty(&quot;user.name&quot;);
+        System.out.println(username+ &quot;: Hello World! &quot;);
+        System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
+    }
+}
+</code></pre></li>
+
+<li><p>Compile and run the program</p>
+
+<pre><code class="language-bash">javac HelloWorld.java
 java HelloWorld.java
-</code></pre></div></li>
+</code></pre></li>
 </ul>
+
 <h2 id="install-nodejs">Install nodejs</h2>
+
 <ul>
-<li>Install Nodejs 8.x</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<li><p>Install Nodejs 8.x</p>
+
+<pre><code class="language-bash">
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-</code></pre></div><ul>
-<li>Install latest npm, yarn and ts</li>
-</ul>
+</code></pre></li>
+
+<li><p>Install latest npm, yarn and ts</p>
+
 <pre><code>sudo npm install -g npm
 sudo npm install -g typescript
 sudo mpm install -g yarn
-</code></pre><h2 id="install-php">Install PHP</h2>
-<ul>
-<li>Add new repo</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install -y python-software-properties
+
+<h2 id="install-php">Install PHP</h2>
+
+<ul>
+<li><p>Add new repo</p>
+
+<pre><code class="language-bash">sudo apt-get install -y python-software-properties
 sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update -y
 
 apt-cache pkgnames | grep php7.2
-</code></pre></div><ul>
-<li>Option 1: Install LAMP stack</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install -y apache2
-sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
-</code></pre></div><ul>
-<li>Option 2: Install LEMP stack</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install -y nginx
-sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
-</code></pre></div><ul>
-<li>Disable Apache and Nginx if you install both</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl disable apache2.service
+</code></pre></li>
+
+<li><p>Option 1: Install LAMP stack</p>
+
+<pre><code class="language-bash">sudo apt-get install -y apache2
+sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common \
+php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre></li>
+
+<li><p>Option 2: Install LEMP stack</p>
+
+<pre><code class="language-bash">sudo apt-get install -y nginx
+sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring \
+php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre></li>
+
+<li><p>Disable Apache and Nginx if you install both</p>
+
+<pre><code class="language-bash">sudo systemctl disable apache2.service
 sudo systemctl disable nginx.service 
-</code></pre></div><h2 id="install-python2-python3">Install Python2, Python3</h2>
-<ul>
-<li>Ubuntu has python2 installed by default</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get python-pip 
+
+<h2 id="install-python2-python3">Install Python2, Python3</h2>
+
+<ul>
+<li><p>Ubuntu has python2 installed by default</p>
+
+<pre><code class="language-bash">sudo apt-get python-pip 
 sudo apt-get install python3-pip
 sudo apt-get install python3-dev python-dev
 
-<span style="color:#75715e">## Install virtualenv</span> 
+## Install virtualenv 
 sudo pip install virtualenv
 sudo pip3 install virtualenv
-</code></pre></div><h2 id="install-go">Install Go</h2>
+</code></pre></li>
+</ul>
+
+<h2 id="install-go">Install Go</h2>
+
 <ul>
-<li>Install Go</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
+<li><p>Install Go</p>
+
+<pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 
 
-<span style="color:#75715e">## check hash</span>
-shasum -a <span style="color:#ae81ff">256</span> go*linux-amd64.tar.gz
+## check hash
+shasum -a 256 go*linux-amd64.tar.gz
 
-<span style="color:#75715e">## install tar ball</span>
+## install tar ball
 sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
-</code></pre></div><ul>
-<li>Setup GOROOT by overwriting the file <code>/etc/environment</code> with following content</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&#34;</span>
-JAVA_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/lib/jvm/java-8-oracle&#34;</span>
-JRE_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/lib/jvm/java-8-oracle/jre&#34;</span>
-GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/go&#34;</span>
-</code></pre></div><ul>
-<li>Setup GOPATH by adding following lines to the end of <code>.profile</code></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/ws/go</span><span style="color:#e6db74">&#34;</span>
-export GOBIN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$GOPATH<span style="color:#e6db74">/bin</span><span style="color:#e6db74">&#34;</span>
-export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$GOPATH<span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</code></pre></div><ul>
-<li>
-<p>Create a simple <code>hello.go</code> file to test</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>                                                        
-                                                                      
-<span style="color:#f92672">import</span> (                                                            
-    <span style="color:#e6db74">&#34;fmt&#34;</span>                                                           
-    <span style="color:#e6db74">&#34;log&#34;</span>                                                           
-    <span style="color:#e6db74">&#34;os/user&#34;</span>                                                       
+</code></pre></li>
+
+<li><p>Setup GOROOT by overwriting the file <code>/etc/environment</code> with following content</p>
+
+<pre><code class="language-bash">PATH=&quot;/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;
+JAVA_HOME=&quot;/usr/lib/jvm/java-8-oracle&quot;
+JRE_HOME=&quot;/usr/lib/jvm/java-8-oracle/jre&quot;
+GOROOT=&quot;/usr/local/go&quot;
+</code></pre></li>
+
+<li><p>Setup GOPATH by adding following lines to the end of <code>.profile</code></p>
+
+<pre><code class="language-bash">export GOPATH=&quot;$HOME/ws/go&quot;
+export GOBIN=&quot;$GOPATH/bin&quot;
+export PATH=&quot;$GOPATH/bin:$PATH&quot;
+</code></pre></li>
+
+<li><p>Create a simple <code>hello.go</code> file to test</p>
+
+<pre><code class="language-go">package main                                                        
+                                                                        
+import (                                                            
+    &quot;fmt&quot;                                                           
+    &quot;log&quot;                                                           
+    &quot;os/user&quot;                                                       
 )
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){                                                        
-    <span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Current</span>()                                 
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {                                             
-        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)                                      
+func main(){                                                        
+    user, err := user.Current()                                 
+    if err != nil {                                             
+        log.Fatal(err)                                      
     }                                                                 
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; said : Hello World! \n&#34;</span> )      
+    fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )      
 }                                                                   
-</code></pre></div></li>
-<li>
-<p>Run the program</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go run $GOPATH/src/hello.go
+</code></pre></li>
+
+<li><p>Run the program</p>
+
+<pre><code class="language-bash">go run $GOPATH/src/hello.go
 go install $GOPATH/src/hello.go
 $GOBIN/hello
-</code></pre></div><h2 id="install-clang--cmake">Install clang &amp; cmake</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install clang
+</code></pre></li>
+</ul>
+
+<h2 id="install-clang-cmake">Install clang &amp; cmake</h2>
+
+<pre><code class="language-bash">sudo apt-get install clang
 sudo apt-get install cmake
-</code></pre></div><h2 id="install-rust">Install Rust</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -f -L https://static.rust-lang.org/rustup.sh -O
+</code></pre>
+
+<h2 id="install-rust">Install Rust</h2>
+
+<pre><code class="language-bash">$ curl -f -L https://static.rust-lang.org/rustup.sh -O
 $ sh rustup.sh
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#wireless-setup">Wireless Setup</a></li>
-    <li><a href="#wifi-trouble-shooting">Wifi Trouble Shooting</a></li>
-    <li><a href="#ufw-setup">UFW setup</a></li>
-    <li><a href="#ssh-server-setup">SSH server setup</a></li>
-    <li><a href="#-install-the-software-properties-common-package">!!! Install the software-properties-common Package</a></li>
-    <li><a href="#time-zone-setup">Time Zone setup</a></li>
-    <li><a href="#install-tmux">Install tmux</a></li>
-    <li><a href="#install-git">Install git</a></li>
-    <li><a href="#install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</a></li>
-    <li><a href="#install-jdk-8">Install JDK 8</a></li>
-    <li><a href="#install-nodejs">Install nodejs</a></li>
-    <li><a href="#install-php">Install PHP</a></li>
-    <li><a href="#install-python2-python3">Install Python2, Python3</a></li>
-    <li><a href="#install-go">Install Go</a></li>
-    <li><a href="#install-clang--cmake">Install clang & cmake</a></li>
-    <li><a href="#install-rust">Install Rust</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#wireless-setup">Wireless Setup</a></li>
+<li><a href="#wifi-trouble-shooting">Wifi Trouble Shooting</a></li>
+<li><a href="#ufw-setup">UFW setup</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a></li>
+<li><a href="#install-the-software-properties-common-package">!!! Install the software-properties-common Package</a></li>
+<li><a href="#time-zone-setup">Time Zone setup</a></li>
+<li><a href="#install-tmux">Install tmux</a></li>
+<li><a href="#install-git">Install git</a></li>
+<li><a href="#install-docker-ce-ubuntu-16-lts">install docker CE (Ubuntu 16 LTS)</a></li>
+<li><a href="#install-jdk-8">Install JDK 8</a></li>
+<li><a href="#install-nodejs">Install nodejs</a></li>
+<li><a href="#install-php">Install PHP</a></li>
+<li><a href="#install-python2-python3">Install Python2, Python3</a></li>
+<li><a href="#install-go">Install Go</a></li>
+<li><a href="#install-clang-cmake">Install clang &amp; cmake</a></li>
+<li><a href="#install-rust">Install Rust</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

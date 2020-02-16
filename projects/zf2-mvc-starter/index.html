@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Zend Framework 2 MVC Starter :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -978,8 +949,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -997,9 +966,14 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Zend Framework 2 MVC Starter</h1>
-        <h2 id="summary">Summary</h2>
+        
+
+<h2 id="summary">Summary</h2>
+
 <p>This starter is the starting point of zend framework 2 MVC project. This application is meant to be used as a starting place for those looking to get their feet wet with ZF2.</p>
+
 <h2 id="features">Features</h2>
+
 <ul>
 <li>This starter was built on the zend framework 2.x.</li>
 <li>This starter uses mysql as database setting by default.</li>
@@ -1008,64 +982,73 @@
 <li>Include Bootstrap 3 without bootstrap-loader.</li>
 <li>Include html5shiiv.js to support older IE browser.</li>
 </ul>
+
 <h2 id="structure-of-starter">Structure of starter</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\z</span>f2-mvc-starter
+
+<pre><code class="language-bash">
+\path\to\zf2-mvc-starter
 +---config                            // Database, authorizaion, authentication setting
 +---data          
 +---module                            // Customized application sources
 |   +---Application                   // Global module used by whole application
 |   |   +---config
-|   |   |   <span style="color:#ae81ff">\-</span>--module.config.php     // Register all modules 
+|   |   |   \---module.config.php     // Register all modules 
 |   |   +---language
 |   |   +---src
-|   |   |   <span style="color:#ae81ff">\-</span>--Application
+|   |   |   \---Application
 |   |   |       +---Controller
-|   |   |       <span style="color:#ae81ff">\-</span>--Factory
-|   |   |           <span style="color:#ae81ff">\-</span>--AuthenticationAdapterFactory.php
-|   |   <span style="color:#ae81ff">\-</span>--view                      // Contains common master, basic layout files 
+|   |   |       \---Factory
+|   |   |           \---AuthenticationAdapterFactory.php
+|   |   \---view                      // Contains common master, basic layout files 
 |   |       +---application
-|   |       |   <span style="color:#ae81ff">\-</span>--index
+|   |       |   \---index
 |   |       +---error
 |   |       +---layout
-|   |       <span style="color:#ae81ff">\-</span>--partial
-|   +---BookList                      // Customized module <span style="color:#66d9ef">for</span> business purpose
+|   |       \---partial
+|   +---BookList                      // Customized module for business purpose
 |   |   +---config
 |   |   +---src
-|   |   |   <span style="color:#ae81ff">\-</span>--BookList
+|   |   |   \---BookList
 |   |   |       +---Controller
 |   |   |       +---Form
-|   |   |       <span style="color:#ae81ff">\-</span>--Model
-|   |   <span style="color:#ae81ff">\-</span>--view
-|   |       <span style="color:#ae81ff">\-</span>--book-list
-|   |           <span style="color:#ae81ff">\-</span>--book
-|   <span style="color:#ae81ff">\-</span>--Test
-|       <span style="color:#ae81ff">\-</span>--config
+|   |   |       \---Model
+|   |   \---view
+|   |       \---book-list
+|   |           \---book
+|   \---Test
+|       \---config
 +---public                          // Contains all fonts, css, images, and js files
 |   +---css
 |   +---fonts
 |   +---img
-|   <span style="color:#ae81ff">\-</span>--js
-<span style="color:#ae81ff">\-</span>--vendor                          // Contains Zend Framework <span style="color:#ae81ff">2</span> source code
+|   \---js
+\---vendor                          // Contains Zend Framework 2 source code
           
     
-</code></pre></div><h2 id="screenshot-of-home-page">Screenshot of home page</h2>
+</code></pre>
+
+<h2 id="screenshot-of-home-page">Screenshot of home page</h2>
+
 <blockquote>
-<p><img src="/img/zf2-mvc-starter.png" alt="zf2-mvc-starter"></p>
+<p><img src="/img/zf2-mvc-starter.png" alt="zf2-mvc-starter" /></p>
 </blockquote>
-<h2 id="browse-repositoryhttpsgithubcomharryhozf2-mvc-startergit">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></h2>
+
+<h2 id="browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></h2>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#structure-of-starter">Structure of starter</a></li>
-    <li><a href="#screenshot-of-home-page">Screenshot of home page</a></li>
-    <li><a href="#browse-repositoryhttpsgithubcomharryhozf2-mvc-startergit">Browse Repository</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#structure-of-starter">Structure of starter</a></li>
+<li><a href="#screenshot-of-home-page">Screenshot of home page</a></li>
+<li><a href="#browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

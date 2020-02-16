@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Ubuntu 14 -- server setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -980,8 +951,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -999,139 +968,185 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Ubuntu 14 -- server setup</h1>
-        <p>Prelude</p>
+        
+
+<p>Prelude</p>
+
 <blockquote>
 <p><em>This article is mainly to help experienced user install and setup Ubuntu server. If you are not familiar with Ubuntu system, please install Ubuntu desktop version at first, and you can follow <a href="/os/ubuntu-desktop-14/">Ubuntu deskstop setup</a></em></p>
 </blockquote>
+
 <h2 id="prerequisites">Prerequisites</h2>
+
 <ul>
 <li>You are familiar with Ubuntu, at least you have some experience working on Linux system.</li>
 <li>You are familiar with bash/shell script</li>
-<li>You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.</li>
+<li>You are going to setup Ubuntu server for special purpose. e.g. Web server, file server, or data center.<br /></li>
 </ul>
+
 <h2 id="ufw-setup">UFW setup</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ufw enable
+
+<pre><code class="language-bash">sudo ufw enable
 sudo ufw allow 80/tcp
 sudo ufw allow ssh
 sudo ufw allow 443/tcp
 sudo ufw allow 8000/tcp
-</code></pre></div><h2 id="ssh-server-setup">SSH server setup</h2>
-<h3 id="secure-ssh-with-ca-in-production">Secure SSH with CA in production</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install openssh-server 
+</code></pre>
 
-<span style="color:#75715e">## backup default config</span> 
+<h2 id="ssh-server-setup">SSH server setup</h2>
+
+<h3 id="secure-ssh-with-ca-in-production">Secure SSH with CA in production</h3>
+
+<pre><code class="language-bash">sudo apt-get install openssh-server 
+
+## backup default config 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
 
-<span style="color:#75715e">## use any editor to update sshd_config</span> 
+## use any editor to update sshd_config 
 sudo nano /etc/ssh/sshd_config
 
-<span style="color:#75715e">## uncomment  PasswordAuthentication yes to allow remote password login</span>
-<span style="color:#75715e">## Password authentication is only for test environment</span>
+## uncomment  PasswordAuthentication yes to allow remote password login
+## Password authentication is only for test environment
 
-<span style="color:#75715e">## setup ssh auto-start onboot</span>
+## setup ssh auto-start onboot
 sudo update-rc.d ssh defaults
-</code></pre></div><h2 id="time-zone-setup">Time Zone setup</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dpkg-reconfigure tzdata
-</code></pre></div><h2 id="install-software-properties-common-package">install software-properties-common Package</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">software-properties-common python-software-properties
-</code></pre></div><p>Install byobu screen</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install byobu screen 
+</code></pre>
 
-<span style="color:#75715e">## Launch byobu</span>
+<h2 id="time-zone-setup">Time Zone setup</h2>
+
+<pre><code class="language-bash">sudo dpkg-reconfigure tzdata
+</code></pre>
+
+<h2 id="install-software-properties-common-package">install software-properties-common Package</h2>
+
+<pre><code class="language-bash">software-properties-common python-software-properties
+</code></pre>
+
+<p>Install byobu screen</p>
+
+<pre><code class="language-bash">sudo apt-get install byobu screen 
+
+## Launch byobu
 byobu
-<span style="color:#75715e">## F9 for help</span> 
-<span style="color:#75715e">## change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6</span>
-</code></pre></div><h2 id="install-docker-ubuntu-1404-lts">install docker (Ubuntu 14.04 LTS)</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## add GBG Key</span>
+## F9 for help 
+## change the keyboard for putty &gt; Termianl &gt; Keyboard &gt; Function keys and keyboard &gt; Xterm R6
+</code></pre>
+
+<h2 id="install-docker-ubuntu-14-04-lts">install docker (Ubuntu 14.04 LTS)</h2>
+
+<pre><code class="language-bash">## add GBG Key
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-<span style="color:#75715e">## add docker.list</span>
+## add docker.list
 sudo touch /etc/apt/sources.list.d/docker.list
-<span style="color:#75715e">##  repo</span> 
+##  repo 
 sudo vi /etc/apt/sources.list.d/docker.list
-<span style="color:#75715e">##  add following repo ath the end of file</span> 
+##  add following repo ath the end of file 
 deb https://apt.dockerproject.org/repo ubuntu-trusty main
 
-<span style="color:#75715e">## apt update</span> 
+## apt update 
 sudo apt-get update
-<span style="color:#75715e">## verify</span> 
+## verify 
 apt-cache policy docker-engine
-<span style="color:#75715e">## install docker engine</span>
+## install docker engine
 
-</code></pre></div><h2 id="build-vim">build vim</h2>
+</code></pre>
+
+<h2 id="build-vim">build vim</h2>
+
 <ul>
-<li>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>, </code>syntastic`, etc.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get build-dep vim
+<li><p>I am not <code>vi</code> fans, but if you really want to use <code>vi</code>. I wiil suggest spend some time to dig into <a href="http://vimawesome.com"><code>vimawesome</code></a> and play around with those plugins. Some are pretty cool, e.g. <code>NERD Tree</code>, &lsquo;youcompleteme<code>,</code>syntastic`, etc.</p>
+
+<pre><code class="language-bash">sudo apt-get build-dep vim
 git clone https://github.com/vim/vim.git ~/forks/vim
 cd ~/forks/vim
-<span style="color:#75715e">### make distclean &amp;&amp; make clean</span>
-<span style="color:#75715e">### build script from this repo</span>
-make VIMRUNTIMEDIR<span style="color:#f92672">=</span>/usr/share/vim/vim74
+### make distclean &amp;&amp; make clean
+### build script from this repo
+make VIMRUNTIMEDIR=/usr/share/vim/vim74
 sudo make install
-</code></pre></div><h2 id="install-jdk-8">Install JDK 8</h2>
+</code></pre></li>
+</ul>
+
+<h2 id="install-jdk-8">Install JDK 8</h2>
+
 <ul>
 <li>If you are going to run Java Web Application on server, or you are going to setup Hadoop environment.</li>
-<li>Setup oracle jdk ppa and install oracle jdk from ppa.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:webupd8team/java
+
+<li><p>Setup oracle jdk ppa and install oracle jdk from ppa.</p>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default     
-</code></pre></div><h2 id="install-openjdk">Install OpenJdk</h2>
-<ul>
-<li>Setup OpenJdk ppa and install it from ppa</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:openjdk-r/ppa
+
+<h2 id="install-openjdk">Install OpenJdk</h2>
+
+<ul>
+<li><p>Setup OpenJdk ppa and install it from ppa</p>
+
+<pre><code class="language-bash">sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update 
 sudo apt-get install openjdk-8-jdk
 sudo update-alternatives --config java
-</code></pre></div><ul>
-<li>Type in a number to select a Java version.</li>
-<li>set default Java Compiler</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo update-alternatives --config javac
+</code></pre></li>
+
+<li><p>Type in a number to select a Java version.</p></li>
+
+<li><p>set default Java Compiler</p>
+
+<pre><code class="language-bash">sudo update-alternatives --config javac
 java -version
-</code></pre></div><ul>
-<li>
-<p>How to stop mysql auto startup</p>
-</li>
-<li>
-<p>Comment out the line below in the config file ( /etc/init/mysql.conf )</p>
+</code></pre></li>
+
+<li><p>How to stop mysql auto startup</p></li>
+
+<li><p>Comment out the line below in the config file ( /etc/init/mysql.conf )</p>
+
 <ul>
 <li>Start on (net-device-up</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="install-nodejs">Install nodejs</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
+
+<pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs
 sudo apt-get install build-essential
-</code></pre></div><p>Setup NPM</p>
+</code></pre>
+
+<p>Setup NPM</p>
+
 <ul>
-<li>You can use default <code>npm</code> on your server after you install nodejs, but there is a better way to manage your <code>npm</code>. It allows you easily to control your packages.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd 
+<li><p>You can use default <code>npm</code> on your server after you install nodejs, but there is a better way to manage your <code>npm</code>. It allows you easily to control your packages.</p>
+
+<pre><code class="language-bash">cd 
 mkdir .node_modules
 npm config list
 npm config get prefix
-<span style="color:#75715e">## /usr or  /usr/share</span>
+## /usr or  /usr/share
 npm config set prefix $HOME/.node_modules
 cat .npmrc
-<span style="color:#75715e">## /home/hho/.node_modules</span>
+## /home/hho/.node_modules
 npm install -g npm
 which npm
-<span style="color:#75715e">## /usr/bin/npm</span>
-</code></pre></div><ul>
-<li>Open .profile add following to end of file</li>
+## /usr/bin/npm
+</code></pre></li>
+
+<li><p>Open .profile add following to end of file</p>
+
+<pre><code class="language-bash">export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.node_modules_global/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</code></pre></div><h2 id="install-nvm">Install nvm</h2>
+
+<h2 id="install-nvm">Install nvm</h2>
+
 <ul>
-<li>Using <code>nvm</code> is no longer popular and best option. I will recommand you just use <code>npm</code> to manage eveything you need.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+<li><p>Using <code>nvm</code> is no longer popular and best option. I will recommand you just use <code>npm</code> to manage eveything you need.</p>
+
+<pre><code class="language-bash">sudo apt-get update
 sudo apt-get install build-essential libssl-dev
 curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
 source ~/.profile
@@ -1140,62 +1155,85 @@ nvm install 0.11.13
 nvm use 0.11.13
 nvm alias default 0.11.13
 nvm use default
-</code></pre></div><h2 id="install-php--compser">Install PHP &amp; Compser</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install curl php5-cli git
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir<span style="color:#f92672">=</span>/usr/local/bin --filename<span style="color:#f92672">=</span>composer
-</code></pre></div><h2 id="install-python2-python3">Install Python2, Python3</h2>
-<ul>
-<li>Ubuntu has python instaleld by default</li>
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get python pip 
+
+<h2 id="install-php-compser">Install PHP &amp; Compser</h2>
+
+<pre><code class="language-bash">sudo apt-get install curl php5-cli git
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+</code></pre>
+
+<h2 id="install-python2-python3">Install Python2, Python3</h2>
+
+<ul>
+<li><p>Ubuntu has python instaleld by default</p>
+
+<pre><code class="language-bash">sudo apt-get python pip 
 sudo apt-get install python3 pip3
-<span style="color:#75715e">## Install virtualenv</span> 
+## Install virtualenv 
 sudo pip install virtualenv
 sudo pip3 install virtualenv
-</code></pre></div><h2 id="install-go">Install Go</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
+</code></pre></li>
+</ul>
+
+<h2 id="install-go">Install Go</h2>
+
+<pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 sudo tar -xzf go1.4.linux-amd64.tar.gz -C /usr/local
 
 sudo vi /etc/profile
-GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/YOUR/USER/HOME/go&#34;</span>
-GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/go&#34;</span>
-PATH<span style="color:#f92672">=</span>$GOROOT/bin:$PATH
-</code></pre></div><h2 id="install-r">Install R</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
+GOPATH=&quot;/YOUR/USER/HOME/go&quot;
+GOROOT=&quot;/usr/local/go&quot;
+PATH=$GOROOT/bin:$PATH
+</code></pre>
+
+<h2 id="install-r">Install R</h2>
+
+<pre><code class="language-bash">sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
 sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
 sudo apt-get update
 sudo apt-get install r-base
-</code></pre></div><h2 id="install-rust">Install Rust</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
-</code></pre></div><p><em>Uninstall Rust</em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
-</code></pre></div>
+</code></pre>
+
+<h2 id="install-rust">Install Rust</h2>
+
+<pre><code class="language-bash">$ curl -sf -L https://static.rust-lang.org/rustup.sh | sh
+</code></pre>
+
+<p><em>Uninstall Rust</em></p>
+
+<pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#ufw-setup">UFW setup</a></li>
-    <li><a href="#ssh-server-setup">SSH server setup</a>
-      <ul>
-        <li><a href="#secure-ssh-with-ca-in-production">Secure SSH with CA in production</a></li>
-      </ul>
-    </li>
-    <li><a href="#time-zone-setup">Time Zone setup</a></li>
-    <li><a href="#install-software-properties-common-package">install software-properties-common Package</a></li>
-    <li><a href="#install-docker-ubuntu-1404-lts">install docker (Ubuntu 14.04 LTS)</a></li>
-    <li><a href="#build-vim">build vim</a></li>
-    <li><a href="#install-jdk-8">Install JDK 8</a></li>
-    <li><a href="#install-openjdk">Install OpenJdk</a></li>
-    <li><a href="#install-nodejs">Install nodejs</a></li>
-    <li><a href="#install-nvm">Install nvm</a></li>
-    <li><a href="#install-php--compser">Install PHP & Compser</a></li>
-    <li><a href="#install-python2-python3">Install Python2, Python3</a></li>
-    <li><a href="#install-go">Install Go</a></li>
-    <li><a href="#install-r">Install R</a></li>
-    <li><a href="#install-rust">Install Rust</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#ufw-setup">UFW setup</a></li>
+<li><a href="#ssh-server-setup">SSH server setup</a>
+<ul>
+<li><a href="#secure-ssh-with-ca-in-production">Secure SSH with CA in production</a></li>
+</ul></li>
+<li><a href="#time-zone-setup">Time Zone setup</a></li>
+<li><a href="#install-software-properties-common-package">install software-properties-common Package</a></li>
+<li><a href="#install-docker-ubuntu-14-04-lts">install docker (Ubuntu 14.04 LTS)</a></li>
+<li><a href="#build-vim">build vim</a></li>
+<li><a href="#install-jdk-8">Install JDK 8</a></li>
+<li><a href="#install-openjdk">Install OpenJdk</a></li>
+<li><a href="#install-nodejs">Install nodejs</a></li>
+<li><a href="#install-nvm">Install nvm</a></li>
+<li><a href="#install-php-compser">Install PHP &amp; Compser</a></li>
+<li><a href="#install-python2-python3">Install Python2, Python3</a></li>
+<li><a href="#install-go">Install Go</a></li>
+<li><a href="#install-r">Install R</a></li>
+<li><a href="#install-rust">Install Rust</a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 

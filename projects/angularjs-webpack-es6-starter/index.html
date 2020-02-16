@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:41:21 AEDT">
+<meta name="revised" content="2020-02-16T13:53:20 AEDT">
 <title>Angularjs Webpack ES6 Starter :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -911,35 +911,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -978,8 +949,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -997,8 +966,12 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Angularjs Webpack ES6 Starter</h1>
-        <h2 id="summary">Summary</h2>
-<p>It simply includes font-awesome, bootstrap for the people who don't want to use boostrap-webpack, font-awesome-webpack. I find it saves us so much effort to create prototype, since we don't need spectacular UI.</p>
+        
+
+<h2 id="summary">Summary</h2>
+
+<p>It simply includes font-awesome, bootstrap for the people who don&rsquo;t want to use boostrap-webpack, font-awesome-webpack. I find it saves us so much effort to create prototype, since we don&rsquo;t need spectacular UI.</p>
+
 <ul>
 <li>This starter uses angular 1.5 for someone want to build component.</li>
 <li>This repo follows mvc patterns instead of component pattern.</li>
@@ -1011,68 +984,75 @@
 <li>Include Bootstrap 3 without bootstrap-loader.</li>
 <li>No gulp and no grunt, just npm scripts.</li>
 </ul>
+
 <h2 id="structure-of-starter">Structure of starter</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\a</span>ngularjs-webpack-es6-starter
+
+<pre><code class="language-bash">
+\path\to\angularjs-webpack-es6-starter
 |   .babelrc                                    &lt;-// default setting es2015.
 |   karma.conf.js                               &lt;-// tests and report setup 
 |   webpack.config.js                           &lt;-// webpack config
-<span style="color:#ae81ff">\-</span>--src
+\---src
     |   tests.webpack.js
     |   
     +---app
     |   |   app.html                            &lt;-// app view
     |   |   app.js                              &lt;-// app module
     |   |   app.routes.js                       &lt;-// app route to manage all routes 
-    |   |   app.runner.js                       &lt;-// app runner <span style="color:#66d9ef">for</span> state change enhancement  
-    |   |   app.spec.js                         &lt;-// app spec file <span style="color:#66d9ef">for</span> testing 
+    |   |   app.runner.js                       &lt;-// app runner for state change enhancement  
+    |   |   app.spec.js                         &lt;-// app spec file for testing 
     |   |   
-    |   +---common                              &lt;-// common module <span style="color:#66d9ef">for</span> whole app
+    |   +---common                              &lt;-// common module for whole app
     |   |   |   common.js
     |   |   |   common.spec.js
-    |   |   +---directives                      &lt;-// common directives <span style="color:#66d9ef">for</span> whole app
+    |   |   +---directives                      &lt;-// common directives for whole app
     |   |   |       appUiDirectives.js
     |   |   |       appUiDirectives.spec.js
     |   |   |       commonDirectives.js
     |   |   |       commonDirectives.spec.js
-    |   |   +---services                        &lt;-// common views <span style="color:#66d9ef">for</span> whole app
+    |   |   +---services                        &lt;-// common views for whole app
     |   |   |       ApiService.js
     |   |   |       ApiService.spec.js
     |   |   |       UtilService.js
     |   |   |       UtilService.spec.js
-    |   |   <span style="color:#ae81ff">\-</span>--views                           &lt;-// contains common views
+    |   |   \---views                           &lt;-// contains common views
     |   |           footer-view.html
     |   |           header-view.html
     |   |           sidebar-view.html
     |   |           topbar-view.html
-    |   <span style="color:#ae81ff">\-</span>--main                                &lt;-// built-in fonts, css, images 
-    |       <span style="color:#ae81ff">\-</span>--dashboard
+    |   \---main                                &lt;-// built-in fonts, css, images 
+    |       \---dashboard
     |           +---controllers
     |           |       dashboardController.js
     |           |       dashboardController.spec.js
-    |           <span style="color:#ae81ff">\-</span>--views
+    |           \---views
     |                   dashboard-view.html
     |                   
     +---public                                  &lt;-// built-in fonts, css, images 
     |   |   index.html
     |   +---fonts
     |   |   +--- ...
-    |   <span style="color:#ae81ff">\-</span>--img
+    |   \---img
     |       +--- favicon.ico
-    <span style="color:#ae81ff">\-</span>--style                                  &lt;-// css files including customized css
+    \---style                                  &lt;-// css files including customized css
            
     
-</code></pre></div><h2 id="browse-repositoryhttpsgithubcomharryhoangularjs-webpack-es6-startergit">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a></h2>
+</code></pre>
+
+<h2 id="browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a></h2>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#structure-of-starter">Structure of starter</a></li>
-    <li><a href="#browse-repositoryhttpsgithubcomharryhoangularjs-webpack-es6-startergit">Browse Repository</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#structure-of-starter">Structure of starter</a></li>
+<li><a href="#browse-repository-https-github-com-harryho-angularjs-webpack-es6-starter-git">Browse <a href="https://github.com/harryho/angularjs-webpack-es6-starter.git">Repository</a></a></li>
+</ul></li>
+</ul>
 </nav>
     </div>
 
