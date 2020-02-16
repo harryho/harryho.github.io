@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>AWS Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,30 +994,23 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>AWS Note - 1</h1>
-        
-
-<h3 id="root-user">Root User</h3>
-
+        <h3 id="root-user">Root User</h3>
 <ul>
-<li>Every account has a root user in AWS. A root user is something that&rsquo;s created automatically for you whenever you create an AWS account.</li>
+<li>Every account has a root user in AWS. A root user is something that's created automatically for you whenever you create an AWS account.</li>
 <li>Every single AWS account has a root user.</li>
 <li>The trouble is that root users have unrestricted access to every service and resource that is in AWS inside of your account.</li>
-<li>The permissions of root user can&rsquo;t be restricted in any way.</li>
+<li>The permissions of root user can't be restricted in any way.</li>
 </ul>
-
-<h3 id="dos-and-don-ts">Dos and Don&rsquo;ts</h3>
-
+<h3 id="dos-and-donts">Dos and Don'ts</h3>
 <ul>
-<li>You should not be accessing the root account on a regular basis, whether that&rsquo;s daily, weekly, or whatever.</li>
-<li>Make sure that you turn on multi-factor authentication on the root account. Multi-factor authentication used to be called two-factor authentication. It really just means that we know the password and we have some sort of a token that we will get a number generated. It&rsquo;s something that you might even use your smartphone for. But it now means that I have to know the username and password and I have to have this token that&rsquo;s going to generate a code. We&rsquo;ll see more about how you&rsquo;ll do that later.</li>
-<li>Make sure that you&rsquo;ve disabled your root access keys. This isn&rsquo;t the interactive login for root, it has to do with how we can access the account programmatically.</li>
-<li>Make sure that you rotate the credentials. Just because we say don&rsquo;t log in doesn&rsquo;t mean set the password and then forget it.</li>
-<li>Don&rsquo;t share the root user credentials. password. And all that the audit logs show is that root logged in and did the job. Kind of dangerous. So</li>
-<li>Make sure that you create a user that has administrative privileges that&rsquo;s assigned to you and that you know the password only.</li>
+<li>You should not be accessing the root account on a regular basis, whether that's daily, weekly, or whatever.</li>
+<li>Make sure that you turn on multi-factor authentication on the root account. Multi-factor authentication used to be called two-factor authentication. It really just means that we know the password and we have some sort of a token that we will get a number generated. It's something that you might even use your smartphone for. But it now means that I have to know the username and password and I have to have this token that's going to generate a code. We'll see more about how you'll do that later.</li>
+<li>Make sure that you've disabled your root access keys. This isn't the interactive login for root, it has to do with how we can access the account programmatically.</li>
+<li>Make sure that you rotate the credentials. Just because we say don't log in doesn't mean set the password and then forget it.</li>
+<li>Don't share the root user credentials. password. And all that the audit logs show is that root logged in and did the job. Kind of dangerous. So</li>
+<li>Make sure that you create a user that has administrative privileges that's assigned to you and that you know the password only.</li>
 </ul>
-
-<h3 id="features-functions">Features &amp; Functions</h3>
-
+<h3 id="features--functions">Features &amp; Functions</h3>
 <ul>
 <li>Allows user to have very secure access including through the use of multi-factor authentication and federation.</li>
 <li>Grant user a lot of granular control over the specific resources.</li>
@@ -987,69 +1018,58 @@
 <li>Simplify the number of logins by using federating identities</li>
 <li>Integrate the IAM solution is with all of the different products that AWS offers.</li>
 </ul>
-
 <h3 id="mfa">MFA</h3>
-
 <ul>
 <li>MFA stands for multi-factor authentication</li>
 <li>Extra layer of security.</li>
 <li>Prevent against imposters, somebody who just happened to guess the right password or happened to actually shoulder surf and watch somebody key in their username and password.</li>
 </ul>
-
 <h3 id="iam-user">IAM User</h3>
-
-<p><strong><em>It is an entity that you create in AWS. The IAM user represents the person or service who uses the IAM user to interact with AWS. A primary use for IAM users is to give people the ability to sign in to the AWS Management Console for interactive tasks and to make programmatic requests to AWS services using the API or CLI. A user in AWS consists of a name, a password to sign into the AWS Management Console, and up to two access keys that can be used with the API or CLI.</em></strong></p>
-
+<p><em><strong>It is an entity that you create in AWS. The IAM user represents the person or service who uses the IAM user to interact with AWS. A primary use for IAM users is to give people the ability to sign in to the AWS Management Console for interactive tasks and to make programmatic requests to AWS services using the API or CLI. A user in AWS consists of a name, a password to sign into the AWS Management Console, and up to two access keys that can be used with the API or CLI.</strong></em></p>
 <ul>
 <li>Receive its own unique identifier, aka, ARN, which is an acronym, of course, which stands for Amazon Resource Name. Now, each one of these user accounts will have its own set of unique credentials, which again might be a common-sense factor, but still everybody needs their own username and password.</li>
 <li>Access the appropriate resources by using policies.</li>
 <li>very easy to remove.</li>
-<li>set up specific permissions. It&rsquo;s a good practice.</li>
+<li>set up specific permissions. It's a good practice.</li>
 </ul>
-
 <h3 id="iam-policy">IAM Policy</h3>
-
 <ul>
 <li>A policy is just a JSON-formatted document. It details what you can do, and it includes information from four different categories.</li>
 <li>We can attach the policy to IAM identities. And those identities could be IAM user accounts, group accounts, or IAM roles.</li>
 </ul>
-
 <h3 id="federation">Federation</h3>
-
 <h4 id="iam-role">IAM Role</h4>
-
-<p><strong><em>It is very similar to a user, in that it is an identity with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it.</em></strong></p>
-
+<p><em><strong>It is very similar to a user, in that it is an identity with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it.</strong></em></p>
 <ul>
 <li>A role is used to assisgn temporary permissions</li>
 <li>Polices are associated to IAM Roles</li>
 <li>Roles are assumed by people or applications</li>
 </ul>
-
 <h4 id="iam-group">IAM Group</h4>
-
-<p><strong><em>It is a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users.</em></strong></p>
-
+<p><em><strong>It is a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users.</strong></em></p>
 <h4 id="cross-accounts">Cross Accounts</h4>
-
 <ul>
-<li><p>Flexible management allows me to take multiple accounts</p></li>
-
-<li><p>It&rsquo;s all token based, so it really optimizes the whole process of setting up security.</p></li>
-
-<li><p>Manage a lot of different services between multiple accounts, as we as between business units</p></li>
-
-<li><p>Steps:</p>
-
+<li>
+<p>Flexible management allows me to take multiple accounts</p>
+</li>
+<li>
+<p>It's all token based, so it really optimizes the whole process of setting up security.</p>
+</li>
+<li>
+<p>Manage a lot of different services between multiple accounts, as we as between business units</p>
+</li>
+<li>
+<p>Steps:</p>
 <ul>
 <li>There are two different AWS accounts. There is one user in one account and we have some resources in another.</li>
 <li>Create a role that exists within the account with the resources.</li>
 <li>create a role, that permits access to the resources, can be then applied to the person or group over in the account by the virtue of what we call the sts:AssumeRole, aka, temporary security credential, aka, .</li>
-</ul></li>
-
-<li><p>Flow chart</p></li>
 </ul>
-
+</li>
+<li>
+<p>Flow chart</p>
+</li>
+</ul>
 <link href="/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
 <script defer src="/mermaid/mermaid.js">mermaid.initialize({startOnLoad:true});</script>
 <div class="mermaid" align="center" >
@@ -1073,35 +1093,35 @@ graph BT
         IAM_User --> RDS
     end 
 </div>
-
 <h4 id="saml">SAML</h4>
-
 <ul>
-<li><p>SAML 2.0 is the one that you&rsquo;ll use for things like Active Directory. It stands for Security Assertion Markup Language.</p></li>
-
-<li><p>It&rsquo;s an open standard. The idea is to create an open-standards-based approach that works with as many identity providers (idPs) as possible, things like Auth0, Microsoft Active Directory, and Shibboleth, etc.</p></li>
-
-<li><p>Use existing corporate credentials for authentication and authorizaion in AWS console, CL, or API calls.</p></li>
-
-<li><p>Steps:</p>
-
+<li>
+<p>SAML 2.0 is the one that you'll use for things like Active Directory. It stands for Security Assertion Markup Language.</p>
+</li>
+<li>
+<p>It's an open standard. The idea is to create an open-standards-based approach that works with as many identity providers (idPs) as possible, things like Auth0, Microsoft Active Directory, and Shibboleth, etc.</p>
+</li>
+<li>
+<p>Use existing corporate credentials for authentication and authorizaion in AWS console, CL, or API calls.</p>
+</li>
+<li>
+<p>Steps:</p>
 <ul>
 <li>set up a SAML 2.0 -based federation,</li>
 <li>Permit given identity to log in to the console, use CLI commands, or API calls. Now, this requires you to have an identity provider, such as Active Directory.</li>
 <li>when the user authenticates with Active Directory, Active Directory issues the SAML assertion document that says yep you are who you said you are and passes that over so that now when you go to access resources AWS says oh yeah</li>
 <li>User is going to log in again to this identity provider. This checks against the local LDAP identity store. so again, Active Directory.</li>
-<li>Get confirmation, A token will be issue, that allows us to talk to Amazon&rsquo;s security token service, or STS, that allows us to assume a particular role within AWS.</li>
+<li>Get confirmation, A token will be issue, that allows us to talk to Amazon's security token service, or STS, that allows us to assume a particular role within AWS.</li>
 <li>This passes back the temporary credentials. User is able to authenticate and gain access to acces AWS resources.</li>
-<li>don&rsquo;t even have an AWS account.</li>
-</ul></li>
+<li>don't even have an AWS account.</li>
 </ul>
-
+</li>
+</ul>
 <h4 id="aws-ds">AWS DS</h4>
-
 <ul>
 <li>There are three different varieties.</li>
 <li>Simple Active Directory for smaller, limited use cases.</li>
-<li>AWS Directory Service for Microsoft Active Directory, it&rsquo;s a mouthful. That&rsquo;s a fully-featured Active Directory.</li>
+<li>AWS Directory Service for Microsoft Active Directory, it's a mouthful. That's a fully-featured Active Directory.</li>
 <li>Active Directory Connector that actually just facilitates or front ends the authentication request. And then the actual authentication is sent back across your VPN to your on-premises.</li>
 </ul>
 
@@ -1109,28 +1129,19 @@ graph BT
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#root-user">Root User</a></li>
-<li><a href="#dos-and-don-ts">Dos and Don&rsquo;ts</a></li>
-<li><a href="#features-functions">Features &amp; Functions</a></li>
-<li><a href="#mfa">MFA</a></li>
-<li><a href="#iam-user">IAM User</a></li>
-<li><a href="#iam-policy">IAM Policy</a></li>
-<li><a href="#federation">Federation</a>
-<ul>
-<li><a href="#iam-role">IAM Role</a></li>
-<li><a href="#iam-group">IAM Group</a></li>
-<li><a href="#cross-accounts">Cross Accounts</a></li>
-<li><a href="#saml">SAML</a></li>
-<li><a href="#aws-ds">AWS DS</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#root-user">Root User</a></li>
+        <li><a href="#dos-and-donts">Dos and Don'ts</a></li>
+        <li><a href="#features--functions">Features & Functions</a></li>
+        <li><a href="#mfa">MFA</a></li>
+        <li><a href="#iam-user">IAM User</a></li>
+        <li><a href="#iam-policy">IAM Policy</a></li>
+        <li><a href="#federation">Federation</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Goroutine &amp; Channel - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -955,7 +991,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -976,6 +1012,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -993,489 +1031,430 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Goroutine &amp; Channel - 1</h1>
-        
-
-<h3 id="goroutine">Goroutine</h3>
-
+        <h3 id="goroutine">Goroutine</h3>
 <ul>
-<li><p>A goroutine is implemented as a function or method (this can also be an anonymous or lambda function) and called (invoked) with the keyword go. This starts the function running in parallel with the current computation but in the same address space and with its own stack.</p></li>
-
-<li><p>Go’s concurrency primitives provide the basis for a good concurrency program design: expressing program structure so as to represent independently executing actions; so Go’s emphasis is not in the 1 st place on parallelism: concurrent programs may or may not be parallel. Parallelism is the ability to make things run quickly by using multiple processors. But it turns out most often that a well designed concurrent program also has excellent performing parallel capabilities.</p></li>
+<li>
+<p>A goroutine is implemented as a function or method (this can also be an anonymous or lambda function) and called (invoked) with the keyword go. This starts the function running in parallel with the current computation but in the same address space and with its own stack.</p>
+</li>
+<li>
+<p>Go’s concurrency primitives provide the basis for a good concurrency program design: expressing program structure so as to represent independently executing actions; so Go’s emphasis is not in the 1 st place on parallelism: concurrent programs may or may not be parallel. Parallelism is the ability to make things run quickly by using multiple processors. But it turns out most often that a well designed concurrent program also has excellent performing parallel capabilities.</p>
+</li>
 </ul>
-
 <h4 id="basic-goroutine">Basic Goroutine</h4>
-
 <ul>
-<li><p>Sample 1: The code below will not print out anything, because the main exits before the &ldquo;hello&rdquo; goroutine kicks off. Actually the main is another goroutine which always runs first.</p>
-
-<pre><code class="language-go">func main() {
-go func() {
-    println(&quot;Hello&quot;)
-}()
+<li>Sample 1: The code below will not print out anything, because the main exits before the &ldquo;hello&rdquo; goroutine kicks off. Actually the main is another goroutine which always runs first.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        println(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+    }()
 }
-</code></pre></li>
-
-<li><p>Sample 2: Add timer to set main goroutine sleep a while, and let the &ldquo;hello&rdquo;
-goroutine to start.</p>
-
-<pre><code class="language-go">func main() {
-go func() {
-    println(&quot;Hello&quot;) // Hello
-}()
-time.Sleep(3000)
+</code></pre></div><ul>
+<li>Sample 2: Add timer to set main goroutine sleep a while, and let the &ldquo;hello&rdquo;
+goroutine to start.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        println(<span style="color:#e6db74">&#34;Hello&#34;</span>) <span style="color:#75715e">// Hello
+</span><span style="color:#75715e"></span>    }()
+    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">3000</span>)
 }
-</code></pre></li>
-
-<li><p>Sample 3: The code below will print &ldquo;hello&rdquo; 10 times and then print &ldquo;world&rdquo; 10 times.</p>
-
-<pre><code class="language-go">func main() {
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;Hello&quot;)
-        time.Sleep(2000)
-    }
-}()
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;World&quot;)
-    }
-}()
-time.Sleep(9999)
+</code></pre></div><ul>
+<li>Sample 3: The code below will print &ldquo;hello&rdquo; 10 times and then print &ldquo;world&rdquo; 10 times.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            println(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+            <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">2000</span>)
+        }
+    }()
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            println(<span style="color:#e6db74">&#34;World&#34;</span>)
+        }
+    }()
+    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">9999</span>)
 }
-</code></pre></li>
+</code></pre></div><ul>
+<li>Sample 4: The code below will print &ldquo;hello&rdquo; and &ldquo;world&rdquo; in different order.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">4</span>)
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            println(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+            <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">500</span>)
+        }
 
-<li><p>Sample 4: The code below will print &ldquo;hello&rdquo; and &ldquo;world&rdquo; in different order.</p>
-
-<pre><code class="language-go">func main() {
-runtime.GOMAXPROCS(4)
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;Hello&quot;)
-        time.Sleep(500)
-    }
-
-}()
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;World&quot;)
-        time.Sleep(500)
-    }
-}()
-time.Sleep(999999)
+    }()
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            println(<span style="color:#e6db74">&#34;World&#34;</span>)
+            <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">500</span>)
+        }
+    }()
+    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">999999</span>)
 }
-</code></pre></li>
+</code></pre></div><ul>
+<li>Sample 5: File watcher</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">watchedPath</span> = <span style="color:#e6db74">&#34;./source&#34;</span>
 
-<li><p>Sample 5: File watcher</p>
-
-<pre><code class="language-go">
-const watchedPath = &quot;./source&quot;
-
-func main() {
-for {
-    d, _ := os.Open(watchedPath)
-    files, _ := d.Readdir(-1)
-    for _, fi := range files {
-        filePath := watchedPath + &quot;/&quot; + fi.Name()
-        f, _ := os.Open(filePath)
-        data, _ := ioutil.ReadAll(f)
-        f.Close()
-        os.Remove(filePath)
-        go func(data string) {
-            reader := csv.NewReader(strings.NewReader(data))
-            records, _ := reader.ReadAll()
-            for _, r := range records {
-                invoice := new(Invoice)
-                invoice.Number = r[0]
-                invoice.Amount, _ = strconv.ParseFloat(r[1], 64)
-                invoice.PurchaseOrderNumber, _ = strconv.Atoi(r[2])
-                unixTime, _ := strconv.ParseInt(r[3], 10, 64)
-                invoice.InvoiceDate = time.Unix(unixTime, 0)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">watchedPath</span>)
+        <span style="color:#a6e22e">files</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Readdir</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">fi</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">files</span> {
+            <span style="color:#a6e22e">filePath</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">watchedPath</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">fi</span>.<span style="color:#a6e22e">Name</span>()
+            <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">filePath</span>)
+            <span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">f</span>)
+            <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Remove</span>(<span style="color:#a6e22e">filePath</span>)
+            <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">data</span> <span style="color:#66d9ef">string</span>) {
+                <span style="color:#a6e22e">reader</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">data</span>))
+                <span style="color:#a6e22e">records</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reader</span>.<span style="color:#a6e22e">ReadAll</span>()
+                <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">records</span> {
+                    <span style="color:#a6e22e">invoice</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">Invoice</span>)
+                    <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">Number</span> = <span style="color:#a6e22e">r</span>[<span style="color:#ae81ff">0</span>]
+                    <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">Amount</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">ParseFloat</span>(<span style="color:#a6e22e">r</span>[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">64</span>)
+                    <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">PurchaseOrderNumber</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Atoi</span>(<span style="color:#a6e22e">r</span>[<span style="color:#ae81ff">2</span>])
+                    <span style="color:#a6e22e">unixTime</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">ParseInt</span>(<span style="color:#a6e22e">r</span>[<span style="color:#ae81ff">3</span>], <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">64</span>)
+                    <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">InvoiceDate</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Unix</span>(<span style="color:#a6e22e">unixTime</span>, <span style="color:#ae81ff">0</span>)
                     
-                fmt.Printf(&quot;Received Invoice '%v' for $%.2f and submitted for processing\n&quot;, invoice.Number, invoice.Amount)
-            }
-        }(string(data))
+                    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received Invoice &#39;%v&#39; for $%.2f and submitted for processing\n&#34;</span>, <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">Number</span>, <span style="color:#a6e22e">invoice</span>.<span style="color:#a6e22e">Amount</span>)
+                }
+            }(string(<span style="color:#a6e22e">data</span>))
+        }
+        <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Close</span>()
+        <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
     }
-    d.Close()
-    time.Sleep(100 * time.Millisecond)
-}
 }
 
-type Invoice struct {
-Number string
-Amount float64
-PurchaseOrderNumber int
-InvoiceDate time.Time
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Invoice</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">Number</span> <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">float64</span>
+    <span style="color:#a6e22e">PurchaseOrderNumber</span> <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">InvoiceDate</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
 }
-</code></pre></li>
-</ul>
-
-<h4 id="using-gomaxprocs">Using GOMAXPROCS</h4>
-
+</code></pre></div><h4 id="using-gomaxprocs">Using GOMAXPROCS</h4>
 <ul>
-<li><p>When GOMAXPROCS is greater than 1, they run on a thread pool with that many threads.With the gccgo compiler GOMAXPROCS is effectively equal to the number of running goroutines.</p></li>
-
-<li><p>Observations from experiments: on a 1 CPU laptop performance improved when GOMAXPROCS was increased to 9. On a 32 core machine, the best performance was reached with GOMAXPROCS=8, a higher number didn’t increase performance in that benchmark.</p></li>
+<li>
+<p>When GOMAXPROCS is greater than 1, they run on a thread pool with that many threads.With the gccgo compiler GOMAXPROCS is effectively equal to the number of running goroutines.</p>
+</li>
+<li>
+<p>Observations from experiments: on a 1 CPU laptop performance improved when GOMAXPROCS was increased to 9. On a 32 core machine, the best performance was reached with GOMAXPROCS=8, a higher number didn’t increase performance in that benchmark.</p>
+</li>
 </ul>
-
 <h3 id="channels">Channels</h3>
-
 <h4 id="channels-for-communication-between-goroutines">Channels for communication between goroutines</h4>
-
 <ul>
-<li><p>Go has a special type, the channel, which is a like a conduit (pipe) through which you can send typed values and which takes care of communication between goroutines, avoiding all the pitfalls of shared memory; the very act of communication through a channel guarantees synchronization.</p></li>
-
-<li><p>Data are passed around on channels: only one goroutine has access to a data item at any given time: so data races cannot occur, by design. The ownership of the data (that is the ability to read and write it) is passed around.</p></li>
-
-<li><p>A channel is in fact a typed message queue: data can be transmitted through it. It is a First In First Out (FIFO) structure and so they preserve the order of the items that are sent into them (for those who are familiar with it, a channel can be compared to a two-way pipe in Unix shells).</p></li>
-
-<li><p>A channel is also a reference type, so we have to use the make() function to allocate memory for it.</p></li>
+<li>
+<p>Go has a special type, the channel, which is a like a conduit (pipe) through which you can send typed values and which takes care of communication between goroutines, avoiding all the pitfalls of shared memory; the very act of communication through a channel guarantees synchronization.</p>
+</li>
+<li>
+<p>Data are passed around on channels: only one goroutine has access to a data item at any given time: so data races cannot occur, by design. The ownership of the data (that is the ability to read and write it) is passed around.</p>
+</li>
+<li>
+<p>A channel is in fact a typed message queue: data can be transmitted through it. It is a First In First Out (FIFO) structure and so they preserve the order of the items that are sent into them (for those who are familiar with it, a channel can be compared to a two-way pipe in Unix shells).</p>
+</li>
+<li>
+<p>A channel is also a reference type, so we have to use the make() function to allocate memory for it.</p>
+</li>
 </ul>
-
 <p><strong>NOTE: Don’t use print statements to indicate the order of sending to and receiving from a channel: this could be out of order with what actually happens due to the time lag between the print statement and the actual channel sending and receiving.</strong></p>
-
 <h4 id="blocking-of-channels">Blocking of channels</h4>
-
 <ul>
-<li><p>A send operation on a channel (and the goroutine or function that contains it) blocks until a receiver is available for the same channel</p></li>
-
-<li><p>A receive operation for a channel blocks (and the goroutine or function that contains it) until a sender is available for the same channel</p></li>
+<li>
+<p>A send operation on a channel (and the goroutine or function that contains it) blocks until a receiver is available for the same channel</p>
+</li>
+<li>
+<p>A receive operation for a channel blocks (and the goroutine or function that contains it) until a sender is available for the same channel</p>
+</li>
 </ul>
-
 <h5 id="goroutine-sync-through-one-or-more-channels">Goroutine sync through one or more channels</h5>
-
 <ul>
-<li><p>Blocking - deadlock</p></li>
-
-<li><p>Sample 1 :  deadlock because of lack of sender</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string)
-fmt.Println(&lt;-ch)
+<li>
+<p>Blocking - deadlock</p>
+</li>
+<li>
+<p>Sample 1 :  deadlock because of lack of sender</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
 }
-//fatal error: all goroutines are asleep - deadlock!
-</code></pre></li>
-
-<li><p>Sample 2: deadlock because of lack of receiver</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
+<span style="color:#75715e">//fatal error: all goroutines are asleep - deadlock!
+</span></code></pre></div><ul>
+<li>Sample 2: deadlock because of lack of receiver</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">1</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
     
 }
-</code></pre></li>
-
-<li><p>Sample 3</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) // Hello
-}
-</code></pre></li>
+</code></pre></div><ul>
+<li>Sample 3</li>
 </ul>
-
-<h5 id="async-channels-channel-with-buffer">Async channels - channel with buffer</h5>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">1</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>) <span style="color:#75715e">// Hello
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h5 id="async-channels---channel-with-buffer">Async channels - channel with buffer</h5>
 <ul>
-<li><p>Channel with buffer</p>
-
-<pre><code class="language-go">buf := 100
-ch1 := make(chan string, buf)
-</code></pre></li>
-
-<li><p>Sample 4: deadlock again because the 2nd sender can not send message</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch)
-fmt.Println(&lt;-ch)
-}
-</code></pre></li>
-
-<li><p>Sample 5</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 2)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) //Hello
-fmt.Println(&lt;-ch) // Hello
-}
-</code></pre></li>
+<li>Channel with buffer</li>
 </ul>
-
-<h5 id="closing-channel">Closing channel</h5>
-
-<ul>
-<li><p>Sample 6: Closing channel will not impact the receiver to get the message</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch)
-fmt.Println(&lt;-ch)
-}
-</code></pre></li>
-
-<li><p>Sample 7: Sender cannot send message to closing channel</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 2)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) //Hello
-fmt.Println(&lt;-ch) // Hello
-ch &lt;- &quot;Hello&quot; // panic: send on closed channel
-}
-</code></pre></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">100</span>
+<span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">buf</span>)
+</code></pre></div><ul>
+<li>Sample 4: deadlock again because the 2nd sender can not send message</li>
 </ul>
-
-<h4 id="semaphore-pattern">Semaphore pattern</h4>
-
-<ul>
-<li><p>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</p>
-
-<pre><code class="language-go">func compute(ch chan int) {
-ch &lt;- someComputation()
-// when it completes, signal on the channel.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">1</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
 }
-
-func main() {
-ch := make(chan int) // allocate a channel.
-go compute(ch)       // start something in a goroutine
-doSomethingElseForAWhile()
-result := &lt;-ch
-}
-</code></pre></li>
+</code></pre></div><ul>
+<li>Sample 5</li>
 </ul>
-
-<h5 id="implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</h5>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">2</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>) <span style="color:#75715e">//Hello
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>) <span style="color:#75715e">// Hello
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h5 id="closing-channel">Closing channel</h5>
 <ul>
-<li><p>There is no semaphore implementation in Go’s sync package, but they can be emulated easily using a buffered channel:</p>
+<li>Sample 6: Closing channel will not impact the receiver to get the message</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">1</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
+}
+</code></pre></div><ul>
+<li>Sample 7: Sender cannot send message to closing channel</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">2</span>)
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>) <span style="color:#75715e">//Hello
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>) <span style="color:#75715e">// Hello
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hello&#34;</span> <span style="color:#75715e">// panic: send on closed channel
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h4 id="semaphore-pattern">Semaphore pattern</h4>
+<ul>
+<li>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">compute</span>(<span style="color:#a6e22e">ch</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">someComputation</span>()
+    <span style="color:#75715e">// when it completes, signal on the channel.
+</span><span style="color:#75715e"></span>}
 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) <span style="color:#75715e">// allocate a channel.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">compute</span>(<span style="color:#a6e22e">ch</span>)       <span style="color:#75715e">// start something in a goroutine
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">doSomethingElseForAWhile</span>()
+    <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>
+}
+</code></pre></div><h5 id="implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</h5>
+<ul>
+<li>
+<p>There is no semaphore implementation in Go’s sync package, but they can be emulated easily using a buffered channel:</p>
 <ul>
 <li>the buffered channel is the number of resources we wish to synchronize</li>
 <li>the length (number of elements currently stored) of the channel is the number of resources currently being used.</li>
 <li>the capacity minus the length of the channel is the number of free resources (the integer value of traditional semaphores)</li>
-</ul></li>
-
-<li><p>Sample 8: semaphore pattern</p>
-
-<pre><code class="language-go">type Empty interface {}
-var empty Empty
-//  do sth ...
-data := make([]float64, N)
-res := make([]float64, N)
-sem := make(chan Empty, N) // semaphore
-// do sth  ...
-for i, xi := range data {
-go func (i int, xi float64) {
-    res[i] = doSomething(i,xi)
-    sem &lt;- empty
-} (i, xi)
-}
-// wait for goroutines to finish
-for i := 0; i &lt; N; i++ { &lt;-sem }
-
-</code></pre></li>
-
-<li><p>Semaphore operations sample pattern</p>
-
-<pre><code class="language-go">// acquire n resources
-func (s semaphore) P(n int) {
-e := new(Empty)
-for i := 0; i &lt; n; i++ {
-    s &lt;- e
-}
-}
-// release n resources
-func (s semaphore) V(n int) {
-for i := 0; i &lt; n; i++ {
-    &lt;-s
-}
-}
-</code></pre></li>
-
-<li><p>Semaphore for a mutex:</p>
-
-<pre><code class="language-go">/* mutexes */
-func (s semaphore) Lock() {
-s.P(1)
-}
-func (s semaphore) Unlock() {
-s.V(1)
-}
-/* signal-wait */
-func (s semaphore) Wait(n int) {
-s.P(n)
-}
-func (s semaphore) Signal() {
-s.V(1)
-}
-</code></pre></li>
 </ul>
-
-<h4 id="channel-factory-pattern">Channel Factory pattern</h4>
-
-<ul>
-<li><p>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</p>
-
-<pre><code class="language-go">func main() {
-stream := pump()
-go suck(stream)
-// the above 2 lines can be shortened to: go suck( pump() )
-time.Sleep(1e9)
-}
-func pump() chan int {
-ch := make(chan int)
-go func() {
-    for i := 0; ; i++ {
-        ch &lt;- i
-    }
-}()
-return ch
-}
-func suck(ch chan int) {
-for {
-    fmt.Println(&lt;-ch)
-}
-}
-</code></pre></li>
+</li>
+<li>
+<p>Sample 8: semaphore pattern</p>
+</li>
 </ul>
-
-<h5 id="for-range-applied-to-channels">For—range applied to channels</h5>
-
-<ul>
-<li><p>The range clause on for loops accepts a channel ch as an operand, in which case the for loops over the values received from the channel.</p></li>
-
-<li><p>Obviously another goroutine must be writing to ch (otherwise the execution blocks in the for-loop) and must close ch when it is done writing.</p>
-
-<pre><code class="language-go">
-func main() {
-suck(pump())
-time.Sleep(1e9)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Empty</span> <span style="color:#66d9ef">interface</span> {}
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">empty</span> <span style="color:#a6e22e">Empty</span>
+<span style="color:#75715e">//  do sth ...
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">N</span>)
+<span style="color:#a6e22e">res</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">N</span>)
+<span style="color:#a6e22e">sem</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">Empty</span>, <span style="color:#a6e22e">N</span>) <span style="color:#75715e">// semaphore
+</span><span style="color:#75715e"></span><span style="color:#75715e">// do sth  ...
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">xi</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">xi</span> <span style="color:#66d9ef">float64</span>) {
+        <span style="color:#a6e22e">res</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">doSomething</span>(<span style="color:#a6e22e">i</span>,<span style="color:#a6e22e">xi</span>)
+        <span style="color:#a6e22e">sem</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">empty</span>
+    } (<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">xi</span>)
 }
-func pump() chan int {
-ch := make(chan int)
-go func() {
-    for i := 0; ; i++ {
-        ch &lt;- i
-    }
-}()
-return ch
-}
-func suck(ch chan int) {
-go func() {
-    for v := range ch {
-        fmt.Println(v)
-    }
-}()
-}
-</code></pre></li>
+<span style="color:#75715e">// wait for goroutines to finish
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> { <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">sem</span> }
 
-<li></li>
+</code></pre></div><ul>
+<li>Semaphore operations sample pattern</li>
 </ul>
-
-<h5 id="iterator-pattern">Iterator pattern</h5>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// acquire n resources
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">P</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">Empty</span>)
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">s</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">e</span>
+    }
+}
+<span style="color:#75715e">// release n resources
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">V</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">s</span>
+    }
+}
+</code></pre></div><ul>
+<li>Semaphore for a mutex:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">/* mutexes */</span>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">Lock</span>() {
+    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">P</span>(<span style="color:#ae81ff">1</span>)
+}
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">Unlock</span>() {
+    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">V</span>(<span style="color:#ae81ff">1</span>)
+}
+<span style="color:#75715e">/* signal-wait */</span>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">Wait</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">P</span>(<span style="color:#a6e22e">n</span>)
+}
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">semaphore</span>) <span style="color:#a6e22e">Signal</span>() {
+    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">V</span>(<span style="color:#ae81ff">1</span>)
+}
+</code></pre></div><h4 id="channel-factory-pattern">Channel Factory pattern</h4>
 <ul>
-<li><p>Another common case where we have to populate a channel with the items of a container type which contains an index-addressable field items . For this we can define a method which returns a read-only channel.</p></li>
-
-<li><p>Inside the goroutine, a for-loop iterates over the elements in the container c (for tree or graph algorithms, this simple for-loop could be replaced with a depth-first search)</p>
-
-<pre><code class="language-go">func (c *container) Iter() &lt;-chan items {
-    ch := make(chan item)
-    go func() {
-        for i := 0; i &lt; c.Len(); i++ {
-            // or use a for-range loop
-            ch &lt;- c.items[i]
+<li>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">stream</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pump</span>()
+    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">stream</span>)
+    <span style="color:#75715e">// the above 2 lines can be shortened to: go suck( pump() )
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1e9</span>)
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pump</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
         }
     }()
-    return ch
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
 }
-
-// The code which calls this method can then iterate over the container
-for x := range container.Iter() { ... }
-
-</code></pre></li>
-</ul>
-
-<h4 id="producer-consumer-pattern">Producer Consumer pattern</h4>
-
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">ch</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>)
+    }
+}
+</code></pre></div><h5 id="forrange-applied-to-channels">For—range applied to channels</h5>
 <ul>
-<li><p>A Produce() function which delivers the values needed by a Consume function. Both could be run as a separate goroutine, Produce putting the values on a channel which is read by Consume.</p>
+<li>
+<p>The range clause on for loops accepts a channel ch as an operand, in which case the for loops over the values received from the channel.</p>
+</li>
+<li>
+<p>Obviously another goroutine must be writing to ch (otherwise the execution blocks in the for-loop) and must close ch when it is done writing.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">pump</span>())
+    <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1e9</span>)
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pump</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; ; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+        }
+    }()
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">suck</span>(<span style="color:#a6e22e">ch</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span> {
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>)
+        }
+    }()
+}
+</code></pre></div><ul>
+<li></li>
+</ul>
+<h5 id="iterator-pattern">Iterator pattern</h5>
+<ul>
+<li>
+<p>Another common case where we have to populate a channel with the items of a container type which contains an index-addressable field items . For this we can define a method which returns a read-only channel.</p>
+</li>
+<li>
+<p>Inside the goroutine, a for-loop iterates over the elements in the container c (for tree or graph algorithms, this simple for-loop could be replaced with a depth-first search)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">container</span>) <span style="color:#a6e22e">Iter</span>() <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">items</span> {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">item</span>)
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Len</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+            <span style="color:#75715e">// or use a for-range loop
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">items</span>[<span style="color:#a6e22e">i</span>]
+        }
+    }()
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+}
 
-<pre><code class="language-go">package main
-/* producer-consumer problem in Go */
+<span style="color:#75715e">// The code which calls this method can then iterate over the container
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">container</span>.<span style="color:#a6e22e">Iter</span>() { <span style="color:#f92672">...</span> }
 
-import (&quot;fmt&quot;)
+</code></pre></div></li>
+</ul>
+<h4 id="producer-consumer-pattern">Producer Consumer pattern</h4>
+<ul>
+<li>
+<p>A Produce() function which delivers the values needed by a Consume function. Both could be run as a separate goroutine, Produce putting the values on a channel which is read by Consume.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<span style="color:#75715e">/* producer-consumer problem in Go */</span>
 
-var done = make(chan bool)
-var msgs = make(chan int)
+<span style="color:#f92672">import</span> (<span style="color:#e6db74">&#34;fmt&#34;</span>)
 
-func produce () {
-    for i := 0; i &lt; 10; i++ {
-        msgs &lt;- i
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">done</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">msgs</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">produce</span> () {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">msgs</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
     }
-    done &lt;- true
+    <span style="color:#a6e22e">done</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">true</span>
 }
 
-func consume () {
-    for {
-        msg := &lt;-msgs
-        fmt.Println(msg)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">consume</span> () {
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">msgs</span>
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">msg</span>)
     }
 }
 
-func main () {
-    go produce()
-    go consume()
-    &lt;- done
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span> () {
+    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">produce</span>()
+    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">consume</span>()
+    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">done</span>
 }
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#goroutine">Goroutine</a>
-<ul>
-<li><a href="#basic-goroutine">Basic Goroutine</a></li>
-<li><a href="#using-gomaxprocs">Using GOMAXPROCS</a></li>
-</ul></li>
-<li><a href="#channels">Channels</a>
-<ul>
-<li><a href="#channels-for-communication-between-goroutines">Channels for communication between goroutines</a></li>
-<li><a href="#blocking-of-channels">Blocking of channels</a>
-<ul>
-<li><a href="#goroutine-sync-through-one-or-more-channels">Goroutine sync through one or more channels</a></li>
-<li><a href="#async-channels-channel-with-buffer">Async channels - channel with buffer</a></li>
-<li><a href="#closing-channel">Closing channel</a></li>
-</ul></li>
-<li><a href="#semaphore-pattern">Semaphore pattern</a>
-<ul>
-<li><a href="#implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</a></li>
-</ul></li>
-<li><a href="#channel-factory-pattern">Channel Factory pattern</a>
-<ul>
-<li><a href="#for-range-applied-to-channels">For—range applied to channels</a></li>
-<li><a href="#iterator-pattern">Iterator pattern</a></li>
-</ul></li>
-<li><a href="#producer-consumer-pattern">Producer Consumer pattern</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#goroutine">Goroutine</a></li>
+        <li><a href="#channels">Channels</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

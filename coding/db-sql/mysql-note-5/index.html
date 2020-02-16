@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:57 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>MySql Note - 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,9 +421,44 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-2/">
+            JS &amp; ES Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-3/">
+            JS &amp; ES Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-99/">
+            JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/python/" class="dd-item haschildren
@@ -877,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -920,7 +984,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -941,6 +1005,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -958,32 +1024,29 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>MySql Note - 5</h1>
-        
-
-<h2 id="json-support">Json support</h2>
-
+        <h2 id="json-support">Json support</h2>
 <p>As of MySQL 5.7.8, MySQL supports a native JSON data type defined by RFC 7159 that enables efficient access to data in JSON (JavaScript Object Notation) documents. The JSON data type provides these advantages over storing JSON-format strings in a string column:</p>
-
 <ul>
-<li><p>Automatic validation of JSON documents stored in JSON columns. Invalid documents produce an error.</p></li>
-
-<li><p>Optimized storage format. JSON documents stored in JSON columns are converted to an internal format that permits quick read access to document elements. When the server later must read a JSON value stored in this binary format, the value need not be parsed from a text representation. The binary format is structured to enable the server to look up subobjects or nested values directly by key or array index without reading all values before or after them in the document.</p></li>
+<li>
+<p>Automatic validation of JSON documents stored in JSON columns. Invalid documents produce an error.</p>
+</li>
+<li>
+<p>Optimized storage format. JSON documents stored in JSON columns are converted to an internal format that permits quick read access to document elements. When the server later must read a JSON value stored in this binary format, the value need not be parsed from a text representation. The binary format is structured to enable the server to look up subobjects or nested values directly by key or array index without reading all values before or after them in the document.</p>
+</li>
 </ul>
-
 <h3 id="caveats">Caveats</h3>
-
 <ul>
-<li><p>The size of any JSON document stored in a JSON column is limited to the value of the max_allowed_packet system variable.</p></li>
-
-<li><p>A JSON column cannot have a non-NULL default value.</p></li>
+<li>
+<p>The size of any JSON document stored in a JSON column is limited to the value of the max_allowed_packet system variable.</p>
+</li>
+<li>
+<p>A JSON column cannot have a non-NULL default value.</p>
+</li>
 </ul>
-
 <h3 id="json-functions">Json functions</h3>
-
 <blockquote>
 <p>Along with the JSON data type, a set of SQL functions is available to enable operations on JSON values, such as creation, manipulation, and searching.</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -991,242 +1054,206 @@
 <th align="left">Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">-&gt;</td>
 <td align="left">Return value from JSON column after evaluating path; equivalent to JSON_EXTRACT().</td>
 </tr>
-
 <tr>
-<td align="left">-&gt;&gt;</td>
+<td align="left">-&raquo;</td>
 <td align="left">Return value from JSON column after evaluating path and unquoting the result; equivalent to JSON_UNQUOTE(JSON_EXTRACT()).</td>
 </tr>
-
 <tr>
 <td align="left">JSON_APPEND()</td>
 <td align="left">(deprecated 5.7.9)  Append data to JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_ARRAY()</td>
 <td align="left">Create JSON array</td>
 </tr>
-
 <tr>
 <td align="left">JSON_ARRAY_APPEND()</td>
 <td align="left">Append data to JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_ARRAY_INSERT()</td>
 <td align="left">Insert into JSON array</td>
 </tr>
-
 <tr>
 <td align="left">JSON_CONTAINS()</td>
 <td align="left">Whether JSON document contains specific object at path</td>
 </tr>
-
 <tr>
 <td align="left">JSON_CONTAINS_PATH()</td>
 <td align="left">Whether JSON document contains any data at path</td>
 </tr>
-
 <tr>
 <td align="left">JSON_DEPTH()</td>
 <td align="left">Maximum depth of JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_EXTRACT()</td>
 <td align="left">Return data from JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_INSERT()</td>
 <td align="left">Insert data into JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_KEYS()</td>
 <td align="left">Array of keys from JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_LENGTH()</td>
 <td align="left">Number of elements in JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_MERGE()</td>
 <td align="left">(deprecated 5.7.22)  Merge JSON documents, preserving duplicate keys. Deprecated synonym for JSON_MERGE_PRESERVE()</td>
 </tr>
-
 <tr>
 <td align="left">JSON_MERGE_PATCH()</td>
 <td align="left">Merge JSON documents, replacing values of duplicate keys</td>
 </tr>
-
 <tr>
 <td align="left">JSON_MERGE_PRESERVE()</td>
 <td align="left">Merge JSON documents, preserving duplicate keys</td>
 </tr>
-
 <tr>
 <td align="left">JSON_OBJECT()</td>
 <td align="left">Create JSON object</td>
 </tr>
-
 <tr>
 <td align="left">JSON_PRETTY()</td>
 <td align="left">Print a JSON document in human-readable format</td>
 </tr>
-
 <tr>
 <td align="left">JSON_QUOTE()</td>
 <td align="left">Quote JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_REMOVE()</td>
 <td align="left">Remove data from JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_REPLACE()</td>
 <td align="left">Replace values in JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_SEARCH()</td>
 <td align="left">Path to value within JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_SET()</td>
 <td align="left">Insert data into JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_STORAGE_SIZE()</td>
 <td align="left">Space used for storage of binary representation of a JSON document</td>
 </tr>
-
 <tr>
 <td align="left">JSON_TYPE()</td>
 <td align="left">Type of JSON value</td>
 </tr>
-
 <tr>
 <td align="left">JSON_UNQUOTE()</td>
 <td align="left">Unquote JSON value</td>
 </tr>
-
 <tr>
 <td align="left">JSON_VALID()</td>
 <td align="left">Whether JSON value is valid</td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="export-table-to-json-file">Export table to json file</h3>
-
 <ul>
-<li><p>Return json object</p>
-
-<pre><code class="language-sql">
----  Return record as json in query
-
-SELECT 
+<li>Return json object</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#75715e">---  Return record as json in query
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SELECT</span> 
 json_object( 
-'entityId',  entityId,
-'categoryName',  categoryName,
-'description',  description,
-'picture',  picture
-) as json, 'Category' 
-FROM  Category 
-WHERE entityId = 1 ; 
-</code></pre></li>
-
-<li><p>Json object result</p>
-
-<pre><code class="language-json">{
-&quot;picture&quot;: null,
-&quot;entityId&quot;: 1,
-&quot;description&quot;: &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
-&quot;categoryName&quot;: &quot;Beverages&quot;
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">entityId</span><span style="color:#e6db74">&#39;</span>,  entityId,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">categoryName</span><span style="color:#e6db74">&#39;</span>,  categoryName,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">description</span><span style="color:#e6db74">&#39;</span>,  description,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">picture</span><span style="color:#e6db74">&#39;</span>,  picture
+ ) <span style="color:#66d9ef">as</span> json, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Category</span><span style="color:#e6db74">&#39;</span> 
+  <span style="color:#66d9ef">FROM</span>  Category 
+  <span style="color:#66d9ef">WHERE</span> entityId <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> ; 
+</code></pre></div><ul>
+<li>Json object result</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;picture&#34;</span>: <span style="color:#66d9ef">null</span>,
+  <span style="color:#f92672">&#34;entityId&#34;</span>: <span style="color:#ae81ff">1</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Soft drinks, coffees, teas, beers, and ales&#34;</span>,
+  <span style="color:#f92672">&#34;categoryName&#34;</span>: <span style="color:#e6db74">&#34;Beverages&#34;</span>
 }
 
-</code></pre></li>
+</code></pre></div><ul>
+<li>Return record as json array</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#75715e">-- Use json_array and json_object functions 
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TEMPORARY</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> tmp_json_data;
 
-<li><p>Return record as json array</p>
-
-<pre><code class="language-sql">
--- Use json_array and json_object functions 
-
-DROP TEMPORARY TABLE IF EXISTS tmp_json_data;
-
-CREATE TEMPORARY TABLE tmp_json_data (
-jsonText TEXT
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TEMPORARY</span> <span style="color:#66d9ef">TABLE</span> tmp_json_data (
+  jsonText TEXT
 ) 
-SELECT 
+<span style="color:#66d9ef">SELECT</span> 
 json_object( 
-'entityId',  entityId,
-'categoryName',  categoryName,
-'description',  description,
-'picture',  picture
-) as json 
-INTO jsonText
-FROM  Category ; 
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">entityId</span><span style="color:#e6db74">&#39;</span>,  entityId,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">categoryName</span><span style="color:#e6db74">&#39;</span>,  categoryName,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">description</span><span style="color:#e6db74">&#39;</span>,  description,
+   <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">picture</span><span style="color:#e6db74">&#39;</span>,  picture
+ ) <span style="color:#66d9ef">as</span> json 
+  <span style="color:#66d9ef">INTO</span> jsonText
+<span style="color:#66d9ef">FROM</span>  Category ; 
   
-SET SESSION  group_concat_max_len = 9999;
+<span style="color:#66d9ef">SET</span> <span style="color:#66d9ef">SESSION</span>  group_concat_max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">9999</span>;
 
-SELECT concat('[', group_concat(jsonText),']') jsonArray
-FROM tmp_json_data;
-</code></pre></li>
-
-<li><p>Json array result</p>
-
-<pre><code class="language-json">[
-{
-  &quot;categoryName&quot; : &quot;Beverages&quot;,
-  &quot;description&quot; : &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
-  &quot;entityId&quot; : 1,
-  &quot;picture&quot; : null
-},
-{
-  &quot;categoryName&quot; : &quot;Condiments&quot;,
-  &quot;description&quot; : &quot;Sweet and savory sauces, relishes, spreads, and seasonings&quot;,
-  &quot;entityId&quot; : 2,
-  &quot;picture&quot; : null
-},
-{
-  &quot;categoryName&quot; : &quot;Confections&quot;,
-  &quot;description&quot; : &quot;Desserts, candies, and sweet breads&quot;,
-  &quot;entityId&quot; : 3,
-  &quot;picture&quot; : null
-}
+<span style="color:#66d9ef">SELECT</span> concat(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">[</span><span style="color:#e6db74">&#39;</span>, group_concat(jsonText),<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">]</span><span style="color:#e6db74">&#39;</span>) jsonArray
+<span style="color:#66d9ef">FROM</span> tmp_json_data;
+</code></pre></div><ul>
+<li>Json array result</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+    {
+      <span style="color:#f92672">&#34;categoryName&#34;</span> : <span style="color:#e6db74">&#34;Beverages&#34;</span>,
+      <span style="color:#f92672">&#34;description&#34;</span> : <span style="color:#e6db74">&#34;Soft drinks, coffees, teas, beers, and ales&#34;</span>,
+      <span style="color:#f92672">&#34;entityId&#34;</span> : <span style="color:#ae81ff">1</span>,
+      <span style="color:#f92672">&#34;picture&#34;</span> : <span style="color:#66d9ef">null</span>
+    },
+    {
+      <span style="color:#f92672">&#34;categoryName&#34;</span> : <span style="color:#e6db74">&#34;Condiments&#34;</span>,
+      <span style="color:#f92672">&#34;description&#34;</span> : <span style="color:#e6db74">&#34;Sweet and savory sauces, relishes, spreads, and seasonings&#34;</span>,
+      <span style="color:#f92672">&#34;entityId&#34;</span> : <span style="color:#ae81ff">2</span>,
+      <span style="color:#f92672">&#34;picture&#34;</span> : <span style="color:#66d9ef">null</span>
+    },
+    {
+      <span style="color:#f92672">&#34;categoryName&#34;</span> : <span style="color:#e6db74">&#34;Confections&#34;</span>,
+      <span style="color:#f92672">&#34;description&#34;</span> : <span style="color:#e6db74">&#34;Desserts, candies, and sweet breads&#34;</span>,
+      <span style="color:#f92672">&#34;entityId&#34;</span> : <span style="color:#ae81ff">3</span>,
+      <span style="color:#f92672">&#34;picture&#34;</span> : <span style="color:#66d9ef">null</span>
+    }
 ]
 
-</code></pre></li>
-</ul>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#json-support">Json support</a>
-<ul>
-<li><a href="#caveats">Caveats</a></li>
-<li><a href="#json-functions">Json functions</a></li>
-<li><a href="#export-table-to-json-file">Export table to json file</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#json-support">Json support</a>
+      <ul>
+        <li><a href="#caveats">Caveats</a></li>
+        <li><a href="#json-functions">Json functions</a></li>
+        <li><a href="#export-table-to-json-file">Export table to json file</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

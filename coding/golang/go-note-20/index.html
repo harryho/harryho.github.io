@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Good practice - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -955,7 +991,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -976,6 +1012,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -993,228 +1031,150 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Good practice - 1</h1>
-        
-
-<h3 id="strings">Strings</h3>
-
+        <h3 id="strings">Strings</h3>
 <h4 id="change-a-character">Change a character</h4>
-
 <ul>
-<li><p>How to change a character in a string</p>
-
-<pre><code class="language-go">str:=&quot;hello&quot;
-c:=[]byte(s)
-c[0]=’c’
-s2:= string(c) // s2 == &quot;cello&quot;
-</code></pre></li>
+<li>
+<p>How to change a character in a string</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">str</span><span style="color:#f92672">:=</span><span style="color:#e6db74">&#34;hello&#34;</span>
+<span style="color:#a6e22e">c</span><span style="color:#f92672">:=</span>[]byte(<span style="color:#a6e22e">s</span>)
+<span style="color:#a6e22e">c</span>[<span style="color:#ae81ff">0</span>]=<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">’</span>
+<span style="color:#a6e22e">s2</span><span style="color:#f92672">:=</span> string(<span style="color:#a6e22e">c</span>) <span style="color:#75715e">// s2 == &#34;cello&#34;
+</span></code></pre></div></li>
 </ul>
-
 <h4 id="substring">Substring</h4>
-
 <ul>
-<li><p>How to take a part(substring) of a string str</p>
-
-<pre><code class="language-go">substr := str[n:m]
-</code></pre></li>
+<li>How to take a part(substring) of a string str</li>
 </ul>
-
-<h4 id="for-loop">for-loop</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">substr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">str</span>[<span style="color:#a6e22e">n</span>:<span style="color:#a6e22e">m</span>]
+</code></pre></div><h4 id="for-loop">for-loop</h4>
 <ul>
-<li><p>How to loop over a string str with for or for-range:</p>
-
-<pre><code class="language-go">// gives only the bytes:
-for i:=0; i &lt; len(str); i++ {
- … = str[i]
+<li>How to loop over a string str with for or for-range:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// gives only the bytes:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">str</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+     <span style="color:#960050;background-color:#1e0010">…</span> = <span style="color:#a6e22e">str</span>[<span style="color:#a6e22e">i</span>]
 }
-// gives the Unicode characters:
-for ix, ch := range str {
-// …
-} 
-</code></pre></li>
-</ul>
-
-<h4 id="bytes-of-str">bytes of str</h4>
-
+<span style="color:#75715e">// gives the Unicode characters:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span>, <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">str</span> {
+    <span style="color:#75715e">// …
+</span><span style="color:#75715e"></span>} 
+</code></pre></div><h4 id="bytes-of-str">bytes of str</h4>
 <ul>
-<li><p>Number of bytes in a string str</p>
-
-<pre><code class="language-go">len(str)
-</code></pre></li>
-
-<li><p>Number of characters in a string str</p>
-
-<pre><code class="language-go">utf8.RuneCountInString(str) // FATEST 
-len([]int(str))
-</code></pre></li>
+<li>
+<p>Number of bytes in a string str</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">len(<span style="color:#a6e22e">str</span>)
+</code></pre></div></li>
+<li>
+<p>Number of characters in a string str</p>
+</li>
 </ul>
-
-<h4 id="concat-strings">Concat strings</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">utf8</span>.<span style="color:#a6e22e">RuneCountInString</span>(<span style="color:#a6e22e">str</span>) <span style="color:#75715e">// FATEST 
+</span><span style="color:#75715e"></span>len([]int(<span style="color:#a6e22e">str</span>))
+</code></pre></div><h4 id="concat-strings">Concat strings</h4>
 <ul>
-<li><p>Best performance with byte buffer</p>
-
-<pre><code class="language-go">var buffer bytes.Buffer
-for {
-    if s, ok := getNextString(); ok { //method getNextString() not shown here
-        buffer.WriteString(s)
-    } else {
-        break
+<li>
+<p>Best performance with byte buffer</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buffer</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+<span style="color:#66d9ef">for</span> {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getNextString</span>(); <span style="color:#a6e22e">ok</span> { <span style="color:#75715e">//method getNextString() not shown here
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">buffer</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">s</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">break</span>
     }
 }
-</code></pre></li>
-
-<li><p>Simple way</p>
-
-<pre><code class="language-go">strings.Join()
-</code></pre></li>
+</code></pre></div></li>
+<li>
+<p>Simple way</p>
+</li>
 </ul>
-
-<h4 id="command-line-args">Command-line args</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>()
+</code></pre></div><h4 id="command-line-args">Command-line args</h4>
 <ul>
 <li>Use flag and os package</li>
 </ul>
-
 <h3 id="array">Array</h3>
-
 <h4 id="cut-the-last-element">Cut the last element</h4>
-
 <ul>
-<li><p>How to cut the last element of an array or slice line</p>
-
-<pre><code class="language-go">line = line[:len(line)-1]
-</code></pre></li>
+<li>How to cut the last element of an array or slice line</li>
 </ul>
-
-<h4 id="loop-over-the-array">Loop over the array</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">line</span> = <span style="color:#a6e22e">line</span>[:len(<span style="color:#a6e22e">line</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</code></pre></div><h4 id="loop-over-the-array">Loop over the array</h4>
 <ul>
-<li><p>for-loop</p>
-
-<pre><code class="language-go">for i:=0; i &lt; len(arr); i++ {
-… = arr[i]
-}
-</code></pre></li>
-
-<li><p>for range</p>
-
-<pre><code class="language-go">for ix, value := range arr {
-…
-}
-</code></pre></li>
+<li>for-loop</li>
 </ul>
-
-<h4 id="search-value-in-2d-array">Search value in 2D array</h4>
-
-<pre><code class="language-go">found := false
-Found: for row := range arr2Dim {
-    for column := range arr2Dim[row] {
-        if arr2Dim[row][column] == V {
-            found = true
-            break Found
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">arr</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+    <span style="color:#960050;background-color:#1e0010">…</span> = <span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">i</span>]
+}
+</code></pre></div><ul>
+<li>for range</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ix</span>, <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">arr</span> {
+    <span style="color:#960050;background-color:#1e0010">…</span>
+}
+</code></pre></div><h4 id="search-value-in-2d-array">Search value in 2D array</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">found</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+<span style="color:#a6e22e">Found</span>: <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">row</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">arr2Dim</span> {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">column</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">arr2Dim</span>[<span style="color:#a6e22e">row</span>] {
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">arr2Dim</span>[<span style="color:#a6e22e">row</span>][<span style="color:#a6e22e">column</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">V</span> {
+            <span style="color:#a6e22e">found</span> = <span style="color:#66d9ef">true</span>
+            <span style="color:#66d9ef">break</span> <span style="color:#a6e22e">Found</span>
         }
     }
 }
-</code></pre>
-
-<h4 id="reverse">Reverse</h4>
-
-<pre><code class="language-go">func ReverseInts(s []int) {
-    first := 0
-    last := len(s) - 1
-    for first &lt; last {
-        s[first], s[last] = s[last], s[first]
-        first++
-        last--
+</code></pre></div><h4 id="reverse">Reverse</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ReverseInts</span>(<span style="color:#a6e22e">s</span> []<span style="color:#66d9ef">int</span>) {
+    <span style="color:#a6e22e">first</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#a6e22e">last</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">s</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">first</span> &lt; <span style="color:#a6e22e">last</span> {
+        <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">first</span>], <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">last</span>] = <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">last</span>], <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">first</span>]
+        <span style="color:#a6e22e">first</span><span style="color:#f92672">++</span>
+        <span style="color:#a6e22e">last</span><span style="color:#f92672">--</span>
     }
 }
-</code></pre>
-
-<h3 id="maps">Maps</h3>
-
+</code></pre></div><h3 id="maps">Maps</h3>
 <h4 id="loop-with-range">loop with range</h4>
-
-<pre><code class="language-go">for key, value := range map1 {
-… 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">map1</span> {
+<span style="color:#960050;background-color:#1e0010">…</span> 
 }
-</code></pre>
-
-<h4 id="test-if-key-exists">Test if key exists</h4>
-
-<pre><code class="language-go">val1, isPresent = map1[key1]
-// which gives: val or zero-value, true or false
-</code></pre>
-
-<h4 id="deleting-a-key-in-a-map">Deleting a key in a map</h4>
-
-<pre><code class="language-go">delete(map1, key1)
-</code></pre>
-
-<h3 id="interface">Interface</h3>
-
+</code></pre></div><h4 id="test-if-key-exists">Test if key exists</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">val1</span>, <span style="color:#a6e22e">isPresent</span> = <span style="color:#a6e22e">map1</span>[<span style="color:#a6e22e">key1</span>]
+<span style="color:#75715e">// which gives: val or zero-value, true or false
+</span></code></pre></div><h4 id="deleting-a-key-in-a-map">Deleting a key in a map</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">delete(<span style="color:#a6e22e">map1</span>, <span style="color:#a6e22e">key1</span>)
+</code></pre></div><h3 id="interface">Interface</h3>
 <h4 id="test-if-a-value-implements-stringer">Test if a value implements Stringer</h4>
-
-<pre><code class="language-go">if v, ok := v.(Stringer); ok {
-    fmt.Printf(&quot;implements String(): %s\n&quot;, v.String());
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v</span>.(<span style="color:#a6e22e">Stringer</span>); <span style="color:#a6e22e">ok</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;implements String(): %s\n&#34;</span>, <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">String</span>());
 }
-</code></pre>
-
-<h4 id="a-type-classifier">A type classifier:</h4>
-
-<pre><code class="language-go">func classifier(items ...interface{}) {
-    for i, x := range items {
-        switch x.(type) {
-            case bool: fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
-            case float64: fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
-            case int, int64: fmt.Printf(&quot;param #%d is an int\n&quot;, i)
-            case nil: fmt.Printf(&quot;param #%d is nil\n&quot;, i)
-            case string: fmt.Printf(&quot;param #%d is a string\n&quot;, i)
-            default: fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+</code></pre></div><h4 id="a-type-classifier">A type classifier:</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">classifier</span>(<span style="color:#a6e22e">items</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">items</span> {
+        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">x</span>.(<span style="color:#66d9ef">type</span>) {
+            <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">bool</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a bool\n&#34;</span>, <span style="color:#a6e22e">i</span>)
+            <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">float64</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a float64\n&#34;</span>, <span style="color:#a6e22e">i</span>)
+            <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int64</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is an int\n&#34;</span>, <span style="color:#a6e22e">i</span>)
+            <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">nil</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is nil\n&#34;</span>, <span style="color:#a6e22e">i</span>)
+            <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">string</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d is a string\n&#34;</span>, <span style="color:#a6e22e">i</span>)
+            <span style="color:#66d9ef">default</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;param #%d’s type is unknown\n&#34;</span>, <span style="color:#a6e22e">i</span>)
         }
     }
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#strings">Strings</a>
-<ul>
-<li><a href="#change-a-character">Change a character</a></li>
-<li><a href="#substring">Substring</a></li>
-<li><a href="#for-loop">for-loop</a></li>
-<li><a href="#bytes-of-str">bytes of str</a></li>
-<li><a href="#concat-strings">Concat strings</a></li>
-<li><a href="#command-line-args">Command-line args</a></li>
-</ul></li>
-<li><a href="#array">Array</a>
-<ul>
-<li><a href="#cut-the-last-element">Cut the last element</a></li>
-<li><a href="#loop-over-the-array">Loop over the array</a></li>
-<li><a href="#search-value-in-2d-array">Search value in 2D array</a></li>
-<li><a href="#reverse">Reverse</a></li>
-</ul></li>
-<li><a href="#maps">Maps</a>
-<ul>
-<li><a href="#loop-with-range">loop with range</a></li>
-<li><a href="#test-if-key-exists">Test if key exists</a></li>
-<li><a href="#deleting-a-key-in-a-map">Deleting a key in a map</a></li>
-</ul></li>
-<li><a href="#interface">Interface</a>
-<ul>
-<li><a href="#test-if-a-value-implements-stringer">Test if a value implements Stringer</a></li>
-<li><a href="#a-type-classifier">A type classifier:</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#strings">Strings</a></li>
+        <li><a href="#array">Array</a></li>
+        <li><a href="#maps">Maps</a></li>
+        <li><a href="#interface">Interface</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

@@ -1,0 +1,246 @@
+	<head><meta charset="utf-8"></head>
+
+	<link rel="stylesheet" href="/revealjs/css/reveal.css">
+	<link rel="stylesheet" href="/revealjs/css/theme/league.css" id="theme">
+	<link rel="stylesheet" href="/revealjs/lib/css/zenburn.css">
+
+	<div class="reveal">
+	<div class="slides">
+	<section data-markdown
+	         data-separator="^---"
+		 data-separator-vertical="^___"
+		 data-separator-notes="^Note:">
+	
+
+## Docker Introduction
+ 
+---
+
+### Install docker
+
+* [Docker official website](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+
+* [Docker overview](https://docs.docker.com/get-started/)
+
+
+---
+
+#### Common docker commands
+
+
+```bash
+docker ps
+docker images 
+docker container 
+docker system
+docker history / inspect
+```
+
+---
+
+### Access image busybox via terminal
+
+```bash
+docker run -it --rm busybox 
+```
+
+### Run static web site 
+```
+docker run  -p 8008:80 -v \
+ $(pwd)/public:/usr/share/nginx/html nginx:alpine
+
+```
+---
+
+### Run your app in the container
+
+```bash
+docker run -p 8000:80 -d  -v \
+     $HOME/ws/gh/vue2crm/dist:/usr/share/nginx/html \
+       nginx:alpine
+```
+
+* Other docker commands
+
+```
+docker attach
+docker logs
+```
+
+---
+
+### Build and run a SPA in container
+
+- Use node:alpine as build &amp; run tool
+
+```bash
+docker build -t node-app -f node.Dockerfile .
+docker run -p 8001:80 -d node-app
+```
+---
+
+### Dockerfile introduction
+
+```docker
+FROM &lt;image_name&gt;:&lt;tag_name&gt;
+RUN  &lt;commands_to_install_packages&gt; 
+WORKDIR &lt;working_direcotry_of_deployment&gt;
+COPY &lt;source_dir&gt; &lt;target_dir&gt;
+CMD &lt;commands_to_launch_the_app&gt;
+```
+
+
+### Docker compose
+
+* [What is docker compose for?](https://docs.docker.com/compose/reference/overview/)
+
+```
+docker-compose up -d
+```
+
+---
+
+#### Multistage docker build
+
+- node:alpine as build tool
+- ngnix:alpine as run tool
+
+```docker
+FROM node:alpine as builder
+...
+
+FROM nginx:alpine as runner
+...
+```
+
+```bash
+## build with node:alpine
+docker build . -t nginx-vue -f alpine.dockerfile
+docker run -p 8080:80 -d nginx-vue
+```
+
+- Compare node-app with nginx-vue
+
+---
+
+### Build react app
+
+
+```bash
+docker build . -t nginx-react -f alpine.dockerfile
+docker run -p4000:80 -d nginx-react
+
+```
+
+---
+
+
+### Docker images management
+
+```bash
+# Get docker system information 
+docker system df
+
+# Get dangling images
+docker images -f &#34;dangling=true&#34;
+
+# Remove all dangling images
+# option 1
+docker rmi $(docker images -f \
+ &#34;dangling=true&#34; -q --no-trunc ) --force
+
+# option 2
+docker image prune 
+
+```
+
+---
+
+### Docker registry (local)
+
+
+
+```bash
+# Pull registry image
+docker pull \
+  registry-1.docker.io/distribution/registry:2.1
+```
+
+
+
+```bash
+# Create registry container
+docker run -d -p 5000:5000 \
+--name registry \
+registry-1.docker.io/distribution/registry:2.1
+```
+
+
+
+```bash
+# Tag and push a new image
+docker tag nginx:alpine \
+localhost:5000/my-nginx:alpine \
+ docker push localhost:5000/my-nginx:alpine
+```
+
+
+
+```bash
+# Pull the image
+docker image rm localhost:5000/my-nginx:alpine
+docker pull localhost:5000/my-nginx:alpine
+```
+
+---
+
+### Docker registry (remote)
+
+#### Public docker hub repo for test
+
+https://cloud.docker.com/u/us2hho
+
+
+
+```bash
+
+# Login -- I share the credential via lastpass 
+docker login 
+
+# Tag and push a new image
+docker tag vue2crm:latest us2hho/vue2crm:1.1
+sudo docker push us2hho/vue2crm:1.1
+```
+	</section>
+	</div>
+	</div>
+	<script src="/revealjs/lib/js/head.min.js"></script>
+	<script src="/revealjs/js/reveal.js"></script>
+	<script>
+		Reveal.initialize({
+		      	embedded : true,
+
+		        
+		        "center": true ,
+		        
+		        "controls": true ,
+		        
+		        "history": true ,
+		        
+		        "progress": true ,
+		        
+		        "transition":"concave",
+		        
+		        
+		        
+		        dependencies: [
+		          { src: '\/revealjs\/lib\/js\/classList.js"', condition: function() { return !document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/markdown\/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/markdown\/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/highlight\/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		          { src: '\/revealjs\/plugin\/zoom-js\/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/notes\/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/math\/math.js', async: true}
+		        ]
+		      });
+	</script>

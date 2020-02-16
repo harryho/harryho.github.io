@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>DigitialOcean Note - 4 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,100 +994,88 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>DigitialOcean Note - 4</h1>
-        
-
-<blockquote>
+        <blockquote>
 <p>Here I continue to finish the web host setup. The last step of web host setup is to add SSL certificate for each site</p>
 </blockquote>
-
 <h3 id="lets-encrypt">Lets Encrypt</h3>
-
 <p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a Certificate Authority (CA). <a href="https://letsencrypt.org/">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
-
 <h4 id="installing-certbot">Installing Certbot</h4>
-
 <ul>
-<li><p>The first step to using Let’s Encrypt to obtain an SSL certificate is to install the Certbot software on your server.</p></li>
-
-<li><p>Certbot is in very active development, so the Certbot packages provided by Ubuntu tend to be outdated. However, the Certbot developers maintain a Ubuntu software repository with up-to-date versions, so we’ll use that repository instead.</p>
-
-<pre><code class="language-bash">#  First, add the repository
+<li>
+<p>The first step to using Let’s Encrypt to obtain an SSL certificate is to install the Certbot software on your server.</p>
+</li>
+<li>
+<p>Certbot is in very active development, so the Certbot packages provided by Ubuntu tend to be outdated. However, the Certbot developers maintain a Ubuntu software repository with up-to-date versions, so we’ll use that repository instead.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#  First, add the repository</span>
 sudo add-apt-repository ppa:certbot/certbot
 
-# Install Certbot’s Nginx package with apt
+<span style="color:#75715e"># Install Certbot’s Nginx package with apt</span>
 sudo apt install python-certbot-nginx
-</code></pre></li>
-
-<li><p>In order to configure SSL for Nginx, we need to verify some of Nginx’s configuration.</p></li>
+</code></pre></div><ul>
+<li>In order to configure SSL for Nginx, we need to verify some of Nginx’s configuration.</li>
 </ul>
-
-<h3 id="confirming-nginx-s-configuration">Confirming Nginx’s Configuration</h3>
-
+<h3 id="confirming-nginxs-configuration">Confirming Nginx’s Configuration</h3>
 <ul>
-<li>In the previous setup, the site for <code>domain-one.com</code> has been up and running in the droplet.</li>
-
-<li><p>Open the server block file of<code>domain-one.com</code>  via any text editor:</p>
-
-<pre><code>sudo vi /etc/nginx/sites-available/example.com
-</code></pre></li>
-
-<li><p>Find the existing <code>server_name</code> line in the file</p>
-
-<pre><code>server_name domain-one.com www.domain-one.com;
-</code></pre></li>
-
-<li><p>If you change the server name, you need to re-run the test and reload nginx</p>
-
-<pre><code>sudo nginx -t
-sudo systemctl reload nginx
-</code></pre></li>
+<li>
+<p>In the previous setup, the site for <strong>domain-one.com</strong> has been up and running in the droplet.</p>
+</li>
+<li>
+<p>Open the server block file of <strong>domain-one.com</strong>  via any text editor:</p>
+<pre><code>  sudo vi /etc/nginx/sites-available/example.com
+</code></pre>
+</li>
+<li>
+<p>Find the existing <strong>server_name</strong> line in the file</p>
+<pre><code>  server_name domain-one.com www.domain-one.com;
+</code></pre>
+</li>
+<li>
+<p>If you change the server name, you need to re-run the test and reload nginx</p>
+<pre><code>  sudo nginx -t
+  sudo systemctl reload nginx
+</code></pre>
+</li>
 </ul>
-
 <p>Certbot can now find the correct server block and update it.</p>
-
 <p>Next, let’s update the firewall to allow HTTPS traffic.</p>
-
 <h3 id="allowing-https-through-the-firewall">Allowing HTTPS Through the Firewall</h3>
-
 <ul>
-<li><p>UFW configuration has been done in the prevous setup. It is good to confirm the UFW configuration.</p></li>
+<li>
+<p>UFW configuration has been done in the prevous setup. It is good to confirm the UFW configuration.</p>
+</li>
+<li>
+<p>You can see the current setting by typing:</p>
+<pre><code>  sudo ufw status
+  Output
+  Status: active
 
-<li><p>You can see the current setting by typing:</p>
-
-<pre><code>sudo ufw status
-Output
-Status: active
-
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere
-Nginx Full                 ALLOW       Anywhere
-OpenSSH (v6)               ALLOW       Anywhere (v6)
-Nginx Full (v6)            ALLOW       Anywhere (v6)
-</code></pre></li>
-
-<li><p>If the &lsquo;Nginx Full&rsquo; is not allowed in your UFW, please run commands below to enable it.</p>
-
-<pre><code>sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
-</code></pre></li>
-
-<li><p>Next, let’s run Certbot and fetch our certificates.</p></li>
+  To                         Action      From
+  --                         ------      ----
+  OpenSSH                    ALLOW       Anywhere
+  Nginx Full                 ALLOW       Anywhere
+  OpenSSH (v6)               ALLOW       Anywhere (v6)
+  Nginx Full (v6)            ALLOW       Anywhere (v6)
+</code></pre>
+</li>
+<li>
+<p>If the &lsquo;Nginx Full&rsquo; is not allowed in your UFW, please run commands below to enable it.</p>
+<pre><code>  sudo ufw allow 'Nginx Full'
+  sudo ufw delete allow 'Nginx HTTP'
+</code></pre>
+</li>
+<li>
+<p>Next, let’s run Certbot and fetch our certificates.</p>
+</li>
 </ul>
-
 <h3 id="obtaining-an-ssl-certificate">Obtaining an SSL Certificate</h3>
-
 <p>Certbot provides a variety of ways to obtain SSL certificates through plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the config whenever necessary. To use this plugin, type the following:</p>
-
 <pre><code>sudo certbot --nginx -d example.com -d www.example.com
 </code></pre>
-
 <p>This runs certbot with the &ndash;nginx plugin, using -d to specify the names we’d like the certificate to be valid for.</p>
-
 <p>If this is your first time running certbot, you will be prompted to enter an email address and agree to the terms of service. After doing so, certbot will communicate with the Let’s Encrypt server, then run a challenge to verify that you control the domain you’re requesting a certificate for.</p>
-
 <p>If that’s successful, certbot will ask how you’d like to configure your HTTPS settings.</p>
-
 <pre><code># Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
 # -------------------------------------------------------------------------------
 # 1: No redirect - Make no further changes to the webserver configuration.
@@ -1064,24 +1090,15 @@ sudo ufw delete allow 'Nginx HTTP'
 # ...
 # ...
 </code></pre>
-
 <h3 id="renew-certificate">Renew certificate</h3>
-
 <p>Let’s Encrypt’s certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process.</p>
-
 <h4 id="verifying-certbot-auto-renewal">Verifying Certbot Auto-Renewal</h4>
-
 <p>The certbot package we installed takes care of this for us by adding a renew script to <code>/etc/cron.d</code>. This script runs twice a day and will automatically renew any certificate that’s within thirty days of expiration.</p>
-
 <p>To test the renewal process, you can do a dry run with certbot:</p>
-
 <pre><code>sudo certbot renew --dry-run
 </code></pre>
-
 <h4 id="use-cron-to-renew-certificate">Use Cron to renew certificate</h4>
-
 <p>Here I just add the cronjob to system crontab <code>/etc/crontab</code></p>
-
 <pre><code># Lets encrypt cronjob - start from 1st April 2020
 0  0    1 */3 * root  /usr/bin/certbot renew &gt;&gt; /var/log/letsencrypt/renew.log
 </code></pre>
@@ -1090,26 +1107,17 @@ sudo ufw delete allow 'Nginx HTTP'
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#lets-encrypt">Lets Encrypt</a>
-<ul>
-<li><a href="#installing-certbot">Installing Certbot</a></li>
-</ul></li>
-<li><a href="#confirming-nginx-s-configuration">Confirming Nginx’s Configuration</a></li>
-<li><a href="#allowing-https-through-the-firewall">Allowing HTTPS Through the Firewall</a></li>
-<li><a href="#obtaining-an-ssl-certificate">Obtaining an SSL Certificate</a></li>
-<li><a href="#renew-certificate">Renew certificate</a>
-<ul>
-<li><a href="#verifying-certbot-auto-renewal">Verifying Certbot Auto-Renewal</a></li>
-<li><a href="#use-cron-to-renew-certificate">Use Cron to renew certificate</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#lets-encrypt">Lets Encrypt</a></li>
+        <li><a href="#confirming-nginxs-configuration">Confirming Nginx’s Configuration</a></li>
+        <li><a href="#allowing-https-through-the-firewall">Allowing HTTPS Through the Firewall</a></li>
+        <li><a href="#obtaining-an-ssl-certificate">Obtaining an SSL Certificate</a></li>
+        <li><a href="#renew-certificate">Renew certificate</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

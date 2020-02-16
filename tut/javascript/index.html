@@ -1,0 +1,549 @@
+	<head><meta charset="utf-8"></head>
+
+	<link rel="stylesheet" href="/revealjs/css/reveal.css">
+	<link rel="stylesheet" href="/revealjs/css/theme/league.css" id="theme">
+	<link rel="stylesheet" href="/revealjs/lib/css/zenburn.css">
+
+	<div class="reveal">
+	<div class="slides">
+	<section data-markdown
+	         data-separator="^---"
+		 data-separator-vertical="^___"
+		 data-separator-notes="^Note:">
+	
+
+
+### Topics
+
+* Operators 
+* var , let and const
+* The __this__
+* Fat arrow
+* Templete literal
+* Destructor
+
+---
+
+### JavaScript Bad Parts - 1
+
+* Operator 
+  
+  * Choose   `==   or  ===`
+  * Choose   `!=   or  !==`
+
+---
+
+* Test yourself 
+
+```js
+
+console.log( &#34; 1==true : &#34;, 1==true)
+
+console.log( &#34; &#39;&#39;==true : &#34;, &#39;&#39;==true)
+
+console.log( &#34; &#39;1&#39;==true : &#34;, &#39;1&#39;==true)
+
+console.log( &#34; \&#34;1\&#34;==true : &#34;, &#34;1&#34;==true)
+
+console.log( &#34; {}==true : &#34;, [{}]==true)
+
+console.log( &#34; []==true : &#34;, [&#39;1&#39;]==true)
+
+```
+
+---
+
+```js
+console.log(&#34;1==true : &#34;, 1==true)      // 1==true :  true
+console.log(&#34;&#39;&#39;==true : &#34;, &#39;&#39;==true)    // &#39;&#39;==true :  false
+console.log(&#34;&#39;1&#39;==true : &#34;, &#39;1&#39;==true)  // &#39;1&#39;==true :  true
+console.log(&#34;\&#34;1\&#34;==true : &#34;, &#34;1&#34;==true)// &#34;1&#34;==true :  true
+console.log(&#34;{}==true : &#34;, {}==true)  // {}==true :  false
+console.log(&#34;[&#39;1&#39;]==true : &#34;, [&#39;1&#39;]==true) // []==true :  true
+
+```
+
+---
+
+* Test yourself 
+
+```js
+console.log( &#34; 0==false : &#34;, 0==false)
+console.log( &#34; 1==false : &#34;, 1==false)
+console.log( &#34; &#39;&#39;==false : &#34;, &#39;&#39;==false)
+console.log( &#34; &#39;1&#39;==false : &#34;, &#39;1&#39;==false)
+
+console.log( &#34; \&#34;\&#34;==false : &#34;, &#34;&#34;==false)
+console.log( &#34; {}==false : &#34;, {}==false)
+console.log( &#34; []==false : &#34;, []==false)
+console.log( &#34; [&#39;0&#39;]==false : &#34;, [&#39;0&#39;]==false)
+```
+
+---
+```js
+
+console.log( &#34; 0==false : &#34;, 0==false)    // 0==false :  true 
+console.log( &#34; 1==false : &#34;, 1==false)    // 1==false :  false 
+console.log( &#34; &#39;&#39;==false : &#34;, &#39;&#39;==false)  // &#39;&#39;==false :  true
+console.log( &#34; &#39;1&#39;==false : &#34;, &#39;1&#39;==false)// &#39;1&#39;==false :  false
+console.log( &#34; \&#34;\&#34;==false : &#34;, &#34;&#34;==false)// &#34;&#34;==false :  true
+console.log( &#34; {}==false : &#34;, {}==false)  // {}==false :  false 
+console.log( &#34; []==false : &#34;, []==false)  // []==false :  true 
+console.log( &#34; [&#39;0&#39;]==false : &#34;, [&#39;0&#39;]==false)  // []==false :  true 
+```
+
+
+---
+
+* Test yourself
+
+```js
+console.log( &#34; null==false : &#34;, null==false)
+
+console.log( &#34; undefined==false : &#34;, undefined==false)
+
+console.log( &#34; undefined==null : &#34;, null==undefined)
+
+
+```
+
+
+---
+
+
+```js
+console.log( &#34; null==false : &#34;, null==false) 
+// null==false: false
+
+console.log( &#34; undefined==false : &#34;, undefined==false) 
+// undefined==false: false
+
+console.log( &#34; undefined==null : &#34;, null==undefined) 
+// undefined==null: true
+```
+
+
+---
+
+* JavaScript has both strict and type–converting comparisons. A strict comparison (e.g., ===) is only true if the operands are of the same type and the contents match. The more commonly-used abstract comparison (e.g. ==) converts the operands to the same type before making the comparison.
+
+
+---
+
+### Quiz
+
+Compare two arrays of number are the same
+
+
+---
+
+### JavaScript Bad Parts - 2
+
+## The **var** 
+
+---
+
+* Test yourself
+
+```js
+function testVar(){
+    console.log(a)
+    console.log(b)
+    var b = 2
+}
+
+var a = 1
+testVar()
+console.log(b)
+```
+
+---
+
+* Test yourself (Browser) - TBC
+
+```js
+d = 13
+console.log(this.d)
+delete this.d
+console.log(this.d)
+
+var e = 31
+console.log(this.e)
+delete this.e
+console.log(this.e)
+
+var i = i &#43; 1
+console.log( i )             
+console.log( this.i )   
+```
+---
+
+```js
+var e = 31
+f = 13
+console.log(this.e, this.f) // 31 13
+console.log(e, f)           //  31 13          
+delete this.f
+delete this.e
+console.log(this.e, this.f) // 31 undefinded
+console.log(e, f)           //  ReferenceError: d is not defined
+
+var i = i &#43; 1
+console.log( i )             // NaN
+console.log( this.i )        // NaN
+```
+
+---
+
+Conclusion: Because of the above unexpected results, it is recommended to always declare variables, regardless of whether they are in a function or global scope.
+
+---
+
+
+* Test yourself
+
+```js
+var var1;
+let letVar;
+const constVar;
+
+function testVar() {
+    console.log( var1);
+    console.log( constVar);
+    console.log( letVar);
+}
+```
+
+---
+
+```js
+var var1;
+let letVar;
+const constVar; // missing initialization
+
+function testVar() {
+    console.log( var1);
+    console.log( constVar);
+    console.log( letVar);
+}
+```
+---
+
+
+* Test yourself
+
+```js
+var v1 = &#34;&#34;;
+var v1 = 123;
+
+let let1 = &#34;&#34;;
+let let1 = 123;
+
+const c1 = &#34;&#34;;
+c1 = 123;
+```
+
+---
+
+```js
+var v1 = &#34;&#34;;
+var v1 = 123;
+
+let let1 = &#34;&#34;;
+let let1 = 123; //SyntaxError: Identifier &#39;let1&#39; has already been declared.
+
+const c1 = &#34;&#34;;
+c1 = 123; // TypeError: Assignment to constant variable.
+```
+
+
+
+---
+
+
+* Test yourself
+
+```js
+for ( var i = 0 ; i &lt; 5 ; i&#43;&#43; ){
+    var x = 20;
+    console.log(i);
+}
+console.log( i );
+console.log( x );
+for ( ; i &lt; 10 ; i&#43;&#43; ){
+    var i  
+    console.log(i);
+}
+```
+
+---
+
+
+```js
+for ( var i = 0 ; i &lt; 5 ; i&#43;&#43; ) {
+    var x = 20
+    console.log(i);//0 1 2 3 4 
+}
+console.log(i);//5
+console.log(x);//20
+for ( ; i &lt; 10 ; i&#43;&#43; ){
+    var i// re-declare will not reset value
+    console.log(i);//5 6 7 8 9 
+}
+```
+
+
+---
+
+* Test yourself
+
+```js
+for ( let t = 0 ; t &lt; 5 ; t&#43;&#43; ){
+    console.log( t);
+    let s = 100
+}
+console.log(s)  
+console.log(t)
+```
+
+---
+
+```js
+for ( let t = 0 ; t &lt; 5 ; t&#43;&#43; ){
+    console.log( t); 
+    let s = 100
+}
+console.log(t)//ReferenceError: t is not defined
+console.log(s)// 
+```
+
+---
+
+* let allows you to declare variables that are limited to a scope of a block statement, or expression on which it is used, unlike the var keyword, which defines a variable globally, or locally to an entire function regardless of block scope. The other difference between var and let is that the latter is initialized to value only when parser evaluates it 
+
+
+---
+
+* Constants are block-scoped, much like variables defined using the let statement. The value of a constant can’t be changed through reassignment, and it can’t be re-declared.  It does not mean the value it holds is immutable, just that the variable identifier cannot be reassigned. 
+
+---
+
+
+
+### JavaScript Bad Parts - 3
+
+## The unpredictable **this** keyword
+
+[MDN] (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+
+In most cases, the value of this is determined by how a function is called (runtime binding). It can&#39;t be set by assignment during execution, and it may be different each time the function is called. 
+
+---
+
+
+* Test 
+
+```js
+var obj0 = {
+    prop: &#39;obj0&#39;,
+    func_1: function () {
+        console.log(&#39; func_1-&gt; &#39;, this);
+        var func_2 = {
+            prop: &#39;func_2&#39;,
+            func_3: function () {
+                console.log(&#39; func_3 -&gt; &#39;, this);
+            }
+        };
+        func_2.func_3();
+    }
+};
+obj0.func_1();
+```
+
+
+---
+
+* Test
+
+```js
+var obj1 = {
+    prop: &#39;obj1&#39;,
+    func_1: function () {
+        console.log(&#39; func_1-&gt; &#39;, this);
+        func_2 = function () {
+            this.prop = &#39;func_2&#39;;
+            var func_3 = function () {
+                this.p = &#39;func_3&#39;;
+                console.log(&#39; func_3 -&gt; &#39;, this);
+            }
+            return func_3
+        };
+        func_2()();
+    }
+};
+obj1.func_1();
+```
+
+---
+
+* Test (Fat Arrow)
+
+```js
+var obj2 = {
+    prop: 123,
+    func_1: () =&gt; {
+        console.log(&#39; func_1-&gt; &#39;, this);
+        func_2 = {
+            prop: &#39;func_2&#39;,
+            func_3: () =&gt; {
+                this.p = &#39;func_3&#39;;
+                console.log(&#39; func_3 -&gt; &#39;, this);
+            }
+        };
+        func_2.func_3();
+    }
+};
+obj2.func_1();
+```
+
+
+
+---
+
+* Test ( Binding )
+
+```js
+
+var obj3 = {
+    p: &#39;obj3&#39;,
+    toBeCalled: function () {
+        console.log(&#39; this is toBeCalled &#39;, this.p);
+    },
+    toBind: function (obj) {
+        obj.toBeCalled();
+    }
+};
+var testBind = obj3.toBind;
+testBind(obj3);
+
+var obj4 = {
+    p: &#39;obj4&#39;,
+    toBeCalled: () =&gt; {
+        console.log(&#39; this is toBeCalled &#39;, this.p);
+    },
+    toBind: obj =&gt; {
+        obj.toBeCalled();
+    }
+};
+var testBind2 = obj4.toBind;
+testBind2(obj4);
+```
+
+
+---
+
+### Arrow Function
+
+An arrow function expression is a syntactically compact alternative to a regular function expression, although without its own bindings to the this, arguments, super, or new.target keywords. Arrow function expressions are ill suited as methods, and they cannot be used as constructors.
+
+---
+
+```js
+
+const arrFunc = p1 =&gt;  p2 =&gt; console.log(p1,&#34; &#34;,p2)
+arrFunc(&#34;Hello&#34;)(&#34;World&#34;)
+
+const arrFunc2 = p1 =&gt;  {
+    return p2 =&gt; console.log(p1,&#34; &#34;,p2)
+}
+arrFunc2(&#34;Hello&#34;)(&#34;World&#34;)
+
+
+```
+
+---
+
+### Template literal
+
+Template literals are string literals allowing embedded expressions. You can use multi-line strings and string interpolation features with them. 
+
+---
+
+
+```js
+// literal 
+const message = `
+hello 
+developer
+${1&#43;1} 
+${new Date()}
+`
+console.log( message)
+
+```
+
+---
+
+### Destructor
+
+
+
+```js
+
+
+const person = {
+    name: &#34;name&#34;,
+    fullName: &#34;full name&#34;,
+    email: &#34;email@test.com&#34;
+}
+
+const testDestructor = (p) =&gt;
+{
+    const { name, fullName , email } = {...p};
+    console.log(`
+    name: ${name}
+    fullName: ${fullName}
+    email: ${email}
+    ${new Date()} 
+    `)
+}
+testDestructor( person )
+
+```
+
+---
+	</section>
+	</div>
+	</div>
+	<script src="/revealjs/lib/js/head.min.js"></script>
+	<script src="/revealjs/js/reveal.js"></script>
+	<script>
+		Reveal.initialize({
+		      	embedded : true,
+
+		        
+		        "controls": true ,
+		        
+		        "height":"80%",
+		        
+		        "history": true ,
+		        
+		        "margin": 0 ,
+		        
+		        "progress": true ,
+		        
+		        "transition":"concave",
+		        
+		        
+		        
+		        dependencies: [
+		          { src: '\/revealjs\/lib\/js\/classList.js"', condition: function() { return !document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/markdown\/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/markdown\/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/highlight\/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		          { src: '\/revealjs\/plugin\/zoom-js\/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/notes\/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/math\/math.js', async: true}
+		        ]
+		      });
+	</script>

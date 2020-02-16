@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Collection :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -923,6 +959,43 @@
    Projects</option>
     <option value="/coding/" >
    Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option>
+    <option value="/coding/golang/" >
+  - 
+   Golang</option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/js-ts/" >
+  - 
+   JS &amp; TS </option>
+    <option value="/coding/python/" >
+  - 
+   Python</option> 
+      <option value="/coding/python/python-note-1/" >-- Package &amp; Module</option>
+      <option value="/coding/python/python-note-2/" >-- Closure &amp; Decorator</option>
+      <option value="/coding/python/python-note-3/" >-- String &amp; Representation</option>
+      <option value="/coding/python/python-note-4/" >-- Iteration</option>
+      <option value="/coding/python/python-note-5/" >-- Inheritance &amp; Polymorphism</option>
+      <option value="/coding/python/python-note-6/"  selected>-- Collection</option>
+      <option value="/coding/python/python-note-7/" >-- Exception &amp; Assertion</option>
+      <option value="/coding/python/python-note-8/" >-- Context</option>
+      <option value="/coding/python/python-note-9/" >-- ABC</option>
+  
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
   
     <option value="/cloud/" >
    Cloud</option>
@@ -934,6 +1007,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -951,36 +1026,41 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Collection</h1>
-        
-
-<h2 id="collection">Collection</h2>
-
+        <h2 id="collection">Collection</h2>
 <h3 id="collection-protocols">Collection protocols</h3>
-
 <ul>
-<li>To implement a protocol, objects must support certain operations.</li>
-<li>Most collections implement container, sized and iterable.</li>
-<li>All except dict and set are sequences</li>
-<li><strong>Container</strong>: membership testing using <code>in</code> and <code>not in</code></li>
-<li><strong>Sized</strong>: Determine number of elements with <code>len(s)</code></li>
-
-<li><p><strong>Iterable</strong>: Can produce an iterator with <code>iter(s)</code>, e.g.</p>
-
-<pre><code>    for item in iterable:
-        do_something(item) `len(s)`
-</code></pre></li>
-
-<li><p><strong>Sequence</strong>:</p>
-
+<li>
+<p>To implement a protocol, objects must support certain operations.</p>
+</li>
+<li>
+<p>Most collections implement container, sized and iterable.</p>
+</li>
+<li>
+<p>All except dict and set are sequences</p>
+</li>
+<li>
+<p><strong>Container</strong>: membership testing using <code>in</code> and <code>not in</code></p>
+</li>
+<li>
+<p><strong>Sized</strong>: Determine number of elements with <code>len(s)</code></p>
+</li>
+<li>
+<p><strong>Iterable</strong>: Can produce an iterator with <code>iter(s)</code>, e.g.</p>
+<pre><code>      for item in iterable:
+          do_something(item) `len(s)`
+</code></pre>
+</li>
+<li>
+<p><strong>Sequence</strong>:</p>
 <ul>
 <li>Retrieve elements by index, e.g. <code>item = seq[index]</code></li>
 <li>Find items by value <code>index = seq.index(item)</code></li>
 <li>Count items <code>num = seq.count(item)</code></li>
 <li>Produce a reversed sequence <code>r = reversed(seq)</code></li>
-</ul></li>
-
-<li><p><strong>Set</strong>: set algebra operations, including method and infix operators . e.g.</p>
-
+</ul>
+</li>
+<li>
+<p><strong>Set</strong>: set algebra operations, including method and infix operators . e.g.</p>
 <ul>
 <li>subset</li>
 <li>proper subset</li>
@@ -992,11 +1072,12 @@
 <li>union</li>
 <li>symmetric difference</li>
 <li>difference</li>
-</ul></li>
-
-<li><p>Built-in collections</p></li>
 </ul>
-
+</li>
+<li>
+<p>Built-in collections</p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -1004,291 +1085,276 @@
 <th>Implementing Collections</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Container</td>
 <td>str, list, range, tuple, set, bytes, dict</td>
 </tr>
-
 <tr>
 <td>Sized</td>
 <td>str, list, range, tuple, set, bytes, dict</td>
 </tr>
-
 <tr>
 <td>Iterable</td>
 <td>str, list, range, tuple, set, bytes, dict</td>
 </tr>
-
 <tr>
 <td>Sequence</td>
 <td>str, list, range, tuple, bytes</td>
 </tr>
-
 <tr>
 <td>Set</td>
 <td>set</td>
 </tr>
-
 <tr>
 <td>Mutable Sequence</td>
 <td>list</td>
 </tr>
-
 <tr>
 <td>Mutable Set</td>
 <td>set</td>
 </tr>
-
 <tr>
 <td>Mutable Mapping</td>
 <td>dict</td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="example">Example</h3>
-
 <ul>
-<li><p>sortedset</p>
-
-<pre><code class="language-python">from bisect import bisect_left
-from collections.abc import Sequence, Set
-from itertools import chain
-
-
-class SortedSet(Sequence, Set):
-
-def __init__(self, items=None):
-    self._items = sorted(set(items)) if items is not None else []
-
-def __contains__(self, item):
-    try:
-        self.index(item)
-        return True
-    except ValueError:
-        return False
-
-def __len__(self):
-    return len(self._items)
-
-def __iter__(self):
-    return iter(self._items)
-
-def __getitem__(self, index):
-    result = self._items[index]
-    return SortedSet(result) if isinstance(index, slice) else result
-
-def __repr__(self):
-    return &quot;SortedSet({})&quot;.format(repr(self._items) if self._items else '')
-
-def __eq__(self, rhs):
-    if not isinstance(rhs, SortedSet):
-        return False
-    return self._items == rhs._items
-
-def _is_unique_and_sorted(self):
-    return all(self[i] &lt; self[i + 1] for i in range(len(self) - 1))
-
-def index(self, item):
-    assert self._is_unique_and_sorted()
-    index = bisect_left(self._items, item)
-    if (index != len(self._items)) and self._items[index] == item:
-        return index
-    raise ValueError(&quot;{} not found&quot;.format(repr(item)))
-
-def count(self, item):
-    assert self._is_unique_and_sorted()
-    return int(item in self._items)
-
-def __add__(self, rhs):
-    return SortedSet(chain(self._items, rhs._items))
-
-def __mul__(self, rhs):
-    return SortedSet(self) if rhs &gt; 0 else SortedSet()
-
-def __rmul__(self, lhs):
-    return self * lhs
-
-def issubset(self, iterable):
-    return self &lt;= SortedSet(iterable)
-
-def issuperset(self, iterable):
-    return self &gt;= SortedSet(iterable)
-
-def intersection(self, iterable):
-    return self &amp; SortedSet(iterable)
-
-def union(self, iterable):
-    return self | SortedSet(iterable)
-
-def symmetric_difference(self, iterable):
-    return self ^ SortedSet(iterable)
-
-def difference(self, iterable):
-    return self - SortedSet(iterable)
-</code></pre></li>
-
-<li><p>test case</p>
-
-<pre><code class="language-python">import unittest
-from sorted_set import SortedSet
-
-
-class TestConstruction(unittest.TestCase):
-
-def test_empty(self):
-    s = SortedSet([])
-
-def test_from_sequence(self):
-    s = SortedSet([7, 8, 3, 1])
-
-def test_with_duplicates(self):
-    s = SortedSet([8, 8, 8])
-
-def test_from_iterable(self):
-    def gen6842():
-        yield 6
-        yield 8
-        yield 4
-        yield 2
-    g = gen6842()
-    s = SortedSet(g)
-
-def test_default_empty(self):
-    s = SortedSet()
-
-
-class TestContainerProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([6, 7, 3, 9])
-
-def test_positive_contained(self):
-    self.assertTrue(6 in self.s)
-
-def test_negative_contained(self):
-    self.assertFalse(2 in self.s)
-
-def test_positive_not_contained(self):
-    self.assertTrue(5 not in self.s)
-
-def test_negative_not_contained(self):
-    self.assertFalse(9 not in self.s)
-
-
-class TestSizedProtocol(unittest.TestCase):
-
-def test_empty(self):
-    s = SortedSet()
-    self.assertEqual(len(s), 0)
-
-def test_one(self):
-    s = SortedSet([42])
-    self.assertEqual(len(s), 1)
-
-def test_ten(self):
-    s = SortedSet(range(10))
-    self.assertEqual(len(s), 10)
-
-def test_with_duplicates(self):
-    s = SortedSet([5, 5, 5])
-    self.assertEqual(len(s), 1)
-
-
-class TestIterableProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([7, 2, 1, 1, 9])
-
-def test_iter(self):
-    i = iter(self.s)
-    self.assertEqual(next(i), 1)
-    self.assertEqual(next(i), 2)
-    self.assertEqual(next(i), 7)
-    self.assertEqual(next(i), 9)
-    self.assertRaises(StopIteration, lambda: next(i))
-
-def test_for_loop(self):
-    index = 0
-    expected = [1, 2, 7, 9]
-    for item in self.s:
-        self.assertEqual(item, expected[index])
-        index += 1
-
-
-class TestSequenceProtocol(unittest.TestCase):
-
-def setUp(self):
-    self.s = SortedSet([1, 4, 9, 13, 15])
-
-def test_index_zero(self):
-    self.assertEqual(self.s[0], 1)
-
-def test_index_four(self):
-    self.assertEqual(self.s[4], 15)
-
-def test_index_one_beyond_the_end(self):
-    with self.assertRaises(IndexError):
-        self.s[5]
-
-def test_index_minus_one(self):
-    self.assertEqual(self.s[-1], 15)
-
-def test_index_minus_five(self):
-    self.assertEqual(self.s[-5], 1)
-
-def test_index_one_before_the_beginning(self):
-    with self.assertRaises(IndexError):
-        self.s[-6]
-
-def test_slice_from_start(self):
-    self.assertEqual(self.s[:3], SortedSet([1, 4, 9]))
-
-def test_slice_to_end(self):
-    self.assertEqual(self.s[3:], SortedSet([13, 15]))
-
-def test_slice_empty(self):
-    self.assertEqual(self.s[10:], SortedSet())
-
-def test_slice_arbitrary(self):
-    self.assertEqual(self.s[2:4], SortedSet([9, 13]))
-
-def test_slice_full(self):
-    self.assertEqual(self.s[:], self.s)
-
-
-class TestReprProtocol(unittest.TestCase):
-
-def test_repr_empty(self):
-    s = SortedSet()
-    self.assertEqual(repr(s), &quot;SortedSet()&quot;)
-
-def test_repr_some(self):
-    s = SortedSet([42, 40, 19])
-    self.assertEqual(repr(s), &quot;SortedSet([19, 40, 42])&quot;)
-
-
-if __name__ == '__main__':
-unittest.main()
-</code></pre></li>
+<li>sortedset</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> bisect <span style="color:#f92672">import</span> bisect_left
+<span style="color:#f92672">from</span> collections.abc <span style="color:#f92672">import</span> Sequence, Set
+<span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> chain
 
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SortedSet</span>(Sequence, Set):
+
+    <span style="color:#66d9ef">def</span> __init__(self, items<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>_items <span style="color:#f92672">=</span> sorted(set(items)) <span style="color:#66d9ef">if</span> items <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> []
+
+    <span style="color:#66d9ef">def</span> __contains__(self, item):
+        <span style="color:#66d9ef">try</span>:
+            self<span style="color:#f92672">.</span>index(item)
+            <span style="color:#66d9ef">return</span> True
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+            <span style="color:#66d9ef">return</span> False
+
+    <span style="color:#66d9ef">def</span> __len__(self):
+        <span style="color:#66d9ef">return</span> len(self<span style="color:#f92672">.</span>_items)
+
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#66d9ef">return</span> iter(self<span style="color:#f92672">.</span>_items)
+
+    <span style="color:#66d9ef">def</span> __getitem__(self, index):
+        result <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_items[index]
+        <span style="color:#66d9ef">return</span> SortedSet(result) <span style="color:#66d9ef">if</span> isinstance(index, slice) <span style="color:#66d9ef">else</span> result
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SortedSet({})</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(repr(self<span style="color:#f92672">.</span>_items) <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_items <span style="color:#66d9ef">else</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __eq__(self, rhs):
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(rhs, SortedSet):
+            <span style="color:#66d9ef">return</span> False
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_items <span style="color:#f92672">==</span> rhs<span style="color:#f92672">.</span>_items
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_is_unique_and_sorted</span>(self):
+        <span style="color:#66d9ef">return</span> all(self[i] <span style="color:#f92672">&lt;</span> self[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(self) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(self, item):
+        <span style="color:#66d9ef">assert</span> self<span style="color:#f92672">.</span>_is_unique_and_sorted()
+        index <span style="color:#f92672">=</span> bisect_left(self<span style="color:#f92672">.</span>_items, item)
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">!=</span> len(self<span style="color:#f92672">.</span>_items)) <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>_items[index] <span style="color:#f92672">==</span> item:
+            <span style="color:#66d9ef">return</span> index
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{} not found</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(repr(item)))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(self, item):
+        <span style="color:#66d9ef">assert</span> self<span style="color:#f92672">.</span>_is_unique_and_sorted()
+        <span style="color:#66d9ef">return</span> int(item <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_items)
+
+    <span style="color:#66d9ef">def</span> __add__(self, rhs):
+        <span style="color:#66d9ef">return</span> SortedSet(chain(self<span style="color:#f92672">.</span>_items, rhs<span style="color:#f92672">.</span>_items))
+
+    <span style="color:#66d9ef">def</span> __mul__(self, rhs):
+        <span style="color:#66d9ef">return</span> SortedSet(self) <span style="color:#66d9ef">if</span> rhs <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> SortedSet()
+
+    <span style="color:#66d9ef">def</span> __rmul__(self, lhs):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">*</span> lhs
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">issubset</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> SortedSet(iterable)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">issuperset</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> SortedSet(iterable)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">intersection</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">&amp;</span> SortedSet(iterable)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">union</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">|</span> SortedSet(iterable)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">symmetric_difference</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">^</span> SortedSet(iterable)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">difference</span>(self, iterable):
+        <span style="color:#66d9ef">return</span> self <span style="color:#f92672">-</span> SortedSet(iterable)
+</code></pre></div><ul>
+<li>test case</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> unittest
+<span style="color:#f92672">from</span> sorted_set <span style="color:#f92672">import</span> SortedSet
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestConstruction</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_empty</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_from_sequence</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_with_duplicates</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_from_iterable</span>(self):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gen6842</span>():
+            <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">6</span>
+            <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">8</span>
+            <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">4</span>
+            <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">2</span>
+        g <span style="color:#f92672">=</span> gen6842()
+        s <span style="color:#f92672">=</span> SortedSet(g)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_default_empty</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet()
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestContainerProtocol</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+        self<span style="color:#f92672">.</span>s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">9</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_positive_contained</span>(self):
+        self<span style="color:#f92672">.</span>assertTrue(<span style="color:#ae81ff">6</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>s)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_negative_contained</span>(self):
+        self<span style="color:#f92672">.</span>assertFalse(<span style="color:#ae81ff">2</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>s)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_positive_not_contained</span>(self):
+        self<span style="color:#f92672">.</span>assertTrue(<span style="color:#ae81ff">5</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>s)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_negative_not_contained</span>(self):
+        self<span style="color:#f92672">.</span>assertFalse(<span style="color:#ae81ff">9</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>s)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestSizedProtocol</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_empty</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet()
+        self<span style="color:#f92672">.</span>assertEqual(len(s), <span style="color:#ae81ff">0</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_one</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">42</span>])
+        self<span style="color:#f92672">.</span>assertEqual(len(s), <span style="color:#ae81ff">1</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_ten</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet(range(<span style="color:#ae81ff">10</span>))
+        self<span style="color:#f92672">.</span>assertEqual(len(s), <span style="color:#ae81ff">10</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_with_duplicates</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>])
+        self<span style="color:#f92672">.</span>assertEqual(len(s), <span style="color:#ae81ff">1</span>)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestIterableProtocol</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+        self<span style="color:#f92672">.</span>s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_iter</span>(self):
+        i <span style="color:#f92672">=</span> iter(self<span style="color:#f92672">.</span>s)
+        self<span style="color:#f92672">.</span>assertEqual(next(i), <span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>assertEqual(next(i), <span style="color:#ae81ff">2</span>)
+        self<span style="color:#f92672">.</span>assertEqual(next(i), <span style="color:#ae81ff">7</span>)
+        self<span style="color:#f92672">.</span>assertEqual(next(i), <span style="color:#ae81ff">9</span>)
+        self<span style="color:#f92672">.</span>assertRaises(<span style="color:#a6e22e">StopIteration</span>, <span style="color:#66d9ef">lambda</span>: next(i))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_for_loop</span>(self):
+        index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        expected <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+        <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>s:
+            self<span style="color:#f92672">.</span>assertEqual(item, expected[index])
+            index <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestSequenceProtocol</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+        self<span style="color:#f92672">.</span>s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">15</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_zero</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_four</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">4</span>], <span style="color:#ae81ff">15</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_one_beyond_the_end</span>(self):
+        <span style="color:#66d9ef">with</span> self<span style="color:#f92672">.</span>assertRaises(<span style="color:#a6e22e">IndexError</span>):
+            self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">5</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_minus_one</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">15</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_minus_five</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>], <span style="color:#ae81ff">1</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_index_one_before_the_beginning</span>(self):
+        <span style="color:#66d9ef">with</span> self<span style="color:#f92672">.</span>assertRaises(<span style="color:#a6e22e">IndexError</span>):
+            self<span style="color:#f92672">.</span>s[<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_slice_from_start</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[:<span style="color:#ae81ff">3</span>], SortedSet([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>]))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_slice_to_end</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">3</span>:], SortedSet([<span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">15</span>]))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_slice_empty</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">10</span>:], SortedSet())
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_slice_arbitrary</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>], SortedSet([<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">13</span>]))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_slice_full</span>(self):
+        self<span style="color:#f92672">.</span>assertEqual(self<span style="color:#f92672">.</span>s[:], self<span style="color:#f92672">.</span>s)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestReprProtocol</span>(unittest<span style="color:#f92672">.</span>TestCase):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_repr_empty</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet()
+        self<span style="color:#f92672">.</span>assertEqual(repr(s), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SortedSet()</span><span style="color:#e6db74">&#34;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_repr_some</span>(self):
+        s <span style="color:#f92672">=</span> SortedSet([<span style="color:#ae81ff">42</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">19</span>])
+        self<span style="color:#f92672">.</span>assertEqual(repr(s), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SortedSet([19, 40, 42])</span><span style="color:#e6db74">&#34;</span>)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    unittest<span style="color:#f92672">.</span>main()
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#collection">Collection</a>
-<ul>
-<li><a href="#collection-protocols">Collection protocols</a></li>
-<li><a href="#example">Example</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#collection">Collection</a>
+      <ul>
+        <li><a href="#collection-protocols">Collection protocols</a></li>
+        <li><a href="#example">Example</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Create a blog site on GitHub Pages :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
   
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,152 +994,130 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Create a blog site on GitHub Pages</h1>
-        
-
-<blockquote>
+        <blockquote>
 <p>If you use Unix-style system, I recommend you to follow the <a href="https://gohugo.io/overview/quickstart/">Hugo Quick Start</a> and <a href="https://gohugo.io/tutorials/github-pages-blog">Hosting on GitHub Pages</a> to create a blog to GitHub pages within 5 mins.</p>
-
+</blockquote>
+<blockquote>
 <p>When I decided to use hugo to create a blog on GitHub pages from my windows machine, it took me over 30 mins. I hope this blog can help someone want to do sth similar within Windows environment.*</p>
 </blockquote>
-
-<h3 id="step-1-plan-and-prepare">Step 1 - Plan and prepare</h3>
-
+<h3 id="step-1---plan-and-prepare">Step 1 - Plan and prepare</h3>
 <h4 id="prerequisite">Prerequisite</h4>
-
 <ul>
 <li>You already have <em>Hugo</em> on your computer. If not, please follow the instruction to <a href="https://gohugo.io/tutorials/installing-on-windows">install hugo on Windows</a>.</li>
 </ul>
-
 <h4 id="manage-your-github-repositories">Manage your github repositories</h4>
-
 <ul>
-<li><p>You will have two repositories <strong>blog-hugo</strong> and <code>&lt;username&gt;.github.io</code> repositories to hold your hugo content and blog site respectively.</p></li>
-
-<li><p>The <strong>blog-hugo</strong> repository will host actual Hugo’s blog content.</p></li>
-
-<li><p><code>&lt;username&gt;.github.io repository</code> repository will host the static website.</p></li>
+<li>
+<p>You will have two repositories <strong>blog-hugo</strong> and <code>&lt;username&gt;.github.io</code> repositories to hold your hugo content and blog site respectively.</p>
+</li>
+<li>
+<p>The <strong>blog-hugo</strong> repository will host actual Hugo’s blog content.</p>
+</li>
+<li>
+<p><code>&lt;username&gt;.github.io repository</code> repository will host the static website.</p>
+</li>
 </ul>
-
 <h4 id="manage-your-blog-site">Manage your blog site</h4>
-
 <ul>
-<li><p>Your <em>Hugo</em> blog folder will be &ldquo;C:\git\blog-hugo&rdquo; in this example.</p></li>
-
-<li><p>Your blog site will finally sit in C driver and map to repositories as follow</p>
-
-<pre><code class="language-bash">C:\&gt;
+<li>
+<p>Your <em>Hugo</em> blog folder will be &ldquo;C:\git\blog-hugo&rdquo; in this example.</p>
+</li>
+<li>
+<p>Your blog site will finally sit in C driver and map to repositories as follow</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#ae81ff">\&gt;</span>
 |--git 
-    |--blog-hugo (https://github.com/&lt;yourname&gt;/blog-hugo.git
+    |--blog-hugo <span style="color:#f92672">(</span>https://github.com/&lt;yourname&gt;/blog-hugo.git
         |--archetypes
         |--content
         |--data
         |--layouts
-        |--public (https://github.com/&lt;yourname&gt;/&lt;yourname&gt;.github.io.git)
+        |--public <span style="color:#f92672">(</span>https://github.com/&lt;yourname&gt;/&lt;yourname&gt;.github.io.git<span style="color:#f92672">)</span>
         |--themes
         |--
 
-</code></pre></li>
+</code></pre></div></li>
 </ul>
-
-<h3 id="step-2-create-a-blog-site">Step -2: Create a blog site</h3>
-
+<h3 id="step--2-create-a-blog-site">Step -2: Create a blog site</h3>
 <h4 id="create-github-repositories">Create github repositories</h4>
-
 <ul>
-<li>Create on GitHub blog-hugo and <username>.github.io repositories  repository via GitHub website</li>
+<li>Create on GitHub blog-hugo and <!-- raw HTML omitted -->.github.io repositories  repository via GitHub website</li>
 </ul>
-
 <h4 id="create-a-bloodily-good-blog-site">Create a bloodily good blog site</h4>
-
 <ul>
-<li><p>Clone blog-hugo via Windows command prompt</p>
-
-<pre><code class="language-bat">c:\&gt;
-c:\&gt;cd git
-c:\git&gt;git clone &lt;&lt;your-project&gt;-hugo-url&gt; &amp;&amp; cd &lt;your-project&gt;-hugo
-</code></pre></li>
-
-<li><p>Create hugo site and setup the theme you like</p>
-
-<pre><code class="language-bat">C:\git&gt;hugo new site blog-hugo
-C:\git&gt;hugo server -t &lt;yourtheme&gt; -D
-</code></pre></li>
+<li>
+<p>Clone blog-hugo via Windows command prompt</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat">c:\<span style="color:#75715e">&gt;</span>
+c:\<span style="color:#75715e">&gt;cd git</span>
+c:\git<span style="color:#75715e">&gt;git clone &lt;&lt;your-project&gt;-hugo-url&gt; &amp;&amp; cd &lt;your-project&gt;-hugo</span>
+</code></pre></div></li>
+<li>
+<p>Create hugo site and setup the theme you like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat">C:\git<span style="color:#75715e">&gt;hugo new site blog-hugo</span>
+C:\git<span style="color:#75715e">&gt;hugo server -t &lt;yourtheme&gt; -D</span>
+</code></pre></div></li>
 </ul>
-
 <h4 id="setup-a-sub-module-for-publish">Setup a sub module for publish</h4>
-
 <ul>
-<li>Clean up the <code>public</code> folder</li>
-
-<li><p>Set submodule inside the blog-hugo and map to folder <code>public</code></p>
-
-<pre><code class="language-bat">C:\&gt;cd git/blog-hugo
-C:\git&gt;del /s /q  /f  public\*
-C:\git&gt;rd /s /q public
-C:\git&gt;git submodule add -b master https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git public
-</code></pre></li>
+<li>
+<p>Clean up the <code>public</code> folder</p>
+</li>
+<li>
+<p>Set submodule inside the blog-hugo and map to folder <code>public</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat">C:\<span style="color:#75715e">&gt;cd git/blog-hugo</span>
+C:\git<span style="color:#75715e">&gt;del /s /q  /f  public\*</span>
+C:\git<span style="color:#75715e">&gt;rd /s /q public</span>
+C:\git<span style="color:#75715e">&gt;git submodule add -b master https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git public</span>
+</code></pre></div></li>
 </ul>
-
 <h3 id="deploy-to-github-page">Deploy to Github page</h3>
-
 <ul>
-<li>Deploy the blog site to GitHub page with the script <code>deploy.bat</code>.</li>
+<li>
+<p>Deploy the blog site to GitHub page with the script <code>deploy.bat</code>.</p>
+</li>
+<li>
+<p><code>deploy.bat &quot;Your optional commit message&quot;</code> will commit the changes to <code>&lt;username&gt;.github.io</code>. You can use and tailor the script below as your <code>deploy.bat</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-batch" data-lang="batch">@<span style="color:#66d9ef">echo</span> OFF
 
-<li><p><code>deploy.bat &quot;Your optional commit message&quot;</code> will commit the changes to <code>&lt;username&gt;.github.io</code>. You can use and tailor the script below as your <code>deploy.bat</code></p>
+<span style="color:#66d9ef">echo</span>  Deploying updates to GitHub...
 
-<pre><code class="language-batch">@echo OFF
+<span style="color:#75715e">REM Build the project. </span>
+hugo -t <span style="color:#ae81ff"></span>&lt;yourtheme<span style="color:#ae81ff"></span>&gt; -D
 
-echo  Deploying updates to GitHub...
+<span style="color:#75715e">REM Go To Public folder</span>
+<span style="color:#66d9ef">cd</span> public
 
-REM Build the project. 
-hugo -t &lt;yourtheme&gt; -D
-
-REM Go To Public folder
-cd public
-
-REM Add changes to git.
+<span style="color:#75715e">REM Add changes to git.</span>
 git add -A
 
-REM Commit changes.
-set msg=&quot;rebuilding site %date%&quot;
-if  NOT &quot;%1&quot;==&quot;&quot;    set msg=%1
-git commit -m '%msg%'
+<span style="color:#75715e">REM Commit changes.</span>
+<span style="color:#66d9ef">set</span> <span style="color:#66d9ef"></span>msg=<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rebuilding site </span>%date%<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">if</span>  <span style="color:#66d9ef"></span><span style="color:#66d9ef">NOT</span> <span style="color:#e6db74">&#34;</span>%1<span style="color:#e6db74">&#34;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>    <span style="color:#66d9ef">set</span> <span style="color:#66d9ef"></span>msg=%1
+git commit -m &#39;%msg%&#39;
 
-REM Push source and build repos.
+<span style="color:#75715e">REM Push source and build repos.</span>
 git push origin master
 
-REM Come Back
-cd ..
-</code></pre></li>
-
-<li><p>You might want to commit the changes to <strong>blog-hugo</strong> repository. Please don&rsquo;t forget to add <code>public</code> into the <code>.gitignore</code>.</p></li>
+<span style="color:#75715e">REM Come Back</span>
+<span style="color:#66d9ef">cd</span> ..
+</code></pre></div></li>
+<li>
+<p>You might want to commit the changes to <strong>blog-hugo</strong> repository. Please don't forget to add <code>public</code> into the <code>.gitignore</code>.</p>
+</li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#step-1-plan-and-prepare">Step 1 - Plan and prepare</a>
-<ul>
-<li><a href="#prerequisite">Prerequisite</a></li>
-<li><a href="#manage-your-github-repositories">Manage your github repositories</a></li>
-<li><a href="#manage-your-blog-site">Manage your blog site</a></li>
-</ul></li>
-<li><a href="#step-2-create-a-blog-site">Step -2: Create a blog site</a>
-<ul>
-<li><a href="#create-github-repositories">Create github repositories</a></li>
-<li><a href="#create-a-bloodily-good-blog-site">Create a bloodily good blog site</a></li>
-<li><a href="#setup-a-sub-module-for-publish">Setup a sub module for publish</a></li>
-</ul></li>
-<li><a href="#deploy-to-github-page">Deploy to Github page</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#step-1---plan-and-prepare">Step 1 - Plan and prepare</a></li>
+        <li><a href="#step--2-create-a-blog-site">Step -2: Create a blog site</a></li>
+        <li><a href="#deploy-to-github-page">Deploy to Github page</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

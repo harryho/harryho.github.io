@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>CentOS 7 Server note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -944,6 +980,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -961,97 +999,70 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>CentOS 7 Server note</h1>
-        
-
-<p>Prelude</p>
-
+        <p>Prelude</p>
 <blockquote>
 <p>This article is mainly to help experienced user install and setup CentOS 7 Server.</p>
 </blockquote>
-
 <h2 id="prerequisites">Prerequisites</h2>
-
 <ul>
 <li>You are familiar with CentOS, at least you have some experience working on Linux system.</li>
 <li>You are familiar with basic bash/shell command</li>
 </ul>
-
 <h2 id="things-to-do-after-installing-centos-server">Things to do after installing CentOS server</h2>
-
 <ul>
 <li>How to setup your server</li>
 </ul>
-
 <h2 id="firewall-setup">Firewall setup</h2>
-
-<pre><code class="language-bash">sudo firewall-cmd --permanent --add-port=22/tcp
-sudo firewall-cmd --permanent --add-port=21/tcp
-sudo firewall-cmd --permanent --add-port=80/tcp
-sudo firewall-cmd --permanent --add-port=443/tcp
-sudo firewall-cmd --permanent --add-port=8080/tcp
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>22/tcp
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>21/tcp
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>80/tcp
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>443/tcp
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>8080/tcp
 
 sudo firewall-cmd --reload
-</code></pre>
-
-<h2 id="ssh-server-setup">SSH server setup</h2>
-
+</code></pre></div><h2 id="ssh-server-setup">SSH server setup</h2>
 <p><code>!!! For production environment, SSH should be secured by the CA</code></p>
-
 <ul>
-<li><p>Install SSH if it is not done yet</p>
-
-<pre><code class="language-bash">## yum install openssh openssh-server openssh-clients openssl-libs
-</code></pre></li>
-
-<li><p>Configure SSH</p>
-
-<pre><code class="language-bash">## backup default config 
+<li>Install SSH if it is not done yet</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## yum install openssh openssh-server openssh-clients openssl-libs</span>
+</code></pre></div><ul>
+<li>Configure SSH</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## backup default config</span> 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.ori
 sudo chmod a-w /etc/ssh/sshd_config.ori
 
-## use any editor to update sshd_config 
+<span style="color:#75715e">## use any editor to update sshd_config</span> 
 sudo vi /etc/ssh/sshd_config 
 
-## uncomment PasswordAuthentication yes to allow remote password login
-## Password authentication is only for test environment
+<span style="color:#75715e">## uncomment PasswordAuthentication yes to allow remote password login</span>
+<span style="color:#75715e">## Password authentication is only for test environment</span>
 
-## setup ssh auto-start onboot
+<span style="color:#75715e">## setup ssh auto-start onboot</span>
 sudo systemctl restart sshd 
-</code></pre></li>
-</ul>
+</code></pre></div><h2 id="update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -l /etc/localtime <span style="color:#75715e">## check the time zone</span>
 
-<h2 id="update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</h2>
-
-<pre><code class="language-bash">ls -l /etc/localtime ## check the time zone
-
-sudo timedatectl list | grep New_York ## find the time zone by the city
+sudo timedatectl list | grep New_York <span style="color:#75715e">## find the time zone by the city</span>
 sudo timedatectl set-timezone America/New_York
-</code></pre>
-
-<h2 id="install-git">Install Git</h2>
-
+</code></pre></div><h2 id="install-git">Install Git</h2>
 <ul>
-<li><p>Option 1: You can use <code>yum</code> to install git, but it is quite out-of-date. The version of git is 1.8.x</p>
-
-<pre><code class="language-bash">sudo yum install git
-git --version
-</code></pre></li>
-
-<li><p>Option 2: Download the latest stable release of Git and compile the software from source. (<strong>Recommended</strong>)</p></li>
+<li>Option 1: You can use <code>yum</code> to install git, but it is quite out-of-date. The version of git is 1.8.x</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install git
+git --version
+</code></pre></div><ul>
+<li>Option 2: Download the latest stable release of Git and compile the software from source. (<strong>Recommended</strong>)</li>
+</ul>
 <h3 id="install-build-tools">Install build tools</h3>
-
 <pre><code>sudo yum groupinstall &quot;Development Tools&quot;
 
 sudo yum install gettext-devel openssl-devel perl-CPAN perl-devel \
     zlib-devel libcurl-devel expat-devel
 
 sudo yum install yum-utils
-</code></pre>
-
-<h3 id="download-the-latest-release">Download the latest release</h3>
-
+</code></pre><h3 id="download-the-latest-release">Download the latest release</h3>
 <pre><code>wget https://github.com/git/git/archive/v2.x.x.tar.gz -O git.tar.gz
 tar -zxf git.tar.gz
 cd git-*
@@ -1059,267 +1070,205 @@ make configure
 ./configure --prefix=/usr/local
 sudo make install
 git --version
-</code></pre>
+</code></pre><h2 id="setup-a-better-vim">Setup a better Vim</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum isntall vim-enhanced
 
-<h2 id="setup-a-better-vim">Setup a better Vim</h2>
-
-<pre><code class="language-bash">sudo yum isntall vim-enhanced
-
-</code></pre>
-
-<h2 id="install-tmux">Install Tmux</h2>
-
-<pre><code class="language-bash">sudo yum install tmux
-</code></pre>
-
-<ul>
+</code></pre></div><h2 id="install-tmux">Install Tmux</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install tmux
+</code></pre></div><ul>
 <li>Most useful tmux commands</li>
 </ul>
-
 <blockquote>
-<p>Ctrl+b &ldquo; — split pane horizontally.</p>
-
+<p>Ctrl+b &quot; — split pane horizontally.</p>
 <p>Ctrl+b % — split pane vertically.</p>
-
 <p>Ctrl+b arrow key — switch pane.</p>
-
 <p>Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.</p>
-
-<p>Ctrl+b c — &copy;reate a new window.</p>
-
+<p>Ctrl+b c — (c)reate a new window.</p>
 <p>Ctrl+b , — rename reate a new window.</p>
-
 <p>Ctrl+b n — move to the (n)ext window.</p>
-
 <p>Ctrl+b p — move to the (p)revious window.</p>
 </blockquote>
-
 <h2 id="install-python-3">Install python 3</h2>
-
 <p>You will only find Python 2 on CentOS by default. In order to install the latest python3, we need to install <code>IUS</code> to which stands for Inline with Upstream Stable.</p>
-
-<pre><code class="language-bash">sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 sudo yum -y install python36u
 
-### Install development package
+<span style="color:#75715e">### Install development package</span>
 sudo yum -y insall python-devel python36u-devel
-</code></pre>
-
-<h2 id="install-nodejs">Install nodejs</h2>
-
+</code></pre></div><h2 id="install-nodejs">Install nodejs</h2>
 <ul>
-<li><p>Nodejs 6.x</p>
-
-<pre><code class="language-bash">sudo yum -y install nodejs
-</code></pre></li>
-
-<li><p>Nodejs 8.x</p>
-
-<pre><code class="language-bash">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-</code></pre></li>
-
-<li><p>Upgrade NPM</p>
-
+<li>Nodejs 6.x</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum -y install nodejs
+</code></pre></div><ul>
+<li>Nodejs 8.x</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+</code></pre></div><ul>
+<li>Upgrade NPM</li>
+</ul>
 <pre><code>sudo npm install -g npm
 sudo npm install -g typescript
 sudo mpm install -g yarn
-</code></pre></li>
-</ul>
+</code></pre><h2 id="install-docker-ce-centos-7">install docker CE (CentOS 7)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## add repo</span>
+sudo yum-config-manager <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --add-repo <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    https://download.docker.com/linux/centos/docker-ce.repo
 
-<h2 id="install-docker-ce-centos-7">install docker CE (CentOS 7)</h2>
-
-<pre><code class="language-bash">## add repo
-sudo yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-
-## check docker.list
+<span style="color:#75715e">## check docker.list</span>
 yum list docker-ce --showduplicates | sort -r
 
-## install docker engine
+<span style="color:#75715e">## install docker engine</span>
 sudo yum install docker-ce
 
 docker -v 
-</code></pre>
-
-<h2 id="install-jdk-8">Install JDK 8</h2>
-
+</code></pre></div><h2 id="install-jdk-8">Install JDK 8</h2>
 <ul>
-<li><p>Downlaod the JDK from Oracle website.</p>
-
-<pre><code class="language-bash">
-## At the confirmation prompt, enter y 
-## then RETURN to continue with the installation.
+<li>Downlaod the JDK from Oracle website.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#75715e">## At the confirmation prompt, enter y</span> 
+<span style="color:#75715e">## then RETURN to continue with the installation.</span>
 sudo yum install java-1.8.0-openjdk-devel
 
 
 java -version
-</code></pre></li>
-
-<li><p>Test JDK with a simple HelloWorld program</p>
-
-<pre><code class="language-java">import java.util.Calendar;
-
-class HelloWorld {
-public static void main(String[] args) {
-    Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH) + 1;
-    int day = cal.get(Calendar.DATE);
-    int hour = cal.get(Calendar.HOUR_OF_DAY);
-    int minute = cal.get(Calendar.MINUTE);
-    String username = System.getProperty(&quot;user.name&quot;);
-    System.out.println(username+ &quot;: Hello World! &quot;);
-    System.out.println(year + &quot;/&quot; + month + &quot;/&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute);
-}
-}
-</code></pre></li>
-
-<li><p>Compile and run the program</p>
-
-<pre><code class="language-bash">javac HelloWorld.java
-java HelloWorld.java
-</code></pre></li>
+</code></pre></div><ul>
+<li>Test JDK with a simple HelloWorld program</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Calendar<span style="color:#f92672">;</span>
 
-<h2 id="install-go">Install Go</h2>
-
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelloWorld</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Calendar cal <span style="color:#f92672">=</span> Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> year <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">YEAR</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> month <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">MONTH</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> day <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">DATE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> hour <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">HOUR_OF_DAY</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> minute <span style="color:#f92672">=</span> cal<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Calendar<span style="color:#f92672">.</span><span style="color:#a6e22e">MINUTE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        String username <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">getProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;user.name&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>username<span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: Hello World! &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>year <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> month <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> day <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> hour <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:&#34;</span> <span style="color:#f92672">+</span> minute<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>Compile and run the program</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">javac HelloWorld.java
+java HelloWorld.java
+</code></pre></div><h2 id="install-go">Install Go</h2>
 <ul>
-<li><p>Install Go</p>
-
-<pre><code class="language-bash">cd /tmp
+<li>Install Go</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /tmp
 curl -LO https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
 
-## check hash
-shasum -a 256 go*linux-amd64.tar.gz
+<span style="color:#75715e">## check hash</span>
+shasum -a <span style="color:#ae81ff">256</span> go*linux-amd64.tar.gz
 
-## install tar ball
+<span style="color:#75715e">## install tar ball</span>
 sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
-</code></pre></li>
-
-<li><p>Setup GOROOT</p>
-
-<pre><code class="language-bash">cd /etc/profile.d
-## Create a path.sh script
+</code></pre></div><ul>
+<li>Setup GOROOT</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /etc/profile.d
+<span style="color:#75715e">## Create a path.sh script</span>
 sudo vi path.sh
-</code></pre></li>
-
-<li><p>Copy following code into <code>path.sh</code></p>
-
+</code></pre></div><ul>
+<li>Copy following code into <code>path.sh</code></li>
+</ul>
 <pre><code>export PATH=$PATH:/usr/local/go/bin
-</code></pre></li>
-
-<li><p>Setup local GOBIN, GOPATH</p>
-
-<pre><code class="language-bash">export GOBIN=&quot;$HOME/projects/go/bin&quot;
-export GOPATH=&quot;$HOME/projects/go/src&quot;
+</code></pre><ul>
+<li>Setup local GOBIN, GOPATH</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export GOBIN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/projects/go/bin</span><span style="color:#e6db74">&#34;</span>
+export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/projects/go/src</span><span style="color:#e6db74">&#34;</span>
 export PATH
-</code></pre></li>
-
-<li><p>Create a simple <code>hello.go</code> file to test</p>
-
-<pre><code class="language-go">package main                                                        
+</code></pre></div><ul>
+<li>Create a simple <code>hello.go</code> file to test</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>                                                        
                                                                     
-import (                                                            
-&quot;fmt&quot;                                                           
-&quot;log&quot;                                                           
-&quot;os/user&quot;                                                       
+<span style="color:#f92672">import</span> (                                                            
+    <span style="color:#e6db74">&#34;fmt&#34;</span>                                                           
+    <span style="color:#e6db74">&#34;log&#34;</span>                                                           
+    <span style="color:#e6db74">&#34;os/user&#34;</span>                                                       
 )                                                                   
                                                                     
-func main(){                                                        
-user, err := user.Current()                                 
-if err != nil {                                             
-        log.Fatal(err)                                      
-}                                                            
-fmt.Printf(user.Name + &quot; said : Hello World! \n&quot; )            
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){                                                        
+    <span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Current</span>()                                 
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {                                             
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)                                      
+    }                                                            
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; said : Hello World! \n&#34;</span> )            
 }                                                                   
-</code></pre></li>
-
-<li><p>Run the program</p>
-
-<pre><code class="language-bash">go run $GOPATH/hello.go
+</code></pre></div><ul>
+<li>Run the program</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go run $GOPATH/hello.go
 go install $GOPATH/hello.go
 $GOBIN/hello
-</code></pre></li>
-</ul>
-
-<h2 id="install-cmake">Install Cmake</h2>
-
-<pre><code class="language-bash">sudo yum install epel-release
+</code></pre></div><h2 id="install-cmake">Install Cmake</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install epel-release
 sudo yum install cmake3
 sudo ln -s /usr/bin/cmake3 /usr/bin/cmake
-</code></pre>
-
-<h2 id="install-rust">Install Rust</h2>
-
-<pre><code class="language-bash">curl -f -L https://static.rust-lang.org/rustup.sh -O
+</code></pre></div><h2 id="install-rust">Install Rust</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -f -L https://static.rust-lang.org/rustup.sh -O
 sh rustup.sh
 rustc --version
-</code></pre>
-
-<h2 id="install-php-7">Install PHP 7</h2>
-
+</code></pre></div><h2 id="install-php-7">Install PHP 7</h2>
 <ul>
-<li><p>install and enable EPEL and Remi repository</p>
-
-<pre><code class="language-bash">sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-</code></pre></li>
-
-<li><p>install <code>yum-utils</code></p>
-
-<pre><code>sudo yum install yum-utils
-</code></pre></li>
-
-<li><p>Enable PHP 7 repo</p>
-
-<pre><code>sudo yum-config-manager --enable remi-php72  
-</code></pre></li>
-
-<li><p>Install PHP</p>
-
-<pre><code>sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
-php-ldap php-zip php-fileinfo 
-</code></pre></li>
+<li>install and enable EPEL and Remi repository</li>
 </ul>
-
-<h2 id="install-clang">Install clang</h2>
-
-<pre><code class="language-bash">sudo yum install llvm
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+</code></pre></div><ul>
+<li>install <code>yum-utils</code></li>
+</ul>
+<pre><code>sudo yum install yum-utils
+</code></pre><ul>
+<li>Enable PHP 7 repo</li>
+</ul>
+<pre><code>sudo yum-config-manager --enable remi-php72  
+</code></pre><ul>
+<li>Install PHP</li>
+</ul>
+<pre><code>sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql \
+    php-ldap php-zip php-fileinfo 
+</code></pre><h2 id="install-clang">Install clang</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install llvm
 sudo yum install clang
 
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#things-to-do-after-installing-centos-server">Things to do after installing CentOS server</a></li>
-<li><a href="#firewall-setup">Firewall setup</a></li>
-<li><a href="#ssh-server-setup">SSH server setup</a></li>
-<li><a href="#update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</a></li>
-<li><a href="#install-git">Install Git</a>
-<ul>
-<li><a href="#install-build-tools">Install build tools</a></li>
-<li><a href="#download-the-latest-release">Download the latest release</a></li>
-</ul></li>
-<li><a href="#setup-a-better-vim">Setup a better Vim</a></li>
-<li><a href="#install-tmux">Install Tmux</a></li>
-<li><a href="#install-python-3">Install python 3</a></li>
-<li><a href="#install-nodejs">Install nodejs</a></li>
-<li><a href="#install-docker-ce-centos-7">install docker CE (CentOS 7)</a></li>
-<li><a href="#install-jdk-8">Install JDK 8</a></li>
-<li><a href="#install-go">Install Go</a></li>
-<li><a href="#install-cmake">Install Cmake</a></li>
-<li><a href="#install-rust">Install Rust</a></li>
-<li><a href="#install-php-7">Install PHP 7</a></li>
-<li><a href="#install-clang">Install clang</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#things-to-do-after-installing-centos-server">Things to do after installing CentOS server</a></li>
+    <li><a href="#firewall-setup">Firewall setup</a></li>
+    <li><a href="#ssh-server-setup">SSH server setup</a></li>
+    <li><a href="#update-time-zone-if-it-is-incorrect">Update Time Zone if it is incorrect</a></li>
+    <li><a href="#install-git">Install Git</a>
+      <ul>
+        <li><a href="#install-build-tools">Install build tools</a></li>
+        <li><a href="#download-the-latest-release">Download the latest release</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup-a-better-vim">Setup a better Vim</a></li>
+    <li><a href="#install-tmux">Install Tmux</a></li>
+    <li><a href="#install-python-3">Install python 3</a></li>
+    <li><a href="#install-nodejs">Install nodejs</a></li>
+    <li><a href="#install-docker-ce-centos-7">install docker CE (CentOS 7)</a></li>
+    <li><a href="#install-jdk-8">Install JDK 8</a></li>
+    <li><a href="#install-go">Install Go</a></li>
+    <li><a href="#install-cmake">Install Cmake</a></li>
+    <li><a href="#install-rust">Install Rust</a></li>
+    <li><a href="#install-php-7">Install PHP 7</a></li>
+    <li><a href="#install-clang">Install clang</a></li>
+  </ul>
 </nav>
     </div>
 

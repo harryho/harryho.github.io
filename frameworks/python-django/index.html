@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:57 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Python Web Framework :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -938,6 +974,8 @@
       <option value="/frameworks/php-web/" >- PHP Web Framework</option>
       <option value="/frameworks/python-django/"  selected>- Python Web Framework</option>
   
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -955,110 +993,100 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Python Web Framework</h1>
-        
-
-<blockquote>
+        <blockquote>
 <p>Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.</p>
 </blockquote>
-
 <h2 id="install-python-pip-and-virtualenv">Install Python, pip and virtualenv</h2>
-
 <ul>
-<li><p>Windows: Please find in from Home Page</p></li>
-
-<li><p>Ubuntu: Please find it from <a href="/os/ubuntu-server-14">Ubuntu setup</a></p></li>
-
-<li><p>Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip.</p></li>
-
-<li><p>You can simply use pip or pip3 install any package you need.</p></li>
+<li>
+<p>Windows: Please find in from Home Page</p>
+</li>
+<li>
+<p>Ubuntu: Please find it from <a href="/os/ubuntu-server-14">Ubuntu setup</a></p>
+</li>
+<li>
+<p>Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip.</p>
+</li>
+<li>
+<p>You can simply use pip or pip3 install any package you need.</p>
+</li>
 </ul>
-
 <h2 id="windows"><strong>Windows</strong></h2>
-
 <h3 id="install-django">Install django</h3>
-
 <ul>
-<li><p>create a folder virtualenvs within the location of python 3</p></li>
-
-<li><p>create a new virtualenv named django18</p></li>
-
-<li><p>Activate the new virtual env</p></li>
-
-<li><p>Install Django 1.x.x (LTS version)</p>
-
-<pre><code class="language-bash">cd  /path/to/python3
+<li>
+<p>create a folder virtualenvs within the location of python 3</p>
+</li>
+<li>
+<p>create a new virtualenv named django18</p>
+</li>
+<li>
+<p>Activate the new virtual env</p>
+</li>
+<li>
+<p>Install Django 1.x.x (LTS version)</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd  /path/to/python3
 cd  virtualenvs
 
 virtualenv django18
 
 cd django18
 
-Scripts\activate
+Scripts<span style="color:#ae81ff">\a</span>ctivate
 
 which python
 
-pip install django==1.x.x
-</code></pre></li>
-</ul>
-
-<h3 id="create-django-project">Create django project</h3>
-
+pip install django<span style="color:#f92672">=</span><span style="color:#f92672">=</span>1.x.x
+</code></pre></div><h3 id="create-django-project">Create django project</h3>
 <ul>
-<li><p>SET PATH in current command promp</p></li>
-
-<li><p>Navigate to workspace folder</p></li>
-
-<li><p>Create new django project</p></li>
-
-<li><p>Start the app</p>
-
-<pre><code class="language-bat">SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
+<li>
+<p>SET PATH in current command promp</p>
+</li>
+<li>
+<p>Navigate to workspace folder</p>
+</li>
+<li>
+<p>Create new django project</p>
+</li>
+<li>
+<p>Start the app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat"><span style="color:#66d9ef">SET</span> <span style="color:#66d9ef"></span>PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
 
 which django-admin
 
-cd c:\ws\python\django\
+<span style="color:#66d9ef">cd</span> c:\ws\python\django\
 
 django-admin startproject demo
 
-cd demo
+<span style="color:#66d9ef">cd</span> demo
 
 python manage.py runserver
-</code></pre></li>
+</code></pre></div></li>
 </ul>
-
 <h3 id="create-a-new-app-module">Create a new app module</h3>
-
-<pre><code class="language-bash">python manage.py startapp main
-</code></pre>
-
-<h3 id="create-a-new-db">Create a new db</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py startapp main
+</code></pre></div><h3 id="create-a-new-db">Create a new db</h3>
 <p><strong>following commands are just tested in django 1.8</strong></p>
-
-<pre><code class="language-python">python manage.py syncdb 
-python manage.py makemigrations new_app 
-## migrate 
-pyrhon manage.py sqlmigrate new_app 0001 
-## migrate 
-python manage.py migrate new_app 0001
-</code></pre>
-
-<h3 id="use-python-shell-model-api">use python shell Model API</h3>
-
-<pre><code class="language-python">python manage.py shell
-&gt;&gt;&gt; from XXX.models import ModelClass
-&gt;&gt;&gt; ModelClass.objects.all()
-&gt;&gt;&gt; ModelClass.objects.get(pk =1 )
-&gt;&gt;&gt; ModelClass.objects.filter( fieldName1=&quot;abc&quot;)
-&gt;&gt;&gt; mc = new ModelClass.( fieldName1 = &quot;abc&quot;, fieldName2=&quot;def&quot;, fieldName3 = 3 )
-&gt;&gt;&gt; mc.save()
-&gt;&gt;&gt; mc = ModelClass.objects.get(pd=1)
-&gt;&gt;&gt; mc.delete()    
-</code></pre>
-
-<h2 id="linux"><strong>Linux</strong></h2>
-
-<pre><code class="language-bash">pip install virtualenv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">python manage<span style="color:#f92672">.</span>py syncdb 
+python manage<span style="color:#f92672">.</span>py makemigrations new_app 
+<span style="color:#75715e">## migrate </span>
+pyrhon manage<span style="color:#f92672">.</span>py sqlmigrate new_app <span style="color:#ae81ff">0001</span> 
+<span style="color:#75715e">## migrate </span>
+python manage<span style="color:#f92672">.</span>py migrate new_app <span style="color:#ae81ff">0001</span>
+</code></pre></div><h3 id="use-python-shell-model-api">use python shell Model API</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">python manage<span style="color:#f92672">.</span>py shell
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> XXX.models <span style="color:#f92672">import</span> ModelClass
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> ModelClass<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> ModelClass<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(pk <span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> )
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> ModelClass<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter( fieldName1<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> mc <span style="color:#f92672">=</span> new ModelClass<span style="color:#f92672">.</span>( fieldName1 <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#34;</span>, fieldName2<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">def</span><span style="color:#e6db74">&#34;</span>, fieldName3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> )
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> mc<span style="color:#f92672">.</span>save()
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> mc <span style="color:#f92672">=</span> ModelClass<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(pd<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> mc<span style="color:#f92672">.</span>delete()    
+</code></pre></div><h2 id="linux"><strong>Linux</strong></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install virtualenv
 
 pip3 install virtualenv
 
@@ -1066,7 +1094,7 @@ cd ~
 
 mkdir .envs
 
-## create python2 env
+<span style="color:#75715e">## create python2 env</span>
 virtualenv -p /usr/bin/python2.7 py2env
 
 virtualenv -p /usr/bin/python3.4 py3env
@@ -1074,35 +1102,31 @@ virtualenv -p /usr/bin/python3.4 py3env
 cd py2env 
 source bin/activate
 
-## Check python path 
+<span style="color:#75715e">## Check python path</span> 
 which python
 
-## Exit
+<span style="color:#75715e">## Exit</span>
 deactivate
 
-</code></pre>
-
-<p><strong>Activate virtual environment need to use source instead of executing sh file</strong></p>
+</code></pre></div><p><strong>Activate virtual environment need to use source instead of executing sh file</strong></p>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#install-python-pip-and-virtualenv">Install Python, pip and virtualenv</a></li>
-<li><a href="#windows"><strong>Windows</strong></a>
-<ul>
-<li><a href="#install-django">Install django</a></li>
-<li><a href="#create-django-project">Create django project</a></li>
-<li><a href="#create-a-new-app-module">Create a new app module</a></li>
-<li><a href="#create-a-new-db">Create a new db</a></li>
-<li><a href="#use-python-shell-model-api">use python shell Model API</a></li>
-</ul></li>
-<li><a href="#linux"><strong>Linux</strong></a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#install-python-pip-and-virtualenv">Install Python, pip and virtualenv</a></li>
+    <li><a href="#windows">Windows</a>
+      <ul>
+        <li><a href="#install-django">Install django</a></li>
+        <li><a href="#create-django-project">Create django project</a></li>
+        <li><a href="#create-a-new-app-module">Create a new app module</a></li>
+        <li><a href="#create-a-new-db">Create a new db</a></li>
+        <li><a href="#use-python-shell-model-api">use python shell Model API</a></li>
+      </ul>
+    </li>
+    <li><a href="#linux">Linux</a></li>
+  </ul>
 </nav>
     </div>
 
@@ -1113,7 +1137,7 @@ deactivate
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/frameworks/php-web/" title="PHP Web Framework"> <i class="fa fa-chevron-left"></i><label>PHP Web Framework</label></a>
-    <a class="nav nav-next" href="/frameworks/cntk-notes-1/" title="CNTK Note - 1" style="margin-right: 0px;"><label>CNTK Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/tut/" title="Tutorial" style="margin-right: 0px;"><label>Tutorial</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

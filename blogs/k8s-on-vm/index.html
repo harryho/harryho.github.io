@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Try Minikube :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
   
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,25 +994,18 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Try Minikube</h1>
-        
-
-<h2 id="prerequisites">Prerequisites</h2>
-
+        <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>Install KVM or VirtualBox</li>
 <li>Install Ubuntu / Debian on KVM or VirtualBox</li>
 <li>Install Minikube</li>
 </ul>
-
 <h2 id="check-k8s-version-and-config">Check K8s version and config</h2>
-
 <pre><code>kubectl version
 kubectl config
 kubectl cluster-info
 </code></pre>
-
-<h2 id="get-describe-command">Get / Describe command</h2>
-
+<h2 id="get--describe-command">Get / Describe command</h2>
 <pre><code>kubectl get ndoes
 kubectl get pods
 kubectl get deployments
@@ -982,76 +1013,68 @@ kubectl get services
 
 kubectl describe pods
 </code></pre>
-
 <h2 id="deploy-hello-world-node-demo-app">Deploy hello-world node demo app</h2>
-
 <ul>
-<li><p>Deploy a demo app</p>
+<li>
+<p>Deploy a demo app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run kubernetes-bootcamp --image<span style="color:#f92672">=</span>gcr.io/google-samples/kubernetes-bootcamp:v1 --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
 
-<pre><code class="language-bash">kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
-
-# View deployments and pods
+<span style="color:#75715e"># View deployments and pods</span>
 kubectl get deployments
 kubectl get pods
-</code></pre></li>
-
-<li><p>Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network.</p></li>
-
-<li><p>The kubectl command can create a proxy that will forward communications into the cluster-wide, private network.</p>
-
-<pre><code class="language-bash"># Create a proxy from another terminal
+</code></pre></div></li>
+<li>
+<p>Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network.</p>
+</li>
+<li>
+<p>The kubectl command can create a proxy that will forward communications into the cluster-wide, private network.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create a proxy from another terminal</span>
 kubectl proxy
 
-# Test it from original termianl
+<span style="color:#75715e"># Test it from original termianl</span>
 curl http://localhost:8001/version
-</code></pre></li>
-
-<li><p>Get pod name</p>
-
-<pre><code class="language-bash">export POD_NAME=$(kubectl get pods -o go-template --template \
- '{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}')
+</code></pre></div></li>
+<li>
+<p>Get pod name</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export POD_NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get pods -o go-template --template <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> <span style="color:#e6db74">&#39;{{range .items}}{{.metadata.name}}{{&#34;\n&#34;}}{{end}}&#39;</span><span style="color:#66d9ef">)</span>
 echo Name of the Pod: $POD_NAME
 kubectl logs $POD_NAME
-</code></pre></li>
-
-<li><p>Execute command on containter</p>
-
-<pre><code class="language-bash">kubectl exec $POD_NAME env
+</code></pre></div></li>
+<li>
+<p>Execute command on containter</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec $POD_NAME env
 kubectl exec $POD_NAME bash
 kubectl exec $POD_NAME curl localhost:8080
-</code></pre></li>
-
-<li><p>Scale demo app with replica</p>
-
-<pre><code class="language-bash"># kubernetes-bootcamp   deployment is the same as above
+</code></pre></div></li>
+<li>
+<p>Scale demo app with replica</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># kubernetes-bootcamp   deployment is the same as above</span>
 kubectl get pods -o wide
 kubectl describe deployments/kubernetes-bootcamp    
-kubectl scale deployments/kubernetes-bootcamp --replicas=2
+kubectl scale deployments/kubernetes-bootcamp --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
 
-# Get NodePort
-export NODE_PORT=$(kubectl get services/kubernetes-bootcamp \
-    -o go-template='{{(index .spec.ports 0).nodePort}}')
-echo NODE_PORT=$NODE_PORT
+<span style="color:#75715e"># Get NodePort</span>
+export NODE_PORT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get services/kubernetes-bootcamp <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -o go-template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{{(index .spec.ports 0).nodePort}}&#39;</span><span style="color:#66d9ef">)</span>
+echo NODE_PORT<span style="color:#f92672">=</span>$NODE_PORT
 
-# Test load balance
-curl $(minikube ip):$NODE_PORT
+<span style="color:#75715e"># Test load balance</span>
+curl <span style="color:#66d9ef">$(</span>minikube ip<span style="color:#66d9ef">)</span>:$NODE_PORT
 
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#check-k8s-version-and-config">Check K8s version and config</a></li>
-<li><a href="#get-describe-command">Get / Describe command</a></li>
-<li><a href="#deploy-hello-world-node-demo-app">Deploy hello-world node demo app</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#check-k8s-version-and-config">Check K8s version and config</a></li>
+    <li><a href="#get--describe-command">Get / Describe command</a></li>
+    <li><a href="#deploy-hello-world-node-demo-app">Deploy hello-world node demo app</a></li>
+  </ul>
 </nav>
     </div>
 

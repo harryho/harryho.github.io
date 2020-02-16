@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:57 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>MySql Note - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -948,7 +984,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -969,6 +1005,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -986,154 +1024,141 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>MySql Note - 3</h1>
-        
-
-<h2 id="function-udf">Function - UDF</h2>
-
+        <h2 id="function---udf">Function - UDF</h2>
 <blockquote>
 <p>For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.h.</p>
-
+</blockquote>
+<blockquote>
 <p>A UDF contains code that becomes part of the running server, so when you write a UDF, you are bound by any and all constraints that apply to writing server code. For example, you may have problems if you attempt to use functions from the libstdc++ library. T</p>
 </blockquote>
-
 <h3 id="function-sample">Function sample</h3>
-
 <ul>
-<li><p>Check the input string is OZ land line</p>
-
-<pre><code class="language-sql">DROP FUNCTION IF EXISTS isAusLandLine;
-DELIMITER $$
-CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT
-BEGIN
-DECLARE vv_number VARCHAR(500);
-
-SELECT REPLACE(in_value, '+','') INTO vv_number;
-
-RETURN 
-  CASE 
-      WHEN LEFT(vv_number, 2) IN ('02','03','07','08') ss
-      THEN LENGTH(vv_number) = 10 ELSE 0 
-  END;
-END $$
-
-DELIMITER ;
-
--- SELECT isAusLandLine('03123322') from dual; -- TRUE
-
--- SELECT isAusLandLine('06123322') from dual; -- FALSE
-
-</code></pre></li>
-
-<li><p>EXtract the Json to String</p>
-
-<pre><code class="language-sql">DROP FUNCTION IF EXISTS json_extract_string;
-
-DELIMITER $
-
-CREATE FUNCTION `json_extract_string`(
-p_json text,
-p_key text
-) RETURNS varchar(40) CHARSET latin1
-BEGIN
-SET p_json = replace(p_json, '\\&quot;', '&quot;');
-SET p_json = replace(p_json, '&quot; :', '&quot;:');
-SET p_json = replace(p_json, ': &quot;', ':&quot;');
-SET p_json = replace(p_json, ': [', ':[');
-
-SET @pattern_start_type = '&quot;';
-SET @pattern_end_type = '&quot;';
-SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
-
-IF LOCATE(@pattern, p_json) &gt; 0 THEN
-  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
-ELSE
-  SET @pattern_start_type = '[';
-  SET @pattern_end_type = ']';
-  SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
-  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
-END IF;
-
-IF @start_i = CHAR_LENGTH(@pattern) THEN
-  SET @end_i = 0;
-ELSE
-  SET @end_i = LOCATE(@pattern_end_type, p_json, @start_i) - @start_i;
-END IF;
-RETURN SUBSTR(p_json, @start_i, @end_i);
-END $
-
-DELIMITER ;
-
--- SELECT json_extract_string('{&quot;key&quot;: 123}' ) from dual; -- 123
-
-</code></pre></li>
+<li>Check the input string is OZ land line</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">FUNCTION</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> isAusLandLine;
+<span style="color:#66d9ef">DELIMITER</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#960050;background-color:#1e0010">$</span>
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> isAusLandLine (in_value VARCHAR(<span style="color:#ae81ff">500</span>)) <span style="color:#66d9ef">RETURNS</span> TINYINT
+<span style="color:#66d9ef">BEGIN</span>
+    <span style="color:#66d9ef">DECLARE</span> vv_number VARCHAR(<span style="color:#ae81ff">500</span>);
 
-<h2 id="stord-procedure">Stord procedure</h2>
+    <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">REPLACE</span>(in_value, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">INTO</span> vv_number;
 
+    <span style="color:#66d9ef">RETURN</span> 
+      <span style="color:#66d9ef">CASE</span> 
+          <span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">LEFT</span>(vv_number, <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">02</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">03</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">07</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">08</span><span style="color:#e6db74">&#39;</span>) ss
+          <span style="color:#66d9ef">THEN</span> <span style="color:#66d9ef">LENGTH</span>(vv_number) <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> 
+      <span style="color:#66d9ef">END</span>;
+<span style="color:#66d9ef">END</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#960050;background-color:#1e0010">$</span>
+
+<span style="color:#66d9ef">DELIMITER</span> ;
+
+<span style="color:#75715e">-- SELECT isAusLandLine(&#39;03123322&#39;) from dual; -- TRUE
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">-- SELECT isAusLandLine(&#39;06123322&#39;) from dual; -- FALSE
+</span><span style="color:#75715e"></span>
+</code></pre></div><ul>
+<li>EXtract the Json to String</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">FUNCTION</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> json_extract_string;
+
+<span style="color:#66d9ef">DELIMITER</span> <span style="color:#960050;background-color:#1e0010">$</span>
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> <span style="color:#f92672">`</span>json_extract_string<span style="color:#f92672">`</span>(
+  p_json text,
+  p_key text
+) <span style="color:#66d9ef">RETURNS</span> varchar(<span style="color:#ae81ff">40</span>) CHARSET latin1
+  <span style="color:#66d9ef">BEGIN</span>
+    <span style="color:#66d9ef">SET</span> p_json <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(p_json, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">\\&#34;</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>);
+    <span style="color:#66d9ef">SET</span> p_json <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(p_json, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34; :</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;:</span><span style="color:#e6db74">&#39;</span>);
+    <span style="color:#66d9ef">SET</span> p_json <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(p_json, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">: &#34;</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">:&#34;</span><span style="color:#e6db74">&#39;</span>);
+    <span style="color:#66d9ef">SET</span> p_json <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(p_json, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">: [</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">:[</span><span style="color:#e6db74">&#39;</span>);
+
+    <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern_start_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>;
+    <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern_end_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>;
+    <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern <span style="color:#f92672">=</span> CONCAT(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>, p_key, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;:</span><span style="color:#e6db74">&#39;</span>,<span style="color:#f92672">@</span>pattern_start_type);
+
+    <span style="color:#66d9ef">IF</span> LOCATE(<span style="color:#f92672">@</span>pattern, p_json) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">THEN</span>
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>start_i <span style="color:#f92672">=</span> LOCATE(<span style="color:#f92672">@</span>pattern, p_json) <span style="color:#f92672">+</span> <span style="color:#66d9ef">CHAR_LENGTH</span>(<span style="color:#f92672">@</span>pattern);
+    <span style="color:#66d9ef">ELSE</span>
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern_start_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">[</span><span style="color:#e6db74">&#39;</span>;
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern_end_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">]</span><span style="color:#e6db74">&#39;</span>;
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>pattern <span style="color:#f92672">=</span> CONCAT(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>, p_key, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;:</span><span style="color:#e6db74">&#39;</span>,<span style="color:#f92672">@</span>pattern_start_type);
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>start_i <span style="color:#f92672">=</span> LOCATE(<span style="color:#f92672">@</span>pattern, p_json) <span style="color:#f92672">+</span> <span style="color:#66d9ef">CHAR_LENGTH</span>(<span style="color:#f92672">@</span>pattern);
+    <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">IF</span>;
+
+    <span style="color:#66d9ef">IF</span> <span style="color:#f92672">@</span>start_i <span style="color:#f92672">=</span> <span style="color:#66d9ef">CHAR_LENGTH</span>(<span style="color:#f92672">@</span>pattern) <span style="color:#66d9ef">THEN</span>
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>end_i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">ELSE</span>
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>end_i <span style="color:#f92672">=</span> LOCATE(<span style="color:#f92672">@</span>pattern_end_type, p_json, <span style="color:#f92672">@</span>start_i) <span style="color:#f92672">-</span> <span style="color:#f92672">@</span>start_i;
+    <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">IF</span>;
+    <span style="color:#66d9ef">RETURN</span> SUBSTR(p_json, <span style="color:#f92672">@</span>start_i, <span style="color:#f92672">@</span>end_i);
+  <span style="color:#66d9ef">END</span> <span style="color:#960050;background-color:#1e0010">$</span>
+
+<span style="color:#66d9ef">DELIMITER</span> ;
+
+<span style="color:#75715e">-- SELECT json_extract_string(&#39;{&#34;key&#34;: 123}&#39; ) from dual; -- 123
+</span><span style="color:#75715e"></span>
+</code></pre></div><h2 id="stord-procedure">Stord procedure</h2>
 <blockquote>
-<p>MySQL supports stored routines (procedures and functions). A stored routine is a set of SQL statements that can be stored in the server. Once this has been done, clients don&rsquo;t need to keep reissuing the individual statements but can refer to the stored routine instead.</p>
+<p>MySQL supports stored routines (procedures and functions). A stored routine is a set of SQL statements that can be stored in the server. Once this has been done, clients don't need to keep reissuing the individual statements but can refer to the stored routine instead.</p>
 </blockquote>
-
 <p>Stored routines can be particularly useful in certain situations:</p>
-
 <ul>
-<li><p>When multiple client applications are written in different languages or work on different platforms, but need to perform the same database operations.</p></li>
-
-<li><p>When security is paramount. Banks, for example, use stored procedures and functions for all common operations. This provides a consistent and secure environment, and routines can ensure that each operation is properly logged. In such a setup, applications and users would have no access to the database tables directly, but can only execute specific stored routines.</p></li>
+<li>
+<p>When multiple client applications are written in different languages or work on different platforms, but need to perform the same database operations.</p>
+</li>
+<li>
+<p>When security is paramount. Banks, for example, use stored procedures and functions for all common operations. This provides a consistent and secure environment, and routines can ensure that each operation is properly logged. In such a setup, applications and users would have no access to the database tables directly, but can only execute specific stored routines.</p>
+</li>
 </ul>
-
 <h3 id="stored-proc-sample">Stored proc sample</h3>
-
 <ul>
-<li><p>Create a stored proc to execute dynamic SQL script based on the previous execution result</p>
-
-<pre><code class="language-sql">DROP PROCEDURE IF EXISTS RunIf;
-
-DELIMITER $$
-
-CREATE PROCEDURE RunIf(ifExpr MEDIUMTEXT, execStmt MEDIUMTEXT)
-BEGIN
-SET @sql = concat('select @result := (', ifExpr, ')');
-PREPARE stmt from @sql;
-EXECUTE stmt;
-DEALLOCATE prepare stmt;
-IF (@result = true) THEN
-  SET @sql = execStmt;
-  PREPARE stmt FROM @sql;
-  EXECUTE stmt;
-  DEALLOCATE prepare stmt;
-END IF;
-END
-$$
-
-DELIMITER ;
-
--- CALL( CALL RunIf('EXISTS (SELECT * FROM information_schema.columns 
--- WHERE table_schema = DATABASE() AND table_name = \'TargeTable\' 
--- AND column_name = \'description\')',
---  'ALTER TABLE TargeTable DROP COLUMN description');)
-
-
-</code></pre></li>
+<li>Create a stored proc to execute dynamic SQL script based on the previous execution result</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">PROCEDURE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> RunIf;
 
+<span style="color:#66d9ef">DELIMITER</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#960050;background-color:#1e0010">$</span>
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> RunIf(ifExpr MEDIUMTEXT, execStmt MEDIUMTEXT)
+  <span style="color:#66d9ef">BEGIN</span>
+    <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> concat(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">select @result := (</span><span style="color:#e6db74">&#39;</span>, ifExpr, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>);
+    <span style="color:#66d9ef">PREPARE</span> stmt <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>;
+    <span style="color:#66d9ef">EXECUTE</span> stmt;
+    <span style="color:#66d9ef">DEALLOCATE</span> <span style="color:#66d9ef">prepare</span> stmt;
+    <span style="color:#66d9ef">IF</span> (<span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">THEN</span>
+      <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> execStmt;
+      <span style="color:#66d9ef">PREPARE</span> stmt <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>;
+      <span style="color:#66d9ef">EXECUTE</span> stmt;
+      <span style="color:#66d9ef">DEALLOCATE</span> <span style="color:#66d9ef">prepare</span> stmt;
+    <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">IF</span>;
+  <span style="color:#66d9ef">END</span>
+<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#960050;background-color:#1e0010">$</span>
+
+<span style="color:#66d9ef">DELIMITER</span> ;
+
+<span style="color:#75715e">-- CALL( CALL RunIf(&#39;EXISTS (SELECT * FROM information_schema.columns 
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- WHERE table_schema = DATABASE() AND table_name = \&#39;TargeTable\&#39; 
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- AND column_name = \&#39;description\&#39;)&#39;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">--  &#39;ALTER TABLE TargeTable DROP COLUMN description&#39;);)
+</span><span style="color:#75715e"></span>
+
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#function-udf">Function - UDF</a>
-<ul>
-<li><a href="#function-sample">Function sample</a></li>
-</ul></li>
-<li><a href="#stord-procedure">Stord procedure</a>
-<ul>
-<li><a href="#stored-proc-sample">Stored proc sample</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#function---udf">Function - UDF</a>
+      <ul>
+        <li><a href="#function-sample">Function sample</a></li>
+      </ul>
+    </li>
+    <li><a href="#stord-procedure">Stord procedure</a>
+      <ul>
+        <li><a href="#stored-proc-sample">Stored proc sample</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

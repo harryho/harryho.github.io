@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>C# Console App :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -945,7 +981,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -966,6 +1002,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -983,113 +1021,96 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>C# Console App</h1>
-        
-
-<blockquote>
+        <blockquote>
 <p><strong>C# is an elegant and type-safe object-oriented language that enables developers to build a variety of secure and robust applications that run on the .NET Framework. C# syntax is highly expressive, yet it is also simple and easy to learn. The curly-brace syntax of C# will be instantly recognizable to anyone familiar with C, C++ or Java.</strong></p>
 </blockquote>
-
 <p>Here I am going to demonstrate how to create simple .net project without Visual Studio</p>
-
 <h3 id="prerequisites">Prerequisites</h3>
-
 <ul>
 <li>.Net Framework has been install to your PC or laptop, and the version of .Net Framework on your PC is 2.0+ or later</li>
 <li>Assume the path  of .Net Frameowork is <strong>c:\Windows\Microsfot.Net\Frameowork\v2.0.50727</strong></li>
 </ul>
-
 <h3 id="create-a-project">Create a project</h3>
-
 <ul>
-<li><p>Create a project named <code>csharp-project</code></p>
-
-<pre><code class="language-bat">md csharp-project
-cd csharp-project 
-md bin src
-echo.&gt;csharp-project.proj
-echo.&gt;src\helloworld.cs
-</code></pre></li>
+<li>
+<p>Create a project named <code>csharp-project</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat"><span style="color:#66d9ef">md</span> csharp-project
+<span style="color:#66d9ef">cd</span> csharp-project 
+<span style="color:#66d9ef">md</span> bin src
+<span style="color:#66d9ef">echo</span>.<span style="color:#ae81ff"></span>&gt;csharp-project.proj
+<span style="color:#66d9ef">echo</span>.<span style="color:#ae81ff"></span>&gt;src\helloworld.cs
+</code></pre></div></li>
 </ul>
-
 <h3 id="update-config-file">Update config file</h3>
-
 <ul>
-<li><p>Update config file <code>csharp-project.proj</code> as below</p>
-
-<pre><code class="language-xml">&lt;Project DefaultTargets = &quot;Compile&quot;
-xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot; &gt;
-
-&lt;!-- Set the application name as a property --&gt;
-&lt;PropertyGroup&gt;
-    &lt;appname&gt;csharp-app&lt;/appname&gt;
-&lt;/PropertyGroup&gt;
-
-&lt;!-- Specify the inputs by type and file name --&gt;
-&lt;ItemGroup&gt;
-    &lt;CSFile Include = &quot;src\helloworld.cs&quot;/&gt;
-&lt;/ItemGroup&gt;
-
-&lt;Target Name = &quot;Compile&quot;&gt;
-    &lt;!-- Run the Visual C# compilation using input files of type CSFile --&gt;
-    &lt;CSC
-        Sources = &quot;@(CSFile)&quot;
-        OutputAssembly = &quot;bin\$(appname).exe&quot;&gt;
-        &lt;!-- Set the OutputAssembly attribute of the CSC task
-        to the name of the executable file that is created --&gt;
-        &lt;Output
-            TaskParameter = &quot;OutputAssembly&quot;
-            ItemName = &quot;EXEFile&quot; /&gt;
-    &lt;/CSC&gt;
-    &lt;!-- Log the file name of the output file --&gt;
-    &lt;Message Text=&quot;The output file is @(EXEFile)&quot;/&gt;
-&lt;/Target&gt;
-&lt;/Project&gt;
-
-</code></pre></li>
+<li>Update config file <code>csharp-project.proj</code> as below</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Project</span> <span style="color:#a6e22e">DefaultTargets =</span> <span style="color:#e6db74">&#34;Compile&#34;</span>
+    <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://schemas.microsoft.com/developer/msbuild/2003&#34;</span> <span style="color:#f92672">&gt;</span>
 
-<h3 id="create-the-main-program">Create the main program</h3>
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Set the application name as a property </span><span style="color:#75715e">--&gt;</span>
+    <span style="color:#f92672">&lt;PropertyGroup</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;appname</span><span style="color:#f92672">&gt;</span>csharp-app<span style="color:#f92672">&lt;/appname&gt;</span>
+    <span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
 
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Specify the inputs by type and file name </span><span style="color:#75715e">--&gt;</span>
+    <span style="color:#f92672">&lt;ItemGroup</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;CSFile</span> <span style="color:#a6e22e">Include =</span> <span style="color:#e6db74">&#34;src\helloworld.cs&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/ItemGroup&gt;</span>
+
+    <span style="color:#f92672">&lt;Target</span> <span style="color:#a6e22e">Name =</span> <span style="color:#e6db74">&#34;Compile&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Run the Visual C# compilation using input files of type CSFile </span><span style="color:#75715e">--&gt;</span>
+        <span style="color:#f92672">&lt;CSC</span>
+            <span style="color:#a6e22e">Sources =</span> <span style="color:#e6db74">&#34;@(CSFile)&#34;</span>
+            <span style="color:#a6e22e">OutputAssembly =</span> <span style="color:#e6db74">&#34;bin\$(appname).exe&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Set the OutputAssembly attribute of the CSC task
+</span><span style="color:#75715e">            to the name of the executable file that is created </span><span style="color:#75715e">--&gt;</span>
+            <span style="color:#f92672">&lt;Output</span>
+                <span style="color:#a6e22e">TaskParameter =</span> <span style="color:#e6db74">&#34;OutputAssembly&#34;</span>
+                <span style="color:#a6e22e">ItemName =</span> <span style="color:#e6db74">&#34;EXEFile&#34;</span> <span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/CSC&gt;</span>
+        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Log the file name of the output file </span><span style="color:#75715e">--&gt;</span>
+        <span style="color:#f92672">&lt;Message</span> <span style="color:#a6e22e">Text=</span><span style="color:#e6db74">&#34;The output file is @(EXEFile)&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/Target&gt;</span>
+<span style="color:#f92672">&lt;/Project&gt;</span>
+
+</code></pre></div><h3 id="create-the-main-program">Create the main program</h3>
 <ul>
-<li><p>Create a new file named <code>HelloWorld.cs</code> and copy following coding to the new file</p>
-
-<pre><code class="language-csharp">public class Hello
+<li>
+<p>Create a new file named <code>HelloWorld.cs</code> and copy following coding to the new file</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Hello</span>
 {
-    public static void Main()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
     {
-        System.Console.WriteLine(&quot;Hello, World!&quot;);
+        System.Console.WriteLine(<span style="color:#e6db74">&#34;Hello, World!&#34;</span>);
     }
 }
-</code></pre></li>
+</code></pre></div></li>
 </ul>
-
 <h3 id="run-the-console-app">Run the console app</h3>
-
 <ul>
-<li><p>Compile with MSBuild &amp; Run</p>
-
-<pre><code class="language-bat">c:\Windows\Microsfot.Net\Frameowork\v2.0.50727\MSBuild
+<li>
+<p>Compile with MSBuild &amp; Run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat">c:\Windows\Microsfot.Net\Frameowork\v2.0.50727\MSBuild<span style="color:#75715e"></span>
 bin\csharp-app.exe
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#create-a-project">Create a project</a></li>
-<li><a href="#update-config-file">Update config file</a></li>
-<li><a href="#create-the-main-program">Create the main program</a></li>
-<li><a href="#run-the-console-app">Run the console app</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#create-a-project">Create a project</a></li>
+        <li><a href="#update-config-file">Update config file</a></li>
+        <li><a href="#create-the-main-program">Create the main program</a></li>
+        <li><a href="#run-the-console-app">Run the console app</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Ubuntu Desktop 18 LTS note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -944,6 +980,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -961,98 +999,77 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Ubuntu Desktop 18 LTS note</h1>
-        
-
-<h3 id="prelude">Prelude</h3>
-
+        <h3 id="prelude">Prelude</h3>
 <blockquote>
 <p>This article is mainly to record the stuff to do post Ubuntu Desktop 18.04 Installation.</p>
 </blockquote>
-
 <h3 id="purpose">Purpose</h3>
-
 <p>All actions post installation is to make the Ubuntu Desktop a wonderful toolkit for developer.</p>
-
 <h3 id="prerequisite">Prerequisite</h3>
-
 <ul>
-<li><p>Install all essentials</p>
-
-<pre><code class="language-bash">sudo apt install -y git curl
+<li>Install all essentials</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install -y git curl
 sudo apt-get install -y apt-transport-https ca-certificates      gnupg-agent
 sudo apt install -y software-properties-common 
 
-</code></pre></li>
-</ul>
-
-<h3 id="install-setup-zsh">Install &amp; Setup Zsh</h3>
-
+</code></pre></div><h3 id="install--setup-zsh">Install &amp; Setup Zsh</h3>
 <ul>
-<li><p>Install Zsh</p>
-
-<pre><code class="language-bash">sudo apt install -y zsh
-
-</code></pre></li>
-
-<li><p>Setup Zsh</p></li>
+<li>Install Zsh</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install -y zsh
 
+</code></pre></div><ul>
+<li>Setup Zsh</li>
+</ul>
 <blockquote>
 <p>I prefer <a href="https://github.com/sorin-ionescu/prezto.git">Prezto Zsh</a>, which is the minimal version of Oh-My-Zsh. In my opinion, Oh-My-Zsh is kind of slow and sort of overblown.</p>
 </blockquote>
-
 <ul>
 <li>Create a script <code>setup_prezto.zsh</code></li>
-
-<li><p>Save the code below to the scirpt and run <code>zsh ./setup_prezto.sh &amp;&amp; source ~/.zshrc</code></p>
-
-<pre><code class="language-bash">
-git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-&quot;${ZDOTDIR:-$HOME}/.zprezto&quot;
+<li>Save the code below to the scirpt and run <code>zsh ./setup_prezto.sh &amp;&amp; source ~/.zshrc </code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+git clone --recursive https://github.com/sorin-ionescu/prezto.git <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ZDOTDIR<span style="color:#66d9ef">:-</span>$HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.zprezto</span><span style="color:#e6db74">&#34;</span>
 
 setopt EXTENDED_GLOB
-for rcfile in &quot;${ZDOTDIR:-$HOME}&quot;/.zprezto/runcoms/^README.md(.N); do
-ln -s &quot;$rcfile&quot; &quot;${ZDOTDIR:-$HOME}/.${rcfile:t}&quot;
-done
+<span style="color:#66d9ef">for</span> rcfile in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ZDOTDIR<span style="color:#66d9ef">:-</span>$HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>/.zprezto/runcoms/^README.md<span style="color:#f92672">(</span>.N<span style="color:#f92672">)</span>; <span style="color:#66d9ef">do</span>
+    ln -s <span style="color:#e6db74">&#34;</span>$rcfile<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ZDOTDIR<span style="color:#66d9ef">:-</span>$HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.</span><span style="color:#e6db74">${</span>rcfile:t<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">done</span>
 
 
-if [ -d ~/.zprezto ];then
-cp  lub18/z* ~/.zprezto/runcoms/
-fi
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -d ~/.zprezto <span style="color:#f92672">]</span>;<span style="color:#66d9ef">then</span>
+    cp  lub18/z* ~/.zprezto/runcoms/
+<span style="color:#66d9ef">fi</span>
 
-[[ ! -d ~/.zprezto-contrib ]] &amp;&amp; mkdir -p ~/.zprezto-contrib;
+<span style="color:#f92672">[</span><span style="color:#f92672">[</span> ! -d ~/.zprezto-contrib <span style="color:#f92672">]</span><span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> mkdir -p ~/.zprezto-contrib;
 
 sudo -R $UsER:$USER .zprezto
 sudo -R $UsER:$USER .zprezto-contrib
 
 chsh -s /bin/zsh
 
-echo &quot;Setup finished.&quot;
-echo &quot;Please reboot or restart terminal.&quot;
+echo <span style="color:#e6db74">&#34;Setup finished.&#34;</span>
+echo <span style="color:#e6db74">&#34;Please reboot or restart terminal.&#34;</span>
 
-</code></pre></li>
-</ul>
-
-<h3 id="install-setup-vim-with-useful-plugins">Install &amp; Setup Vim with useful plugins</h3>
-
+</code></pre></div><h3 id="install--setup-vim-with-useful-plugins">Install &amp; Setup Vim with useful plugins</h3>
 <ul>
-<li><p>Install Vim</p>
-
-<pre><code>sudo apt install -y vim
-</code></pre></li>
-
-<li><p>Setup Vim with some amazing plugins</p></li>
+<li>Install Vim</li>
 </ul>
-
+<pre><code>sudo apt install -y vim
+</code></pre><ul>
+<li>Setup Vim with some amazing plugins</li>
+</ul>
 <blockquote>
 <p>There are many different vim plugins available online. There is a plance callded <a href="https://vimawesome.com/">Vim Awesome</a>, which you can find anything you want.</p>
-
-<p>My favorite option is the <a href="https://github.com/junegunn/vim-plug">Junegunn&rsquo;s Vim plugins</a>. I like the simplicity of this solution.</p>
 </blockquote>
-
+<blockquote>
+<p>My favorite option is the <a href="https://github.com/junegunn/vim-plug">Junegunn's Vim plugins</a>. I like the simplicity of this solution.</p>
+</blockquote>
 <ul>
-<li><p>Prepare the vimrc as below</p>
-
+<li>Prepare the vimrc as below</li>
+</ul>
 <pre><code>set nu
 
 colorscheme delek
@@ -1097,13 +1114,13 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 
 function! BuildYCM(info)
-&quot; info is a dictionary with 3 fields
-&quot; - name:   name of the plugin
-&quot; - status: 'installed', 'updated', or 'unchanged'
-&quot; - force:  set on PlugInstall! or PlugUpdate!
-if a:info.status == 'installed' || a:info.force
-!./install.py
-endif
+  &quot; info is a dictionary with 3 fields
+  &quot; - name:   name of the plugin
+  &quot; - status: 'installed', 'updated', or 'unchanged'
+  &quot; - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
@@ -1117,54 +1134,45 @@ Plug '~/my-prototype-plugin'
 
 &quot; Initialize plugin system
 call plug#end()
-</code></pre></li>
-</ul>
-
-<h3 id="install-mysql">Install MySql</h3>
-
+</code></pre><h3 id="install-mysql">Install MySql</h3>
 <ul>
-<li><p>Here I just install the default MySql 5.7. If you want to install the new version or MariaDB, please check out the official website.</p>
-
-<pre><code class="language-bash"># Install MySql server and client
+<li>Here I just install the default MySql 5.7. If you want to install the new version or MariaDB, please check out the official website.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Install MySql server and client</span>
 sudo apt install mysql-server mysql-client
 
-# Check if the MySql service active and running
+<span style="color:#75715e"># Check if the MySql service active and running</span>
 sudo systemctl status mysql.service
 
-# Enable or Restart MySql service
+<span style="color:#75715e"># Enable or Restart MySql service</span>
 sudo systemctl enable mysql.service
 sudo systemctl restart mysql.service
 
-# Create root account
+<span style="color:#75715e"># Create root account</span>
 sudo mysql_secure_installation
 
-# After the password for root has been created
+<span style="color:#75715e"># After the password for root has been created</span>
 sudo mysql -u root -p
 
-# Update the password via mysql comomand pompt
-mysql&gt;ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_strong_password';
+<span style="color:#75715e"># Update the password via mysql comomand pompt</span>
+mysql&gt;ALTER USER <span style="color:#e6db74">&#39;root&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> IDENTIFIED WITH mysql_native_password BY <span style="color:#e6db74">&#39;your_strong_password&#39;</span>;
 
-# Create another admin is highly recommended in production env
-mysql&gt;GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'your_strong_password';
+<span style="color:#75715e"># Create another admin is highly recommended in production env</span>
+mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span style="color:#e6db74">&#39;admin&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;your_strong_password&#39;</span>;
 
-</code></pre></li>
+</code></pre></div><h3 id="other-useful-tools">Other useful tools</h3>
+<ul>
+<li>
+<p>Office</p>
+<ul>
+<li>I prefer <a href="http://wps-community.org">WPS Office</a>. Rename the template files, because the template names contain Chinese characters and it may cause problem later.</li>
 </ul>
-
-<h3 id="other-useful-tools">Other useful tools</h3>
-
+</li>
+<li>
+<p>Dictionary</p>
 <ul>
-<li><p>Office</p>
-
-<ul>
-<li>I prefer <a href="http://wps-community.org">WPS Office</a>. Rename the template files, because the template names contain Chinese characters and it may cause problem later.
-<br /></li>
-</ul></li>
-
-<li><p>Dictionary</p>
-
-<ul>
-<li><p>Offline Dictionary</p>
-
+<li>Offline Dictionary</li>
+</ul>
 <pre><code>## Install dict client &amp; server (dictd)
 sudo apt install -y dict
 sudo apt install -y dictd
@@ -1175,44 +1183,38 @@ sudo apt-get install dict-wn
 sudo apt-get install dict-devil
 sudo apt-get install dict-moby-thesaurus
 </code></pre></li>
-</ul></li>
-
-<li><p>Meida</p>
-
+<li>
+<p>Meida</p>
 <ul>
-<li><p>VLC</p>
-
+<li>VLC</li>
+</ul>
 <pre><code>sudo apt install vlc
 </code></pre></li>
-</ul></li>
-
-<li><ul>
-<li><p>Spotify</p>
-
-<pre><code class="language-bash">sudo snap install spotify
-</code></pre></li>
-</ul></li>
+<li>
+<ul>
+<li>Spotify</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo snap install spotify
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#prelude">Prelude</a></li>
-<li><a href="#purpose">Purpose</a></li>
-<li><a href="#prerequisite">Prerequisite</a></li>
-<li><a href="#install-setup-zsh">Install &amp; Setup Zsh</a></li>
-<li><a href="#install-setup-vim-with-useful-plugins">Install &amp; Setup Vim with useful plugins</a></li>
-<li><a href="#install-mysql">Install MySql</a></li>
-<li><a href="#other-useful-tools">Other useful tools</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#prelude">Prelude</a></li>
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#prerequisite">Prerequisite</a></li>
+        <li><a href="#install--setup-zsh">Install & Setup Zsh</a></li>
+        <li><a href="#install--setup-vim-with-useful-plugins">Install & Setup Vim with useful plugins</a></li>
+        <li><a href="#install-mysql">Install MySql</a></li>
+        <li><a href="#other-useful-tools">Other useful tools</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

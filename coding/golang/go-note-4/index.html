@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>IO, Json &amp; XML :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -955,7 +991,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -976,6 +1012,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -993,628 +1031,551 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>IO, Json &amp; XML</h1>
-        
-
-<h3 id="io-read-write">IO - Read &amp; Write</h3>
-
+        <h3 id="io---read--write">IO - Read &amp; Write</h3>
 <h4 id="read-from-user-input">Read from user input</h4>
-
-<pre><code class="language-go">var (
-    firstName, lastName, s string
-    i                      int
-    f                      float32
-    input                  = &quot;56.12 / 5212 / Go&quot;
-    format                 = &quot;%f / %d / %s&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
+    <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>, <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">i</span>                      <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">f</span>                      <span style="color:#66d9ef">float32</span>
+    <span style="color:#a6e22e">input</span>                  = <span style="color:#e6db74">&#34;56.12 / 5212 / Go&#34;</span>
+    <span style="color:#a6e22e">format</span>                 = <span style="color:#e6db74">&#34;%f / %d / %s&#34;</span>
 )
 
-func main() {
-    fmt.Println(&quot;Please enter your full name: &quot;)
-    fmt.Scanln(&amp;firstName, &amp;lastName)
-    // fmt.Scanf(&quot;%s %s&quot;, &amp;firstName, &amp;lastName)
-    fmt.Printf(&quot;Hi %s %s!\n&quot;, firstName, lastName) // Hi Chris Naegels
-    fmt.Sscanf(input, format, &amp;f, &amp;i, &amp;s)
-    fmt.Println(&quot;From the string we read: &quot;, f, i, s)
-    // ouwtput: From the string we read: 56.12 5212 Go
-}
-</code></pre>
-
-<h4 id="read-command-line-argument">Read command-line argument</h4>
-
-<pre><code class="language-go">func main() {
-    who := &quot;Harry &quot;
-    if len(os.Args) &gt; 1 {
-        who += strings.Join(os.Args[1:], &quot; &quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Please enter your full name: &#34;</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Scanln</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">firstName</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">lastName</span>)
+    <span style="color:#75715e">// fmt.Scanf(&#34;%s %s&#34;, &amp;firstName, &amp;lastName)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Hi %s %s!\n&#34;</span>, <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>) <span style="color:#75715e">// Hi Chris Naegels
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sscanf</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">format</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">f</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">i</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;From the string we read: &#34;</span>, <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">s</span>)
+    <span style="color:#75715e">// ouwtput: From the string we read: 56.12 5212 Go
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h4 id="read-command-line-argument">Read command-line argument</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">who</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Harry &#34;</span>
+    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>) &gt; <span style="color:#ae81ff">1</span> {
+        <span style="color:#a6e22e">who</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">1</span>:], <span style="color:#e6db74">&#34; &#34;</span>)
     }
-    fmt.Println(&quot;Good Morning&quot;, who)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Good Morning&#34;</span>, <span style="color:#a6e22e">who</span>)
 }
-</code></pre>
-
-<h4 id="read-from-file">Read from file</h4>
-
+</code></pre></div><h4 id="read-from-file">Read from file</h4>
 <ul>
-<li><p>Read by lines</p>
-
-<pre><code class="language-go">func main() {
-inputFile, inputError := os.Open(&quot;hello.go&quot;)
-if inputError != nil {
-    fmt.Printf(&quot;An error occurred on opening the inputfile\n&quot; +
-        &quot;Does the file exist?\n&quot; +
-        &quot;Have you got acces to it?\n&quot;)
-    return // exit the function on error
-}
-defer inputFile.Close()  // Close file before exits the main func
-inputReader := bufio.NewReader(inputFile)
-for {
-    inputString, readerError := inputReader.ReadString('\n')
-    if readerError == io.EOF {
-        return
-    }
-    fmt.Printf(&quot;The input was: %s&quot;, inputString)
-}
-}
-</code></pre></li>
+<li>Read by lines</li>
 </ul>
-
-<p><strong><em>NOTE: The End-of-line characters of text-files in Unix end on \n, but in Windows this is \r\n. By using the method ReadString or ReadBytes with \n as a delimiter you don’t have to worry about this.</em></strong></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">inputFile</span>, <span style="color:#a6e22e">inputError</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;hello.go&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">inputError</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;An error occurred on opening the inputfile\n&#34;</span> <span style="color:#f92672">+</span>
+            <span style="color:#e6db74">&#34;Does the file exist?\n&#34;</span> <span style="color:#f92672">+</span>
+            <span style="color:#e6db74">&#34;Have you got acces to it?\n&#34;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#75715e">// exit the function on error
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">inputFile</span>.<span style="color:#a6e22e">Close</span>()  <span style="color:#75715e">// Close file before exits the main func
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">inputReader</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">inputFile</span>)
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">inputString</span>, <span style="color:#a6e22e">readerError</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">inputReader</span>.<span style="color:#a6e22e">ReadString</span>(<span style="color:#e6db74">&#39;\n&#39;</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">readerError</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">EOF</span> {
+            <span style="color:#66d9ef">return</span>
+        }
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;The input was: %s&#34;</span>, <span style="color:#a6e22e">inputString</span>)
+    }
+}
+</code></pre></div><p><em><strong>NOTE: The End-of-line characters of text-files in Unix end on \n, but in Windows this is \r\n. By using the method ReadString or ReadBytes with \n as a delimiter you don’t have to worry about this.</strong></em></p>
 <ul>
-<li><p>Read entire file into a string</p>
-
-<pre><code class="language-go">func main() {
-inputFile := &quot;hello.go&quot;
-outputFile := &quot;hello.go.txt&quot;
-buf, err := ioutil.ReadFile(inputFile)
-if err != nil {
-    fmt.Fprintf(os.Stderr, &quot;File Error: %s\n&quot;, err)
-    // panic(err.Error())
-}
-fmt.Printf(&quot;%s\n&quot;, string(buf))
-err = ioutil.WriteFile(outputFile, buf, 0x644)
-if err != nil {
-    panic(err.Error())
-}
-}
-</code></pre></li>
-
-<li><p>Read into buffer</p>
-
-<pre><code class="language-go">for {
-n, err := inputReader.Read(buf)
-if (n == 0) { break}
-}
-</code></pre></li>
-
-<li><p>Read columns of data, such as csv</p>
-
-<pre><code class="language-go">func main() {
-file, err := os.Open(&quot;csv_data.txt&quot;)
-if err != nil {
-    panic(err)
-}
-defer file.Close()
-var col1, col2, col3 []string
-for {
-    var v1, v2, v3 string
-    _, err := fmt.Fscanln(file, &amp;v1, &amp;v2, &amp;v3)
-    // scans until newline
-    if err != nil {
-        break
-    }
-    col1 = append(col1, v1)
-    col2 = append(col2, v2)
-    col3 = append(col3, v3)
-}
-fmt.Println(&quot; Col 1 &quot;,col1)
-fmt.Println(&quot; Col 3 &quot;,col2)
-fmt.Println(&quot; Col 3 &quot;,col3)
-}
-</code></pre></li>
-
-<li><p>Read from compressed file</p>
-
-<pre><code class="language-go">func main() {
-fName := &quot;public.zip&quot;
-var r *bufio.Reader
-fi, err := os.Open(fName)
-if err != nil {
-    fmt.Fprintf(os.Stderr, &quot;%v, Can’t open %s: error: %s\n&quot;, os.Args[0],
-        fName, err)
-    os.Exit(1)
-}
-fz, err := gzip.NewReader(fi)
-if err != nil {
-    r = bufio.NewReader(fi)
-} else {
-    r = bufio.NewReader(fz)
-}
-for {
-    line, err := r.ReadString('\n')
-    if err != nil {
-
-        fmt.Println(&quot;Done reading file&quot;)
-        os.Exit(0)
-    }
-    fmt.Println(line)
-}
-}
-</code></pre></li>
+<li>Read entire file into a string</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">inputFile</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;hello.go&#34;</span>
+    <span style="color:#a6e22e">outputFile</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;hello.go.txt&#34;</span>
+    <span style="color:#a6e22e">buf</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#a6e22e">inputFile</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;File Error: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>)
+        <span style="color:#75715e">// panic(err.Error())
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, string(<span style="color:#a6e22e">buf</span>))
+    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">outputFile</span>, <span style="color:#a6e22e">buf</span>, <span style="color:#ae81ff">0x644</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        panic(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+    }
+}
+</code></pre></div><ul>
+<li>Read into buffer</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> {
+    <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">inputReader</span>.<span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">buf</span>)
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { <span style="color:#66d9ef">break</span>}
+}
+</code></pre></div><ul>
+<li>Read columns of data, such as csv</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;csv_data.txt&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        panic(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">col1</span>, <span style="color:#a6e22e">col2</span>, <span style="color:#a6e22e">col3</span> []<span style="color:#66d9ef">string</span>
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">v1</span>, <span style="color:#a6e22e">v2</span>, <span style="color:#a6e22e">v3</span> <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fscanln</span>(<span style="color:#a6e22e">file</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v2</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v3</span>)
+        <span style="color:#75715e">// scans until newline
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#66d9ef">break</span>
+        }
+        <span style="color:#a6e22e">col1</span> = append(<span style="color:#a6e22e">col1</span>, <span style="color:#a6e22e">v1</span>)
+        <span style="color:#a6e22e">col2</span> = append(<span style="color:#a6e22e">col2</span>, <span style="color:#a6e22e">v2</span>)
+        <span style="color:#a6e22e">col3</span> = append(<span style="color:#a6e22e">col3</span>, <span style="color:#a6e22e">v3</span>)
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; Col 1 &#34;</span>,<span style="color:#a6e22e">col1</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; Col 3 &#34;</span>,<span style="color:#a6e22e">col2</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; Col 3 &#34;</span>,<span style="color:#a6e22e">col3</span>)
+}
+</code></pre></div><ul>
+<li>Read from compressed file</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">fName</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;public.zip&#34;</span>
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">Reader</span>
+    <span style="color:#a6e22e">fi</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">fName</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;%v, Can’t open %s: error: %s\n&#34;</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">0</span>],
+            <span style="color:#a6e22e">fName</span>, <span style="color:#a6e22e">err</span>)
+        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+    }
+    <span style="color:#a6e22e">fz</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gzip</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">fi</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">r</span> = <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">fi</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">r</span> = <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">fz</span>)
+    }
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">line</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ReadString</span>(<span style="color:#e6db74">&#39;\n&#39;</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 
-<h4 id="read-with-flag-package">Read with flag package</h4>
-
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Done reading file&#34;</span>)
+            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">0</span>)
+        }
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">line</span>)
+    }
+}
+</code></pre></div><h4 id="read-with-flag-package">Read with flag package</h4>
 <ul>
 <li>The package flag has an extended functionality for parsing of command-line options.</li>
+<li>flag.PrintDefaults() prints out the usage information of the defined flag(s)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">NewLine</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;print on newline&#34;</span>)
 
-<li><p>flag.PrintDefaults() prints out the usage information of the defined flag(s)</p>
-
-<pre><code class="language-go">var NewLine = flag.Bool(&quot;n&quot;, false, &quot;print on newline&quot;)
-
-// echo -n flag, of type *bool
-const (
-Space   = &quot; &quot;
-Newline = &quot;\n&quot;
+<span style="color:#75715e">// echo -n flag, of type *bool
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> (
+    <span style="color:#a6e22e">Space</span>   = <span style="color:#e6db74">&#34; &#34;</span>
+    <span style="color:#a6e22e">Newline</span> = <span style="color:#e6db74">&#34;\n&#34;</span>
 )
 
-func main() {
-flag.PrintDefaults()
-flag.Parse()
-var s string = &quot;&quot;
-for i := 0; i &lt; flag.NArg(); i++ {
-    if i &gt; 0 {
-        s += Space
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">PrintDefaults</span>()
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span> &gt; <span style="color:#ae81ff">0</span> {
+            <span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">Space</span>
+        }
+        <span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#a6e22e">i</span>)
     }
-    s += flag.Arg(i)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NewLine</span> { <span style="color:#75715e">// -n is parsed, flag becomes true
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">s</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">Newline</span>
+    }
+    <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">s</span>)
 }
-if *NewLine { // -n is parsed, flag becomes true
-    s += Newline
-}
-os.Stdout.WriteString(s)
-}
-// :: Output
-// -------------------------
-// command: go run program.go -n abc
-// out : 
-//   -n    print on newline
-// abc
-//----------------------------
-// command: go run program.go -a abc
-// flag provided but not defined: -a
-// Usage of /tmp/go-build701354435/b001/exe/program:
-//   -n    print on newline
-// exit status 2
-</code></pre></li>
-</ul>
-
-<h4 id="read-with-flag-parsing-buffer">Read with flag parsing &amp; buffer</h4>
-
+<span style="color:#75715e">// :: Output
+</span><span style="color:#75715e"></span><span style="color:#75715e">// -------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e">// command: go run program.go -n abc
+</span><span style="color:#75715e"></span><span style="color:#75715e">// out : 
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   -n    print on newline
+</span><span style="color:#75715e"></span><span style="color:#75715e">// abc
+</span><span style="color:#75715e"></span><span style="color:#75715e">//----------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e">// command: go run program.go -a abc
+</span><span style="color:#75715e"></span><span style="color:#75715e">// flag provided but not defined: -a
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Usage of /tmp/go-build701354435/b001/exe/program:
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   -n    print on newline
+</span><span style="color:#75715e"></span><span style="color:#75715e">// exit status 2
+</span></code></pre></div><h4 id="read-with-flag-parsing--buffer">Read with flag parsing &amp; buffer</h4>
 <ul>
 <li>Assume there is a file named test.txt with some content</li>
-
-<li><p>Run Command: go build program.go &amp;&amp; ./program test</p>
-
-<pre><code class="language-go">func cat(r *bufio.Reader) {
-for {
-    buf, err := r.ReadBytes('\n')
-    if err == io.EOF {
-        break
-    }
-    fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
-}
-return
-}
-func main() {
-flag.Parse()
-if flag.NArg() == 0 {
-    cat(bufio.NewReader(os.Stdin))
-}
-
-for i := 0; i &lt; flag.NArg(); i++ {
-    f, err := os.Open(flag.Arg(i))
-    if err != nil {
-        fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-            os.Args[0], flag.Arg(i), err.Error())
-        continue
-    }
-    cat(bufio.NewReader(f))
-}
-}
-</code></pre></li>
+<li>Run Command: go build program.go &amp;&amp; ./program test</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">Reader</span>) {
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">buf</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ReadBytes</span>(<span style="color:#e6db74">&#39;\n&#39;</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">EOF</span> {
+            <span style="color:#66d9ef">break</span>
+        }
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;%s&#34;</span>, <span style="color:#a6e22e">buf</span>)
+    }
+    <span style="color:#66d9ef">return</span>
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdin</span>))
+    }
 
-<h4 id="read-with-flag-parsing-slice">Read with flag parsing &amp; slice</h4>
-
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#a6e22e">i</span>))
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;%s:error reading from %s: %s\n&#34;</span>,
+                <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#a6e22e">i</span>), <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+            <span style="color:#66d9ef">continue</span>
+        }
+        <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">f</span>))
+    }
+}
+</code></pre></div><h4 id="read-with-flag-parsing--slice">Read with flag parsing &amp; slice</h4>
 <ul>
-<li><p>Only different from previous sample is the cat function</p>
-
-<pre><code class="language-go">func cat(f *os.File) {
-const NBUF = 512
-var buf [NBUF]byte
-for {
-    switch nr, err := f.Read(buf[:]); true {
-    case nr &lt; 0:
-        fmt.Fprintf(os.Stderr, &quot;cat: error reading: %s\n&quot;, err.Error())
-        os.Exit(1)
-    case nr == 0: // EOF
-        return
-    case nr &gt; 0:
-        if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
-            fmt.Fprintf(os.Stderr, &quot;cat: error writing: %s\n&quot;,
-                ew)
+<li>Only different from previous sample is the cat function</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">f</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NBUF</span> = <span style="color:#ae81ff">512</span>
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> [<span style="color:#a6e22e">NBUF</span>]<span style="color:#66d9ef">byte</span>
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">nr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">buf</span>[:]); <span style="color:#66d9ef">true</span> {
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">nr</span> &lt; <span style="color:#ae81ff">0</span>:
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;cat: error reading: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">nr</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>: <span style="color:#75715e">// EOF
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span>
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">nr</span> &gt; <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nw</span>, <span style="color:#a6e22e">ew</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">buf</span>[<span style="color:#ae81ff">0</span>:<span style="color:#a6e22e">nr</span>]); <span style="color:#a6e22e">nw</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">nr</span> {
+                <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;cat: error writing: %s\n&#34;</span>,
+                    <span style="color:#a6e22e">ew</span>)
+            }
         }
     }
 }
-}
 
-func main() {
-flag.Parse()
-if flag.NArg() == 0 {
-    cat(os.Stdin)
-}
-
-for i := 0; i &lt; flag.NArg(); i++ {
-    f, err := os.Open(flag.Arg(i))
-    if err != nil {
-        fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-            os.Args[0], flag.Arg(i), err.Error())
-        os.Exit(1)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdin</span>)
     }
-    cat(f)
-    f.Close()
-}
-}
-</code></pre></li>
-</ul>
 
-<h4 id="write-to-a-file">Write to a file</h4>
-
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#a6e22e">i</span>))
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;%s:error reading from %s: %s\n&#34;</span>,
+                <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#a6e22e">i</span>), <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+            <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+        }
+        <span style="color:#a6e22e">cat</span>(<span style="color:#a6e22e">f</span>)
+        <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+    }
+}
+</code></pre></div><h4 id="write-to-a-file">Write to a file</h4>
 <ul>
-<li><p>Flags for open output file</p>
-
+<li>
+<p>Flags for open output file</p>
 <ul>
 <li>os.O_RDONLY: the read flag for read-only access</li>
 <li>os.WRONLY: the write flag for write-only access</li>
 <li>os.O_CREATE : the create flag: create the file if it doesn’t exist</li>
 <li>os.O_TRUNC : the truncate flag: truncate to size 0 if the file already exists</li>
-</ul></li>
-
-<li><p>Write with buffer</p>
-
-<pre><code class="language-go">func main() {
-outputFile, outputError := os.OpenFile(&quot;output.txt&quot;,
-    os.O_WRONLY|os.O_CREATE, 0666)
-if outputError != nil {
-    fmt.Printf(&quot;An error occurred with file creation\n&quot;)
-    return
-}
-defer outputFile.Close()
-outputWriter := bufio.NewWriter(outputFile)
-outputString := &quot;hello world!\n&quot;
-for i := 0; i &lt; 10; i++ {
-    outputWriter.WriteString(outputString)
-}
-outputWriter.Flush()
-}
-</code></pre></li>
-
-<li><p>Write a file without buffer</p>
-
-<ul>
-<li><p>Write the same content as previous sample</p>
-
-<pre><code class="language-go">func main() {
-os.Stdout.WriteString(&quot;hello, world\n&quot;)
-f, _ := os.OpenFile(&quot;output.txt&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer f.Close()
-for i := 0; i &lt; 10; i++ {
-f.WriteString(&quot;hello world!\n&quot;)
-}
-}
-</code></pre></li>
-</ul></li>
 </ul>
-
-<h4 id="write-to-standard-output-interface">Write to standard output: interface</h4>
-
+</li>
+<li>
+<p>Write with buffer</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">outputFile</span>, <span style="color:#a6e22e">outputError</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#e6db74">&#34;output.txt&#34;</span>,
+        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>, <span style="color:#ae81ff">0666</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">outputError</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;An error occurred with file creation\n&#34;</span>)
+        <span style="color:#66d9ef">return</span>
+    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">outputFile</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#a6e22e">outputWriter</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">outputFile</span>)
+    <span style="color:#a6e22e">outputString</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;hello world!\n&#34;</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">outputWriter</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">outputString</span>)
+    }
+    <span style="color:#a6e22e">outputWriter</span>.<span style="color:#a6e22e">Flush</span>()
+}
+</code></pre></div><ul>
+<li>
+<p>Write a file without buffer</p>
+<ul>
+<li>Write the same content as previous sample</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#e6db74">&#34;hello, world\n&#34;</span>)
+    <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#e6db74">&#34;output.txt&#34;</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>, <span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#e6db74">&#34;hello world!\n&#34;</span>)
+    }
+}
+</code></pre></div><h4 id="write-to-standard-output-interface">Write to standard output: interface</h4>
 <ul>
 <li>The interface is fmt.Fprintf</li>
 <li>The fmt.Fprintf writes to a variable of type io.Writer.</li>
-
-<li><p>Any type that has a Write method, including os.Stdout, files (like os.File), pipes, network connections, channels, etc&hellip;, and also to write buffers from the bufio package.</p>
-
-<pre><code class="language-go">func main() {
-// unbuffered: os.Stdout implements io.Writer
-fmt.Fprintf(os.Stdout, &quot;%s\n&quot;, &quot;hello world! - unbuffered&quot;)
-// buffered:
-buf := bufio.NewWriter(os.Stdout)
-// and now so does buf:
-fmt.Fprintf(buf, &quot;%s\n&quot;, &quot;hello world! - buffered&quot;)
-buf.Flush()
-}
-
-</code></pre></li>
+<li>Any type that has a Write method, including os.Stdout, files (like os.File), pipes, network connections, channels, etc&hellip;, and also to write buffers from the bufio package.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// unbuffered: os.Stdout implements io.Writer
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#e6db74">&#34;hello world! - unbuffered&#34;</span>)
+    <span style="color:#75715e">// buffered:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>)
+    <span style="color:#75715e">// and now so does buf:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">buf</span>, <span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#e6db74">&#34;hello world! - buffered&#34;</span>)
+    <span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Flush</span>()
+}
 
-<h4 id="copy">Copy</h4>
-
+</code></pre></div><h4 id="copy">Copy</h4>
 <ul>
-<li><p>Simply use io.Copy method</p>
-
-<pre><code class="language-go">func main() {
-CopyFile(&quot;target_hello.txt&quot;, &quot;hello.go&quot;)
-fmt.Println(&quot;Copy done!&quot;)
-
-}
-func CopyFile(dstName, srcName string) (written int64, err error) {
-src, err := os.Open(srcName)
-if err != nil {
-    return
-}
-defer src.Close()
-dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
-if err != nil {
-    return
-}
-defer dst.Close()
-return io.Copy(dst, src)
-}
-</code></pre></li>
+<li>Simply use io.Copy method</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">CopyFile</span>(<span style="color:#e6db74">&#34;target_hello.txt&#34;</span>, <span style="color:#e6db74">&#34;hello.go&#34;</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Copy done!&#34;</span>)
 
-<h3 id="json">JSON</h3>
-
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CopyFile</span>(<span style="color:#a6e22e">dstName</span>, <span style="color:#a6e22e">srcName</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">written</span> <span style="color:#66d9ef">int64</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+    <span style="color:#a6e22e">src</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">srcName</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#66d9ef">return</span>
+    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">src</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#a6e22e">dst</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#a6e22e">dstName</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>, <span style="color:#ae81ff">0644</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#66d9ef">return</span>
+    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">dst</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">dst</span>, <span style="color:#a6e22e">src</span>)
+}
+</code></pre></div><h3 id="json">JSON</h3>
 <ul>
-<li><p>Mapping of Go type and Js type</p>
-
+<li>Mapping of Go type and Js type
 <ul>
 <li>Go: bool -&gt; Js: boolean</li>
 <li>Go: float64 -&gt; Js: numbers</li>
 <li>Go: string -&gt; Js: strings</li>
-
-<li><p>Go: nil -&gt; Js: null</p>
-
-<pre><code class="language-go">type Address struct {
-Type    string
-City    string
-Country string
-}
-type VCard struct {
-FirstName string
-LastName  string
-Addresses []*Address
-Remark    string
-}
-
-func main() {
-pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-// fmt.Printf(&quot;%v: \n&quot;, vc)
-// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-// JSON format:
-js, _ := json.Marshal(vc)
-fmt.Printf(&quot;JSON format: %s&quot;, js)
-// using an encoder:
-file, _ := os.OpenFile(&quot;vcard.json&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer file.Close()
-enc := json.NewEncoder(file)
-err := enc.Encode(vc)
-if err != nil {
-fmt.Println(&quot;Error in encoding json&quot;)
-}
-}
-
-// cat vcard.json | jq  # jq is a tool for json file
-// ----------------------------------------------------
-// {
-//   &quot;FirstName&quot;: &quot;Jan&quot;,
-//   &quot;LastName&quot;: &quot;Kersschot&quot;,
-//   &quot;Addresses&quot;: [
-//     {
-//       &quot;Type&quot;: &quot;private&quot;,
-//       &quot;City&quot;: &quot;Aartselaar&quot;,
-//       &quot;Country&quot;: &quot;Belgium&quot;
-//     },
-//     {
-//       &quot;Type&quot;: &quot;work&quot;,
-//       &quot;City&quot;: &quot;Boom&quot;,
-//       &quot;Country&quot;: &quot;Belgium&quot;
-//     }
-//   ],
-//   &quot;Remark&quot;: &quot;none&quot;
-// }
-</code></pre></li>
-</ul></li>
+<li>Go: nil -&gt; Js: null</li>
 </ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Address</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">Type</span>    <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">City</span>    <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Country</span> <span style="color:#66d9ef">string</span>
+}
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">VCard</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">FirstName</span> <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">LastName</span>  <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Addresses</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Address</span>
+    <span style="color:#a6e22e">Remark</span>    <span style="color:#66d9ef">string</span>
+}
 
-<h3 id="xml">XML</h3>
-
-<ul>
-<li><p>Sample xml</p>
-
-<pre><code class="language-xml">&lt;Person&gt;
-&lt;FirstName&gt;Laura&lt;/FirstName&gt;
-&lt;LastName&gt;Lynn&lt;/LastName&gt;
-&lt;/Person&gt;
-</code></pre></li>
-
-<li><p>The encoding/xml package also implements a simle xml parser (SAX) to read XML-data and parse it into its constituents.</p>
-
-<pre><code class="language-go">
-var t, token xml.Token
-var err error
-
-func main() {
-input :=
-    &quot;&lt;Person&gt;&lt;FirstName&gt;Laura&lt;/FirstName&gt;&lt;LastName&gt;Lynn&lt;/LastName&gt;&lt;/Person&gt;&quot;
-inputReader := strings.NewReader(input)
-p := xml.NewDecoder(inputReader)
-for t, err = p.Token(); err == nil; t, err = p.Token() {
-    switch token := t.(type) {
-    case xml.StartElement:
-        name := token.Name.Local
-        fmt.Printf(&quot;Token name: %s\n&quot;, name)
-        for _, attr := range token.Attr {
-            attrName := attr.Name.Local
-            attrValue := attr.Value
-            fmt.Printf(&quot;An attribute is: %s %s\n&quot;, attrName,
-                attrValue)
-            // ...
-        }
-    case xml.EndElement:
-        fmt.Println(&quot;End of token&quot;)
-    case xml.CharData:
-        content := string([]byte(token))
-        fmt.Printf(&quot;This is the content: %v\n&quot;, content)
-    // ...
-    default:
-        // ...
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">pa</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Address</span>{<span style="color:#e6db74">&#34;private&#34;</span>, <span style="color:#e6db74">&#34;Aartselaar&#34;</span>, <span style="color:#e6db74">&#34;Belgium&#34;</span>}
+    <span style="color:#a6e22e">wa</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Address</span>{<span style="color:#e6db74">&#34;work&#34;</span>, <span style="color:#e6db74">&#34;Boom&#34;</span>, <span style="color:#e6db74">&#34;Belgium&#34;</span>}
+    <span style="color:#a6e22e">vc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">VCard</span>{<span style="color:#e6db74">&#34;Jan&#34;</span>, <span style="color:#e6db74">&#34;Kersschot&#34;</span>, []<span style="color:#f92672">*</span><span style="color:#a6e22e">Address</span>{<span style="color:#a6e22e">pa</span>, <span style="color:#a6e22e">wa</span>}, <span style="color:#e6db74">&#34;none&#34;</span>}
+    <span style="color:#75715e">// fmt.Printf(&#34;%v: \n&#34;, vc)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// JSON format:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">js</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">vc</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;JSON format: %s&#34;</span>, <span style="color:#a6e22e">js</span>)
+    <span style="color:#75715e">// using an encoder:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#e6db74">&#34;vcard.json&#34;</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>, <span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#a6e22e">enc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewEncoder</span>(<span style="color:#a6e22e">file</span>)
+    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">vc</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Error in encoding json&#34;</span>)
     }
 }
-}
 
-//----------------------
-// Token name: Person
-// Token name: FirstName
-// This is the content: Laura
-// End of token
-// Token name: LastName
-// This is the content: Lynn
-// End of token
-// End of token
-</code></pre></li>
-</ul>
-
-<h3 id="gob-go-binary-format">Gob - Go binary format</h3>
-
+<span style="color:#75715e">// cat vcard.json | jq  # jq is a tool for json file
+</span><span style="color:#75715e"></span><span style="color:#75715e">// ----------------------------------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e">// {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   &#34;FirstName&#34;: &#34;Jan&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   &#34;LastName&#34;: &#34;Kersschot&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   &#34;Addresses&#34;: [
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;Type&#34;: &#34;private&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;City&#34;: &#34;Aartselaar&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;Country&#34;: &#34;Belgium&#34;
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     },
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;Type&#34;: &#34;work&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;City&#34;: &#34;Boom&#34;,
+</span><span style="color:#75715e"></span><span style="color:#75715e">//       &#34;Country&#34;: &#34;Belgium&#34;
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     }
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   ],
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   &#34;Remark&#34;: &#34;none&#34;
+</span><span style="color:#75715e"></span><span style="color:#75715e">// }
+</span></code></pre></div><h3 id="xml">XML</h3>
 <ul>
-<li><p>Simulate network communication</p>
-
-<pre><code class="language-go">type P struct {
-X, Y, Z int
-Name    string
-}
-type Q struct {
-X, Y *int32
-Name string
-}
-
-func main() {
-// Initialize the encoder and decoder. Normally enc and dec would
-// be bound to network connections and the encoder and decoder
-// would run in different processes.
-var network bytes.Buffer
-// Stand-in for a network connection
-enc := gob.NewEncoder(&amp;network) // Will write to network.
-dec := gob.NewDecoder(&amp;network)
-// Will read from network.
-// Encode (send) the value.
-err := enc.Encode(P{3, 4, 5, &quot;Pythagoras&quot;})
-if err != nil {
-    log.Fatal(&quot;encode error:&quot;, err)
-}
-// Decode (receive) the value.
-var q Q
-err = dec.Decode(&amp;q)
-if err != nil {
-    log.Fatal(&quot;decode error:&quot;, err)
-}
-fmt.Printf(&quot;%q: {%d,%d}\n&quot;, q.Name, *q.X, *q.Y)
-// &quot;Pythagoras&quot;: {3,4}
-}
-</code></pre></li>
-
-<li><p>Simulate file operation</p>
-
-<pre><code class="language-go">type Address struct {
-Type    string
-City    string
-Country string
-}
-type VCard struct {
-FirstName string
-LastName  string
-Addresses []*Address
-Remark    string
-}
-
-func main() {
-pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-// fmt.Printf(&quot;%v: \n&quot;, vc)
-// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-// using an encoder:
-file, _ := os.OpenFile(&quot;vcard.gob&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer file.Close()
-enc := gob.NewEncoder(file)
-err := enc.Encode(vc)
-if err != nil {
-    log.Println(&quot;Error in encoding gob&quot;)
-}
-}
-</code></pre></li>
+<li>Sample xml</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Person</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;FirstName</span><span style="color:#f92672">&gt;</span>Laura<span style="color:#f92672">&lt;/FirstName&gt;</span>
+    <span style="color:#f92672">&lt;LastName</span><span style="color:#f92672">&gt;</span>Lynn<span style="color:#f92672">&lt;/LastName&gt;</span>
+<span style="color:#f92672">&lt;/Person&gt;</span>
+</code></pre></div><ul>
+<li>The encoding/xml package also implements a simle xml parser (SAX) to read XML-data and parse it into its constituents.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">token</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">Token</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
 
-<h3 id="crypto">Crypto</h3>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">input</span> <span style="color:#f92672">:=</span>
+        <span style="color:#e6db74">&#34;&lt;Person&gt;&lt;FirstName&gt;Laura&lt;/FirstName&gt;&lt;LastName&gt;Lynn&lt;/LastName&gt;&lt;/Person&gt;&#34;</span>
+    <span style="color:#a6e22e">inputReader</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">input</span>)
+    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">inputReader</span>)
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Token</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span>; <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Token</span>() {
+        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">t</span>.(<span style="color:#66d9ef">type</span>) {
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">StartElement</span>:
+            <span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Name</span>.<span style="color:#a6e22e">Local</span>
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Token name: %s\n&#34;</span>, <span style="color:#a6e22e">name</span>)
+            <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">attr</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Attr</span> {
+                <span style="color:#a6e22e">attrName</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">attr</span>.<span style="color:#a6e22e">Name</span>.<span style="color:#a6e22e">Local</span>
+                <span style="color:#a6e22e">attrValue</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">attr</span>.<span style="color:#a6e22e">Value</span>
+                <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;An attribute is: %s %s\n&#34;</span>, <span style="color:#a6e22e">attrName</span>,
+                    <span style="color:#a6e22e">attrValue</span>)
+                <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>            }
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">EndElement</span>:
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;End of token&#34;</span>)
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">CharData</span>:
+            <span style="color:#a6e22e">content</span> <span style="color:#f92672">:=</span> string([]byte(<span style="color:#a6e22e">token</span>))
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;This is the content: %v\n&#34;</span>, <span style="color:#a6e22e">content</span>)
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">default</span>:
+            <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>        }
+    }
+}
 
+<span style="color:#75715e">//----------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Token name: Person
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Token name: FirstName
+</span><span style="color:#75715e"></span><span style="color:#75715e">// This is the content: Laura
+</span><span style="color:#75715e"></span><span style="color:#75715e">// End of token
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Token name: LastName
+</span><span style="color:#75715e"></span><span style="color:#75715e">// This is the content: Lynn
+</span><span style="color:#75715e"></span><span style="color:#75715e">// End of token
+</span><span style="color:#75715e"></span><span style="color:#75715e">// End of token
+</span></code></pre></div><h3 id="gob---go-binary-format">Gob - Go binary format</h3>
+<ul>
+<li>Simulate network communication</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">P</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">X</span>, <span style="color:#a6e22e">Y</span>, <span style="color:#a6e22e">Z</span> <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">Name</span>    <span style="color:#66d9ef">string</span>
+}
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">X</span>, <span style="color:#a6e22e">Y</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">int32</span>
+    <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Initialize the encoder and decoder. Normally enc and dec would
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// be bound to network connections and the encoder and decoder
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// would run in different processes.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">network</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+    <span style="color:#75715e">// Stand-in for a network connection
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">enc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gob</span>.<span style="color:#a6e22e">NewEncoder</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">network</span>) <span style="color:#75715e">// Will write to network.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dec</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gob</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">network</span>)
+    <span style="color:#75715e">// Will read from network.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Encode (send) the value.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">P</span>{<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#34;Pythagoras&#34;</span>})
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;encode error:&#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#75715e">// Decode (receive) the value.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>
+    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">dec</span>.<span style="color:#a6e22e">Decode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">q</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;decode error:&#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%q: {%d,%d}\n&#34;</span>, <span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">Name</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">X</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">Y</span>)
+    <span style="color:#75715e">// &#34;Pythagoras&#34;: {3,4}
+</span><span style="color:#75715e"></span>}
+</code></pre></div><ul>
+<li>Simulate file operation</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Address</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">Type</span>    <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">City</span>    <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Country</span> <span style="color:#66d9ef">string</span>
+}
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">VCard</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">FirstName</span> <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">LastName</span>  <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Addresses</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Address</span>
+    <span style="color:#a6e22e">Remark</span>    <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">pa</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Address</span>{<span style="color:#e6db74">&#34;private&#34;</span>, <span style="color:#e6db74">&#34;Aartselaar&#34;</span>, <span style="color:#e6db74">&#34;Belgium&#34;</span>}
+    <span style="color:#a6e22e">wa</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Address</span>{<span style="color:#e6db74">&#34;work&#34;</span>, <span style="color:#e6db74">&#34;Boom&#34;</span>, <span style="color:#e6db74">&#34;Belgium&#34;</span>}
+    <span style="color:#a6e22e">vc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">VCard</span>{<span style="color:#e6db74">&#34;Jan&#34;</span>, <span style="color:#e6db74">&#34;Kersschot&#34;</span>, []<span style="color:#f92672">*</span><span style="color:#a6e22e">Address</span>{<span style="color:#a6e22e">pa</span>, <span style="color:#a6e22e">wa</span>}, <span style="color:#e6db74">&#34;none&#34;</span>}
+    <span style="color:#75715e">// fmt.Printf(&#34;%v: \n&#34;, vc)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// using an encoder:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#e6db74">&#34;vcard.gob&#34;</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>, <span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#a6e22e">enc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gob</span>.<span style="color:#a6e22e">NewEncoder</span>(<span style="color:#a6e22e">file</span>)
+    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">vc</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Error in encoding gob&#34;</span>)
+    }
+}
+</code></pre></div><h3 id="crypto">Crypto</h3>
 <ul>
 <li>The hash package: implements the adler32, crc32, crc64 and fnv checksums;</li>
-
-<li><p>The crypto package: implements other hashing algorithms like md4, md5, sha1, etc. and
-complete encryption implementations for aes, blowfish, rc4, rsa, xtea, etc.</p>
-
-<pre><code class="language-go">
-func main() {
-hasher := sha1.New()
-io.WriteString(hasher, &quot;test&quot;)
-b := []byte{}
-fmt.Printf(&quot;Result: %x\n&quot;, hasher.Sum(b))
-fmt.Printf(&quot;Result: %d\n&quot;, hasher.Sum(b))
-hasher.Reset()
-data := []byte(&quot;We shall overcome!&quot;)
-n, err := hasher.Write(data)
-if n != len(data) || err != nil {
-    log.Printf(&quot;Hash write error: %v / %v&quot;, n, err)
-}
-checksum := hasher.Sum(b)
-fmt.Printf(&quot;Result: %x\n&quot;, checksum)
-}
-
-//----------------------------------
-// Result: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
-// Result: [169 74 143 229 204 177 155 166 28 76 8 115 211 145 233 135 152 47 187 211]
-// Checksum: e2222bfc59850bbb00a722e764a555603bb59b2a
-</code></pre></li>
+<li>The crypto package: implements other hashing algorithms like md4, md5, sha1, etc. and
+complete encryption implementations for aes, blowfish, rc4, rsa, xtea, etc.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">hasher</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sha1</span>.<span style="color:#a6e22e">New</span>()
+    <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">hasher</span>, <span style="color:#e6db74">&#34;test&#34;</span>)
+    <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">byte</span>{}
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Result: %x\n&#34;</span>, <span style="color:#a6e22e">hasher</span>.<span style="color:#a6e22e">Sum</span>(<span style="color:#a6e22e">b</span>))
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Result: %d\n&#34;</span>, <span style="color:#a6e22e">hasher</span>.<span style="color:#a6e22e">Sum</span>(<span style="color:#a6e22e">b</span>))
+    <span style="color:#a6e22e">hasher</span>.<span style="color:#a6e22e">Reset</span>()
+    <span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> []byte(<span style="color:#e6db74">&#34;We shall overcome!&#34;</span>)
+    <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hasher</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">data</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">!=</span> len(<span style="color:#a6e22e">data</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Hash write error: %v / %v&#34;</span>, <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#a6e22e">checksum</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hasher</span>.<span style="color:#a6e22e">Sum</span>(<span style="color:#a6e22e">b</span>)
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Result: %x\n&#34;</span>, <span style="color:#a6e22e">checksum</span>)
+}
 
+<span style="color:#75715e">//----------------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Result: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Result: [169 74 143 229 204 177 155 166 28 76 8 115 211 145 233 135 152 47 187 211]
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Checksum: e2222bfc59850bbb00a722e764a555603bb59b2a
+</span></code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#io-read-write">IO - Read &amp; Write</a>
-<ul>
-<li><a href="#read-from-user-input">Read from user input</a></li>
-<li><a href="#read-command-line-argument">Read command-line argument</a></li>
-<li><a href="#read-from-file">Read from file</a></li>
-<li><a href="#read-with-flag-package">Read with flag package</a></li>
-<li><a href="#read-with-flag-parsing-buffer">Read with flag parsing &amp; buffer</a></li>
-<li><a href="#read-with-flag-parsing-slice">Read with flag parsing &amp; slice</a></li>
-<li><a href="#write-to-a-file">Write to a file</a></li>
-<li><a href="#write-to-standard-output-interface">Write to standard output: interface</a></li>
-<li><a href="#copy">Copy</a></li>
-</ul></li>
-<li><a href="#json">JSON</a></li>
-<li><a href="#xml">XML</a></li>
-<li><a href="#gob-go-binary-format">Gob - Go binary format</a></li>
-<li><a href="#crypto">Crypto</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#io---read--write">IO - Read & Write</a></li>
+        <li><a href="#json">JSON</a></li>
+        <li><a href="#xml">XML</a></li>
+        <li><a href="#gob---go-binary-format">Gob - Go binary format</a></li>
+        <li><a href="#crypto">Crypto</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

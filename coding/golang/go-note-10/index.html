@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Template :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -923,6 +959,48 @@
    Projects</option>
     <option value="/coding/" >
    Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option>
+    <option value="/coding/golang/" >
+  - 
+   Golang</option> 
+      <option value="/coding/golang/go-note-1/" >-- Getting started</option>
+      <option value="/coding/golang/go-note-2/" >-- Map, Function &amp; Closure</option>
+      <option value="/coding/golang/go-note-3/" >-- Struct &amp; Interface</option>
+      <option value="/coding/golang/go-note-4/" >-- IO, Json &amp; XML</option>
+      <option value="/coding/golang/go-note-5/" >-- Error handling</option>
+      <option value="/coding/golang/go-note-6/" >-- Goroutine &amp; Channel - 1</option>
+      <option value="/coding/golang/go-note-7/" >-- Goroutine &amp; Channel - 2</option>
+      <option value="/coding/golang/go-note-8/" >-- Packaging</option>
+      <option value="/coding/golang/go-note-9/" >-- Pitfalls</option>
+      <option value="/coding/golang/go-note-10/"  selected>-- Template</option>
+      <option value="/coding/golang/go-note-20/" >-- Good practice - 1</option>
+      <option value="/coding/golang/go-note-21/" >-- Good practice 2</option>
+      <option value="/coding/golang/go-note-22/" >-- Good practice 3</option>
+      <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
+  
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/js-ts/" >
+  - 
+   JS &amp; TS </option>
+    <option value="/coding/python/" >
+  - 
+   Python</option>
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
   
     <option value="/cloud/" >
    Cloud</option>
@@ -934,6 +1012,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -951,223 +1031,203 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Template</h1>
-        
-
-<h3 id="template">Template</h3>
-
+        <h3 id="template">Template</h3>
 <ul>
-<li>Package template implements data-driven templates for generating textual output.</li>
-
-<li><p>Templates are executed by applying them to a data structure. Annotations in the template refer to elements of the data structure (typically a field of a struct or a key in a map) to control execution and derive values to be displayed. Execution of the template walks the structure and sets the cursor, represented by a period &lsquo;.&rsquo; and called &ldquo;dot&rdquo;, to the value at the current location in the structure as execution proceeds.</p></li>
-
-<li><p>The input text for a template is UTF-8-encoded text in any format. &ldquo;Actions&rdquo;&ndash;data evaluations or control structures&ndash;are delimited by &ldquo;{{&rdquo; and &ldquo;}}&rdquo;; all text outside actions is copied to the output unchanged. Except for raw strings, actions may not span newlines, although comments can.</p></li>
+<li>
+<p>Package template implements data-driven templates for generating textual output.</p>
+</li>
+<li>
+<p>Templates are executed by applying them to a data structure. Annotations in the template refer to elements of the data structure (typically a field of a struct or a key in a map) to control execution and derive values to be displayed. Execution of the template walks the structure and sets the cursor, represented by a period &lsquo;.&rsquo; and called &ldquo;dot&rdquo;, to the value at the current location in the structure as execution proceeds.</p>
+</li>
+<li>
+<p>The input text for a template is UTF-8-encoded text in any format. &ldquo;Actions&rdquo;&ndash;data evaluations or control structures&ndash;are delimited by &ldquo;{{&rdquo; and &ldquo;}}&quot;; all text outside actions is copied to the output unchanged. Except for raw strings, actions may not span newlines, although comments can.</p>
+</li>
 </ul>
-
 <h4 id="pipelines">Pipelines</h4>
-
 <ul>
 <li>A pipeline is a possibly chained sequence of &ldquo;commands&rdquo;. A command is a simple value (argument) or a function or method call, possibly with multiple arguments.</li>
 </ul>
-
 <h4 id="example-of-letter-code">Example of letter code</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Define a template.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">letter</span> = <span style="color:#e6db74">`</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Dear </span><span style="color:#75715e">{{</span><span style="color:#a6e22e">.Name</span><span style="color:#75715e">}}</span><span style="color:#e6db74">,
+</span><span style="color:#e6db74"></span><span style="color:#75715e">{{</span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">.Attended</span><span style="color:#75715e">}}</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">It was a pleasure to see you at the wedding.
+</span><span style="color:#e6db74"></span><span style="color:#75715e">{{-</span> <span style="color:#66d9ef">else</span><span style="color:#75715e">}}</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">It is a shame you couldn&#39;t make it to the wedding.
+</span><span style="color:#e6db74"></span><span style="color:#75715e">{{-</span> <span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#75715e">{{</span><span style="color:#66d9ef">with</span> <span style="color:#a6e22e">.Gift</span> <span style="color:#75715e">-}}</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Thank you for the lovely </span><span style="color:#75715e">{{</span><span style="color:#a6e22e">.</span><span style="color:#75715e">}}</span><span style="color:#e6db74">.
+</span><span style="color:#e6db74"></span><span style="color:#75715e">{{</span><span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Best wishes,
+</span><span style="color:#e6db74">Josie
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">`</span>
 
-<pre><code class="language-go">func main() {
-    // Define a template.
-    const letter = `
-Dear {{.Name}},
-{{if .Attended}}
-It was a pleasure to see you at the wedding.
-{{- else}}
-It is a shame you couldn't make it to the wedding.
-{{- end}}
-{{with .Gift -}}
-Thank you for the lovely {{.}}.
-{{end}}
-Best wishes,
-Josie
-`
-
-    // Prepare some data to insert into the template.
-    type Recipient struct {
-        Name, Gift string
-        Attended   bool
+    <span style="color:#75715e">// Prepare some data to insert into the template.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Recipient</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">Gift</span> <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Attended</span>   <span style="color:#66d9ef">bool</span>
     }
-    var recipients = []Recipient{
-        {&quot;Aunt Mildred&quot;, &quot;bone china tea set&quot;, true},
-        {&quot;Uncle John&quot;, &quot;moleskin pants&quot;, false},
-        {&quot;Cousin Rodney&quot;, &quot;&quot;, false},
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">recipients</span> = []<span style="color:#a6e22e">Recipient</span>{
+        {<span style="color:#e6db74">&#34;Aunt Mildred&#34;</span>, <span style="color:#e6db74">&#34;bone china tea set&#34;</span>, <span style="color:#66d9ef">true</span>},
+        {<span style="color:#e6db74">&#34;Uncle John&#34;</span>, <span style="color:#e6db74">&#34;moleskin pants&#34;</span>, <span style="color:#66d9ef">false</span>},
+        {<span style="color:#e6db74">&#34;Cousin Rodney&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#66d9ef">false</span>},
     }
 
-    // Create a new template and parse the letter into it.
-    t := template.Must(template.New(&quot;letter&quot;).Parse(letter))
+    <span style="color:#75715e">// Create a new template and parse the letter into it.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;letter&#34;</span>).<span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">letter</span>))
 
-    // Execute the template for each recipient.
-    for _, r := range recipients {
-        err := t.Execute(os.Stdout, r)
-        if err != nil {
-            log.Println(&quot;executing template:&quot;, err)
+    <span style="color:#75715e">// Execute the template for each recipient.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">recipients</span> {
+        <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">r</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;executing template:&#34;</span>, <span style="color:#a6e22e">err</span>)
         }
     }
 
 }
 
-</code></pre>
-
-<h4 id="glob-example">Glob example</h4>
-
+</code></pre></div><h4 id="glob-example">Glob example</h4>
 <ul>
-<li><p>demonstrate loading a set of templates from a directory</p>
-
-<pre><code class="language-go">// templateFile defines the contents of a template to be stored in a file, for testing.
-type templateFile struct {
-name     string
-contents string
-}
-
-func createTestDir(files []templateFile) string {
-dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-if err != nil {
-    log.Fatal(err)
-}
-for _, file := range files {
-    f, err := os.Create(filepath.Join(dir, file.name))
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer f.Close()
-    _, err = io.WriteString(f, file.contents)
-    if err != nil {
-        log.Fatal(err)
-    }
-}
-return dir
-}
-
-func main() {
-// Here we create a temporary directory and populate it with our sample
-// template definition files; usually the template files would already
-// exist in some location known to the program.
-dir := createTestDir([]templateFile{
-    // T0.tmpl is a plain template file that just invokes T1.
-    {&quot;T0.tmpl&quot;, `T0 invokes T1: ({{template &quot;T1&quot;}})`},
-    // T1.tmpl defines a template, T1 that invokes T2.
-    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-    // T2.tmpl defines a template T2.
-    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-})
-// Clean up after the test; another quirk of running as an example.
-defer os.RemoveAll(dir)
-
-// pattern is the glob pattern used to find all the template files.
-pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
-
-// Here starts the example proper.
-// T0.tmpl is the first name matched, so it becomes the starting template,
-// the value returned by ParseGlob.
-tmpl := template.Must(template.ParseGlob(pattern))
-
-err := tmpl.Execute(os.Stdout, nil)
-if err != nil {
-    log.Fatalf(&quot;template execution: %s&quot;, err)
-}
-}
-</code></pre></li>
+<li>demonstrate loading a set of templates from a directory</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// templateFile defines the contents of a template to be stored in a file, for testing.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">templateFile</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">contents</span> <span style="color:#66d9ef">string</span>
+}
 
-<h4 id="helper-example">Helper example</h4>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createTestDir</span>(<span style="color:#a6e22e">files</span> []<span style="color:#a6e22e">templateFile</span>) <span style="color:#66d9ef">string</span> {
+    <span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">TempDir</span>(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;template&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">files</span> {
+        <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">name</span>))
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+        }
+        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+        <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">contents</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+        }
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Here we create a temporary directory and populate it with our sample
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// template definition files; usually the template files would already
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// exist in some location known to the program.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dir</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createTestDir</span>([]<span style="color:#a6e22e">templateFile</span>{
+        <span style="color:#75715e">// T0.tmpl is a plain template file that just invokes T1.
+</span><span style="color:#75715e"></span>        {<span style="color:#e6db74">&#34;T0.tmpl&#34;</span>, <span style="color:#e6db74">`</span><span style="color:#e6db74">T0 invokes T1: (</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">template</span> <span style="color:#e6db74">&#34;T1&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">)</span><span style="color:#e6db74">`</span>},
+        <span style="color:#75715e">// T1.tmpl defines a template, T1 that invokes T2.
+</span><span style="color:#75715e"></span>        {<span style="color:#e6db74">&#34;T1.tmpl&#34;</span>, <span style="color:#e6db74">`</span><span style="color:#75715e">{{</span><span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;T1&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">T1 invokes T2: (</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">template</span> <span style="color:#e6db74">&#34;T2&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">)</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">`</span>},
+        <span style="color:#75715e">// T2.tmpl defines a template T2.
+</span><span style="color:#75715e"></span>        {<span style="color:#e6db74">&#34;T2.tmpl&#34;</span>, <span style="color:#e6db74">`</span><span style="color:#75715e">{{</span><span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;T2&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">This is T2</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">`</span>},
+    })
+    <span style="color:#75715e">// Clean up after the test; another quirk of running as an example.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">RemoveAll</span>(<span style="color:#a6e22e">dir</span>)
+
+    <span style="color:#75715e">// pattern is the glob pattern used to find all the template files.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">pattern</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">dir</span>, <span style="color:#e6db74">&#34;*.tmpl&#34;</span>)
+
+    <span style="color:#75715e">// Here starts the example proper.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// T0.tmpl is the first name matched, so it becomes the starting template,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// the value returned by ParseGlob.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">tmpl</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#a6e22e">pattern</span>))
+
+    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tmpl</span>.<span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#66d9ef">nil</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;template execution: %s&#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+}
+</code></pre></div><h4 id="helper-example">Helper example</h4>
 <ul>
-<li><p>demonstrates one way to share some templates and use them in different contexts. In this variant we add multiple driver templates by hand to an existing bundle of templates.</p>
-
-<pre><code class="language-go">
-// templateFile defines the contents of a template to be stored in a file, for testing.
-type templateFile struct {
-name     string
-contents string
-}
-
-func createTestDir(files []templateFile) string {
-dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-if err != nil {
-    log.Fatal(err)
-}
-for _, file := range files {
-    f, err := os.Create(filepath.Join(dir, file.name))
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer f.Close()
-    _, err = io.WriteString(f, file.contents)
-    if err != nil {
-        log.Fatal(err)
-    }
-}
-return dir
-}
-
-func main() {
-// Here we create a temporary directory and populate it with our sample
-// template definition files; usually the template files would already
-// exist in some location known to the program.
-dir := createTestDir([]templateFile{
-    // T1.tmpl defines a template, T1 that invokes T2.
-    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-    // T2.tmpl defines a template T2.
-    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-})
-// Clean up after the test; another quirk of running as an example.
-defer os.RemoveAll(dir)
-
-// pattern is the glob pattern used to find all the template files.
-pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
-
-// Here starts the example proper.
-// Load the helpers.
-templates := template.Must(template.ParseGlob(pattern))
-// Add one driver template to the bunch; we do this with an explicit template definition.
-_, err := templates.Parse(&quot;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&quot;)
-if err != nil {
-    log.Fatal(&quot;parsing driver1: &quot;, err)
-}
-// Add another driver template.
-_, err = templates.Parse(&quot;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&quot;)
-if err != nil {
-    log.Fatal(&quot;parsing driver2: &quot;, err)
-}
-// We load all the templates before execution. This package does not require
-// that behavior but html/template's escaping does, so it's a good habit.
-err = templates.ExecuteTemplate(os.Stdout, &quot;driver1&quot;, nil)
-if err != nil {
-    log.Fatalf(&quot;driver1 execution: %s&quot;, err)
-}
-err = templates.ExecuteTemplate(os.Stdout, &quot;driver2&quot;, nil)
-if err != nil {
-    log.Fatalf(&quot;driver2 execution: %s&quot;, err)
-}
-}
-
-</code></pre></li>
+<li>demonstrates one way to share some templates and use them in different contexts. In this variant we add multiple driver templates by hand to an existing bundle of templates.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#75715e">// templateFile defines the contents of a template to be stored in a file, for testing.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">templateFile</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">contents</span> <span style="color:#66d9ef">string</span>
+}
 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createTestDir</span>(<span style="color:#a6e22e">files</span> []<span style="color:#a6e22e">templateFile</span>) <span style="color:#66d9ef">string</span> {
+    <span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">TempDir</span>(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;template&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">files</span> {
+        <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">name</span>))
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+        }
+        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+        <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">contents</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+        }
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// Here we create a temporary directory and populate it with our sample
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// template definition files; usually the template files would already
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// exist in some location known to the program.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dir</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createTestDir</span>([]<span style="color:#a6e22e">templateFile</span>{
+        <span style="color:#75715e">// T1.tmpl defines a template, T1 that invokes T2.
+</span><span style="color:#75715e"></span>        {<span style="color:#e6db74">&#34;T1.tmpl&#34;</span>, <span style="color:#e6db74">`</span><span style="color:#75715e">{{</span><span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;T1&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">T1 invokes T2: (</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">template</span> <span style="color:#e6db74">&#34;T2&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">)</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">`</span>},
+        <span style="color:#75715e">// T2.tmpl defines a template T2.
+</span><span style="color:#75715e"></span>        {<span style="color:#e6db74">&#34;T2.tmpl&#34;</span>, <span style="color:#e6db74">`</span><span style="color:#75715e">{{</span><span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;T2&#34;</span><span style="color:#75715e">}}</span><span style="color:#e6db74">This is T2</span><span style="color:#75715e">{{</span><span style="color:#66d9ef">end</span><span style="color:#75715e">}}</span><span style="color:#e6db74">`</span>},
+    })
+    <span style="color:#75715e">// Clean up after the test; another quirk of running as an example.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">RemoveAll</span>(<span style="color:#a6e22e">dir</span>)
+
+    <span style="color:#75715e">// pattern is the glob pattern used to find all the template files.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">pattern</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">dir</span>, <span style="color:#e6db74">&#34;*.tmpl&#34;</span>)
+
+    <span style="color:#75715e">// Here starts the example proper.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Load the helpers.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">templates</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#a6e22e">pattern</span>))
+    <span style="color:#75715e">// Add one driver template to the bunch; we do this with an explicit template definition.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#e6db74">&#34;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;parsing driver1: &#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#75715e">// Add another driver template.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#e6db74">&#34;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;parsing driver2: &#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#75715e">// We load all the templates before execution. This package does not require
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// that behavior but html/template&#39;s escaping does, so it&#39;s a good habit.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;driver1&#34;</span>, <span style="color:#66d9ef">nil</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;driver1 execution: %s&#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;driver2&#34;</span>, <span style="color:#66d9ef">nil</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;driver2 execution: %s&#34;</span>, <span style="color:#a6e22e">err</span>)
+    }
+}
+
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#template">Template</a>
-<ul>
-<li><a href="#pipelines">Pipelines</a></li>
-<li><a href="#example-of-letter-code">Example of letter code</a></li>
-<li><a href="#glob-example">Glob example</a></li>
-<li><a href="#helper-example">Helper example</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#template">Template</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

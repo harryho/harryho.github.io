@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Ubuntu 14 -- desktop setup &amp; dual boot  :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -944,6 +980,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -961,194 +999,178 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Ubuntu 14 -- desktop setup &amp; dual boot </h1>
-        
-
-<blockquote>
+        <blockquote>
 <p><em>This article is mainly to help beginner install Ubuntu desktop at the first time. If you are looking for setup of Ubuntu server, please check out the blog &ndash; <a href="/blog/ubuntu-server-14/">Ubuntu server setup</a></em></p>
 </blockquote>
-
 <h2 id="where-to-install-linux">Where to install Linux?</h2>
-
 <ul>
-<li><p>How to answer this quetion really depends user&rsquo;s computer knowledge and skills. Basically Linux can be installed on almost any PC, laptop, embedded device or tablet. So there are some suggestions for people with different level skills.*</p></li>
-
-<li><p>Beginner &ndash; If you never install any operating system, or you never use <code>Unix/Linux</code> system, but still want to try something new. You should consider to install virtual machine on your computer and then install ubuntu on the virtual machine. <a href="http://www.vmware.com">VMware</a> and <a href="https://www.virtualbox.org">VirtualBox</a> are both very good products.</p></li>
-
-<li><p>Intermediate &ndash; If you have installed operating system, or you have used <code>Unix/Linux</code> system, you can install it on your old machine. or for safe side try it on virtual machine at first.</p></li>
-
-<li><p>Expert &ndash; You can try dual boot or multiple boot operating systems on your PC. Install 10-20 operating systems on a PC with 400GB harddisk should be alright. The only problem I encountered before some operating system can not find all proper drivers to support the all devices on your PC/laptop, such as the drivers for camera, touchpad, wifi, etc. It would take you so much time to research and try.</p></li>
+<li>
+<p>How to answer this quetion really depends user's computer knowledge and skills. Basically Linux can be installed on almost any PC, laptop, embedded device or tablet. So there are some suggestions for people with different level skills.*</p>
+</li>
+<li>
+<p>Beginner &ndash; If you never install any operating system, or you never use <code>Unix/Linux</code> system, but still want to try something new. You should consider to install virtual machine on your computer and then install ubuntu on the virtual machine. <a href="http://www.vmware.com">VMware</a> and <a href="https://www.virtualbox.org">VirtualBox</a> are both very good products.</p>
+</li>
+<li>
+<p>Intermediate &ndash; If you have installed operating system, or you have used <code>Unix/Linux</code> system, you can install it on your old machine. or for safe side try it on virtual machine at first.</p>
+</li>
+<li>
+<p>Expert &ndash; You can try dual boot or multiple boot operating systems on your PC. Install 10-20 operating systems on a PC with 400GB harddisk should be alright. The only problem I encountered before some operating system can not find all proper drivers to support the all devices on your PC/laptop, such as the drivers for camera, touchpad, wifi, etc. It would take you so much time to research and try.</p>
+</li>
 </ul>
-
 <h3 id="install-virtual-machine">Install virtual machine</h3>
-
-<p><strong><em>Let&rsquo;s get our hands dirty</em></strong></p>
-
+<p><strong><em>Let's get our hands dirty</em></strong></p>
 <ul>
-<li><p>Install VirtualBox/VMWare on your computer. IMO, use VirtualBox is quite handy and save you much effort, even it is free. Because in the real environment, you will use remote tool to do your admin task instead of really handling a phyiscal machine. And you can try another Liunx OS on VirtualBox.</p></li>
-
-<li><p>If you lean to commercial product, you can choose VMWare. There is free trial option for you.</p></li>
+<li>
+<p>Install VirtualBox/VMWare on your computer. IMO, use VirtualBox is quite handy and save you much effort, even it is free. Because in the real environment, you will use remote tool to do your admin task instead of really handling a phyiscal machine. And you can try another Liunx OS on VirtualBox.</p>
+</li>
+<li>
+<p>If you lean to commercial product, you can choose VMWare. There is free trial option for you.</p>
+</li>
 </ul>
-
 <h3 id="which-version-to-choose">Which version to choose</h3>
-
 <ul>
-<li><p>Ubuntu has variant versions for you to download and play. I will suggest you always pick LTS (Long Term Support) version to download. As beginner, desktop version is the best option for you to start.</p></li>
-
-<li><p>After downlaod the <a href="https://www.ubuntu.com/download/desktop">Ubuntu Desktop</a> from the internet. You will get a <code>ISO</code> file like this: ubuntu-xx.xx.x-desktop-amd64.iso, if your OS is 64 bits, or something like ubuntu-xx.xx.x-desktop-x86.iso for 32 bits.</p></li>
+<li>
+<p>Ubuntu has variant versions for you to download and play. I will suggest you always pick LTS (Long Term Support) version to download. As beginner, desktop version is the best option for you to start.</p>
+</li>
+<li>
+<p>After downlaod the <a href="https://www.ubuntu.com/download/desktop">Ubuntu Desktop</a> from the internet. You will get a <code>ISO</code> file like this: ubuntu-xx.xx.x-desktop-amd64.iso, if your OS is 64 bits, or something like ubuntu-xx.xx.x-desktop-x86.iso for 32 bits.</p>
+</li>
 </ul>
-
 <h3 id="install-unbuntu">Install Unbuntu</h3>
-
 <ul>
-<li><p>Before you install, you had better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p></li>
-
-<li><p>Create a new virtual machine within VMWare or VirtualBox. The processes on both softwares are almost the same.</p>
-
+<li>
+<p>Before you install, you had better to backup anything on the device which you are going to install, and chcek your internet is working properly.</p>
+</li>
+<li>
+<p>Create a new virtual machine within VMWare or VirtualBox. The processes on both softwares are almost the same.</p>
 <ul>
 <li>Assume your new virtual machine will sit in <code>C:\vbox</code> for VirtualBox or <code>C:\vm</code> for VMware</li>
 <li>Create a new machine from menu. Type in the name of vm. e.g. Unbuntu</li>
 <li>Select the type of operating system: Linux</li>
-<li>You can choose Ubuntu(<sup>32</sup>&frasl;<sub>64</sub> bit ) or something else. It doesn&rsquo;t matter. We don&rsquo;t use any built-in xxx.iso files from VirtualBox or VMware. Then click <code>Next</code></li>
+<li>You can choose Ubuntu(32/64 bit ) or something else. It doesn't matter. We don't use any built-in xxx.iso files from VirtualBox or VMware. Then click <code>Next</code></li>
 <li>Select the memory size for the Unbuntu. 2G RAM is minimal requirement. I prefer up to 30% of total memory size. And then click <code>Next</code>.</li>
 <li>Select &ldquo;Create a virtual hard drive now&rdquo;, and then click <code>Next</code>.</li>
 <li>Select defaut VDI, then click <code>Next</code>.</li>
 <li>Select &ldquo;Dynamically allocated&rdquo;, then click <code>Next</code>.</li>
-<li>Choose the location of Unbuntu. e.g. c:\vbox\ubuntu\ubuntu.vdi or c:\vm\ubuntu\ubuntu.vmdk. Select the size of VDI\VMDK file. At least 8G. I&rsquo;d like to select 16 or more. Then a Unbuntu virtual machine has been created.</li>
-</ul></li>
-
-<li><p>Config the Unbuntu hardware setting.</p>
-
+<li>Choose the location of Unbuntu. e.g. c:\vbox\ubuntu\ubuntu.vdi or c:\vm\ubuntu\ubuntu.vmdk. Select the size of VDI\VMDK file. At least 8G. I'd like to select 16 or more. Then a Unbuntu virtual machine has been created.</li>
+</ul>
+</li>
+<li>
+<p>Config the Unbuntu hardware setting.</p>
 <p><strong>VirtualBox</strong></p>
-
 <ul>
 <li>On VirtualBox toolbar, there is a <code>Start</code> button. Click <code>Start</code>, then go the Storage item.</li>
-<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.<br /></li>
+<li>Under the Storage Tree section, there is Empty CD icon. Click the Empty icon.</li>
 <li>Under the Attributes section, click the CD icon at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
 <li>Leave all the other setting as default. Click the <code>Start</code>button on the toolbar.</li>
 </ul>
-
 <p><strong>VMWare</strong></p>
-
 <ul>
 <li>On VMware, you can find CD/DVD button on the tab page of new virtual machine.</li>
 <li>Click the CD button at the end of the dropdown list of CD/DVD Drive. Choose the Unbuntu iso file which you download from Unbuntu.org. Click <code>OK</code>.</li>
 <li>Leave all the other setting as default. Click the <code>Power on this virtual machine</code> option on the tab page.</li>
-</ul></li>
-
-<li><p>Ubuntu provides a friendly and beautiful UI to complete installation instead of ugly and terrified terminal, as geek&rsquo;s computer shown on sci-fi movie. If you choose VMWare or VirtulBox as machine, you can open the page of <a href="https://www.ubuntu.com/download/desktop/install-ubuntu-desktop">installation steps</a> on your browser. You just need to follow the instruction step by step, it will take you around 1-2 hours to complete.</p></li>
 </ul>
-
+</li>
+<li>
+<p>Ubuntu provides a friendly and beautiful UI to complete installation instead of ugly and terrified terminal, as geek's computer shown on sci-fi movie. If you choose VMWare or VirtulBox as machine, you can open the page of <a href="https://www.ubuntu.com/download/desktop/install-ubuntu-desktop">installation steps</a> on your browser. You just need to follow the instruction step by step, it will take you around 1-2 hours to complete.</p>
+</li>
+</ul>
 <h2 id="things-to-do-after-installing-ubuntu-desktop">Things to do after installing Ubuntu desktop</h2>
-
 <ul>
-<li>Ubuntu desktop is very nice and friendly, even it is different from your Windows. Basically you don&rsquo;t need any geek&rsquo;s skill to play around on Uubuntu desktop and use it as your Windows. There are tons of free software you can download from Ubuntu Software Center, so you don&rsquo;t worry where to find the softwre you need. Considering you are the beginner, some suggestions and caveats will be highlighted below, but none of these needs command line and terminal.
-
-<ul>
+<li>Ubuntu desktop is very nice and friendly, even it is different from your Windows. Basically you don't need any geek's skill to play around on Uubuntu desktop and use it as your Windows. There are tons of free software you can download from Ubuntu Software Center, so you don't worry where to find the softwre you need. Considering you are the beginner, some suggestions and caveats will be highlighted below, but none of these needs command line and terminal.</li>
 <li>Disable the system upgrade automatically to new LTS version.</li>
 <li>Disable the system power manager to suspend your PC.</li>
 <li>Disable the system problem report service.</li>
 <li>Enbale the third party packages.</li>
 <li>Install <code>Utity Tweek</code> to help you customize your UI.</li>
-</ul></li>
 </ul>
-
-<h2 id="things-don-t-do">Things don&rsquo;t do</h2>
-
+<h2 id="things-dont-do">Things don't do</h2>
 <ul>
-<li>Something below is suggested not to do, because I assume you are Ubuntu or Linux beginner. I don&rsquo;t wnat you to feel frustrated at the beginning of your Ubuntu desktop journey. It is the same that 99.9999% of Windows user should not delete cache files <code>C:\Windows</code> or change the system registry, expect they really understand what they are doing.<br />
-
-<ul>
-<li>Don&rsquo;t optimzie your memory setting. It is really not a big deal.</li>
-<li>Don&rsquo;t try to change your <code>Utity</code> to other Ubuntu desktop, e.g. Ubuntu MATE, Ubuntu Xface, etc.<br /></li>
-<li>Don&rsquo;t follow the tips online to use <code>root</code> in terminal before you fully understand what the commands do.</li>
-<li>Don&rsquo;t try to mount other drives on your computer, if it is mounted automatically.<br /></li>
-</ul></li>
+<li>Something below is suggested not to do, because I assume you are Ubuntu or Linux beginner. I don't wnat you to feel frustrated at the beginning of your Ubuntu desktop journey. It is the same that 99.9999% of Windows user should not delete cache files <code>C:\Windows</code> or change the system registry, expect they really understand what they are doing.</li>
+<li>Don't optimzie your memory setting. It is really not a big deal.</li>
+<li>Don't try to change your <code>Utity</code> to other Ubuntu desktop, e.g. Ubuntu MATE, Ubuntu Xface, etc.</li>
+<li>Don't follow the tips online to use <code>root</code> in terminal before you fully understand what the commands do.</li>
+<li>Don't try to mount other drives on your computer, if it is mounted automatically.</li>
 </ul>
-
 <h2 id="dual-boot-or-multiple-boot-with-windows">Dual boot or multiple boot with Windows</h2>
-
 <p><strong>This section is for  people who want to install multiple operating system on the actual PC, instead of virtual machine as above. Obviously, it is not for beginner user, but everyone must experience the first time to go to higher level. For safe side, I strongly suggest you should use a old PC or redundant one to test it.</strong></p>
-
 <ul>
-<li><p>For dual or multiple boot, you need to make sure your disk is formatted as GPT. It will save you so much effort later to install other operating systems.</p></li>
-
-<li><p>I suggest Windows first approach for multiple boot systems, because that is easier than the other way around. After install Windows on your PC, you need to shrink Windows disk space for other operating systems with <code>Disk Management</code>.</p></li>
-
-<li><p>Now you need to prepare Ubuntu USB installer or DVD. Place the USB stick or DVD in the appropriate drive, reboot the machine and instruct the BIOS/UEFI to boot-up from the DVD/USB by pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).</p></li>
-
-<li><p>When you install Ubuntu, you need to select a separate <code>boot</code> drive for dual boot systems. Usually you just need to pick the drive <code>efi</code> as <code>boot</code> drive. Your drives will be supposed to format with GPT as following structure.</p>
-
-<pre><code class="language-ini">sda
-+----sda1        nfts               500M         Windows recovery
-+----sda2        efi       /boot    100M         grub2 , Windows boot manager
-+----sda3                  /        10M            
-+----sda4        ntfs      /      40000M         Window 7/8/10
-+----sda5                  swap   &lt;Double size of your RAM size&gt;   
-+----sda6        ext4      /      20000M         Ubuntu 14 desktop
-+----sda7        ext4      /      20000M         Fedora 20 desktop           
-+----sda8        ext4      /      20000M         CentOS 6 desktop
-+----sda9        ext4      /      20000M         OpenSuse desktop
-+ ...
-</code></pre></li>
+<li>
+<p>For dual or multiple boot, you need to make sure your disk is formatted as GPT. It will save you so much effort later to install other operating systems.</p>
+</li>
+<li>
+<p>I suggest Windows first approach for multiple boot systems, because that is easier than the other way around. After install Windows on your PC, you need to shrink Windows disk space for other operating systems with <code>Disk Management</code>.</p>
+</li>
+<li>
+<p>Now you need to prepare Ubuntu USB installer or DVD. Place the USB stick or DVD in the appropriate drive, reboot the machine and instruct the BIOS/UEFI to boot-up from the DVD/USB by pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).</p>
+</li>
+<li>
+<p>When you install Ubuntu, you need to select a separate <code>boot</code> drive for dual boot systems. Usually you just need to pick the drive <code>efi</code> as <code>boot</code> drive. Your drives will be supposed to format with GPT as following structure.</p>
+</li>
 </ul>
-
-<h2 id="troubleshooting-windows-always-boots-first">Troubleshooting: Windows always boots first</h2>
-
-<p><strong>Change BIOS</strong>
-* Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).
-* Some PC&rsquo;s BIOS has <code>BOOT</code> tab option, open the <code>BOOT</code> tab, you will find the <code>OS Boot Manager</code>. It is the simplest way to fix the issue. If your PC&rsquo;s BIOS has no such setting feature, you need to check the next section.</p>
-
-<p><strong>Change the Windows Boot Manager</strong>
-* Login windows with common prompt
-* Restart windows, meanwhile press shift key
-* In the options page, choose change to other options
-* Troubleshooting
-* Command Prompt
-* Login in Windows with Common prompt
-* Use BCDEdit to change windows boot manager. Change to boot ubuntu at first</p>
-
-<pre><code class="language-bash">REM backup
-bcdedit /enum &gt; X:\Users\public\documents\bcdedit.txt
-REM change the bootmgr 
-bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">sda</span>
+  <span style="color:#a6e22e">+----sda1        nfts               500M         Windows recovery</span>
+  <span style="color:#a6e22e">+----sda2        efi       /boot    100M         grub2 , Windows boot manager</span>
+  <span style="color:#a6e22e">+----sda3                  /        10M            </span>
+  <span style="color:#a6e22e">+----sda4        ntfs      /      40000M         Window 7/8/10</span>
+  <span style="color:#a6e22e">+----sda5                  swap   &lt;Double size of your RAM size&gt;   </span>
+  <span style="color:#a6e22e">+----sda6        ext4      /      20000M         Ubuntu 14 desktop</span>
+  <span style="color:#a6e22e">+----sda7        ext4      /      20000M         Fedora 20 desktop           </span>
+  <span style="color:#a6e22e">+----sda8        ext4      /      20000M         CentOS 6 desktop</span>
+  <span style="color:#a6e22e">+----sda9        ext4      /      20000M         OpenSuse desktop</span>
+  <span style="color:#a6e22e">+ ...</span>
+</code></pre></div><h2 id="troubleshooting-windows-always-boots-first">Troubleshooting: Windows always boots first</h2>
+<p><strong>Change BIOS</strong></p>
 <ul>
-<li><p>After you reboot system, you will see the Grub 2 menu as follow.</p>
-
-<pre><code class="language-bash">                         GNU GRUB version 2.0
+<li>Start your PC by pressing a pressing a special function key (usually F12, F10 or F2 depending on the vendor specifications).</li>
+<li>Some PC's BIOS has <code>BOOT</code> tab option, open the <code>BOOT</code> tab, you will find the <code>OS Boot Manager</code>. It is the simplest way to fix the issue. If your PC's BIOS has no such setting feature, you need to check the next section.</li>
+</ul>
+<p><strong>Change the Windows Boot Manager</strong></p>
+<ul>
+<li>Login windows with common prompt</li>
+<li>Restart windows, meanwhile press shift key</li>
+<li>In the options page, choose change to other options</li>
+<li>Troubleshooting</li>
+<li>Command Prompt</li>
+<li>Login in Windows with Common prompt</li>
+<li>Use BCDEdit to change windows boot manager. Change to boot ubuntu at first</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">REM backup
+bcdedit /enum &gt; X:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\p</span>ublic<span style="color:#ae81ff">\d</span>ocuments<span style="color:#ae81ff">\b</span>cdedit.txt
+REM change the bootmgr 
+bcdedit /set <span style="color:#f92672">{</span>bootmgr<span style="color:#f92672">}</span> path <span style="color:#ae81ff">\E</span>FI<span style="color:#ae81ff">\u</span>buntu<span style="color:#ae81ff">\g</span>rubx64.efi
+</code></pre></div><ul>
+<li>After you reboot system, you will see the Grub 2 menu as follow.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">                             GNU GRUB version 2.0
 ---------------------------------------------------------------------------------- 
 | Ubuntu 
-| Advanced options for Unbuntu
-| Windows Boot Manager ( on /dev/sda2 )
+| Advanced options <span style="color:#66d9ef">for</span> Unbuntu
+| Windows Boot Manager <span style="color:#f92672">(</span> on /dev/sda2 <span style="color:#f92672">)</span>
 | Fedora 20
-| Advanced options for Fedora 20
+| Advanced options <span style="color:#66d9ef">for</span> Fedora 20
 | OpenSuse 
-| Advanced options for OpenSuse
+| Advanced options <span style="color:#66d9ef">for</span> OpenSuse
 | ....
 
-</code></pre></li>
-</ul>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#where-to-install-linux">Where to install Linux?</a>
-<ul>
-<li><a href="#install-virtual-machine">Install virtual machine</a></li>
-<li><a href="#which-version-to-choose">Which version to choose</a></li>
-<li><a href="#install-unbuntu">Install Unbuntu</a></li>
-</ul></li>
-<li><a href="#things-to-do-after-installing-ubuntu-desktop">Things to do after installing Ubuntu desktop</a></li>
-<li><a href="#things-don-t-do">Things don&rsquo;t do</a></li>
-<li><a href="#dual-boot-or-multiple-boot-with-windows">Dual boot or multiple boot with Windows</a></li>
-<li><a href="#troubleshooting-windows-always-boots-first">Troubleshooting: Windows always boots first</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#where-to-install-linux">Where to install Linux?</a>
+      <ul>
+        <li><a href="#install-virtual-machine">Install virtual machine</a></li>
+        <li><a href="#which-version-to-choose">Which version to choose</a></li>
+        <li><a href="#install-unbuntu">Install Unbuntu</a></li>
+      </ul>
+    </li>
+    <li><a href="#things-to-do-after-installing-ubuntu-desktop">Things to do after installing Ubuntu desktop</a></li>
+    <li><a href="#things-dont-do">Things don't do</a></li>
+    <li><a href="#dual-boot-or-multiple-boot-with-windows">Dual boot or multiple boot with Windows</a></li>
+    <li><a href="#troubleshooting-windows-always-boots-first">Troubleshooting: Windows always boots first</a></li>
+  </ul>
 </nav>
     </div>
 

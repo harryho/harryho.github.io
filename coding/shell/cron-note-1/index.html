@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Cron Job Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -940,7 +976,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -968,6 +1004,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -985,174 +1023,161 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Cron Job Note - 1</h1>
-        
-
-<h2 id="introduction">Introduction</h2>
-
+        <h2 id="introduction">Introduction</h2>
 <p>Cron job is one of most common techniques used on every Unix / Linux.</p>
-
 <h2 id="common-use-cases">Common Use Cases</h2>
-
-<h3 id="house-keeping-clean-up-the-backup">House keeping - Clean up the backup</h3>
-
+<h3 id="house-keeping---clean-up-the-backup">House keeping - Clean up the backup</h3>
 <ul>
-<li>Run every night to remove the daily backup tar ball</li>
-
-<li><p>Assumption:</p>
-
+<li>
+<p>Run every night to remove the daily backup tar ball</p>
+</li>
+<li>
+<p>Assumption:</p>
 <ul>
 <li>The script file named  <code>housekeeping.sh</code>.</li>
 <li>The script sits inside folder <code>bin</code> which is under your user account.</li>
 <li>All backup files have the .tar as extension.</li>
 <li>The script will check the backup tar balls within the folder <code>bacup</code>, which is under your user account as well.</li>
 <li>The script will remove the latest backup if total backup files are over 5.</li>
-</ul></li>
+</ul>
+</li>
+<li>
+<p>Cron Job setting -</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Replace the user_id with you actual user name</span>
+<span style="color:#ae81ff">20</span> <span style="color:#ae81ff">15</span> * * * &lt;user_id&gt; /home/&lt;user_id&gt;/bin/housekeeping 2&gt;&amp;<span style="color:#ae81ff">1</span>  | logger
+</code></pre></div><ul>
+<li>The script file</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># crontab config</span> 
 
-<li><p>Cron Job setting -</p>
+<span style="color:#75715e"># 20 15 * * * /home/${USER}/bin/housekeeping 2&gt;&amp;1</span> 
 
-<pre><code class="language-bash"># Replace the user_id with you actual user name
-20 15 * * * &lt;user_id&gt; /home/&lt;user_id&gt;/bin/housekeeping 2&gt;&amp;1  | logger
-</code></pre></li>
+<span style="color:#75715e"># script location: /home/$(USER}/bin</span>
+<span style="color:#75715e"># log file location: /home/$(USER}/log</span>
 
-<li><p>The script file</p>
+logfile<span style="color:#f92672">=</span>/home/<span style="color:#e6db74">${</span>USER<span style="color:#e6db74">}</span>/log/housekeeping.log;
+backup_dir<span style="color:#f92672">=</span>/home/<span style="color:#e6db74">${</span>USER<span style="color:#e6db74">}</span>/data/backups
 
-<pre><code class="language-bash">#!/bin/bash
+<span style="color:#75715e"># Log the start time</span>
+echo <span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span>&gt;&gt; $logfile;
 
-# crontab config 
+fln<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span><span style="color:#66d9ef">$(</span>find <span style="color:#e6db74">${</span>backup_dir<span style="color:#e6db74">}</span> -type f -name <span style="color:#e6db74">&#34;*.tar&#34;</span> | egrep -i <span style="color:#e6db74">&#34;.tar&#34;</span> | wc -l<span style="color:#66d9ef">)</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0</span><span style="color:#66d9ef">))</span>;
 
-# 20 15 * * * /home/${USER}/bin/housekeeping 2&gt;&amp;1 
-
-# script location: /home/$(USER}/bin
-# log file location: /home/$(USER}/log
-
-logfile=/home/${USER}/log/housekeeping.log;
-backup_dir=/home/${USER}/data/backups
-
-# Log the start time
-echo $(date)&gt;&gt; $logfile;
-
-fln=$(($(find ${backup_dir} -type f -name &quot;*.tar&quot; | egrep -i &quot;.tar&quot; | wc -l)+0));
-
-# Log the number of files 
+<span style="color:#75715e"># Log the number of files</span> 
 echo $fln&gt;&gt;$logfile;
 
-if [[ $fln -ge 6 ]]; then
-for t in $(find ${backup_dir} -type f -name &quot;*.tar&quot; | sort | egrep -m1 &quot;.tar&quot;);
-do
-rm -rf   $t;
-# Log the removed file
-echo &quot;remove $t&quot; &gt;&gt; $logfile;
-done;
-fi;
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> $fln -ge <span style="color:#ae81ff">6</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  <span style="color:#66d9ef">for</span> t in <span style="color:#66d9ef">$(</span>find <span style="color:#e6db74">${</span>backup_dir<span style="color:#e6db74">}</span> -type f -name <span style="color:#e6db74">&#34;*.tar&#34;</span> | sort | egrep -m1 <span style="color:#e6db74">&#34;.tar&#34;</span><span style="color:#66d9ef">)</span>;
+  <span style="color:#66d9ef">do</span>
+    rm -rf   $t;
+    <span style="color:#75715e"># Log the removed file</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">remove </span>$t<span style="color:#e6db74">&#34;</span> &gt;&gt; $logfile;
+  <span style="color:#66d9ef">done</span>;
+<span style="color:#66d9ef">fi</span>;
 
-</code></pre></li>
-</ul>
-
-<h3 id="backup-the-database">Backup the database</h3>
-
+</code></pre></div><h3 id="backup-the-database">Backup the database</h3>
 <h4 id="backup-the-mysql-database-nightly">Backup the MySql database nightly</h4>
-
 <ul>
-<li><p>The database backup dump will be stored into the folder named after the brand name, e.g. the folder facebook for Facebook</p></li>
-
-<li><p>The script of backup  <code>backup.sh</code></p>
-
-<pre><code class="language-bash">
-# Every Backup directory has file named ENVIRONMENT
+<li>
+<p>The database backup dump will be stored into the folder named after the brand name, e.g. the folder facebook for Facebook</p>
+</li>
+<li>
+<p>The script of backup  <code>backup.sh</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#75715e"># Every Backup directory has file named ENVIRONMENT</span>
 # 
-# ENVIRONMENT contains the setting like db, server, etc.
+<span style="color:#75715e"># ENVIRONMENT contains the setting like db, server, etc.</span>
 #
-#    DB_HOST=your_database_host_server
-#    DATABASE=the_target_database
-#    DB_USER=db_login_id
-#    DB_PASSWORD=db_password
-#    BACKUPS_TO_KEEP=5
+<span style="color:#75715e">#    DB_HOST=your_database_host_server</span>
+<span style="color:#75715e">#    DATABASE=the_target_database</span>
+<span style="color:#75715e">#    DB_USER=db_login_id</span>
+<span style="color:#75715e">#    DB_PASSWORD=db_password</span>
+<span style="color:#75715e">#    BACKUPS_TO_KEEP=5</span>
 #
 
 
-# THIS SCRIPT MAY ONLY BE RUN ONCE EACH DAY
-# Usge:
-#   ./backup.sh facebook 
+<span style="color:#75715e"># THIS SCRIPT MAY ONLY BE RUN ONCE EACH DAY</span>
+<span style="color:#75715e"># Usge:</span>
+<span style="color:#75715e">#   ./backup.sh facebook</span> 
 #
-[[ -z &quot;$1&quot; ]] &amp;&amp; echo &quot;Must run script with brand name, which has matching folder in /var/backup/&quot; &amp;&amp; exit 1
+<span style="color:#f92672">[</span><span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;Must run script with brand name, which has matching folder in /var/backup/&#34;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
 
-BACKUP_DIR=/var/backup/${1}
-source ${BACKUP_DIR}/ENVIRONMENT
+BACKUP_DIR<span style="color:#f92672">=</span>/var/backup/<span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
+source <span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span>/ENVIRONMENT
 
-LATEST_DUMP_TARBALL=latest-dump.tgz
-DATE=$(date +%d-%m-%Y) # dd-mm-yyyy
-LATEST_BACKUP_DIR=${BACKUP_DIR}/${DATE}
+LATEST_DUMP_TARBALL<span style="color:#f92672">=</span>latest-dump.tgz
+DATE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%d-%m-%Y<span style="color:#66d9ef">)</span> <span style="color:#75715e"># dd-mm-yyyy</span>
+LATEST_BACKUP_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>DATE<span style="color:#e6db74">}</span>
 
-echo &quot;$(date): Beginning backup of ${DATABASE} on ${DB_HOST}&quot;
-mkdir -p ${LATEST_BACKUP_DIR}
-cd ${LATEST_BACKUP_DIR}
-START=$(date +%s)
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Beginning backup of </span><span style="color:#e6db74">${</span>DATABASE<span style="color:#e6db74">}</span><span style="color:#e6db74"> on </span><span style="color:#e6db74">${</span>DB_HOST<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+mkdir -p <span style="color:#e6db74">${</span>LATEST_BACKUP_DIR<span style="color:#e6db74">}</span>
+cd <span style="color:#e6db74">${</span>LATEST_BACKUP_DIR<span style="color:#e6db74">}</span>
+START<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
 
-# Set procedure definer to ussadmin
-SQL=&quot;UPDATE mysql.proc p \
-SET definer = '${DB_USER}@%' \
-WHERE db = '${DATABASE}' \
-AND definer &lt;&gt; '${DB_USER}@%';&quot;
+<span style="color:#75715e"># Set procedure definer to ussadmin</span>
+SQL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">UPDATE mysql.proc p \
+</span><span style="color:#e6db74">SET definer = &#39;</span><span style="color:#e6db74">${</span>DB_USER<span style="color:#e6db74">}</span><span style="color:#e6db74">@%&#39; \
+</span><span style="color:#e6db74">WHERE db = &#39;</span><span style="color:#e6db74">${</span>DATABASE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; \
+</span><span style="color:#e6db74">AND definer &lt;&gt; &#39;</span><span style="color:#e6db74">${</span>DB_USER<span style="color:#e6db74">}</span><span style="color:#e6db74">@%&#39;;</span><span style="color:#e6db74">&#34;</span>
 
-mysql -h ${DB_HOST} -P 3306 ${DATABASE} -u ${DB_USER} -p${DB_PASSWORD} -e&quot;${SQL}&quot;
+mysql -h <span style="color:#e6db74">${</span>DB_HOST<span style="color:#e6db74">}</span> -P <span style="color:#ae81ff">3306</span> <span style="color:#e6db74">${</span>DATABASE<span style="color:#e6db74">}</span> -u <span style="color:#e6db74">${</span>DB_USER<span style="color:#e6db74">}</span> -p<span style="color:#e6db74">${</span>DB_PASSWORD<span style="color:#e6db74">}</span> -e<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SQL<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-mysqldump -h ${DB_HOST} -P 3306 ${DATABASE} \
---routines \
---lock-tables=false \
--u ${DB_USER} -p${DB_PASSWORD} &gt; ./dump.sql
+mysqldump -h <span style="color:#e6db74">${</span>DB_HOST<span style="color:#e6db74">}</span> -P <span style="color:#ae81ff">3306</span> <span style="color:#e6db74">${</span>DATABASE<span style="color:#e6db74">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--routines <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--lock-tables<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-u <span style="color:#e6db74">${</span>DB_USER<span style="color:#e6db74">}</span> -p<span style="color:#e6db74">${</span>DB_PASSWORD<span style="color:#e6db74">}</span> &gt; ./dump.sql
 
-EXPORT_RESULT=$?
+EXPORT_RESULT<span style="color:#f92672">=</span>$?
 
-END=$(date +%s)
-echo &quot;Export duration: $(( $END - $START ))s&quot;
+END<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Export duration: </span><span style="color:#66d9ef">$((</span> $END <span style="color:#f92672">-</span> $START <span style="color:#66d9ef">))</span><span style="color:#e6db74">s</span><span style="color:#e6db74">&#34;</span>
 
-echo &quot;Gzipping dump file into tarball&quot;
+echo <span style="color:#e6db74">&#34;Gzipping dump file into tarball&#34;</span>
 
-START=$(date +%s)
+START<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
 tar czf dump.tgz dump.sql
-[[ $? ]] &amp;&amp;  rm -f dump.sql
-END=$(date +%s)
+<span style="color:#f92672">[</span><span style="color:#f92672">[</span> $? <span style="color:#f92672">]</span><span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span>  rm -f dump.sql
+END<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
 
-echo &quot;Gzipping duration: $(( $END - $START ))s&quot;
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Gzipping duration: </span><span style="color:#66d9ef">$((</span> $END <span style="color:#f92672">-</span> $START <span style="color:#66d9ef">))</span><span style="color:#e6db74">s</span><span style="color:#e6db74">&#34;</span>
 
-echo &quot;Creating ${BACKUP_DIR}/${LATEST_DUMP_TARBALL}&quot;
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Creating </span><span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>LATEST_DUMP_TARBALL<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-if [[ ${EXPORT_RESULT} ]]; then
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> <span style="color:#e6db74">${</span>EXPORT_RESULT<span style="color:#e6db74">}</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
 
-    if [[ -f ${BACKUP_DIR}/${LATEST_DUMP_TARBALL} ]]; then
-        rm --force ${BACKUP_DIR}/${LATEST_DUMP_TARBALL};
-    fi
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> -f <span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>LATEST_DUMP_TARBALL<span style="color:#e6db74">}</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+        rm --force <span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>LATEST_DUMP_TARBALL<span style="color:#e6db74">}</span>;
+    <span style="color:#66d9ef">fi</span>
 
-    ln -s ${LATEST_BACKUP_DIR}/dump.tgz ${BACKUP_DIR}/${LATEST_DUMP_TARBALL};
+    ln -s <span style="color:#e6db74">${</span>LATEST_BACKUP_DIR<span style="color:#e6db74">}</span>/dump.tgz <span style="color:#e6db74">${</span>BACKUP_DIR<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>LATEST_DUMP_TARBALL<span style="color:#e6db74">}</span>;
 
-else
-    echo &quot;Export operation did not return 0, skipping symlink update&quot;
-fi
+<span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#34;Export operation did not return 0, skipping symlink update&#34;</span>
+<span style="color:#66d9ef">fi</span>
 
-echo &quot;$(date): Completed backup for ${DATABASE} on ${DB_HOST}&quot;
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Completed backup for </span><span style="color:#e6db74">${</span>DATABASE<span style="color:#e6db74">}</span><span style="color:#e6db74"> on </span><span style="color:#e6db74">${</span>DB_HOST<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
 
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#common-use-cases">Common Use Cases</a>
-<ul>
-<li><a href="#house-keeping-clean-up-the-backup">House keeping - Clean up the backup</a></li>
-<li><a href="#backup-the-database">Backup the database</a>
-<ul>
-<li><a href="#backup-the-mysql-database-nightly">Backup the MySql database nightly</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#common-use-cases">Common Use Cases</a>
+      <ul>
+        <li><a href="#house-keeping---clean-up-the-backup">House keeping - Clean up the backup</a></li>
+        <li><a href="#backup-the-database">Backup the database</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

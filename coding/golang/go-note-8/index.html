@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Packaging :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -955,7 +991,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -976,6 +1012,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -993,38 +1031,33 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Packaging</h1>
-        
-
-<h3 id="package">Package</h3>
-
+        <h3 id="package">Package</h3>
 <ul>
-<li><p>Package is a way to structure code: a program is constructed as a “package” (often abbreviated as pkg), which may use facilities from other packages. Every go-file belongs to one (and only one) package (like a library or namespace in other languages). Many different .go files can belong to one package, so the filename(s) and package name are generally not the same.</p></li>
-
-<li><p>The package to which the code-file belongs must be indicated on the first line, e.g.: package main . A standalone executable belongs to package main. Each Go application contains one package called main. An application can consist of different packages, but even if you use only package main, you don’t have to stuff all code in 1 big file: you can make a number of smaller files each having package main as 1 st codeline. If you compile a source file with a package name other than main, like pack1, the object file is stored in pack1.a; a package name is written in lowercase letters.</p></li>
+<li>
+<p>Package is a way to structure code: a program is constructed as a “package” (often abbreviated as pkg), which may use facilities from other packages. Every go-file belongs to one (and only one) package (like a library or namespace in other languages). Many different .go files can belong to one package, so the filename(s) and package name are generally not the same.</p>
+</li>
+<li>
+<p>The package to which the code-file belongs must be indicated on the first line, e.g.: package main . A standalone executable belongs to package main. Each Go application contains one package called main. An application can consist of different packages, but even if you use only package main, you don’t have to stuff all code in 1 big file: you can make a number of smaller files each having package main as 1 st codeline. If you compile a source file with a package name other than main, like pack1, the object file is stored in pack1.a; a package name is written in lowercase letters.</p>
+</li>
 </ul>
-
 <h4 id="standard-library">Standard library</h4>
-
 <ul>
-<li><p>The Go installation contains a number of ready-to-use packages, which form the standard library.</p></li>
-
-<li><p>To build a program, the packages, and the files within them, must be compiled in the correct order. Package dependencies determine the order in which to build packages.</p></li>
+<li>
+<p>The Go installation contains a number of ready-to-use packages, which form the standard library.</p>
+</li>
+<li>
+<p>To build a program, the packages, and the files within them, must be compiled in the correct order. Package dependencies determine the order in which to build packages.</p>
+</li>
 </ul>
-
 <h4 id="import">Import</h4>
-
 <ul>
 <li>A Go program is created by linking together a set of packages through the import keyword.</li>
 </ul>
-
 <h3 id="visibility-rule">VISIBILITY RULE</h3>
-
 <ul>
 <li>When the identifier ( of a constant, variable, type, function, struct field, &hellip;) starts with an uppercase letter, like Group1, then the ‘object’ with this identifier is visible in code outside the package (thus available to client-programs, ‘importers’ of the package), it is said to be exported (like public in OO languages). Identifiers which start with a lowercase letter are not visible outside the package, but they are visible and usable in the whole package (like private).</li>
 </ul>
-
 <h4 id="package-alias">package alias</h4>
-
 <ul>
 <li>A package can, if this is useful (for shortening, name conflicts, &hellip;), also be given another name (an alias), like: import fm “fmt” .</li>
 </ul>
@@ -1033,23 +1066,14 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#package">Package</a>
-<ul>
-<li><a href="#standard-library">Standard library</a></li>
-<li><a href="#import">Import</a></li>
-</ul></li>
-<li><a href="#visibility-rule">VISIBILITY RULE</a>
-<ul>
-<li><a href="#package-alias">package alias</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#package">Package</a></li>
+        <li><a href="#visibility-rule">VISIBILITY RULE</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

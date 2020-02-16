@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Iteration :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -940,7 +976,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option> 
@@ -971,6 +1007,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -988,12 +1026,8 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Iteration</h1>
-        
-
-<h2 id="iterables-iteration">Iterables &amp; Iteration</h2>
-
+        <h2 id="iterables--iteration">Iterables &amp; Iteration</h2>
 <h3 id="comprehensions">Comprehensions</h3>
-
 <ul>
 <li>Comprehensions can process more than one input sequence</li>
 <li>Multiple input sequences in comprehensions work like nested for-loops</li>
@@ -1001,35 +1035,28 @@
 <li>Later clauses in a comprehension can reference variables bound in earlier clauses</li>
 <li>Comprehension can also appear in the result expression of a comprehension, resulting in nested sequences</li>
 </ul>
-
 <h4 id="example">Example</h4>
-
-<pre><code class="language-python">## Comprehensions    
-&gt;&gt;&gt; points
-[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
-&gt;&gt;&gt; points_c=[(x,y) for x in range(3) for y in range(4) ]
-&gt;&gt;&gt; points_c
-[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]
-&gt;&gt;&gt; points_d=[(x,y)
-...     for x in range(3)
-...     if x &gt; 0
-...     for y in range(4)
-...     if y &gt; x ]
-&gt;&gt;&gt; points_d
-[(1, 2), (1, 3), (2, 3)]
-&gt;&gt;&gt; points_e = [ [ y-1 for y in range(x)  ] for x in range(3)]
-&gt;&gt;&gt; points_e
-[[], [-1], [-1, 0]]
-</code></pre>
-
-<h3 id="functional-style-tools">Functional-style tools</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## Comprehensions    </span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points
+[(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_c<span style="color:#f92672">=</span>[(x,y) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>) ]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_c
+[(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_d<span style="color:#f92672">=</span>[(x,y)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">if</span> y <span style="color:#f92672">&gt;</span> x ]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_d
+[(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_e <span style="color:#f92672">=</span> [ [ y<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(x)  ] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> points_e
+[[], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]]
+</code></pre></div><h3 id="functional-style-tools">Functional-style tools</h3>
 <ul>
 <li>Python provides a number of functional-style tools for working with iterators</li>
 </ul>
-
 <h4 id="map">Map</h4>
-
 <ul>
 <li><code>map()</code> calls a function for each element in its input sequences</li>
 <li><code>map()</code> returns an iterable object, not a fully-evaluated collection</li>
@@ -1042,47 +1069,37 @@ it produces</li>
 <li><code>map()</code> stops producing output when its shortest input sequence is exhausted</li>
 <li><code>map()</code> can be used to implement the same behavior as comprehensions in some cases</li>
 </ul>
-
 <h5 id="example-1">Example</h5>
-
-<pre><code class="language-python">&gt;&gt;&gt; sizes =['small','medium', 'large']
-&gt;&gt;&gt; colors = ['lavender', 'teal', 'burnt orange']
-&gt;&gt;&gt; animals = ['koala', 'platypus', 'salamander']
-&gt;&gt;&gt; def combine( size, color, animal):
-...     return '{} {} {}'.format(size, color, animal)
-...
-&gt;&gt;&gt; list(map(combine, sizes, colors, animals ))
-['small lavender koala', 'medium teal platypus', 'large burnt orange salamander']
-&gt;&gt;&gt; import itertools
-&gt;&gt;&gt; def combine2(quantity, size, color, animal):
-...     return '{} - {} {} {}'.format(quantity, size, color, animal)
-...
-&gt;&gt;&gt; list(map(combine2, itertools.count(), sizes, colors, animals ))
-['0 - small lavender koala', '1 - medium teal platypus', '2 - large burnt orange salamander']
-</code></pre>
-
-<h4 id="filter">Filter</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> sizes <span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">small</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">large</span><span style="color:#e6db74">&#39;</span>]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> colors <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lavender</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">teal</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">burnt orange</span><span style="color:#e6db74">&#39;</span>]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> animals <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">koala</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">platypus</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">salamander</span><span style="color:#e6db74">&#39;</span>]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">combine</span>( size, color, animal):
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(size, color, animal)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> list(map(combine, sizes, colors, animals ))
+[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">small lavender koala</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium teal platypus</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">large burnt orange salamander</span><span style="color:#e6db74">&#39;</span>]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">import</span> itertools
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">combine2</span>(quantity, size, color, animal):
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} - {} {} {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(quantity, size, color, animal)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> list(map(combine2, itertools<span style="color:#f92672">.</span>count(), sizes, colors, animals ))
+[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0 - small lavender koala</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1 - medium teal platypus</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2 - large burnt orange salamander</span><span style="color:#e6db74">&#39;</span>]
+</code></pre></div><h4 id="filter">Filter</h4>
 <ul>
 <li><code>filter()</code> selects values from an input sequence which match a specified criteria</li>
 <li><code>filter()</code> passes each element in its input sequence to the function argument</li>
 <li><code>filter()</code> returns an iterable over the input elements for which the function argument is truthy</li>
 <li>Like <code>map()</code>, <code>filter()</code> produces its output lazily If you pass None as the first argument to <code>filter()</code>, it yields the input values which evaluate to True in a boolean context <code>reduce()</code> cumulatively applies a function to the elements of an input sequence</li>
 </ul>
-
 <h5 id="example-2">Example</h5>
-
-<pre><code class="language-python">## filter
-&gt;&gt;&gt; negs = filter(lambda x: x&lt;0 , [3, -1, 2,-4,0,9,-33])
-&gt;&gt;&gt; list(negs)
-[-1, -4, -33]
-&gt;&gt;&gt; notnones = filter(None, [0,1, False, True, [], () , {}, (1,2,), [1,2], '', 'yes'])
-&gt;&gt;&gt; list(map(type, list(notnones)))
-[&lt;class 'int'&gt;, &lt;class 'bool'&gt;, &lt;class 'tuple'&gt;, &lt;class 'list'&gt;, &lt;class 'str'&gt;]
-</code></pre>
-
-<h4 id="reduce">Reduce</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## filter</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> negs <span style="color:#f92672">=</span> filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> , [<span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">9</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">33</span>])
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> list(negs)
+[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">33</span>]
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> notnones <span style="color:#f92672">=</span> filter(None, [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>, False, True, [], () , {}, (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,), [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">yes</span><span style="color:#e6db74">&#39;</span>])
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> list(map(type, list(notnones)))
+[<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">int</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;, &lt;class </span><span style="color:#e6db74">&#39;</span>bool<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;, &lt;class </span><span style="color:#e6db74">&#39;</span>tuple<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;, &lt;class </span><span style="color:#e6db74">&#39;</span>list<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;, &lt;class </span><span style="color:#e6db74">&#39;</span>str<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;]</span>
+</code></pre></div><h4 id="reduce">Reduce</h4>
 <ul>
 <li><code>reduce()</code> calls the input function with two arguments: the accumulated result so far, and the next element in the sequence</li>
 <li><code>reduce()</code> is a generalization of summation</li>
@@ -1093,192 +1110,135 @@ it produces</li>
 <li>The initial value is returned if the input sequence is empty</li>
 <li>The <code>map()</code> and <code>reduce()</code> functions in Python are related to the ideas in the map-reduce algorithm</li>
 </ul>
-
 <h5 id="example-3">Example</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## reduce</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> reduce
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">import</span> operator
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> reduce(operator<span style="color:#f92672">.</span>add, [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>])
+<span style="color:#ae81ff">15</span>
 
-<pre><code class="language-python">## reduce
-&gt;&gt;&gt; from functools import reduce
-&gt;&gt;&gt; import operator
-&gt;&gt;&gt; reduce(operator.add, [1,2,3,4,5])
-15
-
-### x is interim result , y is the next sequence value
-&gt;&gt;&gt; def mul(x, y):
-...     print(' mul {} {} '.format(x,y))
-...     return x * y
-...
-&gt;&gt;&gt; reduce( mul, range(1, 5))
-mul 1 2
-mul 2 3
-mul 6 4
-24
-</code></pre>
-
-<h3 id="the-next-function">The next() function</h3>
-
+<span style="color:#75715e">### x is interim result , y is the next sequence value</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mul</span>(x, y):
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> mul {} {} </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(x,y))
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> y
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> reduce( mul, range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>))
+mul <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>
+mul <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+mul <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">4</span>
+<span style="color:#ae81ff">24</span>
+</code></pre></div><h3 id="the-next-function">The next() function</h3>
 <ul>
-<li>Python&rsquo;s next() function calls <code>__next__()</code> on its argument</li>
+<li>Python's next() function calls <code>__next__()</code> on its argument</li>
 <li>Iterators in Python must support the <code>__next__()</code> method</li>
 <li><code>__next__()</code> should return the next item in the sequence, or raise <code>StopIteration</code> if it is exhausted</li>
-<li>Python&rsquo;s <code>iter()</code> function calls <code>__iter__()</code> on its argument</li>
+<li>Python's <code>iter()</code> function calls <code>__iter__()</code> on its argument</li>
 <li>Iterable objects in Python must support the <code>__iter__()</code> method</li>
 <li><code>__iter__()</code> should return an iterator for the iterable object</li>
 <li>Objects with a <code>__getitem__()</code> method that accepts consecutive integer indices starting at zero are also iterables</li>
 <li>Iterables implemented via <code>__getitem__()</code> must raise <code>IndexError</code> when they are exhausted</li>
 </ul>
-
 <h5 id="example-of-iterator">Example of Iterator</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExampleIterator</span>:
+<span style="color:#66d9ef">def</span> __init__(self, data):
+    self<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    self<span style="color:#f92672">.</span>data <span style="color:#f92672">=</span> data
 
-<pre><code class="language-python">class ExampleIterator:
-def __init__(self, data):
-    self.index = 0
-    self.data = data
+<span style="color:#66d9ef">def</span> __iter__(self):
+    <span style="color:#66d9ef">return</span> self
 
-def __iter__(self):
-    return self
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__next__</span>(self):
+    <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>index <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> len(self<span style="color:#f92672">.</span>data):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">StopIteration</span>()
 
-def __next__(self):
-    if self.index &gt;= len(self.data):
-        raise StopIteration()
+    rslt <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>data[self<span style="color:#f92672">.</span>index]
+    self<span style="color:#f92672">.</span>index <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> rslt
+</code></pre></div><h5 id="example-of-iterable">Example of Iterable</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExampleIterable</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
 
-    rslt = self.data[self.index]
-    self.index += 1
-    return rslt
-</code></pre>
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#66d9ef">return</span> ExampleIterator(self<span style="color:#f92672">.</span>data)
+</code></pre></div><h5 id="example-of-anotheriterable">Example of AnotherIterable</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnotherIterable</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
 
-<h5 id="example-of-iterable">Example of Iterable</h5>
-
-<pre><code class="language-python">class ExampleIterable:
-    def __init__(self):
-        self.data = [1, 2, 3]
-
-    def __iter__(self):
-        return ExampleIterator(self.data)
-</code></pre>
-
-<h5 id="example-of-anotheriterable">Example of AnotherIterable</h5>
-
-<pre><code class="language-python">class AnotherIterable:
-    def __init__(self):
-        self.data = [1, 2, 3]
-
-    def __getitem__(self, idx):
-        return self.data[idx]
-</code></pre>
-
-<h3 id="the-iter-function">The iter() function</h3>
-
+    <span style="color:#66d9ef">def</span> __getitem__(self, idx):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>data[idx]
+</code></pre></div><h3 id="the-iter-function">The iter() function</h3>
 <ul>
 <li>The extended form of <code>iter()</code> accepts a zero-argument callable and a sentinel value</li>
 <li>Extended <code>iter()</code> repeatedly calls the callable argument until it returns the sentinel value</li>
 <li>The values produced by extended <code>iter()</code> are those returned from the callable</li>
 </ul>
-
 <h5 id="example-4">Example</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> ts <span style="color:#f92672">=</span> iter(datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now, None)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> next(ts)
+datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">38</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">752761</span>)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> next(ts)
+datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">38</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">373613</span>)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> next(ts)
+datetime<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">38</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">754588</span>)
 
-<pre><code class="language-python">&gt;&gt;&gt; ts = iter(datetime.datetime.now, None)
-&gt;&gt;&gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 10, 752761)
-&gt;&gt;&gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 13, 373613)
-&gt;&gt;&gt; next(ts)
-datetime.datetime(2017, 7, 14, 14, 38, 14, 754588)
+<span style="color:#75715e">## Read file </span>
+<span style="color:#75715e">## Content of the file file.txt</span>
+<span style="color:#75715e">## You are reading </span>
+<span style="color:#75715e">## the file</span>
+<span style="color:#75715e">## you won&#39;t read </span>
+<span style="color:#75715e">## the </span>
+<span style="color:#75715e">## END</span>
+<span style="color:#75715e">## but not see the END above</span>
 
-## Read file 
-## Content of the file file.txt
-## You are reading 
-## the file
-## you won't read 
-## the 
-## END
-## but not see the END above
-
-&gt;&gt;&gt; with open('file.txt', 'rt') as f:
-...     for line in iter(lambda: f.readline().strip(), 'END'):
-...             print(line)
-...
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file.txt</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rt</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> f:
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> iter(<span style="color:#66d9ef">lambda</span>: f<span style="color:#f92672">.</span>readline()<span style="color:#f92672">.</span>strip(), <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">END</span><span style="color:#e6db74">&#39;</span>):
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>             <span style="color:#66d9ef">print</span>(line)
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
 You are reading
 the file
-you won't read
+you won<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">t read</span>
 the
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>One use case for extended <code>iter()</code> is to iterate using simple functions</li>
 <li>Protocol conforming iterators must also be iterable</li>
 </ul>
-
 <h5 id="example-of-sensor">Example of Sensor</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> itertools
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> time
 
-<pre><code class="language-python">import datetime
-import itertools
-import random
-import time
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sensor</span>:
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#66d9ef">return</span> self
 
-class Sensor:
-    def __iter__(self):
-        return self
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__next__</span>(self):
+        <span style="color:#66d9ef">return</span> random<span style="color:#f92672">.</span>random()
 
-    def __next__(self):
-        return random.random()
+sensor <span style="color:#f92672">=</span> Sensor()
+timestamps <span style="color:#f92672">=</span> iter(datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now, None)
 
-sensor = Sensor()
-timestamps = iter(datetime.datetime.now, None)
+<span style="color:#66d9ef">for</span> stamp, value <span style="color:#f92672">in</span> itertools<span style="color:#f92672">.</span>islice(zip(timestamps, sensor), <span style="color:#ae81ff">10</span>):
+    <span style="color:#66d9ef">print</span>(stamp, value)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
 
-for stamp, value in itertools.islice(zip(timestamps, sensor), 10):
-    print(stamp, value)
-    time.sleep(1)
-
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#iterables-iteration">Iterables &amp; Iteration</a>
-<ul>
-<li><a href="#comprehensions">Comprehensions</a>
-<ul>
-<li><a href="#example">Example</a></li>
-</ul></li>
-<li><a href="#functional-style-tools">Functional-style tools</a>
-<ul>
-<li><a href="#map">Map</a>
-<ul>
-<li><a href="#example-1">Example</a></li>
-</ul></li>
-<li><a href="#filter">Filter</a>
-<ul>
-<li><a href="#example-2">Example</a></li>
-</ul></li>
-<li><a href="#reduce">Reduce</a>
-<ul>
-<li><a href="#example-3">Example</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#the-next-function">The next() function</a>
-<ul>
-<li>
-<ul>
-<li><a href="#example-of-iterator">Example of Iterator</a></li>
-<li><a href="#example-of-iterable">Example of Iterable</a></li>
-<li><a href="#example-of-anotheriterable">Example of AnotherIterable</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#the-iter-function">The iter() function</a>
-<ul>
-<li>
-<ul>
-<li><a href="#example-4">Example</a></li>
-<li><a href="#example-of-sensor">Example of Sensor</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#iterables--iteration">Iterables & Iteration</a>
+      <ul>
+        <li><a href="#comprehensions">Comprehensions</a></li>
+        <li><a href="#functional-style-tools">Functional-style tools</a></li>
+        <li><a href="#the-next-function">The next() function</a></li>
+        <li><a href="#the-iter-function">The iter() function</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

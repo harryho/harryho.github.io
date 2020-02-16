@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Ubuntu 14 -- desktop, extra tools :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -944,6 +980,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -961,142 +999,97 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Ubuntu 14 -- desktop, extra tools</h1>
-        
-
-<h2 id="prerequisites">Prerequisites</h2>
-
+        <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>Install Ubunt 14 Desktop</li>
 <li>Internet is availble</li>
 </ul>
-
 <h2 id="install-chrome">Install chrome</h2>
-
-<pre><code class="language-bash">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
-</code></pre>
-
-<h2 id="install-umake">Install Umake</h2>
-
-<pre><code class="language-bash">sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+</code></pre></div><h2 id="install-umake">Install Umake</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
 sudo apt-get update
 sudo apt-get install ubuntu-make
-</code></pre>
-
-<h2 id="install-ides-via-umake">Install IDEs via Umake</h2>
-
-<pre><code class="language-bash">umake ide pycharm
+</code></pre></div><h2 id="install-ides-via-umake">Install IDEs via Umake</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">umake ide pycharm
 umake web visual-studio-code
 umake android android-studio
-</code></pre>
-
-<h2 id="general-prerequest">General prerequest</h2>
-
-<pre><code class="language-bash">sed -i &quot;/^## deb .*partner/ s/^## //&quot; /etc/apt/sources.list &amp;&amp; apt-get update
-sudo apt-get install geany byobu p7zip-full gimp pdfshuffler scribus \
-filezilla lftp ubuntu-restricted-extras vlc pyrenamer \
+</code></pre></div><h2 id="general-prerequest">General prerequest</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#34;/^## deb .*partner/ s/^## //&#34;</span> /etc/apt/sources.list <span style="color:#f92672">&amp;&amp;</span> apt-get update
+sudo apt-get install geany byobu p7zip-full gimp pdfshuffler scribus <span style="color:#ae81ff">\</span>
+filezilla lftp ubuntu-restricted-extras vlc pyrenamer <span style="color:#ae81ff">\</span>
 imagemagick hugin darktable skype avidemux
-</code></pre>
-
-<h2 id="remove-games">Remove Games</h2>
-
-<pre><code class="language-bash">
+</code></pre></div><h2 id="remove-games">Remove Games</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 sudo apt-get remove aisleriot gnome-mahjongg gnomine gnome-sudoku
 
-</code></pre>
-
-<h2 id="geany-themes">Geany themes</h2>
-
-<pre><code class="language-bash">cd ~/Downloads
+</code></pre></div><h2 id="geany-themes">Geany themes</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/Downloads
 git clone https://github.com/codebrainz/geany-themes.git
 mkdir ~/.config/geany/colorschemes
 cp ~/Downloads/geany-themes/colorschemes/* ~/.config/geany/colorschemes/
 rm -rf ~/Downloads/geany-themes
-</code></pre>
-
-<h2 id="cloud">Cloud</h2>
-
+</code></pre></div><h2 id="cloud">Cloud</h2>
 <blockquote>
 <p>from: <a href="http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html">http://www.webupd8.org/2014/06/install-copycom-client-in-ubuntu-or.html</a></p>
 </blockquote>
-
-<pre><code class="language-bash">sudo add-apt-repository ppa:paolorotolo/copy
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:paolorotolo/copy
 sudo apt-get update
 sudo apt-get install copy
 sudo /opt/copy-client/CopyAgent -installOverlay
 nautilus -q
 copy
-</code></pre>
-
-<h2 id="data-processing">Data processing</h2>
-
-<pre><code class="language-bash">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-sudo add-apt-repository 'deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/'
+</code></pre></div><h2 id="data-processing">Data processing</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository <span style="color:#e6db74">&#39;deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/&#39;</span>
 sudo apt-get update
-sudo apt-get install spyder python-numpy python-numpy-doc sqlite3 \
+sudo apt-get install spyder python-numpy python-numpy-doc sqlite3 <span style="color:#ae81ff">\</span>
 python-scipy python-matplotlib python-matplotlib-doc r-base git-core
-</code></pre>
-
-<h2 id="don-t-forget-to-use-your-own-name-and-email">Don&rsquo;t forget to use your own name and email!</h2>
-
-<pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;your@email.com&quot;
-</code></pre>
-
-<h2 id="maps-and-gis-software">Maps and GIS software</h2>
-
-<pre><code class="language-bash">sudo apt-get install python-software-properties
-sudo add-apt-repository 'deb http://qgis.org/debian trusty main'
+</code></pre></div><h2 id="dont-forget-to-use-your-own-name-and-email">Don't forget to use your own name and email!</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git config --global user.name <span style="color:#e6db74">&#34;Your Name&#34;</span>
+git config --global user.email <span style="color:#e6db74">&#34;your@email.com&#34;</span>
+</code></pre></div><h2 id="maps-and-gis-software">Maps and GIS software</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install python-software-properties
+sudo add-apt-repository <span style="color:#e6db74">&#39;deb http://qgis.org/debian trusty main&#39;</span>
 gpg --keyserver keyserver.ubuntu.com --recv DD45F6C3
 gpg --export --armor DD45F6C3 | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install qgis python-qgis qgis-plugin-grass grass-gui grass-doc \
+sudo apt-get install qgis python-qgis qgis-plugin-grass grass-gui grass-doc <span style="color:#ae81ff">\</span>
 libgdal1-dev libproj-dev gpsbabel
-</code></pre>
-
-<h2 id="latex-type-stuff">Latex type stuff</h2>
-
-<pre><code class="language-bash">sudo apt-get install jabref ibus-qt4 texlive texlive-latex-extra \
+</code></pre></div><h2 id="latex-type-stuff">Latex type stuff</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install jabref ibus-qt4 texlive texlive-latex-extra <span style="color:#ae81ff">\</span>
 texlive-humanities texlive-fonts-extra latex-beamer
 sudo apt-get -f install
-</code></pre>
-
-<h2 id="package-download-and-install-texmaker-and-rstudio">Package download and install (Texmaker and RStudio)</h2>
-
-<pre><code class="language-bash">wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.4.1_amd64.deb
+</code></pre></div><h2 id="package-download-and-install-texmaker-and-rstudio">Package download and install (Texmaker and RStudio)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.4.1_amd64.deb
 wget http://download1.rstudio.org/rstudio-0.98.1102-amd64.deb
 sudo dpkg -i *.deb
 sudo rm *.deb
  
-sudo apt-get update &amp;&amp; apt-get upgrade
+sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> apt-get upgrade
 sudo apt-get autoremove
-</code></pre>
-
-<pre><code class="language-bash">sudo nano /etc/update-manager/release-upgrades
-</code></pre>
-
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/update-manager/release-upgrades
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#install-chrome">Install chrome</a></li>
-<li><a href="#install-umake">Install Umake</a></li>
-<li><a href="#install-ides-via-umake">Install IDEs via Umake</a></li>
-<li><a href="#general-prerequest">General prerequest</a></li>
-<li><a href="#remove-games">Remove Games</a></li>
-<li><a href="#geany-themes">Geany themes</a></li>
-<li><a href="#cloud">Cloud</a></li>
-<li><a href="#data-processing">Data processing</a></li>
-<li><a href="#don-t-forget-to-use-your-own-name-and-email">Don&rsquo;t forget to use your own name and email!</a></li>
-<li><a href="#maps-and-gis-software">Maps and GIS software</a></li>
-<li><a href="#latex-type-stuff">Latex type stuff</a></li>
-<li><a href="#package-download-and-install-texmaker-and-rstudio">Package download and install (Texmaker and RStudio)</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#install-chrome">Install chrome</a></li>
+    <li><a href="#install-umake">Install Umake</a></li>
+    <li><a href="#install-ides-via-umake">Install IDEs via Umake</a></li>
+    <li><a href="#general-prerequest">General prerequest</a></li>
+    <li><a href="#remove-games">Remove Games</a></li>
+    <li><a href="#geany-themes">Geany themes</a></li>
+    <li><a href="#cloud">Cloud</a></li>
+    <li><a href="#data-processing">Data processing</a></li>
+    <li><a href="#dont-forget-to-use-your-own-name-and-email">Don't forget to use your own name and email!</a></li>
+    <li><a href="#maps-and-gis-software">Maps and GIS software</a></li>
+    <li><a href="#latex-type-stuff">Latex type stuff</a></li>
+    <li><a href="#package-download-and-install-texmaker-and-rstudio">Package download and install (Texmaker and RStudio)</a></li>
+  </ul>
 </nav>
     </div>
 

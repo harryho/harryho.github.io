@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Build mobile app with web tech :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
   
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,151 +994,136 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Build mobile app with web tech</h1>
-        
-
-<h2 id="what-is-mobile-app">What is mobile app</h2>
-
+        <h2 id="what-is-mobile-app">What is mobile app</h2>
 <blockquote>
 <p><em>A mobile application, basically, is a computer generated program designed and developed to run on iPhone, Android Smartphone, and many other mobile devices. In a nutshell, there are three types of apps</em></p>
-
+</blockquote>
+<blockquote>
 <p><em><strong>Native apps</strong> are specific to a given mobile platform (iOS or Android) using the development tools and language that the respective platform. Usaully it looks and performs the best.</em></p>
-
+</blockquote>
+<blockquote>
 <p><em><strong>HTML5 apps</strong> use standard web technologies—typically HTML5, JavaScript and CSS. This write-once-run-anywhere approach to mobile development creates cross-platform mobile applications that work on multiple devices.</em></p>
-
+</blockquote>
+<blockquote>
 <p><em><strong>Hybrid apps</strong> make it possible to embed HTML5 apps inside a thin native container, combining the good parts of <strong>Native app</strong> and <strong>HTML5 app</strong> elements.</em></p>
 </blockquote>
-
 <h2 id="mobile-app-development">Mobile app development</h2>
-
 <p>According above breif history we can image the mobile developer community has become asfragmented as the market. Mobile software developers work with different programming environments, different tools, and different programming languages.</p>
-
 <p>After a few years of improvement, we can see some <strong>Hybrid app</strong> based framework becomes more and more popular and shining. <code>ionic</code>, <code>nativescript</code> and <code>react native</code> are most promising frameworks which we should really look into.</p>
-
 <h2 id="introduction-of-ionic-developement">Introduction of ionic developement</h2>
-
 <h3 id="prerequisites">Prerequisites</h3>
-
 <ul>
 <li>Here we just introduce ionic 1.x. When I started investigating the <code>ionic</code>, the <code>ionic 2</code> just came out for a while. <code>ionic 2</code> study is on my todo list.</li>
 <li>You are familiar with web technologies, such as, HTML5, CSS, JavaScript, and you should have experience of nodejs and relevant skills.</li>
 </ul>
-
 <h3 id="getting-started">Getting started</h3>
-
 <ul>
 <li>install ionic 1.x</li>
-
-<li><p>setup ionic and create new project <code>demoApp</code></p>
-
-<pre><code class="language-bash">ionic start demoApp slidemenu
+<li>setup ionic and create new project <code>demoApp</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ionic start demoApp slidemenu
 cd demoApp
 ionic platform add android 
 ionic build android 
 ionic emulate android 
-</code></pre></li>
-</ul>
-
-<h3 id="install-packages">Install packages</h3>
-
+</code></pre></div><h3 id="install-packages">Install packages</h3>
 <ul>
 <li>Use <code>npm install</code> to install packages</li>
-
-<li><p>Folllowing is the <code>package.json</code>. You can tailor it on your own.</p>
-
-<pre><code class="language-json">{
-&quot;name&quot;: &quot;ionic-project&quot;,
-&quot;version&quot;: &quot;1.0.0&quot;,
-&quot;description&quot;: &quot;An Ionic project&quot;,
-&quot;dependencies&quot;: {
-&quot;gulp&quot;: &quot;^3.5.6&quot;,
-&quot;gulp-sass&quot;: &quot;^2.0.4&quot;,
-&quot;gulp-concat&quot;: &quot;^2.2.0&quot;,
-&quot;gulp-minify-css&quot;: &quot;^0.3.0&quot;,
-&quot;gulp-rename&quot;: &quot;^1.2.0&quot;
-},
-&quot;devDependencies&quot;: {
-&quot;bower&quot;: &quot;^1.3.3&quot;,
-&quot;gulp-util&quot;: &quot;^2.2.14&quot;,
-&quot;shelljs&quot;: &quot;^0.3.0&quot;
-},
-&quot;cordovaPlugins&quot;: [
-&quot;cordova-plugin-device&quot;,
-&quot;cordova-plugin-console&quot;,
-&quot;cordova-plugin-whitelist&quot;,
-&quot;cordova-plugin-splashscreen&quot;,
-&quot;cordova-plugin-statusbar&quot;,
-&quot;ionic-plugin-keyboard&quot;
-],
-&quot;cordovaPlatforms&quot;: []
+<li>Folllowing is the <code>package.json</code>. You can tailor it on your own.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ionic-project&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;An Ionic project&#34;</span>,
+  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;gulp&#34;</span>: <span style="color:#e6db74">&#34;^3.5.6&#34;</span>,
+    <span style="color:#f92672">&#34;gulp-sass&#34;</span>: <span style="color:#e6db74">&#34;^2.0.4&#34;</span>,
+    <span style="color:#f92672">&#34;gulp-concat&#34;</span>: <span style="color:#e6db74">&#34;^2.2.0&#34;</span>,
+    <span style="color:#f92672">&#34;gulp-minify-css&#34;</span>: <span style="color:#e6db74">&#34;^0.3.0&#34;</span>,
+    <span style="color:#f92672">&#34;gulp-rename&#34;</span>: <span style="color:#e6db74">&#34;^1.2.0&#34;</span>
+  },
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;bower&#34;</span>: <span style="color:#e6db74">&#34;^1.3.3&#34;</span>,
+    <span style="color:#f92672">&#34;gulp-util&#34;</span>: <span style="color:#e6db74">&#34;^2.2.14&#34;</span>,
+    <span style="color:#f92672">&#34;shelljs&#34;</span>: <span style="color:#e6db74">&#34;^0.3.0&#34;</span>
+  },
+  <span style="color:#f92672">&#34;cordovaPlugins&#34;</span>: [
+    <span style="color:#e6db74">&#34;cordova-plugin-device&#34;</span>,
+    <span style="color:#e6db74">&#34;cordova-plugin-console&#34;</span>,
+    <span style="color:#e6db74">&#34;cordova-plugin-whitelist&#34;</span>,
+    <span style="color:#e6db74">&#34;cordova-plugin-splashscreen&#34;</span>,
+    <span style="color:#e6db74">&#34;cordova-plugin-statusbar&#34;</span>,
+    <span style="color:#e6db74">&#34;ionic-plugin-keyboard&#34;</span>
+  ],
+  <span style="color:#f92672">&#34;cordovaPlatforms&#34;</span>: []
 }
 
-</code></pre></li>
-</ul>
-
-<h3 id="debug">Debug</h3>
-
+</code></pre></div><h3 id="debug">Debug</h3>
 <ul>
 <li>Browser is the best option for ionic mobile development debug tools</li>
 <li>Use Telerik AppBuilder to debug</li>
 </ul>
-
 <h3 id="test-on-emulator-or-device">Test on emulator or device</h3>
-
 <ul>
-<li><p>Android</p>
-
-<ul>
-<li>Download and install <a href="https://developer.android.com/studio/index.html#downloads">Android SDK</a></li>
-<li>Download install at least one sdk platform.</li>
-<li>ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.</li>
-<li>install x86 or x86_64 image for windows environment</li>
-<li>install Extra plugins: Google USB driver, X86 Emulator Accelerator</li>
-<li>Create AVD for your mobile app testing</li>
-</ul></li>
-
-<li><p>iPhone</p>
-
-<ul>
-<li>Install AppBuilder on Visual Studio</li>
-<li>Install Genymotion</li>
-</ul></li>
+<li>
+<p>Android</p>
+</li>
+<li>
+<p>Download and install <a href="https://developer.android.com/studio/index.html#downloads">Android SDK</a></p>
+</li>
+<li>
+<p>Download install at least one sdk platform.
+*  ionic only support Android 4.1.x or later, so you are better to install any sdk platform version 18+.
+*  install x86 or x86_64 image for windows environment
+*  install Extra plugins: Google USB driver, X86 Emulator Accelerator
+*  Create AVD for your mobile app testing</p>
+</li>
+<li>
+<p>iPhone</p>
+</li>
+<li>
+<p>Install AppBuilder on Visual Studio</p>
+</li>
+<li>
+<p>Install Genymotion</p>
+</li>
 </ul>
-
 <h3 id="troubleshooting">Troubleshooting</h3>
-
 <ul>
-<li>Android emulator accelerator error due to version is too low to support the system image</li>
-<li>uninstall old version intel HAXM</li>
-
-<li><p>install new version manually from <code>&lt;Android_SDK_Location&gt;\extras\intel\Hardware_Accelerated_Execution_Manager</code></p></li>
-
-<li><p>If app is not working on emulator, check cordova plugins or manually install cordova plugins</p>
-
-<pre><code class="language-bash">ionic plugins list
+<li>
+<p>Android emulator accelerator error due to version is too low to support the system image</p>
+</li>
+<li>
+<p>uninstall old version intel HAXM</p>
+</li>
+<li>
+<p>install new version manually from <code>&lt;Android_SDK_Location&gt;\extras\intel\Hardware_Accelerated_Execution_Manager</code></p>
+</li>
+<li>
+<p>If app is not working on emulator, check cordova plugins or manually install cordova plugins</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ionic plugins list
 ionic plugins add XXXXX
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#what-is-mobile-app">What is mobile app</a></li>
-<li><a href="#mobile-app-development">Mobile app development</a></li>
-<li><a href="#introduction-of-ionic-developement">Introduction of ionic developement</a>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#getting-started">Getting started</a></li>
-<li><a href="#install-packages">Install packages</a></li>
-<li><a href="#debug">Debug</a></li>
-<li><a href="#test-on-emulator-or-device">Test on emulator or device</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#what-is-mobile-app">What is mobile app</a></li>
+    <li><a href="#mobile-app-development">Mobile app development</a></li>
+    <li><a href="#introduction-of-ionic-developement">Introduction of ionic developement</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#getting-started">Getting started</a></li>
+        <li><a href="#install-packages">Install packages</a></li>
+        <li><a href="#debug">Debug</a></li>
+        <li><a href="#test-on-emulator-or-device">Test on emulator or device</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

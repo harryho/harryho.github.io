@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:57 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>MySql Note - 4 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -948,7 +984,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -969,6 +1005,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -986,70 +1024,56 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>MySql Note - 4</h1>
-        
-
-<h2 id="information-schema">Information schema</h2>
-
+        <h2 id="information-schema">Information schema</h2>
 <blockquote>
 <p>INFORMATION_SCHEMA provides access to database metadata, information about the MySQL server such as the name of a database or table, the data type of a column, or access privileges. Other terms that are sometimes used for this information are data dictionary and system catalog.</p>
 </blockquote>
-
 <h3 id="check-out-table-size">Check out table size</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>target_schema<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">THE_TARGET_SCHEMA</span><span style="color:#e6db74">&#39;</span>;
 
-<pre><code class="language-sql">SET @target_schema='THE_TARGET_SCHEMA';
+<span style="color:#66d9ef">SELECT</span> 
+  <span style="color:#66d9ef">TABLE_NAME</span>, table_rows, data_length, index_length,  
+   round(((data_length <span style="color:#f92672">+</span> index_length) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>),<span style="color:#ae81ff">2</span>) <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Size in GB</span><span style="color:#e6db74">&#39;</span>,
+  round(((data_length <span style="color:#f92672">+</span> index_length) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span> ),<span style="color:#ae81ff">2</span>) <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Size in MB</span><span style="color:#e6db74">&#39;</span> 
+<span style="color:#66d9ef">FROM</span> information_schema.TABLES
+<span style="color:#66d9ef">WHERE</span> table_schema <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>target_schema
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> data_length <span style="color:#66d9ef">DESC</span>
+<span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">50</span>;
 
-SELECT 
-  TABLE_NAME, table_rows, data_length, index_length,  
-   round(((data_length + index_length) / 1024 / 1024 /1024),2) 'Size in GB',
-  round(((data_length + index_length) / 1024 / 1024 ),2) 'Size in MB' 
-FROM information_schema.TABLES
-WHERE table_schema = @target_schema
-ORDER BY data_length DESC
-LIMIT 50;
+</code></pre></div><h3 id="check-out-running-process">Check out running process</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>target_schema<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">THE_TARGET_SCHEMA</span><span style="color:#e6db74">&#39;</span>;
 
-</code></pre>
-
-<h3 id="check-out-running-process">Check out running process</h3>
-
-<pre><code class="language-sql">SET @target_schema='THE_TARGET_SCHEMA';
-
-SELECT * FROM information_schema.PROCESSES
-WHERE command &lt;&gt; 'Sleep'
-  AND db = target_schema 
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> information_schema.PROCESSES
+<span style="color:#66d9ef">WHERE</span> command <span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Sleep</span><span style="color:#e6db74">&#39;</span>
+  <span style="color:#66d9ef">AND</span> db <span style="color:#f92672">=</span> target_schema 
 
 ;
 
--- Another short cut to show all process
+<span style="color:#75715e">-- Another short cut to show all process
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">FULL</span> PROCESSLIST;
 
-SHOW FULL PROCESSLIST;
+</code></pre></div><h3 id="get-the-information-of-stored-proc-or-function">Get the information of stored proc or function</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>target_schema<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">THE_TARGET_SCHEMA</span><span style="color:#e6db74">&#39;</span>;
 
-</code></pre>
-
-<h3 id="get-the-information-of-stored-proc-or-function">Get the information of stored proc or function</h3>
-
-<pre><code class="language-sql">SET @target_schema='THE_TARGET_SCHEMA';
-
-SELECT * FROM information_schema.ROUTINES
-WHERE  routine_schema = target_schema 
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> information_schema.ROUTINES
+<span style="color:#66d9ef">WHERE</span>  <span style="color:#66d9ef">routine_schema</span> <span style="color:#f92672">=</span> target_schema 
 ;
 
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#information-schema">Information schema</a>
-<ul>
-<li><a href="#check-out-table-size">Check out table size</a></li>
-<li><a href="#check-out-running-process">Check out running process</a></li>
-<li><a href="#get-the-information-of-stored-proc-or-function">Get the information of stored proc or function</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#information-schema">Information schema</a>
+      <ul>
+        <li><a href="#check-out-table-size">Check out table size</a></li>
+        <li><a href="#check-out-running-process">Check out running process</a></li>
+        <li><a href="#get-the-information-of-stored-proc-or-function">Get the information of stored proc or function</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

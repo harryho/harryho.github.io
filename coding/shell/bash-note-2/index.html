@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Adv Bash - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -940,7 +976,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -968,6 +1004,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -985,14 +1023,9 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Adv Bash - 2</h1>
-        
-
-<h3 id="manipulating-strings">Manipulating Strings</h3>
-
+        <h3 id="manipulating-strings">Manipulating Strings</h3>
 <p>Bash supports a surprising number of string manipulation operations. Unfortunately, these tools lack a unified focus. Some are a subset of parameter substitution, and others fall under the functionality of the UNIX expr command. This results in inconsistent command syntax and overlap of functionality, not to mention confusion.</p>
-
 <h4 id="string-operations">String Operations</h4>
-
 <table>
 <thead>
 <tr>
@@ -1000,107 +1033,86 @@
 <th>Meaning</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>${#string}</td>
 <td>Length of $string</td>
 </tr>
-
 <tr>
 <td>${string:position}</td>
 <td>Extract substring from $string at $position</td>
 </tr>
-
 <tr>
 <td>${string:position:length}</td>
 <td>Extract $length characters substring from $string at $position [zero-indexed,</td>
 </tr>
-
 <tr>
 <td>${string#substring}</td>
 <td>Strip shortest match of $substring from front of $string</td>
 </tr>
-
 <tr>
 <td>${string##substring}</td>
 <td>Strip longest match of $substring from front of $string</td>
 </tr>
-
 <tr>
 <td>${string%substring}</td>
 <td>Strip shortest match of $substring from back of $string</td>
 </tr>
-
 <tr>
 <td>${string%%substring}</td>
 <td>Strip longest match of $substring from back of $string</td>
 </tr>
-
 <tr>
 <td>${string/substring/replacement}</td>
 <td>Replace first match of $substring with $replacement</td>
 </tr>
-
 <tr>
 <td>${string//substring/replacement}</td>
 <td>Replace all matches of $substring with $replacement</td>
 </tr>
-
 <tr>
 <td>${string/#substring/replacement}</td>
 <td>If $substring matches front end of $string, substitute $replacement for  $substring</td>
 </tr>
-
 <tr>
 <td>${string/%substring/replacement}</td>
 <td>If $substring matches back end of $string, substitute $replacement for $substring</td>
 </tr>
-
 <tr>
 <td>expr match &ldquo;$string&rdquo; &lsquo;$substring&rsquo;</td>
 <td>Length of matching $substring* at beginning of $string</td>
 </tr>
-
 <tr>
 <td>expr &ldquo;$string&rdquo; : &lsquo;$substring&rsquo;</td>
 <td>Length of matching $substring* at beginning of $string</td>
 </tr>
-
 <tr>
 <td>expr index &ldquo;$string&rdquo; $substring</td>
 <td>Numerical position in $string of first character in $substring* that matches [0 if no match, first character counts as position 1]</td>
 </tr>
-
 <tr>
 <td>expr substr $string $position $length</td>
 <td>Extract$length characters from $string starting at $position [0 if</td>
 </tr>
-
 <tr>
-<td>expr match &ldquo;$string&rdquo; &lsquo;($substring)&lsquo;</td>
+<td>expr match &ldquo;$string&rdquo; &lsquo;($substring)&rsquo;</td>
 <td>Extract$substring*, searching from beginning of $string</td>
 </tr>
-
 <tr>
-<td>expr &ldquo;$string&rdquo; : &lsquo;($substring)&lsquo;</td>
+<td>expr &ldquo;$string&rdquo; : &lsquo;($substring)&rsquo;</td>
 <td>Extract$substring* , searching from beginning of $string</td>
 </tr>
-
 <tr>
-<td>expr match &ldquo;$string&rdquo; &lsquo;.*($substring)&lsquo;</td>
+<td>expr match &ldquo;$string&rdquo; &lsquo;.*($substring)&rsquo;</td>
 <td>Extract$substring*, searching from end of $string</td>
 </tr>
-
 <tr>
-<td>expr &ldquo;$string&rdquo; : &lsquo;.*($substring)&lsquo;</td>
+<td>expr &ldquo;$string&rdquo; : &lsquo;.*($substring)&rsquo;</td>
 <td>Extract$substring*, searching from end of $string</td>
 </tr>
 </tbody>
 </table>
-
 <h4 id="parameter-substitution-and-expansion">Parameter Substitution and Expansion</h4>
-
 <table>
 <thead>
 <tr>
@@ -1108,58 +1120,47 @@
 <th>Meaning</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>${var}</td>
 <td>Value of var (same as $var)</td>
 </tr>
-
 <tr>
 <td>${var-$DEFAULT}</td>
 <td>If var not set, evaluate expression as $DEFAULT *</td>
 </tr>
-
 <tr>
 <td>${var:-$DEFAULT}</td>
 <td>If var not set or is empty, evaluate expression as $DEFAULT *</td>
 </tr>
-
 <tr>
 <td>${var=$DEFAULT}</td>
 <td>If var not set, evaluate expression as $DEFAULT *</td>
 </tr>
-
 <tr>
 <td>${var:=$DEFAULT}</td>
 <td>If var not set or is empty, evaluate expression as $DEFAULT *</td>
 </tr>
-
 <tr>
 <td>${var+$OTHER}</td>
 <td>If var set, evaluate expression as $OTHER, otherwise as null string</td>
 </tr>
-
 <tr>
 <td>${var:+$OTHER}</td>
 <td>If var set, evaluate expression as $OTHER, otherwise as null string</td>
 </tr>
-
 <tr>
 <td>${var?$ERR_MSG}</td>
 <td>If var not set, print $ERR_MSG and abort script with an exit status of 1.*</td>
 </tr>
-
 <tr>
 <td>${var:?$ERR_MSG}</td>
 <td>If var not set, print $ERR_MSG and abort script with an exit status of 1.*</td>
 </tr>
-
 <tr>
 <td>${!varprefix*}</td>
 <td>Matches all previously declared variables beginning with varprefix</td>
 </tr>
-
 <tr>
 <td>${!varprefix@}</td>
 <td>Matches all previously declared variables beginning with varprefix</td>
@@ -1171,19 +1172,13 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#manipulating-strings">Manipulating Strings</a>
-<ul>
-<li><a href="#string-operations">String Operations</a></li>
-<li><a href="#parameter-substitution-and-expansion">Parameter Substitution and Expansion</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#manipulating-strings">Manipulating Strings</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

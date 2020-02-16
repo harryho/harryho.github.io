@@ -1,0 +1,239 @@
+	<head><meta charset="utf-8"></head>
+
+	<link rel="stylesheet" href="/revealjs/css/reveal.css">
+	<link rel="stylesheet" href="/revealjs/css/theme/league.css" id="theme">
+	<link rel="stylesheet" href="/revealjs/lib/css/zenburn.css">
+
+	<div class="reveal">
+	<div class="slides">
+	<section data-markdown
+	         data-separator="^---"
+		 data-separator-vertical="^___"
+		 data-separator-notes="^Note:">
+	
+
+
+### Kubernetes basic concepts
+
+* [What can Kubernetes do for you](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+* [Kubernetes design](https://kubernetes.io/docs/concepts/architecture/cloud-controller/#design)
+* [Kubernetes cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+---
+
+### Install kubeadm, kubectl &amp; kubelet
+
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+* [kubeadm](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
+* demo
+
+---
+
+### Trouble shooting
+
+- Linux OS (My script only support ubuntu 16&#43;) 
+- Hardware ( Enable VT-x,  2&#43; Core , 2G RAM )
+- Swap must be off
+
+    - disable swap immediately
+
+    ```bash
+    sudo swapoff -a
+    ```
+
+    - comment out the swap drive from fstab
+
+    ```
+    # swap was on ...
+    # UUID=XXXXXXX-XXXXX-XXXX
+    ```
+
+### Check out the docker and kubelet status
+
+```bash
+systemctl status docker
+systemctl status kubelet
+
+```
+
+---
+
+#### Create a single cluster
+
+```
+# Reset kubeadm
+kubeadm reset
+
+# Cleanup old network setting 
+
+# Init kubedadm
+kubeadm init
+
+# Install pod network
+kubeadm apply -f &lt;pod_network&gt;
+
+# Remove master node schedule restriction
+kubeadm draint ...
+
+```
+
+---
+
+#### Install kubernetes dashboard
+
+* Add a new account and role binding
+
+* Install kubernetes dashboard
+
+* Install kubernetes charts
+
+
+---
+
+#### Add another node to the cluster
+
+* Install kubeadm, kubectl, kubelet 
+* Reset kubeadm (optional)
+* Add a new node to cluster
+
+
+---
+ 
+#### Deploy a stateful application
+
+* Folllowing the instruction to deploy a stateful application
+
+
+---
+
+#### Scale up the applications
+
+```bash
+kubectl top pod/node
+
+kubectl -n &lt;NAME_SPACE&gt; scale --replicas=&lt;number&gt; \
+ deployment &lt;SERVICE_NAME&gt;
+
+```
+
+---
+
+#### Kubernetes Proxy
+
+
+```
+# client 
+kubectl proxy
+
+
+# dashboard
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:443/proxy/#!/login
+
+# grafana
+http://localhost:8001/api/v1/namespaces/kube-system/services/http:monitoring-grafana:80/proxy/dashboard/db/cluster?orgId=1
+
+# influxdb
+http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-influxdb
+
+# direct access grafana
+http://192.168.1.11:30920/datasources/new
+
+# userid / password - admin / admin
+
+```
+
+---
+
+
+#### Deployment   
+
+* Namespace
+
+```json
+{
+  &#34;kind&#34;: &#34;Namespace&#34;,
+  &#34;apiVersion&#34;: &#34;v1&#34;,
+  &#34;metadata&#34;: {
+    &#34;name&#34;: &#34;apex-stage&#34;
+  }
+}
+```
+
+---
+
+* Pod deployment config 
+
+
+```yaml
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: us2-crm
+  namespace: us2-dev
+spec:
+  selector:
+    matchLabels:
+      app: us2-crm
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: us2-crm
+    spec:
+      containers:
+      - name: us2-crm
+        image: us2hho/vue2crm:1.0
+        ports:
+        - containerPort: 80
+```
+---
+
+* Expose the app 
+
+```yaml
+kubectl expose -n us2-dev deployment us2-crm \
+ --type=LoadBalancer --name=u2-crm-service
+```
+
+---
+
+#### Kubernetes Port-fowarding
+
+* port forwarding
+* demo
+
+
+
+	</section>
+	</div>
+	</div>
+	<script src="/revealjs/lib/js/head.min.js"></script>
+	<script src="/revealjs/js/reveal.js"></script>
+	<script>
+		Reveal.initialize({
+		      	embedded : true,
+
+		        
+		        "center": true ,
+		        
+		        "controls": true ,
+		        
+		        "history": true ,
+		        
+		        "progress": true ,
+		        
+		        "transition":"concave",
+		        
+		        
+		        
+		        dependencies: [
+		          { src: '\/revealjs\/lib\/js\/classList.js"', condition: function() { return !document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/markdown\/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/markdown\/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		          { src: '\/revealjs\/plugin\/highlight\/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		          { src: '\/revealjs\/plugin\/zoom-js\/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/notes\/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+		          { src: '\/revealjs\/plugin\/math\/math.js', async: true}
+		        ]
+		      });
+	</script>

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:57 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Sql Server Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -421,7 +421,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -948,7 +984,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -969,6 +1005,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -986,87 +1024,122 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Sql Server Note - 1</h1>
-        
-
-<blockquote>
+        <blockquote>
 <p>Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet).</p>
 </blockquote>
+<h4 id="get-dbtable-size-or-space">Get db/table size or space</h4>
+<ul>
+<li>Get db size</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#75715e">-- Get database size 
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SELECT</span>      sys.databases.name,  
+            <span style="color:#66d9ef">CONVERT</span>(VARCHAR,<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">size</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> MB</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AS</span> [Total disk <span style="color:#66d9ef">space</span>]  ,
+            <span style="color:#66d9ef">CONVERT</span>(VARCHAR,<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">size</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> GB</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AS</span> [Total disk <span style="color:#66d9ef">space</span>]  
+<span style="color:#66d9ef">FROM</span>        sys.databases   
+<span style="color:#66d9ef">JOIN</span>        sys.master_files  
+<span style="color:#66d9ef">ON</span>          sys.databases.database_id<span style="color:#f92672">=</span>sys.master_files.database_id  
 
-<h4 id="get-db-table-size-or-space">Get db/table size or space</h4>
+<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>    sys.databases.name  
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>    sys.databases.name  
 
-<pre><code class="language-sql">
--- Get database size 
+<span style="color:#75715e">-- Get database space &amp; unallocated space
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">exec</span> sp_spaceused
 
-SELECT      sys.databases.name,  
-            CONVERT(VARCHAR,SUM(size)*8/1024)+' MB' AS [Total disk space]  ,
-            CONVERT(VARCHAR,SUM(size)*8/1024/1024)+' GB' AS [Total disk space]  
-FROM        sys.databases   
-JOIN        sys.master_files  
-ON          sys.databases.database_id=sys.master_files.database_id  
+<span style="color:#75715e">-- 
+</span><span style="color:#75715e"></span>
+</code></pre></div><ul>
+<li>Get table size</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> 
+    t.NAME <span style="color:#66d9ef">AS</span> TableName,
+    s.Name <span style="color:#66d9ef">AS</span> SchemaName,
+    p.<span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">AS</span> RowCounts,
+    <span style="color:#66d9ef">SUM</span>(a.total_pages) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">AS</span> TotalSpaceKB, 
+    <span style="color:#66d9ef">CAST</span>(ROUND(((<span style="color:#66d9ef">SUM</span>(a.total_pages) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span>.<span style="color:#ae81ff">00</span>), <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">AS</span> NUMERIC(<span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">2</span>)) <span style="color:#66d9ef">AS</span> TotalSpaceMB,
+    <span style="color:#66d9ef">SUM</span>(a.used_pages) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">AS</span> UsedSpaceKB, 
+    <span style="color:#66d9ef">CAST</span>(ROUND(((<span style="color:#66d9ef">SUM</span>(a.used_pages) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span>.<span style="color:#ae81ff">00</span>), <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">AS</span> NUMERIC(<span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">2</span>)) <span style="color:#66d9ef">AS</span> UsedSpaceMB, 
+    (<span style="color:#66d9ef">SUM</span>(a.total_pages) <span style="color:#f92672">-</span> <span style="color:#66d9ef">SUM</span>(a.used_pages)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">AS</span> UnusedSpaceKB,
+    <span style="color:#66d9ef">CAST</span>(ROUND(((<span style="color:#66d9ef">SUM</span>(a.total_pages) <span style="color:#f92672">-</span> <span style="color:#66d9ef">SUM</span>(a.used_pages)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1024</span>.<span style="color:#ae81ff">00</span>, <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">AS</span> NUMERIC(<span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">2</span>)) <span style="color:#66d9ef">AS</span> UnusedSpaceMB
+<span style="color:#66d9ef">FROM</span> 
+    sys.tables t
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span>      
+    sys.indexes i <span style="color:#66d9ef">ON</span> t.OBJECT_ID <span style="color:#f92672">=</span> i.object_id
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
+    sys.partitions p <span style="color:#66d9ef">ON</span> i.object_id <span style="color:#f92672">=</span> p.OBJECT_ID <span style="color:#66d9ef">AND</span> i.index_id <span style="color:#f92672">=</span> p.index_id
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
+    sys.allocation_units a <span style="color:#66d9ef">ON</span> p.partition_id <span style="color:#f92672">=</span> a.container_id
+<span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">OUTER</span> <span style="color:#66d9ef">JOIN</span> 
+    sys.schemas s <span style="color:#66d9ef">ON</span> t.schema_id <span style="color:#f92672">=</span> s.schema_id
+<span style="color:#66d9ef">WHERE</span> 
+    t.NAME <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">dt%</span><span style="color:#e6db74">&#39;</span> 
+    <span style="color:#66d9ef">AND</span> t.is_ms_shipped <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">AND</span> i.OBJECT_ID <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> 
+<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> 
+    t.Name, s.Name, p.<span style="color:#66d9ef">Rows</span>
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> 
+    t.Name;
 
-GROUP BY    sys.databases.name  
-ORDER BY    sys.databases.name  
-
--- Get database space &amp; unallocated space
-
-exec sp_spaceused
-
--- 
-
-</code></pre>
-
-<h4 id="get-full-text-search-objects">Get full text search objects</h4>
-
-<pre><code class="language-sql">SELECT 
-    SCHEMA_NAME(tbl.schema_id) as SchemaName,
-    tbl.name AS TableName, 
-    FT_ctlg.name AS FullTextCatalogName,
-    i.name AS UniqueIndexName,
-    scols.name AS IndexedColumnName
-FROM 
+</code></pre></div><h4 id="get-full-text-search-objects">Get full text search objects</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> 
+    <span style="color:#66d9ef">SCHEMA_NAME</span>(tbl.schema_id) <span style="color:#66d9ef">as</span> SchemaName,
+    tbl.name <span style="color:#66d9ef">AS</span> TableName, 
+    FT_ctlg.name <span style="color:#66d9ef">AS</span> FullTextCatalogName,
+    i.name <span style="color:#66d9ef">AS</span> UniqueIndexName,
+    scols.name <span style="color:#66d9ef">AS</span> IndexedColumnName
+<span style="color:#66d9ef">FROM</span> 
     sys.tables tbl
-INNER JOIN 
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
     sys.fulltext_indexes FT_idx 
-ON 
-    tbl.[object_id] = FT_idx.[object_id] 
-INNER JOIN 
+<span style="color:#66d9ef">ON</span> 
+    tbl.[object_id] <span style="color:#f92672">=</span> FT_idx.[object_id] 
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
     sys.fulltext_index_columns FT_idx_cols
-ON 
-    FT_idx_cols.[object_id] = tbl.[object_id]
-INNER JOIN
+<span style="color:#66d9ef">ON</span> 
+    FT_idx_cols.[object_id] <span style="color:#f92672">=</span> tbl.[object_id]
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span>
     sys.columns scols
-ON 
-        FT_idx_cols.column_id = scols.column_id
-    AND FT_idx_cols.[object_id] = scols.[object_id]
-INNER JOIN 
+<span style="color:#66d9ef">ON</span> 
+        FT_idx_cols.column_id <span style="color:#f92672">=</span> scols.column_id
+    <span style="color:#66d9ef">AND</span> FT_idx_cols.[object_id] <span style="color:#f92672">=</span> scols.[object_id]
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
     sys.fulltext_catalogs FT_ctlg
-ON 
-    FT_idx.fulltext_catalog_id = FT_ctlg.fulltext_catalog_id
-INNER JOIN 
+<span style="color:#66d9ef">ON</span> 
+    FT_idx.fulltext_catalog_id <span style="color:#f92672">=</span> FT_ctlg.fulltext_catalog_id
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> 
     sys.indexes i
-ON 
-        FT_idx.unique_index_id = i.index_id
-    AND FT_idx.[object_id] = i.[object_id];
+<span style="color:#66d9ef">ON</span> 
+        FT_idx.unique_index_id <span style="color:#f92672">=</span> i.index_id
+    <span style="color:#66d9ef">AND</span> FT_idx.[object_id] <span style="color:#f92672">=</span> i.[object_id];
 
-</code></pre>
+</code></pre></div><h3 id="find-the-table">Find the table</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>      <span style="color:#66d9ef">c</span>.name  <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ColumnName</span><span style="color:#e6db74">&#39;</span>
+            ,t.name <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">TableName</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">FROM</span>        sys.columns <span style="color:#66d9ef">c</span>
+<span style="color:#66d9ef">JOIN</span>        sys.tables  t   <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">c</span>.object_id <span style="color:#f92672">=</span> t.object_id
+<span style="color:#66d9ef">WHERE</span>       <span style="color:#66d9ef">c</span>.name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%MyName%</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>    TableName
+            ,ColumnName;
+</code></pre></div><h3 id="restore-user-login-after-db-restore">Restore user login after db restore</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">exec</span> sp_change_users_login Report
 
+<span style="color:#66d9ef">EXEC</span> sp_change_users_login <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Auto_Fix</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">your_username</span><span style="color:#e6db74">&#39;</span>, <span style="color:#66d9ef">NULL</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">your_password</span><span style="color:#e6db74">&#39;</span>;
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#get-db-table-size-or-space">Get db/table size or space</a></li>
-<li><a href="#get-full-text-search-objects">Get full text search objects</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+        <li><a href="#find-the-table">Find the table</a></li>
+        <li><a href="#restore-user-login-after-db-restore">Restore user login after db restore</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

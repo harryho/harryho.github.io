@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Cron Job Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -940,7 +976,7 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -968,6 +1004,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -985,169 +1023,167 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Cron Job Note - 2</h1>
-        
-
-<h3 id="refresh-the-database-nosql-cassandra">Refresh the database (NoSQL) - Cassandra</h3>
-
+        <h3 id="refresh-the-database-nosql---cassandra">Refresh the database (NoSQL) - Cassandra</h3>
 <blockquote>
 <p>The sample script is used to backup the data from production database and refresh the data to staging or test database. It is not supposed to restore data because of database corruption.</p>
 </blockquote>
-
 <h4 id="backup-the-cassandra-database-nightly">Backup the Cassandra database nightly</h4>
-
 <ul>
-<li>There is a keyspace named <code>hho_ks</code> in the Cassandra nodes store the production data.</li>
-<li>Every night the staging Cassandra server will be refreshed with production&rsquo;s snapshot</li>
-<li>This solution is not built on the incremental snapshot.</li>
-<li>The production and staging nodes are running within the same subnet.</li>
-<li>The backup script will be run nightly on production server</li>
+<li>
+<p>There is a keyspace named <code>hho_ks</code> in the Cassandra nodes store the production data.</p>
+</li>
+<li>
+<p>Every night the staging Cassandra server will be refreshed with production's snapshot</p>
+</li>
+<li>
+<p>This solution is not built on the incremental snapshot.</p>
+</li>
+<li>
+<p>The production and staging nodes are running within the same subnet.</p>
+</li>
+<li>
+<p>The backup script will be run nightly on production server</p>
+</li>
+<li>
+<p>Cron job setting</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">00</span> <span style="color:#ae81ff">20</span>   * * *   &lt;user&gt;  /home/&lt;user&gt;/bin/cass_snapshot.sh &gt;&gt; /home/&lt;user&gt;/bin/refresh.log 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</code></pre></div></li>
+<li>
+<p>The script to create a snapshot:   <code>cass_snapshot.sh</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># the log file sits home/&lt;user&gt;/bin/refresh.log</span> 
 
-<li><p>Cron job setting</p>
+<span style="color:#75715e"># SET staging Cassandra IP</span>
+CASS_STG_IP<span style="color:#f92672">=</span>0.0.0.0
 
-<pre><code class="language-bash">00 20   * * *   &lt;user&gt;  /home/&lt;user&gt;/bin/cass_snapshot.sh &gt;&gt; /home/&lt;user&gt;/bin/refresh.log 2&gt;&amp;1
-</code></pre></li>
-
-<li><p>The script to create a snapshot:   <code>cass_snapshot.sh</code></p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-# the log file sits home/&lt;user&gt;/bin/refresh.log 
-
-# SET staging Cassandra IP
-CASS_STG_IP=0.0.0.0
-
-echo &quot;$(date): Beginning refresh of staging Cassandra ${CASS_STG_IP}&quot;
-START=$(date +%s)
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Beginning refresh of staging Cassandra </span><span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+START<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
 
 cd /data/cassandra
 
-# Prepare a schema script of keyspace hho_ks
-echo &quot;$(date): Prepare a schema script of keyspace hho_ks&quot;
-sudo bash -c &quot;cqlsh -e 'DESC KEYSPACE hho_ks' &gt; hho_ks.cql&quot;
+<span style="color:#75715e"># Prepare a schema script of keyspace hho_ks</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Prepare a schema script of keyspace hho_ks</span><span style="color:#e6db74">&#34;</span>
+sudo bash -c <span style="color:#e6db74">&#34;cqlsh -e &#39;DESC KEYSPACE hho_ks&#39; &gt; hho_ks.cql&#34;</span>
 
-# Remove old snapshots folder and create new snapshots folder with some sub-folders
-echo &quot;$(date): Remove old snapshots folder and create new snapshots folder with some sub-folders&quot;
+<span style="color:#75715e"># Remove old snapshots folder and create new snapshots folder with some sub-folders</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Remove old snapshots folder and create new snapshots folder with some sub-folders</span><span style="color:#e6db74">&#34;</span>
 sudo rm -rf snapshots
 sudo mkdir snapshots
 cd snapshots
 sudo mkdir -p service interval imported_file market_file meter_config
 cd /data/cassandra
 
-# Clear snapshot hho_ks
-echo &quot;$(date): Clear snapshot hho_ks&quot;
-# find /data/cassandra/data/hho_ks/  -name snapshots -type d
-nodetool clearsnapshot hho_ks &gt; /dev/null 2&gt;&amp;1 
-# find /data/cassandra/data/hho_ks/  -name snapshots -type d
+<span style="color:#75715e"># Clear snapshot hho_ks</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Clear snapshot hho_ks</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e"># find /data/cassandra/data/hho_ks/  -name snapshots -type d</span>
+nodetool clearsnapshot hho_ks &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> 
+<span style="color:#75715e"># find /data/cassandra/data/hho_ks/  -name snapshots -type d</span>
 
-# Create new snapshot (cut out the snapshot id into a variable)
-echo &quot;$(date): Create new snapshot&quot;
-SNAP_ID=$(nodetool snapshot hho_ks | cut -c 66-78)
-# echo SNAP_ID=$SNAP_ID
+<span style="color:#75715e"># Create new snapshot (cut out the snapshot id into a variable)</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Create new snapshot</span><span style="color:#e6db74">&#34;</span>
+SNAP_ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>nodetool snapshot hho_ks | cut -c 66-78<span style="color:#66d9ef">)</span>
+<span style="color:#75715e"># echo SNAP_ID=$SNAP_ID</span>
 
-# Copy snapshot data to new folder snapshot
-# ~ 7mins
-echo &quot;$(date): Copy snapshot data to new snapshot folder&quot;
-for d in $(ls /data/cassandra/snapshots); do \
-sudo cp -R /data/cassandra/data/hho_ks/$d*/snapshots/$SNAP_ID/. /data/cassandra/snapshots/$d/ ; \
-done
+<span style="color:#75715e"># Copy snapshot data to new folder snapshot</span>
+<span style="color:#75715e"># ~ 7mins</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Copy snapshot data to new snapshot folder</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">for</span> d in <span style="color:#66d9ef">$(</span>ls /data/cassandra/snapshots<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>sudo cp -R /data/cassandra/data/hho_ks/$d*/snapshots/$SNAP_ID/. /data/cassandra/snapshots/$d/ ; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#66d9ef">done</span>
 
-# Create a tarball of snapshots
-echo &quot;$(date): Create a tarball of snapshots&quot;
+<span style="color:#75715e"># Create a tarball of snapshots</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Create a tarball of snapshots</span><span style="color:#e6db74">&#34;</span>
 sudo rm -rf snapshots.tar.gz
-sudo tar -zcvf snapshots.tar.gz snapshots/ &gt; /dev/null 2&gt;&amp;1  # ~30mins
+sudo tar -zcvf snapshots.tar.gz snapshots/ &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>  <span style="color:#75715e"># ~30mins</span>
 
-# Copy tarball and schema script to staging Cassandra
-echo &quot;$(date): Copy tarball and schema script to staging Cassandra ${CASS_STG_IP}&quot;
-scp snapshots.tar.gz &lt;user&gt;@${CASS_STG_IP}:/home/&lt;user&gt;/ # ~5mins
-scp hho_ks.cql &lt;user&gt;@${CASS_STG_IP}:/home/&lt;user&gt;/
+<span style="color:#75715e"># Copy tarball and schema script to staging Cassandra</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Copy tarball and schema script to staging Cassandra </span><span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+scp snapshots.tar.gz &lt;user&gt;@<span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span>:/home/&lt;user&gt;/ <span style="color:#75715e"># ~5mins</span>
+scp hho_ks.cql &lt;user&gt;@<span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span>:/home/&lt;user&gt;/
 
-# Refresh snapshots on staging Cassandra
-echo &quot;$(date): SSH to staging Cassandra ${CASS_STG_IP}&quot;
-sudo ssh &lt;user&gt;@${CASS_STG_IP} 'bash -s' &lt; /home/&lt;user&gt;/bin/cass_refresh.sh
+<span style="color:#75715e"># Refresh snapshots on staging Cassandra</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: SSH to staging Cassandra </span><span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+sudo ssh &lt;user&gt;@<span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;bash -s&#39;</span> &lt; /home/&lt;user&gt;/bin/cass_refresh.sh
 
-echo &quot;$(date): Completed refresh of staging Cassandra ${CASS_STG_IP}&quot;
-END=$(date +%s)
-echo &quot;Refresh duration: $(( $END - $START ))s&quot;
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Completed refresh of staging Cassandra </span><span style="color:#e6db74">${</span>CASS_STG_IP<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+END<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Refresh duration: </span><span style="color:#66d9ef">$((</span> $END <span style="color:#f92672">-</span> $START <span style="color:#66d9ef">))</span><span style="color:#e6db74">s</span><span style="color:#e6db74">&#34;</span>
 
-</code></pre></li>
-
-<li><p>Refresh the staging Cassandra node</p></li>
-
-<li><p>The script to refresh the staging node: <code>cass_refresh</code></p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-# Unzip tarball
-echo &quot;$(date): Unzip tarball&quot;
+</code></pre></div></li>
+<li>
+<p>Refresh the staging Cassandra node</p>
+</li>
+<li>
+<p>The script to refresh the staging node: <code>cass_refresh</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Unzip tarball</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Unzip tarball</span><span style="color:#e6db74">&#34;</span>
 cd
 rm -rf snapshots
-tar -zxvf snapshots.tar.gz &gt; /dev/null 2&gt;&amp;1 # ~5mins
+tar -zxvf snapshots.tar.gz &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> <span style="color:#75715e"># ~5mins</span>
 
-# Attempt to drop keyspace hho_ks 
-# It will likely throw a java.lang.RuntimeException
-echo &quot;$(date): Drop keyspace hho_ks&quot;
-cqlsh -e &quot;drop keyspace hho_ks&quot; &gt; /dev/null 2&gt;&amp;1 
+<span style="color:#75715e"># Attempt to drop keyspace hho_ks</span> 
+<span style="color:#75715e"># It will likely throw a java.lang.RuntimeException</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Drop keyspace hho_ks</span><span style="color:#e6db74">&#34;</span>
+cqlsh -e <span style="color:#e6db74">&#34;drop keyspace hho_ks&#34;</span> &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> 
 sleep 1m
 
-# Start/restart Cassandra service
-echo &quot;$(date): Restart Cassandra service&quot;
+<span style="color:#75715e"># Start/restart Cassandra service</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Restart Cassandra service</span><span style="color:#e6db74">&#34;</span>
 sudo systemctl start cassandra.service
 sudo systemctl restart cassandra.service
 
-# Wait for 5 minutes to ensure the Cassandra service is running
-echo &quot;$(date): Wait for 5 minutes to ensure the Cassandra service is running&quot;
+<span style="color:#75715e"># Wait for 5 minutes to ensure the Cassandra service is running</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Wait for 5 minutes to ensure the Cassandra service is running</span><span style="color:#e6db74">&#34;</span>
 sleep 5m
 
-# Check Cassandra service status
-# sudo systemctl status cassandra
+<span style="color:#75715e"># Check Cassandra service status</span>
+<span style="color:#75715e"># sudo systemctl status cassandra</span>
 
-# Attempt to drop keyspace hho_ks again 
-# It will likely complain: Cannot drop non existing keyspace 'hho_ks'
-cqlsh -e &quot;drop keyspace hho_ks&quot; &gt; /dev/null 2&gt;&amp;1 
+<span style="color:#75715e"># Attempt to drop keyspace hho_ks again</span> 
+<span style="color:#75715e"># It will likely complain: Cannot drop non existing keyspace &#39;hho_ks&#39;</span>
+cqlsh -e <span style="color:#e6db74">&#34;drop keyspace hho_ks&#34;</span> &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> 
 sleep 1m
 
-# Remove data folder hho_ks
-echo &quot;$(date): Remove data folder hho_ks&quot;
+<span style="color:#75715e"># Remove data folder hho_ks</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Remove data folder hho_ks</span><span style="color:#e6db74">&#34;</span>
 sudo rm -r -f /var/lib/cassandra/data/hho_ks
 
-# Recreate keyspace hho_ks
-echo &quot;$(date): Recreate keyspace hho_ks&quot;
-cqlsh --file=&quot;hho_ks.cql&quot; &gt; /dev/null 2&gt;&amp;1 
+<span style="color:#75715e"># Recreate keyspace hho_ks</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Recreate keyspace hho_ks</span><span style="color:#e6db74">&#34;</span>
+cqlsh --file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hho_ks.cql&#34;</span> &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> 
 
-# Copy snapshots to new data folder hho_ks
-# ~5mins
-echo &quot;$(date): Copy snapshots to new data folder hho_ks&quot;
-for d in $(ls snapshots); do \
-sudo cp -R snapshots/$d/. /var/lib/cassandra/data/hho_ks/$d*/ ; \
-done; 
+<span style="color:#75715e"># Copy snapshots to new data folder hho_ks</span>
+<span style="color:#75715e"># ~5mins</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Copy snapshots to new data folder hho_ks</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">for</span> d in <span style="color:#66d9ef">$(</span>ls snapshots<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>sudo cp -R snapshots/$d/. /var/lib/cassandra/data/hho_ks/$d*/ ; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#66d9ef">done</span>; 
 
-# Refresh keyspace
-# ~10mins
-echo &quot;$(date): Refresh keyspace&quot;
-for d in $(ls snapshots); do \
-nodetool refresh -- hho_ks $d ; \
-done
+<span style="color:#75715e"># Refresh keyspace</span>
+<span style="color:#75715e"># ~10mins</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">: Refresh keyspace</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">for</span> d in <span style="color:#66d9ef">$(</span>ls snapshots<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>nodetool refresh -- hho_ks $d ; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#66d9ef">done</span>
 
 
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#refresh-the-database-nosql-cassandra">Refresh the database (NoSQL) - Cassandra</a>
-<ul>
-<li><a href="#backup-the-cassandra-database-nightly">Backup the Cassandra database nightly</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#refresh-the-database-nosql---cassandra">Refresh the database (NoSQL) - Cassandra</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

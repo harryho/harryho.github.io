@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>DigitialOcean Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -419,7 +419,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -447,6 +447,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -939,6 +975,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -956,22 +994,15 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>DigitialOcean Note - 1</h1>
-        
-
-<h2 id="droplet">Droplet</h2>
-
+        <h2 id="droplet">Droplet</h2>
 <p>DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware. Each Droplet you create is a new server you can use, either standalone or as part of a larger, cloud-based infrastructure.</p>
-
 <h3 id="prerequisite">Prerequisite</h3>
-
 <ul>
 <li>Prepare a bank account or credit card</li>
 <li>Signup DigitalOcean account and activate it</li>
 <li>Create a new prject</li>
 </ul>
-
 <h3 id="os-options">OS Options</h3>
-
 <ul>
 <li>Ubuntu</li>
 <li>FreeBSD</li>
@@ -979,11 +1010,8 @@
 <li>Debian</li>
 <li>CentOS</li>
 </ul>
-
 <h3 id="plans-and-pricing">Plans and Pricing</h3>
-
 <p>We offer four different kinds of Droplet plans: one shared CPU plan and three dedicated CPU plans.</p>
-
 <table>
 <thead>
 <tr>
@@ -994,71 +1022,61 @@
 <th>Processor</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Standard</td>
 <td>Shared</td>
 <td>1 - 32 vCPUs 1 - 192 GB</td>
-<td>RAM   Variable</td>
+<td>RAM	Variable</td>
 <td></td>
 </tr>
-
 <tr>
 <td>General</td>
-<td>Purpose   Dedicated</td>
+<td>Purpose	Dedicated</td>
 <td>2 - 40 vCPUs 8 - 160 GB RAM</td>
 <td>4 GB per vCPU</td>
 <td>Intel Xeon Skylake (2.7 GHz, 3.7 GHz turbo)</td>
 </tr>
-
 <tr>
 <td>CPU-Optimized</td>
 <td>Dedicated</td>
 <td>2 - 32 vCPUs</td>
-<td>4 - 64 GB RAM   2 GB per vCPU</td>
+<td>4 - 64 GB RAM	2 GB per vCPU</td>
 <td>Intel Xeon Broadwell (2.6 GHz) Intel Xeon Skylake (2.7 GHz, 3.7 GHz turbo)</td>
 </tr>
-
 <tr>
 <td>Memory-Optimized</td>
 <td>Dedicated</td>
 <td>2 - 32 vCPUs</td>
-<td>16 - 256 GB RAM   8 GB per vCPU</td>
+<td>16 - 256 GB RAM	8 GB per vCPU</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="create-a-droplet">Create a droplet</h3>
-
 <ul>
 <li>Create a droplet</li>
 <li>Choose the operating system you prefer</li>
 <li>Pick up the CPU and RAM you need.
-
 <ul>
 <li>The lowest one is 1 vCPU and 1G RAM</li>
 <li>The pricing for above setting is $5/month</li>
-</ul></li>
+</ul>
+</li>
 <li>Choose the region your droplet will install</li>
 <li>Always use SSH
-
 <ul>
 <li>Create a new SSH key via <code>ssh-keygen</code></li>
 <li>Add the publc key to your droplet</li>
-</ul></li>
+</ul>
+</li>
 <li>Click the button &ldquo;Create Droplet&rdquo;</li>
 </ul>
-
 <h3 id="access-droplet">Access Droplet</h3>
-
 <h4 id="get-public-ip">Get Public IP</h4>
-
 <blockquote>
 <p>After you create your droplet, you will see a list of droplests as follow</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -1068,7 +1086,6 @@
 <th>Tags</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>droplet-name</td>
@@ -1078,14 +1095,9 @@
 </tr>
 </tbody>
 </table>
-
 <h4 id="login-via-ssh">Login via SSH</h4>
-
 <pre><code>ssh -i ~/.ssh/&lt;your_droplet_rsa&gt; root@&lt;xxx.xxx.xxx.xxx&gt;
-</code></pre>
-
-<h4 id="congrats-your-droplet-is-up-and-running">Congrats, your droplet is up and running</h4>
-
+</code></pre><h4 id="congrats-your-droplet-is-up-and-running">Congrats, your droplet is up and running</h4>
 <ul>
 <li>Next we will continue the setup droplet as web server.</li>
 </ul>
@@ -1094,24 +1106,17 @@
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#droplet">Droplet</a>
-<ul>
-<li><a href="#prerequisite">Prerequisite</a></li>
-<li><a href="#os-options">OS Options</a></li>
-<li><a href="#plans-and-pricing">Plans and Pricing</a></li>
-<li><a href="#create-a-droplet">Create a droplet</a></li>
-<li><a href="#access-droplet">Access Droplet</a>
-<ul>
-<li><a href="#get-public-ip">Get Public IP</a></li>
-<li><a href="#login-via-ssh">Login via SSH</a></li>
-<li><a href="#congrats-your-droplet-is-up-and-running">Congrats, your droplet is up and running</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#droplet">Droplet</a>
+      <ul>
+        <li><a href="#prerequisite">Prerequisite</a></li>
+        <li><a href="#os-options">OS Options</a></li>
+        <li><a href="#plans-and-pricing">Plans and Pricing</a></li>
+        <li><a href="#create-a-droplet">Create a droplet</a></li>
+        <li><a href="#access-droplet">Access Droplet</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

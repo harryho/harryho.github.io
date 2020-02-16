@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>JS &amp; ES Note - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a>
+      <a href="/coding/js-ts/">JS &amp; TS </a>
             <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
@@ -449,6 +449,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +912,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -940,11 +976,12 @@
    Java</option>
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option> 
+   JS &amp; TS </option> 
       <option value="/coding/js-ts/js-note-1/" >-- JS &amp; ES Note - 1</option>
       <option value="/coding/js-ts/js-note-2/"  selected>-- JS &amp; ES Note - 2</option>
       <option value="/coding/js-ts/js-note-3/" >-- JS &amp; ES Note - 3</option>
       <option value="/coding/js-ts/js-note-99/" >-- JS &amp; ES snippet</option>
+      <option value="/coding/js-ts/ts-note-1/" >-- TypeScript Note - 1</option>
   
     <option value="/coding/python/" >
   - 
@@ -966,6 +1003,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -983,152 +1022,118 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>JS &amp; ES Note - 2</h1>
-        
-
-<h2 id="the-equal-operator-doesn-t-always-mean-equivalent">The equal operator doesn&rsquo;t always mean equivalent</h2>
-
+        <h2 id="the-equal-operator-doesnt-always-mean-equivalent">The equal operator doesn't always mean equivalent</h2>
 <blockquote>
-<p>Have you got confused by the equal or not equal expression in the JavaScript? I will say you are definitely not the only one. Even many senior developers come from back-end programming background, they all scratch the head to find out why the equal or not-equal expression doesn&rsquo;t work as they expect. The truth is those expression are really different from other programming language.</p>
+<p>Have you got confused by the equal or not equal expression in the JavaScript? I will say you are definitely not the only one. Even many senior developers come from back-end programming background, they all scratch the head to find out why the equal or not-equal expression doesn't work as they expect. The truth is those expression are really different from other programming language.</p>
 </blockquote>
-
-<h3 id="is-not-the-same-as">&rdquo;===&rdquo; is not the same as &ldquo;==&rdquo;</h3>
-
+<h3 id="-is-not-the-same-as-">&ldquo;===&rdquo; is not the same as &ldquo;==&rdquo;</h3>
 <ul>
-<li><p>JavaScript has both strict and type–converting comparisons. A strict comparison (e.g., ===) is only true if the operands are of the same type and the contents match. The more commonly-used abstract comparison (e.g. ==) converts the operands to the same type before making the comparison.</p></li>
-
-<li><p>The equality operator (==) converts the operands if they are not of the same type, then applies strict comparison. If both operands are objects, then JavaScript compares internal references which are equal when operands refer to the same object in memory.</p></li>
-
-<li><p>The identity operator (===) returns true if the operands are strictly equal.</p></li>
+<li>
+<p>JavaScript has both strict and type–converting comparisons. A strict comparison (e.g., ===) is only true if the operands are of the same type and the contents match. The more commonly-used abstract comparison (e.g. ==) converts the operands to the same type before making the comparison.</p>
+</li>
+<li>
+<p>The equality operator (==) converts the operands if they are not of the same type, then applies strict comparison. If both operands are objects, then JavaScript compares internal references which are equal when operands refer to the same object in memory.</p>
+</li>
+<li>
+<p>The identity operator (===) returns true if the operands are strictly equal.</p>
+</li>
 </ul>
-
-<h3 id="is-not-the-same-as-1">&rdquo;!=&rdquo; is not the same as &ldquo;!==&rdquo;</h3>
-
+<h3 id="-is-not-the-same-as--1">&ldquo;!=&rdquo; is not the same as &ldquo;!==&rdquo;</h3>
 <ul>
-<li><p>The inequality operator (!=) returns true if the operands are not equal. If the two operands are not of the same type, JavaScript attempts to convert the operands to an appropriate type for the comparison.</p></li>
-
-<li><p>The non-identity operator (!==) returns true if the operands are not equal and/or not of the same type.</p></li>
+<li>
+<p>The inequality operator (!=) returns true if the operands are not equal. If the two operands are not of the same type, JavaScript attempts to convert the operands to an appropriate type for the comparison.</p>
+</li>
+<li>
+<p>The non-identity operator (!==) returns true if the operands are not equal and/or not of the same type.</p>
+</li>
 </ul>
-
 <h3 id="follow-are-samples-to-show-difference">Follow are samples to show difference</h3>
-
 <blockquote>
 <p>Try to test yourself before checking the answers</p>
 </blockquote>
-
 <h4 id="sample-1">Sample 1</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 1==true : &#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-<pre><code class="language-js">
-console.log( &quot; 1==true : &quot;, 1==true)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;&#39;==true : &#34;</span>, <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-console.log( &quot; ''==true : &quot;, ''==true)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;1&#39;==true : &#34;</span>, <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-console.log( &quot; '1'==true : &quot;, '1'==true)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; \&#34;1\&#34;==true : &#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-console.log( &quot; \&quot;1\&quot;==true : &quot;, &quot;1&quot;==true)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; {}==true : &#34;</span>, [{}]<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-console.log( &quot; {}==true : &quot;, [{}]==true)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; []==true : &#34;</span>, [<span style="color:#e6db74">&#39;1&#39;</span>]<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)
 
-console.log( &quot; []==true : &quot;, ['1']==true)
+</code></pre></div><h4 id="answer-of-sample-1">Answer of Sample 1</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 1==true : &#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)      <span style="color:#75715e">// 1==true :  true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;&#39;==true : &#34;</span>, <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)    <span style="color:#75715e">// &#39;&#39;==true :  false
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;1&#39;==true : &#34;</span>, <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)  <span style="color:#75715e">// &#39;1&#39;==true :  true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; \&#34;1\&#34;==true : &#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)<span style="color:#75715e">// &#34;1&#34;==true :  true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; {}==true : &#34;</span>, [{}]<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>)  <span style="color:#75715e">// {}==true :  false
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; [&#39;1&#39;]==true : &#34;</span>, [<span style="color:#e6db74">&#39;1&#39;</span>]<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span>) <span style="color:#75715e">// []==true :  true
+</span><span style="color:#75715e"></span>
+</code></pre></div><h4 id="sample-2">Sample 2</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 0==false : &#34;</span>, <span style="color:#ae81ff">0</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 1==false : &#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;&#39;==false : &#34;</span>, <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;1&#39;==false : &#34;</span>, <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; \&#34;\&#34;==false : &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; {}==false : &#34;</span>, {}<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; []==false : &#34;</span>, []<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; [&#39;0&#39;]==false : &#34;</span>, [<span style="color:#e6db74">&#39;0&#39;</span>]<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
 
-</code></pre>
+</code></pre></div><h4 id="answer-of-sample-2">Answer of Sample 2</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 0==false : &#34;</span>, <span style="color:#ae81ff">0</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)    <span style="color:#75715e">// 0==false :  true 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; 1==false : &#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)    <span style="color:#75715e">// 1==false :  false 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;&#39;==false : &#34;</span>, <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)  <span style="color:#75715e">// &#39;&#39;==false :  true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; &#39;1&#39;==false : &#34;</span>, <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)<span style="color:#75715e">// &#39;1&#39;==false :  false
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; \&#34;\&#34;==false : &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)<span style="color:#75715e">// &#34;&#34;==false :  true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; {}==false : &#34;</span>, {}<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)  <span style="color:#75715e">// {}==false :  false 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; []==false : &#34;</span>, []<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)  <span style="color:#75715e">// []==false :  true 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; [&#39;0&#39;]==false : &#34;</span>, [<span style="color:#e6db74">&#39;0&#39;</span>]<span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)  <span style="color:#75715e">// [&#39;0&#39;]==false :  true 
+</span></code></pre></div><h4 id="sample-3">Sample 3</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; null==false : &#34;</span>, <span style="color:#66d9ef">null</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
 
-<h4 id="answer-of-sample-1">Answer of Sample 1</h4>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; undefined==false : &#34;</span>, <span style="color:#66d9ef">undefined</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>)
 
-<pre><code class="language-js">
-console.log( &quot; 1==true : &quot;, 1==true)      // 1==true :  true
-console.log( &quot; ''==true : &quot;, ''==true)    // ''==true :  false
-console.log( &quot; '1'==true : &quot;, '1'==true)  // '1'==true :  true
-console.log( &quot; \&quot;1\&quot;==true : &quot;, &quot;1&quot;==true)// &quot;1&quot;==true :  true
-console.log( &quot; {}==true : &quot;, [{}]==true)  // {}==true :  false
-console.log( &quot; ['1']==true : &quot;, ['1']==true) // []==true :  true
-
-</code></pre>
-
-<h4 id="sample-2">Sample 2</h4>
-
-<pre><code class="language-js">console.log( &quot; 0==false : &quot;, 0==false)
-console.log( &quot; 1==false : &quot;, 1==false)
-console.log( &quot; ''==false : &quot;, ''==false)
-console.log( &quot; '1'==false : &quot;, '1'==false)
-console.log( &quot; \&quot;\&quot;==false : &quot;, &quot;&quot;==false)
-console.log( &quot; {}==false : &quot;, {}==false)
-console.log( &quot; []==false : &quot;, []==false)
-console.log( &quot; ['0']==false : &quot;, ['0']==false)
-
-</code></pre>
-
-<h4 id="answer-of-sample-2">Answer of Sample 2</h4>
-
-<pre><code class="language-js">
-console.log( &quot; 0==false : &quot;, 0==false)    // 0==false :  true 
-console.log( &quot; 1==false : &quot;, 1==false)    // 1==false :  false 
-console.log( &quot; ''==false : &quot;, ''==false)  // ''==false :  true
-console.log( &quot; '1'==false : &quot;, '1'==false)// '1'==false :  false
-console.log( &quot; \&quot;\&quot;==false : &quot;, &quot;&quot;==false)// &quot;&quot;==false :  true
-console.log( &quot; {}==false : &quot;, {}==false)  // {}==false :  false 
-console.log( &quot; []==false : &quot;, []==false)  // []==false :  true 
-console.log( &quot; ['0']==false : &quot;, ['0']==false)  // ['0']==false :  true 
-</code></pre>
-
-<h4 id="sample-3">Sample 3</h4>
-
-<pre><code class="language-js">console.log( &quot; null==false : &quot;, null==false)
-
-console.log( &quot; undefined==false : &quot;, undefined==false)
-
-console.log( &quot; undefined==null : &quot;, null==undefined)
-</code></pre>
-
-<h4 id="answer-of-sample-3">Answer of Sample 3</h4>
-
-<pre><code class="language-js">console.log( &quot; null==false : &quot;, null==false) 
-// null==false: false
-
-console.log( &quot; undefined==false : &quot;, undefined==false) 
-// undefined==false: false
-
-console.log( &quot; undefined==null : &quot;, null==undefined) 
-// undefined==null: true
-</code></pre>
-
-<h3 id="tricks-to-compare-arrays-of-numbers">Tricks to compare arrays of numbers</h3>
-
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; undefined==null : &#34;</span>, <span style="color:#66d9ef">null</span><span style="color:#f92672">==</span><span style="color:#66d9ef">undefined</span>)
+</code></pre></div><h4 id="answer-of-sample-3">Answer of Sample 3</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; null==false : &#34;</span>, <span style="color:#66d9ef">null</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>) 
+<span style="color:#75715e">// null==false: false
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; undefined==false : &#34;</span>, <span style="color:#66d9ef">undefined</span><span style="color:#f92672">==</span><span style="color:#66d9ef">false</span>) 
+<span style="color:#75715e">// undefined==false: false
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>( <span style="color:#e6db74">&#34; undefined==null : &#34;</span>, <span style="color:#66d9ef">null</span><span style="color:#f92672">==</span><span style="color:#66d9ef">undefined</span>) 
+<span style="color:#75715e">// undefined==null: true
+</span></code></pre></div><h3 id="tricks-to-compare-arrays-of-numbers">Tricks to compare arrays of numbers</h3>
 <ul>
-<li><p>Compare two arrays to sure both contain the same numbers</p>
-
-<pre><code class="language-js">const arr1= [1,2.20,-3.5]
-
-const arr2 =  [1.0,-3.5,2.2]
-
-console.log(  &quot; arr1 = arr2 ? &quot;, obj1.sort().toString()===obj2.sort().toString())
-
-</code></pre></li>
+<li>Compare two arrays to sure both contain the same numbers</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr1</span><span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2.20</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">3.5</span>]
 
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr2</span> <span style="color:#f92672">=</span>  [<span style="color:#ae81ff">1.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">3.5</span>,<span style="color:#ae81ff">2.2</span>]
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(  <span style="color:#e6db74">&#34; arr1 = arr2 ? &#34;</span>, <span style="color:#a6e22e">obj1</span>.<span style="color:#a6e22e">sort</span>().<span style="color:#a6e22e">toString</span>()<span style="color:#f92672">===</span><span style="color:#a6e22e">obj2</span>.<span style="color:#a6e22e">sort</span>().<span style="color:#a6e22e">toString</span>())
+
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-equal-operator-doesn-t-always-mean-equivalent">The equal operator doesn&rsquo;t always mean equivalent</a>
-<ul>
-<li><a href="#is-not-the-same-as">&rdquo;===&rdquo; is not the same as &ldquo;==&rdquo;</a></li>
-<li><a href="#is-not-the-same-as-1">&rdquo;!=&rdquo; is not the same as &ldquo;!==&rdquo;</a></li>
-<li><a href="#follow-are-samples-to-show-difference">Follow are samples to show difference</a>
-<ul>
-<li><a href="#sample-1">Sample 1</a></li>
-<li><a href="#answer-of-sample-1">Answer of Sample 1</a></li>
-<li><a href="#sample-2">Sample 2</a></li>
-<li><a href="#answer-of-sample-2">Answer of Sample 2</a></li>
-<li><a href="#sample-3">Sample 3</a></li>
-<li><a href="#answer-of-sample-3">Answer of Sample 3</a></li>
-</ul></li>
-<li><a href="#tricks-to-compare-arrays-of-numbers">Tricks to compare arrays of numbers</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-equal-operator-doesnt-always-mean-equivalent">The equal operator doesn't always mean equivalent</a>
+      <ul>
+        <li><a href="#-is-not-the-same-as-">&ldquo;===&rdquo; is not the same as &ldquo;==&rdquo;</a></li>
+        <li><a href="#-is-not-the-same-as--1">&ldquo;!=&rdquo; is not the same as &ldquo;!==&rdquo;</a></li>
+        <li><a href="#follow-are-samples-to-show-difference">Follow are samples to show difference</a></li>
+        <li><a href="#tricks-to-compare-arrays-of-numbers">Tricks to compare arrays of numbers</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

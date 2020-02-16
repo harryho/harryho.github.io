@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:21 AEDT">
 <title>Laravel MVC Starter :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -420,7 +420,7 @@
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -448,6 +448,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -904,6 +911,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -942,6 +978,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -959,30 +997,21 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Laravel MVC Starter</h1>
-        
-
-<h2 id="summary">Summary</h2>
-
+        <h2 id="summary">Summary</h2>
 <p>This starter is the starting point of laravel 5 MVC project. This application is meant to be used as a starting place for those looking to get their feet wet with laravel.</p>
-
 <h2 id="overview-of-project">Overview of project</h2>
+<h3 id="bdd--business-domain-design">BDD ( Business domain design)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">+-------+ 0...*     0...* +--------+ 1     0...* +---------+ </span>
+<span style="color:#a6e22e">| tag   | --------------- |  post  | ----- ----- | comment |</span>
+<span style="color:#a6e22e">+-------+                 +--------+             +---------+           </span>
+                               <span style="color:#a6e22e">| 1...*</span>
+                               <span style="color:#a6e22e">|</span>
+                               <span style="color:#a6e22e">| 0...*</span>
+                          <span style="color:#a6e22e">+--------+ </span>
+                          <span style="color:#a6e22e">|  like  |</span>
+                          <span style="color:#a6e22e">+--------+</span>
 
-<h3 id="bdd-business-domain-design">BDD ( Business domain design)</h3>
-
-<pre><code class="language-ini">+-------+ 0...*     0...* +--------+ 1     0...* +---------+ 
-| tag   | --------------- |  post  | ----- ----- | comment |
-+-------+                 +--------+             +---------+           
-                               | 1...*
-                               |
-                               | 0...*
-                          +--------+ 
-                          |  like  |
-                          +--------+
-
-</code></pre>
-
-<h3 id="structure-of-starter">Structure of starter</h3>
-
+</code></pre></div><h3 id="structure-of-starter">Structure of starter</h3>
 <pre><code>\path\to\lara-mvc-starter
 +---app                 &lt;-// Customized PHP application code
 |   +---Console
@@ -1024,35 +1053,30 @@
 +---tests
 \---vendor            &lt;-// Laravel framework
 
-</code></pre>
-
-<h2 id="screenshots">Screenshots</h2>
-
+</code></pre><h2 id="screenshots">Screenshots</h2>
 <blockquote>
-<p><img src="/img/lara-mvc-starter.png" alt="laravel-mvc-starter" /></p>
+<p><img src="/img/lara-mvc-starter.png" alt="laravel-mvc-starter"></p>
 </blockquote>
-
-<h3 id="browse-repository-https-github-com-harryho-lara-mvc-starter-git">Browse <a href="https://github.com/harryho/lara-mvc-starter.git">Repository</a></h3>
+<h3 id="browse-repositoryhttpsgithubcomharryholara-mvc-startergit">Browse <a href="https://github.com/harryho/lara-mvc-starter.git">Repository</a></h3>
 
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#overview-of-project">Overview of project</a>
-<ul>
-<li><a href="#bdd-business-domain-design">BDD ( Business domain design)</a></li>
-<li><a href="#structure-of-starter">Structure of starter</a></li>
-</ul></li>
-<li><a href="#screenshots">Screenshots</a>
-<ul>
-<li><a href="#browse-repository-https-github-com-harryho-lara-mvc-starter-git">Browse <a href="https://github.com/harryho/lara-mvc-starter.git">Repository</a></a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#overview-of-project">Overview of project</a>
+      <ul>
+        <li><a href="#bdd--business-domain-design">BDD ( Business domain design)</a></li>
+        <li><a href="#structure-of-starter">Structure of starter</a></li>
+      </ul>
+    </li>
+    <li><a href="#screenshots">Screenshots</a>
+      <ul>
+        <li><a href="#browse-repositoryhttpsgithubcomharryholara-mvc-startergit">Browse Repository</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 

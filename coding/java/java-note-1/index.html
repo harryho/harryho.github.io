@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-08T19:13:56 AEDT">
+<meta name="revised" content="2020-02-16T13:41:22 AEDT">
 <title>Java Note - 1: Enum :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -381,47 +381,12 @@
             <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item active">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/js-ts/">JavaScript &amp; Typescript</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
@@ -449,6 +414,13 @@
         <div>
           <a href="/coding/js-ts/js-note-99/">
             JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TypeScript Note - 1
           </a>
         </div>
     </li>
@@ -905,6 +877,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -946,7 +947,7 @@
   
     <option value="/coding/js-ts/" >
   - 
-   JavaScript &amp; Typescript</option>
+   JS &amp; TS </option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -967,6 +968,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -984,220 +987,196 @@
 <div class="main-page">
     <div class="flex-item main-content">
             <h1>Java Note - 1: Enum</h1>
-        
-
-<h2 id="prerequisites">Prerequisites</h2>
-
+        <h2 id="prerequisites">Prerequisites</h2>
 <blockquote>
 <p><em>Java 1.5+</em></p>
 </blockquote>
-
 <h2 id="new-type-enum">New type: Enum</h2>
-
 <p>Enum was a great improvement in Java 1.5. From that more and more developer abandom the interface or abstract class as constant variable container.</p>
-
 <h3 id="before-java-5">Before Java 5</h3>
-
 <p>Before Java 1.5 you will following coding in many Java program.</p>
-
-<pre><code class="language-java">    // Use interface or abstract class as constant variable container
-    public interface Country {
-         public static final String AU = &quot;Australian&quot;;
-         public static final String UK = &quot;United Kingdom&quot;; 
-         public static final String US = &quot;United State&quot;; 
-    }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// Use interface or abstract class as constant variable container
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Country</span> <span style="color:#f92672">{</span>
+         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String AU <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Australian&#34;</span><span style="color:#f92672">;</span>
+         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String UK <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;United Kingdom&#34;</span><span style="color:#f92672">;</span> 
+         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String US <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;United State&#34;</span><span style="color:#f92672">;</span> 
+    <span style="color:#f92672">}</span>
     
-    public class Util {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Util</span> <span style="color:#f92672">{</span>
          
-        public static String getLanguageCode(String country) {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span>String country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     
-            String languageCode = &quot;en&quot;;
-            switch (country) {
-                case Country.AU:
-                    languageCode = &quot;en-au&quot;;
-                    break;
-                case Country.UK:
-                    languageCode = &quot;en-uk&quot;;
-                    break;
-                case Country.US:
-                    languageCode = &quot;en-us&quot;;
-                    break;
-            }
-            return languageCode;
-        }
-    }
-</code></pre>
-
-<p>Above program looks very good. Please take a close look and check it carefully. You will find the program will never return <strong><em>en-au</em></strong>, since there is a typo in the constant AU. It should be <strong><em>Australia</em></strong> instead of <strong><em>Australian</em></strong>. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.</p>
-
+            String languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">case</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">AU</span><span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-au&#34;</span><span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">case</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-uk&#34;</span><span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">case</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">US</span><span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-us&#34;</span><span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> languageCode<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>Above program looks very good. Please take a close look and check it carefully. You will find the program will never return <strong><em>en-au</em></strong>, since there is a typo in the constant AU. It should be <strong><em>Australia</em></strong> instead of <strong><em>Australian</em></strong>. I believe many developers have short sight problem like me, and it happened again and again. Using string as constant flag is not a good option, but there is no other better solution before Java 1.5.</p>
 <h3 id="after-java-5">After Java 5</h3>
-
 <p>After Java 1.5, you will see the change below. Enum is the best container for constants. It can help you check the program time. Meanwhile, it can simplfy your coding.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// Use Enum as constant variable container
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span>  Country <span style="color:#f92672">{</span>
+    Australia<span style="color:#f92672">,</span> UnitedKingdom<span style="color:#f92672">,</span> UnitedState
+<span style="color:#f92672">}</span>
 
-<pre><code class="language-java">// Use Enum as constant variable container
-public enum  Country {
-    Australia, UnitedKingdom, UnitedState
-}
-
-public class Util {
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Util</span> <span style="color:#f92672">{</span>
         
-    public static String getLanguageCode(Country country) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span>Country country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 
-        String languageCode = &quot;en&quot;;
-        switch (country) {
-            case Australia:
-                languageCode = &quot;en-au&quot;;
-                break;
-            case UnitedKingdom:
-                languageCode = &quot;en-uk&quot;;
-                break;
-            case UnitedState:
-                languageCode = &quot;en-us&quot;;
-                break;
-        }
-        return languageCode;
-    }
-}
-</code></pre>
-
-<p>Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven&rsquo;t refactor your static constants container, it is time to improve it now.</p>
-
+        String languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> Australia<span style="color:#f92672">:</span>
+                languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-au&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> UnitedKingdom<span style="color:#f92672">:</span>
+                languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-uk&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> UnitedState<span style="color:#f92672">:</span>
+                languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-us&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> languageCode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Now you program will not be by any unintentional typo, since it will throw you compile error before you run the application. If you haven't refactor your static constants container, it is time to improve it now.</p>
 <p>After Java Java 1.7, there are some new features. One of these new features is Switch statement. Now it supports String. It is a great for Java developer.With this new feature, the old Enum can be enhanced and the Util class can provide more handy methods (Overload method getLanguageCode) for development.</p>
-
 <p>New Enum class can support flexible requirement. In the early version of Enum, the toString method only will return exactly the specified constanct name. Now it can be overrided with toString to return different constant name.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// It can return customized name and simplify coding 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Country <span style="color:#f92672">{</span>
+    AU<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Australia&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;au&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;en-au&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> 
+    UK<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;United Kingdom&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;en-uk&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>
+    US<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;United State&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;us&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;en-us&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">// It can return customized name and simplify coding 
-public enum Country {
-    AU(&quot;Australia&quot;, &quot;au&quot;,&quot;en-au&quot;), 
-    UK(&quot;United Kingdom&quot;, &quot;en-uk&quot;),
-    US(&quot;United State&quot;, &quot;us&quot;,&quot;en-us&quot;);
-
-    String countryName;
-    String countryCode;
-    String languageCode;
+    String countryName<span style="color:#f92672">;</span>
+    String countryCode<span style="color:#f92672">;</span>
+    String languageCode<span style="color:#f92672">;</span>
     
-    private Country(String name, String code) {
-        countryName = name;
-        countryCode = code;
-    }
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Country</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> String code<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        countryName <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+        countryCode <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public String getCode() {
-        return countryCode;
-    }
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> countryCode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-    public String getLanguageCode() {
-        return languageCode;
-    }
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> languageCode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-    @Override
-    public String toString() {
-        return countryName;
-    }
-}
-</code></pre>
-
-<p>The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.</p>
-
-<pre><code class="language-java">public class Util {
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> countryName<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>The Uitl class can convert any country name or country code to Enum Country, vice versa. Now developer can seamless convert the String from UI to the Enum, since on the UI, usually the country name will Australia or United Kingdom instead of just AU or UK. For coding, use AU or UK can simplify coding and is friendly to developer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Util</span> <span style="color:#f92672">{</span>
         
-    public static Country convertCountryNameOrCode(String nameOrCode ) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Country <span style="color:#a6e22e">convertCountryNameOrCode</span><span style="color:#f92672">(</span>String nameOrCode <span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         
-        Country country = null;
-        switch (nameOrCode) {
-            case &quot;au&quot;:
-            case &quot;AU&quot;:
-            case &quot;Australia&quot;:
-                country = Country.AU;
-                break;
-            case &quot;uk&quot;:
-            case &quot;UK&quot;:    
-            case &quot;United Kingdom&quot;:
-                country = Country.UK;
-                break;
-            case &quot;us&quot;:
-            case &quot;US&quot;:    
-            case &quot;United State&quot;:
-                country = Country.UK;
-                break;
-        }
-        return country;
-    }
+        Country country <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>nameOrCode<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;au&#34;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;AU&#34;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;Australia&#34;</span><span style="color:#f92672">:</span>
+                country <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">AU</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;uk&#34;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;UK&#34;</span><span style="color:#f92672">:</span>    
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;United Kingdom&#34;</span><span style="color:#f92672">:</span>
+                country <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;us&#34;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;US&#34;</span><span style="color:#f92672">:</span>    
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;United State&#34;</span><span style="color:#f92672">:</span>
+                country <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> country<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-    public static String getCountryName(  Country country ){
-        String countryName = null;
-        switch (country){
-            case AU:
-                countryName = Country.AU.toString();
-                break;
-            case US:
-                countryName = Country.UK.toString();
-                break;
-            case UK:
-                countryName = Country.US.toString();
-                break;
-            default:
-                System.err.println(&quot;Unknow Country&quot;);
-                assert false;
-                break;
-        }
-        return countryName;
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getCountryName</span><span style="color:#f92672">(</span>  Country country <span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        String countryName <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>country<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> AU<span style="color:#f92672">:</span>
+                countryName <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">AU</span><span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> US<span style="color:#f92672">:</span>
+                countryName <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> UK<span style="color:#f92672">:</span>
+                countryName <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">US</span><span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Unknow Country&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> countryName<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
     
-    public static String getCountryCode(  Country country ){
-        String countryCode = null;
-        switch (country){
-            case AU:
-                countryCode = Country.AU.getCode();
-                break;
-            case US:
-                countryCode = Country.UK.getCode();
-                break;
-            case UK:
-                countryCode = Country.US.getCode();
-                break;
-            default:
-                System.err.println(&quot;Unknow Country&quot;);
-                assert false;
-                break;
-        }
-        return countryCode;
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getCountryCode</span><span style="color:#f92672">(</span>  Country country <span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        String countryCode <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>country<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> AU<span style="color:#f92672">:</span>
+                countryCode <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">AU</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> US<span style="color:#f92672">:</span>
+                countryCode <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> UK<span style="color:#f92672">:</span>
+                countryCode <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">US</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Unknow Country&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> countryCode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
         
-    public static String getLanguageCode(Country country) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span>Country country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     
-            String languageCode = &quot;en&quot;;
-            switch (country) {
-                case AU:
-                    languageCode = Country.AU.getLanguageCode() ;
-                    break;
-                case UK:
-                    languageCode =  Country.UK.getLanguageCode();
-                    break;
-                case US:
-                    languageCode =  Country.US.getLanguageCode();
-                    break;
-            }
-            return languageCode;
-    }
-}
-</code></pre>
-
+            String languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>country<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">case</span> AU<span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span> Country<span style="color:#f92672">.</span><span style="color:#a6e22e">AU</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">case</span> UK<span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span>  Country<span style="color:#f92672">.</span><span style="color:#a6e22e">UK</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">case</span> US<span style="color:#f92672">:</span>
+                    languageCode <span style="color:#f92672">=</span>  Country<span style="color:#f92672">.</span><span style="color:#a6e22e">US</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLanguageCode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> languageCode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
     </div>
 
     <div class="toc toc-fixed" >
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#new-type-enum">New type: Enum</a>
-<ul>
-<li><a href="#before-java-5">Before Java 5</a></li>
-<li><a href="#after-java-5">After Java 5</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#new-type-enum">New type: Enum</a>
+      <ul>
+        <li><a href="#before-java-5">Before Java 5</a></li>
+        <li><a href="#after-java-5">After Java 5</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 
