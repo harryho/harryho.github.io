@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-02-16T13:53:21 AEDT">
+<meta name="revised" content="2020-02-22T15:00:59 AEDT">
 <title>Sql Server Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1001,18 +1001,21 @@
 
 <h4 id="get-db-table-size-or-space">Get db/table size or space</h4>
 
+<ul>
+<li><p>Get db size</p>
+
 <pre><code class="language-sql">
 -- Get database size 
 
 SELECT      sys.databases.name,  
-            CONVERT(VARCHAR,SUM(size)*8/1024)+' MB' AS [Total disk space]  ,
-            CONVERT(VARCHAR,SUM(size)*8/1024/1024)+' GB' AS [Total disk space]  
+        CONVERT(VARCHAR,SUM(size)*8/1024)+' MB' AS TotalDiskSpaceMB  ,
+        CONVERT(VARCHAR,SUM(size)*8/1024/1024)+' GB' AS TotalDiskSpaceGB
 FROM        sys.databases   
 JOIN        sys.master_files  
 ON          sys.databases.database_id=sys.master_files.database_id  
 
 GROUP BY    sys.databases.name  
-ORDER BY    sys.databases.name  
+ORDER BY     TotalDiskSpaceMB
 
 -- Get database space &amp; unallocated space
 
@@ -1020,7 +1023,41 @@ exec sp_spaceused
 
 -- 
 
-</code></pre>
+</code></pre></li>
+
+<li><p>Get table size</p>
+
+<pre><code class="language-sql">SELECT 
+t.NAME AS TableName,
+s.Name AS SchemaName,
+p.rows AS RowCounts,
+SUM(a.total_pages) * 8 AS TotalSpaceKB, 
+CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS TotalSpaceMB,
+SUM(a.used_pages) * 8 AS UsedSpaceKB, 
+CAST(ROUND(((SUM(a.used_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS UsedSpaceMB, 
+(SUM(a.total_pages) - SUM(a.used_pages)) * 8 AS UnusedSpaceKB,
+CAST(ROUND(((SUM(a.total_pages) - SUM(a.used_pages)) * 8) / 1024.00, 2) AS NUMERIC(36, 2)) AS UnusedSpaceMB
+FROM 
+sys.tables t
+INNER JOIN      
+sys.indexes i ON t.OBJECT_ID = i.object_id
+INNER JOIN 
+sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+INNER JOIN 
+sys.allocation_units a ON p.partition_id = a.container_id
+LEFT OUTER JOIN 
+sys.schemas s ON t.schema_id = s.schema_id
+WHERE 
+t.NAME NOT LIKE 'dt%' 
+AND t.is_ms_shipped = 0
+AND i.OBJECT_ID &gt; 255 
+GROUP BY 
+t.Name, s.Name, p.Rows
+ORDER BY 
+t.Name;
+
+</code></pre></li>
+</ul>
 
 <h4 id="get-full-text-search-objects">Get full text search objects</h4>
 
@@ -1057,6 +1094,24 @@ ON
 
 </code></pre>
 
+<h3 id="find-the-table">Find the table</h3>
+
+<pre><code class="language-sql">SELECT      c.name  AS 'ColumnName'
+            ,t.name AS 'TableName'
+FROM        sys.columns c
+JOIN        sys.tables  t   ON c.object_id = t.object_id
+WHERE       c.name LIKE '%MyName%'
+ORDER BY    TableName
+            ,ColumnName;
+</code></pre>
+
+<h3 id="restore-user-login-after-db-restore">Restore user login after db restore</h3>
+
+<pre><code class="language-sql">exec sp_change_users_login Report
+
+EXEC sp_change_users_login 'Auto_Fix', 'your_username', NULL, 'your_password';
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1071,6 +1126,8 @@ ON
 <li><a href="#get-db-table-size-or-space">Get db/table size or space</a></li>
 <li><a href="#get-full-text-search-objects">Get full text search objects</a></li>
 </ul></li>
+<li><a href="#find-the-table">Find the table</a></li>
+<li><a href="#restore-user-login-after-db-restore">Restore user login after db restore</a></li>
 </ul></li>
 </ul></li>
 </ul>
