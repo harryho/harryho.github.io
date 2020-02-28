@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2020-02-28T17:06:19 AEDT">
-<title>Closure &amp; Decorator :: Hello World</title>
+<title>AWS Note - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Closure &amp; Decorator">
+<meta name="description" content="AWS CLI &amp; Sample">
 
 
 
     
   </head>
-  <body data-url="/coding/python/python-note-2/">
+  <body data-url="/cloud/aws-note-3/">
     
       <header>
   <div class="logo">
@@ -132,11 +132,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/">Coding</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
     <li data-nav-id="/coding/c/" class="dd-item haschildren
@@ -460,11 +459,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/python/" class="dd-item parent haschildren
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
         ">
       <div>
-      <a href="/coding/python/">Python</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
@@ -474,7 +472,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/python/python-note-2/" class="dd-item active">
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
         <div>
           <a href="/coding/python/python-note-2/">
             Closure &amp; Decorator
@@ -620,10 +618,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/cloud/" class="dd-item haschildren
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/cloud/aws-note-1/" class="dd-item">
@@ -640,7 +639,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/aws-note-3/" class="dd-item">
+      <li data-nav-id="/cloud/aws-note-3/" class="dd-item active">
         <div>
           <a href="/cloud/aws-note-3/">
             AWS Note - 3
@@ -965,10 +964,17 @@
     <option value="/projects/" >
    Projects</option>
     <option value="/coding/" >
-   Coding</option> 
-  
+   Coding</option>
     <option value="/cloud/" >
-   Cloud</option>
+   Cloud</option> 
+      <option value="/cloud/aws-note-1/" >- AWS Note - 1</option>
+      <option value="/cloud/aws-note-2/" >- AWS Note - 2</option>
+      <option value="/cloud/aws-note-3/"  selected>- AWS Note - 3</option>
+      <option value="/cloud/digito-note-1/" >- DigitialOcean Note - 1</option>
+      <option value="/cloud/digito-note-2/" >- DigitialOcean Note - 2</option>
+      <option value="/cloud/digito-note-3/" >- DigitialOcean Note - 3</option>
+      <option value="/cloud/digito-note-4/" >- DigitialOcean Note - 4</option>
+  
     <option value="/hacks/" >
    Hacks</option>
     <option value="/os/" >
@@ -995,233 +1001,95 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Closure &amp; Decorator</h1>
+            <h1>AWS Note - 3</h1>
         
 
-<h2 id="closure-decorator">Closure &amp; Decorator</h2>
+<h3 id="aws-cli">AWS CLI</h3>
 
-<h3 id="legb-rules">LEGB rules</h3>
+<p>Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&rsquo;ve defined. This virtual network closely resembles a traditional network that you&rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.</p>
 
-<ul>
-<li>Local, Enclosing, Gloable, Built-in</li>
-</ul>
+<h3 id="profile-setup">Profile Setup</h3>
 
-<h3 id="local-function">Local function</h3>
+<p>A named profile is a collection of settings and credentials that you can apply to a AWS CLI command. When you specify a profile to run a command, the settings and credentials are used to run that command.</p>
 
 <ul>
-<li>Useful for specialized, one-off functions</li>
-<li>Aid in code organization and readability</li>
-<li>Similar to lambdas, but more general</li>
-<li>May contain multiple expressions</li>
-<li>May contain statements</li>
-</ul>
+<li><p><code>~/.aws/credentials</code></p>
 
-<h3 id="closure">Closure</h3>
-
-<ul>
-<li>Closure maintain references to objects from earlier scopes</li>
-<li>LEGB does not apply when making new bindings</li>
-
-<li><p>Usage of nonlocal</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">def make_timer():
-    last_called = None
-
-    def elapsed():
-        nonlocal last_called
-        now = time.time()
-        if last_called is None:
-            last_called = now
-            return None
-        result = now - last_called
-        last_called = now
-        return result
-    return elapsed
-
-
-if __name__ == &quot;__main__&quot;:
-    mt = make_timer()
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-    print('-----------------------------')
-    print(mt ())
-</code></pre></li>
-</ul></li>
-
-<li><p>Use as function factory</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">
-def raise_to(exp):
-    def raise_to_exp(x):
-        return pow(x, exp)
-    return raise_to_exp
-
-if __name__ == &quot;__main__&quot;:
-    square=raise_to(2)
-    cube= raise_to(3)
-    print(square(2))
-    print(cube(2))
-
-## test result:
-## 4
-## 8
-
-</code></pre></li>
-</ul></li>
-</ul>
-
-<h3 id="decorator">Decorator</h3>
-
-<ul>
-<li>Replace, enhance, or modify existing functions</li>
-<li>Does not change the original function definition</li>
-<li>Calling code does not need to change</li>
-<li>Decorator mechanism uses the modified function’s original name</li>
-
-<li><p>Example</p>
-
-<ul>
-<li><p>use function as decorator</p>
-
-<pre><code class="language-python">def escape_unicode(f):
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-if __name__ == &quot;__main__&quot;:
-    print(hello_greek())
-
-## test result:
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
+<pre><code>[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 </code></pre></li>
 
-<li><p>Example: multiple decorators including function and instance</p>
+<li><p><code>~/.aws/config</code></p>
 
-<pre><code class="language-python">class Trace:
-    def __init__(self):
-        self.enabled = True
-
-    def __call__(self, f):
-        @functools.wraps(f)
-        def wrap(*args, **kwargs):
-            if self.enabled:
-                print('Calling {}'.format(f.__name__))
-            return f(*args, **kwargs)
-        return wrap
-
-def escape_unicode(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        x = f(*args, **kwargs)
-        return ascii(x)
-    return wrap
-
-@tracer
-@escape_unicode
-def hello_greek():
-    return 'γειά σου κόσμος'    
-
-## test result
-## Calling hello_greek
-## '\u03b3\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2'
-
+<pre><code>[default]
+region=us-west-2
+output=json
 </code></pre></li>
 
-<li><p>Use as validator</p>
+<li><p>The AWS CLI supports using any of multiple named profiles that are stored in the config and credentials files.</p></li>
 
-<pre><code class="language-python">def check_non_negative(index):
-    def validator(f):
-        def wrap(*args):
-            if args[index] &lt; 0:
-                raise ValueError(
-                    'Arg {} must be non-negative'.format(index)
-                )
-            return f(*args)
-        return wrap
-    return validator
+<li><p><code>~/.aws/credentials</code> (Linux / Mac)</p>
 
-@check_non_negative(1)
-def create_seq(value, size):
-    return [value]*size  
+<pre><code>[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
-if __name__ == &quot;__main__&quot;:
-    create_seq('0', -3)
+[user1]
+aws_access_key_id=AKIAI44QH8DHBEXAMPLE
+aws_secret_access_key=je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
+</code></pre></li>
 
-## test result
-....
-'Arg {} must be non-negative'.format(index)
-ValueError: Arg 1 must be non-negative
+<li><p><code>~/.aws/config</code> (Linux &amp; Mac)</p>
+
+<pre><code>[default]
+region=us-west-2
+output=json
+
+[profile user1]
+region=us-east-1
+output=text
 </code></pre></li>
 </ul>
 
-<h2 id="properties-class">Properties &amp; Class</h2>
+<h3 id="samples">Samples</h3>
 
-<h3 id="staticmethod">@staticmethod</h3>
+<h4 id="ec2">EC2</h4>
 
 <ul>
-<li>No access needed to either class or instance objects.</li>
-<li>Most likely an implementation detail of the class.</li>
-<li>May be able to be moved to become a module-scope function</li>
+<li><p>Get EC2 instances</p>
+
+<pre><code>aws ec2 describe-instances --filters &quot;Name=instance-type,Values=t2.micro&quot; --query &quot;Reservations[].Instances[].InstanceId&quot;  --profile user1
+</code></pre></li>
+
+<li><p>Stop EC2 instance</p>
+
+<pre><code>aws ec2 stop-instances --instance-ids i-1234567890abcdef0
+</code></pre></li>
 </ul>
 
-<h3 id="classmethod">@classmethod</h3>
+<h4 id="s3">S3</h4>
 
 <ul>
-<li>Requires access to the class object to call other class methods or the constructor</li>
-<li>Always use self for the first argument to instance methods.</li>
-<li>Always use cls for the first argument to class methods.</li>
+<li><p>List Buckets</p>
 
-<li><p>Use case: use as named constructors</p>
-
-<pre><code class="language-python">class FileStream(object):
-
-@classmethod
-def from_file(cls, filepath, ignore_comments=False, *args, **kwargs):   
-    with open(filepath, 'r') as fileobj:
-        for obj in cls(fileobj, ignore_comments, *args, **kwargs):
-            yield obj
-
-@classmethod
-def from_socket(cls, socket, ignore_comments=False, *args, **kwargs):
-    raise NotImplemented ## Placeholder until implemented
-
-def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
-    ...
+<pre><code>aws s3 ls --profile user1 
 </code></pre></li>
-</ul></li>
-</ul>
 
-<h3 id="property">@property</h3>
+<li><p>List content within the bucket</p>
 
-<ul>
-<li><p>Encapsulation</p>
-
-<ul>
-<li><p>Example</p>
-
-<pre><code class="language-python">class A
-    @property
-    def  prop(self):
-        return self._prop
-
-    @prop.setter
-    def prop(self, value):
-        self._prop = value
+<pre><code>aws s3 ls --profile user1 s3://your_bucket_name --recursive
 </code></pre></li>
-</ul></li>
+
+<li><p>Sync everything to curerent directory</p>
+
+<pre><code>aws s3 sync --profile  user1 s3://your_bucket_name . 
+</code></pre></li>
+
+<li><p>Copy local file to S3 bucket</p>
+
+<pre><code>aws s3  cp --profile user1 file_name s3://your_bucket_name/file_name
+</code></pre></li>
 </ul>
 
     </div>
@@ -1231,18 +1099,15 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
 <ul>
 <li>
 <ul>
-<li><a href="#closure-decorator">Closure &amp; Decorator</a>
+<li>
 <ul>
-<li><a href="#legb-rules">LEGB rules</a></li>
-<li><a href="#local-function">Local function</a></li>
-<li><a href="#closure">Closure</a></li>
-<li><a href="#decorator">Decorator</a></li>
+<li><a href="#aws-cli">AWS CLI</a></li>
+<li><a href="#profile-setup">Profile Setup</a></li>
+<li><a href="#samples">Samples</a>
+<ul>
+<li><a href="#ec2">EC2</a></li>
+<li><a href="#s3">S3</a></li>
 </ul></li>
-<li><a href="#properties-class">Properties &amp; Class</a>
-<ul>
-<li><a href="#staticmethod">@staticmethod</a></li>
-<li><a href="#classmethod">@classmethod</a></li>
-<li><a href="#property">@property</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1255,8 +1120,8 @@ def __init__(self, iterable, ignore_comments=False, *args, **kwargs):
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/python/python-note-1/" title="Package &amp; Module"> <i class="fa fa-chevron-left"></i><label>Package &amp; Module</label></a>
-    <a class="nav nav-next" href="/coding/python/python-note-3/" title="String &amp; Representation" style="margin-right: 0px;"><label>String &amp; Representation</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/aws-note-2/" title="AWS Note - 2"> <i class="fa fa-chevron-left"></i><label>AWS Note - 2</label></a>
+    <a class="nav nav-next" href="/cloud/digito-note-1/" title="DigitialOcean Note - 1" style="margin-right: 0px;"><label>DigitialOcean Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
