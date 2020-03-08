@@ -11,7 +11,7 @@
     
     
     <item>
-      <title>AWS - IAM</title>
+      <title>AWS: IAM</title>
       <link>/cloud/aws-note-01-iam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -21,7 +21,7 @@ Root User  Every account has a root user in AWS. A root user is something that&a
     </item>
     
     <item>
-      <title>AWS - CLI </title>
+      <title>AWS : CLI </title>
       <link>/cloud/aws-note-02-cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -31,13 +31,42 @@ Profile Setup A named profile is a collection of settings and credentials that y
     </item>
     
     <item>
-      <title>AWS - VPC part 1</title>
+      <title>AWS: VPC - 1</title>
       <link>/cloud/aws-note-03-vpc-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/cloud/aws-note-03-vpc-1/</guid>
-      <description>VPC Part1 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+      <description>VPC Part 1 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
 Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. A subnet is a range of IP addresses in your VPC.</description>
+    </item>
+    
+    <item>
+      <title>AWS: VPC - 2</title>
+      <link>/cloud/aws-note-03-vpc-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-2/</guid>
+      <description>VPC Part 2 VPC has an implicit router (implied router), and you use route tables to control where network traffic is directed.
+Route table  Have up to 200 route tables per VPC Have up to 50 route entries per route table Each subnet must be associated with only one route table The subent (when created) will be associated with main (default) VPC route table Can change the subnet association to another route table Can NOT delete the main route table Every route table in a VPC comes with a default rule that allows all VPC subnets to comminunicate with one another.</description>
+    </item>
+    
+    <item>
+      <title>AWS : VPC - 3</title>
+      <link>/cloud/aws-note-03-vpc-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-3/</guid>
+      <description>VPC Part 3 Endpoint A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+Endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between instances in your VPC and services without imposing availability risks or bandwidth constraints on your network traffic.</description>
+    </item>
+    
+    <item>
+      <title>AWS : VPC - 4</title>
+      <link>/cloud/aws-note-03-vpc-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-4/</guid>
+      <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrivSubet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrivSubet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
     </item>
     
     <item>

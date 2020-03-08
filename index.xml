@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>AWS - IAM</title>
+      <title>AWS: IAM</title>
       <link>/cloud/aws-note-01-iam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -52,7 +52,7 @@ Go is easy to become functional with and appropriate for junior developers to wo
     </item>
     
     <item>
-      <title>AWS - CLI </title>
+      <title>AWS : CLI </title>
       <link>/cloud/aws-note-02-cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -93,12 +93,12 @@ def make_timer(): last_called = None def elapsed(): nonlocal last_called now = t
     </item>
     
     <item>
-      <title>AWS - VPC part 1</title>
+      <title>AWS: VPC - 1</title>
       <link>/cloud/aws-note-03-vpc-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/cloud/aws-note-03-vpc-1/</guid>
-      <description>VPC Part1 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+      <description>VPC Part 1 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
 Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. A subnet is a range of IP addresses in your VPC.</description>
     </item>
     
@@ -133,6 +133,16 @@ Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to yo
     </item>
     
     <item>
+      <title>AWS: VPC - 2</title>
+      <link>/cloud/aws-note-03-vpc-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-2/</guid>
+      <description>VPC Part 2 VPC has an implicit router (implied router), and you use route tables to control where network traffic is directed.
+Route table  Have up to 200 route tables per VPC Have up to 50 route entries per route table Each subnet must be associated with only one route table The subent (when created) will be associated with main (default) VPC route table Can change the subnet association to another route table Can NOT delete the main route table Every route table in a VPC comes with a default rule that allows all VPC subnets to comminunicate with one another.</description>
+    </item>
+    
+    <item>
       <title>Generic Type &amp; Trait </title>
       <link>/coding/rustlang/rust-note-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -162,6 +172,16 @@ Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to yo
     </item>
     
     <item>
+      <title>AWS : VPC - 3</title>
+      <link>/cloud/aws-note-03-vpc-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-3/</guid>
+      <description>VPC Part 3 Endpoint A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+Endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between instances in your VPC and services without imposing availability risks or bandwidth constraints on your network traffic.</description>
+    </item>
+    
+    <item>
       <title>Error handling</title>
       <link>/coding/golang/go-note-5/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -179,6 +199,15 @@ Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to yo
       
       <guid>/coding/python/python-note-5/</guid>
       <description>Inheritance &amp;amp; Polymorphism  Specify single inheritance by putting a base class in parentheses after defining a class&amp;rsquo;s name Subclasses have all of the methods of their base class It&amp;rsquo;s often best to explicitly call a base class initializer from a subclass&amp;rsquo;s initializer If a class with a single base class doesn&amp;rsquo;t define an initializer, the base class&amp;rsquo;s initializer will be called automatically on construction Python treats __init__() like any other method Base class __init__() is not called if overridden Use super() to call base class __init__() isinstance() takes an object as its first argument and a type as its second isinstance() determines if its first argument is an instance of the second argument, or any subclass of the second argument isinstance() can accept a tuple of types as its second argument, in which it returns True if the first argument is of any of those types Checking for specific types is rare in Python and is sometimes regarded as bad design isinstance() determines if its first argument is a direct or indirect subclass of, or the same type as, the second argument Multiple inheritance means having more than one direct base class You declare multiple base classes with a comma-separated list of class names in parentheses after a class&amp;rsquo;s name in a class definition A class can have as many base classes as you want Python uses a well-defined &amp;ldquo;method resolution order&amp;rdquo; to resolve methods at runtime If a multiply-inheriting class defines no initializer, Python will automatically call the initializer of its first base class on construction __bases__ is a tuple of types on a class object which defines the base classes for the class __bases__ is in the same order as in the class definition __bases__ is populated for both single and multiple inheritance Method resolution order defines the order in which Python will search an inheritance graph for methods MRO is short for Method Resolution Order MRO is stored as a tuple of types in the __mro__ attribute of a class The mro() method on type objects returns the contents of __mro__ as a list To resolve a method, Python uses the first entry in a class&amp;rsquo;s MRO which has the requested method MRO is dependent on base class declaration order MRO is calculated by Python using the C3 algorithm MRO honors base-class ordering from class definitions MRO puts subclasses before base classes The relative order of classes in an MRO is consistent across all classes It is possible to specify an inconsistent base class ordering, in which case Python will raise a TypeError when the class definition is reached super() operates by using the elements in an MRO that come after some specified type super() returns a proxy object which forwards calls to the correct objects There are two distinct types of super() proxies, bound and unbound Unbound super() proxies are primarily used for implementing other Python features Bound proxies can be bound to either class objects or instances Calling super() with a base-class and derived-class argument returns a proxy bound to a class Calling super() with a class and an instance of that class returns a proxy bound to an instance A super() proxy takes the MRO of its second argument (or the type of its second argument), finds the first argument in that MRO, and uses everything after it in the MRO for method resolution Since class-bound proxies aren&amp;rsquo;t bound to an instance, you can’t directly call instance methods that they resolve for you However, classmethods resolved by class-bound proxies can be called directly Python will raise a TypeError if the second argument is not a subclass or instance of the first argument Inappropriate use of super() can violate some design constraints * Calling super() with no arguments inside an instance method produces an instance-bound proxy Calling super() with no arguments inside a classmethod produces a class-bound proxy In both cases, the no-argument form of super() is the same as calling super() with the method&amp;rsquo;s class as the first argument and the method&amp;rsquo;s first argument as the second Since super() works on MROs and not just a class&amp;rsquo;s base classes, class can be designed to cooperate without prior knowledge of one another The class object is at the core of Python&amp;rsquo;s object model object is the ultimate base class for all other classes in Python If you don&amp;rsquo;t specify a base class for a class, Python automatically uses object as the base Because object is in every class&amp;rsquo;s inheritance graph, it shows up in every MRO.</description>
+    </item>
+    
+    <item>
+      <title>AWS : VPC - 4</title>
+      <link>/cloud/aws-note-03-vpc-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws-note-03-vpc-4/</guid>
+      <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrivSubet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrivSubet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
     </item>
     
     <item>
@@ -420,6 +449,40 @@ FlatApi  Zero coding and configuration to setup Restful API FlatApi is designed 
       <description>Prelude
  This article is mainly to help experienced user install and setup Ubuntu 16 LTS Server. If you are looking for the information for Ubuntu 14, please go to the page Ubuntu 14 server setup
  Prerequisites  You are familiar with Ubuntu, at least you have some experience working on Linux system. You are familiar with basic bash/shell command  Wireless Setup  If you install ubuntu server on a laptop, you might end up to setup the wifi first.</description>
+    </item>
+    
+    <item>
+      <title>Docker Tutorial</title>
+      <link>/tut/docker/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
+      
+      <guid>/tut/docker/</guid>
+      <description>Docker Introduction Install docker  Docker official website
+ Docker overview
+  Common docker commands docker ps docker images docker container docker system docker history / inspect  Access image busybox via terminal docker run -it --rm busybox  Run static web site docker run -p 8008:80 -v \ $(pwd)/public:/usr/share/nginx/html nginx:alpine  Run your app in the container docker run -p 8000:80 -d -v \ $HOME/ws/gh/vue2crm/dist:/usr/share/nginx/html \ nginx:alpine   Other docker commands</description>
+    </item>
+    
+    <item>
+      <title>JavaScript Tutorial</title>
+      <link>/tut/javascript/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
+      
+      <guid>/tut/javascript/</guid>
+      <description>Topics  Operators var , let and const The this Fat arrow Templete literal Destructor  JavaScript Bad Parts - 1  Operator
+ Choose == or === Choose != or !==    Test yourself
+console.log( &amp;quot; 1==true : &amp;quot;, 1==true) console.log( &amp;quot; &#39;&#39;==true : &amp;quot;, &#39;&#39;==true) console.log( &amp;quot; &#39;1&#39;==true : &amp;quot;, &#39;1&#39;==true) console.log( &amp;quot; \&amp;quot;1\&amp;quot;==true : &amp;quot;, &amp;quot;1&amp;quot;==true) console.log( &amp;quot; {}==true : &amp;quot;, [{}]==true) console.log( &amp;quot; []==true : &amp;quot;, [&#39;1&#39;]==true)   console.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Tutorial</title>
+      <link>/tut/kube/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
+      
+      <guid>/tut/kube/</guid>
+      <description>Kubernetes basic concepts  What can Kubernetes do for you Kubernetes design Kubernetes cheat sheet  Install kubeadm, kubectl &amp;amp; kubelet  kubectl kubeadm demo  Trouble shooting  Linux OS (My script only support ubuntu 16+) Hardware ( Enable VT-x, 2+ Core , 2G RAM ) Swap must be off
+ disable swap immediately
+sudo swapoff -a  comment out the swap drive from fstab
+# swap was on .</description>
     </item>
     
     <item>

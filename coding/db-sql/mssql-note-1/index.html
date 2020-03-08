@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-08T12:51:41 AEDT">
+<meta name="revised" content="2020-03-08T22:43:25 AEDT">
 <title>Sql Server Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -467,6 +467,69 @@
       <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Package &amp; Module
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Closure &amp; Decorator
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            String &amp; Representation
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Iteration
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Inheritance &amp; Polymorphism
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Collection
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Exception &amp; Assertion
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Context
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            ABC
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
@@ -566,21 +629,42 @@
       <li data-nav-id="/cloud/aws-note-01-iam/" class="dd-item">
         <div>
           <a href="/cloud/aws-note-01-iam/">
-            AWS - IAM
+            AWS: IAM
           </a>
         </div>
     </li>
       <li data-nav-id="/cloud/aws-note-02-cli/" class="dd-item">
         <div>
           <a href="/cloud/aws-note-02-cli/">
-            AWS - CLI 
+            AWS : CLI 
           </a>
         </div>
     </li>
       <li data-nav-id="/cloud/aws-note-03-vpc-1/" class="dd-item">
         <div>
           <a href="/cloud/aws-note-03-vpc-1/">
-            AWS - VPC part 1
+            AWS: VPC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws-note-03-vpc-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws-note-03-vpc-2/">
+            AWS: VPC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws-note-03-vpc-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws-note-03-vpc-3/">
+            AWS : VPC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws-note-03-vpc-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws-note-03-vpc-4/">
+            AWS : VPC - 4
           </a>
         </div>
     </li>
@@ -856,6 +940,35 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/tut/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/tut/docker/" class="dd-item">
+        <div>
+          <a href="/tut/docker/">
+            Docker Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/javascript/" class="dd-item">
+        <div>
+          <a href="/tut/javascript/">
+            JavaScript Tutorial
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/tut/kube/" class="dd-item">
+        <div>
+          <a href="/tut/kube/">
+            Kubernetes Tutorial
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -920,6 +1033,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/tut/" >
+   Tutorial</option>
 
 
 
@@ -971,34 +1086,31 @@ exec sp_spaceused
 
 <li><p>Get table size</p>
 
-<pre><code class="language-sql">SELECT 
-t.NAME AS TableName,
-s.Name AS SchemaName,
-p.rows AS RowCounts,
-SUM(a.total_pages) * 8 AS TotalSpaceKB, 
-CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS TotalSpaceMB,
-SUM(a.used_pages) * 8 AS UsedSpaceKB, 
-CAST(ROUND(((SUM(a.used_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS UsedSpaceMB, 
-(SUM(a.total_pages) - SUM(a.used_pages)) * 8 AS UnusedSpaceKB,
-CAST(ROUND(((SUM(a.total_pages) - SUM(a.used_pages)) * 8) / 1024.00, 2) AS NUMERIC(36, 2)) AS UnusedSpaceMB
-FROM 
-sys.tables t
-INNER JOIN      
-sys.indexes i ON t.OBJECT_ID = i.object_id
-INNER JOIN 
-sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
-INNER JOIN 
-sys.allocation_units a ON p.partition_id = a.container_id
-LEFT OUTER JOIN 
-sys.schemas s ON t.schema_id = s.schema_id
-WHERE 
-t.NAME NOT LIKE 'dt%' 
+<pre><code class="language-sql">SELECT  
+    t.NAME AS TableName,
+    s.Name AS SchemaName,
+    p.rows AS RowCounts,
+    SUM(a.total_pages) * 8 AS TotalSpaceKB,
+    CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2))
+    AS TotalSpaceMB,
+    SUM(a.used_pages) * 8 AS UsedSpaceKB, 
+    CAST(ROUND(((SUM(a.used_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2))
+    AS UsedSpaceMB,
+    (SUM(a.total_pages) - SUM(a.used_pages)) * 8 AS UnusedSpaceKB,
+    CAST(ROUND(((SUM(a.total_pages) - SUM(a.used_pages)) * 8) / 1024.00, 2) AS NUMERIC(36, 2))
+    AS UnusedSpaceMB
+
+FROM sys.tables t
+INNER JOIN sys.indexes i ON t.OBJECT_ID = i.object_id
+INNER JOIN sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+INNER JOIN sys.allocation_units a ON p.partition_id = a.container_id
+LEFT OUTER JOIN sys.schemas s ON t.schema_id = s.schema_id
+
+WHERE t.NAME NOT LIKE 'dt%' 
 AND t.is_ms_shipped = 0
 AND i.OBJECT_ID &gt; 255 
-GROUP BY 
-t.Name, s.Name, p.Rows
-ORDER BY 
-t.Name;
+GROUP BY t.Name, s.Name, p.Rows
+ORDER BY t.Name;
 
 </code></pre></li>
 </ul>
