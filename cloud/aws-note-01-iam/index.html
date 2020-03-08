@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-08T12:51:23 AEDT">
-<title>DigitialOcean Note - 4 :: Hello World</title>
+<meta name="revised" content="2020-03-08T12:51:22 AEDT">
+<title>AWS - IAM :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Lets Encrypt &amp; Auto renewal">
+<meta name="description" content="IAM - Idenity and Acces Management: IAM Identity, Dos &amp; Don&#39;ts, Federation Integration">
 
 
 
     
   </head>
-  <body data-url="/cloud/digito-note-4/">
+  <body data-url="/cloud/aws-note-01-iam/">
     
       <header>
   <div class="logo">
@@ -625,7 +625,7 @@
             <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/cloud/aws-note-01-iam/" class="dd-item">
+      <li data-nav-id="/cloud/aws-note-01-iam/" class="dd-item active">
         <div>
           <a href="/cloud/aws-note-01-iam/">
             AWS - IAM
@@ -667,7 +667,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/digito-note-4/" class="dd-item active">
+      <li data-nav-id="/cloud/digito-note-4/" class="dd-item">
         <div>
           <a href="/cloud/digito-note-4/">
             DigitialOcean Note - 4
@@ -938,13 +938,13 @@
    Coding</option>
     <option value="/cloud/" >
    Cloud</option> 
-      <option value="/cloud/aws-note-01-iam/" >- AWS - IAM</option>
+      <option value="/cloud/aws-note-01-iam/"  selected>- AWS - IAM</option>
       <option value="/cloud/aws-note-02-cli/" >- AWS - CLI </option>
       <option value="/cloud/aws-note-03-vpc-1/" >- AWS - VPC part 1</option>
       <option value="/cloud/digito-note-1/" >- DigitialOcean Note - 1</option>
       <option value="/cloud/digito-note-2/" >- DigitialOcean Note - 2</option>
       <option value="/cloud/digito-note-3/" >- DigitialOcean Note - 3</option>
-      <option value="/cloud/digito-note-4/"  selected>- DigitialOcean Note - 4</option>
+      <option value="/cloud/digito-note-4/" >- DigitialOcean Note - 4</option>
   
     <option value="/hacks/" >
    Hacks</option>
@@ -970,136 +970,161 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>DigitialOcean Note - 4</h1>
+            <h1>AWS - IAM</h1>
         
 
-<blockquote>
-<p>Here I continue to finish the web host setup. The last step of web host setup is to add SSL certificate for each site</p>
-</blockquote>
+<h2 id="iam">IAM</h2>
 
-<h3 id="lets-encrypt">Lets Encrypt</h3>
+<p>AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.</p>
 
-<p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a Certificate Authority (CA). <a href="https://letsencrypt.org/">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
-
-<h4 id="installing-certbot">Installing Certbot</h4>
+<h3 id="root-user">Root User</h3>
 
 <ul>
-<li><p>The first step to using Let’s Encrypt to obtain an SSL certificate is to install the Certbot software on your server.</p></li>
-
-<li><p>Certbot is in very active development, so the Certbot packages provided by Ubuntu tend to be outdated. However, the Certbot developers maintain a Ubuntu software repository with up-to-date versions, so we’ll use that repository instead.</p>
-
-<pre><code class="language-bash">#  First, add the repository
-sudo add-apt-repository ppa:certbot/certbot
-
-# Install Certbot’s Nginx package with apt
-sudo apt install python-certbot-nginx
-</code></pre></li>
-
-<li><p>In order to configure SSL for Nginx, we need to verify some of Nginx’s configuration.</p></li>
+<li>Every account has a root user in AWS. A root user is something that&rsquo;s created automatically for you whenever you create an AWS account.</li>
+<li>Every single AWS account has a root user.</li>
+<li>The trouble is that root users have unrestricted access to every service and resource that is in AWS inside of your account.</li>
+<li>The permissions of root user can&rsquo;t be restricted in any way.</li>
 </ul>
 
-<h3 id="confirming-nginx-s-configuration">Confirming Nginx’s Configuration</h3>
+<h3 id="dos-and-don-ts">Dos and Don&rsquo;ts</h3>
 
 <ul>
-<li>In the previous setup, the site for <strong>domain-one.com</strong> has been up and running in the droplet.</li>
-
-<li><p>Open the server block file of <strong>domain-one.com</strong>  via any text editor:</p>
-
-<pre><code>sudo vi /etc/nginx/sites-available/example.com
-</code></pre></li>
-
-<li><p>Find the existing <strong>server_name</strong> line in the file</p>
-
-<pre><code>server_name domain-one.com www.domain-one.com;
-</code></pre></li>
-
-<li><p>If you change the server name, you need to re-run the test and reload nginx</p>
-
-<pre><code>sudo nginx -t
-sudo systemctl reload nginx
-</code></pre></li>
+<li>You should not be accessing the root account on a regular basis, whether that&rsquo;s daily, weekly, or whatever.</li>
+<li>Make sure that you turn on multi-factor authentication on the root account. Multi-factor authentication used to be called two-factor authentication. It really just means that we know the password and we have some sort of a token that we will get a number generated. It&rsquo;s something that you might even use your smartphone for. But it now means that I have to know the username and password and I have to have this token that&rsquo;s going to generate a code. We&rsquo;ll see more about how you&rsquo;ll do that later.</li>
+<li>Make sure that you&rsquo;ve disabled your root access keys. This isn&rsquo;t the interactive login for root, it has to do with how we can access the account programmatically.</li>
+<li>Make sure that you rotate the credentials. Just because we say don&rsquo;t log in doesn&rsquo;t mean set the password and then forget it.</li>
+<li>Don&rsquo;t share the root user credentials. password. And all that the audit logs show is that root logged in and did the job. Kind of dangerous.</li>
+<li>Make sure that you create a user that has administrative privileges that&rsquo;s assigned to you and that you know the password only.</li>
 </ul>
 
-<p>Certbot can now find the correct server block and update it.</p>
-
-<p>Next, let’s update the firewall to allow HTTPS traffic.</p>
-
-<h3 id="allowing-https-through-the-firewall">Allowing HTTPS Through the Firewall</h3>
+<h3 id="features-functions">Features &amp; Functions</h3>
 
 <ul>
-<li><p>UFW configuration has been done in the prevous setup. It is good to confirm the UFW configuration.</p></li>
-
-<li><p>You can see the current setting by typing:</p>
-
-<pre><code>sudo ufw status
-Output
-Status: active
-
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere
-Nginx Full                 ALLOW       Anywhere
-OpenSSH (v6)               ALLOW       Anywhere (v6)
-Nginx Full (v6)            ALLOW       Anywhere (v6)
-</code></pre></li>
-
-<li><p>If the &lsquo;Nginx Full&rsquo; is not allowed in your UFW, please run commands below to enable it.</p>
-
-<pre><code>sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
-</code></pre></li>
-
-<li><p>Next, let’s run Certbot and fetch our certificates.</p></li>
+<li>Allows user to have very secure access including through the use of multi-factor authentication and federation.</li>
+<li>Grant user a lot of granular control over the specific resources.</li>
+<li>Grant temporary access to different people.</li>
+<li>Simplify the number of logins by using federating identities</li>
+<li>Integrate the IAM solution is with all of the different products that AWS offers.</li>
 </ul>
 
-<h3 id="obtaining-an-ssl-certificate">Obtaining an SSL Certificate</h3>
+<h3 id="mfa">MFA</h3>
 
-<p>Certbot provides a variety of ways to obtain SSL certificates through plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the config whenever necessary. To use this plugin, type the following:</p>
+<ul>
+<li>MFA stands for multi-factor authentication</li>
+<li>Extra layer of security.</li>
+<li>Prevent against imposters, somebody who just happened to guess the right password or happened to actually shoulder surf and watch somebody key in their username and password.</li>
+</ul>
 
-<pre><code>sudo certbot --nginx -d example.com -d www.example.com
-</code></pre>
+<h3 id="iam-user">IAM User</h3>
 
-<p>This runs certbot with the &ndash;nginx plugin, using -d to specify the names we’d like the certificate to be valid for.</p>
+<p><strong><em>It is an entity that you create in AWS. The IAM user represents the person or service who uses the IAM user to interact with AWS. A primary use for IAM users is to give people the ability to sign in to the AWS Management Console for interactive tasks and to make programmatic requests to AWS services using the API or CLI. A user in AWS consists of a name, a password to sign into the AWS Management Console, and up to two access keys that can be used with the API or CLI.</em></strong></p>
 
-<p>If this is your first time running certbot, you will be prompted to enter an email address and agree to the terms of service. After doing so, certbot will communicate with the Let’s Encrypt server, then run a challenge to verify that you control the domain you’re requesting a certificate for.</p>
+<ul>
+<li>Receive its own unique identifier, aka, ARN, which is an acronym, of course, which stands for Amazon Resource Name. Now, each one of these user accounts will have its own set of unique credentials, which again might be a common-sense factor, but still everybody needs their own username and password.</li>
+<li>Access the appropriate resources by using policies.</li>
+<li>very easy to remove.</li>
+<li>set up specific permissions. It&rsquo;s a good practice.</li>
+</ul>
 
-<p>If that’s successful, certbot will ask how you’d like to configure your HTTPS settings.</p>
+<h3 id="iam-policy">IAM Policy</h3>
 
-<pre><code># Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
-# -------------------------------------------------------------------------------
-# 1: No redirect - Make no further changes to the webserver configuration.
-# 2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
-# new sites, or if you're confident your site works on HTTPS. You can undo this
-# change by editing your web server's configuration.
-# -------------------------------------------------------------------------------
-# Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
-# Select your choice then hit ENTER. The configuration will be updated, and Nginx will 
-# reload to pick up the new settings. certbot will wrap up with a message telling 
-# you the process was successful and where your certificates are stored:
-# ...
-# ...
-</code></pre>
+<ul>
+<li>A policy is just a JSON-formatted document. It details what you can do, and it includes information from four different categories.</li>
+<li>We can attach the policy to IAM identities. And those identities could be IAM user accounts, group accounts, or IAM roles.</li>
+</ul>
 
-<h3 id="renew-certificate">Renew certificate</h3>
+<h3 id="federation">Federation</h3>
 
-<p>Let’s Encrypt’s certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process.</p>
+<h4 id="iam-role">IAM Role</h4>
 
-<h4 id="verifying-certbot-auto-renewal">Verifying Certbot Auto-Renewal</h4>
+<p><strong><em>It is very similar to a user, in that it is an identity with permission policies that determine what the identity can and cannot do in AWS. However, a role does not have any credentials (password or access keys) associated with it.</em></strong></p>
 
-<p>The certbot package we installed takes care of this for us by adding a renew script to <code>/etc/cron.d</code>. This script runs twice a day and will automatically renew any certificate that’s within thirty days of expiration.</p>
+<ul>
+<li>A role is used to assisgn temporary permissions</li>
+<li>Polices are associated to IAM Roles</li>
+<li>Roles are assumed by people or applications</li>
+</ul>
 
-<p>To test the renewal process, you can do a dry run with certbot:</p>
+<h4 id="iam-group">IAM Group</h4>
 
-<pre><code>sudo certbot renew --dry-run
-</code></pre>
+<p><strong><em>It is a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users.</em></strong></p>
 
-<h4 id="use-cron-to-renew-certificate">Use Cron to renew certificate</h4>
+<h4 id="cross-accounts">Cross Accounts</h4>
 
-<p>Here I just add the cronjob to system crontab <code>/etc/crontab</code></p>
+<ul>
+<li><p>Flexible management allows me to take multiple accounts</p></li>
 
-<pre><code># Lets encrypt cronjob - start from 1st April 2020
-0  0    1 */3 * root  /usr/bin/certbot renew &gt;&gt; /var/log/letsencrypt/renew.log
-</code></pre>
+<li><p>It&rsquo;s all token based, so it really optimizes the whole process of setting up security.</p></li>
+
+<li><p>Manage a lot of different services between multiple accounts, as we as between business units</p></li>
+
+<li><p>Steps:</p>
+
+<ul>
+<li>There are two different AWS accounts. There is one user in one account and we have some resources in another.</li>
+<li>Create a role that exists within the account with the resources.</li>
+<li>create a role, that permits access to the resources, can be then applied to the person or group over in the account by the virtue of what we call the sts:AssumeRole, aka, temporary security credential, aka, .</li>
+</ul></li>
+
+<li><p>Flow chart</p></li>
+</ul>
+
+<link href="/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
+<script defer src="/mermaid/mermaid.js">mermaid.initialize({startOnLoad:true});</script>
+<div class="mermaid" align="center" >
+graph BT
+    EC2(Elastice Computer Cloud)
+    S3(Simple Storage Service)
+    RDS(Rational Database Service)
+    temporay_security_credential-->IAM_User
+    IAM_Role --> temporay_security_credential([sts:AssumeRole])
+    subgraph Accuont_2 
+        IAM_Role(IAM Role with IAM Policies attached)
+        IAM_Role --> EC2
+        IAM_Role --> S3
+        IAM_Role --> RDS
+    end
+   temporay_security_credential;
+   subgraph Account_1     
+        IAM_User(IAM User or Group ABC)
+        IAM_User --> EC2
+        IAM_User --> S3
+        IAM_User --> RDS
+    end 
+</div>
+
+<h4 id="saml">SAML</h4>
+
+<ul>
+<li><p>SAML 2.0 is the one that you&rsquo;ll use for things like Active Directory. It stands for Security Assertion Markup Language.</p></li>
+
+<li><p>It&rsquo;s an open standard. The idea is to create an open-standards-based approach that works with as many identity providers (idPs) as possible, things like Auth0, Microsoft Active Directory, and Shibboleth, etc.</p></li>
+
+<li><p>Use existing corporate credentials for authentication and authorizaion in AWS console, CL, or API calls.</p></li>
+
+<li><p>Steps:</p>
+
+<ul>
+<li>set up a SAML 2.0 -based federation,</li>
+<li>Permit given identity to log in to the console, use CLI commands, or API calls. Now, this requires you to have an identity provider, such as Active Directory.</li>
+<li>when the user authenticates with Active Directory, Active Directory issues the SAML assertion document that says yep you are who you said you are and passes that over so that now when you go to access resources AWS says oh yeah</li>
+<li>User is going to log in again to this identity provider. This checks against the local LDAP identity store. so again, Active Directory.</li>
+<li>Get confirmation, A token will be issue, that allows us to talk to Amazon&rsquo;s security token service, or STS, that allows us to assume a particular role within AWS.</li>
+<li>This passes back the temporary credentials. User is able to authenticate and gain access to acces AWS resources.</li>
+<li>don&rsquo;t even have an AWS account.</li>
+</ul></li>
+</ul>
+
+<h4 id="aws-ds">AWS DS</h4>
+
+<ul>
+<li>There are three different varieties.</li>
+<li>Simple Active Directory for smaller, limited use cases.</li>
+<li>AWS Directory Service for Microsoft Active Directory, it&rsquo;s a mouthful. That&rsquo;s a fully-featured Active Directory.</li>
+<li>Active Directory Connector that actually just facilitates or front ends the authentication request. And then the actual authentication is sent back across your VPN to your on-premises.</li>
+</ul>
+
+<h2 id="s3">S3</h2>
 
     </div>
 
@@ -1108,21 +1133,24 @@ sudo ufw delete allow 'Nginx HTTP'
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#iam">IAM</a>
 <ul>
-<li><a href="#lets-encrypt">Lets Encrypt</a>
+<li><a href="#root-user">Root User</a></li>
+<li><a href="#dos-and-don-ts">Dos and Don&rsquo;ts</a></li>
+<li><a href="#features-functions">Features &amp; Functions</a></li>
+<li><a href="#mfa">MFA</a></li>
+<li><a href="#iam-user">IAM User</a></li>
+<li><a href="#iam-policy">IAM Policy</a></li>
+<li><a href="#federation">Federation</a>
 <ul>
-<li><a href="#installing-certbot">Installing Certbot</a></li>
-</ul></li>
-<li><a href="#confirming-nginx-s-configuration">Confirming Nginx’s Configuration</a></li>
-<li><a href="#allowing-https-through-the-firewall">Allowing HTTPS Through the Firewall</a></li>
-<li><a href="#obtaining-an-ssl-certificate">Obtaining an SSL Certificate</a></li>
-<li><a href="#renew-certificate">Renew certificate</a>
-<ul>
-<li><a href="#verifying-certbot-auto-renewal">Verifying Certbot Auto-Renewal</a></li>
-<li><a href="#use-cron-to-renew-certificate">Use Cron to renew certificate</a></li>
+<li><a href="#iam-role">IAM Role</a></li>
+<li><a href="#iam-group">IAM Group</a></li>
+<li><a href="#cross-accounts">Cross Accounts</a></li>
+<li><a href="#saml">SAML</a></li>
+<li><a href="#aws-ds">AWS DS</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#s3">S3</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1134,8 +1162,8 @@ sudo ufw delete allow 'Nginx HTTP'
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/cloud/digito-note-3/" title="DigitialOcean Note - 3"> <i class="fa fa-chevron-left"></i><label>DigitialOcean Note - 3</label></a>
-    <a class="nav nav-next" href="/hacks/" title="Hacks" style="margin-right: 0px;"><label>Hacks</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/" title="Cloud"> <i class="fa fa-chevron-left"></i><label>Cloud</label></a>
+    <a class="nav nav-next" href="/cloud/aws-note-02-cli/" title="AWS - CLI " style="margin-right: 0px;"><label>AWS - CLI </label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
