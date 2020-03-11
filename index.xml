@@ -13,10 +13,10 @@
     
     <item>
       <title>AWS: IAM</title>
-      <link>/cloud/aws/aws-note-01-iam/</link>
+      <link>/cloud/aws/aws-01-iam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-note-01-iam/</guid>
+      <guid>/cloud/aws/aws-01-iam/</guid>
       <description>IAM AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.
 Root User  Every account has a root user in AWS. A root user is something that&amp;rsquo;s created automatically for you whenever you create an AWS account. Every single AWS account has a root user.</description>
     </item>
@@ -63,10 +63,10 @@ Go is easy to become functional with and appropriate for junior developers to wo
     
     <item>
       <title>AWS : CLI </title>
-      <link>/cloud/aws/aws-note-02-cli/</link>
+      <link>/cloud/aws/aws-02-cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-note-02-cli/</guid>
+      <guid>/cloud/aws/aws-02-cli/</guid>
       <description>AWS CLI Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
 Profile Setup A named profile is a collection of settings and credentials that you can apply to a AWS CLI command. When you specify a profile to run a command, the settings and credentials are used to run that command.</description>
     </item>
@@ -113,10 +113,10 @@ def make_timer(): last_called = None def elapsed(): nonlocal last_called now = t
     
     <item>
       <title>AWS: VPC - 1</title>
-      <link>/cloud/aws/aws-note-03-vpc-1/</link>
+      <link>/cloud/aws/aws-03-vpc-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-note-03-vpc-1/</guid>
+      <guid>/cloud/aws/aws-03-vpc-1/</guid>
       <description>VPC Part 1 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you&amp;rsquo;ve defined. This virtual network closely resembles a traditional network that you&amp;rsquo;d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
 Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. A subnet is a range of IP addresses in your VPC.</description>
     </item>
@@ -163,6 +163,16 @@ sudo vi /etc/default/ufw  Make sure &amp;ldquo;IPV6&amp;rdquo; is set to &amp;ld
       <guid>/coding/golang/go-note-3/</guid>
       <description>Struct  Go supports user-defined or custom types in the form of alias types or structs. A struct tries to represent a real-world entity with its properties. Structs are composite types, to use when you want to define a type which consist of a number of properties, each having their own type and value, grouping pieces of data together.
  Struct with tags  A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label.</description>
+    </item>
+    
+    <item>
+      <title>AWS: VPC - 2</title>
+      <link>/cloud/aws/aws-04-vpc-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-04-vpc-2/</guid>
+      <description>VPC Part 2 VPC has an implicit router (implied router), and you use route tables to control where network traffic is directed.
+Route table  Have up to 200 route tables per VPC Have up to 50 route entries per route table Each subnet must be associated with only one route table The subent (when created) will be associated with main (default) VPC route table Can change the subnet association to another route table Can NOT delete the main route table Every route table in a VPC comes with a default rule that allows all VPC subnets to comminunicate with one another.</description>
     </item>
     
     <item>
@@ -216,10 +226,10 @@ Route table  Have up to 200 route tables per VPC Have up to 50 route entries per
     
     <item>
       <title>AWS : VPC - 3</title>
-      <link>/cloud/aws/aws-note-03-vpc-3/</link>
+      <link>/cloud/aws/aws-05-vpc-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-note-03-vpc-3/</guid>
+      <guid>/cloud/aws/aws-05-vpc-3/</guid>
       <description>VPC Part 3 Endpoint A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 Endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between instances in your VPC and services without imposing availability risks or bandwidth constraints on your network traffic.</description>
     </item>
@@ -246,11 +256,11 @@ Endpoints are virtual devices. They are horizontally scaled, redundant, and high
     
     <item>
       <title>AWS : VPC - 4</title>
-      <link>/cloud/aws/aws-note-03-vpc-4/</link>
+      <link>/cloud/aws/aws-06-vpc-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-note-03-vpc-4/</guid>
-      <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrivSubet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrivSubet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
+      <guid>/cloud/aws/aws-06-vpc-4/</guid>
+      <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrvSubnet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrvSubnet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
     </item>
     
     <item>
@@ -1165,7 +1175,7 @@ QEMU is a virtualization technology emulator that allows you to run operating sy
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/db-sql/mssql-note-1/</guid>
-      <description>Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet).
+      <description>SQL Server  Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet).
  Get db/table size or space  Get db size
 -- Get database size SELECT sys.</description>
     </item>
@@ -1180,7 +1190,7 @@ QEMU is a virtualization technology emulator that allows you to run operating sy
     </item>
     
     <item>
-      <title>TypeScript: Basic Types</title>
+      <title>TS: Basic Types</title>
       <link>/coding/js-ts/ts-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
