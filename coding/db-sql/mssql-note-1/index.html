@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-11T22:33:53 AEDT">
+<meta name="revised" content="2020-03-12T15:04:57 AEDT">
 <title>Sql Server Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1174,14 +1174,27 @@ ON
 
 <h3 id="find-the-table">Find the table</h3>
 
+<ul>
+<li><p>Find table by naming pattern</p>
+
+<pre><code class="language-sql">SELECT     distinct	t.name AS 'TableName'
+FROM        sys.columns c
+JOIN        sys.tables  t   ON c.object_id = t.object_id
+WHERE       t.name LIKE '%bk%'
+ORDER BY    TableName;
+</code></pre></li>
+
+<li><p>Find table by colume name</p>
+
 <pre><code class="language-sql">SELECT      c.name  AS 'ColumnName'
-            ,t.name AS 'TableName'
+        ,t.name AS 'TableName'
 FROM        sys.columns c
 JOIN        sys.tables  t   ON c.object_id = t.object_id
 WHERE       c.name LIKE '%MyName%'
 ORDER BY    TableName
-            ,ColumnName;
-</code></pre>
+        ,ColumnName;
+</code></pre></li>
+</ul>
 
 <h3 id="restore-user-login-after-db-restore">Restore user login after db restore</h3>
 
