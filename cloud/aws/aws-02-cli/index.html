@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-12T15:04:56 AEDT">
+<meta name="revised" content="2020-03-20T18:04:44 AEDT">
 <title>AWS : CLI  :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -660,13 +660,6 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/aws/aws-note-03-vpc-2/" class="dd-item">
-        <div>
-          <a href="/cloud/aws/aws-note-03-vpc-2/">
-            AWS: VPC - 2
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/cloud/aws/aws-05-vpc-3/" class="dd-item">
         <div>
           <a href="/cloud/aws/aws-05-vpc-3/">
@@ -861,6 +854,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/os/mac-notes/" class="dd-item">
+        <div>
+          <a href="/os/mac-notes/">
+            Macbook Notes
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
         <div>
           <a href="/os/centos-fedora-desktop/">
@@ -963,35 +963,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/tut/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/tut/">Tutorial</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/tut/docker/" class="dd-item">
-        <div>
-          <a href="/tut/docker/">
-            Docker Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/javascript/" class="dd-item">
-        <div>
-          <a href="/tut/javascript/">
-            JavaScript Tutorial
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/tut/kube/" class="dd-item">
-        <div>
-          <a href="/tut/kube/">
-            Kubernetes Tutorial
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
 
 
 
@@ -1019,7 +990,6 @@
       <option value="/cloud/aws/aws-02-cli/"  selected>-- AWS : CLI </option>
       <option value="/cloud/aws/aws-03-vpc-1/" >-- AWS: VPC - 1</option>
       <option value="/cloud/aws/aws-04-vpc-2/" >-- AWS: VPC - 2</option>
-      <option value="/cloud/aws/aws-note-03-vpc-2/" >-- AWS: VPC - 2</option>
       <option value="/cloud/aws/aws-05-vpc-3/" >-- AWS : VPC - 3</option>
       <option value="/cloud/aws/aws-06-vpc-4/" >-- AWS : VPC - 4</option>
   
@@ -1035,8 +1005,6 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
-    <option value="/tut/" >
-   Tutorial</option>
 
 
 
@@ -1122,6 +1090,16 @@ output=text
 <pre><code>aws ec2 stop-instances --instance-ids i-1234567890abcdef0
 </code></pre></li>
 
+<li><p>Find out all stopped micro EC2 instancs</p>
+
+<pre><code>instances=($(aws ec2 describe-instances \
+--filters Name=instance-type,Values=t2.micro Name=instance-state-name,Values=stopped \
+--query &quot;Reservations[].Instances[].InstanceId&quot;  \
+--profile ad1 --output text ))
+
+for i in $instances; do echo &quot;$i&quot; ; done;
+</code></pre></li>
+
 <li><p>Find out all unused security group</p>
 
 <pre><code>comm -23  \
@@ -1129,7 +1107,8 @@ output=text
 --profile user1 --query 'SecurityGroups[*].GroupId' --output text \
 | tr '\t' '\n'| sort) \
 &lt;(aws ec2 describe-instances \
---profile user1   --query 'Reservations[*].Instances[*].SecurityGroups[*].GroupId' --output text \
+--profile user1   --output text \
+--query 'Reservations[*].Instances[*].SecurityGroups[*].GroupId' \
 | tr '\t' '\n'  | sort | uniq)
 </code></pre></li>
 
