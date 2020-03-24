@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-24T10:34:51 AEDT">
+<meta name="revised" content="2020-03-24T22:06:55 AEDT">
 <title>Amazon Linux 2 setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1036,12 +1036,14 @@
 
 <h3 id="package-update">Package update</h3>
 
-<p>sudo yum update</p>
+<pre><code>  sudo yum update
+</code></pre>
 
 <h3 id="get-system-info">Get system info</h3>
 
-<p>cat /etc/image-id
-   cat /etc/system-release</p>
+<pre><code>  cat /etc/image-id
+  cat /etc/system-release
+</code></pre>
 
 <h3 id="mount-a-volume-ebs">Mount a volume (EBS)</h3>
 
@@ -1083,10 +1085,12 @@ sudo umount /data
 sudo mount -a
 
 lsblk
-
 </code></pre>
 
 <h3 id="install-mysql">Install MySql</h3>
+
+<ul>
+<li><p>Install MySql 5.7</p>
 
 <pre><code class="language-bash"># Add repo
 sudo wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
@@ -1094,36 +1098,53 @@ sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm
 
 # Install mysql
 sudo yum install mysql-community-server
+</code></pre></li>
 
+<li><p>MySql configuration file sits in /etc/my.cnf</p></li>
 
-# Update data directory
-# location in Amazon linux 2 is /etc/my.cnf
-# backup original one
+<li><p>Update data directory</p>
+
+<pre><code class="language-bash"># backup original one
 sudo cp /etc/my.cnf /etc/my.cnf.orig
+</code></pre></li>
 
-# Use vim to update the data directory 
-# datadir=/data/mysql
+<li><p>Use vim to update the data directory</p>
 
-# Install polkit before start the service
-# otherwise you will get error
-sudo yum install polkit
+<p>datadir=/data/mysql</p></li>
+</ul>
 
-# Enable &amp; Start mysql
-sudo systemctl enable mysqld.service
-sudo systemctl start mysqld.service
+<h4 id="start-mysql-as-service">Start MySql as service</h4>
 
+<ul>
+<li><p>Install polkit before start the service, otherwise you will get error</p>
 
-# Find the temporay password created for root
-sudo cat /var/log/mysql.log | grep &quot;temporary password&quot;
+<p>sudo yum install polkit</p></li>
+
+<li><p>Enable &amp; Start mysql</p>
+
+<p>sudo systemctl enable mysqld.service
+  sudo systemctl start mysqld.service</p></li>
+
+<li><p>Find the temporay password created for root in /var/log/mysql.log</p>
+
+<pre><code class="language-bash">sudo cat /var/log/mysql.log | grep &quot;temporary password&quot;
 # output
 # [Note] A temporary password is generated for root@localhost: l&lt;C-eX&amp;GW8?m
+</code></pre></li>
+</ul>
 
+<h4 id="reset-root-password">Reset root password</h4>
 
-# Reset root password
-sudo mysql_secure_installation
+<pre><code>  sudo mysql_secure_installation
+</code></pre>
 
+<h4 id="create-remote-login-credentials">Create remote login credentials</h4>
 
+<pre><code>  CREATE USER 'user_id'@'localhost' IDENTIFIED BY 'your_secret';
+  CREATE USER 'user_id'@'%' IDENTIFIED BY 'your_secret';
 
+  GRANT ALL ON *.* TO 'user_id'@'localhost';
+  GRANT ALL ON *.* TO 'user_id'@'%';
 </code></pre>
 
     </div>
@@ -1140,7 +1161,12 @@ sudo mysql_secure_installation
 <li><a href="#mount-a-volume-ebs">Mount a volume (EBS)</a></li>
 <li><a href="#extend-the-ebs">Extend the EBS</a></li>
 <li><a href="#auto-attached-volume">Auto attached volume</a></li>
-<li><a href="#install-mysql">Install MySql</a></li>
+<li><a href="#install-mysql">Install MySql</a>
+<ul>
+<li><a href="#start-mysql-as-service">Start MySql as service</a></li>
+<li><a href="#reset-root-password">Reset root password</a></li>
+<li><a href="#create-remote-login-credentials">Create remote login credentials</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
