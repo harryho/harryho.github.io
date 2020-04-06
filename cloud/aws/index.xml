@@ -51,7 +51,7 @@ Route table  Have up to 200 route tables per VPC Have up to 50 route entries per
     </item>
     
     <item>
-      <title>AWS : VPC - 3</title>
+      <title>AWS: VPC - 3</title>
       <link>/cloud/aws/aws-05-vpc-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -61,12 +61,35 @@ Endpoints are virtual devices. They are horizontally scaled, redundant, and high
     </item>
     
     <item>
-      <title>AWS : VPC - 4</title>
+      <title>AWS: VPC - 4</title>
       <link>/cloud/aws/aws-06-vpc-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/cloud/aws/aws-06-vpc-4/</guid>
       <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrvSubnet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrvSubnet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
+    </item>
+    
+    <item>
+      <title>AWS: VPC - 5</title>
+      <link>/cloud/aws/aws-07-vpc-5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-07-vpc-5/</guid>
+      <description>VPC Part 5 Direct Connect AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
+Using industry standard 802.</description>
+    </item>
+    
+    <item>
+      <title>AWS: RDS - 1</title>
+      <link>/cloud/aws/aws-20-rds-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-20-rds-1/</guid>
+      <description>RDS Amazon Relational Database Service (Amazon RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups.
+SQL Server  Backup database to S3
+exec msdb.dbo.rds_backup_database @source_db_name=&#39;database_name&#39;, @s3_arn_to_backup_to=&#39;arn:aws:s3:::db-backup-bucket/database_name_20191221.bak&#39;, @overwrite_S3_backup_file=1;  Track status
+exec msdb.dbo.rds_task_status @db_name=&#39;database_name&#39;  Restore the database
+exec msdb.dbo.rds_restore_database @restore_db_name=&#39;ApplyDirect&#39;, @s3_arn_to_restore_from=&#39;arn:aws:s3:::db-backup-bucket/database_name_20191221.bak&#39;;  Restore with powershell</description>
     </item>
     
   </channel>

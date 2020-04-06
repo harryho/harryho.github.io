@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-03-24T22:59:22 AEDT">
+<meta name="revised" content="2020-04-07T09:04:13 AEST">
 <title>Amazon Linux 2 setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -661,14 +661,28 @@
       <li data-nav-id="/cloud/aws/aws-05-vpc-3/" class="dd-item">
         <div>
           <a href="/cloud/aws/aws-05-vpc-3/">
-            AWS : VPC - 3
+            AWS: VPC - 3
           </a>
         </div>
     </li>
       <li data-nav-id="/cloud/aws/aws-06-vpc-4/" class="dd-item">
         <div>
           <a href="/cloud/aws/aws-06-vpc-4/">
-            AWS : VPC - 4
+            AWS: VPC - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-07-vpc-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-07-vpc-5/">
+            AWS: VPC - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-20-rds-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-20-rds-1/">
+            AWS: RDS - 1
           </a>
         </div>
     </li>
@@ -1150,6 +1164,35 @@ sudo systemctl start mysqld.service
   GRANT ALL ON *.* TO 'user_id'@'%';
 </code></pre>
 
+<h4 id="install-aws-cli">Install AWS CLI</h4>
+
+<pre><code>  # Install aws cli without sudo 
+  curl &quot;https://s3.amazonaws.com/aws-cli/awscli-bundle.zip&quot; -o &quot;awscli-bundle.zip&quot;
+  unzip awscli-bundle.zip
+  ./awscli-bundle/install -b ~/bin/aws
+
+  # Configure cli 
+  aws configure
+  AWS Access Key ID [None]: AKXXXXXXXXXXXXXXXXXXXX
+  AWS Secret Access Key [None]: wJ37hsfSFJSDfhsfihakhfakhfu9763Fhshfsuff
+  Default region name [None]: region-code
+  Default output format [None]: json
+</code></pre>
+
+<h4 id="install-eks">Install EKS</h4>
+
+<pre><code>  curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
+  sudo mv /tmp/eksctl /usr/local/bin
+  ekstool --version
+</code></pre>
+
+<h4 id="install-kubectl">Install kubectl</h4>
+
+<pre><code>  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+  chmod +x ./kubectl
+  mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1169,6 +1212,9 @@ sudo systemctl start mysqld.service
 <li><a href="#start-mysql-as-service">Start MySql as service</a></li>
 <li><a href="#reset-root-password">Reset root password</a></li>
 <li><a href="#create-remote-login-credentials">Create remote login credentials</a></li>
+<li><a href="#install-aws-cli">Install AWS CLI</a></li>
+<li><a href="#install-eks">Install EKS</a></li>
+<li><a href="#install-kubectl">Install kubectl</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
