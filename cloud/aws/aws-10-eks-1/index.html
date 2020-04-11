@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2020-04-11T13:13:39 AEST">
-<title>Cassandra Practices :: Hello World</title>
+<title>AWS: EKS - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Cassandra Introduction &amp; Good practices ...">
+<meta name="description" content="Create a cluster">
 
 
 
     
   </head>
-  <body data-url="/hacks/cass-note/">
+  <body data-url="/cloud/aws/aws-10-eks-1/">
     
       <header>
   <div class="logo">
@@ -618,16 +618,18 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/cloud/" class="dd-item haschildren
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-    <li data-nav-id="/cloud/aws/" class="dd-item haschildren
+    <li data-nav-id="/cloud/aws/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/aws/">AWS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/aws/">AWS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/cloud/aws/aws-01-iam/" class="dd-item">
@@ -679,7 +681,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/aws/aws-10-eks-1/" class="dd-item">
+      <li data-nav-id="/cloud/aws/aws-10-eks-1/" class="dd-item active">
         <div>
           <a href="/cloud/aws/aws-10-eks-1/">
             AWS: EKS - 1
@@ -740,11 +742,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item parent haschildren
+    <li data-nav-id="/hacks/" class="dd-item haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/hacks/windows-command-1/" class="dd-item">
@@ -775,7 +776,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/hacks/cass-note/" class="dd-item active">
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
         <div>
           <a href="/hacks/cass-note/">
             Cassandra Practices
@@ -1016,18 +1017,27 @@
     <option value="/coding/" >
    Coding</option>
     <option value="/cloud/" >
-   Cloud</option>
-    <option value="/hacks/" >
-   Hacks</option> 
-      <option value="/hacks/windows-command-1/" >- Windows cmd &amp; hotkey - 1</option>
-      <option value="/hacks/windows-command-2/" >- Windows cmd &amp; hotkey - 2</option>
-      <option value="/hacks/windows-command-3/" >- Windows cmd &amp; hotkey - 3</option>
-      <option value="/hacks/git-notes/" >- Git Practices</option>
-      <option value="/hacks/cass-note/"  selected>- Cassandra Practices</option>
-      <option value="/hacks/php-debug/" >- Debug PHP with Free IDE</option>
-      <option value="/hacks/qemu-notes/" >- Qemu &amp; Virtual Machine</option>
-      <option value="/hacks/vbox-notes/" >- VirtualBox Notes</option>
+   Cloud</option> 
+    <option value="/cloud/aws/" >
+  - 
+   AWS</option> 
+      <option value="/cloud/aws/aws-01-iam/" >-- AWS: IAM</option>
+      <option value="/cloud/aws/aws-02-cli/" >-- AWS : CLI </option>
+      <option value="/cloud/aws/aws-03-vpc-1/" >-- AWS: VPC - 1</option>
+      <option value="/cloud/aws/aws-04-vpc-2/" >-- AWS: VPC - 2</option>
+      <option value="/cloud/aws/aws-05-vpc-3/" >-- AWS: VPC - 3</option>
+      <option value="/cloud/aws/aws-06-vpc-4/" >-- AWS: VPC - 4</option>
+      <option value="/cloud/aws/aws-07-vpc-5/" >-- AWS: VPC - 5</option>
+      <option value="/cloud/aws/aws-10-eks-1/"  selected>-- AWS: EKS - 1</option>
+      <option value="/cloud/aws/aws-11-eks-2/" >-- AWS: EKS - 2</option>
+      <option value="/cloud/aws/aws-20-rds-1/" >-- AWS: RDS - 1</option>
   
+    <option value="/cloud/digito/" >
+  - 
+   Digital Ocean</option>
+  
+    <option value="/hacks/" >
+   Hacks</option>
     <option value="/os/" >
    OS</option>
     <option value="/blogs/" >
@@ -1050,221 +1060,159 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Cassandra Practices</h1>
+            <h1>AWS: EKS - 1</h1>
         
 
-<p><em>Apache Cassandra is a free open-source database system that is NoSQL based. Meaning Cassandra does not use the table model seen in MySQL, MSSQL or PostgreSQL, but instead uses a cluster model. It’s designed to handle large amounts of data and is highly scalable.</em></p>
+<h2 id="eks-part-1">EKS - Part 1</h2>
 
-<h2 id="install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</h2>
-
-<h3 id="install-java-jre-8">Install Java(JRE) 8+</h3>
-
-<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
-sudo apt update
-sudo apt-get install oracle-java8-set-default
-java -version
-</code></pre>
-
-<h3 id="install-python-2-7">Install Python 2.7+</h3>
-
-<pre><code class="language-bash">sudo apt install python
-python --version
-</code></pre>
-
-<h2 id="install-cassandra">Install Cassandra</h2>
+<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications.</p>
 
 <ul>
-<li><p>First, we have to add Cassandra repository to source list by running following command. The <code>39x</code> is the version. Use 40x if Cassandra 4.0 is the newest version:</p>
+<li>EKS runs Kubernetes control plane instances across multiple Availability Zones to ensure high availability.</li>
+<li>EKS automatically detects and replaces unhealthy control plane instances.</li>
+<li>EKS provides automated version upgrades and patching for them.</li>
+<li>EKS is also integrated with many AWS services to provide scalability and security.</li>
+</ul>
 
-<pre><code class="language-bash">echo &quot;deb http://www.apache.org/dist/cassandra/debian 39x main&quot; | \
-sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+<h3 id="eksctl">eksctl</h3>
+
+<ul>
+<li><p>Install the Latest AWS CLI</p>
+
+<pre><code>pip install awscli --upgrade --user
 </code></pre></li>
 
-<li><p>Next, run the cURL command to add the repository keys :</p>
+<li><p>Install eksctl (Mac)</p>
 
-<pre><code class="language-bash">curl https://www.apache.org/dist/cassandra/KEYS | \
-sudo apt-key add -
+<pre><code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;
+
+#Install the Weaveworks Homebrew tap.
+brew tap weaveworks/tap
+
+# Install or upgrade eksctl.
+brew install weaveworks/tap/eksctl
+
+brew upgrade eksctl &amp;&amp; brew link --overwrite eksctl
+
+eksctl version
 </code></pre></li>
 
-<li><p>We can now update the repositories and install Cassandra:</p>
+<li><p>Install eksctl (Linux)</p>
 
-<pre><code class="language-bash">sudo apt-get update
-sudo apt install cassandra
-# optional - It works on MacBook
-sudo reboot
-</code></pre></li>
+<pre><code># The latest version is 0.16
+curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
 
-<li><p>Check Cassandra status</p>
+## For EKS with workloads   0.17.0-rc.0 is required
+# curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/download/0.17.0-rc.0/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
 
-<pre><code class="language-bash">nodetool status
+
+#Install the Weaveworks Homebrew tap.
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
 </code></pre></li>
 </ul>
 
-<h2 id="install-cassandra-with-docker">Install Cassandra with Docker</h2>
+<h3 id="eks-with-fargate">EKS with Fargate</h3>
 
-<h3 id="create-node-n1">Create node n1</h3>
+<h4 id="fargate">Fargate</h4>
 
-<pre><code>docker run --name n1 -d tobert/cassandra -dc DC1 -rack RAC1
-docker ps
-</code></pre>
-
-<h3 id="get-ip-of-node-n1">Get IP of node n1</h3>
-
-<pre><code>IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
-echo $IP
-</code></pre>
-
-<h3 id="check-status-of-n1">Check status of n1</h3>
-
-<pre><code>docker exec -it n1  nodetool status
-
-# You will see status of Datacenter D1 below
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
-UN  172.17.0.2  51.53 KB   256     100.0%    8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-</code></pre>
-
-<h3 id="create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</h3>
-
-<pre><code>docker run --name=n2 -d tobert/cassandra -dc DC1 -rack RAC2 --seeds $IP
-
-docker exec -it n1  nodetool status
-
-# You will see status of Datacenter D1 below
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
-# UN  172.17.0.3  72.01 KB   256     100.0%  cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
-# UN  172.17.0.2  51.53 KB   256     100.0%  8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-</code></pre>
-
-<h3 id="check-node-n2-configuration">Check node n2 configuration</h3>
-
-<pre><code>docker exec -it n2  cat /data/conf/cassandra.yaml | grep endpoint
-docker exec -it n2  cat /data/conf/cassandra-rackdc.properties | grep  -e &quot;dc&quot;  -e &quot;rack&quot;
-</code></pre>
-
-<h3 id="create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</h3>
-
-<pre><code>docker run --name=n3 -d tobert/cassandra -dc DC2 -rack RAC1 --seeds $IP
-docker exec -it n1  nodetool status
-
-# You will see status below. It may take a few seconds to get everything up and run.
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load    Tokens  Owns (effective)  Host ID  Rack
-# UN  172.17.0.3  134.03 KB  256     66.1%             cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
-# UN  172.17.0.2  102.84 KB  256     64.5%             8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-
-# Datacenter: DC2
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address   Load   Tokens  Owns (effective)  Host ID   Rack
-UN  172.17.0.4  14.38 KB   256     69.4%             0fad8335-763d-42fa-9934-3ed10c44eaa8  RAC1
-</code></pre>
-
-<h3 id="setup-replication-strategy">Setup replication strategy</h3>
-
-<pre><code>docker 
-create keyspace csdb with replication = {'class':'NetworkTopologyStrategy','DC1':2,'DC2':1}
-</code></pre>
-
-<h3 id="check-csdb-status">Check csdb status</h3>
-
-<pre><code>docker exec -it n1 nodetool describering csdb
-
-# Run nodetool status and note that the one node in DC2 owns all the data
-docker exec -it n1 nodetool status csdb  
-
-# Stop and remove all four docker containers:
-docker stop n1 n2 n3 n4; docker rm n1 n2 n3 n4
-</code></pre>
-
-<h2 id="create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</h2>
-
-<h3 id="create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</h3>
-
-<pre><code>docker run --name=n1 -v $PWD/ws/ps/cassdev/scripts:/scripts -d tobert/cassandra
-docker exec -it n1  nodetool status
-
-IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
-echo $IP
-
-docker run --name=n2 -d tobert/cassandra --seeds $IP
-docker run --name=n3 -d tobert/cassandra --seeds $IP
-
-docker exec -it n1 /bin/bash
-cd scripts
-</code></pre>
-
-<h3 id="list-scripts">List scripts</h3>
-
-<pre><code>docker exec -it n1 /bin/bash
-cd /scrpts &amp;&amp; ls
-</code></pre>
-
-<h3 id="create-keyspace-with-simple-replication">Create keyspace with simple replication</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-create keyspace csdb with replication = 
-{'class':'SimpleStrategy', 'replication_factor':1};
-</code></pre>
-
-<h3 id="create-table-and-insert-data-with-script">Create table and insert data with script</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-
-&gt; desc keyspaces;
-&gt; desc tables;
-&gt; use ussdb;
-&gt; source '/scripts/courses.cql'
-&gt; source '/scripts/users.cql'
-</code></pre>
-
-<h3 id="cql">CQL</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-
-&gt; use ussdb;
-&gt; desc tables;
-&gt; select * from users;
-&gt; select * from courses;
-</code></pre>
-
-<h3 id="troubleshoot">Troubleshoot</h3>
+<p>AWS Fargate is a serverless compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). Fargate makes it easy for you to focus on building your applications. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.</p>
 
 <ul>
-<li><p>Connection error</p>
+<li>Deploy and manage applications, not infrastructure</li>
+<li>Right-sized resources with flexible pricing options</li>
+<li>Secure isolation by design</li>
+<li>Rich observability of applications</li>
+</ul>
 
-<pre><code>Connection error: Could not connect to localhost:9160
+<h5 id="pod-configuration">Pod Configuration</h5>
+
+<table>
+<thead>
+<tr>
+<th>vCPU value</th>
+<th>Memory value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>.25 vCPU</td>
+<td>0.5 GB, 1 GB, 2 GB</td>
+</tr>
+
+<tr>
+<td>.5 vCPU</td>
+<td>1 GB, 2 GB, 3 GB, 4 GB</td>
+</tr>
+
+<tr>
+<td>1 vCPU</td>
+<td>2 GB, 3 GB, 4 GB, 5 GB, 6 GB, 7 GB, 8 GB</td>
+</tr>
+
+<tr>
+<td>2 vCPU</td>
+<td>Between 4 GB and 16 GB in 1-GB increments</td>
+</tr>
+
+<tr>
+<td>4 vCPU</td>
+<td>Between 8 GB and 30 GB in 1-GB increments</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="create-cluster">Create Cluster</h4>
+
+<pre><code>CLUSTER_NAME=&quot;pg-prd&quot;
+REGION_CODE=&quot;ap-southeast-1&quot;
+
+eksctl create cluster \
+--name ${CLUSTER_NAME} \
+--region ${REGION_CODE} \
+--fargate
 </code></pre>
 
+<h3 id="eks-with-ec2">EKS with EC2</h3>
+
+<pre><code>CLUSTER_NAME=&quot;pg-prd&quot;
+REGION_CODE=&quot;ap-southeast-2&quot;
+NODE_GRP_NAME=&quot;standard-workers&quot;
+KEY_NAME=&quot;nonprod-kp&quot;
+NODE_TYPE=&quot;t3.medium&quot;
+
+eksctl create cluster \
+--name  ${CLUSTER_NAME}  \
+--region ${REGION_CODE} \
+--nodegroup-name ${NODE_GRP_NAME} \
+--node-type ${NODE_TYPE} \
+--nodes 1 \
+--nodes-min 1 \
+--nodes-max 3 \
+--ssh-access \
+--ssh-public-key &quot;${KEY_NAME}&quot; \
+--managed
+</code></pre>
+
+<h4 id="delete-cluster">Delete Cluster</h4>
+
 <ul>
-<li>Update the configuration - cassandra.yaml</li>
+<li><p>Get all services</p>
 
-<li><p>Change the following IP address</p>
-
-<pre><code>    - seeds: &quot;xxx.xxx.xxx.xxx&quot;
-  listen_address: xxx.xxx.xxx.xxx
-  broadcast_rpc_address: xxx.xxx.xxx.xxx
+<pre><code>kubectl get svc --all-namespaces
 </code></pre></li>
 
-<li><p>Restart the cassandra</p>
+<li><p>Delete all services with EXTERNAL-IP</p>
 
-<pre><code>sudo systemctl restart cassandra
+<pre><code>kubectl delete svc &lt;service-name&gt;
 </code></pre></li>
-</ul></li>
+
+<li><p>Delete cluster</p>
+
+<pre><code>eksctl delete cluster --name &lt;cluster-name&gt;
+</code></pre></li>
 </ul>
 
     </div>
@@ -1274,31 +1222,21 @@ create keyspace csdb with replication =
 <ul>
 <li>
 <ul>
-<li><a href="#install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</a>
+<li><a href="#eks-part-1">EKS - Part 1</a>
 <ul>
-<li><a href="#install-java-jre-8">Install Java(JRE) 8+</a></li>
-<li><a href="#install-python-2-7">Install Python 2.7+</a></li>
+<li><a href="#eksctl">eksctl</a></li>
+<li><a href="#eks-with-fargate">EKS with Fargate</a>
+<ul>
+<li><a href="#fargate">Fargate</a>
+<ul>
+<li><a href="#pod-configuration">Pod Configuration</a></li>
 </ul></li>
-<li><a href="#install-cassandra">Install Cassandra</a></li>
-<li><a href="#install-cassandra-with-docker">Install Cassandra with Docker</a>
-<ul>
-<li><a href="#create-node-n1">Create node n1</a></li>
-<li><a href="#get-ip-of-node-n1">Get IP of node n1</a></li>
-<li><a href="#check-status-of-n1">Check status of n1</a></li>
-<li><a href="#create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</a></li>
-<li><a href="#check-node-n2-configuration">Check node n2 configuration</a></li>
-<li><a href="#create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</a></li>
-<li><a href="#setup-replication-strategy">Setup replication strategy</a></li>
-<li><a href="#check-csdb-status">Check csdb status</a></li>
+<li><a href="#create-cluster">Create Cluster</a></li>
 </ul></li>
-<li><a href="#create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</a>
+<li><a href="#eks-with-ec2">EKS with EC2</a>
 <ul>
-<li><a href="#create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</a></li>
-<li><a href="#list-scripts">List scripts</a></li>
-<li><a href="#create-keyspace-with-simple-replication">Create keyspace with simple replication</a></li>
-<li><a href="#create-table-and-insert-data-with-script">Create table and insert data with script</a></li>
-<li><a href="#cql">CQL</a></li>
-<li><a href="#troubleshoot">Troubleshoot</a></li>
+<li><a href="#delete-cluster">Delete Cluster</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1311,8 +1249,8 @@ create keyspace csdb with replication =
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/hacks/git-notes/" title="Git Practices"> <i class="fa fa-chevron-left"></i><label>Git Practices</label></a>
-    <a class="nav nav-next" href="/hacks/php-debug/" title="Debug PHP with Free IDE" style="margin-right: 0px;"><label>Debug PHP with Free IDE</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/aws/aws-07-vpc-5/" title="AWS: VPC - 5"> <i class="fa fa-chevron-left"></i><label>AWS: VPC - 5</label></a>
+    <a class="nav nav-next" href="/cloud/aws/aws-11-eks-2/" title="AWS: EKS - 2" style="margin-right: 0px;"><label>AWS: EKS - 2</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

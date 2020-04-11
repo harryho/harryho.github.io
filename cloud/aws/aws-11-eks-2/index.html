@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2020-04-11T13:13:39 AEST">
-<title>Cassandra Practices :: Hello World</title>
+<title>AWS: EKS - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Cassandra Introduction &amp; Good practices ...">
+<meta name="description" content="Update / Upgrade Kubernetes">
 
 
 
     
   </head>
-  <body data-url="/hacks/cass-note/">
+  <body data-url="/cloud/aws/aws-11-eks-2/">
     
       <header>
   <div class="logo">
@@ -618,16 +618,18 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/cloud/" class="dd-item haschildren
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-    <li data-nav-id="/cloud/aws/" class="dd-item haschildren
+    <li data-nav-id="/cloud/aws/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/aws/">AWS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/aws/">AWS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/cloud/aws/aws-01-iam/" class="dd-item">
@@ -686,7 +688,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/aws/aws-11-eks-2/" class="dd-item">
+      <li data-nav-id="/cloud/aws/aws-11-eks-2/" class="dd-item active">
         <div>
           <a href="/cloud/aws/aws-11-eks-2/">
             AWS: EKS - 2
@@ -740,11 +742,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/hacks/" class="dd-item parent haschildren
+    <li data-nav-id="/hacks/" class="dd-item haschildren
         ">
       <div>
-      <a href="/hacks/">Hacks</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/hacks/windows-command-1/" class="dd-item">
@@ -775,7 +776,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/hacks/cass-note/" class="dd-item active">
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
         <div>
           <a href="/hacks/cass-note/">
             Cassandra Practices
@@ -1016,18 +1017,27 @@
     <option value="/coding/" >
    Coding</option>
     <option value="/cloud/" >
-   Cloud</option>
-    <option value="/hacks/" >
-   Hacks</option> 
-      <option value="/hacks/windows-command-1/" >- Windows cmd &amp; hotkey - 1</option>
-      <option value="/hacks/windows-command-2/" >- Windows cmd &amp; hotkey - 2</option>
-      <option value="/hacks/windows-command-3/" >- Windows cmd &amp; hotkey - 3</option>
-      <option value="/hacks/git-notes/" >- Git Practices</option>
-      <option value="/hacks/cass-note/"  selected>- Cassandra Practices</option>
-      <option value="/hacks/php-debug/" >- Debug PHP with Free IDE</option>
-      <option value="/hacks/qemu-notes/" >- Qemu &amp; Virtual Machine</option>
-      <option value="/hacks/vbox-notes/" >- VirtualBox Notes</option>
+   Cloud</option> 
+    <option value="/cloud/aws/" >
+  - 
+   AWS</option> 
+      <option value="/cloud/aws/aws-01-iam/" >-- AWS: IAM</option>
+      <option value="/cloud/aws/aws-02-cli/" >-- AWS : CLI </option>
+      <option value="/cloud/aws/aws-03-vpc-1/" >-- AWS: VPC - 1</option>
+      <option value="/cloud/aws/aws-04-vpc-2/" >-- AWS: VPC - 2</option>
+      <option value="/cloud/aws/aws-05-vpc-3/" >-- AWS: VPC - 3</option>
+      <option value="/cloud/aws/aws-06-vpc-4/" >-- AWS: VPC - 4</option>
+      <option value="/cloud/aws/aws-07-vpc-5/" >-- AWS: VPC - 5</option>
+      <option value="/cloud/aws/aws-10-eks-1/" >-- AWS: EKS - 1</option>
+      <option value="/cloud/aws/aws-11-eks-2/"  selected>-- AWS: EKS - 2</option>
+      <option value="/cloud/aws/aws-20-rds-1/" >-- AWS: RDS - 1</option>
   
+    <option value="/cloud/digito/" >
+  - 
+   Digital Ocean</option>
+  
+    <option value="/hacks/" >
+   Hacks</option>
     <option value="/os/" >
    OS</option>
     <option value="/blogs/" >
@@ -1050,221 +1060,98 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Cassandra Practices</h1>
+            <h1>AWS: EKS - 2</h1>
         
 
-<p><em>Apache Cassandra is a free open-source database system that is NoSQL based. Meaning Cassandra does not use the table model seen in MySQL, MSSQL or PostgreSQL, but instead uses a cluster model. It’s designed to handle large amounts of data and is highly scalable.</em></p>
+<h2 id="eks-part-2">EKS - Part 2</h2>
 
-<h2 id="install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</h2>
+<p>The update process consists of Amazon EKS launching new API server nodes with the updated Kubernetes version to replace the existing ones. Amazon EKS performs standard infrastructure and readiness health checks for network traffic on these new nodes to verify that they are working as expected. If any of these checks fail, Amazon EKS reverts the infrastructure deployment, and your cluster remains on the prior Kubernetes version. Running applications are not affected, and your cluster is never left in a non-deterministic or unrecoverable state. Amazon EKS regularly backs up all managed clusters, and mechanisms exist to recover clusters if necessary. We are constantly evaluating and improving our Kubernetes infrastructure management processes.</p>
 
-<h3 id="install-java-jre-8">Install Java(JRE) 8+</h3>
-
-<pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
-sudo apt update
-sudo apt-get install oracle-java8-set-default
-java -version
-</code></pre>
-
-<h3 id="install-python-2-7">Install Python 2.7+</h3>
-
-<pre><code class="language-bash">sudo apt install python
-python --version
-</code></pre>
-
-<h2 id="install-cassandra">Install Cassandra</h2>
+<h3 id="kubernete-info">Kubernete Info</h3>
 
 <ul>
-<li><p>First, we have to add Cassandra repository to source list by running following command. The <code>39x</code> is the version. Use 40x if Cassandra 4.0 is the newest version:</p>
+<li><p>Get kubernete version</p>
 
-<pre><code class="language-bash">echo &quot;deb http://www.apache.org/dist/cassandra/debian 39x main&quot; | \
-sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+<pre><code>kubectl version --short
 </code></pre></li>
 
-<li><p>Next, run the cURL command to add the repository keys :</p>
+<li><p>Get nodes info</p>
 
-<pre><code class="language-bash">curl https://www.apache.org/dist/cassandra/KEYS | \
-sudo apt-key add -
+<pre><code>kubectl get nodes
 </code></pre></li>
 
-<li><p>We can now update the repositories and install Cassandra:</p>
+<li><p>Get pod securtiy policy</p>
 
-<pre><code class="language-bash">sudo apt-get update
-sudo apt install cassandra
-# optional - It works on MacBook
-sudo reboot
+<pre><code>kubectl get psp eks.privileged
 </code></pre></li>
 
-<li><p>Check Cassandra status</p>
+<li><p>Get DNS controller info</p>
 
-<pre><code class="language-bash">nodetool status
+<pre><code>kubectl describe deployment coredns --namespace kube-system | grep Image | cut -d &quot;/&quot; -f 3
 </code></pre></li>
 </ul>
 
-<h2 id="install-cassandra-with-docker">Install Cassandra with Docker</h2>
+<h3 id="update-kubernete">Update Kubernete</h3>
 
-<h3 id="create-node-n1">Create node n1</h3>
-
-<pre><code>docker run --name n1 -d tobert/cassandra -dc DC1 -rack RAC1
-docker ps
+<pre><code>eksctl update cluster --name &lt;cluster-name&gt; --approve
 </code></pre>
 
-<h3 id="get-ip-of-node-n1">Get IP of node n1</h3>
-
-<pre><code>IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
-echo $IP
-</code></pre>
-
-<h3 id="check-status-of-n1">Check status of n1</h3>
-
-<pre><code>docker exec -it n1  nodetool status
-
-# You will see status of Datacenter D1 below
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
-UN  172.17.0.2  51.53 KB   256     100.0%    8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-</code></pre>
-
-<h3 id="create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</h3>
-
-<pre><code>docker run --name=n2 -d tobert/cassandra -dc DC1 -rack RAC2 --seeds $IP
-
-docker exec -it n1  nodetool status
-
-# You will see status of Datacenter D1 below
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load       Tokens  Owns (effective)  Host ID   Rack
-# UN  172.17.0.3  72.01 KB   256     100.0%  cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
-# UN  172.17.0.2  51.53 KB   256     100.0%  8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-</code></pre>
-
-<h3 id="check-node-n2-configuration">Check node n2 configuration</h3>
-
-<pre><code>docker exec -it n2  cat /data/conf/cassandra.yaml | grep endpoint
-docker exec -it n2  cat /data/conf/cassandra-rackdc.properties | grep  -e &quot;dc&quot;  -e &quot;rack&quot;
-</code></pre>
-
-<h3 id="create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</h3>
-
-<pre><code>docker run --name=n3 -d tobert/cassandra -dc DC2 -rack RAC1 --seeds $IP
-docker exec -it n1  nodetool status
-
-# You will see status below. It may take a few seconds to get everything up and run.
-
-# Datacenter: DC1
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address     Load    Tokens  Owns (effective)  Host ID  Rack
-# UN  172.17.0.3  134.03 KB  256     66.1%             cfa002b0-350c-41b8-9f86-eb8978a43b26  RAC2
-# UN  172.17.0.2  102.84 KB  256     64.5%             8965869d-cae8-41a6-bf19-ff69c2605c6c  RAC1
-
-# Datacenter: DC2
-# ===============
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address   Load   Tokens  Owns (effective)  Host ID   Rack
-UN  172.17.0.4  14.38 KB   256     69.4%             0fad8335-763d-42fa-9934-3ed10c44eaa8  RAC1
-</code></pre>
-
-<h3 id="setup-replication-strategy">Setup replication strategy</h3>
-
-<pre><code>docker 
-create keyspace csdb with replication = {'class':'NetworkTopologyStrategy','DC1':2,'DC2':1}
-</code></pre>
-
-<h3 id="check-csdb-status">Check csdb status</h3>
-
-<pre><code>docker exec -it n1 nodetool describering csdb
-
-# Run nodetool status and note that the one node in DC2 owns all the data
-docker exec -it n1 nodetool status csdb  
-
-# Stop and remove all four docker containers:
-docker stop n1 n2 n3 n4; docker rm n1 n2 n3 n4
-</code></pre>
-
-<h2 id="create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</h2>
-
-<h3 id="create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</h3>
-
-<pre><code>docker run --name=n1 -v $PWD/ws/ps/cassdev/scripts:/scripts -d tobert/cassandra
-docker exec -it n1  nodetool status
-
-IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' n1`
-echo $IP
-
-docker run --name=n2 -d tobert/cassandra --seeds $IP
-docker run --name=n3 -d tobert/cassandra --seeds $IP
-
-docker exec -it n1 /bin/bash
-cd scripts
-</code></pre>
-
-<h3 id="list-scripts">List scripts</h3>
-
-<pre><code>docker exec -it n1 /bin/bash
-cd /scrpts &amp;&amp; ls
-</code></pre>
-
-<h3 id="create-keyspace-with-simple-replication">Create keyspace with simple replication</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-create keyspace csdb with replication = 
-{'class':'SimpleStrategy', 'replication_factor':1};
-</code></pre>
-
-<h3 id="create-table-and-insert-data-with-script">Create table and insert data with script</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-
-&gt; desc keyspaces;
-&gt; desc tables;
-&gt; use ussdb;
-&gt; source '/scripts/courses.cql'
-&gt; source '/scripts/users.cql'
-</code></pre>
-
-<h3 id="cql">CQL</h3>
-
-<pre><code>docker exec -it n1 cqlsh
-
-&gt; use ussdb;
-&gt; desc tables;
-&gt; select * from users;
-&gt; select * from courses;
-</code></pre>
-
-<h3 id="troubleshoot">Troubleshoot</h3>
+<h3 id="vpc-cni">VPC CNI</h3>
 
 <ul>
-<li><p>Connection error</p>
+<li><p>Get VPC CNI version</p>
 
-<pre><code>Connection error: Could not connect to localhost:9160
-</code></pre>
+<pre><code>kubectl describe daemonset aws-node --namespace kube-system | grep Image | cut -d &quot;/&quot; -f 2
+</code></pre></li>
+
+<li><p>Patch VPC CNI to latest version</p>
+
+<pre><code>kubectl apply -f https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.5/config/v1.5/aws-k8s-cni.yaml
+</code></pre></li>
+</ul>
+
+<h3 id="cluster-endpoint">Cluster Endpoint</h3>
 
 <ul>
-<li>Update the configuration - cassandra.yaml</li>
+<li><p>Enable private access for specific IP</p>
 
-<li><p>Change the following IP address</p>
-
-<pre><code>    - seeds: &quot;xxx.xxx.xxx.xxx&quot;
-  listen_address: xxx.xxx.xxx.xxx
-  broadcast_rpc_address: xxx.xxx.xxx.xxx
+<pre><code>CIDR=&quot;123.10.113.5&quot;
+CLUSTER_NAME=&quot;pg-prd&quot;
+REGION_CODE=&quot;ap-southeast-2&quot;
+aws eks update-cluster-config \
+--region ${REGION_CODE} \
+--name ${CLUSTER_NAME} \
+--resources-vpc-config endpointPublicAccess=true,publicAccessCidrs=&quot;${CIDR}/32&quot;,endpointPrivateAccess=true
 </code></pre></li>
 
-<li><p>Restart the cassandra</p>
+<li><p>Check the update status with update-id from above output</p>
 
-<pre><code>sudo systemctl restart cassandra
+<pre><code>aws eks describe-update \
+    --region  ${REGION_CODE} \
+    --name ${CLUSTER_NAME} \
+    --update-id &lt;update-id&gt;
 </code></pre></li>
-</ul></li>
+</ul>
+
+<h3 id="control-plane-logs">Control Plane Logs</h3>
+
+<ul>
+<li><p>Enable logging</p>
+
+<pre><code>CLUSTER_NAME=&quot;pg-prd&quot;
+REGION_CODE=&quot;ap-southeast-2&quot;
+aws eks --region ${REGION_CODE} \
+update-cluster-config --name ${CLUSTER_NAME} \
+--logging '{&quot;clusterLogging&quot;:[{&quot;types&quot;:[&quot;api&quot;,&quot;audit&quot;,&quot;authenticator&quot;,&quot;controllerManager&quot;,&quot;scheduler&quot;],&quot;enabled&quot;:true}]}'
+</code></pre></li>
+
+<li><p>Check the update status</p>
+
+<pre><code>aws eks describe-update \
+    --region  ${REGION_CODE} \
+    --name ${CLUSTER_NAME} \
+    --update-id &lt;update-id&gt;
+</code></pre></li>
 </ul>
 
     </div>
@@ -1274,31 +1161,13 @@ create keyspace csdb with replication =
 <ul>
 <li>
 <ul>
-<li><a href="#install-cassandra-on-ubuntu">Install Cassandra on Ubuntu</a>
+<li><a href="#eks-part-2">EKS - Part 2</a>
 <ul>
-<li><a href="#install-java-jre-8">Install Java(JRE) 8+</a></li>
-<li><a href="#install-python-2-7">Install Python 2.7+</a></li>
-</ul></li>
-<li><a href="#install-cassandra">Install Cassandra</a></li>
-<li><a href="#install-cassandra-with-docker">Install Cassandra with Docker</a>
-<ul>
-<li><a href="#create-node-n1">Create node n1</a></li>
-<li><a href="#get-ip-of-node-n1">Get IP of node n1</a></li>
-<li><a href="#check-status-of-n1">Check status of n1</a></li>
-<li><a href="#create-node-n2-on-rack-rac2">Create node n2 on rack RAC2</a></li>
-<li><a href="#check-node-n2-configuration">Check node n2 configuration</a></li>
-<li><a href="#create-node-n3-on-datacenter-d2-and-rack-rac1">Create node n3 on Datacenter D2 and rack RAC1</a></li>
-<li><a href="#setup-replication-strategy">Setup replication strategy</a></li>
-<li><a href="#check-csdb-status">Check csdb status</a></li>
-</ul></li>
-<li><a href="#create-single-datacenter-with-3-nodes">Create single Datacenter with 3 nodes</a>
-<ul>
-<li><a href="#create-3-nodes-with-local-mounted-directory">Create 3 nodes with local mounted directory</a></li>
-<li><a href="#list-scripts">List scripts</a></li>
-<li><a href="#create-keyspace-with-simple-replication">Create keyspace with simple replication</a></li>
-<li><a href="#create-table-and-insert-data-with-script">Create table and insert data with script</a></li>
-<li><a href="#cql">CQL</a></li>
-<li><a href="#troubleshoot">Troubleshoot</a></li>
+<li><a href="#kubernete-info">Kubernete Info</a></li>
+<li><a href="#update-kubernete">Update Kubernete</a></li>
+<li><a href="#vpc-cni">VPC CNI</a></li>
+<li><a href="#cluster-endpoint">Cluster Endpoint</a></li>
+<li><a href="#control-plane-logs">Control Plane Logs</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1311,8 +1180,8 @@ create keyspace csdb with replication =
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/hacks/git-notes/" title="Git Practices"> <i class="fa fa-chevron-left"></i><label>Git Practices</label></a>
-    <a class="nav nav-next" href="/hacks/php-debug/" title="Debug PHP with Free IDE" style="margin-right: 0px;"><label>Debug PHP with Free IDE</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/aws/aws-10-eks-1/" title="AWS: EKS - 1"> <i class="fa fa-chevron-left"></i><label>AWS: EKS - 1</label></a>
+    <a class="nav nav-next" href="/cloud/aws/aws-20-rds-1/" title="AWS: RDS - 1" style="margin-right: 0px;"><label>AWS: RDS - 1</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
