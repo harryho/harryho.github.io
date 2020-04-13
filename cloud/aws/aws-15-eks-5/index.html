@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-04-12T18:29:13 AEST">
+<meta name="revised" content="2020-04-14T01:04:20 AEST">
 <title>AWS: EKS - 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1109,6 +1109,8 @@
 
 <p>The Kubernetes API server exposes a number of metrics that are useful for monitoring and analysis. These metrics are exposed internally through a metrics endpoint that refers to the /metrics HTTP API. Like other endpoints, this endpoint is exposed on the Amazon EKS control plane.</p>
 
+<p>Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud. Since its inception in 2012, many companies and organizations have adopted Prometheus, and the project has a very active developer and user community. It is now a standalone open source project and maintained independently of any company. To emphasize this, and to clarify the project&rsquo;s governance structure, Prometheus joined the Cloud Native Computing Foundation in 2016 as the second hosted project, after Kubernetes.</p>
+
 <h4 id="deploying-prometheus">Deploying Prometheus</h4>
 
 <ul>
@@ -1126,6 +1128,9 @@ brew install helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 &gt; get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+## Add stable repo to helm
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 </code></pre></li>
 
 <li><p>Deploy Prometheus.</p>
@@ -1139,6 +1144,57 @@ chmod 700 get_helm.sh
 
 <pre><code>kubectl get pods -n prometheus
 </code></pre></li>
+</ul>
+
+<h3 id="grafana">Grafana</h3>
+
+<p>Set the storage class to gp2, admin password, configuring the datasource to point to Prometheus and creating an external load balancer for the service.</p>
+
+<pre><code>    kubectl create namespace grafana
+    helm install grafana stable/grafana \
+    --namespace grafana \
+    --set persistence.storageClassName=&quot;gp2&quot; \
+    --set adminPassword='grafana' \
+    --set datasources.&quot;datasources\.yaml&quot;.apiVersion=1 \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].name=Prometheus \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].type=prometheus \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].url=http://prometheus-server.prometheus.svc.cluster.local \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].access=proxy \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].isDefault=true \
+    --set service.type=LoadBalancer
+</code></pre>
+
+<p>Get your &lsquo;admin&rsquo; user password</p>
+
+<pre><code>    kubectl get secret --namespace grafana grafana -o jsonpath=&quot;{.data.admin-password}&quot; | base64 --decode ; echo
+</code></pre>
+
+<p>The Grafana server can be accessed via port 80 on the following DNS name from within your cluster: grafana.grafana.svc.cluster.local</p>
+
+<p>Get the Grafana URL to visit by running these commands in the same shell:</p>
+
+<pre><code> export SERVICE_IP=$(kubectl get svc --namespace grafana grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+ http://$SERVICE_IP:80
+</code></pre>
+
+<h4 id="import-dashboard">Import dashboard</h4>
+
+<ul>
+<li><p>Cluster Monitoring Dashboard
+    - Click ’+’ button on left panel and select ‘Import’.
+    - Enter 3119 dashboard id under Grafana.com Dashboard.
+    - Click ‘Load’.
+    - Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.
+    - Click ‘Import’.</p></li>
+
+<li><p>Pods Monitoring Dashboard
+    - Click ’+’ button on left panel and select ‘Import’.
+    - Enter 6417 dashboard id under Grafana.com Dashboard.
+    - Click ‘Load’.
+    - Enter Kubernetes Pods Monitoring as the Dashboard name.
+    - Click change to set the Unique identifier (uid).
+    - Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.s
+    - Click ‘Import’.</p></li>
 </ul>
 
 <h3 id="kubernetes-dashboard">Kubernetes Dashboard</h3>
@@ -1187,10 +1243,42 @@ EOF
 
 <li><p>Access dashboard via browser</p>
 
-<pre><code> http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login.
+<pre><code>http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login.
 </code></pre></li>
 
 <li><p>Use token from above to login</p></li>
+
+<li><p>Expose the dashboard to public</p>
+
+<pre><code>cat&lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+annotations:
+kubectl.kubernetes.io/last-applied-configuration: |
+  {&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;creationTimestamp&quot;:&quot;2020-04-12T12:34:10Z&quot;,&quot;labels&quot;:{&quot;k8s-app&quot;:&quot;kubernetes-dashboard&quot;},&quot;name&quot;:&quot;kubernetes-dashboard&quot;,&quot;namespace&quot;:&quot;kubernetes-dashboard&quot;,&quot;resourceVersion&quot;:&quot;380715&quot;,&quot;selfLink&quot;:&quot;/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard&quot;,&quot;uid&quot;:&quot;31489c5f-2dff-4b88-9a36-46b248bf9ce2&quot;},&quot;spec&quot;:{&quot;externalTrafficPolicy&quot;:&quot;Cluster&quot;,&quot;ports&quot;:[{&quot;port&quot;:80,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:8443}],&quot;selector&quot;:{&quot;k8s-app&quot;:&quot;kubernetes-dashboard&quot;},&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;LoadBalancer&quot;},&quot;status&quot;:{&quot;loadBalancer&quot;:{}}}
+creationTimestamp: &quot;2020-04-12T13:23:52Z&quot;
+labels:
+k8s-app: kubernetes-dashboard
+name: kubernetes-dashboard
+namespace: kubernetes-dashboard
+resourceVersion: &quot;402339&quot;
+selfLink: /api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard
+uid: d29bab71-d159-4c33-9ba1-00f05138ecb6
+spec:
+externalTrafficPolicy: Cluster
+ports:
+- nodePort: 30556
+port: 443
+protocol: TCP
+targetPort: 8443
+selector:
+k8s-app: kubernetes-dashboard
+sessionAffinity: None
+type: LoadBalancer
+status:
+loadBalancer:{}
+</code></pre></li>
 </ul>
 
     </div>
@@ -1206,6 +1294,10 @@ EOF
 <li><a href="#prometheus">Prometheus</a>
 <ul>
 <li><a href="#deploying-prometheus">Deploying Prometheus</a></li>
+</ul></li>
+<li><a href="#grafana">Grafana</a>
+<ul>
+<li><a href="#import-dashboard">Import dashboard</a></li>
 </ul></li>
 <li><a href="#kubernetes-dashboard">Kubernetes Dashboard</a></li>
 </ul></li>
