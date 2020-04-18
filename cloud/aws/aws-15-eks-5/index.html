@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-04-16T22:30:18 AEST">
+<meta name="revised" content="2020-04-18T16:09:15 AEST">
 <title>AWS: EKS - 5 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1150,23 +1150,24 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 
 <p>Set the storage class to gp2, admin password, configuring the datasource to point to Prometheus and creating an external load balancer for the service.</p>
 
-<pre><code>    kubectl create namespace grafana
-    helm install grafana stable/grafana \
-    --namespace grafana \
-    --set persistence.storageClassName=&quot;gp2&quot; \
-    --set adminPassword='grafana' \
-    --set datasources.&quot;datasources\.yaml&quot;.apiVersion=1 \
-    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].name=Prometheus \
-    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].type=prometheus \
-    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].url=http://prometheus-server.prometheus.svc.cluster.local \
-    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].access=proxy \
-    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].isDefault=true \
-    --set service.type=LoadBalancer
+<pre><code>kubectl create namespace grafana
+helm install grafana stable/grafana \
+        --namespace grafana \
+        --set persistence.storageClassName=&quot;gp2&quot; \
+        --set adminPassword='grafana' \
+        --set datasources.&quot;datasources\.yaml&quot;.apiVersion=1 \
+        --set datasources.&quot;datasources\.yaml&quot;.datasources[0]    name=Prometheus \
+        --set datasources.&quot;datasources\.yaml&quot;.datasources[0]    type=prometheus \
+        --set datasources.&quot;datasources\.yaml&quot;.datasources[0]    url=http://prometheus-server.prometheus.svc.cluster.local \
+        --set datasources.&quot;datasources\.yaml&quot;.datasources[0]    access=proxy \
+        --set datasources.&quot;datasources\.yaml&quot;.datasources[0]    isDefault=true \
+        --set service.type=LoadBalancer
 </code></pre>
 
 <p>Get your &lsquo;admin&rsquo; user password</p>
 
-<pre><code>    kubectl get secret --namespace grafana grafana -o jsonpath=&quot;{.data.admin-password}&quot; | base64 --decode ; echo
+<pre><code>kubectl get secret --namespace grafana grafana \
+    -o jsonpath=&quot;{.data.admin-password}&quot; | base64 --decode ; echo
 </code></pre>
 
 <p>The Grafana server can be accessed via port 80 on the following DNS name from within your cluster: grafana.grafana.svc.cluster.local</p>
@@ -1180,21 +1181,27 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 <h4 id="import-dashboard">Import dashboard</h4>
 
 <ul>
-<li><p>Cluster Monitoring Dashboard
-    - Click ’+’ button on left panel and select ‘Import’.
-    - Enter 3119 dashboard id under Grafana.com Dashboard.
-    - Click ‘Load’.
-    - Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.
-    - Click ‘Import’.</p></li>
+<li><p>Cluster Monitoring Dashboard</p>
 
-<li><p>Pods Monitoring Dashboard
-    - Click ’+’ button on left panel and select ‘Import’.
-    - Enter 6417 dashboard id under Grafana.com Dashboard.
-    - Click ‘Load’.
-    - Enter Kubernetes Pods Monitoring as the Dashboard name.
-    - Click change to set the Unique identifier (uid).
-    - Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.s
-    - Click ‘Import’.</p></li>
+<ul>
+<li>Click ’+’ button on left panel and select ‘Import’.</li>
+<li>Enter 3119 dashboard id under Grafana.com Dashboard.</li>
+<li>Click ‘Load’.</li>
+<li>Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.</li>
+<li>Click ‘Import’.</li>
+</ul></li>
+
+<li><p>Pods Monitoring Dashboard</p>
+
+<ul>
+<li>Click ’+’ button on left panel and select ‘Import’.</li>
+<li>Enter 6417 dashboard id under Grafana.com Dashboard.</li>
+<li>Click ‘Load’.</li>
+<li>Enter Kubernetes Pods Monitoring as the Dashboard name.</li>
+<li>Click change to set the Unique identifier (uid).</li>
+<li>Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.s</li>
+<li>Click ‘Import’.</li>
+</ul></li>
 </ul>
 
 <h3 id="kubernetes-dashboard">Kubernetes Dashboard</h3>

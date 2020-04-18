@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-04-16T22:30:18 AEST">
+<meta name="revised" content="2020-04-18T16:09:15 AEST">
 <title>Windows cmd &amp; hotkey - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1090,7 +1090,7 @@
 
 <h2 id="sample-of-vbscript-file">Sample of VBScript file</h2>
 
-<pre><code class="language-vbs">Set oFSO = CreateObject(&quot;Scripting.FileSystemObject&quot;^)
+<pre><code>Set oFSO = CreateObject(&quot;Scripting.FileSystemObject&quot;^)
 Set oInput = oFSO.OpenTextFile(WScript.Arguments(0^), 1^)
 sData = Replace(oInput.ReadAll, &quot;,&quot; ^&amp; VbCrLf, VbCrLf^)
 Set oOutput = oFSO.CreateTextFile(WScript.Arguments(1^), True^)
@@ -1108,8 +1108,7 @@ oOutput.Close
 
 <li><p>Run the script</p>
 
-<pre><code class="language-vbs">
-@if (@X)==(@Y) @end /* Harmless hybrid line that begins a JScript comment
+<pre><code>@if (@X)==(@Y) @end /* Harmless hybrid line that begins a JScript comment
 
 ::************ Documentation ***********
 ::NEWREPL.BAT version 1.0
@@ -1121,17 +1120,17 @@ oOutput.Close
 
 @echo off
 if .%2 equ . (
-if &quot;%~1&quot; equ &quot;/?&quot; (
-echo.&quot;%~f0&quot;
-&lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^:::&quot; &quot;&quot; a
-exit /b 0
-) else if /i &quot;%~1&quot; equ &quot;/V&quot; (
-&lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^::(NEWREPL\.BAT version)&quot; &quot;$1&quot; a
-exit /b 0
-) else (
-call :err &quot;Insufficient arguments&quot;
-exit /b 2
-)
+  if &quot;%~1&quot; equ &quot;/?&quot; (
+    echo.&quot;%~f0&quot;
+    &lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^:::&quot; &quot;&quot; a
+    exit /b 0
+  ) else if /i &quot;%~1&quot; equ &quot;/V&quot; (
+    &lt;&quot;%~f0&quot; cscript //E:JScript //nologo &quot;%~f0&quot; &quot;^::(NEWREPL\.BAT version)&quot; &quot;$1&quot; a
+    exit /b 0
+  ) else (
+    call :err &quot;Insufficient arguments&quot;
+    exit /b 2
+  )
 )
 
 cscript //E:JScript //nologo &quot;%~f0&quot; %*
@@ -1144,31 +1143,31 @@ exit /b
 ************* JScript portion **********/
 var rtn=1;
 try {
-var env=WScript.CreateObject(&quot;WScript.Shell&quot;).Environment(&quot;Process&quot;);
-var args=WScript.Arguments;
-var search=args.Item(0);
-var replace=args.Item(1);
-var options=&quot;g&quot;;
-if (args.length&gt;2) options+=args.Item(2).toLowerCase();
-var alterations=(options.indexOf(&quot;a&quot;)&gt;=0);
-if (alterations) options=options.replace(/a/g,&quot;&quot;);
-if (options.indexOf(&quot;v&quot;)&gt;=0) {
-    options=options.replace(/v/g,&quot;&quot;);
-    search=env(search);
-    replace=env(replace);
-}
-var search=new RegExp(search,options);
-var str1, str2;
+  var env=WScript.CreateObject(&quot;WScript.Shell&quot;).Environment(&quot;Process&quot;);
+  var args=WScript.Arguments;
+  var search=args.Item(0);
+  var replace=args.Item(1);
+  var options=&quot;g&quot;;
+  if (args.length&gt;2) options+=args.Item(2).toLowerCase();
+  var alterations=(options.indexOf(&quot;a&quot;)&gt;=0);
+  if (alterations) options=options.replace(/a/g,&quot;&quot;);
+  if (options.indexOf(&quot;v&quot;)&gt;=0) {
+      options=options.replace(/v/g,&quot;&quot;);
+      search=env(search);
+      replace=env(replace);
+  }
+  var search=new RegExp(search,options);
+  var str1, str2;
 
-  while (!WScript.StdIn.AtEndOfStream) {
-    str1=WScript.StdIn.ReadLine();
-    str2=str1.replace(search,replace);
-    if (!alterations || str1!=str2) WScript.Stdout.WriteLine(str2);
-    if (str1!=str2) rtn=0;
-}
+    while (!WScript.StdIn.AtEndOfStream) {
+      str1=WScript.StdIn.ReadLine();
+      str2=str1.replace(search,replace);
+      if (!alterations || str1!=str2) WScript.Stdout.WriteLine(str2);
+      if (str1!=str2) rtn=0;
+  }
 } catch(e) {
-WScript.Stderr.WriteLine(&quot;JScript runtime error: &quot;+e.message);
-rtn=3;
+  WScript.Stderr.WriteLine(&quot;JScript runtime error: &quot;+e.message);
+  rtn=3;
 }
 WScript.Quit(rtn);
 
