@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-04-18T16:09:15 AEST">
+<meta name="revised" content="2020-05-05T13:40:14 AEST">
 <title>Amazon Linux 2 setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1136,6 +1136,33 @@ sudo mount -a
 lsblk
 </code></pre>
 
+<h3 id="add-new-user">Add new user</h3>
+
+<ul>
+<li><p>Add new user without password</p>
+
+<pre><code class="language-bash">sudo adduser new_user 
+
+## Add user without password 
+sudo adduser new_user  --disabled-password
+</code></pre></li>
+
+<li><p>Switch to new user</p>
+
+<pre><code class="language-bash">sudo su - new_user
+</code></pre></li>
+
+<li><p>Set password for new user</p>
+
+<pre><code class="language-bash">sudo passwd new_user
+</code></pre></li>
+
+<li><p>Allow the new user to use sudo</p>
+
+<pre><code class="language-bash">sudo usermod -aG wheel new_user
+</code></pre></li>
+</ul>
+
 <h3 id="install-mysql">Install MySql</h3>
 
 <ul>
@@ -1192,40 +1219,40 @@ sudo systemctl start mysqld.service
 
 <h4 id="create-remote-login-credentials">Create remote login credentials</h4>
 
-<pre><code>  CREATE USER 'user_id'@'localhost' IDENTIFIED BY 'your_secret';
-  CREATE USER 'user_id'@'%' IDENTIFIED BY 'your_secret';
+<pre><code class="language-sql">CREATE USER 'user_id'@'localhost' IDENTIFIED BY 'your_secret';
+CREATE USER 'user_id'@'%' IDENTIFIED BY 'your_secret';
 
-  GRANT ALL ON *.* TO 'user_id'@'localhost';
-  GRANT ALL ON *.* TO 'user_id'@'%';
+GRANT ALL ON *.* TO 'user_id'@'localhost';
+GRANT ALL ON *.* TO 'user_id'@'%';
 </code></pre>
 
 <h4 id="install-aws-cli">Install AWS CLI</h4>
 
-<pre><code>  # Install aws cli without sudo 
-  curl &quot;https://s3.amazonaws.com/aws-cli/awscli-bundle.zip&quot; -o &quot;awscli-bundle.zip&quot;
-  unzip awscli-bundle.zip
-  ./awscli-bundle/install -b ~/bin/aws
+<pre><code class="language-bash"># Install aws cli without sudo 
+curl &quot;https://s3.amazonaws.com/aws-cli/awscli-bundle.zip&quot; -o &quot;awscli-bundle.zip&quot;
+unzip awscli-bundle.zip
+./awscli-bundle/install -b ~/bin/aws
 
-  # Configure cli 
-  aws configure
-  AWS Access Key ID [None]: AKXXXXXXXXXXXXXXXXXXXX
-  AWS Secret Access Key [None]: wJ37hsfSFJSDfhsfihakhfakhfu9763Fhshfsuff
-  Default region name [None]: region-code
-  Default output format [None]: json
+# Configure cli 
+aws configure
+AWS Access Key ID [None]: AKXXXXXXXXXXXXXXXXXXXX
+AWS Secret Access Key [None]: wJ37hsfSFJSDfhsfihakhfakhfu9763Fhshfsuff
+Default region name [None]: region-code
+Default output format [None]: json
 </code></pre>
 
 <h4 id="install-eks">Install EKS</h4>
 
-<pre><code>  curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
-  sudo mv /tmp/eksctl /usr/local/bin
-  ekstool --version
+<pre><code class="language-bash">curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+ekstool --version
 </code></pre>
 
 <h4 id="install-kubectl">Install kubectl</h4>
 
-<pre><code>  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
-  chmod +x ./kubectl
-  mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
+<pre><code class="language-bash">curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
 </code></pre>
 
     </div>
@@ -1242,6 +1269,7 @@ sudo systemctl start mysqld.service
 <li><a href="#mount-a-volume-ebs">Mount a volume (EBS)</a></li>
 <li><a href="#extend-the-ebs">Extend the EBS</a></li>
 <li><a href="#auto-attached-volume">Auto attached volume</a></li>
+<li><a href="#add-new-user">Add new user</a></li>
 <li><a href="#install-mysql">Install MySql</a>
 <ul>
 <li><a href="#start-mysql-as-service">Start MySql as service</a></li>
