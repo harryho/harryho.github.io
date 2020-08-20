@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-05-26T21:35:52 AEST">
+<meta name="revised" content="2020-08-20T23:24:31 AEST">
 <title>Ubuntu Desktop 18 LTS note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1263,6 +1263,34 @@ mysql&gt;GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'your_
 </code></pre></li>
 </ul>
 
+<h3 id="install-java">Install Java</h3>
+
+<ul>
+<li><p>Install <a href="https://adoptopenjdk.net/installation.html#x64_linux-jdk">AdoptOpenJDK</a> for Linux</p>
+
+<pre><code># Download tarball you need
+# Unzip the tarball
+
+tar xzf OpenJDK11U-jdk_x64_linux_hotspot_x.y.z.tar.gz
+
+sudo mv OpenJDK11U-jdk_x64_linux_hotspot_x.y.z.tar.gz  \
+    /usr/lib/jvm/OpenJDK11U-jdk_x64_linux_hotspot_x.y.z
+
+sudo apt install update-java-alternatives
+
+# Check alternative JDK 
+install update-java-alternatives -l
+
+adoptopenjdk-11-hotspot-amd64  1111   /usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+adoptopenjdk-14-hotspot-amd64  1141   /usr/lib/jvm/adoptopenjdk-14-hotspot-amd64
+adoptopenjdk-8-hotspot-amd64   1081   /usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
+
+# Switch JDK
+update-java-alternatives -s adoptopenjdk-xx-hotspot-amd64
+
+</code></pre></li>
+</ul>
+
 <h3 id="other-useful-tools">Other useful tools</h3>
 
 <ul>
@@ -1320,6 +1348,7 @@ sudo apt-get install dict-moby-thesaurus
 <li><a href="#install-setup-zsh">Install &amp; Setup Zsh</a></li>
 <li><a href="#install-setup-vim-with-useful-plugins">Install &amp; Setup Vim with useful plugins</a></li>
 <li><a href="#install-mysql">Install MySql</a></li>
+<li><a href="#install-java">Install Java</a></li>
 <li><a href="#other-useful-tools">Other useful tools</a></li>
 </ul></li>
 </ul></li>
