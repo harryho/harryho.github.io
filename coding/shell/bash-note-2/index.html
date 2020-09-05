@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-08-31T20:34:46 AEST">
+<meta name="revised" content="2020-09-06T02:34:50 AEST">
 <title>Adv Bash - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -818,6 +818,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/hacks/docker-note/" class="dd-item">
+        <div>
+          <a href="/hacks/docker-note/">
+            Docker Practices
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
         <div>
           <a href="/hacks/qemu-notes/">
@@ -1026,6 +1033,21 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/challenges/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/challenges/">Challenges</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/challenges/algo-test-01/" class="dd-item">
+        <div>
+          <a href="/challenges/algo-test-01/">
+            Windows cmd &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
 
 
 
@@ -1089,6 +1111,8 @@
    Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
+    <option value="/challenges/" >
+   Challenges</option>
 
 
 
@@ -1291,16 +1315,18 @@
 <h4 id="samples">Samples</h4>
 
 <ul>
-<li><p>Replace file name from abc-note to abc</p>
+<li><p>Replace file name from abc_noteN to abc_N</p>
 
-<pre><code class="language-bash">ls abc-note*
+<pre><code class="language-bash">touch abc_note1 abc_note2 abc_note3
 
-for f in abc-note* ; 
+for f in $(find . -type f -name *abc_note*); 
 do 
-mv -- $f &quot;${f//-note}&quot; 
+mv -- $f &quot;${f//note}&quot; 
 done ;
 
 ls abc*
+# expected output
+# abc_1   abc_2   abc_3
 </code></pre></li>
 </ul>
 
