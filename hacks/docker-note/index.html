@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-06T02:38:12 AEST">
+<meta name="revised" content="2020-09-06T23:56:42 AEST">
 <title>Docker Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -223,52 +223,38 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
+      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
         <div>
-          <a href="/coding/db-sql/mysql-note-2/">
-            MySql: DDL
+          <a href="/coding/js-ts/js-note-1/">
+            JS &amp; ES Note - 1
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
+      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
         <div>
-          <a href="/coding/db-sql/mysql-note-1/">
-            MySql: Getting Started
+          <a href="/coding/js-ts/js-note-2/">
+            JS &amp; ES Note - 2
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
         <div>
-          <a href="/coding/db-sql/mysql-note-5/">
-            MySql: JSON
+          <a href="/coding/js-ts/js-note-3/">
+            JS &amp; ES Note - 3
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
         <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
+          <a href="/coding/js-ts/js-note-99/">
+            JS &amp; ES snippet
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
         <div>
-          <a href="/coding/db-sql/mysql-note-3/">
-            MySql: SP &amp; Func
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/pgsql-note-1/">
-            PostgresQL Note - 1
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mssql-note-1/">
-            Sql Server Note - 1
+          <a href="/coding/js-ts/ts-note-1/">
+            TS: Basic Types
           </a>
         </div>
     </li>
@@ -1143,14 +1129,19 @@ Hello World
 
 <h3 id="build">build</h3>
 
-<p>Build an image from a Dockerfile</p>
+<p>Build an image from a Dockerfile. The presence of Dockerfile is mandatory. The file name convention is <strong>Dockerfile</strong> or <strong>your_customized_filename.Dockerfile</strong></p>
 
-<pre><code>$ docker build &lt;path_of_dockerfile&gt;
+<pre><code>$ docker build &lt;path_of_workspace&gt;
 </code></pre>
 
 <p>Build an image with tag</p>
 
-<pre><code>$ docker build -t &lt;image_tag&gt; &lt;path_of_dockerfile&gt;
+<pre><code>$ docker build &lt;path_of_workspace&gt; -t &lt;image_tag&gt;
+</code></pre>
+
+<p>Build an image with specific dockerfile</p>
+
+<pre><code>$ docker build &lt;path_of_workspace&gt; -f  &lt;path_of_dockerfile&gt;
 </code></pre>
 
 <h3 id="push">push</h3>
@@ -1160,7 +1151,7 @@ Hello World
 
 <h3 id="scripting">scripting</h3>
 
-<p>The build &amp; push can be simplified with scripting. I just recap a script from my docker image repository.</p>
+<p>The build &amp; push can be simplified with scripting. Here I recap a script from my other docker repository below.</p>
 
 <pre><code class="language-bash">DOCKER_REPO=$1
 
@@ -1170,9 +1161,9 @@ fi
 
 echo docker repo: $DOCKER_REPO
 
-#########################################################################################
+############################################################################
 ## --------------------- Build images  ---------------------------
-#########################################################################################
+############################################################################
 
 build_image() {
     FOLDER=$1
@@ -1180,13 +1171,14 @@ build_image() {
     for fname in $(ls ${FOLDER}); do
         PREFIX=${fname/&quot;.Dockerfile&quot;/&quot;&quot;}
         echo &quot;:::: Build ${DOCKER_REPO}:${FOLDER}-${PREFIX}&quot;
-        docker build ${FOLDER} -f &quot;${FOLDER}/${PREFIX}.Dockerfile&quot; -t &quot;${DOCKER_REPO}:${FOLDER}-${PREFIX}&quot;
+        docker build ${FOLDER} -f &quot;${FOLDER}/${PREFIX}.Dockerfile&quot; \
+            -t &quot;${DOCKER_REPO}:${FOLDER}-${PREFIX}&quot;
     done
 }
 
-#########################################################################################
+##############################################################################
 ## --------------------- Push images to docker hub ---------------------------
-#########################################################################################
+##############################################################################
 
 ## alpine basealpined image
 push_image() {
@@ -1217,6 +1209,8 @@ main() {
 main &quot;$@&quot;
 </code></pre>
 
+<h3 id="2-step-build">2-step build</h3>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1231,6 +1225,7 @@ main &quot;$@&quot;
 <li><a href="#build">build</a></li>
 <li><a href="#push">push</a></li>
 <li><a href="#scripting">scripting</a></li>
+<li><a href="#2-step-build">2-step build</a></li>
 </ul></li>
 </ul></li>
 </ul>
