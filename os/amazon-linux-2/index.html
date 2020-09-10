@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-10T21:47:23 AEST">
+<meta name="revised" content="2020-09-10T22:39:48 AEST">
 <title>Amazon Linux 2 setup :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1295,8 +1295,13 @@ mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export P
 
 <h3 id="install-epel-repository">Install EPEL repository</h3>
 
-<pre><code class="language-bash">sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+<pre><code class="language-bash">## Amazon Linux 1 / 2
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum update
+
+## Amazon Linux 2
+sudo amazon-linux-extras install epel
+
 </code></pre>
 
     </div>
