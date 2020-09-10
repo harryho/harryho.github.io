@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-06T23:56:42 AEST">
+<meta name="revised" content="2020-09-10T21:47:23 AEST">
 <title>Docker Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -67,6 +67,13 @@
       <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/projects/angular-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular-crm/">
+            Angular 9 CRM Starter Project
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/projects/docker-toolkits/" class="dd-item">
         <div>
           <a href="/projects/docker-toolkits/">
@@ -223,38 +230,52 @@
       <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
         <div>
-          <a href="/coding/js-ts/js-note-1/">
-            JS &amp; ES Note - 1
+          <a href="/coding/db-sql/mysql-note-2/">
+            MySql: DDL
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
         <div>
-          <a href="/coding/js-ts/js-note-2/">
-            JS &amp; ES Note - 2
+          <a href="/coding/db-sql/mysql-note-1/">
+            MySql: Getting Started
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
         <div>
-          <a href="/coding/js-ts/js-note-3/">
-            JS &amp; ES Note - 3
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql: JSON
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
         <div>
-          <a href="/coding/js-ts/js-note-99/">
-            JS &amp; ES snippet
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+      <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
-          <a href="/coding/js-ts/ts-note-1/">
-            TS: Basic Types
+          <a href="/coding/db-sql/mysql-note-3/">
+            MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
           </a>
         </div>
     </li>
@@ -1151,7 +1172,7 @@ Hello World
 
 <h3 id="scripting">scripting</h3>
 
-<p>The build &amp; push can be simplified with scripting. Here I recap a script from my other docker repository below.</p>
+<p>The build &amp; push can be simplified with  some scripting. Here I recap a script from my other docker repository below.</p>
 
 <pre><code class="language-bash">DOCKER_REPO=$1
 
@@ -1210,6 +1231,28 @@ main &quot;$@&quot;
 </code></pre>
 
 <h3 id="2-step-build">2-step build</h3>
+
+<p>For production deployment, usually we just deploy the delivery instead of the full copy of source code. To achieve that, we can the build into 2 steps. The first step is to build the source code. and the second one is to build the deliverable image.</p>
+
+<p>I recap one docker file from the my repository vue-crm here</p>
+
+<pre><code class="language-dockerfile">###### Build the App #####
+FROM node:10.19 AS node
+LABEL author=&quot;Harry Ho&quot;
+WORKDIR /
+COPY . .
+RUN npm install
+RUN npm run build -- --prod
+
+
+###### Build the Delivery #####
+FROM nginx:alpine
+LABEL author=&quot;Harry Ho&quot;
+WORKDIR /var/cache/nginx
+COPY --from=node /dist /usr/share/nginx/html
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+
+</code></pre>
 
     </div>
 
