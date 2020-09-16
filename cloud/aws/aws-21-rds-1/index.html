@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-10T22:44:46 AEST">
+<meta name="revised" content="2020-09-17T00:59:21 AEST">
 <title>AWS: RDS - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1112,38 +1112,109 @@
 
 <p>Amazon Relational Database Service (Amazon RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups.</p>
 
-<h3 id="sql-server">SQL Server</h3>
+<h3 id="backup-restore-sql-server">Backup &amp; Restore SQL Server</h3>
+
+<h4 id="backup-database-to-s3">Backup database to S3</h4>
 
 <ul>
-<li><p>Backup database to S3</p>
+<li><p>Assumption</p>
+
+<ul>
+<li>DB name: sample_db</li>
+<li>S3 bucket name: sql-server-backup</li>
+</ul></li>
+
+<li><p>Backup with built-in stored proc</p>
 
 <pre><code>exec msdb.dbo.rds_backup_database 
-@source_db_name='database_name', 
-@s3_arn_to_backup_to='arn:aws:s3:::db-backup-bucket/database_name_20191221.bak', 
+@source_db_name='sample_db', 
+@s3_arn_to_backup_to='arn:aws:s3:::sql-server-backup/sample_db_20191221.bak', 
 @overwrite_S3_backup_file=1;
 </code></pre></li>
 
 <li><p>Track status</p>
 
-<pre><code>exec msdb.dbo.rds_task_status @db_name='database_name'
+<pre><code>exec msdb.dbo.rds_task_status @db_name='sample_db'
 </code></pre></li>
+</ul>
 
-<li><p>Restore the database</p>
+<h4 id="restore-db-into-ec2">Restore DB into EC2</h4>
 
-<pre><code>exec msdb.dbo.rds_restore_database 
-@restore_db_name='ApplyDirect', 
-@s3_arn_to_restore_from='arn:aws:s3:::db-backup-bucket/database_name_20191221.bak';
-</code></pre></li>
-
+<ul>
 <li><p>Restore with powershell</p>
 
 <pre><code>#Copy-S3Object -BucketName 'nsw-prod-s3-sql-backups' \ 
-# -Key NSW_Live-20190531011003.bak \
-# -LocalFile L:\Backups\Automated\NSW_Live-20190531011003.bak
-Restore-SqlDatabase -ServerInstance 'localhost' -Database &quot;NSW_Live&quot; \
--BackupFile &quot;L:\Backups\Automated\NSW_Live-20190531011003.bak&quot; \
--ReplaceDatabase -KeepReplication -Verbose 
+# -Key sample_db-20190531011003.bak \
+# -LocalFile L:\Backups\Automated\sample_db-20190531011003.bak
+
+Restore-SqlDatabase -ServerInstance 'localhost' -Database &quot;sample_db&quot; \
+-BackupFile &quot;L:\Backups\Automated\sample_db-20190531011003.bak&quot; \
+-ReplaceDatabase -KeepReplication -Verbose
 </code></pre></li>
+</ul>
+
+<h4 id="restore-db-into-rds">Restore DB into RDS</h4>
+
+<ul>
+<li><p>Create IAM role which can access the backup file in the S3 bucket. e.g. <strong>RDS_RESTORE_S3_READONLY</strong></p>
+
+<pre><code class="language-json">{
+&quot;Version&quot;: &quot;2012-10-17&quot;,
+&quot;Statement&quot;: [
+    {
+        &quot;Effect&quot;: &quot;Allow&quot;,
+        &quot;Action&quot;: [
+            &quot;s3:ListBucket&quot;,
+            &quot;s3:GetBucketLocation&quot;
+        ],
+        &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::sql-server-backup&quot;
+        ]
+    },
+    {
+        &quot;Effect&quot;: &quot;Allow&quot;,
+        &quot;Action&quot;: [
+            &quot;s3:GetObjectMetaData&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:PutObject&quot;,
+            &quot;s3:ListMultipartUploadParts&quot;,
+            &quot;s3:AbortMultipartUpload&quot;
+        ],
+        &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::sql-server-backup/*&quot;
+        ]
+    }
+]
+}
+</code></pre></li>
+
+<li><p>Create a new option group, or copy or modify an existing option group.</p></li>
+
+<li><p>Add the <strong>SQLSERVER_BACKUP_RESTORE</strong> option to the option group.</p></li>
+
+<li><p>Associate the IAM role with the option. The IAM role must have access to an S3 bucket to store the database backups. e.g. <strong>RDS_RESTORE_S3_READONLY</strong></p></li>
+
+<li><p>Associate the option group with the DB instance.</p></li>
+
+<li><p>Make sure the RDS has enough space to restore the db backup.</p></li>
+
+<li><p>Restore the database</p>
+
+<pre><code class="language-sql">EXEC msdb.dbo.rds_restore_database 
+@restore_db_name='sample_db',
+@s3_arn_to_restore_from='arn:aws:s3:::sql-server-backup/sample_db_20191221.bak'
+GO
+</code></pre></li>
+</ul>
+
+<h4 id="caveat">Caveat</h4>
+
+<ul>
+<li><p>After you modify the storage size for a DB instance, the status of the DB instance is storage-optimization. The DB instance is fully operational after a storage modification.</p></li>
+
+<li><p>You can&rsquo;t make further storage modifications until <strong>six (6) hours</strong> after storage optimization has completed on the instance.</p></li>
+
+<li><p>You can&rsquo;t reduce the amount of storage for a DB instance after storage has been allocated.</p></li>
 </ul>
 
     </div>
@@ -1155,7 +1226,13 @@ Restore-SqlDatabase -ServerInstance 'localhost' -Database &quot;NSW_Live&quot; \
 <ul>
 <li><a href="#rds">RDS</a>
 <ul>
-<li><a href="#sql-server">SQL Server</a></li>
+<li><a href="#backup-restore-sql-server">Backup &amp; Restore SQL Server</a>
+<ul>
+<li><a href="#backup-database-to-s3">Backup database to S3</a></li>
+<li><a href="#restore-db-into-ec2">Restore DB into EC2</a></li>
+<li><a href="#restore-db-into-rds">Restore DB into RDS</a></li>
+<li><a href="#caveat">Caveat</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>

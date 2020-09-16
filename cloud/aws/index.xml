@@ -137,10 +137,9 @@ kubectl get deployment metrics-server -n kube-system   Prometheus The Kubernetes
       
       <guid>/cloud/aws/aws-21-rds-1/</guid>
       <description>RDS Amazon Relational Database Service (Amazon RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups.
-SQL Server  Backup database to S3
-exec msdb.dbo.rds_backup_database @source_db_name=&#39;database_name&#39;, @s3_arn_to_backup_to=&#39;arn:aws:s3:::db-backup-bucket/database_name_20191221.bak&#39;, @overwrite_S3_backup_file=1;  Track status
-exec msdb.dbo.rds_task_status @db_name=&#39;database_name&#39;  Restore the database
-exec msdb.dbo.rds_restore_database @restore_db_name=&#39;ApplyDirect&#39;, @s3_arn_to_restore_from=&#39;arn:aws:s3:::db-backup-bucket/database_name_20191221.bak&#39;;  Restore with powershell</description>
+Backup &amp;amp; Restore SQL Server Backup database to S3  Assumption
+ DB name: sample_db S3 bucket name: sql-server-backup  Backup with built-in stored proc
+exec msdb.dbo.rds_backup_database @source_db_name=&#39;sample_db&#39;, @s3_arn_to_backup_to=&#39;arn:aws:s3:::sql-server-backup/sample_db_20191221.</description>
     </item>
     
   </channel>
