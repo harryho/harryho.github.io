@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-17T00:59:21 AEST">
+<meta name="revised" content="2020-09-17T10:08:33 AEST">
 <title>AWS: RDS - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1203,6 +1203,13 @@ Restore-SqlDatabase -ServerInstance 'localhost' -Database &quot;sample_db&quot; 
 <pre><code class="language-sql">EXEC msdb.dbo.rds_restore_database 
 @restore_db_name='sample_db',
 @s3_arn_to_restore_from='arn:aws:s3:::sql-server-backup/sample_db_20191221.bak'
+GO
+</code></pre></li>
+
+<li><p>Check the progress</p>
+
+<pre><code class="language-sql">EXEC msdb.dbo.rds_task_status 
+@db_name='sample_db'
 GO
 </code></pre></li>
 </ul>

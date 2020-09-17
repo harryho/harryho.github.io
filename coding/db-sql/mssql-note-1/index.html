@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-17T00:59:22 AEST">
+<meta name="revised" content="2020-09-17T10:08:33 AEST">
 <title>Sql Server Note - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1273,9 +1273,14 @@ GO
 
 <h3 id="get-connection-info">Get Connection Info</h3>
 
-<pre><code class="language-sql">EXEC sp_who
+<pre><code class="language-sql">
+EXEC sp_who
 GO
 
+EXEC sp_who @loginname='user_id'
+GO
+
+-- Enhanced verssion
 EXEC sp_who2
 GO
 </code></pre>
