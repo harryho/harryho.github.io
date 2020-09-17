@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-17T22:00:59 AEST">
+<meta name="revised" content="2020-09-17T22:40:07 AEST">
 <title>OS :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -870,7 +870,7 @@
       <li data-nav-id="/os/amazon-linux-2/" class="dd-item">
         <div>
           <a href="/os/amazon-linux-2/">
-            Amazon Linux 2 setup
+            Amazon Linux 2 
           </a>
         </div>
     </li>
@@ -933,7 +933,7 @@
       <li data-nav-id="/os/centos-server-7/" class="dd-item">
         <div>
           <a href="/os/centos-server-7/">
-            CentOS 7 Server note
+            CentOS 7 Server
           </a>
         </div>
     </li>
@@ -1091,7 +1091,7 @@
    Hacks</option>
     <option value="/os/"  selected>
    OS</option> 
-      <option value="/os/amazon-linux-2/" >- Amazon Linux 2 setup</option>
+      <option value="/os/amazon-linux-2/" >- Amazon Linux 2 </option>
       <option value="/os/vpn-strongswam/" >- VPN StrongSwam setup</option>
       <option value="/os/vpn-vyos/" >- VPN VyOS setup</option>
       <option value="/os/dual-boot-win10-ubuntu18/" >- Dual Boot Windows 10 &amp; Ubuntu 18</option>
@@ -1100,7 +1100,7 @@
       <option value="/os/lubuntu16-desktop/" >- Lubuntu 16 desktop</option>
       <option value="/os/grub-trouble-shooting/" >- Grub Trouble Shooting</option>
       <option value="/os/ubuntu-server-16/" >- Ubuntu 16 server note</option>
-      <option value="/os/centos-server-7/" >- CentOS 7 Server note</option>
+      <option value="/os/centos-server-7/" >- CentOS 7 Server</option>
       <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
       <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
       <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
@@ -1129,23 +1129,18 @@
 <ul class="children children-card">
 
 <span><card>
-        <a href="/os/amazon-linux-2/" >Amazon Linux 2 setup</a></card>
-        <p>Amazon Linux 2 Amazon Linux 2 is the next generation of Amazon Linux, a Linux server operating system from Amazon Web Services (AWS). It provides a secure, stable, and high performance execution environment to develop and run cloud and enterprise applications. With Amazon Linux 2, you get an application environment that offers long term support with access to the latest innovations in the Linux ecosystem. Amazon Linux 2 is provided at no additional charge.</p>
+        <a href="/os/amazon-linux-2/" >Amazon Linux 2 </a></card>
+        <p><span>Amazon Linux 2 - Setup &amp; Configure ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 </span>
 
 <span><card>
         <a href="/os/vpn-strongswam/" >VPN StrongSwam setup</a></card>
-        <p>VPN StrongSwan strongSwan is a multiplatform IPsec implementation. The focus of the project is on strong authentication mechanisms using X.509 public key certificates and optional secure storage of private keys and certificates on smartcards through a standardized PKCS#11 interface and on TPM 2.0.
-Launch an instance with Ubuntu Update setup script  Following is setup.sh
-#!/bin/bash usage() { echo &quot;Usage: strongswan.sh [install|start] [PATADDR] [ETHDEV] 'install' parameters: PATADDR The private address on MARKETNET (eg.</p>
+        <p><span>VPN with StrongSwam ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 </span>
 
 <span><card>
         <a href="/os/vpn-vyos/" >VPN VyOS setup</a></card>
-        <p>VPN VyOS VyOS is a fully open source network OS that runs on a wide range of hardware, virtual machines, and cloud providers and offers features for any networks, small and large.
-VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
- Customize the setup script
-#!/bin/bash source /opt/vyatta/etc/functions/script-template AWS_PRIVATE_IP=10.104.16.128 AWS_PUBLIC_IP=13.14.15.16 AWS_NAT_SUBNET=10.104.0.0/16 REMOTE_NAT_IP=127.17.12.172 REMOTE_VPN_SUBNET=146.164.46.0/24 REMOTE_1ST_VPN_IP=202.22.20.2 # REMOTE_2ND_VPN_IP=202.22.2.20 # redundant connection not currently used REMOTE_PRE_SHARED_KEY=Your_Remote_Key # begin configuration configure # input settings using set set system host-name vyos-vpn # setting up NAT set interfaces ethernet eth0 description 'aws-internal' # create dummy ethernet device to represent REMOTE-provided private IP set interfaces dummy dum0 address ${REMOTE_NAT_IP}/32 set interfaces dummy dum0 description 'remote-vpn-ip' # configure SNAT set nat source rule 100 description 'Internal to REMOTE' set nat source rule 100 destination address ${REMOTE_VPN_SUBNET} set nat source rule 100 outbound-interface 'any' set nat source rule 100 source address ${AWS_NAT_SUBNET} set nat source rule 100 translation address ${REMOTE_NAT_IP} # setting up VPN # set primary ethernet interface as the VPN interface set vpn ipsec ipsec-interfaces interface 'eth0' set vpn ipsec nat-traversal 'enable' set vpn ipsec logging log-modes 'all' # esp-group set vpn ipsec esp-group vpn-nat-esp compression 'disable' set vpn ipsec esp-group vpn-nat-esp lifetime '28800' set vpn ipsec esp-group vpn-nat-esp mode 'tunnel' set vpn ipsec esp-group vpn-nat-esp pfs 'dh-group2' set vpn ipsec esp-group vpn-nat-esp proposal 1 encryption 'aes256' set vpn ipsec esp-group vpn-nat-esp proposal 1 hash 'sha1' # ike-group set vpn ipsec ike-group vpn-nat-ike ikev2-reauth 'no' set vpn ipsec ike-group vpn-nat-ike key-exchange 'ikev1' set vpn ipsec ike-group vpn-nat-ike lifetime '28800' set vpn ipsec ike-group vpn-nat-ike proposal 1 encryption 'aes256' set vpn ipsec ike-group vpn-nat-ike proposal 1 hash 'sha512' set vpn ipsec ike-group vpn-nat-ike proposal 1 dh-group '5' set vpn ipsec ike-group vpn-nat-ike dead-peer-detection action 'restart' set vpn ipsec ike-group vpn-nat-ike dead-peer-detection interval '30' set vpn ipsec ike-group vpn-nat-ike dead-peer-detection timeout '30' # site-to-site peer edit vpn ipsec site-to-site peer ${REMOTE_NSW_VPN_IP} set authentication mode 'pre-shared-secret' set authentication pre-shared-secret ${REMOTE_PRE_SHARED_KEY} set authentication id ${AWS_PUBLIC_IP} set connection-type 'initiate' set default-esp-group 'vpn-nat-esp' set ike-group 'vpn-nat-ike' set ikev2-reauth 'inherit' set local-address ${AWS_PRIVATE_IP} set tunnel 0 local prefix ${REMOTE_NAT_IP}/32 set tunnel 0 remote prefix ${REMOTE_VPN_SUBNET} # commit command applies changes to VyOS device commit # save configuration to machine save # exit configuration mode exit # check status of VPN tunnel show vpn ipsec sa # commands to check VPN status/logs/information: # monitor vpn ipsec # show vpn debug # show log vpn ipsec   Update VyOS config  Manual update the key Your_Remote_Key or remote IP, e.</p>
+        <p><span>VPN VyOS setup ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 </span>
 
 <span><card>
@@ -1175,13 +1170,11 @@ VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
 
 <span><card>
         <a href="/os/ubuntu-server-16/" >Ubuntu 16 server note</a></card>
-        <p>Prelude
- This article is mainly to help experienced user install and setup Ubuntu 16 LTS Server. If you are looking for the information for Ubuntu 14, please go to the page Ubuntu 14 server setup
- Prerequisites  You are familiar with Ubuntu, at least you have some experience working on Linux system. You are familiar with basic bash/shell command  Wireless Setup  If you install ubuntu server on a laptop, you might end up to setup the wifi first.</p>
+        <p><span>Ubuntu 16 server note ...   &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 </span>
 
 <span><card>
-        <a href="/os/centos-server-7/" >CentOS 7 Server note</a></card>
+        <a href="/os/centos-server-7/" >CentOS 7 Server</a></card>
         <p>Prelude
  This article is mainly to help experienced user install and setup CentOS 7 Server.
  Prerequisites  You are familiar with CentOS, at least you have some experience working on Linux system. You are familiar with basic bash/shell command  Things to do after installing CentOS server  How to setup your server  Firewall setup sudo firewall-cmd --permanent --add-port=22/tcp sudo firewall-cmd --permanent --add-port=21/tcp sudo firewall-cmd --permanent --add-port=80/tcp sudo firewall-cmd --permanent --add-port=443/tcp sudo firewall-cmd --permanent --add-port=8080/tcp sudo firewall-cmd --reload  SSH server setup !</p>
@@ -1224,7 +1217,7 @@ VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/hacks/vbox-notes/" title="VirtualBox Notes"> <i class="fa fa-chevron-left"></i><label>VirtualBox Notes</label></a>
-    <a class="nav nav-next" href="/os/amazon-linux-2/" title="Amazon Linux 2 setup" style="margin-right: 0px;"><label>Amazon Linux 2 setup</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/os/amazon-linux-2/" title="Amazon Linux 2 " style="margin-right: 0px;"><label>Amazon Linux 2 </label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
