@@ -21,6 +21,29 @@
     </item>
     
     <item>
+      <title>VPN StrongSwam setup</title>
+      <link>/os/vpn-strongswam/</link>
+      <pubDate>Tue, 04 Dec 2018 14:59:31 +1100</pubDate>
+      
+      <guid>/os/vpn-strongswam/</guid>
+      <description>VPN StrongSwan strongSwan is a multiplatform IPsec implementation. The focus of the project is on strong authentication mechanisms using X.509 public key certificates and optional secure storage of private keys and certificates on smartcards through a standardized PKCS#11 interface and on TPM 2.0.
+Launch an instance with Ubuntu Update setup script  Following is setup.sh
+#!/bin/bash usage() { echo &amp;quot;Usage: strongswan.sh [install|start] [PATADDR] [ETHDEV] &#39;install&#39; parameters: PATADDR The private address on MARKETNET (eg.</description>
+    </item>
+    
+    <item>
+      <title>VPN VyOS setup</title>
+      <link>/os/vpn-vyos/</link>
+      <pubDate>Tue, 04 Dec 2018 14:59:31 +1100</pubDate>
+      
+      <guid>/os/vpn-vyos/</guid>
+      <description>VPN VyOS VyOS is a fully open source network OS that runs on a wide range of hardware, virtual machines, and cloud providers and offers features for any networks, small and large.
+VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
+ Customize the setup script
+#!/bin/bash source /opt/vyatta/etc/functions/script-template AWS_PRIVATE_IP=10.104.16.128 AWS_PUBLIC_IP=13.14.15.16 AWS_NAT_SUBNET=10.104.0.0/16 REMOTE_NAT_IP=127.17.12.172 REMOTE_VPN_SUBNET=146.164.46.0/24 REMOTE_1ST_VPN_IP=202.22.20.2 # REMOTE_2ND_VPN_IP=202.22.2.20 # redundant connection not currently used REMOTE_PRE_SHARED_KEY=Your_Remote_Key # begin configuration configure # input settings using set set system host-name vyos-vpn # setting up NAT set interfaces ethernet eth0 description &#39;aws-internal&#39; # create dummy ethernet device to represent REMOTE-provided private IP set interfaces dummy dum0 address ${REMOTE_NAT_IP}/32 set interfaces dummy dum0 description &#39;remote-vpn-ip&#39; # configure SNAT set nat source rule 100 description &#39;Internal to REMOTE&#39; set nat source rule 100 destination address ${REMOTE_VPN_SUBNET} set nat source rule 100 outbound-interface &#39;any&#39; set nat source rule 100 source address ${AWS_NAT_SUBNET} set nat source rule 100 translation address ${REMOTE_NAT_IP} # setting up VPN # set primary ethernet interface as the VPN interface set vpn ipsec ipsec-interfaces interface &#39;eth0&#39; set vpn ipsec nat-traversal &#39;enable&#39; set vpn ipsec logging log-modes &#39;all&#39; # esp-group set vpn ipsec esp-group vpn-nat-esp compression &#39;disable&#39; set vpn ipsec esp-group vpn-nat-esp lifetime &#39;28800&#39; set vpn ipsec esp-group vpn-nat-esp mode &#39;tunnel&#39; set vpn ipsec esp-group vpn-nat-esp pfs &#39;dh-group2&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 encryption &#39;aes256&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 hash &#39;sha1&#39; # ike-group set vpn ipsec ike-group vpn-nat-ike ikev2-reauth &#39;no&#39; set vpn ipsec ike-group vpn-nat-ike key-exchange &#39;ikev1&#39; set vpn ipsec ike-group vpn-nat-ike lifetime &#39;28800&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 encryption &#39;aes256&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 hash &#39;sha512&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 dh-group &#39;5&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection action &#39;restart&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection interval &#39;30&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection timeout &#39;30&#39; # site-to-site peer edit vpn ipsec site-to-site peer ${REMOTE_NSW_VPN_IP} set authentication mode &#39;pre-shared-secret&#39; set authentication pre-shared-secret ${REMOTE_PRE_SHARED_KEY} set authentication id ${AWS_PUBLIC_IP} set connection-type &#39;initiate&#39; set default-esp-group &#39;vpn-nat-esp&#39; set ike-group &#39;vpn-nat-ike&#39; set ikev2-reauth &#39;inherit&#39; set local-address ${AWS_PRIVATE_IP} set tunnel 0 local prefix ${REMOTE_NAT_IP}/32 set tunnel 0 remote prefix ${REMOTE_VPN_SUBNET} # commit command applies changes to VyOS device commit # save configuration to machine save # exit configuration mode exit # check status of VPN tunnel show vpn ipsec sa # commands to check VPN status/logs/information: # monitor vpn ipsec # show vpn debug # show log vpn ipsec   Update VyOS config  Manual update the key Your_Remote_Key or remote IP, e.</description>
+    </item>
+    
+    <item>
       <title>Dual Boot Windows 10 &amp; Ubuntu 18</title>
       <link>/os/dual-boot-win10-ubuntu18/</link>
       <pubDate>Fri, 30 Nov 2018 14:59:31 +1100</pubDate>
