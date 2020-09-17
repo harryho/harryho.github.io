@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-17T22:51:56 AEST">
+<meta name="revised" content="2020-09-17T23:03:11 AEST">
 <title>AWS: RDS - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1254,6 +1254,28 @@ GO
 <li><p>You can&rsquo;t reduce the amount of storage for a DB instance after storage has been allocated.</p></li>
 </ul>
 
+<h3 id="rename-database">Rename database</h3>
+
+<ul>
+<li><p>Rename db with built-in stored proc</p>
+
+<pre><code class="language-sql">EXEC rdsadmin.dbo.rds_modify_db_name N'&lt;OldName&gt;', N'&lt;NewName&gt;'
+</code></pre></li>
+
+<li><p>Troubleshoot -The database could not be exclusively locked to perform the operation.</p>
+
+<pre><code class="language-sql"># Kill connection
+EXEC sp_who 
+GO
+
+KILL &lt;spid&gt;
+GO
+
+EXEC sp_who 
+GO
+</code></pre></li>
+</ul>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1270,6 +1292,7 @@ GO
 <li><a href="#restore-db-into-rds">Restore DB into RDS</a></li>
 <li><a href="#caveat">Caveat</a></li>
 </ul></li>
+<li><a href="#rename-database">Rename database</a></li>
 </ul></li>
 </ul></li>
 </ul>
