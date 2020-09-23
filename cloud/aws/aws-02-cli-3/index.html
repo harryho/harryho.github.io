@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-17T23:03:10 AEST">
+<meta name="revised" content="2020-09-23T15:38:09 AEST">
 <title>AWS : CLI - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1173,22 +1173,20 @@ aws ec2 --profile $PROFILE describe-security-groups \
 }
 
 __get_perm() {
-PROFILE=$1
-if [[ $PROFILE == &quot;ssh&quot; ]]; then
+PROTOCOL=$1
+if [[ $PROTOCOL == &quot;ssh&quot; ]]; then
 PERM='[{&quot;IpProtocol&quot;:&quot;tcp&quot;,&quot;FromPort&quot;:22,&quot;ToPort&quot;:22,&quot;IpRanges&quot;:[{&quot;CidrIp&quot;:&quot;IP_ADDRESS/32&quot;}]}]'
-elif [[ $PROFILE == &quot;rdp&quot; ]]; then
+elif [[ $PROTOCOL == &quot;rdp&quot; ]]; then
 PERM='[{&quot;IpProtocol&quot;:&quot;tcp&quot;,&quot;FromPort&quot;:3389,&quot;ToPort&quot;:3389,&quot;IpRanges&quot;:[{&quot;CidrIp&quot;:&quot;IP_ADDRESS/32&quot;}]}]'
 fi
-
 echo $PERM
 }
 
 __get_desc() {
-PROFILE=$1
-
-if [[ $PROFILE == &quot;ssh&quot; ]]; then
+PROTOCOL=$1
+if [[ $PROTOCOL == &quot;ssh&quot; ]]; then
 DESC='[{&quot;IpProtocol&quot;:&quot;tcp&quot;,&quot;FromPort&quot;:22,&quot;ToPort&quot;:22,&quot;IpRanges&quot;:[{&quot;CidrIp&quot;:&quot;IP_ADDRESS/32&quot;,&quot;Description&quot;:&quot;Harry&quot;}]}]'
-elif [[ $PROFILE == &quot;rdp&quot; ]]; then
+elif [[ $PROTOCOL == &quot;rdp&quot; ]]; then
 DESC='[{&quot;IpProtocol&quot;:&quot;tcp&quot;,&quot;FromPort&quot;:3389,&quot;ToPort&quot;:3389,&quot;IpRanges&quot;:[{&quot;CidrIp&quot;:&quot;IP_ADDRESS/32&quot;,&quot;Description&quot;:&quot;Harry&quot;}]}]'
 fi
 echo $DESC
@@ -1196,7 +1194,6 @@ echo $DESC
 
 
 __show_ips() {
-PROFILE=$1
 aws ec2 --profile $PROFILE \
 describe-security-groups \
 --output json \
@@ -1204,15 +1201,15 @@ describe-security-groups \
 }
 
 __update_sg() {
-PROFILE=$1
+PROTOCOL=$1
 SGID=$2
 OIP=$3
 NIP=$4
 
 echo $PROFILE $SG $OIP $NIP | tee -a $LOG
 
-PERM=$(__get_perm $PROFILE)
-DESC=$(__get_desc $PROFILE)
+PERM=$(__get_perm $PROTOCOL)
+DESC=$(__get_desc $PROTOCOL)
 
 OLD_PERM=${PERM/&quot;IP_ADDRESS&quot;/$OIP}
 NEW_PERM=${PERM/&quot;IP_ADDRESS&quot;/$NIP}
@@ -1256,7 +1253,7 @@ echo &quot; :::::::::::: PROFILE - rdp :::::::::::: &quot; | tee -a $LOG
 for SG in &quot;${RDP_SG_LIST[@]}&quot;; do
 __update_sg rdp $SG $OIP $NIP
 done
-__show_ips rdp
+__show_ips
 }
 
 # Update the rule with SSH 
@@ -1272,7 +1269,7 @@ echo &quot; :::::::::::: PROFILE - ssh :::::::::::: &quot; | tee -a $LOG
 for SG in &quot;${SSH_SG_LIST[@]}&quot;; do
 __update_sg ssh $SG $OIP $NIP
 done
-__show_ips ssh
+__show_ips
 }
 
 
@@ -1281,7 +1278,7 @@ echo 'Start...' $(date) | tee -a $LOG
 
 PROFILE=$1
 
-echo 'profile $PROFILE ' | tee -a $LOG
+echo &quot;profile $PROFILE &quot; | tee -a $LOG
 
 echo 'You can pass profile name as 1st parameter to overwrite the default setting.'
 
@@ -1305,6 +1302,13 @@ main $@
 
 </code></pre></li>
 </ul></li>
+
+<li><p>How to use
+&gt; ./update_sg.sh <profile_name></p>
+
+<pre><code>./update_sg.sh profile_A 
+./update_sg.sh profile_B 
+</code></pre></li>
 </ul>
 
     </div>
