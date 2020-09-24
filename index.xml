@@ -188,10 +188,10 @@ sudo vi /etc/default/ufw  Make sure &amp;ldquo;IPV6&amp;rdquo; is set to &amp;ld
     
     <item>
       <title>AWS: VPC - 2</title>
-      <link>/cloud/aws/aws-04-vpc-2/</link>
+      <link>/cloud/aws/aws-03-vpc-2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-04-vpc-2/</guid>
+      <guid>/cloud/aws/aws-03-vpc-2/</guid>
       <description>VPC Part 2 VPC has an implicit router (implied router), and you use route tables to control where network traffic is directed.
 Route table  Have up to 200 route tables per VPC Have up to 50 route entries per route table Each subnet must be associated with only one route table The subent (when created) will be associated with main (default) VPC route table Can change the subnet association to another route table Can NOT delete the main route table Every route table in a VPC comes with a default rule that allows all VPC subnets to comminunicate with one another.</description>
     </item>
@@ -237,10 +237,10 @@ Route table  Have up to 200 route tables per VPC Have up to 50 route entries per
     
     <item>
       <title>AWS: VPC - 3</title>
-      <link>/cloud/aws/aws-05-vpc-3/</link>
+      <link>/cloud/aws/aws-03-vpc-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-05-vpc-3/</guid>
+      <guid>/cloud/aws/aws-03-vpc-3/</guid>
       <description>VPC Part 3 Endpoint A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 Endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between instances in your VPC and services without imposing availability risks or bandwidth constraints on your network traffic.</description>
     </item>
@@ -267,10 +267,10 @@ Endpoints are virtual devices. They are horizontally scaled, redundant, and high
     
     <item>
       <title>AWS: VPC - 4</title>
-      <link>/cloud/aws/aws-06-vpc-4/</link>
+      <link>/cloud/aws/aws-03-vpc-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-06-vpc-4/</guid>
+      <guid>/cloud/aws/aws-03-vpc-4/</guid>
       <description>VPC Part 4 Simples demo  Diagram of customized VPC - MyDemoVPC with Internet Gatway and VPN connect  mermaid.initialize({startOnLoad:true}); graph LR InternetGW(Internet Gateway) VirtualGW(Virtual Gateway) INTER(Internet - Public) InternetGW --- INTER VirtualGW --- SERVER subgraph MyDemoVPC EC2_A(EC2 Instannce A) EC2_B(EC2 Instannce B) EC2_E(EC2 Instannce E) EC2_F(EC2 Instannce F) EC2_C[(Database Master)] EC2_D[(Database Slave)] MainRouteTable(10.0.0.0/16) PrvSubnet(10.0.2.0/24) PubSubnet(10.0.1.0/24) VPNSubnet(10.0.3.0/24) MainRouteTable --- InternetGW MainRouteTable --- NetworkACL NetworkACL --- PubSecGrp NetworkACL --- PrivSecGrp PrivSecGrp --- PrvSubnet VPNSubnet --- VirtualGW VPNSubnet --- MainRouteTable PubSecGrp --- PubSubnet subgraph Implied_Router MainRouteTable(10.</description>
     </item>
     
@@ -296,11 +296,53 @@ Endpoints are virtual devices. They are horizontally scaled, redundant, and high
     </item>
     
     <item>
-      <title>AWS: VPC - 5</title>
-      <link>/cloud/aws/aws-07-vpc-5/</link>
+      <title>AWS: S3 - 1</title>
+      <link>/cloud/aws/aws-04-s3-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-07-vpc-5/</guid>
+      <guid>/cloud/aws/aws-04-s3-1/</guid>
+      <description>S3 Part 1 Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance.
+Storage feature Amazon S3 has various features you can use to organize and manage your data in ways that support specific use cases, enable cost efficiencies, enforce security, and meet compliance requirements. Data is stored as objects within resources called “buckets”, and a single object can be up to 5 terabytes in size.</description>
+    </item>
+    
+    <item>
+      <title>AWS: S3 - 2</title>
+      <link>/cloud/aws/aws-04-s3-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-04-s3-2/</guid>
+      <description>S3 Part 2 Access Access status The list buckets view shows whether your bucket is publicly accessible. Amazon S3 labels the permissions for a bucket as follows:
+ Public – Everyone has access to one or more of the following: List objects, Write objects, Read and write permissions.
+ Objects can be public – The bucket is not public, but anyone with the appropriate permissions can grant public access to objects.</description>
+    </item>
+    
+    <item>
+      <title>AWS: S3 - 3</title>
+      <link>/cloud/aws/aws-04-s3-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-04-s3-3/</guid>
+      <description>Use Case Problem Block all traffic to my Amazon Simple Storage Service (Amazon S3) bucket unless the traffic is from specific Amazon Virtual Private Cloud (VPC) endpoints or certain external IP addresses.
+Resolution Use a bucket policy to specify which VPC endpoints or external IP addresses can access the S3 bucket.
+ Note: An external IP address is a public IP address that can be from within a VPC or outside of a VPC.</description>
+    </item>
+    
+    <item>
+      <title>AWS: SQS,SNS,SES - 2</title>
+      <link>/cloud/aws/aws-05-ses-sqs-sns-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-05-ses-sqs-sns-2/</guid>
+      <description>Use Case Overview mermaid.initialize({startOnLoad:true}); graph LR Sender_Email(&#34;test@test.com&#34;) Email_Failed Email_Delivered SNS_Subscriptions -- Email_Failed SNS_Subscriptions -- Email_Delivered Bounce_Notification -- Email_Failed Complaint_Notification -- Email_Failed Delivery_Notification -- Email_Delivered subgraph SQS subgraph Email_Status_Queue SNS_Subscriptions end end subgraph SNS subgraph Topics Email_Failed Email_Delivered end end subgraph SES Sender_Email subgraph Notifications Bounce_Notification Complaint_Notification Delivery_Notification end end  SNS Setup  Create a topic for failed email, e.g. bounce or spam complaint
+ It is named Email_Failed in the diagram above  Create a topic for delivered email</description>
+    </item>
+    
+    <item>
+      <title>AWS: VPC - 5</title>
+      <link>/cloud/aws/aws-03-vpc-5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/cloud/aws/aws-03-vpc-5/</guid>
       <description>VPC Part 5 Direct Connect AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
 Using industry standard 802.</description>
     </item>
@@ -418,10 +460,10 @@ Let me clarify something first. Advanced command here does not mean that command
     
     <item>
       <title>AWS: EKS - 2</title>
-      <link>/cloud/aws/aws-12-eks-2/</link>
+      <link>/cloud/aws/aws-11-eks-2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-12-eks-2/</guid>
+      <guid>/cloud/aws/aws-11-eks-2/</guid>
       <description>EKS - Part 2 The update process consists of Amazon EKS launching new API server nodes with the updated Kubernetes version to replace the existing ones. Amazon EKS performs standard infrastructure and readiness health checks for network traffic on these new nodes to verify that they are working as expected. If any of these checks fail, Amazon EKS reverts the infrastructure deployment, and your cluster remains on the prior Kubernetes version.</description>
     </item>
     
@@ -437,29 +479,29 @@ Breif history  VBScript/JScript is an Active Scripting language developed by Mic
     
     <item>
       <title>AWS: EKS - 3</title>
-      <link>/cloud/aws/aws-13-eks-3/</link>
+      <link>/cloud/aws/aws-11-eks-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-13-eks-3/</guid>
+      <guid>/cloud/aws/aws-11-eks-3/</guid>
       <description>EKS - Part 3 Cluster Autoscaler The Kubernetes Cluster Autoscaler automatically adjusts the number of nodes in your cluster when pods fail to launch due to lack of resources or when nodes in the cluster are underutilized and their pods can be rescheduled onto other nodes in the cluster.
 Strategy of auto scaling  Stateful application   If you are running a stateful application across multiple Availability Zones that is backed by Amazon EBS volumes and using the Kubernetes Cluster Autoscaler, you should configure multiple node groups, each scoped to a single Availability Zone.</description>
     </item>
     
     <item>
       <title>AWS: EKS - 4</title>
-      <link>/cloud/aws/aws-14-eks-4/</link>
+      <link>/cloud/aws/aws-11-eks-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-14-eks-4/</guid>
+      <guid>/cloud/aws/aws-11-eks-4/</guid>
       <description>EKS - Part 4 VPC Tagging  Key: The  value matches your Amazon EKS cluster&amp;rsquo;s name. Value: The shared value allows more than one cluster to use this VPC.     Key Value     kubernetes.io/cluster/&amp;lt;cluster-name&amp;gt; shared    Load Balancing Amazon EKS supports the Network Load Balancer and the Classic Load Balancer for pods running on Amazon EC2 instance worker nodes through the Kubernetes service of type LoadBalancer.</description>
     </item>
     
     <item>
       <title>AWS: EKS - 5</title>
-      <link>/cloud/aws/aws-15-eks-5/</link>
+      <link>/cloud/aws/aws-11-eks-5/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/cloud/aws/aws-15-eks-5/</guid>
+      <guid>/cloud/aws/aws-11-eks-5/</guid>
       <description>EKS - Part 5 Metrics Server The Kubernetes metrics server is an aggregator of resource usage data in your cluster, and it is not deployed by default in Amazon EKS clusters. The metrics server is commonly used by other Kubernetes add ons, such as the Horizontal Pod Autoscaler or the Kubernetes Dashboard.
  Deploy the metrics server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml  Verify that the metrics-server deployment
