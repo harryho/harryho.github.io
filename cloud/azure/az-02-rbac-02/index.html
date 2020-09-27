@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2020-09-28T01:17:23 AEST">
+<title>Azure: RBAC - 2 :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="Difference - Classic subscription, Azure Roles &amp; Azure AD Roles">
+
+
+
+    
+  </head>
+  <body data-url="/cloud/azure/az-02-rbac-02/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/angular-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular-crm/">
+            Angular 9 CRM Starter Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/docker-toolkits/" class="dd-item">
+        <div>
+          <a href="/projects/docker-toolkits/">
+             Docker Kits
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular4-crm/">
+            Angular 4 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/react-crm/">
+            React Redux CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-crm/">
+            Vue 2 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/kube-cluster/" class="dd-item">
+        <div>
+          <a href="/projects/kube-cluster/">
+            Kubernetes Cluster in 5min
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Console App
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-4/">
+             Generic Predicate &amp; Expression
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            Scheduled task with window service
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-3/">
+            Thread &amp; Task
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/db-sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-2/">
+            MySql: DDL
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-1/">
+            MySql: Getting Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql: JSON
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-3/">
+            MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-1/">
+            Getting started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-2/">
+            Map, Function &amp; Closure
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-3/">
+            Struct &amp; Interface
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-4/">
+            IO, Json &amp; XML
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-5/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-6/">
+            Goroutine &amp; Channel - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-7/">
+            Goroutine &amp; Channel - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-8/">
+            Packaging
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-9/">
+            Pitfalls
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-10/">
+            Template
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-20/">
+            Good practice - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-21/">
+            Good practice - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-22/">
+            Good practice - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-99/">
+            Golang snippets
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-2/">
+            JS &amp; ES Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-3/">
+            JS &amp; ES Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-99/">
+            JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Package &amp; Module
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Closure &amp; Decorator
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            String &amp; Representation
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Iteration
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Inheritance &amp; Polymorphism
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Collection
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Exception &amp; Assertion
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Context
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            ABC
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/rustlang/">Rustlang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-1/">
+            Data Types &amp; Ownership
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Project, Vector, String &amp; Hashmap
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-3/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-4/">
+            Generic Type &amp; Trait 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/bash-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-1/">
+            Adv Bash - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-2/">
+            Adv Bash - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-3/">
+            Adv Bash - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-1/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/cloud/azure/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/cloud/azure/">Azure</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/azure/az-01-caf-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-01/">
+            Azure: CAF - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-01-caf-02/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-02/">
+            Azure: CAF - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-01/">
+            Azure: RBAC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-02/" class="dd-item active">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-02/">
+            Azure: RBAC - 2
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/aws/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/aws/">AWS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/aws/aws-01-iam/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-01-iam/">
+            AWS: IAM
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-1/">
+            AWS : CLI - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-2/">
+            AWS : CLI - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-3/">
+            AWS : CLI - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-1/">
+            AWS: VPC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-2/">
+            AWS: VPC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-3/">
+            AWS: VPC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-4/">
+            AWS: VPC - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-1/">
+            AWS: S3 - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-2/">
+            AWS: S3 - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-3/">
+            AWS: S3 - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-1/">
+            AWS: SQS,SNS,SES - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-2/">
+            AWS: SQS,SNS,SES - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-5/">
+            AWS: VPC - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-1/">
+            AWS: EKS - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-2/">
+            AWS: EKS - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-3/">
+            AWS: EKS - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-4/">
+            AWS: EKS - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-5/">
+            AWS: EKS - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-21-rds-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-21-rds-1/">
+            AWS: RDS - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/digito/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/digito/">Digital Ocean</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/digito/digito-note-1/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-1/">
+            DigitialOcean: Droplet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-2/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-2/">
+            DigitialOcean: Get Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-3/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-3/">
+            DigitialOcean: First Web Host
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-4/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-4/">
+            DigitialOcean: Lets Encrypt
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/windows-command-1/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-1/">
+            Windows cmd &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-2/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-2/">
+            Windows cmd &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-3/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-3/">
+            Windows cmd &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/git-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
+        <div>
+          <a href="/hacks/cass-note/">
+            Cassandra Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/docker-note/" class="dd-item">
+        <div>
+          <a href="/hacks/docker-note/">
+            Docker Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/vbox-notes/">
+            VirtualBox Notes
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/amazon-linux-2/" class="dd-item">
+        <div>
+          <a href="/os/amazon-linux-2/">
+            Amazon Linux 2 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-strongswam/" class="dd-item">
+        <div>
+          <a href="/os/vpn-strongswam/">
+            VPN StrongSwam setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-vyos/" class="dd-item">
+        <div>
+          <a href="/os/vpn-vyos/">
+            VPN VyOS setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/mac-notes/" class="dd-item">
+        <div>
+          <a href="/os/mac-notes/">
+            Macbook Notes
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/k8s-on-vm/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-on-vm/">
+            Try Minikube
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/projects/" >
+   Projects</option>
+    <option value="/coding/" >
+   Coding</option>
+    <option value="/cloud/" >
+   Cloud</option> 
+    <option value="/cloud/azure/" >
+  - 
+   Azure</option> 
+      <option value="/cloud/azure/az-01-caf-01/" >-- Azure: CAF - 1</option>
+      <option value="/cloud/azure/az-01-caf-02/" >-- Azure: CAF - 2</option>
+      <option value="/cloud/azure/az-02-rbac-01/" >-- Azure: RBAC - 1</option>
+      <option value="/cloud/azure/az-02-rbac-02/"  selected>-- Azure: RBAC - 2</option>
+  
+    <option value="/cloud/aws/" >
+  - 
+   AWS</option>
+    <option value="/cloud/digito/" >
+  - 
+   Digital Ocean</option>
+  
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/frameworks/" >
+   Frameworks</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>Azure: RBAC - 2</h1>
+        
+
+<h2 id="roles">Roles</h2>
+
+<ul>
+<li>Classic subscription administrator roles</li>
+<li>Azure roles</li>
+<li>Azure Active Directory (Azure AD) roles</li>
+</ul>
+
+<h3 id="history">History</h3>
+
+<blockquote>
+<p>When Azure was initially released, access to resources was managed with just three administrator roles: Account Administrator, Service Administrator, and Co-Administrator. Later, Azure role-based access control (Azure RBAC) was added. Azure RBAC is a newer authorization system that provides fine-grained access management to Azure resources. Azure RBAC includes many built-in roles, can be assigned at different scopes, and allows you to create your own custom roles. To manage resources in Azure AD, such as users, groups, and domains, there are several Azure AD roles. To manage resources in Azure AD, such as users, groups, and domains, there are several Azure AD roles.</p>
+</blockquote>
+
+<h3 id="high-level-view">High-level view</h3>
+
+<link href="/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
+<script defer src="/mermaid/mermaid.js">mermaid.initialize({startOnLoad:true});</script>
+<div class="mermaid" align="center" >
+graph TB
+    Root(Global Admin,User Access Admin-elevated access)
+    AADT(Azure Active Directtory Tenent)
+    RMG(Root Management Group)
+    MG(Management Group)
+    Sub(Subscriptions, Azure Account, Account Admin)
+    RG(Resource Group)
+    R(Resource)
+    AADT --> Root
+    Root --> RMG
+    GAAA([Global_Admin, Application_Admin])
+    OCRU([Owner,Contributor, Reader,User_Acess_Admin])
+    subgraph Azure_AD_Roles
+        GAAA
+        AADT
+    end
+    Root;
+    subgraph Azure_Roles
+        OCRU
+        RMG --> MG
+        MG --> Sub
+        subgraph Classic_Subscription_Admin_Roles
+            Sub --> RG
+            RG --> R
+        end
+    end
+</div>
+
+<h3 id="classic-subscription-administrator-roles">Classic subscription administrator roles</h3>
+
+<p>Account Administrator, Service Administrator, and Co-Administrator are the three classic subscription administrator roles in Azure. Classic subscription administrators have full access to the Azure subscription.</p>
+
+<p>Classic subscription administrators have full access to the Azure subscription.</p>
+
+<h4 id="account-administrator">Account Administrator</h4>
+
+<ul>
+<li>per Azure account</li>
+<li>Manage billing in the Azure portal</li>
+<li>Manage all subscriptions in an account</li>
+<li>Create new subscriptions</li>
+<li>Cancel subscriptions</li>
+<li>Change the billing for a subscription</li>
+<li>Change the Service Administrator</li>
+<li>Conceptually, the billing owner of the subscription.</li>
+<li>The Account Administrator has no access to the Azure portal.</li>
+</ul>
+
+<h4 id="service-administrator">Service Administrator</h4>
+
+<ul>
+<li>1 per Azure subscription<br /></li>
+<li>Manage services in the Azure portal</li>
+<li>Cancel the subscription</li>
+<li>Assign users to the Co-Administrator role</li>
+<li>By default, for a new subscription, the Account Administrator is also the Service Administrator.</li>
+<li>The Service Administrator has the equivalent access of a user who is assigned the Owner role at the subscription scope.</li>
+<li>The Service Administrator has full access to the Azure portal.</li>
+</ul>
+
+<h4 id="co-administrator">Co-Administrator</h4>
+
+<ul>
+<li>200 per subscription<br /></li>
+<li>Same access privileges as the Service Administrator, but can’t change the association of subscriptions to Azure directories</li>
+<li>Assign users to the Co-Administrator role, but cannot change the Service Administrator</li>
+<li>The Co-Administrator has the equivalent access of a user who is assigned the Owner role at the subscription scope.</li>
+</ul>
+
+<h3 id="azure-account-and-azure-subscriptions">Azure account and Azure subscriptions</h3>
+
+<p>An Azure account represents a billing relationship. An Azure account is a user identity, one or more Azure subscriptions, and an associated set of Azure resources. The person who creates the account is the Account Administrator for all subscriptions created in that account. That person is also the default Service Administrator for the subscription.</p>
+
+<p>Azure subscriptions help you organize access to Azure resources. They also help you control how resource usage is reported, billed, and paid for.</p>
+
+<p>Each subscription can have a different billing and payment setup, so you can have different subscriptions and different plans by office, department, project, and so on.</p>
+
+<h3 id="azure-roles">Azure roles</h3>
+
+<p>Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management to Azure resources.</p>
+
+<h4 id="owner">Owner</h4>
+
+<ul>
+<li>Full access to all resources</li>
+<li>Delegate access to others</li>
+<li>The Service Administrator and Co-Administrators are assigned the Owner role at the subscription scope</li>
+<li>Applies to all resource types.
+<br /></li>
+</ul>
+
+<h4 id="contributor">Contributor</h4>
+
+<ul>
+<li>Create and manage all of types of Azure resources</li>
+<li>Create a new tenant in Azure Active Directory</li>
+<li>Cannot grant access to others</li>
+<li>Applies to all resource types.
+<br /></li>
+</ul>
+
+<h4 id="reader">Reader</h4>
+
+<ul>
+<li>View Azure resources</li>
+<li>Applies to all resource types.</li>
+</ul>
+
+<h4 id="user-access-administrator">User Access Administrator</h4>
+
+<ul>
+<li>Manage user access to Azure resources</li>
+</ul>
+
+<h3 id="azure-ad-roles">Azure AD roles</h3>
+
+<p>Azure AD roles are used to manage Azure AD resources in a directory such as create or edit users, assign administrative roles to others, reset user passwords, manage user licenses, and manage domains.</p>
+
+<h4 id="global-administrator">Global Administrator</h4>
+
+<ul>
+<li>Manage access to all administrative features in Azure Active Directory, as well as services that federate to Azure Active Directory</li>
+<li>Assign administrator roles to others</li>
+<li>Reset the password for any user and all other administrators</li>
+<li>The person who signs up for the Azure Active Directory tenant becomes a Global Administrator.</li>
+</ul>
+
+<h4 id="user-administrator">User Administrator</h4>
+
+<ul>
+<li>Create and manage all aspects of users and groups</li>
+<li>Manage support tickets</li>
+<li>Monitor service health</li>
+<li>Change passwords for users, Helpdesk administrators, and other User Administrators
+<br /></li>
+</ul>
+
+<h4 id="billing-administrator">Billing Administrator</h4>
+
+<ul>
+<li>Make purchases</li>
+<li>Manage subscriptions</li>
+<li>Manage support tickets</li>
+<li>Monitors service health</li>
+</ul>
+
+<h3 id="azure-roles-vs-azure-ad-roles">Azure roles VS Azure AD roles</h3>
+
+<table>
+<thead>
+<tr>
+<th>Azure roles</th>
+<th>Azure AD roles</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Manage access to Azure resources</td>
+<td>Manage access to Azure Active Directory resources</td>
+</tr>
+
+<tr>
+<td>Supports custom roles</td>
+<td>Supports custom roles</td>
+</tr>
+
+<tr>
+<td>Scope can be specified at multiple levels (management group, subscription, resource group, resource)</td>
+<td>Scope is at the tenant level</td>
+</tr>
+
+<tr>
+<td>Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API</td>
+<td>Role information can be accessed in Azure admin portal, Microsoft 365 admin center, Microsoft Graph, AzureAD PowerShell</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="overlap">Overlap</h3>
+
+<p>By default, Azure roles and Azure AD roles do not span Azure and Azure AD. However, if a Global Administrator elevates their access by choosing the Access management for Azure resources switch in the Azure portal, the Global Administrator will be granted the User Access Administrator role (an Azure role) on all subscriptions for a particular tenant.</p>
+
+    </div>
+
+    <div class="toc toc-fixed" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#roles">Roles</a>
+<ul>
+<li><a href="#history">History</a></li>
+<li><a href="#high-level-view">High-level view</a></li>
+<li><a href="#classic-subscription-administrator-roles">Classic subscription administrator roles</a>
+<ul>
+<li><a href="#account-administrator">Account Administrator</a></li>
+<li><a href="#service-administrator">Service Administrator</a></li>
+<li><a href="#co-administrator">Co-Administrator</a></li>
+</ul></li>
+<li><a href="#azure-account-and-azure-subscriptions">Azure account and Azure subscriptions</a></li>
+<li><a href="#azure-roles">Azure roles</a>
+<ul>
+<li><a href="#owner">Owner</a></li>
+<li><a href="#contributor">Contributor</a></li>
+<li><a href="#reader">Reader</a></li>
+<li><a href="#user-access-administrator">User Access Administrator</a></li>
+</ul></li>
+<li><a href="#azure-ad-roles">Azure AD roles</a>
+<ul>
+<li><a href="#global-administrator">Global Administrator</a></li>
+<li><a href="#user-administrator">User Administrator</a></li>
+<li><a href="#billing-administrator">Billing Administrator</a></li>
+</ul></li>
+<li><a href="#azure-roles-vs-azure-ad-roles">Azure roles VS Azure AD roles</a></li>
+<li><a href="#overlap">Overlap</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/cloud/azure/az-02-rbac-01/" title="Azure: RBAC - 1"> <i class="fa fa-chevron-left"></i><label>Azure: RBAC - 1</label></a>
+    <a class="nav nav-next" href="/cloud/aws/" title="AWS" style="margin-right: 0px;"><label>AWS</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>
