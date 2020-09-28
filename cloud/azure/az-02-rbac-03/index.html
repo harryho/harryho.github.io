@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-28T22:08:23 AEST">
-<title>Zend Framework 2 MVC Starter :: Hello World</title>
+<meta name="revised" content="2020-09-28T22:08:22 AEST">
+<title>Azure: RBAC - 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="This starter is the starting point of zend framework 2 MVC project">
+<meta name="description" content="Best practices &amp; Azure AD Privileged Identity Management">
 
 
 
     
   </head>
-  <body data-url="/projects/zf2-mvc-starter/">
+  <body data-url="/cloud/azure/az-02-rbac-03/">
     
       <header>
   <div class="logo">
@@ -61,11 +61,10 @@
             <i class="fa fa-fw fa-home"></i>
           </a>
           </li>
-    <li data-nav-id="/projects/" class="dd-item parent haschildren
+    <li data-nav-id="/projects/" class="dd-item haschildren
         ">
       <div>
-      <a href="/projects/">Projects</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/projects/angular-crm/" class="dd-item">
@@ -131,7 +130,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item active">
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
         <div>
           <a href="/projects/zf2-mvc-starter/">
             Zend Framework 2 MVC Starter
@@ -633,16 +632,18 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/cloud/" class="dd-item haschildren
+    <li data-nav-id="/cloud/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/">Cloud</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
-    <li data-nav-id="/cloud/azure/" class="dd-item haschildren
+    <li data-nav-id="/cloud/azure/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/cloud/azure/">Azure</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/cloud/azure/">Azure</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/cloud/azure/az-01-caf-01/" class="dd-item">
@@ -680,7 +681,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/cloud/azure/az-02-rbac-03/" class="dd-item">
+      <li data-nav-id="/cloud/azure/az-02-rbac-03/" class="dd-item active">
         <div>
           <a href="/cloud/azure/az-02-rbac-03/">
             Azure: RBAC - 3
@@ -1167,23 +1168,28 @@
         <select onchange="javascript:location.href = this.value;">
           
     <option value="/projects/" >
-   Projects</option> 
-      <option value="/projects/angular-crm/" >- Angular 9 CRM Starter Project</option>
-      <option value="/projects/docker-toolkits/" >-  Docker Kits</option>
-      <option value="/projects/python-flat-api/" >- FlatApi - Restful API for python dev</option>
-      <option value="/projects/angular4-crm/" >- Angular 4 CRM Project</option>
-      <option value="/projects/laravel-mvc-starter/" >- Laravel MVC Starter</option>
-      <option value="/projects/react-crm/" >- React Redux CRM Project</option>
-      <option value="/projects/vue2-admin/" >- Vue 2 Admin Project</option>
-      <option value="/projects/vue2-crm/" >- Vue 2 CRM Project</option>
-      <option value="/projects/angularjs-webpack-es6-starter/" >- Angularjs Webpack ES6 Starter</option>
-      <option value="/projects/zf2-mvc-starter/"  selected>- Zend Framework 2 MVC Starter</option>
-      <option value="/projects/kube-cluster/" >- Kubernetes Cluster in 5min</option>
-  
+   Projects</option>
     <option value="/coding/" >
    Coding</option>
     <option value="/cloud/" >
-   Cloud</option>
+   Cloud</option> 
+    <option value="/cloud/azure/" >
+  - 
+   Azure</option> 
+      <option value="/cloud/azure/az-01-caf-01/" >-- Azure: CAF - 1</option>
+      <option value="/cloud/azure/az-01-caf-02/" >-- Azure: CAF - 2</option>
+      <option value="/cloud/azure/az-01-caf-03/" >-- Azure: CAF - 3</option>
+      <option value="/cloud/azure/az-02-rbac-01/" >-- Azure: RBAC - 1</option>
+      <option value="/cloud/azure/az-02-rbac-02/" >-- Azure: RBAC - 2</option>
+      <option value="/cloud/azure/az-02-rbac-03/"  selected>-- Azure: RBAC - 3</option>
+  
+    <option value="/cloud/aws/" >
+  - 
+   AWS</option>
+    <option value="/cloud/digito/" >
+  - 
+   Digital Ocean</option>
+  
     <option value="/hacks/" >
    Hacks</option>
     <option value="/os/" >
@@ -1208,75 +1214,91 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Zend Framework 2 MVC Starter</h1>
+            <h1>Azure: RBAC - 3</h1>
         
 
-<h2 id="summary">Summary</h2>
+<h2 id="best-practices">Best practices</h2>
 
-<p>This starter is the starting point of zend framework 2 MVC project. This application is meant to be used as a starting place for those looking to get their feet wet with ZF2.</p>
+<h3 id="only-grant-the-access-users-need">Only grant the access users need</h3>
 
-<h2 id="features">Features</h2>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Roles</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-</td>
+<td>Reader</td>
+<td>Resource-specific</td>
+<td>Custom</td>
+<td>Contributor</td>
+<td>Owner</td>
+</tr>
+
+<tr>
+<td>Management Group</td>
+<td>Observers</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Admins</td>
+</tr>
+
+<tr>
+<td>Subscriptions</td>
+<td>Observers</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Admins</td>
+</tr>
+
+<tr>
+<td>Resource Group</td>
+<td>Observers</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Users managing resources</td>
+<td>Admins</td>
+</tr>
+
+<tr>
+<td>Resources</td>
+<td>Automated processes</td>
+<td>Automated processes</td>
+<td>Automated processes</td>
+<td>Automated processes</td>
+<td>Automated processes</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="azure-ad-privileged-identity-management">Azure AD Privileged Identity Management</h3>
+
+<p>Privileged Identity Management (PIM) is a service in Azure Active Directory (Azure AD) that enables you to manage, control, and monitor access to important resources in your organization. These resources include resources in Azure AD, Azure, and other Microsoft Online Services such as Microsoft 365 or Microsoft Intune.</p>
+
+<h4 id="what-does-it-do">What does it do</h4>
+
+<p>Privileged Identity Management provides time-based and approval-based role activation to mitigate the risks of excessive, unnecessary, or misused access permissions on resources that you care about.</p>
 
 <ul>
-<li>This starter was built on the zend framework 2.x.</li>
-<li>This starter uses mysql as database setting by default.</li>
-<li>Include digest authentication by default.</li>
-<li>Include font-awesome files.</li>
-<li>Include Bootstrap 3 without bootstrap-loader.</li>
-<li>Include html5shiiv.js to support older IE browser.</li>
+<li>Provide just-in-time privileged access to Azure AD and Azure resources</li>
+<li>Assign time-bound access to resources using start and end dates</li>
+<li>Require approval to activate privileged roles</li>
+<li>Enforce multi-factor authentication to activate any role</li>
+<li>Use justification to understand why users activate</li>
+<li>Get notifications when privileged roles are activated</li>
+<li>Conduct access reviews to ensure users still need roles</li>
+<li>Download audit history for internal or external audit</li>
 </ul>
-
-<h2 id="structure-of-starter">Structure of starter</h2>
-
-<pre><code class="language-bash">
-\path\to\zf2-mvc-starter
-+---config                            // Database, authorizaion, authentication setting
-+---data          
-+---module                            // Customized application sources
-|   +---Application                   // Global module used by whole application
-|   |   +---config
-|   |   |   \---module.config.php     // Register all modules 
-|   |   +---language
-|   |   +---src
-|   |   |   \---Application
-|   |   |       +---Controller
-|   |   |       \---Factory
-|   |   |           \---AuthenticationAdapterFactory.php
-|   |   \---view                      // Contains common master, basic layout files 
-|   |       +---application
-|   |       |   \---index
-|   |       +---error
-|   |       +---layout
-|   |       \---partial
-|   +---BookList                      // Customized module for business purpose
-|   |   +---config
-|   |   +---src
-|   |   |   \---BookList
-|   |   |       +---Controller
-|   |   |       +---Form
-|   |   |       \---Model
-|   |   \---view
-|   |       \---book-list
-|   |           \---book
-|   \---Test
-|       \---config
-+---public                          // Contains all fonts, css, images, and js files
-|   +---css
-|   +---fonts
-|   +---img
-|   \---js
-\---vendor                          // Contains Zend Framework 2 source code
-          
-    
-</code></pre>
-
-<h2 id="screenshot-of-home-page">Screenshot of home page</h2>
-
-<blockquote>
-<p><img src="/img/zf2-mvc-starter.png" alt="zf2-mvc-starter" /></p>
-</blockquote>
-
-<h2 id="browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></h2>
 
     </div>
 
@@ -1285,11 +1307,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#structure-of-starter">Structure of starter</a></li>
-<li><a href="#screenshot-of-home-page">Screenshot of home page</a></li>
-<li><a href="#browse-repository-https-github-com-harryho-zf2-mvc-starter-git">Browse <a href="https://github.com/harryho/zf2-mvc-starter.git">Repository</a></a></li>
+<li><a href="#best-practices">Best practices</a>
+<ul>
+<li><a href="#only-grant-the-access-users-need">Only grant the access users need</a></li>
+<li><a href="#azure-ad-privileged-identity-management">Azure AD Privileged Identity Management</a>
+<ul>
+<li><a href="#what-does-it-do">What does it do</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1301,8 +1326,8 @@
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/projects/angularjs-webpack-es6-starter/" title="Angularjs Webpack ES6 Starter"> <i class="fa fa-chevron-left"></i><label>Angularjs Webpack ES6 Starter</label></a>
-    <a class="nav nav-next" href="/projects/kube-cluster/" title="Kubernetes Cluster in 5min" style="margin-right: 0px;"><label>Kubernetes Cluster in 5min</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/cloud/azure/az-02-rbac-02/" title="Azure: RBAC - 2"> <i class="fa fa-chevron-left"></i><label>Azure: RBAC - 2</label></a>
+    <a class="nav nav-next" href="/cloud/aws/" title="AWS" style="margin-right: 0px;"><label>AWS</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1315,10 +1340,6 @@
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 09/02/2016
-    </div>
     
 
     
