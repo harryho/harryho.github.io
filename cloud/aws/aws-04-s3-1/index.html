@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-09-29T00:26:05 AEST">
+<meta name="revised" content="2020-10-01T09:53:29 AEST">
 <title>AWS: S3 - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -903,6 +903,13 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/hacks/sftp-pgp/" class="dd-item">
+        <div>
+          <a href="/hacks/sftp-pgp/">
+            SFTP &amp; GPG 
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/hacks/git-notes/" class="dd-item">
         <div>
           <a href="/hacks/git-notes/">
@@ -1239,23 +1246,23 @@
 
 <p>Amazon S3 has various features you can use to organize and manage your data in ways that support specific use cases, enable cost efficiencies, enforce security, and meet compliance requirements. Data is stored as objects within resources called “buckets”, and a single object can be up to 5 terabytes in size. Amazon S3 offers a range of storage classes designed for different use cases.</p>
 
-<h3 id="amazon-s3-standard-s3-standard">Amazon S3 Standard (S3 Standard)</h3>
+<h3 id="s3-standard">S3 Standard</h3>
 
 <p>S3 Standard offers high durability, availability, and performance object storage for frequently accessed data. Because it delivers low latency and high throughput, S3 Standard is appropriate for a wide variety of use cases, including cloud applications, dynamic websites, content distribution, mobile and gaming applications, and big data analytics.</p>
 
-<h3 id="amazon-s3-standard-infrequent-access-s3-standard-ia">Amazon S3 Standard-Infrequent Access (S3 Standard-IA)</h3>
+<h3 id="s3-standard-ia-infrequent-access">S3 Standard-IA (Infrequent Access)</h3>
 
 <p>S3 Standard-IA is for data that is accessed less frequently, but requires rapid access when needed. S3 Standard-IA offers the high durability, high throughput, and low latency of S3 Standard, with a low per GB storage price and per GB retrieval fee. This combination of low cost and high performance make S3 Standard-IA ideal for long-term storage, backups, and as a data store for disaster recovery files.</p>
 
-<h3 id="amazon-s3-one-zone-infrequent-access-s3-one-zone-ia">Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)</h3>
+<h3 id="s3-one-zone-ia-infrequent-access">S3 One Zone-IA (Infrequent Access)</h3>
 
 <p>S3 One Zone-IA is for data that is accessed less frequently, but requires rapid access when needed. Unlike other S3 Storage Classes which store data in a minimum of three Availability Zones (AZs), S3 One Zone-IA stores data in a single AZ and costs 20% less than S3 Standard-IA. S3 One Zone-IA is ideal for customers who want a lower-cost option for infrequently accessed data but do not require the availability and resilience of S3 Standard or S3 Standard-IA. It’s a good choice for storing secondary backup copies of on-premises data or easily re-creatable data.</p>
 
-<h3 id="amazon-s3-glacier-s3-glacier">Amazon S3 Glacier (S3 Glacier)</h3>
+<h3 id="s3-glacier">S3 Glacier</h3>
 
 <p>S3 Glacier is a secure, durable, and low-cost storage class for data archiving. You can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions. To keep costs low yet suitable for varying needs, S3 Glacier provides three retrieval options that range from a few minutes to hours.</p>
 
-<h3 id="amazon-s3-glacier-deep-archive-s3-glacier-deep-archive">Amazon S3 Glacier Deep Archive (S3 Glacier Deep Archive)</h3>
+<h3 id="s3-glacier-deep-archive">S3 Glacier Deep Archive</h3>
 
 <p>S3 Glacier Deep Archive is Amazon S3’s lowest-cost storage class and supports long-term retention and digital preservation for data that may be accessed once or twice in a year. It is designed for customers — particularly those in highly-regulated industries, such as the Financial Services, Healthcare, and Public Sectors — that retain data sets for 7-10 years or longer to meet regulatory compliance requirements.</p>
 
@@ -1269,11 +1276,11 @@
 <li><a href="#s3-part-1">S3 Part 1</a>
 <ul>
 <li><a href="#storage-feature">Storage feature</a></li>
-<li><a href="#amazon-s3-standard-s3-standard">Amazon S3 Standard (S3 Standard)</a></li>
-<li><a href="#amazon-s3-standard-infrequent-access-s3-standard-ia">Amazon S3 Standard-Infrequent Access (S3 Standard-IA)</a></li>
-<li><a href="#amazon-s3-one-zone-infrequent-access-s3-one-zone-ia">Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)</a></li>
-<li><a href="#amazon-s3-glacier-s3-glacier">Amazon S3 Glacier (S3 Glacier)</a></li>
-<li><a href="#amazon-s3-glacier-deep-archive-s3-glacier-deep-archive">Amazon S3 Glacier Deep Archive (S3 Glacier Deep Archive)</a></li>
+<li><a href="#s3-standard">S3 Standard</a></li>
+<li><a href="#s3-standard-ia-infrequent-access">S3 Standard-IA (Infrequent Access)</a></li>
+<li><a href="#s3-one-zone-ia-infrequent-access">S3 One Zone-IA (Infrequent Access)</a></li>
+<li><a href="#s3-glacier">S3 Glacier</a></li>
+<li><a href="#s3-glacier-deep-archive">S3 Glacier Deep Archive</a></li>
 </ul></li>
 </ul></li>
 </ul>
