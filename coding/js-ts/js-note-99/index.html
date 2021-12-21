@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>JS &amp; ES snippet :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -388,49 +388,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item parent haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,9 +1226,6 @@
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option> 
@@ -1238,6 +1235,9 @@
       <option value="/coding/js-ts/js-note-99/"  selected>-- JS &amp; ES snippet</option>
       <option value="/coding/js-ts/ts-note-1/" >-- TS: Basic Types</option>
   
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1282,19 +1282,21 @@
 <h3 id="setup-the-global-node-modules">Setup the global node modules</h3>
 
 <ul>
-<li><p>Add an environment variable to tell node where the global node module sits</p>
+<li>Add an environment variable to tell node where the global node module sits</li>
+</ul>
 
 <pre><code class="language-bash"># I use nvm to manage my node and node modules
 export NODE_PATH=${HOME}/.nvm/versions/node/&lt;node_version&gt;/lib/node_modules
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.</p>
 
 <ul>
 <li>Create a new folder under your home directory</li>
 <li>Install npm to new global node module</li>
-
-<li><p>update environment variables in the profile</p>
+<li>update environment variables in the profile</li>
+</ul>
 
 <pre><code class="language-bash">mkdir $HOME/.node_modules
 npm config set prefix $HOME/.node_modules
@@ -1303,7 +1305,6 @@ echo 'export NODE_MODULES=$HOME/.node_modules' &gt;&gt; $HOME/.profile
 echo 'export PATH=$PATH:$NODE_MODULES/bin' &gt;&gt; $HOME/.profile
 source $HOME/.profile
 </code></pre></li>
-</ul></li>
 </ul>
 
 <h3 id="parsing-csv-file">Parsing CSV file</h3>
@@ -1335,7 +1336,8 @@ fs.createReadStream('test.csv')
 <h5 id="sample-2">Sample 2</h5>
 
 <ul>
-<li><p>Validate empty field</p>
+<li>Validate empty field</li>
+</ul>
 
 <pre><code class="language-js">const csv = require('fast-csv')
 const fs = require('fs')
@@ -1345,14 +1347,13 @@ const parser = csv.parse({ ignoreEmpty: true, headers: true, trim: true })
 const invalidFilter
 
 fileStream
-.pipe(parser)
-.validate(data =&gt; data.last_name &amp;&amp; data.mobile.startsWith('04'))
-.on('error', error =&gt; console.error(error))
-.on('data', row =&gt; console.log(`Valid [row=${JSON.stringify(row)}]`))
-.on('data-invalid', (row, rowNumber) =&gt; console.log(`Invalid [rowNumber=${rowNumber}] [row=${JSON.stringify(row)}]`))
-.on('end', rowCount =&gt; console.log(`Parsed ${rowCount} rows`))
-</code></pre></li>
-</ul>
+  .pipe(parser)
+  .validate(data =&gt; data.last_name &amp;&amp; data.mobile.startsWith('04'))
+  .on('error', error =&gt; console.error(error))
+  .on('data', row =&gt; console.log(`Valid [row=${JSON.stringify(row)}]`))
+  .on('data-invalid', (row, rowNumber) =&gt; console.log(`Invalid [rowNumber=${rowNumber}] [row=${JSON.stringify(row)}]`))
+  .on('end', rowCount =&gt; console.log(`Parsed ${rowCount} rows`))
+</code></pre>
 
     </div>
 

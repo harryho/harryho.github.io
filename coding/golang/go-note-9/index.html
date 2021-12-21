@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Pitfalls :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1503,19 +1503,19 @@ func main() {
 <h4 id="don-t-use-booleans">Don’t use booleans:</h4>
 
 <ul>
-<li><p>Making a boolean variable whose value is a test on the error-condition like in the following is superfluous</p>
+<li>Making a boolean variable whose value is a test on the error-condition like in the following is superfluous</li>
+</ul>
 
 <pre><code class="language-go">var good bool
 // test for an error, good becomes true or false
 if !good {
-return errors.New(“things aren’t good”)
+    return errors.New(“things aren’t good”)
 }
 ////--------------
 //... 
 err1 := api.Func1()
 if err1 != nil { … }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="don-t-clutter-your-code-with-error-checking">Don’t clutter your code with error-checking</h4>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Context :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -388,49 +388,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -469,6 +426,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,12 +1226,12 @@
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option> 
@@ -1327,16 +1327,18 @@ with context-manager:
 <li>exit() cleans it up</li>
 </ul></li>
 
-<li><p>Context-manager Protocol</p>
+<li><p>Context-manager Protocol</p></li>
+</ul>
 
 <pre><code class="language-python">__enter__(self)
 
 __exit__(self,
-    exc_type, ## exception type 
-    exc_val,  ## exception object
-    exc_tb)    ## exception traceback
-</code></pre></li>
+        exc_type, ## exception type 
+        exc_val,  ## exception object
+        exc_tb)    ## exception traceback
+</code></pre>
 
+<ul>
 <li><p><code>__enter__()</code></p>
 
 <ul>
@@ -1451,21 +1453,22 @@ if __name__ == &quot;__main__&quot;:
 </code></pre>
 
 <ul>
-<li><p>nested</p>
+<li>nested</li>
+</ul>
 
 <pre><code class="language-python">            
 @contextlib.contextmanager
 def nest_test(name):
-print('Entering', name)
-yield name
-print('Exiting', name)
+    print('Entering', name)
+    yield name
+    print('Exiting', name)
 
 
 
 
 if __name__ == &quot;__main__&quot;:
-with nest_test('outer') as n1, nest_test('inner nested in ' + n1):
-    pass
+    with nest_test('outer') as n1, nest_test('inner nested in ' + n1):
+        pass
 
 ## test result
 ## Entering outer
@@ -1473,52 +1476,53 @@ with nest_test('outer') as n1, nest_test('inner nested in ' + n1):
 ## Exiting inner nested in outer
 ## Exiting outer
             
-</code></pre></li>
+</code></pre>
 
-<li><p>db &amp; transaction</p>
+<ul>
+<li>db &amp; transaction</li>
+</ul>
 
 <pre><code class="language-python">import contextlib
 
 class Connection:
-def __init__(self):
-    self.xid = 0
+    def __init__(self):
+        self.xid = 0
 
-def _start_transaction(self, read_only=True):
-    print('starting transaction', self.xid)
-    rslt = self.xid
-    self.xid = self.xid + 1
-    return rslt
+    def _start_transaction(self, read_only=True):
+        print('starting transaction', self.xid)
+        rslt = self.xid
+        self.xid = self.xid + 1
+        return rslt
 
-def _commit_transaction(self, xid):
-    print('committing transaction', xid)
+    def _commit_transaction(self, xid):
+        print('committing transaction', xid)
 
-def _rollback_transaction(self, xid):
-    print('rolling back transaction', xid)
+    def _rollback_transaction(self, xid):
+        print('rolling back transaction', xid)
 
 class Transaction:
-def __init__(self, conn, read_only=True):
-    self.conn = conn
-    self.xid = conn._start_transaction(read_only=read_only)
+    def __init__(self, conn, read_only=True):
+        self.conn = conn
+        self.xid = conn._start_transaction(read_only=read_only)
 
-def commit(self):
-    self.conn._commit_transaction(self.xid)
+    def commit(self):
+        self.conn._commit_transaction(self.xid)
 
-def rollback(self):
-    self.conn._rollback_transaction(self.xid)
+    def rollback(self):
+        self.conn._rollback_transaction(self.xid)
 
 @contextlib.contextmanager
 def start_transaction(connection):
-tx = Transaction(connection)
+    tx = Transaction(connection)
 
-try:
-    yield tx
-except Exception:
-    tx.rollback()
-    raise
+    try:
+        yield tx
+    except Exception:
+        tx.rollback()
+        raise
 
-tx.commit()
+    tx.commit()
 </code></pre></li>
-</ul></li>
 </ul>
 
 <h3 id="introspection">Introspection</h3>

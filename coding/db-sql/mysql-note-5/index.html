@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>MySql: JSON :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -253,17 +253,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,20 +1226,20 @@
       <option value="/coding/db-sql/mysql-note-2/" >-- MySql: DDL</option>
       <option value="/coding/db-sql/mysql-note-1/" >-- MySql: Getting Started</option>
       <option value="/coding/db-sql/mysql-note-5/"  selected>-- MySql: JSON</option>
-      <option value="/coding/db-sql/mysql-note-4/" >-- MySql: Schema &amp; Metadata</option>
       <option value="/coding/db-sql/mysql-note-3/" >-- MySql: SP &amp; Func</option>
+      <option value="/coding/db-sql/mysql-note-4/" >-- MySql: Schema &amp; Metadata</option>
       <option value="/coding/db-sql/pgsql-note-1/" >-- PostgresQL Note - 1</option>
       <option value="/coding/db-sql/mssql-note-1/" >-- Sql Server Note - 1</option>
   
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1454,80 +1454,86 @@
 <h3 id="export-table-to-json-file">Export table to json file</h3>
 
 <ul>
-<li><p>Return json object</p>
+<li>Return json object</li>
+</ul>
 
 <pre><code class="language-sql">---  Return record as json in query
 SELECT 
 json_object( 
-'entityId',  entityId,
-'categoryName',  categoryName,
-'description',  description,
-'picture',  picture
-) as json, 'Category' 
-FROM  Category 
-WHERE entityId = 1 ; 
-</code></pre></li>
+   'entityId',  entityId,
+   'categoryName',  categoryName,
+   'description',  description,
+   'picture',  picture
+ ) as json, 'Category' 
+  FROM  Category 
+  WHERE entityId = 1 ; 
+</code></pre>
 
-<li><p>Json object result</p>
+<ul>
+<li>Json object result</li>
+</ul>
 
 <pre><code class="language-json">{
-&quot;picture&quot;: null,
-&quot;entityId&quot;: 1,
-&quot;description&quot;: &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
-&quot;categoryName&quot;: &quot;Beverages&quot;
+  &quot;picture&quot;: null,
+  &quot;entityId&quot;: 1,
+  &quot;description&quot;: &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
+  &quot;categoryName&quot;: &quot;Beverages&quot;
 }
 
-</code></pre></li>
+</code></pre>
 
-<li><p>Return record as json array</p>
+<ul>
+<li>Return record as json array</li>
+</ul>
 
 <pre><code class="language-sql">-- Use json_array and json_object functions 
 DROP TEMPORARY TABLE IF EXISTS tmp_json_data;
 
 CREATE TEMPORARY TABLE tmp_json_data (
-jsonText TEXT
+  jsonText TEXT
 ) 
 SELECT 
 json_object( 
-'entityId',  entityId,
-'categoryName',  categoryName,
-'description',  description,
-'picture',  picture
-) as json 
-INTO jsonText
+   'entityId',  entityId,
+   'categoryName',  categoryName,
+   'description',  description,
+   'picture',  picture
+ ) as json 
+  INTO jsonText
 FROM  Category ; 
   
 SET SESSION  group_concat_max_len = 9999;
 
 SELECT concat('[', group_concat(jsonText),']') jsonArray
 FROM tmp_json_data;
-</code></pre></li>
+</code></pre>
 
-<li><p>Json array result</p>
+<ul>
+<li>Json array result</li>
+</ul>
 
 <pre><code class="language-json">[
-{
-  &quot;categoryName&quot; : &quot;Beverages&quot;,
-  &quot;description&quot; : &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
-  &quot;entityId&quot; : 1,
-  &quot;picture&quot; : null
-},
-{
-  &quot;categoryName&quot; : &quot;Condiments&quot;,
-  &quot;description&quot; : &quot;Sweet and savory sauces, relishes, spreads, and seasonings&quot;,
-  &quot;entityId&quot; : 2,
-  &quot;picture&quot; : null
-},
-{
-  &quot;categoryName&quot; : &quot;Confections&quot;,
-  &quot;description&quot; : &quot;Desserts, candies, and sweet breads&quot;,
-  &quot;entityId&quot; : 3,
-  &quot;picture&quot; : null
-}
+    {
+      &quot;categoryName&quot; : &quot;Beverages&quot;,
+      &quot;description&quot; : &quot;Soft drinks, coffees, teas, beers, and ales&quot;,
+      &quot;entityId&quot; : 1,
+      &quot;picture&quot; : null
+    },
+    {
+      &quot;categoryName&quot; : &quot;Condiments&quot;,
+      &quot;description&quot; : &quot;Sweet and savory sauces, relishes, spreads, and seasonings&quot;,
+      &quot;entityId&quot; : 2,
+      &quot;picture&quot; : null
+    },
+    {
+      &quot;categoryName&quot; : &quot;Confections&quot;,
+      &quot;description&quot; : &quot;Desserts, candies, and sweet breads&quot;,
+      &quot;entityId&quot; : 3,
+      &quot;picture&quot; : null
+    }
 ]
 
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 
@@ -1554,7 +1560,7 @@ FROM tmp_json_data;
         <div class="chevrons">
     <div id="navigation">
 <a class="nav nav-prev" href="/coding/db-sql/mysql-note-1/" title="MySql: Getting Started"> <i class="fa fa-chevron-left"></i><label>MySql: Getting Started</label></a>
-    <a class="nav nav-next" href="/coding/db-sql/mysql-note-4/" title="MySql: Schema &amp; Metadata" style="margin-right: 0px;"><label>MySql: Schema &amp; Metadata</label><i class="fa fa-chevron-right"></i></a></div>
+    <a class="nav nav-next" href="/coding/db-sql/mysql-note-3/" title="MySql: SP &amp; Func" style="margin-right: 0px;"><label>MySql: SP &amp; Func</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Debug PHP with Free IDE :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -251,17 +251,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -387,49 +387,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -468,6 +425,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1302,7 +1302,8 @@
 
 <li><p>Type <code>c:\php\php.exe -i | clip</code> to copy the php info to memory. And then paste the content to the input area, and click <code>Analyse my phpinfo() output</code>. It will show the correct file to download.</p></li>
 
-<li><p>Download the dll file and put it into php folder <code>c:\php\ext</code>. Update the <code>php.ini</code> file by adding the following lines at the bottom of file.</p>
+<li><p>Download the dll file and put it into php folder <code>c:\php\ext</code>. Update the <code>php.ini</code> file by adding the following lines at the bottom of file.</p></li>
+</ul>
 
 <pre><code class="language-ini">[XDebug]
 zend_extension=&quot;c:/php/ext/php_xdebug-x.x.x-x.x-vcxx.dll&quot;
@@ -1311,15 +1312,14 @@ xdebug.remote_host=localhost
 xdebug.remote_port=9000
 xdebug.remote_autostart=1
 xdebug.remote_connect_back=1
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="setup-apache-to-load-php">Setup Apache to load PHP</h3>
 
 <ul>
 <li>Add php module loading inside your apache configuration file.</li>
-
-<li><p>On the file <code>c:\apache\conf\httpd.conf</code> with nodepad and update as following setting</p>
+<li>On the file <code>c:\apache\conf\httpd.conf</code> with nodepad and update as following setting</li>
+</ul>
 
 <pre><code class="language-apache">
 ### Update apache root
@@ -1341,7 +1341,7 @@ LoadModule php5_module &quot;c:/php/php5apache2_4.dll&quot;
 AddHandler application/x-httpd-php .php
 
 &lt;FilesMatch \.php$&gt;
-  SetHandler application/x-httpd-php
+      SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;
 
 ### Change origin doc root htdocs 
@@ -1349,12 +1349,11 @@ AddHandler application/x-httpd-php .php
 DocumentRoot &quot;c:/php_workspace/phpsite&quot;
 
 &lt;Directory &quot;c:/php_workspace/phpsite&quot;&gt;
-Options Indexes FollowSymLinks
-AllowOverride All
-Require all granted
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
 &lt;/Directory&gt;
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="debug-php-with-pdt">Debug PHP with PDT</h2>
 
@@ -1429,8 +1428,9 @@ Require all granted
 
 <ul>
 <li>Back the original <code>nginx.conf</code></li>
-
-<li><p>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</p>
+<li>Create a script to launch <code>nginx</code> and <code>php</code> in sequence.</li>
+</ul></li>
+</ul>
 
 <pre><code class="language-dos">@ECHO OFF
 ECHO Start PHP FastCGI...
@@ -1438,44 +1438,43 @@ SET PATH=c:\php;%PATH%
 c:\bin\RunHiddenConsole.exe c:\php\php-cgi.exe -b 127.0.0.1:9000
 ECHO Start Nginx ...
 c:\bin\RunHiddenConsole.exe c:\nginx\nginx.exe 
-</code></pre></li>
+</code></pre>
 
-<li><p>Open the <code>nginx.conf</code> via notepad</p></li>
-
-<li><p>Replace the <code>server</code> block with following setting</p>
+<ul>
+<li>Open the <code>nginx.conf</code> via notepad</li>
+<li>Replace the <code>server</code> block with following setting</li>
+</ul>
 
 <pre><code class="language-nginx">server {
-listen       1234;
-server_name  localhost;
-root          c:/php_workspace/phpsite;
-#charset koi8-r;
+        listen       1234;
+        server_name  localhost;
+        root          c:/php_workspace/phpsite;
+        #charset koi8-r;
 
-### Static
-location / {
-    index  index.php;
-###    try_files $uri $uri/ @missing;
-}
-location ~ /\.ht {
-    deny  all;
-}
-location ~ /\.rewrite {
-    deny  all;
-}
+        ### Static
+        location / {
+            index  index.php;
+        ###    try_files $uri $uri/ @missing;
+        }
+        location ~ /\.ht {
+            deny  all;
+        }
+        location ~ /\.rewrite {
+            deny  all;
+        }
         
-### PHP FastCGI
-location ~ \.php$ {
-    root           c:/php_workspace/phpsite;
-    ### root  html; 
-    fastcgi_pass   127.0.0.1:41234;
-   fastcgi_index  index.php;
-   fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
-   include        fastcgi_params;
-}
+        ### PHP FastCGI
+        location ~ \.php$ {
+            root           c:/php_workspace/phpsite;
+            ### root  html; 
+            fastcgi_pass   127.0.0.1:41234;
+           fastcgi_index  index.php;
+           fastcgi_param  SCRIPT_FILENAME  c:/php_workspace/phpsite/$fastcgi_script_name;
+           include        fastcgi_params;
+        }
 
 }
-</code></pre></li>
-</ul></li>
-</ul>
+</code></pre>
 
 <p>cat file | xclip -selection clipboard</p>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>AWS: SQS,SNS,SES - 2 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -251,17 +251,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -387,49 +387,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -468,6 +425,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1360,7 +1360,8 @@ graph LR
 <h3 id="integration">Integration</h3>
 
 <ul>
-<li><p>Sender code of sample</p>
+<li>Sender code of sample</li>
+</ul>
 
 <pre><code class="language-java">package email.sample;
 
@@ -1368,79 +1369,81 @@ graph LR
 
 public class SesSample {
 
-static final String FROM = &quot;sender@test.com&quot;;
+    static final String FROM = &quot;sender@test.com&quot;;
 
-static final String TO = &quot;recipient@test.com&quot;;
+    static final String TO = &quot;recipient@test.com&quot;;
 
-static final String CONFIGSET = &quot;ConfigSet&quot;;
+    static final String CONFIGSET = &quot;ConfigSet&quot;;
 
-// The subject line for the email.
-static final String SUBJECT = &quot;SES test&quot;;
+    // The subject line for the email.
+    static final String SUBJECT = &quot;SES test&quot;;
 
-// The email body for recipients with non-HTML email clients.
-static final String TEXTBODY = &quot;This email was sent through Amazon SES &quot;
+    // The email body for recipients with non-HTML email clients.
+    static final String TEXTBODY = &quot;This email was sent through Amazon SES &quot;
 
-public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
-    try {
-        AmazonSimpleEmailService client = 
-            AmazonSimpleEmailServiceClientBuilder.standard()
-            // Replace the AWS Region
-                .withRegion(Regions.US_WEST_2).build();
-        SendEmailRequest request = new SendEmailRequest()
-            .withDestination(
-                new Destination().withToAddresses(TO))
-            .withMessage(new Message()
-                .withBody(new Body()
-                    .withText(new Content()
-                        .withCharset(&quot;UTF-8&quot;).withData(TEXTBODY)))
-                .withSubject(new Content()
-                    .withCharset(&quot;UTF-8&quot;).withData(SUBJECT)))
-            .withSource(FROM);
-        client.sendEmail(request);
-        System.out.println(&quot;Email sent!&quot;);
-        } catch (Exception ex) {
-        System.out.println(&quot;Error message: &quot; + ex.getMessage());
+        try {
+            AmazonSimpleEmailService client = 
+                AmazonSimpleEmailServiceClientBuilder.standard()
+                // Replace the AWS Region
+                    .withRegion(Regions.US_WEST_2).build();
+            SendEmailRequest request = new SendEmailRequest()
+                .withDestination(
+                    new Destination().withToAddresses(TO))
+                .withMessage(new Message()
+                    .withBody(new Body()
+                        .withText(new Content()
+                            .withCharset(&quot;UTF-8&quot;).withData(TEXTBODY)))
+                    .withSubject(new Content()
+                        .withCharset(&quot;UTF-8&quot;).withData(SUBJECT)))
+                .withSource(FROM);
+            client.sendEmail(request);
+            System.out.println(&quot;Email sent!&quot;);
+            } catch (Exception ex) {
+            System.out.println(&quot;Error message: &quot; + ex.getMessage());
+        }
     }
 }
-}
 
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample of SQS code</p>
+<ul>
+<li>Sample of SQS code</li>
+</ul>
 
 <pre><code class="language-java">// .....
 public class SqsConsumer {
     
-  public void receive(Object message) throws Exception {
+      public void receive(Object message) throws Exception {
 
-    if (message instanceof CamelMessage) {
-        String body = ((CamelMessage) message).getBodyAs(String.class, camelContext());
-        JsonNode envelope = Json.parse(body);
-        if (envelope.has(&quot;Message&quot;)) {
-            JsonNode notification = Json.parse(envelope.get(&quot;Message&quot;).asText());
-            String notificationType = notification.get(&quot;notificationType&quot;).asText();
+        if (message instanceof CamelMessage) {
+            String body = ((CamelMessage) message).getBodyAs(String.class, camelContext());
+            JsonNode envelope = Json.parse(body);
+            if (envelope.has(&quot;Message&quot;)) {
+                JsonNode notification = Json.parse(envelope.get(&quot;Message&quot;).asText());
+                String notificationType = notification.get(&quot;notificationType&quot;).asText();
 
-            log.debug(&quot;Processing email notification: &quot; + notificationType);
-            switch (notification.get(&quot;notificationType&quot;).asText()) {
-                case &quot;Received&quot;:
-                    received.tell(new EmailActorProtocol.EmailReceived(notification), self());
-                    break;
-                case &quot;Bounce&quot;:
-                    response.tell(new EmailActorProtocol.EmailBounced(notification), self());
-                    break;
-                case &quot;Delivery&quot;:
-                    response.tell(new EmailActorProtocol.EmailDelivered(notification), self());
-                    break;
-                case &quot;Complaint&quot;:
-                    response.tell(new EmailActorProtocol.EmailComplaintReceived(notification), self());
-                    break;
-                default:
-                    throw new RuntimeException(String.format(&quot;Notification type %s not supported&quot;, notificationType));
+                log.debug(&quot;Processing email notification: &quot; + notificationType);
+                switch (notification.get(&quot;notificationType&quot;).asText()) {
+                    case &quot;Received&quot;:
+                        received.tell(new EmailActorProtocol.EmailReceived(notification), self());
+                        break;
+                    case &quot;Bounce&quot;:
+                        response.tell(new EmailActorProtocol.EmailBounced(notification), self());
+                        break;
+                    case &quot;Delivery&quot;:
+                        response.tell(new EmailActorProtocol.EmailDelivered(notification), self());
+                        break;
+                    case &quot;Complaint&quot;:
+                        response.tell(new EmailActorProtocol.EmailComplaintReceived(notification), self());
+                        break;
+                    default:
+                        throw new RuntimeException(String.format(&quot;Notification type %s not supported&quot;, notificationType));
+                }
             }
         }
     }
-}
 }
 
 // EmailActorProtocol 
@@ -1472,8 +1475,7 @@ public class SqsConsumer {
 // }
 
 
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 

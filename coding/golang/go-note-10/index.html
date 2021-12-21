@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Template :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1351,138 +1351,138 @@ Josie
 <h4 id="glob-example">Glob example</h4>
 
 <ul>
-<li><p>demonstrate loading a set of templates from a directory</p>
+<li>demonstrate loading a set of templates from a directory</li>
+</ul>
 
 <pre><code class="language-go">// templateFile defines the contents of a template to be stored in a file, for testing.
 type templateFile struct {
-name     string
-contents string
+    name     string
+    contents string
 }
 
 func createTestDir(files []templateFile) string {
-dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-if err != nil {
-    log.Fatal(err)
-}
-for _, file := range files {
-    f, err := os.Create(filepath.Join(dir, file.name))
+    dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
     if err != nil {
         log.Fatal(err)
     }
-    defer f.Close()
-    _, err = io.WriteString(f, file.contents)
-    if err != nil {
-        log.Fatal(err)
+    for _, file := range files {
+        f, err := os.Create(filepath.Join(dir, file.name))
+        if err != nil {
+            log.Fatal(err)
+        }
+        defer f.Close()
+        _, err = io.WriteString(f, file.contents)
+        if err != nil {
+            log.Fatal(err)
+        }
     }
-}
-return dir
+    return dir
 }
 
 func main() {
-// Here we create a temporary directory and populate it with our sample
-// template definition files; usually the template files would already
-// exist in some location known to the program.
-dir := createTestDir([]templateFile{
-    // T0.tmpl is a plain template file that just invokes T1.
-    {&quot;T0.tmpl&quot;, `T0 invokes T1: ({{template &quot;T1&quot;}})`},
-    // T1.tmpl defines a template, T1 that invokes T2.
-    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-    // T2.tmpl defines a template T2.
-    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-})
-// Clean up after the test; another quirk of running as an example.
-defer os.RemoveAll(dir)
+    // Here we create a temporary directory and populate it with our sample
+    // template definition files; usually the template files would already
+    // exist in some location known to the program.
+    dir := createTestDir([]templateFile{
+        // T0.tmpl is a plain template file that just invokes T1.
+        {&quot;T0.tmpl&quot;, `T0 invokes T1: ({{template &quot;T1&quot;}})`},
+        // T1.tmpl defines a template, T1 that invokes T2.
+        {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
+        // T2.tmpl defines a template T2.
+        {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
+    })
+    // Clean up after the test; another quirk of running as an example.
+    defer os.RemoveAll(dir)
 
-// pattern is the glob pattern used to find all the template files.
-pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
+    // pattern is the glob pattern used to find all the template files.
+    pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
 
-// Here starts the example proper.
-// T0.tmpl is the first name matched, so it becomes the starting template,
-// the value returned by ParseGlob.
-tmpl := template.Must(template.ParseGlob(pattern))
+    // Here starts the example proper.
+    // T0.tmpl is the first name matched, so it becomes the starting template,
+    // the value returned by ParseGlob.
+    tmpl := template.Must(template.ParseGlob(pattern))
 
-err := tmpl.Execute(os.Stdout, nil)
-if err != nil {
-    log.Fatalf(&quot;template execution: %s&quot;, err)
+    err := tmpl.Execute(os.Stdout, nil)
+    if err != nil {
+        log.Fatalf(&quot;template execution: %s&quot;, err)
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="helper-example">Helper example</h4>
 
 <ul>
-<li><p>demonstrates one way to share some templates and use them in different contexts. In this variant we add multiple driver templates by hand to an existing bundle of templates.</p>
+<li>demonstrates one way to share some templates and use them in different contexts. In this variant we add multiple driver templates by hand to an existing bundle of templates.</li>
+</ul>
 
 <pre><code class="language-go">
 // templateFile defines the contents of a template to be stored in a file, for testing.
 type templateFile struct {
-name     string
-contents string
+    name     string
+    contents string
 }
 
 func createTestDir(files []templateFile) string {
-dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
-if err != nil {
-    log.Fatal(err)
-}
-for _, file := range files {
-    f, err := os.Create(filepath.Join(dir, file.name))
+    dir, err := ioutil.TempDir(&quot;&quot;, &quot;template&quot;)
     if err != nil {
         log.Fatal(err)
     }
-    defer f.Close()
-    _, err = io.WriteString(f, file.contents)
-    if err != nil {
-        log.Fatal(err)
+    for _, file := range files {
+        f, err := os.Create(filepath.Join(dir, file.name))
+        if err != nil {
+            log.Fatal(err)
+        }
+        defer f.Close()
+        _, err = io.WriteString(f, file.contents)
+        if err != nil {
+            log.Fatal(err)
+        }
     }
-}
-return dir
+    return dir
 }
 
 func main() {
-// Here we create a temporary directory and populate it with our sample
-// template definition files; usually the template files would already
-// exist in some location known to the program.
-dir := createTestDir([]templateFile{
-    // T1.tmpl defines a template, T1 that invokes T2.
-    {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
-    // T2.tmpl defines a template T2.
-    {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
-})
-// Clean up after the test; another quirk of running as an example.
-defer os.RemoveAll(dir)
+    // Here we create a temporary directory and populate it with our sample
+    // template definition files; usually the template files would already
+    // exist in some location known to the program.
+    dir := createTestDir([]templateFile{
+        // T1.tmpl defines a template, T1 that invokes T2.
+        {&quot;T1.tmpl&quot;, `{{define &quot;T1&quot;}}T1 invokes T2: ({{template &quot;T2&quot;}}){{end}}`},
+        // T2.tmpl defines a template T2.
+        {&quot;T2.tmpl&quot;, `{{define &quot;T2&quot;}}This is T2{{end}}`},
+    })
+    // Clean up after the test; another quirk of running as an example.
+    defer os.RemoveAll(dir)
 
-// pattern is the glob pattern used to find all the template files.
-pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
+    // pattern is the glob pattern used to find all the template files.
+    pattern := filepath.Join(dir, &quot;*.tmpl&quot;)
 
-// Here starts the example proper.
-// Load the helpers.
-templates := template.Must(template.ParseGlob(pattern))
-// Add one driver template to the bunch; we do this with an explicit template definition.
-_, err := templates.Parse(&quot;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&quot;)
-if err != nil {
-    log.Fatal(&quot;parsing driver1: &quot;, err)
-}
-// Add another driver template.
-_, err = templates.Parse(&quot;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&quot;)
-if err != nil {
-    log.Fatal(&quot;parsing driver2: &quot;, err)
-}
-// We load all the templates before execution. This package does not require
-// that behavior but html/template's escaping does, so it's a good habit.
-err = templates.ExecuteTemplate(os.Stdout, &quot;driver1&quot;, nil)
-if err != nil {
-    log.Fatalf(&quot;driver1 execution: %s&quot;, err)
-}
-err = templates.ExecuteTemplate(os.Stdout, &quot;driver2&quot;, nil)
-if err != nil {
-    log.Fatalf(&quot;driver2 execution: %s&quot;, err)
-}
+    // Here starts the example proper.
+    // Load the helpers.
+    templates := template.Must(template.ParseGlob(pattern))
+    // Add one driver template to the bunch; we do this with an explicit template definition.
+    _, err := templates.Parse(&quot;{{define `driver1`}}Driver 1 calls T1: ({{template `T1`}})\n{{end}}&quot;)
+    if err != nil {
+        log.Fatal(&quot;parsing driver1: &quot;, err)
+    }
+    // Add another driver template.
+    _, err = templates.Parse(&quot;{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}&quot;)
+    if err != nil {
+        log.Fatal(&quot;parsing driver2: &quot;, err)
+    }
+    // We load all the templates before execution. This package does not require
+    // that behavior but html/template's escaping does, so it's a good habit.
+    err = templates.ExecuteTemplate(os.Stdout, &quot;driver1&quot;, nil)
+    if err != nil {
+        log.Fatalf(&quot;driver1 execution: %s&quot;, err)
+    }
+    err = templates.ExecuteTemplate(os.Stdout, &quot;driver2&quot;, nil)
+    if err != nil {
+        log.Fatalf(&quot;driver2 execution: %s&quot;, err)
+    }
 }
 
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 

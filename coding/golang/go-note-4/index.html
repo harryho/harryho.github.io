@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>IO, Json &amp; XML :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1325,143 +1325,149 @@ func main() {
 <h4 id="read-from-file">Read from file</h4>
 
 <ul>
-<li><p>Read by lines</p>
+<li>Read by lines</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-inputFile, inputError := os.Open(&quot;hello.go&quot;)
-if inputError != nil {
-    fmt.Printf(&quot;An error occurred on opening the inputfile\n&quot; +
-        &quot;Does the file exist?\n&quot; +
-        &quot;Have you got acces to it?\n&quot;)
-    return // exit the function on error
-}
-defer inputFile.Close()  // Close file before exits the main func
-inputReader := bufio.NewReader(inputFile)
-for {
-    inputString, readerError := inputReader.ReadString('\n')
-    if readerError == io.EOF {
-        return
+    inputFile, inputError := os.Open(&quot;hello.go&quot;)
+    if inputError != nil {
+        fmt.Printf(&quot;An error occurred on opening the inputfile\n&quot; +
+            &quot;Does the file exist?\n&quot; +
+            &quot;Have you got acces to it?\n&quot;)
+        return // exit the function on error
     }
-    fmt.Printf(&quot;The input was: %s&quot;, inputString)
+    defer inputFile.Close()  // Close file before exits the main func
+    inputReader := bufio.NewReader(inputFile)
+    for {
+        inputString, readerError := inputReader.ReadString('\n')
+        if readerError == io.EOF {
+            return
+        }
+        fmt.Printf(&quot;The input was: %s&quot;, inputString)
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <p><strong><em>NOTE: The End-of-line characters of text-files in Unix end on \n, but in Windows this is \r\n. By using the method ReadString or ReadBytes with \n as a delimiter you don’t have to worry about this.</em></strong></p>
 
 <ul>
-<li><p>Read entire file into a string</p>
+<li>Read entire file into a string</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-inputFile := &quot;hello.go&quot;
-outputFile := &quot;hello.go.txt&quot;
-buf, err := ioutil.ReadFile(inputFile)
-if err != nil {
-    fmt.Fprintf(os.Stderr, &quot;File Error: %s\n&quot;, err)
-    // panic(err.Error())
+    inputFile := &quot;hello.go&quot;
+    outputFile := &quot;hello.go.txt&quot;
+    buf, err := ioutil.ReadFile(inputFile)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, &quot;File Error: %s\n&quot;, err)
+        // panic(err.Error())
+    }
+    fmt.Printf(&quot;%s\n&quot;, string(buf))
+    err = ioutil.WriteFile(outputFile, buf, 0x644)
+    if err != nil {
+        panic(err.Error())
+    }
 }
-fmt.Printf(&quot;%s\n&quot;, string(buf))
-err = ioutil.WriteFile(outputFile, buf, 0x644)
-if err != nil {
-    panic(err.Error())
-}
-}
-</code></pre></li>
+</code></pre>
 
-<li><p>Read into buffer</p>
+<ul>
+<li>Read into buffer</li>
+</ul>
 
 <pre><code class="language-go">for {
-n, err := inputReader.Read(buf)
-if (n == 0) { break}
+    n, err := inputReader.Read(buf)
+    if (n == 0) { break}
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Read columns of data, such as csv</p>
-
-<pre><code class="language-go">func main() {
-file, err := os.Open(&quot;csv_data.txt&quot;)
-if err != nil {
-    panic(err)
-}
-defer file.Close()
-var col1, col2, col3 []string
-for {
-    var v1, v2, v3 string
-    _, err := fmt.Fscanln(file, &amp;v1, &amp;v2, &amp;v3)
-    // scans until newline
-    if err != nil {
-        break
-    }
-    col1 = append(col1, v1)
-    col2 = append(col2, v2)
-    col3 = append(col3, v3)
-}
-fmt.Println(&quot; Col 1 &quot;,col1)
-fmt.Println(&quot; Col 3 &quot;,col2)
-fmt.Println(&quot; Col 3 &quot;,col3)
-}
-</code></pre></li>
-
-<li><p>Read from compressed file</p>
-
-<pre><code class="language-go">func main() {
-fName := &quot;public.zip&quot;
-var r *bufio.Reader
-fi, err := os.Open(fName)
-if err != nil {
-    fmt.Fprintf(os.Stderr, &quot;%v, Can’t open %s: error: %s\n&quot;, os.Args[0],
-        fName, err)
-    os.Exit(1)
-}
-fz, err := gzip.NewReader(fi)
-if err != nil {
-    r = bufio.NewReader(fi)
-} else {
-    r = bufio.NewReader(fz)
-}
-for {
-    line, err := r.ReadString('\n')
-    if err != nil {
-
-        fmt.Println(&quot;Done reading file&quot;)
-        os.Exit(0)
-    }
-    fmt.Println(line)
-}
-}
-</code></pre></li>
+<ul>
+<li>Read columns of data, such as csv</li>
 </ul>
+
+<pre><code class="language-go">func main() {
+    file, err := os.Open(&quot;csv_data.txt&quot;)
+    if err != nil {
+        panic(err)
+    }
+    defer file.Close()
+    var col1, col2, col3 []string
+    for {
+        var v1, v2, v3 string
+        _, err := fmt.Fscanln(file, &amp;v1, &amp;v2, &amp;v3)
+        // scans until newline
+        if err != nil {
+            break
+        }
+        col1 = append(col1, v1)
+        col2 = append(col2, v2)
+        col3 = append(col3, v3)
+    }
+    fmt.Println(&quot; Col 1 &quot;,col1)
+    fmt.Println(&quot; Col 3 &quot;,col2)
+    fmt.Println(&quot; Col 3 &quot;,col3)
+}
+</code></pre>
+
+<ul>
+<li>Read from compressed file</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    fName := &quot;public.zip&quot;
+    var r *bufio.Reader
+    fi, err := os.Open(fName)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, &quot;%v, Can’t open %s: error: %s\n&quot;, os.Args[0],
+            fName, err)
+        os.Exit(1)
+    }
+    fz, err := gzip.NewReader(fi)
+    if err != nil {
+        r = bufio.NewReader(fi)
+    } else {
+        r = bufio.NewReader(fz)
+    }
+    for {
+        line, err := r.ReadString('\n')
+        if err != nil {
+
+            fmt.Println(&quot;Done reading file&quot;)
+            os.Exit(0)
+        }
+        fmt.Println(line)
+    }
+}
+</code></pre>
 
 <h4 id="read-with-flag-package">Read with flag package</h4>
 
 <ul>
 <li>The package flag has an extended functionality for parsing of command-line options.</li>
-
-<li><p>flag.PrintDefaults() prints out the usage information of the defined flag(s)</p>
+<li>flag.PrintDefaults() prints out the usage information of the defined flag(s)</li>
+</ul>
 
 <pre><code class="language-go">var NewLine = flag.Bool(&quot;n&quot;, false, &quot;print on newline&quot;)
 
 // echo -n flag, of type *bool
 const (
-Space   = &quot; &quot;
-Newline = &quot;\n&quot;
+    Space   = &quot; &quot;
+    Newline = &quot;\n&quot;
 )
 
 func main() {
-flag.PrintDefaults()
-flag.Parse()
-var s string = &quot;&quot;
-for i := 0; i &lt; flag.NArg(); i++ {
-    if i &gt; 0 {
-        s += Space
+    flag.PrintDefaults()
+    flag.Parse()
+    var s string = &quot;&quot;
+    for i := 0; i &lt; flag.NArg(); i++ {
+        if i &gt; 0 {
+            s += Space
+        }
+        s += flag.Arg(i)
     }
-    s += flag.Arg(i)
-}
-if *NewLine { // -n is parsed, flag becomes true
-    s += Newline
-}
-os.Stdout.WriteString(s)
+    if *NewLine { // -n is parsed, flag becomes true
+        s += Newline
+    }
+    os.Stdout.WriteString(s)
 }
 // :: Output
 // -------------------------
@@ -1475,88 +1481,86 @@ os.Stdout.WriteString(s)
 // Usage of /tmp/go-build701354435/b001/exe/program:
 //   -n    print on newline
 // exit status 2
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="read-with-flag-parsing-buffer">Read with flag parsing &amp; buffer</h4>
 
 <ul>
 <li>Assume there is a file named test.txt with some content</li>
-
-<li><p>Run Command: go build program.go &amp;&amp; ./program test</p>
+<li>Run Command: go build program.go &amp;&amp; ./program test<br /></li>
+</ul>
 
 <pre><code class="language-go">func cat(r *bufio.Reader) {
-for {
-    buf, err := r.ReadBytes('\n')
-    if err == io.EOF {
-        break
+    for {
+        buf, err := r.ReadBytes('\n')
+        if err == io.EOF {
+            break
+        }
+        fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
     }
-    fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
-}
-return
+    return
 }
 func main() {
-flag.Parse()
-if flag.NArg() == 0 {
-    cat(bufio.NewReader(os.Stdin))
-}
-
-for i := 0; i &lt; flag.NArg(); i++ {
-    f, err := os.Open(flag.Arg(i))
-    if err != nil {
-        fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-            os.Args[0], flag.Arg(i), err.Error())
-        continue
+    flag.Parse()
+    if flag.NArg() == 0 {
+        cat(bufio.NewReader(os.Stdin))
     }
-    cat(bufio.NewReader(f))
+
+    for i := 0; i &lt; flag.NArg(); i++ {
+        f, err := os.Open(flag.Arg(i))
+        if err != nil {
+            fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
+                os.Args[0], flag.Arg(i), err.Error())
+            continue
+        }
+        cat(bufio.NewReader(f))
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="read-with-flag-parsing-slice">Read with flag parsing &amp; slice</h4>
 
 <ul>
-<li><p>Only different from previous sample is the cat function</p>
+<li>Only different from previous sample is the cat function</li>
+</ul>
 
 <pre><code class="language-go">func cat(f *os.File) {
-const NBUF = 512
-var buf [NBUF]byte
-for {
-    switch nr, err := f.Read(buf[:]); true {
-    case nr &lt; 0:
-        fmt.Fprintf(os.Stderr, &quot;cat: error reading: %s\n&quot;, err.Error())
-        os.Exit(1)
-    case nr == 0: // EOF
-        return
-    case nr &gt; 0:
-        if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
-            fmt.Fprintf(os.Stderr, &quot;cat: error writing: %s\n&quot;,
-                ew)
+    const NBUF = 512
+    var buf [NBUF]byte
+    for {
+        switch nr, err := f.Read(buf[:]); true {
+        case nr &lt; 0:
+            fmt.Fprintf(os.Stderr, &quot;cat: error reading: %s\n&quot;, err.Error())
+            os.Exit(1)
+        case nr == 0: // EOF
+            return
+        case nr &gt; 0:
+            if nw, ew := os.Stdout.Write(buf[0:nr]); nw != nr {
+                fmt.Fprintf(os.Stderr, &quot;cat: error writing: %s\n&quot;,
+                    ew)
+            }
         }
     }
 }
-}
 
 func main() {
-flag.Parse()
-if flag.NArg() == 0 {
-    cat(os.Stdin)
-}
-
-for i := 0; i &lt; flag.NArg(); i++ {
-    f, err := os.Open(flag.Arg(i))
-    if err != nil {
-        fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
-            os.Args[0], flag.Arg(i), err.Error())
-        os.Exit(1)
+    flag.Parse()
+    if flag.NArg() == 0 {
+        cat(os.Stdin)
     }
-    cat(f)
-    f.Close()
+
+    for i := 0; i &lt; flag.NArg(); i++ {
+        f, err := os.Open(flag.Arg(i))
+        if err != nil {
+            fmt.Fprintf(os.Stderr, &quot;%s:error reading from %s: %s\n&quot;,
+                os.Args[0], flag.Arg(i), err.Error())
+            os.Exit(1)
+        }
+        cat(f)
+        f.Close()
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="write-to-a-file">Write to a file</h4>
 
@@ -1570,130 +1574,132 @@ for i := 0; i &lt; flag.NArg(); i++ {
 <li>os.O_TRUNC : the truncate flag: truncate to size 0 if the file already exists</li>
 </ul></li>
 
-<li><p>Write with buffer</p>
+<li><p>Write with buffer</p></li>
+</ul>
 
 <pre><code class="language-go">func main() {
-outputFile, outputError := os.OpenFile(&quot;output.txt&quot;,
-    os.O_WRONLY|os.O_CREATE, 0666)
-if outputError != nil {
-    fmt.Printf(&quot;An error occurred with file creation\n&quot;)
-    return
+    outputFile, outputError := os.OpenFile(&quot;output.txt&quot;,
+        os.O_WRONLY|os.O_CREATE, 0666)
+    if outputError != nil {
+        fmt.Printf(&quot;An error occurred with file creation\n&quot;)
+        return
+    }
+    defer outputFile.Close()
+    outputWriter := bufio.NewWriter(outputFile)
+    outputString := &quot;hello world!\n&quot;
+    for i := 0; i &lt; 10; i++ {
+        outputWriter.WriteString(outputString)
+    }
+    outputWriter.Flush()
 }
-defer outputFile.Close()
-outputWriter := bufio.NewWriter(outputFile)
-outputString := &quot;hello world!\n&quot;
-for i := 0; i &lt; 10; i++ {
-    outputWriter.WriteString(outputString)
-}
-outputWriter.Flush()
-}
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Write a file without buffer</p>
 
 <ul>
-<li><p>Write the same content as previous sample</p>
-
-<pre><code class="language-go">func main() {
-os.Stdout.WriteString(&quot;hello, world\n&quot;)
-f, _ := os.OpenFile(&quot;output.txt&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer f.Close()
-for i := 0; i &lt; 10; i++ {
-f.WriteString(&quot;hello world!\n&quot;)
-}
-}
-</code></pre></li>
+<li>Write the same content as previous sample</li>
 </ul></li>
 </ul>
+
+<pre><code class="language-go">func main() {
+    os.Stdout.WriteString(&quot;hello, world\n&quot;)
+    f, _ := os.OpenFile(&quot;output.txt&quot;, os.O_CREATE|os.O_WRONLY, 0)
+    defer f.Close()
+    for i := 0; i &lt; 10; i++ {
+        f.WriteString(&quot;hello world!\n&quot;)
+    }
+}
+</code></pre>
 
 <h4 id="write-to-standard-output-interface">Write to standard output: interface</h4>
 
 <ul>
 <li>The interface is fmt.Fprintf</li>
 <li>The fmt.Fprintf writes to a variable of type io.Writer.</li>
-
-<li><p>Any type that has a Write method, including os.Stdout, files (like os.File), pipes, network connections, channels, etc&hellip;, and also to write buffers from the bufio package.</p>
+<li>Any type that has a Write method, including os.Stdout, files (like os.File), pipes, network connections, channels, etc&hellip;, and also to write buffers from the bufio package.</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-// unbuffered: os.Stdout implements io.Writer
-fmt.Fprintf(os.Stdout, &quot;%s\n&quot;, &quot;hello world! - unbuffered&quot;)
-// buffered:
-buf := bufio.NewWriter(os.Stdout)
-// and now so does buf:
-fmt.Fprintf(buf, &quot;%s\n&quot;, &quot;hello world! - buffered&quot;)
-buf.Flush()
+    // unbuffered: os.Stdout implements io.Writer
+    fmt.Fprintf(os.Stdout, &quot;%s\n&quot;, &quot;hello world! - unbuffered&quot;)
+    // buffered:
+    buf := bufio.NewWriter(os.Stdout)
+    // and now so does buf:
+    fmt.Fprintf(buf, &quot;%s\n&quot;, &quot;hello world! - buffered&quot;)
+    buf.Flush()
 }
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="copy">Copy</h4>
 
 <ul>
-<li><p>Simply use io.Copy method</p>
+<li>Simply use io.Copy method</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-CopyFile(&quot;target_hello.txt&quot;, &quot;hello.go&quot;)
-fmt.Println(&quot;Copy done!&quot;)
+    CopyFile(&quot;target_hello.txt&quot;, &quot;hello.go&quot;)
+    fmt.Println(&quot;Copy done!&quot;)
 
 }
 func CopyFile(dstName, srcName string) (written int64, err error) {
-src, err := os.Open(srcName)
-if err != nil {
-    return
+    src, err := os.Open(srcName)
+    if err != nil {
+        return
+    }
+    defer src.Close()
+    dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
+    if err != nil {
+        return
+    }
+    defer dst.Close()
+    return io.Copy(dst, src)
 }
-defer src.Close()
-dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
-if err != nil {
-    return
-}
-defer dst.Close()
-return io.Copy(dst, src)
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="json">JSON</h3>
 
 <ul>
-<li><p>Mapping of Go type and Js type</p>
+<li>Mapping of Go type and Js type
 
 <ul>
 <li>Go: bool -&gt; Js: boolean</li>
 <li>Go: float64 -&gt; Js: numbers</li>
 <li>Go: string -&gt; Js: strings</li>
-
-<li><p>Go: nil -&gt; Js: null</p>
+<li>Go: nil -&gt; Js: null</li>
+</ul></li>
+</ul>
 
 <pre><code class="language-go">type Address struct {
-Type    string
-City    string
-Country string
+    Type    string
+    City    string
+    Country string
 }
 type VCard struct {
-FirstName string
-LastName  string
-Addresses []*Address
-Remark    string
+    FirstName string
+    LastName  string
+    Addresses []*Address
+    Remark    string
 }
 
 func main() {
-pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-// fmt.Printf(&quot;%v: \n&quot;, vc)
-// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-// JSON format:
-js, _ := json.Marshal(vc)
-fmt.Printf(&quot;JSON format: %s&quot;, js)
-// using an encoder:
-file, _ := os.OpenFile(&quot;vcard.json&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer file.Close()
-enc := json.NewEncoder(file)
-err := enc.Encode(vc)
-if err != nil {
-fmt.Println(&quot;Error in encoding json&quot;)
-}
+    pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
+    wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
+    vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
+    // fmt.Printf(&quot;%v: \n&quot;, vc)
+    // {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
+    // JSON format:
+    js, _ := json.Marshal(vc)
+    fmt.Printf(&quot;JSON format: %s&quot;, js)
+    // using an encoder:
+    file, _ := os.OpenFile(&quot;vcard.json&quot;, os.O_CREATE|os.O_WRONLY, 0)
+    defer file.Close()
+    enc := json.NewEncoder(file)
+    err := enc.Encode(vc)
+    if err != nil {
+        fmt.Println(&quot;Error in encoding json&quot;)
+    }
 }
 
 // cat vcard.json | jq  # jq is a tool for json file
@@ -1715,54 +1721,55 @@ fmt.Println(&quot;Error in encoding json&quot;)
 //   ],
 //   &quot;Remark&quot;: &quot;none&quot;
 // }
-</code></pre></li>
-</ul></li>
-</ul>
+</code></pre>
 
 <h3 id="xml">XML</h3>
 
 <ul>
-<li><p>Sample xml</p>
+<li>Sample xml</li>
+</ul>
 
 <pre><code class="language-xml">&lt;Person&gt;
-&lt;FirstName&gt;Laura&lt;/FirstName&gt;
-&lt;LastName&gt;Lynn&lt;/LastName&gt;
+    &lt;FirstName&gt;Laura&lt;/FirstName&gt;
+    &lt;LastName&gt;Lynn&lt;/LastName&gt;
 &lt;/Person&gt;
-</code></pre></li>
+</code></pre>
 
-<li><p>The encoding/xml package also implements a simle xml parser (SAX) to read XML-data and parse it into its constituents.</p>
+<ul>
+<li>The encoding/xml package also implements a simle xml parser (SAX) to read XML-data and parse it into its constituents.</li>
+</ul>
 
 <pre><code class="language-go">
 var t, token xml.Token
 var err error
 
 func main() {
-input :=
-    &quot;&lt;Person&gt;&lt;FirstName&gt;Laura&lt;/FirstName&gt;&lt;LastName&gt;Lynn&lt;/LastName&gt;&lt;/Person&gt;&quot;
-inputReader := strings.NewReader(input)
-p := xml.NewDecoder(inputReader)
-for t, err = p.Token(); err == nil; t, err = p.Token() {
-    switch token := t.(type) {
-    case xml.StartElement:
-        name := token.Name.Local
-        fmt.Printf(&quot;Token name: %s\n&quot;, name)
-        for _, attr := range token.Attr {
-            attrName := attr.Name.Local
-            attrValue := attr.Value
-            fmt.Printf(&quot;An attribute is: %s %s\n&quot;, attrName,
-                attrValue)
+    input :=
+        &quot;&lt;Person&gt;&lt;FirstName&gt;Laura&lt;/FirstName&gt;&lt;LastName&gt;Lynn&lt;/LastName&gt;&lt;/Person&gt;&quot;
+    inputReader := strings.NewReader(input)
+    p := xml.NewDecoder(inputReader)
+    for t, err = p.Token(); err == nil; t, err = p.Token() {
+        switch token := t.(type) {
+        case xml.StartElement:
+            name := token.Name.Local
+            fmt.Printf(&quot;Token name: %s\n&quot;, name)
+            for _, attr := range token.Attr {
+                attrName := attr.Name.Local
+                attrValue := attr.Value
+                fmt.Printf(&quot;An attribute is: %s %s\n&quot;, attrName,
+                    attrValue)
+                // ...
+            }
+        case xml.EndElement:
+            fmt.Println(&quot;End of token&quot;)
+        case xml.CharData:
+            content := string([]byte(token))
+            fmt.Printf(&quot;This is the content: %v\n&quot;, content)
+        // ...
+        default:
             // ...
         }
-    case xml.EndElement:
-        fmt.Println(&quot;End of token&quot;)
-    case xml.CharData:
-        content := string([]byte(token))
-        fmt.Printf(&quot;This is the content: %v\n&quot;, content)
-    // ...
-    default:
-        // ...
     }
-}
 }
 
 //----------------------
@@ -1774,111 +1781,111 @@ for t, err = p.Token(); err == nil; t, err = p.Token() {
 // This is the content: Lynn
 // End of token
 // End of token
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="gob-go-binary-format">Gob - Go binary format</h3>
 
 <ul>
-<li><p>Simulate network communication</p>
+<li>Simulate network communication</li>
+</ul>
 
 <pre><code class="language-go">type P struct {
-X, Y, Z int
-Name    string
+    X, Y, Z int
+    Name    string
 }
 type Q struct {
-X, Y *int32
-Name string
+    X, Y *int32
+    Name string
 }
 
 func main() {
-// Initialize the encoder and decoder. Normally enc and dec would
-// be bound to network connections and the encoder and decoder
-// would run in different processes.
-var network bytes.Buffer
-// Stand-in for a network connection
-enc := gob.NewEncoder(&amp;network) // Will write to network.
-dec := gob.NewDecoder(&amp;network)
-// Will read from network.
-// Encode (send) the value.
-err := enc.Encode(P{3, 4, 5, &quot;Pythagoras&quot;})
-if err != nil {
-    log.Fatal(&quot;encode error:&quot;, err)
+    // Initialize the encoder and decoder. Normally enc and dec would
+    // be bound to network connections and the encoder and decoder
+    // would run in different processes.
+    var network bytes.Buffer
+    // Stand-in for a network connection
+    enc := gob.NewEncoder(&amp;network) // Will write to network.
+    dec := gob.NewDecoder(&amp;network)
+    // Will read from network.
+    // Encode (send) the value.
+    err := enc.Encode(P{3, 4, 5, &quot;Pythagoras&quot;})
+    if err != nil {
+        log.Fatal(&quot;encode error:&quot;, err)
+    }
+    // Decode (receive) the value.
+    var q Q
+    err = dec.Decode(&amp;q)
+    if err != nil {
+        log.Fatal(&quot;decode error:&quot;, err)
+    }
+    fmt.Printf(&quot;%q: {%d,%d}\n&quot;, q.Name, *q.X, *q.Y)
+    // &quot;Pythagoras&quot;: {3,4}
 }
-// Decode (receive) the value.
-var q Q
-err = dec.Decode(&amp;q)
-if err != nil {
-    log.Fatal(&quot;decode error:&quot;, err)
-}
-fmt.Printf(&quot;%q: {%d,%d}\n&quot;, q.Name, *q.X, *q.Y)
-// &quot;Pythagoras&quot;: {3,4}
-}
-</code></pre></li>
+</code></pre>
 
-<li><p>Simulate file operation</p>
+<ul>
+<li>Simulate file operation</li>
+</ul>
 
 <pre><code class="language-go">type Address struct {
-Type    string
-City    string
-Country string
+    Type    string
+    City    string
+    Country string
 }
 type VCard struct {
-FirstName string
-LastName  string
-Addresses []*Address
-Remark    string
+    FirstName string
+    LastName  string
+    Addresses []*Address
+    Remark    string
 }
 
 func main() {
-pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
-wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
-vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
-// fmt.Printf(&quot;%v: \n&quot;, vc)
-// {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
-// using an encoder:
-file, _ := os.OpenFile(&quot;vcard.gob&quot;, os.O_CREATE|os.O_WRONLY, 0)
-defer file.Close()
-enc := gob.NewEncoder(file)
-err := enc.Encode(vc)
-if err != nil {
-    log.Println(&quot;Error in encoding gob&quot;)
+    pa := &amp;Address{&quot;private&quot;, &quot;Aartselaar&quot;, &quot;Belgium&quot;}
+    wa := &amp;Address{&quot;work&quot;, &quot;Boom&quot;, &quot;Belgium&quot;}
+    vc := VCard{&quot;Jan&quot;, &quot;Kersschot&quot;, []*Address{pa, wa}, &quot;none&quot;}
+    // fmt.Printf(&quot;%v: \n&quot;, vc)
+    // {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
+    // using an encoder:
+    file, _ := os.OpenFile(&quot;vcard.gob&quot;, os.O_CREATE|os.O_WRONLY, 0)
+    defer file.Close()
+    enc := gob.NewEncoder(file)
+    err := enc.Encode(vc)
+    if err != nil {
+        log.Println(&quot;Error in encoding gob&quot;)
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="crypto">Crypto</h3>
 
 <ul>
 <li>The hash package: implements the adler32, crc32, crc64 and fnv checksums;</li>
-
-<li><p>The crypto package: implements other hashing algorithms like md4, md5, sha1, etc. and
-complete encryption implementations for aes, blowfish, rc4, rsa, xtea, etc.</p>
+<li>The crypto package: implements other hashing algorithms like md4, md5, sha1, etc. and
+complete encryption implementations for aes, blowfish, rc4, rsa, xtea, etc.</li>
+</ul>
 
 <pre><code class="language-go">
 func main() {
-hasher := sha1.New()
-io.WriteString(hasher, &quot;test&quot;)
-b := []byte{}
-fmt.Printf(&quot;Result: %x\n&quot;, hasher.Sum(b))
-fmt.Printf(&quot;Result: %d\n&quot;, hasher.Sum(b))
-hasher.Reset()
-data := []byte(&quot;We shall overcome!&quot;)
-n, err := hasher.Write(data)
-if n != len(data) || err != nil {
-    log.Printf(&quot;Hash write error: %v / %v&quot;, n, err)
-}
-checksum := hasher.Sum(b)
-fmt.Printf(&quot;Result: %x\n&quot;, checksum)
+    hasher := sha1.New()
+    io.WriteString(hasher, &quot;test&quot;)
+    b := []byte{}
+    fmt.Printf(&quot;Result: %x\n&quot;, hasher.Sum(b))
+    fmt.Printf(&quot;Result: %d\n&quot;, hasher.Sum(b))
+    hasher.Reset()
+    data := []byte(&quot;We shall overcome!&quot;)
+    n, err := hasher.Write(data)
+    if n != len(data) || err != nil {
+        log.Printf(&quot;Hash write error: %v / %v&quot;, n, err)
+    }
+    checksum := hasher.Sum(b)
+    fmt.Printf(&quot;Result: %x\n&quot;, checksum)
 }
 
 //----------------------------------
 // Result: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
 // Result: [169 74 143 229 204 177 155 166 28 76 8 115 211 145 233 135 152 47 187 211]
 // Checksum: e2222bfc59850bbb00a722e764a555603bb59b2a
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 

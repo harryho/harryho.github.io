@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Getting started :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1324,7 +1324,8 @@ GOBIN=/home/<user_account>/ws/go/bin</p></li>
 
 <li><p>Save the program to the location <code>$GOPATH/src</code></p></li>
 
-<li><p>Build, Run &amp; Install the helloworld program <code>hello.go</code></p>
+<li><p>Build, Run &amp; Install the helloworld program <code>hello.go</code></p></li>
+</ul>
 
 <pre><code class="language-bash"># Navigate to hello.go location
 cd $GOPATH/src
@@ -1341,40 +1342,39 @@ go run hello.go
 go install hello.go
 hello
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="assignment-operator">Assignment Operator</h3>
 
 <ul>
-<li><p>The <code>:=</code> operator effectively makes a new variable; it is also called an initializing declaration.This is the preferred form, but it can only be used inside functions, not in package scope.</p>
+<li>The <code>:=</code> operator effectively makes a new variable; it is also called an initializing declaration.This is the preferred form, but it can only be used inside functions, not in package scope.</li>
+</ul>
 
 <pre><code class="language-go">// Multiple declarations on a single line
 a, b, c := 5, 7, “abc”
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="parallel-or-simultaneous-assignment">Parallel or Simultaneous assignment</h3>
 
 <ul>
-<li><p>There is no need to make a swap function in Go</p>
+<li>There is no need to make a swap function in Go</li>
+</ul>
 
 <pre><code class="language-go">// Following code perform a swap function
 a,b = b,a
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="powerful-blank-variable">Powerful blank variable</h3>
 
 <ul>
-<li><p>The blank identifier _ can also be used to throw away values. _ is in effect a write-only variable, you cannot ask for its value. It exists because a declared variable in Go must also be used, and sometimes you don’t need to use all return values from a function.</p>
+<li>The blank identifier _ can also be used to throw away values. _ is in effect a write-only variable, you cannot ask for its value. It exists because a declared variable in Go must also be used, and sometimes you don’t need to use all return values from a function.</li>
+</ul>
 
 <pre><code class="language-go">_, b = &quot;abc&quot;, 7
 // A function return val and error, but error can be ignored.
 
 val, _ = FuncReturnValAndErr(' Ignore the return error ')
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="array-slice">Array &amp; Slice</h3>
 
@@ -1385,12 +1385,13 @@ val, _ = FuncReturnValAndErr(' Ignore the return error ')
 </blockquote>
 
 <ul>
-<li><p>Create an array variable</p>
+<li>Create an array variable</li>
+</ul>
 
 <pre><code class="language-go">var arr1 [5]int;
 
 for  i := range arr1 { 
-fmt.Printf(&quot; index = %d , val = %d \n&quot;, i, arr1[i])
+    fmt.Printf(&quot; index = %d , val = %d \n&quot;, i, arr1[i])
 }
 
 // ----------- Output ---------------
@@ -1399,21 +1400,23 @@ fmt.Printf(&quot; index = %d , val = %d \n&quot;, i, arr1[i])
 //  index = 2 , value = 0 
 //  index = 3 , value = 0 
 //  index = 4 , value = 0 
-</code></pre></li>
+</code></pre>
 
-<li><p>Create an arrary with Array literal</p>
+<ul>
+<li>Create an arrary with Array literal</li>
+</ul>
 
 <pre><code class="language-go">// Print out the array below will get the same output as arr1 above
 var arr2 = [...]int{0,0,0,0,0};
 var arr3 = []int{0,0,0,0,0}; // This is a slice instead of array
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="slice">Slice</h4>
 
 <ul>
-<li><p>A slice is a reference to a contiguous segment(section) of an array (which we will call the underlying array, and which is usually anonymous), so a slice is a reference type (thus more akin to the array type in C/C++, or the list type in Python).</p>
+<li>A slice is a reference to a contiguous segment(section) of an array (which we will call the underlying array, and which is usually anonymous), so a slice is a reference type (thus more akin to the array type in C/C++, or the list type in Python).</li>
+</ul>
 
 <pre><code class="language-go">
 arr := [5]int {1,2,3,4,5}
@@ -1435,8 +1438,7 @@ fmt.Printf( &quot; slice = %v \n&quot;, slice)
 //  slice = [2 3 4 5] 
 //  slice = [1 2 3 4 5] 
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="re-slicing">Re-slicing</h4>
 
@@ -1475,7 +1477,8 @@ func main() {
 
 <li><p>make(T) returns an initialized value of type T; it applies only to the 3 built-in reference types: slices, maps and channels.</p></li>
 
-<li><p>In other words, new allocates; make initializes.</p>
+<li><p>In other words, new allocates; make initializes.</p></li>
+</ul>
 
 <pre><code class="language-go">var p *[]int = new([]int) // *p == nil; with len and cap 0
 // or use assignment operator
@@ -1485,29 +1488,28 @@ var v []int = make([]int, 10, 50)
 // or use assignment operator
 v := make([]int, 10, 50)
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="good-practices">Good practices</h3>
 
 <h4 id="use-buffer-to-concat-string">Use Buffer to concat string</h4>
 
 <ul>
-<li><p>Go has a package bytes with manipulation functions for that kind of type Buffer. The sample below is much more memory and CPU-efficient than +=, especially if the number of strings to concatenate is large.</p>
+<li>Go has a package bytes with manipulation functions for that kind of type Buffer. The sample below is much more memory and CPU-efficient than +=, especially if the number of strings to concatenate is large.</li>
+</ul>
 
 <pre><code class="language-go">var buffer bytes.Buffer
-for {
-    if s, ok := getNextString(); ok { //method getNextString() not shown here
-        buffer.WriteString(s)
-    } else {
-        break
-}
+    for {
+        if s, ok := getNextString(); ok { //method getNextString() not shown here
+            buffer.WriteString(s)
+        } else {
+            break
+    }
 }
 
 fmt.Print(buffer.String(), “\n”)
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="substr">Substr</h4>
 
@@ -1516,14 +1518,14 @@ fmt.Print(buffer.String(), “\n”)
 <h4 id="change-a-character-in-string">Change a character in string</h4>
 
 <ul>
-<li><p>To do this you first have to convert the string to an array of bytes, then an array-item of a certain index can be changed, and then the array must be converted back to a new string.</p>
+<li>To do this you first have to convert the string to an array of bytes, then an array-item of a certain index can be changed, and then the array must be converted back to a new string.</li>
+</ul>
 
 <pre><code class="language-go">str := &quot;golang&quot;
 chars:= []byte(str)
 chars[1] = '0'
 newStr := string(chars) // g0lang
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 

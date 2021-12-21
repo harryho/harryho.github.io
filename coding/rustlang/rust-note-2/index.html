@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Project, Vector, String &amp; Hashmap :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -388,49 +388,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -469,6 +426,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,12 +1226,12 @@
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1366,18 +1366,19 @@ for i in &amp;mut v {
 <h4 id="new-string">New string</h4>
 
 <ul>
-<li><p>use new function</p>
+<li>use new function</li>
+</ul>
 
 <pre><code class="language-rs">let mut s = String::new();
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="updating-a-string">Updating a String</h4>
 
 <ul>
 <li><p>A String can grow in size and its contents by using the push_str method to append a string slice.</p></li>
 
-<li><p>The push method takes a single character as a parameter and adds it to the String.</p>
+<li><p>The push method takes a single character as a parameter and adds it to the String.</p></li>
+</ul>
 
 <pre><code class="language-rs">let mut s1 = String::from(&quot;foo&quot;);
 let s2 = &quot;bar&quot;;
@@ -1388,26 +1389,29 @@ println!(&quot;s2 is {}&quot;, s2);
 let mut s3 = String::from(&quot;lo&quot;);
 s3.push('l'); 
 println!(&quot;s3 is {}&quot;, s3);
-</code></pre></li>
+</code></pre>
 
-<li><p>Concatenation with the + Operator or the format! Macro</p>
+<ul>
+<li>Concatenation with the + Operator or the format! Macro</li>
+</ul>
 
 <pre><code class="language-rs">let s1 = String::from(&quot;Hello, &quot;);
 let s2 = String::from(&quot;world!&quot;);
 let s3 = s1 + &amp;s2; // note s1 has been moved here and can no longer be used
-</code></pre></li>
+</code></pre>
 
-<li><p>Iterates char of string</p>
+<ul>
+<li>Iterates char of string</li>
+</ul>
 
 <pre><code class="language-rs">for c in &quot;नमस्ते&quot;.chars() {
-println!(&quot;{}&quot;, c);
+    println!(&quot;{}&quot;, c);
 }
 
 for b in &quot;नमस्ते&quot;.bytes() {
-println!(&quot;{}&quot;, b);
+    println!(&quot;{}&quot;, b);
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="strings-are-not-so-simple">Strings Are Not So Simple</h4>
 
@@ -1426,7 +1430,8 @@ println!(&quot;{}&quot;, b);
 <h4 id="new-hashmap">New hashmap</h4>
 
 <ul>
-<li><p>create an empty hash map with new and add elements with insert.</p>
+<li>create an empty hash map with new and add elements with insert.</li>
+</ul>
 
 <pre><code class="language-rs">use std::collections::HashMap;
 
@@ -1434,9 +1439,11 @@ let mut scores = HashMap::new();
 
 scores.insert(String::from(&quot;Blue&quot;), 10);
 scores.insert(String::from(&quot;Yellow&quot;), 50);
-</code></pre></li>
+</code></pre>
 
-<li><p>Another way of constructing a hash map is by using the collect method on a vector of tuples, where each tuple consists of a key and its value. The collect method gathers data into a number of collection types, including HashMap.</p>
+<ul>
+<li>Another way of constructing a hash map is by using the collect method on a vector of tuples, where each tuple consists of a key and its value. The collect method gathers data into a number of collection types, including HashMap.</li>
+</ul>
 
 <pre><code class="language-rs">use std::collections::HashMap;
 
@@ -1444,13 +1451,13 @@ let teams  = vec![String::from(&quot;Blue&quot;), String::from(&quot;Yellow&quot
 let initial_scores = vec![10, 50];
 
 let scores: HashMap&lt;_, _&gt; = teams.iter().zip(initial_scores.iter()).collect();
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="hash-maps-and-ownership">Hash Maps and Ownership</h4>
 
 <ul>
-<li><p>For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values.</p>
+<li>For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values.</li>
+</ul>
 
 <pre><code class="language-rs">use std::collections::HashMap;
 
@@ -1463,13 +1470,13 @@ map.insert(field_name, field_value);
 println!(&quot;field_name: {} field_value: {}&quot;, field_name, field_value);
 // error[E0382]: borrow of moved value: `field_name`
 // error[E0382]: borrow of moved value: `field_value`
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="accessing-values-in-a-hash-map">Accessing Values in a Hash Map</h4>
 
 <ul>
-<li><p>get a value out of the hash map by providing its key to the get method</p>
+<li>get a value out of the hash map by providing its key to the get method</li>
+</ul>
 
 <pre><code class="language-rs">use std::collections::HashMap;
 
@@ -1479,10 +1486,9 @@ scores.insert(String::from(&quot;Blue&quot;), 10);
 scores.insert(String::from(&quot;Yellow&quot;), 50);
 
 for (key, value) in &amp;scores {
-println!(&quot;{}: {}&quot;, key, value);
+    println!(&quot;{}: {}&quot;, key, value);
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="updating-a-hash-map">Updating a Hash Map</h4>
 
@@ -1504,23 +1510,23 @@ println!(&quot;{:?}&quot;, scores);
 <p><strong>Only Inserting a Value If the Key Has No Value</strong></p>
 
 <ul>
-<li><p>It’s common to check whether a particular key has a value and, if it doesn’t, insert a value for it. Hash maps have a special API for this called entry that takes the key you want to check as a parameter. The return value of the entry method is an enum called Entry that represents a value that might or might not exist.</p>
+<li>It’s common to check whether a particular key has a value and, if it doesn’t, insert a value for it. Hash maps have a special API for this called entry that takes the key you want to check as a parameter. The return value of the entry method is an enum called Entry that represents a value that might or might not exist.</li>
+</ul>
 
 <pre><code class="language-rs">#![allow(unused_variables)]
 fn main() {
-use std::collections::HashMap;
+    use std::collections::HashMap;
 
-let mut scores = HashMap::new();
-scores.insert(String::from(&quot;Blue&quot;), 10);
+    let mut scores = HashMap::new();
+    scores.insert(String::from(&quot;Blue&quot;), 10);
 
-scores.entry(String::from(&quot;Yellow&quot;)).or_insert(50);
-scores.entry(String::from(&quot;Blue&quot;)).or_insert(50);
+    scores.entry(String::from(&quot;Yellow&quot;)).or_insert(50);
+    scores.entry(String::from(&quot;Blue&quot;)).or_insert(50);
 
-println!(&quot;{:?}&quot;, scores);
-// {&quot;Blue&quot;: 10, &quot;Yellow&quot;: 50}
+    println!(&quot;{:?}&quot;, scores);
+    // {&quot;Blue&quot;: 10, &quot;Yellow&quot;: 50}
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <p><strong>Updating a Value Based on the Old Value</strong></p>
 

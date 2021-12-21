@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>MySql: SP &amp; Func :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -253,17 +253,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item active">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,20 +1226,20 @@
       <option value="/coding/db-sql/mysql-note-2/" >-- MySql: DDL</option>
       <option value="/coding/db-sql/mysql-note-1/" >-- MySql: Getting Started</option>
       <option value="/coding/db-sql/mysql-note-5/" >-- MySql: JSON</option>
-      <option value="/coding/db-sql/mysql-note-4/" >-- MySql: Schema &amp; Metadata</option>
       <option value="/coding/db-sql/mysql-note-3/"  selected>-- MySql: SP &amp; Func</option>
+      <option value="/coding/db-sql/mysql-note-4/" >-- MySql: Schema &amp; Metadata</option>
       <option value="/coding/db-sql/pgsql-note-1/" >-- PostgresQL Note - 1</option>
       <option value="/coding/db-sql/mssql-note-1/" >-- Sql Server Note - 1</option>
   
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1292,21 +1292,22 @@
 <h3 id="function-sample">Function sample</h3>
 
 <ul>
-<li><p>Check the input string is OZ land line</p>
+<li>Check the input string is OZ land line</li>
+</ul>
 
 <pre><code class="language-sql">DROP FUNCTION IF EXISTS isAusLandLine;
 DELIMITER $$
 CREATE FUNCTION isAusLandLine (in_value VARCHAR(500)) RETURNS TINYINT
 BEGIN
-DECLARE vv_number VARCHAR(500);
+    DECLARE vv_number VARCHAR(500);
 
-SELECT REPLACE(in_value, '+','') INTO vv_number;
+    SELECT REPLACE(in_value, '+','') INTO vv_number;
 
-RETURN 
-  CASE 
-      WHEN LEFT(vv_number, 2) IN ('02','03','07','08') ss
-      THEN LENGTH(vv_number) = 10 ELSE 0 
-  END;
+    RETURN 
+      CASE 
+          WHEN LEFT(vv_number, 2) IN ('02','03','07','08') ss
+          THEN LENGTH(vv_number) = 10 ELSE 0 
+      END;
 END $$
 
 DELIMITER ;
@@ -1315,51 +1316,52 @@ DELIMITER ;
 
 -- SELECT isAusLandLine('06123322') from dual; -- FALSE
 
-</code></pre></li>
+</code></pre>
 
-<li><p>EXtract the Json to String</p>
+<ul>
+<li>EXtract the Json to String</li>
+</ul>
 
 <pre><code class="language-sql">DROP FUNCTION IF EXISTS json_extract_string;
 
 DELIMITER $
 
 CREATE FUNCTION `json_extract_string`(
-p_json text,
-p_key text
+  p_json text,
+  p_key text
 ) RETURNS varchar(40) CHARSET latin1
-BEGIN
-SET p_json = replace(p_json, '\\&quot;', '&quot;');
-SET p_json = replace(p_json, '&quot; :', '&quot;:');
-SET p_json = replace(p_json, ': &quot;', ':&quot;');
-SET p_json = replace(p_json, ': [', ':[');
+  BEGIN
+    SET p_json = replace(p_json, '\\&quot;', '&quot;');
+    SET p_json = replace(p_json, '&quot; :', '&quot;:');
+    SET p_json = replace(p_json, ': &quot;', ':&quot;');
+    SET p_json = replace(p_json, ': [', ':[');
 
-SET @pattern_start_type = '&quot;';
-SET @pattern_end_type = '&quot;';
-SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
+    SET @pattern_start_type = '&quot;';
+    SET @pattern_end_type = '&quot;';
+    SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
 
-IF LOCATE(@pattern, p_json) &gt; 0 THEN
-  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
-ELSE
-  SET @pattern_start_type = '[';
-  SET @pattern_end_type = ']';
-  SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
-  SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
-END IF;
+    IF LOCATE(@pattern, p_json) &gt; 0 THEN
+      SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
+    ELSE
+      SET @pattern_start_type = '[';
+      SET @pattern_end_type = ']';
+      SET @pattern = CONCAT('&quot;', p_key, '&quot;:',@pattern_start_type);
+      SET @start_i = LOCATE(@pattern, p_json) + CHAR_LENGTH(@pattern);
+    END IF;
 
-IF @start_i = CHAR_LENGTH(@pattern) THEN
-  SET @end_i = 0;
-ELSE
-  SET @end_i = LOCATE(@pattern_end_type, p_json, @start_i) - @start_i;
-END IF;
-RETURN SUBSTR(p_json, @start_i, @end_i);
-END $
+    IF @start_i = CHAR_LENGTH(@pattern) THEN
+      SET @end_i = 0;
+    ELSE
+      SET @end_i = LOCATE(@pattern_end_type, p_json, @start_i) - @start_i;
+    END IF;
+    RETURN SUBSTR(p_json, @start_i, @end_i);
+  END $
 
 DELIMITER ;
 
 -- SELECT json_extract_string('{&quot;key&quot;: 123}' ) from dual; -- 123
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="stord-procedure">Stord procedure</h2>
 
@@ -1378,25 +1380,26 @@ DELIMITER ;
 <h3 id="stored-proc-sample">Stored proc sample</h3>
 
 <ul>
-<li><p>Create a stored proc to execute dynamic SQL script based on the previous execution result</p>
+<li>Create a stored proc to execute dynamic SQL script based on the previous execution result</li>
+</ul>
 
 <pre><code class="language-sql">DROP PROCEDURE IF EXISTS RunIf;
 
 DELIMITER $$
 
 CREATE PROCEDURE RunIf(ifExpr MEDIUMTEXT, execStmt MEDIUMTEXT)
-BEGIN
-SET @sql = concat('select @result := (', ifExpr, ')');
-PREPARE stmt from @sql;
-EXECUTE stmt;
-DEALLOCATE prepare stmt;
-IF (@result = true) THEN
-  SET @sql = execStmt;
-  PREPARE stmt FROM @sql;
-  EXECUTE stmt;
-  DEALLOCATE prepare stmt;
-END IF;
-END
+  BEGIN
+    SET @sql = concat('select @result := (', ifExpr, ')');
+    PREPARE stmt from @sql;
+    EXECUTE stmt;
+    DEALLOCATE prepare stmt;
+    IF (@result = true) THEN
+      SET @sql = execStmt;
+      PREPARE stmt FROM @sql;
+      EXECUTE stmt;
+      DEALLOCATE prepare stmt;
+    END IF;
+  END
 $$
 
 DELIMITER ;
@@ -1406,8 +1409,7 @@ DELIMITER ;
 -- AND column_name = \'description\')',
 --  'ALTER TABLE TargeTable DROP COLUMN description');)
 
-</code></pre></li>
-</ul>
+</code></pre>
 
     </div>
 
@@ -1435,8 +1437,8 @@ DELIMITER ;
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/db-sql/mysql-note-4/" title="MySql: Schema &amp; Metadata"> <i class="fa fa-chevron-left"></i><label>MySql: Schema &amp; Metadata</label></a>
-    <a class="nav nav-next" href="/coding/db-sql/pgsql-note-1/" title="PostgresQL Note - 1" style="margin-right: 0px;"><label>PostgresQL Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/db-sql/mysql-note-5/" title="MySql: JSON"> <i class="fa fa-chevron-left"></i><label>MySql: JSON</label></a>
+    <a class="nav nav-next" href="/coding/db-sql/mysql-note-4/" title="MySql: Schema &amp; Metadata" style="margin-right: 0px;"><label>MySql: Schema &amp; Metadata</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

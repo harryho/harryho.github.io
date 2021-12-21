@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Data Types &amp; Ownership :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -388,49 +388,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -469,6 +426,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1226,12 +1226,12 @@
     <option value="/coding/golang/" >
   - 
    Golang</option>
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1325,14 +1325,14 @@
 <h4 id="the-tuple-type">The Tuple Type</h4>
 
 <ul>
-<li><p>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</p>
+<li>A tuple is a general way of grouping together some number of other values with a variety of types into one compound type.</li>
+</ul>
 
 <pre><code class="language-rs">let tup: (i32, f64, u8) = (500, 6.4, 1);
 let tup = (500, 6.4, 1);
 let (x, y, z) = tup;
 println!(&quot;The value of y is: {}&quot;, y); //6.4
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="ownership">Ownership</h3>
 
@@ -1357,33 +1357,39 @@ println!(&quot;The value of y is: {}&quot;, y); //6.4
 <ul>
 <li><p>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</p></li>
 
-<li><p>Explanation of memory allocation and free</p>
+<li><p>Explanation of memory allocation and free</p></li>
+</ul>
 
 <pre><code class="language-go">{
-let s = String::from(&quot;hello&quot;); // s is valid from this point forward
+    let s = String::from(&quot;hello&quot;); // s is valid from this point forward
 }   // this scope is now over, and s is no longer valid
-</code></pre></li>
+</code></pre>
 
-<li><p>There is a natural point at which we can return the memory our String needs to the operating system: when s goes out of scope. When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.</p></li>
+<ul>
+<li>There is a natural point at which we can return the memory our String needs to the operating system: when s goes out of scope. When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.</li>
 </ul>
 
 <h4 id="move-or-clone-or-copy">Move or Clone or Copy</h4>
 
 <ul>
-<li><p>Sample of move; the scalar type has no this problem</p>
+<li>Sample of move; the scalar type has no this problem</li>
+</ul>
 
 <pre><code class="language-rs">let s1 = String::from(&quot;hello&quot;);
 let s2 = s1;  // move value from s1 to s2
-          // s1 is no longer valid 
+              // s1 is no longer valid 
 
 println!(&quot;{}, world!&quot;, s1); // Compile error - value used here after move
-</code></pre></li>
+</code></pre>
 
-<li><p>If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called clone.</p>
+<ul>
+<li>If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called clone.</li>
+</ul>
 
 <pre><code class="language-rs">let s2 = s1.clone();
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Rust has a special annotation called the Copy trait that we can place on types like integers that are stored on the stack. If a type has the Copy trait, an older variable is still usable after assignment. Rust won’t let us annotate a type with the Copy trait if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error.</p></li>
 
 <li><p>Types for copy</p>

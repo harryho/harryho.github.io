@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Map, Function &amp; Closure :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1327,13 +1327,13 @@
 <h4 id="does-the-key-exist">Does the key exist</h4>
 
 <ul>
-<li><p>Delete the pair from the map</p>
+<li>Delete the pair from the map</li>
+</ul>
 
 <pre><code>if _, ok := map1[key1]; ok {
-delete(map1, key1)
+    delete(map1, key1)
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="function">Function</h3>
 
@@ -1397,33 +1397,33 @@ func fibonacci(n int) (res int) {
 <h4 id="callback">Callback</h4>
 
 <ul>
-<li><p>Functions can be used as parameters in another function, the passed function can then be called within the body of that function, that is why it is commonly called a callback.</p>
+<li>Functions can be used as parameters in another function, the passed function can then be called within the body of that function, that is why it is commonly called a callback.</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-callback(1, Add)
+    callback(1, Add)
 }
 func Add(a, b int) {
-fmt.Printf(&quot;The sum of %d and %d is: %d\n&quot;, a, b, a+b)
+    fmt.Printf(&quot;The sum of %d and %d is: %d\n&quot;, a, b, a+b)
 }
 func callback(y int, f func(int, int)) {
-f(y, 2)
-// this becomes Add(1, 2)
+    f(y, 2)
+    // this becomes Add(1, 2)
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="closures-function-literals">Closures (function literals)</h4>
 
 <ul>
-<li><p>Sample</p>
+<li>Sample</li>
+</ul>
 
 <pre><code class="language-go">plus := func(x, y int) int { return x + y }
 plus( 1,2) // 3
 
 // invoke func immediatley
 func(x, y int) int { return x + y }( 1, 2) // 3
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="closures-return-another-function">Closures - return another function</h4>
 

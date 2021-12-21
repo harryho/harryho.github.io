@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Struct &amp; Interface :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1299,7 +1299,8 @@
 <ul>
 <li><p>A field in a struct can, apart from a name and a type, also optionally have a tag: this is a string attached to the field, which could be documentation or some other important label. The tag-content cannot be used in normal programming, only the package reflect can access it.</p></li>
 
-<li><p>Sample</p>
+<li><p>Sample</p></li>
+</ul>
 
 <pre><code class="language-go">package main
 import (
@@ -1308,50 +1309,48 @@ import (
 )
 
 type TagType struct { //tags
-field1 bool   &quot;An important answer&quot;
-field2 string &quot;The name of the thing&quot;
-field3 int    &quot;How much there are&quot;
+    field1 bool   &quot;An important answer&quot;
+    field2 string &quot;The name of the thing&quot;
+    field3 int    &quot;How much there are&quot;
 }
 
 func main() {
-tt := TagType{true, &quot;Barak Obama&quot;, 1}
-for i := 0; i &lt; 3; i++ {
-    refTag(tt, i)
-}
+    tt := TagType{true, &quot;Barak Obama&quot;, 1}
+    for i := 0; i &lt; 3; i++ {
+        refTag(tt, i)
+    }
 }
 func refTag(tt TagType, ix int) {
-ttType := reflect.TypeOf(tt)
-ixField := ttType.Field(ix)
-fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
+    ttType := reflect.TypeOf(tt)
+    ixField := ttType.Field(ix)
+    fmt.Printf(&quot;%v\n&quot;, ixField.Tag)
 }
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="anonymous-fields-and-embedded-structs">Anonymous fields and embedded structs</h4>
 
 <ul>
 <li>It can only have one anonymous field of each data type in a struct.</li>
-
-<li><p>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</p>
+<li>The inner struct is simply inserted or “embedded” into the outer. This simple ‘inheritance’ mechanism provides a way to derive some or all of your implementation from another type or types.</li>
+</ul>
 
 <pre><code class="language-go">type innerS struct {
-in1 int
-in2 int
+    in1 int
+    in2 int
 }
 type outerS struct {
-b int
-c float32
-int // anonymous field
-innerS // anonymous field
+    b int
+    c float32
+    int // anonymous field
+    innerS // anonymous field
 }
 func Func(){
-outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
-fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
+    outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
+    fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
 }
 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="conflicting-names">Conflicting names</h4>
 
@@ -1372,14 +1371,16 @@ fmt.Println(&quot;output : &quot;, outer2) // output: {6 7.5 60 {5 10}}
 
 <li><p>The receiver type can be (almost) anything, not only a struct type: any type can have methods, even a function type or alias types for int, bool, string or array. The receiver also cannot be an interface type.</p></li>
 
-<li><p>sample</p>
+<li><p>sample</p></li>
+</ul>
 
 <pre><code class="language-go">type List []int
 func (l List) Len() int { return len(l) }
 func (l *List) Append(val int) { *l = append(*l, val) }
-</code></pre></li>
+</code></pre>
 
-<li><p>Receiver is most often a pointer to the receiver_type for performance reasons.</p></li>
+<ul>
+<li>Receiver is most often a pointer to the receiver_type for performance reasons.</li>
 </ul>
 
 <h4 id="embedded-methods">Embedded methods</h4>
@@ -1430,67 +1431,70 @@ func main () {
 <ul>
 <li><p>Go contains the very flexible concept of interfaces, with which a lot of aspects of object-orientation can be made available. Interfaces in Go provide a way to specify the behavior of an object: if something can do this, then it can be used here.</p></li>
 
-<li><p>Sample of interface syntax</p>
+<li><p>Sample of interface syntax</p></li>
+</ul>
 
 <pre><code class="language-go">type Namer interface {
 Method1(param_list) return_type
 Method2(param_list) return_type
 ...
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Type switch</p>
+<ul>
+<li>Type switch</li>
+</ul>
 
 <pre><code class="language-go">type Shape interface {
-Area() float32
+    Area() float32
 }
 type Square struct {
-side float32
+    side float32
 }
 
 type Circle struct {
-radius float32
+    radius float32
 }
 
 func (sq *Square) Area() float32 {
-return sq.side * sq.side
+    return sq.side * sq.side
 }
 
 func (c *Circle) Area() float32 {
-return c.radius * c.radius * math.Pi
+    return c.radius * c.radius * math.Pi
 }
 
 type Rectangle struct {
-length, width float32
+    length, width float32
 }
 
 func (r Rectangle) Area() float32 {
-return r.length * r.width
+    return r.length * r.width
 }
 
 func main() {
-shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
-fmt.Println(&quot;Looping through shapes for area ...&quot;)
-for n, _ := range shapes {
-    fmt.Println(&quot;Shape details: &quot;, shapes[n])
-    fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
-}
+    shapes := []Shape{Rectangle{5, 3}, &amp;Square{5}, &amp;Circle{5}}
+    fmt.Println(&quot;Looping through shapes for area ...&quot;)
+    for n, _ := range shapes {
+        fmt.Println(&quot;Shape details: &quot;, shapes[n])
+        fmt.Println(&quot;Area of this shape is: &quot;, shapes[n].Area())
+    }
 
-var shape Shape
-shape = &amp;Square{4}
+    var shape Shape
+    shape = &amp;Square{4}
 
-switch t := shape.(type) {
-case *Square:
-    fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
-case *Circle:
-    fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
-case *Rectangle:
-    fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
-case nil:
-    fmt.Println(&quot;nil value: nothing to check?&quot;)
-default:
-    fmt.Printf(&quot;Unexpected type %T&quot;, t)
-}
+    switch t := shape.(type) {
+    case *Square:
+        fmt.Printf(&quot;Type Square %T with value %v\n&quot;, t, t)
+    case *Circle:
+        fmt.Printf(&quot;Type Circle %T with value %v\n&quot;, t, t)
+    case *Rectangle:
+        fmt.Printf(&quot;Type Rectangle %T with value %v\n&quot;, t, t)
+    case nil:
+        fmt.Println(&quot;nil value: nothing to check?&quot;)
+    default:
+        fmt.Printf(&quot;Unexpected type %T&quot;, t)
+    }
 }
 
 // Looping through shapes for area ...
@@ -1501,39 +1505,40 @@ default:
 // Shape details:  &amp;{5}
 // Area of this shape is:  78.53982
 // Type Square *main.Square with value &amp;{4}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="empty-interface">Empty Interface</h4>
 
 <ul>
-<li><p>The empty or minimal interface has no methods and so doesn’t make any demands at all. So any variable, any type implements it (not only reference types as Object in Java/C#), and any or Any (Sample code below) is really a good name as alias and abbreviation!</p>
+<li>The empty or minimal interface has no methods and so doesn’t make any demands at all. So any variable, any type implements it (not only reference types as Object in Java/C#), and any or Any (Sample code below) is really a good name as alias and abbreviation!</li>
+</ul>
 
 <pre><code class="language-go">type Any interface{}
-</code></pre></li>
+</code></pre>
 
-<li><p>Type classifier</p>
+<ul>
+<li>Type classifier</li>
+</ul>
 
 <pre><code class="language-go">func classifier(items ...interface{}) {
-for i, x := range items {
-    switch x.(type) {
-    case bool:
-        fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
-    case float64:
-        fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
-    case int, int64:
-        fmt.Printf(&quot;param #%d is an int\n&quot;, i)
-    case nil:
-        fmt.Printf(&quot;param #%d is nil\n&quot;, i)
-    case string:
-        fmt.Printf(&quot;param #%d is a string\n&quot;, i)
-    default:
-        fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+    for i, x := range items {
+        switch x.(type) {
+        case bool:
+            fmt.Printf(&quot;param #%d is a bool\n&quot;, i)
+        case float64:
+            fmt.Printf(&quot;param #%d is a float64\n&quot;, i)
+        case int, int64:
+            fmt.Printf(&quot;param #%d is an int\n&quot;, i)
+        case nil:
+            fmt.Printf(&quot;param #%d is nil\n&quot;, i)
+        case string:
+            fmt.Printf(&quot;param #%d is a string\n&quot;, i)
+        default:
+            fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)
+        }
     }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="interface-to-interface">Interface to interface</h4>
 
@@ -1557,25 +1562,24 @@ for i, x := range items {
 
 <ul>
 <li>Pass the address instead of copy of value</li>
-
-<li><p>Use the Elem() function work on it which indirects through the pointer</p>
+<li>Use the Elem() function work on it which indirects through the pointer</li>
+</ul>
 
 <pre><code class="language-go">func modifyValByReflect() {
-var x float64 = 3.4
-v := reflect.ValueOf(x)                      // Pass value
-fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
-v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
-fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
-fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
-v = v.Elem()
-fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
-fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
-v.SetFloat(3.1415)                           // this works!
-fmt.Println(v.Interface())
-fmt.Println(v) // &lt;float64 Value&gt;
+    var x float64 = 3.4
+    v := reflect.ValueOf(x)                      // Pass value
+    fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+    v = reflect.ValueOf(&amp;x)                      // Note: take the address of x.
+    fmt.Println(&quot;type of v:&quot;, v.Type())          // float64
+    fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // false
+    v = v.Elem()
+    fmt.Println(&quot;The Elem of v is: &quot;, v)         // &lt;float64 Value&gt;
+    fmt.Println(&quot;Settability of v:&quot;, v.CanSet()) // true
+    v.SetFloat(3.1415)                           // this works!
+    fmt.Println(v.Interface())
+    fmt.Println(v) // &lt;float64 Value&gt;
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="dynamic-typing">Dynamic typing</h4>
 

@@ -6,7 +6,7 @@
     <description>Recent content on Hello World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Feb 2020 16:56:21 +1100</lastBuildDate>
+    <lastBuildDate>Wed, 09 Mar 2011 10:59:31 +1100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -253,8 +253,7 @@ Key concepts  A virtual private cloud (VPC) is a virtual network dedicated to yo
  UFW UFW, or Uncomplicated Firewall, is a front-end to iptables. Its main goal is to make managing your firewall drop-dead simple and to provide an easy-to-use interface.
 DO NOT Enable UFW
  DO NOT enable UFW without reading through the instructions
- Enable IP V6  Open the UFW configuration with vi:
-sudo vi /etc/default/ufw  Make sure &amp;ldquo;IPV6&amp;rdquo; is set to &amp;ldquo;yes&amp;rdquo;, like so:</description>
+ Enable IP V6  Open the UFW configuration with vi:  sudo vi /etc/default/ufw   Make sure &amp;ldquo;IPV6&amp;rdquo; is set to &amp;ldquo;yes&amp;rdquo;, like so:  .</description>
     </item>
     
     <item>
@@ -637,9 +636,7 @@ exec msdb.dbo.rds_backup_database @source_db_name=&#39;sample_db&#39;, @s3_arn_t
       
       <guid>/coding/golang/go-note-20/</guid>
       <description>Strings Change a character  How to change a character in a string
-str:=&amp;quot;hello&amp;quot; c:=[]byte(s) c[0]=’c’ s2:= string(c) // s2 == &amp;quot;cello&amp;quot;   Substring  How to take a part(substring) of a string str
-substr := str[n:m]   for-loop  How to loop over a string str with for or for-range:
-// gives only the bytes: for i:=0; i &amp;lt; len(str); i++ { … = str[i] } // gives the Unicode characters: for ix, ch := range str { // … }   bytes of str  Number of bytes in a string str</description>
+str:=&amp;quot;hello&amp;quot; c:=[]byte(s) c[0]=’c’ s2:= string(c) // s2 == &amp;quot;cello&amp;quot;   Substring  How to take a part(substring) of a string str  substr := str[n:m]  for-loop  How to loop over a string str with for or for-range:  // gives only the bytes: for i:=0; i &amp;lt; len(str); i++ { … = str[i] } // gives the Unicode characters: for ix, ch := range str { // … }  bytes of str  Number of bytes in a string str</description>
     </item>
     
     <item>
@@ -659,8 +656,7 @@ A buffered channel can easily double its throughput, depending on the context th
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/golang/go-note-22/</guid>
-      <description>Error  How to stop a program when an error occurs:
-if err != nil { fmt.Printf(&amp;quot;Program stopping with error %v&amp;quot;, err) os.Exit(1) } // OR : if err != nil { panic(&amp;quot;ERROR occurred: &amp;quot; + err.Error()) }   Performance best practices and advice  Use the initializing declaration form := wherever possible (in functions). Use bytes if possible instead of strings Use slices instead of arrays. Use arrays or slices instead of a map where possible (see ref.</description>
+      <description>Error  How to stop a program when an error occurs:  if err != nil { fmt.Printf(&amp;quot;Program stopping with error %v&amp;quot;, err) os.Exit(1) } // OR : if err != nil { panic(&amp;quot;ERROR occurred: &amp;quot; + err.Error()) }  Performance best practices and advice  Use the initializing declaration form := wherever possible (in functions). Use bytes if possible instead of strings Use slices instead of arrays. Use arrays or slices instead of a map where possible (see ref.</description>
     </item>
     
     <item>
@@ -719,8 +715,7 @@ SFTP has pretty much replaced legacy FTP as a file transfer protocol, and is qui
       
       <guid>/os/vpn-strongswam/</guid>
       <description>VPN StrongSwan strongSwan is a multiplatform IPsec implementation. The focus of the project is on strong authentication mechanisms using X.509 public key certificates and optional secure storage of private keys and certificates on smartcards through a standardized PKCS#11 interface and on TPM 2.0.
-Launch an instance with Ubuntu Update setup script  Following is setup.sh
-#!/bin/bash usage() { echo &amp;quot;Usage: strongswan.sh [install|start] [PATADDR] [ETHDEV] &#39;install&#39; parameters: PATADDR The private address on MARKETNET (eg.</description>
+Launch an instance with Ubuntu Update setup script  Following is setup.sh  #!/bin/bash usage() { echo &amp;quot;Usage: strongswan.sh [install|start] [PATADDR] [ETHDEV] &#39;install&#39; parameters: PATADDR The private address on MARKETNET (eg.</description>
     </item>
     
     <item>
@@ -732,7 +727,7 @@ Launch an instance with Ubuntu Update setup script  Following is setup.sh
       <description>VPN VyOS VyOS is a fully open source network OS that runs on a wide range of hardware, virtual machines, and cloud providers and offers features for any networks, small and large.
 VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
  Customize the setup script
-#!/bin/bash source /opt/vyatta/etc/functions/script-template AWS_PRIVATE_IP=10.104.16.128 AWS_PUBLIC_IP=13.14.15.16 AWS_NAT_SUBNET=10.104.0.0/16 REMOTE_NAT_IP=127.17.12.172 REMOTE_VPN_SUBNET=146.164.46.0/24 REMOTE_1ST_VPN_IP=202.22.20.2 # REMOTE_2ND_VPN_IP=202.22.2.20 # redundant connection not currently used REMOTE_PRE_SHARED_KEY=Your_Remote_Key # begin configuration configure # input settings using set set system host-name vyos-vpn # setting up NAT set interfaces ethernet eth0 description &#39;aws-internal&#39; # create dummy ethernet device to represent REMOTE-provided private IP set interfaces dummy dum0 address ${REMOTE_NAT_IP}/32 set interfaces dummy dum0 description &#39;remote-vpn-ip&#39; # configure SNAT set nat source rule 100 description &#39;Internal to REMOTE&#39; set nat source rule 100 destination address ${REMOTE_VPN_SUBNET} set nat source rule 100 outbound-interface &#39;any&#39; set nat source rule 100 source address ${AWS_NAT_SUBNET} set nat source rule 100 translation address ${REMOTE_NAT_IP} # setting up VPN # set primary ethernet interface as the VPN interface set vpn ipsec ipsec-interfaces interface &#39;eth0&#39; set vpn ipsec nat-traversal &#39;enable&#39; set vpn ipsec logging log-modes &#39;all&#39; # esp-group set vpn ipsec esp-group vpn-nat-esp compression &#39;disable&#39; set vpn ipsec esp-group vpn-nat-esp lifetime &#39;28800&#39; set vpn ipsec esp-group vpn-nat-esp mode &#39;tunnel&#39; set vpn ipsec esp-group vpn-nat-esp pfs &#39;dh-group2&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 encryption &#39;aes256&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 hash &#39;sha1&#39; # ike-group set vpn ipsec ike-group vpn-nat-ike ikev2-reauth &#39;no&#39; set vpn ipsec ike-group vpn-nat-ike key-exchange &#39;ikev1&#39; set vpn ipsec ike-group vpn-nat-ike lifetime &#39;28800&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 encryption &#39;aes256&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 hash &#39;sha512&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 dh-group &#39;5&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection action &#39;restart&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection interval &#39;30&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection timeout &#39;30&#39; # site-to-site peer edit vpn ipsec site-to-site peer ${REMOTE_NSW_VPN_IP} set authentication mode &#39;pre-shared-secret&#39; set authentication pre-shared-secret ${REMOTE_PRE_SHARED_KEY} set authentication id ${AWS_PUBLIC_IP} set connection-type &#39;initiate&#39; set default-esp-group &#39;vpn-nat-esp&#39; set ike-group &#39;vpn-nat-ike&#39; set ikev2-reauth &#39;inherit&#39; set local-address ${AWS_PRIVATE_IP} set tunnel 0 local prefix ${REMOTE_NAT_IP}/32 set tunnel 0 remote prefix ${REMOTE_VPN_SUBNET} # commit command applies changes to VyOS device commit # save configuration to machine save # exit configuration mode exit # check status of VPN tunnel show vpn ipsec sa # commands to check VPN status/logs/information: # monitor vpn ipsec # show vpn debug # show log vpn ipsec   Update VyOS config  Manual update the key Your_Remote_Key or remote IP, e.</description>
+  #!/bin/bash source /opt/vyatta/etc/functions/script-template AWS_PRIVATE_IP=10.104.16.128 AWS_PUBLIC_IP=13.14.15.16 AWS_NAT_SUBNET=10.104.0.0/16 REMOTE_NAT_IP=127.17.12.172 REMOTE_VPN_SUBNET=146.164.46.0/24 REMOTE_1ST_VPN_IP=202.22.20.2 # REMOTE_2ND_VPN_IP=202.22.2.20 # redundant connection not currently used REMOTE_PRE_SHARED_KEY=Your_Remote_Key # begin configuration configure # input settings using set set system host-name vyos-vpn # setting up NAT set interfaces ethernet eth0 description &#39;aws-internal&#39; # create dummy ethernet device to represent REMOTE-provided private IP set interfaces dummy dum0 address ${REMOTE_NAT_IP}/32 set interfaces dummy dum0 description &#39;remote-vpn-ip&#39; # configure SNAT set nat source rule 100 description &#39;Internal to REMOTE&#39; set nat source rule 100 destination address ${REMOTE_VPN_SUBNET} set nat source rule 100 outbound-interface &#39;any&#39; set nat source rule 100 source address ${AWS_NAT_SUBNET} set nat source rule 100 translation address ${REMOTE_NAT_IP} # setting up VPN # set primary ethernet interface as the VPN interface set vpn ipsec ipsec-interfaces interface &#39;eth0&#39; set vpn ipsec nat-traversal &#39;enable&#39; set vpn ipsec logging log-modes &#39;all&#39; # esp-group set vpn ipsec esp-group vpn-nat-esp compression &#39;disable&#39; set vpn ipsec esp-group vpn-nat-esp lifetime &#39;28800&#39; set vpn ipsec esp-group vpn-nat-esp mode &#39;tunnel&#39; set vpn ipsec esp-group vpn-nat-esp pfs &#39;dh-group2&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 encryption &#39;aes256&#39; set vpn ipsec esp-group vpn-nat-esp proposal 1 hash &#39;sha1&#39; # ike-group set vpn ipsec ike-group vpn-nat-ike ikev2-reauth &#39;no&#39; set vpn ipsec ike-group vpn-nat-ike key-exchange &#39;ikev1&#39; set vpn ipsec ike-group vpn-nat-ike lifetime &#39;28800&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 encryption &#39;aes256&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 hash &#39;sha512&#39; set vpn ipsec ike-group vpn-nat-ike proposal 1 dh-group &#39;5&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection action &#39;restart&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection interval &#39;30&#39; set vpn ipsec ike-group vpn-nat-ike dead-peer-detection timeout &#39;30&#39; # site-to-site peer edit vpn ipsec site-to-site peer ${REMOTE_NSW_VPN_IP} set authentication mode &#39;pre-shared-secret&#39; set authentication pre-shared-secret ${REMOTE_PRE_SHARED_KEY} set authentication id ${AWS_PUBLIC_IP} set connection-type &#39;initiate&#39; set default-esp-group &#39;vpn-nat-esp&#39; set ike-group &#39;vpn-nat-ike&#39; set ikev2-reauth &#39;inherit&#39; set local-address ${AWS_PRIVATE_IP} set tunnel 0 local prefix ${REMOTE_NAT_IP}/32 set tunnel 0 remote prefix ${REMOTE_VPN_SUBNET} # commit command applies changes to VyOS device commit # save configuration to machine save # exit configuration mode exit # check status of VPN tunnel show vpn ipsec sa # commands to check VPN status/logs/information: # monitor vpn ipsec # show vpn debug # show log vpn ipsec  Update VyOS config  Manual update the key Your_Remote_Key or remote IP, e.</description>
     </item>
     
     <item>
@@ -753,9 +748,7 @@ VyOS on AWS Setup VyOS  Launch instance with community AMI - VyOS (HVM) 1.x.x
       <guid>/os/ubuntu-desktop-18/</guid>
       <description>Prelude  This article is mainly to record the stuff to do post Ubuntu Desktop 18.04 Installation.
  Purpose All actions post installation is to make the Ubuntu Desktop a wonderful toolkit for developer.
-Prerequisite  Install all essentials
-sudo apt install -y git curl sudo apt-get install -y apt-transport-https ca-certificates gnupg-agent sudo apt install -y software-properties-common   Install &amp;amp; Setup Zsh  Install Zsh
-sudo apt install -y zsh  Setup Zsh</description>
+Prerequisite  Install all essentials  sudo apt install -y git curl sudo apt-get install -y apt-transport-https ca-certificates gnupg-agent sudo apt install -y software-properties-common  Install &amp;amp; Setup Zsh  Install Zsh  sudo apt install -y zsh   Setup Zsh   I prefer Prezto Zsh, which is the minimal version of Oh-My-Zsh.</description>
     </item>
     
     <item>
@@ -1037,8 +1030,7 @@ Features  This starter was built on the zend framework 2.x. This starter uses my
       <pubDate>Sun, 12 Jul 2015 14:59:31 +1100</pubDate>
       
       <guid>/os/mac-notes/</guid>
-      <description>Prerequisites  Mac OS 10.12+  Ownership issue  If you have Homebrew or other software installed by someone else, you need to change ownership
-sudo chown -R $(whoami) /usr/local/brew sudo chown -R $(whoami) /usr/local/etc sudo chown -R $(whoami) /usr/local/share sudo chown -R $(whoami) /usr/local/lib   Install Homebrew /bin/bash -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;quot; ## Brew commands brew update brew upgrade brew list ## Brew Cask brew cask install firefox  Install NVM brew install nvm   Add following setting to ~/.</description>
+      <description>Prerequisites  Mac OS 10.12+  Ownership issue  If you have Homebrew or other software installed by someone else, you need to change ownership  sudo chown -R $(whoami) /usr/local/brew sudo chown -R $(whoami) /usr/local/etc sudo chown -R $(whoami) /usr/local/share sudo chown -R $(whoami) /usr/local/lib  Install Homebrew /bin/bash -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;quot; ## Brew commands brew update brew upgrade brew list ## Brew Cask brew cask install firefox  Install NVM brew install nvm   Add following setting to ~/.</description>
     </item>
     
     <item>
@@ -1227,6 +1219,46 @@ Common Use Cases House keeping - Clean up the backup  Run every night to remove 
     </item>
     
     <item>
+      <title>JS &amp; ES Note - 1</title>
+      <link>/coding/js-ts/js-note-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/js-ts/js-note-1/</guid>
+      <description>The most unpredictable keyword and feature You may already guessed what I am talking about. Yes, thethis keyword. It is not only a powerful feature, but also often misinterpreted keyword.
+In JavaScript, we also have this concept inside a Function constructor when it is invoked using the “new” keyword, however it is not the only rule and “this” can often refer to a different object from a different execution context.</description>
+    </item>
+    
+    <item>
+      <title>JS &amp; ES Note - 2</title>
+      <link>/coding/js-ts/js-note-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/js-ts/js-note-2/</guid>
+      <description>The equal operator doesn&amp;rsquo;t always mean equivalent  Have you got confused by the equal or not equal expression in the JavaScript? I will say you are definitely not the only one. Even many senior developers come from back-end programming background, they all scratch the head to find out why the equal or not-equal expression doesn&amp;rsquo;t work as they expect. The truth is those expression are really different from other programming language.</description>
+    </item>
+    
+    <item>
+      <title>JS &amp; ES Note - 3</title>
+      <link>/coding/js-ts/js-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/js-ts/js-note-3/</guid>
+      <description>The var statement  var declarations, wherever they occur, are processed before any code is executed. This is called hoisting.
+ The scope of a variable declared with var is its current execution context, which is either the enclosing function or, for variables declared outside any function, global. If you re-declare a JavaScript variable, it will not lose its value.
+ Assigning a value to an undeclared variable implicitly creates it as a global variable (it becomes a property of the global object) when the assignment is executed.</description>
+    </item>
+    
+    <item>
+      <title>JS &amp; ES snippet</title>
+      <link>/coding/js-ts/js-note-99/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/js-ts/js-note-99/</guid>
+      <description>Setup the global node modules  Add an environment variable to tell node where the global node module sits  # I use nvm to manage my node and node modules export NODE_PATH=${HOME}/.nvm/versions/node/&amp;lt;node_version&amp;gt;/lib/node_modules   If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.
+ Create a new folder under your home directory Install npm to new global node module update environment variables in the profile  mkdir $HOME/.</description>
+    </item>
+    
+    <item>
       <title>Java Note - 1: Enum</title>
       <link>/coding/java/java-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1246,7 +1278,7 @@ Before Java 5 Before Java 1.5 you will following coding in many Java program.
       <guid>/coding/java/java-note-2/</guid>
       <description>Thread Join  The join method allows one thread to wait for the completion of another. join responds to an interrupt by exiting with an InterruptedException.
  Demo code of thread join
-public class JoinDemo implements Runnable { private Random rand = new Random(System.currentTimeMillis()); public void run() { //simulate some CPU expensive task for (int i = 0; i &amp;lt; 100000000; i++) { rand.nextInt(); } System.out.println(&amp;quot;[&amp;quot; + Thread.currentThread().getName() + &amp;quot;] finished .</description>
+  public class JoinDemo implements Runnable { private Random rand = new Random(System.currentTimeMillis()); public void run() { //simulate some CPU expensive task for (int i = 0; i &amp;lt; 100000000; i++) { rand.nextInt(); } System.out.println(&amp;quot;[&amp;quot; + Thread.</description>
     </item>
     
     <item>
@@ -1298,47 +1330,6 @@ public class JoinDemo implements Runnable { private Random rand = new Random(Sys
     </item>
     
     <item>
-      <title>JS &amp; ES Note - 1</title>
-      <link>/coding/js-ts/js-note-1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/js-ts/js-note-1/</guid>
-      <description>The most unpredictable keyword and feature You may already guessed what I am talking about. Yes, thethis keyword. It is not only a powerful feature, but also often misinterpreted keyword.
-In JavaScript, we also have this concept inside a Function constructor when it is invoked using the “new” keyword, however it is not the only rule and “this” can often refer to a different object from a different execution context.</description>
-    </item>
-    
-    <item>
-      <title>JS &amp; ES Note - 2</title>
-      <link>/coding/js-ts/js-note-2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/js-ts/js-note-2/</guid>
-      <description>The equal operator doesn&amp;rsquo;t always mean equivalent  Have you got confused by the equal or not equal expression in the JavaScript? I will say you are definitely not the only one. Even many senior developers come from back-end programming background, they all scratch the head to find out why the equal or not-equal expression doesn&amp;rsquo;t work as they expect. The truth is those expression are really different from other programming language.</description>
-    </item>
-    
-    <item>
-      <title>JS &amp; ES Note - 3</title>
-      <link>/coding/js-ts/js-note-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/js-ts/js-note-3/</guid>
-      <description>The var statement  var declarations, wherever they occur, are processed before any code is executed. This is called hoisting.
- The scope of a variable declared with var is its current execution context, which is either the enclosing function or, for variables declared outside any function, global. If you re-declare a JavaScript variable, it will not lose its value.
- Assigning a value to an undeclared variable implicitly creates it as a global variable (it becomes a property of the global object) when the assignment is executed.</description>
-    </item>
-    
-    <item>
-      <title>JS &amp; ES snippet</title>
-      <link>/coding/js-ts/js-note-99/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/js-ts/js-note-99/</guid>
-      <description>Setup the global node modules  Add an environment variable to tell node where the global node module sits
-# I use nvm to manage my node and node modules export NODE_PATH=${HOME}/.nvm/versions/node/&amp;lt;node_version&amp;gt;/lib/node_modules  If you use npm by default, you may have permission problem to access the node modules. I suggest you to set a customized global node module folder under your home directory.
- Create a new folder under your home directory Install npm to new global node module update environment variables in the profile</description>
-    </item>
-    
-    <item>
       <title>Kubernetes Cluster in 5min</title>
       <link>/projects/kube-cluster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1380,6 +1371,15 @@ It groups containers that make up an application into logical units for easy man
     </item>
     
     <item>
+      <title>MySql: SP &amp; Func</title>
+      <link>/coding/db-sql/mysql-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/db-sql/mysql-note-3/</guid>
+      <description>Function - UDF  For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.</description>
+    </item>
+    
+    <item>
       <title>MySql: Schema &amp; Metadata</title>
       <link>/coding/db-sql/mysql-note-4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1390,24 +1390,13 @@ It groups containers that make up an application into logical units for easy man
     </item>
     
     <item>
-      <title>MySql: SP &amp; Func</title>
-      <link>/coding/db-sql/mysql-note-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/db-sql/mysql-note-3/</guid>
-      <description>Function - UDF  For the UDF mechanism to work, functions must be written in C or C++ and your operating system must support dynamic loading. MySQL source distributions include a file sql/udf_example.cc that defines five UDF functions. Consult this file to see how UDF calling conventions work. The include/mysql_com.h header file defines UDF-related symbols and data structures, although you need not include this header file directly; it is included by mysql.</description>
-    </item>
-    
-    <item>
       <title>PostgresQL Note - 1</title>
       <link>/coding/db-sql/pgsql-note-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/db-sql/pgsql-note-1/</guid>
       <description>PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
- Getting Started  Switch to user postges
-sudo su - postgres psql  Create new login id as super admin
-  It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole.</description>
+ Getting Started  Switch to user postges  sudo su - postgres psql   Create new login id as super admin  It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole.</description>
     </item>
     
     <item>
@@ -1417,7 +1406,7 @@ sudo su - postgres psql  Create new login id as super admin
       
       <guid>/coding/shell/ps-note-1/</guid>
       <description>PowerShell is a task-based command-line shell and scripting language built on .NET. PowerShell helps system administrators and power-users rapidly automate tasks that manage operating systems (Linux, macOS, and Windows) and processes.
- Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable</description>
+ Prerequisites  The OS of Windows 7 or later version Install Powershell 4 or later version. You can find it on Microsoft website Has basic computer knowledge  Launch PS command prompt  Type command on windows command prompt: powershell  Get PS Version  Type $psversiontable   PS C:\&amp;gt;$psversiontable ## You might see sth below Name Value ---- ----- PSVersion 4.</description>
     </item>
     
     <item>
@@ -1459,17 +1448,7 @@ QEMU is a virtualization technology emulator that allows you to run operating sy
       
       <guid>/coding/db-sql/mssql-note-1/</guid>
       <description>SQL Server  Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet).
- Get db/table size or space  Get db size
--- Get database size SELECT sys.</description>
-    </item>
-    
-    <item>
-      <title>Thread &amp; Task</title>
-      <link>/coding/c-sharp/csharp-note-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/c-sharp/csharp-note-3/</guid>
-      <description>C# Thread &amp;amp; Task  From Net 4.0, .Net applicatoin introduced Parallel Framework Extensions (PFx), along the way it delivered an entirely new model for async processing in .NET. In .NET 4.0 the thread pool queue was redesigned with the new requirements of PFx in mind. Instead of using a simple linked list, the queue was built with arrays of work items with the arrays connected into a linked list.</description>
+ Get db/table size or space  Get db size  -- Get database size SELECT sys.</description>
     </item>
     
     <item>
@@ -1482,6 +1461,15 @@ QEMU is a virtualization technology emulator that allows you to run operating sy
 Types in JavaScript  Boolean - The most basic datatype is the simple true/false value, aka boolean value.
 let isDone: boolean = false;  Number - All numbers in TypeScript are floating point values.
 let decimal: number = 6; let hex: number = 0xf00d; let binary: number = 0b1010; let octal: number = 0o744;  String - Another fundamental part of creating programs in JavaScript for webpages and servers alike is working with textual data.</description>
+    </item>
+    
+    <item>
+      <title>Thread &amp; Task</title>
+      <link>/coding/c-sharp/csharp-note-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/c-sharp/csharp-note-3/</guid>
+      <description>C# Thread &amp;amp; Task  From Net 4.0, .Net applicatoin introduced Parallel Framework Extensions (PFx), along the way it delivered an entirely new model for async processing in .NET. In .NET 4.0 the thread pool queue was redesigned with the new requirements of PFx in mind. Instead of using a simple linked list, the queue was built with arrays of work items with the arrays connected into a linked list.</description>
     </item>
     
     <item>

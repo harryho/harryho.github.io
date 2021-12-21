@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>FlatApi - Restful API for python dev :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -388,49 +388,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -469,6 +426,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1281,7 +1281,8 @@ $ pip install --no-cache-dir flatapi
 <h3 id="quick-start">Quick Start</h3>
 
 <ul>
-<li><p>Launch FlatApi without configuration</p>
+<li>Launch FlatApi without configuration</li>
+</ul>
 
 <pre><code class="language-bash">## Start the FlatApi - Sample 1 
 $ python3 /&lt;path_to_package&gt;/flatapi -S MEMORY -G NO
@@ -1300,26 +1301,30 @@ There is no config file found. Flat Api uses internal configuration.
 
 Resource :
 /&lt;string:doc&gt; -- The doc is the collection name
-                you want to post or put the object.
+                    you want to post or put the object.
 /&lt;string:doc&gt;/&lt;int:id&gt; --The id is the unique id for query or delete.
 
 Database: Memory
 
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Test api via postman</p>
 
-<p>It would be a much more handy and easy way to play around with the API immediately.</p>
+<p>It would be a much more handy and easy way to play around with the API immediately.</p></li>
+</ul>
 
 <pre><code class="language-bash">GET /posts       --&gt; Get all posts
 POST /posts      --&gt; Add new post
 PUT /posts/1     --&gt; Update existing post which id is 1
 DELETE /posts/1  --&gt; Delete a post which id is 1
 DELETE /posts    --&gt; Delete all posts
-</code></pre></li>
+</code></pre>
 
-<li><p>Test api via curl</p>
+<ul>
+<li>Test api via curl</li>
+</ul>
 
 <pre><code class="language-bash">## Add a new post
 $ curl -d &quot;{\&quot;text\&quot;:\&quot;post 1\&quot;,\&quot;author\&quot;:\&quot;harry\&quot;}&quot; -H &quot;Content-Type: application/json&quot; -X POST http://localhost:5000/posts
@@ -1339,8 +1344,7 @@ $ curl -d &quot;{\&quot;text\&quot;:\&quot;post updated\&quot;,\&quot;author\&qu
 
 ## Delete 
 $ curl -X DELETE http://localhost:5000/posts 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h3 id="browse-repository-https-github-com-harryho-flat-api-git">Browse <a href="https://github.com/harryho/flat-api.git">Repository</a></h3>
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Goroutine &amp; Channel - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -252,17 +252,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -389,49 +389,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -470,6 +427,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1241,12 +1241,12 @@
       <option value="/coding/golang/go-note-22/" >-- Good practice - 3</option>
       <option value="/coding/golang/go-note-99/" >-- Golang snippets</option>
   
-    <option value="/coding/java/" >
-  - 
-   Java</option>
     <option value="/coding/js-ts/" >
   - 
    JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
     <option value="/coding/python/" >
   - 
    Python</option>
@@ -1299,108 +1299,116 @@
 <h4 id="basic-goroutine">Basic Goroutine</h4>
 
 <ul>
-<li><p>Sample 1: The code below will not print out anything, because the main exits before the &ldquo;hello&rdquo; goroutine kicks off. Actually the main is another goroutine which always runs first.</p>
+<li>Sample 1: The code below will not print out anything, because the main exits before the &ldquo;hello&rdquo; goroutine kicks off. Actually the main is another goroutine which always runs first.</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-go func() {
-    println(&quot;Hello&quot;)
-}()
-}
-</code></pre></li>
-
-<li><p>Sample 2: Add timer to set main goroutine sleep a while, and let the &ldquo;hello&rdquo;
-goroutine to start.</p>
-
-<pre><code class="language-go">func main() {
-go func() {
-    println(&quot;Hello&quot;) // Hello
-}()
-time.Sleep(3000)
-}
-</code></pre></li>
-
-<li><p>Sample 3: The code below will print &ldquo;hello&rdquo; 10 times and then print &ldquo;world&rdquo; 10 times.</p>
-
-<pre><code class="language-go">func main() {
-go func() {
-    for i := 0; i &lt; 10; i++ {
+    go func() {
         println(&quot;Hello&quot;)
-        time.Sleep(2000)
-    }
-}()
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;World&quot;)
-    }
-}()
-time.Sleep(9999)
+    }()
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample 4: The code below will print &ldquo;hello&rdquo; and &ldquo;world&rdquo; in different order.</p>
+<ul>
+<li>Sample 2: Add timer to set main goroutine sleep a while, and let the &ldquo;hello&rdquo;
+goroutine to start.</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-runtime.GOMAXPROCS(4)
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;Hello&quot;)
-        time.Sleep(500)
-    }
-
-}()
-go func() {
-    for i := 0; i &lt; 10; i++ {
-        println(&quot;World&quot;)
-        time.Sleep(500)
-    }
-}()
-time.Sleep(999999)
+    go func() {
+        println(&quot;Hello&quot;) // Hello
+    }()
+    time.Sleep(3000)
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample 5: File watcher</p>
+<ul>
+<li>Sample 3: The code below will print &ldquo;hello&rdquo; 10 times and then print &ldquo;world&rdquo; 10 times.</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    go func() {
+        for i := 0; i &lt; 10; i++ {
+            println(&quot;Hello&quot;)
+            time.Sleep(2000)
+        }
+    }()
+    go func() {
+        for i := 0; i &lt; 10; i++ {
+            println(&quot;World&quot;)
+        }
+    }()
+    time.Sleep(9999)
+}
+</code></pre>
+
+<ul>
+<li>Sample 4: The code below will print &ldquo;hello&rdquo; and &ldquo;world&rdquo; in different order.</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    runtime.GOMAXPROCS(4)
+    go func() {
+        for i := 0; i &lt; 10; i++ {
+            println(&quot;Hello&quot;)
+            time.Sleep(500)
+        }
+
+    }()
+    go func() {
+        for i := 0; i &lt; 10; i++ {
+            println(&quot;World&quot;)
+            time.Sleep(500)
+        }
+    }()
+    time.Sleep(999999)
+}
+</code></pre>
+
+<ul>
+<li>Sample 5: File watcher</li>
+</ul>
 
 <pre><code class="language-go">
 const watchedPath = &quot;./source&quot;
 
 func main() {
-for {
-    d, _ := os.Open(watchedPath)
-    files, _ := d.Readdir(-1)
-    for _, fi := range files {
-        filePath := watchedPath + &quot;/&quot; + fi.Name()
-        f, _ := os.Open(filePath)
-        data, _ := ioutil.ReadAll(f)
-        f.Close()
-        os.Remove(filePath)
-        go func(data string) {
-            reader := csv.NewReader(strings.NewReader(data))
-            records, _ := reader.ReadAll()
-            for _, r := range records {
-                invoice := new(Invoice)
-                invoice.Number = r[0]
-                invoice.Amount, _ = strconv.ParseFloat(r[1], 64)
-                invoice.PurchaseOrderNumber, _ = strconv.Atoi(r[2])
-                unixTime, _ := strconv.ParseInt(r[3], 10, 64)
-                invoice.InvoiceDate = time.Unix(unixTime, 0)
+    for {
+        d, _ := os.Open(watchedPath)
+        files, _ := d.Readdir(-1)
+        for _, fi := range files {
+            filePath := watchedPath + &quot;/&quot; + fi.Name()
+            f, _ := os.Open(filePath)
+            data, _ := ioutil.ReadAll(f)
+            f.Close()
+            os.Remove(filePath)
+            go func(data string) {
+                reader := csv.NewReader(strings.NewReader(data))
+                records, _ := reader.ReadAll()
+                for _, r := range records {
+                    invoice := new(Invoice)
+                    invoice.Number = r[0]
+                    invoice.Amount, _ = strconv.ParseFloat(r[1], 64)
+                    invoice.PurchaseOrderNumber, _ = strconv.Atoi(r[2])
+                    unixTime, _ := strconv.ParseInt(r[3], 10, 64)
+                    invoice.InvoiceDate = time.Unix(unixTime, 0)
                     
-                fmt.Printf(&quot;Received Invoice '%v' for $%.2f and submitted for processing\n&quot;, invoice.Number, invoice.Amount)
-            }
-        }(string(data))
+                    fmt.Printf(&quot;Received Invoice '%v' for $%.2f and submitted for processing\n&quot;, invoice.Number, invoice.Amount)
+                }
+            }(string(data))
+        }
+        d.Close()
+        time.Sleep(100 * time.Millisecond)
     }
-    d.Close()
-    time.Sleep(100 * time.Millisecond)
-}
 }
 
 type Invoice struct {
-Number string
-Amount float64
-PurchaseOrderNumber int
-InvoiceDate time.Time
+    Number string
+    Amount float64
+    PurchaseOrderNumber int
+    InvoiceDate time.Time
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="using-gomaxprocs">Using GOMAXPROCS</h4>
 
@@ -1439,111 +1447,121 @@ InvoiceDate time.Time
 <ul>
 <li><p>Blocking - deadlock</p></li>
 
-<li><p>Sample 1 :  deadlock because of lack of sender</p>
+<li><p>Sample 1 :  deadlock because of lack of sender</p></li>
+</ul>
 
 <pre><code class="language-go">func main() {
-ch := make(chan string)
-fmt.Println(&lt;-ch)
+    ch := make(chan string)
+    fmt.Println(&lt;-ch)
 }
 //fatal error: all goroutines are asleep - deadlock!
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample 2: deadlock because of lack of receiver</p>
+<ul>
+<li>Sample 2: deadlock because of lack of receiver</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
+    ch := make(chan string, 1)
+    ch &lt;- &quot;Hello&quot;
     
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample 3</p>
+<ul>
+<li>Sample 3</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) // Hello
+    ch := make(chan string, 1)
+    ch &lt;- &quot;Hello&quot;
+    fmt.Println(&lt;-ch) // Hello
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h5 id="async-channels-channel-with-buffer">Async channels - channel with buffer</h5>
 
 <ul>
-<li><p>Channel with buffer</p>
+<li>Channel with buffer</li>
+</ul>
 
 <pre><code class="language-go">buf := 100
 ch1 := make(chan string, buf)
-</code></pre></li>
+</code></pre>
 
-<li><p>Sample 4: deadlock again because the 2nd sender can not send message</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch)
-fmt.Println(&lt;-ch)
-}
-</code></pre></li>
-
-<li><p>Sample 5</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 2)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) //Hello
-fmt.Println(&lt;-ch) // Hello
-}
-</code></pre></li>
+<ul>
+<li>Sample 4: deadlock again because the 2nd sender can not send message</li>
 </ul>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan string, 1)
+    ch &lt;- &quot;Hello&quot;
+    ch &lt;- &quot;Hello&quot;
+    fmt.Println(&lt;-ch)
+    fmt.Println(&lt;-ch)
+}
+</code></pre>
+
+<ul>
+<li>Sample 5</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan string, 2)
+    ch &lt;- &quot;Hello&quot;
+    ch &lt;- &quot;Hello&quot;
+    fmt.Println(&lt;-ch) //Hello
+    fmt.Println(&lt;-ch) // Hello
+}
+</code></pre>
 
 <h5 id="closing-channel">Closing channel</h5>
 
 <ul>
-<li><p>Sample 6: Closing channel will not impact the receiver to get the message</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 1)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch)
-fmt.Println(&lt;-ch)
-}
-</code></pre></li>
-
-<li><p>Sample 7: Sender cannot send message to closing channel</p>
-
-<pre><code class="language-go">func main() {
-ch := make(chan string, 2)
-ch &lt;- &quot;Hello&quot;
-ch &lt;- &quot;Hello&quot;
-fmt.Println(&lt;-ch) //Hello
-fmt.Println(&lt;-ch) // Hello
-ch &lt;- &quot;Hello&quot; // panic: send on closed channel
-}
-</code></pre></li>
+<li>Sample 6: Closing channel will not impact the receiver to get the message</li>
 </ul>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan string, 1)
+    ch &lt;- &quot;Hello&quot;
+    ch &lt;- &quot;Hello&quot;
+    fmt.Println(&lt;-ch)
+    fmt.Println(&lt;-ch)
+}
+</code></pre>
+
+<ul>
+<li>Sample 7: Sender cannot send message to closing channel</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan string, 2)
+    ch &lt;- &quot;Hello&quot;
+    ch &lt;- &quot;Hello&quot;
+    fmt.Println(&lt;-ch) //Hello
+    fmt.Println(&lt;-ch) // Hello
+    ch &lt;- &quot;Hello&quot; // panic: send on closed channel
+}
+</code></pre>
 
 <h4 id="semaphore-pattern">Semaphore pattern</h4>
 
 <ul>
-<li><p>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</p>
+<li>The goroutine compute signals its completion by putting a value on the channel ch, the main routine waits on &lt;-ch until this value gets through.</li>
+</ul>
 
 <pre><code class="language-go">func compute(ch chan int) {
-ch &lt;- someComputation()
-// when it completes, signal on the channel.
+    ch &lt;- someComputation()
+    // when it completes, signal on the channel.
 }
 
 func main() {
-ch := make(chan int) // allocate a channel.
-go compute(ch)       // start something in a goroutine
-doSomethingElseForAWhile()
-result := &lt;-ch
+    ch := make(chan int) // allocate a channel.
+    go compute(ch)       // start something in a goroutine
+    doSomethingElseForAWhile()
+    result := &lt;-ch
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h5 id="implement-a-semaphore-with-a-buffered-channel">Implement a semaphore with a buffered channel</h5>
 
@@ -1556,7 +1574,8 @@ result := &lt;-ch
 <li>the capacity minus the length of the channel is the number of free resources (the integer value of traditional semaphores)</li>
 </ul></li>
 
-<li><p>Sample 8: semaphore pattern</p>
+<li><p>Sample 8: semaphore pattern</p></li>
+</ul>
 
 <pre><code class="language-go">type Empty interface {}
 var empty Empty
@@ -1566,110 +1585,115 @@ res := make([]float64, N)
 sem := make(chan Empty, N) // semaphore
 // do sth  ...
 for i, xi := range data {
-go func (i int, xi float64) {
-    res[i] = doSomething(i,xi)
-    sem &lt;- empty
-} (i, xi)
+    go func (i int, xi float64) {
+        res[i] = doSomething(i,xi)
+        sem &lt;- empty
+    } (i, xi)
 }
 // wait for goroutines to finish
 for i := 0; i &lt; N; i++ { &lt;-sem }
 
-</code></pre></li>
+</code></pre>
 
-<li><p>Semaphore operations sample pattern</p>
+<ul>
+<li>Semaphore operations sample pattern</li>
+</ul>
 
 <pre><code class="language-go">// acquire n resources
 func (s semaphore) P(n int) {
-e := new(Empty)
-for i := 0; i &lt; n; i++ {
-    s &lt;- e
-}
+    e := new(Empty)
+    for i := 0; i &lt; n; i++ {
+        s &lt;- e
+    }
 }
 // release n resources
 func (s semaphore) V(n int) {
-for i := 0; i &lt; n; i++ {
-    &lt;-s
+    for i := 0; i &lt; n; i++ {
+        &lt;-s
+    }
 }
-}
-</code></pre></li>
+</code></pre>
 
-<li><p>Semaphore for a mutex:</p>
+<ul>
+<li>Semaphore for a mutex:</li>
+</ul>
 
 <pre><code class="language-go">/* mutexes */
 func (s semaphore) Lock() {
-s.P(1)
+    s.P(1)
 }
 func (s semaphore) Unlock() {
-s.V(1)
+    s.V(1)
 }
 /* signal-wait */
 func (s semaphore) Wait(n int) {
-s.P(n)
+    s.P(n)
 }
 func (s semaphore) Signal() {
-s.V(1)
+    s.V(1)
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h4 id="channel-factory-pattern">Channel Factory pattern</h4>
 
 <ul>
-<li><p>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</p>
+<li>Another pattern common in this style of programming goes as follows: instead of passing a channel as a parameter to a goroutine, let the function make the channel and return it (so it plays the role of a factory); inside the function a lambda function is called as a goroutine.</li>
+</ul>
 
 <pre><code class="language-go">func main() {
-stream := pump()
-go suck(stream)
-// the above 2 lines can be shortened to: go suck( pump() )
-time.Sleep(1e9)
+    stream := pump()
+    go suck(stream)
+    // the above 2 lines can be shortened to: go suck( pump() )
+    time.Sleep(1e9)
 }
 func pump() chan int {
-ch := make(chan int)
-go func() {
-    for i := 0; ; i++ {
-        ch &lt;- i
-    }
-}()
-return ch
+    ch := make(chan int)
+    go func() {
+        for i := 0; ; i++ {
+            ch &lt;- i
+        }
+    }()
+    return ch
 }
 func suck(ch chan int) {
-for {
-    fmt.Println(&lt;-ch)
+    for {
+        fmt.Println(&lt;-ch)
+    }
 }
-}
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h5 id="for-range-applied-to-channels">For—range applied to channels</h5>
 
 <ul>
 <li><p>The range clause on for loops accepts a channel ch as an operand, in which case the for loops over the values received from the channel.</p></li>
 
-<li><p>Obviously another goroutine must be writing to ch (otherwise the execution blocks in the for-loop) and must close ch when it is done writing.</p>
+<li><p>Obviously another goroutine must be writing to ch (otherwise the execution blocks in the for-loop) and must close ch when it is done writing.</p></li>
+</ul>
 
 <pre><code class="language-go">
 func main() {
-suck(pump())
-time.Sleep(1e9)
+    suck(pump())
+    time.Sleep(1e9)
 }
 func pump() chan int {
-ch := make(chan int)
-go func() {
-    for i := 0; ; i++ {
-        ch &lt;- i
-    }
-}()
-return ch
+    ch := make(chan int)
+    go func() {
+        for i := 0; ; i++ {
+            ch &lt;- i
+        }
+    }()
+    return ch
 }
 func suck(ch chan int) {
-go func() {
-    for v := range ch {
-        fmt.Println(v)
-    }
-}()
+    go func() {
+        for v := range ch {
+            fmt.Println(v)
+        }
+    }()
 }
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li></li>
 </ul>
 

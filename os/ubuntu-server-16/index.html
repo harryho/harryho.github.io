@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Ubuntu 16 server note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -251,17 +251,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -387,49 +387,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -468,6 +425,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1280,7 +1280,8 @@
 </blockquote>
 
 <ul>
-<li><p>Find out network control installed on your laptop. The column link lists the name of interfaces. The interface name on your laptop will be possible slightly a bit different. It depends on laptop maker. Basically the interface with the type <strong>wlan</strong> is your wifi interface.</p>
+<li>Find out network control installed on your laptop. The column link lists the name of interfaces. The interface name on your laptop will be possible slightly a bit different. It depends on laptop maker. Basically the interface with the type <strong>wlan</strong> is your wifi interface.</li>
+</ul>
 
 <pre><code class="language-bash">networkctl 
 </code></pre>
@@ -1289,23 +1290,25 @@
 <li><p>You will see network interfaces on your laptop. enp1s0 is the ethernet interface., and <code>wlp3s0</code> is your wifi interface</p>
 
 <pre><code>IDX LINK           TYPE         OPERATIONAL              SETUP
-1   lo         loopback     n/a                      unmanaged
-2   enp1s0     ether        n/a                      unmanaged
-3   wlp3s0     wlan         n/a                      unmanaged
+    1   lo         loopback     n/a                      unmanaged
+    2   enp1s0     ether        n/a                      unmanaged
+    3   wlp3s0     wlan         n/a                      unmanaged
 </code></pre></li>
-</ul></li>
 
 <li><p>Disable IP V6 if you don&rsquo;t use it. (Highly recommanded for personal laptop user)</p>
 
 <ul>
-<li><p>Add  following setting to file  <code>/etc/sysctl.conf</code></p>
+<li>Add  following setting to file  <code>/etc/sysctl.conf</code></li>
+</ul>
 
 <pre><code class="language-bash">net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
-</code></pre></li>
+</code></pre>
 
-<li><p>Reconfigure by running the following command</p>
+<ul>
+<li>Reconfigure by running the following command</li>
+</ul>
 
 <pre><code class="language-bash">sudo sysctl -p
 
@@ -1314,7 +1317,6 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 cat /proc/sys/net/ipv6/conf/all/disable_ipv6
         
 </code></pre></li>
-</ul></li>
 
 <li><p>Find out the status <code>wpa_supplicant</code></p>
 
@@ -1335,23 +1337,27 @@ sudo systemctl enable wpa_supplicant
 sudo ifconfig wlp3s0 up
 </code></pre></li>
 
-<li><p>Setup the wpa passphrase for your wifi</p>
+<li><p>Setup the wpa passphrase for your wifi</p></li>
+</ul>
 
-<pre><code class="language-bash">## Use following command to add pass phrase to your wpa_supplicant
-## 
-## wpa_passphrase &lt;your-ESSID&gt; &lt;your-passphrase&gt; | sudo tee /etc/wpa_supplicant.conf
+<pre><code class="language-bash">   ## Use following command to add pass phrase to your wpa_supplicant
+   ## 
+   ## wpa_passphrase &lt;your-ESSID&gt; &lt;your-passphrase&gt; | sudo tee /etc/wpa_supplicant.conf
 
-## If your ESSID is mywifi and password of wifi is mypasswork, then you will end up the 
-## command below
-wpa_passphrase mywifi mypasswork | sudo tee /etc/wpa_supplicant.conf
+   ## If your ESSID is mywifi and password of wifi is mypasswork, then you will end up the 
+   ## command below
+   wpa_passphrase mywifi mypasswork | sudo tee /etc/wpa_supplicant.conf
 
-</code></pre></li>
+</code></pre>
 
-<li><p>Config your wpa supplicant for your wifi interface and run the comand as background process</p>
+<ul>
+<li>Config your wpa supplicant for your wifi interface and run the comand as background process</li>
+</ul>
 
-<pre><code class="language-bash">sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlp3s0 &gt; /dev/null 2&gt;1&amp; &amp;
-</code></pre></li>
+<pre><code class="language-bash">   sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlp3s0 &gt; /dev/null 2&gt;1&amp; &amp;
+</code></pre>
 
+<ul>
 <li><p>Add SSID scan into config <code>/etc/wpa_supplicant.conf</code></p>
 
 <pre><code class="language-bash">network={
@@ -1362,14 +1368,14 @@ wpa_passphrase mywifi mypasswork | sudo tee /etc/wpa_supplicant.conf
 }
 </code></pre></li>
 
-<li><p>Get IP address from external DHCP</p>
-
-<pre><code class="language-bash">sudo dhclient wlp3s0
-
-## Check the ip address
-ifconfig wlp3s0
-</code></pre></li>
+<li><p>Get IP address from external DHCP</p></li>
 </ul>
+
+<pre><code class="language-bash">  sudo dhclient wlp3s0
+
+  ## Check the ip address
+  ifconfig wlp3s0
+</code></pre>
 
 <h2 id="wifi-trouble-shooting">Wifi Trouble Shooting</h2>
 
@@ -1396,27 +1402,29 @@ some network service has been disabled</p></li>
 <li>Enable the <code>squid.service</code></li>
 </ul></li>
 
-<li><p>Auto connect to wifi on Starup</p>
+<li><p>Auto connect to wifi on Starup</p></li>
+</ul>
 
 <pre><code class="language-bash">sudo cp /lib/systemd/system/wpa_supplicant.service /etc/systemd/system/wpa_supplicant.service
 
 sudo vi /etc/systemd/system/wpa_supplicant.service
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Replace the following line
 <code>ExecStart=/sbin/wpa_supplicant -u -s -O /run/wpa_supplicant</code>
 with
 <code>ExecStart=/sbin/wpa_supplicant -u -s -c /etc/wpa_supplicant.conf -i wlp3s0</code></p></li>
 
-<li><p>Add wifi  interface into auto startup file <code>/etc/network/interfaces</code></p>
+<li><p>Add wifi  interface into auto startup file <code>/etc/network/interfaces</code></p></li>
+</ul>
 
 <pre><code class="language-bash">auto lo
 iface lo net loopback
 
 auto wlp3s0
 iface wlp3s0 net dchp
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="ufw-setup">UFW setup</h2>
 
@@ -1531,16 +1539,19 @@ sudo apt-get install docker-ce
 <h2 id="install-jdk-8">Install JDK 8</h2>
 
 <ul>
-<li><p>Downlaod the JDK from Oracle website.</p>
+<li>Downlaod the JDK from Oracle website.</li>
+</ul>
 
 <pre><code class="language-bash">sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 
 java -version
-</code></pre></li>
+</code></pre>
 
-<li><p>Setup environment</p>
+<ul>
+<li>Setup environment</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get install oracle-java8-set-default
 
@@ -1549,8 +1560,9 @@ cat &gt;&gt; /etc/environment &lt;&lt;EOL
 JAVA_HOME=/usr/lib/jvm/java-8-oracle
 JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
 EOL
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Test JDK with a simple HelloWorld program</p>
 
 <pre><code class="language-java">import java.util.Calendar;
@@ -1580,59 +1592,68 @@ java HelloWorld.java
 <h2 id="install-nodejs">Install nodejs</h2>
 
 <ul>
-<li><p>Install Nodejs 8.x</p>
+<li>Install Nodejs 8.x</li>
+</ul>
 
 <pre><code class="language-bash">
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-</code></pre></li>
+</code></pre>
 
-<li><p>Install latest npm, yarn and ts</p>
+<ul>
+<li>Install latest npm, yarn and ts</li>
+</ul>
 
 <pre><code>sudo npm install -g npm
 sudo npm install -g typescript
 sudo mpm install -g yarn
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="install-php">Install PHP</h2>
 
 <ul>
-<li><p>Add new repo</p>
+<li>Add new repo</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get install -y python-software-properties
 sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update -y
 
 apt-cache pkgnames | grep php7.2
-</code></pre></li>
+</code></pre>
 
-<li><p>Option 1: Install LAMP stack</p>
+<ul>
+<li>Option 1: Install LAMP stack</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get install -y apache2
 sudo apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-cli php7.2-common \
-php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
-</code></pre></li>
+    php7.2-mbstring php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre>
 
-<li><p>Option 2: Install LEMP stack</p>
+<ul>
+<li>Option 2: Install LEMP stack</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get install -y nginx
 sudo apt-get install -y php7.2 php7.2-fpm php7.2-cli php7.2-common php7.2-mbstring \
-php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
-</code></pre></li>
+    php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.1-mcrypt php7.2-zip
+</code></pre>
 
-<li><p>Disable Apache and Nginx if you install both</p>
+<ul>
+<li>Disable Apache and Nginx if you install both</li>
+</ul>
 
 <pre><code class="language-bash">sudo systemctl disable apache2.service
 sudo systemctl disable nginx.service 
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="install-python2-python3">Install Python2, Python3</h2>
 
 <ul>
-<li><p>Ubuntu has python2 installed by default</p>
+<li>Ubuntu has python2 installed by default</li>
+</ul>
 
 <pre><code class="language-bash">sudo apt-get python-pip 
 sudo apt-get install python3-pip
@@ -1641,13 +1662,13 @@ sudo apt-get install python3-dev python-dev
 ## Install virtualenv 
 sudo pip install virtualenv
 sudo pip3 install virtualenv
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="install-go">Install Go</h2>
 
 <ul>
-<li><p>Install Go</p>
+<li>Install Go</li>
+</ul>
 
 <pre><code class="language-bash">wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 
@@ -1657,23 +1678,28 @@ shasum -a 256 go*linux-amd64.tar.gz
 
 ## install tar ball
 sudo tar -C /usr/local -xvzf go1.9.2.linux-amd64.tar.gz
-</code></pre></li>
+</code></pre>
 
-<li><p>Setup GOROOT by overwriting the file <code>/etc/environment</code> with following content</p>
+<ul>
+<li>Setup GOROOT by overwriting the file <code>/etc/environment</code> with following content</li>
+</ul>
 
 <pre><code class="language-bash">PATH=&quot;/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;
 JAVA_HOME=&quot;/usr/lib/jvm/java-8-oracle&quot;
 JRE_HOME=&quot;/usr/lib/jvm/java-8-oracle/jre&quot;
 GOROOT=&quot;/usr/local/go&quot;
-</code></pre></li>
+</code></pre>
 
-<li><p>Setup GOPATH by adding following lines to the end of <code>.profile</code></p>
+<ul>
+<li>Setup GOPATH by adding following lines to the end of <code>.profile</code></li>
+</ul>
 
 <pre><code class="language-bash">export GOPATH=&quot;$HOME/ws/go&quot;
 export GOBIN=&quot;$GOPATH/bin&quot;
 export PATH=&quot;$GOPATH/bin:$PATH&quot;
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Create a simple <code>hello.go</code> file to test</p>
 
 <pre><code class="language-go">package main                                                        
@@ -1693,13 +1719,13 @@ func main(){
 }                                                                   
 </code></pre></li>
 
-<li><p>Run the program</p>
+<li><p>Run the program</p></li>
+</ul>
 
 <pre><code class="language-bash">go run $GOPATH/src/hello.go
 go install $GOPATH/src/hello.go
 $GOBIN/hello
-</code></pre></li>
-</ul>
+</code></pre>
 
 <h2 id="install-clang-cmake">Install clang &amp; cmake</h2>
 

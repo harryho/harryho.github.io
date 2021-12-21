@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2020-10-24T22:22:12 AEDT">
+<meta name="revised" content="2021-12-21T17:00:51 AEDT">
 <title>Azure Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -251,17 +251,17 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/db-sql/mysql-note-4/">
-            MySql: Schema &amp; Metadata
-          </a>
-        </div>
-    </li>
       <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-3/">
             MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
           </a>
         </div>
     </li>
@@ -387,49 +387,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/coding/java/" class="dd-item haschildren
-        ">
-      <div>
-      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
-      </div>
-        <ul>
-      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-1/">
-            Java Note - 1: Enum
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-2/">
-            Java Note - 2: Concurrency
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-3/">
-            Java Note - 3: Path and Files
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-4/">
-            Java Note - 4: Date Time 
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
-        <div>
-          <a href="/coding/java/java-note-5/">
-            Java Note - 5: Lambda 
-          </a>
-        </div>
-    </li>
-        </ul>
-    </li>
     <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
         ">
       <div>
@@ -468,6 +425,49 @@
         <div>
           <a href="/coding/js-ts/ts-note-1/">
             TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
           </a>
         </div>
     </li>
@@ -1297,15 +1297,17 @@
 <li>Change previous publish profile from Web Deploy to Web Deploy Package and create a package in local somewhere e.g. C:\webdeploy\webapp.zip</li>
 </ul></li>
 
-<li><p>Deploy to azure ( Start PowerShell as admin )</p>
+<li><p>Deploy to azure ( Start PowerShell as admin )</p></li>
+</ul>
 
-<pre><code>Add-AzureAccount
-Get-AzureSubscription -Default `
-Publish-AzureWebsiteProject -Name 'webdeploy' -Package 'C:\webdeploy\webapp.zip'
-</code></pre></li>
+<pre><code>  Add-AzureAccount
+  Get-AzureSubscription -Default `
+  Publish-AzureWebsiteProject -Name 'webdeploy' -Package 'C:\webdeploy\webapp.zip'
+</code></pre>
 
-<li><p>Deploy website to dev slot
-**Publish&hellip; &gt; Profile &gt; Expand the webdeploy &gt; Deployment slots &gt; dev &gt; Next &gt; Publish</p></li>
+<ul>
+<li>Deploy website to dev slot
+**Publish&hellip; &gt; Profile &gt; Expand the webdeploy &gt; Deployment slots &gt; dev &gt; Next &gt; Publish</li>
 </ul>
 
 <h3 id="webjobs">Webjobs</h3>
@@ -1323,40 +1325,44 @@ Publish-AzureWebsiteProject -Name 'webdeploy' -Package 'C:\webdeploy\webapp.zip'
 <li><p>demoWeb ( folder )
 *#**  Index.html</p></li>
 
-<li><p>Deploy project to azure git repo ( Start powershell as admin)</p>
+<li><p>Deploy project to azure git repo ( Start powershell as admin)</p></li>
+</ul>
 
-<pre><code class="language-bash">git init 
-git status 
-git config user.name &quot;harryho&quot; 
-git config user.email &quot;hho@hho.com&quot; 
-git commit -m &quot;initial commit&quot;
-git remote add azure https://xxxxxxx.git 
-git remote -v
-git push azure master 
-</code></pre></li>
+<pre><code class="language-bash">  git init 
+  git status 
+  git config user.name &quot;harryho&quot; 
+  git config user.email &quot;hho@hho.com&quot; 
+  git commit -m &quot;initial commit&quot;
+  git remote add azure https://xxxxxxx.git 
+  git remote -v
+  git push azure master 
+</code></pre>
 
+<ul>
 <li><p>Use Kudu</p>
 
 <ul>
 <li>DEVELOPMENT TOOLS &gt; Advanced Tools</li>
 </ul></li>
 
-<li><p>Create a webjob and deploy to azure (Start powershell as admin)</p>
+<li><p>Create a webjob and deploy to azure (Start powershell as admin)</p></li>
+</ul>
 
-<pre><code class="language-bash">mkdir webjob01
-cd webjob01
-echo &quot;Get-Date | Out-File -FilePath 'd:\home\site\wwwroot\dateoutput.txt -Append' &quot;&gt;getdatejob.ps1
-.\getdatejob.ps1
-cat .\dateoutput.txt
+<pre><code class="language-bash">  mkdir webjob01
+  cd webjob01
+  echo &quot;Get-Date | Out-File -FilePath 'd:\home\site\wwwroot\dateoutput.txt -Append' &quot;&gt;getdatejob.ps1
+  .\getdatejob.ps1
+  cat .\dateoutput.txt
 
-7z a -tzip getdatejob.zip *.ps1
-7z l getdatejob.zip
+  7z a -tzip getdatejob.zip *.ps1
+  7z l getdatejob.zip
 
-help New-AzureWebisteJob
-New-AzureWebsiteJob -Name 'WebAppV1301' -JobName 'GetDateJob01'  -JobType Continuous -JobFile '.\getdatejob.zip'        
+  help New-AzureWebisteJob
+  New-AzureWebsiteJob -Name 'WebAppV1301' -JobName 'GetDateJob01'  -JobType Continuous -JobFile '.\getdatejob.zip'        
 
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Create webjob from visual studio</p>
 
 <ul>
@@ -1401,51 +1407,57 @@ New-AzureWebsiteJob -Name 'WebAppV1301' -JobName 'GetDateJob01'  -JobType Contin
 <h3 id="self-signed-ssl-setup">Self-signed SSL setup</h3>
 
 <ul>
-<li><p>Create a text file named serverauth.cnf, then copy the following content into it, and then save it in a working directory.</p>
+<li>Create a text file named serverauth.cnf, then copy the following content into it, and then save it in a working directory.</li>
+</ul>
 
-<pre><code class="language-ini">[ req ]
-default_bits           = 2048
-default_keyfile        = privkey.pem
-distinguished_name     = req_distinguished_name
-attributes             = req_attributes
-x509_extensions        = v3_ca
+<pre><code class="language-ini">  [ req ]
+  default_bits           = 2048
+  default_keyfile        = privkey.pem
+  distinguished_name     = req_distinguished_name
+  attributes             = req_attributes
+  x509_extensions        = v3_ca
 
-[ req_distinguished_name ]
-countryName         = Country Name (2 letter code)
-countryName_min         = 2
-countryName_max         = 2
-stateOrProvinceName     = State or Province Name (full name)
-localityName            = Locality Name (eg, city)
-0.organizationName      = Organization Name (eg, company)
-organizationalUnitName      = Organizational Unit Name (eg, section)
-commonName          = Common Name (eg, your app's domain name)
-commonName_max          = 64
-emailAddress            = Email Address
-emailAddress_max        = 40
+  [ req_distinguished_name ]
+  countryName         = Country Name (2 letter code)
+  countryName_min         = 2
+  countryName_max         = 2
+  stateOrProvinceName     = State or Province Name (full name)
+  localityName            = Locality Name (eg, city)
+  0.organizationName      = Organization Name (eg, company)
+  organizationalUnitName      = Organizational Unit Name (eg, section)
+  commonName          = Common Name (eg, your app's domain name)
+  commonName_max          = 64
+  emailAddress            = Email Address
+  emailAddress_max        = 40
 
-[ req_attributes ]
-challengePassword       = A challenge password
-challengePassword_min       = 4
-challengePassword_max       = 20
+  [ req_attributes ]
+  challengePassword       = A challenge password
+  challengePassword_min       = 4
+  challengePassword_max       = 20
 
-[ v3_ca ]
-subjectKeyIdentifier=hash
-authorityKeyIdentifier=keyid:always,issuer:always
-basicConstraints = CA:false
-keyUsage=nonRepudiation, digitalSignature, keyEncipherment
-extendedKeyUsage = serverAuth  
-</code></pre></li>
+  [ v3_ca ]
+  subjectKeyIdentifier=hash
+  authorityKeyIdentifier=keyid:always,issuer:always
+  basicConstraints = CA:false
+  keyUsage=nonRepudiation, digitalSignature, keyEncipherment
+  extendedKeyUsage = serverAuth  
+</code></pre>
 
-<li><p>In a command-line terminal, <code>CD</code> into your working directory and run the following command. Remember set your domain name as common name.</p>
+<ul>
+<li>In a command-line terminal, <code>CD</code> into your working directory and run the following command. Remember set your domain name as common name.</li>
+</ul>
 
 <pre><code>openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
-</code></pre></li>
+</code></pre>
 
-<li><p>Export the certificate to a .pfx file by running the following command. When prompted, define a password to secure the .pfx file.</p>
+<ul>
+<li>Export the certificate to a .pfx file by running the following command. When prompted, define a password to secure the .pfx file.</li>
+</ul>
 
 <pre><code>openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
-</code></pre></li>
+</code></pre>
 
+<ul>
 <li><p>Add SSL binding</p>
 
 <ul>
@@ -1457,29 +1469,30 @@ extendedKeyUsage = serverAuth
 <ul>
 <li>DEVELOPMENT TOOLS &gt; Advanced Tools &gt; Debug Console&gt; Powershell</li>
 <li>Navigate from site &gt; wwwroot .</li>
-
-<li><p>Edit Web.config. Add url rewite into Web.config proply</p>
+<li>Edit Web.config. Add url rewite into Web.config proply</li>
+</ul></li>
+</ul>
 
 <pre><code class="language-xml">&lt;configuration&gt;
-&lt;system.webServer&gt;
-&lt;rewrite&gt;
-&lt;rules&gt;
-&lt;rule name=&quot;HTTP/S to HTTPS Redirect&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
-&lt;match url=&quot;(.*)&quot; /&gt;
-&lt;conditions logicalGrouping=&quot;MatchAny&quot;&gt;
-  &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^1$&quot; /&gt;
-  &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^0$&quot; /&gt;
-&lt;/conditions&gt;
-&lt;action type=&quot;Redirect&quot; url=&quot;https://{HTTP_HOST}/OWA/&quot; redirectType=&quot;Permanent&quot; /&gt;
-&lt;/rule&gt;
-&lt;/rules&gt;
-&lt;/rewrite&gt;
-&lt;/system.webServer&gt;
+  &lt;system.webServer&gt;
+    &lt;rewrite&gt;
+      &lt;rules&gt;
+        &lt;rule name=&quot;HTTP/S to HTTPS Redirect&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
+        &lt;match url=&quot;(.*)&quot; /&gt;
+        &lt;conditions logicalGrouping=&quot;MatchAny&quot;&gt;
+          &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^1$&quot; /&gt;
+          &lt;add input=&quot;{SERVER_PORT_SECURE}&quot; pattern=&quot;^0$&quot; /&gt;
+        &lt;/conditions&gt;
+        &lt;action type=&quot;Redirect&quot; url=&quot;https://{HTTP_HOST}/OWA/&quot; redirectType=&quot;Permanent&quot; /&gt;
+        &lt;/rule&gt;
+      &lt;/rules&gt;
+    &lt;/rewrite&gt;
+  &lt;/system.webServer&gt;
 &lt;/configuration&gt;
-</code></pre></li>
-</ul></li>
+</code></pre>
 
-<li><p>Restart the web.config (Optional ). Cleanup the browser cache and hard refresh</p></li>
+<ul>
+<li>Restart the web.config (Optional ). Cleanup the browser cache and hard refresh</li>
 </ul>
 
     </div>
