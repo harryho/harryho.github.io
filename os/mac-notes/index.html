@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-21T17:00:51 AEDT">
-<title>Macbook Notes :: Hello World</title>
+<meta name="revised" content="2021-12-21T17:30:55 AEDT">
+<title>Macbook Notes - Intel X64 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -1089,7 +1089,7 @@
       <li data-nav-id="/os/mac-notes/" class="dd-item active">
         <div>
           <a href="/os/mac-notes/">
-            Macbook Notes
+            Macbook Notes - Intel X64
           </a>
         </div>
     </li>
@@ -1234,7 +1234,7 @@
       <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
       <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
       <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
-      <option value="/os/mac-notes/"  selected>- Macbook Notes</option>
+      <option value="/os/mac-notes/"  selected>- Macbook Notes - Intel X64</option>
       <option value="/os/centos-fedora-desktop/" >- CentOS 6/7 Multi-Boot Setup</option>
   
     <option value="/blogs/" >
@@ -1257,16 +1257,17 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Macbook Notes</h1>
+            <h1>Macbook Notes - Intel X64</h1>
         
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="prerequisites">Prerequisites</h3>
 
 <ul>
 <li>Mac OS 10.12+</li>
+<li>Intel X64 CPU</li>
 </ul>
 
-<h2 id="ownership-issue">Ownership issue</h2>
+<h3 id="ownership-issue">Ownership issue</h3>
 
 <ul>
 <li>If you have Homebrew or other software installed by someone else, you need to change ownership</li>
@@ -1279,7 +1280,7 @@ sudo chown -R $(whoami) /usr/local/lib
 
 </code></pre>
 
-<h2 id="install-homebrew">Install Homebrew</h2>
+<h3 id="install-homebrew">Install Homebrew</h3>
 
 <pre><code class="language-bash">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;
 
@@ -1289,37 +1290,93 @@ brew update
 brew upgrade 
 brew list
 
-## Brew Cask
+</code></pre>
 
-brew cask install firefox
+<h2 id="install-zsh-prezto">Install Zsh Prezto</h2>
 
+<ul>
+<li>Clone Zsh Prezto</li>
+</ul>
+
+<pre><code class="language-sh">git clone --recursive https://github.com/sorin-ionescu/prezto.git &quot;${ZDOTDIR:-$HOME}/.zprezto&quot;
+
+</code></pre>
+
+<ul>
+<li>Remove default <code>zshrc</code></li>
+</ul>
+
+<pre><code class="language-sh">rm -f ~/.zshrc
+</code></pre>
+
+<ul>
+<li>Initialize our Prezto configuration files.</li>
+</ul>
+
+<pre><code class="language-sh">setopt EXTENDED_GLOB
+for rcfile in &quot;${ZDOTDIR:-$HOME}&quot;/.zprezto/runcoms/^README.md(.N); do
+  ln -s &quot;$rcfile&quot; &quot;${ZDOTDIR:-$HOME}/.${rcfile:t}&quot;
+done
+</code></pre>
+
+<ul>
+<li><p>Setup Prezto Style</p>
+
+<ul>
+<li>Open up ~/.zpreztorc and find where it says:</li>
+<li>change “sorin” to “steeef.”</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-sh">zstyle ':prezto:module:prompt' theme 'steeef'
+</code></pre>
+
+<ul>
+<li>Add Some Prezto Modules</li>
+</ul>
+
+<pre><code class="language-sh">'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'prompt' \
+  'git' \
+  'completion' \
+  'syntax-highlighting' \
+  'history-substring-search'
 </code></pre>
 
 <h2 id="install-nvm">Install NVM</h2>
 
-<pre><code>brew install nvm
+<pre><code class="language-sh">brew install nvm
 </code></pre>
 
 <ul>
-<li>Add following setting to ~/.profile or  ~/.zshrc</li>
+<li>Add following setting to file <code>.zshrc</code></li>
 </ul>
 
-<pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
-[ -s &quot;/usr/local/opt/nvm/nvm.sh&quot; ] &amp;&amp; . &quot;/usr/local/opt/nvm/nvm.sh&quot;  # This loads nvm
+<pre><code class="language-sh"># NVM
+export NVM_DIR=&quot;$HOME/.nvm&quot;
+  [ -s &quot;/usr/local/opt/nvm/nvm.sh&quot; ] &amp;&amp; \. &quot;/usr/local/opt/nvm/nvm.sh&quot;  # This loads nvm
+  [ -s &quot;/usr/local/opt/nvm/etc/bash_completion.d/nvm&quot; ] &amp;&amp; \. &quot;/usr/local/opt/nvm/etc/bash_completion.d/nvm&quot;  # This loads nvm bash_completion
 </code></pre>
 
-<h2 id="install-visual-studio-code">Install visual studio code</h2>
+<h3 id="install-visual-studio-code">Install visual studio code</h3>
 
 <pre><code>brew cask install visual-studio-code
 
 </code></pre>
 
-<h2 id="install-python-3">Install python 3</h2>
+<h3 id="install-python-3">Install python 3</h3>
 
 <pre><code>brew install python@3.x
 </code></pre>
 
-<h2 id="install-jdk">Install JDK</h2>
+<h3 id="install-jdk">Install JDK</h3>
 
 <ul>
 <li>Install different version of JDK</li>
@@ -1452,7 +1509,7 @@ java11
 java -version
 </code></pre>
 
-<h2 id="install-vim-plugins">Install Vim plugins</h2>
+<h3 id="install-vim-plugins">Install Vim plugins</h3>
 
 <pre><code>[[ ! -d ~/.vim/autoload ]] &amp;&amp; mkdir -p ~/.vim/autoload
 [[ ! -d ~/.vim/plugged ]] &amp;&amp; mkdir -p ~/.vim/plugged
@@ -1470,21 +1527,21 @@ vi
 
 </code></pre>
 
-<h2 id="install-kubectl">Install KubeCtl</h2>
+<h3 id="install-kubectl">Install KubeCtl</h3>
 
 <pre><code>brew unlink kubernetes-cli
 brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/f25e36259eaa8bcf9b9add2c599aa6d8b15f437b/Formula/kubernetes-cli.rb
 
 </code></pre>
 
-<h2 id="install-hugo">Install Hugo</h2>
+<h3 id="install-hugo">Install Hugo</h3>
 
 <pre><code>## Version: hugo_extended_0.57.2_macOS-64bit
 tar -xvzf ~/Downloads/hugo_X.Y_osx-64bit.tgz
 cp hugo_X.Y_osx-64bit.tgz
 </code></pre>
 
-<h2 id="install-aws-cli-1-x">Install AWS Cli 1.x</h2>
+<h3 id="install-aws-cli-1-x">Install AWS Cli 1.x</h3>
 
 <pre><code>curl &quot;https://s3.amazonaws.com/aws-cli/awscli-bundle.zip&quot; -o &quot;awscli-bundle.zip&quot;
 unzip awscli-bundle.zip
@@ -1498,10 +1555,15 @@ sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 <ul>
 <li>
 <ul>
+<li>
+<ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li><a href="#ownership-issue">Ownership issue</a></li>
 <li><a href="#install-homebrew">Install Homebrew</a></li>
-<li><a href="#install-nvm">Install NVM</a></li>
+</ul></li>
+<li><a href="#install-zsh-prezto">Install Zsh Prezto</a></li>
+<li><a href="#install-nvm">Install NVM</a>
+<ul>
 <li><a href="#install-visual-studio-code">Install visual studio code</a></li>
 <li><a href="#install-python-3">Install python 3</a></li>
 <li><a href="#install-jdk">Install JDK</a></li>
@@ -1509,6 +1571,7 @@ sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 <li><a href="#install-kubectl">Install KubeCtl</a></li>
 <li><a href="#install-hugo">Install Hugo</a></li>
 <li><a href="#install-aws-cli-1-x">Install AWS Cli 1.x</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
