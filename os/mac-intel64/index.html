@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-21T18:06:03 AEDT">
+<meta name="revised" content="2021-12-21T21:55:43 AEDT">
 <title>Macbook Notes - Intel X64 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1384,110 +1384,81 @@ export NVM_DIR=&quot;$HOME/.nvm&quot;
 <h3 id="install-jdk">Install JDK</h3>
 
 <ul>
-<li>Install different version of JDK</li>
+<li>Tap adoptopenjdk to brew</li>
 </ul>
 
-<pre><code>brew tap AdoptOpenJDK/openjdk
+<pre><code class="language-sh">brew tap adoptopenjdk/openjdk
 
-brew cask install &lt;jdk_version&gt;
+brew search openjdk
+==&gt; Formulae
+openjdk                                     openjdk@11                                  openjdk@8                                   openj9                                      openvdb
 
+==&gt; Casks
+adoptopenjdk-jre                     adoptopenjdk11-openj9                adoptopenjdk12-openj9-jre-large      adoptopenjdk14                       adoptopenjdk15-openj9                adoptopenjdk8
+adoptopenjdk-openj9                  adoptopenjdk11-openj9-jre            adoptopenjdk12-openj9-large          adoptopenjdk14-jre                   adoptopenjdk15-openj9-jre            adoptopenjdk8-jre
+adoptopenjdk-openj9-jre              adoptopenjdk11-openj9-jre-large      adoptopenjdk13                       adoptopenjdk14-openj9                adoptopenjdk15-openj9-jre-large      adoptopenjdk8-openj9
+adoptopenjdk-openj9-jre-large        adoptopenjdk11-openj9-large          adoptopenjdk13-jre                   adoptopenjdk14-openj9-jre            adoptopenjdk15-openj9-large          adoptopenjdk8-openj9-jre
+adoptopenjdk-openj9-large            adoptopenjdk12                       adoptopenjdk13-openj9                adoptopenjdk14-openj9-jre-large      adoptopenjdk16                       adoptopenjdk8-openj9-jre-large
+adoptopenjdk10                       adoptopenjdk12-jre                   adoptopenjdk13-openj9-jre            adoptopenjdk14-openj9-large          adoptopenjdk16-jre                   adoptopenjdk8-openj9-large
+adoptopenjdk11                       adoptopenjdk12-openj9                adoptopenjdk13-openj9-jre-large      adoptopenjdk15                       adoptopenjdk16-openj9                adoptopenjdk9
+adoptopenjdk11-jre                   adoptopenjdk12-openj9-jre            adoptopenjdk13-openj9-large          adoptopenjdk15-jre                   adoptopenjdk16-openj9-jre
 </code></pre>
+
+<ul>
+<li>Install multiple versions of JDK</li>
+</ul>
+
+<pre><code>brew install --cask adoptopenjdk # Latest version is 16
+brew install --cask adoptopenjdk8
+brew install --cask adoptopenjdk11
+</code></pre>
+
+<ul>
+<li>LTS version info</li>
+</ul>
 
 <table>
 <thead>
 <tr>
-<th>Java  Version</th>
-<th>JDK</th>
-<th>JRE</th>
+<th>Java Version</th>
+<th>First Release</th>
+<th>Next Release</th>
+<th>End of Availability</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>OpenJDK8 with Hotspot JVM</td>
-<td>adoptopenjdk8</td>
-<td>adoptopenjdk8-jre</td>
+<td>Java 8 (LTS)</td>
+<td>Mar 2014</td>
+<td>jdk8u302 20th Jul 2021</td>
+<td>At Least May 2026</td>
 </tr>
 
 <tr>
-<td>OpenJDK8 with OpenJ9 JVM</td>
-<td>adoptopenjdk8-openj9</td>
-<td>adoptopenjdk8-openj9-jre</td>
+<td>Java 11 (LTS)</td>
+<td>September 2018</td>
+<td>jdk-11.0.12 20th Jul 2021</td>
+<td>At Least Oct 2024</td>
 </tr>
 
 <tr>
-<td>OpenJDK8 with OpenJ9 JVM, large heap*</td>
-<td>adoptopenjdk8-openj9-large</td>
-<td>adoptopenjdk8-openj9-jre-large</td>
-</tr>
-
-<tr>
-<td>OpenJDK9 with Hotspot JVM</td>
-<td>adoptopenjdk9    n/a</td>
-<td></td>
-</tr>
-
-<tr>
-<td>OpenJDK10 with Hotspot JVM</td>
-<td>adoptopenjdk10   n/a</td>
-<td></td>
-</tr>
-
-<tr>
-<td>OpenJDK11 with Hotspot JVM</td>
-<td>adoptopenjdk11</td>
-<td>adoptopenjdk11-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK11 with OpenJ9 JVM</td>
-<td>adoptopenjdk11-openj9</td>
-<td>adoptopenjdk11-openj9-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK11 with OpenJ9 JVM, large heap*</td>
-<td>adoptopenjdk11-openj9-large</td>
-<td>adoptopenjdk11-openj9-jre-large</td>
-</tr>
-
-<tr>
-<td>OpenJDK12 with Hotspot JVM</td>
-<td>adoptopenjdk12</td>
-<td>adoptopenjdk12-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK12 with OpenJ9 JVM</td>
-<td>adoptopenjdk12-openj9</td>
-<td>adoptopenjdk12-openj9-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK12 with OpenJ9 JVM, large heap*</td>
-<td>adoptopenjdk12-openj9-large</td>
-<td>adoptopenjdk12-openj9-jre-large</td>
-</tr>
-
-<tr>
-<td>OpenJDK13 with Hotspot JVM</td>
-<td>adoptopenjdk13</td>
-<td>adoptopenjdk13-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK13 with OpenJ9 JVM</td>
-<td>adoptopenjdk13-openj9</td>
-<td>adoptopenjdk13-openj9-jre</td>
-</tr>
-
-<tr>
-<td>OpenJDK13 with OpenJ9 JVM, large heap*</td>
-<td>adoptopenjdk13-openj9-large</td>
-<td>adoptopenjdk13-openj9-jre-large</td>
+<td>Java 17 (LTS)</td>
+<td>Sep 2021</td>
+<td>jdk-17 14th Sep 2021</td>
+<td>TBC</td>
 </tr>
 </tbody>
 </table>
+
+<ul>
+<li>Inspect all available JDKs</li>
+</ul>
+
+<pre><code>ls  /Library/Java/JavaVirtualMachines
+adoptopenjdk-11.jdk adoptopenjdk-16.jdk adoptopenjdk-8.jdk
+
+</code></pre>
 
 <ul>
 <li>Setup the profile</li>
