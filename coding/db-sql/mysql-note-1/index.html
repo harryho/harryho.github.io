@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-23T15:34:33 AEDT">
+<meta name="revised" content="2021-12-24T01:10:34 AEDT">
 <title>MySql: Getting Started :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -235,7 +235,7 @@
       <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
         <div>
           <a href="/coding/db-sql/mysql-note-2/">
-            MySql: DDL
+            MySql: DDL &amp; DML
           </a>
         </div>
     </li>
@@ -1223,7 +1223,7 @@
     <option value="/coding/db-sql/" >
   - 
    DB &amp; SQL</option> 
-      <option value="/coding/db-sql/mysql-note-2/" >-- MySql: DDL</option>
+      <option value="/coding/db-sql/mysql-note-2/" >-- MySql: DDL &amp; DML</option>
       <option value="/coding/db-sql/mysql-note-1/"  selected>-- MySql: Getting Started</option>
       <option value="/coding/db-sql/mysql-note-5/" >-- MySql: JSON</option>
       <option value="/coding/db-sql/mysql-note-3/" >-- MySql: SP &amp; Func</option>
@@ -1327,6 +1327,18 @@ mysql&gt; FLUSH PRIVILEGES;
 <pre><code class="language-bash">mysql -u &lt;user_name&gt; -p  -P &lt;port&gt; -h &lt;host_name&gt;
 </code></pre>
 
+<h3 id="add-a-new-user">Add a new user</h3>
+
+<pre><code class="language-sql">CREATE USER 'user1'@'%' IDENTIFIED BY 'pass1';
+GRANT ALL PRIVILEGES ON * . * TO 'user1'@'%';
+</code></pre>
+
+<h3 id="delete-a-user">Delete a user</h3>
+
+<pre><code class="language-sql">REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user1'@'%';
+DROP USER 'user1'@'%';
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1341,6 +1353,8 @@ mysql&gt; FLUSH PRIVILEGES;
 <li><a href="#set-root-password">Set root password</a></li>
 <li><a href="#reset-root-password">Reset root password</a></li>
 <li><a href="#connect-to-mysql-server">Connect to MySql server</a></li>
+<li><a href="#add-a-new-user">Add a new user</a></li>
+<li><a href="#delete-a-user">Delete a user</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1353,7 +1367,7 @@ mysql&gt; FLUSH PRIVILEGES;
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/db-sql/mysql-note-2/" title="MySql: DDL"> <i class="fa fa-chevron-left"></i><label>MySql: DDL</label></a>
+<a class="nav nav-prev" href="/coding/db-sql/mysql-note-2/" title="MySql: DDL &amp; DML"> <i class="fa fa-chevron-left"></i><label>MySql: DDL &amp; DML</label></a>
     <a class="nav nav-next" href="/coding/db-sql/mysql-note-5/" title="MySql: JSON" style="margin-right: 0px;"><label>MySql: JSON</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 

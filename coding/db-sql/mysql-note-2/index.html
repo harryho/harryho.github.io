@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-23T15:34:33 AEDT">
-<title>MySql: DDL :: Hello World</title>
+<meta name="revised" content="2021-12-24T01:10:34 AEDT">
+<title>MySql: DDL &amp; DML :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -235,7 +235,7 @@
       <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item active">
         <div>
           <a href="/coding/db-sql/mysql-note-2/">
-            MySql: DDL
+            MySql: DDL &amp; DML
           </a>
         </div>
     </li>
@@ -1223,7 +1223,7 @@
     <option value="/coding/db-sql/" >
   - 
    DB &amp; SQL</option> 
-      <option value="/coding/db-sql/mysql-note-2/"  selected>-- MySql: DDL</option>
+      <option value="/coding/db-sql/mysql-note-2/"  selected>-- MySql: DDL &amp; DML</option>
       <option value="/coding/db-sql/mysql-note-1/" >-- MySql: Getting Started</option>
       <option value="/coding/db-sql/mysql-note-5/" >-- MySql: JSON</option>
       <option value="/coding/db-sql/mysql-note-3/" >-- MySql: SP &amp; Func</option>
@@ -1278,7 +1278,7 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>MySql: DDL</h1>
+            <h1>MySql: DDL &amp; DML</h1>
         
 
 <blockquote>
@@ -1344,6 +1344,22 @@ SET tableB.value = IF(tableA.value &gt; 0, tableA.value, tableB.value)
 WHERE tableA.name = 'Joe'
 </code></pre>
 
+<h3 id="delete-data">Delete data</h3>
+
+<div class="notices tip" ><p>How to avoid error: <code>You can’t specify target table</code></p>
+</div>
+
+
+<pre><code class="language-sql">DELETE FROM TableA
+WHERE id NOT IN (
+    SELECT * FROM (
+        SELECT a.id id FROM TableA a
+        JOIN TableB b ON a.tableb_id = b.id
+    ) as t
+);
+
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1358,6 +1374,7 @@ WHERE tableA.name = 'Joe'
 <li><a href="#query">Query</a></li>
 <li><a href="#useful-temporary-table">Useful temporary table</a></li>
 <li><a href="#update-data-from-other-table">Update data from other table</a></li>
+<li><a href="#delete-data">Delete data</a></li>
 </ul></li>
 </ul></li>
 </ul>
