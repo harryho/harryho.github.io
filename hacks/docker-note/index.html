@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-27T20:45:17 AEDT">
+<meta name="revised" content="2021-12-28T03:43:11 AEDT">
 <title>Docker Practices :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -686,6 +686,20 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/cloud/azure/az-03-app-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-03-app-01/">
+            Azure: App - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-04-cli-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-04-cli-01/">
+            Azure: CLI - 1
+          </a>
+        </div>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/cloud/aws/" class="dd-item haschildren
@@ -1307,6 +1321,13 @@ Hello World
 <pre><code>$ docker build &lt;path_of_workspace&gt; -f  &lt;path_of_dockerfile&gt;
 </code></pre>
 
+<h3 id="tag-or-untag">tag or untag</h3>
+
+<pre><code>$ docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+
+$ docker rmi [unwanted_tag]
+</code></pre>
+
 <h3 id="push">push</h3>
 
 <pre><code>$ docker push &lt;docker_repo&gt;:&lt;image_tag&gt;
@@ -1408,6 +1429,7 @@ COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 <li><a href="#test-with-busybox-image">Test with busybox image</a></li>
 <li><a href="#test-with-nginx-image">Test with nginx image</a></li>
 <li><a href="#build">build</a></li>
+<li><a href="#tag-or-untag">tag or untag</a></li>
 <li><a href="#push">push</a></li>
 <li><a href="#scripting">scripting</a></li>
 <li><a href="#2-step-build">2-step build</a></li>
