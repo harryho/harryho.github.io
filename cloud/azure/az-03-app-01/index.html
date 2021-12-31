@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-31T17:50:36 AEDT">
+<meta name="revised" content="2022-01-01T00:13:52 AEDT">
 <title>Azure: App - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1298,6 +1298,44 @@
 <li>The Azure portal shows only features that currently work for Linux apps.</li>
 </ul>
 
+<h3 id="create-a-web-app">Create a Web App</h3>
+
+<h4 id="create-a-web-app-via-docker-container">Create a web app via docker container</h4>
+
+<ul>
+<li>Set defaout subscriptoin</li>
+</ul>
+
+<pre><code>az account set --subscription XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+</code></pre>
+
+<ul>
+<li>Crate a resource group</li>
+</ul>
+
+<pre><code>az group create --name my-ResourceGroup --location &lt;your-region&gt;
+
+</code></pre>
+
+<ul>
+<li>Create a service plan
+<br /></li>
+</ul>
+
+<blockquote>
+<p>By default, the command below uses an inexpensive B1 pricing tier that is free for the first month. You can control the tier with the &ndash;sku parameter.</p>
+</blockquote>
+
+<pre><code>az appservice plan create --name myAppServicePlan \
+    --resource-group myResourceGroup --is-linux
+</code></pre>
+
+<pre><code class="language-sh">az webapp create --resource-group myAppServicePlan \
+     --plan myAppServicePlan --name  myApp  \
+     --deployment-container-image-name XXXXX/my-web-app:latest
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1308,6 +1346,10 @@
 <li><a href="#azure-app-service">Azure App Service</a>
 <ul>
 <li><a href="#limitations">Limitations</a></li>
+<li><a href="#create-a-web-app">Create a Web App</a>
+<ul>
+<li><a href="#create-a-web-app-via-docker-container">Create a web app via docker container</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
