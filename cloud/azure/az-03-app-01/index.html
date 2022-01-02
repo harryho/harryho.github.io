@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-01-01T00:13:52 AEDT">
+<meta name="revised" content="2022-01-02T21:54:12 AEDT">
 <title>Azure: App - 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1010,6 +1010,13 @@
       <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
+      <li data-nav-id="/os/ubuntu-desktop-20/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-20/">
+            Ubuntu Desktop 20 LTS note
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/os/amazon-linux-2/" class="dd-item">
         <div>
           <a href="/os/amazon-linux-2/">
@@ -1336,6 +1343,80 @@
      --deployment-container-image-name XXXXX/my-web-app:latest
 </code></pre>
 
+<h4 id="add-lets-encrypt-ssl-for-custom-domain-or-sub-domain">Add Lets Encrypt SSL for custom domain or sub-domain</h4>
+
+<blockquote>
+<p><strong><em>The approach below is only for experiment. It is not scalable for commercial purpose.</em></strong></p>
+</blockquote>
+
+<ul>
+<li>Add customized sub-domain to your DNS</li>
+</ul>
+
+<pre><code class="language-sh">    sub-domain.domain.com.	1800	IN	A	123.123.123.123
+</code></pre>
+
+<ul>
+<li>Generate the SSL cert via Certbot. Following example is done on a linux machine, which IP is <code>10.10.10.10</code></li>
+</ul>
+
+<pre><code class="language-sh">    sudo certbot  --nginx -d sub-domain.domain.com
+</code></pre>
+
+<ul>
+<li>Generate the pfx file from pem file</li>
+</ul>
+
+<blockquote>
+<p><strong>Remember the password of the SSL cert</strong></p>
+</blockquote>
+
+<pre><code class="language-sh">    cd
+    sudo openssl pkcs12 -inkey /etc/letsencrypt/live/sub-domain.domain.com/privkey.pem  -in /etc/letsencrypt/live/sub-domain.domain.com/fullchain.pem -in -export  -out sub-domain.domain.com.pfx
+    Enter Export Password:
+    Verifying - Enter Export Password:
+</code></pre>
+
+<ul>
+<li>Download the certificate file</li>
+</ul>
+
+<pre><code class="language-sh">    scp -i ~/.ssh/XXX_rsa username@10.10.10.10:/sub-domain.domain.com.pfx ~/
+</code></pre>
+
+<ul>
+<li><p>Follow the Azure App Service instruction to add customized domain</p>
+
+<ul>
+<li>Navigate to <code>Custom Domain</code> page: App Service &gt; Settings &gt; custom domains</li>
+<li><strong>Remove the previous A Record of this sub-domain from your DNS</strong></li>
+<li>Add following records in your DNS
+<br /></li>
+</ul>
+
+<pre><code>sub-domain.domain.com. 1800       IN    CNAME   sub-domain.azurewebsites.net.
+asuid.sub-domain.domain.com. 1800 IN    TXT  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</code></pre>
+
+<ul>
+<li>Validate the custom domain</li>
+<li>Add the custom domain</li>
+</ul></li>
+
+<li><p>Add the SSL to custom domain</p>
+
+<ul>
+<li>Under the SSL session there is alarm sign which shows the domain has no SSL certiificate</li>
+<li>Click <code>Add binding</code></li>
+<li>Upload the pfx certificate file generated from previous step</li>
+<li>Enter the password of the certificate</li>
+<li>Select default option for <code>Private Certificate Thumbprint</code> (Only one option available)</li>
+<li>Select  <code>SNI SSL</code> for TSL Type  (Only one option available)</li>
+</ul></li>
+
+<li><p>Check the SSL with SSL online checker</p></li>
+</ul>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1349,6 +1430,7 @@
 <li><a href="#create-a-web-app">Create a Web App</a>
 <ul>
 <li><a href="#create-a-web-app-via-docker-container">Create a web app via docker container</a></li>
+<li><a href="#add-lets-encrypt-ssl-for-custom-domain-or-sub-domain">Add Lets Encrypt SSL for custom domain or sub-domain</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
