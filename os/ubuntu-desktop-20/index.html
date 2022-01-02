@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-01-02T22:54:29 AEDT">
+<meta name="revised" content="2022-01-03T04:13:25 AEDT">
 <title>Ubuntu Desktop 20 LTS note :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1398,6 +1398,24 @@ newgrp docker
 docker ps
 </code></pre>
 
+<h4 id="add-docker-completion-to-zsh">Add Docker completion to Zsh</h4>
+
+<ul>
+<li>Add the completion to prezto</li>
+</ul>
+
+<pre><code class="language-sh">curl -fLo ~/.zprezto/modules/completion/external/src/_docker \
+https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+
+</code></pre>
+
+<ul>
+<li>Add following line to zshrc</li>
+</ul>
+
+<pre><code>autoload -Uz compinit; compinit
+</code></pre>
+
 <h3 id="git">Git</h3>
 
 <h4 id="set-git-credential-store">Set git credential store</h4>
@@ -1405,6 +1423,81 @@ docker ps
 <pre><code class="language-sh">git config credential.helper store	
 # OR 
 git config --global credential.helper store	
+</code></pre>
+
+<h3 id="dotnet-core-6-sdk">Dotnet Core 6 SDK</h3>
+
+<ul>
+<li>Add the Microsoft package signing key to your list of trusted keys and add the package repository.</li>
+</ul>
+
+<pre><code class="language-sh">
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+</code></pre>
+
+<ul>
+<li>Install the SDK</li>
+</ul>
+
+<pre><code class="language-sh">sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https &amp;&amp; \
+  sudo apt-get update &amp;&amp; \
+  sudo apt-get install -y dotnet-sdk-6.0
+</code></pre>
+
+<h3 id="golang">Golang</h3>
+
+<ul>
+<li>Download &amp; install the golang tal ball</li>
+</ul>
+
+<pre><code class="language-sh"># Download the linux tar ball from golang site
+sudo rm -rf /usr/local/go &amp;&amp; sudo tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
+</code></pre>
+
+<ul>
+<li>Set the Go to PATH on file <code>.zshrc</code></li>
+</ul>
+
+<pre><code>export PATH=$PATH:/usr/local/go/bin
+</code></pre>
+
+<ul>
+<li>Verify the version</li>
+</ul>
+
+<pre><code>go version
+</code></pre>
+
+<h3 id="rustlang">Rustlang</h3>
+
+<ul>
+<li>Use universal script</li>
+</ul>
+
+<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+
+<h3 id="java-openjdk">Java: OpenJDK</h3>
+
+<ul>
+<li>Install LTS JDK</li>
+</ul>
+
+<pre><code class="language-sh"> sudo apt install -y openjdk-8-jdk \
+    openjdk-11-jdk \
+    openjdk-17-jdk
+
+</code></pre>
+
+<ul>
+<li>Setup default JDK</li>
+</ul>
+
+<pre><code class="language-sh">sudo update-alternatives --config java
 </code></pre>
 
     </div>
@@ -1428,11 +1521,16 @@ git config --global credential.helper store
 <li><a href="#add-docker-s-official-gpg-key">Add Docker’s official GPG key:</a></li>
 <li><a href="#install-docker-engine">Install Docker Engine</a></li>
 <li><a href="#post-installation-of-docker">Post installation of Docker</a></li>
+<li><a href="#add-docker-completion-to-zsh">Add Docker completion to Zsh</a></li>
 </ul></li>
 <li><a href="#git">Git</a>
 <ul>
 <li><a href="#set-git-credential-store">Set git credential store</a></li>
 </ul></li>
+<li><a href="#dotnet-core-6-sdk">Dotnet Core 6 SDK</a></li>
+<li><a href="#golang">Golang</a></li>
+<li><a href="#rustlang">Rustlang</a></li>
+<li><a href="#java-openjdk">Java: OpenJDK</a></li>
 </ul></li>
 </ul></li>
 </ul>
