@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-06-14T02:07:42 AEST">
+<meta name="revised" content="2022-06-14T02:36:27 AEST">
 <title>F# Collections 3 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1397,17 +1397,12 @@
 
 <p>A sequence is a logical series of elements all of one type. Sequences are particularly useful when you have a large, ordered collection of data but do not necessarily expect to use all of the elements. Individual sequence elements are computed only as required, so a sequence can provide better performance than a list in situations in which not all the elements are used.</p>
 
-<pre><code class="language-fsharp">
-F#
-
-// Sequence that has an increment.
+<pre><code class="language-fsharp">// Sequence that has an increment.
 seq { 0 .. 10 .. 100 }
-
 
 // uses the -&gt; operator, which allows you to specify an expression 
 // whose value will become a part of the sequence. 
 seq { for i in 1 .. 10 -&gt; i * i }
-
 
 
 // specify the do keyword, with an optional yield that follows:
@@ -1475,6 +1470,8 @@ let aSequence =
 
 for x in aSequence do
     printfn &quot;%d&quot; x
+// output
+// 1 2 3 5 7 ...47 53 ... 89 97
 
 
 // Following example creates a multiplication table that consists of 
