@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-06-13T22:19:50 AEST">
+<meta name="revised" content="2022-06-13T22:21:45 AEST">
 <title>F# Computations 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1527,6 +1527,127 @@ expr { match! ... }
 </tr>
 </tbody>
 </table>
+
+<p>The following code example shows a computation expression that encapsulates a computation as a series of steps that can be evaluated one step at a time. A discriminated union type, OkOrException, encodes the error state of the expression as evaluated so far. This code demonstrates several typical patterns that you can use in your computation expressions, such as boilerplate implementations of some of the builder methods.</p>
+
+<pre><code class="language-fsharp">/// Represents computations that can be run step by step
+type Eventually&lt;'T&gt; =
+    | Done of 'T
+    | NotYetDone of (unit -&gt; Eventually&lt;'T&gt;)
+
+module Eventually =
+
+    /// Bind a computation using 'func'.
+    let rec bind func expr =
+        match expr with
+        | Done value -&gt; func value
+        | NotYetDone work -&gt; NotYetDone (fun () -&gt; bind func (work()))
+
+    /// Return the final value
+    let result value = Done value
+
+    /// The catch for the computations. Stitch try/with throughout
+    /// the computation, and return the overall result as an OkOrException.
+    let rec catch expr =
+        match expr with
+        | Done value -&gt; result (Ok value)
+        | NotYetDone work -&gt;
+            NotYetDone (fun () -&gt;
+                let res = try Ok(work()) with | exn -&gt; Error exn
+                match res with
+                | Ok cont -&gt; catch cont // note, a tailcall
+                | Error exn -&gt; result (Error exn))
+
+    /// The delay operator.
+    let delay func = NotYetDone (fun () -&gt; func())
+
+    /// The stepping action for the computations.
+    let step expr =
+        match expr with
+        | Done _ -&gt; expr
+        | NotYetDone func -&gt; func ()
+
+    /// The tryFinally operator.
+    /// This is boilerplate in terms of &quot;result&quot;, &quot;catch&quot;, and &quot;bind&quot;.
+    let tryFinally expr compensation =
+        catch (expr)
+        |&gt; bind (fun res -&gt;
+            compensation();
+            match res with
+            | Ok value -&gt; result value
+            | Error exn -&gt; raise exn)
+
+    /// The tryWith operator.
+    /// This is boilerplate in terms of &quot;result&quot;, &quot;catch&quot;, and &quot;bind&quot;.
+    let tryWith exn handler =
+        catch exn
+        |&gt; bind (function Ok value -&gt; result value | Error exn -&gt; handler exn)
+
+    /// The whileLoop operator.
+    /// This is boilerplate in terms of &quot;result&quot; and &quot;bind&quot;.
+    let rec whileLoop pred body =
+        if pred() then body |&gt; bind (fun _ -&gt; whileLoop pred body)
+        else result ()
+
+    /// The sequential composition operator.
+    /// This is boilerplate in terms of &quot;result&quot; and &quot;bind&quot;.
+    let combine expr1 expr2 =
+        expr1 |&gt; bind (fun () -&gt; expr2)
+
+    /// The using operator.
+    /// This is boilerplate in terms of &quot;tryFinally&quot; and &quot;Dispose&quot;.
+    let using (resource: #System.IDisposable) func =
+        tryFinally (func resource) (fun () -&gt; resource.Dispose())
+
+    /// The forLoop operator.
+    /// This is boilerplate in terms of &quot;catch&quot;, &quot;result&quot;, and &quot;bind&quot;.
+    let forLoop (collection:seq&lt;_&gt;) func =
+        let ie = collection.GetEnumerator()
+        tryFinally
+            (whileLoop
+                (fun () -&gt; ie.MoveNext())
+                (delay (fun () -&gt; let value = ie.Current in func value)))
+            (fun () -&gt; ie.Dispose())
+
+/// The builder class.
+type EventuallyBuilder() =
+    member x.Bind(comp, func) = Eventually.bind func comp
+    member x.Return(value) = Eventually.result value
+    member x.ReturnFrom(value) = value
+    member x.Combine(expr1, expr2) = Eventually.combine expr1 expr2
+    member x.Delay(func) = Eventually.delay func
+    member x.Zero() = Eventually.result ()
+    member x.TryWith(expr, handler) = Eventually.tryWith expr handler
+    member x.TryFinally(expr, compensation) = Eventually.tryFinally expr compensation
+    member x.For(coll:seq&lt;_&gt;, func) = Eventually.forLoop coll func
+    member x.Using(resource, expr) = Eventually.using resource expr
+
+let eventually = new EventuallyBuilder()
+
+let comp =
+    eventually {
+        for x in 1..2 do
+            printfn $&quot; x = %d{x}&quot;
+        return 3 + 4
+    }
+
+/// Try the remaining lines in F# interactive to see how this
+/// computation expression works in practice.
+let step x = Eventually.step x
+
+// returns &quot;NotYetDone &lt;closure&gt;&quot;
+comp |&gt; step
+
+// prints &quot;x = 1&quot;
+// returns &quot;NotYetDone &lt;closure&gt;&quot;
+comp |&gt; step |&gt; step
+
+// prints &quot;x = 1&quot;
+// prints &quot;x = 2&quot;
+// returns &quot;Done 7&quot;
+comp |&gt; step |&gt; step |&gt; step |&gt; step
+
+</code></pre>
 
     </div>
 
