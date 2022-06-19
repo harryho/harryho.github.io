@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-06-14T02:36:27 AEST">
+<meta name="revised" content="2022-06-19T22:23:23 AEST">
 <title>F# Pattern Matching :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1601,6 +1601,257 @@ function1 (0, 0)
 // 0 equals 0
 </code></pre>
 
+<h3 id="as-pattern">as Pattern</h3>
+
+<p>The <code>as</code> pattern is a pattern that has an as clause appended to it.</p>
+
+<pre><code class="language-fsharp">let (var1, var2) as tuple1 = (1, 2)
+printfn &quot;%d %d %A&quot; var1 var2 tuple1
+// 1 2 (1, 2)
+</code></pre>
+
+<h3 id="or-pattern">OR Pattern</h3>
+
+<p>The OR pattern is used when input data can match multiple patterns, and you want to execute the same code as a result.</p>
+
+<pre><code class="language-fsharp">let detectZeroOR point =
+    match point with
+    | (0, 0) | (0, _) | (_, 0) -&gt; printfn &quot;Zero found.&quot;
+    | _ -&gt; printfn &quot;Both nonzero.&quot;
+detectZeroOR (0, 0)
+detectZeroOR (1, 0)
+detectZeroOR (0, 10)
+detectZeroOR (10, 15)
+// output
+// Zero found.
+// Zero found.
+// Zero found.
+// Both nonzero.
+</code></pre>
+
+<h3 id="and-pattern">AND Pattern</h3>
+
+<p>The AND pattern requires that the input match two patterns. The types of both sides of the AND pattern must be compatible.</p>
+
+<pre><code class="language-fsharp">let detectZeroAND point =
+    match point with
+    | (0, 0) -&gt; printfn &quot;Both values zero.&quot;
+    | (var1, var2) &amp; (0, _) -&gt; printfn &quot;First value is 0 in (%d, %d)&quot; var1 var2
+    | (var1, var2)  &amp; (_, 0) -&gt; printfn &quot;Second value is 0 in (%d, %d)&quot; var1 var2
+    | _ -&gt; printfn &quot;Both nonzero.&quot;
+detectZeroAND (0, 0)
+detectZeroAND (1, 0)
+detectZeroAND (0, 10)
+detectZeroAND (10, 15)
+// output
+// Both values zero.
+// Second value is 0 in (1, 0)
+// First value is 0 in (0, 10)
+// Both nonzero.
+</code></pre>
+
+<h3 id="cons-pattern">Cons Pattern</h3>
+
+<p>The cons pattern is used to decompose a list into the first element, the head, and a list that contains the remaining elements, the tail.</p>
+
+<pre><code class="language-fsharp">let list1 = [ 1; 2; 3; 4 ]
+
+// This example uses a cons pattern and a list pattern.
+let rec printList l =
+    match l with
+    | head :: tail -&gt; printf &quot;%d &quot; head; printList tail
+    | [] -&gt; printfn &quot;&quot;
+
+printList list1
+</code></pre>
+
+<h3 id="list-pattern">List Pattern</h3>
+
+<p>The list pattern enables lists to be decomposed into a number of elements. The list pattern itself can match only lists of a specific number of elements.</p>
+
+<pre><code class="language-fsharp">// This example uses a list pattern.
+let listLength list =
+    match list with
+    | [] -&gt; 0
+    | [ _ ] -&gt; 1
+    | [ _; _ ] -&gt; 2
+    | [ _; _; _ ] -&gt; 3
+    | _ -&gt; List.length list
+
+printfn &quot;%d&quot; (listLength [ 1 ])
+printfn &quot;%d&quot; (listLength [ 1; 1 ])
+printfn &quot;%d&quot; (listLength [ 1; 1; 1; ])
+printfn &quot;%d&quot; (listLength [ ] )
+// output
+// 1
+// 2
+// 3
+// 0
+</code></pre>
+
+<h3 id="array-pattern">Array Pattern</h3>
+
+<p>The array pattern resembles the list pattern and can be used to decompose arrays of a specific length.</p>
+
+<pre><code class="language-fsharp">// This example uses array patterns.
+let vectorLength vec =
+    match vec with
+    | [| var1 |] -&gt; var1
+    | [| var1; var2 |] -&gt; sqrt (var1*var1 + var2*var2)
+    | [| var1; var2; var3 |] -&gt; sqrt (var1*var1 + var2*var2 + var3*var3)
+    | _ -&gt; failwith (sprintf &quot;vectorLength called with an unsupported array size of %d.&quot; (vec.Length))
+
+printfn &quot;%f&quot; (vectorLength [| 1. |])
+printfn &quot;%f&quot; (vectorLength [| 1.; 1. |])
+printfn &quot;%f&quot; (vectorLength [| 1.; 1.; 1.; |])
+printfn &quot;%f&quot; (vectorLength [| |] )
+// output
+// 1.000000
+// 1.414214
+// 1.732051
+// System.Exception: vectorLength called with an unsupported array size of 0.
+//    at FSI_0055.vectorLength(Double[] vec)
+//    at &lt;StartupCode$FSI_0055&gt;.$FSI_0055.main@()
+// Stopped due to error
+
+</code></pre>
+
+<h3 id="tuple-pattern">Tuple Pattern</h3>
+
+<p>The tuple pattern matches input in tuple form and enables the tuple to be decomposed into its constituent elements by using pattern matching variables for each position in the tuple.</p>
+
+<pre><code class="language-fsharp">let detectZeroTuple point =
+    match point with
+    | (0, 0) -&gt; printfn &quot;Both values zero.&quot;
+    | (0, var2) -&gt; printfn &quot;First value is 0 in (0, %d)&quot; var2
+    | (var1, 0) -&gt; printfn &quot;Second value is 0 in (%d, 0)&quot; var1
+    | _ -&gt; printfn &quot;Both nonzero.&quot;
+detectZeroTuple (0, 0)
+detectZeroTuple (1, 0)
+detectZeroTuple (0, 10)
+detectZeroTuple (10, 15)
+// output
+// Both values zero.
+// Second value is 0 in (1, 0)
+// First value is 0 in (0, 10)
+// Both nonzero.
+</code></pre>
+
+<h3 id="record-pattern">Record Pattern</h3>
+
+<p>The record pattern is used to decompose records to extract the values of fields. The pattern does not have to reference all fields of the record; any omitted fields just do not participate in matching and are not extracted.</p>
+
+<pre><code class="language-fsharp">
+let IsMatchByName record1 (name: string) =
+    match record1 with
+    | { MyRecord.Name = nameFound; MyRecord.ID = _; } when nameFound = name -&gt; true
+    | _ -&gt; false
+
+let recordX = { Name = &quot;Parker&quot;; ID = 10 }
+let isNameMatched1 = IsMatchByName recordX &quot;Parker&quot;
+let isNameMatched2 = IsMatchByName recordX &quot;Hartono&quot;
+printfn &quot;isNameMatched1 %A isNameMatched2 %A &quot; isNameMatched1 isNameMatched2 
+// output
+// isNameMatched1 true isNameMatched2 false
+
+let IsMatchByNameOrId record1 (name: string, id: int) =
+    match record1 with
+    | { MyRecord.Name = nameFound; MyRecord.ID = _; } when nameFound = name -&gt; true
+    | { MyRecord.ID = myid; MyRecord.Name = _ ;} when myid = id -&gt; true
+    | _ -&gt; false
+
+let isAnyMatched1 = IsMatchByNameOrId recordX (&quot;Parker&quot;, 2)
+let isAnyMatched2 = IsMatchByNameOrId recordX (&quot;Hartono&quot;, 10)
+let isAnyMatched3 = IsMatchByNameOrId recordX (&quot;XXX&quot;, 5)
+printfn &quot;isAnyMatched1 %A isAnyMatched2 %A isAnyMatched3 %A&quot; isAnyMatched1 isAnyMatched2 isAnyMatched3
+// output
+// isAnyMatched1 true isAnyMatched2 true isAnyMatched3 false
+
+</code></pre>
+
+<h3 id="patterns-that-have-type-annotations">Patterns That Have Type Annotations</h3>
+
+<p>Patterns can have type annotations.</p>
+
+<pre><code class="language-fsharp">let detect1 x =
+    match x with
+    | 1 -&gt; printfn &quot;Found a 1!&quot;
+    | (var1 : int) -&gt; printfn &quot;%d&quot; var1
+detect1 5
+detect1 1
+// output
+// 5
+// Found a 1!
+</code></pre>
+
+<h3 id="type-test-pattern">Type Test Pattern</h3>
+
+<p>The type test pattern is used to match the input against a type.</p>
+
+<pre><code class="language-fsharp">open System.Windows.Forms
+
+let RegisterControl(control:Control) =
+    match control with
+    | :? Button as button -&gt; button.Text &lt;- &quot;Registered.&quot;
+    | :? CheckBox as checkbox -&gt; checkbox.Text &lt;- &quot;Registered.&quot;
+    | _ -&gt; ()
+
+// ------------------------------------------------------------------------
+// If you're only checking if an identifier is of a particular derived type, 
+// you don't need the as identifier part of the pattern
+type A() = class end
+type B() = inherit A()
+type C() = inherit A()
+
+let m (a: A) =
+    match a with
+    | :? B -&gt; printfn &quot;It's a B&quot;
+    | :? C -&gt; printfn &quot;It's a C&quot;
+    | _ -&gt; ()
+
+</code></pre>
+
+<h3 id="null-pattern">Null Pattern</h3>
+
+<p>The null pattern matches the null value that can appear when you are working with types that allow a null value.</p>
+
+<pre><code class="language-fsharp">let ReadFromFile (reader : System.IO.StreamReader) =
+    match reader.ReadLine() with
+    | null -&gt; printfn &quot;\n&quot;; false
+    | line -&gt; printfn &quot;%s&quot; line; true
+
+let fs = System.IO.File.Open(&quot;./test.fs&quot;, System.IO.FileMode.Open)
+let sr = new System.IO.StreamReader(fs)
+while ReadFromFile(sr) = true do ()
+sr.Close()
+// output
+// let ReadFromFile (reader : System.IO.StreamReader) =
+//     match reader.ReadLine() with
+//     | null -&gt; printfn &quot;\n&quot;; false
+//     | line -&gt; printfn &quot;%s&quot; line; true
+
+// let fs = System.IO.File.Open(&quot;./test.fs&quot;, System.IO.FileMode.Open)
+// let sr = new System.IO.StreamReader(fs)
+// while ReadFromFile(sr) = true do ()
+// sr.Close()
+</code></pre>
+
+<h3 id="nameof-pattern">Nameof pattern</h3>
+
+<p>The nameof pattern matches against a string when its value is equal to the expression that follows the nameof keyword.</p>
+
+<pre><code class="language-fsharp">let f (str: string) =
+    match str with
+    | nameof str -&gt; &quot;It's 'str'!&quot;
+    | _ -&gt; &quot;It is not 'str'!&quot;
+
+f &quot;str&quot; // matches
+f &quot;asdf&quot; // does not match
+// output
+// It's 'str'!
+// It is not 'str'!
+</code></pre>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1613,6 +1864,18 @@ function1 (0, 0)
 <li><a href="#constant-patterns">Constant Patterns</a></li>
 <li><a href="#identifier-patterns">Identifier Patterns</a></li>
 <li><a href="#variable-patterns">Variable Patterns</a></li>
+<li><a href="#as-pattern">as Pattern</a></li>
+<li><a href="#or-pattern">OR Pattern</a></li>
+<li><a href="#and-pattern">AND Pattern</a></li>
+<li><a href="#cons-pattern">Cons Pattern</a></li>
+<li><a href="#list-pattern">List Pattern</a></li>
+<li><a href="#array-pattern">Array Pattern</a></li>
+<li><a href="#tuple-pattern">Tuple Pattern</a></li>
+<li><a href="#record-pattern">Record Pattern</a></li>
+<li><a href="#patterns-that-have-type-annotations">Patterns That Have Type Annotations</a></li>
+<li><a href="#type-test-pattern">Type Test Pattern</a></li>
+<li><a href="#null-pattern">Null Pattern</a></li>
+<li><a href="#nameof-pattern">Nameof pattern</a></li>
 </ul></li>
 </ul></li>
 </ul>
