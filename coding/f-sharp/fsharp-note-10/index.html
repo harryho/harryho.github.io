@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-06-19T22:26:59 AEST">
+<meta name="revised" content="2022-06-26T04:48:00 AEST">
 <title>F# Computations 1 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="F# Computation expressions">
+<meta name="description" content="F# Computation expressions ">
 
 
 
@@ -296,10 +296,10 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/f-sharp/fsharp-note-9/" class="dd-item">
+      <li data-nav-id="/coding/f-sharp/fsharp-note-3/" class="dd-item">
         <div>
-          <a href="/coding/f-sharp/fsharp-note-9/">
-            F# Active Patterns
+          <a href="/coding/f-sharp/fsharp-note-3/">
+            F# Functions
           </a>
         </div>
     </li>
@@ -331,6 +331,20 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-8/">
+            F# Pattern Matching
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-9/">
+            F# Active Patterns
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/f-sharp/fsharp-note-10/" class="dd-item active">
         <div>
           <a href="/coding/f-sharp/fsharp-note-10/">
@@ -338,10 +352,10 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/coding/f-sharp/fsharp-note-3/" class="dd-item">
+      <li data-nav-id="/coding/f-sharp/fsharp-note-11/" class="dd-item">
         <div>
-          <a href="/coding/f-sharp/fsharp-note-3/">
-            F# Functions
+          <a href="/coding/f-sharp/fsharp-note-11/">
+            F# Computations 2
           </a>
         </div>
     </li>
@@ -349,13 +363,6 @@
         <div>
           <a href="/coding/f-sharp/fsharp-note-2/">
             F# Namespace, Module &amp; Import
-          </a>
-        </div>
-    </li>
-      <li data-nav-id="/coding/f-sharp/fsharp-note-8/" class="dd-item">
-        <div>
-          <a href="/coding/f-sharp/fsharp-note-8/">
-            F# Pattern Matching
           </a>
         </div>
     </li>
@@ -1333,15 +1340,16 @@
   - 
    F#</option> 
       <option value="/coding/f-sharp/fsharp-note-1/" >-- F# Overview</option>
-      <option value="/coding/f-sharp/fsharp-note-9/" >-- F# Active Patterns</option>
+      <option value="/coding/f-sharp/fsharp-note-3/" >-- F# Functions</option>
       <option value="/coding/f-sharp/fsharp-note-4/" >-- F# C.U.R.S.</option>
       <option value="/coding/f-sharp/fsharp-note-5/" >-- F# Collections 1</option>
       <option value="/coding/f-sharp/fsharp-note-6/" >-- F# Collections 2</option>
       <option value="/coding/f-sharp/fsharp-note-7/" >-- F# Collections 3</option>
-      <option value="/coding/f-sharp/fsharp-note-10/"  selected>-- F# Computations 1</option>
-      <option value="/coding/f-sharp/fsharp-note-3/" >-- F# Functions</option>
-      <option value="/coding/f-sharp/fsharp-note-2/" >-- F# Namespace, Module &amp; Import</option>
       <option value="/coding/f-sharp/fsharp-note-8/" >-- F# Pattern Matching</option>
+      <option value="/coding/f-sharp/fsharp-note-9/" >-- F# Active Patterns</option>
+      <option value="/coding/f-sharp/fsharp-note-10/"  selected>-- F# Computations 1</option>
+      <option value="/coding/f-sharp/fsharp-note-11/" >-- F# Computations 2</option>
+      <option value="/coding/f-sharp/fsharp-note-2/" >-- F# Namespace, Module &amp; Import</option>
   
     <option value="/coding/golang/" >
   - 
@@ -1649,6 +1657,119 @@ comp |&gt; step |&gt; step |&gt; step |&gt; step
 
 </code></pre>
 
+<h3 id="translation-of-expression">Translation of expression</h3>
+
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Translation</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>{ let binding in cexpr }</td>
+<td>let binding in {| cexpr |}</td>
+</tr>
+
+<tr>
+<td>{ let! pattern = expr in cexpr }</td>
+<td>builder.Bind(expr, (fun pattern -&gt; {| cexpr |}))</td>
+</tr>
+
+<tr>
+<td>{ do! expr in cexpr }</td>
+<td>builder.Bind(expr, (fun () -&gt; {| cexpr |}))</td>
+</tr>
+
+<tr>
+<td>{ yield expr }</td>
+<td>builder.Yield(expr)</td>
+</tr>
+
+<tr>
+<td>{ yield! expr }</td>
+<td>builder.YieldFrom(expr)</td>
+</tr>
+
+<tr>
+<td>{ return expr }</td>
+<td>builder.Return(expr)</td>
+</tr>
+
+<tr>
+<td>{ return! expr }</td>
+<td>builder.ReturnFrom(expr)</td>
+</tr>
+
+<tr>
+<td>{ use pattern = expr in cexpr }</td>
+<td>builder.Using(expr, (fun pattern -&gt; {| cexpr |}))</td>
+</tr>
+
+<tr>
+<td>{ use! value = expr in cexpr }</td>
+<td>builder.Bind(expr, (fun value -&gt; builder.Using(value, (fun value -&gt; { cexpr }))))</td>
+</tr>
+
+<tr>
+<td>{ if expr then cexpr0</td>
+<td>}</td>
+</tr>
+
+<tr>
+<td>{ if expr then cexpr0 else cexpr1</td>
+<td>}</td>
+</tr>
+
+<tr>
+<td>{ match expr with | pattern_i -&gt; cexpr_i }</td>
+<td>match expr with | pattern_i -&gt; { cexpr_i }</td>
+</tr>
+
+<tr>
+<td>{ for pattern in expr do cexpr }</td>
+<td>builder.For(enumeration, (fun pattern -&gt; { cexpr }))</td>
+</tr>
+
+<tr>
+<td>{ for identifier = expr1 to expr2 do cexpr }</td>
+<td>builder.For(enumeration, (fun identifier -&gt; { cexpr }))</td>
+</tr>
+
+<tr>
+<td>{ while expr do cexpr }</td>
+<td>builder.While(fun () -&gt; expr, builder.Delay({ cexpr }))</td>
+</tr>
+
+<tr>
+<td>{ try cexpr with | pattern_i -&gt; expr_i }</td>
+<td>builder.TryWith(builder.Delay({ cexpr }), (fun value -&gt; match value with | pattern_i -&gt; expr_i | exn -&gt; System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(exn).Throw())))</td>
+</tr>
+
+<tr>
+<td>{ try cexpr finally expr }</td>
+<td>builder.TryFinally(builder.Delay( { cexpr }), (fun () -&gt; expr))</td>
+</tr>
+
+<tr>
+<td>{ cexpr1; cexpr2 }</td>
+<td>builder.Combine({ cexpr1 }, { cexpr2 })</td>
+</tr>
+
+<tr>
+<td>{ other-expr; cexpr }</td>
+<td>expr; { cexpr }</td>
+</tr>
+
+<tr>
+<td>{ other-expr }</td>
+<td>expr; builder.Zero()</td>
+</tr>
+</tbody>
+</table>
+
     </div>
 
     <div class="toc toc-fixed" >
@@ -1665,6 +1786,7 @@ comp |&gt; step |&gt; step |&gt; step |&gt; step
 </ul></li>
 <li><a href="#built-in-computation-expressions">Built-in computation expressions</a></li>
 <li><a href="#custom-computation-expression">Custom computation expression</a></li>
+<li><a href="#translation-of-expression">Translation of expression</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1677,8 +1799,8 @@ comp |&gt; step |&gt; step |&gt; step |&gt; step
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-7/" title="F# Collections 3"> <i class="fa fa-chevron-left"></i><label>F# Collections 3</label></a>
-    <a class="nav nav-next" href="/coding/f-sharp/fsharp-note-3/" title="F# Functions" style="margin-right: 0px;"><label>F# Functions</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-9/" title="F# Active Patterns"> <i class="fa fa-chevron-left"></i><label>F# Active Patterns</label></a>
+    <a class="nav nav-next" href="/coding/f-sharp/fsharp-note-11/" title="F# Computations 2" style="margin-right: 0px;"><label>F# Computations 2</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>

@@ -16,19 +16,18 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/coding/f-sharp/fsharp-note-1/</guid>
-      <description>F  F# is an open-source, cross-platform, interoperable programming language for writing succinct, robust and performant code. Your focus remains on your problem domain, rather than the details of programming.
+      <description>F#  F# is an open-source, cross-platform, interoperable programming language for writing succinct, robust and performant code. Your focus remains on your problem domain, rather than the details of programming.
  Organizing F# Code The following table shows reference articles related to organizing your F# code.
    Title Description     Namespaces Learn about namespace support in F#. A namespace lets you organize code into areas of related functionality by enabling you to attach a name to a grouping of program elements.</description>
     </item>
     
     <item>
-      <title>F# Active Patterns</title>
-      <link>/coding/f-sharp/fsharp-note-9/</link>
+      <title>F# Functions</title>
+      <link>/coding/f-sharp/fsharp-note-3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/f-sharp/fsharp-note-9/</guid>
-      <description>Active Patterns Active patterns enable you to define named partitions that subdivide input data, so that you can use these names in a pattern matching expression just as you would for a discriminated union. You can use active patterns to decompose data in a customized manner for each partition.
-Syntax // Active pattern of one choice. let (|identifier|) [arguments] valueToMatch = expression // Active Pattern with multiple choices. // Uses a FSharp.</description>
+      <guid>/coding/f-sharp/fsharp-note-3/</guid>
+      <description>F# Function  Functions are the fundamental unit of program execution in any programming language. As in other languages, an F# function has a name, can have parameters and take arguments, and has a body. F# also supports functional programming constructs such as treating functions as values, using unnamed functions in expressions, composition of functions to form new functions, curried functions, and the implicit definition of functions by way of the partial application of function arguments.</description>
     </item>
     
     <item>
@@ -73,6 +72,26 @@ Creating &amp;amp; appending Creating and Initializing Lists
     </item>
     
     <item>
+      <title>F# Pattern Matching</title>
+      <link>/coding/f-sharp/fsharp-note-8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/f-sharp/fsharp-note-8/</guid>
+      <description>Pattern Patterns are rules for transforming input data. They are used throughout F# to compare data with a logical structure or structures, decompose data into constituent parts, or extract information from data in various ways.
+   Name Description Example     Constant pattern Any numeric, character, or string literal, an enumeration constant, or a defined literal identifier 1.0, &amp;ldquo;test&amp;rdquo;, 30, Color.Red   Identifier pattern A case value of a discriminated union, an exception label, or an active pattern case Some(x) Failure(msg)   Variable pattern identifier a   as pattern pattern as identifier (a, b) as tuple1   OR pattern pattern1 pattern2   AND pattern pattern1 &amp;amp; pattern2 (a, b) &amp;amp; (_, &amp;ldquo;test&amp;rdquo;)   Cons pattern identifier :: list-identifier h :: t   List pattern [ pattern_1; &amp;hellip; ; pattern_n ] [ a; b; c ]   Array pattern [ pattern_1; .</description>
+    </item>
+    
+    <item>
+      <title>F# Active Patterns</title>
+      <link>/coding/f-sharp/fsharp-note-9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/coding/f-sharp/fsharp-note-9/</guid>
+      <description>Active Patterns Active patterns enable you to define named partitions that subdivide input data, so that you can use these names in a pattern matching expression just as you would for a discriminated union. You can use active patterns to decompose data in a customized manner for each partition.
+Syntax // Active pattern of one choice. let (|identifier|) [arguments] valueToMatch = expression // Active Pattern with multiple choices. // Uses a FSharp.</description>
+    </item>
+    
+    <item>
       <title>F# Computations 1</title>
       <link>/coding/f-sharp/fsharp-note-10/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -82,12 +101,18 @@ Creating &amp;amp; appending Creating and Initializing Lists
     </item>
     
     <item>
-      <title>F# Functions</title>
-      <link>/coding/f-sharp/fsharp-note-3/</link>
+      <title>F# Computations 2</title>
+      <link>/coding/f-sharp/fsharp-note-11/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/coding/f-sharp/fsharp-note-3/</guid>
-      <description>F# Function  Functions are the fundamental unit of program execution in any programming language. As in other languages, an F# function has a name, can have parameters and take arguments, and has a body. F# also supports functional programming constructs such as treating functions as values, using unnamed functions in expressions, composition of functions to form new functions, curried functions, and the implicit definition of functions by way of the partial application of function arguments.</description>
+      <guid>/coding/f-sharp/fsharp-note-11/</guid>
+      <description>Map Common Names: map, fmap, lift, Select
+Common Operators: &amp;lt;$&amp;gt; &amp;lt;!&amp;gt;
+What it does: Lifts a function into the elevated world
+Signature: (a-&amp;gt;b) -&amp;gt; E&amp;lt;a&amp;gt; -&amp;gt; E&amp;lt;b&amp;gt;.
+Alternatively with the parameters reversed: E&amp;lt;a&amp;gt; -&amp;gt; (a-&amp;gt;b) -&amp;gt; E&amp;lt;b&amp;gt;
+Description “map” is the generic name for something that takes a function in the normal world and transforms it into a corresponding function in the elevated world.
+/// map for Options let mapOption f opt = match opt with | None -&amp;gt; None | Some x -&amp;gt; Some (f x) // has type : (&#39;a -&amp;gt; &#39;b) -&amp;gt; &#39;a option -&amp;gt; &#39;b option /// map for Lists let rec mapList f list = match list with | [] -&amp;gt; [] | head::tail -&amp;gt; // new head + new tail (f head) :: (mapList f tail) // has type : (&#39;a -&amp;gt; &#39;b) -&amp;gt; &#39;a list -&amp;gt; &#39;b list  Return Common Names: return, pure, unit, yield, point</description>
     </item>
     
     <item>
@@ -99,16 +124,6 @@ Creating &amp;amp; appending Creating and Initializing Lists
       <description>Namespace  A namespace lets you organize code into areas of related functionality by enabling you to attach a name to a grouping of F# program elements. Namespaces are typically top-level elements in F# files.
  Namespaces cannot directly contain values and functions. Instead, values and functions must be included in modules, and modules are included in namespaces. Namespaces can contain types, modules.
 namespace [rec] [parent-namespaces.]identifier  Modules  A module is a grouping of F# code, such as values, types, and function values, in an F# program.</description>
-    </item>
-    
-    <item>
-      <title>F# Pattern Matching</title>
-      <link>/coding/f-sharp/fsharp-note-8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/coding/f-sharp/fsharp-note-8/</guid>
-      <description>Pattern Patterns are rules for transforming input data. They are used throughout F# to compare data with a logical structure or structures, decompose data into constituent parts, or extract information from data in various ways.
-   Name Description Example     Constant pattern Any numeric, character, or string literal, an enumeration constant, or a defined literal identifier 1.0, &amp;ldquo;test&amp;rdquo;, 30, Color.Red   Identifier pattern A case value of a discriminated union, an exception label, or an active pattern case Some(x) Failure(msg)   Variable pattern identifier a   as pattern pattern as identifier (a, b) as tuple1   OR pattern pattern1 pattern2   AND pattern pattern1 &amp;amp; pattern2 (a, b) &amp;amp; (_, &amp;ldquo;test&amp;rdquo;)   Cons pattern identifier :: list-identifier h :: t   List pattern [ pattern_1; &amp;hellip; ; pattern_n ] [ a; b; c ]   Array pattern [ pattern_1; .</description>
     </item>
     
   </channel>
