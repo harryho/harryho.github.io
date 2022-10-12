@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2022-10-12T13:07:01 AEDT">
+<title>F# Collections 2 :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="F# List, Seq &amp; Map">
+
+
+
+    
+  </head>
+  <body data-url="/coding/f-sharp/fsharp-note-6/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/angular-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular-crm/">
+            Angular 9 CRM Starter Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/docker-toolkits/" class="dd-item">
+        <div>
+          <a href="/projects/docker-toolkits/">
+             Docker Kits
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular4-crm/">
+            Angular 4 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/react-crm/">
+            React Redux CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-crm/">
+            Vue 2 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/kube-cluster/" class="dd-item">
+        <div>
+          <a href="/projects/kube-cluster/">
+            Kubernetes Cluster in 5min
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Console App
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-4/">
+             Generic Predicate &amp; Expression
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            Scheduled task with window service
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-3/">
+            Thread &amp; Task
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/db-sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-2/">
+            MySql: DDL &amp; DML
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-1/">
+            MySql: Getting Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql: JSON
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-3/">
+            MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/f-sharp/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/f-sharp/">F#</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-1/">
+            F# Overview
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-3/">
+            F# Functions
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-4/">
+            F# C.U.R.S.
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-5/">
+            F# Collections 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-6/" class="dd-item active">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-6/">
+            F# Collections 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-7/">
+            F# Collections 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-8/">
+            F# Pattern Matching
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-9/">
+            F# Active Patterns
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-10/">
+            F# Computations 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-11/">
+            F# Computations 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-12/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-12/">
+            F# Async
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-13/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-13/">
+            F# Task
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-14/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-14/">
+            F# Lazy
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-2/">
+            F# Namespace, Module &amp; Import
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-1/">
+            Getting started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-2/">
+            Map, Function &amp; Closure
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-3/">
+            Struct &amp; Interface
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-4/">
+            IO, Json &amp; XML
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-5/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-6/">
+            Goroutine &amp; Channel - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-7/">
+            Goroutine &amp; Channel - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-8/">
+            Packaging
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-9/">
+            Pitfalls
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-10/">
+            Template
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-20/">
+            Good practice - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-21/">
+            Good practice - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-22/">
+            Good practice - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-99/">
+            Golang snippets
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-2/">
+            JS &amp; ES Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-3/">
+            JS &amp; ES Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-99/">
+            JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Package &amp; Module
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Closure &amp; Decorator
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            String &amp; Representation
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Iteration
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Inheritance &amp; Polymorphism
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Collection
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Exception &amp; Assertion
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Context
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            ABC
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/rustlang/">Rustlang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-1/">
+            Data Types &amp; Ownership
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Project, Vector, String &amp; Hashmap
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-3/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-4/">
+            Generic Type &amp; Trait 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/bash-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-1/">
+            Adv Bash - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-2/">
+            Adv Bash - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-3/">
+            Adv Bash - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-1/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/cloud/azure/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/azure/">Azure</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/azure/az-01-caf-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-01/">
+            Azure: CAF - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-01-caf-02/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-02/">
+            Azure: CAF - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-01-caf-03/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-03/">
+            Azure: CAF - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-01/">
+            Azure: RBAC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-02/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-02/">
+            Azure: RBAC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-03/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-03/">
+            Azure: RBAC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-03-app-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-03-app-01/">
+            Azure: App - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-04-cli-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-04-cli-01/">
+            Azure: CLI - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/aws/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/aws/">AWS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/aws/aws-01-iam/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-01-iam/">
+            AWS: IAM
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-1/">
+            AWS : CLI - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-2/">
+            AWS : CLI - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-3/">
+            AWS : CLI - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-1/">
+            AWS: VPC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-2/">
+            AWS: VPC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-3/">
+            AWS: VPC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-4/">
+            AWS: VPC - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-5/">
+            AWS: VPC - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-1/">
+            AWS: S3 - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-2/">
+            AWS: S3 - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-3/">
+            AWS: S3 - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-1/">
+            AWS: SQS,SNS,SES - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-2/">
+            AWS: SQS,SNS,SES - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-1/">
+            AWS: EKS - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-2/">
+            AWS: EKS - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-3/">
+            AWS: EKS - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-4/">
+            AWS: EKS - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-5/">
+            AWS: EKS - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-21-rds-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-21-rds-1/">
+            AWS: RDS - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/digito/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/digito/">Digital Ocean</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/digito/digito-note-1/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-1/">
+            DigitialOcean: Droplet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-2/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-2/">
+            DigitialOcean: Get Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-3/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-3/">
+            DigitialOcean: First Web Host
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-4/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-4/">
+            DigitialOcean: Lets Encrypt
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/windows-command-1/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-1/">
+            Windows cmd &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-2/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-2/">
+            Windows cmd &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-3/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-3/">
+            Windows cmd &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/sftp-pgp/" class="dd-item">
+        <div>
+          <a href="/hacks/sftp-pgp/">
+            SFTP &amp; GPG 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/git-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
+        <div>
+          <a href="/hacks/cass-note/">
+            Cassandra Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/docker-note/" class="dd-item">
+        <div>
+          <a href="/hacks/docker-note/">
+            Docker Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/vbox-notes/">
+            VirtualBox Notes
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/management/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/management/">Management</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/management/cmmi/" class="dd-item">
+        <div>
+          <a href="/management/cmmi/">
+            CMMI
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/cmmi_v2/" class="dd-item">
+        <div>
+          <a href="/management/cmmi_v2/">
+            CMMI 2.0
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/cobit_5/" class="dd-item">
+        <div>
+          <a href="/management/cobit_5/">
+            COBIT 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/scrum_vs_kanban/" class="dd-item">
+        <div>
+          <a href="/management/scrum_vs_kanban/">
+            Scrum VS Kanban
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/ubuntu-desktop-20/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-20/">
+            Ubuntu Desktop 20 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/amazon-linux-2/" class="dd-item">
+        <div>
+          <a href="/os/amazon-linux-2/">
+            Amazon Linux 2 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-strongswam/" class="dd-item">
+        <div>
+          <a href="/os/vpn-strongswam/">
+            VPN StrongSwam setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-vyos/" class="dd-item">
+        <div>
+          <a href="/os/vpn-vyos/">
+            VPN VyOS setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/mac-intel64/" class="dd-item">
+        <div>
+          <a href="/os/mac-intel64/">
+            Macbook Notes - Intel X64
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/powershell-7/" class="dd-item">
+        <div>
+          <a href="/os/powershell-7/">
+            PowerShell 7
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/k8s-on-vm/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-on-vm/">
+            Try Minikube
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/projects/" >
+   Projects</option>
+    <option value="/coding/" >
+   Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option>
+    <option value="/coding/f-sharp/" >
+  - 
+   F#</option> 
+      <option value="/coding/f-sharp/fsharp-note-1/" >-- F# Overview</option>
+      <option value="/coding/f-sharp/fsharp-note-3/" >-- F# Functions</option>
+      <option value="/coding/f-sharp/fsharp-note-4/" >-- F# C.U.R.S.</option>
+      <option value="/coding/f-sharp/fsharp-note-5/" >-- F# Collections 1</option>
+      <option value="/coding/f-sharp/fsharp-note-6/"  selected>-- F# Collections 2</option>
+      <option value="/coding/f-sharp/fsharp-note-7/" >-- F# Collections 3</option>
+      <option value="/coding/f-sharp/fsharp-note-8/" >-- F# Pattern Matching</option>
+      <option value="/coding/f-sharp/fsharp-note-9/" >-- F# Active Patterns</option>
+      <option value="/coding/f-sharp/fsharp-note-10/" >-- F# Computations 1</option>
+      <option value="/coding/f-sharp/fsharp-note-11/" >-- F# Computations 2</option>
+      <option value="/coding/f-sharp/fsharp-note-12/" >-- F# Async</option>
+      <option value="/coding/f-sharp/fsharp-note-13/" >-- F# Task</option>
+      <option value="/coding/f-sharp/fsharp-note-14/" >-- F# Lazy</option>
+      <option value="/coding/f-sharp/fsharp-note-2/" >-- F# Namespace, Module &amp; Import</option>
+  
+    <option value="/coding/golang/" >
+  - 
+   Golang</option>
+    <option value="/coding/js-ts/" >
+  - 
+   JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/python/" >
+  - 
+   Python</option>
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
+  
+    <option value="/cloud/" >
+   Cloud</option>
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/management/" >
+   Management</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/frameworks/" >
+   Frameworks</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>F# Collections 2</h1>
+        
+
+<h2 id="list">List</h2>
+
+<p>A list in F# is an ordered, immutable series of elements of the same type. To perform basic operations on lists, use the functions in the List module.</p>
+
+<h3 id="creating-appending">Creating &amp; appending</h3>
+
+<p>Creating and Initializing Lists</p>
+
+<pre><code class="language-fsharp">// --- creating ---
+let list123 = [ 1; 2; 3 ]
+
+// You can also put line breaks between elements, in which case the semicolons are optional. 
+let list123 = [
+    1
+    2
+    3 ]
+
+
+// Normally, all list elements must be the same type. 
+// An exception is that a list in which the elements are specified to be a base type
+//  can have elements that are derived types. Thus the following is acceptable, 
+// because both Button and CheckBox derive from Control.
+let myControlList : Control list = [ new Button(); new CheckBox() ]
+
+// using a range indicated by integers separated by the range operator (..)
+let list1 = [ 1 .. 10 ]
+
+
+// An empty list.
+let listEmpty = []
+
+// use a sequence expression to create a list.
+let listOfSquares = [ for i in 1 .. 10 -&gt; i*i ]
+
+// ---- appending -------
+// You can attach elements to a list by using the :: (cons) operator. 
+// If list1 is [2; 3; 4], the following code creates list2 as [100; 2; 3; 4].
+let list2 = 100 :: list1
+
+// You can concatenate lists that have compatible types by using the @ operator, as in the following code. 
+// If list1 is [2; 3; 4] and list2 is [100; 2; 3; 4], this code creates list3 as [2; 3; 4; 100; 2; 3; 4].
+let list3 = list1 @ list2
+
+</code></pre>
+
+<h3 id="properties">Properties</h3>
+
+<p>The list type supports the following properties:
+Property |  Type |  Description
+&mdash;| &mdash;-| &mdash;
+Head    |&rsquo;T |   The first element.
+Empty | &rsquo;T list |   A static property that returns an empty list of the appropriate type.
+IsEmpty |   bool |  true if the list has no elements.
+Item |  &rsquo;T |    The element at the specified index (zero-based).
+Length  |int    |The number of elements.
+Tail |  &rsquo;T list |   The list without the first element.</p>
+
+<pre><code class="language-fsharp">
+let list1 = [ 1; 2; 3 ]
+
+// Properties
+printfn &quot;list1.IsEmpty is %b&quot; (list1.IsEmpty)
+printfn &quot;list1.Length is %d&quot; (list1.Length)
+printfn &quot;list1.Head is %d&quot; (list1.Head)
+printfn &quot;list1.Tail.Head is %d&quot; (list1.Tail.Head)
+printfn &quot;list1.Tail.Tail.Head is %d&quot; (list1.Tail.Tail.Head)
+printfn &quot;list1.Item(1) is %d&quot; (list1.Item(1))
+</code></pre>
+
+<h3 id="recursion">Recursion</h3>
+
+<pre><code class="language-fsharp">// simple implmentaton for small list
+let rec sum list =
+   match list with
+   | head :: tail -&gt; head + sum tail
+   | [] -&gt; 0
+
+// The previous code works well for small lists, but for larger lists, 
+// it could overflow the stack. The following code improves on this 
+// code by using an accumulator argument, a standard technique for
+// working with recursive functions.
+let sum list =
+   let rec loop list acc =
+       match list with
+       | head :: tail -&gt; loop tail (acc + head)
+       | [] -&gt; acc
+   loop list 0
+
+
+// The function RemoveAllMultiples is a recursive function that takes two lists. 
+// The first list contains the numbers whose multiples will be removed, and 
+// the second list is the list from which to remove the numbers.
+// Uses this recursive function to eliminate all the non-prime numbers 
+// from a list, leaving a list of prime numbers as the result.
+let IsPrimeMultipleTest n x =
+   x = n || x % n &lt;&gt; 0
+
+let rec RemoveAllMultiples listn listx =
+   match listn with
+   | head :: tail -&gt; RemoveAllMultiples tail (List.filter (IsPrimeMultipleTest head) listx)
+   | [] -&gt; listx
+
+
+let GetPrimesUpTo n =
+    let max = int (sqrt (float n))
+    RemoveAllMultiples [ 2 .. max ] [ 1 .. n ]
+
+printfn &quot;Primes Up To %d:\n %A&quot; 100 (GetPrimesUpTo 100)
+// output
+// Primes Up To 100:
+// [2; 3; 5; 7; 11; 13; 17; 19; 23; 29; 31; 37; 41; 43; 47; 53; 59; 61; 67; 71; 73; 79; 83; 89; 97]
+
+</code></pre>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="exists">Exists</h4>
+
+<pre><code class="language-fsharp">
+// Use List.exists to determine whether there is an element of a list satisfies a given Boolean expression.
+// containsNumber returns true if any of the elements of the supplied list match
+// the supplied number.
+let containsNumber number list = List.exists (fun elem -&gt; elem = number) list
+let list0to3 = [0 .. 3]
+printfn &quot;For list %A, contains zero is %b&quot; list0to3 (containsNumber 0 list0to3)
+// The output is as follows
+// For list [0; 1; 2; 3], contains zero is true
+
+// Use List.exists2 to compare elements in two lists.
+// isEqualElement returns true if any elements at the same position in two supplied
+// lists match.
+let isEqualElement list1 list2 = List.exists2 (fun elem1 elem2 -&gt; elem1 = elem2) list1 list2
+let list1to5 = [ 1 .. 5 ]
+let list5to1 = [ 5 .. -1 .. 1 ]
+if (isEqualElement list1to5 list5to1) then
+    printfn &quot;Lists %A and %A have at least one equal element at the same position.&quot; list1to5 list5to1
+else
+    printfn &quot;Lists %A and %A do not have an equal element at the same position.&quot; list1to5 list5to1
+
+// The output is as follows
+// Lists [1; 2; 3; 4; 5] and [5; 4; 3; 2; 1] have at least one equal element at the same position.
+
+// You can use List.forall if you want to test whether all the elements of a list meet a condition.
+let isAllZeroes list = List.forall (fun elem -&gt; elem = 0.0) list
+printfn &quot;%b&quot; (isAllZeroes [0.0; 0.0])
+printfn &quot;%b&quot; (isAllZeroes [0.0; 1.0])
+
+// The output is as follows
+// true
+// false
+
+// Similarly, List.forall2 determines whether all elements in the corresponding 
+// positions in two lists satisfy a Boolean expression that involves each pair of elements.
+
+
+let listEqual list1 list2 = List.forall2 (fun elem1 elem2 -&gt; elem1 = elem2) list1 list2
+printfn &quot;%b&quot; (listEqual [0; 1; 2] [0; 1; 2])
+printfn &quot;%b&quot; (listEqual [0; 0; 0] [0; 1; 0])
+
+// The output is as follows
+// true
+// false
+
+</code></pre>
+
+<h4 id="sort">Sort</h4>
+
+<pre><code class="language-fsharp">// use of List.sort.
+let sortedList1 = List.sort [1; 4; 8; -2; 5]
+printfn &quot;%A&quot; sortedList1
+
+// The output is as follows
+// [-2; 1; 4; 5; 8]
+
+// use of List.sortBy.
+let sortedList2 = List.sortBy (fun elem -&gt; abs elem) [1; 4; 8; -2; 5]
+printfn &quot;%A&quot; sortedList2
+
+// The output is as follows:
+// [1; -2; 4; 5; 8]
+
+// The next example demonstrates the use of List.sortWith. In this example, the custom comparison function compareWidgets is used to first compare one field of a custom type, and then another when the values of the first field are equal.
+F#
+
+type Widget = { ID: int; Rev: int }
+
+let compareWidgets widget1 widget2 =
+   if widget1.ID &lt; widget2.ID then -1 else
+   if widget1.ID &gt; widget2.ID then 1 else
+   if widget1.Rev &lt; widget2.Rev then -1 else
+   if widget1.Rev &gt; widget2.Rev then 1 else
+   0
+
+let listToCompare = [
+    { ID = 92; Rev = 1 }
+    { ID = 110; Rev = 1 }
+    { ID = 100; Rev = 5 }
+    { ID = 100; Rev = 2 }
+    { ID = 92; Rev = 1 }
+    ]
+
+let sortedWidgetList = List.sortWith compareWidgets listToCompare
+printfn &quot;%A&quot; sortedWidgetList
+
+// The output is as follows:
+// [{ID = 92;
+// Rev = 1;}; {ID = 92;
+// Rev = 1;}; {ID = 100;
+// Rev = 2;}; {ID = 100;
+// Rev = 5;}; {ID = 110;
+// Rev = 1;}]
+</code></pre>
+
+<h4 id="search">Search</h4>
+
+<pre><code class="language-fsharp">// The simplest, List.find, enables you to find the first element that matches a given condition.
+let isDivisibleBy number elem = elem % number = 0
+let result = List.find (isDivisibleBy 5) [ 1 .. 100 ]
+printfn &quot;%d &quot; result
+// output
+// 5
+
+// If the elements must be transformed first, call List.pick, which takes 
+// a function that returns an option, and looks for the first option 
+// value that is Some(x). Instead of returning the element, List.pick 
+// returns the result x. If no matching element is found, List.pick throws 
+// System.Collections.Generic.KeyNotFoundException.
+let valuesList = [ (&quot;a&quot;, 1); (&quot;b&quot;, 2); (&quot;c&quot;, 3) ]
+
+let resultPick = List.pick (fun elem -&gt;
+                    match elem with
+                    | (value, 2) -&gt; Some value
+                    | _ -&gt; None) valuesList
+printfn &quot;%A&quot; resultPick
+
+The output is as follows:
+Console
+
+&quot;b&quot;
+
+// Another group of search operations, List.tryFind and related functions, 
+// return an option value. The List.tryFind function returns the first element
+// of a list that satisfies a condition if such an element exists, but 
+// the option value None if not. The variation List.tryFindIndex returns
+// the index of the element, if one is found, rather than the element 
+// itself. These functions are illustrated in the following code.
+
+
+let list1d = [1; 3; 7; 9; 11; 13; 15; 19; 22; 29; 36]
+let isEven x = x % 2 = 0
+match List.tryFind isEven list1d with
+| Some value -&gt; printfn &quot;The first even value is %d.&quot; value
+| None -&gt; printfn &quot;There is no even value in the list.&quot;
+
+match List.tryFindIndex isEven list1d with
+| Some value -&gt; printfn &quot;The first even value is at position %d.&quot; value
+| None -&gt; printfn &quot;There is no even value in the list.&quot;
+// The output is as follows:
+// The first even value is 22.
+// The first even value is at position 8.
+
+</code></pre>
+
+<h3 id="list-tuple">List &amp; Tuple</h3>
+
+<p>Lists that contain tuples can be manipulated by zip and unzip functions. These functions combine two lists of single values into one list of tuples or separate one list of tuples into two lists of single values.</p>
+
+<pre><code class="language-fsharp">// ------------------ zip ---------------------
+// The simplest List.zip function takes two lists of single elements and 
+// produces a single list of tuple pairs. 
+let list1 = [ 1; 2; 3 ]
+let list2 = [ -1; -2; -3 ]
+let listZip = List.zip list1 list2
+printfn &quot;%A&quot; listZip
+// The output is as follows
+// [(1, -1); (2, -2); (3; -3)]
+
+
+// Another version, List.zip3, takes three lists of single elements and produces a 
+// single list of tuples that have three elements. 
+let list3 = [ 0; 0; 0]
+let listZip3 = List.zip3 list1 list2 list3
+printfn &quot;%A&quot; listZip3
+// The output is as follows
+// [(1, -1, 0); (2, -2, 0); (3, -3, 0)]
+
+
+// ------------------ unzip ---------------------
+
+//  use of List.unzip.
+let lists = List.unzip [(1,2); (3,4)]
+printfn &quot;%A&quot; lists
+printfn &quot;%A %A&quot; (fst lists) (snd lists)
+// The output is as follows
+// ([1; 3], [2; 4])
+// [1; 3] [2; 4]
+
+
+// use of List.unzip3.
+let listsUnzip3 = List.unzip3 [(1,2,3); (4,5,6)]
+printfn &quot;%A&quot; listsUnzip3
+// The output is as follows
+// ([1; 4], [2; 5], [3; 6])
+
+
+</code></pre>
+
+<h3 id="operating">Operating</h3>
+
+<pre><code class="language-fsharp">// The simplest is List.iter, which enables you to call a function on every 
+// element of a list. Variations include List.iter2, which enables you to 
+// perform an operation on elements of two lists, List.iteri, which is like 
+// List.iter except that the index of each element is passed as an argument 
+// to the function that is called for each element, and List.iteri2, which 
+// is a combination of the functionality of List.iter2 and List.iteri.  
+let list1 = [1; 2; 3]
+let list2 = [4; 5; 6]
+List.iter (fun x -&gt; printfn &quot;List.iter: element is %d&quot; x) list1
+List.iteri(fun i x -&gt; printfn &quot;List.iteri: element %d is %d&quot; i x) list1
+List.iter2 (fun x y -&gt; printfn &quot;List.iter2: elements are %d %d&quot; x y) list1 list2
+List.iteri2 (fun i x y -&gt;
+                printfn &quot;List.iteri2: element %d of list1 is %d element %d of list2 is %d&quot;
+                  i x i y)
+            list1 list2
+
+// The output is as follows:
+// List.iter: element is 1
+// List.iter: element is 2
+// List.iter: element is 3
+// List.iteri: element 0 is 1
+// List.iteri: element 1 is 2
+// List.iteri: element 2 is 3
+// List.iter2: elements are 1 4
+// List.iter2: elements are 2 5
+// List.iter2: elements are 3 6
+// List.iteri2: element 0 of list1 is 1; element 0 of list2 is 4
+// List.iteri2: element 1 of list1 is 2; element 1 of list2 is 5
+// List.iteri2: element 2 of list1 is 3; element 2 of list2 is 6
+
+
+// Another frequently used function that transforms list elements is List.map, 
+// which enables you to apply a function to each element of a list and put all 
+// the results into a new list. 
+
+// List.map2 and List.map3 are variations that take multiple lists. 
+// The only difference between List.mapi2 and List.mapi is that List.mapi2 
+// works with two lists. The following example illustrates List.map.
+
+let list1 = [1; 2; 3]
+let newList = List.map (fun x -&gt; x + 1) list1
+printfn &quot;%A&quot; newList
+// The output is as follows:
+// [2; 3; 4]
+
+
+// use of List.map2.
+let list1 = [1; 2; 3]
+let list2 = [4; 5; 6]
+let sumList = List.map2 (fun x y -&gt; x + y) list1 list2
+printfn &quot;%A&quot; sumList
+// The output is as follows
+// [5; 7; 9]
+
+
+// use of List.map3.
+let newList2 = List.map3 (fun x y z -&gt; x + y + z) list1 list2 [2; 3; 4]
+printfn &quot;%A&quot; newList2
+// The output is as follows:
+// [7; 10; 13]
+
+
+// use of List.mapi.
+let newListAddIndex = List.mapi (fun i x -&gt; x + i) list1
+printfn &quot;%A&quot; newListAddIndex
+// The output is as follows
+// [1; 3; 5]
+
+
+// use of List.mapi2.
+let listAddTimesIndex = List.mapi2 (fun i x y -&gt; (x + y) * i) list1 list2
+printfn &quot;%A&quot; listAddTimesIndex
+// The output is as follows
+// [0; 7; 18]
+
+
+
+// List.collect is like List.map, except that each element produces a list 
+// and all these lists are concatenated into a final list. In the following 
+// code, each element of the list generates three numbers.
+let collectList = List.collect (fun x -&gt; [for i in 1..3 -&gt; x * i]) list1
+printfn &quot;%A&quot; collectList
+
+// The output is as follows:
+// [1; 2; 3; 2; 4; 6; 3; 6; 9]
+
+// use List.filter, which takes a Boolean condition and produces a new list 
+// that consists only of elements that satisfy the given condition.
+let evenOnlyList = List.filter (fun x -&gt; x % 2 = 0) [1; 2; 3; 4; 5; 6]
+
+// The resulting list is [2; 4; 6].
+
+// A combination of map and filter, List.choose enables you to transform 
+// and select elements at the same time. List.choose applies a function that 
+// returns an option to each element of a list, and returns a new list of 
+// the results for elements when the function returns the option value Some.
+
+// use of List.choose to select capitalized words out of a list of words.
+let listWords = [ &quot;and&quot;; &quot;Rome&quot;; &quot;Bob&quot;; &quot;apple&quot;; &quot;zebra&quot; ]
+let isCapitalized (string1:string) = System.Char.IsUpper string1[0]
+let results = List.choose (fun elem -&gt;
+    match elem with
+    | elem when isCapitalized elem -&gt; Some(elem + &quot;'s&quot;)
+    | _ -&gt; None) listWords
+printfn &quot;%A&quot; results
+// The output is as follows:
+// [&quot;Rome's&quot;; &quot;Bob's&quot;]
+
+</code></pre>
+
+<h3 id="fold-scan">Fold &amp; Scan</h3>
+
+<p>The fold and scan operations are like List.iter and List.map in that you invoke a function on each element, but these operations provide an additional parameter called the accumulator that carries information through the computation.</p>
+
+<pre><code class="language-fsharp">let sumList list = List.fold (fun acc elem -&gt; acc + elem) 0 list
+printfn &quot;Sum of the elements of list %A is %d.&quot; [ 1 .. 3 ] (sumList [ 1 .. 3 ])
+// output
+// Sum of the elements of list [1; 2; 3] is 6.
+
+// The following example computes the average of a list.
+let averageList list = (List.fold (fun acc elem -&gt; acc + float elem) 0.0 list / float list.Length)
+
+// The following example computes the standard deviation of a list.
+// The standard deviation is computed by taking the square root of the
+// sum of the variances, which are the differences between each value
+// and the average.
+let stdDevList list =
+    let avg = averageList list
+    sqrt (List.fold (fun acc elem -&gt; acc + (float elem - avg) ** 2.0 ) 0.0 list / float list.Length)
+
+let testList listTest =
+    printfn &quot;List %A average: %f stddev: %f&quot; listTest (averageList listTest) (stdDevList listTest)
+
+testList [1; 1; 1]
+testList [1; 2; 1]
+testList [1; 2; 3]
+// output
+// List [1; 1; 1] average: 1.000000 stddev: 0.000000
+// List [1; 2; 1] average: 1.333333 stddev: 0.471405
+// List [1; 2; 3] average: 2.000000 stddev: 0.816497
+
+
+
+// List.fold is the same as to List.iter when the accumulator is not used.
+let printList list = List.fold (fun acc elem -&gt; printfn &quot;%A&quot; elem) () list
+printList [0.0; 1.0; 2.5; 5.1 ]
+// output
+// 0.0
+// 1.0
+// 2.5
+// 5.1
+
+
+
+// The following example uses List.fold to reverse a list.
+// The accumulator starts out as the empty list, and the function uses the cons operator
+// to add each successive element to the head of the accumulator list, resulting in a
+// reversed form of the list.
+let reverseList list = List.fold (fun acc elem -&gt; elem::acc) [] list
+printfn &quot;%A&quot; (reverseList [1 .. 10])
+// output
+// [10; 9; 8; 7; 6; 5; 4; 3; 2; 1]
+
+// Use List.fold2 to perform computations over two lists (of equal size) at the same time.
+// Example: Sum the greater element at each list position.
+let sumGreatest list1 list2 = List.fold2 (fun acc elem1 elem2 -&gt;
+                                              acc + max elem1 elem2) 0 list1 list2
+
+let sum = sumGreatest [1; 2; 3] [3; 2; 1]
+printfn &quot;The sum of the greater of each pair of elements in the two lists is %d.&quot; sum
+// output
+// The sum of the greater of each pair of elements in the two lists is 8.
+
+
+
+// List.fold and List.scan differ in that List.fold returns the final value of 
+// the extra parameter, but List.scan returns the list of the intermediate 
+// values (along with the final value) of the extra parameter.
+
+
+// Discriminated union type that encodes the transaction type.
+type Transaction =
+    | Deposit
+    | Withdrawal
+
+let transactionTypes = [Deposit; Deposit; Withdrawal]
+let transactionAmounts = [100.00; 1000.00; 95.00 ]
+let initialBalance = 200.00
+
+// Use fold2 to perform a calculation on the list to update the account balance.
+let endingBalance = List.fold2 (fun acc elem1 elem2 -&gt;
+                                match elem1 with
+                                | Deposit -&gt; acc + elem2
+                                | Withdrawal -&gt; acc - elem2)
+                                initialBalance
+                                transactionTypes
+                                transactionAmounts
+printfn &quot;%f&quot; endingBalance
+// output 
+// 1205.000000
+
+// For a calculation like summation, List.fold and List.foldBack have the same effect because the result does not depend on the order of traversal. In the following example, List.foldBack is used to add the elements in a list.
+let sumListBack list = List.foldBack (fun elem acc -&gt; acc + elem) list 0
+printfn &quot;%d&quot; (sumListBack [1; 2; 3])
+// output: 6
+
+
+// For a calculation in which the order of traversal is important, fold and foldBack have different
+// results. For example, replacing fold with foldBack in the listReverse function
+// produces a function that copies the list, rather than reversing it.
+let copyList list = List.foldBack (fun elem acc -&gt; elem::acc) list []
+printfn &quot;%A&quot; (copyList [1 .. 10])
+// output: [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
+
+
+// The following example returns to the bank account example. This time a new 
+// transaction type is added: an interest calculation. The ending balance now 
+// depends on the order of transactions.
+type Transaction2 =
+    | Deposit
+    | Withdrawal
+    | Interest
+
+let transactionTypes2 = [Deposit; Deposit; Withdrawal; Interest]
+let transactionAmounts2 = [100.00; 1000.00; 95.00; 0.05 / 12.0 ]
+let initialBalance2 = 200.00
+
+// Because fold2 processes the lists by starting at the head element,
+// the interest is calculated last, on the balance of 1205.00.
+let endingBalance2 = List.fold2 (fun acc elem1 elem2 -&gt;
+                                match elem1 with
+                                | Deposit -&gt; acc + elem2
+                                | Withdrawal -&gt; acc - elem2
+                                | Interest -&gt; acc * (1.0 + elem2))
+                                initialBalance2
+                                transactionTypes2
+                                transactionAmounts2
+printfn &quot;%f&quot; endingBalance2
+// output
+// 1210.020833
+
+// Because foldBack2 processes the lists by starting at end of the list,
+// the interest is calculated first, on the balance of only 200.00.
+let endingBalance3 = List.foldBack2 (fun elem1 elem2 acc -&gt;
+                                match elem1 with
+                                | Deposit -&gt; acc + elem2
+                                | Withdrawal -&gt; acc - elem2
+                                | Interest -&gt; acc * (1.0 + elem2))
+                                transactionTypes2
+                                transactionAmounts2
+                                initialBalance2
+printfn &quot;%f&quot; endingBalance3
+// output
+// 1205.833333
+</code></pre>
+
+    </div>
+
+    <div class="toc toc-fixed" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#list">List</a>
+<ul>
+<li><a href="#creating-appending">Creating &amp; appending</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#recursion">Recursion</a></li>
+<li><a href="#functions">Functions</a>
+<ul>
+<li><a href="#exists">Exists</a></li>
+<li><a href="#sort">Sort</a></li>
+<li><a href="#search">Search</a></li>
+</ul></li>
+<li><a href="#list-tuple">List &amp; Tuple</a></li>
+<li><a href="#operating">Operating</a></li>
+<li><a href="#fold-scan">Fold &amp; Scan</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-5/" title="F# Collections 1"> <i class="fa fa-chevron-left"></i><label>F# Collections 1</label></a>
+    <a class="nav nav-next" href="/coding/f-sharp/fsharp-note-7/" title="F# Collections 3" style="margin-right: 0px;"><label>F# Collections 3</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

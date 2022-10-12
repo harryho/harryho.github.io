@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2022-10-12T13:07:01 AEDT">
+<title>F# Active Patterns :: Hello World</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "\/";
+</script>
+<meta name="description" content="F# Active Patterns">
+
+
+
+    
+  </head>
+  <body data-url="/coding/f-sharp/fsharp-note-9/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="/">Hello World</a>
+  
+
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+  <nav class="shortcuts">
+    <div>
+      <div class="searchbox">
+        <input data-search-input id="search-by" type="text" placeholder="Search...">
+      </div>
+      <script type="text/javascript" src="/js/lunr.min.js"></script>
+      <script type="text/javascript" src="/js/auto-complete.js"></script>
+      <link href="/css/auto-complete.css" rel="stylesheet">
+      <script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+      </script>
+      <script type="text/javascript" src="/js/search.js"></script>
+    </div>
+  </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/" class="dd-item">
+          <a href="/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/projects/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/projects/">Projects</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/projects/angular-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular-crm/">
+            Angular 9 CRM Starter Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/docker-toolkits/" class="dd-item">
+        <div>
+          <a href="/projects/docker-toolkits/">
+             Docker Kits
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/python-flat-api/" class="dd-item">
+        <div>
+          <a href="/projects/python-flat-api/">
+            FlatApi - Restful API for python dev
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angular4-crm/" class="dd-item">
+        <div>
+          <a href="/projects/angular4-crm/">
+            Angular 4 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/laravel-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/laravel-mvc-starter/">
+            Laravel MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/react-crm/" class="dd-item">
+        <div>
+          <a href="/projects/react-crm/">
+            React Redux CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-admin/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-admin/">
+            Vue 2 Admin Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/vue2-crm/" class="dd-item">
+        <div>
+          <a href="/projects/vue2-crm/">
+            Vue 2 CRM Project
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/angularjs-webpack-es6-starter/" class="dd-item">
+        <div>
+          <a href="/projects/angularjs-webpack-es6-starter/">
+            Angularjs Webpack ES6 Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/zf2-mvc-starter/" class="dd-item">
+        <div>
+          <a href="/projects/zf2-mvc-starter/">
+            Zend Framework 2 MVC Starter
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/projects/kube-cluster/" class="dd-item">
+        <div>
+          <a href="/projects/kube-cluster/">
+            Kubernetes Cluster in 5min
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/">Coding</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/coding/c/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c/">C </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c/lcthw-lectures.1/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.1/">
+            C Lecture - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.2/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.2/">
+            C Lecture - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.3/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.3/">
+            C Lecture - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c/lcthw-lectures.4/" class="dd-item">
+        <div>
+          <a href="/coding/c/lcthw-lectures.4/">
+            C Lecture - 4
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/c-sharp/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/c-sharp/">C#</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/c-sharp/csharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-1/">
+            C# Console App
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-4/">
+             Generic Predicate &amp; Expression
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-2/">
+            Scheduled task with window service
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/c-sharp/csharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/c-sharp/csharp-note-3/">
+            Thread &amp; Task
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/db-sql/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/db-sql/">DB &amp; SQL</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/db-sql/mysql-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-2/">
+            MySql: DDL &amp; DML
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-1/">
+            MySql: Getting Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-5/">
+            MySql: JSON
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-3/">
+            MySql: SP &amp; Func
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mysql-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mysql-note-4/">
+            MySql: Schema &amp; Metadata
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/pgsql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/pgsql-note-1/">
+            PostgresQL Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/db-sql/mssql-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/db-sql/mssql-note-1/">
+            Sql Server Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/f-sharp/" class="dd-item parent haschildren
+        ">
+      <div>
+      <a href="/coding/f-sharp/">F#</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-1/">
+            F# Overview
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-3/">
+            F# Functions
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-4/">
+            F# C.U.R.S.
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-5/">
+            F# Collections 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-6/">
+            F# Collections 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-7/">
+            F# Collections 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-8/">
+            F# Pattern Matching
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-9/" class="dd-item active">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-9/">
+            F# Active Patterns
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-10/">
+            F# Computations 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-11/">
+            F# Computations 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-12/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-12/">
+            F# Async
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-13/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-13/">
+            F# Task
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-14/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-14/">
+            F# Lazy
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-2/">
+            F# Namespace, Module &amp; Import
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/golang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/golang/">Golang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/golang/go-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-1/">
+            Getting started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-2/">
+            Map, Function &amp; Closure
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-3/">
+            Struct &amp; Interface
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-4/">
+            IO, Json &amp; XML
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-5/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-6/">
+            Goroutine &amp; Channel - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-7/">
+            Goroutine &amp; Channel - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-8/">
+            Packaging
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-9/">
+            Pitfalls
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-10/">
+            Template
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-20/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-20/">
+            Good practice - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-21/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-21/">
+            Good practice - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-22/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-22/">
+            Good practice - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/golang/go-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/golang/go-note-99/">
+            Golang snippets
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/js-ts/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/js-ts/">JS &amp; TS </a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/js-ts/js-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-1/">
+            JS &amp; ES Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-2/">
+            JS &amp; ES Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-3/">
+            JS &amp; ES Note - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/js-note-99/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/js-note-99/">
+            JS &amp; ES snippet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/js-ts/ts-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/js-ts/ts-note-1/">
+            TS: Basic Types
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/java/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/java/">Java</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/java/java-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-1/">
+            Java Note - 1: Enum
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-2/">
+            Java Note - 2: Concurrency
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-3/">
+            Java Note - 3: Path and Files
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-4/">
+            Java Note - 4: Date Time 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/java/java-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/java/java-note-5/">
+            Java Note - 5: Lambda 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/python/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/python/">Python</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/python/python-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-1/">
+            Package &amp; Module
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-2/">
+            Closure &amp; Decorator
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-3/">
+            String &amp; Representation
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-4/">
+            Iteration
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-5/">
+            Inheritance &amp; Polymorphism
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-6/">
+            Collection
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-7/">
+            Exception &amp; Assertion
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-8/">
+            Context
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/python/python-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/python/python-note-9/">
+            ABC
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/rustlang/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/rustlang/">Rustlang</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/rustlang/rust-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-1/">
+            Data Types &amp; Ownership
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-2/">
+            Project, Vector, String &amp; Hashmap
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-3/">
+            Error handling
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/rustlang/rust-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/rustlang/rust-note-4/">
+            Generic Type &amp; Trait 
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/coding/shell/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/coding/shell/">Shell</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/coding/shell/bash-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-1/">
+            Adv Bash - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-2/">
+            Adv Bash - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/bash-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/shell/bash-note-3/">
+            Adv Bash - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-1/">
+            Cron Job Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/cron-note-2/" class="dd-item">
+        <div>
+          <a href="/coding/shell/cron-note-2/">
+            Cron Job Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/shell/ps-note-1/" class="dd-item">
+        <div>
+          <a href="/coding/shell/ps-note-1/">
+            Powershell Note - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/">Cloud</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/cloud/azure/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/azure/">Azure</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/azure/az-01-caf-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-01/">
+            Azure: CAF - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-01-caf-02/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-02/">
+            Azure: CAF - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-01-caf-03/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-01-caf-03/">
+            Azure: CAF - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-01/">
+            Azure: RBAC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-02/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-02/">
+            Azure: RBAC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-02-rbac-03/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-02-rbac-03/">
+            Azure: RBAC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-03-app-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-03-app-01/">
+            Azure: App - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/azure/az-04-cli-01/" class="dd-item">
+        <div>
+          <a href="/cloud/azure/az-04-cli-01/">
+            Azure: CLI - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/aws/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/aws/">AWS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/aws/aws-01-iam/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-01-iam/">
+            AWS: IAM
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-1/">
+            AWS : CLI - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-2/">
+            AWS : CLI - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-02-cli-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-02-cli-3/">
+            AWS : CLI - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-1/">
+            AWS: VPC - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-2/">
+            AWS: VPC - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-3/">
+            AWS: VPC - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-4/">
+            AWS: VPC - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-03-vpc-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-03-vpc-5/">
+            AWS: VPC - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-1/">
+            AWS: S3 - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-2/">
+            AWS: S3 - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-04-s3-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-04-s3-3/">
+            AWS: S3 - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-1/">
+            AWS: SQS,SNS,SES - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-05-ses-sqs-sns-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-05-ses-sqs-sns-2/">
+            AWS: SQS,SNS,SES - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-1/">
+            AWS: EKS - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-2/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-2/">
+            AWS: EKS - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-3/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-3/">
+            AWS: EKS - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-4/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-4/">
+            AWS: EKS - 4
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-11-eks-5/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-11-eks-5/">
+            AWS: EKS - 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/aws/aws-21-rds-1/" class="dd-item">
+        <div>
+          <a href="/cloud/aws/aws-21-rds-1/">
+            AWS: RDS - 1
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/cloud/digito/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/cloud/digito/">Digital Ocean</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/cloud/digito/digito-note-1/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-1/">
+            DigitialOcean: Droplet
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-2/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-2/">
+            DigitialOcean: Get Started
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-3/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-3/">
+            DigitialOcean: First Web Host
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/cloud/digito/digito-note-4/" class="dd-item">
+        <div>
+          <a href="/cloud/digito/digito-note-4/">
+            DigitialOcean: Lets Encrypt
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/hacks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/hacks/">Hacks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/hacks/windows-command-1/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-1/">
+            Windows cmd &amp; hotkey - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-2/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-2/">
+            Windows cmd &amp; hotkey - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/windows-command-3/" class="dd-item">
+        <div>
+          <a href="/hacks/windows-command-3/">
+            Windows cmd &amp; hotkey - 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/sftp-pgp/" class="dd-item">
+        <div>
+          <a href="/hacks/sftp-pgp/">
+            SFTP &amp; GPG 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/git-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/git-notes/">
+            Git Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/cass-note/" class="dd-item">
+        <div>
+          <a href="/hacks/cass-note/">
+            Cassandra Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/php-debug/" class="dd-item">
+        <div>
+          <a href="/hacks/php-debug/">
+            Debug PHP with Free IDE
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/docker-note/" class="dd-item">
+        <div>
+          <a href="/hacks/docker-note/">
+            Docker Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/qemu-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/qemu-notes/">
+            Qemu &amp; Virtual Machine
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/hacks/vbox-notes/" class="dd-item">
+        <div>
+          <a href="/hacks/vbox-notes/">
+            VirtualBox Notes
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/management/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/management/">Management</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/management/cmmi/" class="dd-item">
+        <div>
+          <a href="/management/cmmi/">
+            CMMI
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/cmmi_v2/" class="dd-item">
+        <div>
+          <a href="/management/cmmi_v2/">
+            CMMI 2.0
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/cobit_5/" class="dd-item">
+        <div>
+          <a href="/management/cobit_5/">
+            COBIT 5
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/management/scrum_vs_kanban/" class="dd-item">
+        <div>
+          <a href="/management/scrum_vs_kanban/">
+            Scrum VS Kanban
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/os/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/os/ubuntu-desktop-20/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-20/">
+            Ubuntu Desktop 20 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/amazon-linux-2/" class="dd-item">
+        <div>
+          <a href="/os/amazon-linux-2/">
+            Amazon Linux 2 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-strongswam/" class="dd-item">
+        <div>
+          <a href="/os/vpn-strongswam/">
+            VPN StrongSwam setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/vpn-vyos/" class="dd-item">
+        <div>
+          <a href="/os/vpn-vyos/">
+            VPN VyOS setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/dual-boot-win10-ubuntu18/" class="dd-item">
+        <div>
+          <a href="/os/dual-boot-win10-ubuntu18/">
+            Dual Boot Windows 10 &amp; Ubuntu 18
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-18/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-18/">
+            Ubuntu Desktop 18 LTS note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/raspberrypi-notes/" class="dd-item">
+        <div>
+          <a href="/os/raspberrypi-notes/">
+            Raspberry Pi setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/lubuntu16-desktop/" class="dd-item">
+        <div>
+          <a href="/os/lubuntu16-desktop/">
+            Lubuntu 16 desktop
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/grub-trouble-shooting/" class="dd-item">
+        <div>
+          <a href="/os/grub-trouble-shooting/">
+            Grub Trouble Shooting
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-16/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-16/">
+            Ubuntu 16 server note
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-server-7/" class="dd-item">
+        <div>
+          <a href="/os/centos-server-7/">
+            CentOS 7 Server
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-server-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-server-14/">
+            Ubuntu 14 -- server setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14/">
+            Ubuntu 14 -- desktop setup &amp; dual boot 
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/ubuntu-desktop-14-extra-tools/" class="dd-item">
+        <div>
+          <a href="/os/ubuntu-desktop-14-extra-tools/">
+            Ubuntu 14 -- desktop, extra tools
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/mac-intel64/" class="dd-item">
+        <div>
+          <a href="/os/mac-intel64/">
+            Macbook Notes - Intel X64
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/centos-fedora-desktop/" class="dd-item">
+        <div>
+          <a href="/os/centos-fedora-desktop/">
+            CentOS 6/7 Multi-Boot Setup
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/os/powershell-7/" class="dd-item">
+        <div>
+          <a href="/os/powershell-7/">
+            PowerShell 7
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/blogs/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/blogs/k8s-on-vm/" class="dd-item">
+        <div>
+          <a href="/blogs/k8s-on-vm/">
+            Try Minikube
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/vue-ng-react/" class="dd-item">
+        <div>
+          <a href="/blogs/vue-ng-react/">
+            Angular vs React vs Vue
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/create-a-blog-on-github/" class="dd-item">
+        <div>
+          <a href="/blogs/create-a-blog-on-github/">
+            Create a blog site on GitHub Pages
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/build-mobile-app/" class="dd-item">
+        <div>
+          <a href="/blogs/build-mobile-app/">
+            Build mobile app with web tech
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/azure-notes/" class="dd-item">
+        <div>
+          <a href="/blogs/azure-notes/">
+            Azure Practices
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/blogs/javascript-oop/" class="dd-item">
+        <div>
+          <a href="/blogs/javascript-oop/">
+            JavaScript and OOP
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
+        ">
+      <div>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/cntk-notes-1/">
+            CNTK Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-1/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-1/">
+            Tensorflow Note - 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/tensorflow-notes-2/" class="dd-item">
+        <div>
+          <a href="/frameworks/tensorflow-notes-2/">
+            Tensorflow Note - 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/php-web/" class="dd-item">
+        <div>
+          <a href="/frameworks/php-web/">
+            PHP Web Framework
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
+        <div>
+          <a href="/frameworks/python-django/">
+            Python Web Framework
+          </a>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/projects/" >
+   Projects</option>
+    <option value="/coding/" >
+   Coding</option> 
+    <option value="/coding/c/" >
+  - 
+   C </option>
+    <option value="/coding/c-sharp/" >
+  - 
+   C#</option>
+    <option value="/coding/db-sql/" >
+  - 
+   DB &amp; SQL</option>
+    <option value="/coding/f-sharp/" >
+  - 
+   F#</option> 
+      <option value="/coding/f-sharp/fsharp-note-1/" >-- F# Overview</option>
+      <option value="/coding/f-sharp/fsharp-note-3/" >-- F# Functions</option>
+      <option value="/coding/f-sharp/fsharp-note-4/" >-- F# C.U.R.S.</option>
+      <option value="/coding/f-sharp/fsharp-note-5/" >-- F# Collections 1</option>
+      <option value="/coding/f-sharp/fsharp-note-6/" >-- F# Collections 2</option>
+      <option value="/coding/f-sharp/fsharp-note-7/" >-- F# Collections 3</option>
+      <option value="/coding/f-sharp/fsharp-note-8/" >-- F# Pattern Matching</option>
+      <option value="/coding/f-sharp/fsharp-note-9/"  selected>-- F# Active Patterns</option>
+      <option value="/coding/f-sharp/fsharp-note-10/" >-- F# Computations 1</option>
+      <option value="/coding/f-sharp/fsharp-note-11/" >-- F# Computations 2</option>
+      <option value="/coding/f-sharp/fsharp-note-12/" >-- F# Async</option>
+      <option value="/coding/f-sharp/fsharp-note-13/" >-- F# Task</option>
+      <option value="/coding/f-sharp/fsharp-note-14/" >-- F# Lazy</option>
+      <option value="/coding/f-sharp/fsharp-note-2/" >-- F# Namespace, Module &amp; Import</option>
+  
+    <option value="/coding/golang/" >
+  - 
+   Golang</option>
+    <option value="/coding/js-ts/" >
+  - 
+   JS &amp; TS </option>
+    <option value="/coding/java/" >
+  - 
+   Java</option>
+    <option value="/coding/python/" >
+  - 
+   Python</option>
+    <option value="/coding/rustlang/" >
+  - 
+   Rustlang</option>
+    <option value="/coding/shell/" >
+  - 
+   Shell</option>
+  
+    <option value="/cloud/" >
+   Cloud</option>
+    <option value="/hacks/" >
+   Hacks</option>
+    <option value="/management/" >
+   Management</option>
+    <option value="/os/" >
+   OS</option>
+    <option value="/blogs/" >
+   Blogs</option>
+    <option value="/frameworks/" >
+   Frameworks</option>
+
+
+
+        </select>
+      </center>
+    </div>
+
+
+    
+
+
+    
+    
+    
+<div class="main-page">
+    <div class="flex-item main-content">
+            <h1>F# Active Patterns</h1>
+        
+
+<h2 id="active-patterns">Active Patterns</h2>
+
+<p>Active patterns enable you to define named partitions that subdivide input data, so that you can use these names in a pattern matching expression just as you would for a discriminated union. You can use active patterns to decompose data in a customized manner for each partition.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<pre><code class="language-fsharp">// Active pattern of one choice.
+let (|identifier|) [arguments] valueToMatch = expression
+
+// Active Pattern with multiple choices.
+// Uses a FSharp.Core.Choice&lt;_,...,_&gt; based on the number of case names. In F#, the limitation n &lt;= 7 applies.
+let (|identifier1|identifier2|...|) valueToMatch = expression
+
+// Partial active pattern definition.
+// Uses a FSharp.Core.option&lt;_&gt; to represent if the type is satisfied at the call site.
+let (|identifier|_|) [arguments] valueToMatch = expression
+</code></pre>
+
+<h3 id="examples">Examples</h3>
+
+<ul>
+<li>Multiple choices</li>
+</ul>
+
+<pre><code class="language-fsharp">let (|Even|Odd|) input = if input % 2 = 0 then Even else Odd
+let TestNumber input =
+   match input with
+   | Even -&gt; printfn &quot;%d is even&quot; input
+   | Odd -&gt; printfn &quot;%d is odd&quot; input
+
+TestNumber 7
+TestNumber 11
+TestNumber 32
+// output
+// 7 is odd
+// 11 is odd
+// 32 is even
+
+</code></pre>
+
+<ul>
+<li>Decompose data types</li>
+</ul>
+
+<pre><code class="language-fsharp">
+open System.Drawing
+
+let (|RGB|) (col : System.Drawing.Color) =
+     ( col.R, col.G, col.B )
+
+let (|HSB|) (col : System.Drawing.Color) =
+   ( col.GetHue(), col.GetSaturation(), col.GetBrightness() )
+
+let printRGB (col: System.Drawing.Color) =
+   match col with
+   | RGB(r, g, b) -&gt; printfn &quot; Red: %d Green: %d Blue: %d&quot; r g b
+
+let printHSB (col: System.Drawing.Color) =
+   match col with
+   | HSB(h, s, b) -&gt; printfn &quot; Hue: %f Saturation: %f Brightness: %f&quot; h s b
+
+let printAll col colorString =
+  printfn &quot;%s&quot; colorString
+  printRGB col
+  printHSB col
+
+printAll Color.Red &quot;Red&quot;
+printAll Color.Black &quot;Black&quot;
+printAll Color.White &quot;White&quot;
+printAll Color.Gray &quot;Gray&quot;
+printAll Color.BlanchedAlmond &quot;BlanchedAlmond&quot;
+
+// Red
+//  Red: 255 Green: 0 Blue: 0
+//  Hue: 360.000000 Saturation: 1.000000 Brightness: 0.500000
+// Black
+//  Red: 0 Green: 0 Blue: 0
+//  Hue: 0.000000 Saturation: 0.000000 Brightness: 0.000000
+// White
+//  Red: 255 Green: 255 Blue: 255
+//  Hue: 0.000000 Saturation: 0.000000 Brightness: 1.000000
+// Gray
+//  Red: 128 Green: 128 Blue: 128
+//  Hue: 0.000000 Saturation: 0.000000 Brightness: 0.501961
+// BlanchedAlmond
+//  Red: 255 Green: 235 Blue: 205
+//  Hue: 36.000000 Saturation: 1.000000 Brightness: 0.901961
+</code></pre>
+
+<h3 id="partial-active-patterns">Partial Active Patterns</h3>
+
+<p>Active patterns that do not always produce a value are called partial active patterns; they have a return value that is an option type. To define a partial active pattern, you use a wildcard character (_) at the end of the list of patterns inside the banana clips.</p>
+
+<pre><code class="language-fsharp">let (|Integer|_|) (str: string) =
+   let mutable intvalue = 0
+   if System.Int32.TryParse(str, &amp;intvalue) then Some(intvalue)
+   else None
+
+let (|Float|_|) (str: string) =
+   let mutable floatvalue = 0.0
+   if System.Double.TryParse(str, &amp;floatvalue) then Some(floatvalue)
+   else None
+
+let parseNumeric str =
+   match str with
+     | Integer i -&gt; printfn &quot;%d : Integer&quot; i
+     | Float f -&gt; printfn &quot;%f : Floating point&quot; f
+     | _ -&gt; printfn &quot;%s : Not matched.&quot; str
+
+parseNumeric &quot;1.1&quot;
+parseNumeric &quot;0&quot;
+parseNumeric &quot;0.0&quot;
+parseNumeric &quot;10&quot;
+parseNumeric &quot;Something else&quot;
+
+// output
+// 1.100000 : Floating point
+// 0 : Integer
+// 0.000000 : Floating point
+// 10 : Integer
+// Something else : Not matched.
+
+
+let err = 1.e-10
+
+let isNearlyIntegral (x:float) = abs (x - round(x)) &lt; err
+
+let (|Square|_|) (x : int) =
+  if isNearlyIntegral (sqrt (float x)) then Some(x)
+  else None
+
+let (|Cube|_|) (x : int) =
+  if isNearlyIntegral ((float x) ** ( 1.0 / 3.0)) then Some(x)
+  else None
+
+let findSquareCubes x =
+   match x with
+       | Cube x &amp; Square _ -&gt; printfn &quot;%d is a cube and a square&quot; x
+       | Cube x -&gt; printfn &quot;%d is a cube&quot; x
+       | _ -&gt; ()
+
+[ 1 .. 1000 ] |&gt; List.iter (fun elem -&gt; findSquareCubes elem)
+// output
+// 1 is a cube and a square
+// 8 is a cube
+// 27 is a cube
+// 64 is a cube and a square
+// 125 is a cube
+// 216 is a cube
+// 343 is a cube
+// 512 is a cube
+// 729 is a cube and a square
+// 1000 is a cube
+
+</code></pre>
+
+<h3 id="parameterized-active-patterns">Parameterized Active Patterns</h3>
+
+<p>Active patterns always take at least one argument for the item being matched, but they may take additional arguments as well, in which case the name parameterized active pattern applies. Additional arguments allow a general pattern to be specialized.</p>
+
+<pre><code class="language-fsharp">open System.Text.RegularExpressions
+
+// ParseRegex parses a regular expression and returns a list of the strings that match each group in
+// the regular expression.
+// List.tail is called to eliminate the first element in the list, which is the full matched expression,
+// since only the matches for each group are wanted.
+let (|ParseRegex|_|) regex str =
+   let m = Regex(regex).Match(str)
+   if m.Success
+   then Some (List.tail [ for x in m.Groups -&gt; x.Value ])
+   else None
+
+// Three different date formats are demonstrated here. The first matches two-
+// digit dates and the second matches full dates. This code assumes that if a two-digit
+// date is provided, it is an abbreviation, not a year in the first century.
+let parseDate str =
+   match str with
+     | ParseRegex &quot;(\d{1,2})/(\d{1,2})/(\d{1,2})$&quot; [Integer m; Integer d; Integer y]
+          -&gt; new System.DateTime(y + 2000, m, d)
+     | ParseRegex &quot;(\d{1,2})/(\d{1,2})/(\d{3,4})&quot; [Integer m; Integer d; Integer y]
+          -&gt; new System.DateTime(y, m, d)
+     | ParseRegex &quot;(\d{1,4})-(\d{1,2})-(\d{1,2})&quot; [Integer y; Integer m; Integer d]
+          -&gt; new System.DateTime(y, m, d)
+     | _ -&gt; new System.DateTime()
+
+let dt1 = parseDate &quot;12/22/08&quot;
+let dt2 = parseDate &quot;1/1/2009&quot;
+let dt3 = parseDate &quot;2008-1-15&quot;
+let dt4 = parseDate &quot;1995-12-28&quot;
+
+printfn &quot;12/22/08 -&gt; %s&quot; (dt1.ToString()) 
+printfn &quot;1/1/2009 -&gt; %s&quot; (dt2.ToString()) 
+printfn &quot;2008-1-15 -&gt; %s&quot; (dt3.ToString()) 
+printfn &quot;1995-12-28 -&gt; %s&quot; (dt4.ToString())
+// output
+// 12/22/08 -&gt; 22/12/2008 12:00:00 am
+// 1/1/2009 -&gt; 1/1/2009 12:00:00 am
+// 2008-1-15 -&gt; 15/1/2008 12:00:00 am
+// 1995-12-28 -&gt; 28/12/1995 12:00:00 am
+// 2000.12.21 -&gt; 1/1/0001 12:00:00 am
+</code></pre>
+
+<p>Active patterns are not restricted only to pattern matching expressions, you can also use them on let-bindings.</p>
+
+<pre><code class="language-fsharp">let (|Default|) onNone value =
+    match value with
+    | None -&gt; onNone
+    | Some e -&gt; e
+
+let greet (Default &quot;random citizen&quot; name) =
+    printfn &quot;Hello, %s!&quot; name
+
+greet None
+greet (Some &quot;George&quot;)
+// Hello, random citizen!
+// Hello, George!
+</code></pre>
+
+    </div>
+
+    <div class="toc toc-fixed" >
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#active-patterns">Active Patterns</a>
+<ul>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#partial-active-patterns">Partial Active Patterns</a></li>
+<li><a href="#parameterized-active-patterns">Parameterized Active Patterns</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+</div>
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-8/" title="F# Pattern Matching"> <i class="fa fa-chevron-left"></i><label>F# Pattern Matching</label></a>
+    <a class="nav nav-next" href="/coding/f-sharp/fsharp-note-10/" title="F# Computations 1" style="margin-right: 0px;"><label>F# Computations 1</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+
+    
+
+    
+
+    
+  </div>
+
+
+	<div>
+
+
+  
+    
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/js/clipboard.min.js"></script>
+
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<script src="/js/featherlight.min.js"></script>
+
+
+<link href="/css/github.css" rel="stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

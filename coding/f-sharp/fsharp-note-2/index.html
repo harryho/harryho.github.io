@@ -5,8 +5,8 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-01-29T21:57:42 AEDT">
-<title>F# Namespace, Module &amp; Access Control :: Hello World</title>
+<meta name="revised" content="2022-10-12T13:07:02 AEDT">
+<title>F# Namespace, Module &amp; Import :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="F# Namespace, Module &amp; Access Control">
+<meta name="description" content="F# Namespace, Module &amp; Open Declaration">
 
 
 
@@ -296,10 +296,94 @@
           </a>
         </div>
     </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-3/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-3/">
+            F# Functions
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-4/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-4/">
+            F# C.U.R.S.
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-5/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-5/">
+            F# Collections 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-6/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-6/">
+            F# Collections 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-7/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-7/">
+            F# Collections 3
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-8/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-8/">
+            F# Pattern Matching
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-9/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-9/">
+            F# Active Patterns
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-10/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-10/">
+            F# Computations 1
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-11/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-11/">
+            F# Computations 2
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-12/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-12/">
+            F# Async
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-13/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-13/">
+            F# Task
+          </a>
+        </div>
+    </li>
+      <li data-nav-id="/coding/f-sharp/fsharp-note-14/" class="dd-item">
+        <div>
+          <a href="/coding/f-sharp/fsharp-note-14/">
+            F# Lazy
+          </a>
+        </div>
+    </li>
       <li data-nav-id="/coding/f-sharp/fsharp-note-2/" class="dd-item active">
         <div>
           <a href="/coding/f-sharp/fsharp-note-2/">
-            F# Namespace, Module &amp; Access Control
+            F# Namespace, Module &amp; Import
           </a>
         </div>
     </li>
@@ -1277,7 +1361,19 @@
   - 
    F#</option> 
       <option value="/coding/f-sharp/fsharp-note-1/" >-- F# Overview</option>
-      <option value="/coding/f-sharp/fsharp-note-2/"  selected>-- F# Namespace, Module &amp; Access Control</option>
+      <option value="/coding/f-sharp/fsharp-note-3/" >-- F# Functions</option>
+      <option value="/coding/f-sharp/fsharp-note-4/" >-- F# C.U.R.S.</option>
+      <option value="/coding/f-sharp/fsharp-note-5/" >-- F# Collections 1</option>
+      <option value="/coding/f-sharp/fsharp-note-6/" >-- F# Collections 2</option>
+      <option value="/coding/f-sharp/fsharp-note-7/" >-- F# Collections 3</option>
+      <option value="/coding/f-sharp/fsharp-note-8/" >-- F# Pattern Matching</option>
+      <option value="/coding/f-sharp/fsharp-note-9/" >-- F# Active Patterns</option>
+      <option value="/coding/f-sharp/fsharp-note-10/" >-- F# Computations 1</option>
+      <option value="/coding/f-sharp/fsharp-note-11/" >-- F# Computations 2</option>
+      <option value="/coding/f-sharp/fsharp-note-12/" >-- F# Async</option>
+      <option value="/coding/f-sharp/fsharp-note-13/" >-- F# Task</option>
+      <option value="/coding/f-sharp/fsharp-note-14/" >-- F# Lazy</option>
+      <option value="/coding/f-sharp/fsharp-note-2/"  selected>-- F# Namespace, Module &amp; Import</option>
   
     <option value="/coding/golang/" >
   - 
@@ -1326,16 +1422,182 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>F# Namespace, Module &amp; Access Control</h1>
+            <h1>F# Namespace, Module &amp; Import</h1>
         
 
-<h2 id="f-namespace">F# Namespace</h2>
+<h2 id="namespace">Namespace</h2>
 
 <blockquote>
 <p>A namespace lets you organize code into areas of related functionality by enabling you to attach a name to a grouping of F# program elements. Namespaces are typically top-level elements in F# files.</p>
 </blockquote>
 
+<p>Namespaces <strong>cannot</strong> directly contain values and functions. Instead, values and functions must be included in modules, and modules are included in namespaces. Namespaces can contain types, modules.</p>
+
 <pre><code class="language-fsharp">namespace [rec] [parent-namespaces.]identifier
+</code></pre>
+
+<h2 id="modules">Modules</h2>
+
+<blockquote>
+<p>A module is a grouping of F# code, such as values, types, and function values, in an F# program. Grouping code in modules helps keep related code together and helps avoid name conflicts in your program.</p>
+</blockquote>
+
+<pre><code class="language-fsharp">// Top-level module declaration.
+module [accessibility-modifier] [qualified-namespace.]module-name
+declarations
+// Local module declaration.
+module [accessibility-modifier] module-name =
+    declarations
+</code></pre>
+
+<h2 id="open-declaration">OPen Declaration</h2>
+
+<blockquote>
+<p>An import declaration specifies a module or namespace whose elements you can reference without using a fully qualified name.</p>
+</blockquote>
+
+<pre><code class="language-fsharp">open module-or-namespace-name
+open type type-name
+</code></pre>
+
+<h2 id="namespace-examples">Namespace Examples</h2>
+
+<ul>
+<li>Example 1</li>
+</ul>
+
+<pre><code class="language-fsharp">namespace Widgets
+
+type MyWidget1 =
+    member this.WidgetName = &quot;Widget1&quot;
+
+module WidgetsModule =
+    let widgetName = &quot;Widget2&quot;
+
+</code></pre>
+
+<ul>
+<li>Example 2</li>
+</ul>
+
+<pre><code class="language-fsharp">namespace Widgets
+
+module WidgetModule1 =
+   let widgetFunction x y =
+      printfn &quot;Module1 %A %A&quot; x y
+module WidgetModule2 =
+   let widgetFunction x y =
+      printfn &quot;Module2 %A %A&quot; x y
+
+module useWidgets =
+
+  do
+     WidgetModule1.widgetFunction 10 20
+     WidgetModule2.widgetFunction 5 6
+
+
+</code></pre>
+
+<ul>
+<li>Example 3 - Recursive nampespaces</li>
+</ul>
+
+<pre><code class="language-fsharp">namespace rec MutualReferences
+
+type Orientation = Up | Down
+type PeelState = Peeled | Unpeeled
+
+// This exception depends on the type below.
+exception DontSqueezeTheBananaException of Banana
+
+type Banana(orientation : Orientation) =
+    member val IsPeeled = false with get, set
+    member val Orientation = orientation with get, set
+    member val Sides: PeelState list = [ Unpeeled; Unpeeled; Unpeeled; Unpeeled] with get, set
+
+    member self.Peel() = BananaHelpers.peel self // Note the dependency on the BananaHelpers module.
+    member self.SqueezeJuiceOut() = raise (DontSqueezeTheBananaException self) // This member depends on the exception above.
+
+module BananaHelpers =
+    let peel (b: Banana) =
+        let flip (banana: Banana) =
+            match banana.Orientation with
+            | Up -&gt;
+                banana.Orientation &lt;- Down
+                banana
+            | Down -&gt; banana
+
+        let peelSides (banana: Banana) =
+            banana.Sides
+            |&gt; List.map (function
+                         | Unpeeled -&gt; Peeled
+                         | Peeled -&gt; Peeled)
+
+        match b.Orientation with
+        | Up -&gt;   b |&gt; flip |&gt; peelSides
+        | Down -&gt; b |&gt; peelSides
+</code></pre>
+
+<h2 id="module-examples">Module Examples</h2>
+
+<ul>
+<li>Example 1 - Recursive</li>
+</ul>
+
+<pre><code class="language-fsharp">namespace rec MutualReferences
+
+type Orientation = Up | Down
+type PeelState = Peeled | Unpeeled
+
+// This exception depends on the type below.
+exception DontSqueezeTheBananaException of Banana
+
+type Banana(orientation : Orientation) =
+    member val IsPeeled = false with get, set
+    member val Orientation = orientation with get, set
+    member val Sides: PeelState list = [ Unpeeled; Unpeeled; Unpeeled; Unpeeled] with get, set
+
+    member self.Peel() = BananaHelpers.peel self // Note the dependency on the BananaHelpers module.
+    member self.SqueezeJuiceOut() = raise (DontSqueezeTheBananaException self) // This member depends on the exception above.
+
+module BananaHelpers =
+    let peel (b: Banana) =
+        let flip (banana: Banana) =
+            match banana.Orientation with
+            | Up -&gt;
+                banana.Orientation &lt;- Down
+                banana
+            | Down -&gt; banana
+
+        let peelSides (banana: Banana) =
+            banana.Sides
+            |&gt; List.map (function
+                         | Unpeeled -&gt; Peeled
+                         | Peeled -&gt; Peeled)
+
+        match b.Orientation with
+        | Up -&gt;   b |&gt; flip |&gt; peelSides
+        | Down -&gt; b |&gt; peelSides
+
+</code></pre>
+
+<h2 id="open-examples">Open Examples</h2>
+
+<ul>
+<li>Example 1</li>
+</ul>
+
+<pre><code class="language-fsharp">// Open a .NET Framework namespace.
+open System.IO
+
+// Now you do not have to include the full paths.
+let writeToFile2 filename (text: string) =
+  let stream1 = new FileStream(filename, FileMode.Create)
+  let writer = new StreamWriter(stream1)
+  writer.WriteLine(text)
+
+writeToFile2 &quot;file1.txt&quot; &quot;Testing...&quot;
+
 </code></pre>
 
     </div>
@@ -1345,7 +1607,12 @@
 <ul>
 <li>
 <ul>
-<li><a href="#f-namespace">F# Namespace</a></li>
+<li><a href="#namespace">Namespace</a></li>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#open-declaration">OPen Declaration</a></li>
+<li><a href="#namespace-examples">Namespace Examples</a></li>
+<li><a href="#module-examples">Module Examples</a></li>
+<li><a href="#open-examples">Open Examples</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1357,7 +1624,7 @@
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-1/" title="F# Overview"> <i class="fa fa-chevron-left"></i><label>F# Overview</label></a>
+<a class="nav nav-prev" href="/coding/f-sharp/fsharp-note-14/" title="F# Lazy"> <i class="fa fa-chevron-left"></i><label>F# Lazy</label></a>
     <a class="nav nav-next" href="/coding/golang/" title="Golang" style="margin-right: 0px;"><label>Golang</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
