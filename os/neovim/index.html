@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2022-10-14T09:18:25 AEDT">
-<title>Python Web Framework :: Hello World</title>
+<title>NeoVim :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Introduction of Django: Most popular python web framework">
+<meta name="description" content="Empower the vi with NeoVimn">
 
 
 
     
   </head>
-  <body data-url="/frameworks/python-django/">
+  <body data-url="/os/neovim/">
     
       <header>
   <div class="logo">
@@ -1108,10 +1108,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item haschildren
+    <li data-nav-id="/os/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/os/">OS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/os/ubuntu-desktop-20/" class="dd-item">
@@ -1226,7 +1227,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/os/neovim/" class="dd-item">
+      <li data-nav-id="/os/neovim/" class="dd-item active">
         <div>
           <a href="/os/neovim/">
             NeoVim
@@ -1292,11 +1293,10 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/frameworks/" class="dd-item parent haschildren
+    <li data-nav-id="/frameworks/" class="dd-item haschildren
         ">
       <div>
-      <a href="/frameworks/">Frameworks</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/frameworks/">Frameworks</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/frameworks/cntk-notes-1/" class="dd-item">
@@ -1327,7 +1327,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/frameworks/python-django/" class="dd-item active">
+      <li data-nav-id="/frameworks/python-django/" class="dd-item">
         <div>
           <a href="/frameworks/python-django/">
             Python Web Framework
@@ -1361,17 +1361,30 @@
     <option value="/management/" >
    Management</option>
     <option value="/os/" >
-   OS</option>
+   OS</option> 
+      <option value="/os/ubuntu-desktop-20/" >- Ubuntu Desktop 20 LTS note</option>
+      <option value="/os/amazon-linux-2/" >- Amazon Linux 2 </option>
+      <option value="/os/vpn-strongswam/" >- VPN StrongSwam setup</option>
+      <option value="/os/vpn-vyos/" >- VPN VyOS setup</option>
+      <option value="/os/dual-boot-win10-ubuntu18/" >- Dual Boot Windows 10 &amp; Ubuntu 18</option>
+      <option value="/os/ubuntu-desktop-18/" >- Ubuntu Desktop 18 LTS note</option>
+      <option value="/os/raspberrypi-notes/" >- Raspberry Pi setup</option>
+      <option value="/os/lubuntu16-desktop/" >- Lubuntu 16 desktop</option>
+      <option value="/os/grub-trouble-shooting/" >- Grub Trouble Shooting</option>
+      <option value="/os/ubuntu-server-16/" >- Ubuntu 16 server note</option>
+      <option value="/os/centos-server-7/" >- CentOS 7 Server</option>
+      <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
+      <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
+      <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
+      <option value="/os/mac-intel64/" >- Macbook Notes - Intel X64</option>
+      <option value="/os/centos-fedora-desktop/" >- CentOS 6/7 Multi-Boot Setup</option>
+      <option value="/os/neovim/"  selected>- NeoVim</option>
+      <option value="/os/powershell-7/" >- PowerShell 7</option>
+  
     <option value="/blogs/" >
    Blogs</option>
     <option value="/frameworks/" >
-   Frameworks</option> 
-      <option value="/frameworks/cntk-notes-1/" >- CNTK Note - 1</option>
-      <option value="/frameworks/tensorflow-notes-1/" >- Tensorflow Note - 1</option>
-      <option value="/frameworks/tensorflow-notes-2/" >- Tensorflow Note - 2</option>
-      <option value="/frameworks/php-web/" >- PHP Web Framework</option>
-      <option value="/frameworks/python-django/"  selected>- Python Web Framework</option>
-  
+   Frameworks</option>
 
 
 
@@ -1388,135 +1401,129 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Python Web Framework</h1>
+            <h1>NeoVim</h1>
         
 
+<p><strong>This article will show you how to empower your vi with NeoVim.</strong></p>
+
+<h2 id="neovim">NeoVim</h2>
+
 <blockquote>
-<p>Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.</p>
+<p><a href="https://github.com/neovim/neovim">Neovim</a> is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of Vim, and more.</p>
 </blockquote>
 
-<h2 id="install-python-pip-and-virtualenv">Install Python, pip and virtualenv</h2>
+<h3 id="install-neovim">Install Neovim</h3>
+
+<p>Please follow the installation instructions <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim">here</a></p>
+
+<h3 id="vim-plugin">Vim Plugin</h3>
+
+<p>Please follow the installation instructions from <a href="https://github.com/neovim/neovim">Vim-Plug&rsquo;s README</a><a href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a></p>
+
+<h3 id="init">Init</h3>
 
 <ul>
-<li><p>Windows: Please find in from Home Page</p></li>
-
-<li><p>Ubuntu: Please find it from <a href="/os/ubuntu-server-14">Ubuntu setup</a></p></li>
-
-<li><p>Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip.</p></li>
-
-<li><p>You can simply use pip or pip3 install any package you need.</p></li>
+<li>Create a file <code>init.vim</code></li>
 </ul>
 
-<h2 id="windows"><strong>Windows</strong></h2>
+<pre><code class="language-lua">:set number
+:set relativenumber
+:set autoindent
+:set tabstop=4
+:set shiftwidth=4
+:set smarttab
+:set softtabstop=4
+:set mouse=a
 
-<h3 id="install-django">Install django</h3>
+call plug#begin()
+
+Plug 'http://github.com/tpope/vim-surround' &quot; Surrounding ysw)
+Plug 'https://github.com/preservim/nerdtree' &quot; NerdTree
+Plug 'https://github.com/tpope/vim-commentary' &quot; For Commenting gcc &amp; gc
+Plug 'https://github.com/vim-airline/vim-airline' &quot; Status bar
+Plug 'https://github.com/lifepillar/pgsql.vim' &quot; PSQL Pluging needs :SQLSetType pgsql.vim
+Plug 'https://github.com/ap/vim-css-color' &quot; CSS Color Preview
+Plug 'https://github.com/rafi/awesome-vim-colorschemes' &quot; Retro Scheme
+Plug 'https://github.com/neoclide/coc.nvim'  &quot; Auto Completion
+Plug 'https://github.com/ryanoasis/vim-devicons' &quot; Developer Icons
+Plug 'https://github.com/tc50cal/vim-terminal' &quot; Vim Terminal
+Plug 'https://github.com/preservim/tagbar' &quot; Tagbar for code navigation
+Plug 'https://github.com/terryma/vim-multiple-cursors' &quot; CTRL + N for multiple cursors
+Plug 'https://github.com/EdenEast/nightfox.nvim' &quot; A highly customizable theme
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'kassio/neoterm'
+
+
+
+set encoding=UTF-8
+
+call plug#end()
+
+nnoremap &lt;C-f&gt; :NERDTreeFocus&lt;CR&gt;
+nnoremap &lt;C-n&gt; :NERDTree&lt;CR&gt;
+nnoremap &lt;C-t&gt; :NERDTreeToggle&lt;CR&gt;
+nnoremap &lt;C-l&gt; :call CocActionAsync('jumpDefinition')&lt;CR&gt;
+
+nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;
+
+:set completeopt-=preview &quot; For No Previews
+
+:colorscheme nightfox
+
+let g:NERDTreeDirArrowExpandable=&quot;+&quot;
+let g:NERDTreeDirArrowCollapsible=&quot;~&quot;
+
+&quot; --- Just Some Notes ---
+&quot; :PlugClean :PlugInstall :UpdateRemotePlugins
+&quot;
+&quot; :CocInstall coc-python
+&quot; :CocInstall coc-clangd
+&quot; :CocInstall coc-snippets
+&quot; :CocCommand snippets.edit... FOR EACH FILE TYPE
+
+&quot; air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+&quot; airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+inoremap &lt;expr&gt; &lt;Tab&gt; pumvisible() ? coc#_select_confirm() : &quot;&lt;Tab&gt;&quot;
+
+</code></pre>
 
 <ul>
-<li><p>create a folder virtualenvs within the location of python 3</p></li>
-
-<li><p>create a new virtualenv named django18</p></li>
-
-<li><p>Activate the new virtual env</p></li>
-
-<li><p>Install Django 1.x.x (LTS version)</p></li>
-</ul>
-
-<pre><code class="language-bash">cd  /path/to/python3
-cd  virtualenvs
-
-virtualenv django18
-
-cd django18
-
-Scripts\activate
-
-which python
-
-pip install django==1.x.x
-</code></pre>
-
-<h3 id="create-django-project">Create django project</h3>
+<li><p>Install plugins</p>
 
 <ul>
-<li><p>SET PATH in current command promp</p></li>
-
-<li><p>Navigate to workspace folder</p></li>
-
-<li><p>Create new django project</p></li>
-
-<li><p>Start the app</p>
-
-<pre><code class="language-bat">SET PATH=c:\apps\python3\virtualenvs\django18\Script;%PATH%
-
-which django-admin
-
-cd c:\ws\python\django\
-
-django-admin startproject demo
-
-cd demo
-
-python manage.py runserver
-</code></pre></li>
+<li>Open nvim</li>
+<li>Enter command mode and enter <code>PlugInstall</code></li>
+</ul></li>
 </ul>
 
-<h3 id="create-a-new-app-module">Create a new app module</h3>
+<h3 id="trouble-shooting">Trouble shooting</h3>
 
-<pre><code class="language-bash">python manage.py startapp main
-</code></pre>
+<h4 id="coc-nvim">coc.nvim</h4>
 
-<h3 id="create-a-new-db">Create a new db</h3>
+<ul>
+<li>Windows pwsh</li>
+</ul>
 
-<p><strong>following commands are just tested in django 1.8</strong></p>
-
-<pre><code class="language-python">python manage.py syncdb 
-python manage.py makemigrations new_app 
-## migrate 
-pyrhon manage.py sqlmigrate new_app 0001 
-## migrate 
-python manage.py migrate new_app 0001
-</code></pre>
-
-<h3 id="use-python-shell-model-api">use python shell Model API</h3>
-
-<pre><code class="language-python">python manage.py shell
-&gt;&gt;&gt; from XXX.models import ModelClass
-&gt;&gt;&gt; ModelClass.objects.all()
-&gt;&gt;&gt; ModelClass.objects.get(pk =1 )
-&gt;&gt;&gt; ModelClass.objects.filter( fieldName1=&quot;abc&quot;)
-&gt;&gt;&gt; mc = new ModelClass.( fieldName1 = &quot;abc&quot;, fieldName2=&quot;def&quot;, fieldName3 = 3 )
-&gt;&gt;&gt; mc.save()
-&gt;&gt;&gt; mc = ModelClass.objects.get(pd=1)
-&gt;&gt;&gt; mc.delete()    
-</code></pre>
-
-<h2 id="linux"><strong>Linux</strong></h2>
-
-<pre><code class="language-bash">pip install virtualenv
-
-pip3 install virtualenv
-
-cd ~
-
-mkdir .envs
-
-## create python2 env
-virtualenv -p /usr/bin/python2.7 py2env
-
-virtualenv -p /usr/bin/python3.4 py3env
-
-cd py2env 
-source bin/activate
-
-## Check python path 
-which python
-
-## Exit
-deactivate
+<pre><code class="language-powershell">cd &lt;coc.nvim_folder&gt;
+sudo nvm use 14.19.3
+npm install -g yarn 
+yarn install
 
 </code></pre>
-
-<p><strong>Activate virtual environment need to use source instead of executing sh file</strong></p>
 
     </div>
 
@@ -1525,16 +1532,16 @@ deactivate
 <ul>
 <li>
 <ul>
-<li><a href="#install-python-pip-and-virtualenv">Install Python, pip and virtualenv</a></li>
-<li><a href="#windows"><strong>Windows</strong></a>
+<li><a href="#neovim">NeoVim</a>
 <ul>
-<li><a href="#install-django">Install django</a></li>
-<li><a href="#create-django-project">Create django project</a></li>
-<li><a href="#create-a-new-app-module">Create a new app module</a></li>
-<li><a href="#create-a-new-db">Create a new db</a></li>
-<li><a href="#use-python-shell-model-api">use python shell Model API</a></li>
+<li><a href="#install-neovim">Install Neovim</a></li>
+<li><a href="#vim-plugin">Vim Plugin</a></li>
+<li><a href="#init">Init</a></li>
+<li><a href="#trouble-shooting">Trouble shooting</a>
+<ul>
+<li><a href="#coc-nvim">coc.nvim</a></li>
 </ul></li>
-<li><a href="#linux"><strong>Linux</strong></a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1546,8 +1553,8 @@ deactivate
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/frameworks/php-web/" title="PHP Web Framework"> <i class="fa fa-chevron-left"></i><label>PHP Web Framework</label></a>
-    <a class="nav nav-next" href="/frameworks/cntk-notes-1/" title="CNTK Note - 1" style="margin-right: 0px;"><label>CNTK Note - 1</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/os/centos-fedora-desktop/" title="CentOS 6/7 Multi-Boot Setup"> <i class="fa fa-chevron-left"></i><label>CentOS 6/7 Multi-Boot Setup</label></a>
+    <a class="nav nav-next" href="/os/powershell-7/" title="PowerShell 7" style="margin-right: 0px;"><label>PowerShell 7</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
