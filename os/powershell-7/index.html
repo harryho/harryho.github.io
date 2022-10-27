@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-10-14T09:18:25 AEDT">
+<meta name="revised" content="2022-10-28T02:56:49 AEDT">
 <title>PowerShell 7 :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -1571,7 +1571,6 @@ Set-Alias g git
 Set-Alias grep findstr
 Set-Alias tig $env:USERPROFILE\app\git\usr\bin\tig.exe
 Set-Alias less $env:USERPROFILE\app\git\usr\bin\less.exe
-
 </code></pre>
 
 <ul>
@@ -1597,14 +1596,10 @@ nvim $PROFILE.CurrentUserCurrentHost
 <li>Installation</li>
 </ul>
 
-<pre><code class="language-powershell">
-Install-Module posh-git
-Install-Module oh-my-posh
-
-</code></pre>
+<p><a href="https://ohmyposh.dev/docs/migrating">Please follow latest instruction</a></p>
 
 <ul>
-<li>Create customized theme file <code>hho.omp.json</code></li>
+<li>Create customized theme file <code>sample.omp.json</code></li>
 </ul>
 
 <pre><code>{
@@ -1744,9 +1739,13 @@ Install-Module oh-my-posh
 <pre><code class="language-powershell">
 # Prompt
 Import-Module posh-git
-Import-Module oh-my-posh
-$omp_config = &quot;$env:USERPROFILE\hho.omp.json&quot;
+$omp_config = &quot;$env:USERPROFILE\sample.omp.json&quot;
 oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
+</code></pre>
+
+<h3 id="posh-git">Posh-Git</h3>
+
+<pre><code>Install-Module posh-git
 </code></pre>
 
 <h3 id="terminal-icons">Terminal Icons</h3>
@@ -1765,7 +1764,12 @@ oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
 <pre><code class="language-powershell">Import-Module -Name Terminal-Icons
 </code></pre>
 
-<h3 id="install-psreadline">Install PSReadLine</h3>
+<h3 id="z">Z</h3>
+
+<pre><code>Install-Module -Name z --Respository SGallery -Force
+</code></pre>
+
+<h3 id="psreadline">PSReadLine</h3>
 
 <ul>
 <li>Installation</li>
@@ -1832,8 +1836,10 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory
 </ul></li>
 <li><a href="#user-profile">User Profile</a></li>
 <li><a href="#oh-my-posh">Oh My Posh</a></li>
+<li><a href="#posh-git">Posh-Git</a></li>
 <li><a href="#terminal-icons">Terminal Icons</a></li>
-<li><a href="#install-psreadline">Install PSReadLine</a></li>
+<li><a href="#z">Z</a></li>
+<li><a href="#psreadline">PSReadLine</a></li>
 <li><a href="#fzf">FZF</a></li>
 </ul></li>
 </ul></li>
