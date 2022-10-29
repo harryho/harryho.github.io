@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2022-10-29T23:18:25 AEDT">
-<title>Try Minikube :: Hello World</title>
+<title>Windows Terminal :: Hello World</title>
 <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/nucleus.css" rel="stylesheet">
@@ -17,13 +17,13 @@
 <script type="text/javascript">
       var baseurl = "\/";
 </script>
-<meta name="description" content="Test Minikube on virtual machine">
+<meta name="description" content="Empower Windows with Terminal">
 
 
 
     
   </head>
-  <body data-url="/blogs/k8s-on-vm/">
+  <body data-url="/os/windows-terminal/">
     
       <header>
   <div class="logo">
@@ -1108,10 +1108,11 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/os/" class="dd-item haschildren
+    <li data-nav-id="/os/" class="dd-item parent haschildren
         ">
       <div>
-      <a href="/os/">OS</a><i class="fa fa-angle-right fa-lg category-icon"></i>
+      <a href="/os/">OS</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
       </div>
         <ul>
       <li data-nav-id="/os/ubuntu-desktop-20/" class="dd-item">
@@ -1240,7 +1241,7 @@
           </a>
         </div>
     </li>
-      <li data-nav-id="/os/windows-terminal/" class="dd-item">
+      <li data-nav-id="/os/windows-terminal/" class="dd-item active">
         <div>
           <a href="/os/windows-terminal/">
             Windows Terminal
@@ -1249,14 +1250,13 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/blogs/" class="dd-item parent haschildren
+    <li data-nav-id="/blogs/" class="dd-item haschildren
         ">
       <div>
-      <a href="/blogs/">Blogs</a>
-            <i class="fa fa-angle-down fa-lg category-icon"></i>
+      <a href="/blogs/">Blogs</a><i class="fa fa-angle-right fa-lg category-icon"></i>
       </div>
         <ul>
-      <li data-nav-id="/blogs/k8s-on-vm/" class="dd-item active">
+      <li data-nav-id="/blogs/k8s-on-vm/" class="dd-item">
         <div>
           <a href="/blogs/k8s-on-vm/">
             Try Minikube
@@ -1368,16 +1368,29 @@
     <option value="/management/" >
    Management</option>
     <option value="/os/" >
-   OS</option>
-    <option value="/blogs/" >
-   Blogs</option> 
-      <option value="/blogs/k8s-on-vm/"  selected>- Try Minikube</option>
-      <option value="/blogs/vue-ng-react/" >- Angular vs React vs Vue</option>
-      <option value="/blogs/create-a-blog-on-github/" >- Create a blog site on GitHub Pages</option>
-      <option value="/blogs/build-mobile-app/" >- Build mobile app with web tech</option>
-      <option value="/blogs/azure-notes/" >- Azure Practices</option>
-      <option value="/blogs/javascript-oop/" >- JavaScript and OOP</option>
+   OS</option> 
+      <option value="/os/ubuntu-desktop-20/" >- Ubuntu Desktop 20 LTS note</option>
+      <option value="/os/amazon-linux-2/" >- Amazon Linux 2 </option>
+      <option value="/os/vpn-strongswam/" >- VPN StrongSwam setup</option>
+      <option value="/os/vpn-vyos/" >- VPN VyOS setup</option>
+      <option value="/os/dual-boot-win10-ubuntu18/" >- Dual Boot Windows 10 &amp; Ubuntu 18</option>
+      <option value="/os/ubuntu-desktop-18/" >- Ubuntu Desktop 18 LTS note</option>
+      <option value="/os/raspberrypi-notes/" >- Raspberry Pi setup</option>
+      <option value="/os/lubuntu16-desktop/" >- Lubuntu 16 desktop</option>
+      <option value="/os/grub-trouble-shooting/" >- Grub Trouble Shooting</option>
+      <option value="/os/ubuntu-server-16/" >- Ubuntu 16 server note</option>
+      <option value="/os/centos-server-7/" >- CentOS 7 Server</option>
+      <option value="/os/ubuntu-server-14/" >- Ubuntu 14 -- server setup</option>
+      <option value="/os/ubuntu-desktop-14/" >- Ubuntu 14 -- desktop setup &amp; dual boot </option>
+      <option value="/os/ubuntu-desktop-14-extra-tools/" >- Ubuntu 14 -- desktop, extra tools</option>
+      <option value="/os/mac-intel64/" >- Macbook Notes - Intel X64</option>
+      <option value="/os/centos-fedora-desktop/" >- CentOS 6/7 Multi-Boot Setup</option>
+      <option value="/os/neovim/" >- NeoVim</option>
+      <option value="/os/powershell-7/" >- PowerShell 7</option>
+      <option value="/os/windows-terminal/"  selected>- Windows Terminal</option>
   
+    <option value="/blogs/" >
+   Blogs</option>
     <option value="/frameworks/" >
    Frameworks</option>
 
@@ -1396,89 +1409,449 @@
     
 <div class="main-page">
     <div class="flex-item main-content">
-            <h1>Try Minikube</h1>
+            <h1>Windows Terminal</h1>
         
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="windows-terminal">Windows Terminal</h3>
+
+<blockquote>
+<p>The Windows Terminal is a modern, fast, efficient, powerful, and productive terminal application for users of command-line tools and shells like Command Prompt, PowerShell, and WSL. Its main features include multiple tabs, panes, Unicode and UTF-8 character support, a GPU accelerated text rendering engine, and custom themes, styles, and configurations.</p>
+</blockquote>
+
+<h4 id="prerequisite">Prerequisite</h4>
 
 <ul>
-<li>Install KVM or VirtualBox</li>
-<li>Install Ubuntu / Debian on KVM or VirtualBox</li>
-<li>Install Minikube</li>
-</ul>
-
-<h2 id="check-k8s-version-and-config">Check K8s version and config</h2>
-
-<pre><code>kubectl version
-kubectl config
-kubectl cluster-info
-</code></pre>
-
-<h2 id="get-describe-command">Get / Describe command</h2>
-
-<pre><code>kubectl get ndoes
-kubectl get pods
-kubectl get deployments
-kubectl get services
-
-kubectl describe pods
-</code></pre>
-
-<h2 id="deploy-hello-world-node-demo-app">Deploy hello-world node demo app</h2>
+<li>PowerShell 7
 
 <ul>
-<li><p>Deploy a demo app</p>
+<li>Install latest PowerShell (version 7.x) from Windows Store</li>
+</ul></li>
 
-<pre><code class="language-bash">kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+<li><p>Scoop</p>
 
-# View deployments and pods
-kubectl get deployments
-kubectl get pods
-</code></pre></li>
-
-<li><p>Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network.</p></li>
-
-<li><p>The kubectl command can create a proxy that will forward communications into the cluster-wide, private network.</p>
-
-<pre><code class="language-bash"># Create a proxy from another terminal
-kubectl proxy
-
-# Test it from original termianl
-curl http://localhost:8001/version
-</code></pre></li>
-
-<li><p>Get pod name</p>
-
-<pre><code class="language-bash">export POD_NAME=$(kubectl get pods -o go-template --template \
- '{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}')
-echo Name of the Pod: $POD_NAME
-kubectl logs $POD_NAME
-</code></pre></li>
-
-<li><p>Execute command on containter</p>
-
-<pre><code class="language-bash">kubectl exec $POD_NAME env
-kubectl exec $POD_NAME bash
-kubectl exec $POD_NAME curl localhost:8080
-</code></pre></li>
-
-<li><p>Scale demo app with replica</p>
-
-<pre><code class="language-bash"># kubernetes-bootcamp   deployment is the same as above
-kubectl get pods -o wide
-kubectl describe deployments/kubernetes-bootcamp    
-kubectl scale deployments/kubernetes-bootcamp --replicas=2
-
-# Get NodePort
-export NODE_PORT=$(kubectl get services/kubernetes-bootcamp \
-    -o go-template='{{(index .spec.ports 0).nodePort}}')
-echo NODE_PORT=$NODE_PORT
-
-# Test load balance
-curl $(minikube ip):$NODE_PORT
-
-</code></pre></li>
+<ul>
+<li><a href="https://scoop.sh">Scoop</a> can be found here or simply execute the command below
+```powershell
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString(&lsquo;<a href="https://get.scoop.sh'">https://get.scoop.sh'</a>)</li>
 </ul>
+
+<h1 id="or-shorter">or shorter</h1>
+
+<p>iwr -useb get.scoop.sh | iex
+```</p></li>
+</ul>
+
+<h4 id="install-windows-terminal">Install Windows Terminal</h4>
+
+<p>This is an open source project and we welcome community participation. To participate please visit <a href="https://github.com/microsoft/terminal">https://github.com/microsoft/terminal</a></p>
+
+<h4 id="install-nerd-font">Install Nerd font</h4>
+
+<ul>
+<li><a href="https://www.nerdfonts.com/font-downloads">Nerd Font</a></li>
+<li>Download Meslo Nerd Font</li>
+<li>Install font file</li>
+</ul>
+
+<h4 id="update-setting">Update Setting</h4>
+
+<ul>
+<li><p>Settings &gt; Startups</p>
+
+<ul>
+<li>Profile -&gt; PowerShell ( Default is Windows PowerShell )</li>
+<li>Launch mode -&gt; Maximised</li>
+</ul></li>
+
+<li><p>Update Setting file</p>
+
+<ul>
+<li>Hide the proflle Windows PowerShell &amp; move the PowerShell to the top</li>
+</ul>
+
+<pre><code class="language-json">&quot;list&quot;: [
+    {
+            &quot;guid&quot;: &quot;{574e775e-4f2a-5b96-ac1e-a2962a402336}&quot;,
+            &quot;hidden&quot;: false,
+            &quot;name&quot;: &quot;PowerShell&quot;,
+            &quot;source&quot;: &quot;Windows.Terminal.PowershellCore&quot;
+    },
+    ...
+    {
+            &quot;commandline&quot;: &quot;powershell.exe&quot;,
+            &quot;font&quot;: 
+            {
+                &quot;face&quot;: &quot;MesloLGM NF&quot;
+            },
+            &quot;guid&quot;: &quot;{61c54bbd-c2c6-5271-96e7-009a87ff44bf}&quot;,
+            &quot;hidden&quot;: true,
+            &quot;name&quot;: &quot;Windows PowerShell&quot;
+    } 
+</code></pre>
+
+<ul>
+<li>Create a customzed color scheme</li>
+</ul>
+
+<pre><code class="language-json">{
+    &quot;background&quot;: &quot;#001D26&quot;,
+    &quot;black&quot;: &quot;#282C34&quot;,
+    &quot;blue&quot;: &quot;#61AFEF&quot;,
+    &quot;brightBlack&quot;: &quot;#9aabc5&quot;,
+    &quot;brightBlue&quot;: &quot;#61AFEF&quot;,
+    &quot;brightCyan&quot;: &quot;#56B6C2&quot;,
+    &quot;brightGreen&quot;: &quot;#98C379&quot;,
+    &quot;brightPurple&quot;: &quot;#C678DD&quot;,
+    &quot;brightRed&quot;: &quot;#E06C75&quot;,
+    &quot;brightWhite&quot;: &quot;#DCDFE4&quot;,
+    &quot;brightYellow&quot;: &quot;#E5C07B&quot;,
+    &quot;cursorColor&quot;: &quot;#FFFFFF&quot;,
+    &quot;cyan&quot;: &quot;#56B6C2&quot;,
+    &quot;foreground&quot;: &quot;#DCDFE4&quot;,
+    &quot;green&quot;: &quot;#98C379&quot;,
+    &quot;name&quot;: &quot;One Half Dark (mod)&quot;,
+    &quot;purple&quot;: &quot;#C678DD&quot;,
+    &quot;red&quot;: &quot;#E06C75&quot;,
+    &quot;selectionBackground&quot;: &quot;#FFFFFF&quot;,
+    &quot;white&quot;: &quot;#DCDFE4&quot;,
+    &quot;yellow&quot;: &quot;#E5C07B&quot;
+}
+</code></pre></li>
+
+<li><p>Settings &gt; Default &gt; Appearence</p>
+
+<ul>
+<li>Color scheme : One Half Dark (mod)</li>
+<li>Font face:  MesloLGM NF</li>
+<li>Acrylic opacity: 60%</li>
+</ul></li>
+</ul>
+
+<h4 id="git">Git</h4>
+
+<pre><code>winget install -e --id Git.Git
+</code></pre>
+
+<h4 id="other-tools">Other tools</h4>
+
+<pre><code>scoop install curl sudo jq yq
+scoop install neovim gcc 
+scoop install 7zip bat 
+</code></pre>
+
+<h4 id="setup-user-profile">Setup User Profile</h4>
+
+<ul>
+<li>Create user profile folder</li>
+</ul>
+
+<pre><code class="language-cmd">mkdir ~\.config\powershell
+</code></pre>
+
+<ul>
+<li>Create a launch script</li>
+</ul>
+
+<pre><code class="language-powershell">type nul &gt; $env:USERPROFILE\.config\powershell\profile.ps1
+</code></pre>
+
+<ul>
+<li>Add alias to <code>$env:USERPROFILE\.config\powershell\profile.ps1</code></li>
+</ul>
+
+<pre><code class="language-powershell"># Alias
+Set-Alias vi nvim
+Set-Alias ll ls
+Set-Alias g git
+Set-Alias grep findstr
+Set-Alias tig $env:USERPROFILE\app\git\usr\bin\tig.exe
+Set-Alias less $env:USERPROFILE\app\git\usr\bin\less.exe
+</code></pre>
+
+<ul>
+<li>Update built-in profile</li>
+</ul>
+
+<pre><code class="language-powershell"># Get all profiles
+$PROFILE | Get-Member -Type NoteProperty
+
+# If the file of $PROFILE.CurrentUserCurrentHost does not exist
+type nul &gt; $PROFILE.CurrentUserCurrentHost
+</code></pre>
+
+<ul>
+<li>Copy content below to <code>$PROFILE.CurrentUserCurrentHost</code></li>
+</ul>
+
+<pre><code>. $env:USERPROFILE\.config\powershell\profile.ps1
+</code></pre>
+
+<h4 id="oh-my-posh">Oh My Posh</h4>
+
+<ul>
+<li>Installation</li>
+</ul>
+
+<p><a href="https://ohmyposh.dev/docs/migrating">Please follow latest instruction</a></p>
+
+<ul>
+<li>Create customized theme file <code>sample.omp.json</code></li>
+</ul>
+
+<pre><code>{
+  &quot;$schema&quot;: &quot;https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json&quot;,
+  &quot;final_space&quot;: false,
+  &quot;osc99&quot;: true,
+  &quot;blocks&quot;: [
+    {
+      &quot;type&quot;: &quot;prompt&quot;,
+      &quot;alignment&quot;: &quot;left&quot;,
+      &quot;segments&quot;: [
+        {
+          &quot;type&quot;: &quot;shell&quot;,
+          &quot;style&quot;: &quot;diamond&quot;,
+          &quot;leading_diamond&quot;: &quot;╭─&quot;,
+          &quot;trailing_diamond&quot;: &quot;&quot;,
+          &quot;foreground&quot;: &quot;#ffffff&quot;,
+          &quot;background&quot;: &quot;#0077c2&quot;,
+          &quot;properties&quot;: {
+          }
+        },
+        {
+          &quot;type&quot;: &quot;root&quot;,
+          &quot;style&quot;: &quot;diamond&quot;,
+          &quot;leading_diamond&quot;: &quot;&quot;,
+          &quot;trailing_diamond&quot;: &quot;&quot;,
+          &quot;foreground&quot;: &quot;#FFFB38&quot;,
+          &quot;background&quot;: &quot;#ef5350&quot;,
+          &quot;properties&quot;: {
+            &quot;root_icon&quot;: &quot;\uf292&quot;,
+            &quot;prefix&quot;: &quot;&lt;parentBackground&gt;\uE0B0&lt;/&gt; &quot;
+          }
+        },
+        {
+          &quot;type&quot;: &quot;path&quot;,
+          &quot;style&quot;: &quot;powerline&quot;,
+          &quot;powerline_symbol&quot;: &quot;\uE0B0&quot;,
+          &quot;foreground&quot;: &quot;#E4E4E4&quot;,
+          &quot;background&quot;: &quot;#444444&quot;,
+          &quot;properties&quot;: {
+            &quot;style&quot;: &quot;full&quot;,
+            &quot;enable_hyperlink&quot;: true
+          }
+        },
+        {
+          &quot;type&quot;: &quot;git&quot;,
+          &quot;style&quot;: &quot;powerline&quot;,
+          &quot;powerline_symbol&quot;: &quot;\uE0B0&quot;,
+          &quot;foreground&quot;: &quot;#011627&quot;,
+          &quot;background&quot;: &quot;#FFFB38&quot;,
+          &quot;background_templates&quot;: [
+            &quot;{{ if or (.Working.Changed) (.Staging.Changed) }}#ffeb95{{ end }}&quot;,
+            &quot;{{ if and (gt .Ahead 0) (gt .Behind 0) }}#c5e478{{ end }}&quot;,
+            &quot;{{ if gt .Ahead 0 }}#C792EA{{ end }}&quot;,
+            &quot;{{ if gt .Behind 0 }}#C792EA{{ end }}&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;branch_icon&quot;: &quot;\ue725 &quot;,
+            &quot;fetch_status&quot;: true,
+            &quot;fetch_upstream_icon&quot;: true,
+            &quot;template&quot;: &quot;{{ .HEAD }} {{ if .Working.Changed }}{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}&lt;#ef5350&gt; \uF046 {{ .Staging.String }}&lt;/&gt;{{ end }}&quot;
+          }
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;prompt&quot;,
+      &quot;alignment&quot;: &quot;right&quot;,
+      &quot;segments&quot;: [
+        {
+          &quot;type&quot;: &quot;node&quot;,
+          &quot;style&quot;: &quot;diamond&quot;,
+          &quot;leading_diamond&quot;: &quot; \uE0B6&quot;,
+          &quot;trailing_diamond&quot;: &quot;\uE0B4&quot;,
+          &quot;foreground&quot;: &quot;#3C873A&quot;,
+          &quot;background&quot;: &quot;#303030&quot;,
+          &quot;properties&quot;: {
+            &quot;prefix&quot;: &quot;\uE718 &quot;,
+            &quot;postfix&quot;: &quot;&quot;,
+            &quot;display_package_manager&quot;: true,
+            &quot;yarn_icon&quot;: &quot; &lt;#348cba&gt;&lt;/&gt;&quot;,
+            &quot;npm_icon&quot;: &quot; &lt;#cc3a3a&gt;&lt;/&gt; &quot;
+          }
+        },
+        {
+          &quot;type&quot;: &quot;time&quot;,
+          &quot;style&quot;: &quot;diamond&quot;,
+          &quot;invert_powerline&quot;: true,
+          &quot;leading_diamond&quot;: &quot; \uE0B6&quot;,
+          &quot;trailing_diamond&quot;: &quot;\uE0B4&quot;,
+          &quot;background&quot;: &quot;#40c4ff&quot;,
+          &quot;foreground&quot;: &quot;#ffffff&quot;,
+          &quot;properties&quot;: {
+            &quot;prefix&quot;: &quot; \uf5ef &quot;,
+            &quot;postfix&quot;: &quot; &quot;
+        }
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;prompt&quot;,
+      &quot;alignment&quot;: &quot;left&quot;,
+      &quot;newline&quot;: true,
+      &quot;segments&quot;: [
+        {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;style&quot;: &quot;plain&quot;,
+          &quot;foreground&quot;: &quot;#21c7c7&quot;,
+          &quot;properties&quot;: {
+            &quot;prefix&quot;: &quot;&quot;,
+            &quot;postfix&quot;: &quot;&quot;,
+            &quot;text&quot;: &quot;╰─&quot;
+          }
+        },
+        {
+          &quot;type&quot;: &quot;exit&quot;,
+          &quot;style&quot;: &quot;plain&quot;,
+          &quot;foreground&quot;: &quot;#e0f8ff&quot;,
+          &quot;properties&quot;: {
+            &quot;prefix&quot;: &quot;\u276F&quot;,
+            &quot;display_exit_code&quot;: false,
+            &quot;always_enabled&quot;: true,
+            &quot;error_color&quot;: &quot;#ef5350&quot;
+          }
+        }
+      ]
+    }
+  ]
+}
+
+</code></pre>
+
+<ul>
+<li><p>Update user profile</p>
+
+<ul>
+<li>Add content to <code>$env:USERPROFILE\.config\powershell\profile.ps1</code></li>
+</ul></li>
+</ul>
+
+<pre><code class="language-powershell">
+  # Prompt
+  Import-Module posh-git
+  $omp_config = &quot;$env:USERPROFILE\sample.omp.json&quot;
+  oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
+</code></pre>
+
+<h4 id="posh-git">Posh-Git</h4>
+
+<pre><code>Install-Module posh-git -Repository PSGallery -Force
+</code></pre>
+
+<h4 id="terminal-icons">Terminal Icons</h4>
+
+<ul>
+<li>Installation</li>
+</ul>
+
+<pre><code class="language-powershell"> Install-Module -Name Terminal-Icons -Repository PSGallery -Force
+</code></pre>
+
+<ul>
+<li>Update user profile
+
+<ul>
+<li>Add content to <code>$env:USERPROFILE\.config\powershell\profile.ps1</code></li>
+</ul></li>
+</ul>
+
+<pre><code class="language-powershell">  Import-Module -Name Terminal-Icons
+</code></pre>
+
+<h4 id="psreadline">PSReadLine</h4>
+
+<ul>
+<li>Installation</li>
+</ul>
+
+<pre><code class="language-powershell">Install-Module -Name PSReadLine  -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+</code></pre>
+
+<ul>
+<li>Update user profile
+
+<ul>
+<li>Add content to <code>$env:USERPROFILE\.config\powershell\profile.ps1</code></li>
+</ul></li>
+</ul>
+
+<pre><code class="language-powershell">  # PSReadLine
+  Set-PSReadLineOption -EditMode Emacs
+  Set-PSReadLineOption -BellStyle None
+  Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
+  Set-PSReadLineOption -PredictionSource History
+</code></pre>
+
+<h4 id="fzf">FZF</h4>
+
+<ul>
+<li>Installation</li>
+</ul>
+
+<pre><code class="language-powershell">scoop install fzf
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+</code></pre>
+
+<ul>
+<li><p>Update user profile</p>
+
+<ul>
+<li><p>Add content to <code>$env:USERPROFILE\.config\powershell\profile.ps1</code></p>
+
+<pre><code class="language-powershell"># Fzf
+Import-Module PSFzf
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+</code></pre>
+
+<h4 id="z">Z</h4></li>
+</ul></li>
+</ul>
+
+<pre><code>Install-Module -Name z --Respository SGallery -Force
+</code></pre>
+
+<h4 id="exmple-of-launch-script">Exmple of launch script</h4>
+
+<pre><code class="language-powershell"># Alias
+Set-Alias vi nvim
+Set-Alias ll ls
+Set-Alias g git
+Set-Alias grep findstr
+Set-Alias tig $env:USERPROFILE\app\git\usr\bin\tig.exe
+Set-Alias less $env:USERPROFILE\app\git\usr\bin\less.exe
+
+# Prompt
+Import-Module posh-git
+$omp_config = &quot;$env:USERPROFILE\sample.omp.json&quot;
+oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
+
+# Terminal Icons
+Import-Module -Name Terminal-Icons
+
+# PSReadLine
+Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineOption -BellStyle None
+Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
+Set-PSReadLineOption -PredictionSource History
+
+# Fzf
+Import-Module PSFzf
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+
+# Customized functions 
+# Add your functions here
+
+</code></pre>
 
     </div>
 
@@ -1487,10 +1860,35 @@ curl $(minikube ip):$NODE_PORT
 <ul>
 <li>
 <ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#check-k8s-version-and-config">Check K8s version and config</a></li>
-<li><a href="#get-describe-command">Get / Describe command</a></li>
-<li><a href="#deploy-hello-world-node-demo-app">Deploy hello-world node demo app</a></li>
+<li>
+<ul>
+<li><a href="#windows-terminal">Windows Terminal</a>
+<ul>
+<li><a href="#prerequisite">Prerequisite</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#or-shorter">or shorter</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#install-windows-terminal">Install Windows Terminal</a></li>
+<li><a href="#install-nerd-font">Install Nerd font</a></li>
+<li><a href="#update-setting">Update Setting</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#other-tools">Other tools</a></li>
+<li><a href="#setup-user-profile">Setup User Profile</a></li>
+<li><a href="#oh-my-posh">Oh My Posh</a></li>
+<li><a href="#posh-git">Posh-Git</a></li>
+<li><a href="#terminal-icons">Terminal Icons</a></li>
+<li><a href="#psreadline">PSReadLine</a></li>
+<li><a href="#fzf">FZF</a></li>
+<li><a href="#z">Z</a></li>
+<li><a href="#exmple-of-launch-script">Exmple of launch script</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1502,8 +1900,8 @@ curl $(minikube ip):$NODE_PORT
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/blogs/" title="Blogs"> <i class="fa fa-chevron-left"></i><label>Blogs</label></a>
-    <a class="nav nav-next" href="/blogs/vue-ng-react/" title="Angular vs React vs Vue" style="margin-right: 0px;"><label>Angular vs React vs Vue</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/os/powershell-7/" title="PowerShell 7"> <i class="fa fa-chevron-left"></i><label>PowerShell 7</label></a>
+    <a class="nav nav-next" href="/blogs/" title="Blogs" style="margin-right: 0px;"><label>Blogs</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -1516,10 +1914,6 @@ curl $(minikube ip):$NODE_PORT
 
     
 
-    
-    <div class="date">
-        <i class='fa fa-calendar'></i> Last update on 11/10/2017
-    </div>
     
 
     
